@@ -84,9 +84,18 @@ packages/
 !/SDL2_ttf-2.0.18
 !/SDL2_ttf-2.0.18/*
 
-
 !/SDL2_ttf
 !/SDL2_ttf/*
 
 !/Optick
 !/Optick/*
+
+
+!Game/Source/External/SDL_ttf/libx86/SDL2_ttf.lib
+
+
+!Game/Source/External/Optick/lib/debugLib/OptickCore.dll
+!Game/Source/External/Optick/lib/debugLib/OptickCore.lib
+
+!Game/Source/External/Optick/lib/releaseLib/OptickCore.dll
+!Game/Source/External/Optick/lib/releaseLib/OptickCore.lib
