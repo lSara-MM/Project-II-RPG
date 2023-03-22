@@ -52,8 +52,10 @@ public:
 	bool alive;
 
 	//Stats
-	int hp;
+	int maxHp;
+	int currentHp;
 	int attack;
+	int defense;
 	int speed;
 
 private:
