@@ -10,9 +10,9 @@ class PhysBody;
 
 enum class EntityType
 {
-	PLAYER,
-	ENEMY,
-	COIN,
+	PLAYER, //ERIC: Para Out of Combat
+	CHARACTHER, //Classe padre de Enemy y Personajes Jugables
+	CHEST,
 	GEM,
 	PORTAL,
 	SAVE,
