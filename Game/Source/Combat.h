@@ -46,6 +46,7 @@ public:
 	bool InitEntities(); //No se si quitarlo o que 
 	
 	bool AddCombatant(Characther* chara); //Eric:Añadir charathers a la lista de personajes
+	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
@@ -57,7 +58,7 @@ public:
 
 	//Turn Order
 	List<Characther*> initiative;
-	
+	int charaInTurn;
 	
 
 private:

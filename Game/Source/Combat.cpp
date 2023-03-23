@@ -186,3 +186,10 @@ bool Combat::AddCombatant(Characther* chara)
 	//	}
 	//}
 }
+
+bool Combat::NextTurn()
+{
+	if (initiative.Count() <= charaInTurn) { charaInTurn = 1; }
+	else { ++charaInTurn; }
+	initiative.At(charaInTurn)->data->onTurn = true;
+}
