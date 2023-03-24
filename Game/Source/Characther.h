@@ -57,7 +57,7 @@ public:
 	int maxHp;
 	int currentHp;
 	int attack;
-	int defense;
+	int armor; //MAXIMO ABSOLUTO 200, mas menos full items en tanque 120
 	int speed;
 
 private:

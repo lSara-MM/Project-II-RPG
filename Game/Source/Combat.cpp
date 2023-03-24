@@ -174,6 +174,23 @@ bool Combat::AddCombatant(Characther* chara)
 	//We add a Characther to the initiative list and we sort it by speed (fasters first, slowers last)
 	initiative.Add(chara);
 	
+	int n= initiative.Count();
+	initiative.At(2)->data->speed;
+
+		for (int i = 0; i < n - 1; i++)
+			for (int j = 0; j < n - i - 1; j++)
+				if (initiative.At(j)->data->speed > initiative.At(j+1)->data->speed)
+				{
+					//SWAP WIP
+					/*ListItem<Characther*> aux = new Characther;
+					aux = initiative.At(j);
+					initiative.At(j) = initiative.At(j + 1);
+					initiative.At(j + 1) = aux;*/
+				}
+					
+					
+	
+	
 	//initiative.BubbleSort();
 	//if (chara != initiative.start->data) {
 	//	//Bubble Sort Method
@@ -185,7 +202,10 @@ bool Combat::AddCombatant(Characther* chara)
 	//		//ERIC: Hacer el cambio
 	//	}
 	//}
+
+	return true;
 }
+
 
 bool Combat::NextTurn()
 {

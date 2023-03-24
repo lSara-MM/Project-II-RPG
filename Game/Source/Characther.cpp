@@ -91,12 +91,16 @@ void Characther::ModifyHP(int num)
 int Characther::CalculateDamage(int initialDmg) 
 {
 	int realDmg;
+	//Idea 1, crecimiento lento
+	//unsigned int defCalculus = (this->defense / 10) + 1; //Minimo valor de 1 ya que se usa para un logaritmo
+	//float defLogRes = log2(defCalculus); //Numero usado para calcular el multiplicador, se usa log para crecimiento mas lento
+	//float defMultiplier = defLogRes / (defLogRes + 1); //Multiplicador de la armor, cada vez crece mas despacio
+	//int reductionPercent = this->defense * defMultiplier; //Porcentaje de reduccion, tiene en cuenta la armadura y su multiplicador
+	//realDmg = initialDmg * (100 - reductionPercent)/100; //
 
-	unsigned int defCalculus = (this->defense / 10) + 1; //Minimo valor de 1 ya que se usa para un logaritmo
-	float defLogRes = log2(defCalculus); //Numero usado para calcular el multiplicador, se usa log para crecimiento mas lento
-	float defMultiplier = defLogRes / (defLogRes + 1); //Multiplicador de la armor, cada vez crece mas despacio
-	int reductionPercent = this->defense * defMultiplier; //Porcentaje de reduccion, tiene en cuenta la armadura y su multiplicador
-	realDmg = initialDmg * (100 - reductionPercent)/100; //
+	//Idea2, defensa mas relevante vs ataques mas debiles
+	float armorRelevance = (this->armor / initialDmg) + 1;
+	realDmg = initialDmg - ( (this->armor / 2) * armorRelevance);
 
 	return realDmg;
 }
