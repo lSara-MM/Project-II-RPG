@@ -43,6 +43,9 @@ bool Scene::Awake(pugi::xml_node& config)
 
 bool Scene::Start()
 {
+	app->entityManager->Enable();
+	player->Enable();
+
 	// Settings
 	pSettings->GUI_id = 0;
 	pSettings->CreateSettings(this);
