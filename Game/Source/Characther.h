@@ -27,7 +27,9 @@ public:
 
 	bool CleanUp();
 
-	
+	void ModifyHP(int cantidad); //Positivo para curar negativo para dañar
+
+	int CalculateDamage(int damage);
 
 public:
 	// The pointer to the current player animation

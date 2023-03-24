@@ -71,3 +71,32 @@ bool Characther::CleanUp()
 	return true;
 }
 
+void Characther::ModifyHP(int num)
+{
+	if ((this->currentHp + num) > this->maxHp) 
+	{
+		this->currentHp = this->maxHp;
+	}
+	else if ((this->currentHp + num) < 0)
+	{
+		this->currentHp = 0;
+		//Muere? No muere? Hay que hablar si hay death door
+	}
+	else
+	{
+		this->currentHp += num;
+	}
+}
+
+int Characther::CalculateDamage(int initialDmg) 
+{
+	int realDmg;
+
+	unsigned int defCalculus = (this->defense / 10) + 1; //Minimo valor de 1 ya que se usa para un logaritmo
+	float defLogRes = log2(defCalculus); //Numero usado para calcular el multiplicador, se usa log para crecimiento mas lento
+	float defMultiplier = defLogRes / (defLogRes + 1); //Multiplicador de la armor, cada vez crece mas despacio
+	int reductionPercent = this->defense * defMultiplier; //Porcentaje de reduccion, tiene en cuenta la armadura y su multiplicador
+	realDmg = initialDmg * (100 - reductionPercent)/100; //
+
+	return realDmg;
+}
