@@ -35,31 +35,31 @@ public:
 
 		// close
 		GUI_id++;
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 1050, 200, 26, 28 }, ButtonType::SMALL, "x", 10);
 		button->state = GuiControlState::NONE;
 		listSettingsButtons.Add(button);
 
 		// game
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 290, 300, 26, 28 }, ButtonType::SMALL, "Game", 20);
 		button->state = GuiControlState::NONE;
 		listSettingsButtons.Add(button);
 
 		// controls
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 290, 375, 26, 28 }, ButtonType::SMALL, "Controls", 20);
 		button->state = GuiControlState::NONE;
 		listSettingsButtons.Add(button);
 
 		// graphics
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 290, 450, 26, 28 }, ButtonType::SMALL, "Graphics", 20);
 		button->state = GuiControlState::NONE;
 		listSettingsButtons.Add(button);
 
 		// audio
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 290, 525, 26, 28 }, ButtonType::SMALL, "Audio", 20);
 		button->state = GuiControlState::NONE;
 		listSettingsButtons.Add(button);
 
