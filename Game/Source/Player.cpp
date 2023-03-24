@@ -6,6 +6,7 @@
 #include "Physics.h"
 #include "Render.h"
 #include "Window.h"
+#include "Textures.h"
 
 #include "Scene.h"
 
@@ -20,6 +21,13 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
 
+	idleAnim.PushBack({ 8, 39, 17, 28 });
+	idleAnim.PushBack({ 40, 39, 17, 28 });
+	idleAnim.PushBack({ 71, 38, 18, 29 });
+	idleAnim.PushBack({ 102, 38, 20, 29 });
+
+	idleAnim.speed = 0.1f;
+
 	active = true;
 }
 
@@ -29,10 +37,13 @@ Player::~Player() {
 
 bool Player::Awake() {
 
+
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 
-	
+	width = parameters.attribute("width").as_int();
+	height = parameters.attribute("height").as_int();
+
 	texturePath = parameters.attribute("texturepath").as_string();
 
 	return true;
@@ -54,13 +65,34 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	Controller(dt);
+	pbody->body->SetGravityScale(0);
+
+	if (app->scene->pause)
+	{
+		dtP = 0;
+	}
+	else if (!app->scene->pause)
+	{
+		dtP = dt / 1000;
+	}
+
+	Controller(dtP);
+
+	vel = b2Vec2(vel.x * dtP, vel.y * dtP);
+	//Set the velocity of the pbody of the player
+	pbody->body->SetLinearVelocity(vel);
+
+	//Update player position in pixels
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2;
 
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
+
+
 	return true;
 }
 
@@ -82,20 +114,20 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 void Player::Controller(float dt)
 {
-	if(app->input->GetKey(SDL_SCANCODE_W) || app->input->GetKey(SDL_SCANCODE_UP))
+	if(app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT|| app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
-		pbody->body->SetLinearVelocity({ 0, 5 * dt});
+		vel.y = -125;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_S) || app->input->GetKey(SDL_SCANCODE_DOWN))
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
-		pbody->body->SetLinearVelocity({ 0, -5 * dt});
+		vel.y = 125;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_A) || app->input->GetKey(SDL_SCANCODE_LEFT))
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT  || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		pbody->body->SetLinearVelocity({ -5 * dt , 0});
+		vel.x = -125;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_D) || app->input->GetKey(SDL_SCANCODE_RIGHT))
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		pbody->body->SetLinearVelocity({ 5 * dt , 0 });
+		vel.x = 125;
 	}
 }

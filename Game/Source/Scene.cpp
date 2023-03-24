@@ -38,13 +38,15 @@ bool Scene::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	sceneNode = config;
+
 	return ret;
 }
 
 bool Scene::Start()
 {
-	app->entityManager->Enable();
-	player->Enable();
+	//pause menu
+	pause = false;
 
 	// Settings
 	pSettings->GUI_id = 0;
@@ -53,6 +55,9 @@ bool Scene::Start()
 	// Pause 
 	pPause->GUI_id = pSettings->GUI_id;
 	pPause->CreatePause(this);
+
+	InitEntities();
+	app->entityManager->Enable();
 
 	return true;
 }
@@ -64,6 +69,7 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
+
 	Debug();
 
 	return true;
@@ -110,6 +116,9 @@ void Scene::Debug()
 
 bool Scene::InitEntities()
 {
+	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+	player->parameters = sceneNode.child("player");
+	player->Awake();
 
 	return true;
 }

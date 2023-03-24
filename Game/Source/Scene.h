@@ -51,6 +51,9 @@ public:
 
 	Player* player;
 	bool frcap;
+	bool pause;
+
+	pugi::xml_node sceneNode;
 
 private:
 

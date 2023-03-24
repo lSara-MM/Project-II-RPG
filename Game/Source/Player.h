@@ -6,6 +6,7 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "List.h"
+#include "Physics.h"
 
 #include "Animation.h"
 
@@ -45,6 +46,8 @@ public:
 	Animation attackAnim;
 
 	float dtP;
+	float grav;
+	b2Vec2 vel = { 0, 0 };
 
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
