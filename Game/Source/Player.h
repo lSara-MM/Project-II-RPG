@@ -29,6 +29,8 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	void Controller(float dt);
+
 public:
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction

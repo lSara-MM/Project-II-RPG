@@ -54,11 +54,12 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+	Controller(dt);
+
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 	return true;
 }
@@ -76,5 +77,25 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype)
 	{
+	}
+}
+
+void Player::Controller(float dt)
+{
+	if(app->input->GetKey(SDL_SCANCODE_W) || app->input->GetKey(SDL_SCANCODE_UP))
+	{
+		pbody->body->SetLinearVelocity({ 0, 5 * dt});
+	}
+	if (app->input->GetKey(SDL_SCANCODE_S) || app->input->GetKey(SDL_SCANCODE_DOWN))
+	{
+		pbody->body->SetLinearVelocity({ 0, -5 * dt});
+	}
+	if (app->input->GetKey(SDL_SCANCODE_A) || app->input->GetKey(SDL_SCANCODE_LEFT))
+	{
+		pbody->body->SetLinearVelocity({ -5 * dt , 0});
+	}
+	if (app->input->GetKey(SDL_SCANCODE_D) || app->input->GetKey(SDL_SCANCODE_RIGHT))
+	{
+		pbody->body->SetLinearVelocity({ 5 * dt , 0 });
 	}
 }
