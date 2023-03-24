@@ -35,20 +35,237 @@ public:
 
 		// close
 		GUI_id++;
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, "x", { 137, 56, 26, 28 }, 10, mod, ButtonType::SMALL);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
+		button->state = GuiControlState::NONE;
+		listSettingsButtons.Add(button);
+
+		// game
+		GUI_id++;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL);
+		button->state = GuiControlState::NONE;
+		listSettingsButtons.Add(button);
+
+		// controls
+		GUI_id++;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL);
+		button->state = GuiControlState::NONE;
+		listSettingsButtons.Add(button);
+
+		// graphics
+		GUI_id++;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL);
+		button->state = GuiControlState::NONE;
+		listSettingsButtons.Add(button);
+
+		// audio
+		GUI_id++;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL);
+		button->state = GuiControlState::NONE;
+		listSettingsButtons.Add(button);
+
+		return set;
+	}
+
+	bool OpenSettings()
+	{
+		SDL_Rect rect = { 0, 0, 226, 261 };
+
+		app->render->DrawRectangle({ 290, 203, 730, 463 }, 163, 163, 163, 200, true);
+		//if (!app->render->DrawTexture(settingsTexture, 150, 70, &rect)) { app->render->TextDraw("Settings", 180, 100, 21, { 107, 0, 110}); }
+		app->render->TextDraw("Settings", 180, 100, 21, { 107, 0, 110 });
+
+		int x = 170; int y = 130; int offset = 40;
+		app->render->TextDraw("Music:", x, y + offset, 12);
+		app->render->TextDraw("Fx:", x, y + offset * 2, 12);
+		app->render->TextDraw("Fullscreen:", x, y + offset * 3, 12);
+		app->render->TextDraw("Vsync:", x, y + offset * 4, 12);
+
+		if (!open)
+		{
+			for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
+			{
+				i->data->state = GuiControlState::NORMAL;
+			}
+
+
+			for (ListItem<GuiCheckBox*>* i = listCheckbox.start; i != nullptr; i = i->next)
+			{
+				if (i->data->id == 4 && app->win->changeScreen)
+				{
+					i->data->state = GuiControlState::SELECTED;
+				}
+				else
+				{
+					i->data->state = GuiControlState::NORMAL;
+				}
+			}
+
+			for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
+			{
+				i->data->state = GuiControlState::NORMAL;
+			}
+
+			open = true;
+		}
+
+		return true;
+	}
+
+	bool CloseSettings()
+	{
+		settings = false;
+		open = false;
+		for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NONE;
+		}
+
+		for (ListItem<GuiCheckBox*>* i = listCheckbox.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NONE;
+		}
+
+		for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NONE;
+		}
+
+		return true;
+	}
+
+	bool CleanUp()
+	{
+		CloseSettings();
+		//app->tex->UnLoad(settingsTexture);
+		listSettingsButtons.Clear();
+		listCheckbox.Clear();
+		listSliderBars.Clear();
+
+		return true;
+	}
+
+public:
+
+	// buttons
+	int GUI_id = 0;
+	List<GuiButton*> listSettingsButtons;
+	List<GuiSliderBar*> listSliderBars;
+	List<GuiCheckBox*> listCheckbox;
+
+	GuiSliderBar* music, *fx;
+
+	SDL_Texture* settingsTexture;
+	const char* settingsPath;
+	bool settings;
+	bool open;
+};
+
+struct GameSettings
+{
+public:
+
+	GameSettings* CreateGameSettings(Module* mod)
+	{
+		GameSettings* set = this;
+
+		//settingsTexture = app->tex->Load(settingsPath);
+
+		// settings buttons
+		gameSettings = false;
+		open = false;
+
+		return set;
+	}
+
+	bool OpenGameSettings()
+	{
+		SDL_Rect rect = { 0, 0, 226, 261 };
+
+		app->render->DrawRectangle({ 68, 165, 1095, 694 }, 163, 163, 163, 200, true);
+		//if (!app->render->DrawTexture(gameSettingsTexture, 150, 70, &rect)) { app->render->TextDraw("gameSettings", 180, 100, 21, { 107, 0, 110}); }
+		//app->render->TextDraw("gameSettings", 180, 100, 21, { 107, 0, 110 });
+
+		int x = 170; int y = 130; int offset = 40;
+		app->render->TextDraw("Language:", x, y + offset, 12);
+		app->render->TextDraw("Text Speed:", x, y + offset * 2, 12);
+		app->render->TextDraw("Return to Title:", x, y + offset * 3, 12);
+		app->render->TextDraw("Exit Game:", x, y + offset * 4, 12);
+
+		if (!open)
+		{
+			for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
+			{
+				i->data->state = GuiControlState::NORMAL;
+			}
+		}
+		return true;
+	}
+
+	bool CloseGameSettings()
+	{
+		gameSettings = false;
+		open = false;
+		for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NONE;
+		}
+
+		return true;
+	}
+
+	bool CleanUp()
+	{
+		CloseGameSettings();
+		//app->tex->UnLoad(gameSettingsTexture);
+		listGameButtons.Clear();
+
+		return true;
+	}
+
+public:
+
+	// buttons
+	int GUI_id = 0;
+	List<GuiButton*> listGameButtons;
+
+	GuiSliderBar* music, * fx;
+
+	SDL_Texture* gameSettingsTexture;
+	const char* gameSettingsPath;
+	bool gameSettings;
+	bool open;
+};
+
+struct ControlSettings
+{
+public:
+
+	ControlSettings* CreateSettings(Module* mod)
+	{
+		ControlSettings* set = this;
+
+		//settingsTexture = app->tex->Load(settingsPath);
+
+		// settings buttons
+		settings = false;
+		open = false;
+
+		// close
+		GUI_id++;
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
 		button->state = GuiControlState::NONE;
 		listSettingsButtons.Add(button);
 
 		// music
 		GUI_id++;
-		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, "music", { 250, 170, 63, 10 }, 10, mod, ButtonType::NONE, { 310, 165, 14, 16});
+		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 250, 170, 63, 10 }, ButtonType::NONE, "music", 10, { 310, 165, 14, 16 });
 		sliderBar->state = GuiControlState::NONE;
 		music = sliderBar;
 		listSliderBars.Add(sliderBar);
 
 		// fx
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, "fx", { 250, 210, 63, 10 }, 10, mod, ButtonType::NONE, { 310, 205, 14, 16 });
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 250, 210, 63, 10 }, ButtonType::NONE, "fx", 10, { 310, 205, 14, 16 });
 		sliderBar->state = GuiControlState::NONE;
 		fx = sliderBar;
 		listSliderBars.Add(sliderBar);
@@ -56,13 +273,13 @@ public:
 
 		// fullscreen	
 		GUI_id++;
-		GuiCheckBox* checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, "", { 330, 240, 30, 30 }, 10, mod);
+		GuiCheckBox* checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 330, 240, 30, 30 });
 		checkbox->state = GuiControlState::NONE;
 		listCheckbox.Add(checkbox);
 
 		// vsync
 		GUI_id++;
-		checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, "", { 330, 280, 30, 30 }, 10, mod);
+		checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod,{ 330, 280, 30, 30 });
 		checkbox->state = GuiControlState::NONE;
 		listCheckbox.Add(checkbox);
 
@@ -73,7 +290,7 @@ public:
 	{
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
-		app->render->DrawRectangle({ 150, 70, 226, 261 }, 206, 167, 240 , 230, true);
+		app->render->DrawRectangle({ 150, 70, 226, 261 }, 206, 167, 240, 230, true);
 		//if (!app->render->DrawTexture(settingsTexture, 150, 70, &rect)) { app->render->TextDraw("Settings", 180, 100, 21, { 107, 0, 110}); }
 		app->render->TextDraw("Settings", 180, 100, 21, { 107, 0, 110 });
 
@@ -164,7 +381,313 @@ public:
 	List<GuiSliderBar*> listSliderBars;
 	List<GuiCheckBox*> listCheckbox;
 
-	GuiSliderBar* music, *fx;
+	GuiSliderBar* music, * fx;
+
+	SDL_Texture* settingsTexture;
+	const char* settingsPath;
+	bool settings;
+	bool open;
+};
+
+struct GraphicsSettings
+{
+public:
+
+	GraphicsSettings* CreateSettings(Module* mod)
+	{
+		GraphicsSettings* set = this;
+
+		//settingsTexture = app->tex->Load(settingsPath);
+
+		// settings buttons
+		settings = false;
+		open = false;
+
+		// close
+		GUI_id++;
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
+		button->state = GuiControlState::NONE;
+		listSettingsButtons.Add(button);
+
+		// music
+		GUI_id++;
+		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 250, 170, 63, 10 }, ButtonType::NONE, "music", 10, { 310, 165, 14, 16 });
+		sliderBar->state = GuiControlState::NONE;
+		music = sliderBar;
+		listSliderBars.Add(sliderBar);
+
+		// fx
+		GUI_id++;
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 250, 210, 63, 10 }, ButtonType::NONE, "fx", 10, { 310, 205, 14, 16 });
+		sliderBar->state = GuiControlState::NONE;
+		fx = sliderBar;
+		listSliderBars.Add(sliderBar);
+
+
+		// fullscreen	
+		GUI_id++;
+		GuiCheckBox* checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 330, 240, 30, 30 });
+		checkbox->state = GuiControlState::NONE;
+		listCheckbox.Add(checkbox);
+
+		// vsync
+		GUI_id++;
+		checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod,{ 330, 280, 30, 30 });
+		checkbox->state = GuiControlState::NONE;
+		listCheckbox.Add(checkbox);
+
+		return set;
+	}
+
+	bool OpenSettings()
+	{
+		SDL_Rect rect = { 0, 0, 226, 261 };
+
+		app->render->DrawRectangle({ 150, 70, 226, 261 }, 206, 167, 240, 230, true);
+		//if (!app->render->DrawTexture(settingsTexture, 150, 70, &rect)) { app->render->TextDraw("Settings", 180, 100, 21, { 107, 0, 110}); }
+		app->render->TextDraw("Settings", 180, 100, 21, { 107, 0, 110 });
+
+		int x = 170; int y = 130; int offset = 40;
+		app->render->TextDraw("Music:", x, y + offset, 12);
+		app->render->TextDraw("Fx:", x, y + offset * 2, 12);
+		app->render->TextDraw("Fullscreen:", x, y + offset * 3, 12);
+		app->render->TextDraw("Vsync:", x, y + offset * 4, 12);
+
+		if (!open)
+		{
+			for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
+			{
+				i->data->state = GuiControlState::NORMAL;
+			}
+
+
+			for (ListItem<GuiCheckBox*>* i = listCheckbox.start; i != nullptr; i = i->next)
+			{
+				if (i->data->id == 4 && app->win->changeScreen)
+				{
+					i->data->state = GuiControlState::SELECTED;
+				}
+				else
+				{
+					i->data->state = GuiControlState::NORMAL;
+				}
+			}
+
+			for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
+			{
+				i->data->state = GuiControlState::NORMAL;
+			}
+
+			music->sliderBounds.x = music->bounds.x + app->audio->volumeM * 60 / SDL_MIX_MAXVOLUME;
+			music->volume100 = app->audio->volumeM;
+
+			fx->sliderBounds.x = fx->bounds.x + app->audio->volumeF * 60 / SDL_MIX_MAXVOLUME;
+			fx->volume100 = app->audio->volumeF;
+
+
+			open = true;
+		}
+
+		if (app->audio->volumeM != music->volume100)app->audio->ChangeMusicVolume(music->volume100);
+		if (app->audio->volumeF != fx->volume100)app->audio->ChangeFxVolume(fx->volume100);
+		return true;
+	}
+
+	bool CloseSettings()
+	{
+		settings = false;
+		open = false;
+		for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NONE;
+		}
+
+		for (ListItem<GuiCheckBox*>* i = listCheckbox.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NONE;
+		}
+
+		for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NONE;
+		}
+
+		return true;
+	}
+
+	bool CleanUp()
+	{
+		CloseSettings();
+		//app->tex->UnLoad(settingsTexture);
+		listSettingsButtons.Clear();
+		listCheckbox.Clear();
+		listSliderBars.Clear();
+
+		return true;
+	}
+
+public:
+
+	// buttons
+	int GUI_id = 0;
+	List<GuiButton*> listSettingsButtons;
+	List<GuiSliderBar*> listSliderBars;
+	List<GuiCheckBox*> listCheckbox;
+
+	GuiSliderBar* music, * fx;
+
+	SDL_Texture* settingsTexture;
+	const char* settingsPath;
+	bool settings;
+	bool open;
+};
+
+struct AudioSettings
+{
+public:
+
+	AudioSettings* CreateSettings(Module* mod)
+	{
+		AudioSettings* set = this;
+
+		//settingsTexture = app->tex->Load(settingsPath);
+
+		// settings buttons
+		settings = false;
+		open = false;
+
+		// close
+		GUI_id++;
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
+		button->state = GuiControlState::NONE;
+		listSettingsButtons.Add(button);
+
+		// music
+		GUI_id++;
+		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 250, 170, 63, 10 }, ButtonType::NONE, "music", 10, { 310, 165, 14, 16 });
+		sliderBar->state = GuiControlState::NONE;
+		music = sliderBar;
+		listSliderBars.Add(sliderBar);
+
+		// fx
+		GUI_id++;
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 250, 210, 63, 10 }, ButtonType::NONE, "fx", 10, { 310, 205, 14, 16 });
+		sliderBar->state = GuiControlState::NONE;
+		fx = sliderBar;
+		listSliderBars.Add(sliderBar);
+
+
+		// fullscreen	
+		GUI_id++;
+		GuiCheckBox* checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 330, 240, 30, 30 });
+		checkbox->state = GuiControlState::NONE;
+		listCheckbox.Add(checkbox);
+
+		// vsync
+		GUI_id++;
+		checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod,{ 330, 280, 30, 30 });
+		checkbox->state = GuiControlState::NONE;
+		listCheckbox.Add(checkbox);
+
+		return set;
+	}
+
+	bool OpenSettings()
+	{
+		SDL_Rect rect = { 0, 0, 226, 261 };
+
+		app->render->DrawRectangle({ 150, 70, 226, 261 }, 206, 167, 240, 230, true);
+		//if (!app->render->DrawTexture(settingsTexture, 150, 70, &rect)) { app->render->TextDraw("Settings", 180, 100, 21, { 107, 0, 110}); }
+		app->render->TextDraw("Settings", 180, 100, 21, { 107, 0, 110 });
+
+		int x = 170; int y = 130; int offset = 40;
+		app->render->TextDraw("Music:", x, y + offset, 12);
+		app->render->TextDraw("Fx:", x, y + offset * 2, 12);
+		app->render->TextDraw("Fullscreen:", x, y + offset * 3, 12);
+		app->render->TextDraw("Vsync:", x, y + offset * 4, 12);
+
+		if (!open)
+		{
+			for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
+			{
+				i->data->state = GuiControlState::NORMAL;
+			}
+
+
+			for (ListItem<GuiCheckBox*>* i = listCheckbox.start; i != nullptr; i = i->next)
+			{
+				if (i->data->id == 4 && app->win->changeScreen)
+				{
+					i->data->state = GuiControlState::SELECTED;
+				}
+				else
+				{
+					i->data->state = GuiControlState::NORMAL;
+				}
+			}
+
+			for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
+			{
+				i->data->state = GuiControlState::NORMAL;
+			}
+
+			music->sliderBounds.x = music->bounds.x + app->audio->volumeM * 60 / SDL_MIX_MAXVOLUME;
+			music->volume100 = app->audio->volumeM;
+
+			fx->sliderBounds.x = fx->bounds.x + app->audio->volumeF * 60 / SDL_MIX_MAXVOLUME;
+			fx->volume100 = app->audio->volumeF;
+
+
+			open = true;
+		}
+
+		if (app->audio->volumeM != music->volume100)app->audio->ChangeMusicVolume(music->volume100);
+		if (app->audio->volumeF != fx->volume100)app->audio->ChangeFxVolume(fx->volume100);
+		return true;
+	}
+
+	bool CloseSettings()
+	{
+		settings = false;
+		open = false;
+		for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NONE;
+		}
+
+		for (ListItem<GuiCheckBox*>* i = listCheckbox.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NONE;
+		}
+
+		for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NONE;
+		}
+
+		return true;
+	}
+
+	bool CleanUp()
+	{
+		CloseSettings();
+		//app->tex->UnLoad(settingsTexture);
+		listSettingsButtons.Clear();
+		listCheckbox.Clear();
+		listSliderBars.Clear();
+
+		return true;
+	}
+
+public:
+
+	// buttons
+	int GUI_id = 0;
+	List<GuiButton*> listSettingsButtons;
+	List<GuiSliderBar*> listSliderBars;
+	List<GuiCheckBox*> listCheckbox;
+
+	GuiSliderBar* music, * fx;
 
 	SDL_Texture* settingsTexture;
 	const char* settingsPath;
@@ -189,14 +712,14 @@ public:
 
 		// close
 		GUI_id++;
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, "x", { 137, 56, 26, 28 }, 10, mod, ButtonType::SMALL);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
 		button->state = GuiControlState::NONE;
 		listPauseButtons.Add(button);
 
 		// buttons
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, buttons[i], { 180, 130 + 50 * i, 172, 40 }, 10, mod, ButtonType::EXTRA_LARGE);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 180, 130 + 50 * i, 172, 40 }, ButtonType::EXTRA_LARGE, buttons[i], 10);
 			button->state = GuiControlState::NONE;
 			listPauseButtons.Add(button);
 		}
@@ -278,7 +801,7 @@ public:
 
 		// close
 		GUI_id++;
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, "x", { 137, 56, 26, 28 }, 10, mod, ButtonType::SMALL);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
 		button->state = GuiControlState::NONE;
 		listCreditsButtons.Add(button);
 

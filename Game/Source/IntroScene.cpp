@@ -46,7 +46,7 @@ bool IntroScene::Start()
 	for (int i = 0; buttons[i] != "\n"; i++)
 	{
 		bNum = i + 6;
-		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, bNum, buttons[i], { 25, 180 + 33 * i, 90, 27 }, 10, this, ButtonType::LARGE));
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, bNum, this, { 25, 180 + 33 * i, 90, 27 }, ButtonType::LARGE, buttons[i], 10));
 	}
 
 	listButtons.start->next->data->state = GuiControlState::DISABLED;

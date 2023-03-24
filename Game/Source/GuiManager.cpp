@@ -20,7 +20,7 @@ bool GuiManager::Start()
 	return true;
 }
 
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, int fontSize, Module* observer, ButtonType bType, SDL_Rect sliderBounds)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, SDL_Rect sliderBounds)
 {
 	GuiControl* guiControl = nullptr;
 

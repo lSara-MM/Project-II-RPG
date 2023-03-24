@@ -2,7 +2,7 @@
 	<app>
 		<title>Twisted Tent</title>
 		<organization>UPC</organization>
-		<frcap value = "16"/>
+		<frcap value = "60"/>
 	</app>
 
 	<renderer>
@@ -11,7 +11,7 @@
 	</renderer>
 
 	<window>
-		<resolution width="1024" height="767" scale="2"/>
+		<resolution width="1280" height="720" scale="1"/>
 		<fullscreen value="false"/>
 		<borderless value="false"/>
 		<resizable value="false"/>
