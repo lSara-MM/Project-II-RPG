@@ -80,6 +80,9 @@
     <ClCompile Include="Source\Combat.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PartyMember.cpp">
+      <Filter>Modules\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player.h" />
@@ -195,6 +198,9 @@
     <ClInclude Include="Source\Combat.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\PartyMember.h">
+      <Filter>Modules\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">
@@ -220,6 +226,9 @@
     </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{59396da5-13ff-4cbf-85fc-91a7386282ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Entities\PCs">
+      <UniqueIdentifier>{c5d6774c-26c4-4529-a462-f01c7599a39a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

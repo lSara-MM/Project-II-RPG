@@ -59,6 +59,10 @@ public:
 	//Turn Order
 	List<Characther*> initiative;
 	int charaInTurn;
+
+	Characther* allies[4]; //4 es backline, 1 es frontline
+	Characther* enemies[4]; //4 es backline, 1 es frontline
+
 	
 
 private:
