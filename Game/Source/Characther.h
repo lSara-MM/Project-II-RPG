@@ -60,6 +60,9 @@ public:
 	int armor; //MAXIMO ABSOLUTO 200, mas menos full items en tanque 120
 	int speed;
 
+	//Posicion combate
+	int positionCombat; //Del uno al cuatro
+
 private:
 
 	SDL_Texture* texture;

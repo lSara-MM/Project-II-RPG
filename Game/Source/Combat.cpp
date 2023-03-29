@@ -63,6 +63,9 @@ bool Combat::Update(float dt)
 {
 	Debug();
 
+	/*for (int i=1;initiative.Count()>=i;i++) 
+	{initiative.At(i)->data.}*/
+
 	return true;
 }
 
@@ -169,11 +172,12 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-bool Combat::AddCombatant(Characther* chara)
+bool Combat::AddCombatant(Characther* chara, int mod)
 {
 	//We add a Characther to the initiative list and we sort it by speed (fasters first, slowers last)
 	initiative.Add(chara);
-	
+	chara->speed += mod; //Aumentar o disminuir la speed de ese especifico (es para enemigos que usan la misma template)
+
 	int n= initiative.Count();
 	initiative.At(2)->data->speed;
 
@@ -182,10 +186,10 @@ bool Combat::AddCombatant(Characther* chara)
 				if (initiative.At(j)->data->speed > initiative.At(j+1)->data->speed)
 				{
 					//SWAP WIP
-					/*ListItem<Characther*> aux = new Characther;
-					aux = initiative.At(j);
-					initiative.At(j) = initiative.At(j + 1);
-					initiative.At(j + 1) = aux;*/
+					ListItem<Characther*>* aux;
+					aux->data = initiative.At(j)->data;
+					initiative.At(j)->data = initiative.At(j + 1)->data;
+					initiative.At(j + 1)->data = aux->data;
 				}
 					
 					

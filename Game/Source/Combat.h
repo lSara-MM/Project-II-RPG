@@ -45,7 +45,7 @@ public:
 	void Debug();
 	bool InitEntities(); //No se si quitarlo o que 
 	
-	bool AddCombatant(Characther* chara); //Eric:Añadir charathers a la lista de personajes
+	bool AddCombatant(Characther* chara, int modifier); //Eric:Añadir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
 
 	// Settings
