@@ -46,7 +46,7 @@ bool Scene::Awake(pugi::xml_node& config)
 bool Scene::Start()
 {
 	//pause menu
-	pause = false;
+	pause_B = false;
 
 	// Settings
 	pSettings->GUI_id = 0;
@@ -79,12 +79,12 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if (exit) return false;
+	if (exit_B) return false;
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 	
-	if (pSettings->settings) { pSettings->OpenSettings(); }
+	if (pSettings->settings_B) { pSettings->OpenSettings(); }
 	if (pPause->pause) { pPause->OpenPause(); }
 	app->guiManager->Draw();
 
@@ -127,54 +127,54 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Event by %d ", control->id);
 
-	app->audio->PlayFx(control->fxControl);
+	//app->audio->PlayFx(control->fxControl);
 
 	switch (control->id)
 	{
-	case 1:
+	case 801:
 		LOG("Button Close settings click");
 		pPause->OpenPause();
 		pSettings->CloseSettings();
 		break;
-	case 2:
+	case 802:
 		LOG("Slider music click");
-		app->audio->ChangeMusicVolume(pSettings->music->volume100);
+		//app->audio->ChangeMusicVolume(pSettings->music->volume100);
 		break;
-	case 3:
+	case 803:
 		LOG("Slider fx click");
-		app->audio->ChangeFxVolume(pSettings->fx->volume100);
+		//app->audio->ChangeFxVolume(pSettings->fx->volume100);
 		break;
-	case 4:
+	case 804:
 		LOG("Checkbox Fullscreen click");
 		app->win->changeScreen = !app->win->changeScreen;
 		app->win->ResizeWin();
 		break;
-	case 5:
+	case 805:
 		LOG("Checkbox Vsync click");
 		(control->state == GuiControlState::NORMAL) ? app->render->flags = SDL_RENDERER_ACCELERATED : app->render->flags |= SDL_RENDERER_PRESENTVSYNC;
 		break;
-	case 6:
+	case 806:
 		LOG("Button Close pause click");
 		pPause->ClosePause(); 
 		break;
-	case 7:
+	case 807:
 		LOG("Button Resume click");
 		pPause->ClosePause();
 		break;
-	case 8:
+	case 808:
 		LOG("Button Return to Title click");
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
 		break;
-	case 9:
+	case 809:
 		LOG("Button settings click");
 		pPause->ClosePause();
 
-		pSettings->settings = !pSettings->settings;
-		if (!pSettings->settings) { pSettings->CloseSettings();}
+		pSettings->settings_B = !pSettings->settings_B;
+		if (!pSettings->settings_B) { pSettings->CloseSettings();}
 		break;
 	case 10:
 		LOG("Button Exit game click");
-		exit = true;
+		exit_B = true;
 		break;
 	}
 

@@ -50,8 +50,8 @@ public:
 public:
 
 	Player* player;
-	bool frcap;
-	bool pause;
+	bool frcap_B;
+	bool pause_B;
 
 	pugi::xml_node sceneNode;
 
@@ -64,7 +64,7 @@ private:
 	Pause pauseMenu;
 	Pause* pPause = &pauseMenu;
 
-	bool exit;
+	bool exit_B;
 };
 
 #endif // __SCENE_H__

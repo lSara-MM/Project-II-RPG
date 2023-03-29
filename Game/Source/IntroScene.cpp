@@ -56,7 +56,7 @@ bool IntroScene::Start()
 
 	pCredits->CreateCredits(this, bNum);
 
-	exit = false;
+	exit_B = false;
 
 	return true;
 }
@@ -81,13 +81,13 @@ bool IntroScene::PostUpdate()
 {
 	bool ret = true;
 
-	if (exit) return false;
+	if (exit_B) return false;
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
 
-	if (pSettings->settings) { pSettings->OpenSettings(); }
+	if (pSettings->settings_B) { pSettings->OpenSettings(); }
 	if (pCredits->credits) { pCredits->OpenCredits(); }
 
 	app->guiManager->Draw();
@@ -122,11 +122,11 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 2:
 		LOG("Slider music click");
-		app->audio->ChangeMusicVolume(pSettings->music->volume100);
+		//app->audio->ChangeMusicVolume(pSettings->music->volume100);
 		break;
 	case 3:
 		LOG("Slider fx click");
-		app->audio->ChangeFxVolume(pSettings->fx->volume100);
+		//app->audio->ChangeFxVolume(pSettings->fx->volume100);
 		break;
 	case 4:
 		LOG("Checkbox Fullscreen click");
@@ -146,8 +146,8 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 8:
 		LOG("Button settings click");
-		pSettings->settings = !pSettings->settings;
-		if (!pSettings->settings)
+		pSettings->settings_B = !pSettings->settings_B;
+		if (!pSettings->settings_B)
 		{
 			pSettings->CloseSettings();
 		}
@@ -160,7 +160,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 10:
 		LOG("Button Exit game click");
-		exit = true;
+		exit_B = true;
 		break;
 
 	case 11:

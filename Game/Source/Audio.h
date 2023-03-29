@@ -39,7 +39,7 @@ public:
 	bool ChangeFxVolume(int vol);
 
 public:
-	int volumeM, volumeF;
+	int volume_music, volume_fx;
 
 private:
 

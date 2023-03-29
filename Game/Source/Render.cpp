@@ -114,7 +114,6 @@ void Render::ResetViewPort()
 // Blit to screen
 bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY, SDL_RendererFlip flip) const
 {
-
 	bool ret = true;
 
 	uint scale = app->win->GetScale();
@@ -256,11 +255,15 @@ bool Render::SaveState(pugi::xml_node& data)
 	return true;
 }
 
-bool Render::TextDraw(const char* text, int x, int y, int size, SDL_Color color)
+bool Render::TextDraw(const char* text, int x, int y, int size, FONT font, SDL_Color color)
 {
 	bool ret = true;
+
 	//load a font into memory
-	ttf_font = TTF_OpenFont("Assets/Fonts/pcsenior.ttf", size);
+
+	if (font == FONT::UI)	{ ttf_font = TTF_OpenFont("Assets/Fonts/Fondamento-Regular.ttf", size); }
+	else if (font == FONT::TEXT) { ttf_font = TTF_OpenFont("Assets/Fonts/FingerPaint-Regular.ttf", size); }
+	
 	
 	if (!ttf_font)
 	{

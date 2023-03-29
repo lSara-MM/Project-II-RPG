@@ -74,7 +74,7 @@ public:
 	iPoint pos_Enemy;
 	iPoint pos_Origin;	// make the enemy return to the spawn point
 	iPoint originPos;
-	bool origin;
+	bool origin_B;
 
 	int detectionDistance;
 

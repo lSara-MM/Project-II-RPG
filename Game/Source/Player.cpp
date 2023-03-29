@@ -67,11 +67,11 @@ bool Player::Update(float dt)
 {
 	pbody->body->SetGravityScale(0);
 
-	if (app->scene->pause)
+	if (app->scene->pause_B)
 	{
 		dtP = 0;
 	}
-	else if (!app->scene->pause)
+	else if (!app->scene->pause_B)
 	{
 		dtP = dt / 1000;
 	}
