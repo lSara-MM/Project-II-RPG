@@ -71,6 +71,13 @@ bool Characther::CleanUp()
 	return true;
 }
 
+bool Characther::Render()
+{
+	app->render->DrawTexture(texture, position.x, position.y);
+
+	return true;
+}
+
 void Characther::ModifyHP(int num)
 {
 	if ((this->currentHp + num) > this->maxHp) 

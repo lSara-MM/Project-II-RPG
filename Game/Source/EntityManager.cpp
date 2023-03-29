@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "Player.h"
+#include "Characther.h"
 
 #include "App.h"
 #include "Map.h"
@@ -84,6 +85,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 
 	case EntityType::PLAYER:
 		entity = new Player();
+		break;
+
+	case EntityType::CHARACTHER:
+		entity = new Characther();
 		break;
 
 	default: break;

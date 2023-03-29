@@ -27,6 +27,8 @@ public:
 
 	bool CleanUp();
 
+	bool Render(); //Se llama a ser printado desde combat(?)
+
 	void ModifyHP(int cantidad); //Positivo para curar negativo para dañar
 
 	int CalculateDamage(int damage);

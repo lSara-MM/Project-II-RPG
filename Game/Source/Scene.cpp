@@ -11,6 +11,7 @@
 
 #include "IntroScene.h"
 #include "LoseScene.h"
+#include "Combat.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
@@ -51,6 +52,12 @@ bool Scene::Start()
 	pPause->GUI_id = pSettings->GUI_id;
 	pPause->CreatePause(this);
 
+
+	//Pruebas
+	Entity* entidad = app->entityManager->CreateEntity(EntityType::CHARACTHER);
+	app->entityManager->AddEntity(entidad);
+
+
 	return true;
 }
 
@@ -63,6 +70,19 @@ bool Scene::Update(float dt)
 {
 	Debug();
 
+	Entity* entidad = app->entityManager->CreateEntity(EntityType::CHARACTHER);
+	app->entityManager->AddEntity(entidad);
+
+	Entity* entidad2 = app->entityManager->CreateEntity(EntityType::CHARACTHER);
+	app->entityManager->AddEntity(entidad2);
+	
+	//ERIC: Prueba que no funciona.
+	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) 
+	{ 
+		app->combat->AddCombatant((Characther*)entidad, 3);
+		app->combat->AddCombatant((Characther*)entidad2, -1);
+	}
+
 	return true;
 }
 
@@ -71,6 +91,9 @@ bool Scene::PostUpdate()
 	bool ret = true;
 
 	if (exit) return false;
+
+	
+		
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
