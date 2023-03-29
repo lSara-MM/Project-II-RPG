@@ -1,4 +1,5 @@
 #include "GuiCheckBox.h"
+#include "GuiManager.h"
 
 GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds) : GuiControl(GuiControlType::CHECKBOX, id)
 {
@@ -51,7 +52,7 @@ bool GuiCheckBox::Update(float dt)
 bool GuiCheckBox::Draw(Render* render)
 {
 	SDL_Rect rect = { 0, 0, 0, 0 };
-	if (GUI_debug)
+	if (app->guiManager->GUI_debug)
 	{
 		// Draw the right button depending on state
 		switch (state)

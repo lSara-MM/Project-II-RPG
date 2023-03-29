@@ -73,6 +73,9 @@ bool IntroScene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
+
 	return true;
 }
 
@@ -166,6 +169,185 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 11:
 		LOG("Button Close credits");
 		pCredits->CloseCredits();
+		break;
+
+
+		// Settings
+	case 801:
+		LOG("Button Close settings click");
+		pSettings->CloseSettings();
+		break;
+
+	case 802:
+		LOG("Game settings click");
+
+		break;
+
+	case 803:
+		LOG("Controls settings click");
+
+		break;
+
+	case 804:
+		LOG("Graphics settings click");
+
+		break;
+
+	case 805:
+		LOG("Audio settings click");
+
+		break;
+
+
+		// Game settings
+	case 806:
+		LOG("Button Language click");
+
+		break;
+
+	case 807:
+		LOG("Button Text Speed click");
+
+		break;
+	case 808:
+		LOG("Button Return to Title click");
+
+		break;
+
+	case 809:
+		LOG("Button Exit Game click");
+
+		break;
+
+
+		// Control settings
+	case 810:
+		LOG("Button Move Up keyboard check");
+
+		break;
+
+	case 811:
+		LOG("Button Move Up gamepad check");
+
+		break;
+
+	case 812:
+		LOG("Button Move Left keyboard check");
+
+		break;
+
+	case 813:
+		LOG("Button Move Left gamepad check");
+
+		break;
+
+	case 814:
+		LOG("Button Move Right keyboard check");
+
+		break;
+
+	case 815:
+		LOG("Button Move Right gamepad check");
+
+		break;
+
+	case 816:
+		LOG("Button Move Down keyboard check");
+
+		break;
+
+	case 817:
+		LOG("Button Move Down gamepad check");
+
+		break;
+
+	case 818:
+		LOG("Button Interact keyboard check");
+
+		break;
+
+	case 819:
+		LOG("Button Interact gamepad check");
+
+		break;
+
+	case 820:
+		LOG("Button Inventory keyboard check");
+
+		break;
+
+	case 821:
+		LOG("Button Party gamepad check");
+
+		break;
+
+	case 822:
+		LOG("Button Quests keyboard check");
+
+		break;
+
+	case 823:
+		LOG("Button Quests gamepad check");
+
+		break;
+
+	case 824:
+		LOG("Button Map keyboard check");
+
+		break;
+
+	case 825:
+		LOG("Button Map gamepad check");
+
+		break;
+
+	case 826:
+		LOG("Button Settings keyboard check");
+
+		break;
+
+	case 827:
+		LOG("Button Settings gamepad check");
+
+		break;
+
+
+		// Graphics settings
+	case 828:
+		LOG("Button Windows size");
+
+		break;
+
+	case 829:
+		LOG("Checkbox Fullscreen check");
+
+		break;
+
+	case 830:
+		LOG("Checkbox Vsync check");
+
+		break;
+
+	case 831:
+		LOG("Button Max fps");
+
+		break;
+
+
+		// Audio settings
+	case 832:
+		LOG("Slider bar General volume");
+
+		break;
+
+	case 833:
+		LOG("Slider bar Music volume");
+
+		break;
+
+	case 834:
+		LOG("Slider bar Fx volume");
+
 		break;
 	}
 

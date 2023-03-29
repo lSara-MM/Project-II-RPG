@@ -112,8 +112,6 @@ public:
 	int fontSize;
 
 	Module* observer;        // Observer module (it should probably be an array/list)
-
-	bool GUI_debug = false;
 };
 
 #endif // __GUICONTROL_H__

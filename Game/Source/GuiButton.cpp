@@ -1,4 +1,5 @@
 #include "GuiButton.h"
+#include "GuiManager.h"
 
 GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -77,7 +78,7 @@ bool GuiButton::Draw(Render* render)
 	SDL_Rect rect = { 0, 0, 0, 0 };
 	int offsetX = 0; int offsetY = 0;
 
-	if (GUI_debug)
+	if (app->guiManager->GUI_debug)
 	{
 		if (buttonType == ButtonType::EXTRA_LARGE) { rect = { 90, 0, 172, 40 }; offsetX = 50;	offsetY = 10; }
 		if (buttonType == ButtonType::LARGE) { rect = { 90, 0, 90, 27 }; offsetX = 20;	offsetY = 3; }

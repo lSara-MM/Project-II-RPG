@@ -1,4 +1,5 @@
 #include "GuiSliderBar.h"
+#include "GuiManager.h"
 
 GuiSliderBar::GuiSliderBar(uint32 id, SDL_Rect bounds, SDL_Rect sliderBounds) : GuiControl(GuiControlType::SLIDERBAR, id)
 {
@@ -61,7 +62,7 @@ bool GuiSliderBar::Draw(Render* render)
 {
 	SDL_Rect rect = { 0, 16, 68, 4 };
 
-	if (GUI_debug)
+	if (app->guiManager->GUI_debug)
 	{
 		// Draw the right button depending on state
 		switch (state)

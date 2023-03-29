@@ -158,3 +158,14 @@ void Input::GetMouseMotion(int& x, int& y)
 	x = mouseMotionX;
 	y = mouseMotionY;
 }
+
+// to test
+void Input::RemapKeys(int* key)
+{
+	static SDL_Event event;
+
+	if (SDL_PollEvent(&event) != 0)
+	{
+		*key = event.key.keysym.sym;
+	}
+}
