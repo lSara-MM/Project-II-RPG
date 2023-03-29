@@ -18,7 +18,7 @@
 #include "Log.h"
 #include "Point.h"
 
-PartyMember::PartyMember() : Entity(EntityType::CHARACTHER)
+PartyMember::PartyMember() : Characther()
 {
 	name.Create("Characther");
 

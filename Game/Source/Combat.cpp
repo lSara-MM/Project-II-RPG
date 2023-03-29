@@ -186,7 +186,7 @@ bool Combat::AddCombatant(Characther* chara, int mod)
 				if (initiative.At(j)->data->speed > initiative.At(j+1)->data->speed)
 				{
 					//SWAP WIP
-					ListItem<Characther*>* aux;
+					ListItem<Characther*>* aux=nullptr;
 					aux->data = initiative.At(j)->data;
 					initiative.At(j)->data = initiative.At(j + 1)->data;
 					initiative.At(j + 1)->data = aux->data;
