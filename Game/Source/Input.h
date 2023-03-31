@@ -25,6 +25,27 @@ enum KeyState
 	KEY_UP
 };
 
+enum KeyType
+{
+	KEY_MOVE_UP,
+	KEY_MOVE_LEFT,
+	KEY_MOVE_RIGHT,
+	KEY_MOVE_DOWN,
+	KEY_INTERACT,
+	KEY_INVENTORY,
+	KEY_PARTY,
+	KEY_QUESTS, 
+	KEY_MAP,
+	KEY_SETTINGS
+};
+
+struct KeyBinding
+{
+	KeyType keyType;
+	char key;		// character
+	int key_num;	// scancode number
+};
+
 class Input : public Module
 {
 
@@ -65,7 +86,7 @@ public:
 	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
 
-	void RemapKeys(int* key);
+	void RemapKeys(KeyBinding* key);
 
 public:
 
@@ -77,6 +98,32 @@ private:
 	int mouseMotionY;
 	int mouseX;
 	int mouseY;
+
+
+	KeyBinding move_up_k;
+	KeyBinding move_left_k;
+	KeyBinding move_right_k;
+	KeyBinding move_down_k;
+	KeyBinding interact_k;
+
+	KeyBinding move_up_g;
+	KeyBinding move_left_g;
+	KeyBinding move_right_g;
+	KeyBinding move_down_g;
+	KeyBinding interact_g;
+
+
+	KeyBinding invetory_k;
+	KeyBinding party_k;
+	KeyBinding quests_k;
+	KeyBinding map_k;
+	KeyBinding settings_k;
+
+	KeyBinding invetory_g;
+	KeyBinding party_g;
+	KeyBinding quests_g;
+	KeyBinding map_g;
+	KeyBinding settings_g;
 };
 
 #endif // __INPUT_H__

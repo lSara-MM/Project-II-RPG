@@ -160,12 +160,13 @@ void Input::GetMouseMotion(int& x, int& y)
 }
 
 // to test
-void Input::RemapKeys(int* key)
+void Input::RemapKeys(KeyBinding* key)
 {
 	static SDL_Event event;
 
 	if (SDL_PollEvent(&event) != 0)
 	{
-		*key = event.key.keysym.sym;
+		key->key_num = event.key.keysym.sym;
+		key->key = event.key.keysym.sym;
 	}
 }

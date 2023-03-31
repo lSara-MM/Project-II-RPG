@@ -19,7 +19,7 @@
 
 #include "SDL/include/SDL.h"
 
-struct GameSettings
+class GameSettings
 {
 public:
 
@@ -91,7 +91,7 @@ public:
 	bool open_game_B;
 };
 
-struct ControlSettings
+class ControlSettings
 {
 public:
 
@@ -105,129 +105,15 @@ public:
 		control_B = false;
 		open_control_B = false;
 
-		// First column
+		GuiButton* button;
 
-		// Move Up keyboard
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-		
-		// Move Up gamepad
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Move Left keyboard
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Move Left gamepad
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Move Right keyboard
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Move Right gamepad
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Move Down keyboard
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Move Down gamepad
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Interact keyboard
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Interact gamepad
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-
-		// Second column
-
-		// Inventory keyboard
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Inventory  gamepad
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Party keyboard
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Party gamepad
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Quests keyboard
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Quests gamepad
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Map keyboard
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Map gamepad
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Settings keyboard
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// Settings gamepad
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
+		// buttons
+		for (int i = 0; buttons[i] != "\n"; i++)
+		{
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 180, 130 + 50 * i, 172, 40 }, ButtonType::EXTRA_LARGE, buttons[i], 10);
+			button->state = GuiControlState::NONE;
+			listControlButtons.Add(button);
+		}
 
 		return set;
 	}
@@ -251,7 +137,7 @@ public:
 
 		if (!open_control_B)
 		{
-			for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
+			for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
 			{
 				i->data->state = GuiControlState::NORMAL;
 			}
@@ -267,7 +153,7 @@ public:
 		control_B = false;
 		open_control_B = false;
 
-		for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
+		for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->state = GuiControlState::NONE;
 		}
@@ -278,7 +164,7 @@ public:
 	bool CleanUp()
 	{
 		CloseControlSettings();
-		listSettingsButtons.Clear();
+		listControlButtons.Clear();
 
 		return true;
 	}
@@ -287,13 +173,15 @@ public:
 
 	// buttons
 	int GUI_id = 810;
-	List<GuiButton*> listSettingsButtons;
+	List<GuiButton*> listControlButtons;
+
+	const char* buttons[21];
 
 	bool control_B;
 	bool open_control_B;
 };
 
-struct GraphicsSettings
+class GraphicsSettings
 {
 public:
 
@@ -402,7 +290,7 @@ public:
 	bool open_graphics_B;
 };
 
-struct AudioSettings
+class AudioSettings
 {
 public:
 
@@ -505,7 +393,7 @@ public:
 	bool open_audio_B;
 };
 
-struct Settings
+class Settings
 {
 public:
 
@@ -525,29 +413,13 @@ public:
 		button->state = GuiControlState::NONE;
 		listSettingsButtons.Add(button);
 
-		// game
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, module_P, { 290, 300, 26, 28 }, ButtonType::EXTRA_LARGE, "Game", 20);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// controls
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, module_P, { 290, 375, 26, 28 }, ButtonType::EXTRA_LARGE, "Controls", 20);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// graphics
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, module_P, { 290, 450, 26, 28 }, ButtonType::EXTRA_LARGE, "Graphics", 20);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
-
-		// audio
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, module_P, { 290, 525, 26, 28 }, ButtonType::EXTRA_LARGE, "Audio", 20);
-		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
+		// buttons
+		for (int i = 0; buttons[i] != "\n"; i++)
+		{
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 290, 300 + 75 * i, 26, 28 }, ButtonType::EXTRA_LARGE, buttons[i], 20);
+			button->state = GuiControlState::NONE;
+			listSettingsButtons.Add(button);
+		}
 
 		return set;
 	}
@@ -562,6 +434,17 @@ public:
 		app->render->DrawLine(490, 250, 490, 600, 0, 0, 0);
 		app->render->TextDraw("Settings", 500, 121, 40, FONT::UI, { 255, 255, 255 });
 
+
+		if (pGame->game_B) { pGame->OpenGameSettings(); }
+		if (pControl->control_B) { pControl->OpenControlSettings(); }
+		if (pGraphics->graphics_B) { pGraphics->OpenGraphics(); }
+		if (pAudio->audio_B) { pAudio->OpenAudioSettings(); }
+
+
+		if (pGame->game_B) { LOG("game open"); }
+		if (pControl->control_B) { LOG("control open"); }
+		if (pGraphics->graphics_B) { LOG("graphics open"); }
+		if (pAudio->audio_B) { LOG("audio open"); }
 
 		if (!open_settings_B)
 		{
@@ -602,6 +485,7 @@ public:
 	// buttons
 	int GUI_id = 801;
 	List<GuiButton*> listSettingsButtons;
+	const char* buttons[5] = { "Game", "Controls", "Graphics", "Audio", "\n" };
 
 	SDL_Texture* settingsTexture;
 	const char* settingsPath;
@@ -610,14 +494,15 @@ public:
 
 	Module* module_P;
 
-	GameSettings* pGame;
-	ControlSettings* pControl;
-	GraphicsSettings* pGraphics;
-	AudioSettings* pAudio;
+	
+	GameSettings* pGame = new GameSettings;
+	ControlSettings* pControl = new ControlSettings;;
+	GraphicsSettings* pGraphics = new GraphicsSettings;
+	AudioSettings* pAudio = new AudioSettings;
 };
 
 
-struct Pause
+class Pause
 {
 public:
 
@@ -700,97 +585,6 @@ public:
 	SDL_Texture* PauseTexture;
 	const char* PausePath;
 	bool pause;
-	bool open;
-};
-
-
-struct Credits
-{
-public:
-
-	Credits* CreateCredits(Module* mod, int num)
-	{
-		Credits* Credits = this;
-
-		//CreditsTexture = app->tex->Load(CreditsPath);
-
-		GUI_id = num;
-
-		// Credits buttons
-		credits = false;
-		open = false;
-
-		// close
-		GUI_id++;
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
-		button->state = GuiControlState::NONE;
-		listCreditsButtons.Add(button);
-
-		return Credits;
-	}
-
-	bool OpenCredits()
-	{
-		SDL_Rect rect = { 0, 0, 226, 261 };
-
-		app->render->DrawRectangle({ 150, 70, 226, 261 }, 206, 167, 240, 230, true);
-		//if (!app->render->DrawTexture(CreditsTexture, 150, 70, &rect)) { app->render->TextDraw("Credits", 210, 90, 21, { 107, 0, 110 }); }
-		app->render->TextDraw("Credits", 195, 90, 21, FONT::UI, { 107, 0, 110 });
-
-
-		app->render->TextDraw("Game by: Pikum", 160, 130, 11, FONT::UI, { 107, 0, 110 });
-
-		int posX = 180; int posY = 150; int offset = 20;
-
-		app->render->TextDraw("This project is", posX, posY + offset, 10, FONT::UI, { 107, 0, 110 });
-		app->render->TextDraw("licensed under an", posX, posY + offset * 2, 10, FONT::UI, { 107, 0, 110 });
-		app->render->TextDraw("unmodified MIT", posX, posY + offset * 3, 10, FONT::UI, { 107, 0, 110 });
-		app->render->TextDraw("license", posX, posY + offset * 4, 10, FONT::UI, { 107, 0, 110 });
-
-		if (!open)
-		{
-			for (ListItem<GuiButton*>* i = listCreditsButtons.start; i != nullptr; i = i->next)
-			{
-				i->data->state = GuiControlState::NORMAL;
-			}
-
-			open = true;
-		}
-
-		return true;
-	}
-
-	bool CloseCredits()
-	{
-		credits = false;
-		open = false;
-		for (ListItem<GuiButton*>* i = listCreditsButtons.start; i != nullptr; i = i->next)
-		{
-			i->data->state = GuiControlState::NONE;
-		}
-
-		return true;
-	}
-
-	bool CleanUp()
-	{
-		CloseCredits();
-		//app->tex->UnLoad(CreditsTexture);
-		listCreditsButtons.Clear();
-
-		return true;
-	}
-
-public:
-
-	// buttons
-	int GUI_id = 0;
-	List<GuiButton*> listCreditsButtons;
-	const char* buttons[2] = { "x", "\n" };
-
-	SDL_Texture* creditsTexture;
-	const char* creditsPath;
-	bool credits;
 	bool open;
 };
 

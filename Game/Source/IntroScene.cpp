@@ -54,8 +54,6 @@ bool IntroScene::Start()
 	pSettings->CreateSettings(this);
 	listButtons.Add(pSettings->listSettingsButtons.start->data);
 
-	pCredits->CreateCredits(this, bNum);
-
 	exit_B = false;
 
 	return true;
@@ -91,7 +89,6 @@ bool IntroScene::PostUpdate()
 
 
 	if (pSettings->settings_B) { pSettings->OpenSettings(); }
-	if (pCredits->credits) { pCredits->OpenCredits(); }
 
 	app->guiManager->Draw();
 
@@ -105,7 +102,6 @@ bool IntroScene::CleanUp()
 	
 	listButtons.Clear();
 	pSettings->CleanUp();
-	pCredits->CleanUp();
 
 	app->guiManager->CleanUp();
 	return true;
@@ -157,8 +153,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 9:
 		LOG("Button Credits click");
-		pCredits->credits = !pCredits->credits;
-		if (!pCredits->credits) { pCredits->CloseCredits(); }
 		break;
 
 	case 10:
@@ -168,7 +162,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 11:
 		LOG("Button Close credits");
-		pCredits->CloseCredits();
 		break;
 
 
@@ -180,22 +173,22 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 802:
 		LOG("Game settings click");
-
+		pSettings->pGame->game_B = true;
 		break;
 
 	case 803:
 		LOG("Controls settings click");
-
+		pSettings->pControl->control_B = true;
 		break;
 
 	case 804:
 		LOG("Graphics settings click");
-
+		pSettings->pGraphics->graphics_B = true;
 		break;
 
 	case 805:
 		LOG("Audio settings click");
-
+		pSettings->pAudio->audio_B = true;
 		break;
 
 

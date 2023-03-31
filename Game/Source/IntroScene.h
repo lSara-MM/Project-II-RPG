@@ -54,9 +54,6 @@ private:
 	Settings options;
 	Settings* pSettings = &options;
 
-	Credits credits;
-	Credits* pCredits = &credits;
-
 	bool exit_B;
 };
 
