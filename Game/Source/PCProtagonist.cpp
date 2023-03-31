@@ -1,6 +1,7 @@
-#include "PartyMember.h"
+#include "PCProtagonist.h"
 
 #include "Characther.h"
+#include "PartyMember.h"
 
 #include "App.h"
 #include "Audio.h"
@@ -18,18 +19,18 @@
 #include "Log.h"
 #include "Point.h"
 
-PartyMember::PartyMember() : Characther()
+Protagonist::Protagonist() : PartyMember()
 {
 	name.Create("Characther");
 
 	active = true;
 }
 
-PartyMember::~PartyMember() {
+Protagonist::~Protagonist() {
 
 }
 
-bool PartyMember::Awake() {
+bool Protagonist::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -40,7 +41,7 @@ bool PartyMember::Awake() {
 	return true;
 }
 
-bool PartyMember::Start() {
+bool Protagonist::Start() {
 
 	texture = app->tex->Load(texturePath);
 	
@@ -50,11 +51,17 @@ bool PartyMember::Start() {
 	pbody->listener = this; 
 
 	pbody->ctype = ColliderType::PLAYER;
-	
+	this->type = EntityType::PC_PROTAGONIST;
+	maxHp = 50;
+	currentHp = 37;
+	attack = 30;
+	armor = 20;
+	speed = 5;
+
 	return true;
 }
 
-bool PartyMember::Update(float dt)
+bool Protagonist::Update(float dt)
 {
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
@@ -74,14 +81,13 @@ bool PartyMember::Update(float dt)
 	return true;
 }
 
-bool PartyMember::CleanUp()
+bool Protagonist::CleanUp()
 {
 	app->tex->UnLoad(texture);
 	pbody->body->GetWorld()->DestroyBody(pbody->body);
 	
 	return true;
 }
-
 
 
 

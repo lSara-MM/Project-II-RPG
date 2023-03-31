@@ -83,6 +83,9 @@
     <ClCompile Include="Source\PartyMember.cpp">
       <Filter>Modules\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PCProtagonist.cpp">
+      <Filter>Modules\Entities\PCs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player.h" />
@@ -201,6 +204,9 @@
     <ClInclude Include="Source\PartyMember.h">
       <Filter>Modules\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Source\PCProtagonist.h">
+      <Filter>Modules\Entities\PCs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">
@@ -229,6 +235,9 @@
     </Filter>
     <Filter Include="Modules\Entities\PCs">
       <UniqueIdentifier>{c5d6774c-26c4-4529-a462-f01c7599a39a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Entities\EC">
+      <UniqueIdentifier>{2c344999-e73e-47ae-9538-5822c1886e1c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

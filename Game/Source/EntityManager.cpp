@@ -10,6 +10,10 @@
 #include "Defs.h"
 #include "Log.h"
 
+//CHARACTHERS
+//PCs
+#include "PCProtagonist.h"
+
 EntityManager::EntityManager() : Module()
 { 
 	name.Create("entitymanager");
@@ -87,8 +91,8 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		entity = new Player();
 		break;
 
-	case EntityType::CHARACTHER:
-		entity = new Characther();
+	case EntityType::PC_PROTAGONIST:
+		entity = new Protagonist();
 		break;
 
 	default: break;

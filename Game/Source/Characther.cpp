@@ -16,7 +16,7 @@
 #include "Log.h"
 #include "Point.h"
 
-Characther::Characther() : Entity(EntityType::CHARACTHER)
+Characther::Characther() : Entity(EntityType::UNKNOWN)
 {
 	name.Create("Characther");
 

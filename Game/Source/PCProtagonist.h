@@ -1,8 +1,9 @@
-#ifndef __PARTYMEMBER_H__
-#define __PARTYMEMBER_H__
+#ifndef __PCPROTAGONIST_H__
+#define __PCPROTAGONIST_H__
 
 #include "Entity.h"
 #include "Characther.h"
+#include "PartyMember.h"
 
 #include "Point.h"
 #include "SDL/include/SDL.h"
@@ -10,18 +11,15 @@
 
 #include "Animation.h"
 
-//List PCs
-#include "PCProtagonist.h"
-
 struct SDL_Texture;
 
-class PartyMember : public Characther
+class Protagonist : public PartyMember
 {
 public:
 
-	PartyMember();
+	Protagonist();
 
-	virtual ~PartyMember();
+	virtual ~Protagonist();
 
 	bool Awake();
 
@@ -51,16 +49,9 @@ public:
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
 
-	//Gestion de Turnos
-	bool onTurn;
-	bool alive;
+	
 
-	//Stats
-	int maxHp;
-	int currentHp;
-	int attack;
-	int armor; //MAXIMO ABSOLUTO 200, mas menos full items en tanque 120
-	int speed;
+	
 
 private:
 
@@ -71,4 +62,4 @@ private:
 	int width, height;
 };
 
-#endif // __PARTYMEMBER_H__
+#endif // __PCPROTAGONIST_H__

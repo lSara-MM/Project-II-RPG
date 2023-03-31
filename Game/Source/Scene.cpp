@@ -53,9 +53,7 @@ bool Scene::Start()
 	pPause->CreatePause(this);
 
 
-	//Pruebas
-	Entity* entidad = app->entityManager->CreateEntity(EntityType::CHARACTHER);
-	app->entityManager->AddEntity(entidad);
+
 
 
 	return true;
@@ -70,17 +68,17 @@ bool Scene::Update(float dt)
 {
 	Debug();
 
-	Entity* entidad = app->entityManager->CreateEntity(EntityType::CHARACTHER);
-	app->entityManager->AddEntity(entidad);
+	Entity* prota = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota);
 
-	Entity* entidad2 = app->entityManager->CreateEntity(EntityType::CHARACTHER);
-	app->entityManager->AddEntity(entidad2);
+	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
+	app->entityManager->AddEntity(entidad2);*/
 	
 	//ERIC: Prueba que no funciona.
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) 
 	{ 
-		app->combat->AddCombatant((Characther*)entidad, 3);
-		app->combat->AddCombatant((Characther*)entidad2, -1);
+		app->combat->AddCombatant((Characther*)prota, 3);
+		//app->combat->AddCombatant((Characther*)entidad2, -1);
 	}
 
 	return true;
