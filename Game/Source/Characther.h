@@ -63,7 +63,7 @@ public:
 	int speed;
 
 	//Posicion combate
-	int positionCombat; //Del uno al cuatro
+	int positionCombat_I; //Del uno al cuatro
 
 private:
 

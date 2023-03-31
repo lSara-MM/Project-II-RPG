@@ -13,7 +13,7 @@
 
 struct SDL_Texture;
 
-class Protagonist : public PartyMember
+class Protagonist : public PartyMember 
 {
 public:
 

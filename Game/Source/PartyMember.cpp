@@ -1,5 +1,6 @@
 #include "PartyMember.h"
 
+#include "Entity.h"
 #include "Characther.h"
 
 #include "App.h"
@@ -24,6 +25,8 @@ PartyMember::PartyMember() : Characther()
 
 	active = true;
 }
+
+PartyMember::PartyMember(Characther* chara){}
 
 PartyMember::~PartyMember() {
 
@@ -70,6 +73,12 @@ bool PartyMember::Update(float dt)
 
 	}
 
+
+	return true;
+}
+
+bool PartyMember::Render()
+{
 
 	return true;
 }

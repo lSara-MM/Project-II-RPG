@@ -21,7 +21,7 @@
 
 Protagonist::Protagonist() : PartyMember()
 {
-	name.Create("Characther");
+	name.Create("PCProtagonist");
 
 	active = true;
 }
@@ -36,7 +36,8 @@ bool Protagonist::Awake() {
 	position.y = parameters.attribute("y").as_int();
 
 	
-	texturePath = parameters.attribute("texturepath").as_string();
+	//texturePath = parameters.attribute("texturepath").as_string();
+	texturePath = "Assets/Textures/PC A";
 
 	return true;
 }
@@ -52,11 +53,11 @@ bool Protagonist::Start() {
 
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::PC_PROTAGONIST;
-	maxHp = 50;
-	currentHp = 37;
-	attack = 30;
-	armor = 20;
-	speed = 5;
+	this->maxHp = 50;
+	this->currentHp = 37;
+	this->attack = 30;
+	this->armor = 20;
+	this->speed = 5;
 
 	return true;
 }

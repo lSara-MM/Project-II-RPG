@@ -174,6 +174,10 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 bool Combat::AddCombatant(Characther* chara, int mod)
 {
+	chara->Awake(); //Sino peta porque no se carga la textura
+	chara->Enable();
+	chara->Start();
+	
 	//We add a Characther to the initiative list and we sort it by speed (fasters first, slowers last)
 	initiative.Add(chara);
 	chara->speed += mod; //Aumentar o disminuir la speed de ese especifico (es para enemigos que usan la misma template)
@@ -186,7 +190,7 @@ bool Combat::AddCombatant(Characther* chara, int mod)
 				if (initiative.At(j)->data->speed > initiative.At(j+1)->data->speed)
 				{
 					//SWAP WIP
-					ListItem<Characther*>* aux=nullptr;
+					ListItem<Characther*>* aux= nullptr /*new ListItem<Characther*>*/; //Esta petando el switchhh
 					aux->data = initiative.At(j)->data;
 					initiative.At(j)->data = initiative.At(j + 1)->data;
 					initiative.At(j + 1)->data = aux->data;

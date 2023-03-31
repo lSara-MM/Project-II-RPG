@@ -10,8 +10,8 @@
 
 #include "Animation.h"
 
-//List PCs
-#include "PCProtagonist.h"
+////List PCs
+//#include "PCProtagonist.h" //Hace petar al player
 
 struct SDL_Texture;
 
@@ -21,6 +21,8 @@ public:
 
 	PartyMember();
 
+	PartyMember(Characther*);
+
 	virtual ~PartyMember();
 
 	bool Awake();
@@ -28,6 +30,8 @@ public:
 	bool Start();
 
 	bool Update(float dt);
+
+	bool Render();
 
 	bool CleanUp();
 
@@ -51,16 +55,7 @@ public:
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
 
-	//Gestion de Turnos
-	bool onTurn;
-	bool alive;
-
-	//Stats
-	int maxHp;
-	int currentHp;
-	int attack;
-	int armor; //MAXIMO ABSOLUTO 200, mas menos full items en tanque 120
-	int speed;
+	
 
 private:
 
