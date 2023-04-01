@@ -91,25 +91,25 @@ bool GuiButton::Draw(Render* render)
 
 		case GuiControlState::DISABLED:
 		{
-			render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 200, 200, 200, 255, true, false);
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 200, 200, 200, 255, true, false);
 
 		} break;
 
 		case GuiControlState::NORMAL:
 		{
-			render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 0, 0, 255, 255, true, false);
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h}, 0, 0, 255, 255, true, false);
 
 		}	break;
 
 		case GuiControlState::FOCUSED:
 		{
-			render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 255, 0, 255, 255, true, false);
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 255, 0, 255, 255, true, false);
 
 		} break;
 
 		case GuiControlState::PRESSED:
 		{
-			render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 0, 255, 0, 255, true, false);
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w * 2, bounds.h * 2 }, 0, 255, 0, 255, true, false);
 			if (buttonType == ButtonType::EXTRA_LARGE) { rect = { 343, 0, 210, 80 }; }
 			if (buttonType == ButtonType::LARGE) { rect = { 180, 0, 120, 40 }; }
 			if (buttonType == ButtonType::SMALL) { rect = { 0, 0, 56, 41 }; }
@@ -260,7 +260,6 @@ bool GuiButton::Draw(Render* render)
 			offsetX = -15;	offsetY = 6;
 		}
 	}
-
 
 
 	int size = fontSize;

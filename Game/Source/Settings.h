@@ -40,11 +40,11 @@ public:
 	{
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
-		int x = 170; int y = 130; int offset = 40;
-		app->render->TextDraw("Language:", x, y + offset, 12);
-		app->render->TextDraw("Text Speed:", x, y + offset * 2, 12);
-		app->render->TextDraw("Return to Title:", x, y + offset * 3, 12);
-		app->render->TextDraw("Exit Game:", x, y + offset * 4, 12);
+		int x = 509; int y = 206; int offset = 32;
+		app->render->TextDraw("Language:", x, y + offset, 16);
+		app->render->TextDraw("Text Speed:", x, y + offset * 2, 16);
+		app->render->TextDraw("Return to Title:", x, y + offset * 3, 16);
+		app->render->TextDraw("Exit Game:", x, y + offset * 4, 16);
 
 		if (!open_game_B)
 		{
@@ -305,21 +305,21 @@ public:
 		open_audio_B = false;
 
 		// General volume
-		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 250, 170, 63, 10 }, ButtonType::NONE, "music", 10, { 310, 165, 14, 16 });
+		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 298, 350, 30 }, ButtonType::NONE, "music", 10, { 310, 298, 41, 60 });
 		sliderBar->state = GuiControlState::NONE;
 		music = sliderBar;
 		listSliderBars.Add(sliderBar);
 
 		// music
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 250, 170, 63, 10 }, ButtonType::NONE, "music", 10, { 310, 165, 14, 16 });
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 375, 350, 30 }, ButtonType::NONE, "music", 10, { 310, 375, 41, 60 });
 		sliderBar->state = GuiControlState::NONE;
 		music = sliderBar;
 		listSliderBars.Add(sliderBar);
 
 		// fx
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 250, 210, 63, 10 }, ButtonType::NONE, "fx", 10, { 310, 205, 14, 16 });
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 452, 350, 30 }, ButtonType::NONE, "fx", 10, { 310, 452, 41, 60 });
 		sliderBar->state = GuiControlState::NONE;
 		fx = sliderBar;
 		listSliderBars.Add(sliderBar);
@@ -334,9 +334,7 @@ public:
 		int x = 170; int y = 130; int offset = 40;
 		app->render->TextDraw("Music:", x, y + offset, 12);
 		app->render->TextDraw("Fx:", x, y + offset * 2, 12);
-		app->render->TextDraw("Fullscreen:", x, y + offset * 3, 12);
-		app->render->TextDraw("Vsync:", x, y + offset * 4, 12);
-
+	
 		if (!open_audio_B)
 		{
 			for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
@@ -409,17 +407,22 @@ public:
 		open_settings_B = false;
 
 		// close
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, module_P, { 1050, 200, 26, 28 }, ButtonType::SMALL, "x", 10);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, module_P, { 1038, 175, 57, 57 }, ButtonType::SMALL, "x", 48);
 		button->state = GuiControlState::NONE;
 		listSettingsButtons.Add(button);
 
 		// buttons
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 290, 300 + 75 * i, 26, 28 }, ButtonType::EXTRA_LARGE, buttons[i], 20);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 290, 300 + 75 * i, 136, 33 }, ButtonType::EXTRA_LARGE, buttons[i], 32);
 			button->state = GuiControlState::NONE;
 			listSettingsButtons.Add(button);
 		}
+
+		pGame->CreateGameSettings(module_P);
+		//pControl->CreateControlSettings(module_P);
+		pGraphics->CreateGraphicsSettings(module_P);
+		pAudio->CreateAudioSettings(module_P);
 
 		return set;
 	}
@@ -435,16 +438,22 @@ public:
 		app->render->TextDraw("Settings", 500, 121, 40, FONT::UI, { 255, 255, 255 });
 
 
-		if (pGame->game_B) { pGame->OpenGameSettings(); }
-		if (pControl->control_B) { pControl->OpenControlSettings(); }
-		if (pGraphics->graphics_B) { pGraphics->OpenGraphics(); }
-		if (pAudio->audio_B) { pAudio->OpenAudioSettings(); }
+		if (pGame->game_B) 
+		{ pGame->OpenGameSettings(); }
+		if (pControl->control_B) 
+		{ pControl->OpenControlSettings(); }
+		if (pGraphics->graphics_B) 
+		{ pGraphics->OpenGraphics(); }
+		if (pAudio->audio_B)
+		{
+			pAudio->OpenAudioSettings();
+		}
 
 
-		if (pGame->game_B) { LOG("game open"); }
+		/*if (pGame->game_B) { LOG("game open"); }
 		if (pControl->control_B) { LOG("control open"); }
 		if (pGraphics->graphics_B) { LOG("graphics open"); }
-		if (pAudio->audio_B) { LOG("audio open"); }
+		if (pAudio->audio_B) { LOG("audio open"); }*/
 
 		if (!open_settings_B)
 		{
