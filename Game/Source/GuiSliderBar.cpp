@@ -38,10 +38,11 @@ bool GuiSliderBar::Update(float dt)
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
 			{
 				state = GuiControlState::PRESSED;
-				sliderBounds.x = mouseX;	volume = bounds.x + mouseX - 500;
+	
+				sliderBounds.x = mouseX;	volume = sliderBounds.x - bounds.x;
 
-				volume100 = volume * SDL_MIX_MAXVOLUME / 60;
-				//LOG("volume %d, %d", volume, volume100);
+				volume100 =  volume * SDL_MIX_MAXVOLUME / bounds.w;
+				//LOG("volume %d, %d, %d", volume, volume100, sliderBounds.x);
 			}
 
 			// If mouse button pressed -> Generate event!
@@ -61,10 +62,6 @@ bool GuiSliderBar::Update(float dt)
 
 bool GuiSliderBar::Draw(Render* render)
 {
-	/*SDL_Rect button_rect = { 351, 0, 41, 60 };
-	SDL_Rect slider_static_rect = { 0, 14, 350, 13 };
-	SDL_Rect slider_dynamic_rect = { 0, 0, sliderBounds.w / 2 - sliderBounds.x, 13 };*/
-
 	SDL_Rect button_rect = { 233, 0, 28, 39 };
 	SDL_Rect slider_static_rect = { 0, 10, 233, 9 };
 	SDL_Rect slider_dynamic_rect = { 0, 0, sliderBounds.x - bounds.x + 14, 9 };
@@ -112,8 +109,8 @@ bool GuiSliderBar::Draw(Render* render)
 	}
 	else
 	{
-		render->DrawTexture(SliderBarTex, bounds.x - 3, bounds.y - 5, &slider_static_rect);
-		render->DrawTexture(SliderBarTex, bounds.x - 3, bounds.y - 5, &slider_dynamic_rect);
+		render->DrawTexture(SliderBarTex, bounds.x, bounds.y - 5, &slider_static_rect);
+		render->DrawTexture(SliderBarTex, bounds.x, bounds.y - 5, &slider_dynamic_rect);
 
 		// Draw the right SliderBar depending on state
 		switch (state)

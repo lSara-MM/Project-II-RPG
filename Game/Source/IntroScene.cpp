@@ -24,12 +24,14 @@ IntroScene::IntroScene() : Module()
 IntroScene::~IntroScene()
 {}
 
-// Called before render is available
 bool IntroScene::Awake(pugi::xml_node& config)
 {
 	LOG("Loading IntroScene");
 	bool ret = true;
 
+	// iterate all objects in the IntroScene
+	// Check https://pugixml.org/docs/quickstart.html#access
+	music_intro = config.attribute("audioIntroPath").as_string();
 
 	return ret;
 }
@@ -37,10 +39,11 @@ bool IntroScene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool IntroScene::Start()
 {
-	SString title("Twisted Tent: width- %d, height- %d", app->win->GetWidth(), app->win->GetHeight());
+	SString title("Pinky Adventures: width- %d, height- %d", app->win->GetWidth(), app->win->GetHeight());
 
 	app->win->SetTitle(title.GetString());
 
+	//app->audio->PlayMusic(music_intro, 0);
 
 	// buttons
 	for (int i = 0; buttons[i] != "\n"; i++)
@@ -87,6 +90,8 @@ bool IntroScene::PostUpdate()
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		LOG("general %d, %d music, %d fx", pSettings->pAudio->general->volume100, pSettings->pAudio->music->volume100,pSettings->pAudio->fx->volume100);
 
 	if (pSettings->settings_B) { pSettings->OpenSettings(); }
 
@@ -118,23 +123,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 1:
 		LOG("Button Close settings click");
 		pSettings->CloseSettings();
-		break;
-	case 2:
-		LOG("Slider music click");
-		//app->audio->ChangeMusicVolume(pSettings->music->volume100);
-		break;
-	case 3:
-		LOG("Slider fx click");
-		//app->audio->ChangeFxVolume(pSettings->fx->volume100);
-		break;
-	case 4:
-		LOG("Checkbox Fullscreen click");
-		app->win->changeScreen = !app->win->changeScreen;
-		app->win->ResizeWin();
-		break;
-	case 5:
-		LOG("Checkbox Vsync click");
-		(control->state == GuiControlState::NORMAL) ? app->render->flags = SDL_RENDERER_ACCELERATED : app->render->flags |= SDL_RENDERER_PRESENTVSYNC;
 		break;
 	case 6:
 		LOG("Button start click");
@@ -348,17 +336,15 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		// Audio settings
 	case 832:
 		LOG("Slider bar General volume");
-
+		app->audio->ChangeGeneralVolume(pSettings->pAudio->general->volume100);
 		break;
 
 	case 833:
 		LOG("Slider bar Music volume");
-
 		break;
 
 	case 834:
 		LOG("Slider bar Fx volume");
-
 		break;
 	}
 

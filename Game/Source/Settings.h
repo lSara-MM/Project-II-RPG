@@ -329,21 +329,21 @@ public:
 		open_audio_B = false;
 
 		// General volume
-		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 298, 228, 39 }, ButtonType::NONE, "general", 10, { 310, 298, 28, 39 });
+		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 298, 219, 39 }, ButtonType::NONE, "general", 10, { 310, 298, 28, 39 });
 		sliderBar->state = GuiControlState::NONE;
 		general = sliderBar;
 		listSliderBars.Add(sliderBar);
 
 		// music
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 375, 228, 39 }, ButtonType::NONE, "music", 10, { 310, 375, 28, 39 });
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 375, 219, 39 }, ButtonType::NONE, "music", 10, { 310, 375, 28, 39 });
 		sliderBar->state = GuiControlState::NONE;
 		music = sliderBar;
 		listSliderBars.Add(sliderBar);
 
 		// fx
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 452, 228, 39 }, ButtonType::NONE, "fx", 10, { 310, 452, 28, 39 });
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 452, 219, 39 }, ButtonType::NONE, "fx", 10, { 310, 452, 28, 39 });
 		sliderBar->state = GuiControlState::NONE;
 		fx = sliderBar;
 		listSliderBars.Add(sliderBar);
@@ -367,20 +367,20 @@ public:
 				i->data->state = GuiControlState::NORMAL;
 			}
 
-			general->sliderBounds.x = general->bounds.x + app->audio->volume_general * 60 / SDL_MIX_MAXVOLUME;
+			general->sliderBounds.x = general->bounds.x + app->audio->volume_general * general->bounds.w / SDL_MIX_MAXVOLUME;
 			general->volume100 = app->audio->volume_general;
 
-			music->sliderBounds.x = music->bounds.x + app->audio->volume_music * 60 / SDL_MIX_MAXVOLUME;
+			music->sliderBounds.x = music->bounds.x + app->audio->volume_music * music->bounds.w / SDL_MIX_MAXVOLUME;
 			music->volume100 = app->audio->volume_music;
 
-			fx->sliderBounds.x = fx->bounds.x + app->audio->volume_fx * 60 / SDL_MIX_MAXVOLUME;
+			fx->sliderBounds.x = fx->bounds.x + app->audio->volume_fx * fx->bounds.w / SDL_MIX_MAXVOLUME;
 			fx->volume100 = app->audio->volume_fx;
 
 
 			open_audio_B = true;
 		}
 
-		if (app->audio->volume_music != music->volume100)app->audio->ChangeMusicVolume(music->volume100);
+		if (app->audio->volume_general != general->volume100)app->audio->ChangeGeneralVolume(general->volume100);
 		if (app->audio->volume_music != music->volume100)app->audio->ChangeMusicVolume(music->volume100);
 		if (app->audio->volume_fx != fx->volume100)app->audio->ChangeFxVolume(fx->volume100);
 		

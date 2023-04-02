@@ -196,7 +196,7 @@ bool GuiButton::Draw(Render* render)
 	int x = rect.w - text.Length() * size / 2 - offsetX;
 	int y = rect.h - size / 2 + offsetY;
 
-	app->render->TextDraw(text.GetString(), bounds.x + x / 4, bounds.y + y / 4, size);
+	if(text != "") app->render->TextDraw(text.GetString(), bounds.x + x / 4, bounds.y + y / 4, size);
 
 	return false;
 }

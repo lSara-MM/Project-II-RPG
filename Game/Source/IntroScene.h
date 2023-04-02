@@ -46,6 +46,8 @@ public:
 
 private:
 
+	const char* music_intro;
+
 	// buttons
 	List<GuiButton*> listButtons;
 	const char* buttons[6] = { "Play", "Continue", "Settings", "Credits", "Exit", "\n" };
