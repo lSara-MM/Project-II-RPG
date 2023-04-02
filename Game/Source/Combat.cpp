@@ -63,8 +63,10 @@ bool Combat::Update(float dt)
 {
 	Debug();
 
-	/*for (int i=1;initiative.Count()>=i;i++) 
-	{initiative.At(i)->data.}*/
+	for (int i=1;initiative.Count()>=i;i++) 
+	{
+		initiative.At(i-1)->data->Update(dt);
+	}
 
 	return true;
 }
@@ -185,16 +187,16 @@ bool Combat::AddCombatant(Characther* chara, int mod)
 	int n= initiative.Count();
 	initiative.At(2)->data->speed;
 
-		for (int i = 0; i < n - 1; i++)
-			for (int j = 0; j < n - i - 1; j++)
-				if (initiative.At(j)->data->speed > initiative.At(j+1)->data->speed)
-				{
-					//SWAP WIP
-					ListItem<Characther*>* aux= nullptr /*new ListItem<Characther*>*/; //Esta petando el switchhh
-					aux->data = initiative.At(j)->data;
-					initiative.At(j)->data = initiative.At(j + 1)->data;
-					initiative.At(j + 1)->data = aux->data;
-				}
+		//for (int i = 0; i < n - 1; i++)
+		//	for (int j = 0; j < n - i - 1; j++)
+		//		if (initiative.At(j)->data->speed > initiative.At(j+1)->data->speed)
+		//		{
+		//			//SWAP WIP
+		//			ListItem<Characther*>* aux= nullptr /*new ListItem<Characther*>*/; //Esta petando el switchhh
+		//			aux->data = initiative.At(j)->data;
+		//			initiative.At(j)->data = initiative.At(j + 1)->data;
+		//			initiative.At(j + 1)->data = aux->data;
+		//		}
 					
 					
 	

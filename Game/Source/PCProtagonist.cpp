@@ -37,7 +37,7 @@ bool Protagonist::Awake() {
 
 	
 	//texturePath = parameters.attribute("texturepath").as_string();
-	texturePath = "Assets/Textures/PC A";
+	texturePath = "Assets/Textures/PCA.png";
 
 	return true;
 }
@@ -69,7 +69,10 @@ bool Protagonist::Update(float dt)
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
-	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
+	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
+
+	rect = { 0,0,258,496 };
+	app->render->DrawTexture(texture, 20, 20/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/);
 
 	if (onTurn)
 	{
