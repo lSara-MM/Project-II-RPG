@@ -5,8 +5,6 @@
 #include "Defs.h"
 #include "Log.h"
 
-#include "SDL/include/SDL.h"
-
 #define MAX_KEYS 300
 
 Input::Input() : Module()
@@ -167,6 +165,6 @@ void Input::RemapKeys(KeyBinding* key)
 	if (SDL_PollEvent(&event) != 0)
 	{
 		key->key_num = event.key.keysym.sym;
-		key->key = event.key.keysym.sym;
+		//key->key = event.key.keysym.sym;
 	}
 }

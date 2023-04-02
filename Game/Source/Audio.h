@@ -35,11 +35,12 @@ public:
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int repeat = 0);
 
+	bool ChangeGeneralVolume(int vol);
 	bool ChangeMusicVolume(int vol);
 	bool ChangeFxVolume(int vol);
 
 public:
-	int volume_music, volume_fx;
+	int volume_general, volume_music, volume_fx;
 
 private:
 

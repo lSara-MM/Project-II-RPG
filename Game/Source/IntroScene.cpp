@@ -46,7 +46,7 @@ bool IntroScene::Start()
 	for (int i = 0; buttons[i] != "\n"; i++)
 	{
 		bNum = i + 6;
-		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, bNum, this, { 25, 180 + 77 * i, 136, 33 }, ButtonType::LARGE, buttons[i], 20));
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, bNum, this, { 25, 180 + 77 * i, 136, 33 }, ButtonType::START, buttons[i], 20));
 	}
 
 	listButtons.start->next->data->state = GuiControlState::DISABLED;
@@ -174,21 +174,37 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 802:
 		LOG("Game settings click");
 		pSettings->pGame->game_B = true;
+
+		pSettings->pControl->CloseControlSettings();
+		pSettings->pGraphics->CloseGraphics();
+		pSettings->pAudio->CloseAudioSettings();
 		break;
 
 	case 803:
 		LOG("Controls settings click");
 		pSettings->pControl->control_B = true;
+
+		pSettings->pGame->CloseGameSettings();
+		pSettings->pGraphics->CloseGraphics();
+		pSettings->pAudio->CloseAudioSettings();
 		break;
 
 	case 804:
 		LOG("Graphics settings click");
 		pSettings->pGraphics->graphics_B = true;
+
+		pSettings->pGame->CloseGameSettings();
+		pSettings->pControl->CloseControlSettings();
+		pSettings->pAudio->CloseAudioSettings();
 		break;
 
 	case 805:
 		LOG("Audio settings click");
 		pSettings->pAudio->audio_B = true;
+
+		pSettings->pGame->CloseGameSettings();
+		pSettings->pControl->CloseControlSettings();
+		pSettings->pGraphics->CloseGraphics();
 		break;
 
 
@@ -313,12 +329,14 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 829:
 		LOG("Checkbox Fullscreen check");
-
+		app->win->changeScreen = !app->win->changeScreen;
+		app->win->ResizeWin();
 		break;
 
+	
 	case 830:
 		LOG("Checkbox Vsync check");
-
+		(control->state == GuiControlState::NORMAL) ? app->render->flags = SDL_RENDERER_ACCELERATED : app->render->flags |= SDL_RENDERER_PRESENTVSYNC;
 		break;
 
 	case 831:

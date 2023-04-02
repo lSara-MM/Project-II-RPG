@@ -33,6 +33,29 @@ public:
 		game_B = false;
 		open_game_B = false;
 
+		// Language
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 290, 133, 33 }, ButtonType::SETTINGS, "English", 16);
+		button->state = GuiControlState::NONE;
+		listGameButtons.Add(button);
+
+		// Text Speed
+		GUI_id++;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 367, 133, 33 }, ButtonType::SETTINGS, "Medium", 16);
+		button->state = GuiControlState::NONE;
+		listGameButtons.Add(button);
+
+		// Return to Title
+		GUI_id++;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 444, 133, 33 }, ButtonType::SETTINGS, "Return to Title", 16);
+		button->state = GuiControlState::NONE;
+		listGameButtons.Add(button);
+
+		// Exit
+		GUI_id++;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 521, 133, 33 }, ButtonType::SETTINGS, "Exit", 16);
+		button->state = GuiControlState::NONE;
+		listGameButtons.Add(button);
+
 		return set;
 	}
 
@@ -40,11 +63,9 @@ public:
 	{
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
-		int x = 509; int y = 206; int offset = 32;
-		app->render->TextDraw("Language:", x, y + offset, 16);
-		app->render->TextDraw("Text Speed:", x, y + offset * 2, 16);
-		app->render->TextDraw("Return to Title:", x, y + offset * 3, 16);
-		app->render->TextDraw("Exit Game:", x, y + offset * 4, 16);
+		int x = 556; int y = 290; int offset = 77;
+		app->render->TextDraw("Language", x, y, 16);
+		app->render->TextDraw("Text Speed", x, y + offset, 16);
 
 		if (!open_game_B)
 		{
@@ -110,7 +131,7 @@ public:
 		// buttons
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 180, 130 + 50 * i, 172, 40 }, ButtonType::EXTRA_LARGE, buttons[i], 10);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 180, 130 + 50 * i, 172, 40 }, ButtonType::CONTROL_SETTINGS, buttons[i], 10);
 			button->state = GuiControlState::NONE;
 			listControlButtons.Add(button);
 		}
@@ -123,17 +144,17 @@ public:
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
 		int x = 170; int y = 130; int offset = 40;
-		app->render->TextDraw("Move up", x, y + offset, 12);
-		app->render->TextDraw("Move left", x, y + offset * 2, 12);
-		app->render->TextDraw("Move right", x, y + offset * 3, 12);
-		app->render->TextDraw("Move down", x, y + offset * 4, 12);
-		app->render->TextDraw("Interact", x, y + offset * 5, 12);
+		app->render->TextDraw("Move up", x, y, 16);
+		app->render->TextDraw("Move left", x, y + offset, 16);
+		app->render->TextDraw("Move right", x, y + offset * 2, 16);
+		app->render->TextDraw("Move down", x, y + offset * 3, 16);
+		app->render->TextDraw("Interact", x, y + offset * 4, 16);
 
-		app->render->TextDraw("Inventory", x, y + offset, 12);
-		app->render->TextDraw("Party", x, y + offset * 2, 12);
-		app->render->TextDraw("Quests", x, y + offset * 3, 12);
-		app->render->TextDraw("Map", x, y + offset * 4, 12);
-		app->render->TextDraw("Settings", x, y + offset * 5, 12);
+		app->render->TextDraw("Inventory", x, y, 16);
+		app->render->TextDraw("Party", x, y + offset, 16);
+		app->render->TextDraw("Quests", x, y + offset * 2, 16);
+		app->render->TextDraw("Map", x, y + offset * 3, 16);
+		app->render->TextDraw("Settings", x, y + offset * 4, 16);
 
 		if (!open_control_B)
 		{
@@ -196,49 +217,49 @@ public:
 		open_graphics_B = false;
 
 		// Window Size
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 280, 133, 33 }, ButtonType::SETTINGS, "Window Size", 16);
 		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
+		listGraphicsButtons.Add(button);
 
 		// Fullscreen	
 		GUI_id++;
-		GuiCheckBox* checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 330, 240, 30, 30 });
+		GuiCheckBox* checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 871, 357, 46, 46 });
 		checkbox->state = GuiControlState::NONE;
-		listCheckbox.Add(checkbox);
+		listGraphicsCheckbox.Add(checkbox);
 
 		// Vsync
 		GUI_id++;
-		checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 330, 280, 30, 30 });
+		checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 871, 434, 46, 46 });
 		checkbox->state = GuiControlState::NONE;
-		listCheckbox.Add(checkbox);
+		listGraphicsCheckbox.Add(checkbox);
 
 		// Max fps
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::LARGE, "x", 10);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::SETTINGS, "Max fps", 10);
 		button->state = GuiControlState::NONE;
-		listSettingsButtons.Add(button);
+		listGraphicsButtons.Add(button);
 
 		return set;
 	}
 
 	bool OpenGraphics()
 	{
-		int x = 170; int y = 130; int offset = 40;
-		app->render->TextDraw("Windows Size", x, y + offset, 12);
-		app->render->TextDraw("Fullscreen", x, y + offset * 2, 12);
-		app->render->TextDraw("Vsync", x, y + offset * 3, 12);
-		app->render->TextDraw("Max fps:", x, y + offset * 4, 12);
+		int x = 556; int y = 290; int offset = 77;
+		app->render->TextDraw("Windows Size", x, y, 16);
+		app->render->TextDraw("Fullscreen", x, y + offset, 16);
+		app->render->TextDraw("Vsync", x, y + offset * 2, 16);
+		app->render->TextDraw("Max fps", x, y + offset * 3, 16);
 
 		if (!open_graphics_B)
 		{
-			for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
+			for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
 			{
 				i->data->state = GuiControlState::NORMAL;
 			}
 
-			for (ListItem<GuiCheckBox*>* i = listCheckbox.start; i != nullptr; i = i->next)
+			for (ListItem<GuiCheckBox*>* i = listGraphicsCheckbox.start; i != nullptr; i = i->next)
 			{
-				if (i->data->id == 4 && app->win->changeScreen)
+				if (app->win->changeScreen)
 				{
 					i->data->state = GuiControlState::SELECTED;
 				}
@@ -256,12 +277,15 @@ public:
 
 	bool CloseGraphics()
 	{
-		for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
+		graphics_B = false;
+		open_graphics_B = false;
+
+		for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->state = GuiControlState::NONE;
 		}
 
-		for (ListItem<GuiCheckBox*>* i = listCheckbox.start; i != nullptr; i = i->next)
+		for (ListItem<GuiCheckBox*>* i = listGraphicsCheckbox.start; i != nullptr; i = i->next)
 		{
 			i->data->state = GuiControlState::NONE;
 		}
@@ -273,8 +297,8 @@ public:
 	{
 		CloseGraphics();
 		//app->tex->UnLoad(settingsTexture);
-		listSettingsButtons.Clear();
-		listCheckbox.Clear();
+		listGraphicsButtons.Clear();
+		listGraphicsCheckbox.Clear();
 
 		return true;
 	}
@@ -283,8 +307,8 @@ public:
 
 	// GUI
 	int GUI_id = 828;
-	List<GuiButton*> listSettingsButtons;
-	List<GuiCheckBox*> listCheckbox;
+	List<GuiButton*> listGraphicsButtons;
+	List<GuiCheckBox*> listGraphicsCheckbox;
 
 	bool graphics_B;
 	bool open_graphics_B;
@@ -305,21 +329,21 @@ public:
 		open_audio_B = false;
 
 		// General volume
-		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 298, 350, 30 }, ButtonType::NONE, "music", 10, { 310, 298, 41, 60 });
+		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 298, 228, 39 }, ButtonType::NONE, "general", 10, { 310, 298, 28, 39 });
 		sliderBar->state = GuiControlState::NONE;
-		music = sliderBar;
+		general = sliderBar;
 		listSliderBars.Add(sliderBar);
 
 		// music
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 375, 350, 30 }, ButtonType::NONE, "music", 10, { 310, 375, 41, 60 });
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 375, 228, 39 }, ButtonType::NONE, "music", 10, { 310, 375, 28, 39 });
 		sliderBar->state = GuiControlState::NONE;
 		music = sliderBar;
 		listSliderBars.Add(sliderBar);
 
 		// fx
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 452, 350, 30 }, ButtonType::NONE, "fx", 10, { 310, 452, 41, 60 });
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 452, 228, 39 }, ButtonType::NONE, "fx", 10, { 310, 452, 28, 39 });
 		sliderBar->state = GuiControlState::NONE;
 		fx = sliderBar;
 		listSliderBars.Add(sliderBar);
@@ -331,9 +355,10 @@ public:
 	{
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
-		int x = 170; int y = 130; int offset = 40;
-		app->render->TextDraw("Music:", x, y + offset, 12);
-		app->render->TextDraw("Fx:", x, y + offset * 2, 12);
+		int x = 556; int y = 290; int offset = 77;
+		app->render->TextDraw("General volume", x, y, 16);
+		app->render->TextDraw("Music volume", x, y + offset, 16);
+		app->render->TextDraw("Fx volume", x, y + offset * 2, 16);
 	
 		if (!open_audio_B)
 		{
@@ -341,6 +366,9 @@ public:
 			{
 				i->data->state = GuiControlState::NORMAL;
 			}
+
+			general->sliderBounds.x = general->bounds.x + app->audio->volume_general * 60 / SDL_MIX_MAXVOLUME;
+			general->volume100 = app->audio->volume_general;
 
 			music->sliderBounds.x = music->bounds.x + app->audio->volume_music * 60 / SDL_MIX_MAXVOLUME;
 			music->volume100 = app->audio->volume_music;
@@ -352,6 +380,7 @@ public:
 			open_audio_B = true;
 		}
 
+		if (app->audio->volume_music != music->volume100)app->audio->ChangeMusicVolume(music->volume100);
 		if (app->audio->volume_music != music->volume100)app->audio->ChangeMusicVolume(music->volume100);
 		if (app->audio->volume_fx != fx->volume100)app->audio->ChangeFxVolume(fx->volume100);
 		
@@ -385,7 +414,7 @@ public:
 	int GUI_id = 832;
 	List<GuiSliderBar*> listSliderBars;
 
-	GuiSliderBar* music, * fx;
+	GuiSliderBar* general, * music, * fx;
 
 	bool audio_B;
 	bool open_audio_B;
@@ -407,14 +436,14 @@ public:
 		open_settings_B = false;
 
 		// close
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, module_P, { 1038, 175, 57, 57 }, ButtonType::SMALL, "x", 48);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, module_P, { 1038, 175, 57, 57 }, ButtonType::CLOSE);
 		button->state = GuiControlState::NONE;
 		listSettingsButtons.Add(button);
 
 		// buttons
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 290, 300 + 75 * i, 136, 33 }, ButtonType::EXTRA_LARGE, buttons[i], 32);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 290, 300 + 75 * i, 136, 33 }, ButtonType::SETTINGS, buttons[i], 32);
 			button->state = GuiControlState::NONE;
 			listSettingsButtons.Add(button);
 		}
@@ -435,25 +464,13 @@ public:
 		//if (!app->render->DrawTexture(settingsTexture, 150, 70, &rect)) { app->render->TextDraw("Settings", 180, 100, 21, { 107, 0, 110}); }
 
 		app->render->DrawLine(490, 250, 490, 600, 0, 0, 0);
-		app->render->TextDraw("Settings", 500, 121, 40, FONT::UI, { 255, 255, 255 });
+		app->render->TextDraw("Settings", 600, 121, 40, FONT::UI, { 255, 255, 255 });
 
 
-		if (pGame->game_B) 
-		{ pGame->OpenGameSettings(); }
-		if (pControl->control_B) 
-		{ pControl->OpenControlSettings(); }
-		if (pGraphics->graphics_B) 
-		{ pGraphics->OpenGraphics(); }
-		if (pAudio->audio_B)
-		{
-			pAudio->OpenAudioSettings();
-		}
-
-
-		/*if (pGame->game_B) { LOG("game open"); }
-		if (pControl->control_B) { LOG("control open"); }
-		if (pGraphics->graphics_B) { LOG("graphics open"); }
-		if (pAudio->audio_B) { LOG("audio open"); }*/
+		if (pGame->game_B) { pGame->OpenGameSettings(); }
+		if (pControl->control_B) { pControl->OpenControlSettings(); }
+		if (pGraphics->graphics_B) { pGraphics->OpenGraphics(); }
+		if (pAudio->audio_B) { pAudio->OpenAudioSettings(); }
 
 		if (!open_settings_B)
 		{
@@ -472,6 +489,12 @@ public:
 	{
 		settings_B = false;
 		open_settings_B = false;
+
+		pGame->CloseGameSettings();
+		pControl->CloseControlSettings();
+		pGraphics->CloseGraphics();
+		pAudio->CloseAudioSettings();
+
 		for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->state = GuiControlState::NONE;

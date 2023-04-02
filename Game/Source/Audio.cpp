@@ -194,6 +194,12 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 	return ret;
 }
 
+bool Audio::ChangeGeneralVolume(int vol)
+{
+
+	return false;
+}
+
 bool Audio::ChangeMusicVolume(int vol)
 {
 	if (vol >= 0 && vol <= SDL_MIX_MAXVOLUME)

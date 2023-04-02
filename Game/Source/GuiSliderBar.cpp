@@ -6,7 +6,8 @@ GuiSliderBar::GuiSliderBar(uint32 id, SDL_Rect bounds, SDL_Rect sliderBounds) : 
 	this->bounds = bounds;
 	this->sliderBounds = sliderBounds;
 
-	SliderBarTex = app->tex->Load("Assets/GUI/UI_bars.png");
+	//SliderBarTex = app->tex->Load("Assets/GUI/UI_slider.png");
+	SliderBarTex = app->tex->Load("Assets/GUI/UI_slider2.png");
 }
 
 GuiSliderBar::~GuiSliderBar()
@@ -60,9 +61,13 @@ bool GuiSliderBar::Update(float dt)
 
 bool GuiSliderBar::Draw(Render* render)
 {
-	SDL_Rect button_rect = { 351, 0, 41, 60 };
+	/*SDL_Rect button_rect = { 351, 0, 41, 60 };
 	SDL_Rect slider_static_rect = { 0, 14, 350, 13 };
-	SDL_Rect slider_dynamic_rect = { 0, 0, sliderBounds.w / 2 - sliderBounds.x, 13 };
+	SDL_Rect slider_dynamic_rect = { 0, 0, sliderBounds.w / 2 - sliderBounds.x, 13 };*/
+
+	SDL_Rect button_rect = { 233, 0, 28, 39 };
+	SDL_Rect slider_static_rect = { 0, 10, 233, 9 };
+	SDL_Rect slider_dynamic_rect = { 0, 0, sliderBounds.x - bounds.x + 14, 9 };
 
 	if (app->guiManager->GUI_debug)
 	{
