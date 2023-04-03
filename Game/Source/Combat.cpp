@@ -288,6 +288,8 @@ bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 		return false;
 	}
 
+	//Guardar las referencias a cosas
+
 	//En caso de avanzar los desplaza hacia atras. (los otros characthers)
 	if (charaPosition_I > newPosition_I) //Avanzar hacia la frontline
 	{
