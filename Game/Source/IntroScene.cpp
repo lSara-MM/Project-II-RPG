@@ -43,7 +43,7 @@ bool IntroScene::Start()
 
 	app->win->SetTitle(title.GetString());
 
-	//app->audio->PlayMusic(music_intro, 0);
+	app->audio->PlayMusic(music_intro, 0);
 
 	// buttons
 	for (int i = 0; buttons[i] != "\n"; i++)
