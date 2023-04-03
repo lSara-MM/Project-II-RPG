@@ -47,6 +47,7 @@ public:
 	
 	bool AddCombatant(Characther* chara, int modifier); //Eric:Añadir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
+	bool MoveAllies(int charaPosition_I, int newPosition_I);
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);

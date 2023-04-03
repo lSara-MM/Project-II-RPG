@@ -70,7 +70,7 @@ public:
 		ENEMY,
 		NONE 
 	};
-	CharatherType charaType_I;
+	CharatherType charaType_I; //Va del 1 al 4
 	
 
 private:

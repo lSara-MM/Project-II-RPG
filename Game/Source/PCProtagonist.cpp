@@ -75,7 +75,8 @@ bool Protagonist::Update(float dt)
 	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
 	rect = { 0,0,258,496 };
-	app->render->DrawTexture(texture, 20, 20/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/);
+	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
+	app->render->DrawTexture(texture, 20-10*positionCombat_I, 120/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/);
 
 	if (onTurn)
 	{

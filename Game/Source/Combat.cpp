@@ -65,10 +65,27 @@ bool Combat::Update(float dt)
 {
 	Debug();
 
+	//Pruebas de mover positiones
+	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
+	{
+		allies[initiative.At(initiative.Count() - 1)->data->positionCombat_I] = allies[initiative.At(initiative.Count() - 1)->data->positionCombat_I - 1];
+		allies[initiative.At(initiative.Count() - 1)->data->positionCombat_I-1] = nullptr;
+		initiative.At(initiative.Count() - 1)->data->positionCombat_I++;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+	{
+		allies[initiative.At(initiative.Count() - 1)->data->positionCombat_I - 2] = allies[initiative.At(initiative.Count() - 1)->data->positionCombat_I - 1];
+		allies[initiative.At(initiative.Count() - 1)->data->positionCombat_I - 1] = nullptr;
+		initiative.At(initiative.Count() - 1)->data->positionCombat_I--;
+	}
+
 	for (int i=1;initiative.Count()>=i;i++) 
 	{
 		initiative.At(i-1)->data->Update(dt);
 	}
+
+
 
 	return true;
 }
@@ -189,14 +206,32 @@ bool Combat::AddCombatant(Characther* pChara, int mod)
 	//Add to the formation list position
 	switch (pChara->charaType_I)
 	{
-	case 0:
+	case pChara->ALLY:
+		//Asignar en su posicion en el array, si esta vacio 
+		if (allies[pChara->positionCombat_I-1]==nullptr) //Los valores son del 1 al 4 por eso le restamos 1
+		{
+			allies[pChara->positionCombat_I-1] = pChara;
+		}
+		else
+		{
+			for (size_t i = 0; i < 4; i++)
+			{
+				if (allies[i] == nullptr) //Los valores son del 1 al 4 por eso le restamos 1
+				{
+					allies[i] = pChara;
+					pChara->positionCombat_I = (i + 1);
+				}
+			}
+		}
+
+		break;
+	case pChara->ENEMY:
 		//Codigo
-	case 1:
-		//Codigo
+		break;
 	default:
 		break;
 	}
-
+	
 
 	//Order by initiative
 	int n= initiative.Count();
@@ -237,6 +272,34 @@ bool Combat::NextTurn()
 	if (initiative.Count() <= charaInTurn) { charaInTurn = 1; }
 	else { ++charaInTurn; }
 	initiative.At(charaInTurn)->data->onTurn = true;
+
+	return true;
+}
+
+bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
+{
+	//DUDA: Esto solo es para evitar accesos de acceso , no se si quitarlo porque teoricamente no se deberia poder poner esos valores.
+	if (charaPosition_I>4||charaPosition_I<0)
+	{
+		return false;
+	}
+	if (newPosition_I > 4 || newPosition_I < 0)
+	{
+		return false;
+	}
+
+	//En caso de avanzar los desplaza hacia atras. (los otros characthers)
+	if (charaPosition_I > newPosition_I) //Avanzar hacia la frontline
+	{
+		//CODIGO
+
+	}
+	//En caso de retroceder los avanza hacia adelante. (los otros characthers)
+	if (charaPosition_I < newPosition_I) //Retroceder a la backline
+	{
+		//CODIGO
+
+	}
 
 	return true;
 }
