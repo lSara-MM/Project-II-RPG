@@ -64,6 +64,14 @@ public:
 
 	//Posicion combate
 	int positionCombat_I; //Del uno al cuatro
+	enum CharatherType
+	{
+		ALLY,
+		ENEMY,
+		NONE 
+	};
+	CharatherType charaType_I;
+	
 
 private:
 

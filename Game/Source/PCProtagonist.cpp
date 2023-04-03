@@ -53,11 +53,14 @@ bool Protagonist::Start() {
 
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::PC_PROTAGONIST;
+	this->charaType_I = CharatherType::ALLY;
 	this->maxHp = 50;
 	this->currentHp = 37;
 	this->attack = 30;
 	this->armor = 20;
 	this->speed = 5;
+
+	this->positionCombat_I = 1;
 
 	return true;
 }

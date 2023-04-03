@@ -21,6 +21,8 @@
 #include "Defs.h"
 #include "Log.h"
 
+#include "Characther.h"
+
 #include <iostream>
 using namespace std;
 #include <sstream>
@@ -174,16 +176,29 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-bool Combat::AddCombatant(Characther* chara, int mod)
+bool Combat::AddCombatant(Characther* pChara, int mod)
 {
-	chara->Awake(); //Sino peta porque no se carga la textura
-	chara->Enable();
-	chara->Start();
+	pChara->Awake(); //Sino peta porque no se carga la textura
+	pChara->Enable();
+	pChara->Start();
 	
 	//We add a Characther to the initiative list and we sort it by speed (fasters first, slowers last)
-	initiative.Add(chara);
-	chara->speed += mod; //Aumentar o disminuir la speed de ese especifico (es para enemigos que usan la misma template)
+	initiative.Add(pChara);
+	pChara->speed += mod; //Aumentar o disminuir la speed de ese especifico (es para enemigos que usan la misma template)
 
+	//Add to the formation list position
+	switch (pChara->charaType_I)
+	{
+	case 0:
+		//Codigo
+	case 1:
+		//Codigo
+	default:
+		break;
+	}
+
+
+	//Order by initiative
 	int n= initiative.Count();
 	initiative.At(2)->data->speed;
 
@@ -202,12 +217,12 @@ bool Combat::AddCombatant(Characther* chara, int mod)
 	
 	
 	//initiative.BubbleSort();
-	//if (chara != initiative.start->data) {
+	//if (pChara != initiative.start->data) {
 	//	//Bubble Sort Method
 	//	ListItem<Characther*>* aux;
 	//	aux = initiative.end->next;
 	//	//aux = new ListItem<Characther*>;
-	//	while (chara->speed > aux->data->speed)
+	//	while (pChara->speed > aux->data->speed)
 	//	{
 	//		//ERIC: Hacer el cambio
 	//	}
