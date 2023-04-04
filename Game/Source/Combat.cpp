@@ -289,19 +289,33 @@ bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 	}
 
 	//Guardar las referencias a cosas
+	Characther* aux = new Characther;
+	aux = allies[charaPosition_I - 1]; //Ally que queremos mover.
 
 	//En caso de avanzar los desplaza hacia atras. (los otros characthers)
 	if (charaPosition_I > newPosition_I) //Avanzar hacia la frontline
-	{
-		//CODIGO
-
+	{	
+		for (size_t i = charaPosition_I-1; i > newPosition_I-1; i--)//Desplazar hacia atras a los demas
+		{
+			allies[i] = allies[i - 1];
+			allies[i]->positionCombat_I = i + 1;
+		}
 	}
 	//En caso de retroceder los avanza hacia adelante. (los otros characthers)
 	if (charaPosition_I < newPosition_I) //Retroceder a la backline
 	{
-		//CODIGO
+		for (size_t i = charaPosition_I - 1; i < newPosition_I - 1; i++)//Desplazar hacia atras a los demas
+		{
+			allies[i] = allies[i + 1];
+			if(allies[i]!=nullptr)
+			{
+			allies[i]->positionCombat_I = i - 1;
+			}
+		}
 
 	}
+
+	allies[newPosition_I - 1]=aux;//Colocamos el alliado en la posicion objetivo
 
 	return true;
 }

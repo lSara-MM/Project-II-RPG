@@ -88,6 +88,14 @@ bool Scene::Update(float dt)
 		app->combat->AddCombatant((Characther*)prota3, 5);*/
 		
 	}
+	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
+	{
+		app->combat->MoveAllies(1,4);
+		/*app->combat->AddCombatant((Characther*)prota2, -2);
+		app->combat->AddCombatant((Characther*)prota3, 5);*/
+
+	}
+
 
 	return true;
 }
