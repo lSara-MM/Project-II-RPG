@@ -86,6 +86,9 @@
     <ClCompile Include="Source\PCProtagonist.cpp">
       <Filter>Modules\Entities\PCs</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CombatEnemy.cpp">
+      <Filter>Modules\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player.h" />
@@ -206,6 +209,9 @@
     </ClInclude>
     <ClInclude Include="Source\PCProtagonist.h">
       <Filter>Modules\Entities\PCs</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CombatEnemy.h">
+      <Filter>Modules\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
