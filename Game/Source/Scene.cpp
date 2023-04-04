@@ -68,14 +68,17 @@ bool Scene::Update(float dt)
 {
 	Debug();
 
-	Entity* prota = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-	app->entityManager->AddEntity(prota);
+	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota1);
 
-	/*Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
 	app->entityManager->AddEntity(prota2);
 
 	Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-	app->entityManager->AddEntity(prota3);*/
+	app->entityManager->AddEntity(prota3);
+
+	Entity* prota4 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota4);
 
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(entidad2);*/
@@ -83,9 +86,11 @@ bool Scene::Update(float dt)
 	//ERIC: Prueba que no funciona.
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) 
 	{ 
-		app->combat->AddCombatant((Character*)prota, 3);
-		/*app->combat->AddCombatant((Characther*)prota2, -2);
-		app->combat->AddCombatant((Characther*)prota3, 5);*/
+		//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDAÍS AVISADOS!!!
+		app->combat->AddCombatant((Character*)prota1, 3);
+		app->combat->AddCombatant((Character*)prota2, 4);
+		app->combat->AddCombatant((Character*)prota3, 5);
+		app->combat->AddCombatant((Character*)prota4, 9);
 		
 	}
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)

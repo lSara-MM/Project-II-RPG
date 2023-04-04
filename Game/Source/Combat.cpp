@@ -207,6 +207,7 @@ bool Combat::AddCombatant(Character* pChara, int mod)
 				{
 					allies[i] = pChara;
 					pChara->positionCombat_I = (i + 1);
+					break;
 				}
 			}
 		}
@@ -224,31 +225,17 @@ bool Combat::AddCombatant(Character* pChara, int mod)
 	int n= initiative.Count();
 	initiative.At(2)->data->speed;
 
-		//for (int i = 0; i < n - 1; i++)
-		//	for (int j = 0; j < n - i - 1; j++)
-		//		if (initiative.At(j)->data->speed > initiative.At(j+1)->data->speed)
-		//		{
-		//			//SWAP WIP
-		//			ListItem<Characther*>* aux= nullptr /*new ListItem<Characther*>*/; //Esta petando el switchhh
-		//			aux->data = initiative.At(j)->data;
-		//			initiative.At(j)->data = initiative.At(j + 1)->data;
-		//			initiative.At(j + 1)->data = aux->data;
-		//		}
-					
-					
-	
-	
-	//initiative.BubbleSort();
-	//if (pChara != initiative.start->data) {
-	//	//Bubble Sort Method
-	//	ListItem<Characther*>* aux;
-	//	aux = initiative.end->next;
-	//	//aux = new ListItem<Characther*>;
-	//	while (pChara->speed > aux->data->speed)
-	//	{
-	//		//ERIC: Hacer el cambio
-	//	}
-	//}
+		for (int i = 0; i < n - 1; i++)
+			for (int j = 0; j < n - i - 1; j++)
+				if (initiative.At(j)->data->speed > initiative.At(j+1)->data->speed)
+				{
+					//SWAP WIP
+					ListItem<Character*>* aux = nullptr; /*new ListItem<Characther*>*/; //Esta petando el switchhh
+					aux = initiative.At(j);
+					aux->data = initiative.At(j)->data;
+					initiative.At(j)->data = initiative.At(j + 1)->data;
+					initiative.At(j + 1)->data = aux->data;
+				}
 
 	return true;
 }
