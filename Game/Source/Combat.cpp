@@ -214,7 +214,24 @@ bool Combat::AddCombatant(Character* pChara, int mod)
 
 		break;
 	case pChara->ENEMY:
-		//Codigo
+		//Asignar en su posicion en el array, si esta vacio 
+		if (enemies[pChara->positionCombat_I - 1] == nullptr) //Los valores son del 1 al 4 por eso le restamos 1
+		{
+			enemies[pChara->positionCombat_I - 1] = pChara;
+		}
+		else
+		{
+			for (size_t i = 0; i < 4; i++)
+			{
+				if (enemies[i] == nullptr) //Los valores son del 1 al 4 por eso le restamos 1
+				{
+					enemies[i] = pChara;
+					pChara->positionCombat_I = (i + 1);
+					break;
+				}
+			}
+		}
+
 		break;
 	default:
 		break;

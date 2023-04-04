@@ -13,6 +13,8 @@
 //CHARACTHERS
 //PCs
 #include "PCProtagonist.h"
+//ECs
+#include "ECHouseTank.h"
 
 EntityManager::EntityManager() : Module()
 { 
@@ -93,6 +95,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 
 	case EntityType::PC_PROTAGONIST:
 		entity = new Protagonist();
+		break;
+	case EntityType::ENEMY_TANK_HOUSE:
+		entity = new HouseTank();
 		break;
 
 	default: break;
