@@ -15,13 +15,13 @@
 
 struct SDL_Texture;
 
-class CombatEnemy : public Characther
+class CombatEnemy : public Character
 {
 public:
 
 	CombatEnemy();
 
-	CombatEnemy(Characther*);
+	CombatEnemy(Character*);
 
 	virtual ~CombatEnemy();
 

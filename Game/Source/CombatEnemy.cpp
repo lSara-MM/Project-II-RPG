@@ -19,14 +19,14 @@
 #include "Log.h"
 #include "Point.h"
 
-CombatEnemy::CombatEnemy() : Characther()
+CombatEnemy::CombatEnemy() : Character()
 {
 	name.Create("Characther");
 
 	active = true;
 }
 
-CombatEnemy::CombatEnemy(Characther* chara){}
+CombatEnemy::CombatEnemy(Character* chara){}
 
 CombatEnemy::~CombatEnemy() {
 

@@ -66,19 +66,6 @@ bool Combat::Update(float dt)
 	Debug();
 
 	//Pruebas de mover positiones
-	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
-	{
-		allies[initiative.At(initiative.Count() - 1)->data->positionCombat_I] = allies[initiative.At(initiative.Count() - 1)->data->positionCombat_I - 1];
-		allies[initiative.At(initiative.Count() - 1)->data->positionCombat_I-1] = nullptr;
-		initiative.At(initiative.Count() - 1)->data->positionCombat_I++;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
-	{
-		allies[initiative.At(initiative.Count() - 1)->data->positionCombat_I - 2] = allies[initiative.At(initiative.Count() - 1)->data->positionCombat_I - 1];
-		allies[initiative.At(initiative.Count() - 1)->data->positionCombat_I - 1] = nullptr;
-		initiative.At(initiative.Count() - 1)->data->positionCombat_I--;
-	}
 
 	for (int i=1;initiative.Count()>=i;i++) 
 	{
@@ -193,7 +180,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-bool Combat::AddCombatant(Characther* pChara, int mod)
+bool Combat::AddCombatant(Character* pChara, int mod)
 {
 	pChara->Awake(); //Sino peta porque no se carga la textura
 	pChara->Enable();
@@ -289,7 +276,7 @@ bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 	}
 
 	//Guardar las referencias a cosas
-	Characther* aux = new Characther;
+	Character* aux = new Character;
 	aux = allies[charaPosition_I - 1]; //Ally que queremos mover.
 
 	//En caso de avanzar los desplaza hacia atras. (los otros characthers)

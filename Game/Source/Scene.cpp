@@ -83,7 +83,7 @@ bool Scene::Update(float dt)
 	//ERIC: Prueba que no funciona.
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) 
 	{ 
-		app->combat->AddCombatant((Characther*)prota, 3);
+		app->combat->AddCombatant((Character*)prota, 3);
 		/*app->combat->AddCombatant((Characther*)prota2, -2);
 		app->combat->AddCombatant((Characther*)prota3, 5);*/
 		

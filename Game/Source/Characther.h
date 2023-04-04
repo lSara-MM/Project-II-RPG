@@ -11,13 +11,13 @@
 
 struct SDL_Texture;
 
-class Characther : public Entity
+class Character : public Entity
 {
 public:
 
-	Characther();
+	Character();
 
-	virtual ~Characther();
+	virtual ~Character();
 
 	bool Awake();
 
@@ -72,6 +72,11 @@ public:
 	};
 	CharatherType charaType_I; //Va del 1 al 4
 	
+	int GetHealth() { return currentHp; }
+	int GetAttack() { return attack; }
+	int GetArmor() { return armor; }
+	int GetSpeed() { return speed; }
+	int GetMaxHP() { return maxHp; }
 
 private:
 

@@ -16,18 +16,18 @@
 #include "Log.h"
 #include "Point.h"
 
-Characther::Characther() : Entity(EntityType::UNKNOWN)
+Character::Character() : Entity(EntityType::UNKNOWN)
 {
 	name.Create("Characther");
 
 	active = true;
 }
 
-Characther::~Characther() {
+Character::~Character() {
 
 }
 
-bool Characther::Awake() {
+bool Character::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -38,7 +38,7 @@ bool Characther::Awake() {
 	return true;
 }
 
-bool Characther::Start() {
+bool Character::Start() {
 
 	texture = app->tex->Load(texturePath);
 	
@@ -52,7 +52,7 @@ bool Characther::Start() {
 	return true;
 }
 
-bool Characther::Update(float dt)
+bool Character::Update(float dt)
 {
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
@@ -63,7 +63,7 @@ bool Characther::Update(float dt)
 	return true;
 }
 
-bool Characther::CleanUp()
+bool Character::CleanUp()
 {
 	app->tex->UnLoad(texture);
 	pbody->body->GetWorld()->DestroyBody(pbody->body);
@@ -71,14 +71,14 @@ bool Characther::CleanUp()
 	return true;
 }
 
-bool Characther::Render()
+bool Character::Render()
 {
 	app->render->DrawTexture(texture, position.x, position.y);
 
 	return true;
 }
 
-void Characther::ModifyHP(int num)
+void Character::ModifyHP(int num)
 {
 	if ((this->currentHp + num) > this->maxHp) 
 	{
@@ -95,7 +95,7 @@ void Characther::ModifyHP(int num)
 	}
 }
 
-int Characther::CalculateDamage(int initialDmg) 
+int Character::CalculateDamage(int initialDmg) 
 {
 	int realDmg;
 	//Idea 1, crecimiento lento
@@ -111,3 +111,5 @@ int Characther::CalculateDamage(int initialDmg)
 
 	return realDmg;
 }
+
+

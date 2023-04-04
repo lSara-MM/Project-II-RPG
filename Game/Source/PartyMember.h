@@ -15,13 +15,13 @@
 
 struct SDL_Texture;
 
-class PartyMember : public Characther
+class PartyMember : public Character
 {
 public:
 
 	PartyMember();
 
-	PartyMember(Characther*);
+	PartyMember(Character*);
 
 	virtual ~PartyMember();
 

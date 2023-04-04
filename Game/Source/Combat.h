@@ -45,7 +45,7 @@ public:
 	void Debug();
 	bool InitEntities(); //No se si quitarlo o que 
 	
-	bool AddCombatant(Characther* chara, int modifier); //Eric:Añadir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
+	bool AddCombatant(Character* chara, int modifier); //Eric:Añadir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
 	bool MoveAllies(int charaPosition_I, int newPosition_I);
 
@@ -58,11 +58,11 @@ public:
 	bool frcap;
 
 	//Turn Order
-	List<Characther*> initiative;
+	List<Character*> initiative;
 	int charaInTurn;
 
-	Characther* allies[4]; //4 es backline, 1 es frontline
-	Characther* enemies[4]; //4 es backline, 1 es frontline
+	Character* allies[4]; //4 es backline, 1 es frontline
+	Character* enemies[4]; //4 es backline, 1 es frontline
 
 	
 

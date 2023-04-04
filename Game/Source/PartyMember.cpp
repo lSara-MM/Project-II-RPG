@@ -19,14 +19,14 @@
 #include "Log.h"
 #include "Point.h"
 
-PartyMember::PartyMember() : Characther()
+PartyMember::PartyMember() : Character()
 {
 	name.Create("Characther");
 
 	active = true;
 }
 
-PartyMember::PartyMember(Characther* chara){}
+PartyMember::PartyMember(Character* chara){}
 
 PartyMember::~PartyMember() {
 
