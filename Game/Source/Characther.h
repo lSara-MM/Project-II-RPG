@@ -77,6 +77,7 @@ public:
 	int GetArmor() { return armor; }
 	int GetSpeed() { return speed; }
 	int GetMaxHP() { return maxHp; }
+	
 
 private:
 

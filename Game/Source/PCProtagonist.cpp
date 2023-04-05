@@ -80,9 +80,27 @@ bool Protagonist::Update(float dt)
 
 	if (onTurn)
 	{
-		//render barra de habilidades
-		// Para seleccionar app->input->GetMousePosition o 
+		//if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+		//{
+		//	int x, y;
+		//	app->input->GetMousePosition(x, y);
 
+		//	List<Entity*>* targets = app->entityManager->entities.
+
+		//	for (List<Entity*>::Node* node = targets->start; node != nullptr; node = node->next)
+		//	{
+		//		Entity* enemy = node->data;
+		//		if (enemy->pbody->Contains(x, y))
+		//		{
+		//			// Calculate damage and apply it to the enemy
+		//			int damage = CalculateDamage(attack);
+		//			enemy->ModifyHP(-damage);
+
+		//			// Exit the loop since we've found our target
+		//			break;
+		//		}
+		//	}
+		//}
 	}
 
 
