@@ -95,10 +95,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ECHouseTank.cpp" />
     <ClCompile Include="Source\Characther.cpp" />
     <ClCompile Include="Source\Combat.cpp" />
     <ClCompile Include="Source\CombatEnemy.cpp" />
+    <ClCompile Include="Source\ECHouseTank.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\GuiButton.cpp" />
@@ -124,11 +124,11 @@
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Window.cpp" />
-    <ClInclude Include="ECHouseTank.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Characther.h" />
     <ClInclude Include="Source\Combat.h" />
     <ClInclude Include="Source\CombatEnemy.h" />
+    <ClInclude Include="Source\ECHouseTank.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />

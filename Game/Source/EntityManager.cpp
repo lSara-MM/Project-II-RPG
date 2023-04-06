@@ -172,7 +172,7 @@ List<Entity*> EntityManager::GetEntitiesByType(EntityType type)
 		Entity* entity = item->data;
 		if (entity->type == type)
 		{
-			result.Del(entity);
+			//result.Del(entity); //Esto peta
 		}
 		item = item->next;
 	}

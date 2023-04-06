@@ -1,7 +1,7 @@
 #include "ECHouseTank.h"
 
 #include "Characther.h"
-#include "EnemyCombat.h"
+#include "CombatEnemy.h"
 
 #include "App.h"
 #include "Audio.h"
@@ -19,7 +19,7 @@
 #include "Log.h"
 #include "Point.h"
 
-HouseTank::HouseTank() : EnemyCombat()
+HouseTank::HouseTank() : CombatEnemy()
 {
 	name.Create("PCProtagonist");
 
@@ -95,3 +95,4 @@ bool HouseTank::CleanUp()
 	pbody->body->GetWorld()->DestroyBody(pbody->body);
 
 	return true;
+}
