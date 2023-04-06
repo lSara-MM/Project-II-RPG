@@ -166,7 +166,7 @@ List<Entity*> EntityManager::GetEntitiesByType(EntityType type)
 		}
 	}*/
 
-	ListItem<Entity*>* item = entities.start;
+	/*ListItem<Entity*>* item = entities.start;
 	while (item != NULL)
 	{
 		Entity* entity = item->data;
@@ -175,6 +175,14 @@ List<Entity*> EntityManager::GetEntitiesByType(EntityType type)
 			result.Del(entity);
 		}
 		item = item->next;
+	}*/
+	for (int i = 0; i < 7; i++)
+	{
+		if (entities[i]->type == type) {
+			result.Add(entities[i]);
+		}
 	}
+
+
 	return result;
 }
