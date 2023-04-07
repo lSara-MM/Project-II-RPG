@@ -33,6 +33,7 @@ class Scene;
 class LoseScene;
 class LeaderboardScene;
 class FadeToBlack;
+class Combat;
 
 
 class App
@@ -115,6 +116,7 @@ public:
 	LoseScene* loseScene;
 	LeaderboardScene* leadScene;
 	FadeToBlack* fade;
+	Combat* combat;
 
 	// Time control
 	uint frames;

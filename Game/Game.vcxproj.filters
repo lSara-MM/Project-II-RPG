@@ -77,6 +77,21 @@
     <ClCompile Include="Source\Characther.cpp">
       <Filter>Modules\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Combat.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PartyMember.cpp">
+      <Filter>Modules\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PCProtagonist.cpp">
+      <Filter>Modules\Entities\PCs</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CombatEnemy.cpp">
+      <Filter>Modules\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ECHouseTank.cpp">
+      <Filter>Modules\Entities\EC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player.h" />
@@ -189,6 +204,21 @@
     <ClInclude Include="Source\Characther.h">
       <Filter>Modules\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Combat.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PartyMember.h">
+      <Filter>Modules\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PCProtagonist.h">
+      <Filter>Modules\Entities\PCs</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CombatEnemy.h">
+      <Filter>Modules\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ECHouseTank.h">
+      <Filter>Modules\Entities\EC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">
@@ -214,6 +244,12 @@
     </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{59396da5-13ff-4cbf-85fc-91a7386282ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Entities\PCs">
+      <UniqueIdentifier>{c5d6774c-26c4-4529-a462-f01c7599a39a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Entities\EC">
+      <UniqueIdentifier>{2c344999-e73e-47ae-9538-5822c1886e1c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

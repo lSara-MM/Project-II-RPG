@@ -16,18 +16,18 @@
 #include "Log.h"
 #include "Point.h"
 
-Characther::Characther() : Entity(EntityType::CHARACTHER)
+Character::Character() : Entity(EntityType::UNKNOWN)
 {
 	name.Create("Characther");
 
 	active = true;
 }
 
-Characther::~Characther() {
+Character::~Character() {
 
 }
 
-bool Characther::Awake() {
+bool Character::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -38,7 +38,7 @@ bool Characther::Awake() {
 	return true;
 }
 
-bool Characther::Start() {
+bool Character::Start() {
 
 	texture = app->tex->Load(texturePath);
 	
@@ -52,7 +52,7 @@ bool Characther::Start() {
 	return true;
 }
 
-bool Characther::Update(float dt)
+bool Character::Update(float dt)
 {
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
@@ -63,11 +63,53 @@ bool Characther::Update(float dt)
 	return true;
 }
 
-bool Characther::CleanUp()
+bool Character::CleanUp()
 {
 	app->tex->UnLoad(texture);
 	pbody->body->GetWorld()->DestroyBody(pbody->body);
 	
 	return true;
 }
+
+bool Character::Render()
+{
+	app->render->DrawTexture(texture, position.x, position.y);
+
+	return true;
+}
+
+void Character::ModifyHP(int num)
+{
+	if ((this->currentHp + num) > this->maxHp) 
+	{
+		this->currentHp = this->maxHp;
+	}
+	else if ((this->currentHp + num) < 0)
+	{
+		this->currentHp = 0;
+		//Muere? No muere? Hay que hablar si hay death door
+	}
+	else
+	{
+		this->currentHp += num;
+	}
+}
+
+int Character::CalculateDamage(int initialDmg) 
+{
+	int realDmg;
+	//Idea 1, crecimiento lento
+	//unsigned int defCalculus = (this->defense / 10) + 1; //Minimo valor de 1 ya que se usa para un logaritmo
+	//float defLogRes = log2(defCalculus); //Numero usado para calcular el multiplicador, se usa log para crecimiento mas lento
+	//float defMultiplier = defLogRes / (defLogRes + 1); //Multiplicador de la armor, cada vez crece mas despacio
+	//int reductionPercent = this->defense * defMultiplier; //Porcentaje de reduccion, tiene en cuenta la armadura y su multiplicador
+	//realDmg = initialDmg * (100 - reductionPercent)/100; //
+
+	//Idea2, defensa mas relevante vs ataques mas debiles
+	float armorRelevance = (this->armor / initialDmg) + 1;
+	realDmg = initialDmg - ( (this->armor / 2) * armorRelevance);
+
+	return realDmg;
+}
+
 
