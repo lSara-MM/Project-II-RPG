@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<!--eventReturn
+0 - no choice
+1 - choice(s)
+2 - input
+3 - save choice
+4 - conditional
+-->
+
+<!--
+  IMPORTANT. Some special characters may crash the game
+  Ex. % -> use %% (it will only show 1 %)
+  https://stackoverflow.com/questions/45328047/how-can-i-avoiding-crashing-at-vsprintf-s-while-printing-character-similar-to
+-->
+
+<dialogues>
+  <dialogueTree ID="0">
+
+    <node id="0" text="Hey there, traveler. Who are you and what brings you here?">
+        <choice id="0" option="My name is %%x. I'm just seeking out new adventures." nextNode="1" eventReturn="2"/>
+    </node>
+
+    <node id="1" text="Ah, I see. Well, I do have a quest for you if you're interested. There's a dangerous beast lurking around here, and it's been attacking my livestock. Would you be willing to hunt it down for me?">
+        <choice id="0" option="Sounds dangerous, but I'm up for the challenge. Do you have any information?" nextNode="2"  eventReturn="3"/>
+        <choice id="1" option="What's in it for me?" nextNode="3"  eventReturn="3"/>
+        <choice id="2" option="I don't think I'm ready for something like that yet." nextNode="4"  eventReturn="3"/>
+    </node>
+
+    <node id="2" text="It tends to roam around the nearby forest at night but I have no clue about its weak points.">
+        <choice id="0" option="Thanks for the information. Anything else I should know?" nextNode="6" eventReturn="1"/>
+    </node>
+    
+    <node id="3" text="Well, I can offer you 100 gold coins.">
+      <choice id="0" option="Deal." nextNode="5" eventReturn="1"/>
+      <choice id="1" option="Only? Don't waste my time!" nextNode="4" eventReturn="1"/>
+      <choice id="2" option="Hmm, and how's that beast?" nextNode="2" eventReturn="1"/>
+    </node>
+
+    <node id="4" text="That's understandable. It's not for everyone. Have a safe journey ahead!">
+      <choice id="0" option="Goodbye. " nextNode="-1" eventReturn="1"/>
+    </node>
+
+    <node id="5" text="Good luck out there, and be careful!">
+        <choice id="0" option="Of course! I'll do my best to take care of that beast." nextNode="-1" eventReturn="1"/>
+    </node>
+
+    <node id="6" text="There have been rumors that the beast is being controlled by someone. If that's true, you'll need to be extra cautious.">
+        <choice id="0" option="Got it. I'll keep my guard up. I'll be on my way now." nextNode="-1" eventReturn="1"/>
+        <choice id="1" option="Actually, I've changed my mind." nextNode="4" eventReturn="3"/>
+    </node>
+
+    
+
+    <node id="-1" text ="End of conversation -F1- to talk again"></node>
+  </dialogueTree>
+
+</dialogues>
+

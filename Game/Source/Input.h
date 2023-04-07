@@ -8,6 +8,8 @@
 #define NUM_MOUSE_BUTTONS 5
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
+#define NAME_MAX_CHARS 10
+
 struct SDL_Rect;
 
 enum EventWindow
@@ -105,10 +107,16 @@ public:
 	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
 
+	void HandleInput(SDL_Event event);
 	void RemapKeys(KeyBinding* key);
-
+	
 public:
+	string playerName;	// tf perque te problemes en un string 
+	bool nameEntered_B = false;
+	bool getInput_B = false;
+
 	bool godMode_B = true;
+
 private:
 	bool windowEvents[WE_COUNT];
 	KeyState*	keyboard;

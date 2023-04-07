@@ -98,6 +98,8 @@
     <ClCompile Include="Source\Characther.cpp" />
     <ClCompile Include="Source\Combat.cpp" />
     <ClCompile Include="Source\CombatEnemy.cpp" />
+    <ClCompile Include="Source\DialogueSystem.cpp" />
+    <ClCompile Include="Source\DialogueTree.cpp" />
     <ClCompile Include="Source\ECHouseTank.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
@@ -128,6 +130,8 @@
     <ClInclude Include="Source\Characther.h" />
     <ClInclude Include="Source\Combat.h" />
     <ClInclude Include="Source\CombatEnemy.h" />
+    <ClInclude Include="Source\DialogueSystem.h" />
+    <ClInclude Include="Source\DialogueTree.h" />
     <ClInclude Include="Source\ECHouseTank.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Entity.h" />

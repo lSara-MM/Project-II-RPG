@@ -13,6 +13,7 @@
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
+#include "DialogueSystem.h"
 #include "GuiManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
@@ -68,7 +69,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(map);
 	AddModule(entityManager);
+	AddModule(dialogueSystem);
 	AddModule(guiManager);
+
 
 	AddModule(fade);
 

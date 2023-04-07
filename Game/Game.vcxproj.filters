@@ -92,6 +92,12 @@
     <ClCompile Include="Source\ECHouseTank.cpp">
       <Filter>Modules\Entities\EC</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DialogueSystem.cpp">
+      <Filter>Modules\Core\Dialogue System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DialogueTree.cpp">
+      <Filter>Modules\Core\Dialogue System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player.h" />
@@ -219,6 +225,12 @@
     <ClInclude Include="Source\ECHouseTank.h">
       <Filter>Modules\Entities\EC</Filter>
     </ClInclude>
+    <ClInclude Include="Source\DialogueSystem.h">
+      <Filter>Modules\Core\Dialogue System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DialogueTree.h">
+      <Filter>Modules\Core\Dialogue System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">
@@ -250,6 +262,9 @@
     </Filter>
     <Filter Include="Modules\Entities\EC">
       <UniqueIdentifier>{2c344999-e73e-47ae-9538-5822c1886e1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Core\Dialogue System">
+      <UniqueIdentifier>{785cf3fe-fa6d-49b9-a075-19fdc110902d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

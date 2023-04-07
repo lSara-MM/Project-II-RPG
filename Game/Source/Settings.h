@@ -329,21 +329,21 @@ public:
 		open_audio_B = false;
 
 		// General volume
-		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 298, 219, 39 }, ButtonType::NONE, "general", 10, { 310, 298, 28, 39 });
+		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 298, 219, 39 }, ButtonType::NONE, "general", 10, Font::UI, { 310, 298, 28, 39 });
 		sliderBar->state = GuiControlState::NONE;
 		general = sliderBar;
 		listSliderBars.Add(sliderBar);
 
 		// music
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 375, 219, 39 }, ButtonType::NONE, "music", 10, { 310, 375, 28, 39 });
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 375, 219, 39 }, ButtonType::NONE, "music", 10, Font::UI, { 310, 375, 28, 39 });
 		sliderBar->state = GuiControlState::NONE;
 		music = sliderBar;
 		listSliderBars.Add(sliderBar);
 
 		// fx
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 452, 219, 39 }, ButtonType::NONE, "fx", 10, { 310, 452, 28, 39 });
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 452, 219, 39 }, ButtonType::NONE, "fx", 10, Font::UI, { 310, 452, 28, 39 });
 		sliderBar->state = GuiControlState::NONE;
 		fx = sliderBar;
 		listSliderBars.Add(sliderBar);
@@ -464,7 +464,7 @@ public:
 		//if (!app->render->DrawTexture(settingsTexture, 150, 70, &rect)) { app->render->TextDraw("Settings", 180, 100, 21, { 107, 0, 110}); }
 
 		app->render->DrawLine(490, 250, 490, 600, 0, 0, 0);
-		app->render->TextDraw("Settings", 600, 121, 40, FONT::UI, { 255, 255, 255 });
+		app->render->TextDraw("Settings", 600, 121, 40, Font::UI, { 255, 255, 255 });
 
 
 		if (pGame->game_B) { pGame->OpenGameSettings(); }
@@ -571,7 +571,7 @@ public:
 
 		app->render->DrawRectangle({ 150, 70, 226, 261 }, 206, 167, 240, 230, true);
 		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
-		app->render->TextDraw("Pause", 210, 90, 21, FONT::UI, { 107, 0, 110 });
+		app->render->TextDraw("Pause", 210, 90, 21, Font::UI, { 107, 0, 110 });
 
 		if (!open)
 		{

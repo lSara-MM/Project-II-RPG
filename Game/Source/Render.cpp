@@ -255,14 +255,14 @@ bool Render::SaveState(pugi::xml_node& data)
 	return true;
 }
 
-bool Render::TextDraw(const char* text, int x, int y, int size, FONT font, SDL_Color color)
+bool Render::TextDraw(const char* text, int x, int y, int size, Font font, SDL_Color color)
 {
 	bool ret = true;
 
 	//load a font into memory
 
-	if (font == FONT::UI)	{ ttf_font = TTF_OpenFont("Assets/Fonts/Fondamento-Regular.ttf", size); }
-	else if (font == FONT::TEXT) { ttf_font = TTF_OpenFont("Assets/Fonts/FingerPaint-Regular.ttf", size); }
+	if (font == Font::UI)	{ ttf_font = TTF_OpenFont("Assets/Fonts/Fondamento-Regular.ttf", size); }
+	else if (font == Font::TEXT) { ttf_font = TTF_OpenFont("Assets/Fonts/FingerPaint-Regular.ttf", size); }
 	
 	
 	if (!ttf_font)

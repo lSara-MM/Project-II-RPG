@@ -2,6 +2,8 @@
 #include "Input.h"
 #include "Window.h"
 
+#include "DialogueSystem.h"
+
 #include "Defs.h"
 #include "Log.h"
 
@@ -107,6 +109,10 @@ bool Input::PreUpdate()
 				}
 			break;
 
+			case SDL_KEYDOWN:
+				if (getInput_B) { HandleInput(event); }
+				break;
+
 			case SDL_MOUSEBUTTONDOWN:
 				mouseButtons[event.button.button - 1] = KEY_DOWN;
 				//LOG("Mouse button %d down", event.button.button-1);
@@ -155,6 +161,44 @@ void Input::GetMouseMotion(int& x, int& y)
 {
 	x = mouseMotionX;
 	y = mouseMotionY;
+}
+
+void Input::HandleInput(SDL_Event event)
+{
+	// TODO: GET AND PROCESS USER'S INPUT 
+
+	// Keep a copy of the current version of the string
+	string temp = playerName;
+
+	// If the string less than maximum size
+	if (playerName.length() <= NAME_MAX_CHARS)
+	{
+		//Append the character
+		playerName += (char)event.key.keysym.sym;
+	}
+
+	// If backspace was pressed and the string isn't blank
+	if ((event.key.keysym.sym == SDLK_BACKSPACE) && !playerName.empty())
+	{
+		// Remove a character from the end
+		playerName.erase(playerName.length() - 1);
+		playerName.erase(playerName.length() - 1);
+	}
+
+	if ((event.key.keysym.sym == SDLK_RETURN) && !playerName.empty())
+	{
+		playerName.erase(playerName.length() - 1);
+		app->dialogueSystem->SaveDialogueState();
+		nameEntered_B = true;
+		getInput_B = false;
+	}
+
+	// Ignore shift
+	if (event.key.keysym.sym == SDLK_LSHIFT || event.key.keysym.sym == SDLK_RSHIFT)
+	{
+		// Append the character
+		playerName.erase(playerName.length() - 1);
+	}
 }
 
 // to test
