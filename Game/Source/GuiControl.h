@@ -44,7 +44,18 @@ enum class ButtonType
 	NONE,
 	EXTRA_LARGE,
 	LARGE,
-	SMALL
+	SMALL,
+
+	START,
+	CLOSE,
+	MENU,
+	SETTINGS,
+	IN_SETTINGS,
+	CONTROL_SETTINGS,
+	INVENTORY,
+	INV_NEXT_PAGE,
+	INV_PAGES,
+	SWAP_SKILL,
 };
 
 
@@ -112,8 +123,6 @@ public:
 	int fontSize;
 
 	Module* observer;        // Observer module (it should probably be an array/list)
-
-	bool GUI_debug = false;
 };
 
 #endif // __GUICONTROL_H__

@@ -1,4 +1,5 @@
 #include "GuiCheckBox.h"
+#include "GuiManager.h"
 
 GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds) : GuiControl(GuiControlType::CHECKBOX, id)
 {
@@ -51,7 +52,7 @@ bool GuiCheckBox::Update(float dt)
 bool GuiCheckBox::Draw(Render* render)
 {
 	SDL_Rect rect = { 0, 0, 0, 0 };
-	if (GUI_debug)
+	if (app->guiManager->GUI_debug)
 	{
 		// Draw the right button depending on state
 		switch (state)
@@ -59,30 +60,30 @@ bool GuiCheckBox::Draw(Render* render)
 
 		case GuiControlState::DISABLED:
 		{
-			render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 200, 200, 200, 255, true, false);
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 200, 200, 200, 255, true, false);
 
 		} break;
 
 		case GuiControlState::NORMAL:
 		{
-			render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 0, 0, 255, 255, true, false);
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 0, 255, 255, true, false);
 
 		}	break;
 
 		case GuiControlState::FOCUSED:
 		{
-			//render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 255, 0, 255, 255, true, false);
+			//render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 255, 0, 255, 255, true, false);
 
 		} break;
 
 		case GuiControlState::PRESSED:
 		{
-			//render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 0, 255, 0, 255, true, false);
+			//render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 255, 0, 255, true, false);
 
 		} break;
 
 		case GuiControlState::SELECTED:
-			render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 0, 255, 0, 255, true, false);
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 255, 0, 255, true, false);
 			break;
 
 		default:
