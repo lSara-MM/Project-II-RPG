@@ -9,6 +9,7 @@
 #include "LogoScene.h"
 #include "LoseScene.h"
 #include "Scene.h"
+#include "Combat.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
@@ -47,6 +48,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new Scene();
 	loseScene = new LoseScene();
 	fade = new FadeToBlack();
+	combat = new Combat();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -62,6 +64,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(iScene);
 	AddModule(scene);
 	AddModule(loseScene);
+	AddModule(combat);
 
 	AddModule(map);
 	AddModule(entityManager);

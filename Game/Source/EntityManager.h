@@ -35,6 +35,8 @@ public:
 
 	bool LoadState(pugi::xml_node&);
 	bool SaveState(pugi::xml_node&);
+	List<Entity*> GetEntitiesByType(EntityType type);
+
 
 
 public:
