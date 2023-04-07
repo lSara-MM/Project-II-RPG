@@ -66,7 +66,7 @@ public:
 	void GetMouseMotion(int& x, int& y);
 
 public:
-	bool godMode;
+	bool godMode_B = true;
 private:
 	bool windowEvents[WE_COUNT];
 	KeyState*	keyboard;

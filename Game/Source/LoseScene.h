@@ -54,11 +54,8 @@ private:
 	const char* but2Path;
 
 	SDL_Texture* p2sTexture;
-	int v_start = 0;
 
-	bool retry;
-	bool musLose;
-
+	bool retry_B;
 
 	// buttons
 	List<GuiButton*> listButtons;
