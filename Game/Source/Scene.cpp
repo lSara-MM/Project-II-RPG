@@ -111,7 +111,83 @@ bool Scene::CleanUp()
 
 void Scene::Debug()
 {
+	// Start again level
+	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+		app->fade->FadingToBlack(this, (Module*)app->scene, 0);
 
+	// Load / Save - keys F5 (save) / F6 (load)
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+		app->SaveGameRequest();
+
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+		app->LoadGameRequest();
+
+
+	// Show Gui 
+	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
+		//app->iScene->buttonDebug = !app->iScene->buttonDebug;
+	}
+
+	// Show collisions
+	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+	{
+		!app->physics->collisions;
+		
+	}
+
+	// GodMode
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		!app->input->godMode_B;
+	}
+
+	// Enable/Disable Frcap
+	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	{
+		!frcap_B;
+		LOG("frame rate: %d", app->physics->frameRate);
+	}
+
+	//pause menu
+	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+	{
+		!pause_B;
+		!pSettings->settings_B;
+		if (!pSettings->settings_B)
+		{
+			pSettings->CloseSettings();
+		}
+
+		LOG("PAUSE");
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		!pause_B;
+		pPause->pause = !pPause->pause;
+		if (!pPause->pause)
+		{
+			pPause->ClosePause();
+		}
+
+		LOG("PAUSE");
+	}
+
+	// Mute / unmute
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+
+		!mute_B;
+		LOG("MUTE");
+	}
+		
+
+	// God mode functions
+	if (app->input->godMode_B)
+	{
+		
+	}
+
+	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
 }
 
 bool Scene::InitEntities()
