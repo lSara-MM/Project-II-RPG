@@ -236,23 +236,28 @@ bool Combat::AddCombatant(Character* pChara, int mod)
 	default:
 		break;
 	}
-	
+
+	return true;
+}
+
+bool Combat::OrderBySpeed()
+{
 
 	//Order by initiative
-	int n= initiative.Count();
+	int n = initiative.Count();
 	initiative.At(2)->data->speed;
 
-		for (int i = 0; i < n - 1; i++)
-			for (int j = 0; j < n - i - 1; j++)
-				if (initiative.At(j)->data->speed > initiative.At(j+1)->data->speed)
-				{
-					//SWAP WIP
-					ListItem<Character*>* aux = nullptr; /*new ListItem<Characther*>*/; //Esta petando el switchhh
-					aux = initiative.At(j);
-					aux->data = initiative.At(j)->data;
-					initiative.At(j)->data = initiative.At(j + 1)->data;
-					initiative.At(j + 1)->data = aux->data;
-				}
+	for (int i = 0; i < n - 1; i++)
+		for (int j = 0; j < n - i - 1; j++)
+			if (initiative.At(j)->data->speed > initiative.At(j + 1)->data->speed)
+			{
+				//SWAP WIP
+				ListItem<Character*>* aux = nullptr; /*new ListItem<Characther*>*/; //Esta petando el switchhh
+				aux = initiative.At(j);
+				aux->data = initiative.At(j)->data;
+				initiative.At(j)->data = initiative.At(j + 1)->data;
+				initiative.At(j + 1)->data = aux->data;
+			}
 
 	return true;
 }
