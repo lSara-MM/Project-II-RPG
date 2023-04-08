@@ -21,7 +21,7 @@
 
 PartyMember::PartyMember() : Character()
 {
-	name.Create("Characther");
+	name.Create("Character");
 
 	active = true;
 }

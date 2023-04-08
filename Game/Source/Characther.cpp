@@ -18,7 +18,7 @@
 
 Character::Character() : Entity(EntityType::UNKNOWN)
 {
-	name.Create("Characther");
+	name.Create("Character");
 
 	active = true;
 }
