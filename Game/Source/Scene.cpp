@@ -171,28 +171,29 @@ void Scene::Debug()
 	// Show collisions
 	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
 	{
-		!app->physics->collisions;
+		app->physics->collisions = !app->physics->collisions;
 		
 	}
 
 	// GodMode
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
-		!app->input->godMode_B;
+		app->input->godMode_B = !app->input->godMode_B;
 	}
 
 	// Enable/Disable Frcap
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
 	{
-		!frcap_B;
+		frcap_B = !frcap_B;
 		LOG("frame rate: %d", app->physics->frameRate);
 	}
 
 	//pause menu
 	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
 	{
-		!pause_B;
-		!pSettings->settings_B;
+		pause_B = !pause_B;
+		pSettings->settings_B = !pSettings->settings_B;
+
 		if (!pSettings->settings_B)
 		{
 			pSettings->CloseSettings();
@@ -203,7 +204,7 @@ void Scene::Debug()
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
-		!pause_B;
+		pause_B = !pause_B;
 		pPause->pause = !pPause->pause;
 		if (!pPause->pause)
 		{
@@ -216,7 +217,7 @@ void Scene::Debug()
 	// Mute / unmute
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
 
-		!mute_B;
+		mute_B = !mute_B;
 		LOG("MUTE");
 	}
 		
