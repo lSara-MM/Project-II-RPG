@@ -9,10 +9,10 @@
 #include "LogoScene.h"
 #include "LoseScene.h"
 #include "Scene.h"
-#include "Combat.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
+#include "Combat.h"
 #include "DialogueSystem.h"
 #include "GuiManager.h"
 #include "Map.h"
@@ -42,6 +42,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	pathfinding = new PathFinding();
 
 	entityManager = new EntityManager();
+	combat = new Combat();
+	dialogueSystem = new DialogueSystem();
 	guiManager = new GuiManager();
 	
 	lScene = new LogoScene();
@@ -49,7 +51,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new Scene();
 	loseScene = new LoseScene();
 	fade = new FadeToBlack();
-	combat = new Combat();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -65,10 +66,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(iScene);
 	AddModule(scene);
 	AddModule(loseScene);
-	AddModule(combat);
 
 	AddModule(map);
 	AddModule(entityManager);
+	AddModule(combat);
 	AddModule(dialogueSystem);
 	AddModule(guiManager);
 

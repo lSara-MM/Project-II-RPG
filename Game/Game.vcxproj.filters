@@ -17,9 +17,6 @@
     <ClCompile Include="Source\Audio.cpp">
       <Filter>Modules\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Input.cpp">
-      <Filter>Modules\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Map.cpp">
       <Filter>Modules\Core</Filter>
     </ClCompile>
@@ -98,6 +95,9 @@
     <ClCompile Include="Source\DialogueTree.cpp">
       <Filter>Modules\Core\Dialogue System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player.h" />
@@ -135,9 +135,6 @@
       <Filter>App</Filter>
     </ClInclude>
     <ClInclude Include="Source\Audio.h">
-      <Filter>Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input.h">
       <Filter>Modules\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\Map.h">
@@ -230,6 +227,9 @@
     </ClInclude>
     <ClInclude Include="Source\DialogueTree.h">
       <Filter>Modules\Core\Dialogue System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>Modules\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -99,6 +99,8 @@ bool DialogueTree::UpdateNodes(Module* mod, iPoint pos, int fontSize)
 
 bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 {
+	SString temp;
+
 	for (int i = 0; i < activeNode->choicesList.size(); i++)
 	{
 		switch (activeNode->choicesList[i]->eventReturn)
@@ -118,13 +120,9 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 				}
 			}
 
-			app->render->TextDraw("Player's name:", app->win->GetWidth() / 3, 100, fontSize, Font::TEXT, { 255, 255, 255 });
-			if (!app->input->playerName.empty())
-			{
-				const char* ch_name = app->input->playerName.c_str();	// SString to const char*	
-				app->render->TextDraw(ch_name, app->win->GetWidth() / 3 + fontSize * 7, 100, fontSize, Font::TEXT, { 255, 255, 255 });
-			}
-
+			temp = "Player's name:  %%";
+			temp.Substitute("%", app->input->playerName.c_str());
+			app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 100, fontSize, Font::TEXT, { 255, 255, 255 });
 			break;
 
 		case DIALOGUE_SAVE:

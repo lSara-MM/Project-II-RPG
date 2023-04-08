@@ -7,6 +7,8 @@
 #include "Defs.h"
 #include "Log.h"
 
+#include "SDL/include/SDL.h"
+
 #define MAX_KEYS 300
 
 Input::Input() : Module()
@@ -43,6 +45,9 @@ bool Input::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Input::Start()
 {
+	//Enable Unicode
+	//SDL_EnableUNICODE(SDL_ENABLE);
+
 	SDL_StopTextInput();
 	return true;
 }
@@ -109,6 +114,7 @@ bool Input::PreUpdate()
 				}
 			break;
 
+			// TODO: Handle input
 			case SDL_KEYDOWN:
 				if (getInput_B) { HandleInput(event); }
 				break;
@@ -142,6 +148,9 @@ bool Input::CleanUp()
 {
 	LOG("Quitting SDL event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
+
+	//Disable Unicode
+	//SDL_EnableUNICODE(SDL_DISABLE);
 	return true;
 }
 
@@ -162,6 +171,7 @@ void Input::GetMouseMotion(int& x, int& y)
 	x = mouseMotionX;
 	y = mouseMotionY;
 }
+
 
 void Input::HandleInput(SDL_Event event)
 {
@@ -188,7 +198,7 @@ void Input::HandleInput(SDL_Event event)
 	if ((event.key.keysym.sym == SDLK_RETURN) && !playerName.empty())
 	{
 		playerName.erase(playerName.length() - 1);
-		app->dialogueSystem->SaveDialogueState();
+		app->dialogueSystem->SaveDialogueState();		
 		nameEntered_B = true;
 		getInput_B = false;
 	}
@@ -198,17 +208,5 @@ void Input::HandleInput(SDL_Event event)
 	{
 		// Append the character
 		playerName.erase(playerName.length() - 1);
-	}
-}
-
-// to test
-void Input::RemapKeys(KeyBinding* key)
-{
-	static SDL_Event event;
-
-	if (SDL_PollEvent(&event) != 0)
-	{
-		key->key_num = event.key.keysym.sym;
-		//key->key = event.key.keysym.sym;
 	}
 }

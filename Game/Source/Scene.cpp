@@ -15,6 +15,7 @@
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
+#include "DialogueSystem.h"
 #include "GuiManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
@@ -50,7 +51,6 @@ bool Scene::Start()
 	pause_B = false;
 
 	// Settings
-	pSettings->GUI_id = 0;
 	pSettings->CreateSettings(this);
 
 	// Pause 
@@ -67,7 +67,6 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
-
 	Debug();
 
 	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
@@ -97,17 +96,13 @@ bool Scene::Update(float dt)
 		app->combat->AddCombatant((Character*)prota2, 4);
 		app->combat->AddCombatant((Character*)prota3, 5);
 		app->combat->AddCombatant((Character*)prota4, 9);
-		
-		
 	}
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
 	{
 		app->combat->MoveAllies(1,4);
 		/*app->combat->AddCombatant((Characther*)prota2, -2);
 		app->combat->AddCombatant((Characther*)prota3, 5);*/
-
 	}
-
 
 	return true;
 }
@@ -118,8 +113,21 @@ bool Scene::PostUpdate()
 
 	if (exit_B) return false;
 
-	
-		
+
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		app->dialogueSystem->CleanUp();
+		app->dialogueSystem->LoadDialogue("dialogues.xml", 0);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		app->dialogueSystem->CleanUp();
+		app->dialogueSystem->LoadDialogue("dialogues.xml", 1);
+		app->dialogueSystem->LoadDialogueState();
+	}
+	app->render->TextDraw("F1: start dialogue 1", 50, 50, 16, Font::TEXT, { 255, 255, 255 });
+	app->render->TextDraw("F2: start dialogue 2", 50, 75, 16, Font::TEXT, { 255, 255, 255 });
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;

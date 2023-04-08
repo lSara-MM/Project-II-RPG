@@ -107,13 +107,13 @@
     <ClCompile Include="Source\GuiCheckBox.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\GuiSliderBar.cpp" />
+    <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\IntroScene.cpp" />
     <ClCompile Include="Source\LogoScene.cpp" />
     <ClCompile Include="Source\LoseScene.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
-    <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\PartyMember.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
@@ -142,6 +142,7 @@
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\GuiSliderBar.h" />
+    <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\IntroScene.h" />
     <ClInclude Include="Source\LogoScene.h" />
     <ClInclude Include="Source\LoseScene.h" />
@@ -155,7 +156,6 @@
     <ClInclude Include="Source\Queue.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Audio.h" />
-    <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\App.h" />
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Render.h" />
