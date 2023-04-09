@@ -1,7 +1,7 @@
 #include "ECHouseTank.h"
 
 #include "Characther.h"
-#include "EnemyCombat.h"
+#include "CombatEnemy.h"
 
 #include "App.h"
 #include "Audio.h"
@@ -19,7 +19,7 @@
 #include "Log.h"
 #include "Point.h"
 
-HouseTank::HouseTank() : EnemyCombat()
+HouseTank::HouseTank() : CombatEnemy()
 {
 	name.Create("PCProtagonist");
 
@@ -37,7 +37,7 @@ bool HouseTank::Awake() {
 
 
 	//texturePath = parameters.attribute("texturepath").as_string();
-	texturePath = "Assets/Textures/EC1.png";
+	texturePath = "Assets/Textures/Enemy1.png";
 
 	return true;
 }
@@ -76,7 +76,7 @@ bool HouseTank::Update(float dt)
 
 	rect = { 0,0,258,496 };
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
-	app->render->DrawTexture(texture, 600 + 70 * positionCombat_I, 120/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/);
+	app->render->DrawTexture(texture, 300 + 70 * positionCombat_I, 120/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/);
 
 	if (onTurn)
 	{
@@ -95,3 +95,4 @@ bool HouseTank::CleanUp()
 	pbody->body->GetWorld()->DestroyBody(pbody->body);
 
 	return true;
+}

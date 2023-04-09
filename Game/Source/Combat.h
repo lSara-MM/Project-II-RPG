@@ -46,28 +46,25 @@ public:
 	bool InitEntities(); //No se si quitarlo o que 
 	
 	bool AddCombatant(Character* chara, int modifier); //Eric:Añadir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
+	bool OrderBySpeed();
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
-	bool MoveAllies(int charaPosition_I, int newPosition_I);
+	bool MoveAllies(int charaPosition_I, int newPosition_I);//Swap de un PC en una posicion hasta otra posicion
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 public:
-
 	Player* player;
 	bool frcap;
 
 	//Turn Order
-	List<Character*> initiative;
+	List<Character*> listInitiative;
 	int charaInTurn;
 
 	Character* allies[4]; //4 es backline, 1 es frontline
 	Character* enemies[4]; //4 es backline, 1 es frontline
 
-	
-
 private:
-
 	// Settings
 	Settings options;
 	Settings* pSettings = &options;

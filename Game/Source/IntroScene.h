@@ -57,7 +57,7 @@ private:
 	Credits credits;
 	Credits* pCredits = &credits;
 
-	bool exit;
+	bool exit_B;
 };
 
 #endif // __INTROSCENE_H__

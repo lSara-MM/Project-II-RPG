@@ -1,5 +1,5 @@
 #ifndef __ECHOUSETANK_H__
-#define __ECHOUSETANK_H__
+#define __ECHOUSETANK_H_
 
 #include "Entity.h"
 #include "Characther.h"
