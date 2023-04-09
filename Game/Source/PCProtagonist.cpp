@@ -85,11 +85,11 @@ bool Protagonist::Update(float dt)
 		//	int x, y;
 		//	app->input->GetMousePosition(x, y);
 
-		//	List<Entity*>* targets = app->entityManager->entities.
+		//	List<Entity*> targets = app->entityManager->GetEntitiesByType(ENEMY);
 
-		//	for (List<Entity*>::Node* node = targets->start; node != nullptr; node = node->next)
+		//	for (List<Entity*> node = targets->start; node != nullptr; node = node->next)
 		//	{
-		//		Entity* enemy = node->data;
+		//		Character* enemy = node->data;
 		//		if (enemy->pbody->Contains(x, y))
 		//		{
 		//			// Calculate damage and apply it to the enemy
