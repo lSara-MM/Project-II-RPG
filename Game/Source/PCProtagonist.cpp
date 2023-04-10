@@ -80,27 +80,27 @@ bool Protagonist::Update(float dt)
 
 	if (onTurn)
 	{
-		//if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-		//{
-		//	int x, y;
-		//	app->input->GetMousePosition(x, y);
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+		{
+			int x, y;
+			app->input->GetMousePosition(x, y);
 
-		//	List<Entity*> targets = app->entityManager->GetEntitiesByType(ENEMY);
+			List<Entity*> targets = app->entityManager->GetEntitiesByType(/*type of the enemy*/);
 
-		//	for (List<Entity*> node = targets->start; node != nullptr; node = node->next)
-		//	{
-		//		Character* enemy = node->data;
-		//		if (enemy->pbody->Contains(x, y))
-		//		{
-		//			// Calculate damage and apply it to the enemy
-		//			int damage = CalculateDamage(attack);
-		//			enemy->ModifyHP(-damage);
+			for (List<Entity*> aux = targets.start; aux != nullptr; aux = aux->next)
+			{
+				Character* enemy = aux.data;
+				if (enemy->pbody->Contains(x, y))
+				{
+					// Calculate damage and apply it to the enemy
+					int damage = CalculateDamage(attack);
+					enemy->ModifyHP(-damage);
 
-		//			// Exit the loop since we've found our target
-		//			break;
-		//		}
-		//	}
-		//}
+					// Exit the loop since we've found the target
+					break;
+				}
+			}
+		}
 	}
 
 
