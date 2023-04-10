@@ -18,6 +18,7 @@
 
 #include "Log.h"
 #include "Point.h"
+#include "Combat.h"
 
 Protagonist::Protagonist() : PartyMember()
 {
@@ -80,26 +81,54 @@ bool Protagonist::Update(float dt)
 
 	if (onTurn)
 	{
-		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+		//if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+		//{
+		//	int x, y;
+		//	app->input->GetMousePosition(x, y);
+
+		//	//List<Entity*> targets = app->entityManager->GetEntitiesByType(/*type of the enemy*/);
+
+		//	for (int i = 0; i < 3; i++)
+		//	{
+		//		if (app->combat->enemies[i]->pbody->Contains(x, y))
+		//		{
+		//			// Calculate damage and apply it to the enemy
+		//			int damage = app->combat->enemies[i]->CalculateDamage(attack);
+		//			app->combat->enemies[i]->ModifyHP(-damage);
+
+		//			// Exit the loop since we've found the target
+		//			break;
+		//		}
+		//	}
+		//}
+		
+		if (app->input->GetMouseButtonDown(SDL_SCANCODE_1) == KEY_DOWN)
 		{
-			int x, y;
-			app->input->GetMousePosition(x, y);
 
-			List<Entity*> targets = app->entityManager->GetEntitiesByType(/*type of the enemy*/);
+				float damage = app->combat->enemies[0]->CalculateDamage(attack);
+				app->combat->enemies[0]->ModifyHP(-damage);
+				app->combat->NextTurn();
+		}
+		if (app->input->GetMouseButtonDown(SDL_SCANCODE_2) == KEY_DOWN)
+		{
 
-			for (List<Entity*> aux = targets.start; aux != nullptr; aux = aux->next)
-			{
-				Character* enemy = aux.data;
-				if (enemy->pbody->Contains(x, y))
-				{
-					// Calculate damage and apply it to the enemy
-					int damage = CalculateDamage(attack);
-					enemy->ModifyHP(-damage);
+			float damage = app->combat->enemies[1]->CalculateDamage(attack);
+			app->combat->enemies[0]->ModifyHP(-damage);
+			app->combat->NextTurn();
+		}
+		if (app->input->GetMouseButtonDown(SDL_SCANCODE_3) == KEY_DOWN)
+		{
 
-					// Exit the loop since we've found the target
-					break;
-				}
-			}
+			float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.75);
+			app->combat->enemies[0]->ModifyHP(-damage);
+			app->combat->NextTurn();
+		}
+		if (app->input->GetMouseButtonDown(SDL_SCANCODE_4) == KEY_DOWN)
+		{
+
+			float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.75);
+			app->combat->enemies[0]->ModifyHP(-damage);
+			app->combat->NextTurn();
 		}
 	}
 
