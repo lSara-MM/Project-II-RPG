@@ -66,6 +66,10 @@ bool Combat::Update(float dt)
 	Debug();
 
 	//Pruebas de mover positiones
+	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+	{
+		listInitiative.start->data->onTurn = true;
+	}
 
 	for (int i=1;listInitiative.Count()>=i;i++) 
 	{
@@ -210,8 +214,13 @@ bool Combat::OrderBySpeed()
 
 bool Combat::NextTurn()
 {
-	if (listInitiative.Count() <= charaInTurn) { charaInTurn = 1; }
-	else { ++charaInTurn; }
+
+	if (listInitiative.Count()-1 <= charaInTurn) { charaInTurn = 1; }
+	else
+	{
+		listInitiative.At(charaInTurn)->data->onTurn = false;
+		++charaInTurn; 
+	}
 	listInitiative.At(charaInTurn)->data->onTurn = true;
 
 	return true;
@@ -259,4 +268,13 @@ bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 	allies[newPosition_I - 1]=aux;//Colocamos el alliado en la posicion objetivo
 
 	return true;
+}
+
+bool Combat::StartCombat()
+{
+	//OrderBySpeed();
+
+	/*listInitiative.start->data->onTurn = true;*/
+	//NextTurn();
+	return false;
 }

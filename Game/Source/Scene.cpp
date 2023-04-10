@@ -95,7 +95,8 @@ bool Scene::Update(float dt)
 		app->combat->AddCombatant((Character*)prota1, 3);
 		app->combat->AddCombatant((Character*)prota2, 4);
 		app->combat->AddCombatant((Character*)prota3, 5);
-		app->combat->AddCombatant((Character*)prota4, 9);	
+		app->combat->AddCombatant((Character*)prota4, 9);
+		app->combat->StartCombat();
 	}
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
 	{

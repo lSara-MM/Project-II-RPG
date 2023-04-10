@@ -60,6 +60,7 @@ bool Protagonist::Start() {
 	this->attack = 30;
 	this->armor = 20;
 	this->speed = 5;
+	this->onTurn = false;
 
 	this->positionCombat_I = 1;
 
@@ -81,6 +82,7 @@ bool Protagonist::Update(float dt)
 
 	if (onTurn)
 	{
+		app->render->DrawCircle( 300 - 70 * positionCombat_I,15, 20,0,255,255);
 		//if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//{
 		//	int x, y;
@@ -102,33 +104,40 @@ bool Protagonist::Update(float dt)
 		//	}
 		//}
 		
-		if (app->input->GetMouseButtonDown(SDL_SCANCODE_1) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_UP)
 		{
 
 				float damage = app->combat->enemies[0]->CalculateDamage(attack);
 				app->combat->enemies[0]->ModifyHP(-damage);
+				SDL_Delay(500);
+				onTurn = false;
 				app->combat->NextTurn();
+				
 		}
-		if (app->input->GetMouseButtonDown(SDL_SCANCODE_2) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 		{
 
 			float damage = app->combat->enemies[1]->CalculateDamage(attack);
 			app->combat->enemies[0]->ModifyHP(-damage);
+			onTurn = false;
 			app->combat->NextTurn();
+			
 		}
-		if (app->input->GetMouseButtonDown(SDL_SCANCODE_3) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 		{
 
 			float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.75);
 			app->combat->enemies[0]->ModifyHP(-damage);
 			app->combat->NextTurn();
+			onTurn = false;
 		}
-		if (app->input->GetMouseButtonDown(SDL_SCANCODE_4) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 		{
 
 			float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.75);
 			app->combat->enemies[0]->ModifyHP(-damage);
 			app->combat->NextTurn();
+			onTurn = false;
 		}
 	}
 

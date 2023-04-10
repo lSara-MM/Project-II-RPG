@@ -49,6 +49,7 @@ public:
 	bool OrderBySpeed();
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
 	bool MoveAllies(int charaPosition_I, int newPosition_I);//Swap de un PC en una posicion hasta otra posicion
+	bool StartCombat();
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
@@ -59,7 +60,7 @@ public:
 
 	//Turn Order
 	List<Character*> listInitiative;
-	int charaInTurn;
+	int charaInTurn=1;
 
 	Character* allies[4]; //4 es backline, 1 es frontline
 	Character* enemies[4]; //4 es backline, 1 es frontline

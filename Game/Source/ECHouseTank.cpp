@@ -84,6 +84,7 @@ bool HouseTank::Update(float dt)
 		//render barra de habilidades
 		// Para seleccionar app->input->GetMousePosition o 
 		app->combat->NextTurn();
+		onTurn = false;
 
 	}
 
