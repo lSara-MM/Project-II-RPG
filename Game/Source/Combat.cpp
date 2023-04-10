@@ -67,9 +67,9 @@ bool Combat::Update(float dt)
 
 	//Pruebas de mover positiones
 
-	for (int i=1;initiative.Count()>=i;i++) 
+	for (int i=1;listInitiative.Count()>=i;i++) 
 	{
-		initiative.At(i-1)->data->Update(dt);
+		listInitiative.At(i-1)->data->Update(dt);
 	}
 
 
@@ -99,12 +99,10 @@ bool Combat::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	player->Disable();
+	//player->Disable();
 
 	app->entityManager->Disable();
 
-	pSettings->CleanUp();
-	pPause->CleanUp();
 	app->guiManager->CleanUp();
 	return true;
 }
@@ -125,9 +123,6 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	LOG("Event by %d ", control->id);
 
 	app->audio->PlayFx(control->fxControl);
-
-	
-
 	return true;
 }
 
@@ -138,7 +133,7 @@ bool Combat::AddCombatant(Character* pChara, int mod)
 	pChara->Start();
 	
 	//We add a Characther to the initiative list and we sort it by speed (fasters first, slowers last)
-	initiative.Add(pChara);
+	listInitiative.Add(pChara);
 	pChara->speed += mod; //Aumentar o disminuir la speed de ese especifico (es para enemigos que usan la misma template)
 
 	//Add to the formation list position
@@ -146,9 +141,9 @@ bool Combat::AddCombatant(Character* pChara, int mod)
 	{
 	case pChara->ALLY:
 		//Asignar en su posicion en el array, si esta vacio 
-		if (allies[pChara->positionCombat_I-1]==nullptr) //Los valores son del 1 al 4 por eso le restamos 1
+		if (allies[pChara->positionCombat_I - 1] == nullptr) //Los valores son del 1 al 4 por eso le restamos 1
 		{
-			allies[pChara->positionCombat_I-1] = pChara;
+			allies[pChara->positionCombat_I - 1] = pChara;
 		}
 		else
 		{
@@ -193,21 +188,20 @@ bool Combat::AddCombatant(Character* pChara, int mod)
 
 bool Combat::OrderBySpeed()
 {
-
 	//Order by initiative
-	int n = initiative.Count();
-	initiative.At(2)->data->speed;
+	int n = listInitiative.Count();
+	listInitiative.At(2)->data->speed;
 
 	for (int i = 0; i < n - 1; i++)
 		for (int j = 0; j < n - i - 1; j++)
-			if (initiative.At(j)->data->speed > initiative.At(j + 1)->data->speed)
+			if (listInitiative.At(j)->data->speed > listInitiative.At(j + 1)->data->speed)
 			{
 				//SWAP WIP
 				ListItem<Character*>* aux = nullptr; /*new ListItem<Characther*>*/; //Esta petando el switchhh
-				aux = initiative.At(j);
-				aux->data = initiative.At(j)->data;
-				initiative.At(j)->data = initiative.At(j + 1)->data;
-				initiative.At(j + 1)->data = aux->data;
+				aux = listInitiative.At(j);
+				aux->data = listInitiative.At(j)->data;
+				listInitiative.At(j)->data = listInitiative.At(j + 1)->data;
+				listInitiative.At(j + 1)->data = aux->data;
 			}
 
 	return true;
@@ -216,9 +210,9 @@ bool Combat::OrderBySpeed()
 
 bool Combat::NextTurn()
 {
-	if (initiative.Count() <= charaInTurn) { charaInTurn = 1; }
+	if (listInitiative.Count() <= charaInTurn) { charaInTurn = 1; }
 	else { ++charaInTurn; }
-	initiative.At(charaInTurn)->data->onTurn = true;
+	listInitiative.At(charaInTurn)->data->onTurn = true;
 
 	return true;
 }

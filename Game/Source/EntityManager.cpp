@@ -160,21 +160,13 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 List<Entity*> EntityManager::GetEntitiesByType(EntityType type)
 {
 	List<Entity*> result;
-	/*for (std::list<Entity*>::iterator it = entities.begin(); it != entities.end(); ++it) {
-		if ((*it)->type == type) {
-			result.add((*it));
-		}
-	}*/
-
-	ListItem<Entity*>* item = entities.start;
-	while (item != NULL)
+	for (int i = 0; i < 7; i++)
 	{
-		Entity* entity = item->data;
-		if (entity->type == type)
-		{
-			//result.Del(entity); //Esto peta
+		if (entities[i]->type == type) {
+			result.Add(entities[i]);
 		}
-		item = item->next;
 	}
+
+
 	return result;
 }

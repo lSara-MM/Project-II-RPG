@@ -18,6 +18,7 @@
 
 #include "Log.h"
 #include "Point.h"
+#include"Combat.h"
 
 HouseTank::HouseTank() : CombatEnemy()
 {
@@ -82,6 +83,7 @@ bool HouseTank::Update(float dt)
 	{
 		//render barra de habilidades
 		// Para seleccionar app->input->GetMousePosition o 
+		app->combat->NextTurn();
 
 	}
 

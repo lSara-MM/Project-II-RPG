@@ -67,7 +67,6 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
-
 	Debug();
 
 	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
@@ -96,18 +95,14 @@ bool Scene::Update(float dt)
 		app->combat->AddCombatant((Character*)prota1, 3);
 		app->combat->AddCombatant((Character*)prota2, 4);
 		app->combat->AddCombatant((Character*)prota3, 5);
-		app->combat->AddCombatant((Character*)prota4, 9);
-		
-		
+		app->combat->AddCombatant((Character*)prota4, 9);	
 	}
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
 	{
 		app->combat->MoveAllies(1,4);
 		/*app->combat->AddCombatant((Characther*)prota2, -2);
 		app->combat->AddCombatant((Characther*)prota3, 5);*/
-
 	}
-
 
 	return true;
 }
@@ -117,8 +112,6 @@ bool Scene::PostUpdate()
 	bool ret = true;
 
 	if (exit_B) return false;
-
-	
 		
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
@@ -139,7 +132,7 @@ bool Scene::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	player->Disable();
+	//player->Disable();
 
 	app->entityManager->Disable();
 
@@ -171,8 +164,7 @@ void Scene::Debug()
 	// Show collisions
 	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
 	{
-		!app->physics->collisions;
-		
+		!app->physics->collisions;	
 	}
 
 	// GodMode
