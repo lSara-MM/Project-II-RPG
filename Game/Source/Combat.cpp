@@ -123,7 +123,6 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	LOG("Event by %d ", control->id);
 
 	app->audio->PlayFx(control->fxControl);
-
 	return true;
 }
 

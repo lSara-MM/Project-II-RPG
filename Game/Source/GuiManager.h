@@ -43,6 +43,8 @@ public:
 	bool doLogic = false;
 
 	SDL_Texture* texture;
+
+	bool GUI_debug = false;
 };
 
 #endif // __GUIMANAGER_H__
