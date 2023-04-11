@@ -64,6 +64,8 @@ public:
 
 	Character* allies[4]; //4 es backline, 1 es frontline
 	Character* enemies[4]; //4 es backline, 1 es frontline
+	Character* targeted_Character=nullptr;
+
 
 private:
 	// Settings

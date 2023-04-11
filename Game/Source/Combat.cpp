@@ -47,17 +47,18 @@ bool Combat::Awake(pugi::xml_node& config)
 
 bool Combat::Start()
 {
-	
+	//Zona aliados
 	texture= app->tex->Load(texturePath);
 	for (int i = 0; i < 4; i++)
 	{
-	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, this, { 107+i*107, 560, 48, 92 }, ButtonType::START));
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, this, { 107+i*107, 560, 48, 92 }, ButtonType::LARGE));
 	}
+	//Zona enemigos, tiene un espaciado
 	for (int i = 0; i < 4; i++)
 	{
-		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4+i, this, { 749 + i * 107, 560, 48, 92 }, ButtonType::START));
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4+i, this, { 749 + i * 107, 560, 48, 92 }, ButtonType::LARGE)); 
 	}
-	
+	//Ambos de los botones de arriba tendrian que ser tipo combat target y estos tener la textura correspondiente de "UI_button_charactherSelection"
 
 	return true;
 }
@@ -133,6 +134,44 @@ bool Combat::InitEntities()
 bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Event by %d ", control->id);
+
+	switch (control->id)
+	{
+	//Target 
+	case 0:
+		targeted_Character = allies[3];
+		break;
+	case 1:
+		targeted_Character = allies[2];
+		break;
+	case 2:
+		targeted_Character = allies[1];
+		break;
+	case 3:
+		targeted_Character = allies[0];
+		break;
+	case 4:
+		targeted_Character = enemies[0];
+		break;
+	case 5:
+		targeted_Character = enemies[1];
+		break;
+	case 6:
+		targeted_Character = enemies[2];
+		break;
+	case 7:
+		targeted_Character = enemies[3];
+		break;
+	//Target
+
+		//Otros botones
+
+		//Otros botones
+
+
+	default:
+		break;
+	}
 
 	app->audio->PlayFx(control->fxControl);
 	return true;
