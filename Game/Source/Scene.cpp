@@ -90,6 +90,8 @@ bool Scene::Update(float dt)
 	//ERIC: Prueba que no funciona.
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) 
 	{ 
+		app->fade->FadingToBlack(this, (Module*)app->combat, 30);
+
 		//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDA�S AVISADOS!!!
 		app->combat->AddCombatant((Character*)enemy1, 0);
 		app->combat->AddCombatant((Character*)prota1, 3);

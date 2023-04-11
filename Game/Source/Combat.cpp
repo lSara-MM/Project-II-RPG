@@ -40,18 +40,24 @@ bool Combat::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	texturePath = "Assets/Textures/combat_background_placeholder.png";
+
 	return ret;
 }
 
 bool Combat::Start()
 {
-	// Settings
-	pSettings->GUI_id = 0;
-	pSettings->CreateSettings(this);
-
-	// Pause 
-	pPause->GUI_id = pSettings->GUI_id;
-	pPause->CreatePause(this);
+	
+	texture= app->tex->Load(texturePath);
+	for (int i = 0; i < 4; i++)
+	{
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, this, { 107+i*107, 560, 48, 92 }, ButtonType::START));
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4+i, this, { 749 + i * 107, 560, 48, 92 }, ButtonType::START));
+	}
+	
 
 	return true;
 }
@@ -64,6 +70,8 @@ bool Combat::PreUpdate()
 bool Combat::Update(float dt)
 {
 	Debug();
+
+	app->render->DrawTexture(texture, 0, 0);
 
 	//Pruebas de mover positiones
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
