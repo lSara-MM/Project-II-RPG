@@ -1,4 +1,4 @@
-#include "PCProtagonist.h"
+#include "PCBard.h"
 
 #include "Characther.h"
 #include "PartyMember.h"
@@ -20,18 +20,18 @@
 #include "Point.h"
 #include "Combat.h"
 
-Protagonist::Protagonist() : PartyMember()
+Bard::Bard() : PartyMember()
 {
-	name.Create("PCProtagonist");
+	name.Create("PCBard");
 
 	active = true;
 }
 
-Protagonist::~Protagonist() {
+Bard::~Bard() {
 
 }
 
-bool Protagonist::Awake() {
+bool Bard::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -43,7 +43,7 @@ bool Protagonist::Awake() {
 	return true;
 }
 
-bool Protagonist::Start() {
+bool Bard::Start() {
 
 	texture = app->tex->Load(texturePath);
 	
@@ -53,13 +53,13 @@ bool Protagonist::Start() {
 	pbody->listener = this; 
 
 	pbody->ctype = ColliderType::PLAYER;
-	this->type = EntityType::PC_PROTAGONIST;
+	this->type = EntityType::PC_BARD;
 	this->charaType_I = CharatherType::ALLY;
-	this->maxHp = 50;
-	this->currentHp = 50;
+	this->maxHp = 46;
+	this->currentHp = 46;
 	this->attack = 30;
-	this->armor = 20;
-	this->speed = 5;
+	this->armor = 25;
+	this->speed = 6;
 	this->onTurn = false;
 
 	this->positionCombat_I = 1;
@@ -67,7 +67,7 @@ bool Protagonist::Start() {
 	return true;
 }
 
-bool Protagonist::Update(float dt)
+bool Bard::Update(float dt)
 {
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
@@ -145,7 +145,7 @@ bool Protagonist::Update(float dt)
 	return true;
 }
 
-bool Protagonist::CleanUp()
+bool Bard::CleanUp()
 {
 	app->tex->UnLoad(texture);
 	pbody->body->GetWorld()->DestroyBody(pbody->body);

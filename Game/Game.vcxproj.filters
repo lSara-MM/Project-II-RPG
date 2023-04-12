@@ -92,6 +92,9 @@
     <ClCompile Include="Source\ECHouseTank.cpp">
       <Filter>Modules\Entities\EC</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PCBard.cpp">
+      <Filter>Modules\Entities\PCs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player.h" />
@@ -218,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="Source\ECHouseTank.h">
       <Filter>Modules\Entities\EC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PCBard.h">
+      <Filter>Modules\Entities\PCs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -115,6 +115,7 @@
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\PartyMember.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
+    <ClCompile Include="Source\PCBard.cpp" />
     <ClCompile Include="Source\PCProtagonist.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\PartyMember.h" />
     <ClInclude Include="Source\Pathfinding.h" />
+    <ClInclude Include="Source\PCBard.h" />
     <ClInclude Include="Source\PCProtagonist.h" />
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />

@@ -56,7 +56,7 @@ bool HouseTank::Start() {
 	this->type = EntityType::ENEMY_TANK_HOUSE;
 	this->charaType_I = CharatherType::ENEMY;
 	this->maxHp = 80;
-	this->currentHp = 70;
+	this->currentHp = 80;
 	this->attack = 12;
 	this->armor = 30;
 	this->speed = 3;

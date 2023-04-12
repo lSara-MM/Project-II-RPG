@@ -69,7 +69,7 @@ bool Scene::Update(float dt)
 {
 	Debug();
 
-	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_BARD);
 	app->entityManager->AddEntity(prota1);
 
 	Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
