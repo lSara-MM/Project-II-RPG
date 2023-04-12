@@ -16,6 +16,7 @@
 #include "PCBard.h"
 //ECs
 #include "ECHouseTank.h"
+#include "ECHouseDPS.h"
 
 EntityManager::EntityManager() : Module()
 { 
@@ -101,6 +102,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		entity = new Bard();
 		break;
 	case EntityType::ENEMY_TANK_HOUSE:
+		entity = new HouseTank();
+		break;
+	case EntityType::ENEMY_DPS_HOUSE:
 		entity = new HouseTank();
 		break;
 
