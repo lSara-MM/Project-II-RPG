@@ -67,6 +67,9 @@ bool Combat::Start()
 	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, this, { 107, 600, 140, 50 }, ButtonType::START, actions[2], 20));
 	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, this, { 107 + 167, 600, 140, 50 }, ButtonType::START, actions[3], 20));
 
+	//Inventory Button
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, this, { 60, 60, 50, 50 }, ButtonType::START, "Inv", 20));
+
 	return true;
 }
 
@@ -198,6 +201,11 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 11:
+		LOG("Attack 4");
+		break;
+
+	//Inventory
+	case 12:
 		LOG("Attack 4");
 		break;
 	//Target
