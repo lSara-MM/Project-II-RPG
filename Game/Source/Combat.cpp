@@ -51,7 +51,7 @@ bool Combat::Start()
 	//Zona aliados
 	for (int i = 0; i < 4; i++)
 	{
-		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, this, { 77 + i * 107, 160, 90, 180 }, ButtonType::LARGE));
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, this, { 47 + i * 107, 160, 90, 180 }, ButtonType::LARGE));
 	}
 	//Zona enemigos, tiene un espaciado
 	for (int i = 0; i < 4; i++)
