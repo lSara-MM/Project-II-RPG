@@ -117,17 +117,21 @@ void Player::Controller(float dt)
 	if(app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT|| app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
 		vel.y = -125;
+		vel.x = 0;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
 		vel.y = 125;
+		vel.x = 0;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT  || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		vel.x = -125;
+		vel.y = 0;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
 		vel.x = 125;
+		vel.y = 0;
 	}
 }
