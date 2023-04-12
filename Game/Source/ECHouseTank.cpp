@@ -81,6 +81,31 @@ bool HouseTank::Update(float dt)
 
 	if (onTurn)
 	{
+		
+		int randomNum = std::rand() % 3 + 1;
+
+		if (randomNum == 1)
+		{
+
+			float damage = app->combat->allies[0]->CalculateDamage(attack);
+			app->combat->enemies[0]->ModifyHP(-damage);
+			app->combat->NextTurn();
+		}
+		if (randomNum == 2)
+		{
+
+			float damage = app->combat->allies[1]->CalculateDamage(attack);
+			app->combat->enemies[1]->ModifyHP(-damage);
+			app->combat->NextTurn();
+		}
+		if (randomNum == 3)
+		{
+
+			float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
+			app->combat->enemies[0]->ModifyHP(-damage);
+			app->combat->enemies[1]->ModifyHP(-damage);
+			app->combat->NextTurn();
+		}
 		//render barra de habilidades
 		// Para seleccionar app->input->GetMousePosition o 
 		app->combat->NextTurn();
