@@ -17,6 +17,7 @@
 //ECs
 #include "ECHouseTank.h"
 #include "ECHouseDPS.h"
+#include "ECHouseHealer.h"
 
 EntityManager::EntityManager() : Module()
 { 
@@ -105,7 +106,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		entity = new HouseTank();
 		break;
 	case EntityType::ENEMY_DPS_HOUSE:
-		entity = new HouseTank();
+		entity = new HouseDPS();
+		break;
+	case EntityType::ENEMY_HEALER_HOUSE:
+		entity = new HouseHealer();
 		break;
 
 	default: break;

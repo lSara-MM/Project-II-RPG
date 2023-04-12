@@ -99,6 +99,7 @@
     <ClCompile Include="Source\Combat.cpp" />
     <ClCompile Include="Source\CombatEnemy.cpp" />
     <ClCompile Include="Source\ECHouseDPS.cpp" />
+    <ClCompile Include="Source\ECHouseHealer.cpp" />
     <ClCompile Include="Source\ECHouseTank.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="Source\Combat.h" />
     <ClInclude Include="Source\CombatEnemy.h" />
     <ClInclude Include="Source\ECHouseDPS.h" />
+    <ClInclude Include="Source\ECHouseHealer.h" />
     <ClInclude Include="Source\ECHouseTank.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Entity.h" />

@@ -1,4 +1,4 @@
-#include "ECHouseDPS.h"
+#include "ECHouseHealer.h"
 
 #include "Characther.h"
 #include "CombatEnemy.h"
@@ -20,18 +20,18 @@
 #include "Point.h"
 #include"Combat.h"
 
-HouseDPS::HouseDPS() : CombatEnemy()
+HouseHealer::HouseHealer() : CombatEnemy()
 {
 	name.Create("PCProtagonist");
 
 	active = true;
 }
 
-HouseDPS::~HouseDPS() {
+HouseHealer::~HouseHealer() {
 
 }
 
-bool HouseDPS::Awake() {
+bool HouseHealer::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -43,7 +43,7 @@ bool HouseDPS::Awake() {
 	return true;
 }
 
-bool HouseDPS::Start() {
+bool HouseHealer::Start() {
 
 	texture = app->tex->Load(texturePath);
 
@@ -53,20 +53,20 @@ bool HouseDPS::Start() {
 	pbody->listener = this;
 
 	pbody->ctype = ColliderType::PLAYER;
-	this->type = EntityType::ENEMY_DPS_HOUSE;
+	this->type = EntityType::ENEMY_HEALER_HOUSE;
 	this->charaType_I = CharatherType::ENEMY;
 	this->maxHp = 80;
 	this->currentHp = 80;
 	this->attack = 12;
 	this->armor = 30;
-	this->speed = 5;
+	this->speed = 2;
 
 	this->positionCombat_I = 1;
 
 	return true;
 }
 
-bool HouseDPS::Update(float dt)
+bool HouseHealer::Update(float dt)
 {
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
@@ -92,7 +92,7 @@ bool HouseDPS::Update(float dt)
 	return true;
 }
 
-bool HouseDPS::CleanUp()
+bool HouseHealer::CleanUp()
 {
 	app->tex->UnLoad(texture);
 	pbody->body->GetWorld()->DestroyBody(pbody->body);
