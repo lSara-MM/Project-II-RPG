@@ -61,11 +61,11 @@ bool Combat::Start()
 	//Ambos de los botones de arriba tendrian que ser tipo combat target y estos tener la textura correspondiente de "UI_button_charactherSelection"
 
 	//Botones Acciones Turno Player
-	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, this, { 107, 480, 48, 92 }, ButtonType::START, actions[0], 20));
-	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, this, { 107 + 107, 480, 48, 92 }, ButtonType::START, actions[1], 20));
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, this, { 107, 480, 48, 92 }, ButtonType::START, actions[0], 20));
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, this, { 107 + 107, 480, 48, 92 }, ButtonType::START, actions[1], 20));
 
-	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, this, { 107, 560, 48, 92 }, ButtonType::START, actions[2], 20));
-	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, this, { 107 + 107, 560, 48, 92 }, ButtonType::START, actions[3], 20));
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, this, { 107, 560, 48, 92 }, ButtonType::START, actions[2], 20));
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, this, { 107 + 107, 560, 48, 92 }, ButtonType::START, actions[3], 20));
 
 	return true;
 }
@@ -146,28 +146,54 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	{
 	//Target 
 	case 0:
+		LOG("Allies Slot 1 click");
 		targeted_Character = allies[3];
 		break;
 	case 1:
+		LOG("Allies Slot 2	 click");
 		targeted_Character = allies[2];
 		break;
 	case 2:
+		LOG("Allies Slot 2 click");
 		targeted_Character = allies[1];
 		break;
 	case 3:
+		LOG("Allies Slot 3 click");
 		targeted_Character = allies[0];
 		break;
 	case 4:
+		LOG("Enemies Slot 1 click");
 		targeted_Character = enemies[0];
 		break;
 	case 5:
+		LOG("Enemies Slot 2 click");
 		targeted_Character = enemies[1];
 		break;
 	case 6:
+		LOG("Enemies Slot 3 click");
 		targeted_Character = enemies[2];
 		break;
 	case 7:
+		LOG("Enemies Slot 4 click");
 		targeted_Character = enemies[3];
+		break;
+
+	//PLayer OnTurn Action Buttons
+	
+	case 8:
+		LOG("Attack 1");
+		break;
+
+	case 9:
+		LOG("Attack 2");
+		break;
+
+	case 10:
+		LOG("Attack 3");
+		break;
+
+	case 11:
+		LOG("Attack 4");
 		break;
 	//Target
 
