@@ -51,14 +51,21 @@ bool Combat::Start()
 	texture= app->tex->Load(texturePath);
 	for (int i = 0; i < 4; i++)
 	{
-	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, this, { 107+i*107, 560, 48, 92 }, ButtonType::LARGE));
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, this, { 107 + i * 107, 300, 48, 92 }, ButtonType::LARGE));
 	}
 	//Zona enemigos, tiene un espaciado
 	for (int i = 0; i < 4; i++)
 	{
-		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4+i, this, { 749 + i * 107, 560, 48, 92 }, ButtonType::LARGE)); 
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4 + i, this, { 749 + i * 107, 300, 48, 92 }, ButtonType::LARGE));
 	}
 	//Ambos de los botones de arriba tendrian que ser tipo combat target y estos tener la textura correspondiente de "UI_button_charactherSelection"
+
+	//Botones Acciones Turno Player
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, this, { 107, 480, 48, 92 }, ButtonType::START, actions[0], 20));
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, this, { 107 + 107, 480, 48, 92 }, ButtonType::START, actions[1], 20));
+
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, this, { 107, 560, 48, 92 }, ButtonType::START, actions[2], 20));
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, this, { 107 + 107, 560, 48, 92 }, ButtonType::START, actions[3], 20));
 
 	return true;
 }
