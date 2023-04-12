@@ -47,11 +47,11 @@ bool Scene::Awake(pugi::xml_node& config)
 
 bool Scene::Start()
 {
-	//pause menu
-	pause_B = false;
-
 	// Settings
 	pSettings->CreateSettings(this);
+	
+	//pause menu
+	pause_B = false;
 
 	// Pause 
 	pPause->GUI_id = pSettings->GUI_id;
@@ -129,8 +129,10 @@ bool Scene::PostUpdate()
 	app->render->TextDraw("F1: start dialogue 1", 50, 50, 16, Font::TEXT, { 255, 255, 255 });
 	app->render->TextDraw("F2: start dialogue 2", 50, 75, 16, Font::TEXT, { 255, 255, 255 });
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	{
+		pSettings->settings_B = !pSettings->settings_B;
+	}
 	
 	if (pSettings->settings_B) { pSettings->OpenSettings(); }
 	if (pPause->pause) { pPause->OpenPause(); }
@@ -258,7 +260,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	{
 	case 801:
 		LOG("Button Close settings click");
-		pPause->OpenPause();
+		//pPause->OpenPause();
 		pSettings->CloseSettings();
 		break;
 	case 802:
