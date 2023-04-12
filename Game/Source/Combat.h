@@ -50,6 +50,7 @@ public:
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
 	bool MoveAllies(int charaPosition_I, int newPosition_I);//Swap de un PC en una posicion hasta otra posicion
 	bool StartCombat();
+	bool DeactivateTargetButtons(int id);
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
@@ -64,7 +65,7 @@ public:
 
 	Character* allies[4]; //4 es backline, 1 es frontline
 	Character* enemies[4]; //4 es backline, 1 es frontline
-	Character* targeted_Character=nullptr;
+	Character* targeted_Character=nullptr; //Last button selected
 
 
 private:
