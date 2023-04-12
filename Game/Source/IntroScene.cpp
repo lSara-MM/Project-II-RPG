@@ -86,6 +86,8 @@ bool IntroScene::PostUpdate()
 	bool ret = true;
 
 	if (exit_B) return false;
+	if (app->input->getInput_B) PlayerNameInput();
+	if (app->input->nameEntered_B) { app->fade->FadingToBlack(this, (Module*)app->scene, 90); }
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -126,7 +128,9 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 6:
 		LOG("Button start click");
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+		
+		app->input->getInput_B = true;
+		
 		break;
 	case 7:
 		LOG("Button continue click");
@@ -349,4 +353,15 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	return true;
+}
+
+bool IntroScene::PlayerNameInput()
+{
+	SString temp;
+
+	temp = "Sign:  %%";
+	temp.Substitute("%", app->input->playerName.c_str());
+	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 100, 16, Font::TEXT, { 255, 255, 255 });
+
+	return app->input->nameEntered_B;
 }

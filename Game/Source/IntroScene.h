@@ -42,6 +42,9 @@ public:
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	// Player's name input
+	bool PlayerNameInput();
+
 public:
 
 private:

@@ -100,29 +100,29 @@ bool DialogueTree::UpdateNodes(Module* mod, iPoint pos, int fontSize)
 bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 {
 	SString temp;
-
+	
 	for (int i = 0; i < activeNode->choicesList.size(); i++)
 	{
 		switch (activeNode->choicesList[i]->eventReturn)
 		{
 		case DIALOGUE_INPUT:
 
-			if (!app->input->getInput_B)
-			{
-				// Get player's input
-				app->input->getInput_B = true;
-				updateOptions = true;
+			//if (!app->input->getInput_B)
+			//{
+			//	// Get player's input
+			//	app->input->getInput_B = true;
+			//	updateOptions = true;
 
-				if (app->input->nameEntered_B)
-				{
-					activeNode->choicesList[i]->text.Substitute("%x", app->input->playerName.c_str());	// Change %x for player's name - (const char* current word, const char* new word)
-					updateOptions = UpdateNodes(mod, pos, fontSize);
-				}
-			}
+			//	if (app->input->nameEntered_B)
+			//	{
+			//		activeNode->choicesList[i]->text.Substitute("%x", app->input->playerName.c_str());	// Change %x for player's name - (const char* current word, const char* new word)
+			//		updateOptions = UpdateNodes(mod, pos, fontSize);
+			//	}
+			//}
 
-			temp = "Player's name:  %%";
-			temp.Substitute("%", app->input->playerName.c_str());
-			app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 100, fontSize, Font::TEXT, { 255, 255, 255 });
+			//temp = "Player's name:  %%";
+			//temp.Substitute("%", app->input->playerName.c_str());
+			//app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 100, fontSize, Font::TEXT, { 255, 255, 255 });
 			break;
 
 		case DIALOGUE_SAVE:

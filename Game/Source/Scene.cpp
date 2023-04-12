@@ -147,7 +147,7 @@ bool Scene::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	player->Disable();
+	// player->Disable();
 
 	app->entityManager->Disable();
 

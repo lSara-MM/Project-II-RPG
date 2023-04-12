@@ -60,6 +60,8 @@ bool Player::Start() {
 
 	pbody->ctype = ColliderType::PLAYER;
 	
+	playerName = app->input->playerName.c_str();
+
 	return true;
 }
 

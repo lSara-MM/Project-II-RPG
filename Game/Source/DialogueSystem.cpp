@@ -211,17 +211,20 @@ bool DialogueSystem::SaveDialogueState()
 	player.append_attribute("player_name") = app->input->playerName.c_str();
 
 	// save important choices
-	for (size_t i = 0; i < activeTree->nodeList.size(); i++)
+	if (activeTree != nullptr)
 	{
-		for (int j = 0; j < activeTree->nodeList[i]->choicesList.size(); j++)
+		for (size_t i = 0; i < activeTree->nodeList.size(); i++)
 		{
-			if (activeTree->nodeList[i]->playerAnswer > -1 && activeTree->nodeList[i]->choicesList[j]->eventReturn == 3)
+			for (int j = 0; j < activeTree->nodeList[i]->choicesList.size(); j++)
 			{
-				player = node.append_child("node");
-				player.append_attribute("id") = activeTree->nodeList[i]->nodeID;
-				player.append_attribute("answer") = activeTree->nodeList[i]->playerAnswer;
-				player.append_attribute("text") = activeTree->nodeList[i]->choicesList[activeTree->nodeList[i]->playerAnswer]->text.GetString();
-				break;
+				if (activeTree->nodeList[i]->playerAnswer > -1 && activeTree->nodeList[i]->choicesList[j]->eventReturn == 3)
+				{
+					player = node.append_child("node");
+					player.append_attribute("id") = activeTree->nodeList[i]->nodeID;
+					player.append_attribute("answer") = activeTree->nodeList[i]->playerAnswer;
+					player.append_attribute("text") = activeTree->nodeList[i]->choicesList[activeTree->nodeList[i]->playerAnswer]->text.GetString();
+					break;
+				}
 			}
 		}
 	}
