@@ -49,6 +49,8 @@ bool Protagonist::Start() {
 	
 	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
+
+	
 	
 	pbody->listener = this; 
 
@@ -61,6 +63,8 @@ bool Protagonist::Start() {
 	this->armor = 20;
 	this->speed = 5;
 	this->onTurn = false;
+	
+	
 
 	this->positionCombat_I = 1;
 
@@ -69,9 +73,21 @@ bool Protagonist::Start() {
 
 bool Protagonist::Update(float dt)
 {
+	
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
 
+	//Health Bar
+	int auxhp = ((currentHp * 100) / maxHp)*0.90;
+	app->render->DrawRectangle({ 477 - 107 * positionCombat_I, 280, 90, 20 }, 255, 0, 255, 255, true);
+	app->render->DrawRectangle({ 477 - 107 * positionCombat_I, 280, auxhp, 20}, 255, 255, 255, 255, true);
+	
+	//Modify Health Bar
+	/*if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
+		currentHp--;
+	}*/
+
+	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);

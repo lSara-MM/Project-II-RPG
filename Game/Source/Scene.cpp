@@ -73,6 +73,9 @@ bool Scene::Update(float dt)
 
 	
 
+	Entity* enemy3 = app->entityManager->CreateEntity(EntityType::ENEMY_HEALER_HOUSE);
+	app->entityManager->AddEntity(enemy3);
+
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(entidad2);*/
 	
@@ -102,6 +105,7 @@ bool Scene::Update(float dt)
 		//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDA�S AVISADOS!!!
 		app->combat->AddCombatant((Character*)enemy1, 0);
 		app->combat->AddCombatant((Character*)enemy2, 1);
+		app->combat->AddCombatant((Character*)enemy3, 2);
 		app->combat->AddCombatant((Character*)prota1, 3);
 		app->combat->AddCombatant((Character*)prota2, 4);
 		app->combat->AddCombatant((Character*)prota3, 5);

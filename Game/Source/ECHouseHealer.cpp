@@ -71,6 +71,16 @@ bool HouseHealer::Update(float dt)
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
 
+	//Health Bar
+	int auxhp = ((currentHp * 100) / maxHp) * 0.90;
+	app->render->DrawRectangle({ 722 + 107 * positionCombat_I, 280, 90, 20 }, 255, 0, 255, 255, true);
+	app->render->DrawRectangle({ 722 + 107 * positionCombat_I, 280, auxhp, 20 }, 255, 255, 255, 255, true);
+
+	// Modify Health Bar
+	/*if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
+		currentHp--;
+	}*/
+
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
