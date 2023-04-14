@@ -26,7 +26,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	downAnim.PushBack({ 0, 0, 64, 64 });
 	downAnim.PushBack({ 64, 0, 64, 64 });
 	downAnim.PushBack({ 128, 0, 64, 64 });
-	downAnim.PushBack({ 128, 0, 64, 64 });
+	downAnim.PushBack({ 64, 0, 64, 64 });
 
 	idleDownAnim.PushBack({ 64, 0, 64, 64 });
 
