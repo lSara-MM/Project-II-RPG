@@ -55,6 +55,7 @@ bool HouseDPS::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::ENEMY_DPS_HOUSE;
 	this->charaType_I = CharatherType::ENEMY;
+	this->name = "Cursed Puppet";
 	this->maxHp = 80;
 	this->currentHp = 80;
 	this->attack = 12;

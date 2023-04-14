@@ -10,6 +10,7 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	buttonType = bType;
 
 	buttonTex = app->tex->Load("Assets/GUI/UI_buttons.png");
+	//Dos Opciones, o cargar de un PNG distinto esas texturas si es el botton de combate o modificar el UI_buttons
 }
 
 GuiButton::~GuiButton()
@@ -76,6 +77,8 @@ bool GuiButton::Draw(Render* render)
 	if (buttonType == ButtonType::INV_NEXT_PAGE) { rect = { 188, 189, 53, 57 }; offsetX = 20;	offsetY = 3; }
 	if (buttonType == ButtonType::INV_PAGES) { rect = { 156, 160, 19, 20 }; offsetX = -15;	offsetY = 6; }
 	if (buttonType == ButtonType::SWAP_SKILL) { rect = { 90, 0, 82, 80 }; }
+
+	if (buttonType == ButtonType::COMBAT_TARGET) { rect = { 0,0,48* 1,92  }; } //48 anchura de solo 1 corchete, 92 es la altura que tiene DE MOMENTO.
 
 	if (app->guiManager->GUI_debug)
 	{

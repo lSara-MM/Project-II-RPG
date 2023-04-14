@@ -55,6 +55,7 @@ bool HouseTank::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::ENEMY_TANK_HOUSE;
 	this->charaType_I = CharatherType::ENEMY;
+	this->name = "Bewitched Wardrobe";
 	this->maxHp = 80;
 	this->currentHp = 80;
 	this->attack = 12;

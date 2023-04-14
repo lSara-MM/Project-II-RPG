@@ -75,10 +75,13 @@ private:
 
 	Pause pauseMenu;
 	Pause* pPause = &pauseMenu;
-	
-	//Fondo
-	const char* texturePath;
-	SDL_Texture* texture;
+	//TEXTURAS
+		//Fondo
+		const char* texturePathBackground;
+		SDL_Texture* textureBackground;
+		const char* texturePathTargetButton;
+		SDL_Texture* textureTargetButton;
+
 
 	// buttons
 	List<GuiButton*> listButtons;

@@ -55,6 +55,7 @@ bool Bard::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::PC_BARD;
 	this->charaType_I = CharatherType::ALLY;
+	this->name = "Bard";
 	this->maxHp = 46;
 	this->currentHp = 46;
 	this->attack = 30;

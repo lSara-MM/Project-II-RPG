@@ -40,23 +40,29 @@ bool Combat::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	texturePath = "Assets/Textures/combat_background_placeholder.png";
+	texturePathBackground = "Assets/Textures/combat_background_placeholder.png"; //FondoActual (habra que cambiarlo por los de la dungeon actual)
+	texturePathTargetButton = "Assets/GUI/UI_button_charactherSelection.png"; //De momento lo he puesto aqui para ver como se ve pero quiza haya que borrarlos
 
 	return ret;
 }
 
 bool Combat::Start()
 {
-	texture = app->tex->Load(texturePath);
+	//Cargar texturas
+	textureBackground = app->tex->Load(texturePathBackground);
+	textureTargetButton = app->tex->Load(texturePathTargetButton);
+
 	//Zona aliados
 	for (int i = 0; i < 4; i++)
 	{
-		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, this, { 47 + i * 107, 160, 90, 180 }, ButtonType::LARGE));
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, this, { 32 + i * 128, 280, 126 , 180 }, ButtonType::START));
+		listButtons.At(i)->data->buttonTex = textureTargetButton; //TEMPORAL, HABRA QUE QUITARLO
 	}
 	//Zona enemigos, tiene un espaciado
 	for (int i = 0; i < 4; i++)
 	{
-		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4 + i, this, { 827 + i * 107, 160, 90, 180 }, ButtonType::LARGE));
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4 + i, this, { 736 + i * 128, 280, 126, 180 }, ButtonType::START));
+		listButtons.At(4+i)->data->buttonTex = textureTargetButton; //TEMPORAL, HABRA QUE QUITARLO
 	}
 	//Ambos de los botones de arriba tendrian que ser tipo combat target y estos tener la textura correspondiente de "UI_button_charactherSelection"
 
@@ -82,7 +88,7 @@ bool Combat::Update(float dt)
 {
 	Debug();
 
-	app->render->DrawTexture(texture, 0, 0);
+	app->render->DrawTexture(textureBackground, 0, 0);
 
 	//Pruebas de mover positiones
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
