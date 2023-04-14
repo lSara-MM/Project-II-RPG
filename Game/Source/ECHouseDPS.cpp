@@ -38,7 +38,7 @@ bool HouseDPS::Awake() {
 
 
 	//texturePath = parameters.attribute("texturepath").as_string();
-	texturePath = "Assets/Textures/Enemy1.png";
+	texturePath = "Assets/Textures/EnemyCursedPuppet.png";
 
 	return true;
 }
@@ -88,7 +88,7 @@ bool HouseDPS::Update(float dt)
 
 	rect = { 0,0,258,496 };
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
-	app->render->DrawTexture(texture, 300 + 70 * positionCombat_I, 120/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/);
+	app->render->DrawTexture(texture, 736 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
 
 	if (onTurn)
 	{
