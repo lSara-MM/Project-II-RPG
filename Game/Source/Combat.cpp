@@ -191,7 +191,8 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Enemies Slot 4 click");
 		targeted_Character = enemies[3];
 		break;
-
+//Target
+// 
 	//PLayer OnTurn Action Buttons
 	
 	case 8:
@@ -209,12 +210,13 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	case 11:
 		LOG("Attack 4");
 		break;
+	//PLayer OnTurn Action Buttons
 
 	//Inventory
 	case 12:
 		LOG("Attack 4");
 		break;
-	//Target
+	
 
 		//Otros botones
 
@@ -376,4 +378,22 @@ bool Combat::StartCombat()
 	/*listInitiative.start->data->onTurn = true;*/
 	//NextTurn();
 	return false;
+}
+
+bool Combat::DeactivateTargetButton(int id)
+{
+	//Evitar que pete o acceder a botones que no deberia 
+	if (id<0)
+	{
+		return false;
+	}
+	if (id > 7)
+	{
+		return false;
+	}
+
+	listButtons.At(id)->data->state = GuiControlState::DISABLED;
+
+
+	return true;
 }
