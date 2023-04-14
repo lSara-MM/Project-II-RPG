@@ -50,7 +50,9 @@ public:
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
 	bool MoveAllies(int charaPosition_I, int newPosition_I);//Swap de un PC en una posicion hasta otra posicion
 	bool StartCombat();
+	//TargetControl
 	bool DeactivateTargetButton(int id);
+	bool ActivateTargetButton(int id);
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);

@@ -96,6 +96,15 @@ bool Combat::Update(float dt)
 		listInitiative.start->data->onTurn = true;
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+	{
+		DeactivateTargetButton(6);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
+	{
+		ActivateTargetButton(6);
+	}
+
 	for (int i=1;listInitiative.Count()>=i;i++) 
 	{
 		listInitiative.At(i-1)->data->Update(dt);
@@ -393,6 +402,24 @@ bool Combat::DeactivateTargetButton(int id)
 	}
 
 	listButtons.At(id)->data->state = GuiControlState::DISABLED;
+
+
+	return true;
+}
+
+bool Combat::ActivateTargetButton(int id)
+{
+	//Evitar que pete o acceder a botones que no deberia 
+	if (id < 0)
+	{
+		return false;
+	}
+	if (id > 7)
+	{
+		return false;
+	}
+
+	listButtons.At(id)->data->state = GuiControlState::NORMAL;
 
 
 	return true;
