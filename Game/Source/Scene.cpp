@@ -46,6 +46,10 @@ bool Scene::Awake(pugi::xml_node& config)
 
 bool Scene::Start()
 {
+	//Load Map
+	app->map->Load();
+	backGround = app->tex->Load("Assets/Maps/TwistedTentMap.png");
+
 	//pause menu
 	pause_B = false;
 
@@ -57,6 +61,10 @@ bool Scene::Start()
 	pPause->GUI_id = pSettings->GUI_id;
 	pPause->CreatePause(this);
 
+	//Camera pos
+	app->render->camera.x = -2800;
+	app->render->camera.y = -800;
+	app->physics->CreateRectangle(-2850, -700, 8000, 2, bodyType::STATIC);
 	return true;
 }
 
@@ -67,6 +75,9 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
+	//Render background
+	app->render->DrawTexture(backGround, 0, 0);
+
 	Debug();
 
 	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
@@ -103,6 +114,22 @@ bool Scene::Update(float dt)
 		/*app->combat->AddCombatant((Characther*)prota2, -2);
 		app->combat->AddCombatant((Characther*)prota3, 5);*/
 	}
+
+	//Borrar
+	float speed = 0.2 * dt;
+
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		app->render->camera.y += ceil(speed);
+
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		app->render->camera.y -= ceil(speed);
+
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		app->render->camera.x += ceil(speed);
+
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		app->render->camera.x -= ceil(speed);
+
 
 	return true;
 }
