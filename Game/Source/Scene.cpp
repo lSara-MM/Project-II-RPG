@@ -247,7 +247,7 @@ void Scene::Debug()
 	// God mode functions
 	if (app->input->godMode_B)
 	{
-		
+		app->physics->collisions = true;
 	}
 
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();

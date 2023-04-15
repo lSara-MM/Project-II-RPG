@@ -39,9 +39,6 @@ bool IntroScene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool IntroScene::Start()
 {
-	SString title("Pinky Adventures: width- %d, height- %d", app->win->GetWidth(), app->win->GetHeight());
-
-	app->win->SetTitle(title.GetString());
 
 	app->audio->PlayMusic(music_intro, 0);
 

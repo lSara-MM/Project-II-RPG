@@ -108,7 +108,7 @@ public:
 	void RemapKeys(KeyBinding* key);
 
 public:
-	bool godMode_B = true;
+	bool godMode_B = false;
 private:
 	bool windowEvents[WE_COUNT];
 	KeyState*	keyboard;
