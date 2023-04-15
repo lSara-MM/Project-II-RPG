@@ -129,7 +129,7 @@ void Map::DrawPlatformCollider() {
 
     while (mapLayerItem != NULL) {
 
-        if (mapLayerItem->data->name == "collisionsTerrain") {
+        if (mapLayerItem->data->name == "Collider") {
 
             for (int x = 0; x < mapLayerItem->data->width; x++)
             {
@@ -137,7 +137,7 @@ void Map::DrawPlatformCollider() {
                 {
                     int gid = mapLayerItem->data->Get(x, y);
 
-                    if (gid == 244)
+                    if (gid == 1)
                     {
                         TileSet* tileset = GetTilesetFromTileId(gid);
 

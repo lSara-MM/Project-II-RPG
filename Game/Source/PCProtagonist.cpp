@@ -18,6 +18,7 @@
 
 #include "Log.h"
 #include "Point.h"
+#include "Combat.h"
 
 Protagonist::Protagonist() : PartyMember()
 {
@@ -85,22 +86,50 @@ bool Protagonist::Update(float dt)
 		//	int x, y;
 		//	app->input->GetMousePosition(x, y);
 
-		//	List<Entity*>* targets = app->entityManager->entities.
+		//	//List<Entity*> targets = app->entityManager->GetEntitiesByType(/*type of the enemy*/);
 
-		//	for (List<Entity*>::Node* node = targets->start; node != nullptr; node = node->next)
+		//	for (int i = 0; i < 3; i++)
 		//	{
-		//		Entity* enemy = node->data;
-		//		if (enemy->pbody->Contains(x, y))
+		//		if (app->combat->enemies[i]->pbody->Contains(x, y))
 		//		{
 		//			// Calculate damage and apply it to the enemy
-		//			int damage = CalculateDamage(attack);
-		//			enemy->ModifyHP(-damage);
+		//			int damage = app->combat->enemies[i]->CalculateDamage(attack);
+		//			app->combat->enemies[i]->ModifyHP(-damage);
 
-		//			// Exit the loop since we've found our target
+		//			// Exit the loop since we've found the target
 		//			break;
 		//		}
 		//	}
 		//}
+		
+		if (app->input->GetMouseButtonDown(SDL_SCANCODE_1) == KEY_DOWN)
+		{
+
+				float damage = app->combat->enemies[0]->CalculateDamage(attack);
+				app->combat->enemies[0]->ModifyHP(-damage);
+				app->combat->NextTurn();
+		}
+		if (app->input->GetMouseButtonDown(SDL_SCANCODE_2) == KEY_DOWN)
+		{
+
+			float damage = app->combat->enemies[1]->CalculateDamage(attack);
+			app->combat->enemies[0]->ModifyHP(-damage);
+			app->combat->NextTurn();
+		}
+		if (app->input->GetMouseButtonDown(SDL_SCANCODE_3) == KEY_DOWN)
+		{
+
+			float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.75);
+			app->combat->enemies[0]->ModifyHP(-damage);
+			app->combat->NextTurn();
+		}
+		if (app->input->GetMouseButtonDown(SDL_SCANCODE_4) == KEY_DOWN)
+		{
+
+			float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.75);
+			app->combat->enemies[0]->ModifyHP(-damage);
+			app->combat->NextTurn();
+		}
 	}
 
 
