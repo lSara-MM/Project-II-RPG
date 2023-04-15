@@ -119,7 +119,18 @@ bool Bard::Update(float dt)
 		{
 
 				float damage = app->combat->enemies[0]->CalculateDamage(attack);
-				app->combat->enemies[0]->ModifyHP(-damage);
+
+				//Si no hay godmode va normal, si lo hay la vida del enemigo se reduce a 0
+				if (!app->input->godMode_B)
+				{
+					app->combat->enemies[0]->ModifyHP(-damage);
+				}
+
+				else
+				{
+					app->combat->enemies[0]->currentHp = 0;
+				}
+		
 				SDL_Delay(500);
 				onTurn = false;
 				app->combat->NextTurn();
