@@ -187,7 +187,7 @@ void Scene::Debug()
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
 
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
-		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
+
 	}
 
 	// Show collisions
@@ -211,7 +211,7 @@ void Scene::Debug()
 	}
 
 	//pause menu
-	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
 	{
 		pause_B = !pause_B;
 		pSettings->settings_B = !pSettings->settings_B;
