@@ -52,12 +52,14 @@ public:
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
 
+	iPoint  position;
+
 private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
 
-	iPoint  position;
+	
 	int width, height;
 };
 
