@@ -58,10 +58,10 @@ bool Protagonist::Start() {
 	this->type = EntityType::PC_PROTAGONIST;
 	this->charaType_I = CharatherType::ALLY;
 	this->name = "Protagonista"; //Hay que poner el nombre assigando al principio del juego
-	this->maxHp = 50;
-	this->currentHp = 50;
-	this->attack = 30;
-	this->armor = 20;
+	this->maxHp = 1150;
+	this->currentHp = 1150;
+	this->attack = 190;
+	this->armor = 10;
 	this->speed = 5;
 	this->onTurn = false;
 	

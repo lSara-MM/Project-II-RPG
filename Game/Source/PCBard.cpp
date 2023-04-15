@@ -56,14 +56,14 @@ bool Bard::Start() {
 	this->type = EntityType::PC_BARD;
 	this->charaType_I = CharatherType::ALLY;
 	this->name = "Bard";
-	this->maxHp = 46;
-	this->currentHp = 46;
-	this->attack = 30;
-	this->armor = 25;
+	this->maxHp = 1000;
+	this->currentHp = 1000;
+	this->attack = 200;
+	this->armor = 8;
 	this->speed = 6;
 	this->onTurn = false;
 
-	this->positionCombat_I = 1;
+	this->positionCombat_I = 2;
 
 	return true;
 }

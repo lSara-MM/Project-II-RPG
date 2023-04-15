@@ -88,11 +88,11 @@ bool Scene::Update(float dt)
 		Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
 		app->entityManager->AddEntity(prota2);
 
-		Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+		/*Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
 		app->entityManager->AddEntity(prota3);
 
 		Entity* prota4 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-		app->entityManager->AddEntity(prota4);
+		app->entityManager->AddEntity(prota4);*/
 
 		Entity* enemy1 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 		app->entityManager->AddEntity(enemy1);
@@ -108,8 +108,8 @@ bool Scene::Update(float dt)
 		app->combat->AddCombatant((Character*)enemy3, 2);
 		app->combat->AddCombatant((Character*)prota1, 3);
 		app->combat->AddCombatant((Character*)prota2, 4);
-		app->combat->AddCombatant((Character*)prota3, 5);
-		app->combat->AddCombatant((Character*)prota4, 9);
+		/*app->combat->AddCombatant((Character*)prota3, 5);
+		app->combat->AddCombatant((Character*)prota4, 9);*/
 		app->combat->StartCombat();
 	}
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
