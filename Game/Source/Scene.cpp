@@ -185,7 +185,7 @@ void Scene::Debug()
 	// GodMode
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
-		!app->input->godMode_B;
+		app->input->godMode_B = !app->input->godMode_B;
 	}
 
 	// Enable/Disable Frcap

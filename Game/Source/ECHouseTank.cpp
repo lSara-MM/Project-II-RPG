@@ -99,7 +99,10 @@ bool HouseTank::Update(float dt)
 		{
 
 			float damage = app->combat->allies[0]->CalculateDamage(attack);
-			app->combat->enemies[0]->ModifyHP(-damage);
+			if (!app->input->godMode_B)//Hace daño si no hay godmode
+			{
+				app->combat->enemies[0]->ModifyHP(-damage);
+			}
 			app->combat->NextTurn();
 		}
 		if (randomNum == 2)
