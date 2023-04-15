@@ -89,11 +89,11 @@ bool Combat::Update(float dt)
 	Debug();
 
 	app->render->DrawTexture(textureBackground, 0, 0);
-
+	app->render->TextDraw(listInitiative.At(charaInTurn)->data->name.GetString(), 560, 20,20);
 	//Pruebas de mover positiones
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 	{
-		listInitiative.start->data->onTurn = true;
+		StartCombat();
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
@@ -324,8 +324,13 @@ bool Combat::OrderBySpeed()
 
 bool Combat::NextTurn()
 {
+	//Reactivar todos los posibles targets
+	for (int i = 0; i < 7; i++)
+	{
+		ActivateTargetButton(i);
+	}
 
-	if (listInitiative.Count()-1 <= charaInTurn) { charaInTurn = 1; }
+	if (listInitiative.Count()-1 <= charaInTurn) { charaInTurn = 0; }
 	else
 	{
 		listInitiative.At(charaInTurn)->data->onTurn = false;
@@ -338,7 +343,7 @@ bool Combat::NextTurn()
 
 bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 {
-	//DUDA: Esto solo es para evitar accesos de acceso , no se si quitarlo porque teoricamente no se deberia poder poner esos valores.
+	//DUDA: Esto solo es para evitar errores de acceso , no se si quitarlo porque teoricamente no se deberia poder poner esos valores.
 	if (charaPosition_I>4||charaPosition_I<0)
 	{
 		return false;
@@ -384,9 +389,10 @@ bool Combat::StartCombat()
 {
 	//OrderBySpeed();
 
-	/*listInitiative.start->data->onTurn = true;*/
+	listInitiative.start->data->onTurn = true;
+	charaInTurn = 0;
 	//NextTurn();
-	return false;
+	return true;
 }
 
 bool Combat::DeactivateTargetButton(int id)

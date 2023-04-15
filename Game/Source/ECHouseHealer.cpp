@@ -18,7 +18,7 @@
 
 #include "Log.h"
 #include "Point.h"
-#include"Combat.h"
+#include "Combat.h"
 
 HouseHealer::HouseHealer() : CombatEnemy()
 {
