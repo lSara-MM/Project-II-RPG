@@ -185,7 +185,9 @@ void Scene::Debug()
 
 	// Show Gui 
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
-		//app->iScene->buttonDebug = !app->iScene->buttonDebug;
+
+		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
+		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
 	}
 
 	// Show collisions
@@ -195,17 +197,17 @@ void Scene::Debug()
 		
 	}
 
+	// Enable/Disable Frcap
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+	{
+		frcap_B = !frcap_B;
+		LOG("frame rate: %d", app->physics->frameRate);
+	}
+
 	// GodMode
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
 		app->input->godMode_B = !app->input->godMode_B;
-	}
-
-	// Enable/Disable Frcap
-	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
-	{
-		frcap_B = !frcap_B;
-		LOG("frame rate: %d", app->physics->frameRate);
 	}
 
 	//pause menu
