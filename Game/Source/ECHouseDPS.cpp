@@ -56,10 +56,10 @@ bool HouseDPS::Start() {
 	this->type = EntityType::ENEMY_DPS_HOUSE;
 	this->charaType_I = CharatherType::ENEMY;
 	this->name = "Cursed Puppet";
-	this->maxHp = 80;
-	this->currentHp = 80;
-	this->attack = 12;
-	this->armor = 30;
+	this->maxHp = 600;
+	this->currentHp = 600;
+	this->attack = 200;
+	this->armor = 0;
 	this->speed = 5;
 
 	this->positionCombat_I = 1;

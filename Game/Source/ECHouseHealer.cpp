@@ -56,10 +56,10 @@ bool HouseHealer::Start() {
 	this->type = EntityType::ENEMY_HEALER_HOUSE;
 	this->charaType_I = CharatherType::ENEMY;
 	this->name = "Possessed Painting";
-	this->maxHp = 80;
-	this->currentHp = 80;
-	this->attack = 12;
-	this->armor = 30;
+	this->maxHp = 850;
+	this->currentHp = 850;
+	this->attack = 140;
+	this->armor = 8;
 	this->speed = 2;
 
 	this->positionCombat_I = 1;

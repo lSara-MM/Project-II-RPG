@@ -56,10 +56,10 @@ bool HouseTank::Start() {
 	this->type = EntityType::ENEMY_TANK_HOUSE;
 	this->charaType_I = CharatherType::ENEMY;
 	this->name = "Bewitched Wardrobe";
-	this->maxHp = 80;
-	this->currentHp = 80;
-	this->attack = 12;
-	this->armor = 30;
+	this->maxHp = 1000;
+	this->currentHp = 1000;
+	this->attack = 120;
+	this->armor = 18;
 	this->speed = 3;
 
 	this->positionCombat_I = 1;
