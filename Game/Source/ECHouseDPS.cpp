@@ -94,7 +94,7 @@ bool HouseDPS::Update(float dt)
 	{
 		
 		int randomNum = std::rand() % 3 + 1;
-
+		//Mejor con un switch
 		if (randomNum == 1)
 		{
 
@@ -124,7 +124,7 @@ bool HouseDPS::Update(float dt)
 		}
 		//render barra de habilidades
 		// Para seleccionar app->input->GetMousePosition o 
-		app->combat->NextTurn();
+		//app->combat->NextTurn();
 		onTurn = false;
 
 	}
