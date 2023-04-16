@@ -103,7 +103,7 @@ bool Protagonist::Update(float dt)
 	if (onTurn)
 	{
 		app->render->DrawCircle( 300 - 70 * positionCombat_I,15, 20,0,255,255);
-		if (app->combat->LastPressedAbility == 1)
+		if (app->combat->lastPressedAbility_I == 1)
 		{
 
 			float damage = app->combat->enemies[0]->CalculateDamage(attack);
@@ -126,7 +126,7 @@ bool Protagonist::Update(float dt)
 			}
 				
 		}
-		if (app->combat->LastPressedAbility == 2)
+		if (app->combat->lastPressedAbility_I == 2)
 		{
 			if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1]) 
 			{
@@ -137,7 +137,7 @@ bool Protagonist::Update(float dt)
 			}
 			
 		}
-		if (app->combat->LastPressedAbility == 3)
+		if (app->combat->lastPressedAbility_I == 3)
 		{
 
 			if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1]) {
@@ -149,7 +149,7 @@ bool Protagonist::Update(float dt)
 			}
 			
 		}
-		if (app->combat->LastPressedAbility == 4)
+		if (app->combat->lastPressedAbility_I == 4)
 		{
 
 			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3]) {
