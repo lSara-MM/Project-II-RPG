@@ -115,7 +115,7 @@ bool Bard::Update(float dt)
 		//	}
 		//}
 		
-		if (app->combat->LastPressedAbility == 1)
+		if (app->combat->lastPressedAbility_I == 1)
 		{
 
 				
@@ -138,7 +138,7 @@ bool Bard::Update(float dt)
 				}
 				
 		}
-		if (app->combat->LastPressedAbility == 2)
+		if (app->combat->lastPressedAbility_I == 2)
 		{
 			if (app->combat->targeted_Character == app->combat->enemies[1] || app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3])
 			{
@@ -149,7 +149,7 @@ bool Bard::Update(float dt)
 			}
 			
 		}
-		if (app->combat->LastPressedAbility == 3)
+		if (app->combat->lastPressedAbility_I == 3)
 		{
 			if (app->combat->targeted_Character == app->combat->enemies[0])
 			{
@@ -159,7 +159,7 @@ bool Bard::Update(float dt)
 				onTurn = false;
 			}
 		}
-		if (app->combat->LastPressedAbility == 4)
+		if (app->combat->lastPressedAbility_I == 4)
 		{
 			if (app->combat->targeted_Character != nullptr)
 			{

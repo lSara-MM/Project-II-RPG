@@ -48,11 +48,19 @@ public:
 	bool AddCombatant(Character* chara, int modifier); //Eric:Añadir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
 	bool OrderBySpeed();
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
-	bool MoveAllies(int charaPosition_I, int newPosition_I);//Swap de un PC en una posicion hasta otra posicion
+	//Swap de un PC en una posicion hasta otra posicion
+	bool MoveAllies(int charaPosition_I, int newPosition_I);
 	bool StartCombat();
-	//TargetControl
-	bool DeactivateTargetButton(int id);
-	bool ActivateTargetButton(int id);
+//TargetControl
+	// Del 0 al 7
+	bool DisableTargetButton(int id);
+	// Del 0 al 7
+	bool EnableTargetButton(int id); 
+	
+	//Del 1 al 4
+	bool EnableSkillButton(int skillNum); 
+	//Del 1 al 4
+	bool DisableSkillButton(int skillNum); 
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
@@ -65,10 +73,10 @@ public:
 	List<Character*> listInitiative;
 	int charaInTurn=1;
 
-	Character* allies[4]; //4 es backline, 1 es frontline
-	Character* enemies[4]; //4 es backline, 1 es frontline
+	Character* allies[4]; //3 es backline, 0 es frontline
+	Character* enemies[4]; //3 es backline, 0 es frontline
 	Character* targeted_Character=nullptr; //Last button selected
-	int LastPressedAbility = 0;
+	int lastPressedAbility_I = 0;
 
 
 private:

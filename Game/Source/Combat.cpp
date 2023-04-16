@@ -90,6 +90,17 @@ bool Combat::Update(float dt)
 
 	app->render->DrawTexture(textureBackground, 0, 0);
 	app->render->TextDraw(listInitiative.At(charaInTurn)->data->name.GetString(), 560, 20,20);
+
+	//Si algo esta vacio desactivarlo
+	for (int i = 0; i <= 3; i++)
+	{
+		if (enemies[i] == nullptr) { DisableTargetButton(4 + i); }
+	}
+	for (int i = 0; i <= 3; i++)
+	{
+		if (allies[3 - i] == nullptr) { DisableTargetButton(i); }
+	}
+
 	//Pruebas de mover positiones
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 	{
@@ -98,11 +109,11 @@ bool Combat::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
 	{
-		DeactivateTargetButton(6);
+		DisableTargetButton(6);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
 	{
-		ActivateTargetButton(6);
+		EnableTargetButton(6);
 	}
 
 	for (int i=1;listInitiative.Count()>=i;i++) 
@@ -169,7 +180,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	{
 	//Target 
 	case 0:
-		LOG("Allies Slot 1 click");
+		LOG("Allies Slot 1 (last backline) click");
 		targeted_Character = allies[3];
 		break;
 	case 1:
@@ -181,11 +192,11 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		targeted_Character = allies[1];
 		break;
 	case 3:
-		LOG("Allies Slot 3 click");
+		LOG("Allies Slot 3 (first frontline) click");
 		targeted_Character = allies[0];
 		break;
 	case 4:
-		LOG("Enemies Slot 1 click");
+		LOG("Enemies Slot 1 (first frontline) click");
 		targeted_Character = enemies[0];
 		break;
 	case 5:
@@ -197,31 +208,31 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		targeted_Character = enemies[2];
 		break;
 	case 7:
-		LOG("Enemies Slot 4 click");
+		LOG("Enemies Slot 4 (last backline) click");
 		targeted_Character = enemies[3];
 		break;
 //Target
 // 
-	//PLayer OnTurn Action Buttons
+	//PLayer OnTurn Action Buttons IMPORTANTE NO MOVERLO PORQUE ROMPERIA LAS FUNCIONES DE SkillButton
 	
 	case 8:
 		LOG("Attack 1");
-		LastPressedAbility = 1;
+		lastPressedAbility_I = 1;
 		break;
 
 	case 9:
 		LOG("Attack 2");
-		LastPressedAbility = 2;
+		lastPressedAbility_I = 2;
 		break;
 
 	case 10:
 		LOG("Attack 3");
-		LastPressedAbility = 3;
+		lastPressedAbility_I = 3;
 		break;
 
 	case 11:
 		LOG("Attack 4");
-		LastPressedAbility = 4;
+		lastPressedAbility_I = 4;
 		break;
 	//PLayer OnTurn Action Buttons
 
@@ -334,11 +345,33 @@ bool Combat::OrderBySpeed()
 
 bool Combat::NextTurn()
 {
-	//Reactivar todos los posibles targets
+	//Resetear los botones targeteados
+	lastPressedAbility_I = 0;
+	targeted_Character = nullptr;
+
+	//Reactivar todos los posibles targets, los vacios desactivarlos
+
 	for (int i = 0; i < 7; i++)
 	{
-		ActivateTargetButton(i);
+		EnableTargetButton(i);
 	}
+	for (int i = 1; i < 4; i++)
+	{
+		EnableSkillButton(i);
+	}
+
+	//Si algo esta vacio desactivarlo
+	for (int i = 0; i <= 3; i++)
+	{
+		if (enemies[i] == nullptr) { DisableTargetButton(4 + i); }
+	}
+	for (int i = 0; i <= 3; i++)
+	{
+		if (allies[3-i] == nullptr) { DisableTargetButton(i); }
+	}
+	
+
+
 
 	if (listInitiative.Count()-1 <= charaInTurn) { charaInTurn = 0; }
 	else
@@ -399,13 +432,20 @@ bool Combat::StartCombat()
 {
 	OrderBySpeed();
 
+	lastPressedAbility_I = 0;
+	targeted_Character = nullptr;
+	for (int i = 0; i < 7; i++)
+	{
+		EnableTargetButton(i);
+		EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
+	}
 	listInitiative.start->data->onTurn = true;
 	charaInTurn = 0;
-	//NextTurn();
+	
 	return true;
 }
 
-bool Combat::DeactivateTargetButton(int id)
+bool Combat::DisableTargetButton(int id)
 {
 	//Evitar que pete o acceder a botones que no deberia 
 	if (id<0)
@@ -423,7 +463,7 @@ bool Combat::DeactivateTargetButton(int id)
 	return true;
 }
 
-bool Combat::ActivateTargetButton(int id)
+bool Combat::EnableTargetButton(int id)
 {
 	//Evitar que pete o acceder a botones que no deberia 
 	if (id < 0)
@@ -437,6 +477,40 @@ bool Combat::ActivateTargetButton(int id)
 
 	listButtons.At(id)->data->state = GuiControlState::NORMAL;
 
+
+	return true;
+}
+
+bool Combat::EnableSkillButton(int skillNum)
+{
+	//Evitar que pete o acceder a botones que no deberia 
+	if (skillNum < 1)
+	{
+		return false;
+	}
+	if (skillNum > 4)
+	{
+		return false;
+	}
+
+	listButtons.At(7 + skillNum)->data->state = GuiControlState::NORMAL;
+
+	return true;
+}
+
+bool Combat::DisableSkillButton(int skillNum)
+{
+	//Evitar que pete o acceder a botones que no deberia 
+	if (skillNum < 1)
+	{
+		return false;
+	}
+	if (skillNum > 4)
+	{
+		return false;
+	}
+
+	listButtons.At(7 + skillNum)->data->state = GuiControlState::DISABLED;
 
 	return true;
 }
