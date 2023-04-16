@@ -1,12 +1,13 @@
 #include "GuiButton.h"
 #include "GuiManager.h"
 
-GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize) : GuiControl(GuiControlType::BUTTON, id)
+GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
 	this->text = text;
 	this->fontSize = fontSize;
-	
+	this->font = font;
+
 	buttonType = bType;
 
 	buttonTex = app->tex->Load("Assets/GUI/UI_buttons.png");
@@ -199,7 +200,7 @@ bool GuiButton::Draw(Render* render)
 	int x = rect.w - text.Length() * size / 2 - offsetX;
 	int y = rect.h - size / 2 + offsetY;
 
-	if(text != "") app->render->TextDraw(text.GetString(), bounds.x + x / 4, bounds.y + y / 4, size);
+	if(text != "") app->render->TextDraw(text.GetString(), bounds.x + x / 4, bounds.y + y / 4, size, font);
 
 	return false;
 }

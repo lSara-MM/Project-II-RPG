@@ -8,11 +8,10 @@
 #include "SDL/include/SDL.h"
 #include "SDL_ttf/include/SDL_ttf.h"
 
-enum FONT
+enum Font
 {
 	UI,
 	TEXT
-
 };
 
 
@@ -49,7 +48,7 @@ public:
 	bool DrawCircle(int x1, int y1, int redius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
 
 	// Text, x, y, size, {color}
-	bool TextDraw(const char* text, int x, int y, int size, FONT font = FONT::UI, SDL_Color color = { 0, 0, 0 });
+	bool TextDraw(const char* text, int x, int y, int size, Font font = Font::UI, SDL_Color color = { 0, 0, 0 });
 
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);

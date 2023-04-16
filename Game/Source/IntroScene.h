@@ -45,6 +45,8 @@ public:
 	//Load / Save methods
 	bool LoadState(pugi::xml_node&);
 	bool SaveState(pugi::xml_node&);
+	// Player's name input
+	bool PlayerNameInput();
 
 public:
 
@@ -60,7 +62,6 @@ private:
 	// buttons
 	List<GuiButton*> listButtons;
 	const char* buttons[6] = { "Play", "Continue", "Settings", "Credits", "Exit", "\n" };
-	int bNum;
 	
 	Settings options;
 	Settings* pSettings = &options;

@@ -17,9 +17,6 @@
     <ClCompile Include="Source\Audio.cpp">
       <Filter>Modules\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Input.cpp">
-      <Filter>Modules\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Map.cpp">
       <Filter>Modules\Core</Filter>
     </ClCompile>
@@ -74,9 +71,6 @@
     <ClCompile Include="Source\GuiSliderBar.cpp">
       <Filter>Modules\Core\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Characther.cpp">
-      <Filter>Modules\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Combat.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -84,13 +78,25 @@
       <Filter>Modules\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Source\PCProtagonist.cpp">
-      <Filter>Modules\Entities\PCs</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CombatEnemy.cpp">
-      <Filter>Modules\Entities</Filter>
+      <Filter>Modules\Entities\Combat\PCs</Filter>
     </ClCompile>
     <ClCompile Include="Source\ECHouseTank.cpp">
-      <Filter>Modules\Entities\EC</Filter>
+      <Filter>Modules\Entities\Combat\EC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DialogueSystem.cpp">
+      <Filter>Modules\Core\Dialogue System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DialogueTree.cpp">
+      <Filter>Modules\Core\Dialogue System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Characther.cpp">
+      <Filter>Modules\Entities\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CombatEnemy.cpp">
+      <Filter>Modules\Entities\Combat</Filter>
     </ClCompile>
     <ClCompile Include="Source\PCBard.cpp">
       <Filter>Modules\Entities\PCs</Filter>
@@ -138,9 +144,6 @@
       <Filter>App</Filter>
     </ClInclude>
     <ClInclude Include="Source\Audio.h">
-      <Filter>Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input.h">
       <Filter>Modules\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\Map.h">
@@ -210,9 +213,6 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy.h" />
-    <ClInclude Include="Source\Characther.h">
-      <Filter>Modules\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Combat.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -220,13 +220,25 @@
       <Filter>Modules\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Source\PCProtagonist.h">
-      <Filter>Modules\Entities\PCs</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CombatEnemy.h">
-      <Filter>Modules\Entities</Filter>
+      <Filter>Modules\Entities\Combat\PCs</Filter>
     </ClInclude>
     <ClInclude Include="Source\ECHouseTank.h">
-      <Filter>Modules\Entities\EC</Filter>
+      <Filter>Modules\Entities\Combat\EC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DialogueSystem.h">
+      <Filter>Modules\Core\Dialogue System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DialogueTree.h">
+      <Filter>Modules\Core\Dialogue System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Characther.h">
+      <Filter>Modules\Entities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CombatEnemy.h">
+      <Filter>Modules\Entities\Combat</Filter>
     </ClInclude>
     <ClInclude Include="Source\PCBard.h">
       <Filter>Modules\Entities\PCs</Filter>
@@ -263,11 +275,17 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{59396da5-13ff-4cbf-85fc-91a7386282ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Entities\PCs">
-      <UniqueIdentifier>{c5d6774c-26c4-4529-a462-f01c7599a39a}</UniqueIdentifier>
+    <Filter Include="Modules\Core\Dialogue System">
+      <UniqueIdentifier>{785cf3fe-fa6d-49b9-a075-19fdc110902d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Entities\EC">
+    <Filter Include="Modules\Entities\Combat">
+      <UniqueIdentifier>{22185b4f-ffea-4c83-bf5a-fd849d8df9c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Entities\Combat\EC">
       <UniqueIdentifier>{2c344999-e73e-47ae-9538-5822c1886e1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Entities\Combat\PCs">
+      <UniqueIdentifier>{c5d6774c-26c4-4529-a462-f01c7599a39a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

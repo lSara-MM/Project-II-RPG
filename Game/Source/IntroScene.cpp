@@ -64,8 +64,7 @@ bool IntroScene::Start()
 	// buttons
 	for (int i = 0; buttons[i] != "\n"; i++)
 	{
-		bNum = i + 6;
-		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, bNum, this, { 25, 180 + 77 * i, 136, 33 }, ButtonType::START, buttons[i], 20));
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 1, this, { 25, 180 + 77 * i, 136, 33 }, ButtonType::START, buttons[i], 20));
 	}
 
 	listButtons.start->next->data->state = GuiControlState::DISABLED;
@@ -107,6 +106,8 @@ bool IntroScene::PostUpdate()
 	bool ret = true;
 
 	if (exit_B) return false;
+	if (app->input->getInput_B) PlayerNameInput();
+	if (app->input->nameEntered_B) { app->fade->FadingToBlack(this, (Module*)app->scene, 90); }
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -164,14 +165,15 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button Close settings click");
 		pSettings->CloseSettings();
 		break;
-	case 6:
+	case 2:
 		LOG("Button start click");
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+		app->input->getInput_B = true;
+		
 		break;
-	case 7:
+	case 3:
 		LOG("Button continue click");
 		break;
-	case 8:
+	case 4:
 		LOG("Button settings click");
 		pSettings->settings_B = !pSettings->settings_B;
 		if (!pSettings->settings_B)
@@ -179,16 +181,16 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 			pSettings->CloseSettings();
 		}
 		break;
-	case 9:
+	case 5:
 		LOG("Button Credits click");
 		break;
 
-	case 10:
+	case 6:
 		LOG("Button Exit game click");
 		exit_B = true;
 		break;
 
-	case 11:
+	case 7:
 		LOG("Button Close credits");
 		break;
 
@@ -389,4 +391,15 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	return true;
+}
+
+bool IntroScene::PlayerNameInput()
+{
+	SString temp;
+
+	temp = "Sign:  %%";
+	temp.Substitute("%", app->input->playerName.c_str());
+	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 100, 16, Font::TEXT, { 255, 255, 255 });
+
+	return app->input->nameEntered_B;
 }

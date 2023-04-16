@@ -11,7 +11,7 @@ class GuiButton : public GuiControl
 {
 public:
 
-	GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text = "", int fontSize = 12);
+	GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text = "", int fontSize = 12, Font font = Font::UI);
 	virtual ~GuiButton();
 
 	bool Update(float dt);
@@ -21,6 +21,7 @@ public:
 
 	SDL_Texture* buttonTex;
 	ButtonType buttonType;
+	Font font;
 };
 
 #endif // __GUIBUTTON_H__
