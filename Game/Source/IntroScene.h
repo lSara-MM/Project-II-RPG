@@ -60,7 +60,7 @@ private:
 
 	// buttons
 	List<GuiButton*> listButtons;
-	const char* buttons[6] = { "Play", "Continue", "Settings", "Credits", "Exit", "\n" };
+	const char* buttons[6] = { "Play", "Continue", "Settings", "Exit", "\n" };
 	
 	Settings* pSettings;
 
