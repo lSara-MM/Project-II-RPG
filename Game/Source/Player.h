@@ -9,6 +9,7 @@
 #include "Physics.h"
 
 #include "Animation.h"
+#include "SString.h"
 
 struct SDL_Texture;
 

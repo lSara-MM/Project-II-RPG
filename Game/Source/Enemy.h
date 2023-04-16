@@ -7,8 +7,6 @@
 #include "List.h"
 
 #include "Animation.h"
-#include "ItemCoin.h"
-#include "ItemGem.h"
 #include "Physics.h"
 
 struct SDL_Texture;

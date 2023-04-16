@@ -65,6 +65,9 @@ bool Scene::Start()
 	InitEntities();
 	app->entityManager->Enable();
 
+	InitEntities();
+	app->entityManager->Enable();
+
 	return true;
 }
 
@@ -80,6 +83,7 @@ bool Scene::Update(float dt)
 
 	Debug();
 
+	
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(entidad2);*/
 	
@@ -287,6 +291,11 @@ bool Scene::InitEntities()
 	player->parameters = sceneNode.child("player");
 	player->Awake();
 
+	Entity* npc = app->entityManager->CreateEntity(EntityType::NPC);
+	app->entityManager->AddEntity(npc);
+	npc->Awake();
+
+	//app->entityManager->Awake();
 	return true;
 }
 
