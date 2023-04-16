@@ -11,11 +11,7 @@ class PhysBody;
 enum class EntityType
 {
 	PLAYER, //ERIC: Para Out of Combat
-	CHEST,
-	GEM,
-	PORTAL,
-	SAVE,
-	HEALTH,
+	NPC,
 	//Lista de todos los Characthers
 		//PCs
 	PC_PROTAGONIST,
