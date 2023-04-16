@@ -45,7 +45,7 @@ public:
 	void Debug();
 	bool InitEntities(); //No se si quitarlo o que 
 	
-	bool AddCombatant(Character* chara, int modifier); //Eric:Añadir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
+	bool AddCombatant(Character* chara, int modifier); //Eric:Aï¿½adir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
 	bool OrderBySpeed();
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
 	//Swap de un PC en una posicion hasta otra posicion
@@ -78,11 +78,9 @@ public:
 	Character* targeted_Character=nullptr; //Last button selected
 	int lastPressedAbility_I = 0;
 
-
 private:
 	// Settings
-	Settings options;
-	Settings* pSettings = &options;
+	Settings* pSettings;
 
 	Pause pauseMenu;
 	Pause* pPause = &pauseMenu;

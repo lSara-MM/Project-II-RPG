@@ -157,6 +157,8 @@ bool Combat::CleanUp()
 
 	app->entityManager->Disable();
 
+	pSettings->CleanUp();
+	//pPause->CleanUp();
 	app->guiManager->CleanUp();
 	return true;
 }

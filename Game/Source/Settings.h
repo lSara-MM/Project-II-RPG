@@ -23,14 +23,12 @@ class GameSettings
 {
 public:
 
-	GameSettings* CreateGameSettings(Module* mod)
+	GameSettings(Module* mod)
 	{
-		GameSettings* set = this;
-
 		//settingsTexture = app->tex->Load(settingsPath);
 
 		// settings buttons
-		game_B = false;
+		game_B = true;
 		open_game_B = false;
 
 		// Language
@@ -55,8 +53,6 @@ public:
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 521, 133, 33 }, ButtonType::SETTINGS, "Exit", 16);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
-
-		return set;
 	}
 
 	bool OpenGameSettings()
@@ -81,17 +77,19 @@ public:
 	{
 		game_B = false;
 		open_game_B = false;
+
 		for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->state = GuiControlState::NONE;
 		}
+
+		CleanUp();
 
 		return true;
 	}
 
 	bool CleanUp()
 	{
-		CloseGameSettings();
 		//app->tex->UnLoad(gameSettingsTexture);
 		listGameButtons.Clear();
 
@@ -116,10 +114,8 @@ class ControlSettings
 {
 public:
 
-	ControlSettings* CreateControlSettings(Module* mod)
+	ControlSettings(Module* mod)
 	{
-		ControlSettings* set = this;
-
 		//settingsTexture = app->tex->Load(settingsPath);
 
 		// settings buttons
@@ -135,8 +131,6 @@ public:
 			button->state = GuiControlState::NONE;
 			listControlButtons.Add(button);
 		}
-
-		return set;
 	}
 
 	bool OpenControlSettings()
@@ -179,12 +173,13 @@ public:
 			i->data->state = GuiControlState::NONE;
 		}
 
+		CleanUp();
+
 		return true;
 	}
 
 	bool CleanUp()
 	{
-		CloseControlSettings();
 		listControlButtons.Clear();
 
 		return true;
@@ -206,10 +201,8 @@ class GraphicsSettings
 {
 public:
 
-	GraphicsSettings* CreateGraphicsSettings(Module* mod)
+	GraphicsSettings(Module* mod)
 	{
-		GraphicsSettings* set = this;
-
 		//settingsTexture = app->tex->Load(settingsPath);
 
 		// settings buttons
@@ -238,8 +231,6 @@ public:
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::SETTINGS, "Max fps", 10);
 		button->state = GuiControlState::NONE;
 		listGraphicsButtons.Add(button);
-
-		return set;
 	}
 
 	bool OpenGraphics()
@@ -290,12 +281,13 @@ public:
 			i->data->state = GuiControlState::NONE;
 		}
 
+		CleanUp();
+
 		return true;
 	}
 
 	bool CleanUp()
 	{
-		CloseGraphics();
 		//app->tex->UnLoad(settingsTexture);
 		listGraphicsButtons.Clear();
 		listGraphicsCheckbox.Clear();
@@ -318,10 +310,8 @@ class AudioSettings
 {
 public:
 
-	AudioSettings* CreateAudioSettings(Module* mod)
+	AudioSettings(Module* mod)
 	{
-		AudioSettings* set = this;
-
 		//settingsTexture = app->tex->Load(settingsPath);
 
 		// settings buttons
@@ -347,8 +337,6 @@ public:
 		sliderBar->state = GuiControlState::NONE;
 		fx = sliderBar;
 		listSliderBars.Add(sliderBar);
-		
-		return set;
 	}
 
 	bool OpenAudioSettings()
@@ -397,12 +385,13 @@ public:
 			i->data->state = GuiControlState::NONE;
 		}
 
+		CleanUp();
+
 		return true;
 	}
 
 	bool CleanUp()
 	{
-		CloseAudioSettings();
 		listSliderBars.Clear();
 
 		return true;
@@ -424,11 +413,8 @@ class Settings
 {
 public:
 
-	Settings* CreateSettings(Module* mod)
+	Settings(Module* mod)
 	{
-		Settings* set = this;
-		module_P = mod;
-
 		//settingsTexture = app->tex->Load(settingsPath);
 
 		// settings buttons
@@ -436,7 +422,7 @@ public:
 		open_settings_B = false;
 
 		// close
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, module_P, { 1038, 175, 57, 57 }, ButtonType::CLOSE);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 1038, 175, 57, 57 }, ButtonType::CLOSE);
 		button->state = GuiControlState::NONE;
 		listSettingsButtons.Add(button);
 
@@ -448,12 +434,10 @@ public:
 			listSettingsButtons.Add(button);
 		}
 
-		pGame->CreateGameSettings(module_P);
-		//pControl->CreateControlSettings(module_P);
-		pGraphics->CreateGraphicsSettings(module_P);
-		pAudio->CreateAudioSettings(module_P);
-
-		return set;
+		pGame = new GameSettings(mod);
+		//pControl = new ControlSettings(mod);
+		pGraphics = new GraphicsSettings(mod);
+		pAudio = new AudioSettings(mod);
 	}
 
 	bool OpenSettings()
@@ -468,7 +452,7 @@ public:
 
 
 		if (pGame->game_B) { pGame->OpenGameSettings(); }
-		if (pControl->control_B) { pControl->OpenControlSettings(); }
+		//if (pControl->control_B) { pControl->OpenControlSettings(); }
 		if (pGraphics->graphics_B) { pGraphics->OpenGraphics(); }
 		if (pAudio->audio_B) { pAudio->OpenAudioSettings(); }
 
@@ -491,7 +475,7 @@ public:
 		open_settings_B = false;
 
 		pGame->CloseGameSettings();
-		pControl->CloseControlSettings();
+		//pControl->CloseControlSettings();
 		pGraphics->CloseGraphics();
 		pAudio->CloseAudioSettings();
 
@@ -505,9 +489,21 @@ public:
 
 	bool CleanUp()
 	{
-		CloseSettings();
 		//app->tex->UnLoad(settingsTexture);
 		listSettingsButtons.Clear();
+		settings_B = false;
+		
+		delete pGame;
+		pGame = nullptr;
+
+		delete pControl;
+		pControl = nullptr;
+
+		delete pGraphics;
+		pGraphics = nullptr;
+
+		delete pAudio;
+		pAudio = nullptr;
 
 		return true;
 	}
@@ -524,13 +520,11 @@ public:
 	bool settings_B;
 	bool open_settings_B;
 
-	Module* module_P;
-
 	
-	GameSettings* pGame = new GameSettings;
-	ControlSettings* pControl = new ControlSettings;;
-	GraphicsSettings* pGraphics = new GraphicsSettings;
-	AudioSettings* pAudio = new AudioSettings;
+	GameSettings* pGame;
+	ControlSettings* pControl;
+	GraphicsSettings* pGraphics;
+	AudioSettings* pAudio;
 };
 
 

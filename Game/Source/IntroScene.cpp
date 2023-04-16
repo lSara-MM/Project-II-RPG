@@ -69,7 +69,7 @@ bool IntroScene::Start()
 
 	listButtons.start->next->data->state = GuiControlState::DISABLED;
 
-	pSettings->CreateSettings(this);
+	pSettings = new Settings(this);
 	listButtons.Add(pSettings->listSettingsButtons.start->data);
 
 	exit_B = false;
@@ -128,7 +128,12 @@ bool IntroScene::CleanUp()
 	LOG("Freeing IntroScene");
 	
 	listButtons.Clear();
+	delete buttons;
+
 	pSettings->CleanUp();
+
+	delete pSettings;
+	pSettings = nullptr;
 
 	app->guiManager->CleanUp();
 	return true;
@@ -176,6 +181,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 4:
 		LOG("Button settings click");
 		pSettings->settings_B = !pSettings->settings_B;
+
 		if (!pSettings->settings_B)
 		{
 			pSettings->CloseSettings();
@@ -205,18 +211,18 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Game settings click");
 		pSettings->pGame->game_B = true;
 
-		pSettings->pControl->CloseControlSettings();
+		//pSettings->pControl->CloseControlSettings();
 		pSettings->pGraphics->CloseGraphics();
 		pSettings->pAudio->CloseAudioSettings();
 		break;
 
 	case 803:
 		LOG("Controls settings click");
-		pSettings->pControl->control_B = true;
+		//pSettings->pControl->control_B = true;
 
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pGraphics->CloseGraphics();
-		pSettings->pAudio->CloseAudioSettings();
+		//pSettings->pGame->CloseGameSettings();
+		//pSettings->pGraphics->CloseGraphics();
+		//pSettings->pAudio->CloseAudioSettings();
 		break;
 
 	case 804:
@@ -224,7 +230,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		pSettings->pGraphics->graphics_B = true;
 
 		pSettings->pGame->CloseGameSettings();
-		pSettings->pControl->CloseControlSettings();
+		//pSettings->pControl->CloseControlSettings();
 		pSettings->pAudio->CloseAudioSettings();
 		break;
 
@@ -233,7 +239,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		pSettings->pAudio->audio_B = true;
 
 		pSettings->pGame->CloseGameSettings();
-		pSettings->pControl->CloseControlSettings();
+		//pSettings->pControl->CloseControlSettings();
 		pSettings->pGraphics->CloseGraphics();
 		break;
 

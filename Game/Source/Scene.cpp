@@ -8,7 +8,6 @@
 #include "Textures.h"
 #include "Window.h"
 
-
 #include "IntroScene.h"
 #include "LoseScene.h"
 #include "Combat.h"
@@ -53,10 +52,7 @@ bool Scene::Start()
 	exit_B = false;
 
 	// Settings
-	pSettings->CreateSettings(this);
-	
-	//pause menu
-	//pause_B = false;
+	pSettings = new Settings(this);
 
 	// Pause 
 	//pPause->GUI_id = pSettings->GUI_id;
@@ -66,7 +62,6 @@ bool Scene::Start()
 	app->render->camera.x = -2800;
 	app->render->camera.y = -800;
 	
-
 	InitEntities();
 	app->entityManager->Enable();
 
@@ -84,10 +79,6 @@ bool Scene::Update(float dt)
 	app->render->DrawTexture(backGround, 0, 0);
 
 	Debug();
-
-	
-
-	
 
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(entidad2);*/
@@ -118,7 +109,7 @@ bool Scene::Update(float dt)
 
 		app->fade->FadingToBlack(this, (Module*)app->combat, 30);
 
-		//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDA�S AVISADOS!!!
+		//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDAIS AVISADOS!!!
 		app->combat->AddCombatant((Character*)enemy1, 0);
 		app->combat->AddCombatant((Character*)enemy2, 5);
 		app->combat->AddCombatant((Character*)enemy3, 3);
@@ -127,6 +118,7 @@ bool Scene::Update(float dt)
 		/*app->combat->AddCombatant((Character*)prota3, 5);
 		app->combat->AddCombatant((Character*)prota4, 9);*/
 	}
+	
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
 	{
 		app->combat->MoveAllies(1,4);
@@ -180,7 +172,7 @@ bool Scene::PostUpdate()
 	}
 	
 	if (pSettings->settings_B) { pSettings->OpenSettings(); }
-	if (pPause->pause) { pPause->OpenPause(); }
+	//if (pPause->pause) { pPause->OpenPause(); }
 	app->guiManager->Draw();
 
 	return ret;
@@ -199,7 +191,7 @@ bool Scene::CleanUp()
 	app->entityManager->Disable();
 
 	pSettings->CleanUp();
-	pPause->CleanUp();
+	//pPause->CleanUp();
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 	app->tex->UnLoad(backGround);
@@ -262,12 +254,12 @@ void Scene::Debug()
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
-		pause_B = !pause_B;
-		pPause->pause = !pPause->pause;
-		if (!pPause->pause)
+		!pause_B;
+		//pPause->pause = !pPause->pause;
+		/*if (!pPause->pause)
 		{
 			pPause->ClosePause();
-		}
+		}*/
 
 		LOG("PAUSE");
 	}
@@ -330,11 +322,11 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 806:
 		LOG("Button Close pause click");
-		pPause->ClosePause(); 
+		//pPause->ClosePause(); 
 		break;
 	case 807:
 		LOG("Button Resume click");
-		pPause->ClosePause();
+		//pPause->ClosePause();
 		break;
 	case 808:
 		LOG("Button Return to Title click");
@@ -342,7 +334,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 809:
 		LOG("Button settings click");
-		pPause->ClosePause();
+		//pPause->ClosePause();
 
 		pSettings->settings_B = !pSettings->settings_B;
 		if (!pSettings->settings_B) { pSettings->CloseSettings();}
