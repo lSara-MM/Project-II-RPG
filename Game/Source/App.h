@@ -21,6 +21,8 @@ class Textures;
 class Audio;
 
 class EntityManager;
+class Combat;
+class DialogueSystem;
 class GuiManager;
 
 class Map;
@@ -33,7 +35,6 @@ class Scene;
 class LoseScene;
 class LeaderboardScene;
 class FadeToBlack;
-
 
 class App
 {
@@ -103,6 +104,8 @@ public:
 	Audio* audio;
 	
 	EntityManager* entityManager;
+	Combat* combat;
+	DialogueSystem* dialogueSystem;
 	GuiManager* guiManager;
 	
 	Map* map;

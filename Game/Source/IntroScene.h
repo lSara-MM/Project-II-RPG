@@ -42,20 +42,21 @@ public:
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	// Player's name input
+	bool PlayerNameInput();
+
 public:
 
 private:
 
+	const char* music_intro;
+
 	// buttons
 	List<GuiButton*> listButtons;
 	const char* buttons[6] = { "Play", "Continue", "Settings", "Credits", "Exit", "\n" };
-	int bNum;
 	
 	Settings options;
 	Settings* pSettings = &options;
-
-	Credits credits;
-	Credits* pCredits = &credits;
 
 	bool exit_B;
 };

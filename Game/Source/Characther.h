@@ -11,13 +11,13 @@
 
 struct SDL_Texture;
 
-class Characther : public Entity
+class Character : public Entity
 {
 public:
 
-	Characther();
+	Character();
 
-	virtual ~Characther();
+	virtual ~Character();
 
 	bool Awake();
 
@@ -27,7 +27,11 @@ public:
 
 	bool CleanUp();
 
-	
+	bool Render(); //Se llama a ser printado desde combat(?)
+
+	void ModifyHP(int cantidad); //Positivo para curar negativo para dañar
+
+	int CalculateDamage(int damage);
 
 public:
 	// The pointer to the current player animation
@@ -52,9 +56,28 @@ public:
 	bool alive;
 
 	//Stats
-	int hp;
+	int maxHp;
+	int currentHp;
 	int attack;
+	int armor; //MAXIMO ABSOLUTO 200, mas menos full items en tanque 120
 	int speed;
+
+	//Posicion combate
+	int positionCombat_I; //Del uno al cuatro
+	enum CharatherType
+	{
+		ALLY,
+		ENEMY,
+		NONE 
+	};
+	CharatherType charaType_I; //Va del 1 al 4
+	
+	int GetHealth() { return currentHp; }
+	int GetAttack() { return attack; }
+	int GetArmor() { return armor; }
+	int GetSpeed() { return speed; }
+	int GetMaxHP() { return maxHp; }
+	
 
 private:
 

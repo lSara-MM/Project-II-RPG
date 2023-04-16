@@ -1,30 +1,16 @@
 #include "GuiButton.h"
+#include "GuiManager.h"
 
-GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize) : GuiControl(GuiControlType::BUTTON, id)
+GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
 	this->text = text;
 	this->fontSize = fontSize;
-	
+	this->font = font;
+
 	buttonType = bType;
 
-	switch (bType)
-	{
-	case ButtonType::NONE:
-		break;
-	case ButtonType::EXTRA_LARGE:
-		buttonTex = app->tex->Load("Assets/Textures/extra_long_button.png");
-		break;
-	case ButtonType::LARGE:
-		buttonTex = app->tex->Load("Assets/Textures/long_button.png");
-		break;
-	case ButtonType::SMALL:
-		buttonTex = app->tex->Load("Assets/Textures/small_button.png");
-		break;
-	default:
-		buttonTex = app->tex->Load("Assets/Textures/small_button.png");
-		break;
-	}		
+	buttonTex = app->tex->Load("Assets/GUI/UI_buttons.png");
 }
 
 GuiButton::~GuiButton()
@@ -77,38 +63,48 @@ bool GuiButton::Draw(Render* render)
 	SDL_Rect rect = { 0, 0, 0, 0 };
 	int offsetX = 0; int offsetY = 0;
 
-	if (GUI_debug)
+	if (buttonType == ButtonType::EXTRA_LARGE) { rect = { 0, 0, 93, 118 }; offsetX = 50;	offsetY = 10; }
+	if (buttonType == ButtonType::LARGE) { rect = { 0, 0, 93, 118 }; offsetX = 20;	offsetY = 3; }
+	if (buttonType == ButtonType::SMALL) { rect = { 0, 0, 93, 118 }; offsetX = -15;	offsetY = 6; }
+
+	if (buttonType == ButtonType::START) { rect = { 0, 0, 93, 118 }; offsetX = 50;	offsetY = 10; }
+	if (buttonType == ButtonType::CLOSE) { rect = { 188, 89, 100, 96 }; offsetX = 50;	offsetY = 10; }
+	if (buttonType == ButtonType::MENU) { rect = { 94, 39, 93, 118 }; offsetX = 20;	offsetY = 3; }
+	if (buttonType == ButtonType::SETTINGS) { rect = { 90, 0, 26, 28 }; offsetX = -15;	offsetY = 6; }
+	if (buttonType == ButtonType::IN_SETTINGS) { rect = { 90, 0, 26, 28 }; offsetX = -15;	offsetY = 6; }
+	if (buttonType == ButtonType::CONTROL_SETTINGS) { rect = { 90, 0, 89, 90 }; offsetX = 50;	offsetY = 10; }
+	if (buttonType == ButtonType::INVENTORY) { rect = { 188, 0, 89, 88 }; offsetX = 50;	offsetY = 10; }
+	if (buttonType == ButtonType::INV_NEXT_PAGE) { rect = { 188, 189, 53, 57 }; offsetX = 20;	offsetY = 3; }
+	if (buttonType == ButtonType::INV_PAGES) { rect = { 156, 160, 19, 20 }; offsetX = -15;	offsetY = 6; }
+	if (buttonType == ButtonType::SWAP_SKILL) { rect = { 90, 0, 82, 80 }; }
+
+	if (app->guiManager->GUI_debug)
 	{
-		if (buttonType == ButtonType::EXTRA_LARGE) { rect = { 90, 0, 172, 40 }; offsetX = 50;	offsetY = 10; }
-		if (buttonType == ButtonType::LARGE) { rect = { 90, 0, 90, 27 }; offsetX = 20;	offsetY = 3; }
-		if (buttonType == ButtonType::SMALL) { rect = { 90, 0, 26, 28 }; offsetX = -15;	offsetY = 6; }
-
-
 		// Draw the right button depending on state
 		switch (state)
 		{
 
 		case GuiControlState::DISABLED:
 		{
-			render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 200, 200, 200, 255, true, false);
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 200, 200, 200, 255, true, false);
 
 		} break;
 
 		case GuiControlState::NORMAL:
 		{
-			render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 0, 0, 255, 255, true, false);
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h}, 0, 0, 255, 255, true, false);
 
 		}	break;
 
 		case GuiControlState::FOCUSED:
 		{
-			render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 255, 0, 255, 255, true, false);
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 255, 0, 255, 255, true, false);
 
 		} break;
 
 		case GuiControlState::PRESSED:
 		{
-			render->DrawRectangle({ bounds.x * 2, bounds.y * 2, bounds.w * 2, bounds.h * 2 }, 0, 255, 0, 255, true, false);
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w * 2, bounds.h * 2 }, 0, 255, 0, 255, true, false);
 			if (buttonType == ButtonType::EXTRA_LARGE) { rect = { 343, 0, 210, 80 }; }
 			if (buttonType == ButtonType::LARGE) { rect = { 180, 0, 120, 40 }; }
 			if (buttonType == ButtonType::SMALL) { rect = { 0, 0, 56, 41 }; }
@@ -124,149 +120,84 @@ bool GuiButton::Draw(Render* render)
 	}
 	else
 	{
-		if (buttonType == ButtonType::EXTRA_LARGE)
+		// Draw the right button depending on state
+		switch (state)
 		{
-			// Draw the right button depending on state
-			switch (state)
+
+		case GuiControlState::DISABLED:
+		{
+			render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+		} break;
+
+		case GuiControlState::NORMAL:
+		{
+			render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+		} break;
+
+		case GuiControlState::FOCUSED:
+		{
+			switch (buttonType)
 			{
-
-			case GuiControlState::DISABLED:
-			{
-				rect = { 528, 0, 172, 40 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::NORMAL:
-			{
-				rect = { 0, 0, 172, 40 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::FOCUSED:
-			{
-				rect = { 172, 0, 172, 40 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::PRESSED:
-			{
-				rect = { 343, 0, 185, 40 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-				rect = { 343, 0, 210, 80 };
-
-			} break;
-
-			case GuiControlState::SELECTED: //render->DrawRectangle(bounds, 0, 255, 0, 255);
+			case ButtonType::NONE:
 				break;
-
+			case ButtonType::EXTRA_LARGE:
+				break;
+			case ButtonType::LARGE:
+				break;
+			case ButtonType::SMALL:
+				break;
+			case ButtonType::START:
+				rect = { 94, 39, 93, 50 };
+				break;
+			case ButtonType::CLOSE:
+				break;
+			case ButtonType::MENU:
+				break;
+			case ButtonType::SETTINGS:
+				rect = { 94, 39, 93, 118 };
+				break;
+			case ButtonType::IN_SETTINGS:
+				break;
+			case ButtonType::CONTROL_SETTINGS:
+				break;
+			case ButtonType::INVENTORY:
+				break;
+			case ButtonType::INV_NEXT_PAGE:
+				break;
+			case ButtonType::INV_PAGES:
+				break;
+			case ButtonType::SWAP_SKILL:
+				break;
 			default:
 				break;
 			}
+			
+			render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 
-			offsetX = 50;	offsetY = 10;
-		}
+		} break;
 
-		if (buttonType == ButtonType::LARGE)
+		case GuiControlState::PRESSED:
 		{
-			// Draw the right button depending on state
-			switch (state)
-			{
+			render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 
-			case GuiControlState::DISABLED:
-			{
-				rect = { 277, 0, 90, 27 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+		} break;
 
-			} break;
+		case GuiControlState::SELECTED: //render->DrawRectangle(bounds, 0, 255, 0, 255);
+			break;
 
-			case GuiControlState::NORMAL:
-			{
-				rect = { 0, 0, 90, 27 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::FOCUSED:
-			{
-				rect = { 90, 0, 90, 27 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::PRESSED:
-			{
-				rect = { 180, 0, 97, 27 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-				rect = { 180, 0, 120, 40 };
-
-			} break;
-
-			case GuiControlState::SELECTED: //render->DrawRectangle(bounds, 0, 255, 0, 255);
-				break;
-
-			default:
-				break;
-			}
-
-			offsetX = 20;	offsetY = 3;
-		}
-
-		if (buttonType == ButtonType::SMALL)
-		{
-			// Draw the right button depending on state
-			switch (state)
-			{
-
-			case GuiControlState::DISABLED:
-			{
-				rect = { 85, 0, 26, 28 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::NORMAL:
-			{
-				rect = { 0, 0, 26, 28 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::FOCUSED:
-			{
-				rect = { 26, 0, 26, 28 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::PRESSED:
-			{
-				rect = { 52, 0, 33, 28 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-				rect = { 0, 0, 56, 41 };
-
-			} break;
-
-			case GuiControlState::SELECTED: //render->DrawRectangle(bounds, 0, 255, 0, 255);
-				break;
-
-			default:
-				break;
-			}
-
-			offsetX = -15;	offsetY = 6;
+		default:
+			break;
 		}
 	}
-
 
 
 	int size = fontSize;
 	int x = rect.w - text.Length() * size / 2 - offsetX;
 	int y = rect.h - size / 2 + offsetY;
 
-	app->render->TextDraw(text.GetString(), bounds.x + x / 4, bounds.y + y / 4, size);
+	if(text != "") app->render->TextDraw(text.GetString(), bounds.x + x / 4, bounds.y + y / 4, size, font);
 
 	return false;
 }

@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "Player.h"
+#include "Characther.h"
 
 #include "App.h"
 #include "Map.h"
@@ -8,6 +9,12 @@
 
 #include "Defs.h"
 #include "Log.h"
+
+//CHARACTHERS
+//PCs
+#include "PCProtagonist.h"
+//ECs
+#include "ECHouseTank.h"
 
 EntityManager::EntityManager() : Module()
 { 
@@ -86,6 +93,13 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		entity = new Player();
 		break;
 
+	case EntityType::PC_PROTAGONIST:
+		entity = new Protagonist();
+		break;
+	case EntityType::ENEMY_TANK_HOUSE:
+		entity = new HouseTank();
+		break;
+
 	default: break;
 	}
 
@@ -141,4 +155,26 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 	pugi::xml_node player = data.append_child("player");
 
 	return true;
+}
+
+List<Entity*> EntityManager::GetEntitiesByType(EntityType type)
+{
+	List<Entity*> result;
+	/*for (std::list<Entity*>::iterator it = entities.begin(); it != entities.end(); ++it) {
+		if ((*it)->type == type) {
+			result.add((*it));
+		}
+	}*/
+
+	ListItem<Entity*>* item = entities.start;
+	while (item != NULL)
+	{
+		Entity* entity = item->data;
+		if (entity->type == type)
+		{
+			//result.Del(entity); //Esto peta
+		}
+		item = item->next;
+	}
+	return result;
 }

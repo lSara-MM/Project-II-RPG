@@ -52,6 +52,7 @@ public:
 	Player* player;
 	bool frcap_B = true;
 	bool pause_B;
+	bool mute_B = true;
 
 	pugi::xml_node sceneNode;
 

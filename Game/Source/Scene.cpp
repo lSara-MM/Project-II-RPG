@@ -11,9 +11,11 @@
 
 #include "IntroScene.h"
 #include "LoseScene.h"
+#include "Combat.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
+#include "DialogueSystem.h"
 #include "GuiManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
@@ -45,19 +47,15 @@ bool Scene::Awake(pugi::xml_node& config)
 
 bool Scene::Start()
 {
+	// Settings
+	pSettings->CreateSettings(this);
+	
 	//pause menu
 	pause_B = false;
-
-	// Settings
-	pSettings->GUI_id = 0;
-	pSettings->CreateSettings(this);
 
 	// Pause 
 	pPause->GUI_id = pSettings->GUI_id;
 	pPause->CreatePause(this);
-
-	InitEntities();
-	app->entityManager->Enable();
 
 	return true;
 }
@@ -69,8 +67,42 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
-
 	Debug();
+
+	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota1);
+
+	Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota2);
+
+	Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota3);
+
+	Entity* prota4 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota4);
+
+	Entity* enemy1 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
+	app->entityManager->AddEntity(enemy1);
+
+	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
+	app->entityManager->AddEntity(entidad2);*/
+	
+	//ERIC: Prueba que no funciona.
+	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) 
+	{ 
+		//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDA�S AVISADOS!!!
+		app->combat->AddCombatant((Character*)enemy1, 0);
+		app->combat->AddCombatant((Character*)prota1, 3);
+		app->combat->AddCombatant((Character*)prota2, 4);
+		app->combat->AddCombatant((Character*)prota3, 5);
+		app->combat->AddCombatant((Character*)prota4, 9);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
+	{
+		app->combat->MoveAllies(1,4);
+		/*app->combat->AddCombatant((Characther*)prota2, -2);
+		app->combat->AddCombatant((Characther*)prota3, 5);*/
+	}
 
 	return true;
 }
@@ -81,8 +113,26 @@ bool Scene::PostUpdate()
 
 	if (exit_B) return false;
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		app->dialogueSystem->CleanUp();
+		app->dialogueSystem->LoadDialogue("dialogues.xml", 0);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		app->dialogueSystem->CleanUp();
+		app->dialogueSystem->LoadDialogue("dialogues.xml", 1);
+		app->dialogueSystem->LoadDialogueState();
+	}
+	app->render->TextDraw("F1: start dialogue 1", 50, 50, 16, Font::TEXT, { 255, 255, 255 });
+	app->render->TextDraw("F2: start dialogue 2", 50, 75, 16, Font::TEXT, { 255, 255, 255 });
+
+	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	{
+		pSettings->settings_B = !pSettings->settings_B;
+	}
 	
 	if (pSettings->settings_B) { pSettings->OpenSettings(); }
 	if (pPause->pause) { pPause->OpenPause(); }
@@ -99,7 +149,7 @@ bool Scene::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	player->Disable();
+	// player->Disable();
 
 	app->entityManager->Disable();
 
@@ -111,7 +161,84 @@ bool Scene::CleanUp()
 
 void Scene::Debug()
 {
+	// Start again level
+	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+		app->fade->FadingToBlack(this, (Module*)app->scene, 0);
 
+	// Load / Save - keys F5 (save) / F6 (load)
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+		app->SaveGameRequest();
+
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+		app->LoadGameRequest();
+
+
+	// Show Gui 
+	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
+		//app->iScene->buttonDebug = !app->iScene->buttonDebug;
+	}
+
+	// Show collisions
+	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+	{
+		app->physics->collisions = !app->physics->collisions;
+		
+	}
+
+	// GodMode
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		app->input->godMode_B = !app->input->godMode_B;
+	}
+
+	// Enable/Disable Frcap
+	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	{
+		frcap_B = !frcap_B;
+		LOG("frame rate: %d", app->physics->frameRate);
+	}
+
+	//pause menu
+	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+	{
+		pause_B = !pause_B;
+		pSettings->settings_B = !pSettings->settings_B;
+
+		if (!pSettings->settings_B)
+		{
+			pSettings->CloseSettings();
+		}
+
+		LOG("PAUSE");
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		pause_B = !pause_B;
+		pPause->pause = !pPause->pause;
+		if (!pPause->pause)
+		{
+			pPause->ClosePause();
+		}
+
+		LOG("PAUSE");
+	}
+
+	// Mute / unmute
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+
+		mute_B = !mute_B;
+		LOG("MUTE");
+	}
+		
+
+	// God mode functions
+	if (app->input->godMode_B)
+	{
+		
+	}
+
+	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
 }
 
 bool Scene::InitEntities()
@@ -133,7 +260,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	{
 	case 801:
 		LOG("Button Close settings click");
-		pPause->OpenPause();
+		//pPause->OpenPause();
 		pSettings->CloseSettings();
 		break;
 	case 802:

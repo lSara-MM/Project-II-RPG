@@ -30,7 +30,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	GuiControl* CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType = ButtonType::NONE, const char* text = "", int fontSize = 12, SDL_Rect sliderBounds = {0,0,0,0});
+	GuiControl* CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType = ButtonType::NONE, const char* text = "", int fontSize = 12, Font font = Font::UI, SDL_Rect sliderBounds = {0,0,0,0});
 	//void DestroyGuiControl(GuiControl* gui);
 	//void AddGuiControl(GuiControl* gui);
 
@@ -43,6 +43,8 @@ public:
 	bool doLogic = false;
 
 	SDL_Texture* texture;
+
+	bool GUI_debug = false;
 };
 
 #endif // __GUIMANAGER_H__
