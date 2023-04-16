@@ -64,7 +64,7 @@ bool Scene::Start()
 	//Camera pos
 	app->render->camera.x = -2800;
 	app->render->camera.y = -800;
-	app->physics->CreateRectangle(-2850, -700, 8000, 2, bodyType::STATIC);
+	
 
 	InitEntities();
 	app->entityManager->Enable();
@@ -170,6 +170,9 @@ bool Scene::CleanUp()
 	pSettings->CleanUp();
 	pPause->CleanUp();
 	app->guiManager->CleanUp();
+	app->map->CleanUp();
+	app->tex->UnLoad(backGround);
+
 	return true;
 }
 
@@ -191,14 +194,12 @@ void Scene::Debug()
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
 
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
-
 	}
 
 	// Show collisions
 	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
 	{
 		app->physics->collisions = !app->physics->collisions;
-		
 	}
 
 	// Enable/Disable Frcap
