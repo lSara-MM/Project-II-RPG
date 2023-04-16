@@ -38,12 +38,23 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	// A set of animations
-	Animation idleAnim;
-	Animation forwardAnim;
-	Animation jumpAnim;
+	Animation currentAnim;
+	Animation downAnim;
+	Animation idleDownAnim;
+	Animation upAnim;
+	Animation idleUpAnim;
+	Animation leftAnim;
+	Animation idleLeftAnim;
+	Animation rigthAnim;
+	Animation idleRigthAnim;
 	Animation hurtAnim;
 	Animation deathAnim;
 	Animation attackAnim;
+
+	bool keyLockUp = false;
+	bool keyLockDown = false;
+	bool keyLockLeft = false;
+	bool keyLockRigth = false;
 
 	float dtP;
 	float grav;

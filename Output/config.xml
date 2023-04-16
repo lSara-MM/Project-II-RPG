@@ -44,7 +44,7 @@
 	</map>
 
 	<player x="120" y="260" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
-			texturepath="Assets/Textures/Protagonist.png"
+			texturepath="Assets/Textures/CH_Protagonist_Sprites.png"
 			velocity="400" width="20" height="27" FUYMGravity="250"
 			audiopathCoin="Assets/Audio/Fx/Coin.wav"
 			audiopathGem="Assets/Audio/Fx/Gem.wav"
