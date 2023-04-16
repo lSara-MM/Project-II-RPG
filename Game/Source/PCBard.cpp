@@ -118,16 +118,15 @@ bool Bard::Update(float dt)
 		if (app->combat->LastPressedAbility == 1)
 		{
 
-				float damage = app->combat->enemies[0]->CalculateDamage(attack);
-
-				if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3])
+				
+				if(app->combat->targeted_Character != nullptr)
 				{
+					float damage = app->combat->enemies[0]->CalculateDamage(attack * 0.6);
 					//Si no hay godmode va normal, si lo hay la vida del enemigo se reduce a 0
 					if (!app->input->godMode_B)
 					{
-						app->combat->enemies[0]->ModifyHP(-damage);
+						app->combat->targeted_Character->ModifyHP(+damage);
 					}
-
 					else
 					{
 						app->combat->enemies[0]->currentHp = 0;
@@ -141,7 +140,7 @@ bool Bard::Update(float dt)
 		}
 		if (app->combat->LastPressedAbility == 2)
 		{
-			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3])
+			if (app->combat->targeted_Character == app->combat->enemies[1] || app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3])
 			{
 				float damage = app->combat->enemies[1]->CalculateDamage(attack);
 				app->combat->enemies[0]->ModifyHP(-damage);
@@ -152,9 +151,9 @@ bool Bard::Update(float dt)
 		}
 		if (app->combat->LastPressedAbility == 3)
 		{
-			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3])
+			if (app->combat->targeted_Character == app->combat->enemies[0])
 			{
-				float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.75);
+				float damage = app->combat->enemies[0]->CalculateDamage(attack * 0.85);
 				app->combat->enemies[0]->ModifyHP(-damage);
 				app->combat->NextTurn();
 				onTurn = false;
@@ -162,10 +161,9 @@ bool Bard::Update(float dt)
 		}
 		if (app->combat->LastPressedAbility == 4)
 		{
-			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3])
+			if (app->combat->targeted_Character != nullptr)
 			{
-				float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.75);
-				app->combat->enemies[0]->ModifyHP(-damage);
+				app->combat->enemies[0]->ModifyHP(+(attack * 0.25));
 				app->combat->NextTurn();
 				onTurn = false;
 			}
