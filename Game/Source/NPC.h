@@ -35,6 +35,7 @@ public:
 	void Controller(float dt);
 
 public:
+
 	SString NpcName;
 
 	// The pointer to the current Npc animation
@@ -43,9 +44,7 @@ public:
 
 	// A set of animations
 	Animation idleDownAnim;
-
 	
-	SString npcName;
 	vector<int> dialoguesID;
 
 	float dtP;

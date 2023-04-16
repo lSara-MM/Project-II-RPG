@@ -42,21 +42,21 @@ bool Npc::Awake() {
 
 	//dialoguesID.push_back(parameters.attribute("dialogue").as_int());
 	
-	string temp = parameters.attribute("dialogueID").as_string();
-	for (int i = 0; i < temp.size(); i++)
-	{
-		string s(1, temp.at(i));
-		dialoguesID.push_back(stoi(s));
-	}
+	//string temp = parameters.attribute("dialogueID").as_string();
+	//for (int i = 0; i < temp.size(); i++)
+	//{
+	//	string s(1, temp.at(i));
+	//	dialoguesID.push_back(stoi(s));
+	//}
 
-	// no funciona, como se hace un for de atributos :/
-	for (pugi::xml_attribute attr : parameters.attributes())
-	{
-		if (parameters.name() == "dialogueID")
-		{
-			dialoguesID.push_back(attr.as_int());
-		}
-	}
+	//// no funciona, como se hace un for de atributos :/
+	//for (pugi::xml_attribute attr : parameters.attributes())
+	//{
+	//	if (parameters.name() == "dialogueID")
+	//	{
+	//		dialoguesID.push_back(attr.as_int());
+	//	}
+	//}
 
 	return true;
 }
@@ -89,10 +89,10 @@ bool Npc::Update(float dt)
 		dtP = dt / 1000;
 	}
 
-	currentAnimation->Update();
+	//currentAnimation->Update();
 
-	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
+	//DL_Rect rect = currentAnimation->GetCurrentFrame();
+	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
 	return true;
 }

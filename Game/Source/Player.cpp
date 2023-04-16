@@ -134,73 +134,175 @@ bool Player::CleanUp()
 }
 
 
-void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
-
+void Player::OnCollision(PhysBody* physA, PhysBody* physB) 
+{
 	switch (physB->ctype)
 	{
+	case ColliderType::NPC:
+		break;
+	default:
+		break;
 	}
 }
 
 void Player::Controller(float dt)
 {
-	if (!keyLockDown && !keyLockLeft && !keyLockRigth)
+	if (app->input->godMode_B) 
 	{
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		if (!keyLockDown && !keyLockLeft && !keyLockRigth)
 		{
-			keyLockUp = true;
-			currentAnimation = &upAnim;
-			vel.y = -125;
-			vel.x = 0;
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+			{
+				keyLockUp = true;
+				currentAnimation = &upAnim;
+				vel.y = -125 * 2;
+
+				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+				{
+					vel.x = 125 * 2;
+				}
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+				{
+					vel.x = -125 * 2;
+				}
+			}
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP)
+			{
+				keyLockUp = false;
+				currentAnimation = &idleUpAnim;
+			}
 		}
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP)
+		if (!keyLockUp && !keyLockLeft && !keyLockRigth)
 		{
-			keyLockUp = false;
-			currentAnimation = &idleUpAnim;
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+			{
+				keyLockDown = true;
+				currentAnimation = &downAnim;
+				vel.y = 125 * 2;
+
+				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+				{
+					vel.x = 125 * 2;
+				}
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+				{
+					vel.x = -125 * 2;
+				}
+			}
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
+			{
+				keyLockDown = false;
+				currentAnimation = &idleDownAnim;
+			}
+		}
+		if (!keyLockDown && !keyLockUp && !keyLockRigth)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			{
+				keyLockLeft = true;
+				currentAnimation = &leftAnim;
+				vel.x = -125 * 2;
+
+				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+				{
+					vel.y = 125 * 2;
+				}
+				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+				{
+					vel.y = -125 * 2;
+				}
+			}
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+			{
+				keyLockLeft = false;
+				currentAnimation = &idleLeftAnim;
+			}
+		}
+		if (!keyLockDown && !keyLockLeft && !keyLockUp)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+			{
+				keyLockRigth = true;
+				currentAnimation = &rigthAnim;
+				vel.x = 125 * 2;
+
+				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+				{
+					vel.y = 125 * 2;
+				}
+				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+				{
+					vel.y = -125 * 2;
+				}
+			}
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
+			{
+				keyLockRigth = false;
+				currentAnimation = &idleRigthAnim;
+			}
 		}
 	}
-	if (!keyLockUp && !keyLockLeft && !keyLockRigth)
+	else
 	{
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		if (!keyLockDown && !keyLockLeft && !keyLockRigth)
 		{
-			keyLockDown = true;
-			currentAnimation = &downAnim;
-			vel.y = 125;
-			vel.x = 0;
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+			{
+				keyLockUp = true;
+				currentAnimation = &upAnim;
+				vel.y = -125;
+				vel.x = 0;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP)
+			{
+				keyLockUp = false;
+				currentAnimation = &idleUpAnim;
+			}
 		}
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
+		if (!keyLockUp && !keyLockLeft && !keyLockRigth)
 		{
-			keyLockDown = false;
-			currentAnimation = &idleDownAnim;
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+			{
+				keyLockDown = true;
+				currentAnimation = &downAnim;
+				vel.y = 125;
+				vel.x = 0;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
+			{
+				keyLockDown = false;
+				currentAnimation = &idleDownAnim;
+			}
 		}
-	}
-	if (!keyLockDown && !keyLockUp && !keyLockRigth)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		if (!keyLockDown && !keyLockUp && !keyLockRigth)
 		{
-			keyLockLeft = true;
-			currentAnimation = &leftAnim;
-			vel.x = -125;
-			vel.y = 0;
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			{
+				keyLockLeft = true;
+				currentAnimation = &leftAnim;
+				vel.x = -125;
+				vel.y = 0;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+			{
+				keyLockLeft = false;
+				currentAnimation = &idleLeftAnim;
+			}
 		}
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+		if (!keyLockDown && !keyLockLeft && !keyLockUp)
 		{
-			keyLockLeft = false;
-			currentAnimation = &idleLeftAnim;
-		}
-	}
-	if (!keyLockDown && !keyLockLeft && !keyLockUp)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		{
-			keyLockRigth = true;
-			currentAnimation = &rigthAnim;
-			vel.x = 125;
-			vel.y = 0;
-		}
-		if(app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
-		{
-			keyLockRigth = false;
-			currentAnimation = &idleRigthAnim;
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+			{
+				keyLockRigth = true;
+				currentAnimation = &rigthAnim;
+				vel.x = 125;
+				vel.y = 0;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
+			{
+				keyLockRigth = false;
+				currentAnimation = &idleRigthAnim;
+			}
 		}
 	}
 }

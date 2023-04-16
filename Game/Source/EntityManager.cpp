@@ -90,14 +90,12 @@ Entity* EntityManager::CreateEntity(EntityType type)
 
 	switch (type)
 	{
-
 	case EntityType::PLAYER:
 		entity = new Player();
 		break;
 	case EntityType::NPC:
 		entity = new Npc();
 		break;
-
 	case EntityType::PC_PROTAGONIST:
 		entity = new Protagonist();
 		break;

@@ -58,6 +58,7 @@ bool Scene::Start()
 	pPause->CreatePause(this);
 
 	InitEntities();
+	app->entityManager->Enable();
 
 	return true;
 }

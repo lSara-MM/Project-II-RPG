@@ -37,6 +37,7 @@ enum class ColliderType {
 	PORTAL,
 	SAVE,
 	HEALTH,
+	NPC,
 	UNKNOWN
 	// ..
 };
