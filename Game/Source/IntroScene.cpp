@@ -15,6 +15,10 @@
 #include "Defs.h"
 #include "Log.h"
 
+#include <iostream>
+using namespace std;
+#include <sstream>
+
 IntroScene::IntroScene() : Module()
 {
 	name.Create("introScene");
@@ -32,6 +36,21 @@ bool IntroScene::Awake(pugi::xml_node& config)
 	// iterate all objects in the IntroScene
 	// Check https://pugixml.org/docs/quickstart.html#access
 	music_intro = config.attribute("audioIntroPath").as_string();
+
+
+	//Save boton continue
+	pugi::xml_document gameStateFile;
+	pugi::xml_parse_result result = gameStateFile.load_file("save_game.xml");
+
+	IntroLoadNode = gameStateFile.child("save_state").child("introScene");
+
+	LoadState(IntroLoadNode);
+
+
+	pugi::xml_document* saveDoc = new pugi::xml_document();
+	pugi::xml_node saveStateNode = saveDoc->append_child("save_state");
+
+	IntroSaveNode = saveStateNode.append_child("introScene");
 
 	return ret;
 }
@@ -74,6 +93,11 @@ bool IntroScene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
 
+	if (previousGame_B)
+	{
+		LOG("Continue");
+	}
+
 	return true;
 }
 
@@ -108,6 +132,25 @@ bool IntroScene::CleanUp()
 	app->guiManager->CleanUp();
 	return true;
 }
+
+bool IntroScene::LoadState(pugi::xml_node& data)
+{
+	previousGame_B = data.child("previousGame").attribute("state_B").as_bool();
+
+	return true;
+}
+
+bool IntroScene::SaveState(pugi::xml_node& data)
+{
+
+	pugi::xml_node previousGame = data.append_child("previousGame");
+
+	previousGame.append_attribute("state_B") = true;
+
+
+	return true;
+}
+
 
 bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 {

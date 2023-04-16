@@ -42,7 +42,16 @@ public:
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	//Load / Save methods
+	bool LoadState(pugi::xml_node&);
+	bool SaveState(pugi::xml_node&);
+
 public:
+
+	pugi::xml_node IntroSaveNode;
+	pugi::xml_node IntroLoadNode;
+
+	bool previousGame_B = false;
 
 private:
 

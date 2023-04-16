@@ -65,6 +65,10 @@ bool Scene::Start()
 	app->render->camera.x = -2800;
 	app->render->camera.y = -800;
 	app->physics->CreateRectangle(-2850, -700, 8000, 2, bodyType::STATIC);
+
+	InitEntities();
+	app->entityManager->Enable();
+
 	return true;
 }
 

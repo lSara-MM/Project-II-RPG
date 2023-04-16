@@ -7,6 +7,7 @@
 #include "Physics.h"
 #include "Textures.h"
 #include "Scene.h"
+#include "IntroScene.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -161,6 +162,13 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 
 	player.append_attribute("x") = app->scene->player->position.x;
 	player.append_attribute("y") = app->scene->player->position.y;
+
+	if (!app->iScene->previousGame_B)
+	{
+		app->iScene->previousGame_B = true;
+
+		app->iScene->SaveState(app->iScene->IntroSaveNode);
+	}
 
 	//pugi::xml_node prota1 = data.append_child("prota1");
 	// 
