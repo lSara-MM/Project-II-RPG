@@ -40,18 +40,41 @@ bool Combat::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	texturePathBackground = "Assets/Textures/combat_background_placeholder.png"; //FondoActual (habra que cambiarlo por los de la dungeon actual)
+	texturePathTargetButton = "Assets/GUI/UI_button_charactherSelection.png"; //De momento lo he puesto aqui para ver como se ve pero quiza haya que borrarlos
+
 	return ret;
 }
 
 bool Combat::Start()
 {
-	// Settings
-	pSettings->GUI_id = 0;
-	pSettings->CreateSettings(this);
+	//Cargar texturas
+	textureBackground = app->tex->Load(texturePathBackground);
+	textureTargetButton = app->tex->Load(texturePathTargetButton);
 
-	// Pause 
-	pPause->GUI_id = pSettings->GUI_id;
-	pPause->CreatePause(this);
+	//Zona aliados
+	for (int i = 0; i < 4; i++)
+	{
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, this, { 32 + i * 128, 280, 126 , 180 }, ButtonType::START));
+		listButtons.At(i)->data->buttonTex = textureTargetButton; //TEMPORAL, HABRA QUE QUITARLO
+	}
+	//Zona enemigos, tiene un espaciado
+	for (int i = 0; i < 4; i++)
+	{
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4 + i, this, { 736 + i * 128, 280, 126, 180 }, ButtonType::START));
+		listButtons.At(4+i)->data->buttonTex = textureTargetButton; //TEMPORAL, HABRA QUE QUITARLO
+	}
+	//Ambos de los botones de arriba tendrian que ser tipo combat target y estos tener la textura correspondiente de "UI_button_charactherSelection"
+
+	//Botones Acciones Turno Player
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, this, { 107, 510, 140, 50 }, ButtonType::START, actions[0], 20));
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, this, { 107 + 167, 510, 140, 50 }, ButtonType::START, actions[1], 20));
+
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, this, { 107, 600, 140, 50 }, ButtonType::START, actions[2], 20));
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, this, { 107 + 167, 600, 140, 50 }, ButtonType::START, actions[3], 20));
+
+	//Inventory Button
+	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, this, { 60, 60, 50, 50 }, ButtonType::START, "Inv", 20));
 
 	return true;
 }
@@ -65,13 +88,44 @@ bool Combat::Update(float dt)
 {
 	Debug();
 
+	app->render->DrawTexture(textureBackground, 0, 0);
+	app->render->TextDraw(listInitiative.At(charaInTurn)->data->name.GetString(), 560, 20,20);
+
+	//Si algo esta vacio desactivarlo
+	for (int i = 0; i <= 3; i++)
+	{
+		if (enemies[i] == nullptr) { DisableTargetButton(4 + i); }
+	}
+	for (int i = 0; i <= 3; i++)
+	{
+		if (allies[3 - i] == nullptr) { DisableTargetButton(i); }
+	}
+
 	//Pruebas de mover positiones
+	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+	{
+		StartCombat();
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+	{
+		DisableTargetButton(6);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
+	{
+		EnableTargetButton(6);
+	}
 
 	for (int i=1;listInitiative.Count()>=i;i++) 
 	{
 		listInitiative.At(i-1)->data->Update(dt);
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
+
+	//Rectangulo donde va la Info abajo derecha {x,y,w,h} r, g, b, opacity(0 = 100% & 255 = 0%)
+	app->render->DrawRectangle({ 430, 470, 730, 220 }, 255, 255, 255, 250, true);
 
 
 	return true;
@@ -121,6 +175,81 @@ bool Combat::InitEntities()
 bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Event by %d ", control->id);
+
+	switch (control->id)
+	{
+	//Target 
+	case 0:
+		LOG("Allies Slot 1 (last backline) click");
+		targeted_Character = allies[3];
+		break;
+	case 1:
+		LOG("Allies Slot 2	 click");
+		targeted_Character = allies[2];
+		break;
+	case 2:
+		LOG("Allies Slot 2 click");
+		targeted_Character = allies[1];
+		break;
+	case 3:
+		LOG("Allies Slot 3 (first frontline) click");
+		targeted_Character = allies[0];
+		break;
+	case 4:
+		LOG("Enemies Slot 1 (first frontline) click");
+		targeted_Character = enemies[0];
+		break;
+	case 5:
+		LOG("Enemies Slot 2 click");
+		targeted_Character = enemies[1];
+		break;
+	case 6:
+		LOG("Enemies Slot 3 click");
+		targeted_Character = enemies[2];
+		break;
+	case 7:
+		LOG("Enemies Slot 4 (last backline) click");
+		targeted_Character = enemies[3];
+		break;
+//Target
+// 
+	//PLayer OnTurn Action Buttons IMPORTANTE NO MOVERLO PORQUE ROMPERIA LAS FUNCIONES DE SkillButton
+	
+	case 8:
+		LOG("Attack 1");
+		lastPressedAbility_I = 1;
+		break;
+
+	case 9:
+		LOG("Attack 2");
+		lastPressedAbility_I = 2;
+		break;
+
+	case 10:
+		LOG("Attack 3");
+		lastPressedAbility_I = 3;
+		break;
+
+	case 11:
+		LOG("Attack 4");
+		lastPressedAbility_I = 4;
+		break;
+	//PLayer OnTurn Action Buttons
+
+	//Inventory
+	case 12:
+		LOG("Attack 4");
+		break;
+	
+
+		//Otros botones
+
+		//Otros botones
+
+
+	default:
+		break;
+	}
 
 	app->audio->PlayFx(control->fxControl);
 	return true;
@@ -192,26 +321,64 @@ bool Combat::OrderBySpeed()
 	int n = listInitiative.Count();
 	listInitiative.At(2)->data->speed;
 
-	for (int i = 0; i < n - 1; i++)
-		for (int j = 0; j < n - i - 1; j++)
+	for (int i = 0; i < n - 1; i++) {
+		
+		for (int j = 0; j < n - i - 1; j++) {
+
 			if (listInitiative.At(j)->data->speed > listInitiative.At(j + 1)->data->speed)
 			{
 				//SWAP WIP
-				ListItem<Character*>* aux = nullptr; /*new ListItem<Characther*>*/; //Esta petando el switchhh
-				aux = listInitiative.At(j);
-				aux->data = listInitiative.At(j)->data;
+				ListItem<Character*>* aux = new ListItem<Character*>(listInitiative.At(j)->data); /*new ListItem<Characther*>*/; //Esta petando el switchhh
+				/*aux = listInitiative.At(j);
+				aux->data = listInitiative.At(j)->data;*/
 				listInitiative.At(j)->data = listInitiative.At(j + 1)->data;
 				listInitiative.At(j + 1)->data = aux->data;
+				delete aux;
 			}
-
+		}
+		
+	}
+		
 	return true;
 }
 
 
 bool Combat::NextTurn()
 {
-	if (listInitiative.Count() <= charaInTurn) { charaInTurn = 1; }
-	else { ++charaInTurn; }
+	//Resetear los botones targeteados
+	lastPressedAbility_I = 0;
+	targeted_Character = nullptr;
+
+	//Reactivar todos los posibles targets, los vacios desactivarlos
+
+	for (int i = 0; i < 7; i++)
+	{
+		EnableTargetButton(i);
+	}
+	for (int i = 1; i < 4; i++)
+	{
+		EnableSkillButton(i);
+	}
+
+	//Si algo esta vacio desactivarlo
+	for (int i = 0; i <= 3; i++)
+	{
+		if (enemies[i] == nullptr) { DisableTargetButton(4 + i); }
+	}
+	for (int i = 0; i <= 3; i++)
+	{
+		if (allies[3-i] == nullptr) { DisableTargetButton(i); }
+	}
+	
+
+
+
+	if (listInitiative.Count()-1 <= charaInTurn) { charaInTurn = 0; }
+	else
+	{
+		listInitiative.At(charaInTurn)->data->onTurn = false;
+		++charaInTurn; 
+	}
 	listInitiative.At(charaInTurn)->data->onTurn = true;
 
 	return true;
@@ -219,7 +386,7 @@ bool Combat::NextTurn()
 
 bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 {
-	//DUDA: Esto solo es para evitar accesos de acceso , no se si quitarlo porque teoricamente no se deberia poder poner esos valores.
+	//DUDA: Esto solo es para evitar errores de acceso , no se si quitarlo porque teoricamente no se deberia poder poner esos valores.
 	if (charaPosition_I>4||charaPosition_I<0)
 	{
 		return false;
@@ -257,6 +424,93 @@ bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 	}
 
 	allies[newPosition_I - 1]=aux;//Colocamos el alliado en la posicion objetivo
+
+	return true;
+}
+
+bool Combat::StartCombat()
+{
+	OrderBySpeed();
+
+	lastPressedAbility_I = 0;
+	targeted_Character = nullptr;
+	for (int i = 0; i < 7; i++)
+	{
+		EnableTargetButton(i);
+		EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
+	}
+	listInitiative.start->data->onTurn = true;
+	charaInTurn = 0;
+	
+	return true;
+}
+
+bool Combat::DisableTargetButton(int id)
+{
+	//Evitar que pete o acceder a botones que no deberia 
+	if (id<0)
+	{
+		return false;
+	}
+	if (id > 7)
+	{
+		return false;
+	}
+
+	listButtons.At(id)->data->state = GuiControlState::DISABLED;
+
+
+	return true;
+}
+
+bool Combat::EnableTargetButton(int id)
+{
+	//Evitar que pete o acceder a botones que no deberia 
+	if (id < 0)
+	{
+		return false;
+	}
+	if (id > 7)
+	{
+		return false;
+	}
+
+	listButtons.At(id)->data->state = GuiControlState::NORMAL;
+
+
+	return true;
+}
+
+bool Combat::EnableSkillButton(int skillNum)
+{
+	//Evitar que pete o acceder a botones que no deberia 
+	if (skillNum < 1)
+	{
+		return false;
+	}
+	if (skillNum > 4)
+	{
+		return false;
+	}
+
+	listButtons.At(7 + skillNum)->data->state = GuiControlState::NORMAL;
+
+	return true;
+}
+
+bool Combat::DisableSkillButton(int skillNum)
+{
+	//Evitar que pete o acceder a botones que no deberia 
+	if (skillNum < 1)
+	{
+		return false;
+	}
+	if (skillNum > 4)
+	{
+		return false;
+	}
+
+	listButtons.At(7 + skillNum)->data->state = GuiControlState::DISABLED;
 
 	return true;
 }

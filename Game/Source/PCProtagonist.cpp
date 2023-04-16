@@ -49,17 +49,23 @@ bool Protagonist::Start() {
 	
 	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
+
+	
 	
 	pbody->listener = this; 
 
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::PC_PROTAGONIST;
 	this->charaType_I = CharatherType::ALLY;
-	this->maxHp = 50;
-	this->currentHp = 37;
-	this->attack = 30;
-	this->armor = 20;
+	this->name = "Protagonista"; //Hay que poner el nombre assigando al principio del juego
+	this->maxHp = 1150;
+	this->currentHp = 1150;
+	this->attack = 190;
+	this->armor = 10;
 	this->speed = 5;
+	this->onTurn = false;
+	
+	
 
 	this->positionCombat_I = 1;
 
@@ -68,67 +74,92 @@ bool Protagonist::Start() {
 
 bool Protagonist::Update(float dt)
 {
+	
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
 
+	//Health Bar
+	int auxhp = ((currentHp * 100) / maxHp)*0.90;
+	app->render->DrawRectangle({ 477 - 107 * positionCombat_I, 250, 90, 20 }, 255, 0, 255, 255, true);
+	app->render->DrawRectangle({ 477 - 107 * positionCombat_I, 250, auxhp, 20}, 255, 255, 255, 255, true);
+	
+	//Modify Health Bar
+	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
+		ModifyHP(-1);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN) {
+		ModifyHP(10);
+	}
+
+	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
 	rect = { 0,0,258,496 };
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
-	app->render->DrawTexture(texture, 300 - 70*positionCombat_I, 120/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/);
+	app->render->DrawTexture(texture, 416 - 128*positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/);
 
 	if (onTurn)
 	{
-		//if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-		//{
-		//	int x, y;
-		//	app->input->GetMousePosition(x, y);
-
-		//	//List<Entity*> targets = app->entityManager->GetEntitiesByType(/*type of the enemy*/);
-
-		//	for (int i = 0; i < 3; i++)
-		//	{
-		//		if (app->combat->enemies[i]->pbody->Contains(x, y))
-		//		{
-		//			// Calculate damage and apply it to the enemy
-		//			int damage = app->combat->enemies[i]->CalculateDamage(attack);
-		//			app->combat->enemies[i]->ModifyHP(-damage);
-
-		//			// Exit the loop since we've found the target
-		//			break;
-		//		}
-		//	}
-		//}
-		
-		if (app->input->GetMouseButtonDown(SDL_SCANCODE_1) == KEY_DOWN)
+		app->render->DrawCircle( 300 - 70 * positionCombat_I,15, 20,0,255,255);
+		if (app->combat->lastPressedAbility_I == 1)
 		{
 
-				float damage = app->combat->enemies[0]->CalculateDamage(attack);
-				app->combat->enemies[0]->ModifyHP(-damage);
+			
+			//Si no hay godmode va normal, si lo hay la vida del enemigo se reduce a 0
+
+			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3])
+			{
+
+				if (!app->input->godMode_B)
+				{
+					float damage = app->combat->targeted_Character->CalculateDamage(attack);
+				}
+				else
+				{
+					app->combat->enemies[0]->currentHp = 0;
+				}
+
+				SDL_Delay(500);
 				app->combat->NextTurn();
+				onTurn = false;
+			}
+				
 		}
-		if (app->input->GetMouseButtonDown(SDL_SCANCODE_2) == KEY_DOWN)
+		if (app->combat->lastPressedAbility_I == 2)
+		{
+			if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1]) 
+			{
+				float damage = app->combat->targeted_Character->CalculateDamage(attack);
+				app->combat->targeted_Character->ModifyHP(-damage);
+				onTurn = false;
+				app->combat->NextTurn();
+			}
+			
+		}
+		if (app->combat->lastPressedAbility_I == 3)
 		{
 
-			float damage = app->combat->enemies[1]->CalculateDamage(attack);
-			app->combat->enemies[0]->ModifyHP(-damage);
-			app->combat->NextTurn();
+			if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1]) {
+				float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.55);
+				app->combat->enemies[0]->ModifyHP(-damage);
+				app->combat->enemies[1]->ModifyHP(-damage);
+				app->combat->NextTurn();
+				onTurn = false;
+			}
+			
 		}
-		if (app->input->GetMouseButtonDown(SDL_SCANCODE_3) == KEY_DOWN)
+		if (app->combat->lastPressedAbility_I == 4)
 		{
 
-			float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.75);
-			app->combat->enemies[0]->ModifyHP(-damage);
-			app->combat->NextTurn();
-		}
-		if (app->input->GetMouseButtonDown(SDL_SCANCODE_4) == KEY_DOWN)
-		{
-
-			float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.75);
-			app->combat->enemies[0]->ModifyHP(-damage);
-			app->combat->NextTurn();
+			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3]) {
+				float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.55);
+				app->combat->enemies[2]->ModifyHP(-damage);
+				app->combat->enemies[3]->ModifyHP(-damage);
+				app->combat->NextTurn();
+				onTurn = false;
+			}
 		}
 	}
 

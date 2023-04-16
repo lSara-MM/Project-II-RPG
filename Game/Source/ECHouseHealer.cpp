@@ -1,4 +1,4 @@
-#include "ECHouseTank.h"
+#include "ECHouseHealer.h"
 
 #include "Characther.h"
 #include "CombatEnemy.h"
@@ -18,20 +18,20 @@
 
 #include "Log.h"
 #include "Point.h"
-#include"Combat.h"
+#include "Combat.h"
 
-HouseTank::HouseTank() : CombatEnemy()
+HouseHealer::HouseHealer() : CombatEnemy()
 {
 	name.Create("PCProtagonist");
 
 	active = true;
 }
 
-HouseTank::~HouseTank() {
+HouseHealer::~HouseHealer() {
 
 }
 
-bool HouseTank::Awake() {
+bool HouseHealer::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -43,7 +43,7 @@ bool HouseTank::Awake() {
 	return true;
 }
 
-bool HouseTank::Start() {
+bool HouseHealer::Start() {
 
 	texture = app->tex->Load(texturePath);
 
@@ -53,21 +53,21 @@ bool HouseTank::Start() {
 	pbody->listener = this;
 
 	pbody->ctype = ColliderType::PLAYER;
-	this->type = EntityType::ENEMY_TANK_HOUSE;
+	this->type = EntityType::ENEMY_HEALER_HOUSE;
 	this->charaType_I = CharatherType::ENEMY;
-	this->name = "Bewitched Wardrobe";
-	this->maxHp = 1000;
-	this->currentHp = 1000;
-	this->attack = 120;
-	this->armor = 18;
-	this->speed = 3;
+	this->name = "Possessed Painting";
+	this->maxHp = 850;
+	this->currentHp = 850;
+	this->attack = 140;
+	this->armor = 8;
+	this->speed = 2;
 
 	this->positionCombat_I = 1;
 
 	return true;
 }
 
-bool HouseTank::Update(float dt)
+bool HouseHealer::Update(float dt)
 {
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
@@ -78,9 +78,9 @@ bool HouseTank::Update(float dt)
 	app->render->DrawRectangle({ 722 + 107 * positionCombat_I, 280, auxhp, 20 }, 255, 255, 255, 255, true);
 
 	// Modify Health Bar
-	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
+	/*if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
 		currentHp--;
-	}
+	}*/
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
@@ -94,7 +94,7 @@ bool HouseTank::Update(float dt)
 	{
 		
 		int randomNum = std::rand() % 3 + 1;
-		//Mejor con un switch
+		//Esto mejor con un switch en vez de 3 IFs
 		if (randomNum == 1)
 		{
 
@@ -122,7 +122,7 @@ bool HouseTank::Update(float dt)
 		}
 		//render barra de habilidades
 		// Para seleccionar app->input->GetMousePosition o 
-		//app->combat->NextTurn(); //Se llamaria dos veces
+		//app->combat->NextTurn(); //Se generan 2 next turn
 		onTurn = false;
 
 	}
@@ -131,7 +131,7 @@ bool HouseTank::Update(float dt)
 	return true;
 }
 
-bool HouseTank::CleanUp()
+bool HouseHealer::CleanUp()
 {
 	app->tex->UnLoad(texture);
 	pbody->body->GetWorld()->DestroyBody(pbody->body);

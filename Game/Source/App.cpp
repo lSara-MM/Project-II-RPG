@@ -459,4 +459,5 @@ void App::DisableAtStart()
 	scene->active = false;
 	loseScene->active = false;
 	entityManager->active = false;
+	combat->active = false;
 }

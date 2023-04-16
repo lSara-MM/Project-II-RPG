@@ -1,4 +1,4 @@
-#include "ECHouseTank.h"
+#include "ECHouseDPS.h"
 
 #include "Characther.h"
 #include "CombatEnemy.h"
@@ -20,30 +20,30 @@
 #include "Point.h"
 #include"Combat.h"
 
-HouseTank::HouseTank() : CombatEnemy()
+HouseDPS::HouseDPS() : CombatEnemy()
 {
 	name.Create("PCProtagonist");
 
 	active = true;
 }
 
-HouseTank::~HouseTank() {
+HouseDPS::~HouseDPS() {
 
 }
 
-bool HouseTank::Awake() {
+bool HouseDPS::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 
 
 	//texturePath = parameters.attribute("texturepath").as_string();
-	texturePath = "Assets/Textures/Enemy1.png";
+	texturePath = "Assets/Textures/EnemyCursedPuppet.png";
 
 	return true;
 }
 
-bool HouseTank::Start() {
+bool HouseDPS::Start() {
 
 	texture = app->tex->Load(texturePath);
 
@@ -53,21 +53,21 @@ bool HouseTank::Start() {
 	pbody->listener = this;
 
 	pbody->ctype = ColliderType::PLAYER;
-	this->type = EntityType::ENEMY_TANK_HOUSE;
+	this->type = EntityType::ENEMY_DPS_HOUSE;
 	this->charaType_I = CharatherType::ENEMY;
-	this->name = "Bewitched Wardrobe";
-	this->maxHp = 1000;
-	this->currentHp = 1000;
-	this->attack = 120;
-	this->armor = 18;
-	this->speed = 3;
+	this->name = "Cursed Puppet";
+	this->maxHp = 600;
+	this->currentHp = 600;
+	this->attack = 200;
+	this->armor = 0;
+	this->speed = 5;
 
 	this->positionCombat_I = 1;
 
 	return true;
 }
 
-bool HouseTank::Update(float dt)
+bool HouseDPS::Update(float dt)
 {
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
@@ -78,9 +78,9 @@ bool HouseTank::Update(float dt)
 	app->render->DrawRectangle({ 722 + 107 * positionCombat_I, 280, auxhp, 20 }, 255, 255, 255, 255, true);
 
 	// Modify Health Bar
-	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
+	/*if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
 		currentHp--;
-	}
+	}*/
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
@@ -99,10 +99,12 @@ bool HouseTank::Update(float dt)
 		{
 
 			float damage = app->combat->allies[0]->CalculateDamage(attack);
+
 			if (!app->input->godMode_B)//Hace daño si no hay godmode
 			{
 				app->combat->enemies[0]->ModifyHP(-damage);
 			}
+
 			app->combat->NextTurn();
 		}
 		if (randomNum == 2)
@@ -122,7 +124,7 @@ bool HouseTank::Update(float dt)
 		}
 		//render barra de habilidades
 		// Para seleccionar app->input->GetMousePosition o 
-		//app->combat->NextTurn(); //Se llamaria dos veces
+		//app->combat->NextTurn();
 		onTurn = false;
 
 	}
@@ -131,7 +133,7 @@ bool HouseTank::Update(float dt)
 	return true;
 }
 
-bool HouseTank::CleanUp()
+bool HouseDPS::CleanUp()
 {
 	app->tex->UnLoad(texture);
 	pbody->body->GetWorld()->DestroyBody(pbody->body);

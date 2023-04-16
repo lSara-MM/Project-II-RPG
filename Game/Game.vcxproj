@@ -21,14 +21,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -98,6 +98,8 @@
     <ClCompile Include="Source\Characther.cpp" />
     <ClCompile Include="Source\Combat.cpp" />
     <ClCompile Include="Source\CombatEnemy.cpp" />
+    <ClCompile Include="Source\ECHouseDPS.cpp" />
+    <ClCompile Include="Source\ECHouseHealer.cpp" />
     <ClCompile Include="Source\ECHouseTank.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
@@ -115,6 +117,7 @@
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\PartyMember.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
+    <ClCompile Include="Source\PCBard.cpp" />
     <ClCompile Include="Source\PCProtagonist.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
@@ -128,6 +131,8 @@
     <ClInclude Include="Source\Characther.h" />
     <ClInclude Include="Source\Combat.h" />
     <ClInclude Include="Source\CombatEnemy.h" />
+    <ClInclude Include="Source\ECHouseDPS.h" />
+    <ClInclude Include="Source\ECHouseHealer.h" />
     <ClInclude Include="Source\ECHouseTank.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Entity.h" />
@@ -144,6 +149,7 @@
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\PartyMember.h" />
     <ClInclude Include="Source\Pathfinding.h" />
+    <ClInclude Include="Source\PCBard.h" />
     <ClInclude Include="Source\PCProtagonist.h" />
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />
