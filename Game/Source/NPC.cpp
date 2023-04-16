@@ -29,6 +29,7 @@ Npc::~Npc() {
 
 }
 
+// no entra en el pugi, porque T-T
 bool Npc::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
@@ -39,13 +40,31 @@ bool Npc::Awake() {
 
 	texturePath = parameters.attribute("texturepath").as_string();
 
+	//dialoguesID.push_back(parameters.attribute("dialogue").as_int());
+	
+	string temp = parameters.attribute("dialogueID").as_string();
+	for (int i = 0; i < temp.size(); i++)
+	{
+		string s(1, temp.at(i));
+		dialoguesID.push_back(stoi(s));
+	}
+
+	// no funciona, como se hace un for de atributos :/
+	for (pugi::xml_attribute attr : parameters.attributes())
+	{
+		if (parameters.name() == "dialogueID")
+		{
+			dialoguesID.push_back(attr.as_int());
+		}
+	}
+
 	return true;
 }
 
 bool Npc::Start() {
 
 	texture = app->tex->Load(texturePath);
-	currentAnimation = &currentAnim;
+	//currentAnimation = &currentAnim;
 	
 	/*pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
@@ -69,16 +88,6 @@ bool Npc::Update(float dt)
 	{
 		dtP = dt / 1000;
 	}
-
-	//Controller(dtP);
-
-	//vel = b2Vec2(vel.x * dtP, vel.y * dtP);
-	////Set the velocity of the pbody of the Npc
-	//pbody->body->SetLinearVelocity(vel);
-
-	////Update Npc position in pixels
-	//position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2;
-	//position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2;
 
 	currentAnimation->Update();
 

@@ -53,6 +53,9 @@
 			audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
 			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"/>
 		
+	<npc x="10" y="20" width="230" height="1230" texturepath="null" 
+		dialogueID="123"/>
+
 	<enemy x_E="300" y_E="50" type_E="flying" detectionDistance="20" 
 			texturepath_E="Assets/Textures/ss_duck.png"
 			velocity_E="160" width_E="16" height_E="12"
