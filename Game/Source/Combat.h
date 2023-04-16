@@ -65,16 +65,12 @@ public:
 	Character* allies[4]; //4 es backline, 1 es frontline
 	Character* enemies[4]; //4 es backline, 1 es frontline
 
-	
-
 private:
 
 	// Settings
-	Settings options;
-	Settings* pSettings = &options;
+	Settings* pSettings;
 
-	Pause pauseMenu;
-	Pause* pPause = &pauseMenu;
+	//Pause* pPause = &pauseMenu;
 
 	bool exit;
 };

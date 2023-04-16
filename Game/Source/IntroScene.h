@@ -45,7 +45,6 @@ public:
 public:
 
 private:
-
 	const char* music_intro;
 
 	// buttons
@@ -53,8 +52,7 @@ private:
 	const char* buttons[6] = { "Play", "Continue", "Settings", "Credits", "Exit", "\n" };
 	int bNum;
 	
-	Settings options;
-	Settings* pSettings = &options;
+	Settings* pSettings;
 
 	bool exit_B;
 };

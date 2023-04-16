@@ -8,7 +8,6 @@
 #include "Textures.h"
 #include "Window.h"
 
-
 #include "IntroScene.h"
 #include "LoseScene.h"
 #include "Combat.h"
@@ -50,12 +49,11 @@ bool Scene::Start()
 	pause_B = false;
 
 	// Settings
-	pSettings->GUI_id = 0;
-	pSettings->CreateSettings(this);
+	pSettings = new Settings(this);
 
 	// Pause 
-	pPause->GUI_id = pSettings->GUI_id;
-	pPause->CreatePause(this);
+	//pPause->GUI_id = pSettings->GUI_id;
+	//pPause->CreatePause(this);
 
 	return true;
 }
@@ -67,23 +65,7 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
-
 	Debug();
-
-	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-	app->entityManager->AddEntity(prota1);
-
-	Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-	app->entityManager->AddEntity(prota2);
-
-	Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-	app->entityManager->AddEntity(prota3);
-
-	Entity* prota4 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-	app->entityManager->AddEntity(prota4);
-
-	Entity* enemy1 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
-	app->entityManager->AddEntity(enemy1);
 
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(entidad2);*/
@@ -91,23 +73,35 @@ bool Scene::Update(float dt)
 	//ERIC: Prueba que no funciona.
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) 
 	{ 
+		Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+		app->entityManager->AddEntity(prota1);
+
+		Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+		app->entityManager->AddEntity(prota2);
+
+		Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+		app->entityManager->AddEntity(prota3);
+
+		Entity* prota4 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+		app->entityManager->AddEntity(prota4);
+
+		Entity* enemy1 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
+		app->entityManager->AddEntity(enemy1);
+
 		//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDA�S AVISADOS!!!
 		app->combat->AddCombatant((Character*)enemy1, 0);
 		app->combat->AddCombatant((Character*)prota1, 3);
 		app->combat->AddCombatant((Character*)prota2, 4);
 		app->combat->AddCombatant((Character*)prota3, 5);
-		app->combat->AddCombatant((Character*)prota4, 9);
-		
-		
+		app->combat->AddCombatant((Character*)prota4, 9);		
 	}
+	
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
 	{
 		app->combat->MoveAllies(1,4);
 		/*app->combat->AddCombatant((Characther*)prota2, -2);
 		app->combat->AddCombatant((Characther*)prota3, 5);*/
-
 	}
-
 
 	return true;
 }
@@ -116,16 +110,13 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if (exit_B) return false;
-
-	
-		
+	if (exit_B) return false;	
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 	
 	if (pSettings->settings_B) { pSettings->OpenSettings(); }
-	if (pPause->pause) { pPause->OpenPause(); }
+	//if (pPause->pause) { pPause->OpenPause(); }
 	app->guiManager->Draw();
 
 	return ret;
@@ -144,7 +135,7 @@ bool Scene::CleanUp()
 	app->entityManager->Disable();
 
 	pSettings->CleanUp();
-	pPause->CleanUp();
+	//pPause->CleanUp();
 	app->guiManager->CleanUp();
 	return true;
 }
@@ -204,11 +195,11 @@ void Scene::Debug()
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
 		!pause_B;
-		pPause->pause = !pPause->pause;
-		if (!pPause->pause)
+		//pPause->pause = !pPause->pause;
+		/*if (!pPause->pause)
 		{
 			pPause->ClosePause();
-		}
+		}*/
 
 		LOG("PAUSE");
 	}
@@ -249,7 +240,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	{
 	case 801:
 		LOG("Button Close settings click");
-		pPause->OpenPause();
+		//pPause->OpenPause();
 		pSettings->CloseSettings();
 		break;
 	case 802:
@@ -271,11 +262,11 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 806:
 		LOG("Button Close pause click");
-		pPause->ClosePause(); 
+		//pPause->ClosePause(); 
 		break;
 	case 807:
 		LOG("Button Resume click");
-		pPause->ClosePause();
+		//pPause->ClosePause();
 		break;
 	case 808:
 		LOG("Button Return to Title click");
@@ -283,7 +274,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 809:
 		LOG("Button settings click");
-		pPause->ClosePause();
+		//pPause->ClosePause();
 
 		pSettings->settings_B = !pSettings->settings_B;
 		if (!pSettings->settings_B) { pSettings->CloseSettings();}

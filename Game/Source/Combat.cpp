@@ -46,12 +46,11 @@ bool Combat::Awake(pugi::xml_node& config)
 bool Combat::Start()
 {
 	// Settings
-	pSettings->GUI_id = 0;
-	pSettings->CreateSettings(this);
+	//pSettings->GUI_id = 0;
+	//pSettings->CreateSettings(this);
 
 	// Pause 
-	pPause->GUI_id = pSettings->GUI_id;
-	pPause->CreatePause(this);
+	//pPause->CreatePause(this);
 
 	return true;
 }
@@ -104,7 +103,7 @@ bool Combat::CleanUp()
 	app->entityManager->Disable();
 
 	pSettings->CleanUp();
-	pPause->CleanUp();
+	//pPause->CleanUp();
 	app->guiManager->CleanUp();
 	return true;
 }
