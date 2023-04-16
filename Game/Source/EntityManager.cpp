@@ -1,6 +1,4 @@
 #include "EntityManager.h"
-#include "Player.h"
-#include "Characther.h"
 
 #include "App.h"
 #include "Map.h"
@@ -11,6 +9,10 @@
 #include "Log.h"
 
 //CHARACTHERS
+#include "Player.h"
+#include "NPC.h"
+
+#include "Characther.h" 
 //PCs
 #include "PCProtagonist.h"
 //ECs
@@ -91,6 +93,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 
 	case EntityType::PLAYER:
 		entity = new Player();
+		break;
+	case EntityType::NPC:
+		entity = new Npc();
 		break;
 
 	case EntityType::PC_PROTAGONIST:
