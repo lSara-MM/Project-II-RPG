@@ -393,7 +393,7 @@ bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 
 bool Combat::StartCombat()
 {
-	//OrderBySpeed();
+	OrderBySpeed();
 
 	listInitiative.start->data->onTurn = true;
 	charaInTurn = 0;

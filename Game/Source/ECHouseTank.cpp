@@ -94,7 +94,7 @@ bool HouseTank::Update(float dt)
 	{
 		
 		int randomNum = std::rand() % 3 + 1;
-
+		//Mejor con un switch
 		if (randomNum == 1)
 		{
 
@@ -122,7 +122,7 @@ bool HouseTank::Update(float dt)
 		}
 		//render barra de habilidades
 		// Para seleccionar app->input->GetMousePosition o 
-		app->combat->NextTurn();
+		//app->combat->NextTurn(); //Se llamaria dos veces
 		onTurn = false;
 
 	}

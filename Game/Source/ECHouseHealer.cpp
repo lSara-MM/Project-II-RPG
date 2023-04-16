@@ -94,7 +94,7 @@ bool HouseHealer::Update(float dt)
 	{
 		
 		int randomNum = std::rand() % 3 + 1;
-
+		//Esto mejor con un switch en vez de 3 IFs
 		if (randomNum == 1)
 		{
 
@@ -122,7 +122,7 @@ bool HouseHealer::Update(float dt)
 		}
 		//render barra de habilidades
 		// Para seleccionar app->input->GetMousePosition o 
-		app->combat->NextTurn();
+		//app->combat->NextTurn(); //Se generan 2 next turn
 		onTurn = false;
 
 	}

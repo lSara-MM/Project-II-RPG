@@ -106,10 +106,10 @@ bool Scene::Update(float dt)
 
 		//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDA�S AVISADOS!!!
 		app->combat->AddCombatant((Character*)enemy1, 0);
-		app->combat->AddCombatant((Character*)enemy2, 10);
-		app->combat->AddCombatant((Character*)enemy3, 200);
-		app->combat->AddCombatant((Character*)prota1, 3000);
-		app->combat->AddCombatant((Character*)prota2, 40000);
+		app->combat->AddCombatant((Character*)enemy2, 5);
+		app->combat->AddCombatant((Character*)enemy3, 3);
+		app->combat->AddCombatant((Character*)prota1, 1);
+		app->combat->AddCombatant((Character*)prota2, -2);
 		/*app->combat->AddCombatant((Character*)prota3, 5);
 		app->combat->AddCombatant((Character*)prota4, 9);*/
 		
