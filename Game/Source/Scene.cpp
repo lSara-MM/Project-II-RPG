@@ -165,6 +165,9 @@ bool Scene::CleanUp()
 	pSettings->CleanUp();
 	pPause->CleanUp();
 	app->guiManager->CleanUp();
+	app->map->CleanUp();
+	app->tex->UnLoad(backGround);
+
 	return true;
 }
 
