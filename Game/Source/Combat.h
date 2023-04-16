@@ -68,6 +68,7 @@ public:
 	Character* allies[4]; //4 es backline, 1 es frontline
 	Character* enemies[4]; //4 es backline, 1 es frontline
 	Character* targeted_Character=nullptr; //Last button selected
+	int LastPressedAbility = 0;
 
 
 private:

@@ -103,48 +103,28 @@ bool Protagonist::Update(float dt)
 	if (onTurn)
 	{
 		app->render->DrawCircle( 300 - 70 * positionCombat_I,15, 20,0,255,255);
-		//if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-		//{
-		//	int x, y;
-		//	app->input->GetMousePosition(x, y);
-
-		//	//List<Entity*> targets = app->entityManager->GetEntitiesByType(/*type of the enemy*/);
-
-		//	for (int i = 0; i < 3; i++)
-		//	{
-		//		if (app->combat->enemies[i]->pbody->Contains(x, y))
-		//		{
-		//			// Calculate damage and apply it to the enemy
-		//			int damage = app->combat->enemies[i]->CalculateDamage(attack);
-		//			app->combat->enemies[i]->ModifyHP(-damage);
-
-		//			// Exit the loop since we've found the target
-		//			break;
-		//		}
-		//	}
-		//}
 		
-		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_UP)
+		if (app->combat->LastPressedAbility == 1)
 		{
 
-				float damage = app->combat->enemies[0]->CalculateDamage(attack);
-				//Si no hay godmode va normal, si lo hay la vida del enemigo se reduce a 0
-				if (!app->input->godMode_B)
-				{
-					app->combat->enemies[0]->ModifyHP(-damage);
-				}
+			float damage = app->combat->enemies[0]->CalculateDamage(attack);
+			//Si no hay godmode va normal, si lo hay la vida del enemigo se reduce a 0
+			if (!app->input->godMode_B)
+			{
+				app->combat->enemies[0]->ModifyHP(-damage);
+			}
 
-				else
-				{
-					app->combat->enemies[0]->currentHp = 0;
-				}
+			else
+			{
+				app->combat->enemies[0]->currentHp = 0;
+			}
 
-				SDL_Delay(500);
-				onTurn = false;
-				app->combat->NextTurn();
+			SDL_Delay(500);
+			onTurn = false;
+			app->combat->NextTurn();
 				
 		}
-		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+		if (app->combat->LastPressedAbility == 2)
 		{
 
 			float damage = app->combat->enemies[1]->CalculateDamage(attack);
@@ -153,7 +133,7 @@ bool Protagonist::Update(float dt)
 			app->combat->NextTurn();
 			
 		}
-		if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+		if (app->combat->LastPressedAbility == 3)
 		{
 
 			float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.75);
@@ -161,7 +141,7 @@ bool Protagonist::Update(float dt)
 			app->combat->NextTurn();
 			onTurn = false;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+		if (app->combat->LastPressedAbility == 4)
 		{
 
 			float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.75);

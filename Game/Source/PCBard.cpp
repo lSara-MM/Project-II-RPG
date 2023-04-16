@@ -115,7 +115,7 @@ bool Bard::Update(float dt)
 		//	}
 		//}
 		
-		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_UP)
+		if (app->combat->LastPressedAbility == 1)
 		{
 
 				float damage = app->combat->enemies[0]->CalculateDamage(attack);
@@ -136,7 +136,7 @@ bool Bard::Update(float dt)
 				app->combat->NextTurn();
 				
 		}
-		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+		if (app->combat->LastPressedAbility == 2)
 		{
 
 			float damage = app->combat->enemies[1]->CalculateDamage(attack);
@@ -145,7 +145,7 @@ bool Bard::Update(float dt)
 			app->combat->NextTurn();
 			
 		}
-		if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+		if (app->combat->LastPressedAbility == 3)
 		{
 
 			float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.75);
@@ -153,7 +153,7 @@ bool Bard::Update(float dt)
 			app->combat->NextTurn();
 			onTurn = false;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+		if (app->combat->LastPressedAbility == 4)
 		{
 
 			float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.75);

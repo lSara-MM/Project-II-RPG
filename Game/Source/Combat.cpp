@@ -206,18 +206,22 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	
 	case 8:
 		LOG("Attack 1");
+		LastPressedAbility = 1;
 		break;
 
 	case 9:
 		LOG("Attack 2");
+		LastPressedAbility = 2;
 		break;
 
 	case 10:
 		LOG("Attack 3");
+		LastPressedAbility = 3;
 		break;
 
 	case 11:
 		LOG("Attack 4");
+		LastPressedAbility = 4;
 		break;
 	//PLayer OnTurn Action Buttons
 
