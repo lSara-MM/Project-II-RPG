@@ -113,41 +113,46 @@ bool Protagonist::Update(float dt)
 			{
 				app->combat->enemies[0]->ModifyHP(-damage);
 			}
-
 			else
 			{
 				app->combat->enemies[0]->currentHp = 0;
 			}
 
 			SDL_Delay(500);
-			onTurn = false;
 			app->combat->NextTurn();
+			onTurn = false;
 				
 		}
 		if (app->combat->LastPressedAbility == 2)
 		{
 
-			float damage = app->combat->enemies[1]->CalculateDamage(attack);
-			app->combat->enemies[0]->ModifyHP(-damage);
+			float damage = app->combat->targeted_Character->CalculateDamage(attack);
+			app->combat->targeted_Character->ModifyHP(-damage);
 			onTurn = false;
 			app->combat->NextTurn();
 			
 		}
 		if (app->combat->LastPressedAbility == 3)
 		{
-
-			float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.75);
-			app->combat->enemies[0]->ModifyHP(-damage);
-			app->combat->NextTurn();
-			onTurn = false;
+			if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1]) {
+				float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.55);
+				app->combat->enemies[0]->ModifyHP(-damage);
+				app->combat->enemies[1]->ModifyHP(-damage);
+				app->combat->NextTurn();
+				onTurn = false;
+			}
+			
 		}
 		if (app->combat->LastPressedAbility == 4)
 		{
 
-			float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.75);
-			app->combat->enemies[0]->ModifyHP(-damage);
-			app->combat->NextTurn();
-			onTurn = false;
+			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3]) {
+				float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.55);
+				app->combat->enemies[2]->ModifyHP(-damage);
+				app->combat->enemies[3]->ModifyHP(-damage);
+				app->combat->NextTurn();
+				onTurn = false;
+			}
 		}
 	}
 
