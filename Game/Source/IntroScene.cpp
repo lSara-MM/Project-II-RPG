@@ -148,11 +148,8 @@ bool IntroScene::LoadState(pugi::xml_node& data)
 
 bool IntroScene::SaveState(pugi::xml_node& data)
 {
-
 	pugi::xml_node previousGame = data.append_child("previousGame");
-
 	previousGame.append_attribute("state_B") = true;
-
 
 	return true;
 }
