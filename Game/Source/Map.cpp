@@ -129,34 +129,40 @@ void Map::DrawPlatformCollider() {
 
     while (mapLayerItem != NULL) {
 
-        if (mapLayerItem->data->name == "Collider") {
-
-            for (int x = 0; x < mapLayerItem->data->width; x++)
+        if (mapLayerItem->data->properties.GetProperty("Colliders") != NULL && mapLayerItem->data->properties.GetProperty("Colliders")->value == true)
+        {
+            for (int x1 = 0; x1 < mapLayerItem->data->width; x1++) //Preguntar a Pedro porque explota
             {
-                for (int y = 0; y < mapLayerItem->data->height; y++)
+                for (int y1 = 0; y1 < mapLayerItem->data->height; y1++)
                 {
-                    int gid = mapLayerItem->data->Get(x, y);
+                    // L05: DONE 9: Complete the draw function
+                    int gid = mapLayerItem->data->Get(x1, y1);
 
-                    if (gid == 1)
+
+                    //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
+                    TileSet* tileset = GetTilesetFromTileId(gid);
+
+                    SDL_Rect r = tileset->GetTileRect(gid);
+                    iPoint pos = MapToWorld(x1, y1);
+
+                    switch (gid)
                     {
-                        TileSet* tileset = GetTilesetFromTileId(gid);
+                    case 111:
 
-                        SDL_Rect r = tileset->GetTileRect(gid);
+                        int w, h;
+                        w = 32;
+                        h = 32;
 
-                        iPoint pos = MapToWorld(x, y);
+                        PhysBody* co = new PhysBody;
+                        co = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                        co->ctype = ColliderType::PLATFORM;
+                        listBodies.Add(co);
 
-                        PhysBody* collider;
-
-                        collider = app->physics->CreateRectangle(pos.x + r.w * 0.5 , pos.y + r.h * 0.5 , r.w, r.h, bodyType::STATIC);
-
-                        collider->ctype = ColliderType::PLATFORM;
-
-                        listBodies.Add(collider);
+                        break;
                     }
                 }
             }
         }
-        mapLayerItem = mapLayerItem->next;
     }
 }
 
@@ -323,7 +329,6 @@ bool Map::Load()
         ret = LoadAllLayers(mapFileXML.child("map"));
     }
   
-
     if(ret == true)
     {
         LOG("Successfully parsed map XML file :%s", mapFileName.GetString());
@@ -355,9 +360,6 @@ bool Map::Load()
     if(mapFileXML) mapFileXML.reset();
 
     mapLoaded = ret;
-
-
-    //DrawPlatformCollider();
 
     int w, h;
     uchar* data = NULL;

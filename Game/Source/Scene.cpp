@@ -64,7 +64,6 @@ bool Scene::Start()
 	//Camera pos
 	app->render->camera.x = -2800;
 	app->render->camera.y = -800;
-	app->physics->CreateRectangle(-2850, -700, 8000, 2, bodyType::STATIC);
 	return true;
 }
 
@@ -191,7 +190,7 @@ void Scene::Debug()
 	// Show collisions
 	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
 	{
-		!app->physics->collisions;	
+		app->physics->collisions = !app->physics->collisions;
 	}
 
 	// GodMode

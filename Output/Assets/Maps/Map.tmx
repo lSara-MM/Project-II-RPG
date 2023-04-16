@@ -8,7 +8,7 @@
    <property name="Navigation" type="bool" value="true"/>
   </properties>
  </imagelayer>
- <layer id="1" name="Collider" width="111" height="79" offsetx="1248" offsety="0">
+ <layer id="1" name="collider" width="111" height="79" offsetx="1248" offsety="0">
   <properties>
    <property name="Draw" type="bool" value="false"/>
    <property name="Navigation" type="bool" value="false"/>
