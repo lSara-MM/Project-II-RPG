@@ -306,18 +306,24 @@ bool Combat::OrderBySpeed()
 	int n = listInitiative.Count();
 	listInitiative.At(2)->data->speed;
 
-	for (int i = 0; i < n - 1; i++)
-		for (int j = 0; j < n - i - 1; j++)
+	for (int i = 0; i < n - 1; i++) {
+		
+		for (int j = 0; j < n - i - 1; j++) {
+
 			if (listInitiative.At(j)->data->speed > listInitiative.At(j + 1)->data->speed)
 			{
 				//SWAP WIP
-				ListItem<Character*>* aux = nullptr; /*new ListItem<Characther*>*/; //Esta petando el switchhh
-				aux = listInitiative.At(j);
-				aux->data = listInitiative.At(j)->data;
+				ListItem<Character*>* aux = new ListItem<Character*>(listInitiative.At(j)->data); /*new ListItem<Characther*>*/; //Esta petando el switchhh
+				/*aux = listInitiative.At(j);
+				aux->data = listInitiative.At(j)->data;*/
 				listInitiative.At(j)->data = listInitiative.At(j + 1)->data;
 				listInitiative.At(j + 1)->data = aux->data;
+				delete aux;
 			}
-
+		}
+		
+	}
+		
 	return true;
 }
 
