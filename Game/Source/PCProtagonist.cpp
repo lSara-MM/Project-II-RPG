@@ -106,14 +106,15 @@ bool Protagonist::Update(float dt)
 		if (app->combat->lastPressedAbility_I == 1)
 		{
 
-			float damage = app->combat->enemies[0]->CalculateDamage(attack);
+			
 			//Si no hay godmode va normal, si lo hay la vida del enemigo se reduce a 0
 
 			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3])
 			{
+
 				if (!app->input->godMode_B)
 				{
-					app->combat->targeted_Character->ModifyHP(-damage);
+					float damage = app->combat->targeted_Character->CalculateDamage(attack);
 				}
 				else
 				{
