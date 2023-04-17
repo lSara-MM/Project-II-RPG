@@ -39,6 +39,8 @@ bool Scene::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	lobby_music = config.attribute("music").as_string();
+
 	sceneNode = config;
 
 	return ret;
@@ -46,6 +48,7 @@ bool Scene::Awake(pugi::xml_node& config)
 
 bool Scene::Start()
 {
+	app->audio->PlayMusic(lobby_music, 0);
 	//Load Map
 	app->map->Load();
 	backGround = app->tex->Load("Assets/Maps/TwistedTentMap.png");
