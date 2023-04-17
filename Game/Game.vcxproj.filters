@@ -71,9 +71,6 @@
     <ClCompile Include="Source\GuiSliderBar.cpp">
       <Filter>Modules\Core\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Combat.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Source\PCProtagonist.cpp">
       <Filter>Modules\Entities\Combat\PCs</Filter>
     </ClCompile>
@@ -95,19 +92,18 @@
     <ClCompile Include="Source\CombatEnemy.cpp">
       <Filter>Modules\Entities\Combat</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PCBard.cpp">
-      <Filter>Modules\Entities\PCs</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ECHouseDPS.cpp">
-      <Filter>Modules\Entities\EC</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ECHouseHealer.cpp">
-      <Filter>Modules\Entities\EC</Filter>
-    </ClCompile>
     <ClCompile Include="Source\PartyMember.cpp">
       <Filter>Modules\Entities\Combat</Filter>
     </ClCompile>
     <ClCompile Include="Source\NPC.cpp" />
+    <ClCompile Include="Source\ECHouseDPS.cpp" />
+    <ClCompile Include="Source\ECHouseHealer.cpp" />
+    <ClCompile Include="Source\PCBard.cpp">
+      <Filter>Modules\Entities\Combat\PCs</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Combat.cpp">
+      <Filter>Modules\Entities\Combat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player.h" />
@@ -214,9 +210,6 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy.h" />
-    <ClInclude Include="Source\Combat.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Source\PCProtagonist.h">
       <Filter>Modules\Entities\Combat\PCs</Filter>
     </ClInclude>
@@ -238,19 +231,18 @@
     <ClInclude Include="Source\CombatEnemy.h">
       <Filter>Modules\Entities\Combat</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PCBard.h">
-      <Filter>Modules\Entities\PCs</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ECHouseDPS.h">
-      <Filter>Modules\Entities\EC</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ECHouseHealer.h">
-      <Filter>Modules\Entities\EC</Filter>
-    </ClInclude>
     <ClInclude Include="Source\PartyMember.h">
       <Filter>Modules\Entities\Combat</Filter>
     </ClInclude>
     <ClInclude Include="Source\NPC.h" />
+    <ClInclude Include="Source\ECHouseDPS.h" />
+    <ClInclude Include="Source\ECHouseHealer.h" />
+    <ClInclude Include="Source\PCBard.h">
+      <Filter>Modules\Entities\Combat\PCs</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Combat.h">
+      <Filter>Modules\Entities\Combat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">

@@ -56,7 +56,11 @@
 			audiopathCd ="Assets/Audio/Fx/sfx_Attack_Up.wav"
 			audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
 			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"/>
-		
+
+	<bard maxHp="1000" currentHp="1000" attack="200" armor="8" speed="6"/>
+
+	<protagonist maxHp="1150" currentHp="1150" attack="190" armor="10" speed="5"/>
+			
 	<npc x="10" y="20" width="230" height="1230" texturepath="Assets/Textures/BlueCube_NPC.jpg" 
 		dialogueID="123"/>
 		

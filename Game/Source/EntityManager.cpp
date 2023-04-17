@@ -10,6 +10,7 @@
 #include "Defs.h"
 #include "Log.h"
 
+#include "Combat.h"
 //CHARACTHERS
 #include "Player.h"
 #include "NPC.h"
@@ -165,7 +166,8 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 
 	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
 
-	//app->scene->prota1->currentHp = data.child("prota1").attribute("currentHp").as_int();
+	//app->combat->allies[0]->currentHp = data.child("bard").attribute("currentHp").as_int();
+	//app->combat->allies[1]->currentHp = data.child("protagonist").attribute("currentHp").as_int();
 
 	return true;
 }
@@ -185,16 +187,12 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 		app->iScene->SaveState(app->iScene->IntroSaveNode);
 	}
 
-	//pugi::xml_node prota1 = data.append_child("prota1");
-	// 
-	//prota1.append_attribute("currentHp") = app->scene->prota1->currentHp;
-	// 
-	//pugi::xml_node prota2 = data.append_child("prota2");
+	//pugi::xml_node bard = data.append_child("bard");
+	//bard.append_attribute("currentHp") = app->combat->allies[0]->currentHp;
 
-	//pugi::xml_node prota3 = data.append_child("prota3");
-
-	//pugi::xml_node prota4 = data.append_child("prota4");
-
+	//pugi::xml_node protagonist = data.append_child("bard");
+	//protagonist.append_attribute("currentHp") = app->combat->allies[1]->currentHp;
+ 
 	return true;
 }
 

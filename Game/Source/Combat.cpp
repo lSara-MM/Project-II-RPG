@@ -8,7 +8,7 @@
 #include "Textures.h"
 #include "Window.h"
 
-
+#include "Scene.h"
 #include "IntroScene.h"
 #include "LoseScene.h"
 
@@ -80,10 +80,12 @@ bool Combat::Start()
 	
 	{Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_BARD);
 	app->entityManager->AddEntity(prota1); //No se esta metiendo
-
+	prota1->parameters = app->scene->sceneNode.child("bard");
+	prota1->Awake();
 	Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
 	app->entityManager->AddEntity(prota2);
-
+	prota2->parameters = app->scene->sceneNode.child("protagonist");
+	prota2->Awake();
 	{/*Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
 	app->entityManager->AddEntity(prota3);
 

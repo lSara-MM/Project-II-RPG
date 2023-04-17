@@ -84,6 +84,9 @@ private:
 
 	Pause pauseMenu;
 	Pause* pPause = &pauseMenu;
+
+	pugi::xml_node combatNode;
+
 	//TEXTURAS
 		//Fondo
 		const char* texturePathBackground;
