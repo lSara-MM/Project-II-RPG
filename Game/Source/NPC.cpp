@@ -36,6 +36,8 @@ Npc::~Npc() {
 // no entra en el pugi, porque T-T
 bool Npc::Awake() {
 
+	NpcName = parameters.attribute("name").as_string();
+
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 
@@ -44,23 +46,15 @@ bool Npc::Awake() {
 
 	texturePath = parameters.attribute("texturepath").as_string();
 
-	//dialoguesID.push_back(parameters.attribute("dialogue").as_int());
-	
-	//string temp = parameters.attribute("dialogueID").as_string();
-	//for (int i = 0; i < temp.size(); i++)
-	//{
-	//	string s(1, temp.at(i));
-	//	dialoguesID.push_back(stoi(s));
-	//}
 
-	//// no funciona, como se hace un for de atributos :/
-	//for (pugi::xml_attribute attr : parameters.attributes())
-	//{
-	//	if (parameters.name() == "dialogueID")
-	//	{
-	//		dialoguesID.push_back(attr.as_int());
-	//	}
-	//}
+	// Load dialogue IDs
+	for (pugi::xml_attribute attr = parameters.first_attribute(); attr; attr = attr.next_attribute())
+	{	
+		if (strcmp(attr.name(), "dialogueID") == 0)
+		{
+			dialoguesID.push_back(attr.as_int());
+		}
+	}
 
 	return true;
 }
