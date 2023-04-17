@@ -94,6 +94,7 @@ bool IntroScene::Update(float dt)
 
 	if (previousGame_B)
 	{
+		listButtons.start->next->data->state = GuiControlState::NORMAL;
 		LOG("Continue");
 	}
 
@@ -165,10 +166,12 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 1:
 		LOG("Button start click");
 		app->input->getInput_B = true;
-		
+		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		break;
 	case 2:
 		LOG("Button continue click");
+		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+		continueGame_B = true;
 		break;
 	case 3:
 		LOG("Button settings click");

@@ -55,6 +55,8 @@ public:
 
 	bool previousGame_B = false;
 
+	bool continueGame_B = false;
+
 private:
 	const char* music_intro;
 
