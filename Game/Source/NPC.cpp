@@ -45,7 +45,7 @@ bool Npc::Awake() {
 		{
 			dialoguesID.push_back(attr.as_int());
 		}
-		else if (strcmp(attr.name(), "x") == 0)
+		if (strcmp(attr.next_attribute().name(), "dialogueID") != 0)
 		{
 			break;
 		}
