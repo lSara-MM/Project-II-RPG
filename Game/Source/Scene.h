@@ -5,6 +5,7 @@
 
 #include "Module.h"
 #include "Player.h"
+#include "NPC.h"
 
 #include "GuiButton.h"
 #include "GuiCheckBox.h"

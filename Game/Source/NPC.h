@@ -50,15 +50,17 @@ public:
 	float dtP;
 	
 	SDL_RendererFlip flipType;
-	PhysBody* npcMerch;
-	PhysBody* npcMerchSensor;
+	PhysBody* pbody;
+	//PhysBody* npcMerch;
+	//PhysBody* npcMerchSensor;
 
 private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
 
-	iPoint positionMerch;
+	iPoint position;
+	//iPoint positionMerch;
 	int width, height;
 };
 
