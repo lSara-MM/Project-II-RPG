@@ -43,21 +43,22 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	// A set of animations
-	Animation idleDownAnim;
+	Animation idleAnim;
 	
 	vector<int> dialoguesID;
 
 	float dtP;
 	
 	SDL_RendererFlip flipType;
-	PhysBody* pbody;
+	PhysBody* npcMerch;
+	PhysBody* npcMerchSensor;
 
 private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
 
-	iPoint  position;
+	iPoint positionMerch;
 	int width, height;
 };
 

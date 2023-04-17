@@ -57,7 +57,7 @@
 			audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
 			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"/>
 		
-	<npc x="10" y="20" width="230" height="1230" texturepath="Assets/Textures/BlueCube_NPC.jpg" 
+	<npc x="120" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png" 
 		dialogueID="123"/>
 		
 </scene>
