@@ -46,9 +46,11 @@ bool Npc::Awake() {
 
 	texturePath = parameters.attribute("texturepath").as_string();
 
+	int a = 0;
 	// Load dialogue IDs
 	for (pugi::xml_attribute attr = parameters.first_attribute(); attr; attr = attr.next_attribute())
 	{	
+		a++;
 		if (strcmp(attr.name(), "dialogueID") == 0)
 		{
 			dialoguesID.push_back(attr.as_int());
@@ -58,7 +60,7 @@ bool Npc::Awake() {
 			break;
 		}
 	}
-
+	a;
 	return true;
 }
 
