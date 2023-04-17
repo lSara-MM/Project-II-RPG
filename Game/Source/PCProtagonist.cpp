@@ -36,7 +36,12 @@ bool Protagonist::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 
-	
+	this->maxHp = parameters.attribute("maxHp").as_int();
+	this->currentHp = parameters.attribute("currentHp").as_int();
+	this->attack = parameters.attribute("attack").as_int();
+	this->armor = parameters.attribute("armor").as_int();
+	this->speed = parameters.attribute("speed").as_int();
+
 	//texturePath = parameters.attribute("texturepath").as_string();
 	texturePath = "Assets/Textures/PCA.png";
 
@@ -58,11 +63,7 @@ bool Protagonist::Start() {
 	this->type = EntityType::PC_PROTAGONIST;
 	this->charaType_I = CharatherType::ALLY;
 	this->name = "Protagonista"; //Hay que poner el nombre assigando al principio del juego
-	this->maxHp = 1150;
-	this->currentHp = 1150;
-	this->attack = 190;
-	this->armor = 10;
-	this->speed = 5;
+	
 	this->onTurn = false;
 	
 	
