@@ -92,34 +92,47 @@ bool HouseDPS::Update(float dt)
 
 	if (onTurn)
 	{
+		SDL_Delay(2000);
 		
 		int randomNum = std::rand() % 3 + 1;
 		//Mejor con un switch
 		if (randomNum == 1)
 		{
-
+			if (!(app->combat->allies[0]==nullptr))
+			{
 			float damage = app->combat->allies[0]->CalculateDamage(attack);
-
 			if (!app->input->godMode_B)//Hace daño si no hay godmode
 			{
-				app->combat->enemies[0]->ModifyHP(-damage);
+				app->combat->allies[0]->ModifyHP(-damage);
 			}
+			}
+			
 
 			app->combat->NextTurn();
 		}
 		if (randomNum == 2)
 		{
-
+			if (!(app->combat->allies[1] == nullptr))
+			{
 			float damage = app->combat->allies[1]->CalculateDamage(attack);
-			app->combat->enemies[1]->ModifyHP(-damage);
+			app->combat->allies[1]->ModifyHP(-damage);
 			app->combat->NextTurn();
+			}
+			
 		}
 		if (randomNum == 3)
 		{
-
+			if (!(app->combat->allies[0] == nullptr))
+			{
 			float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
-			app->combat->enemies[0]->ModifyHP(-damage);
-			app->combat->enemies[1]->ModifyHP(-damage);
+			app->combat->allies[0]->ModifyHP(-damage);
+			}
+			
+			if (!(app->combat->allies[1] == nullptr))
+			{
+				float damage = app->combat->allies[1]->CalculateDamage(attack * 0.5);
+				app->combat->allies[1]->ModifyHP(-damage);
+			}
 			app->combat->NextTurn();
 		}
 		//render barra de habilidades

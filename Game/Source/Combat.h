@@ -52,9 +52,9 @@ public:
 	bool MoveAllies(int charaPosition_I, int newPosition_I);
 	bool StartCombat();
 //TargetControl
-	// Del 0 al 7
+	// Del 0-3 allies al 4-7 enemies 
 	bool DisableTargetButton(int id);
-	// Del 0 al 7
+	// Del 0-3 allies al 4-7 enemies
 	bool EnableTargetButton(int id); 
 	
 	//Del 1 al 4

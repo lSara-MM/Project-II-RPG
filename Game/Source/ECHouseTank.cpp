@@ -92,7 +92,8 @@ bool HouseTank::Update(float dt)
 
 	if (onTurn)
 	{
-		
+		SDL_Delay(2000);
+
 		int randomNum = std::rand() % 3 + 1;
 		//Mejor con un switch
 		if (randomNum == 1)
@@ -101,23 +102,23 @@ bool HouseTank::Update(float dt)
 			float damage = app->combat->allies[0]->CalculateDamage(attack);
 			if (!app->input->godMode_B)//Hace daño si no hay godmode
 			{
-				app->combat->enemies[0]->ModifyHP(-damage);
+				if (!(app->combat->allies[0] == nullptr))
+				app->combat->allies[0]->ModifyHP(-damage);
 			}
 			app->combat->NextTurn();
 		}
 		if (randomNum == 2)
 		{
-
-			float damage = app->combat->allies[1]->CalculateDamage(attack);
-			app->combat->enemies[1]->ModifyHP(-damage);
+			if (!(app->combat->allies[1] == nullptr))
+			{float damage = app->combat->allies[1]->CalculateDamage(attack);
+			app->combat->allies[1]->ModifyHP(-damage);}
+			
 			app->combat->NextTurn();
 		}
 		if (randomNum == 3)
 		{
 
-			float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
-			app->combat->enemies[0]->ModifyHP(-damage);
-			app->combat->enemies[1]->ModifyHP(-damage);
+			this->ModifyHP(maxHp * 0.3);
 			app->combat->NextTurn();
 		}
 		//render barra de habilidades

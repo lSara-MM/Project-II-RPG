@@ -92,32 +92,42 @@ bool HouseHealer::Update(float dt)
 
 	if (onTurn)
 	{
-		
+		SDL_Delay(2000);
+
 		int randomNum = std::rand() % 3 + 1;
 		//Esto mejor con un switch en vez de 3 IFs
 		if (randomNum == 1)
 		{
 
-			float damage = app->combat->allies[0]->CalculateDamage(attack);
+			float damage = app->combat->allies[1]->CalculateDamage(attack);
 			if (!app->input->godMode_B)//Hace daño si no hay godmode
 			{
-				app->combat->enemies[0]->ModifyHP(-damage);
+				app->combat->allies[1]->ModifyHP(-damage);
 			}
 			app->combat->NextTurn();
 		}
 		if (randomNum == 2)
 		{
-
-			float damage = app->combat->allies[1]->CalculateDamage(attack);
-			app->combat->enemies[1]->ModifyHP(-damage);
+			if (!(app->combat->enemies[1] == nullptr)) {
+				float heal = maxHp * 0.3;
+				app->combat->enemies[1]->ModifyHP(heal);
+			}
 			app->combat->NextTurn();
 		}
 		if (randomNum == 3)
 		{
 
-			float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
-			app->combat->enemies[0]->ModifyHP(-damage);
-			app->combat->enemies[1]->ModifyHP(-damage);
+			if (!(app->combat->allies[0] == nullptr))
+			{
+				float damage = app->combat->allies[1]->CalculateDamage(attack * 0.8);
+				app->combat->allies[0]->ModifyHP(-damage);
+			}
+
+			if (!(app->combat->allies[1] == nullptr))
+			{
+				float damage = app->combat->allies[2]->CalculateDamage(attack * 0.3);
+				app->combat->allies[1]->ModifyHP(-damage);
+			}
 			app->combat->NextTurn();
 		}
 		//render barra de habilidades

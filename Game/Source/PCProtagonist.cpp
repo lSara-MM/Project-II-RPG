@@ -103,13 +103,20 @@ bool Protagonist::Update(float dt)
 	if (onTurn)
 	{
 		app->render->DrawCircle( 300 - 70 * positionCombat_I,15, 20,0,255,255);
-		if (app->combat->lastPressedAbility_I == 1)
+		if (app->combat->lastPressedAbility_I == 1) //Only allows targeting 2 and 3
 		{
 
+			for (short i = 0; i <= 3; i++)
+			{
+				app->combat->DisableTargetButton(i);
+			}
+
+			app->combat->DisableTargetButton(4);
+			app->combat->DisableTargetButton(7);
 			
 			//Si no hay godmode va normal, si lo hay la vida del enemigo se reduce a 0
 
-			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3])
+			if (app->combat->targeted_Character != nullptr)
 			{
 
 				if (!app->input->godMode_B)
@@ -118,10 +125,10 @@ bool Protagonist::Update(float dt)
 				}
 				else
 				{
-					app->combat->enemies[0]->currentHp = 0;
+					app->combat->targeted_Character->ModifyHP(-99999);
 				}
 
-				SDL_Delay(500);
+				SDL_Delay(2000);
 				app->combat->NextTurn();
 				onTurn = false;
 			}

@@ -94,26 +94,7 @@ bool Bard::Update(float dt)
 	if (onTurn)
 	{
 		app->render->DrawCircle( 300 - 70 * positionCombat_I,15, 20,0,255,255);
-		//if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-		//{
-		//	int x, y;
-		//	app->input->GetMousePosition(x, y);
-
-		//	//List<Entity*> targets = app->entityManager->GetEntitiesByType(/*type of the enemy*/);
-
-		//	for (int i = 0; i < 3; i++)
-		//	{
-		//		if (app->combat->enemies[i]->pbody->Contains(x, y))
-		//		{
-		//			// Calculate damage and apply it to the enemy
-		//			int damage = app->combat->enemies[i]->CalculateDamage(attack);
-		//			app->combat->enemies[i]->ModifyHP(-damage);
-
-		//			// Exit the loop since we've found the target
-		//			break;
-		//		}
-		//	}
-		//}
+	
 		
 		if (app->combat->lastPressedAbility_I == 1)
 		{
