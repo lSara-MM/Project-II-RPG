@@ -76,6 +76,44 @@ bool Combat::Start()
 	//Inventory Button
 	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, this, { 60, 60, 50, 50 }, ButtonType::START, "Inv", 20));
 
+	
+	
+	{Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_BARD);
+	app->entityManager->AddEntity(prota1); //No se esta metiendo
+
+	Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota2);
+
+	{/*Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota3);
+
+	Entity* prota4 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota4);*/}
+
+	Entity* enemy1 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
+	app->entityManager->AddEntity(enemy1);
+
+	Entity* enemy2 = app->entityManager->CreateEntity(EntityType::ENEMY_DPS_HOUSE);
+	app->entityManager->AddEntity(enemy2);
+
+	Entity* enemy3 = app->entityManager->CreateEntity(EntityType::ENEMY_HEALER_HOUSE);
+	app->entityManager->AddEntity(enemy3);
+
+
+
+	//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDAIS AVISADOS!!!
+	app->combat->AddCombatant((Character*)enemy1, 0);
+	app->combat->AddCombatant((Character*)enemy2, 5);
+	app->combat->AddCombatant((Character*)enemy3, 3);
+	app->combat->AddCombatant((Character*)prota1, 1);
+	app->combat->AddCombatant((Character*)prota2, -2);
+	/*app->combat->AddCombatant((Character*)prota3, 5);
+	app->combat->AddCombatant((Character*)prota4, 9);*/
+	}
+
+
+
+
 	return true;
 }
 
