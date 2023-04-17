@@ -38,17 +38,9 @@ bool Npc::Awake() {
 
 	NpcName = parameters.attribute("name").as_string();
 
-	position.x = parameters.attribute("x").as_int();
-	position.y = parameters.attribute("y").as_int();
-
-	width = parameters.attribute("width").as_int();
-	height = parameters.attribute("height").as_int();
-
-	texturePath = parameters.attribute("texturepath").as_string();
-
 	// Load dialogue IDs
 	for (pugi::xml_attribute attr = parameters.first_attribute(); attr; attr = attr.next_attribute())
-	{	
+	{
 		if (strcmp(attr.name(), "dialogueID") == 0)
 		{
 			dialoguesID.push_back(attr.as_int());
@@ -58,6 +50,14 @@ bool Npc::Awake() {
 			break;
 		}
 	}
+
+	position.x = parameters.attribute("x").as_int();
+	position.y = parameters.attribute("y").as_int();
+
+	width = parameters.attribute("width").as_int();
+	height = parameters.attribute("height").as_int();
+
+	texturePath = parameters.attribute("texturepath").as_string();
 
 	return true;
 }
