@@ -221,7 +221,7 @@ void Scene::Debug()
 	}
 
 	// Show collisions
-	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F8))
 	{
 		app->physics->collisions = !app->physics->collisions;
 	}
@@ -236,6 +236,7 @@ void Scene::Debug()
 	// GodMode
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
+		app->physics->collisions = !app->physics->collisions;
 		app->input->godMode_B = !app->input->godMode_B;
 	}
 
@@ -272,13 +273,6 @@ void Scene::Debug()
 		LOG("MUTE");
 	}
 		
-
-	// God mode functions
-	if (app->input->godMode_B)
-	{
-		app->physics->collisions = true;
-	}
-
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
 }
 
