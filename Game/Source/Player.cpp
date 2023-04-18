@@ -12,6 +12,7 @@
 
 #include "FadeToBlack.h"
 #include "EntityManager.h"
+#include "DialogueSystem.h"
 #include "Map.h"
 
 #include "Log.h"
@@ -147,6 +148,8 @@ bool Player::CleanUp()
 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) 
 {
+	ListItem<Npc*>* i;
+
 	switch (physB->ctype)
 	{
 	case ColliderType::NPC:

@@ -51,6 +51,8 @@ bool Scene::Start()
 	backGround = app->tex->Load("Assets/Maps/TwistedTentMap.png");
 	exit_B = false;
 
+	npcSetID = 1;
+
 	// Settings
 	pSettings = new Settings(this);
 
@@ -142,7 +144,6 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x -= ceil(speed);
 
-
 	return true;
 }
 
@@ -155,17 +156,10 @@ bool Scene::PostUpdate()
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		app->dialogueSystem->CleanUp();
-		app->dialogueSystem->LoadDialogue("dialogues.xml", 0);
+		app->dialogueSystem->LoadDialogue(0);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-	{
-		app->dialogueSystem->CleanUp();
-		app->dialogueSystem->LoadDialogue("dialogues.xml", 1);
-		app->dialogueSystem->LoadDialogueState();
-	}
 	app->render->TextDraw("F1: start dialogue 1", 50, 50, 16, Font::TEXT, { 255, 255, 255 });
-	app->render->TextDraw("F2: start dialogue 2", 50, 75, 16, Font::TEXT, { 255, 255, 255 });
 
 	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 	{
@@ -294,7 +288,7 @@ bool Scene::InitEntities()
 		npc->parameters = itemNode;
 		npc->Awake();
 
-		npcList.Add(npc);
+		listNpc.Add(npc);
 	}
 
 	//app->entityManager->Awake();

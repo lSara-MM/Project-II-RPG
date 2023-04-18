@@ -91,8 +91,9 @@ bool DialogueSystem::CleanUp()
 }
 
 
-int DialogueSystem::LoadDialogue(const char* file, int dialogueID)
+int DialogueSystem::LoadDialogue(int dialogueID)
 {
+	const char* file = "dialogues.xml";
 	pugi::xml_parse_result result = dialogues.load_file(file);
 
 	DialogueTree* tree = new DialogueTree(false);

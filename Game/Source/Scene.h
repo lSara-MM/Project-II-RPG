@@ -51,7 +51,9 @@ public:
 public:
 
 	Player* player;
-	List <Npc*> npcList;
+	List <Npc*> listNpc;
+
+	int npcSetID;
 
 	bool frcap_B = true;
 	bool pause_B;

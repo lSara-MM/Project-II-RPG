@@ -38,6 +38,9 @@ public:
 
 	SString name;
 
+	iPoint position;
+	int width, height;
+
 	// The pointer to the current Npc animation
 	// It will be switched depending on the Npc's movement direction
 	Animation* currentAnimation = nullptr;
@@ -51,17 +54,12 @@ public:
 	
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
-	//PhysBody* npcMerch;
-	//PhysBody* npcMerchSensor;
+	PhysBody* pSensor;
 
 private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
-
-	iPoint position;
-	//iPoint positionMerch;
-	int width, height;
 };
 
 #endif // __NPC_H__

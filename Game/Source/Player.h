@@ -9,6 +9,7 @@
 #include "Physics.h"
 
 #include "Animation.h"
+#include "NPC.h"
 #include "SString.h"
 
 struct SDL_Texture;
@@ -43,6 +44,7 @@ public:
 
 	// A set of animations
 	Animation currentAnim;
+
 	Animation downAnim;
 	Animation idleDownAnim;
 	Animation upAnim;
@@ -51,6 +53,7 @@ public:
 	Animation idleLeftAnim;
 	Animation rigthAnim;
 	Animation idleRigthAnim;
+
 	Animation hurtAnim;
 	Animation deathAnim;
 	Animation attackAnim;
@@ -76,6 +79,7 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 
+	Npc* npcTalkingTo;
 	
 	int width, height;
 };
