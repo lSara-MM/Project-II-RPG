@@ -57,12 +57,14 @@
 			audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
 			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"/>
 		
-	<npc name="paco1" dialogueID="1" dialogueID="3" dialogueID="4"
+	<npc name="GUIA" dialogueID="1"
 		x="120" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
 
-	<npc name="paco2" dialogueID="1" dialogueID="2"
+	<npc name="ORACULO" dialogueID="2"
 		x="420" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
 		
+	<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
+		x="420" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
 </scene>
 	<map>
 		<mapfolder path="Assets/Maps/"/>

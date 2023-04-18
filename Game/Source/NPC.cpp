@@ -33,7 +33,6 @@ Npc::~Npc() {
 
 }
 
-// no entra en el pugi, porque T-T
 bool Npc::Awake() {
 
 	NpcName = parameters.attribute("name").as_string();
