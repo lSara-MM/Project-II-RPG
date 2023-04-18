@@ -75,9 +75,8 @@ bool Combat::Start()
 
 	//Inventory Button
 	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, this, { 60, 60, 50, 50 }, ButtonType::START, "Inv", 20));
-
 	
-	
+	//Inicializar Combatientes (si no se hace aqui por algun motivo se dejan de ver)
 	{Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_BARD);
 	app->entityManager->AddEntity(prota1); //No se esta metiendo
 	prota1->parameters = app->scene->sceneNode.child("bard");
@@ -114,13 +113,10 @@ bool Combat::Start()
 	app->combat->AddCombatant((Character*)enemy2, 5);
 	app->combat->AddCombatant((Character*)enemy3, 3);
 	app->combat->AddCombatant((Character*)prota1, 1);
-	app->combat->AddCombatant((Character*)prota2, -2);
+	app->combat->AddCombatant((Character*)prota2, 13);
 	/*app->combat->AddCombatant((Character*)prota3, 5);
 	app->combat->AddCombatant((Character*)prota4, 9);*/
 	}
-
-
-
 
 	return true;
 }
@@ -147,21 +143,22 @@ bool Combat::Update(float dt)
 		if (allies[3 - i] == nullptr) { DisableTargetButton(i); }
 	}
 
-	//Pruebas de mover positiones
+	//Iniciar el combate
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 	{
 		StartCombat();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
-		DisableTargetButton(6);
-	}
-	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
-	{
-		EnableTargetButton(6);
+		MoveAllies(1, 2);
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	{
+		MoveEnemies(3, 1);
+	}
+	
 	for (int i=1;listInitiative.Count()>=i;i++) 
 	{
 		listInitiative.At(i-1)->data->Update(dt);
@@ -435,14 +432,10 @@ bool Combat::NextTurn()
 bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 {
 	//DUDA: Esto solo es para evitar errores de acceso , no se si quitarlo porque teoricamente no se deberia poder poner esos valores.
-	if (charaPosition_I>4||charaPosition_I<0)
-	{
-		return false;
-	}
-	if (newPosition_I > 4 || newPosition_I < 0)
-	{
-		return false;
-	}
+	if (charaPosition_I>4||charaPosition_I<0) {return false;}
+	if (newPosition_I > 4 || newPosition_I < 0) {return false;}
+	//Evitar que se acceda a un nullptr
+	if (allies[newPosition_I-1] == nullptr || allies[charaPosition_I-1] == nullptr) {return false;}
 
 	//Guardar las referencias a cosas
 	Character* aux = new Character;
@@ -460,18 +453,60 @@ bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 	//En caso de retroceder los avanza hacia adelante. (los otros characthers)
 	if (charaPosition_I < newPosition_I) //Retroceder a la backline
 	{
-		for (size_t i = charaPosition_I - 1; i < newPosition_I - 1; i++)//Desplazar hacia atras a los demas
+		for (int i = charaPosition_I - 1; i < newPosition_I - 1; i++)//Desplazar hacia atras a los demas
 		{
 			allies[i] = allies[i + 1];
 			if(allies[i]!=nullptr)
 			{
-			allies[i]->positionCombat_I = i - 1;
+			allies[i]->positionCombat_I = i + 1;
 			}
 		}
 
 	}
 
 	allies[newPosition_I - 1]=aux;//Colocamos el alliado en la posicion objetivo
+	allies[newPosition_I - 1]->positionCombat_I = newPosition_I;
+
+	return true;
+}
+
+bool Combat::MoveEnemies(int charaPosition_I, int newPosition_I)
+{
+	//DUDA: Esto solo es para evitar errores de acceso , no se si quitarlo porque teoricamente no se deberia poder poner esos valores.
+	if (charaPosition_I > 4 || charaPosition_I < 0) { return false; }
+	if (newPosition_I > 4 || newPosition_I < 0) { return false; }
+	//Evitar que se acceda a un nullptr
+	if (enemies[newPosition_I - 1] == nullptr || enemies[charaPosition_I - 1] == nullptr) { return false; }
+
+	//Guardar las referencias a cosas
+	Character* aux = new Character;
+	aux = enemies[charaPosition_I - 1]; //Ally que queremos mover.
+
+	//En caso de avanzar los desplaza hacia atras. (los otros characthers)
+	if (charaPosition_I > newPosition_I) //Avanzar hacia la frontline
+	{
+		for (size_t i = charaPosition_I - 1; i > newPosition_I - 1; i--)//Desplazar hacia atras a los demas
+		{
+			enemies[i] = enemies[i - 1];
+			enemies[i]->positionCombat_I = i + 1;
+		}
+	}
+	//En caso de retroceder los avanza hacia adelante. (los otros characthers)
+	if (charaPosition_I < newPosition_I) //Retroceder a la backline
+	{
+		for (int i = charaPosition_I - 1; i < newPosition_I - 1; i++)//Desplazar hacia atras a los demas
+		{
+			enemies[i] = enemies[i + 1];
+			if (allies[i] != nullptr)
+			{
+				enemies[i]->positionCombat_I = i + 1;
+			}
+		}
+
+	}
+
+	enemies[newPosition_I - 1] = aux;//Colocamos el alliado en la posicion objetivo
+	enemies[newPosition_I - 1]->positionCombat_I = newPosition_I;
 
 	return true;
 }

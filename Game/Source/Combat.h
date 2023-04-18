@@ -48,8 +48,10 @@ public:
 	bool AddCombatant(Character* chara, int modifier); //Eric:A�adir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
 	bool OrderBySpeed();
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
-	//Swap de un PC en una posicion hasta otra posicion
+	//Swap de un PC en una posicion hasta otra posicion, las posiciones van del 1 (front) al 4 (back)
 	bool MoveAllies(int charaPosition_I, int newPosition_I);
+	//Swap de un Enemy en una posicion hasta otra posicion, las posiciones van del 1 (front) al 4 (back)
+	bool MoveEnemies(int charaPosition_I, int newPosition_I);
 	bool StartCombat();
 //TargetControl
 	// Del 0-3 allies al 4-7 enemies 
