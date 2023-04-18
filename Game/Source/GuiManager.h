@@ -44,7 +44,7 @@ public:
 
 	SDL_Texture* texture;
 
-	bool GUI_debug = false;
+	bool GUI_debug = true;	// TO CHANGE
 };
 
 #endif // __GUIMANAGER_H__
