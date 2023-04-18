@@ -117,15 +117,15 @@ bool HouseHealer::Update(float dt)
 		}
 		if (randomNum == 3)
 		{
-			if (!(app->combat->allies[0] == nullptr))
+			if (app->combat->allies[0] != nullptr)
 			{
 				float damage = app->combat->allies[1]->CalculateDamage(attack * 0.8);
 				app->combat->allies[0]->ModifyHP(-damage);
 			}
 
-			if (!(app->combat->allies[1] == nullptr))
+			if (app->combat->allies[1] != nullptr)
 			{
-				float damage = app->combat->allies[2]->CalculateDamage(attack * 0.3);
+				float damage = app->combat->allies[1]->CalculateDamage(attack * 0.3);
 				app->combat->allies[1]->ModifyHP(-damage);
 			}
 			app->combat->NextTurn();
