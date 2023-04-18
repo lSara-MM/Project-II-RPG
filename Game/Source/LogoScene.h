@@ -43,7 +43,7 @@ private:
 	const char* musicLogo;
 	const char* imagePath;
 
-	SDL_Texture* texture;
+	SDL_Texture* logotexture;
 	const char* logoPath;
 };
 

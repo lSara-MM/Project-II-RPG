@@ -31,6 +31,7 @@ bool LogoScene::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	musicLogo = config.attribute("audioLogoPath").as_string();
+	logoPath = config.attribute("background").as_string();
 
 	// iterate all objects in the LogoScene
 	// Check https://pugixml.org/docs/quickstart.html#access
@@ -44,7 +45,7 @@ bool LogoScene::Start()
 	/*SString title("UPC - CITM");
 	app->win->SetTitle(title.GetString());*/
 
-	//texture = app->tex->Load(logoPath);	
+	logotexture = app->tex->Load(logoPath);	
 	app->audio->PlayMusic(musicLogo, 0);
 	
 	return true;
@@ -79,7 +80,7 @@ bool LogoScene::PostUpdate()
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
-	//app->render->DrawTexture(logoTexture, -65, 0);
+	app->render->DrawTexture(logotexture, 65, 0);
 	
 	return ret;
 }
@@ -90,7 +91,7 @@ bool LogoScene::CleanUp()
 	LOG("Freeing LogoScene");
 
 	//app->audio->PauseMusic();
-	//app->tex->UnLoad(texture);
+	app->tex->UnLoad(logotexture);
 
 	return true;
 }

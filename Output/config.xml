@@ -27,7 +27,7 @@
 	<fadeToBlack>
 	</fadeToBlack>
 
-	<logoScene background="Assets/Maps/logo_bg.png" audioLogoPath ="Assets/Audio/Music/Logo_Intro.ogg"/>
+	<logoScene background="Assets/Maps/Logo_Pikum_re.png" audioLogoPath ="Assets/Audio/Music/Logo_Intro.ogg"/>
 	<loseScene background="Assets/Maps/lose_bg.png" losebutton1="Assets/Maps/rect_pa.png" losebutton2="Assets/Maps/rect_gu.png"
 		musicLose="Assets/Audio/Music/the_end.ogg"/>
 
