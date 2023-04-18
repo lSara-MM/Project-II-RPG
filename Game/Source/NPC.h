@@ -51,8 +51,7 @@ public:
 	
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
-	//PhysBody* npcMerch;
-	//PhysBody* npcMerchSensor;
+	PhysBody* pSensor;
 
 private:
 

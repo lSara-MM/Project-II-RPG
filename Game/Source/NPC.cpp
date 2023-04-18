@@ -67,22 +67,22 @@ bool Npc::Start() {
 	texture = app->tex->Load(texturePath);
 	currentAnimation = &idleAnim;
 	
-	//npcMerch = app->physics->CreateRectangle(positionMerch.x + width / 2, positionMerch.y + height / 2, width, height, bodyType::STATIC);
-	//npcMerch->body->SetFixedRotation(true);
-	//npcMerch->listener = this;
+	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::STATIC);
+	pbody->body->SetFixedRotation(true);
+	pbody->listener = this;
 
-	//npcMerchSensor = app->physics->CreateRectangleSensor(positionMerch.x + width / 2, positionMerch.y + height / 2, width*2, height*2, bodyType::STATIC);
-	//npcMerchSensor->body->SetFixedRotation(true);
-	//npcMerchSensor->ctype = ColliderType::NPC;
-	//npcMerchSensor->listener = this;
+	pSensor = app->physics->CreateRectangleSensor(position.x + width / 2, position.y + height / 2, width * 2, height * 2, bodyType::STATIC);
+	pSensor->body->SetFixedRotation(true);
+	pSensor->ctype = ColliderType::NPC;
+	pSensor->listener = this;
 
 	return true;
 }
 
 bool Npc::Update(float dt)
 {
-	/*npcMerch->body->SetGravityScale(0);
-	npcMerchSensor->body->SetGravityScale(0);*/
+	pbody->body->SetGravityScale(0);
+	pSensor->body->SetGravityScale(0);
 
 	if (app->scene->pause_B)
 	{
@@ -104,8 +104,8 @@ bool Npc::Update(float dt)
 bool Npc::CleanUp()
 {
 	app->tex->UnLoad(texture);
-	/*npcMerch->body->GetWorld()->DestroyBody(npcMerch->body);
-	npcMerchSensor->body->GetWorld()->DestroyBody(npcMerchSensor->body);*/
+	pbody->body->GetWorld()->DestroyBody(pbody->body);
+	pSensor->body->GetWorld()->DestroyBody(pSensor->body);
 	
 	return true;
 }

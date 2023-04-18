@@ -124,7 +124,10 @@ bool Player::Update(float dt)
 	//Sara aquí tienes tu parte, donde cuando el player está dentro de la zona interactuable con el npc
 	if (npcInteract) 
 	{
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
+		{
 
+		}
 	}
 
 	return true;
