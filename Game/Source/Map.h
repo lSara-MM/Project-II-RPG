@@ -159,6 +159,9 @@ public:
 private:
     SString mapFileName;
 	SString mapFolder;
+	SString mapBackground;
+
+	SDL_Texture* backGround;
     bool mapLoaded;
 };
 

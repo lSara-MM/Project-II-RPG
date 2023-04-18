@@ -30,6 +30,7 @@ bool Map::Awake(pugi::xml_node& config)
 
     mapFileName = config.child("mapfile").attribute("path").as_string();
     mapFolder = config.child("mapfolder").attribute("path").as_string();
+    mapBackground = config.child("mapbackground").attribute("path").as_string();
 
     return ret;
 }
@@ -65,7 +66,6 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 
                 else {
                     map[i] = 0;
-
                 }
                
             }
@@ -89,30 +89,12 @@ void Map::Draw()
 
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
-
+    app->render->DrawTexture(backGround, 0, 0);
     while (mapLayerItem != NULL) {
 
         if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
             
-            for (int x = 0; x < mapLayerItem->data->width; x++)
-            {
-                for (int y = 0; y < mapLayerItem->data->height; y++)
-                {
-                   
-                    int gid = mapLayerItem->data->Get(x, y);
-
-              
-                    TileSet* tileset = GetTilesetFromTileId(gid);
-
-                    SDL_Rect r = tileset->GetTileRect(gid);
-                    iPoint pos = MapToWorld(x, y);
-
-                    app->render->DrawTexture(tileset->texture,
-                        pos.x,
-                        pos.y,
-                        &r);
-                }
-            }
+            
         }
         mapLayerItem = mapLayerItem->next;
     }
@@ -129,15 +111,14 @@ void Map::DrawPlatformCollider() {
 
     while (mapLayerItem != NULL) {
 
-        if( mapLayerItem->data->properties.GetProperty("collider") != NULL && mapLayerItem->data->properties.GetProperty("collider")->value)
+        if( mapLayerItem->data->properties.GetProperty("collider") != NULL && mapLayerItem->data->properties.GetProperty("collider")->value == true)
         {
-            for (int x1 = 0; x1 < mapLayerItem->data->width; x1++) //Preguntar a Pedro porque explota
+            for (int x1 = 0; x1 < mapLayerItem->data->width; x1++) 
             {
                 for (int y1 = 0; y1 < mapLayerItem->data->height; y1++)
                 {
                     // L05: DONE 9: Complete the draw function
                     int gid = mapLayerItem->data->Get(x1, y1);
-
 
                     //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
                     TileSet* tileset = GetTilesetFromTileId(gid);
@@ -145,10 +126,8 @@ void Map::DrawPlatformCollider() {
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x1, y1);
 
-                    switch (gid)
+                    if(gid == 1 && gid!=NULL)
                     {
-                    case 1:
-
                         int w, h;
                         w = 64;
                         h = 64;
@@ -156,13 +135,13 @@ void Map::DrawPlatformCollider() {
                         PhysBody* co = new PhysBody;
                         co = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
                         co->ctype = ColliderType::PLATFORM;
-                        listBodies.Add(co);
-
-                        break;
+                        listBodies.Add(co);  
+                        
                     }
                 }
             }
         }
+        mapLayerItem = mapLayerItem->next;
     }
 }
 
@@ -327,7 +306,6 @@ bool Map::Load()
     if (ret == true)
     {
         ret = LoadAllLayers(mapFileXML.child("map"));
-        DrawPlatformCollider();
     }
   
     if(ret == true)
@@ -358,6 +336,7 @@ bool Map::Load()
         }
     }
 
+    
     if(mapFileXML) mapFileXML.reset();
 
     mapLoaded = ret;
@@ -367,7 +346,7 @@ bool Map::Load()
 
     bool retWalkMap = CreateWalkabilityMap(w, h, &data);
     if (retWalkMap) app->pathfinding->SetMap(w, h, data);
-
+    DrawPlatformCollider();
 
     RELEASE_ARRAY(data);
 
@@ -391,6 +370,7 @@ bool Map::LoadMap(pugi::xml_node mapFile)
         mapData.width = map.attribute("width").as_int();
         mapData.tileHeight = map.attribute("tileheight").as_int();
         mapData.tileWidth = map.attribute("tilewidth").as_int();
+        backGround = app->tex->Load(mapBackground.GetString());
     }
 
     return ret;

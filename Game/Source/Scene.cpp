@@ -48,7 +48,6 @@ bool Scene::Start()
 {
 	//Load Map
 	app->map->Load();
-	backGround = app->tex->Load("Assets/Maps/TwistedTentMap.png");
 
 	//pause menu
 	pause_B = false;
@@ -74,9 +73,10 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
-	//Render background
-	app->render->DrawTexture(backGround, 0, 0);
+	//Draw Map
+	app->map->Draw();
 
+	//Load Debug keys
 	Debug();
 
 	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
@@ -166,7 +166,6 @@ bool Scene::CleanUp()
 	pPause->CleanUp();
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
-	app->tex->UnLoad(backGround);
 
 	return true;
 }
