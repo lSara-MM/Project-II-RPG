@@ -33,8 +33,11 @@ HouseDPS::~HouseDPS() {
 
 bool HouseDPS::Awake() {
 
-	position.x = parameters.attribute("x").as_int();
-	position.y = parameters.attribute("y").as_int();
+	this->maxHp = parameters.attribute("maxHp").as_int();
+	this->currentHp = parameters.attribute("currentHp").as_int();
+	this->attack = parameters.attribute("attack").as_int();
+	this->armor = parameters.attribute("armor").as_int();
+	this->speed = parameters.attribute("speed").as_int();
 
 
 	//texturePath = parameters.attribute("texturepath").as_string();
@@ -56,11 +59,7 @@ bool HouseDPS::Start() {
 	this->type = EntityType::ENEMY_DPS_HOUSE;
 	this->charaType_I = CharatherType::ENEMY;
 	this->name = "Cursed Puppet";
-	this->maxHp = 600;
-	this->currentHp = 600;
-	this->attack = 200;
-	this->armor = 0;
-	this->speed = 5;
+
 
 	this->positionCombat_I = 1;
 

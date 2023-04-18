@@ -94,12 +94,18 @@ bool Combat::Start()
 
 	Entity* enemy1 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(enemy1);
+	enemy1->parameters = app->scene->sceneNode.child("enemyTank");
+	enemy1->Awake();
 
 	Entity* enemy2 = app->entityManager->CreateEntity(EntityType::ENEMY_DPS_HOUSE);
 	app->entityManager->AddEntity(enemy2);
+	enemy2->parameters = app->scene->sceneNode.child("enemyDPS");
+	enemy2->Awake();
 
 	Entity* enemy3 = app->entityManager->CreateEntity(EntityType::ENEMY_HEALER_HOUSE);
 	app->entityManager->AddEntity(enemy3);
+	enemy3->parameters = app->scene->sceneNode.child("enemyHealer");
+	enemy3->Awake();
 
 
 

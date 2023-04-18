@@ -33,8 +33,11 @@ HouseTank::~HouseTank() {
 
 bool HouseTank::Awake() {
 
-	position.x = parameters.attribute("x").as_int();
-	position.y = parameters.attribute("y").as_int();
+	this->maxHp = parameters.attribute("maxHp").as_int();
+	this->currentHp = parameters.attribute("currentHp").as_int();
+	this->attack = parameters.attribute("attack").as_int();
+	this->armor = parameters.attribute("armor").as_int();
+	this->speed = parameters.attribute("speed").as_int();
 
 
 	//texturePath = parameters.attribute("texturepath").as_string();
@@ -56,11 +59,7 @@ bool HouseTank::Start() {
 	this->type = EntityType::ENEMY_TANK_HOUSE;
 	this->charaType_I = CharatherType::ENEMY;
 	this->name = "Bewitched Wardrobe";
-	this->maxHp = 1000;
-	this->currentHp = 1000;
-	this->attack = 120;
-	this->armor = 18;
-	this->speed = 3;
+
 
 	this->positionCombat_I = 1;
 

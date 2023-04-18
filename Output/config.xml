@@ -60,6 +60,12 @@
 	<bard maxHp="1000" currentHp="1000" attack="200" armor="8" speed="6"/>
 
 	<protagonist maxHp="1150" currentHp="1150" attack="190" armor="10" speed="5"/>
+
+	<enemyTank maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"/>
+		
+	<enemyDPS maxHp="600" currentHp="600" attack="200" armor="0" speed="5"/>
+
+	<enemyHealer maxHp="850" currentHp="850" attack="140" armor="8" speed="2"/>
 			
 	<npc x="10" y="20" width="230" height="1230" texturepath="Assets/Textures/BlueCube_NPC.jpg" 
 		dialogueID="123"/>
