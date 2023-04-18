@@ -77,7 +77,7 @@ bool Combat::Start()
 	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, this, { 60, 60, 50, 50 }, ButtonType::START, "Inv", 20));
 	
 	//Inicializar Combatientes (si no se hace aqui por algun motivo se dejan de ver)
-	{Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_BARD);
+	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_BARD);
 	app->entityManager->AddEntity(prota1); //No se esta metiendo
 	prota1->parameters = app->scene->sceneNode.child("bard");
 	prota1->Awake();
@@ -86,7 +86,7 @@ bool Combat::Start()
 	prota2->parameters = app->scene->sceneNode.child("protagonist");
 	prota2->Awake();
 
-	{Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
 	app->entityManager->AddEntity(prota3);
 	prota3->parameters = app->scene->sceneNode.child("protagonist");
 	prota3->Awake();
@@ -94,7 +94,7 @@ bool Combat::Start()
 	app->entityManager->AddEntity(prota4);
 	prota4->parameters = app->scene->sceneNode.child("protagonist");
 	prota4->Awake();
-	}
+	
 	Entity* enemy1 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(enemy1);
 	enemy1->parameters = app->scene->sceneNode.child("enemyTank");
@@ -120,7 +120,7 @@ bool Combat::Start()
 	app->combat->AddCombatant((Character*)prota2, 13);
 	/*app->combat->AddCombatant((Character*)prota3, 5);
 	app->combat->AddCombatant((Character*)prota4, 9);*/
-	}
+	
 
 	return true;
 }

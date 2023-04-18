@@ -119,7 +119,7 @@ bool HouseHealer::Update(float dt)
 		{
 			if (app->combat->allies[0] != nullptr)
 			{
-				float damage = app->combat->allies[1]->CalculateDamage(attack * 0.8);
+				float damage = app->combat->allies[0]->CalculateDamage(attack * 0.8);
 				app->combat->allies[0]->ModifyHP(-damage);
 			}
 
