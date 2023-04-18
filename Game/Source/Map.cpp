@@ -89,12 +89,12 @@ void Map::Draw()
 
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
-    app->render->DrawTexture(backGround, 0, 0);
+ 
     while (mapLayerItem != NULL) {
 
-        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
+        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value == true) {
             
-            
+            app->render->DrawTexture(backGround, 0, 0);
         }
         mapLayerItem = mapLayerItem->next;
     }

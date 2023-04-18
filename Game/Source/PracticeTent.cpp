@@ -1,4 +1,4 @@
-#include "Scene.h"
+#include "PracticeTent.h"
 
 #include "App.h"
 #include "Audio.h"
@@ -26,17 +26,17 @@
 using namespace std;
 #include <sstream>
 
-Scene::Scene() : Module()
+PracticeTent::PracticeTent() : Module()
 {
-	name.Create("scene");
+	name.Create("PracticeTent");
 }
 
-Scene::~Scene()
+PracticeTent::~PracticeTent()
 {}
 
-bool Scene::Awake(pugi::xml_node& config)
+bool PracticeTent::Awake(pugi::xml_node& config)
 {
-	LOG("Loading Scene");
+	LOG("Loading PracticeTent");
 	bool ret = true;
 
 	sceneNode = config;
@@ -44,7 +44,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	return ret;
 }
 
-bool Scene::Start()
+bool PracticeTent::Start()
 {
 	//Load Map
 	app->map->Load();
@@ -66,15 +66,15 @@ bool Scene::Start()
 	return true;
 }
 
-bool Scene::PreUpdate()
+bool PracticeTent::PreUpdate()
 {
 	return true;
 }
 
-bool Scene::Update(float dt)
+bool PracticeTent::Update(float dt)
 {
 	//Draw Map
-	//app->map->Draw();
+	app->map->Draw();
 
 	//Load Debug keys
 	Debug();
@@ -133,7 +133,7 @@ bool Scene::Update(float dt)
 	return true;
 }
 
-bool Scene::PostUpdate()
+bool PracticeTent::PostUpdate()
 {
 	bool ret = true;
 
@@ -151,7 +151,7 @@ bool Scene::PostUpdate()
 }
 
 // Called before quitting
-bool Scene::CleanUp()
+bool PracticeTent::CleanUp()
 {
 	LOG("Freeing scene");
 
@@ -170,7 +170,7 @@ bool Scene::CleanUp()
 	return true;
 }
 
-void Scene::Debug()
+void PracticeTent::Debug()
 {
 	// Start again level
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
@@ -250,7 +250,7 @@ void Scene::Debug()
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
 }
 
-bool Scene::InitEntities()
+bool PracticeTent::InitEntities()
 {
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = sceneNode.child("player");
@@ -259,7 +259,7 @@ bool Scene::InitEntities()
 	return true;
 }
 
-bool Scene::OnGuiMouseClickEvent(GuiControl* control)
+bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Event by %d ", control->id);
 

@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Characther.cpp" />
+    <ClCompile Include="Source\Circus.cpp" />
     <ClCompile Include="Source\Combat.cpp" />
     <ClCompile Include="Source\CombatEnemy.cpp" />
     <ClCompile Include="Source\ECHouseTank.cpp" />
@@ -105,6 +106,7 @@
     <ClCompile Include="Source\GuiCheckBox.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\GuiSliderBar.cpp" />
+    <ClCompile Include="Source\HouseOfTerrors.cpp" />
     <ClCompile Include="Source\IntroScene.cpp" />
     <ClCompile Include="Source\LogoScene.cpp" />
     <ClCompile Include="Source\LoseScene.cpp" />
@@ -119,6 +121,7 @@
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PracticeTent.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
@@ -126,6 +129,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Characther.h" />
+    <ClInclude Include="Source\Circus.h" />
     <ClInclude Include="Source\Combat.h" />
     <ClInclude Include="Source\CombatEnemy.h" />
     <ClInclude Include="Source\ECHouseTank.h" />
@@ -138,6 +142,7 @@
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\GuiSliderBar.h" />
+    <ClInclude Include="Source\HouseOfTerrors.h" />
     <ClInclude Include="Source\IntroScene.h" />
     <ClInclude Include="Source\LogoScene.h" />
     <ClInclude Include="Source\LoseScene.h" />
@@ -148,6 +153,7 @@
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\PracticeTent.h" />
     <ClInclude Include="Source\Queue.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Audio.h" />

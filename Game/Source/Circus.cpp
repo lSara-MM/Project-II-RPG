@@ -1,4 +1,4 @@
-#include "Scene.h"
+#include "Circus.h"
 
 #include "App.h"
 #include "Audio.h"
@@ -26,15 +26,15 @@
 using namespace std;
 #include <sstream>
 
-Scene::Scene() : Module()
+Circus::Circus() : Module()
 {
-	name.Create("scene");
+	name.Create("Circus");
 }
 
-Scene::~Scene()
+Circus::~Circus()
 {}
 
-bool Scene::Awake(pugi::xml_node& config)
+bool Circus::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
@@ -44,7 +44,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	return ret;
 }
 
-bool Scene::Start()
+bool Circus::Start()
 {
 	//Load Map
 	app->map->Load();
@@ -66,15 +66,15 @@ bool Scene::Start()
 	return true;
 }
 
-bool Scene::PreUpdate()
+bool Circus::PreUpdate()
 {
 	return true;
 }
 
-bool Scene::Update(float dt)
+bool Circus::Update(float dt)
 {
 	//Draw Map
-	//app->map->Draw();
+	app->map->Draw();
 
 	//Load Debug keys
 	Debug();
@@ -133,7 +133,7 @@ bool Scene::Update(float dt)
 	return true;
 }
 
-bool Scene::PostUpdate()
+bool Circus::PostUpdate()
 {
 	bool ret = true;
 
@@ -151,7 +151,7 @@ bool Scene::PostUpdate()
 }
 
 // Called before quitting
-bool Scene::CleanUp()
+bool Circus::CleanUp()
 {
 	LOG("Freeing scene");
 
@@ -170,7 +170,7 @@ bool Scene::CleanUp()
 	return true;
 }
 
-void Scene::Debug()
+void Circus::Debug()
 {
 	// Start again level
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
@@ -250,7 +250,7 @@ void Scene::Debug()
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
 }
 
-bool Scene::InitEntities()
+bool Circus::InitEntities()
 {
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = sceneNode.child("player");
@@ -259,7 +259,7 @@ bool Scene::InitEntities()
 	return true;
 }
 
-bool Scene::OnGuiMouseClickEvent(GuiControl* control)
+bool Circus::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Event by %d ", control->id);
 
