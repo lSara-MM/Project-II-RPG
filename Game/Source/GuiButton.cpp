@@ -105,7 +105,7 @@ bool GuiButton::Draw(Render* render)
 
 		case GuiControlState::PRESSED:
 		{
-			render->DrawRectangle({ bounds.x, bounds.y, bounds.w * 2, bounds.h * 2 }, 0, 255, 0, 200, true, false);
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 255, 0, 200, true, false);
 
 		} break;
 

@@ -57,8 +57,6 @@ public:
 
 	bool OpenGameSettings()
 	{
-		SDL_Rect rect = { 0, 0, 226, 261 };
-
 		int x = 556; int y = 290; int offset = 77;
 		app->render->TextDraw("Language", x, y, 16);
 		app->render->TextDraw("Text Speed", x, y + offset, 16);
@@ -88,7 +86,12 @@ public:
 
 	bool CleanUp()
 	{
-		//app->tex->UnLoad(gameSettingsTexture);
+		for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
+		{
+			delete i->data;
+			i->data = nullptr;
+		}
+
 		listGameButtons.Clear();
 
 		return true;
@@ -123,9 +126,12 @@ public:
 		GuiButton* button;
 
 		// buttons
+		int x = 630; int y = 0;
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 180, 130 + 50 * i, 172, 40 }, ButtonType::CONTROL_SETTINGS, buttons[i], 10);
+			if (i == 5) { x = 900; y = 0; }
+
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { x, 280 + 77 * y++, 34, 34 }, ButtonType::CONTROL_SETTINGS, buttons[i], 16);
 			button->state = GuiControlState::NONE;
 			listControlButtons.Add(button);
 		}
@@ -133,15 +139,14 @@ public:
 
 	bool OpenControlSettings()
 	{
-		SDL_Rect rect = { 0, 0, 226, 261 };
-
-		int x = 170; int y = 130; int offset = 40;
+		int x = 530; int y = 290; int offset = 77;
 		app->render->TextDraw("Move up", x, y, 16);
 		app->render->TextDraw("Move left", x, y + offset, 16);
 		app->render->TextDraw("Move right", x, y + offset * 2, 16);
 		app->render->TextDraw("Move down", x, y + offset * 3, 16);
 		app->render->TextDraw("Interact", x, y + offset * 4, 16);
 
+		x = 800;
 		app->render->TextDraw("Inventory", x, y, 16);
 		app->render->TextDraw("Party", x, y + offset, 16);
 		app->render->TextDraw("Quests", x, y + offset * 2, 16);
@@ -176,6 +181,12 @@ public:
 
 	bool CleanUp()
 	{
+		for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
+		{
+			delete i->data;
+			i->data = nullptr;
+		}
+
 		listControlButtons.Clear();
 
 		return true;
@@ -187,7 +198,7 @@ public:
 	int GUI_id = 810;
 	List<GuiButton*> listControlButtons;
 
-	const char* buttons[21];
+	const char* buttons[21] = {"W", "A", "D", "S", "E", "I", "R", "J", "M", "Esc", "\n"};
 
 	bool control_B;
 	bool open_control_B;
@@ -246,7 +257,7 @@ public:
 
 			for (ListItem<GuiCheckBox*>* i = listGraphicsCheckbox.start; i != nullptr; i = i->next)
 			{
-				if (app->win->changeScreen)
+				if (app->win->fullscreen || app->render->vSync_B)	// to change later (if as default is on, it should be shown activated 
 				{
 					i->data->state = GuiControlState::SELECTED;
 				}
@@ -282,7 +293,18 @@ public:
 
 	bool CleanUp()
 	{
-		//app->tex->UnLoad(settingsTexture);
+		for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
+		{
+			delete i->data;
+			i->data = nullptr;
+		}
+
+		for (ListItem<GuiCheckBox*>* i = listGraphicsCheckbox.start; i != nullptr; i = i->next)
+		{
+			delete i->data;
+			i->data = nullptr;
+		}
+
 		listGraphicsButtons.Clear();
 		listGraphicsCheckbox.Clear();
 
@@ -384,6 +406,12 @@ public:
 
 	bool CleanUp()
 	{
+		for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
+		{
+			delete i->data;
+			i->data = nullptr;
+		}
+		
 		listSliderBars.Clear();
 
 		return true;
@@ -427,7 +455,7 @@ public:
 		}
 
 		pGame = new GameSettings(mod);
-		//pControl = new ControlSettings(mod);
+		pControl = new ControlSettings(mod);
 		pGraphics = new GraphicsSettings(mod);
 		pAudio = new AudioSettings(mod);
 	}
@@ -444,7 +472,7 @@ public:
 
 
 		if (pGame->game_B) { pGame->OpenGameSettings(); }
-		//if (pControl->control_B) { pControl->OpenControlSettings(); }
+		if (pControl->control_B) { pControl->OpenControlSettings(); }
 		if (pGraphics->graphics_B) { pGraphics->OpenGraphics(); }
 		if (pAudio->audio_B) { pAudio->OpenAudioSettings(); }
 
@@ -467,7 +495,7 @@ public:
 		open_settings_B = false;
 
 		pGame->CloseGameSettings();
-		//pControl->CloseControlSettings();
+		pControl->CloseControlSettings();
 		pGraphics->CloseGraphics();
 		pAudio->CloseAudioSettings();
 
@@ -482,9 +510,11 @@ public:
 	bool CleanUp()
 	{
 		//app->tex->UnLoad(settingsTexture);
+
 		listSettingsButtons.Clear();
 		settings_B = false;
 		
+		// no li agraden els clean ups aquests
 		/*pGame->CleanUp();
 		pControl->CleanUp();
 		pGraphics->CleanUp();
@@ -529,18 +559,15 @@ class Pause
 {
 public:
 
-	Pause* CreatePause(Module* mod)
+	Pause(Module* mod)
 	{
-		Pause* pause = this;
-
 		//PauseTexture = app->tex->Load(PausePath);
 
 		// Pause buttons
-		pause = false;
-		open = false;
+		pause_B = false;
+		open_pause_B = false;
 
 		// close
-		GUI_id++;
 		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
 		button->state = GuiControlState::NONE;
 		listPauseButtons.Add(button);
@@ -553,7 +580,8 @@ public:
 			listPauseButtons.Add(button);
 		}
 
-		return pause;
+		// Settings
+		pSettings = new Settings(mod);
 	}
 
 	bool OpenPause()
@@ -564,14 +592,14 @@ public:
 		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
 		app->render->TextDraw("Pause", 210, 90, 21, Font::UI, { 107, 0, 110 });
 
-		if (!open)
+		if (!open_pause_B)
 		{
 			for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
 			{
 				i->data->state = GuiControlState::NORMAL;
 			}
 
-			open = true;
+			open_pause_B = true;
 		}
 
 		return true;
@@ -579,8 +607,8 @@ public:
 
 	bool ClosePause()
 	{
-		pause = false;
-		open = false;
+		pause_B = false;
+		open_pause_B = false;
 		for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->state = GuiControlState::NONE;
@@ -601,14 +629,16 @@ public:
 public:
 
 	// buttons
-	int GUI_id = 0;
+	int GUI_id = 701;
 	List<GuiButton*> listPauseButtons;
 	const char* buttons[5] = { "Resume", "Return to Title", "Settings", "Exit", "\n" };
 
 	SDL_Texture* PauseTexture;
 	const char* PausePath;
-	bool pause;
-	bool open;
+	bool pause_B;
+	bool open_pause_B;
+
+	Settings* pSettings;
 };
 
 #endif // __SETTINGS_H__

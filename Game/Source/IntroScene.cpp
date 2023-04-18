@@ -197,18 +197,18 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Game settings click");
 		pSettings->pGame->game_B = true;
 
-		//pSettings->pControl->CloseControlSettings();
+		pSettings->pControl->CloseControlSettings();
 		pSettings->pGraphics->CloseGraphics();
 		pSettings->pAudio->CloseAudioSettings();
 		break;
 
 	case 803:
 		LOG("Controls settings click");
-		//pSettings->pControl->control_B = true;
+		pSettings->pControl->control_B = true;
 
-		//pSettings->pGame->CloseGameSettings();
-		//pSettings->pGraphics->CloseGraphics();
-		//pSettings->pAudio->CloseAudioSettings();
+		pSettings->pGame->CloseGameSettings();
+		pSettings->pGraphics->CloseGraphics();
+		pSettings->pAudio->CloseAudioSettings();
 		break;
 
 	case 804:
@@ -216,7 +216,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		pSettings->pGraphics->graphics_B = true;
 
 		pSettings->pGame->CloseGameSettings();
-		//pSettings->pControl->CloseControlSettings();
+		pSettings->pControl->CloseControlSettings();
 		pSettings->pAudio->CloseAudioSettings();
 		break;
 
@@ -225,7 +225,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		pSettings->pAudio->audio_B = true;
 
 		pSettings->pGame->CloseGameSettings();
-		//pSettings->pControl->CloseControlSettings();
+		pSettings->pControl->CloseControlSettings();
 		pSettings->pGraphics->CloseGraphics();
 		break;
 
@@ -247,7 +247,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 809:
 		LOG("Button Exit Game click");
-
+		exit_B = true;
 		break;
 
 
@@ -351,14 +351,15 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 829:
 		LOG("Checkbox Fullscreen check");
-		app->win->changeScreen = !app->win->changeScreen;
-		app->win->ResizeWin();
+		app->win->fullscreen = !app->win->fullscreen;
+		app->win->FullscreenWin();
 		break;
 
 	
 	case 830:
 		LOG("Checkbox Vsync check");
-		(control->state == GuiControlState::NORMAL) ? app->render->flags = SDL_RENDERER_ACCELERATED : app->render->flags |= SDL_RENDERER_PRESENTVSYNC;
+		app->render->vSync_B = !app->render->vSync_B;
+		app->render->VSyncOn();
 		break;
 
 	case 831:
