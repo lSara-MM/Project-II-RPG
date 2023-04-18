@@ -206,13 +206,18 @@ void Scene::Debug()
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 		app->fade->FadingToBlack(this, (Module*)app->scene, 0);
 
+	// Return Title
+	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
+	{
+		app->fade->FadingToBlack(this, (Module*)app->iScene, 0);
+	}
+
 	// Load / Save - keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		app->SaveGameRequest();
 
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();
-
 
 	// Show Gui 
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
@@ -241,7 +246,7 @@ void Scene::Debug()
 	}
 
 	//pause menu
-	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
 	{
 		pause_B = !pause_B;
 		pSettings->settings_B = !pSettings->settings_B;
