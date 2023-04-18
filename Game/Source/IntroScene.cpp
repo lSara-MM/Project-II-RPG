@@ -59,7 +59,7 @@ bool IntroScene::Awake(pugi::xml_node& config)
 bool IntroScene::Start()
 {
 
-	app->audio->PlayMusic(music_intro, 0);
+	app->audio->PlayMusic(music_intro, 1);
 
 	// buttons
 	for (int i = 0; buttons[i] != "\n"; i++)

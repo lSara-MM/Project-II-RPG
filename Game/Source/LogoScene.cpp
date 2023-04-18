@@ -30,6 +30,8 @@ bool LogoScene::Awake(pugi::xml_node& config)
 	LOG("Loading LogoScene");
 	bool ret = true;
 
+	musicLogo = config.attribute("audioLogoPath").as_string();
+
 	// iterate all objects in the LogoScene
 	// Check https://pugixml.org/docs/quickstart.html#access
 	
@@ -43,7 +45,7 @@ bool LogoScene::Start()
 	app->win->SetTitle(title.GetString());*/
 
 	//texture = app->tex->Load(logoPath);	
-	//app->audio->PlayMusic(musicLogo, 0);
+	app->audio->PlayMusic(musicLogo, 0);
 	
 	return true;
 }
