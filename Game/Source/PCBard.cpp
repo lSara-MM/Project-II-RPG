@@ -40,7 +40,7 @@ bool Bard::Awake() {
 	this->speed = parameters.attribute("speed").as_int();
 	
 	//texturePath = parameters.attribute("texturepath").as_string();
-	texturePath = "Assets/Textures/PCA.png";
+	texturePath = "Assets/Textures/AllyBard.png";
 
 	return true;
 }
@@ -87,7 +87,7 @@ bool Bard::Update(float dt)
 
 	rect = { 0,0,258,496 };
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
-	app->render->DrawTexture(texture, 416 - 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //Print bueno
+	app->render->DrawTexture(texture, 544 - 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //Print bueno
 
 	if (onTurn)
 	{

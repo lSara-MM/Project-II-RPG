@@ -88,7 +88,7 @@ bool HouseHealer::Update(float dt)
 
 	rect = { 0,0,258,496 };
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
-	app->render->DrawTexture(texture, 736 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
+	app->render->DrawTexture(texture, 608 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
 
 	if (onTurn)
 	{
@@ -98,7 +98,6 @@ bool HouseHealer::Update(float dt)
 		//Esto mejor con un switch en vez de 3 IFs
 		if (randomNum == 1)
 		{
-
 			float damage = app->combat->allies[1]->CalculateDamage(attack);
 			if (!app->input->godMode_B)//Hace daño si no hay godmode
 			{
@@ -116,7 +115,6 @@ bool HouseHealer::Update(float dt)
 		}
 		if (randomNum == 3)
 		{
-
 			if (!(app->combat->allies[0] == nullptr))
 			{
 				float damage = app->combat->allies[1]->CalculateDamage(attack * 0.8);

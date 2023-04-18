@@ -88,7 +88,7 @@ bool HouseTank::Update(float dt)
 
 	rect = { 0,0,258,496 };
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
-	app->render->DrawTexture(texture, 736 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
+	app->render->DrawTexture(texture, 608 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
 
 	if (onTurn)
 	{
@@ -98,7 +98,6 @@ bool HouseTank::Update(float dt)
 		//Mejor con un switch
 		if (randomNum == 1)
 		{
-
 			float damage = app->combat->allies[0]->CalculateDamage(attack);
 			if (!app->input->godMode_B)//Hace daño si no hay godmode
 			{
@@ -117,7 +116,6 @@ bool HouseTank::Update(float dt)
 		}
 		if (randomNum == 3)
 		{
-
 			this->ModifyHP(maxHp * 0.3);
 			app->combat->NextTurn();
 		}
@@ -125,9 +123,7 @@ bool HouseTank::Update(float dt)
 		// Para seleccionar app->input->GetMousePosition o 
 		//app->combat->NextTurn(); //Se llamaria dos veces
 		onTurn = false;
-
 	}
-
 
 	return true;
 }
