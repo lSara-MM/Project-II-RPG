@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void DialogueNode::SplitText(SString text_, int fontSize_, int max_chars_line_)
+void DialogueNode::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, int max_chars_line_)
 {
 	string line = text_.GetString();
 
@@ -22,13 +22,13 @@ void DialogueNode::SplitText(SString text_, int fontSize_, int max_chars_line_)
 			// If we reached the end of the word or the end of the input.
 			string temp;
 			temp.append(line, startIndex, b - startIndex);	// string text to append, int index start, int size of text to append
-			texts.push_back(temp.c_str());
+			pTexts->push_back(temp.c_str());
 			startIndex = b;
 		}
 	}
 	else
 	{
-		texts.push_back(line.c_str());
+		pTexts->push_back(line.c_str());
 	}
 
 	trimmed = true;
@@ -48,8 +48,7 @@ DialogueTree::DialogueTree(bool a)
 
 bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 {
-	fontSize = 24;
-	max_chars_line = fontSize * 3;
+	max_chars_line = FONT_SIZE * 3;
 
 
 	if (!app->input->playerName.empty())
@@ -59,20 +58,20 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 
 	if (!activeNode->trimmed)
 	{
-		activeNode->SplitText(activeNode->text, fontSize, max_chars_line);
+		activeNode->SplitText(activeNode->text, &activeNode->texts, FONT_SIZE, max_chars_line);
 	}
 
 	size_t lines = activeNode->texts.size();
 	for (size_t i = 0; i < lines; i++)
 	{
-		app->render->TextDraw(activeNode->texts[i].GetString(), pos.x + 100, pos.y + 20 + 50 * i, fontSize, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(activeNode->texts[i].GetString(), pos.x + 100, pos.y + 20 + 50 * i, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
 	}
 
 	EventReturn(mod, pos);
 
 	if (!updateOptions)
 	{
-		updateOptions = UpdateNodes(mod, pos, fontSize);
+		updateOptions = UpdateNodes(mod, pos, FONT_SIZE);
 	}
 
 	return true;

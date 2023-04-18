@@ -134,6 +134,7 @@ DialogueNode* DialogueSystem::LoadNodes(pugi::xml_node& xml_trees, DialogueTree*
 		DialogueNode* node = new DialogueNode;
 
 		node->nodeID = pugiNode.attribute("id").as_int();
+		node->name = pugiNode.attribute("name").as_string();
 		node->text = pugiNode.attribute("text").as_string();
 
 		LoadChoices(pugiNode, node);
