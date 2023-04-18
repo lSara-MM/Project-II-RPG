@@ -32,11 +32,11 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	void Controller(float dt);
+	bool PerformDialogue();
 
 public:
 
-	SString NpcName;
+	SString name;
 
 	// The pointer to the current Npc animation
 	// It will be switched depending on the Npc's movement direction

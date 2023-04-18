@@ -122,6 +122,7 @@ int DialogueSystem::LoadDialogue(const char* file, int dialogueID)
 			 }
 		}
 	}
+
 	return dialogueID;
 }
 

@@ -82,13 +82,12 @@ bool Player::Start() {
 	currentAnimation = &currentAnim;
 	
 	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
-	pbody->body->SetFixedRotation(true);
-	
+	pbody->body->SetFixedRotation(true);	
 	pbody->listener = this; 
-
 	pbody->ctype = ColliderType::PLAYER;
 	
 	playerName = app->input->playerName.c_str();
+	npcInteract = false;
 
 	return true;
 }
@@ -124,7 +123,14 @@ bool Player::Update(float dt)
 	//Sara aquí tienes tu parte, donde cuando el player está dentro de la zona interactuable con el npc
 	if (npcInteract) 
 	{
+		app->render->DrawRectangle({ npcTalkingTo->position.x, npcTalkingTo->position.y - 60, 24, 24 },
+			255, 255, 255, 200);
+		app->render->TextDraw("E", npcTalkingTo->position.x + npcTalkingTo->width / 2, npcTalkingTo->position.y - 57, 16, Font::TEXT);
 
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
+		{
+			npcTalkingTo->PerformDialogue();
+		}
 	}
 
 	return true;
@@ -144,6 +150,17 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 	switch (physB->ctype)
 	{
 	case ColliderType::NPC:
+
+		i = app->scene->listNpc.start;
+
+		for (i; i != NULL; i = i->next)
+		{
+			if (i->data->pSensor->id == physB->id)
+			{
+				npcTalkingTo = i->data;
+				break;
+			}
+		}
 		npcInteract = true;
 		break;
 	default:

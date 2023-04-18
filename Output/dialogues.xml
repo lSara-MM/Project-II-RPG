@@ -58,7 +58,7 @@
     <dialogueTree ID="1">
 
 	    <node id="0" text="The fair is big %%x. Go around and discover the place, now everything will be closed, but surely there are people you can talk to.">
-		    <choice id="0" option="¿Where should I go first?" nextNode="1" eventReturn="0"/>
+		    <choice id="0" option="Where should I go first?" nextNode="1" eventReturn="0"/>
 		    <choice id="1" option="Talk me about this place." nextNode="2" eventReturn="0"/>
 		    <choice id="2" option="Talk me about The Showman." nextNode="3" eventReturn="0"/>
 	    </node>
@@ -69,9 +69,9 @@
 	    </node>
 
 	    <node id="2" text="How this place. This is the best fair in the world. They all have unique powers to cheer people up, or smash the faces of little busybodies. They can be a bit aggressive, but they are nice, sometimes.">
-		    <choice id="0" option="I see…" nextNode="0" eventReturn="0"/>
+		    <choice id="0" option="I see..." nextNode="0" eventReturn="0"/>
 		    <choice id="1" option="And about the fair attractions." nextNode="4" eventReturn="0"/>
-		    <choice id="2" option="Busybodies… Like me you would say." nextNode="5" eventReturn="0"/>
+		    <choice id="2" option="Busybodies... Like me you would say." nextNode="5" eventReturn="0"/>
 	    </node>
 
 	    <node id="3" text="Ooh! The Showman. He is a sweetheart! Always thinking of others, specifically their souls ¿Isn’t that sweet? He's the one keeping this alive, and with magic. Never forget, he is a powerful man, you don't want to make enmity with him. Although as adorable as he is, I don't think you'll be able to anger him.">
@@ -81,7 +81,7 @@
 
 	    <node id="4" text="That's so exciting! There are attractions of all kinds. A house of terror that becomes the house of mirrors, a carousel, a Ferris wheel, the circus where the Showman lives and much more. You will surely have a great time. You will see! You will see! You will see!">
 		    <choice id="0" option="Sure" nextNode="0" eventReturn="0"/>
-		    <choice id="1" option="Yeah well… I can’t wait to see that…" nextNode="-1" eventReturn="0"/>
+		    <choice id="1" option="Yeah well... I can't wait to see that..." nextNode="-1" eventReturn="0"/>
 	    </node>
 
 	    <node id="5" text="Well... I wouldn't say that. But maybe they do. Just in case, go practicing your powers. You never know.">
@@ -117,14 +117,14 @@
 
 		<node id="4" text="I can't believe my eyes, you just paid, silly-billy. I got no more to say, this place is more than closed, you can go in without fear. You will find an empty House of Terrors. But if you want to toss one more coin…">
 			<choice id="0" option="Toss a coin." nextNode="5" eventReturn="0"/>
-			<choice id="1" option="I’ll pay no more…" nextNode="-1" eventReturn="0"/>
+			<choice id="1" option="I'll pay no more..." nextNode="-1" eventReturn="0"/>
 		</node>
 
 		<node id="5" text="HAHAHAHA! You're truly an idiot, aren't you? I have never met anyone more useless in my life and I have worked with people who have been decapitated. But seriously, you thought I was going to tell you something else. HAHAHAHA!">
 			<choice id="0" option="Say nothing" nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="6" text="Junk?! I’m not junk, idiot. I offer information from the future, maybe you are not even able to read my name. I can tell you what you will find when you enter here, or if you have a special question, I can answer it for a coin, always for a coin. It will be two for you now">
+		<node id="6" text="Junk?! I'm not junk, idiot. I offer information from the future, maybe you are not even able to read my name. I can tell you what you will find when you enter here, or if you have a special question, I can answer it for a coin, always for a coin. It will be two for you now">
 			<choice id="0" option="Pay." nextNode="1" eventReturn="0"/>
 			<choice id="1" option="Get lost asshole." nextNode="-1" eventReturn="0"/>
 		</node>
@@ -134,7 +134,7 @@
 
 	<dialogueTree ID="3">
 
-		<node id="0" text="We are closed mate. Go arround. I’ll be ready for the next delivery.">
+		<node id="0" text="We are closed mate. Go arround. I'll be ready for the next delivery.">
 			<choice id="0" option="What do you sell?" nextNode="1" eventReturn="0"/>
 			<choice id="1" option="Farewell." nextNode="-1" eventReturn="0"/>
 		</node>
@@ -157,7 +157,7 @@
 
 	<dialogueTree ID="5">
 
-		<node id="0" text="Got nothing to offer yet. Be patient. I’ll see you arround.">
+		<node id="0" text="Got nothing to offer yet. Be patient. I'll see you arround.">
 			<choice id="0" option="Bye MERCANT." nextNode="-1" eventReturn="0"/>
 		</node>
 
@@ -166,3 +166,4 @@
 	
 </dialogues>
 
+<!--<node id="0" text="Got nothing to offer yet. Be patient. I’ll see you arround.">-->

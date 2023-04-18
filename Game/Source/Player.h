@@ -69,7 +69,7 @@ public:
 
 	iPoint position;
 
-	bool npcInteract = false;
+	bool npcInteract;
 
 private:
 
