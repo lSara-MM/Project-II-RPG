@@ -129,7 +129,7 @@ void Map::DrawPlatformCollider() {
 
     while (mapLayerItem != NULL) {
 
-        if (mapLayerItem->data->properties.GetProperty("Colliders") != NULL && mapLayerItem->data->properties.GetProperty("Colliders")->value == true)
+        if( mapLayerItem->data->properties.GetProperty("collider") != NULL && mapLayerItem->data->properties.GetProperty("collider")->value)
         {
             for (int x1 = 0; x1 < mapLayerItem->data->width; x1++) //Preguntar a Pedro porque explota
             {
@@ -147,11 +147,11 @@ void Map::DrawPlatformCollider() {
 
                     switch (gid)
                     {
-                    case 111:
+                    case 1:
 
                         int w, h;
-                        w = 32;
-                        h = 32;
+                        w = 64;
+                        h = 64;
 
                         PhysBody* co = new PhysBody;
                         co = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
@@ -327,6 +327,7 @@ bool Map::Load()
     if (ret == true)
     {
         ret = LoadAllLayers(mapFileXML.child("map"));
+        DrawPlatformCollider();
     }
   
     if(ret == true)
@@ -366,6 +367,7 @@ bool Map::Load()
 
     bool retWalkMap = CreateWalkabilityMap(w, h, &data);
     if (retWalkMap) app->pathfinding->SetMap(w, h, data);
+
 
     RELEASE_ARRAY(data);
 
