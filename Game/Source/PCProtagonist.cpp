@@ -43,7 +43,7 @@ bool Protagonist::Awake() {
 	this->speed = parameters.attribute("speed").as_int();
 
 	//texturePath = parameters.attribute("texturepath").as_string();
-	texturePath = "Assets/Textures/PCA.png";
+	texturePath = "Assets/Textures/AllyProtagonist.png";
 
 	return true;
 }
@@ -81,8 +81,8 @@ bool Protagonist::Update(float dt)
 
 	//Health Bar
 	int auxhp = ((currentHp * 100) / maxHp)*0.90;
-	app->render->DrawRectangle({ 477 - 107 * positionCombat_I, 250, 90, 20 }, 255, 0, 255, 255, true);
-	app->render->DrawRectangle({ 477 - 107 * positionCombat_I, 250, auxhp, 20}, 255, 255, 255, 255, true);
+	app->render->DrawRectangle({ 560 - 127 * positionCombat_I, 250, 90, 20 }, 255, 0, 255, 255, true);
+	app->render->DrawRectangle({ 560 - 127 * positionCombat_I, 250, auxhp, 20}, 255, 255, 255, 255, true);
 	
 	//Modify Health Bar
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
@@ -99,7 +99,7 @@ bool Protagonist::Update(float dt)
 
 	rect = { 0,0,258,496 };
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
-	app->render->DrawTexture(texture, 416 - 128*positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/);
+	app->render->DrawTexture(texture, 544 - 128*positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/);
 
 	if (onTurn)
 	{

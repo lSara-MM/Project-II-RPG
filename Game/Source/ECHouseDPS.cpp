@@ -73,8 +73,8 @@ bool HouseDPS::Update(float dt)
 
 	//Health Bar
 	int auxhp = ((currentHp * 100) / maxHp) * 0.90;
-	app->render->DrawRectangle({ 722 + 107 * positionCombat_I, 280, 90, 20 }, 255, 0, 255, 255, true);
-	app->render->DrawRectangle({ 722 + 107 * positionCombat_I, 280, auxhp, 20 }, 255, 255, 255, 255, true);
+	app->render->DrawRectangle({ 628 + 127 * positionCombat_I, 250, 90, 20 }, 255, 0, 255, 255, true);
+	app->render->DrawRectangle({ 628 + 127 * positionCombat_I, 250, auxhp, 20 }, 255, 255, 255, 255, true);
 
 	// Modify Health Bar
 	/*if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
@@ -87,7 +87,7 @@ bool HouseDPS::Update(float dt)
 
 	rect = { 0,0,258,496 };
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
-	app->render->DrawTexture(texture, 736 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
+	app->render->DrawTexture(texture, 608 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
 
 	if (onTurn)
 	{
