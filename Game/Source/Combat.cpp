@@ -236,11 +236,11 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		targeted_Character = allies[2];
 		break;
 	case 2:
-		LOG("Allies Slot 2 click");
+		LOG("Allies Slot 3 click");
 		targeted_Character = allies[1];
 		break;
 	case 3:
-		LOG("Allies Slot 3 (first frontline) click");
+		LOG("Allies Slot 4 (first frontline) click");
 		targeted_Character = allies[0];
 		break;
 	case 4:
@@ -286,7 +286,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 	//Inventory
 	case 12:
-		LOG("Attack 4");
+		LOG("Open Inventory");
 		break;
 	
 
@@ -496,14 +496,14 @@ bool Combat::StartCombat()
 bool Combat::DisableTargetButton(int id)
 {
 	//Evitar que pete o acceder a botones que no deberia 
-	if (id<0)
+	if (id<0 || id > 7)
 	{
 		return false;
 	}
-	if (id > 7)
-	{
-		return false;
-	}
+	//if (id > 7)
+	//{
+	//	return false;
+	//}
 
 	listButtons.At(id)->data->state = GuiControlState::DISABLED;
 
@@ -514,14 +514,14 @@ bool Combat::DisableTargetButton(int id)
 bool Combat::EnableTargetButton(int id)
 {
 	//Evitar que pete o acceder a botones que no deberia 
-	if (id < 0)
+	if (id < 0 || id > 7)
 	{
 		return false;
 	}
-	if (id > 7)
+	/*if (id > 7)
 	{
 		return false;
-	}
+	}*/
 
 	listButtons.At(id)->data->state = GuiControlState::NORMAL;
 
@@ -532,14 +532,14 @@ bool Combat::EnableTargetButton(int id)
 bool Combat::EnableSkillButton(int skillNum)
 {
 	//Evitar que pete o acceder a botones que no deberia 
-	if (skillNum < 1)
+	if (skillNum < 1 || skillNum > 4)
 	{
 		return false;
 	}
-	if (skillNum > 4)
-	{
-		return false;
-	}
+	//if (skillNum > 4)
+	//{
+	//	return false;
+	//}
 
 	listButtons.At(7 + skillNum)->data->state = GuiControlState::NORMAL;
 
@@ -549,14 +549,14 @@ bool Combat::EnableSkillButton(int skillNum)
 bool Combat::DisableSkillButton(int skillNum)
 {
 	//Evitar que pete o acceder a botones que no deberia 
-	if (skillNum < 1)
+	if (skillNum < 1 || skillNum > 4)
 	{
 		return false;
 	}
-	if (skillNum > 4)
-	{
-		return false;
-	}
+	//if (skillNum > 4)
+	//{
+	//	return false;
+	//}
 
 	listButtons.At(7 + skillNum)->data->state = GuiControlState::DISABLED;
 
