@@ -25,7 +25,7 @@ public:
 
 	void PerformDialogue(int treeId);
 
-	int LoadDialogue(const char* file, int dialogueID);
+	int LoadDialogue(int dialogueID);
 	DialogueNode* LoadNodes(pugi::xml_node& xml_trees, DialogueTree* tree);
 	void LoadChoices(pugi::xml_node& xml_node, DialogueNode* node);
 

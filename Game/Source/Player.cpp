@@ -12,6 +12,7 @@
 
 #include "FadeToBlack.h"
 #include "EntityManager.h"
+#include "DialogueSystem.h"
 #include "Map.h"
 
 #include "Log.h"
@@ -126,7 +127,7 @@ bool Player::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
 		{
-
+			app->render->TextDraw("E", npcTalkingTo->position.x, npcTalkingTo->position.y, FONT_SIZE, Font::TEXT, {255, 255, 255});
 		}
 	}
 
@@ -144,9 +145,22 @@ bool Player::CleanUp()
 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) 
 {
+	ListItem<Npc*>* i;
+
 	switch (physB->ctype)
 	{
 	case ColliderType::NPC:
+
+		i = app->scene->listNpc.start;
+
+		for (i; i != NULL; i = i->next)
+		{
+			if (i->data->pbody->id == physB->id)
+			{
+				npcTalkingTo = i->data;
+				break;
+			}
+		}
 		npcInteract = true;
 		break;
 	default:
