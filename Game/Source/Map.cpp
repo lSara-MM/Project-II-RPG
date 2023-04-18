@@ -370,7 +370,7 @@ bool Map::LoadMap(pugi::xml_node mapFile)
         mapData.width = map.attribute("width").as_int();
         mapData.tileHeight = map.attribute("tileheight").as_int();
         mapData.tileWidth = map.attribute("tilewidth").as_int();
-        backGround = app->tex->Load(mapBackground.GetString());
+        backGround = app->tex->Load(mapBackground);
     }
 
     return ret;

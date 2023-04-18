@@ -159,7 +159,7 @@ public:
 private:
     SString mapFileName;
 	SString mapFolder;
-	SString mapBackground;
+	const char* mapBackground;
 
 	SDL_Texture* backGround;
     bool mapLoaded;
