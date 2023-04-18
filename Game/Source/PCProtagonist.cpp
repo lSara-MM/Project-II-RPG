@@ -103,7 +103,8 @@ bool Protagonist::Update(float dt)
 
 	if (onTurn)
 	{
-		app->render->DrawCircle( 300 - 70 * positionCombat_I,15, 20,0,255,255);
+		app->render->DrawCircle(544 - 128 * positionCombat_I + (126 / 2), 220, 20, 0, 255, 255);
+
 		if (app->combat->lastPressedAbility_I == 1) //Only allows targeting 2 and 3
 		{
 
