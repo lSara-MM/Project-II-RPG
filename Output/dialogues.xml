@@ -17,7 +17,7 @@
 <dialogues>
       <dialogueTree ID="0">
 
-        <node id="0" text="Hey there, traveler. Who are you and what brings you here?">
+        <node id="0" name="paco" text="Hey there, traveler. Who are you and what brings you here?">
             <choice id="0" option="My name is %%x. I'm just seeking out new adventures." nextNode="1" eventReturn="2"/>
         </node>
 
