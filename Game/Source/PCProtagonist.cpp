@@ -89,7 +89,7 @@ bool Protagonist::Update(float dt)
 		ModifyHP(-1);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN) {
-		ModifyHP(10);
+		ModifyHP(1);
 	}
 
 	
