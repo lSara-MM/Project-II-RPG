@@ -174,6 +174,11 @@ bool Combat::Update(float dt)
 	//Rectangulo donde va la Info abajo derecha {x,y,w,h} r, g, b, opacity(0 = 100% & 255 = 0%)
 	app->render->DrawRectangle({ 430, 470, 730, 220 }, 255, 255, 255, 250, true);
 
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		app->fade->FadingToBlack(this, (Module*)app->scene, 30);
+	}
+
 
 	return true;
 }
@@ -200,13 +205,24 @@ bool Combat::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	//player->Disable();
-
 	app->entityManager->Disable();
 
 	pSettings->CleanUp();
-	//pPause->CleanUp();
+	
 	app->guiManager->CleanUp();
+
+	listInitiative.Clear();
+
+	for (int i = 0; i <= 3; i++)
+	{
+		allies[i] = nullptr;
+	}
+	for (int i = 0; i <= 3; i++)
+	{
+		enemies[i] = nullptr;
+	}
+	
+
 	return true;
 }
 

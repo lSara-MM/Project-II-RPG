@@ -33,15 +33,13 @@ HouseDPS::~HouseDPS() {
 
 bool HouseDPS::Awake() {
 
+	this->name = parameters.attribute("name").as_string();
 	this->maxHp = parameters.attribute("maxHp").as_int();
 	this->currentHp = parameters.attribute("currentHp").as_int();
 	this->attack = parameters.attribute("attack").as_int();
 	this->armor = parameters.attribute("armor").as_int();
 	this->speed = parameters.attribute("speed").as_int();
-
-
-	//texturePath = parameters.attribute("texturepath").as_string();
-	texturePath = "Assets/Textures/EnemyCursedPuppet.png";
+	texturePath = parameters.attribute("texturePath").as_string();
 
 	return true;
 }
@@ -58,8 +56,6 @@ bool HouseDPS::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::ENEMY_DPS_HOUSE;
 	this->charaType_I = CharacterType::ENEMY;
-	this->name = "Cursed Puppet";
-
 
 	this->positionCombat_I = 1;
 

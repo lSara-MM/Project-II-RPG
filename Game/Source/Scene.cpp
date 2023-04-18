@@ -85,12 +85,11 @@ bool Scene::Update(float dt)
 	app->entityManager->AddEntity(entidad2);*/
 	
 	//ERIC: Prueba que no funciona.
-	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) 
+	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
 		app->fade->FadingToBlack(this, (Module*)app->combat, 30);
-
+		app->SaveGameRequest();//guardar para volver misma posicion al volver de combate
+	}
 		
-	
-	
 
 	//Borrar
 	float speed = 0.2 * dt;

@@ -57,15 +57,20 @@
 			audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
 			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"/>
 
-	<bard maxHp="1000" currentHp="1000" attack="200" armor="8" speed="6"/>
+	<bard name ="Bard" maxHp="1000" currentHp="1000" attack="200" armor="8" speed="6"
+		   texturePath ="Assets/Textures/AllyBard.png"/>
 
-	<protagonist maxHp="1150" currentHp="1150" attack="190" armor="10" speed="5"/>
+	<protagonist name ="Protagonista" maxHp="1150" currentHp="1150" attack="190" armor="10" speed="5"
+				  texturePath ="Assets/Textures/AllyProtagonist.png"/>
 
-	<enemyTank maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"/>
+	<enemyTank name ="Bewitched Wardrobe" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
+			    texturePath ="Assets/Textures/Enemy1.png"/>
 		
-	<enemyDPS maxHp="600" currentHp="600" attack="200" armor="0" speed="5"/>
+	<enemyDPS name ="Cursed Puppet" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
+			  texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
 
-	<enemyHealer maxHp="850" currentHp="850" attack="140" armor="8" speed="2"/>
+	<enemyHealer name ="Possessed Painting" maxHp="850" currentHp="850" attack="140" armor="8" speed="2"
+				  texturePath ="Assets/Textures/Enemy1.png"/>
 			
 	<npc x="10" y="20" width="230" height="1230" texturepath="Assets/Textures/BlueCube_NPC.jpg" 
 		dialogueID="123"/>

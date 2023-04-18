@@ -33,14 +33,13 @@ HouseHealer::~HouseHealer() {
 
 bool HouseHealer::Awake() {
 
+	this->name = parameters.attribute("name").as_string();
 	this->maxHp = parameters.attribute("maxHp").as_int();
 	this->currentHp = parameters.attribute("currentHp").as_int();
 	this->attack = parameters.attribute("attack").as_int();
 	this->armor = parameters.attribute("armor").as_int();
 	this->speed = parameters.attribute("speed").as_int();
-
-	//texturePath = parameters.attribute("texturepath").as_string();
-	texturePath = "Assets/Textures/Enemy1.png";
+	texturePath = parameters.attribute("texturePath").as_string();
 
 	return true;
 }
@@ -57,12 +56,6 @@ bool HouseHealer::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::ENEMY_HEALER_HOUSE;
 	this->charaType_I = CharacterType::ENEMY;
-	this->name = "Possessed Painting";
-	this->maxHp = 850;
-	this->currentHp = 850;
-	this->attack = 140;
-	this->armor = 8;
-	this->speed = 2;
 
 	this->positionCombat_I = 1;
 

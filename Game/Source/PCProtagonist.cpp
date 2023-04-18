@@ -33,17 +33,13 @@ Protagonist::~Protagonist() {
 
 bool Protagonist::Awake() {
 
-	position.x = parameters.attribute("x").as_int();
-	position.y = parameters.attribute("y").as_int();
-
+	this->name = parameters.attribute("name").as_string();
 	this->maxHp = parameters.attribute("maxHp").as_int();
 	this->currentHp = parameters.attribute("currentHp").as_int();
 	this->attack = parameters.attribute("attack").as_int();
 	this->armor = parameters.attribute("armor").as_int();
 	this->speed = parameters.attribute("speed").as_int();
-
-	//texturePath = parameters.attribute("texturepath").as_string();
-	texturePath = "Assets/Textures/AllyProtagonist.png";
+	texturePath = parameters.attribute("texturePath").as_string();
 
 	return true;
 }
@@ -55,18 +51,14 @@ bool Protagonist::Start() {
 	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 
-	
-	
 	pbody->listener = this; 
 
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::PC_PROTAGONIST;
 	this->charaType_I = CharacterType::ALLY;
-	this->name = "Protagonista"; //Hay que poner el nombre assigando al principio del juego
+	//this->name = "Protagonista"; //Hay que poner el nombre assigando al principio del juego
 	
 	this->onTurn = false;
-	
-	
 
 	this->positionCombat_I = 1;
 
