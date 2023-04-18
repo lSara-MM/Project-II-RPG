@@ -66,13 +66,13 @@ public:
 
 	//Posicion combate
 	int positionCombat_I; //Del uno al cuatro
-	enum CharatherType
+	enum CharacterType
 	{
 		ALLY,
 		ENEMY,
 		NONE 
 	};
-	CharatherType charaType_I; //Va del 1 al 4
+	CharacterType charaType_I; //Ally o Enemy
 	
 	int GetHealth() { return currentHp; }
 	int GetAttack() { return attack; }

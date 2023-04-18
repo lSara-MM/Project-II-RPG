@@ -56,7 +56,7 @@ bool Bard::Start() {
 
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::PC_BARD;
-	this->charaType_I = CharatherType::ALLY;
+	this->charaType_I = CharacterType::ALLY;
 	this->name = "Bard";
 
 	this->onTurn = false;

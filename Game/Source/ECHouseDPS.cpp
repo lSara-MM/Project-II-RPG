@@ -57,7 +57,7 @@ bool HouseDPS::Start() {
 
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::ENEMY_DPS_HOUSE;
-	this->charaType_I = CharatherType::ENEMY;
+	this->charaType_I = CharacterType::ENEMY;
 	this->name = "Cursed Puppet";
 
 

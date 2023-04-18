@@ -387,6 +387,61 @@ bool Combat::OrderBySpeed()
 	return true;
 }
 
+bool Combat::EliminateCombatant(Character* chara, int modifier)
+{
+	//Mover chara al fondo antes de matarlo para ordenar los arrays
+	switch (chara->charaType_I)
+	{
+	case chara->CharacterType::ALLY:
+		for (int i = 3; i > 0; i--)
+		{
+			if (allies[i] != nullptr)
+			{
+				MoveAllies(chara->positionCombat_I, i);
+			}
+		}
+		
+		listInitiative.Del(listInitiative.At(listInitiative.Find(chara)));
+		break;
+
+	case chara->CharacterType::ENEMY:
+		for (int i = 3; i > 0; i--)
+		{
+			if (enemies[i] != nullptr)
+			{
+				MoveEnemies(chara->positionCombat_I, i);
+			}
+		}
+		break;
+
+	case chara->CharacterType::NONE:
+		break;
+
+	default:
+		break;
+	}
+
+	listInitiative.Del(listInitiative.At(listInitiative.Find(chara)));
+
+	return true;
+}
+
+bool Combat::StartCombat()
+{
+	OrderBySpeed();
+
+	lastPressedAbility_I = 0;
+	targeted_Character = nullptr;
+	for (int i = 0; i < 7; i++)
+	{
+		EnableTargetButton(i);
+		EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
+	}
+	listInitiative.start->data->onTurn = true;
+	charaInTurn = 0;
+	
+	return true;
+}
 
 bool Combat::NextTurn()
 {
@@ -511,22 +566,7 @@ bool Combat::MoveEnemies(int charaPosition_I, int newPosition_I)
 	return true;
 }
 
-bool Combat::StartCombat()
-{
-	OrderBySpeed();
 
-	lastPressedAbility_I = 0;
-	targeted_Character = nullptr;
-	for (int i = 0; i < 7; i++)
-	{
-		EnableTargetButton(i);
-		EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
-	}
-	listInitiative.start->data->onTurn = true;
-	charaInTurn = 0;
-	
-	return true;
-}
 
 bool Combat::DisableTargetButton(int id)
 {
