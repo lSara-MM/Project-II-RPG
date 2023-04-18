@@ -288,9 +288,14 @@ bool Scene::InitEntities()
 	player->parameters = sceneNode.child("player");
 	player->Awake();
 
-	Entity* npc = app->entityManager->CreateEntity(EntityType::NPC);
-	app->entityManager->AddEntity(npc);
-	npc->Awake();
+	for (pugi::xml_node itemNode = sceneNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	{
+		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
+		npc->parameters = itemNode;
+		npc->Awake();
+
+		npcList.Add(npc);
+	}
 
 	//app->entityManager->Awake();
 	return true;

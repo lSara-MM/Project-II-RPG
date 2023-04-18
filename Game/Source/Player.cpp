@@ -121,6 +121,11 @@ bool Player::Update(float dt)
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
+	//Sara aquí tienes tu parte, donde cuando el player está dentro de la zona interactuable con el npc
+	if (npcInteract) 
+	{
+
+	}
 
 	return true;
 }
@@ -139,6 +144,18 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 	switch (physB->ctype)
 	{
 	case ColliderType::NPC:
+		npcInteract = true;
+		break;
+	default:
+		break;
+	}
+}
+void Player::EndContact(PhysBody* physA, PhysBody* physB) 
+{
+	switch (physB->ctype)
+	{
+	case ColliderType::NPC:
+		npcInteract = false;
 		break;
 	default:
 		break;
@@ -248,7 +265,7 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 			{
-				app->render->camera.y += -125 * dtP;
+				app->render->camera.y += 125 * dtP;
 				keyLockUp = true;
 				currentAnimation = &upAnim;
 				vel.y = -125;
@@ -264,7 +281,7 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 			{
-				app->render->camera.y += 125 * dtP;
+				app->render->camera.y += -125 * dtP;
 				keyLockDown = true;
 				currentAnimation = &downAnim;
 				vel.y = 125;
@@ -280,7 +297,7 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 			{
-				app->render->camera.x += -125 * dtP;
+				app->render->camera.x += 125 * dtP;
 				keyLockLeft = true;
 				currentAnimation = &leftAnim;
 				vel.x = -125;
@@ -296,7 +313,7 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 			{
-				app->render->camera.x += 125 * dtP;
+				app->render->camera.x += -125 * dtP;
 				keyLockRigth = true;
 				currentAnimation = &rigthAnim;
 				vel.x = 125;

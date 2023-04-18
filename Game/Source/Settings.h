@@ -83,8 +83,6 @@ public:
 			i->data->state = GuiControlState::NONE;
 		}
 
-		CleanUp();
-
 		return true;
 	}
 
@@ -172,8 +170,6 @@ public:
 		{
 			i->data->state = GuiControlState::NONE;
 		}
-
-		CleanUp();
 
 		return true;
 	}
@@ -281,8 +277,6 @@ public:
 			i->data->state = GuiControlState::NONE;
 		}
 
-		CleanUp();
-
 		return true;
 	}
 
@@ -384,8 +378,6 @@ public:
 		{
 			i->data->state = GuiControlState::NONE;
 		}
-
-		CleanUp();
 
 		return true;
 	}
@@ -493,6 +485,11 @@ public:
 		listSettingsButtons.Clear();
 		settings_B = false;
 		
+		/*pGame->CleanUp();
+		pControl->CleanUp();
+		pGraphics->CleanUp();
+		pAudio->CleanUp();*/
+
 		delete pGame;
 		pGame = nullptr;
 

@@ -128,7 +128,6 @@ bool IntroScene::CleanUp()
 	LOG("Freeing IntroScene");
 	
 	listButtons.Clear();
-	delete buttons;
 
 	pSettings->CleanUp();
 
@@ -164,18 +163,14 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	switch (control->id)
 	{
 	case 1:
-		LOG("Button Close settings click");
-		pSettings->CloseSettings();
-		break;
-	case 2:
 		LOG("Button start click");
 		app->input->getInput_B = true;
 		
 		break;
-	case 3:
+	case 2:
 		LOG("Button continue click");
 		break;
-	case 4:
+	case 3:
 		LOG("Button settings click");
 		pSettings->settings_B = !pSettings->settings_B;
 
@@ -184,19 +179,10 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 			pSettings->CloseSettings();
 		}
 		break;
-	case 5:
-		LOG("Button Credits click");
-		break;
-
-	case 6:
+	case 4:
 		LOG("Button Exit game click");
 		exit_B = true;
 		break;
-
-	case 7:
-		LOG("Button Close credits");
-		break;
-
 
 		// Settings
 	case 801:

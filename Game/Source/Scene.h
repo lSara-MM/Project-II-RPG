@@ -5,6 +5,7 @@
 
 #include "Module.h"
 #include "Player.h"
+#include "NPC.h"
 
 #include "GuiButton.h"
 #include "GuiCheckBox.h"
@@ -50,6 +51,8 @@ public:
 public:
 
 	Player* player;
+	List <Npc*> npcList;
+
 	bool frcap_B = true;
 	bool pause_B;
 	bool mute_B = true;

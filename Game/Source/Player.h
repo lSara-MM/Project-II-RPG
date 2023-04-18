@@ -30,6 +30,7 @@ public:
 	bool CleanUp();
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
+	void EndContact(PhysBody* physA, PhysBody* physB);
 
 	void Controller(float dt);
 
@@ -66,7 +67,9 @@ public:
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
 
-	iPoint  position;
+	iPoint position;
+
+	bool npcInteract = false;
 
 private:
 
