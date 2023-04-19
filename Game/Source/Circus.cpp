@@ -48,7 +48,7 @@ bool Circus::Start()
 {
 	//Load Map
 	app->map->Load(2);
-
+	
 	//pause menu
 	pause_B = false;
 
@@ -59,9 +59,8 @@ bool Circus::Start()
 	//pPause->GUI_id = pSettings->GUI_id;
 	//pPause->CreatePause(this);
 
-	//Camera pos
-	//app->render->camera.x = -2800;
-	//app->render->camera.y = -800;
+	//Camera pos temporal Sara no convulsiones
+	app->render->camera.y = -700;
 	
 	InitEntities();
 

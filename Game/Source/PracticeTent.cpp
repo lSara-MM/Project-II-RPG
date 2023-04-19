@@ -47,7 +47,7 @@ bool PracticeTent::Awake(pugi::xml_node& config)
 bool PracticeTent::Start()
 {
 	//Load Map
-	app->map->Load(0);
+	app->map->Load(3);
 
 	//pause menu
 	pause_B = false;
@@ -59,9 +59,8 @@ bool PracticeTent::Start()
 	//pPause->GUI_id = pSettings->GUI_id;
 	//pPause->CreatePause(this);
 
-	//Camera pos
-	/*app->render->camera.x = -2800;
-	app->render->camera.y = -800;*/
+	//Camera pos temporal Sara no convulsiones
+	app->render->camera.y = 50;
 	
 	InitEntities();
 	app->entityManager->Enable();

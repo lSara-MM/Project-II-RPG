@@ -72,12 +72,12 @@
 		<mapdungeonbackground path="Assets/Maps/DungeonMap.png"/>
 		
 		<mappracticefolder path="Assets/Maps/"/>
-		<mappracticefile path="Assets/Maps/map1.tmx"/>
-		<mappracticebackground path="Assets/Maps/TwistedTentMap.png"/>
+		<mappracticefile path="Assets/Maps/mapPractice.tmx"/>
+		<mappracticebackground path="Assets/Maps/PracticeMap.png"/>
 
 		<mapcircusfolder path="Assets/Maps/"/>
-		<mapcircusfile path="Assets/Maps/map1.tmx"/>
-		<mapcircusbackground path="Assets/Maps/TwistedTentMap.png"/>
+		<mapcircusfile path="Assets/Maps/mapCircus.tmx"/>
+		<mapcircusbackground path="Assets/Maps/CircusMap.png"/>
 
 	</map>
 

@@ -36,6 +36,14 @@ bool Map::Awake(pugi::xml_node& config)
     mapDungeonFolder = config.child("mapdungeonfolder").attribute("path").as_string();
     mapDungeonBackground = config.child("mapdungeonbackground").attribute("path").as_string();
 
+    mapCircusFileName = config.child("mapcircusfile").attribute("path").as_string();
+    mapCircusFolder = config.child("mapcircusfolder").attribute("path").as_string();
+    mapCircusBackground = config.child("mapcircusbackground").attribute("path").as_string();
+
+    mapPracticeFileName = config.child("mappracticefile").attribute("path").as_string();
+    mapPracticeFolder = config.child("mappracticefolder").attribute("path").as_string();
+    mapPracticeBackground = config.child("mappracticebackground").attribute("path").as_string();
+
     return ret;
 }
 
@@ -319,6 +327,12 @@ bool Map::Load(int ID)
     case 1:
         result = mapFileXML.load_file(mapDungeonFileName.GetString());
         break;
+    case 2:
+        result = mapFileXML.load_file(mapCircusFileName.GetString());
+        break;
+    case 3:
+       result = mapFileXML.load_file(mapPracticeFileName.GetString());
+        break;
     }
     
 
@@ -413,6 +427,12 @@ bool Map::LoadMap(pugi::xml_node mapFile, int ID)
         case 1:
             backGround = app->tex->Load(mapDungeonBackground);
             break;
+        case 2:
+            backGround = app->tex->Load(mapCircusBackground);
+            break;
+        case 3:
+            backGround = app->tex->Load(mapPracticeBackground);
+            break;
         }
         
         portalID = 0;
@@ -465,6 +485,50 @@ bool Map::LoadTileSet(pugi::xml_node mapFile, int ID){
 
 
             SString tmp("%s%s", mapDungeonFolder.GetString(), tileset.child("image").attribute("source").as_string());
+            set->texture = app->tex->Load(tmp.GetString());
+
+            mapData.tilesets.Add(set);
+        }
+        break;
+
+    case 2:
+        for (tileset = mapFile.child("circus").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        {
+            TileSet* set = new TileSet();
+
+            set->name = tileset.attribute("name").as_string();
+            set->firstgid = tileset.attribute("firstgid").as_int();
+            set->margin = tileset.attribute("margin").as_int();
+            set->spacing = tileset.attribute("spacing").as_int();
+            set->tileWidth = tileset.attribute("tilewidth").as_int();
+            set->tileHeight = tileset.attribute("tileheight").as_int();
+            set->columns = tileset.attribute("columns").as_int();
+            set->tilecount = tileset.attribute("tilecount").as_int();
+
+
+            SString tmp("%s%s", mapCircusFolder.GetString(), tileset.child("image").attribute("source").as_string());
+            set->texture = app->tex->Load(tmp.GetString());
+
+            mapData.tilesets.Add(set);
+        }
+        break;
+
+    case 3:
+        for (tileset = mapFile.child("practice").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        {
+            TileSet* set = new TileSet();
+
+            set->name = tileset.attribute("name").as_string();
+            set->firstgid = tileset.attribute("firstgid").as_int();
+            set->margin = tileset.attribute("margin").as_int();
+            set->spacing = tileset.attribute("spacing").as_int();
+            set->tileWidth = tileset.attribute("tilewidth").as_int();
+            set->tileHeight = tileset.attribute("tileheight").as_int();
+            set->columns = tileset.attribute("columns").as_int();
+            set->tilecount = tileset.attribute("tilecount").as_int();
+
+
+            SString tmp("%s%s", mapPracticeFolder.GetString(), tileset.child("image").attribute("source").as_string());
             set->texture = app->tex->Load(tmp.GetString());
 
             mapData.tilesets.Add(set);

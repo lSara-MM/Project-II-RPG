@@ -193,10 +193,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			}
 			break;
 		case 1:
-			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, 90);
+			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
 			break;
 		case 2:
-			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
+			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, 90);
 			break;
 		}
 		break;

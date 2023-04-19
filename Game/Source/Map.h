@@ -168,6 +168,14 @@ private:
 	SString mapDungeonFileName;
 	SString mapDungeonFolder;
 	const char* mapDungeonBackground;
+	//Circus
+	SString mapCircusFileName;
+	SString mapCircusFolder;
+	const char* mapCircusBackground;
+	//Practice
+	SString mapPracticeFileName;
+	SString mapPracticeFolder;
+	const char* mapPracticeBackground;
 
 	SDL_Texture* backGround;
     bool mapLoaded;
