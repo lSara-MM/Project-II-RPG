@@ -99,6 +99,7 @@ bool HouseDPS::Update(float dt)
 		if (this->alive == false) {
 			app->combat->NextTurn();
 			onTurn = false;
+			app->combat->EliminateCombatant(this);
 		}
 
 		else 
