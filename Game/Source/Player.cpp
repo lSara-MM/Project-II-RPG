@@ -121,17 +121,50 @@ bool Player::Update(float dt)
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
-	//Sara aquí tienes tu parte, donde cuando el player está dentro de la zona interactuable con el npc
-	if (npcInteract) 
+	if (npcInteract)
 	{
 		app->render->DrawRectangle({ npcTalkingTo->position.x, npcTalkingTo->position.y - 60, 24, 24 },
 			255, 255, 255, 200);
 		app->render->TextDraw("E", npcTalkingTo->position.x + npcTalkingTo->width / 2, npcTalkingTo->position.y - 57, 16, Font::TEXT);
 
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
+			lockMovement = true;
 			npcTalkingTo->PerformDialogue();
 		}
+
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP)
+		{
+			keyLockUp = false;
+			currentAnimation = &idleUpAnim;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
+		{
+			keyLockDown = false;
+			currentAnimation = &idleDownAnim;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+		{
+			keyLockLeft = false;
+			currentAnimation = &idleLeftAnim;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
+		{
+			keyLockRigth = false;
+			currentAnimation = &idleRigthAnim;
+		}
+	}
+	else
+	{
+		lockMovement = false;
+	}
+
+	if (!lockMovement)
+	{
+		Controller(dtP);
 	}
 
 	return true;
@@ -164,6 +197,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 				break;
 			}
 		}
+
 		npcInteract = true;
 		break;
 	default:
