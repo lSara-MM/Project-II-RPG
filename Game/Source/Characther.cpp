@@ -115,12 +115,4 @@ int Character::CalculateDamage(int initialDmg)
 	return realDmg;
 }
 
-//bool Character::IsAlive() 
-//{
-//	if (this->alive == false)
-//	{
-//		return false;
-//	}
-//	return true;
-//}
 

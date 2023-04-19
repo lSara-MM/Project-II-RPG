@@ -33,8 +33,6 @@ public:
 
 	int CalculateDamage(int damage);
 
-	//bool IsAlive();
-
 public:
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction

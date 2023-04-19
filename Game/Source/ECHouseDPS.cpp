@@ -109,7 +109,7 @@ bool HouseDPS::Update(float dt)
 			//Timer(4);
 
 			//Mejor con un switch
-			if (randomNum == 1 /*&& aliado en pos alive == true*/)
+			if (randomNum == 1 )
 			{
 				if (!(app->combat->allies[0] == nullptr))
 				{
@@ -118,10 +118,8 @@ bool HouseDPS::Update(float dt)
 					{
 						app->combat->allies[0]->ModifyHP(-damage);
 					}
+					app->combat->NextTurn();
 				}
-
-
-				app->combat->NextTurn();
 			}
 			if (randomNum == 2)
 			{
@@ -131,7 +129,7 @@ bool HouseDPS::Update(float dt)
 					app->combat->allies[1]->ModifyHP(-damage);
 					app->combat->NextTurn();
 				}
-
+				app->combat->NextTurn();
 			}
 			if (randomNum == 3)
 			{

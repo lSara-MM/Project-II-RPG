@@ -1,4 +1,4 @@
-#include "ECHouseHealer.h"
+ï»¿#include "ECHouseHealer.h"
 
 #include "Characther.h"
 #include "CombatEnemy.h"
@@ -83,7 +83,7 @@ bool HouseHealer::Update(float dt)
 	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
 	rect = { 0,0,258,496 };
-	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
+	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formaciÃ³n
 	app->render->DrawTexture(texture, 608 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
 	
 
@@ -102,52 +102,45 @@ bool HouseHealer::Update(float dt)
 		else
 		{
 			int randomNum = std::rand() % 3 + 1;
-
-			//Timer(4);
-
-			//Mejor con un switch
-			if (randomNum == 1 /*&& aliado en pos alive == true*/)
+			//Esto mejor con un switch en vez de 3 IFs
+			if (randomNum == 1)
 			{
 				if (!(app->combat->allies[0] == nullptr))
 				{
 					float damage = app->combat->allies[0]->CalculateDamage(attack);
-					if (!app->input->godMode_B)//Hace daño si no hay godmode
+					if (!app->input->godMode_B)//Hace daÃ±o si no hay godmode
 					{
 						app->combat->allies[0]->ModifyHP(-damage);
 					}
+					app->combat->NextTurn();
 				}
-
-
-				app->combat->NextTurn();
 			}
 			if (randomNum == 2)
 			{
-				if (!(app->combat->allies[1] == nullptr))
-				{
-					float damage = app->combat->allies[1]->CalculateDamage(attack);
-					app->combat->allies[1]->ModifyHP(-damage);
-					app->combat->NextTurn();
-				}
-
-			}
-			if (randomNum == 3)
-			{
-				if (!(app->combat->allies[0] == nullptr))
-				{
-					float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
-					app->combat->allies[0]->ModifyHP(-damage);
-				}
-
-				if (!(app->combat->allies[1] == nullptr))
-				{
-					float damage = app->combat->allies[1]->CalculateDamage(attack * 0.5);
-					app->combat->allies[1]->ModifyHP(-damage);
+				if (!(app->combat->enemies[1] == nullptr && this->alive == true)) {
+					float heal = maxHp * 0.3;
+					app->combat->enemies[1]->ModifyHP(heal);
 				}
 				app->combat->NextTurn();
 			}
+			if (randomNum == 3)
+			{
+				if (app->combat->allies[0] != nullptr)
+				{
+					float damage = app->combat->allies[0]->CalculateDamage(attack * 0.8);
+					app->combat->allies[0]->ModifyHP(-damage);
+				}
+				if (app->combat->allies[1] != nullptr)
+				{
+					float damage = app->combat->allies[1]->CalculateDamage(attack * 0.3);
+					app->combat->allies[1]->ModifyHP(-damage);
+				}
+				app->combat->NextTurn();
+
+			}
 			//render barra de habilidades
 			// Para seleccionar app->input->GetMousePosition o 
-			//app->combat->NextTurn();
+			//app->combat->NextTurn(); //Se generan 2 next turn
 
 			onTurn = false;
 		}
