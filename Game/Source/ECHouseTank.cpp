@@ -86,7 +86,6 @@ bool HouseTank::Update(float dt)
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formaci�n
 	app->render->DrawTexture(texture, 608 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
 	
-
 	if (onTurn)
 	{
 		if (this->currentHp <= 0)
@@ -159,7 +158,6 @@ bool HouseTank::Update(float dt)
 			onTurn = false;
 		}
 	}
-
 
 	return true;
 }
