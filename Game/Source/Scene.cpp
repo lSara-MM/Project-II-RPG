@@ -279,9 +279,19 @@ void Scene::Debug()
 
 bool Scene::InitEntities()
 {
+	for (pugi::xml_node itemNode = sceneNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	{
+		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
+		npc->parameters = itemNode;
+		npc->Awake();
+
+		listNpc.Add(npc);
+	}
+
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = sceneNode.child("player");
 	player->Awake();
+
 	switch (app->entityManager->tpID)
 	{
 	case 0:
@@ -296,15 +306,6 @@ bool Scene::InitEntities()
 		player->position.x = 3437;
 		player->position.y = 1085;
 		break;
-	}
-
-	for (pugi::xml_node itemNode = sceneNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
-	{
-		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
-		npc->parameters = itemNode;
-		npc->Awake();
-
-		listNpc.Add(npc);
 	}
 
 	//app->entityManager->Awake();
