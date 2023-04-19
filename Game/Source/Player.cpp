@@ -110,8 +110,6 @@ bool Player::Update(float dt)
 		dtP = dt / 1000;
 	}
 
-	Controller(dtP);
-
 	vel = b2Vec2(vel.x * dtP, vel.y * dtP);
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);
@@ -136,6 +134,34 @@ bool Player::Update(float dt)
 		{
 			npcTalkingTo->PerformDialogue();
 		}
+
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP)
+		{
+			keyLockUp = false;
+			currentAnimation = &idleUpAnim;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
+		{
+			keyLockDown = false;
+			currentAnimation = &idleDownAnim;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+		{
+			keyLockLeft = false;
+			currentAnimation = &idleLeftAnim;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
+		{
+			keyLockRigth = false;
+			currentAnimation = &idleRigthAnim;
+		}
+	}
+	else 
+	{
+		Controller(dtP);
 	}
 
 	return true;
