@@ -33,8 +33,6 @@ public:
 
 	int CalculateDamage(int damage);
 
-	//bool IsAlive();
-
 public:
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
@@ -83,7 +81,7 @@ public:
 	int GetMaxHP() { return maxHp; }
 	
 	//Skills Descriptions
-	const char* skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
+	SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
 
 private:
 

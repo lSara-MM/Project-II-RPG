@@ -83,7 +83,7 @@ bool HouseTank::Update(float dt)
 	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
 	rect = { 0,0,258,496 };
-	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
+	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formaciï¿½n
 	app->render->DrawTexture(texture, 608 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
 	
 
@@ -106,18 +106,16 @@ bool HouseTank::Update(float dt)
 			//Timer(4);
 
 			//Mejor con un switch
-			if (randomNum == 1 /*&& aliado en pos alive == true*/)
+			if (randomNum == 1)
 			{
 				if (!(app->combat->allies[0] == nullptr))
 				{
 					float damage = app->combat->allies[0]->CalculateDamage(attack);
-					if (!app->input->godMode_B)//Hace daño si no hay godmode
+					if (!app->input->godMode_B)//Hace daï¿½o si no hay godmode
 					{
 						app->combat->allies[0]->ModifyHP(-damage);
 					}
 				}
-
-
 				app->combat->NextTurn();
 			}
 			if (randomNum == 2)
@@ -129,9 +127,9 @@ bool HouseTank::Update(float dt)
 					{
 						app->combat->allies[1]->ModifyHP(-damage);
 					}
-					app->combat->NextTurn();
+					app->combat->allies[1]->ModifyHP(-damage);
 				}
-
+				app->combat->NextTurn();
 			}
 			if (randomNum == 3)
 			{

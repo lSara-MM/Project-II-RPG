@@ -48,6 +48,11 @@ bool Protagonist::Awake() {
 	this->speed = parameters.attribute("speed").as_int();
 	texturePath = parameters.attribute("texturePath").as_string();
 
+	this->skills_C[0] = "Skill 1 Prota";
+	this->skills_C[1] = "Skill 2 Prota";
+	this->skills_C[2] = "Skill 3 Prota";
+	this->skills_C[3] = "Skill 4 Prota";
+
 	return true;
 }
 
