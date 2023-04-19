@@ -168,8 +168,6 @@ bool Scene::PostUpdate()
 		app->dialogueSystem->LoadDialogue(0);
 	}
 
-	app->render->TextDraw("F1: start dialogue 1", 50, 50, 16, Font::TEXT, { 255, 255, 255 });
-
 	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 	{
 		settings_B = !settings_B;
