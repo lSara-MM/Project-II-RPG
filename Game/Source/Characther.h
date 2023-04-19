@@ -33,10 +33,7 @@ public:
 
 	int CalculateDamage(int damage);
 
-	bool IsAlive();
-
-	bool IsDead();
-
+	//bool IsAlive();
 
 public:
 	// The pointer to the current player animation

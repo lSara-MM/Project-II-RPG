@@ -98,12 +98,7 @@ bool Bard::Update(float dt)
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
 	app->render->DrawTexture(texture, 544 - 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //Print bueno
 
-	if (this->currentHp <= 0) {
-		app->combat->NextTurn();
-		onTurn = false;
-		app->entityManager->DestroyEntity(app->combat->allies[positionCombat_I]);
-	}
-	if (onTurn && this->currentHp > 0)
+	if (onTurn)
 	{
 		app->render->DrawCircle(544 - 128 * positionCombat_I + (126 / 2), 220, 20, 0, 255, 255);
 
@@ -116,109 +111,122 @@ bool Bard::Update(float dt)
 		app->combat->DisableTargetButton(6);
 		app->combat->DisableTargetButton(7);
 
-		if (app->combat->lastPressedAbility_I == 1) //Only allows targeting 2 and 3
+		if (this->currentHp <= 0)
 		{
-			if (app->combat->enemies[1] != nullptr)
+			this->alive = false;
+		}
+
+		if (this->alive == false) {
+			app->combat->NextTurn();
+			onTurn = false;
+		}
+
+		else
+		{
+			if (app->combat->lastPressedAbility_I == 1) //Only allows targeting 2 and 3
 			{
-				app->combat->EnableTargetButton(5);
+				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
+				{
+					app->combat->EnableTargetButton(5);
+				}
+
+				if (app->combat->enemies[2] != nullptr && app->combat->enemies[2]->alive == true)
+				{
+					app->combat->EnableTargetButton(6);
+				}
+				//Si no hay godmode va normal, si lo hay la vida del enemigo se reduce a 0
+
+				if (app->combat->targeted_Character != nullptr)
+				{
+
+					if (!app->input->godMode_B)
+					{
+						float damage = app->combat->targeted_Character->CalculateDamage(attack);
+						app->combat->targeted_Character->ModifyHP(-damage);
+					}
+					else
+					{
+						app->combat->targeted_Character->ModifyHP(-99999);
+					}
+					app->combat->NextTurn();
+					onTurn = false;
+				}
+
 			}
-
-			if (app->combat->enemies[3] != nullptr)
+			if (app->combat->lastPressedAbility_I == 2)
 			{
-				app->combat->EnableTargetButton(6);
-			}
-			//Si no hay godmode va normal, si lo hay la vida del enemigo se reduce a 0
+				if (app->combat->enemies[2] != nullptr && app->combat->enemies[2]->alive == true)
+				{
+					app->combat->EnableTargetButton(5);
+				}
+				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
+				{
+					app->combat->EnableTargetButton(4);
+				}
 
-			if (app->combat->targeted_Character != nullptr)
-			{
-
-				if (!app->input->godMode_B)
+				if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1] && app->combat->targeted_Character != nullptr)
 				{
 					float damage = app->combat->targeted_Character->CalculateDamage(attack);
 					app->combat->targeted_Character->ModifyHP(-damage);
+					onTurn = false;
+					app->combat->NextTurn();
 				}
-				else
+
+			}
+			if (app->combat->lastPressedAbility_I == 3)
+			{
+
+				if (app->combat->enemies[2] != nullptr && app->combat->enemies[2]->alive == true)
 				{
-					app->combat->targeted_Character->ModifyHP(-99999);
+					app->combat->EnableTargetButton(5);
 				}
-				app->combat->NextTurn();
-				onTurn = false;
-			}
-
-		}
-		if (app->combat->lastPressedAbility_I == 2)
-		{
-			if (app->combat->enemies[2] != nullptr)
-			{
-				app->combat->EnableTargetButton(5);
-			}
-			if (app->combat->enemies[1] != nullptr)
-			{
-				app->combat->EnableTargetButton(4);
-			}
-
-			if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1] && app->combat->targeted_Character != nullptr)
-			{
-				float damage = app->combat->targeted_Character->CalculateDamage(attack);
-				app->combat->targeted_Character->ModifyHP(-damage);
-				onTurn = false;
-				app->combat->NextTurn();
-			}
-
-		}
-		if (app->combat->lastPressedAbility_I == 3)
-		{
-
-			if (app->combat->enemies[2] != nullptr)
-			{
-				app->combat->EnableTargetButton(5);
-			}
-			if (app->combat->enemies[1] != nullptr)
-			{
-				app->combat->EnableTargetButton(4);
-			}
-
-			if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1] && app->combat->targeted_Character != nullptr) {
-				if (app->combat->enemies[0] != nullptr){
-					float damage = app->combat->enemies[0]->CalculateDamage(attack * 0.65);
-					app->combat->enemies[0]->ModifyHP(-damage);
-			}
-				if (app->combat->enemies[1] != nullptr) {
-					float damage = app->combat->enemies[1]->CalculateDamage(attack * 0.30);
-					app->combat->enemies[1]->ModifyHP(-damage);
-				}
-				app->combat->NextTurn();
-				onTurn = false;
-			}
-
-		}
-		if (app->combat->lastPressedAbility_I == 4)
-		{
-			if (app->combat->enemies[2] != nullptr)
-			{
-				app->combat->EnableTargetButton(6);
-			}
-
-			if (app->combat->enemies[3] != nullptr)
-			{
-				app->combat->EnableTargetButton(7);
-			}
-
-
-			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3] && app->combat->targeted_Character != nullptr) {
-				if (app->combat->enemies[2] != nullptr)
+				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
 				{
-					float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.65);
-					app->combat->enemies[2]->ModifyHP(-damage);
+					app->combat->EnableTargetButton(4);
 				}
 
-				if (app->combat->enemies[3] != nullptr)
-				{
-					float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.30);
-					app->combat->enemies[3]->ModifyHP(-damage);
+				if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1] && app->combat->targeted_Character != nullptr) {
+					if (app->combat->enemies[0] != nullptr) {
+						float damage = app->combat->enemies[0]->CalculateDamage(attack * 0.65);
+						app->combat->enemies[0]->ModifyHP(-damage);
+					}
+					if (app->combat->enemies[1] != nullptr) {
+						float damage = app->combat->enemies[1]->CalculateDamage(attack * 0.30);
+						app->combat->enemies[1]->ModifyHP(-damage);
+					}
+					app->combat->NextTurn();
+					onTurn = false;
 				}
-				app->combat->NextTurn();
-				onTurn = false;
+
+			}
+			if (app->combat->lastPressedAbility_I == 4)
+			{
+				if (app->combat->enemies[2] != nullptr && app->combat->enemies[2]->alive == true)
+				{
+					app->combat->EnableTargetButton(6);
+				}
+
+				if (app->combat->enemies[3] != nullptr && app->combat->enemies[3]->alive == true)
+				{
+					app->combat->EnableTargetButton(7);
+				}
+
+
+				if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3] && app->combat->targeted_Character != nullptr) {
+					if (app->combat->enemies[2] != nullptr)
+					{
+						float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.65);
+						app->combat->enemies[2]->ModifyHP(-damage);
+					}
+
+					if (app->combat->enemies[3] != nullptr)
+					{
+						float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.30);
+						app->combat->enemies[3]->ModifyHP(-damage);
+					}
+					app->combat->NextTurn();
+					onTurn = false;
+				}
 			}
 		}
 	}

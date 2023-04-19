@@ -85,53 +85,70 @@ bool HouseHealer::Update(float dt)
 	rect = { 0,0,258,496 };
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
 	app->render->DrawTexture(texture, 608 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
-	if (this->currentHp <= 0) {
-		app->combat->NextTurn();
-		onTurn = false;
-		app->entityManager->DestroyEntity(app->combat->enemies[positionCombat_I]);
-	}
-	if (onTurn && this->currentHp > 0)
+	if (onTurn)
 	{
-
-		int randomNum = std::rand() % 3 + 1;
-		//Esto mejor con un switch en vez de 3 IFs
-		if (randomNum == 1)
+		if (this->currentHp <= 0)
 		{
-			float damage = app->combat->allies[1]->CalculateDamage(attack);
-			if (!app->input->godMode_B)//Hace daño si no hay godmode
-			{
-				app->combat->allies[1]->ModifyHP(-damage);
-			}
-			app->combat->NextTurn();
+			this->alive = false;
 		}
-		if (randomNum == 2)
-		{
-			if (!(app->combat->enemies[1] == nullptr)) {
-				float heal = maxHp * 0.3;
-				app->combat->enemies[1]->ModifyHP(heal);
-			}
-			app->combat->NextTurn();
-		}
-		if (randomNum == 3)
-		{
-			if (app->combat->allies[0] != nullptr)
-			{
-				float damage = app->combat->allies[0]->CalculateDamage(attack * 0.8);
-				app->combat->allies[0]->ModifyHP(-damage);
-			}
 
-			if (app->combat->allies[1] != nullptr)
-			{
-				float damage = app->combat->allies[1]->CalculateDamage(attack * 0.3);
-				app->combat->allies[1]->ModifyHP(-damage);
-			}
+		if (this->alive == false) {
 			app->combat->NextTurn();
+			onTurn = false;
 		}
-		//render barra de habilidades
-		// Para seleccionar app->input->GetMousePosition o 
-		//app->combat->NextTurn(); //Se generan 2 next turn
-		onTurn = false;
 
+		else
+		{
+			int randomNum = std::rand() % 3 + 1;
+
+			Timer(4);
+
+			//Mejor con un switch
+			if (randomNum == 1 /*&& aliado en pos alive == true*/)
+			{
+				if (!(app->combat->allies[0] == nullptr))
+				{
+					float damage = app->combat->allies[0]->CalculateDamage(attack);
+					if (!app->input->godMode_B)//Hace daño si no hay godmode
+					{
+						app->combat->allies[0]->ModifyHP(-damage);
+					}
+				}
+
+
+				app->combat->NextTurn();
+			}
+			if (randomNum == 2)
+			{
+				if (!(app->combat->allies[1] == nullptr))
+				{
+					float damage = app->combat->allies[1]->CalculateDamage(attack);
+					app->combat->allies[1]->ModifyHP(-damage);
+					app->combat->NextTurn();
+				}
+
+			}
+			if (randomNum == 3)
+			{
+				if (!(app->combat->allies[0] == nullptr))
+				{
+					float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
+					app->combat->allies[0]->ModifyHP(-damage);
+				}
+
+				if (!(app->combat->allies[1] == nullptr))
+				{
+					float damage = app->combat->allies[1]->CalculateDamage(attack * 0.5);
+					app->combat->allies[1]->ModifyHP(-damage);
+				}
+				app->combat->NextTurn();
+			}
+			//render barra de habilidades
+			// Para seleccionar app->input->GetMousePosition o 
+			//app->combat->NextTurn();
+
+			onTurn = false;
+		}
 	}
 
 
