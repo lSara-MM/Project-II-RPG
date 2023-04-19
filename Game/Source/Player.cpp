@@ -244,9 +244,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			break;
 		}
 		break;
-
-	default:
-		break;
 	}
 }
 void Player::EndContact(PhysBody* physA, PhysBody* physB) 
