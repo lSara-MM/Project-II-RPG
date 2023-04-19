@@ -49,8 +49,7 @@ public:
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
 
-	
-
+	SString skills_C[4] = { "Habilidad 1 Barda", "Habilidad 2 Barda","Habilidad 3 Barda","Habilidad 4 Barda" };
 	
 
 private:

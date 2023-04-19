@@ -221,10 +221,21 @@ bool Combat::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
+	}
 
 	//Rectangulo donde va la Info abajo derecha {x,y,w,h} r, g, b, opacity(0 = 100% & 255 = 0%)
 	app->render->DrawRectangle({ 430, 470, 730, 220 }, 255, 255, 255, 250, true);
+
+	if(listInitiative.At(charaInTurn)->data->charaType_I==0)
+	{
+		if(lastPressedAbility_I>0)
+		{
+			
+			app->render->TextDraw(allies[1]->skills_C[lastPressedAbility_I - 1] , 460, 500, 20);
+		}
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
