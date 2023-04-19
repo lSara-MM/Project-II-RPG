@@ -26,7 +26,6 @@ bool DialogueSystem::Awake(pugi::xml_node& config)
 bool DialogueSystem::Start()
 {
 	textBox_tex = app->tex->Load(textBox_path);
-	hasEnded = false;
 	return true;
 }
 
@@ -66,7 +65,6 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 	else
 	{
 		activeTree->activeNode = nullptr;
-		hasEnded = true;
 		CleanUp();
 	}
 	

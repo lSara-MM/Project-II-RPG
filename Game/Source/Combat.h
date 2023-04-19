@@ -81,8 +81,9 @@ public:
 private:
 	// Settings
 	Settings* pSettings;
-	Pause* pPause;
 
+	Pause pauseMenu;
+	Pause* pPause = &pauseMenu;
 	//TEXTURAS
 		//Fondo
 		const char* texturePathBackground;

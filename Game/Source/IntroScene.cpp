@@ -64,10 +64,10 @@ bool IntroScene::Start()
 	// buttons
 	for (int i = 0; buttons[i] != "\n"; i++)
 	{
-		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 1, this, { 25, 180 + 77 * i, 200, 70 }, ButtonType::START, buttons[i], 20));
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 1, this, { 25, 180 + 77 * i, 136, 33 }, ButtonType::START, buttons[i], 20));
 	}
 
-	//listButtons.start->next->data->state = GuiControlState::DISABLED;
+	listButtons.start->next->data->state = GuiControlState::DISABLED;
 
 	pSettings = new Settings(this);
 	listButtons.Add(pSettings->listSettingsButtons.start->data);
@@ -94,12 +94,7 @@ bool IntroScene::Update(float dt)
 
 	if (previousGame_B)
 	{
-		listButtons.start->next->data->state = GuiControlState::NORMAL;
 		LOG("Continue");
-	}
-	else
-	{
-		listButtons.start->next->data->state = GuiControlState::DISABLED;
 	}
 
 	return true;
@@ -112,11 +107,7 @@ bool IntroScene::PostUpdate()
 
 	if (exit_B) return false;
 	if (app->input->getInput_B) PlayerNameInput();
-	if (app->input->nameEntered_B && !introDone) 
-	{
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
-		introDone = true;
-	}
+	if (app->input->nameEntered_B) { app->fade->FadingToBlack(this, (Module*)app->scene, 90); }
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -173,27 +164,19 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	{
 	case 1:
 		LOG("Button start click");
-		if (!app->input->nameEntered_B)
-		{
-			app->input->getInput_B = true;
-		}
-		else
-		{
-			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
-		}
+		app->input->getInput_B = true;
+		
 		break;
 	case 2:
 		LOG("Button continue click");
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
-		continueGame_B = true;
 		break;
 	case 3:
 		LOG("Button settings click");
-		pSettings->settings_B = true;
+		pSettings->settings_B = !pSettings->settings_B;
 
-		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
+		if (!pSettings->settings_B)
 		{
-			i->data->state = GuiControlState::DISABLED;
+			pSettings->CloseSettings();
 		}
 		break;
 	case 4:
@@ -204,10 +187,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		// Settings
 	case 801:
 		LOG("Button Close settings click");
-		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
-		{
-			i->data->state = GuiControlState::NORMAL;
-		}
 		pSettings->CloseSettings();
 		break;
 
@@ -215,18 +194,18 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Game settings click");
 		pSettings->pGame->game_B = true;
 
-		pSettings->pControl->CloseControlSettings();
+		//pSettings->pControl->CloseControlSettings();
 		pSettings->pGraphics->CloseGraphics();
 		pSettings->pAudio->CloseAudioSettings();
 		break;
 
 	case 803:
 		LOG("Controls settings click");
-		pSettings->pControl->control_B = true;
+		//pSettings->pControl->control_B = true;
 
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pGraphics->CloseGraphics();
-		pSettings->pAudio->CloseAudioSettings();
+		//pSettings->pGame->CloseGameSettings();
+		//pSettings->pGraphics->CloseGraphics();
+		//pSettings->pAudio->CloseAudioSettings();
 		break;
 
 	case 804:
@@ -234,7 +213,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		pSettings->pGraphics->graphics_B = true;
 
 		pSettings->pGame->CloseGameSettings();
-		pSettings->pControl->CloseControlSettings();
+		//pSettings->pControl->CloseControlSettings();
 		pSettings->pAudio->CloseAudioSettings();
 		break;
 
@@ -243,7 +222,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		pSettings->pAudio->audio_B = true;
 
 		pSettings->pGame->CloseGameSettings();
-		pSettings->pControl->CloseControlSettings();
+		//pSettings->pControl->CloseControlSettings();
 		pSettings->pGraphics->CloseGraphics();
 		break;
 
@@ -265,7 +244,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 809:
 		LOG("Button Exit Game click");
-		exit_B = true;
+
 		break;
 
 
@@ -369,15 +348,14 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 829:
 		LOG("Checkbox Fullscreen check");
-		app->win->fullscreen = !app->win->fullscreen;
-		app->win->FullscreenWin();
+		app->win->changeScreen = !app->win->changeScreen;
+		app->win->ResizeWin();
 		break;
 
 	
 	case 830:
 		LOG("Checkbox Vsync check");
-		app->render->vSync_B = !app->render->vSync_B;
-		app->render->VSyncOn();
+		(control->state == GuiControlState::NORMAL) ? app->render->flags = SDL_RENDERER_ACCELERATED : app->render->flags |= SDL_RENDERER_PRESENTVSYNC;
 		break;
 
 	case 831:
@@ -410,7 +388,7 @@ bool IntroScene::PlayerNameInput()
 
 	temp = "Sign:  %%";
 	temp.Substitute("%", app->input->playerName.c_str());
-	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 500, 40, Font::TEXT, { 255, 255, 255 });
+	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 100, 16, Font::TEXT, { 255, 255, 255 });
 
 	return app->input->nameEntered_B;
 }

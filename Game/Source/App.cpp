@@ -6,6 +6,9 @@
 #include "Window.h"
 
 #include "IntroScene.h"
+#include "HouseOfTerrors.h"
+#include "PracticeTent.h"
+#include "Circus.h"
 #include "LogoScene.h"
 #include "LoseScene.h"
 #include "Scene.h"
@@ -49,6 +52,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	lScene = new LogoScene();
 	iScene = new IntroScene();
 	scene = new Scene();
+	hTerrors = new HouseOfTerrors();
+	practiceTent = new PracticeTent();
+	circus = new Circus();
 	loseScene = new LoseScene();
 	fade = new FadeToBlack();
 
@@ -65,6 +71,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(lScene);
 	AddModule(iScene);
 	AddModule(scene);
+	AddModule(circus);
+	AddModule(hTerrors);
+	AddModule(practiceTent);
 	AddModule(loseScene);
 
 	AddModule(map);
@@ -254,7 +263,7 @@ void App::FinishUpdate()
 	if (app->input->godMode_B)
 	{
 		static char title[256];
-		if (app->render->vSync_B)
+		if (app->render->flags == SDL_RENDERER_ACCELERATED)
 		{
 			sprintf_s(title, 256, "GodMode: ON Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u Vsync: On",
 				averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
@@ -461,10 +470,10 @@ void App::DisableAtStart()
 {
 	iScene->active = false;
 	scene->active = false;
+	hTerrors->active = false;
+	circus->active = false;
+	practiceTent->active = false;
 	loseScene->active = false;
-	
 	entityManager->active = false;
-	dialogueSystem->active = false;
-
 	combat->active = false;
 }

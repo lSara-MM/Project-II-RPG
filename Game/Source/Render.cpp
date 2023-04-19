@@ -307,9 +307,3 @@ bool Render::TextDraw(const char* text, int x, int y, int size, Font font, SDL_C
 
 	return ret;
 }
-
-bool Render::VSyncOn()
-{
-	(vSync_B) ? flags = SDL_RENDERER_ACCELERATED : flags |= SDL_RENDERER_PRESENTVSYNC;
-	return vSync_B;
-}

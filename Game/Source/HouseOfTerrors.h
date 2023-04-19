@@ -1,11 +1,10 @@
-#ifndef __SCENE_H__
-#define __SCENE_H__
+#ifndef __HOUSEOFTERRORS_H__
+#define __HOUSEOFTERRORS_H__
 
 #include "App.h"
 
 #include "Module.h"
 #include "Player.h"
-#include "NPC.h"
 
 #include "GuiButton.h"
 #include "GuiCheckBox.h"
@@ -15,14 +14,14 @@
 
 struct SDL_Texture;
 
-class Scene : public Module
+class HouseOfTerrors : public Module
 {
 public:
 
-	Scene();
+	HouseOfTerrors();
 
 	// Destructor
-	virtual ~Scene();
+	virtual ~HouseOfTerrors();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node& config);
@@ -51,10 +50,6 @@ public:
 public:
 
 	Player* player;
-	List <Npc*> listNpc;
-
-	int npcSetID;
-
 	bool frcap_B = true;
 	bool pause_B;
 	bool mute_B = true;
@@ -72,4 +67,4 @@ private:
 
 };
 
-#endif // __SCENE_H__
+#endif // __HOUSEOFTERRORS_H__

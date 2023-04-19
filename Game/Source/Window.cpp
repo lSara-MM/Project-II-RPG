@@ -117,11 +117,10 @@ int Window::GetHeight() const
 	return height;
 }
 
-bool Window::FullscreenWin()
+bool Window::ResizeWin()
 {
-	(!fullscreen) ? flags = SDL_WINDOW_SHOWN : flags = SDL_WINDOW_FULLSCREEN;
+	(!changeScreen) ? flags = SDL_WINDOW_SHOWN : flags = SDL_WINDOW_FULLSCREEN;
 
 	SDL_SetWindowFullscreen(window, flags);
-	return fullscreen;
+	return true; 
 }
-

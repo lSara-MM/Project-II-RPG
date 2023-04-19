@@ -57,10 +57,8 @@ public:
 	bool LoadState(pugi::xml_node&);
 	bool SaveState(pugi::xml_node&);
 
-	bool VSyncOn();
-
 public:
-	bool vSync_B;
+	Uint32 flags = SDL_RENDERER_ACCELERATED;
 
 	SDL_Renderer* renderer;
 	SDL_Rect camera;
@@ -71,9 +69,6 @@ public:
 	SDL_Surface* ttf_surface = nullptr;
 	SDL_Texture* ttf_texture = nullptr;
 	TTF_Font* ttf_font = nullptr;
-
-private:
-	Uint32 flags = SDL_RENDERER_ACCELERATED;
 };
 
 #endif // __RENDER_H__
