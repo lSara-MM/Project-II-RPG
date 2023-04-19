@@ -57,6 +57,7 @@ public:
 	bool continueGame_B = false;
 
 	int mouseX_intro, mouseY_intro;
+	float mouse_Speed;
 
 private:
 	const char* music_intro;

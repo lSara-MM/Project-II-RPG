@@ -79,6 +79,9 @@ public:
 	int lastPressedAbility_I = 0;
 
 private:
+
+	int mouseX_combat, mouseY_combat;
+	float mouse_Speed;
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;
