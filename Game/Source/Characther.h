@@ -55,7 +55,7 @@ public:
 
 	//Gestion de Turnos
 	bool onTurn;
-	bool alive = true;
+	bool alive;
 
 	//Stats
 	SString name;

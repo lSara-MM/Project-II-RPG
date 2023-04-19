@@ -48,6 +48,7 @@ bool Character::Start() {
 	pbody->listener = this; 
 
 	pbody->ctype = ColliderType::PLAYER;
+	alive = true;
 	
 	return true;
 }
@@ -83,11 +84,12 @@ void Character::ModifyHP(int num)
 	if ((this->currentHp + num) > this->maxHp) 
 	{
 		this->currentHp = this->maxHp;
-		this->alive = false;
+
 	}
 	else if ((this->currentHp + num) < 0)
 	{
 		this->currentHp = 0;
+
 		//Muere? No muere? Hay que hablar si hay death door
 	}
 	else

@@ -68,6 +68,7 @@ bool Bard::Start() {
 	this->charaType_I = CharacterType::ALLY;
 
 	this->onTurn = false;
+	this->alive = true;
 
 	this->positionCombat_I = 2;
 
@@ -97,8 +98,11 @@ bool Bard::Update(float dt)
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
 	app->render->DrawTexture(texture, 544 - 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //Print bueno
 
-
-	if (onTurn)
+	if (this->currentHp <= 0) {
+		app->combat->NextTurn();
+		onTurn = false;
+	}
+	if (onTurn && this->currentHp > 0)
 	{
 		app->render->DrawCircle(544 - 128 * positionCombat_I + (126 / 2), 220, 20, 0, 255, 255);
 

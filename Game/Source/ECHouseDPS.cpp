@@ -58,6 +58,7 @@ bool HouseDPS::Start() {
 	this->charaType_I = CharacterType::ENEMY;
 
 	this->positionCombat_I = 1;
+	this->alive = true;
 
 	return true;
 }
@@ -84,8 +85,11 @@ bool HouseDPS::Update(float dt)
 	rect = { 0,0,258,496 };
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
 	app->render->DrawTexture(texture, 608 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
-
-	if (onTurn)
+	if (this->currentHp <= 0) {
+		app->combat->NextTurn();
+		onTurn = false;
+	}
+	if (onTurn && this->currentHp > 0)
 	{
 		
 		int randomNum = std::rand() % 3 + 1;
