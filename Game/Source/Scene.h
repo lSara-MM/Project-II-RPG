@@ -70,6 +70,9 @@ private:
 
 	bool exit_B;
 
+	//Map render image
+
+	SDL_Texture* backGround;
 };
 
 #endif // __SCENE_H__

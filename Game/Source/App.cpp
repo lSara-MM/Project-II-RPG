@@ -6,9 +6,6 @@
 #include "Window.h"
 
 #include "IntroScene.h"
-#include "HouseOfTerrors.h"
-#include "PracticeTent.h"
-#include "Circus.h"
 #include "LogoScene.h"
 #include "LoseScene.h"
 #include "Scene.h"
@@ -52,9 +49,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	lScene = new LogoScene();
 	iScene = new IntroScene();
 	scene = new Scene();
-	hTerrors = new HouseOfTerrors();
-	practiceTent = new PracticeTent();
-	circus = new Circus();
 	loseScene = new LoseScene();
 	fade = new FadeToBlack();
 
@@ -71,9 +65,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(lScene);
 	AddModule(iScene);
 	AddModule(scene);
-	AddModule(circus);
-	AddModule(hTerrors);
-	AddModule(practiceTent);
 	AddModule(loseScene);
 
 	AddModule(map);
@@ -470,9 +461,6 @@ void App::DisableAtStart()
 {
 	iScene->active = false;
 	scene->active = false;
-	hTerrors->active = false;
-	circus->active = false;
-	practiceTent->active = false;
 	loseScene->active = false;
 	
 	entityManager->active = false;

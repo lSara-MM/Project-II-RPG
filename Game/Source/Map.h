@@ -129,7 +129,7 @@ public:
     bool CleanUp();
 
     // Load new map
-    bool Load(int ID);
+    bool Load();
 
 	// Translates x,y coordinates from map positions to world positions
 	iPoint MapToWorld(int x, int y) const;
@@ -142,9 +142,9 @@ public:
 
 private:
 
-	bool LoadMap(pugi::xml_node mapFile, int ID);
+	bool LoadMap(pugi::xml_node mapFile);
 
-	bool LoadTileSet(pugi::xml_node mapFile, int ID);
+	bool LoadTileSet(pugi::xml_node mapFile);
 
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadAllLayers(pugi::xml_node mapNode);
@@ -156,31 +156,10 @@ public:
 	MapData mapData;
 	List<PhysBody*> listBodies;
 
-	bool mapPendingtoDelete;
-
 private:
-
-	//Feria
     SString mapFileName;
 	SString mapFolder;
-	const char* mapBackground;
-	//Dungeon
-	SString mapDungeonFileName;
-	SString mapDungeonFolder;
-	const char* mapDungeonBackground;
-	//Circus
-	SString mapCircusFileName;
-	SString mapCircusFolder;
-	const char* mapCircusBackground;
-	//Practice
-	SString mapPracticeFileName;
-	SString mapPracticeFolder;
-	const char* mapPracticeBackground;
-
-	SDL_Texture* backGround;
     bool mapLoaded;
-
-	int portalID;
 };
 
 #endif // __MAP_H__

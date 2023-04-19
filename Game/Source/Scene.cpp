@@ -47,23 +47,18 @@ bool Scene::Awake(pugi::xml_node& config)
 bool Scene::Start()
 {
 	//Load Map
-	app->map->Load(0);
-
-	//pause menu
-	pause_B = false;
+	app->map->Load();
+	backGround = app->tex->Load("Assets/Maps/TwistedTentMap.png");
+	exit_B = false;
 
 	npcSetID = 1;
 
 	// Settings
 	pSettings = new Settings(this);
 
-	// Pause 
-	//pPause->GUI_id = pSettings->GUI_id;
-	//pPause->CreatePause(this);
-
-	//Camera pos temporal Sara no convulsiones
-	app->render->camera.x = -2800;
-	app->render->camera.y = -800;
+	//Camera pos
+	/*app->render->camera.x = -2800;
+	app->render->camera.y = -800;*/
 	
 	InitEntities();
 	app->entityManager->Enable();
@@ -78,11 +73,11 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
-	//Draw Map
-	app->map->Draw();
+	//Render background
+	app->render->DrawTexture(backGround, 0, 0);
 
-	//Load Debug keys
 	Debug();
+
 	
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(entidad2);*/
@@ -171,11 +166,6 @@ bool Scene::PostUpdate()
 	//if (pPause->pause) { pPause->OpenPause(); }
 	app->guiManager->Draw();
 
-	if (app->map->mapPendingtoDelete == true)
-	{
-		app->map->CleanUp();
-	}
-
 	return ret;
 }
 
@@ -187,14 +177,15 @@ bool Scene::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	//player->Disable();
+	// player->Disable();
 
-	app->entityManager->CleanUp();
+	app->entityManager->Disable();
 
 	pSettings->CleanUp();
 	//pPause->CleanUp();
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
+	app->tex->UnLoad(backGround);
 
 	return true;
 }
