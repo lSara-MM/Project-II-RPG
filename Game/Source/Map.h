@@ -129,7 +129,7 @@ public:
     bool CleanUp();
 
     // Load new map
-    bool Load();
+    bool Load(int ID);
 
 	// Translates x,y coordinates from map positions to world positions
 	iPoint MapToWorld(int x, int y) const;
@@ -140,11 +140,13 @@ public:
 
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
+	void LoadNewMap(int ID, Module* scene);
+
 private:
 
-	bool LoadMap(pugi::xml_node mapFile);
+	bool LoadMap(pugi::xml_node mapFile, int ID);
 
-	bool LoadTileSet(pugi::xml_node mapFile);
+	bool LoadTileSet(pugi::xml_node mapFile, int ID);
 
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadAllLayers(pugi::xml_node mapNode);
@@ -163,6 +165,8 @@ private:
 
 	SDL_Texture* backGround;
     bool mapLoaded;
+
+	int portalID;
 };
 
 #endif // __MAP_H__

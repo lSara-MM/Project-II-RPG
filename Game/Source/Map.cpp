@@ -137,6 +137,22 @@ void Map::DrawPlatformCollider() {
                         co->ctype = ColliderType::PLATFORM;
                         listBodies.Add(co);  
                         
+                    }else if (gid == 2 && gid != NULL)
+                    {
+                        int w, h;
+                        w = 64;
+                        h = 64;
+
+                        PhysBody* co = new PhysBody;
+                        co = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                        co->ctype = ColliderType::PORTAL;
+                        co->id = portalID;
+                        listBodies.Add(co);
+                        if (mapLayerItem->data->Get(x1+1, y1) != 2)
+                        {
+                            portalID++;
+                        }
+
                     }
                 }
             }
@@ -274,13 +290,14 @@ bool Map::CleanUp()
         bodyItem = bodyItem->next;
     }
     listBodies.Clear();
+    portalID = 0;
 
     app->render->active;
     return true;
 }
 
 // Load new map
-bool Map::Load()
+bool Map::Load(int ID)
 {
     bool ret = true;
 
@@ -295,12 +312,12 @@ bool Map::Load()
 
     if(ret == true)
     {
-        ret = LoadMap(mapFileXML);
+        ret = LoadMap(mapFileXML, ID);
     }
 
     if (ret == true)
     {
-        ret = LoadTileSet(mapFileXML);
+        ret = LoadTileSet(mapFileXML, ID);
     }
 
     if (ret == true)
@@ -353,10 +370,18 @@ bool Map::Load()
     return ret;
 }
 
-bool Map::LoadMap(pugi::xml_node mapFile)
+bool Map::LoadMap(pugi::xml_node mapFile, int ID)
 {
     bool ret = true;
-    pugi::xml_node map = mapFile.child("map");
+    pugi::xml_node map;
+
+    switch (ID)
+    {
+    case 0:
+         map = mapFile.child("map");
+        break;
+    }
+    
 
     if (map == NULL)
     {
@@ -371,35 +396,42 @@ bool Map::LoadMap(pugi::xml_node mapFile)
         mapData.tileHeight = map.attribute("tileheight").as_int();
         mapData.tileWidth = map.attribute("tilewidth").as_int();
         backGround = app->tex->Load(mapBackground);
+        portalID = 0;
     }
 
     return ret;
 }
 
-bool Map::LoadTileSet(pugi::xml_node mapFile){
+bool Map::LoadTileSet(pugi::xml_node mapFile, int ID){
 
     bool ret = true; 
 
     pugi::xml_node tileset;
-    for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+    switch (ID)
     {
-        TileSet* set = new TileSet();
-       
-        set->name = tileset.attribute("name").as_string();
-        set->firstgid = tileset.attribute("firstgid").as_int();
-        set->margin = tileset.attribute("margin").as_int();
-        set->spacing = tileset.attribute("spacing").as_int();
-        set->tileWidth = tileset.attribute("tilewidth").as_int();
-        set->tileHeight = tileset.attribute("tileheight").as_int();
-        set->columns = tileset.attribute("columns").as_int();
-        set->tilecount = tileset.attribute("tilecount").as_int();
+    case 0:
+        for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        {
+            TileSet* set = new TileSet();
 
-    
-        SString tmp("%s%s", mapFolder.GetString(), tileset.child("image").attribute("source").as_string());
-        set->texture = app->tex->Load(tmp.GetString());
+            set->name = tileset.attribute("name").as_string();
+            set->firstgid = tileset.attribute("firstgid").as_int();
+            set->margin = tileset.attribute("margin").as_int();
+            set->spacing = tileset.attribute("spacing").as_int();
+            set->tileWidth = tileset.attribute("tilewidth").as_int();
+            set->tileHeight = tileset.attribute("tileheight").as_int();
+            set->columns = tileset.attribute("columns").as_int();
+            set->tilecount = tileset.attribute("tilecount").as_int();
 
-        mapData.tilesets.Add(set);
+
+            SString tmp("%s%s", mapFolder.GetString(), tileset.child("image").attribute("source").as_string());
+            set->texture = app->tex->Load(tmp.GetString());
+
+            mapData.tilesets.Add(set);
+        }
+        break;
     }
+    
 
     return ret;
 }
@@ -465,6 +497,24 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
     }
 
     return ret;
+}
+
+void Map::LoadNewMap(int ID, Module* scene)
+{
+    CleanUp();
+
+    switch (ID)
+    {
+    case 0:
+        Load(0);
+        break;
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    }
 }
 
 Properties::Property* Properties::GetProperty(const char* name)

@@ -47,7 +47,7 @@ bool Scene::Awake(pugi::xml_node& config)
 bool Scene::Start()
 {
 	//Load Map
-	app->map->Load();
+	app->map->Load(0);
 
 	//pause menu
 	pause_B = false;
@@ -79,7 +79,7 @@ bool Scene::PreUpdate()
 bool Scene::Update(float dt)
 {
 	//Draw Map
-	//app->map->Draw();
+	app->map->Draw();
 
 	//Load Debug keys
 	Debug();
