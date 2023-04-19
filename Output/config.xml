@@ -38,8 +38,12 @@
 	   background1 ="Assets/Maps/clouds_bg.png" background2 ="Assets/Maps/clouds_mg_1.png" background3 ="Assets/Maps/clouds_mg_2.png"
 	   coinspath="Assets/Maps/coin.png" heartspath="Assets/Maps/heart.png"
 		   settingsPath ="Assets/Textures/setting_menu.png">
-		
-	<player x="3000" y="1000" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
+	<map>
+		<mapfolder path="Assets/Maps/"/>
+		<mapfile path="Assets/Maps/Map.tmx"/>
+	</map>
+
+	<player x="120" y="260" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
 			texturepath="Assets/Textures/CH_Protagonist_Sprites.png"
 			velocity="400" width="20" height="27" FUYMGravity="250"
 			audiopathCoin="Assets/Audio/Fx/Coin.wav"
@@ -54,33 +58,20 @@
 			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"/>
 		
 	<npc name="GUIA" dialogueID="1"
-		x="3710" y="985" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
+		x="0" y="0" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
 
 	<npc name="ORACULO" dialogueID="2"
-		x="2555" y="4358" width="135" height="113" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
+		x="420" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
 		
 	<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
-		x="3600" y="2625" width="150" height="38" texturepath=""/>
+		x="900" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
 </scene>
 	<map>
 		<mapfolder path="Assets/Maps/"/>
 		<mapfile path="Assets/Maps/map1.tmx"/>
-		<mapbackground path="Assets/Maps/TwistedTentMap.png"/>
-		
-		<mapdungeonfolder path="Assets/Maps/"/>
-		<mapdungeonfile path="Assets/Maps/mapDungeon.tmx"/>
-		<mapdungeonbackground path="Assets/Maps/DungeonMap.png"/>
-		
-		<mappracticefolder path="Assets/Maps/"/>
-		<mappracticefile path="Assets/Maps/mapPractice.tmx"/>
-		<mappracticebackground path="Assets/Maps/PracticeMap.png"/>
 
-		<mapcircusfolder path="Assets/Maps/"/>
-		<mapcircusfile path="Assets/Maps/mapCircus.tmx"/>
-		<mapcircusbackground path="Assets/Maps/CircusMap.png"/>
-
+		<map1>
+		</map1>
 	</map>
-
-
 
 </config>

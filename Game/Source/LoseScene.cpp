@@ -97,23 +97,5 @@ bool LoseScene::OnGuiMouseClickEvent(GuiControl* control)
 	LOG("Event by %d ", control->id);
 
 	app->audio->PlayFx(control->fxControl);
-
-	switch (control->id)
-	{
-	case 1:
-		LOG("Button Retry click");
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
-		
-		break;
-	case 2:
-		LOG("Button Give up click");
-		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
-		break;
-	case 3:
-		LOG("Button Leaderboard click");
-		app->fade->FadingToBlack(this, (Module*)app->leadScene, 90);
-		break;
-	}
-
 	return true;
 }

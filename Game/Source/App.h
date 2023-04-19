@@ -32,9 +32,6 @@ class Physics;
 class LogoScene;
 class IntroScene;
 class Scene;
-class HouseOfTerrors;
-class PracticeTent;
-class Circus;
 class LoseScene;
 class LeaderboardScene;
 class FadeToBlack;
@@ -118,11 +115,7 @@ public:
 	LogoScene* lScene;
 	IntroScene* iScene;
 	Scene* scene;
-	HouseOfTerrors* hTerrors;
-	PracticeTent* practiceTent;
-	Circus* circus;
 	LoseScene* loseScene;
-	LeaderboardScene* leadScene;
 	FadeToBlack* fade;
 
 	// Time control

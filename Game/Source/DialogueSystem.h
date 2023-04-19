@@ -41,6 +41,8 @@ public:
 	DialogueTree* activeTree;
 	//vector <DialogueTree*> treeList;
 
+	bool hasEnded;
+
 	SDL_Texture* textBox_tex;
 	const char* textBox_path;
 private:
