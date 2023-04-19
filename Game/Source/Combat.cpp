@@ -346,22 +346,40 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	
 	case 8:
 		LOG("Attack 1");
-		lastPressedAbility_I = 1;
+		if (lastPressedAbility_I == 1)
+		{
+			lastPressedAbility_I = 0;
+		}
+		else { lastPressedAbility_I = 1; }
+
 		break;
 
 	case 9:
 		LOG("Attack 2");
-		lastPressedAbility_I = 2;
+		if (lastPressedAbility_I == 2)
+		{
+			lastPressedAbility_I = 0;
+		}
+		else { lastPressedAbility_I = 2; }
 		break;
 
 	case 10:
 		LOG("Attack 3");
-		lastPressedAbility_I = 3;
+		if (lastPressedAbility_I == 3)
+		{
+			lastPressedAbility_I = 0;
+		}
+		else{lastPressedAbility_I = 3;}
+		
 		break;
 
 	case 11:
 		LOG("Attack 4");
-		lastPressedAbility_I = 4;
+		if (lastPressedAbility_I == 4)
+		{
+			lastPressedAbility_I = 0;
+		}
+		else { lastPressedAbility_I = 4; }
 		break;
 	//PLayer OnTurn Action Buttons
 
