@@ -163,6 +163,7 @@ bool Scene::PostUpdate()
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
+		app->dialogueSystem->Enable();
 		app->dialogueSystem->CleanUp();
 		app->dialogueSystem->LoadDialogue(0);
 	}

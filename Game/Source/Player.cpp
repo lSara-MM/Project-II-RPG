@@ -80,6 +80,8 @@ bool Player::Awake() {
 bool Player::Start() {
 
 	texture = app->tex->Load(texturePath);
+	textureE = app->tex->Load("Assets/GUI/UI_E.png");
+
 	currentAnimation = &currentAnim;
 	
 	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
@@ -123,15 +125,18 @@ bool Player::Update(float dt)
 
 	if (npcInteract)
 	{
-		app->render->DrawRectangle({ npcTalkingTo->position.x, npcTalkingTo->position.y - 60, 24, 24 },
-			255, 255, 255, 200);
-		app->render->TextDraw("E", npcTalkingTo->position.x + npcTalkingTo->width / 2, npcTalkingTo->position.y - 57, 16, Font::TEXT);
-
+		app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
+		//app->render->DrawRectangle({ npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60, 24, 24 },
+			//255, 255, 255, 200);
+	
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
 			lockMovement = true;
+			app->dialogueSystem->Enable();
 			npcTalkingTo->PerformDialogue();
 		}
+		if (app->dialogueSystem->hasEnded) { lockMovement = false; }
+
 
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP)
 		{
@@ -186,6 +191,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 	switch (physB->ctype)
 	{
 	case ColliderType::NPC:
+		LOG("NPC Interact");
 
 		i = app->scene->listNpc.start;
 

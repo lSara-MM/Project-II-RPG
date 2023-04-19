@@ -27,6 +27,9 @@
 	<fadeToBlack>
 	</fadeToBlack>
 
+	<dialogue textBoxBg="Assets/GUI/UI_TextBox.png">
+	</dialogue>
+
 	<logoScene background="Assets/Maps/logo_bg.png" audioLogoPath ="Assets/Audio/Music/music_logo.ogg"/>
 	<loseScene background="Assets/Maps/lose_bg.png" losebutton1="Assets/Maps/rect_pa.png" losebutton2="Assets/Maps/rect_gu.png"
 		musicLose="Assets/Audio/Music/the_end.ogg"/>
@@ -66,6 +69,7 @@
 	<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
 		x="900" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
 </scene>
+
 	<map>
 		<mapfolder path="Assets/Maps/"/>
 		<mapfile path="Assets/Maps/map1.tmx"/>

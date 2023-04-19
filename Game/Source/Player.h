@@ -62,6 +62,7 @@ public:
 	bool keyLockDown = false;
 	bool keyLockLeft = false;
 	bool keyLockRigth = false;
+	bool lockMovement = false;
 
 	float dtP;
 	float grav;
@@ -72,7 +73,6 @@ public:
 
 	iPoint position;
 
-	bool npcInteract;
 
 private:
 
@@ -80,8 +80,10 @@ private:
 	const char* texturePath;
 
 	Npc* npcTalkingTo;
+	bool npcInteract;
 	
 	int width, height;
+	SDL_Texture* textureE;
 };
 
 #endif // __PLAYER_H__
