@@ -362,8 +362,8 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		
 	case 704: 
 		LOG("Button Settings click");
-		pause_B = false;
-		pPause->CleanUp();
+		//pause_B = false;
+		//pPause->CleanUp();
 
 		settings_B = true;
 		pSettings = new Settings(this);

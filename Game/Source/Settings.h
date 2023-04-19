@@ -235,7 +235,7 @@ public:
 
 		// Max fps
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::SETTINGS, "Max fps", 10);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::SETTINGS, "Max fps", 16);
 		button->state = GuiControlState::NONE;
 		listGraphicsButtons.Add(button);
 	}
@@ -589,7 +589,7 @@ public:
 	{
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
-		app->render->DrawRectangle({ 0, 0, app->win->GetWidth(), app->win->GetHeight()}, 163, 163, 163);
+		app->render->DrawRectangle({ 0, 0, app->win->GetWidth(), app->win->GetHeight()}, 255, 255, 255);
 		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
 		app->render->TextDraw("Pause", 210, 90, 40, Font::UI, { 107, 0, 110 });
 
