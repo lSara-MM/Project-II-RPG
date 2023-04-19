@@ -32,6 +32,10 @@ bool Map::Awake(pugi::xml_node& config)
     mapFolder = config.child("mapfolder").attribute("path").as_string();
     mapBackground = config.child("mapbackground").attribute("path").as_string();
 
+    mapDungeonFileName = config.child("mapdungeonfile").attribute("path").as_string();
+    mapDungeonFolder = config.child("mapdungeonfolder").attribute("path").as_string();
+    mapDungeonBackground = config.child("mapdungeonbackground").attribute("path").as_string();
+
     return ret;
 }
 
@@ -123,7 +127,6 @@ void Map::DrawPlatformCollider() {
                     //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
                     TileSet* tileset = GetTilesetFromTileId(gid);
 
-                    SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x1, y1);
 
                     if(gid == 1 && gid!=NULL)
@@ -285,7 +288,6 @@ bool Map::CleanUp()
     while (bodyItem != NULL)
     {
         app->render->name;
-        //RELEASE(bodyItem->data);
         bodyItem->data->body->GetWorld()->DestroyBody(bodyItem->data->body);
         app->render->active;
         delete bodyItem->data;
@@ -307,7 +309,18 @@ bool Map::Load(int ID)
     mapPendingtoDelete = false;
 
     pugi::xml_document mapFileXML;
-    pugi::xml_parse_result result = mapFileXML.load_file(mapFileName.GetString());
+    pugi::xml_parse_result result;
+
+    switch (ID)
+    {
+    case 0:
+         result = mapFileXML.load_file(mapFileName.GetString());
+        break;
+    case 1:
+        result = mapFileXML.load_file(mapDungeonFileName.GetString());
+        break;
+    }
+    
 
     if(result == NULL)
     {
@@ -326,7 +339,7 @@ bool Map::Load(int ID)
     }
 
     if (ret == true)
-    {
+    { 
         ret = LoadAllLayers(mapFileXML.child("map"));
     }
   
@@ -378,18 +391,7 @@ bool Map::Load(int ID)
 bool Map::LoadMap(pugi::xml_node mapFile, int ID)
 {
     bool ret = true;
-    pugi::xml_node map;
-
-    switch (ID)
-    {
-    case 0:
-         map = mapFile.child("map");
-        break;
-    case 1:
-        map = mapFile.child("map");
-        break;
-    }
-    
+    pugi::xml_node map = mapFile.child("map");
 
     if (map == NULL)
     {
@@ -403,7 +405,16 @@ bool Map::LoadMap(pugi::xml_node mapFile, int ID)
         mapData.width = map.attribute("width").as_int();
         mapData.tileHeight = map.attribute("tileheight").as_int();
         mapData.tileWidth = map.attribute("tilewidth").as_int();
-        backGround = app->tex->Load(mapBackground);
+        switch (ID)
+        {
+        case 0:
+            backGround = app->tex->Load(mapBackground);
+            break;
+        case 1:
+            backGround = app->tex->Load(mapDungeonBackground);
+            break;
+        }
+        
         portalID = 0;
     }
 
@@ -439,7 +450,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile, int ID){
         }
         break;
     case 1:
-        for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        for (tileset = mapFile.child("dungeon").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
         {
             TileSet* set = new TileSet();
 
@@ -453,7 +464,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile, int ID){
             set->tilecount = tileset.attribute("tilecount").as_int();
 
 
-            SString tmp("%s%s", mapFolder.GetString(), tileset.child("image").attribute("source").as_string());
+            SString tmp("%s%s", mapDungeonFolder.GetString(), tileset.child("image").attribute("source").as_string());
             set->texture = app->tex->Load(tmp.GetString());
 
             mapData.tilesets.Add(set);

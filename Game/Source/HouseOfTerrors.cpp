@@ -47,7 +47,7 @@ bool HouseOfTerrors::Awake(pugi::xml_node& config)
 bool HouseOfTerrors::Start()
 {
 	//Load Map
-	app->map->Load(0);
+	app->map->Load(1);
 
 	//pause menu
 	pause_B = false;
@@ -59,9 +59,9 @@ bool HouseOfTerrors::Start()
 	//pPause->GUI_id = pSettings->GUI_id;
 	//pPause->CreatePause(this);
 
-	//Camera pos
-	/*app->render->camera.x = -2800;
-	app->render->camera.y = -800;*/
+	//Camera pos temporal Sara no convulsiones
+	app->render->camera.x = -1390;
+	app->render->camera.y = -900;
 	
 	InitEntities();
 	app->entityManager->Enable();

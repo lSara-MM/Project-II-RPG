@@ -159,9 +159,15 @@ public:
 	bool mapPendingtoDelete;
 
 private:
+
+	//Feria
     SString mapFileName;
 	SString mapFolder;
 	const char* mapBackground;
+	//Dungeon
+	SString mapDungeonFileName;
+	SString mapDungeonFolder;
+	const char* mapDungeonBackground;
 
 	SDL_Texture* backGround;
     bool mapLoaded;

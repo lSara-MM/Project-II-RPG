@@ -61,7 +61,7 @@ bool Scene::Start()
 	//pPause->GUI_id = pSettings->GUI_id;
 	//pPause->CreatePause(this);
 
-	//Camera pos
+	//Camera pos temporal Sara no convulsiones
 	app->render->camera.x = -2800;
 	app->render->camera.y = -800;
 	

@@ -66,24 +66,21 @@
 		<mapfolder path="Assets/Maps/"/>
 		<mapfile path="Assets/Maps/map1.tmx"/>
 		<mapbackground path="Assets/Maps/TwistedTentMap.png"/>
+		
+		<mapdungeonfolder path="Assets/Maps/"/>
+		<mapdungeonfile path="Assets/Maps/mapDungeon.tmx"/>
+		<mapdungeonbackground path="Assets/Maps/DungeonMap.png"/>
+		
+		<mappracticefolder path="Assets/Maps/"/>
+		<mappracticefile path="Assets/Maps/map1.tmx"/>
+		<mappracticebackground path="Assets/Maps/TwistedTentMap.png"/>
+
+		<mapcircusfolder path="Assets/Maps/"/>
+		<mapcircusfile path="Assets/Maps/map1.tmx"/>
+		<mapcircusbackground path="Assets/Maps/TwistedTentMap.png"/>
+
 	</map>
 
-	<dungeon>
-		<mapfolder path="Assets/Maps/"/>
-		<mapfile path="Assets/Maps/map1.tmx"/>
-		<mapbackground path="Assets/Maps/TwistedTentMap.png"/>
-	</dungeon>
 
-	<practice>
-		<mapfolder path="Assets/Maps/"/>
-		<mapfile path="Assets/Maps/map1.tmx"/>
-		<mapbackground path="Assets/Maps/TwistedTentMap.png"/>
-	</practice>
-
-	<circus>
-		<mapfolder path="Assets/Maps/"/>
-		<mapfile path="Assets/Maps/map1.tmx"/>
-		<mapbackground path="Assets/Maps/TwistedTentMap.png"/>
-	</circus>
 
 </config>
