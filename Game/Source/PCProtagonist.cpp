@@ -113,7 +113,7 @@ bool Protagonist::Update(float dt)
 				app->combat->EnableTargetButton(5);
 			}
 
-			if (app->combat->enemies[2] != nullptr)
+			if (app->combat->enemies[3] != nullptr)
 			{
 				app->combat->EnableTargetButton(6);
 			}
@@ -131,8 +131,6 @@ bool Protagonist::Update(float dt)
 				{
 					app->combat->targeted_Character->ModifyHP(-99999);
 				}
-
-				SDL_Delay(2000);
 				app->combat->NextTurn();
 				onTurn = false;
 			}

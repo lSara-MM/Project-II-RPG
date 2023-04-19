@@ -91,6 +91,15 @@ bool Bard::Update(float dt)
 	{
 		app->render->DrawCircle(544 - 128 * positionCombat_I + (126 / 2), 220, 20, 0, 255, 255);
 
+		app->combat->DisableTargetButton(0);
+		app->combat->DisableTargetButton(1);
+		app->combat->DisableTargetButton(2);
+		app->combat->DisableTargetButton(3);
+		app->combat->DisableTargetButton(4);
+		app->combat->DisableTargetButton(5);
+		app->combat->DisableTargetButton(6);
+		app->combat->DisableTargetButton(7);
+
 		if (app->combat->lastPressedAbility_I == 1)
 		{				
 				if(app->combat->targeted_Character != nullptr)
