@@ -8,13 +8,13 @@
 #include "Textures.h"
 #include "Window.h"
 
-
 #include "IntroScene.h"
 #include "LoseScene.h"
 #include "Combat.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
+#include "DialogueSystem.h"
 #include "GuiManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
@@ -53,16 +53,19 @@ bool Circus::Start()
 	pause_B = false;
 
 	// Settings
-	pSettings->GUI_id = 0;
-	pSettings->CreateSettings(this);
+	pSettings = new Settings(this);
 
 	// Pause 
-	pPause->GUI_id = pSettings->GUI_id;
-	pPause->CreatePause(this);
+	//pPause->GUI_id = pSettings->GUI_id;
+	//pPause->CreatePause(this);
 
 	//Camera pos
-	app->render->camera.x = -2800;
-	app->render->camera.y = -800;
+	/*app->render->camera.x = -2800;
+	app->render->camera.y = -800;*/
+	
+	InitEntities();
+	app->entityManager->Enable();
+
 	return true;
 }
 
@@ -74,39 +77,51 @@ bool Circus::PreUpdate()
 bool Circus::Update(float dt)
 {
 	//Draw Map
-	app->map->Draw();
+	//app->map->Draw();
 
 	//Load Debug keys
 	Debug();
 
-	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-	app->entityManager->AddEntity(prota1);
-
-	Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-	app->entityManager->AddEntity(prota2);
-
-	Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-	app->entityManager->AddEntity(prota3);
-
-	Entity* prota4 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-	app->entityManager->AddEntity(prota4);
-
-	Entity* enemy1 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
-	app->entityManager->AddEntity(enemy1);
-
+	
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(entidad2);*/
 	
 	//ERIC: Prueba que no funciona.
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) 
 	{ 
-		//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDA�S AVISADOS!!!
+		Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_BARD);
+		app->entityManager->AddEntity(prota1); //No se esta metiendo
+
+		Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+		app->entityManager->AddEntity(prota2);
+
+		{/*Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+		app->entityManager->AddEntity(prota3);
+
+		Entity* prota4 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+		app->entityManager->AddEntity(prota4);*/}
+
+		Entity* enemy1 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
+		app->entityManager->AddEntity(enemy1);
+
+		Entity* enemy2 = app->entityManager->CreateEntity(EntityType::ENEMY_DPS_HOUSE);
+		app->entityManager->AddEntity(enemy2);
+		
+		Entity* enemy3 = app->entityManager->CreateEntity(EntityType::ENEMY_HEALER_HOUSE);
+		app->entityManager->AddEntity(enemy3);
+
+		app->fade->FadingToBlack(this, (Module*)app->combat, 30);
+
+		//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDAIS AVISADOS!!!
 		app->combat->AddCombatant((Character*)enemy1, 0);
-		app->combat->AddCombatant((Character*)prota1, 3);
-		app->combat->AddCombatant((Character*)prota2, 4);
-		app->combat->AddCombatant((Character*)prota3, 5);
-		app->combat->AddCombatant((Character*)prota4, 9);	
+		app->combat->AddCombatant((Character*)enemy2, 5);
+		app->combat->AddCombatant((Character*)enemy3, 3);
+		app->combat->AddCombatant((Character*)prota1, 1);
+		app->combat->AddCombatant((Character*)prota2, -2);
+		/*app->combat->AddCombatant((Character*)prota3, 5);
+		app->combat->AddCombatant((Character*)prota4, 9);*/
 	}
+	
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
 	{
 		app->combat->MoveAllies(1,4);
@@ -138,13 +153,29 @@ bool Circus::PostUpdate()
 	bool ret = true;
 
 	if (exit_B) return false;
-		
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		app->dialogueSystem->CleanUp();
+		app->dialogueSystem->LoadDialogue("dialogues.xml", 0);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		app->dialogueSystem->CleanUp();
+		app->dialogueSystem->LoadDialogue("dialogues.xml", 1);
+		app->dialogueSystem->LoadDialogueState();
+	}
+	app->render->TextDraw("F1: start dialogue 1", 50, 50, 16, Font::TEXT, { 255, 255, 255 });
+	app->render->TextDraw("F2: start dialogue 2", 50, 75, 16, Font::TEXT, { 255, 255, 255 });
+
+	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	{
+		pSettings->settings_B = !pSettings->settings_B;
+	}
 	
 	if (pSettings->settings_B) { pSettings->OpenSettings(); }
-	if (pPause->pause) { pPause->OpenPause(); }
+	//if (pPause->pause) { pPause->OpenPause(); }
 	app->guiManager->Draw();
 
 	return ret;
@@ -158,12 +189,12 @@ bool Circus::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	//player->Disable();
+	// player->Disable();
 
 	app->entityManager->Disable();
 
 	pSettings->CleanUp();
-	pPause->CleanUp();
+	//pPause->CleanUp();
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 
@@ -186,7 +217,8 @@ void Circus::Debug()
 
 	// Show Gui 
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
-		//app->iScene->buttonDebug = !app->iScene->buttonDebug;
+
+		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
 	}
 
 	// Show collisions
@@ -195,24 +227,25 @@ void Circus::Debug()
 		app->physics->collisions = !app->physics->collisions;
 	}
 
-	// GodMode
-	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
-	{
-		!app->input->godMode_B;
-	}
-
 	// Enable/Disable Frcap
-	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
-		!frcap_B;
+		frcap_B = !frcap_B;
 		LOG("frame rate: %d", app->physics->frameRate);
 	}
 
-	//pause menu
-	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+	// GodMode
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
-		!pause_B;
-		!pSettings->settings_B;
+		app->input->godMode_B = !app->input->godMode_B;
+	}
+
+	//pause menu
+	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
+	{
+		pause_B = !pause_B;
+		pSettings->settings_B = !pSettings->settings_B;
+
 		if (!pSettings->settings_B)
 		{
 			pSettings->CloseSettings();
@@ -224,11 +257,11 @@ void Circus::Debug()
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
 		!pause_B;
-		pPause->pause = !pPause->pause;
-		if (!pPause->pause)
+		//pPause->pause = !pPause->pause;
+		/*if (!pPause->pause)
 		{
 			pPause->ClosePause();
-		}
+		}*/
 
 		LOG("PAUSE");
 	}
@@ -236,7 +269,7 @@ void Circus::Debug()
 	// Mute / unmute
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
 
-		!mute_B;
+		mute_B = !mute_B;
 		LOG("MUTE");
 	}
 		
@@ -244,7 +277,7 @@ void Circus::Debug()
 	// God mode functions
 	if (app->input->godMode_B)
 	{
-		
+		app->physics->collisions = true;
 	}
 
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
@@ -256,6 +289,11 @@ bool Circus::InitEntities()
 	player->parameters = sceneNode.child("player");
 	player->Awake();
 
+	Entity* npc = app->entityManager->CreateEntity(EntityType::NPC);
+	app->entityManager->AddEntity(npc);
+	npc->Awake();
+
+	//app->entityManager->Awake();
 	return true;
 }
 
@@ -269,7 +307,7 @@ bool Circus::OnGuiMouseClickEvent(GuiControl* control)
 	{
 	case 801:
 		LOG("Button Close settings click");
-		pPause->OpenPause();
+		//pPause->OpenPause();
 		pSettings->CloseSettings();
 		break;
 	case 802:
@@ -291,11 +329,11 @@ bool Circus::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 806:
 		LOG("Button Close pause click");
-		pPause->ClosePause(); 
+		//pPause->ClosePause(); 
 		break;
 	case 807:
 		LOG("Button Resume click");
-		pPause->ClosePause();
+		//pPause->ClosePause();
 		break;
 	case 808:
 		LOG("Button Return to Title click");
@@ -303,7 +341,7 @@ bool Circus::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 809:
 		LOG("Button settings click");
-		pPause->ClosePause();
+		//pPause->ClosePause();
 
 		pSettings->settings_B = !pSettings->settings_B;
 		if (!pSettings->settings_B) { pSettings->CloseSettings();}

@@ -59,11 +59,9 @@ public:
 private:
 
 	// Settings
-	Settings options;
-	Settings* pSettings = &options;
+	Settings* pSettings;
 
-	Pause pauseMenu;
-	Pause* pPause = &pauseMenu;
+	//Pause* pPause = &pauseMenu;
 
 	bool exit_B;
 
