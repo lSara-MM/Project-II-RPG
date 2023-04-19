@@ -47,7 +47,7 @@ bool Circus::Awake(pugi::xml_node& config)
 bool Circus::Start()
 {
 	//Load Map
-	app->map->Load(1);
+	app->map->LoadNewMap(1);
 
 	//pause menu
 	pause_B = false;
@@ -77,7 +77,7 @@ bool Circus::PreUpdate()
 bool Circus::Update(float dt)
 {
 	//Draw Map
-	//app->map->Draw();
+	app->map->Draw();
 
 	//Load Debug keys
 	Debug();

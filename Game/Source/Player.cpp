@@ -9,6 +9,9 @@
 #include "Textures.h"
 
 #include "Scene.h"
+#include "HouseOfTerrors.h"
+#include "Circus.h"
+#include "PracticeTent.h"
 
 #include "FadeToBlack.h"
 #include "EntityManager.h"
@@ -165,6 +168,36 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			}
 		}
 		npcInteract = true;
+		break;
+
+	case ColliderType::PORTAL:
+		switch (physB->id)
+		{
+		case 0:
+			if (app->scene->active == true)
+			{
+				app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
+			}
+			if (app->hTerrors->active == true)
+			{
+				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
+			}
+			if (app->practiceTent->active == true)
+			{
+				app->fade->FadingToBlack((Module*)app->practiceTent, (Module*)app->scene, 90);
+			}
+			if (app->circus->active == true)
+			{
+				app->fade->FadingToBlack((Module*)app->circus, (Module*)app->scene, 90);
+			}
+			break;
+		case 1:
+			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, 90);
+			break;
+		case 2:
+			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
+			break;
+		}
 		break;
 
 	default:

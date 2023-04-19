@@ -140,7 +140,7 @@ public:
 
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
-	void LoadNewMap(int ID, Module* scene);
+	void LoadNewMap(int ID);
 
 private:
 

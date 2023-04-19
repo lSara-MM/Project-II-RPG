@@ -47,7 +47,7 @@ bool HouseOfTerrors::Awake(pugi::xml_node& config)
 bool HouseOfTerrors::Start()
 {
 	//Load Map
-	app->map->Load(0);
+	app->map->LoadNewMap(0);
 
 	//pause menu
 	pause_B = false;

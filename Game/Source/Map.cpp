@@ -150,7 +150,17 @@ void Map::DrawPlatformCollider() {
                         listBodies.Add(co);
                         if (mapLayerItem->data->Get(x1+1, y1) != 2)
                         {
-                            portalID++;
+                            if (mapLayerItem->data->Get(x1 - 1, y1) != 2)
+                            {
+                                if (mapLayerItem->data->Get(x1, y1 + 1) != 2)
+                                {
+                                    if (mapLayerItem->data->Get(x1, y1 - 1) != 2)
+                                    {
+                                            portalID++;
+                                    }
+                                }
+                            }
+                            
                         }
 
                     }
@@ -380,6 +390,9 @@ bool Map::LoadMap(pugi::xml_node mapFile, int ID)
     case 0:
          map = mapFile.child("map");
         break;
+    case 1:
+        map = mapFile.child("map");
+        break;
     }
     
 
@@ -410,6 +423,27 @@ bool Map::LoadTileSet(pugi::xml_node mapFile, int ID){
     switch (ID)
     {
     case 0:
+        for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        {
+            TileSet* set = new TileSet();
+
+            set->name = tileset.attribute("name").as_string();
+            set->firstgid = tileset.attribute("firstgid").as_int();
+            set->margin = tileset.attribute("margin").as_int();
+            set->spacing = tileset.attribute("spacing").as_int();
+            set->tileWidth = tileset.attribute("tilewidth").as_int();
+            set->tileHeight = tileset.attribute("tileheight").as_int();
+            set->columns = tileset.attribute("columns").as_int();
+            set->tilecount = tileset.attribute("tilecount").as_int();
+
+
+            SString tmp("%s%s", mapFolder.GetString(), tileset.child("image").attribute("source").as_string());
+            set->texture = app->tex->Load(tmp.GetString());
+
+            mapData.tilesets.Add(set);
+        }
+        break;
+    case 1:
         for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
         {
             TileSet* set = new TileSet();
@@ -499,7 +533,7 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
     return ret;
 }
 
-void Map::LoadNewMap(int ID, Module* scene)
+void Map::LoadNewMap(int ID)
 {
     CleanUp();
 
@@ -509,6 +543,7 @@ void Map::LoadNewMap(int ID, Module* scene)
         Load(0);
         break;
     case 1:
+        Load(0);
         break;
     case 2:
         break;
