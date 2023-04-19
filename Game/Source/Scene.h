@@ -54,6 +54,10 @@ public:
 	bool pause_B;
 	bool mute_B = true;
 
+	int currentHP_Bard = 0;
+	int currentHP_Protagonist = 0;
+	bool isCharacterLoaded_B = true;
+
 	pugi::xml_node sceneNode;
 
 private:

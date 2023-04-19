@@ -166,8 +166,8 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 
 	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
 
-	//app->combat->allies[0]->currentHp = data.child("bard").attribute("currentHp").as_int();
-	//app->combat->allies[1]->currentHp = data.child("protagonist").attribute("currentHp").as_int();
+	app->scene->currentHP_Bard = data.child("bard").attribute("currentHp").as_int();
+	app->scene->currentHP_Protagonist = data.child("protagonist").attribute("currentHp").as_int();
 
 	return true;
 }
@@ -187,11 +187,13 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 		app->iScene->SaveState(app->iScene->IntroSaveNode);
 	}
 
-	//pugi::xml_node bard = data.append_child("bard");
-	//bard.append_attribute("currentHp") = app->combat->allies[0]->currentHp;
+	pugi::xml_node bard = data.append_child("bard");
+	bard.append_attribute("currentHp") = app->scene->currentHP_Bard;
 
-	//pugi::xml_node protagonist = data.append_child("bard");
-	//protagonist.append_attribute("currentHp") = app->combat->allies[1]->currentHp;
+	pugi::xml_node protagonist = data.append_child("protagonist");
+	protagonist.append_attribute("currentHp") = app->scene->currentHP_Protagonist;
+
+	app->scene->isCharacterLoaded_B = false;
  
 	return true;
 }

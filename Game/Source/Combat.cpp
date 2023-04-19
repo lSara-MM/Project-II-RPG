@@ -86,6 +86,11 @@ bool Combat::Start()
 	prota2->parameters = app->scene->sceneNode.child("protagonist");
 	prota2->Awake();
 
+	if (!app->scene->isCharacterLoaded_B)
+	{
+		app->scene->isCharacterLoaded_B = true;
+	}
+
 	/*Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
 	app->entityManager->AddEntity(prota3);
 	prota3->parameters = app->scene->sceneNode.child("protagonist");

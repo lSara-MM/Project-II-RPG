@@ -34,8 +34,18 @@ Bard::~Bard() {
 bool Bard::Awake() {
 
 	this->name = parameters.attribute("name").as_string();
+
+	if (!app->scene->isCharacterLoaded_B)
+	{
+		this->currentHp = app->scene->currentHP_Bard;
+		app->scene->isCharacterLoaded_B = true;
+	}
+	else
+	{
+		this->currentHp = parameters.attribute("currentHp").as_int();
+	}
+
 	this->maxHp = parameters.attribute("maxHp").as_int();
-	this->currentHp = parameters.attribute("currentHp").as_int();
 	this->attack = parameters.attribute("attack").as_int();
 	this->armor = parameters.attribute("armor").as_int();
 	this->speed = parameters.attribute("speed").as_int();
