@@ -32,18 +32,21 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	void Controller(float dt);
+	bool PerformDialogue();
 
 public:
 
-	SString NpcName;
+	SString name;
+
+	iPoint position;
+	int width, height;
 
 	// The pointer to the current Npc animation
 	// It will be switched depending on the Npc's movement direction
 	Animation* currentAnimation = nullptr;
 
 	// A set of animations
-	Animation idleDownAnim;
+	Animation idleAnim;
 	
 	vector<int> dialoguesID;
 
@@ -51,14 +54,12 @@ public:
 	
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
+	PhysBody* pSensor;
 
 private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
-
-	iPoint  position;
-	int width, height;
 };
 
 #endif // __NPC_H__

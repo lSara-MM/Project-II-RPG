@@ -11,6 +11,8 @@
 #include "SString.h"
 #include <vector>
 
+#define FONT_SIZE 24
+
 #define DIALOGUE_INPUT 2
 #define DIALOGUE_SAVE 3
 #define DIALOGUE_IF 4
@@ -37,12 +39,14 @@ public:
 	DialogueNode() {};
 	~DialogueNode() {};
 	
-	void SplitText(SString text, int fontSize_, int max_chars_line_);
+	void SplitText(SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_);
 
 	void CleanUp();
 
 public:
+	SString name;
 	SString text;
+
 	int nodeID;
 	vector <DialogueChoice*> choicesList;
 	int playerAnswer = -1;
@@ -76,7 +80,6 @@ public:
 	int GUI_id = 0;
 
 	bool updateOptions;
-	int fontSize;
 	int max_chars_line;
 };
 
