@@ -106,8 +106,6 @@ bool HouseDPS::Update(float dt)
 		{
 			int randomNum = std::rand() % 3 + 1;
 
-			Timer(4);
-
 			//Mejor con un switch
 			if (randomNum == 1 )
 			{
