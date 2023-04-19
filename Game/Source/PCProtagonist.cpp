@@ -108,8 +108,15 @@ bool Protagonist::Update(float dt)
 
 		if (app->combat->lastPressedAbility_I == 1) //Only allows targeting 2 and 3
 		{
-			app->combat->EnableTargetButton(5);
-			app->combat->EnableTargetButton(6);
+			if (app->combat->enemies[1] != nullptr)
+			{
+				app->combat->EnableTargetButton(5);
+			}
+
+			if (app->combat->enemies[2] != nullptr)
+			{
+				app->combat->EnableTargetButton(6);
+			}
 			//Si no hay godmode va normal, si lo hay la vida del enemigo se reduce a 0
 
 			if (app->combat->targeted_Character != nullptr)
@@ -118,6 +125,7 @@ bool Protagonist::Update(float dt)
 				if (!app->input->godMode_B)
 				{
 					float damage = app->combat->targeted_Character->CalculateDamage(attack);
+					app->combat->targeted_Character->ModifyHP(-damage);
 				}
 				else
 				{
@@ -162,15 +170,29 @@ bool Protagonist::Update(float dt)
 		}
 		if (app->combat->lastPressedAbility_I == 4)
 		{
+			if (app->combat->enemies[2] != nullptr)
+			{
+				app->combat->EnableTargetButton(6);
+			}
+			
+			if (app->combat->enemies[3] != nullptr)
+			{
+				app->combat->EnableTargetButton(7);
+			}
 
-			app->combat->EnableTargetButton(6);
-			app->combat->EnableTargetButton(7);
 
-			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3]) {
-				float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.65);
-				app->combat->enemies[2]->ModifyHP(-damage);
-				damage = app->combat->enemies[3]->CalculateDamage(attack * 0.30);
-				app->combat->enemies[3]->ModifyHP(-damage);
+			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3] && app->combat->targeted_Character != nullptr) {
+				if (app->combat->enemies[2] != nullptr)
+				{
+					float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.65);
+					app->combat->enemies[2]->ModifyHP(-damage);
+				}
+				
+				if(app->combat->enemies[3] != nullptr)
+				{
+					float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.30);
+					app->combat->enemies[3]->ModifyHP(-damage);
+				}
 				app->combat->NextTurn();
 				onTurn = false;
 			}
