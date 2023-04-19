@@ -593,7 +593,7 @@ public:
 	{
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
-		app->render->DrawRectangle({ 0 - app->render->camera.x, 0 - app->render->camera.y, app->win->GetWidth(), app->win->GetHeight()}, 232, 209, 146, 240);
+		app->render->DrawRectangle({ 0 - app->render->camera.x, 0 - app->render->camera.y, app->win->GetWidth(), app->win->GetHeight()}, 255, 255, 255);
 		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
 		app->render->TextDraw("Pause", 600, 121, 40, Font::UI);
 
