@@ -1,4 +1,4 @@
-#include "Scene.h"
+#include "PracticeTent.h"
 
 #include "App.h"
 #include "Audio.h"
@@ -26,15 +26,15 @@
 using namespace std;
 #include <sstream>
 
-Scene::Scene() : Module()
+PracticeTent::PracticeTent() : Module()
 {
 	name.Create("scene");
 }
 
-Scene::~Scene()
+PracticeTent::~PracticeTent()
 {}
 
-bool Scene::Awake(pugi::xml_node& config)
+bool PracticeTent::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
@@ -44,15 +44,13 @@ bool Scene::Awake(pugi::xml_node& config)
 	return ret;
 }
 
-bool Scene::Start()
+bool PracticeTent::Start()
 {
 	//Load Map
-	app->map->Load(0);
+	app->map->Load(3);
 
 	//pause menu
 	pause_B = false;
-
-	npcSetID = 1;
 
 	// Settings
 	pSettings = new Settings(this);
@@ -62,8 +60,7 @@ bool Scene::Start()
 	//pPause->CreatePause(this);
 
 	//Camera pos temporal Sara no convulsiones
-	app->render->camera.x = -2800;
-	app->render->camera.y = -800;
+	app->render->camera.y = 50;
 	
 	InitEntities();
 	app->entityManager->Enable();
@@ -71,18 +68,19 @@ bool Scene::Start()
 	return true;
 }
 
-bool Scene::PreUpdate()
+bool PracticeTent::PreUpdate()
 {
 	return true;
 }
 
-bool Scene::Update(float dt)
+bool PracticeTent::Update(float dt)
 {
 	//Draw Map
 	app->map->Draw();
 
 	//Load Debug keys
 	Debug();
+
 	
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(entidad2);*/
@@ -145,22 +143,15 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x -= ceil(speed);
 
+
 	return true;
 }
 
-bool Scene::PostUpdate()
+bool PracticeTent::PostUpdate()
 {
 	bool ret = true;
 
 	if (exit_B) return false;
-
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-	{
-		app->dialogueSystem->CleanUp();
-		app->dialogueSystem->LoadDialogue(0);
-	}
-
-	app->render->TextDraw("F1: start dialogue 1", 50, 50, 16, Font::TEXT, { 255, 255, 255 });
 
 	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 	{
@@ -171,25 +162,20 @@ bool Scene::PostUpdate()
 	//if (pPause->pause) { pPause->OpenPause(); }
 	app->guiManager->Draw();
 
-	if (app->map->mapPendingtoDelete == true)
-	{
-		app->map->CleanUp();
-	}
-
 	return ret;
 }
 
 // Called before quitting
-bool Scene::CleanUp()
+bool PracticeTent::CleanUp()
 {
 	LOG("Freeing scene");
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	//player->Disable();
+	// player->Disable();
 
-	app->entityManager->CleanUp();
+	app->entityManager->Disable();
 
 	pSettings->CleanUp();
 	//pPause->CleanUp();
@@ -199,7 +185,7 @@ bool Scene::CleanUp()
 	return true;
 }
 
-void Scene::Debug()
+void PracticeTent::Debug()
 {
 	// Start again level
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
@@ -281,26 +267,13 @@ void Scene::Debug()
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
 }
 
-bool Scene::InitEntities()
+bool PracticeTent::InitEntities()
 {
-	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	player->parameters = sceneNode.child("player");
-	player->Awake();
 
-	for (pugi::xml_node itemNode = sceneNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
-	{
-		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
-		npc->parameters = itemNode;
-		npc->Awake();
-
-		listNpc.Add(npc);
-	}
-
-	//app->entityManager->Awake();
 	return true;
 }
 
-bool Scene::OnGuiMouseClickEvent(GuiControl* control)
+bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Event by %d ", control->id);
 

@@ -26,10 +26,10 @@ Npc::Npc() : Entity(EntityType::NPC)
 {
 	name.Create("Npc");
 
-	//idleAnim.PushBack({ 64, 0, 64, 64 });
-	//idleAnim.PushBack({ 64, 0, 64, 64 });
+	idleAnim.PushBack({ 0, 0, 64, 64 });
+	idleAnim.PushBack({ 0, 0, 64, 64 });
 
-	//idleAnim.speed = 0.1f;
+	idleAnim.speed = 0.1f;
 
 	active = true;
 }
