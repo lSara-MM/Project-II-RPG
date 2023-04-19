@@ -35,7 +35,7 @@ public:
 
 	bool CleanUp();
 
-	
+	int Timer(int val);
 
 public:
 	// The pointer to the current player animation

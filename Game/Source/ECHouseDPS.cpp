@@ -92,7 +92,8 @@ bool HouseDPS::Update(float dt)
 	}
 	if (onTurn && this->currentHp > 0)
 	{
-		
+		Timer(4);
+
 		int randomNum = std::rand() % 3 + 1;
 		//Mejor con un switch
 		if (randomNum == 1)

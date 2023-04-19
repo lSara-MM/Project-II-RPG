@@ -117,7 +117,13 @@ int Character::CalculateDamage(int initialDmg)
 
 bool Character::IsAlive() 
 {
+	this->alive = true;
 	return this->alive;
 }
 
 
+bool Character::IsDead()
+{
+	this->alive = false;
+	return this->alive;
+}

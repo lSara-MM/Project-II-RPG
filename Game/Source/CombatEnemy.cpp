@@ -91,7 +91,14 @@ bool CombatEnemy::CleanUp()
 	return true;
 }
 
-
+int CombatEnemy::Timer(int val)
+{
+	int c = 1, d = 1;
+	for (c = 1; c <= 20000 * val; c++)
+		for (d = 1; d <= 20000 * val; d++)
+		{}
+	return val;
+}
 
 
 
