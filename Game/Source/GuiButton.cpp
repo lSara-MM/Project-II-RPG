@@ -38,17 +38,18 @@ bool GuiButton::Update(float dt)
 				//LOG("Change state from %d to %d", previousState, state);
 			}
 
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->controller.A != 0)
 			{
 				state = GuiControlState::PRESSED;
 			}
 
 			// If mouse button pressed -> Generate event!
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->controller.A != 0)
 			{
 				NotifyObserver();
 			}
 		}
+
 		else 
 		{
 			state = GuiControlState::NORMAL;
