@@ -86,6 +86,8 @@ bool IntroScene::PreUpdate()
 // Called each loop iteration
 bool IntroScene::Update(float dt)
 {
+	app->input->GetMousePosition(mouseX_intro, mouseY_intro);
+
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 
@@ -100,6 +102,30 @@ bool IntroScene::Update(float dt)
 	else
 	{
 		listButtons.start->next->data->state = GuiControlState::DISABLED;
+	}
+
+	if (app->input->controller.j1_x > 0)
+	{
+		SDL_WarpMouseInWindow(app->win->window, mouseX_intro + 20, mouseY_intro);
+
+	}
+
+	else if (app->input->controller.j1_x < 0)
+	{
+		SDL_WarpMouseInWindow(app->win->window, mouseX_intro - 20, mouseY_intro);
+
+	}
+
+	else if (app->input->controller.j1_y > 0)
+	{
+		SDL_WarpMouseInWindow(app->win->window, mouseX_intro, mouseY_intro + 20);
+
+	}
+
+	else if (app->input->controller.j1_y < 0)
+	{
+		SDL_WarpMouseInWindow(app->win->window, mouseX_intro, mouseY_intro-20);
+
 	}
 
 	return true;
