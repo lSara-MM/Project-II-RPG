@@ -30,6 +30,19 @@ bool Map::Awake(pugi::xml_node& config)
 
     mapFileName = config.child("mapfile").attribute("path").as_string();
     mapFolder = config.child("mapfolder").attribute("path").as_string();
+    mapBackground = config.child("mapbackground").attribute("path").as_string();
+
+    mapDungeonFileName = config.child("mapdungeonfile").attribute("path").as_string();
+    mapDungeonFolder = config.child("mapdungeonfolder").attribute("path").as_string();
+    mapDungeonBackground = config.child("mapdungeonbackground").attribute("path").as_string();
+
+    mapCircusFileName = config.child("mapcircusfile").attribute("path").as_string();
+    mapCircusFolder = config.child("mapcircusfolder").attribute("path").as_string();
+    mapCircusBackground = config.child("mapcircusbackground").attribute("path").as_string();
+
+    mapPracticeFileName = config.child("mappracticefile").attribute("path").as_string();
+    mapPracticeFolder = config.child("mappracticefolder").attribute("path").as_string();
+    mapPracticeBackground = config.child("mappracticebackground").attribute("path").as_string();
 
     return ret;
 }
@@ -65,7 +78,6 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 
                 else {
                     map[i] = 0;
-
                 }
                
             }
@@ -89,30 +101,12 @@ void Map::Draw()
 
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
-
+ 
     while (mapLayerItem != NULL) {
 
-        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
+        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value == true) {
             
-            for (int x = 0; x < mapLayerItem->data->width; x++)
-            {
-                for (int y = 0; y < mapLayerItem->data->height; y++)
-                {
-                   
-                    int gid = mapLayerItem->data->Get(x, y);
-
-              
-                    TileSet* tileset = GetTilesetFromTileId(gid);
-
-                    SDL_Rect r = tileset->GetTileRect(gid);
-                    iPoint pos = MapToWorld(x, y);
-
-                    app->render->DrawTexture(tileset->texture,
-                        pos.x,
-                        pos.y,
-                        &r);
-                }
-            }
+            app->render->DrawTexture(backGround, 0, 0);
         }
         mapLayerItem = mapLayerItem->next;
     }
@@ -129,40 +123,54 @@ void Map::DrawPlatformCollider() {
 
     while (mapLayerItem != NULL) {
 
-        if (mapLayerItem->data->properties.GetProperty("Colliders") != NULL && mapLayerItem->data->properties.GetProperty("Colliders")->value == true)
+        if( mapLayerItem->data->properties.GetProperty("collider") != NULL && mapLayerItem->data->properties.GetProperty("collider")->value == true)
         {
-            for (int x1 = 0; x1 < mapLayerItem->data->width; x1++) //Preguntar a Pedro porque explota
+            for (int x1 = 0; x1 < mapLayerItem->data->width; x1++) 
             {
                 for (int y1 = 0; y1 < mapLayerItem->data->height; y1++)
                 {
                     // L05: DONE 9: Complete the draw function
                     int gid = mapLayerItem->data->Get(x1, y1);
 
-
                     //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
                     TileSet* tileset = GetTilesetFromTileId(gid);
 
-                    SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x1, y1);
 
-                    switch (gid)
+                    if(gid == 1 && gid!=NULL)
                     {
-                    case 111:
-
                         int w, h;
-                        w = 32;
-                        h = 32;
+                        w = 64;
+                        h = 64;
 
                         PhysBody* co = new PhysBody;
                         co = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
                         co->ctype = ColliderType::PLATFORM;
-                        listBodies.Add(co);
+                        listBodies.Add(co);  
+                        
+                    }else if (gid == 2 && gid != NULL)
+                    {
+                        int w, h;
+                        w = 64;
+                        h = 64;
 
-                        break;
+                        PhysBody* co = new PhysBody;
+                        co = app->physics->CreateRectangleSensor(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                        co->ctype = ColliderType::PORTAL;
+                        co->id = portalID;
+                        listBodies.Add(co);
+                        if (mapLayerItem->data->Get(x1+1, y1) != 2)
+                        {
+                            if (mapLayerItem->data->Get(x1, y1 + 1) != 2)
+                            {
+                                portalID++;
+                            }
+                        }
                     }
                 }
             }
         }
+        mapLayerItem = mapLayerItem->next;
     }
 }
 
@@ -288,25 +296,45 @@ bool Map::CleanUp()
     while (bodyItem != NULL)
     {
         app->render->name;
-        //RELEASE(bodyItem->data);
-        //bodyItem->data->body->GetWorld()->DestroyBody(bodyItem->data->body);
+        bodyItem->data->body->GetWorld()->DestroyBody(bodyItem->data->body);
         app->render->active;
         delete bodyItem->data;
         bodyItem = bodyItem->next;
     }
     listBodies.Clear();
 
+    portalID = 0;
+    mapPendingtoDelete = false;
     app->render->active;
     return true;
 }
 
 // Load new map
-bool Map::Load()
+bool Map::Load(int ID)
 {
     bool ret = true;
 
+    mapPendingtoDelete = false;
+
     pugi::xml_document mapFileXML;
-    pugi::xml_parse_result result = mapFileXML.load_file(mapFileName.GetString());
+    pugi::xml_parse_result result;
+
+    switch (ID)
+    {
+    case 0:
+         result = mapFileXML.load_file(mapFileName.GetString());
+        break;
+    case 1:
+        result = mapFileXML.load_file(mapDungeonFileName.GetString());
+        break;
+    case 2:
+        result = mapFileXML.load_file(mapCircusFileName.GetString());
+        break;
+    case 3:
+       result = mapFileXML.load_file(mapPracticeFileName.GetString());
+        break;
+    }
+    
 
     if(result == NULL)
     {
@@ -316,16 +344,16 @@ bool Map::Load()
 
     if(ret == true)
     {
-        ret = LoadMap(mapFileXML);
+        ret = LoadMap(mapFileXML, ID);
     }
 
     if (ret == true)
     {
-        ret = LoadTileSet(mapFileXML);
+        ret = LoadTileSet(mapFileXML, ID);
     }
 
     if (ret == true)
-    {
+    { 
         ret = LoadAllLayers(mapFileXML.child("map"));
     }
   
@@ -357,6 +385,7 @@ bool Map::Load()
         }
     }
 
+    
     if(mapFileXML) mapFileXML.reset();
 
     mapLoaded = ret;
@@ -366,13 +395,14 @@ bool Map::Load()
 
     bool retWalkMap = CreateWalkabilityMap(w, h, &data);
     if (retWalkMap) app->pathfinding->SetMap(w, h, data);
+    DrawPlatformCollider();
 
     RELEASE_ARRAY(data);
 
     return ret;
 }
 
-bool Map::LoadMap(pugi::xml_node mapFile)
+bool Map::LoadMap(pugi::xml_node mapFile, int ID)
 {
     bool ret = true;
     pugi::xml_node map = mapFile.child("map");
@@ -389,35 +419,123 @@ bool Map::LoadMap(pugi::xml_node mapFile)
         mapData.width = map.attribute("width").as_int();
         mapData.tileHeight = map.attribute("tileheight").as_int();
         mapData.tileWidth = map.attribute("tilewidth").as_int();
+        switch (ID)
+        {
+        case 0:
+            backGround = app->tex->Load(mapBackground);
+            break;
+        case 1:
+            backGround = app->tex->Load(mapDungeonBackground);
+            break;
+        case 2:
+            backGround = app->tex->Load(mapCircusBackground);
+            break;
+        case 3:
+            backGround = app->tex->Load(mapPracticeBackground);
+            break;
+        }
+        
+        portalID = 0;
     }
 
     return ret;
 }
 
-bool Map::LoadTileSet(pugi::xml_node mapFile){
+bool Map::LoadTileSet(pugi::xml_node mapFile, int ID){
 
     bool ret = true; 
 
     pugi::xml_node tileset;
-    for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+    switch (ID)
     {
-        TileSet* set = new TileSet();
-       
-        set->name = tileset.attribute("name").as_string();
-        set->firstgid = tileset.attribute("firstgid").as_int();
-        set->margin = tileset.attribute("margin").as_int();
-        set->spacing = tileset.attribute("spacing").as_int();
-        set->tileWidth = tileset.attribute("tilewidth").as_int();
-        set->tileHeight = tileset.attribute("tileheight").as_int();
-        set->columns = tileset.attribute("columns").as_int();
-        set->tilecount = tileset.attribute("tilecount").as_int();
+    case 0:
+        for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        {
+            TileSet* set = new TileSet();
 
-    
-        SString tmp("%s%s", mapFolder.GetString(), tileset.child("image").attribute("source").as_string());
-        set->texture = app->tex->Load(tmp.GetString());
+            set->name = tileset.attribute("name").as_string();
+            set->firstgid = tileset.attribute("firstgid").as_int();
+            set->margin = tileset.attribute("margin").as_int();
+            set->spacing = tileset.attribute("spacing").as_int();
+            set->tileWidth = tileset.attribute("tilewidth").as_int();
+            set->tileHeight = tileset.attribute("tileheight").as_int();
+            set->columns = tileset.attribute("columns").as_int();
+            set->tilecount = tileset.attribute("tilecount").as_int();
 
-        mapData.tilesets.Add(set);
+
+            SString tmp("%s%s", mapFolder.GetString(), tileset.child("image").attribute("source").as_string());
+            set->texture = app->tex->Load(tmp.GetString());
+
+            mapData.tilesets.Add(set);
+        }
+        break;
+    case 1:
+        for (tileset = mapFile.child("dungeon").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        {
+            TileSet* set = new TileSet();
+
+            set->name = tileset.attribute("name").as_string();
+            set->firstgid = tileset.attribute("firstgid").as_int();
+            set->margin = tileset.attribute("margin").as_int();
+            set->spacing = tileset.attribute("spacing").as_int();
+            set->tileWidth = tileset.attribute("tilewidth").as_int();
+            set->tileHeight = tileset.attribute("tileheight").as_int();
+            set->columns = tileset.attribute("columns").as_int();
+            set->tilecount = tileset.attribute("tilecount").as_int();
+
+
+            SString tmp("%s%s", mapDungeonFolder.GetString(), tileset.child("image").attribute("source").as_string());
+            set->texture = app->tex->Load(tmp.GetString());
+
+            mapData.tilesets.Add(set);
+        }
+        break;
+
+    case 2:
+        for (tileset = mapFile.child("circus").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        {
+            TileSet* set = new TileSet();
+
+            set->name = tileset.attribute("name").as_string();
+            set->firstgid = tileset.attribute("firstgid").as_int();
+            set->margin = tileset.attribute("margin").as_int();
+            set->spacing = tileset.attribute("spacing").as_int();
+            set->tileWidth = tileset.attribute("tilewidth").as_int();
+            set->tileHeight = tileset.attribute("tileheight").as_int();
+            set->columns = tileset.attribute("columns").as_int();
+            set->tilecount = tileset.attribute("tilecount").as_int();
+
+
+            SString tmp("%s%s", mapCircusFolder.GetString(), tileset.child("image").attribute("source").as_string());
+            set->texture = app->tex->Load(tmp.GetString());
+
+            mapData.tilesets.Add(set);
+        }
+        break;
+
+    case 3:
+        for (tileset = mapFile.child("practice").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        {
+            TileSet* set = new TileSet();
+
+            set->name = tileset.attribute("name").as_string();
+            set->firstgid = tileset.attribute("firstgid").as_int();
+            set->margin = tileset.attribute("margin").as_int();
+            set->spacing = tileset.attribute("spacing").as_int();
+            set->tileWidth = tileset.attribute("tilewidth").as_int();
+            set->tileHeight = tileset.attribute("tileheight").as_int();
+            set->columns = tileset.attribute("columns").as_int();
+            set->tilecount = tileset.attribute("tilecount").as_int();
+
+
+            SString tmp("%s%s", mapPracticeFolder.GetString(), tileset.child("image").attribute("source").as_string());
+            set->texture = app->tex->Load(tmp.GetString());
+
+            mapData.tilesets.Add(set);
+        }
+        break;
     }
+    
 
     return ret;
 }
