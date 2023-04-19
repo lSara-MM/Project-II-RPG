@@ -572,13 +572,14 @@ public:
 		button->state = GuiControlState::NONE;
 		listPauseButtons.Add(button);
 
-		// buttons
+
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 180, 130 + 50 * i, 172, 40 }, ButtonType::EXTRA_LARGE, buttons[i], 10);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 50, 300 + 77 * i, 200, 70 }, ButtonType::EXTRA_LARGE, buttons[i], 10);
 			button->state = GuiControlState::NONE;
 			listPauseButtons.Add(button);
 		}
+
 
 		// Settings
 		pSettings = new Settings(mod);
@@ -588,7 +589,7 @@ public:
 	{
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
-		app->render->DrawRectangle({ 150, 70, 226, 261 }, 206, 167, 240, 230, true);
+		app->render->DrawRectangle({ 0, 0, app->win->GetWidth(), app->win->GetHeight()}, 163, 163, 163);
 		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
 		app->render->TextDraw("Pause", 210, 90, 21, Font::UI, { 107, 0, 110 });
 
