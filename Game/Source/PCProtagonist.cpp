@@ -128,6 +128,15 @@ bool Protagonist::Update(float dt)
 		app->combat->DisableTargetButton(6);
 		app->combat->DisableTargetButton(7);
 
+		if (app->combat->enemies[1] == nullptr && app->combat->enemies[2] == nullptr) 
+		{
+			app->combat->DisableSkillButton(1);
+		}
+		if (app->combat->enemies[2] == nullptr && app->combat->enemies[3] == nullptr)
+		{
+			app->combat->DisableSkillButton(4);
+		}
+
 		/*if (this->currentHp <= 0)
 		{
 			this->alive = false;
@@ -258,7 +267,7 @@ bool Protagonist::Update(float dt)
 					if (app->combat->enemies[2] != nullptr) {
 						if (!app->input->godMode_B)
 						{
-							float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.65);
+							float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.6);
 							app->combat->enemies[2]->ModifyHP(-damage);
 						}
 						else
@@ -270,7 +279,7 @@ bool Protagonist::Update(float dt)
 					if (app->combat->enemies[3] != nullptr) {
 						if (!app->input->godMode_B)
 						{
-							float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.65);
+							float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.6);
 							app->combat->enemies[3]->ModifyHP(-damage);
 						}
 						else
