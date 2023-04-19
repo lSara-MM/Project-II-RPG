@@ -51,6 +51,12 @@ bool Bard::Awake() {
 	this->speed = parameters.attribute("speed").as_int();
 	texturePath = parameters.attribute("texturePath").as_string();
 
+	
+	this->skills_C[0] = "Damage x1 2 OR 3";
+	this->skills_C[1] = "Damage x1 1 OR 2";
+	this->skills_C[2] = "Damage x0.85 1 AND x0.3 2";
+	this->skills_C[3] = "Damage x0.85 3 AND x0.3 4";
+
 	return true;
 }
 

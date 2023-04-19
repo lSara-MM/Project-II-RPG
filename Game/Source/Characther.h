@@ -83,7 +83,7 @@ public:
 	int GetMaxHP() { return maxHp; }
 	
 	//Skills Descriptions
-	const char* skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
+	SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
 
 private:
 

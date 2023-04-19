@@ -233,7 +233,7 @@ bool Combat::Update(float dt)
 		if(lastPressedAbility_I>0)
 		{
 			
-			app->render->TextDraw(allies[1]->skills_C[lastPressedAbility_I - 1] , 460, 500, 20);
+			app->render->TextDraw(listInitiative.At(charaInTurn)->data->skills_C[lastPressedAbility_I - 1].GetString(), 460, 500, 40);
 		}
 	}
 

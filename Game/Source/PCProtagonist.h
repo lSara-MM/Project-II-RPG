@@ -49,7 +49,7 @@ public:
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
 
-	const char* skills_C[4] = {"Habilidad 1 Prota","Habilidad 2 Prota","Habilidad 3 Prota","Habilidad 4 Prota" };
+	
 
 	
 
