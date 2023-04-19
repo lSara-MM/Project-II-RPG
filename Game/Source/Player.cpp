@@ -82,7 +82,7 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 	currentAnimation = &currentAnim;
 	
-	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x - width / 2, position.y - height / 2, width + 5, height + 5, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 	
 	pbody->listener = this; 
@@ -96,6 +96,9 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+	app->render->camera.y = -position.y + 360 - height;
+	app->render->camera.x = -position.x + 640 - width;
+
 	pbody->body->SetGravityScale(0);
 
 	if (app->scene->pause_B)
@@ -120,7 +123,7 @@ bool Player::Update(float dt)
 	currentAnimation->Update();
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
+	app->render->DrawTexture(texture, position.x - width - 2, position.y - height, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
 	//Sara aquí tienes tu parte, donde cuando el player está dentro de la zona interactuable con el npc
 	if (npcInteract) 
@@ -282,7 +285,6 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 			{
-				app->render->camera.y += 125 * dtP;
 				keyLockUp = true;
 				currentAnimation = &upAnim;
 				vel.y = -125;
@@ -298,7 +300,6 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 			{
-				app->render->camera.y += -125 * dtP;
 				keyLockDown = true;
 				currentAnimation = &downAnim;
 				vel.y = 125;
@@ -314,7 +315,6 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 			{
-				app->render->camera.x += 125 * dtP;
 				keyLockLeft = true;
 				currentAnimation = &leftAnim;
 				vel.x = -125;
@@ -330,7 +330,6 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 			{
-				app->render->camera.x += -125 * dtP;
 				keyLockRigth = true;
 				currentAnimation = &rigthAnim;
 				vel.x = 125;
