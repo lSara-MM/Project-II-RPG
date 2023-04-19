@@ -51,14 +51,8 @@ bool Scene::Start()
 	backGround = app->tex->Load("Assets/Maps/TwistedTentMap.png");
 	exit_B = false;
 
-	npcSetID = 1;
-
-	// Settings
-	pSettings = new Settings(this);
-
-	// Pause 
-	//pPause->GUI_id = pSettings->GUI_id;
-	//pPause->CreatePause(this);
+	pause_B = false;
+	settings_B = false;
 
 	//Camera pos
 	/*app->render->camera.x = -2800;
@@ -66,6 +60,12 @@ bool Scene::Start()
 	
 	InitEntities();
 	app->entityManager->Enable();
+
+	if (app->iScene->continueGame_B)
+	{
+		app->LoadGameRequest();
+		app->iScene->continueGame_B = false;
+	}
 
 	return true;
 }
@@ -163,11 +163,21 @@ bool Scene::PostUpdate()
 
 	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 	{
-		pSettings->settings_B = !pSettings->settings_B;
+		settings_B = !settings_B;
+
+		if (settings_B)
+		{
+			pSettings = new Settings(this);
+		}
+		else
+		{
+			pSettings->CloseSettings();
+			pSettings->CleanUp();
+		}
 	}
 	
-	if (pSettings->settings_B) { pSettings->OpenSettings(); }
-	//if (pPause->pause) { pPause->OpenPause(); }
+	if (pause_B) { pPause->OpenPause(); }
+	if (settings_B) { pSettings->OpenSettings(); }
 	app->guiManager->Draw();
 
 	return ret;
@@ -185,8 +195,15 @@ bool Scene::CleanUp()
 
 	app->entityManager->Disable();
 
-	pSettings->CleanUp();
-	//pPause->CleanUp();
+	if (pSettings != nullptr)
+	{
+		pSettings->CleanUp();
+	}
+	if (pPause != nullptr)
+	{
+		pPause->CleanUp();
+	}
+	
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 	app->tex->UnLoad(backGround);
@@ -233,15 +250,21 @@ void Scene::Debug()
 		app->input->godMode_B = !app->input->godMode_B;
 	}
 
-	//pause menu
+	// Pause menu
 	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
 	{
-		pause_B = !pause_B;
-		pSettings->settings_B = !pSettings->settings_B;
+		pause_B = !pause_B;	
 
-		if (!pSettings->settings_B)
+		if (pause_B)
 		{
-			pSettings->CloseSettings();
+			pPause = new Pause(this);
+			pSettings = pPause->pSettings;
+
+			pSettings->settings_B = !pSettings->settings_B;
+		}
+		else
+		{
+			pPause->CleanUp();
 		}
 
 		LOG("PAUSE");
@@ -249,12 +272,19 @@ void Scene::Debug()
 
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
-		!pause_B;
-		//pPause->pause = !pPause->pause;
-		/*if (!pPause->pause)
+		pause_B = !pause_B;
+
+		if (pause_B)
 		{
-			pPause->ClosePause();
-		}*/
+			pPause = new Pause(this);
+			pSettings = pPause->pSettings;
+
+			pSettings->settings_B = !pSettings->settings_B;
+		}
+		else
+		{
+			pPause->CleanUp();
+		}
 
 		LOG("PAUSE");
 	}
@@ -299,54 +329,258 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Event by %d ", control->id);
 
-	//app->audio->PlayFx(control->fxControl);
+	app->audio->PlayFx(control->fxControl);
 
 	switch (control->id)
 	{
+	case 1:
+		LOG("Button start click");
+		break;
+	case 2:
+		LOG("Button continue click");
+		break;
+	case 3:
+		LOG("Button settings click");
+		break;
+	case 4:
+		LOG("Button Exit game click");
+		break;
+
+		// Pause
+	case 701: 
+		LOG("Button Close pause click");
+		pause_B = false;
+		pPause->CleanUp();
+		break;
+		
+	case 702: 
+		LOG("Button Resume click");
+		pause_B = false;
+		pPause->CleanUp();
+		break;
+		
+	case 703: 
+		LOG("Button Return to title click");
+		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);		
+		break;
+		
+	case 704: 
+		LOG("Button Settings click");
+		for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::DISABLED;
+		}
+
+		settings_B = true;
+		pSettings = new Settings(this);
+		break;
+			
+	case 705: 
+		LOG("Button Exit click");
+		exit_B = true;
+		break;
+
+
+		// Settings
 	case 801:
 		LOG("Button Close settings click");
-		//pPause->OpenPause();
+		for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NORMAL;
+		}
+
+		settings_B = false;
 		pSettings->CloseSettings();
+		pSettings->CleanUp();
 		break;
+
 	case 802:
-		LOG("Slider music click");
-		//app->audio->ChangeMusicVolume(pSettings->music->volume100);
+		LOG("Game settings click");
+		pSettings->pGame->game_B = true;
+
+		pSettings->pControl->CloseControlSettings();
+		pSettings->pGraphics->CloseGraphics();
+		pSettings->pAudio->CloseAudioSettings();
 		break;
+
 	case 803:
-		LOG("Slider fx click");
-		//app->audio->ChangeFxVolume(pSettings->fx->volume100);
+		LOG("Controls settings click");
+		pSettings->pControl->control_B = true;
+
+		pSettings->pGame->CloseGameSettings();
+		pSettings->pGraphics->CloseGraphics();
+		pSettings->pAudio->CloseAudioSettings();
 		break;
+
 	case 804:
-		LOG("Checkbox Fullscreen click");
-		app->win->changeScreen = !app->win->changeScreen;
-		app->win->ResizeWin();
+		LOG("Graphics settings click");
+		pSettings->pGraphics->graphics_B = true;
+
+		pSettings->pGame->CloseGameSettings();
+		pSettings->pControl->CloseControlSettings();
+		pSettings->pAudio->CloseAudioSettings();
 		break;
+
 	case 805:
-		LOG("Checkbox Vsync click");
-		(control->state == GuiControlState::NORMAL) ? app->render->flags = SDL_RENDERER_ACCELERATED : app->render->flags |= SDL_RENDERER_PRESENTVSYNC;
+		LOG("Audio settings click");
+		pSettings->pAudio->audio_B = true;
+
+		pSettings->pGame->CloseGameSettings();
+		pSettings->pControl->CloseControlSettings();
+		pSettings->pGraphics->CloseGraphics();
 		break;
+
+
+		// Game settings
 	case 806:
-		LOG("Button Close pause click");
-		//pPause->ClosePause(); 
+		LOG("Button Language click");
+
 		break;
+
 	case 807:
-		LOG("Button Resume click");
-		//pPause->ClosePause();
+		LOG("Button Text Speed click");
+
 		break;
 	case 808:
 		LOG("Button Return to Title click");
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
 		break;
-	case 809:
-		LOG("Button settings click");
-		//pPause->ClosePause();
 
-		pSettings->settings_B = !pSettings->settings_B;
-		if (!pSettings->settings_B) { pSettings->CloseSettings();}
-		break;
-	case 10:
-		LOG("Button Exit game click");
+	case 809:
+		LOG("Button Exit Game click");
 		exit_B = true;
+		break;
+
+
+		// Control settings
+	case 810:
+		LOG("Button Move Up keyboard check");
+
+		break;
+
+	case 811:
+		LOG("Button Move Up gamepad check");
+
+		break;
+
+	case 812:
+		LOG("Button Move Left keyboard check");
+
+		break;
+
+	case 813:
+		LOG("Button Move Left gamepad check");
+
+		break;
+
+	case 814:
+		LOG("Button Move Right keyboard check");
+
+		break;
+
+	case 815:
+		LOG("Button Move Right gamepad check");
+
+		break;
+
+	case 816:
+		LOG("Button Move Down keyboard check");
+
+		break;
+
+	case 817:
+		LOG("Button Move Down gamepad check");
+
+		break;
+
+	case 818:
+		LOG("Button Interact keyboard check");
+
+		break;
+
+	case 819:
+		LOG("Button Interact gamepad check");
+
+		break;
+
+	case 820:
+		LOG("Button Inventory keyboard check");
+
+		break;
+
+	case 821:
+		LOG("Button Party gamepad check");
+
+		break;
+
+	case 822:
+		LOG("Button Quests keyboard check");
+
+		break;
+
+	case 823:
+		LOG("Button Quests gamepad check");
+
+		break;
+
+	case 824:
+		LOG("Button Map keyboard check");
+
+		break;
+
+	case 825:
+		LOG("Button Map gamepad check");
+
+		break;
+
+	case 826:
+		LOG("Button Settings keyboard check");
+
+		break;
+
+	case 827:
+		LOG("Button Settings gamepad check");
+
+		break;
+
+
+		// Graphics settings
+	case 828:
+		LOG("Button Windows size");
+
+		break;
+
+	case 829:
+		LOG("Checkbox Fullscreen check");
+		app->win->fullscreen = !app->win->fullscreen;
+		app->win->FullscreenWin();
+		break;
+
+
+	case 830:
+		LOG("Checkbox Vsync check");
+		app->render->vSync_B = !app->render->vSync_B;
+		app->render->VSyncOn();
+		break;
+
+	case 831:
+		LOG("Button Max fps");
+
+		break;
+
+
+		// Audio settings
+	case 832:
+		LOG("Slider bar General volume");
+		app->audio->ChangeGeneralVolume(pSettings->pAudio->general->volume100);
+		break;
+
+	case 833:
+		LOG("Slider bar Music volume");
+		break;
+
+	case 834:
+		LOG("Slider bar Fx volume");
 		break;
 	}
 
