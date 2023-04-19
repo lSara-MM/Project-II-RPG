@@ -168,8 +168,16 @@ bool Protagonist::Update(float dt)
 
 				if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1])
 				{
-					float damage = app->combat->targeted_Character->CalculateDamage(attack);
-					app->combat->targeted_Character->ModifyHP(-damage);
+					if (!app->input->godMode_B)
+					{
+						float damage = app->combat->targeted_Character->CalculateDamage(attack);
+						app->combat->targeted_Character->ModifyHP(-damage);
+					}
+					else
+					{
+						app->combat->targeted_Character->ModifyHP(-99999);
+					}
+
 					onTurn = false;
 					app->combat->NextTurn();
 				}
@@ -188,14 +196,30 @@ bool Protagonist::Update(float dt)
 				}
 
 				if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1]) {
-					if (app->combat->enemies[0] != nullptr && app->combat->enemies[0]->currentHp > 0) {
-						float damage = app->combat->enemies[0]->CalculateDamage(attack * 0.65);
-						app->combat->enemies[0]->ModifyHP(-damage);
+					if (app->combat->enemies[0] != nullptr) {
+						if (!app->input->godMode_B)
+						{
+							float damage = app->combat->enemies[0]->CalculateDamage(attack * 0.65);
+							app->combat->enemies[0]->ModifyHP(-damage);
+						}
+						else
+						{
+							app->combat->enemies[0]->ModifyHP(-99999);
+						}
+
 					}
-					if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->currentHp > 0) {
-						float damage = app->combat->enemies[1]->CalculateDamage(attack * 0.30);
-						app->combat->enemies[1]->ModifyHP(-damage);
+					if (app->combat->enemies[1] != nullptr) {
+						if (!app->input->godMode_B)
+						{
+							float damage = app->combat->enemies[1]->CalculateDamage(attack * 0.65);
+							app->combat->enemies[1]->ModifyHP(-damage);
+						}
+						else
+						{
+							app->combat->enemies[1]->ModifyHP(-99999);
+						}
 					}
+					
 					app->combat->NextTurn();
 					onTurn = false;
 				}
@@ -215,16 +239,28 @@ bool Protagonist::Update(float dt)
 
 
 				if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3] && app->combat->targeted_Character != nullptr) {
-					if (app->combat->enemies[2] != nullptr)
-					{
-						float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.65);
-						app->combat->enemies[2]->ModifyHP(-damage);
-					}
+					if (app->combat->enemies[2] != nullptr) {
+						if (!app->input->godMode_B)
+						{
+							float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.65);
+							app->combat->enemies[2]->ModifyHP(-damage);
+						}
+						else
+						{
+							app->combat->enemies[2]->ModifyHP(-99999);
+						}
 
-					if (app->combat->enemies[3] != nullptr)
-					{
-						float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.30);
-						app->combat->enemies[3]->ModifyHP(-damage);
+					}
+					if (app->combat->enemies[3] != nullptr) {
+						if (!app->input->godMode_B)
+						{
+							float damage = app->combat->enemies[3]->CalculateDamage(attack * 0.65);
+							app->combat->enemies[3]->ModifyHP(-damage);
+						}
+						else
+						{
+							app->combat->enemies[1]->ModifyHP(-99999);
+						}
 					}
 					app->combat->NextTurn();
 					onTurn = false;

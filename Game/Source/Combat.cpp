@@ -242,6 +242,10 @@ bool Combat::Update(float dt)
 		app->fade->FadingToBlack(this, (Module*)app->scene, 30);
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_F10== KEY_DOWN))
+	{
+		app->input->godMode_B != app->input->godMode_B;
+	}
 
 	return true;
 }
