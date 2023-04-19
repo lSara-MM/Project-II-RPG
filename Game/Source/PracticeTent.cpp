@@ -275,58 +275,58 @@ bool PracticeTent::InitEntities()
 
 bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 {
-	LOG("Event by %d ", control->id);
+	//LOG("Event by %d ", control->id);
 
-	//app->audio->PlayFx(control->fxControl);
+	////app->audio->PlayFx(control->fxControl);
 
-	switch (control->id)
-	{
-	case 801:
-		LOG("Button Close settings click");
-		//pPause->OpenPause();
-		pSettings->CloseSettings();
-		break;
-	case 802:
-		LOG("Slider music click");
-		//app->audio->ChangeMusicVolume(pSettings->music->volume100);
-		break;
-	case 803:
-		LOG("Slider fx click");
-		//app->audio->ChangeFxVolume(pSettings->fx->volume100);
-		break;
-	case 804:
-		LOG("Checkbox Fullscreen click");
-		app->win->changeScreen = !app->win->changeScreen;
-		app->win->ResizeWin();
-		break;
-	case 805:
-		LOG("Checkbox Vsync click");
-		(control->state == GuiControlState::NORMAL) ? app->render->flags = SDL_RENDERER_ACCELERATED : app->render->flags |= SDL_RENDERER_PRESENTVSYNC;
-		break;
-	case 806:
-		LOG("Button Close pause click");
-		//pPause->ClosePause(); 
-		break;
-	case 807:
-		LOG("Button Resume click");
-		//pPause->ClosePause();
-		break;
-	case 808:
-		LOG("Button Return to Title click");
-		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
-		break;
-	case 809:
-		LOG("Button settings click");
-		//pPause->ClosePause();
+	//switch (control->id)
+	//{
+	//case 801:
+	//	LOG("Button Close settings click");
+	//	//pPause->OpenPause();
+	//	pSettings->CloseSettings();
+	//	break;
+	//case 802:
+	//	LOG("Slider music click");
+	//	//app->audio->ChangeMusicVolume(pSettings->music->volume100);
+	//	break;
+	//case 803:
+	//	LOG("Slider fx click");
+	//	//app->audio->ChangeFxVolume(pSettings->fx->volume100);
+	//	break;
+	//case 804:
+	//	LOG("Checkbox Fullscreen click");
+	//	app->win->changeScreen = !app->win->changeScreen;
+	//	app->win->ResizeWin();
+	//	break;
+	//case 805:
+	//	LOG("Checkbox Vsync click");
+	//	(control->state == GuiControlState::NORMAL) ? app->render->flags = SDL_RENDERER_ACCELERATED : app->render->flags |= SDL_RENDERER_PRESENTVSYNC;
+	//	break;
+	//case 806:
+	//	LOG("Button Close pause click");
+	//	//pPause->ClosePause(); 
+	//	break;
+	//case 807:
+	//	LOG("Button Resume click");
+	//	//pPause->ClosePause();
+	//	break;
+	//case 808:
+	//	LOG("Button Return to Title click");
+	//	app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
+	//	break;
+	//case 809:
+	//	LOG("Button settings click");
+	//	//pPause->ClosePause();
 
-		pSettings->settings_B = !pSettings->settings_B;
-		if (!pSettings->settings_B) { pSettings->CloseSettings();}
-		break;
-	case 10:
-		LOG("Button Exit game click");
-		exit_B = true;
-		break;
-	}
+	//	pSettings->settings_B = !pSettings->settings_B;
+	//	if (!pSettings->settings_B) { pSettings->CloseSettings();}
+	//	break;
+	//case 10:
+	//	LOG("Button Exit game click");
+	//	exit_B = true;
+	//	break;
+	//}
 
 	return true;
 }

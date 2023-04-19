@@ -593,6 +593,8 @@ public:
 	{
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
+		app->audio->lowerBgMusic();
+
 		app->render->DrawRectangle({ 0 - app->render->camera.x, 0 - app->render->camera.y, app->win->GetWidth(), app->win->GetHeight()}, 255, 255, 255);
 		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
 		app->render->TextDraw("Pause", 600, 121, 40, Font::UI);
@@ -612,6 +614,8 @@ public:
 
 	bool ClosePause()
 	{
+		app->audio->upperBgMusic();
+
 		pause_B = false;
 		open_pause_B = false;
 		for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)

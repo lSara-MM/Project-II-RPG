@@ -27,14 +27,17 @@
 	<fadeToBlack>
 	</fadeToBlack>
 
-	<logoScene background="Assets/Maps/logo_bg.png" audioLogoPath ="Assets/Audio/Music/music_logo.ogg"/>
+	<logoScene background="Assets/Maps/Logo_Pikum_re.png" collaborator="Assets/Maps/citm_logo.png" audioLogoPath ="Assets/Audio/Music/Logo_Intro.ogg"/>
 	<loseScene background="Assets/Maps/lose_bg.png" losebutton1="Assets/Maps/rect_pa.png" losebutton2="Assets/Maps/rect_gu.png"
 		musicLose="Assets/Audio/Music/the_end.ogg"/>
 
-	<introScene background="Assets/Maps/intro_bg.png" audioIntroPath ="Assets/Audio/Music/music_intro.ogg"
+	<introScene background="Assets/Maps/intro_bg.png" audioIntroPath ="Assets/Audio/Music/Intro_mus.ogg"
 				settingsPath="Assets/Textures/setting_menu.png"/>
+
+	<HouseOfTerrors musicD1="Assets/Audio/Music/Haunted_House.ogg"/>
+	<Circus musicCircus="Assets/Audio/Music/CircusTent_mus.ogg"/>
 	
-	<scene music="Assets/Audio/Music/lvl_1.ogg" textureAttackPath="Assets/Textures/attack.png"
+	<scene music="Assets/Audio/Music/Lobby_Music.ogg" textureAttackPath="Assets/Textures/attack.png"
 	   background1 ="Assets/Maps/clouds_bg.png" background2 ="Assets/Maps/clouds_mg_1.png" background3 ="Assets/Maps/clouds_mg_2.png"
 	   coinspath="Assets/Maps/coin.png" heartspath="Assets/Maps/heart.png"
 		   settingsPath ="Assets/Textures/setting_menu.png">
@@ -51,7 +54,8 @@
 			audiopathSecret ="Assets/Audio/Fx/sfx_secret.wav"
 			audiopathCd ="Assets/Audio/Fx/sfx_Attack_Up.wav"
 			audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
-			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"/>
+			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"
+			grassStep="Assets/Audio/Fx/Pasos_Hierba.wav"/>
 		
 	<npc name="GUIA" dialogueID="1"
 		x="0" y="0" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>

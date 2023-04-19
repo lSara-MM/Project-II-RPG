@@ -58,6 +58,9 @@ public:
 
 private:
 
+	//Path music
+	const char* circusMusPath;
+
 	// Settings
 	Settings* pSettings;
 

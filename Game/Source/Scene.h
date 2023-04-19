@@ -64,6 +64,7 @@ public:
 
 private:
 
+	const char* lobby_music;
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;

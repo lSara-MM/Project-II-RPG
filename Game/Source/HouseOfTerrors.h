@@ -58,6 +58,9 @@ public:
 
 private:
 
+	//Music
+	const char* musHauntedPath;
+
 	// Settings
 	Settings* pSettings;
 

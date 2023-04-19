@@ -43,8 +43,11 @@ private:
 	const char* musicLogo;
 	const char* imagePath;
 
-	SDL_Texture* texture;
+	SDL_Texture* logoTexture;
 	const char* logoPath;
+
+	SDL_Texture* logoCitmTexture;
+	const char* logoCitmPath;
 };
 
 #endif // __LOGOSCENE_H__

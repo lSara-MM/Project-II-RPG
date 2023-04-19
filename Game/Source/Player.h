@@ -79,6 +79,9 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 
+	const char* grass_path;
+	uint walk_grass;
+
 	Npc* npcTalkingTo;
 	
 	int width, height;

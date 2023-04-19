@@ -39,6 +39,9 @@ public:
 	bool ChangeMusicVolume(int vol);
 	bool ChangeFxVolume(int vol);
 
+	bool lowerBgMusic();
+	bool upperBgMusic();
+
 public:
 	int volume_general, volume_music, volume_fx;
 
