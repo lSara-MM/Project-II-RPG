@@ -56,7 +56,9 @@
 			audiopathCd ="Assets/Audio/Fx/sfx_Attack_Up.wav"
 			audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
 			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"
-			grassStep="Assets/Audio/Fx/Pasos_Hierba.wav"/>
+			grassStep="Assets/Audio/Fx/Pasos_Hierba.wav"
+			enterZone="Assets/Audio/Fx/Pasos_Hierba.wav"/>
+			
 		
 	<npc name="GUIA" dialogueID="1"
 		x="0" y="0" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>

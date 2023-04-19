@@ -82,6 +82,10 @@ private:
 	const char* grass_path;
 	uint walk_grass;
 
+	// entrar sala
+	const char* enterPath;
+	uint enterZone;
+
 	Npc* npcTalkingTo;
 	
 	int width, height;

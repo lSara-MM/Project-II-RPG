@@ -80,6 +80,10 @@ bool Player::Awake() {
 	grass_path = "Assets/Audio/Fx/Pasos_Hierba.wav";
 	walk_grass = app->audio->LoadFx(grass_path);
 
+	//fx enter zone
+	enterPath = "Assets/Audio/Fx/entrar_sala.wav";
+	enterZone = app->audio->LoadFx(enterPath);
+
 	return true;
 }
 
@@ -210,6 +214,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 }
 void Player::EndContact(PhysBody* physA, PhysBody* physB) 
 {
+	app->audio->PlayFx(enterZone, 0);
 	switch (physB->ctype)
 	{
 	case ColliderType::NPC:
