@@ -14,7 +14,7 @@
 	<loseScene />
 	<map />
 	<entitymanager>
-		<player x="141" y="260" />
+		<player x="120" y="260" />
 		<bard currentHp="0" />
 		<protagonist currentHp="0" />
 	</entitymanager>
@@ -23,6 +23,6 @@
 	<guiManager />
 	<fadeToBlack />
 	<renderer>
-		<camera x="26" y="0" />
+		<camera x="0" y="0" />
 	</renderer>
 </save_state>
