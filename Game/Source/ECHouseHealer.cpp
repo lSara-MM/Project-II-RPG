@@ -70,8 +70,8 @@ bool HouseHealer::Update(float dt)
 
 	//Health Bar
 	int auxhp = ((currentHp * 100) / maxHp) * 0.90;
-	app->render->DrawRectangle({ 628 + 127 * positionCombat_I, 250, 90, 20 }, 1, 1, 1, 255, true);
-	app->render->DrawRectangle({ 628 + 127 * positionCombat_I, 250, auxhp, 20 }, 255, 0, 0, 255, true);
+	app->render->DrawRectangle({ 628 + 127 * positionCombat_I, 250, 90, 20 }, 255, 0, 255, 255, true);
+	app->render->DrawRectangle({ 628 + 127 * positionCombat_I, 250, auxhp, 20 }, 255, 255, 255, 255, true);
 
 	// Modify Health Bar
 	/*if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
