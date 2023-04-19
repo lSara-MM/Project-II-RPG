@@ -86,14 +86,14 @@ bool Combat::Start()
 	prota2->parameters = app->scene->sceneNode.child("protagonist");
 	prota2->Awake();
 
-	Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	/*Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
 	app->entityManager->AddEntity(prota3);
 	prota3->parameters = app->scene->sceneNode.child("protagonist");
 	prota3->Awake();
 	Entity* prota4 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
 	app->entityManager->AddEntity(prota4);
 	prota4->parameters = app->scene->sceneNode.child("protagonist");
-	prota4->Awake();
+	prota4->Awake();*/
 	
 	Entity* enemy1 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(enemy1);
