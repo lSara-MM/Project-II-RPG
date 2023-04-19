@@ -47,7 +47,7 @@ bool Circus::Awake(pugi::xml_node& config)
 bool Circus::Start()
 {
 	//Load Map
-	app->map->Load(0);
+	app->map->Load(1);
 
 	//pause menu
 	pause_B = false;

@@ -353,3 +353,17 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 
 	return true;
 }
+
+void OnCollision(PhysBody* physA, PhysBody* physB)
+{
+	switch (physB->id)
+	{
+	case 0:
+		app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
+		break;
+	case 1:
+		break;
+	case 2:
+		break;
+	}
+}

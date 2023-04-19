@@ -166,6 +166,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		}
 		npcInteract = true;
 		break;
+
 	default:
 		break;
 	}

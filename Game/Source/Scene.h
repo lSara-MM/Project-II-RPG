@@ -48,6 +48,9 @@ public:
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	//Collision
+	void OnCollision(PhysBody* physA, PhysBody* physB);
+
 public:
 
 	Player* player;

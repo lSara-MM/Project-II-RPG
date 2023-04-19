@@ -59,7 +59,7 @@
 	<npc name="ORACULO" dialogueID="2"
 		x="420" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
 		
-	<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
+	<npc name="MERCANTE" dialogueID="3"
 		x="900" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
 </scene>
 	<map>
