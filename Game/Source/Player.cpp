@@ -138,13 +138,13 @@ bool Player::Update(float dt)
 			npcTalkingTo->PerformDialogue();
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y > 0)
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y < 0)
 		{
 			keyLockUp = false;
 			currentAnimation = &idleUpAnim;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y < 0)
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y > 0)
 		{
 			keyLockDown = false;
 			currentAnimation = &idleDownAnim;
@@ -226,7 +226,7 @@ void Player::Controller(float dt)
 	{
 		if (!keyLockDown && !keyLockLeft && !keyLockRigth)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y > 0)
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
 			{
 				keyLockUp = true;
 				currentAnimation = &upAnim;
@@ -242,7 +242,7 @@ void Player::Controller(float dt)
 					vel.x = -125 * 3;
 				}
 			}
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y > 0)
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y < 0)
 			{
 				keyLockUp = false;
 				currentAnimation = &idleUpAnim;
@@ -250,7 +250,7 @@ void Player::Controller(float dt)
 		}
 		if (!keyLockUp && !keyLockLeft && !keyLockRigth)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y < 0)
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
 			{
 				keyLockDown = true;
 				currentAnimation = &downAnim;
@@ -266,7 +266,7 @@ void Player::Controller(float dt)
 					vel.x = -125 * 3;
 				}
 			}
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y < 0)
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y > 0)
 			{
 				keyLockDown = false;
 				currentAnimation = &idleDownAnim;
@@ -281,11 +281,11 @@ void Player::Controller(float dt)
 				currentAnim.speed = currentAnim.speed * 4;
 				vel.x = -125 * 3;
 
-				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y < 0)
+				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
 				{
 					vel.y = 125 * 3;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y > 0)
+				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
 				{
 					vel.y = -125 * 3;
 				}
@@ -305,11 +305,11 @@ void Player::Controller(float dt)
 				currentAnim.speed = currentAnim.speed * 4;
 				vel.x = 125 * 3;
 
-				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y < 0)
+				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
 				{
 					vel.y = 125 * 3;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y > 0)
+				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
 				{
 					vel.y = -125 * 3;
 				}
@@ -325,14 +325,14 @@ void Player::Controller(float dt)
 	{
 		if (!keyLockDown && !keyLockLeft && !keyLockRigth)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y > 0)
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
 			{
 				keyLockUp = true;
 				currentAnimation = &upAnim;
 				vel.y = -125;
 				vel.x = 0;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y > 0)
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y < 0)
 			{
 				keyLockUp = false;
 				currentAnimation = &idleUpAnim;
@@ -340,14 +340,14 @@ void Player::Controller(float dt)
 		}
 		if (!keyLockUp && !keyLockLeft && !keyLockRigth)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y < 0)
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
 			{
 				keyLockDown = true;
 				currentAnimation = &downAnim;
 				vel.y = 125;
 				vel.x = 0;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y < 0)
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y > 0)
 			{
 				keyLockDown = false;
 				currentAnimation = &idleDownAnim;
@@ -384,7 +384,7 @@ void Player::Controller(float dt)
 			}
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
+		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT || app->input->controller.B != 0) {
 			vel.x = vel.x * 2;
 			vel.y = vel.y * 2;
 			currentAnim.speed = currentAnim.speed * 3;
