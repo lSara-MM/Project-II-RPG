@@ -464,13 +464,13 @@ public:
 	{
 		SDL_Rect rect = { 0, 0, 90, 93 };
 
-		app->render->DrawRectangle({ 290, 203, 730, 463 }, 163, 163, 163, 200, true);
+		app->render->DrawRectangle({ 290 - app->render->camera.x, 203 - app->render->camera.y, 730, 463 }, 163, 163, 163, 200, true);
 		
-		app->render->DrawTexture(settingsTexture, 450, 100, &rect);
+		app->render->DrawTexture(settingsTexture, 450 - app->render->camera.x, 100 - app->render->camera.y, &rect);
 		rect = { 91, 0, 249, 93 };
-		app->render->DrawTexture(settingsTexture, 540, 100, &rect);
+		app->render->DrawTexture(settingsTexture, 540 - app->render->camera.x, 100 - app->render->camera.y, &rect);
 		rect = { 341, 0, 90, 93 };
-		app->render->DrawTexture(settingsTexture, 789, 100, &rect);
+		app->render->DrawTexture(settingsTexture, 789 - app->render->camera.x, 100 - app->render->camera.y, &rect);
 
 		app->render->DrawLine(490, 250, 490, 600, 0, 0, 0);
 		app->render->TextDraw("Settings", 600, 121, 40, Font::UI, { 255, 255, 255 });
@@ -593,7 +593,7 @@ public:
 	{
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
-		app->render->DrawRectangle({ 0, 0, app->win->GetWidth(), app->win->GetHeight()}, 255, 255, 255);
+		app->render->DrawRectangle({ 0 - app->render->camera.x, 0 - app->render->camera.y, app->win->GetWidth(), app->win->GetHeight()}, 232, 209, 146, 240);
 		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
 		app->render->TextDraw("Pause", 600, 121, 40, Font::UI);
 
