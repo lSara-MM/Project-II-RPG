@@ -36,6 +36,7 @@
 
 	<HouseOfTerrors musicD1="Assets/Audio/Music/Haunted_House.ogg"/>
 	<Circus musicCircus="Assets/Audio/Music/CircusTent_mus.ogg"/>
+	<practiceTent musTent="Assets/Audio/Music/sala_Entrenamiento.ogg"/>
 	
 	<scene music="Assets/Audio/Music/Lobby_Music.ogg" textureAttackPath="Assets/Textures/attack.png"
 	   background1 ="Assets/Maps/clouds_bg.png" background2 ="Assets/Maps/clouds_mg_1.png" background3 ="Assets/Maps/clouds_mg_2.png"

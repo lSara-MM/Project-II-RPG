@@ -58,6 +58,9 @@ public:
 
 private:
 
+	//Music path
+	const char* practisePath;
+
 	// Settings
 	Settings* pSettings;
 
