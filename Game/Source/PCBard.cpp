@@ -34,8 +34,18 @@ Bard::~Bard() {
 bool Bard::Awake() {
 
 	this->name = parameters.attribute("name").as_string();
+
+	if (!app->scene->isCharacterLoaded_B)
+	{
+		this->currentHp = app->scene->currentHP_Bard;
+		app->scene->isCharacterLoaded_B = true;
+	}
+	else
+	{
+		this->currentHp = parameters.attribute("currentHp").as_int();
+	}
+
 	this->maxHp = parameters.attribute("maxHp").as_int();
-	this->currentHp = parameters.attribute("currentHp").as_int();
 	this->attack = parameters.attribute("attack").as_int();
 	this->armor = parameters.attribute("armor").as_int();
 	this->speed = parameters.attribute("speed").as_int();
@@ -90,6 +100,15 @@ bool Bard::Update(float dt)
 	if (onTurn)
 	{
 		app->render->DrawCircle(544 - 128 * positionCombat_I + (126 / 2), 220, 20, 0, 255, 255);
+
+		app->combat->DisableTargetButton(0);
+		app->combat->DisableTargetButton(1);
+		app->combat->DisableTargetButton(2);
+		app->combat->DisableTargetButton(3);
+		app->combat->DisableTargetButton(4);
+		app->combat->DisableTargetButton(5);
+		app->combat->DisableTargetButton(6);
+		app->combat->DisableTargetButton(7);
 
 		if (app->combat->lastPressedAbility_I == 1)
 		{				
