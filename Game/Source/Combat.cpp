@@ -228,14 +228,14 @@ bool Combat::Update(float dt)
 	//Rectangulo donde va la Info abajo derecha {x,y,w,h} r, g, b, opacity(0 = 100% & 255 = 0%)
 	app->render->DrawRectangle({ 430, 470, 730, 220 }, 255, 255, 255, 250, true);
 
-	if(listInitiative.At(charaInTurn)->data->charaType_I==0)
+	//PROTEGER VS NULLPTR
+	/*if(listInitiative.At(charaInTurn)->data->charaType_I==0)
 	{
 		if(lastPressedAbility_I>0)
 		{
-			
 			app->render->TextDraw(listInitiative.At(charaInTurn)->data->skills_C[lastPressedAbility_I - 1].GetString(), 460, 500, 40);
 		}
-	}
+	}*/
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{

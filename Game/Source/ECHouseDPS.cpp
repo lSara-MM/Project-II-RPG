@@ -78,6 +78,17 @@ bool HouseDPS::Update(float dt)
 		currentHp--;
 	}*/
 
+	if (this->currentHp <= 0)
+	{
+		this->alive = false;
+	}
+	else { this->alive = true; }
+
+	if (this->alive == false)
+	{
+		app->combat->EliminateCombatant(this);
+	}
+
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
@@ -91,7 +102,7 @@ bool HouseDPS::Update(float dt)
 	
 	if (onTurn)
 	{
-		if (this->currentHp <= 0)
+		/*if (this->currentHp <= 0)
 		{
 			this->alive = false;
 		}
@@ -102,7 +113,7 @@ bool HouseDPS::Update(float dt)
 			app->combat->EliminateCombatant(this);
 		}
 
-		else
+		else*/
 		{
 			int randomNum = std::rand() % 3 + 1;
 
@@ -129,7 +140,7 @@ bool HouseDPS::Update(float dt)
 						app->combat->allies[1]->ModifyHP(-damage);
 					}
 				
-					app->combat->NextTurn();
+					
 				}
 				app->combat->NextTurn();
 			}

@@ -78,6 +78,17 @@ bool HouseTank::Update(float dt)
 		currentHp--;
 	}
 
+	if (this->currentHp <= 0)
+	{
+		this->alive = false;
+	}
+	else { this->alive = true; }
+
+	if (this->alive == false)
+	{
+		app->combat->EliminateCombatant(this);
+	}
+
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
@@ -88,7 +99,7 @@ bool HouseTank::Update(float dt)
 	
 	if (onTurn)
 	{
-		if (this->currentHp <= 0)
+		/*if (this->currentHp <= 0)
 		{
 			this->alive = false;
 		}
@@ -98,7 +109,7 @@ bool HouseTank::Update(float dt)
 			onTurn = false;
 		}
 
-		else
+		else*/
 		{
 			int randomNum = std::rand() % 3 + 1;
 
@@ -107,7 +118,7 @@ bool HouseTank::Update(float dt)
 			//Mejor con un switch
 			if (randomNum == 1)
 			{
-				if (!(app->combat->allies[0] == nullptr))
+				if (app->combat->allies[0] != nullptr)
 				{
 					float damage = app->combat->allies[0]->CalculateDamage(attack);
 					if (!app->input->godMode_B)//Hace da�o si no hay godmode
@@ -126,7 +137,7 @@ bool HouseTank::Update(float dt)
 					{
 						app->combat->allies[1]->ModifyHP(-damage);
 					}
-					app->combat->allies[1]->ModifyHP(-damage);
+					
 				}
 				app->combat->NextTurn();
 			}

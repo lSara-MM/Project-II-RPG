@@ -78,6 +78,17 @@ bool HouseHealer::Update(float dt)
 		currentHp--;
 	}*/
 
+	if (this->currentHp <= 0)
+	{
+		this->alive = false;
+	}
+	else { this->alive = true; }
+
+	if (this->alive == false)
+	{
+		app->combat->EliminateCombatant(this);
+	}
+
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
@@ -87,7 +98,7 @@ bool HouseHealer::Update(float dt)
 	app->render->DrawTexture(texture, 608 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
 	if (onTurn)
 	{
-		if (this->currentHp <= 0)
+		/*if (this->currentHp <= 0)
 		{
 			this->alive = false;
 		}
@@ -97,14 +108,14 @@ bool HouseHealer::Update(float dt)
 			onTurn = false;
 		}
 
-		else
+		else*/
 		{
 			int randomNum = std::rand() % 3 + 1;
 			//Esto mejor con un switch en vez de 3 IFs
 			if (randomNum == 1)
 
 			{
-				if (!(app->combat->allies[0] == nullptr))
+				if (app->combat->allies[0] != nullptr)
 				{
 					float damage = app->combat->allies[0]->CalculateDamage(attack);
 					if (!app->input->godMode_B)//Hace daño si no hay godmode

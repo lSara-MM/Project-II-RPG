@@ -96,6 +96,16 @@ bool Protagonist::Update(float dt)
 		ModifyHP(1);
 	}
 
+	if (this->currentHp <= 0)
+	{
+		this->alive = false;
+	}
+	else { this->alive = true; }
+
+	if (this->alive == false)
+	{
+		app->combat->EliminateCombatant(this);
+	}
 	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
@@ -118,17 +128,18 @@ bool Protagonist::Update(float dt)
 		app->combat->DisableTargetButton(6);
 		app->combat->DisableTargetButton(7);
 
-		if (this->currentHp <= 0)
+		/*if (this->currentHp <= 0)
 		{
 			this->alive = false;
 		}
+		else { this->alive = true; }
 
-		if (this->alive == false) {
-			app->combat->NextTurn();
-			onTurn = false;
+		if (this->alive == false)
+		{
+			app->combat->EliminateCombatant(this);
 		}
 
-		else
+		else*/
 		{
 			if (app->combat->lastPressedAbility_I == 1) //Only allows targeting 2 and 3
 			{

@@ -104,6 +104,17 @@ bool Bard::Update(float dt)
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
 	app->render->DrawTexture(texture, 544 - 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //Print bueno
 
+	if (this->currentHp <= 0)
+	{
+		this->alive = false;
+	}
+	else { this->alive = true; }
+
+	if (this->alive == false) 
+	{
+		app->combat->EliminateCombatant(this);
+	}
+
 	if (onTurn)
 	{
 		app->render->DrawCircle(544 - 128 * positionCombat_I + (126 / 2), 220, 20, 0, 255, 255);
@@ -117,7 +128,7 @@ bool Bard::Update(float dt)
 		app->combat->DisableTargetButton(6);
 		app->combat->DisableTargetButton(7);
 
-		if (this->currentHp <= 0)
+		/*if (this->currentHp <= 0)
 		{
 			this->alive = false;
 		}
@@ -127,7 +138,7 @@ bool Bard::Update(float dt)
 			onTurn = false;
 		}
 
-		else
+		else*/
 		{
 			if (app->combat->lastPressedAbility_I == 1) //Only allows targeting 2 and 3
 			{

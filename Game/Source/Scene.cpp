@@ -91,7 +91,7 @@ bool Scene::Update(float dt)
 	//ERIC: Prueba que no funciona.
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
 		app->fade->FadingToBlack(this, (Module*)app->combat, 30);
-		app->SaveGameRequest();//guardar para volver misma posicion al volver de combate
+		//app->SaveGameRequest();//guardar para volver misma posicion al volver de combate
 	}
 		
 

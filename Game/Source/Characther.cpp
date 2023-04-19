@@ -8,6 +8,7 @@
 #include "Window.h"
 
 #include "Scene.h"
+#include "Combat.h"
 
 #include "FadeToBlack.h"
 #include "EntityManager.h"
@@ -90,6 +91,7 @@ void Character::ModifyHP(int num)
 	{
 		this->currentHp = 0;
 
+		app->combat->EliminateCombatant(this);
 		//Muere? No muere? Hay que hablar si hay death door
 	}
 	else
