@@ -435,7 +435,7 @@ public:
 
 	Settings(Module* mod)
 	{
-		//settingsTexture = app->tex->Load(settingsPath);
+		settingsTexture = app->tex->Load(settingsPath);
 
 		// settings buttons
 		settings_B = false;
@@ -449,7 +449,7 @@ public:
 		// buttons
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 290, 300 + 75 * i, 136, 33 }, ButtonType::SETTINGS, buttons[i], 32);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 290, 300 + 75 * i, 136, 50 }, ButtonType::SETTINGS, buttons[i], 32);
 			button->state = GuiControlState::NONE;
 			listSettingsButtons.Add(button);
 		}
@@ -462,10 +462,10 @@ public:
 
 	bool OpenSettings()
 	{
-		SDL_Rect rect = { 0, 0, 226, 261 };
+		SDL_Rect rect = { 0, 0, 430, 93 };
 
 		app->render->DrawRectangle({ 290, 203, 730, 463 }, 163, 163, 163, 200, true);
-		//if (!app->render->DrawTexture(settingsTexture, 150, 70, &rect)) { app->render->TextDraw("Settings", 180, 100, 21, { 107, 0, 110}); }
+		app->render->DrawTexture(settingsTexture, 550, 100, &rect);
 
 		app->render->DrawLine(490, 250, 490, 600, 0, 0, 0);
 		app->render->TextDraw("Settings", 600, 121, 40, Font::UI, { 255, 255, 255 });
@@ -509,7 +509,7 @@ public:
 
 	bool CleanUp()
 	{
-		//app->tex->UnLoad(settingsTexture);
+		app->tex->UnLoad(settingsTexture);
 
 		listSettingsButtons.Clear();
 		settings_B = false;
@@ -543,7 +543,7 @@ public:
 	const char* buttons[5] = { "Game", "Controls", "Graphics", "Audio", "\n" };
 
 	SDL_Texture* settingsTexture;
-	const char* settingsPath;
+	const char* settingsPath = "Assets/GUI/UI_Marker_L.png";
 	bool settings_B;
 	bool open_settings_B;
 
@@ -568,10 +568,9 @@ public:
 		open_pause_B = false;
 
 		// close
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 20);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 1200, 57, 57, 57 }, ButtonType::SMALL, "x", 20);
 		button->state = GuiControlState::NONE;
 		listPauseButtons.Add(button);
-
 
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
@@ -591,7 +590,7 @@ public:
 
 		app->render->DrawRectangle({ 0, 0, app->win->GetWidth(), app->win->GetHeight()}, 255, 255, 255);
 		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
-		app->render->TextDraw("Pause", 210, 90, 40, Font::UI, { 107, 0, 110 });
+		app->render->TextDraw("Pause", 600, 121, 40, Font::UI);
 
 		if (!open_pause_B)
 		{

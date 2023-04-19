@@ -160,12 +160,6 @@ bool Scene::PostUpdate()
 		app->dialogueSystem->LoadDialogue("dialogues.xml", 0);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-	{
-		app->dialogueSystem->CleanUp();
-		app->dialogueSystem->LoadDialogue("dialogues.xml", 1);
-		app->dialogueSystem->LoadDialogueState();
-	}
 	app->render->TextDraw("F1: start dialogue 1", 50, 50, 16, Font::TEXT, { 255, 255, 255 });
 	app->render->TextDraw("F2: start dialogue 2", 50, 75, 16, Font::TEXT, { 255, 255, 255 });
 
@@ -184,8 +178,8 @@ bool Scene::PostUpdate()
 		}
 	}
 	
-	if (settings_B) { pSettings->OpenSettings(); }
 	if (pause_B) { pPause->OpenPause(); }
+	if (settings_B) { pSettings->OpenSettings(); }
 	app->guiManager->Draw();
 
 	return ret;
@@ -203,8 +197,15 @@ bool Scene::CleanUp()
 
 	app->entityManager->Disable();
 
-	pSettings->CleanUp();
-	//pPause->CleanUp();
+	if (pSettings != nullptr)
+	{
+		pSettings->CleanUp();
+	}
+	if (pPause != nullptr)
+	{
+		pPause->CleanUp();
+	}
+	
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 	app->tex->UnLoad(backGround);
@@ -362,8 +363,10 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		
 	case 704: 
 		LOG("Button Settings click");
-		//pause_B = false;
-		//pPause->CleanUp();
+		for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::DISABLED;
+		}
 
 		settings_B = true;
 		pSettings = new Settings(this);
@@ -378,8 +381,12 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		// Settings
 	case 801:
 		LOG("Button Close settings click");
+		for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NORMAL;
+		}
+
 		settings_B = false;
-		// algo per que quan es tanqui el settings, si el pause estava activat es vegi
 		pSettings->CloseSettings();
 		pSettings->CleanUp();
 		break;

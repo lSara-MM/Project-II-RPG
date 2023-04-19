@@ -67,7 +67,7 @@ bool IntroScene::Start()
 		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 1, this, { 25, 180 + 77 * i, 200, 70 }, ButtonType::START, buttons[i], 20));
 	}
 
-	listButtons.start->next->data->state = GuiControlState::DISABLED;
+	//listButtons.start->next->data->state = GuiControlState::DISABLED;
 
 	pSettings = new Settings(this);
 	listButtons.Add(pSettings->listSettingsButtons.start->data);
@@ -96,6 +96,10 @@ bool IntroScene::Update(float dt)
 	{
 		listButtons.start->next->data->state = GuiControlState::NORMAL;
 		LOG("Continue");
+	}
+	else
+	{
+		listButtons.start->next->data->state = GuiControlState::DISABLED;
 	}
 
 	return true;
@@ -185,11 +189,11 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 3:
 		LOG("Button settings click");
-		pSettings->settings_B = !pSettings->settings_B;
+		pSettings->settings_B = true;
 
-		if (!pSettings->settings_B)
+		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 		{
-			pSettings->CloseSettings();
+			i->data->state = GuiControlState::DISABLED;
 		}
 		break;
 	case 4:
@@ -200,6 +204,10 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		// Settings
 	case 801:
 		LOG("Button Close settings click");
+		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NORMAL;
+		}
 		pSettings->CloseSettings();
 		break;
 
