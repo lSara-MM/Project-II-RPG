@@ -128,6 +128,15 @@ bool Bard::Update(float dt)
 		app->combat->DisableTargetButton(6);
 		app->combat->DisableTargetButton(7);
 
+		if (app->combat->enemies[1] == nullptr && app->combat->enemies[2] == nullptr)
+		{
+			app->combat->DisableSkillButton(1);
+		}
+		if (app->combat->enemies[2] == nullptr && app->combat->enemies[3] == nullptr)
+		{
+			app->combat->DisableSkillButton(4);
+		}
+
 		/*if (this->currentHp <= 0)
 		{
 			this->alive = false;
