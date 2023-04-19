@@ -85,7 +85,6 @@ bool HouseHealer::Update(float dt)
 	rect = { 0,0,258,496 };
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
 	app->render->DrawTexture(texture, 608 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
-	
 	if (onTurn)
 	{
 		if (this->currentHp <= 0)
@@ -103,6 +102,7 @@ bool HouseHealer::Update(float dt)
 			int randomNum = std::rand() % 3 + 1;
 			//Esto mejor con un switch en vez de 3 IFs
 			if (randomNum == 1)
+
 			{
 				if (!(app->combat->allies[0] == nullptr))
 				{

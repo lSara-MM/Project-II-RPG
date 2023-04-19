@@ -134,11 +134,8 @@ bool HouseTank::Update(float dt)
 			{
 				if (!(app->combat->allies[0] == nullptr))
 				{
-					float damage = app->combat->allies[0]->CalculateDamage(attack * 0.25);
-					if (!app->input->godMode_B)
-					{
-						app->combat->allies[0]->ModifyHP(-damage);
-					}
+					float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
+					app->combat->allies[0]->ModifyHP(-damage);
 				}
 
 				if (!(app->combat->allies[1] == nullptr))
