@@ -229,13 +229,13 @@ bool Combat::Update(float dt)
 	app->render->DrawRectangle({ 430, 470, 730, 220 }, 255, 255, 255, 250, true);
 
 	//PROTEGER VS NULLPTR
-	/*if(listInitiative.At(charaInTurn)->data->charaType_I==0)
+	if(listInitiative.At(charaInTurn)->data->charaType_I==0)
 	{
 		if(lastPressedAbility_I>0)
 		{
 			app->render->TextDraw(listInitiative.At(charaInTurn)->data->skills_C[lastPressedAbility_I - 1].GetString(), 460, 500, 40);
 		}
-	}*/
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
