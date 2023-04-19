@@ -122,17 +122,17 @@ bool Player::Update(float dt)
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
 	//Sara aquí tienes tu parte, donde cuando el player está dentro de la zona interactuable con el npc
-	if (npcInteract) 
-	{
-		app->render->DrawRectangle({ npcTalkingTo->position.x, npcTalkingTo->position.y - 60, 24, 24 },
-			255, 255, 255, 200);
-		app->render->TextDraw("E", npcTalkingTo->position.x + npcTalkingTo->width / 2, npcTalkingTo->position.y - 57, 16, Font::TEXT);
+	//if (npcInteract) 
+	//{
+	//	app->render->DrawRectangle({ npcTalkingTo->position.x, npcTalkingTo->position.y - 60, 24, 24 },
+	//		255, 255, 255, 200);
+	//	app->render->TextDraw("E", npcTalkingTo->position.x + npcTalkingTo->width / 2, npcTalkingTo->position.y - 57, 16, Font::TEXT);
 
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
-		{
-			npcTalkingTo->PerformDialogue();
-		}
-	}
+	//	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
+	//	{
+	//		npcTalkingTo->PerformDialogue();
+	//	}
+	//}
 
 	return true;
 }

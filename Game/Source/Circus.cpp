@@ -154,21 +154,6 @@ bool Circus::PostUpdate()
 
 	if (exit_B) return false;
 
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-	{
-		app->dialogueSystem->CleanUp();
-		app->dialogueSystem->LoadDialogue("dialogues.xml", 0);
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-	{
-		app->dialogueSystem->CleanUp();
-		app->dialogueSystem->LoadDialogue("dialogues.xml", 1);
-		app->dialogueSystem->LoadDialogueState();
-	}
-	app->render->TextDraw("F1: start dialogue 1", 50, 50, 16, Font::TEXT, { 255, 255, 255 });
-	app->render->TextDraw("F2: start dialogue 2", 50, 75, 16, Font::TEXT, { 255, 255, 255 });
-
 	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 	{
 		pSettings->settings_B = !pSettings->settings_B;
