@@ -57,7 +57,7 @@
 		x="3710" y="985" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
 
 	<npc name="ORACULO" dialogueID="2"
-		x="2555" y="4358" width="135" height="113" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
+		x="2595" y="4438" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 		
 	<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
 		x="3600" y="2625" width="150" height="38" texturepath=""/>
