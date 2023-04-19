@@ -80,17 +80,17 @@ bool Player::Awake() {
 	return true;
 }
 
-bool Player::Start() {
-
+bool Player::Start() 
+{
 	texture = app->tex->Load(texturePath);
 	currentAnimation = &currentAnim;
-	
+
 	pbody = app->physics->CreateRectangle(position.x - width / 2, position.y - height / 2, width + 5, height + 5, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
-	
-	pbody->listener = this; 
+
+	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
-	
+
 	playerName = app->input->playerName.c_str();
 	npcInteract = false;
 
@@ -99,6 +99,8 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+	if (pbody != nullptr) 
+	{
 	app->render->camera.y = -position.y + 360 - height;
 	app->render->camera.x = -position.x + 640 - width;
 
@@ -173,13 +175,17 @@ bool Player::Update(float dt)
 		Controller(dtP);
 	}
 
+   }
 	return true;
 }
 
 bool Player::CleanUp()
 {
-	app->tex->UnLoad(texture);
-	pbody->body->GetWorld()->DestroyBody(pbody->body);
+	if (pbody != nullptr)
+	{
+		app->tex->UnLoad(texture);
+		pbody->body->GetWorld()->DestroyBody(pbody->body);
+	}
 	
 	return true;
 }

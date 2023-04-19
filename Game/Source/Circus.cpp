@@ -271,6 +271,7 @@ bool Circus::InitEntities()
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = sceneNode.child("player");
 	player->Awake();
+	player->Start();
 
 	return true;
 }

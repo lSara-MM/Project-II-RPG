@@ -189,7 +189,7 @@ bool Scene::CleanUp()
 
 	//player->Disable();
 
-	app->entityManager->Disable();
+	app->entityManager->CleanUp();
 
 	pSettings->CleanUp();
 	//pPause->CleanUp();
