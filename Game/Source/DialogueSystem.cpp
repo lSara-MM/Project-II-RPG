@@ -64,7 +64,8 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 	} 
 	else
 	{
-		activeTree->activeNode = activeTree->nodeList.at(activeTree->nodeList.size() - 1);
+		activeTree->activeNode = nullptr;
+		CleanUp();
 	}
 	
 	app->guiManager->CleanUp();
@@ -91,8 +92,9 @@ bool DialogueSystem::CleanUp()
 }
 
 
-int DialogueSystem::LoadDialogue(const char* file, int dialogueID)
+int DialogueSystem::LoadDialogue(int dialogueID)
 {
+	const char* file = "dialogues.xml";
 	pugi::xml_parse_result result = dialogues.load_file(file);
 
 	DialogueTree* tree = new DialogueTree(false);
@@ -122,6 +124,7 @@ int DialogueSystem::LoadDialogue(const char* file, int dialogueID)
 			 }
 		}
 	}
+
 	return dialogueID;
 }
 
@@ -134,6 +137,7 @@ DialogueNode* DialogueSystem::LoadNodes(pugi::xml_node& xml_trees, DialogueTree*
 		DialogueNode* node = new DialogueNode;
 
 		node->nodeID = pugiNode.attribute("id").as_int();
+		node->name = pugiNode.attribute("name").as_string();
 		node->text = pugiNode.attribute("text").as_string();
 
 		LoadChoices(pugiNode, node);

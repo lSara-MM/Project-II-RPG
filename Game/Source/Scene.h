@@ -5,6 +5,7 @@
 
 #include "Module.h"
 #include "Player.h"
+#include "NPC.h"
 
 #include "GuiButton.h"
 #include "GuiCheckBox.h"
@@ -50,6 +51,10 @@ public:
 public:
 
 	Player* player;
+	List <Npc*> listNpc;
+
+	int npcSetID;
+
 	bool frcap_B = true;
 	bool pause_B;
 	bool mute_B = true;
@@ -65,9 +70,6 @@ private:
 
 	bool exit_B;
 
-	//Map render image
-
-	SDL_Texture* backGround;
 };
 
 #endif // __SCENE_H__
