@@ -135,7 +135,11 @@ bool Combat::Update(float dt)
 	Debug();
 
 	app->render->DrawTexture(textureBackground, 0, 0);
-	app->render->TextDraw(listInitiative.At(charaInTurn)->data->name.GetString(), 560, 20,20);
+	if (true)
+	{
+		app->render->TextDraw(listInitiative.At(charaInTurn)->data->name.GetString(), 560, 20,20);
+	}
+	
 
 	//Si algo esta vacio desactivarlo
 	for (int i = 0; i <= 3; i++)
@@ -156,6 +160,21 @@ bool Combat::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
 		MoveAllies(1, 2);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	{
+		MoveEnemies(3, 1);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
+	{
+		EliminateCombatant(allies[0]);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+	{
+		EliminateCombatant(enemies[0]);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
@@ -230,12 +249,12 @@ bool Combat::CleanUp()
 		enemies[i] = nullptr;
 	}
 
-	//app->entityManager->Disable();
+
 	
 
 	listInitiative.Clear();
 	
-	
+	app->entityManager->Disable();
 	
 
 	return true;
@@ -422,29 +441,34 @@ bool Combat::OrderBySpeed()
 	return true;
 }
 
-bool Combat::EliminateCombatant(Character* chara, int modifier)
+bool Combat::EliminateCombatant(Character* chara)
 {
 	//Mover chara al fondo antes de matarlo para ordenar los arrays
 	switch (chara->charaType_I)
 	{
 	case chara->CharacterType::ALLY:
-		for (int i = 3; i > 0; i--)
+		for (int i = 3; i >= 0; i--)
 		{
 			if (allies[i] != nullptr)
 			{
-				MoveAllies(chara->positionCombat_I, i);
+				MoveAllies(chara->positionCombat_I, i+1);
+				delete allies[i];
+				allies[i]=nullptr;
+				break;
 			}
 		}
 		
-		listInitiative.Del(listInitiative.At(listInitiative.Find(chara)));
+		
 		break;
 
 	case chara->CharacterType::ENEMY:
-		for (int i = 3; i > 0; i--)
+		for (int i = 3; i >= 0; i--)
 		{
 			if (enemies[i] != nullptr)
 			{
-				MoveEnemies(chara->positionCombat_I, i);
+				MoveEnemies(chara->positionCombat_I, i+1);
+				enemies[i] = nullptr;
+				break;
 			}
 		}
 		break;

@@ -48,7 +48,7 @@ public:
 	bool AddCombatant(Character* chara, int modifier); //Eric:A�adir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
 	bool OrderBySpeed();
 	//Es muy importante que antes de 
-	bool EliminateCombatant(Character* chara, int modifier); 
+	bool EliminateCombatant(Character* chara); 
 	
 	bool StartCombat();
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
@@ -73,7 +73,7 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 public:
-	Player* player;
+	//Player* player;
 	bool frcap;
 
 	//Turn Order
