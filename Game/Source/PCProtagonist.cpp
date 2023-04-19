@@ -97,17 +97,19 @@ bool Protagonist::Update(float dt)
 	{
 		app->render->DrawCircle(544 - 128 * positionCombat_I + (126 / 2), 220, 20, 0, 255, 255);
 
+		app->combat->DisableTargetButton(0);
+		app->combat->DisableTargetButton(1);
+		app->combat->DisableTargetButton(2);
+		app->combat->DisableTargetButton(3);
+		app->combat->DisableTargetButton(4);
+		app->combat->DisableTargetButton(5);
+		app->combat->DisableTargetButton(6);
+		app->combat->DisableTargetButton(7);
+
 		if (app->combat->lastPressedAbility_I == 1) //Only allows targeting 2 and 3
 		{
-
-			for (short i = 0; i <= 3; i++)
-			{
-				app->combat->DisableTargetButton(i);
-			}
-
-			app->combat->DisableTargetButton(4);
-			app->combat->DisableTargetButton(7);
-			
+			app->combat->EnableTargetButton(5);
+			app->combat->EnableTargetButton(6);
 			//Si no hay godmode va normal, si lo hay la vida del enemigo se reduce a 0
 
 			if (app->combat->targeted_Character != nullptr)
@@ -130,6 +132,9 @@ bool Protagonist::Update(float dt)
 		}
 		if (app->combat->lastPressedAbility_I == 2)
 		{
+			app->combat->EnableTargetButton(5);
+			app->combat->EnableTargetButton(4);
+
 			if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1]) 
 			{
 				float damage = app->combat->targeted_Character->CalculateDamage(attack);
@@ -142,9 +147,13 @@ bool Protagonist::Update(float dt)
 		if (app->combat->lastPressedAbility_I == 3)
 		{
 
+			app->combat->EnableTargetButton(5);
+			app->combat->EnableTargetButton(4);
+
 			if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1]) {
-				float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.55);
+				float damage = app->combat->enemies[0]->CalculateDamage(attack * 0.65);
 				app->combat->enemies[0]->ModifyHP(-damage);
+				damage = app->combat->enemies[1]->CalculateDamage(attack * 0.30);
 				app->combat->enemies[1]->ModifyHP(-damage);
 				app->combat->NextTurn();
 				onTurn = false;
@@ -154,9 +163,13 @@ bool Protagonist::Update(float dt)
 		if (app->combat->lastPressedAbility_I == 4)
 		{
 
+			app->combat->EnableTargetButton(6);
+			app->combat->EnableTargetButton(7);
+
 			if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3]) {
-				float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.55);
+				float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.65);
 				app->combat->enemies[2]->ModifyHP(-damage);
+				damage = app->combat->enemies[3]->CalculateDamage(attack * 0.30);
 				app->combat->enemies[3]->ModifyHP(-damage);
 				app->combat->NextTurn();
 				onTurn = false;

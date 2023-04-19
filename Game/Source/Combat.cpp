@@ -121,6 +121,7 @@ bool Combat::Start()
 	/*app->combat->AddCombatant((Character*)prota3, 5);
 	app->combat->AddCombatant((Character*)prota4, 9);*/
 	
+	StartCombat();
 
 	return true;
 }
