@@ -61,10 +61,6 @@ bool Scene::Start()
 	//pPause->GUI_id = pSettings->GUI_id;
 	//pPause->CreatePause(this);
 
-	//Camera pos temporal Sara no convulsiones
-	app->render->camera.x = -2800;
-	app->render->camera.y = -800;
-	
 	InitEntities();
 	app->entityManager->Enable();
 
@@ -286,6 +282,21 @@ bool Scene::InitEntities()
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = sceneNode.child("player");
 	player->Awake();
+	switch (app->entityManager->tpID)
+	{
+	case 0:
+		player->position.x = 2365;
+		player->position.y = 4429;
+		break;
+	case 1:
+		player->position.x = 4277;
+		player->position.y = 3869;
+		break;
+	case 21:
+		player->position.x = 3437;
+		player->position.y = 1085;
+		break;
+	}
 
 	for (pugi::xml_node itemNode = sceneNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
 	{

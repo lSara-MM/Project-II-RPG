@@ -223,14 +223,17 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			}
 			if (app->hTerrors->active == true)
 			{
+				app->entityManager->tpID = 0;
 				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
 			}
 			if (app->practiceTent->active == true)
 			{
+				app->entityManager->tpID = 1;
 				app->fade->FadingToBlack((Module*)app->practiceTent, (Module*)app->scene, 90);
 			}
 			if (app->circus->active == true)
 			{
+				app->entityManager->tpID = 21;
 				app->fade->FadingToBlack((Module*)app->circus, (Module*)app->scene, 90);
 			}
 			break;

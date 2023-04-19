@@ -1,4 +1,5 @@
 #include "Circus.h"
+#include "Scene.h"
 
 #include "App.h"
 #include "Audio.h"
@@ -39,8 +40,6 @@ bool Circus::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	sceneNode = config;
-
 	return ret;
 }
 
@@ -59,9 +58,6 @@ bool Circus::Start()
 	//pPause->GUI_id = pSettings->GUI_id;
 	//pPause->CreatePause(this);
 
-	//Camera pos temporal Sara no convulsiones
-	app->render->camera.y = -700;
-	
 	InitEntities();
 
 	return true;
@@ -269,8 +265,10 @@ void Circus::Debug()
 bool Circus::InitEntities()
 {
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	player->parameters = sceneNode.child("player");
+	player->parameters = app->scene->sceneNode.child("player");
 	player->Awake();
+	player->position.x = 653;
+	player->position.y = 1265;
 	player->Start();
 
 	return true;

@@ -1,4 +1,5 @@
 #include "PracticeTent.h"
+#include "Scene.h"
 
 #include "App.h"
 #include "Audio.h"
@@ -58,9 +59,6 @@ bool PracticeTent::Start()
 	// Pause 
 	//pPause->GUI_id = pSettings->GUI_id;
 	//pPause->CreatePause(this);
-
-	//Camera pos temporal Sara no convulsiones
-	app->render->camera.y = 50;
 	
 	InitEntities();
 	app->entityManager->Enable();
@@ -269,6 +267,12 @@ void PracticeTent::Debug()
 
 bool PracticeTent::InitEntities()
 {
+	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+	player->parameters = app->scene->sceneNode.child("player");
+	player->Awake();
+	player->position.x = 105;
+	player->position.y = 341;
+	player->Start();
 
 	return true;
 }

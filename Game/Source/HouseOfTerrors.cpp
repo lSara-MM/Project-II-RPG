@@ -1,4 +1,5 @@
 #include "HouseOfTerrors.h"
+#include "Scene.h"
 
 #include "App.h"
 #include "Audio.h"
@@ -58,10 +59,6 @@ bool HouseOfTerrors::Start()
 	// Pause 
 	//pPause->GUI_id = pSettings->GUI_id;
 	//pPause->CreatePause(this);
-
-	//Camera pos temporal Sara no convulsiones
-	app->render->camera.x = -1390;
-	app->render->camera.y = -900;
 	
 	InitEntities();
 	app->entityManager->Enable();
@@ -270,6 +267,12 @@ void HouseOfTerrors::Debug()
 
 bool HouseOfTerrors::InitEntities()
 {
+	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+	player->parameters = app->scene->sceneNode.child("player");
+	player->Awake();
+	player->position.x = 1817;
+	player->position.y = 1250;
+	player->Start();
 
 	return true;
 }
