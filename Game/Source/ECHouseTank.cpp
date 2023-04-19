@@ -88,68 +88,8 @@ bool HouseTank::Update(float dt)
 	
 	if (onTurn)
 	{
-		if (this->currentHp <= 0)
-		{
-			this->alive = false;
-		}
-
-		if (this->alive == false) {
-			app->combat->NextTurn();
-			onTurn = false;
-		}
-
-		else
-		{
-			int randomNum = std::rand() % 3 + 1;
-
-			Timer(4);
-
-			//Mejor con un switch
-			if (randomNum == 1 /*&& aliado en pos alive == true*/)
-			{
-				if (!(app->combat->allies[0] == nullptr))
-				{
-					float damage = app->combat->allies[0]->CalculateDamage(attack);
-					if (!app->input->godMode_B)//Hace daño si no hay godmode
-					{
-						app->combat->allies[0]->ModifyHP(-damage);
-					}
-				}
-
-
-				app->combat->NextTurn();
-			}
-			if (randomNum == 2)
-			{
-				if (!(app->combat->allies[1] == nullptr))
-				{
-					float damage = app->combat->allies[1]->CalculateDamage(attack);
-					app->combat->allies[1]->ModifyHP(-damage);
-					app->combat->NextTurn();
-				}
-
-			}
-			if (randomNum == 3)
-			{
-				if (!(app->combat->allies[0] == nullptr))
-				{
-					float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
-					app->combat->allies[0]->ModifyHP(-damage);
-				}
-
-				if (!(app->combat->allies[1] == nullptr))
-				{
-					float damage = app->combat->allies[1]->CalculateDamage(attack * 0.5);
-					app->combat->allies[1]->ModifyHP(-damage);
-				}
-				app->combat->NextTurn();
-			}
-			//render barra de habilidades
-			// Para seleccionar app->input->GetMousePosition o 
-			//app->combat->NextTurn();
-
-			onTurn = false;
-		}
+		app->combat->NextTurn();
+		onTurn = false;
 	}
 
 	return true;

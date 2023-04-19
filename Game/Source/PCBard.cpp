@@ -155,11 +155,11 @@ bool Bard::Update(float dt)
 			}
 			if (app->combat->lastPressedAbility_I == 2)
 			{
-				if (app->combat->enemies[2] != nullptr && app->combat->enemies[2]->alive == true)
+				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive)
 				{
 					app->combat->EnableTargetButton(5);
 				}
-				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
+				if (app->combat->enemies[0] != nullptr && app->combat->enemies[0]->alive)
 				{
 					app->combat->EnableTargetButton(4);
 				}
@@ -176,11 +176,11 @@ bool Bard::Update(float dt)
 			if (app->combat->lastPressedAbility_I == 3)
 			{
 
-				if (app->combat->enemies[2] != nullptr && app->combat->enemies[2]->alive == true)
+				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
 				{
 					app->combat->EnableTargetButton(5);
 				}
-				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
+				if (app->combat->enemies[0] != nullptr && app->combat->enemies[0]->alive == true)
 				{
 					app->combat->EnableTargetButton(4);
 				}
