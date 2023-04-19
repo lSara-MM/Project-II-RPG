@@ -140,10 +140,37 @@ bool Combat::Update(float dt)
 {
 	Debug();
 
+	//Printar barra de Turnos Cutre momentaria
 	app->render->DrawTexture(textureBackground, 0, 0);
 	if (true)
 	{
-		app->render->TextDraw(listInitiative.At(charaInTurn)->data->name.GetString(), 560, 20,20);
+		for (int i = 0; i < listInitiative.Count(); i++)
+		{
+			int c = charaInTurn+i;
+
+			//Reiniciar la lista
+			if (c >= listInitiative.Count())
+			{
+				c -= listInitiative.Count();
+			}
+
+			SDL_Rect rect = { 10 + 140 * i,20,130,40 };
+			switch (listInitiative.At(c)->data->charaType_I)
+			{
+			case 0: //Aliado
+				app->render->DrawRectangle(rect, 0, 230, 0, 220);
+				
+				break;
+			case 1: //Enemigo
+				app->render->DrawRectangle(rect, 230, 0, 0, 220);
+				break;
+			default:
+				break;
+			}
+			app->render->TextDraw(listInitiative.At(c)->data->name.GetString(), 15 + 140 * i, 25, 12);
+			
+			
+		}
 	}
 	
 
@@ -230,7 +257,7 @@ bool Combat::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	
+	listButtons.Clear();
 
 	//pSettings->CleanUp();
 	
@@ -261,6 +288,8 @@ bool Combat::CleanUp()
 	listInitiative.Clear();
 	
 	app->entityManager->Disable();
+
+
 	
 
 	return true;

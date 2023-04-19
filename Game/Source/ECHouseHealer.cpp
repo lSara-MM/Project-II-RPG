@@ -87,7 +87,6 @@ bool HouseHealer::Update(float dt)
 
 	if (onTurn)
 	{
-		SDL_Delay(2000);
 
 		int randomNum = std::rand() % 3 + 1;
 		//Esto mejor con un switch en vez de 3 IFs

@@ -87,7 +87,6 @@ bool HouseTank::Update(float dt)
 
 	if (onTurn)
 	{
-		SDL_Delay(2000);
 
 		int randomNum = std::rand() % 3 + 1;
 		//Mejor con un switch

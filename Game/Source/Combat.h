@@ -78,7 +78,7 @@ public:
 
 	//Turn Order
 	List<Character*> listInitiative;
-	int charaInTurn=1;
+	int charaInTurn=0; //Empieza en 0, max 7
 
 	Character* allies[4]; //3 es backline, 0 es frontline
 	Character* enemies[4]; //3 es backline, 0 es frontline
