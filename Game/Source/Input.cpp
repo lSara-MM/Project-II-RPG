@@ -2,8 +2,12 @@
 #include "Input.h"
 #include "Window.h"
 
+#include "DialogueSystem.h"
+
 #include "Defs.h"
 #include "Log.h"
+
+#include "SDL/include/SDL.h"
 
 #define MAX_KEYS 300
 
@@ -41,6 +45,9 @@ bool Input::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Input::Start()
 {
+	//Enable Unicode
+	//SDL_EnableUNICODE(SDL_ENABLE);
+
 	SDL_StopTextInput();
 	return true;
 }
@@ -107,6 +114,10 @@ bool Input::PreUpdate()
 				}
 			break;
 
+			case SDL_KEYDOWN:
+				if (getInput_B) { HandleInput(event); }
+				break;
+
 			case SDL_MOUSEBUTTONDOWN:
 				mouseButtons[event.button.button - 1] = KEY_DOWN;
 				//LOG("Mouse button %d down", event.button.button-1);
@@ -136,6 +147,9 @@ bool Input::CleanUp()
 {
 	LOG("Quitting SDL event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
+
+	//Disable Unicode
+	//SDL_EnableUNICODE(SDL_DISABLE);
 	return true;
 }
 
@@ -157,14 +171,39 @@ void Input::GetMouseMotion(int& x, int& y)
 	y = mouseMotionY;
 }
 
-// to test
-void Input::RemapKeys(KeyBinding* key)
-{
-	static SDL_Event event;
 
-	if (SDL_PollEvent(&event) != 0)
+void Input::HandleInput(SDL_Event event)
+{
+	// Keep a copy of the current version of the string
+	string temp = playerName;
+
+	// If the string less than maximum size
+	if (playerName.length() <= NAME_MAX_CHARS)
 	{
-		key->key_num = event.key.keysym.sym;
-		//key->key = event.key.keysym.sym;
+		//Append the character
+		playerName += (char)event.key.keysym.sym;
+	}
+
+	// If backspace was pressed and the string isn't blank
+	if ((event.key.keysym.sym == SDLK_BACKSPACE) && !playerName.empty())
+	{
+		// Remove a character from the end
+		playerName.erase(playerName.length() - 1);
+		playerName.erase(playerName.length() - 1);
+	}
+
+	if ((event.key.keysym.sym == SDLK_RETURN) && !playerName.empty())
+	{
+		playerName.erase(playerName.length() - 1);
+		app->dialogueSystem->SaveDialogueState();		
+		nameEntered_B = true;
+		getInput_B = false;
+	}
+
+	// Ignore shift
+	if (event.key.keysym.sym == SDLK_LSHIFT || event.key.keysym.sym == SDLK_RSHIFT)
+	{
+		// Append the character
+		playerName.erase(playerName.length() - 1);
 	}
 }

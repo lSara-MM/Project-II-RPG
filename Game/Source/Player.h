@@ -9,6 +9,7 @@
 #include "Physics.h"
 
 #include "Animation.h"
+#include "SString.h"
 
 struct SDL_Texture;
 
@@ -33,17 +34,30 @@ public:
 	void Controller(float dt);
 
 public:
+	SString playerName;
+
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
 
 	// A set of animations
-	Animation idleAnim;
-	Animation forwardAnim;
-	Animation jumpAnim;
+	Animation currentAnim;
+	Animation downAnim;
+	Animation idleDownAnim;
+	Animation upAnim;
+	Animation idleUpAnim;
+	Animation leftAnim;
+	Animation idleLeftAnim;
+	Animation rigthAnim;
+	Animation idleRigthAnim;
 	Animation hurtAnim;
 	Animation deathAnim;
 	Animation attackAnim;
+
+	bool keyLockUp = false;
+	bool keyLockDown = false;
+	bool keyLockLeft = false;
+	bool keyLockRigth = false;
 
 	float dtP;
 	float grav;
@@ -52,12 +66,14 @@ public:
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
 
+	iPoint  position;
+
 private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
 
-	iPoint  position;
+	
 	int width, height;
 };
 

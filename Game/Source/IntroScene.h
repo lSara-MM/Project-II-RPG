@@ -42,19 +42,27 @@ public:
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	//Load / Save methods
+	bool LoadState(pugi::xml_node&);
+	bool SaveState(pugi::xml_node&);
+	// Player's name input
+	bool PlayerNameInput();
+
 public:
 
-private:
+	pugi::xml_node IntroSaveNode;
+	pugi::xml_node IntroLoadNode;
 
+	bool previousGame_B = false;
+
+private:
 	const char* music_intro;
 
 	// buttons
 	List<GuiButton*> listButtons;
-	const char* buttons[6] = { "Play", "Continue", "Settings", "Credits", "Exit", "\n" };
-	int bNum;
+	const char* buttons[6] = { "Play", "Continue", "Settings", "Exit", "\n" };
 	
-	Settings options;
-	Settings* pSettings = &options;
+	Settings* pSettings;
 
 	bool exit_B;
 };

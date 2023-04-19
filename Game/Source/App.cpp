@@ -12,10 +12,11 @@
 #include "LogoScene.h"
 #include "LoseScene.h"
 #include "Scene.h"
-#include "Combat.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
+#include "Combat.h"
+#include "DialogueSystem.h"
 #include "GuiManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
@@ -44,6 +45,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	pathfinding = new PathFinding();
 
 	entityManager = new EntityManager();
+	combat = new Combat();
+	dialogueSystem = new DialogueSystem();
 	guiManager = new GuiManager();
 	
 	lScene = new LogoScene();
@@ -54,7 +57,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	circus = new Circus();
 	loseScene = new LoseScene();
 	fade = new FadeToBlack();
-	combat = new Combat();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -73,11 +75,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(hTerrors);
 	AddModule(practiceTent);
 	AddModule(loseScene);
-	AddModule(combat);
 
 	AddModule(map);
 	AddModule(entityManager);
+	AddModule(combat);
+	AddModule(dialogueSystem);
 	AddModule(guiManager);
+
 
 	AddModule(fade);
 
@@ -255,20 +259,29 @@ void App::FinishUpdate()
 	}
 
 	//window info
-	static char title[256];
-
-	if (app->render->flags == SDL_RENDERER_ACCELERATED)
+	
+	if (app->input->godMode_B)
 	{
-		sprintf_s(title, 256, "Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u Vsync: On",
-			averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
+		static char title[256];
+		if (app->render->flags == SDL_RENDERER_ACCELERATED)
+		{
+			sprintf_s(title, 256, "GodMode: ON Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u Vsync: On",
+				averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
+		}
+		else
+		{
+			sprintf_s(title, 256, "Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u Vsync: Off",
+				averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
+		}
+
+		app->win->SetTitle(title);
 	}
 	else
 	{
-		sprintf_s(title, 256, "Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u Vsync: Off",
-			averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
+		SString title("Twisted Tent");
+		app->win->SetTitle(title.GetString());
 	}
 
-	app->win->SetTitle(title);
 }
 
 // Call modules before each loop iteration
@@ -459,4 +472,5 @@ void App::DisableAtStart()
 	scene->active = false;
 	loseScene->active = false;
 	entityManager->active = false;
+	combat->active = false;
 }

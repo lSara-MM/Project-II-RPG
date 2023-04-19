@@ -1,9 +1,9 @@
-#ifndef __PCPROTAGONIST_H__
-#define __PCPROTAGONIST_H__
+#ifndef __ECHOUSEDPS_H__
+#define __ECHOUSEDPS_H_
 
 #include "Entity.h"
 #include "Characther.h"
-#include "PartyMember.h"
+#include "CombatEnemy.h"
 
 #include "Point.h"
 #include "SDL/include/SDL.h"
@@ -13,13 +13,13 @@
 
 struct SDL_Texture;
 
-class Protagonist : public PartyMember 
+class HouseDPS : public CombatEnemy
 {
 public:
 
-	Protagonist();
+	HouseDPS();
 
-	virtual ~Protagonist();
+	virtual ~HouseDPS();
 
 	bool Awake();
 
@@ -29,7 +29,7 @@ public:
 
 	bool CleanUp();
 
-	
+
 
 public:
 	// The pointer to the current player animation
@@ -49,9 +49,9 @@ public:
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
 
-	
 
-	
+
+
 
 private:
 
@@ -60,8 +60,6 @@ private:
 
 	iPoint  position;
 	int width, height;
-	int auxtres;
-
 };
 
-#endif // __PCPROTAGONIST_H__
+#endif // __PCHOUSEDPS_H__

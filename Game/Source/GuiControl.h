@@ -56,6 +56,9 @@ enum class ButtonType
 	INV_NEXT_PAGE,
 	INV_PAGES,
 	SWAP_SKILL,
+
+	//For combat
+	COMBAT_TARGET,
 };
 
 

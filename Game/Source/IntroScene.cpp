@@ -15,6 +15,10 @@
 #include "Defs.h"
 #include "Log.h"
 
+#include <iostream>
+using namespace std;
+#include <sstream>
+
 IntroScene::IntroScene() : Module()
 {
 	name.Create("introScene");
@@ -33,28 +37,39 @@ bool IntroScene::Awake(pugi::xml_node& config)
 	// Check https://pugixml.org/docs/quickstart.html#access
 	music_intro = config.attribute("audioIntroPath").as_string();
 
+
+	//Save boton continue
+	pugi::xml_document gameStateFile;
+	pugi::xml_parse_result result = gameStateFile.load_file("save_game.xml");
+
+	IntroLoadNode = gameStateFile.child("save_state").child("introScene");
+
+	LoadState(IntroLoadNode);
+
+
+	pugi::xml_document* saveDoc = new pugi::xml_document();
+	pugi::xml_node saveStateNode = saveDoc->append_child("save_state");
+
+	IntroSaveNode = saveStateNode.append_child("introScene");
+
 	return ret;
 }
 
 // Called before the first frame
 bool IntroScene::Start()
 {
-	SString title("Pinky Adventures: width- %d, height- %d", app->win->GetWidth(), app->win->GetHeight());
-
-	app->win->SetTitle(title.GetString());
 
 	app->audio->PlayMusic(music_intro, 0);
 
 	// buttons
 	for (int i = 0; buttons[i] != "\n"; i++)
 	{
-		bNum = i + 6;
-		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, bNum, this, { 25, 180 + 77 * i, 136, 33 }, ButtonType::START, buttons[i], 20));
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 1, this, { 25, 180 + 77 * i, 136, 33 }, ButtonType::START, buttons[i], 20));
 	}
 
 	listButtons.start->next->data->state = GuiControlState::DISABLED;
 
-	pSettings->CreateSettings(this);
+	pSettings = new Settings(this);
 	listButtons.Add(pSettings->listSettingsButtons.start->data);
 
 	exit_B = false;
@@ -77,6 +92,11 @@ bool IntroScene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
 
+	if (previousGame_B)
+	{
+		LOG("Continue");
+	}
+
 	return true;
 }
 
@@ -86,6 +106,8 @@ bool IntroScene::PostUpdate()
 	bool ret = true;
 
 	if (exit_B) return false;
+	if (app->input->getInput_B) PlayerNameInput();
+	if (app->input->nameEntered_B) { app->fade->FadingToBlack(this, (Module*)app->scene, 90); }
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -106,11 +128,31 @@ bool IntroScene::CleanUp()
 	LOG("Freeing IntroScene");
 	
 	listButtons.Clear();
+
 	pSettings->CleanUp();
+
+	delete pSettings;
+	pSettings = nullptr;
 
 	app->guiManager->CleanUp();
 	return true;
 }
+
+bool IntroScene::LoadState(pugi::xml_node& data)
+{
+	previousGame_B = data.child("previousGame").attribute("state_B").as_bool();
+
+	return true;
+}
+
+bool IntroScene::SaveState(pugi::xml_node& data)
+{
+	pugi::xml_node previousGame = data.append_child("previousGame");
+	previousGame.append_attribute("state_B") = true;
+
+	return true;
+}
+
 
 bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 {
@@ -121,37 +163,26 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	switch (control->id)
 	{
 	case 1:
-		LOG("Button Close settings click");
-		pSettings->CloseSettings();
-		break;
-	case 6:
 		LOG("Button start click");
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+		app->input->getInput_B = true;
+		
 		break;
-	case 7:
+	case 2:
 		LOG("Button continue click");
 		break;
-	case 8:
+	case 3:
 		LOG("Button settings click");
 		pSettings->settings_B = !pSettings->settings_B;
+
 		if (!pSettings->settings_B)
 		{
 			pSettings->CloseSettings();
 		}
 		break;
-	case 9:
-		LOG("Button Credits click");
-		break;
-
-	case 10:
+	case 4:
 		LOG("Button Exit game click");
 		exit_B = true;
 		break;
-
-	case 11:
-		LOG("Button Close credits");
-		break;
-
 
 		// Settings
 	case 801:
@@ -163,18 +194,18 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Game settings click");
 		pSettings->pGame->game_B = true;
 
-		pSettings->pControl->CloseControlSettings();
+		//pSettings->pControl->CloseControlSettings();
 		pSettings->pGraphics->CloseGraphics();
 		pSettings->pAudio->CloseAudioSettings();
 		break;
 
 	case 803:
 		LOG("Controls settings click");
-		pSettings->pControl->control_B = true;
+		//pSettings->pControl->control_B = true;
 
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pGraphics->CloseGraphics();
-		pSettings->pAudio->CloseAudioSettings();
+		//pSettings->pGame->CloseGameSettings();
+		//pSettings->pGraphics->CloseGraphics();
+		//pSettings->pAudio->CloseAudioSettings();
 		break;
 
 	case 804:
@@ -182,7 +213,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		pSettings->pGraphics->graphics_B = true;
 
 		pSettings->pGame->CloseGameSettings();
-		pSettings->pControl->CloseControlSettings();
+		//pSettings->pControl->CloseControlSettings();
 		pSettings->pAudio->CloseAudioSettings();
 		break;
 
@@ -191,7 +222,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		pSettings->pAudio->audio_B = true;
 
 		pSettings->pGame->CloseGameSettings();
-		pSettings->pControl->CloseControlSettings();
+		//pSettings->pControl->CloseControlSettings();
 		pSettings->pGraphics->CloseGraphics();
 		break;
 
@@ -349,4 +380,15 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	return true;
+}
+
+bool IntroScene::PlayerNameInput()
+{
+	SString temp;
+
+	temp = "Sign:  %%";
+	temp.Substitute("%", app->input->playerName.c_str());
+	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 100, 16, Font::TEXT, { 255, 255, 255 });
+
+	return app->input->nameEntered_B;
 }

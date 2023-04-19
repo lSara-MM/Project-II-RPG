@@ -39,8 +39,8 @@ bool LogoScene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool LogoScene::Start()
 {
-	SString title("UPC - CITM");
-	app->win->SetTitle(title.GetString());
+	/*SString title("UPC - CITM");
+	app->win->SetTitle(title.GetString());*/
 
 	//texture = app->tex->Load(logoPath);	
 	//app->audio->PlayMusic(musicLogo, 0);

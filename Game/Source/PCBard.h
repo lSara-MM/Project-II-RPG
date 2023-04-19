@@ -1,5 +1,5 @@
-#ifndef __PCPROTAGONIST_H__
-#define __PCPROTAGONIST_H__
+#ifndef __PCBARD_H__
+#define __PCBARD_H__
 
 #include "Entity.h"
 #include "Characther.h"
@@ -13,13 +13,13 @@
 
 struct SDL_Texture;
 
-class Protagonist : public PartyMember 
+class Bard : public PartyMember
 {
 public:
 
-	Protagonist();
+	Bard();
 
-	virtual ~Protagonist();
+	virtual ~Bard();
 
 	bool Awake();
 
@@ -61,7 +61,6 @@ private:
 	iPoint  position;
 	int width, height;
 	int auxtres;
-
 };
 
-#endif // __PCPROTAGONIST_H__
+#endif // __PCBARD_H__

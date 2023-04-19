@@ -20,7 +20,7 @@ bool GuiManager::Start()
 	return true;
 }
 
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, SDL_Rect sliderBounds)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font, SDL_Rect sliderBounds)
 {
 	GuiControl* guiControl = nullptr;
 
@@ -28,7 +28,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* ob
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		guiControl = (GuiControl*) new GuiButton(id, bounds, bType,  text, fontSize);
+		guiControl = (GuiControl*) new GuiButton(id, bounds, bType,  text, fontSize, font);
 		break;
 	case GuiControlType::TOGGLE:
 		break;

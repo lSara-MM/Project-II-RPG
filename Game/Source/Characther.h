@@ -56,6 +56,8 @@ public:
 	bool alive;
 
 	//Stats
+	SString name;
+
 	int maxHp;
 	int currentHp;
 	int attack;

@@ -21,6 +21,8 @@ class Textures;
 class Audio;
 
 class EntityManager;
+class Combat;
+class DialogueSystem;
 class GuiManager;
 
 class Map;
@@ -36,8 +38,6 @@ class Circus;
 class LoseScene;
 class LeaderboardScene;
 class FadeToBlack;
-class Combat;
-
 
 class App
 {
@@ -107,6 +107,8 @@ public:
 	Audio* audio;
 	
 	EntityManager* entityManager;
+	Combat* combat;
+	DialogueSystem* dialogueSystem;
 	GuiManager* guiManager;
 	
 	Map* map;
@@ -122,7 +124,6 @@ public:
 	LoseScene* loseScene;
 	LeaderboardScene* leadScene;
 	FadeToBlack* fade;
-	Combat* combat;
 
 	// Time control
 	uint frames;
