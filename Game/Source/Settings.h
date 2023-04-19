@@ -568,14 +568,14 @@ public:
 		open_pause_B = false;
 
 		// close
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 10);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 137, 56, 26, 28 }, ButtonType::SMALL, "x", 20);
 		button->state = GuiControlState::NONE;
 		listPauseButtons.Add(button);
 
 
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 50, 300 + 77 * i, 200, 70 }, ButtonType::EXTRA_LARGE, buttons[i], 10);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 50, 300 + 77 * i, 200, 70 }, ButtonType::EXTRA_LARGE, buttons[i], 20);
 			button->state = GuiControlState::NONE;
 			listPauseButtons.Add(button);
 		}
@@ -591,7 +591,7 @@ public:
 
 		app->render->DrawRectangle({ 0, 0, app->win->GetWidth(), app->win->GetHeight()}, 163, 163, 163);
 		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
-		app->render->TextDraw("Pause", 210, 90, 21, Font::UI, { 107, 0, 110 });
+		app->render->TextDraw("Pause", 210, 90, 40, Font::UI, { 107, 0, 110 });
 
 		if (!open_pause_B)
 		{
