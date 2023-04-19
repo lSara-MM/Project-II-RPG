@@ -175,7 +175,6 @@ bool Player::Update(float dt)
 		Controller(dtP);
 	}
 
-   }
 	return true;
 }
 
