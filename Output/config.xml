@@ -39,7 +39,7 @@
 	   coinspath="Assets/Maps/coin.png" heartspath="Assets/Maps/heart.png"
 		   settingsPath ="Assets/Textures/setting_menu.png">
 		
-	<player x="120" y="260" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
+	<player x="3000" y="1000" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
 			texturepath="Assets/Textures/CH_Protagonist_Sprites.png"
 			velocity="400" width="20" height="27" FUYMGravity="250"
 			audiopathCoin="Assets/Audio/Fx/Coin.wav"
@@ -66,8 +66,24 @@
 		<mapfolder path="Assets/Maps/"/>
 		<mapfile path="Assets/Maps/map1.tmx"/>
 		<mapbackground path="Assets/Maps/TwistedTentMap.png"/>
-		<map1>
-		</map1>
 	</map>
+
+	<dungeon>
+		<mapfolder path="Assets/Maps/"/>
+		<mapfile path="Assets/Maps/map1.tmx"/>
+		<mapbackground path="Assets/Maps/TwistedTentMap.png"/>
+	</dungeon>
+
+	<practice>
+		<mapfolder path="Assets/Maps/"/>
+		<mapfile path="Assets/Maps/map1.tmx"/>
+		<mapbackground path="Assets/Maps/TwistedTentMap.png"/>
+	</practice>
+
+	<circus>
+		<mapfolder path="Assets/Maps/"/>
+		<mapfile path="Assets/Maps/map1.tmx"/>
+		<mapbackground path="Assets/Maps/TwistedTentMap.png"/>
+	</circus>
 
 </config>

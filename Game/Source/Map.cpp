@@ -144,7 +144,7 @@ void Map::DrawPlatformCollider() {
                         h = 64;
 
                         PhysBody* co = new PhysBody;
-                        co = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                        co = app->physics->CreateRectangleSensor(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
                         co->ctype = ColliderType::PORTAL;
                         co->id = portalID;
                         listBodies.Add(co);

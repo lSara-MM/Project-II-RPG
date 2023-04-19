@@ -62,8 +62,8 @@ bool Scene::Start()
 	//pPause->CreatePause(this);
 
 	//Camera pos
-	/*app->render->camera.x = -2800;
-	app->render->camera.y = -800;*/
+	app->render->camera.x = -2800;
+	app->render->camera.y = -800;
 	
 	InitEntities();
 	app->entityManager->Enable();
