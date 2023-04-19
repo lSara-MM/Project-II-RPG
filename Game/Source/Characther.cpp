@@ -83,6 +83,7 @@ void Character::ModifyHP(int num)
 	if ((this->currentHp + num) > this->maxHp) 
 	{
 		this->currentHp = this->maxHp;
+		this->alive = false;
 	}
 	else if ((this->currentHp + num) < 0)
 	{
@@ -110,6 +111,11 @@ int Character::CalculateDamage(int initialDmg)
 	realDmg = initialDmg - ( (this->armor / 2) * armorRelevance);
 
 	return realDmg;
+}
+
+bool Character::IsAlive() 
+{
+	return this->alive;
 }
 
 
