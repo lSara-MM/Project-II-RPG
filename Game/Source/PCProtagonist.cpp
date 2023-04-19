@@ -88,13 +88,9 @@ bool Protagonist::Update(float dt)
 	app->render->DrawRectangle({ 560 - 127 * positionCombat_I, 250, 90, 20 }, 1, 1, 1, 255, true);
 	app->render->DrawRectangle({ 560 - 127 * positionCombat_I, 250, auxhp, 20}, 255, 0, 0, 255, true);
 	
-	//Modify Health Bar
-	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
-		ModifyHP(-1);
-	}
-	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN) {
-		ModifyHP(1);
-	}
+	string s_hp = std::to_string(this->currentHp);
+	const char* ch_hp = s_hp.c_str();
+	app->render->TextDraw(ch_hp, 560 - 127 * positionCombat_I, 220, 20, UI, { 125,0,0 });
 
 	if (this->currentHp <= 0)
 	{
