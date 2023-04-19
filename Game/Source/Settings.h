@@ -462,10 +462,15 @@ public:
 
 	bool OpenSettings()
 	{
-		SDL_Rect rect = { 0, 0, 430, 93 };
+		SDL_Rect rect = { 0, 0, 90, 93 };
 
 		app->render->DrawRectangle({ 290, 203, 730, 463 }, 163, 163, 163, 200, true);
-		app->render->DrawTexture(settingsTexture, 550, 100, &rect);
+		
+		app->render->DrawTexture(settingsTexture, 450, 100, &rect);
+		rect = { 91, 0, 249, 93 };
+		app->render->DrawTexture(settingsTexture, 540, 100, &rect);
+		rect = { 341, 0, 90, 93 };
+		app->render->DrawTexture(settingsTexture, 789, 100, &rect);
 
 		app->render->DrawLine(490, 250, 490, 600, 0, 0, 0);
 		app->render->TextDraw("Settings", 600, 121, 40, Font::UI, { 255, 255, 255 });
