@@ -86,6 +86,7 @@ bool DialogueSystem::CleanUp()
 
 	app->input->getInput_B = false;
 	app->input->nameEntered_B = false;
+	hasEnded = false;
 
 	app->guiManager->CleanUp();
 

@@ -108,8 +108,6 @@ bool Player::Update(float dt)
 		dtP = dt / 1000;
 	}
 
-	Controller(dtP);
-
 	vel = b2Vec2(vel.x * dtP, vel.y * dtP);
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);
@@ -126,9 +124,7 @@ bool Player::Update(float dt)
 	if (npcInteract)
 	{
 		app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
-		//app->render->DrawRectangle({ npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60, 24, 24 },
-			//255, 255, 255, 200);
-	
+		
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
 			lockMovement = true;
