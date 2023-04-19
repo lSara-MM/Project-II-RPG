@@ -133,6 +133,14 @@ bool Combat::Start()
 
 bool Combat::PreUpdate()
 {
+	if (allies[0] == nullptr && allies[1] == nullptr && allies[2] == nullptr && allies[3] == nullptr)
+	{
+		app->fade->FadingToBlack(this, (Module*)app->scene, 30);
+	}
+	if (enemies[0] == nullptr && enemies[1] == nullptr && enemies[2] == nullptr && enemies[3] == nullptr)
+	{
+		app->fade->FadingToBlack(this, (Module*)app->scene, 30);
+	}
 	return true;
 }
 
@@ -298,7 +306,7 @@ bool Combat::CleanUp()
 	}
 
 
-	
+	app->entityManager->entities.Clear();
 
 	listInitiative.Clear();
 	
