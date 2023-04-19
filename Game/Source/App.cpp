@@ -263,7 +263,7 @@ void App::FinishUpdate()
 	if (app->input->godMode_B)
 	{
 		static char title[256];
-		if (app->render->flags == SDL_RENDERER_ACCELERATED)
+		if (app->render->vSync_B)
 		{
 			sprintf_s(title, 256, "GodMode: ON Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u Vsync: On",
 				averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
