@@ -410,7 +410,7 @@ bool IntroScene::PlayerNameInput()
 
 	temp = "Sign:  %%";
 	temp.Substitute("%", app->input->playerName.c_str());
-	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 100, 16, Font::TEXT, { 255, 255, 255 });
+	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 500, 40, Font::TEXT, { 255, 255, 255 });
 
 	return app->input->nameEntered_B;
 }
