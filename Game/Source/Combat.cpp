@@ -378,6 +378,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	
 	case 8:
 		LOG("Attack 1");
+		targeted_Character = nullptr;
 		if (lastPressedAbility_I == 1)
 		{
 			lastPressedAbility_I = 0;
@@ -388,6 +389,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 9:
 		LOG("Attack 2");
+		targeted_Character = nullptr;
 		if (lastPressedAbility_I == 2)
 		{
 			lastPressedAbility_I = 0;
@@ -397,6 +399,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 10:
 		LOG("Attack 3");
+		targeted_Character = nullptr;
 		if (lastPressedAbility_I == 3)
 		{
 			lastPressedAbility_I = 0;
@@ -407,6 +410,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 11:
 		LOG("Attack 4");
+		targeted_Character = nullptr;
 		if (lastPressedAbility_I == 4)
 		{
 			lastPressedAbility_I = 0;
