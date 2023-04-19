@@ -127,11 +127,12 @@ bool HouseHealer::Update(float dt)
 			}
 			if (randomNum == 2)
 			{
-				if (!(app->combat->enemies[1] == nullptr && this->alive == true)) {
-					float heal = maxHp * 0.3;
+				if (app->combat->enemies[1] != nullptr) {
+					float heal = this->attack * 0.5;
 					app->combat->enemies[1]->ModifyHP(heal);
+					app->combat->NextTurn();
 				}
-				app->combat->NextTurn();
+				
 			}
 			if (randomNum == 3)
 			{
@@ -145,7 +146,7 @@ bool HouseHealer::Update(float dt)
 					float damage = app->combat->allies[1]->CalculateDamage(attack * 0.3);
 					app->combat->allies[1]->ModifyHP(-damage);
 				}
-				app->combat->NextTurn();
+				if (app->combat->allies[0] != nullptr || app->combat->allies[1] != nullptr) { app->combat->NextTurn(); }
 
 			}
 			//render barra de habilidades
