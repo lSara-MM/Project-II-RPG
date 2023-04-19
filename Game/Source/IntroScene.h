@@ -54,7 +54,6 @@ public:
 	pugi::xml_node IntroLoadNode;
 
 	bool previousGame_B = false;
-
 	bool continueGame_B = false;
 
 private:
@@ -66,6 +65,7 @@ private:
 	
 	Settings* pSettings;
 
+	bool introDone = false;
 	bool exit_B;
 };
 

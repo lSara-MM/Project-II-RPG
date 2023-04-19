@@ -86,11 +86,11 @@ public:
 
 	bool CleanUp()
 	{
-		for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
+		/*for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
 		{
 			delete i->data;
 			i->data = nullptr;
-		}
+		}*/
 
 		listGameButtons.Clear();
 
@@ -181,11 +181,11 @@ public:
 
 	bool CleanUp()
 	{
-		for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
+		/*for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
 		{
 			delete i->data;
 			i->data = nullptr;
-		}
+		}*/
 
 		listControlButtons.Clear();
 
@@ -293,7 +293,7 @@ public:
 
 	bool CleanUp()
 	{
-		for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
+		/*for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
 		{
 			delete i->data;
 			i->data = nullptr;
@@ -303,7 +303,7 @@ public:
 		{
 			delete i->data;
 			i->data = nullptr;
-		}
+		}*/
 
 		listGraphicsButtons.Clear();
 		listGraphicsCheckbox.Clear();
@@ -406,11 +406,11 @@ public:
 
 	bool CleanUp()
 	{
-		for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
+		/*for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
 		{
 			delete i->data;
 			i->data = nullptr;
-		}
+		}*/
 		
 		listSliderBars.Clear();
 

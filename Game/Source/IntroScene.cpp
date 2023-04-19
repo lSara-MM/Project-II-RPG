@@ -108,7 +108,11 @@ bool IntroScene::PostUpdate()
 
 	if (exit_B) return false;
 	if (app->input->getInput_B) PlayerNameInput();
-	if (app->input->nameEntered_B) { app->fade->FadingToBlack(this, (Module*)app->scene, 90); }
+	if (app->input->nameEntered_B && !introDone) 
+	{
+		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
+		introDone = true;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -165,8 +169,14 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	{
 	case 1:
 		LOG("Button start click");
-		app->input->getInput_B = true;
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+		if (!app->input->nameEntered_B)
+		{
+			app->input->getInput_B = true;
+		}
+		else
+		{
+			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+		}
 		break;
 	case 2:
 		LOG("Button continue click");
