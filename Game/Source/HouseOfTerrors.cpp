@@ -47,7 +47,7 @@ bool HouseOfTerrors::Awake(pugi::xml_node& config)
 bool HouseOfTerrors::Start()
 {
 	//Load Map
-	app->map->LoadNewMap(0);
+	app->map->Load(0);
 
 	//pause menu
 	pause_B = false;
@@ -77,7 +77,7 @@ bool HouseOfTerrors::PreUpdate()
 bool HouseOfTerrors::Update(float dt)
 {
 	//Draw Map
-	//app->map->Draw();
+	app->map->Draw();
 
 	//Load Debug keys
 	Debug();
@@ -270,15 +270,7 @@ void HouseOfTerrors::Debug()
 
 bool HouseOfTerrors::InitEntities()
 {
-	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	player->parameters = sceneNode.child("player");
-	player->Awake();
 
-	Entity* npc = app->entityManager->CreateEntity(EntityType::NPC);
-	app->entityManager->AddEntity(npc);
-	npc->Awake();
-
-	//app->entityManager->Awake();
 	return true;
 }
 

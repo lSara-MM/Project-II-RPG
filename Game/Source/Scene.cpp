@@ -83,7 +83,6 @@ bool Scene::Update(float dt)
 
 	//Load Debug keys
 	Debug();
-
 	
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(entidad2);*/
@@ -172,6 +171,11 @@ bool Scene::PostUpdate()
 	//if (pPause->pause) { pPause->OpenPause(); }
 	app->guiManager->Draw();
 
+	if (app->map->mapPendingtoDelete == true)
+	{
+		app->map->CleanUp();
+	}
+
 	return ret;
 }
 
@@ -183,7 +187,7 @@ bool Scene::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	// player->Disable();
+	//player->Disable();
 
 	app->entityManager->Disable();
 

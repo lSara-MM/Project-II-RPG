@@ -176,9 +176,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		case 0:
 			if (app->scene->active == true)
 			{
-				app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
+				app->map->mapPendingtoDelete = true;
+				app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
 			}
-			if (app->hTerrors->active == true)
+		/*	if (app->hTerrors->active == true)
 			{
 				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
 			}
@@ -189,13 +190,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			if (app->circus->active == true)
 			{
 				app->fade->FadingToBlack((Module*)app->circus, (Module*)app->scene, 90);
-			}
+			}*/
 			break;
 		case 1:
-			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, 90);
+			//app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, 90);
 			break;
 		case 2:
-			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
+			//app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
 			break;
 		}
 		break;

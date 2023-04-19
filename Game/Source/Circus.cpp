@@ -47,7 +47,7 @@ bool Circus::Awake(pugi::xml_node& config)
 bool Circus::Start()
 {
 	//Load Map
-	app->map->LoadNewMap(1);
+	app->map->Load(0);
 
 	//pause menu
 	pause_B = false;
@@ -60,11 +60,10 @@ bool Circus::Start()
 	//pPause->CreatePause(this);
 
 	//Camera pos
-	/*app->render->camera.x = -2800;
-	app->render->camera.y = -800;*/
+	app->render->camera.x = -2800;
+	app->render->camera.y = -800;
 	
 	InitEntities();
-	app->entityManager->Enable();
 
 	return true;
 }
@@ -174,7 +173,7 @@ bool Circus::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	// player->Disable();
+	//player->Disable();
 
 	app->entityManager->Disable();
 
@@ -274,11 +273,6 @@ bool Circus::InitEntities()
 	player->parameters = sceneNode.child("player");
 	player->Awake();
 
-	Entity* npc = app->entityManager->CreateEntity(EntityType::NPC);
-	app->entityManager->AddEntity(npc);
-	npc->Awake();
-
-	//app->entityManager->Awake();
 	return true;
 }
 

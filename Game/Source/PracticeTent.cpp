@@ -77,7 +77,7 @@ bool PracticeTent::PreUpdate()
 bool PracticeTent::Update(float dt)
 {
 	//Draw Map
-	//app->map->Draw();
+	app->map->Draw();
 
 	//Load Debug keys
 	Debug();
@@ -270,15 +270,7 @@ void PracticeTent::Debug()
 
 bool PracticeTent::InitEntities()
 {
-	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	player->parameters = sceneNode.child("player");
-	player->Awake();
 
-	Entity* npc = app->entityManager->CreateEntity(EntityType::NPC);
-	app->entityManager->AddEntity(npc);
-	npc->Awake();
-
-	//app->entityManager->Awake();
 	return true;
 }
 

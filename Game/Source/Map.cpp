@@ -150,19 +150,11 @@ void Map::DrawPlatformCollider() {
                         listBodies.Add(co);
                         if (mapLayerItem->data->Get(x1+1, y1) != 2)
                         {
-                            if (mapLayerItem->data->Get(x1 - 1, y1) != 2)
+                            if (mapLayerItem->data->Get(x1, y1 + 1) != 2)
                             {
-                                if (mapLayerItem->data->Get(x1, y1 + 1) != 2)
-                                {
-                                    if (mapLayerItem->data->Get(x1, y1 - 1) != 2)
-                                    {
-                                            portalID++;
-                                    }
-                                }
+                                portalID++;
                             }
-                            
                         }
-
                     }
                 }
             }
@@ -294,14 +286,15 @@ bool Map::CleanUp()
     {
         app->render->name;
         //RELEASE(bodyItem->data);
-        //bodyItem->data->body->GetWorld()->DestroyBody(bodyItem->data->body);
+        bodyItem->data->body->GetWorld()->DestroyBody(bodyItem->data->body);
         app->render->active;
         delete bodyItem->data;
         bodyItem = bodyItem->next;
     }
     listBodies.Clear();
-    portalID = 0;
 
+    portalID = 0;
+    mapPendingtoDelete = false;
     app->render->active;
     return true;
 }
@@ -310,6 +303,8 @@ bool Map::CleanUp()
 bool Map::Load(int ID)
 {
     bool ret = true;
+
+    mapPendingtoDelete = false;
 
     pugi::xml_document mapFileXML;
     pugi::xml_parse_result result = mapFileXML.load_file(mapFileName.GetString());
@@ -531,25 +526,6 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
     }
 
     return ret;
-}
-
-void Map::LoadNewMap(int ID)
-{
-    CleanUp();
-
-    switch (ID)
-    {
-    case 0:
-        Load(0);
-        break;
-    case 1:
-        Load(0);
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-    }
 }
 
 Properties::Property* Properties::GetProperty(const char* name)

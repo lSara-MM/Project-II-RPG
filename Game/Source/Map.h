@@ -140,8 +140,6 @@ public:
 
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
-	void LoadNewMap(int ID);
-
 private:
 
 	bool LoadMap(pugi::xml_node mapFile, int ID);
@@ -157,6 +155,8 @@ private:
 public: 
 	MapData mapData;
 	List<PhysBody*> listBodies;
+
+	bool mapPendingtoDelete;
 
 private:
     SString mapFileName;
