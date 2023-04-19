@@ -62,6 +62,7 @@ public:
 	bool keyLockDown = false;
 	bool keyLockLeft = false;
 	bool keyLockRigth = false;
+	bool lockMovement = false;
 
 	float dtP;
 	float grav;
