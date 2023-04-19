@@ -205,22 +205,37 @@ bool Combat::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	app->entityManager->Disable();
+	
 
-	pSettings->CleanUp();
+	//pSettings->CleanUp();
 	
 	app->guiManager->CleanUp();
 
-	listInitiative.Clear();
-
 	for (int i = 0; i <= 3; i++)
 	{
+		if(allies[i] != nullptr)
+		{
+			allies[i]->Disable();
+			app->entityManager->DestroyEntity(allies[i]);
+		}
 		allies[i] = nullptr;
 	}
 	for (int i = 0; i <= 3; i++)
 	{
+		if (enemies[i] != nullptr)
+		{
+			enemies[i]->Disable();
+			app->entityManager->DestroyEntity(enemies[i]);
+		}
 		enemies[i] = nullptr;
 	}
+
+	//app->entityManager->Disable();
+	
+
+	listInitiative.Clear();
+	
+	
 	
 
 	return true;
