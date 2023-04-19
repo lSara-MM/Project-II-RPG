@@ -121,7 +121,7 @@ bool Player::Update(float dt)
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
-	//Sara aquí tienes tu parte, donde cuando el player está dentro de la zona interactuable con el npc
+	//Sara aquÃ­ tienes tu parte, donde cuando el player estÃ¡ dentro de la zona interactuable con el npc
 	if (npcInteract) 
 	{
 		app->render->DrawRectangle({ npcTalkingTo->position.x, npcTalkingTo->position.y - 60, 24, 24 },

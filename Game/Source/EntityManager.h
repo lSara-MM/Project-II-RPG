@@ -45,6 +45,9 @@ public:
 
 	List<Entity*> entities;
 
+	//Pido perdón no borren 
+	int tpID = 21;
+
 };
 
 #endif // __ENTITYMANAGER_H__
