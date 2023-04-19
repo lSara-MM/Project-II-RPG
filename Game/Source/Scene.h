@@ -56,7 +56,8 @@ public:
 	int npcSetID;
 
 	bool frcap_B = true;
-	bool pause_B;
+	bool pause_B = false;
+	bool settings_B = false;
 	bool mute_B = true;
 
 	pugi::xml_node sceneNode;
@@ -65,8 +66,7 @@ private:
 
 	// Settings
 	Settings* pSettings;
-
-	//Pause* pPause = &pauseMenu;
+	Pause* pPause;
 
 	bool exit_B;
 
