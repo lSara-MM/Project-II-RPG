@@ -116,7 +116,6 @@ public:
 	IntroScene* iScene;
 	Scene* scene;
 	LoseScene* loseScene;
-	LeaderboardScene* leadScene;
 	FadeToBlack* fade;
 
 	// Time control
