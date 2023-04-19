@@ -102,6 +102,7 @@ bool Protagonist::Update(float dt)
 	if (this->currentHp <= 0) {
 		app->combat->NextTurn();
 		onTurn = false;
+		app->entityManager->DestroyEntity(app->combat->allies[positionCombat_I]);
 	}
 	if (onTurn && this->currentHp >0)
 	{
@@ -179,10 +180,14 @@ bool Protagonist::Update(float dt)
 			}
 
 			if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1]) {
-				float damage = app->combat->enemies[0]->CalculateDamage(attack * 0.65);
-				app->combat->enemies[0]->ModifyHP(-damage);
-				damage = app->combat->enemies[1]->CalculateDamage(attack * 0.30);
-				app->combat->enemies[1]->ModifyHP(-damage);
+				if (app->combat->enemies[0] != nullptr && app->combat->enemies[0]->currentHp > 0) {
+					float damage = app->combat->enemies[0]->CalculateDamage(attack * 0.65);
+					app->combat->enemies[0]->ModifyHP(-damage);
+				}
+				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->currentHp > 0) {
+					float damage = app->combat->enemies[1]->CalculateDamage(attack * 0.30);
+					app->combat->enemies[1]->ModifyHP(-damage);
+				}
 				app->combat->NextTurn();
 				onTurn = false;
 			}

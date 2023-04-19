@@ -88,6 +88,7 @@ bool HouseDPS::Update(float dt)
 	if (this->currentHp <= 0) {
 		app->combat->NextTurn();
 		onTurn = false;
+		app->entityManager->DestroyEntity(app->combat->enemies[positionCombat_I]);
 	}
 	if (onTurn && this->currentHp > 0)
 	{
