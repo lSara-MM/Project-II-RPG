@@ -31,7 +31,7 @@
 	<loseScene background="Assets/Maps/lose_bg.png" losebutton1="Assets/Maps/rect_pa.png" losebutton2="Assets/Maps/rect_gu.png"
 		musicLose="Assets/Audio/Music/the_end.ogg"/>
 
-	<introScene background="Assets/Maps/intro_bg.png" audioIntroPath ="Assets/Audio/Music/music_intro.ogg"
+	<introScene background="Assets/Textures/intro_bg.png" audioIntroPath ="Assets/Audio/Music/music_intro.ogg"
 				settingsPath="Assets/Textures/setting_menu.png"/>
 	
 	<scene music="Assets/Audio/Music/lvl_1.ogg" textureAttackPath="Assets/Textures/attack.png"

@@ -270,6 +270,7 @@ bool Map::CleanUp()
 
     ListItem<TileSet*>* item;
     item = mapData.tilesets.start;
+    app->tex->UnLoad(backGround);
 
     while (item != NULL)
     {

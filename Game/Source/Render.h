@@ -11,7 +11,8 @@
 enum Font
 {
 	UI,
-	TEXT
+	TEXT,
+	TITLE
 };
 
 
