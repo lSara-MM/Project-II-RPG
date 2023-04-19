@@ -64,7 +64,8 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 	} 
 	else
 	{
-		activeTree->activeNode = activeTree->nodeList.at(activeTree->nodeList.size() - 1);
+		activeTree->activeNode = nullptr;
+		CleanUp();
 	}
 	
 	app->guiManager->CleanUp();
@@ -123,6 +124,7 @@ int DialogueSystem::LoadDialogue(int dialogueID)
 			 }
 		}
 	}
+
 	return dialogueID;
 }
 

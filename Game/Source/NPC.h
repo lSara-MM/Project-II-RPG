@@ -32,11 +32,11 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	void Controller(float dt);
+	bool PerformDialogue();
 
 public:
 
-	SString NpcName;
+	SString name;
 
 	iPoint position;
 	int width, height;

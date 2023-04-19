@@ -12,10 +12,15 @@
 
 #include "FadeToBlack.h"
 #include "EntityManager.h"
+#include "DialogueSystem.h"
 #include "Map.h"
 
 #include "Log.h"
 #include "Point.h"
+
+#include <stdio.h>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 Npc::Npc() : Entity(EntityType::NPC)
 {
@@ -35,7 +40,7 @@ Npc::~Npc() {
 
 bool Npc::Awake() {
 
-	NpcName = parameters.attribute("name").as_string();
+	name = parameters.attribute("name").as_string();
 
 	// Load dialogue IDs
 	for (pugi::xml_attribute attr = parameters.first_attribute(); attr; attr = attr.next_attribute())
@@ -62,6 +67,7 @@ bool Npc::Awake() {
 }
 
 bool Npc::Start() {
+	srand(time(NULL));
 
 	texture = app->tex->Load(texturePath);
 	currentAnimation = &idleAnim;
@@ -70,7 +76,7 @@ bool Npc::Start() {
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
 
-	pSensor = app->physics->CreateRectangleSensor(position.x + width / 2, position.y + height / 2, width * 2, height * 2, bodyType::STATIC, app->scene->npcSetID++);
+	pSensor = app->physics->CreateRectangleSensor(position.x + width / 2, position.y + height / 2, width * 3, height * 3, bodyType::STATIC, app->scene->npcSetID++);
 	pSensor->body->SetFixedRotation(true);
 	pSensor->ctype = ColliderType::NPC;
 	pSensor->listener = this;
@@ -97,6 +103,9 @@ bool Npc::Update(float dt)
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
+	// borrar al final
+	app->render->TextDraw(name.GetString(), position.x, position.y - FONT_SIZE * 2, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
+
 	return true;
 }
 
@@ -115,4 +124,13 @@ void Npc::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	}
+}
+
+bool Npc::PerformDialogue()
+{
+	int id = rand() % dialoguesID.size() + 1;
+
+	app->dialogueSystem->LoadDialogue(id);
+
+	return true;
 }
