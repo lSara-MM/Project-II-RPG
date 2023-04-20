@@ -163,4 +163,6 @@ void DialogueTree::CleanUp()
 	}
 	
 	nodeList.clear();
+
+	listDialogueButtons.Clear();
 }
