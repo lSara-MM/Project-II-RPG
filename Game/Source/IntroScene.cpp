@@ -59,7 +59,6 @@ bool IntroScene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool IntroScene::Start()
 {
-	
 	app->audio->PlayMusic(music_intro, 0);
 	texture = app->tex->Load(texturePath);
 	
@@ -68,8 +67,6 @@ bool IntroScene::Start()
 	{
 		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 1, this, { 25, 180 + 77 * i, 200, 70 }, ButtonType::START, buttons[i], 20));
 	}
-
-	//listButtons.start->next->data->state = GuiControlState::DISABLED;
 
 	pSettings = new Settings(this);
 	listButtons.Add(pSettings->listSettingsButtons.start->data);
