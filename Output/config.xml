@@ -62,7 +62,7 @@
 			audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
 			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"
 			grassStep="Assets/Audio/Fx/Pasos_Hierba.wav"
-			enterZone="Assets/Audio/Fx/Pasos_Hierba.wav"/>
+			enterZone="Assets/Audio/Fx/entrar_sala.wav"/>
 			
 		
 	<npc name="GUIA" dialogueID="1"
