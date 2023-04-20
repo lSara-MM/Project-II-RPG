@@ -35,10 +35,9 @@ bool Bard::Awake() {
 
 	this->name = parameters.attribute("name").as_string();
 
-	if (!app->scene->isCharacterLoaded_B)
+	if (app->input->currentHP_Bard != 0)
 	{
-		this->currentHp = app->scene->currentHP_Bard;
-		app->scene->isCharacterLoaded_B = true;
+		this->currentHp = app->input->currentHP_Bard;
 	}
 	else
 	{

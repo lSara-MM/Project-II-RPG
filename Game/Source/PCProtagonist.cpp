@@ -35,9 +35,9 @@ bool Protagonist::Awake() {
 
 	this->name = parameters.attribute("name").as_string();
 	this->maxHp = parameters.attribute("maxHp").as_int();
-	if (!app->scene->isCharacterLoaded_B)
+	if (app->input->currentHP_Protagonist!=0)
 	{
-		this->currentHp = app->scene->currentHP_Protagonist;
+		this->currentHp = app->input->currentHP_Protagonist;
 	}
 	else
 	{
