@@ -115,7 +115,7 @@
 			<choice id="1" option="You can mess with me but I don't even know what you do, you look like nothing but junk." nextNode="6" eventReturn="3"/>
 		</node>
 
-		<node id="4" name="ORACULO" text="I can't believe my eyes, you just paid, silly-billy. I got no more to say, this place is more than closed, you can go in without fear. You will find an empty House of Terrors. But if you want to toss one more coin…">
+		<node id="4" name="ORACULO" text="I can't believe my eyes, you just paid, silly-billy. I got no more to say, this place is more than closed, you can go in without fear. You will find an empty House of Terrors. But if you want to toss one more coin...">
 			<choice id="0" option="Toss a coin." nextNode="5" eventReturn="0"/>
 			<choice id="1" option="I'll pay no more..." nextNode="-1" eventReturn="0"/>
 		</node>

@@ -11,7 +11,7 @@
 #include "SString.h"
 #include <vector>
 
-#define FONT_SIZE 24
+#define FONT_SIZE 20
 
 #define DIALOGUE_INPUT 2
 #define DIALOGUE_SAVE 3

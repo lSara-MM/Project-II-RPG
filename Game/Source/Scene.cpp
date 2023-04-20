@@ -53,6 +53,11 @@ bool Scene::Start()
 {
 	app->audio->PlayMusic(lobby_music, 0);
 
+	if (app->input->playerName.empty())
+	{
+		app->input->playerName = "Player";
+	}
+
 	//Load Map
 	app->map->Load(0);
 	backGround = app->tex->Load("Assets/Maps/TwistedTentMap.png");
@@ -65,8 +70,6 @@ bool Scene::Start()
 	pPause = nullptr;
 	pause_B = false;
 	settings_B = false;
-
-	// Pause 
 
 	InitEntities();
 	app->entityManager->Enable();
