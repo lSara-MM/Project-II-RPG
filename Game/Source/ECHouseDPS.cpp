@@ -79,6 +79,10 @@ bool HouseDPS::Update(float dt)
 	//Si vida es 0 o menor, eliminar enemy
 	if (currentHp <= 0)
 	{
+		if (onTurn) 
+		{
+			app->combat->NextTurn();
+		}
 		app->combat->EliminateCombatant(this);
 		return true;
 	}
