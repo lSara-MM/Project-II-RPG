@@ -132,6 +132,10 @@ bool Combat::Start()
 	app->combat->AddCombatant((Character*)prota2, 13);
 	/*app->combat->AddCombatant((Character*)prota3, 5);
 	app->combat->AddCombatant((Character*)prota4, 9);*/
+
+	//Poner la camara en su lugar
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
 	
 	StartCombat();
 
@@ -148,6 +152,15 @@ bool Combat::PreUpdate()
 	{
 		app->fade->FadingToBlack(this, (Module*)app->scene, 30);
 	}
+
+	//Check if not combat
+	bool someoneOnTurn=false;
+	for (int i = 1; listInitiative.Count() >= i; i++)
+	{
+		if (listInitiative.At(i - 1)->data->onTurn) { someoneOnTurn = true; };
+	}
+	if (!someoneOnTurn) { listInitiative.At(charaInTurn)->data->onTurn = true; }
+
 	return true;
 }
 
@@ -212,7 +225,7 @@ bool Combat::Update(float dt)
 	//Rectangulo donde va la Info abajo derecha {x,y,w,h} r, g, b, opacity(0 = 100% & 255 = 0%)
 	app->render->DrawRectangle({ 430, 470, 730, 220 }, 255, 255, 255, 250, true);
 
-	//Printar barra de turnos
+	//Printar skills en uso
 	if (listInitiative.At(charaInTurn) != nullptr)
 	{
 		if(listInitiative.At(charaInTurn)->data->charaType_I==0)

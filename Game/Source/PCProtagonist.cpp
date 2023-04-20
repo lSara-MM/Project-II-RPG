@@ -93,15 +93,14 @@ bool Protagonist::Update(float dt)
 	app->render->TextDraw(ch_hp, 560 - 127 * positionCombat_I, 220, 20, UI, { 125,0,0 });
 
 	//If not alive, destroy entity
-	if (this->currentHp <= 0)
+	if (currentHp <= 0)
 	{
-		this->alive = false;
-	}
-	else { this->alive = true; }
-
-	if (this->alive == false)
-	{
+		if (onTurn)
+		{
+			app->combat->NextTurn();
+		}
 		app->combat->EliminateCombatant(this);
+		return true;
 	}
 	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
@@ -188,7 +187,7 @@ bool Protagonist::Update(float dt)
 					}
 					else
 					{
-					app->combat->targeted_Character->ModifyHP(+99999);
+					app->combat->targeted_Character->ModifyHP(99999);
 					}
 
 					onTurn = false;

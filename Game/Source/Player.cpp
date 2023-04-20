@@ -142,39 +142,43 @@ bool Player::Update(float dt)
 		if (npcInteract)
 		{
 			app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
-
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->controller.Y != 0)
+			
+			if (!lockMovement)
 			{
-				lockMovement = true;
-				app->dialogueSystem->Enable();
-				npcTalkingTo->PerformDialogue();
+				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->controller.Y != 0)
+				{
+					app->dialogueSystem->hasEnded = false;
+					lockMovement = true;
+					app->dialogueSystem->Enable();
+					npcTalkingTo->PerformDialogue();
+
+					if (keyLockUp)
+					{
+						keyLockUp = false;
+						currentAnimation = &idleUpAnim;
+					}
+
+					if (keyLockDown)
+					{
+						keyLockDown = false;
+						currentAnimation = &idleDownAnim;
+					}
+
+					if (keyLockLeft)
+					{
+						keyLockLeft = false;
+						currentAnimation = &idleLeftAnim;
+					}
+
+					if (keyLockRigth)
+					{
+						keyLockRigth = false;
+						currentAnimation = &idleRigthAnim;
+					}
+				}
 			}
 
 			if (app->dialogueSystem->hasEnded) { lockMovement = false; }
-
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y < 0)
-			{
-				keyLockUp = false;
-				currentAnimation = &idleUpAnim;
-			}
-
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y > 0)
-			{
-				keyLockDown = false;
-				currentAnimation = &idleDownAnim;
-			}
-
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP || app->input->controller.j1_x < 0)
-			{
-				keyLockLeft = false;
-				currentAnimation = &idleLeftAnim;
-			}
-
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP || app->input->controller.j1_x > 0)
-			{
-				keyLockRigth = false;
-				currentAnimation = &idleRigthAnim;
-			}
 		}
 		else
 		{
@@ -263,12 +267,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 
 void Player::EndContact(PhysBody* physA, PhysBody* physB) 
 {
-	app->audio->PlayFx(enterZone, 0);
 	switch (physB->ctype)
 	{
 	case ColliderType::NPC:
 		npcInteract = false;
 		break;
+	case ColliderType::PORTAL:
+		app->audio->PlayFx(enterZone, 0);
 	default:
 		break;
 	}

@@ -139,9 +139,6 @@ bool PracticeTent::CleanUp()
 {
 	LOG("Freeing scene");
 
-	app->render->camera.x = 0;
-	app->render->camera.y = 0;
-
 	app->entityManager->Disable();
 
 	if (pSettings != nullptr)

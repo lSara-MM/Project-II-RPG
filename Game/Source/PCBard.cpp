@@ -103,16 +103,14 @@ bool Bard::Update(float dt)
 	app->render->DrawTexture(texture, 544 - 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //Print bueno
 
 	//si su vida ha llegado a 0, set alive to false, else set it true
-	if (this->currentHp <= 0)
+	if (currentHp <= 0)
 	{
-		this->alive = false;
-	}
-	else { this->alive = true; }
-
-	//Si no esta vivo, destruir entity
-	if (this->alive == false) 
-	{
+		if (onTurn)
+		{
+			app->combat->NextTurn();
+		}
 		app->combat->EliminateCombatant(this);
+		return true;
 	}
 
 	if (onTurn)
@@ -226,7 +224,7 @@ bool Bard::Update(float dt)
 						}
 						else
 						{
-							app->combat->allies[0]->ModifyHP(-99999);
+							app->combat->allies[0]->ModifyHP(99999);
 						}
 						
 					}
@@ -239,7 +237,7 @@ bool Bard::Update(float dt)
 						}
 						else
 						{
-							app->combat->allies[1]->ModifyHP(-99999);
+							app->combat->allies[1]->ModifyHP(99999);
 						}
 					}
 					app->combat->NextTurn();
