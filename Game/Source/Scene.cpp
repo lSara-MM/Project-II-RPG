@@ -177,6 +177,7 @@ bool Scene::CleanUp()
 		pPause->CleanUp();
 	}
 	
+	app->dialogueSystem->CleanUp();
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 

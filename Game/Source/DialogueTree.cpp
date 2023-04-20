@@ -98,8 +98,8 @@ bool DialogueTree::UpdateNodes(Module* mod, iPoint pos, int fontSize)
 	for (int i = 0; i < activeNode->choicesList.size(); i++)
 	{
 		const char* ch_option = activeNode->choicesList[i]->text.GetString();	// SString to const char*	
-		int w = activeNode->choicesList[i]->text.Length() * fontSize * 0.5 + 10;
-		int h = fontSize + fontSize / 4;
+		int w = activeNode->choicesList[i]->text.Length() * fontSize * 0.5 + 50;
+		int h = fontSize * 1.5f;
 		SDL_Rect bounds = { app->win->GetWidth() - w, pos.y - (h + fontSize) * (i + 1), w, h};
 
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id, mod, bounds, ButtonType::LARGE, ch_option, fontSize);

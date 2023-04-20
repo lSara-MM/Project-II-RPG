@@ -60,13 +60,15 @@ public:
 	pugi::xml_node sceneNode;
 
 private:
-
+	int mouseX_pos, mouseY_pos;
 	//Music path
 	const char* musHauntedPath;
 
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;
+
+	float mouseSpeed;
 
 	bool exit_B;
 };
