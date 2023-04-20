@@ -267,7 +267,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 
 void Player::EndContact(PhysBody* physA, PhysBody* physB) 
 {
-	app->audio->PlayFx(enterZone, 0);
 	switch (physB->ctype)
 	{
 	case ColliderType::NPC:
