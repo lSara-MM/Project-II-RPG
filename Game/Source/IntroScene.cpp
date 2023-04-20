@@ -67,7 +67,7 @@ bool IntroScene::Start()
 	// buttons
 	for (int i = 0; buttons[i] != "\n"; i++)
 	{
-		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 1, this, { 25, 180 + 77 * i, 200, 70 }, ButtonType::START, buttons[i], 20));
+		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 1, this, { 25, 350 + 77 * i, 200, 70 }, ButtonType::START, buttons[i], 20));
 	}
 
 	pSettings = new Settings(this);
@@ -423,7 +423,7 @@ bool IntroScene::PlayerNameInput()
 
 	temp = "Sign:  %%";
 	temp.Substitute("%", app->input->playerName.c_str());
-	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 500, 40, Font::TEXT, { 255, 255, 255 });
+	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 4, 650, 40, Font::TEXT, { 255, 255, 255 });
 
 	return app->input->nameEntered_B;
 }
