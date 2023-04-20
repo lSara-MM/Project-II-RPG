@@ -68,7 +68,7 @@ bool Protagonist::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::PC_PROTAGONIST;
 	this->charaType_I = CharacterType::ALLY;
-	//this->name = "Protagonista"; //Hay que poner el nombre assigando al principio del juego
+	this->name = "Protagonista"; //Hay que poner el nombre assigando al principio del juego
 	
 	this->onTurn = false;
 
