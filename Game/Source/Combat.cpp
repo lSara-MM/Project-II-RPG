@@ -137,6 +137,9 @@ bool Combat::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	
+	//Desactivar physics
+	app->physics->Disable();
+
 	StartCombat();
 
 	return true;
@@ -334,6 +337,9 @@ bool Combat::CleanUp()
 	app->entityManager->Disable();
 
 	listInitiative.Clear();
+
+	//Reactivar physics
+	app->physics->Enable();
 
 	return true;
 }
