@@ -34,7 +34,7 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Pause menu -> P
 
-### Player
+### Combat
 
 * Swap position allies -> E
 
