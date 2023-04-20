@@ -132,6 +132,10 @@ bool Combat::Start()
 	app->combat->AddCombatant((Character*)prota2, 13);
 	/*app->combat->AddCombatant((Character*)prota3, 5);
 	app->combat->AddCombatant((Character*)prota4, 9);*/
+
+	//Poner la camara en su lugar
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
 	
 	StartCombat();
 
