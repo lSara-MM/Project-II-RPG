@@ -60,7 +60,6 @@ bool Scene::Start()
 
 	//Load Map
 	app->map->Load(0);
-	backGround = app->tex->Load("Assets/Maps/TwistedTentMap.png");
 	exit_B = false;
 
 	npcSetID = 1;
@@ -91,8 +90,7 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
-	//Render background
-	app->render->DrawTexture(backGround, 0, 0);
+	app->map->Draw();
 
 	Debug();
 
