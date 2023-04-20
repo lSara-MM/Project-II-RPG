@@ -256,7 +256,7 @@ void Scene::Debug()
 	}
 
 	// Pause menu
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || app->input->controller.START == 1)
+	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || app->input->controller.START == 1))
 	{
 		pause_B = true;	
 
@@ -275,22 +275,37 @@ void Scene::Debug()
 		LOG("PAUSE");
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->controller.B == 1)//POSAR CONTROL NORMAL
+	if (pause_B == true && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->controller.B == 1))//POSAR CONTROL NORMAL
 	{
-		pause_B = false;
-
-		if (pause_B)
+		
+		if (settings_B == true)
 		{
-			pPause = new Pause(this);
-			pSettings = pPause->pSettings;
+			for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
+			{
+				i->data->state = GuiControlState::NORMAL;
+			}
 
-			pSettings->settings_B = !pSettings->settings_B;
+			settings_B = false;
+			pSettings->CloseSettings();
+			pSettings->CleanUp();
 		}
-		else
+		else 
 		{
-			pPause->CleanUp();
-		}
+			pause_B = false;
+			if (pause_B)
+			{
+				pPause = new Pause(this);
+				pSettings = pPause->pSettings;
 
+				pSettings->settings_B = !pSettings->settings_B;
+			}
+			else
+			{
+				pPause->CleanUp();
+			}
+
+		}
+		
 		LOG("PAUSE");
 	}
 
