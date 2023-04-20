@@ -151,7 +151,7 @@ public:
 		app->render->TextDraw("Party", x, y + offset, 16);
 		app->render->TextDraw("Quests", x, y + offset * 2, 16);
 		app->render->TextDraw("Map", x, y + offset * 3, 16);
-		app->render->TextDraw("Settings", x, y + offset * 4, 16);
+		app->render->TextDraw("Pause", x, y + offset * 4, 16);
 
 		if (!open_control_B)
 		{

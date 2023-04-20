@@ -99,7 +99,7 @@ bool IntroScene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
 
-	if (previousGame_B)
+	if (previousGame_B && !pSettings->settings_B)
 	{
 		listButtons.start->next->data->state = GuiControlState::NORMAL;
 		LOG("Continue");
