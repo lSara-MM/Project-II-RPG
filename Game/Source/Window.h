@@ -35,7 +35,7 @@ public:
 
 	int GetHeight() const;	//no pot fade to black amb unsigned int
 
-	bool ResizeWin();
+	bool FullscreenWin();
 
 public:
 	// The window we'll be rendering to
@@ -44,12 +44,12 @@ public:
 	// The surface contained by the window
 	SDL_Surface* screenSurface;
 
-	bool changeScreen;	// false - small screen / true - fullscreen
+	bool changeScreen;	
+	bool fullscreen; // false - small screen / true - fullscreen
 	
 private:
 	Uint32 flags = SDL_WINDOW_SHOWN;
 
-	bool fullscreen;
 	bool borderless;
 	bool resizable;
 	bool fullscreen_window;

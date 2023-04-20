@@ -11,7 +11,6 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	buttonType = bType;
 
 	buttonTex = app->tex->Load("Assets/GUI/UI_buttons.png");
-	//Dos Opciones, o cargar de un PNG distinto esas texturas si es el botton de combate o modificar el UI_buttons
 }
 
 GuiButton::~GuiButton()
@@ -39,17 +38,18 @@ bool GuiButton::Update(float dt)
 				//LOG("Change state from %d to %d", previousState, state);
 			}
 
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->controller.A != 0)
 			{
 				state = GuiControlState::PRESSED;
 			}
 
 			// If mouse button pressed -> Generate event!
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->controller.A != 0)
 			{
 				NotifyObserver();
 			}
 		}
+
 		else 
 		{
 			state = GuiControlState::NORMAL;
@@ -61,10 +61,9 @@ bool GuiButton::Update(float dt)
 
 bool GuiButton::Draw(Render* render)
 {
-	SDL_Rect rect = { 0, 0, 0, 0 };
-	int offsetX = 0; int offsetY = 0;
+	SDL_Rect rect = { 0, 0, bounds.w, bounds.h };
 
-	if (buttonType == ButtonType::EXTRA_LARGE) { rect = { 0, 0, 93, 118 }; offsetX = 50;	offsetY = 10; }
+	/*if (buttonType == ButtonType::EXTRA_LARGE) { rect = { 0, 0, 93, 118 }; offsetX = 50;	offsetY = 10; }
 	if (buttonType == ButtonType::LARGE) { rect = { 0, 0, 93, 118 }; offsetX = 20;	offsetY = 3; }
 	if (buttonType == ButtonType::SMALL) { rect = { 0, 0, 93, 118 }; offsetX = -15;	offsetY = 6; }
 
@@ -77,9 +76,9 @@ bool GuiButton::Draw(Render* render)
 	if (buttonType == ButtonType::INVENTORY) { rect = { 188, 0, 89, 88 }; offsetX = 50;	offsetY = 10; }
 	if (buttonType == ButtonType::INV_NEXT_PAGE) { rect = { 188, 189, 53, 57 }; offsetX = 20;	offsetY = 3; }
 	if (buttonType == ButtonType::INV_PAGES) { rect = { 156, 160, 19, 20 }; offsetX = -15;	offsetY = 6; }
-	if (buttonType == ButtonType::SWAP_SKILL) { rect = { 90, 0, 82, 80 }; }
+	if (buttonType == ButtonType::SWAP_SKILL) { rect = { 90, 0, 82, 80 }; }*/
 
-	if (buttonType == ButtonType::COMBAT_TARGET) { rect = { 0,0,48* 1,92  }; } //48 anchura de solo 1 corchete, 92 es la altura que tiene DE MOMENTO.
+	if (buttonType == ButtonType::COMBAT_TARGET) { rect = { 0, 0, 48 * 1, 92 }; } //48 anchura de solo 1 corchete, 92 es la altura que tiene DE MOMENTO.
 
 	if (app->guiManager->GUI_debug)
 	{
@@ -107,10 +106,7 @@ bool GuiButton::Draw(Render* render)
 
 		case GuiControlState::PRESSED:
 		{
-			render->DrawRectangle({ bounds.x, bounds.y, bounds.w * 2, bounds.h * 2 }, 0, 255, 0, 200, true, false);
-			if (buttonType == ButtonType::EXTRA_LARGE) { rect = { 343, 0, 210, 80 }; }
-			if (buttonType == ButtonType::LARGE) { rect = { 180, 0, 120, 40 }; }
-			if (buttonType == ButtonType::SMALL) { rect = { 0, 0, 56, 41 }; }
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 255, 0, 200, true, false);
 
 		} break;
 
@@ -141,7 +137,7 @@ bool GuiButton::Draw(Render* render)
 
 		case GuiControlState::FOCUSED:
 		{
-			switch (buttonType)
+			/*switch (buttonType)
 			{
 			case ButtonType::NONE:
 				break;
@@ -175,7 +171,7 @@ bool GuiButton::Draw(Render* render)
 				break;
 			default:
 				break;
-			}
+			}*/
 			
 			render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 
@@ -195,12 +191,12 @@ bool GuiButton::Draw(Render* render)
 		}
 	}
 
+	int offsetX = text.Length() * fontSize / 2;
+	
+	int x = (rect.w - offsetX) / 2;
+	int y = (rect.h - fontSize) / 2;
 
-	int size = fontSize;
-	int x = rect.w - text.Length() * size / 2 - offsetX;
-	int y = rect.h - size / 2 + offsetY;
-
-	if(text != "") app->render->TextDraw(text.GetString(), bounds.x + x / 4, bounds.y + y / 4, size, font);
+	if(text != "") app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
 
 	return false;
 }

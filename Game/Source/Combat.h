@@ -79,11 +79,13 @@ public:
 	int lastPressedAbility_I = 0;
 
 private:
+
+	int mouseX_combat, mouseY_combat;
+	float mouse_Speed;
 	// Settings
 	Settings* pSettings;
+	Pause* pPause;
 
-	Pause pauseMenu;
-	Pause* pPause = &pauseMenu;
 	//TEXTURAS
 		//Fondo
 		const char* texturePathBackground;

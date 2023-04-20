@@ -39,6 +39,9 @@ bool Input::Awake(pugi::xml_node& config)
 		ret = false;
 	}
 
+	SDL_Init(SDL_INIT_GAMECONTROLLER);
+	sdl_controller = SDL_GameControllerOpen(0);
+
 	return ret;
 }
 
@@ -139,6 +142,22 @@ bool Input::PreUpdate()
 		}
 	}
 
+	SDL_GameControllerUpdate();
+
+
+	controller.j1_x = SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTX);
+	controller.j1_y = SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTY);
+	controller.j2_x = SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTX);
+	controller.j2_y = SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTY);
+	controller.RT = SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
+	controller.LT = SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERLEFT);
+	controller.A = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_A);
+	controller.B = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_B);
+	controller.X = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_X);
+	controller.Y = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_Y);
+
+	controller.START = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_START);
+
 	return true;
 }
 
@@ -205,5 +224,31 @@ void Input::HandleInput(SDL_Event event)
 	{
 		// Append the character
 		playerName.erase(playerName.length() - 1);
+	}
+}
+
+void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt)
+{
+	if (app->input->controller.j1_x > 0)
+	{
+		SDL_WarpMouseInWindow(app->win->window, mouseX + (mouseSpeed * dt), mouseY);
+
+	}
+
+	else if (app->input->controller.j1_x < 0)
+	{
+		SDL_WarpMouseInWindow(app->win->window, mouseX - (mouseSpeed * dt), mouseY);
+	}
+
+	else if (app->input->controller.j1_y > 0)
+	{
+		SDL_WarpMouseInWindow(app->win->window, mouseX, mouseY + (mouseSpeed * dt));
+
+	}
+
+	else if (app->input->controller.j1_y < 0)
+	{
+		SDL_WarpMouseInWindow(app->win->window, mouseX, mouseY - (mouseSpeed * dt));
+
 	}
 }

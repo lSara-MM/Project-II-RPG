@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "SDL/include/SDL.h"
 
+#include "External/SDL/include/SDL_gamecontroller.h"
+
 //#define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
 //#define LAST_KEYS_PRESSED_BUFFER 50
@@ -28,6 +30,11 @@ enum KeyState
 	KEY_DOWN,
 	KEY_REPEAT,
 	KEY_UP
+};
+
+struct GameController
+{
+	float j1_x, j1_y,j2_x, j2_y, RT, LT, A, B, X, Y, START;
 };
 
 enum KeyType
@@ -111,12 +118,17 @@ public:
 
 	void HandleInput(SDL_Event event);
 
+	void HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt);
+
 public:
 	string playerName;
 	bool nameEntered_B = false;
 	bool getInput_B = false;
 
 	bool godMode_B = false;
+
+	SDL_GameController* sdl_controller;
+	GameController controller;
 
 private:
 	bool windowEvents[WE_COUNT];

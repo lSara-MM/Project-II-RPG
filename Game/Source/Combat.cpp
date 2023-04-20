@@ -42,12 +42,14 @@ bool Combat::Awake(pugi::xml_node& config)
 
 	texturePathBackground = "Assets/Textures/combat_background_placeholder.png"; //FondoActual (habra que cambiarlo por los de la dungeon actual)
 	texturePathTargetButton = "Assets/GUI/UI_button_charactherSelection.png"; //De momento lo he puesto aqui para ver como se ve pero quiza haya que borrarlos
+	mouse_Speed = config.attribute("mouseSpeed").as_float();
 
 	return ret;
 }
 
 bool Combat::Start()
 {
+
 	//Cargar texturas
 	textureBackground = app->tex->Load(texturePathBackground);
 	textureTargetButton = app->tex->Load(texturePathTargetButton);
@@ -86,6 +88,8 @@ bool Combat::PreUpdate()
 
 bool Combat::Update(float dt)
 {
+	app->input->GetMousePosition(mouseX_combat, mouseY_combat);
+
 	Debug();
 
 	app->render->DrawTexture(textureBackground, 0, 0);
@@ -127,6 +131,8 @@ bool Combat::Update(float dt)
 	//Rectangulo donde va la Info abajo derecha {x,y,w,h} r, g, b, opacity(0 = 100% & 255 = 0%)
 	app->render->DrawRectangle({ 430, 470, 730, 220 }, 255, 255, 255, 250, true);
 
+
+	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
 
 	return true;
 }

@@ -12,16 +12,25 @@
 
 #include "FadeToBlack.h"
 #include "EntityManager.h"
+#include "DialogueSystem.h"
 #include "Map.h"
 
 #include "Log.h"
 #include "Point.h"
 
+#include <stdio.h>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+
 Npc::Npc() : Entity(EntityType::NPC)
 {
 	name.Create("Npc");
 
-	
+	//idleAnim.PushBack({ 64, 0, 64, 64 });
+	//idleAnim.PushBack({ 64, 0, 64, 64 });
+
+	//idleAnim.speed = 0.1f;
+
 	active = true;
 }
 
@@ -29,8 +38,22 @@ Npc::~Npc() {
 
 }
 
-// no entra en el pugi, porque T-T
 bool Npc::Awake() {
+
+	name = parameters.attribute("name").as_string();
+
+	// Load dialogue IDs
+	for (pugi::xml_attribute attr = parameters.first_attribute(); attr; attr = attr.next_attribute())
+	{
+		if (strcmp(attr.name(), "dialogueID") == 0)
+		{
+			dialoguesID.push_back(attr.as_int());
+		}
+		if (strcmp(attr.next_attribute().name(), "dialogueID") != 0)
+		{
+			break;
+		}
+	}
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -40,45 +63,31 @@ bool Npc::Awake() {
 
 	texturePath = parameters.attribute("texturepath").as_string();
 
-	//dialoguesID.push_back(parameters.attribute("dialogue").as_int());
-	
-	//string temp = parameters.attribute("dialogueID").as_string();
-	//for (int i = 0; i < temp.size(); i++)
-	//{
-	//	string s(1, temp.at(i));
-	//	dialoguesID.push_back(stoi(s));
-	//}
-
-	//// no funciona, como se hace un for de atributos :/
-	//for (pugi::xml_attribute attr : parameters.attributes())
-	//{
-	//	if (parameters.name() == "dialogueID")
-	//	{
-	//		dialoguesID.push_back(attr.as_int());
-	//	}
-	//}
-
 	return true;
 }
 
 bool Npc::Start() {
+	srand(time(NULL));
 
 	texture = app->tex->Load(texturePath);
-	//currentAnimation = &currentAnim;
+	currentAnimation = &idleAnim;
 	
-	/*pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::STATIC);
 	pbody->body->SetFixedRotation(true);
-	
-	pbody->listener = this; */
+	pbody->listener = this;
 
-	//pbody->ctype = ColliderType::Npc;
+	pSensor = app->physics->CreateRectangleSensor(position.x + width / 2, position.y + height / 2, width * 3, height * 3, bodyType::STATIC, app->scene->npcSetID++);
+	pSensor->body->SetFixedRotation(true);
+	pSensor->ctype = ColliderType::NPC;
+	pSensor->listener = this;
 
 	return true;
 }
 
 bool Npc::Update(float dt)
 {
-	//pbody->body->SetGravityScale(0);
+	pbody->body->SetGravityScale(0);
+	pSensor->body->SetGravityScale(0);
 
 	if (app->scene->pause_B)
 	{
@@ -89,10 +98,13 @@ bool Npc::Update(float dt)
 		dtP = dt / 1000;
 	}
 
-	//currentAnimation->Update();
+	currentAnimation->Update();
 
-	//DL_Rect rect = currentAnimation->GetCurrentFrame();
-	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
+
+	// borrar al final
+	app->render->TextDraw(name.GetString(), position.x, position.y - FONT_SIZE * 2, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
 
 	return true;
 }
@@ -100,7 +112,8 @@ bool Npc::Update(float dt)
 bool Npc::CleanUp()
 {
 	app->tex->UnLoad(texture);
-	//pbody->body->GetWorld()->DestroyBody(pbody->body);
+	pbody->body->GetWorld()->DestroyBody(pbody->body);
+	pSensor->body->GetWorld()->DestroyBody(pSensor->body);
 	
 	return true;
 }
@@ -111,4 +124,13 @@ void Npc::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	}
+}
+
+bool Npc::PerformDialogue()
+{
+	int id = rand() % dialoguesID.size() + 1;
+
+	app->dialogueSystem->LoadDialogue(id);
+
+	return true;
 }

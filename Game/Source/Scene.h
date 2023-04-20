@@ -5,6 +5,7 @@
 
 #include "Module.h"
 #include "Player.h"
+#include "NPC.h"
 
 #include "GuiButton.h"
 #include "GuiCheckBox.h"
@@ -50,18 +51,24 @@ public:
 public:
 
 	Player* player;
+	List <Npc*> listNpc;
+
+	int npcSetID;
+
 	bool frcap_B = true;
-	bool pause_B;
+	bool pause_B = false;
+	bool settings_B = false;
 	bool mute_B = true;
 
 	pugi::xml_node sceneNode;
 
 private:
 
+	int mouseX_scene, mouseY_scene;
+	float mouseSpeed;
 	// Settings
 	Settings* pSettings;
-
-	//Pause* pPause = &pauseMenu;
+	Pause* pPause;
 
 	bool exit_B;
 

@@ -9,6 +9,7 @@
 #include "Physics.h"
 
 #include "Animation.h"
+#include "NPC.h"
 #include "SString.h"
 
 struct SDL_Texture;
@@ -30,6 +31,7 @@ public:
 	bool CleanUp();
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
+	void EndContact(PhysBody* physA, PhysBody* physB);
 
 	void Controller(float dt);
 
@@ -42,6 +44,7 @@ public:
 
 	// A set of animations
 	Animation currentAnim;
+
 	Animation downAnim;
 	Animation idleDownAnim;
 	Animation upAnim;
@@ -50,6 +53,7 @@ public:
 	Animation idleLeftAnim;
 	Animation rigthAnim;
 	Animation idleRigthAnim;
+
 	Animation hurtAnim;
 	Animation deathAnim;
 	Animation attackAnim;
@@ -58,6 +62,7 @@ public:
 	bool keyLockDown = false;
 	bool keyLockLeft = false;
 	bool keyLockRigth = false;
+	bool lockMovement = false;
 
 	float dtP;
 	float grav;
@@ -66,13 +71,16 @@ public:
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
 
-	iPoint  position;
+	iPoint position;
+
+	bool npcInteract;
 
 private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
 
+	Npc* npcTalkingTo;
 	
 	int width, height;
 };
