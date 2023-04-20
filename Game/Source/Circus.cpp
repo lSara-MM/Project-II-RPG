@@ -42,7 +42,7 @@ bool Circus::Awake(pugi::xml_node& config)
 
 	mute_B = false;
 	circusMusPath = config.attribute("musicCircus").as_string();
-
+	mouseSpeed = config.attribute("mouseSpeed").as_float();
 	sceneNode = config;
 
 	return ret;
@@ -83,6 +83,8 @@ bool Circus::Update(float dt)
 	//Draw Map
 	app->map->Draw();
 
+	app->input->GetMousePosition(mouseX_pos, mouseY_pos);
+
 	//Load Debug keys
 	Debug();
 
@@ -99,6 +101,8 @@ bool Circus::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x -= ceil(speed);
+
+	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_pos, mouseY_pos, mouseSpeed, dt); }
 
 	return true;
 }
@@ -157,10 +161,15 @@ bool Circus::CleanUp()
 }
 
 void Circus::Debug()
-{
-	// Start again level
+{// Start again level
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 		app->fade->FadingToBlack(this, (Module*)app->scene, 0);
+
+	// Return Title
+	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
+	{
+		app->fade->FadingToBlack(this, (Module*)app->iScene, 0);
+	}
 
 	// Load / Save - keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
@@ -169,7 +178,6 @@ void Circus::Debug()
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();
 
-
 	// Show Gui 
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
 
@@ -177,7 +185,7 @@ void Circus::Debug()
 	}
 
 	// Show collisions
-	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F8))
 	{
 		app->physics->collisions = !app->physics->collisions;
 	}
@@ -192,6 +200,7 @@ void Circus::Debug()
 	// GodMode
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
+		app->physics->collisions = !app->physics->collisions;
 		app->input->godMode_B = !app->input->godMode_B;
 	}
 
@@ -249,18 +258,12 @@ void Circus::Debug()
 		LOG("PAUSE");
 	}
 
+
 	// Mute / unmute
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
 
 		mute_B = !mute_B;
 		LOG("MUTE");
-	}
-		
-
-	// God mode functions
-	if (app->input->godMode_B)
-	{
-		app->physics->collisions = true;
 	}
 
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();

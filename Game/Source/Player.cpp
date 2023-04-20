@@ -112,11 +112,11 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
-	if (app->scene->pause_B)
+	if (app->scene->pause_B || app->hTerrors->pause_B || app->circus->pause_B || app->practiceTent->pause_B)
 	{
 		dtP = 0;
 	}
-	else if (!app->scene->pause_B)
+	else if (!app->scene->pause_B || !app->hTerrors->pause_B || !app->circus->pause_B || !app->practiceTent->pause_B)
 	{
 		dtP = dt / 1000;
 	}
