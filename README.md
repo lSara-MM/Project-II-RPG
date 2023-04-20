@@ -16,17 +16,17 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 ### Player
 
-* Player walk left -> A / Right arrow
+* Player walk left -> A / Right arrow / Left Joystick Gamepad
 
-* Player walk right -> D / Left arrow
+* Player walk right -> D / Left arrow / Left Joystick Gamepad
 
-* Player walk up -> W / Up arrow
+* Player walk up -> W / Up arrow / Left Joystick Gamepad
 
-* Player walk down -> S / Down arrow
+* Player walk down -> S / Down arrow / Left Joystick Gamepad
 
-* Player run -> Left shift
+* Player run -> Left shift / B button gamepad
 
-* Interact -> E 
+* Interact  -> E / Y button gamepad
 
 ### Menus
 
@@ -34,17 +34,54 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Pause menu -> P
 
+
 ### Debug
 
+#### Logo scene
+
+* Go to Play Scene  -> F1
+
+* Go to Menu Scene -> Return/A button Gamepad
+
+#### Menu scene
+
+* Go to Play Scene  -> F1
+
+* Show GUI -> F2
+
+* Mute sound -> M key
+
+#### Play scene
+
+* Restart -> F3
+
+* Return to Menu scene -> F4
+
+* Save game -> F5
+
+* Load game -> F6
+
+* Show UI -> F7
+
+* Show collisions -> F8
+
+* Enable/disable FRCAP -> F9
+
 * God Mode -> F10
-* God Mode Combat -> F10
-* Show UI in Combat -> F2
-* Access to Combat -> C
-* Show Colliders -> F8
-* Show UI in Play Scene -> F7
-* Skip to Play Scene from Start Menu -> F1
-* From Combat to Play Scene -> F1
-* Skip to Start Menu from Logo Menu -> F2
+
+* Pause -> ESC/START button Gamepad
+
+* Exit Pause -> Return/B button Gamepad
+
+* Enter combat -> C key/X button Gamepad
+
+
+#### Combat
+
+* Go to Play Scene -> F1
+* God Mode -> F10
+
+
 
 ## Pikum Studios Members
 
