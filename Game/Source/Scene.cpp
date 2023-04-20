@@ -73,7 +73,6 @@ bool Scene::Start()
 
 	InitEntities();
 	app->entityManager->Enable();
-	//player->Start();
 
 	//if (app->iScene->continueGame_B)
 	//{
