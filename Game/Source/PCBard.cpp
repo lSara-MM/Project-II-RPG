@@ -51,10 +51,10 @@ bool Bard::Awake() {
 	texturePath = parameters.attribute("texturePath").as_string();
 
 	
-	this->skills_C[0] = "Damage x1 2 OR 3";
-	this->skills_C[1] = "Damage x1 1 OR 2";
-	this->skills_C[2] = "Damage x0.85 1 AND x0.3 2";
-	this->skills_C[3] = "Damage x0.85 3 AND x0.3 4";
+	this->skills_C[0] = "Damage x1 to 2 OR 3";
+	this->skills_C[1] = "Damage x1 to 1 OR 2";
+	this->skills_C[2] = "Heal x0.4 to 1 AND 2";
+	this->skills_C[3] = "Damage x0.85 to 3 AND x0.3 to 4";
 
 	return true;
 }
@@ -210,37 +210,37 @@ bool Bard::Update(float dt)
 			if (app->combat->lastPressedAbility_I == 3)
 			{
 
-				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
+				if (app->combat->allies[1] != nullptr && app->combat->allies[1]->alive == true)
 				{
-					app->combat->EnableTargetButton(5);
+					app->combat->EnableTargetButton(2);
 				}
-				if (app->combat->enemies[0] != nullptr && app->combat->enemies[0]->alive == true)
+				if (app->combat->allies[0] != nullptr && app->combat->allies[0]->alive == true)
 				{
-					app->combat->EnableTargetButton(4);
+					app->combat->EnableTargetButton(3);
 				}
 
-				if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1] && app->combat->targeted_Character != nullptr) {
-					if (app->combat->enemies[0] != nullptr) {
+				if (app->combat->targeted_Character == app->combat->allies[0] || app->combat->targeted_Character == app->combat->allies[1] && app->combat->targeted_Character != nullptr) {
+					if (app->combat->allies[0] != nullptr) {
 						if (!app->input->godMode_B)
 						{
-							float damage = app->combat->enemies[0]->CalculateDamage(attack * 0.65);
-							app->combat->enemies[0]->ModifyHP(-damage);
+							float heal = app->combat->allies[0]->CalculateDamage(attack * 0.4);
+							app->combat->allies[0]->ModifyHP(heal);
 						}
 						else
 						{
-							app->combat->enemies[0]->ModifyHP(-99999);
+							app->combat->allies[0]->ModifyHP(-99999);
 						}
 						
 					}
-					if (app->combat->enemies[1] != nullptr) {
+					if (app->combat->allies[1] != nullptr) {
 						if (!app->input->godMode_B)
 						{
-							float damage = app->combat->enemies[1]->CalculateDamage(attack * 0.65);
-							app->combat->enemies[1]->ModifyHP(-damage);
+							float heal = app->combat->allies[1]->CalculateDamage(attack * 0.4);
+							app->combat->allies[1]->ModifyHP(heal);
 						}
 						else
 						{
-							app->combat->enemies[1]->ModifyHP(-99999);
+							app->combat->allies[1]->ModifyHP(-99999);
 						}
 					}
 					app->combat->NextTurn();

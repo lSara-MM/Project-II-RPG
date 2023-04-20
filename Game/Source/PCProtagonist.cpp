@@ -48,10 +48,10 @@ bool Protagonist::Awake() {
 	this->speed = parameters.attribute("speed").as_int();
 	texturePath = parameters.attribute("texturePath").as_string();
 
-	this->skills_C[0] = "Skill 1 Prota";
-	this->skills_C[1] = "Skill 2 Prota";
-	this->skills_C[2] = "Skill 3 Prota";
-	this->skills_C[3] = "Skill 4 Prota";
+	this->skills_C[0] = "Damage X1 to 2 OR 3";
+	this->skills_C[1] = "Self Heal X0.6";
+	this->skills_C[2] = "Damage X 0.75 to 1 AND 2";
+	this->skills_C[3] = "Damage X0.6 to 2 AND 4";
 
 	return true;
 }
@@ -178,6 +178,26 @@ bool Protagonist::Update(float dt)
 			}
 			if (app->combat->lastPressedAbility_I == 2)
 			{
+					app->combat->EnableTargetButton(3);
+					if (app->combat->targeted_Character == app->combat->allies[0])
+					{
+					if (!app->input->godMode_B)
+					{
+						float heal = app->combat->targeted_Character->CalculateDamage(attack*0.6);
+						app->combat->targeted_Character->ModifyHP(heal);
+					}
+					else
+					{
+						app->combat->targeted_Character->ModifyHP(+99999);
+					}
+
+					onTurn = false;
+					app->combat->NextTurn();
+				}
+					
+			}
+			/*if (app->combat->lastPressedAbility_I == 2)
+			{
 				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
 				{
 					app->combat->EnableTargetButton(5);
@@ -203,10 +223,10 @@ bool Protagonist::Update(float dt)
 						onTurn = false;
 						app->combat->NextTurn();
 					}
-					
+
 				}
 
-			}
+			}*/
 			if (app->combat->lastPressedAbility_I == 3)
 			{
 
@@ -219,11 +239,11 @@ bool Protagonist::Update(float dt)
 					app->combat->EnableTargetButton(4);
 				}
 
-				if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1]) {
+				if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1] && app->combat->targeted_Character != nullptr) {
 					if (app->combat->enemies[0] != nullptr) {
 						if (!app->input->godMode_B)
 						{
-							float damage = app->combat->enemies[0]->CalculateDamage(attack * 0.65);
+							float damage = app->combat->enemies[0]->CalculateDamage(attack * 0.75);
 							app->combat->enemies[0]->ModifyHP(-damage);
 						}
 						else
@@ -235,7 +255,7 @@ bool Protagonist::Update(float dt)
 					if (app->combat->enemies[1] != nullptr) {
 						if (!app->input->godMode_B)
 						{
-							float damage = app->combat->enemies[1]->CalculateDamage(attack * 0.65);
+							float damage = app->combat->enemies[1]->CalculateDamage(attack * 0.75);
 							app->combat->enemies[1]->ModifyHP(-damage);
 						}
 						else
@@ -251,9 +271,9 @@ bool Protagonist::Update(float dt)
 			}
 			if (app->combat->lastPressedAbility_I == 4)
 			{
-				if (app->combat->enemies[2] != nullptr && app->combat->enemies[2]->alive == true)
+				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
 				{
-					app->combat->EnableTargetButton(6);
+					app->combat->EnableTargetButton(5);
 				}
 
 				if (app->combat->enemies[3] != nullptr && app->combat->enemies[3]->alive == true)
@@ -262,16 +282,16 @@ bool Protagonist::Update(float dt)
 				}
 
 
-				if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3] && app->combat->targeted_Character != nullptr) {
-					if (app->combat->enemies[2] != nullptr) {
+				if (app->combat->targeted_Character == app->combat->enemies[1] || app->combat->targeted_Character == app->combat->enemies[3] && app->combat->targeted_Character != nullptr) {
+					if (app->combat->enemies[1] != nullptr) {
 						if (!app->input->godMode_B)
 						{
-							float damage = app->combat->enemies[2]->CalculateDamage(attack * 0.6);
-							app->combat->enemies[2]->ModifyHP(-damage);
+							float damage = app->combat->enemies[1]->CalculateDamage(attack * 0.6);
+							app->combat->enemies[1]->ModifyHP(-damage);
 						}
 						else
 						{
-							app->combat->enemies[2]->ModifyHP(-99999);
+							app->combat->enemies[1]->ModifyHP(-99999);
 						}
 
 					}

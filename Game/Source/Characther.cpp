@@ -94,6 +94,10 @@ void Character::ModifyHP(int num)
 		app->combat->EliminateCombatant(this);
 		//Muere? No muere? Hay que hablar si hay death door
 	}
+	else if ((this->currentHp + num) > this->maxHp)
+	{
+		this->currentHp = maxHp;
+	}
 	else
 	{
 		this->currentHp += num;
