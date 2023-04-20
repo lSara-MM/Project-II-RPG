@@ -208,6 +208,5 @@ List<Entity*> EntityManager::GetEntitiesByType(EntityType type)
 		}
 	}
 
-
 	return result;
 }

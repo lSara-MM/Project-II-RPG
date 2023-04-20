@@ -74,7 +74,7 @@
 		    <choice id="2" option="Busybodies... Like me you would say." nextNode="5" eventReturn="0"/>
 	    </node>
 
-	    <node id="3" name="GUIA" text="Ooh! The Showman. He is a sweetheart! Always thinking of others, specifically their souls ¿Isn’t that sweet? He's the one keeping this alive, and with magic. Never forget, he is a powerful man, you don't want to make enmity with him. Although as adorable as he is, I don't think you'll be able to anger him.">
+	    <node id="3" name="GUIA" text="Ooh! The Showman. He is a sweetheart! Always thinking of others, specifically their souls Isn't that sweet? He's the one keeping this alive, and with magic. Never forget, he is a powerful man, you don't want to make enmity with him. Although as adorable as he is, I don't think you'll be able to anger him.">
 		    <choice id="0" option="So he gave me my powers in exchange for my soul. He smell a rat." nextNode="0" eventReturn="0"/>
 		    <choice id="1" option="I bet I can anger him." nextNode="-1" eventReturn="0"/>
 	    </node>

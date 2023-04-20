@@ -68,7 +68,7 @@ bool Protagonist::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::PC_PROTAGONIST;
 	this->charaType_I = CharacterType::ALLY;
-	//this->name = "Protagonista"; //Hay que poner el nombre assigando al principio del juego
+	this->name = "Protagonista"; //Hay que poner el nombre assigando al principio del juego
 	
 	this->onTurn = false;
 
@@ -92,6 +92,7 @@ bool Protagonist::Update(float dt)
 	const char* ch_hp = s_hp.c_str();
 	app->render->TextDraw(ch_hp, 560 - 127 * positionCombat_I, 220, 20, UI, { 125,0,0 });
 
+	//If not alive, destroy entity
 	if (this->currentHp <= 0)
 	{
 		this->alive = false;
@@ -115,6 +116,7 @@ bool Protagonist::Update(float dt)
 	{
 		app->render->DrawCircle(544 - 128 * positionCombat_I + (126 / 2), 220, 20, 0, 255, 255);
 
+		//Disable all Target Buttons
 		app->combat->DisableTargetButton(0);
 		app->combat->DisableTargetButton(1);
 		app->combat->DisableTargetButton(2);
@@ -124,6 +126,7 @@ bool Protagonist::Update(float dt)
 		app->combat->DisableTargetButton(6);
 		app->combat->DisableTargetButton(7);
 
+		//Disable skill buttons if targets not alive
 		if (app->combat->enemies[1] == nullptr && app->combat->enemies[2] == nullptr) 
 		{
 			app->combat->DisableSkillButton(1);
@@ -132,23 +135,17 @@ bool Protagonist::Update(float dt)
 		{
 			app->combat->DisableSkillButton(4);
 		}
-
-		/*if (this->currentHp <= 0)
+		if (positionCombat_I == 3)
 		{
-			this->alive = false;
-		}
-		else { this->alive = true; }
-
-		if (this->alive == false)
-		{
-			app->combat->EliminateCombatant(this);
+			app->combat->DisableSkillButton(4);
 		}
 
-		else*/
+
 		{
-			//ATAQUE 1 Daño a una sola unidad
+			//Habilidad 1 Daño a una sola unidad
 			if (app->combat->lastPressedAbility_I == 1) //Only allows targeting 2 and 3
 			{
+				//Enable Buttons if enemies are alive
 				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
 				{
 					app->combat->EnableTargetButton(5);
@@ -162,7 +159,7 @@ bool Protagonist::Update(float dt)
 
 				if (app->combat->targeted_Character != nullptr)
 				{
-
+					//If in godmode, deal massive damage
 					if (!app->input->godMode_B)
 					{
 						float damage = app->combat->targeted_Character->CalculateDamage(1.3*attack);
@@ -177,11 +174,12 @@ bool Protagonist::Update(float dt)
 				}
 
 			}
-			//ATAQUE 2 Auto Heal
+			//Habilidad 2 Auto Heal
 			if (app->combat->lastPressedAbility_I == 2)
 			{
+				//Enable Buttons if enemies are alive
 				app->combat->EnableTargetButton(3);
-				if (app->combat->targeted_Character == app->combat->allies[0]) //ERIC:Solo puede usarse en posicion 0? Porque si no esto puede curar a otros personajes
+				if (app->combat->targeted_Character == app->combat->allies[0]) //ERIC:Solo puede usarse en posicion 0? Porque si no esto puede curar a otros personajes PAU: Si
 				{
 					if (!app->input->godMode_B)
 					{
@@ -198,10 +196,10 @@ bool Protagonist::Update(float dt)
 				}
 					
 			}
-			//ATAQUE 3
+			//Habilidad 3 daño a 1r y 2ndo enemigo
 			if (app->combat->lastPressedAbility_I == 3)
 			{
-
+				//Enable Buttons if enemies are alive
 				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
 				{
 					app->combat->EnableTargetButton(5);
@@ -212,6 +210,7 @@ bool Protagonist::Update(float dt)
 				}
 
 				if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1] && app->combat->targeted_Character != nullptr) {
+					//Damage to 1rst enemy
 					if (app->combat->enemies[0] != nullptr) {
 						if (!app->input->godMode_B)
 						{
@@ -224,6 +223,7 @@ bool Protagonist::Update(float dt)
 						}
 
 					}
+					//Damage to 2nd enemy
 					if (app->combat->enemies[1] != nullptr) {
 						if (!app->input->godMode_B)
 						{
@@ -235,14 +235,16 @@ bool Protagonist::Update(float dt)
 							app->combat->enemies[1]->ModifyHP(-99999);
 						}
 					}
-					
+					//Next Turn
 					if (app->combat->enemies[0] != nullptr || app->combat->enemies[1] != nullptr) { app->combat->NextTurn(); }
 					onTurn = false;
 				}
 
 			}
+			//Habilidad 4 Daño a 2ndo y 4to enemigo
 			if (app->combat->lastPressedAbility_I == 4)
 			{
+				//Enable Buttons if enemies are alive
 				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
 				{
 					app->combat->EnableTargetButton(5);
@@ -255,6 +257,7 @@ bool Protagonist::Update(float dt)
 
 
 				if (app->combat->targeted_Character == app->combat->enemies[1] || app->combat->targeted_Character == app->combat->enemies[3] && app->combat->targeted_Character != nullptr) {
+					//Damage to 2nd enemy
 					if (app->combat->enemies[1] != nullptr) {
 						if (!app->input->godMode_B)
 						{
@@ -267,6 +270,7 @@ bool Protagonist::Update(float dt)
 						}
 
 					}
+					//Damage to 4th enemy
 					if (app->combat->enemies[3] != nullptr) {
 						if (!app->input->godMode_B)
 						{
@@ -278,6 +282,7 @@ bool Protagonist::Update(float dt)
 							app->combat->enemies[1]->ModifyHP(-99999);
 						}
 					}
+					//Next Turn
 					if (app->combat->enemies[1] != nullptr || app->combat->enemies[3] != nullptr) { app->combat->NextTurn(); }
 					onTurn = false;
 				}

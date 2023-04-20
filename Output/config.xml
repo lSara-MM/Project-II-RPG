@@ -88,7 +88,7 @@
 		x="2595" y="4438" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
 	<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
-		x="3600" y="2625" width="150" height="38" texturepath=""/>
+		x="3570" y="2670" width="150" height="150" texturepath=""/>
 </scene>
 	<map>
 		<mapfolder path="Assets/Maps/"/>

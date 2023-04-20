@@ -102,12 +102,14 @@ bool Bard::Update(float dt)
 	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
 	app->render->DrawTexture(texture, 544 - 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //Print bueno
 
+	//si su vida ha llegado a 0, set alive to false, else set it true
 	if (this->currentHp <= 0)
 	{
 		this->alive = false;
 	}
 	else { this->alive = true; }
 
+	//Si no esta vivo, destruir entity
 	if (this->alive == false) 
 	{
 		app->combat->EliminateCombatant(this);
@@ -117,6 +119,7 @@ bool Bard::Update(float dt)
 	{
 		app->render->DrawCircle(544 - 128 * positionCombat_I + (126 / 2), 220, 20, 0, 255, 255);
 
+		//Disable all Target Buttons
 		app->combat->DisableTargetButton(0);
 		app->combat->DisableTargetButton(1);
 		app->combat->DisableTargetButton(2);
@@ -126,6 +129,7 @@ bool Bard::Update(float dt)
 		app->combat->DisableTargetButton(6);
 		app->combat->DisableTargetButton(7);
 
+		//Disable Skill Buttons if there are no enemies to target
 		if (app->combat->enemies[1] == nullptr && app->combat->enemies[2] == nullptr)
 		{
 			app->combat->DisableSkillButton(1);
@@ -134,22 +138,11 @@ bool Bard::Update(float dt)
 		{
 			app->combat->DisableSkillButton(4);
 		}
-
-		/*if (this->currentHp <= 0)
 		{
-			this->alive = false;
-		}
-
-		if (this->alive == false) {
-			app->combat->NextTurn();
-			onTurn = false;
-		}
-
-		else*/
-		{
-			//ATAQUE 1 Daño un solo objetivo
+			//Habilidad 1 Daño a 2ndo o 3r enemigo
 			if (app->combat->lastPressedAbility_I == 1) //Only allows targeting 2 and 3
 			{
+				//Enable Buttons if enemies are alive
 				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
 				{
 					app->combat->EnableTargetButton(5);
@@ -163,7 +156,7 @@ bool Bard::Update(float dt)
 
 				if (app->combat->targeted_Character != nullptr)
 				{
-
+					//Damage to targeted enemy
 					if (!app->input->godMode_B)
 					{
 						float damage = app->combat->targeted_Character->CalculateDamage(attack);
@@ -178,9 +171,10 @@ bool Bard::Update(float dt)
 				}
 
 			}
-			//ATAQUE 2 Damage un objetivo
+			//Habilidad 2 Damage a 1ro o 2ndo enemigo
 			if (app->combat->lastPressedAbility_I == 2)
 			{
+				//Enable Buttons if enemies are alive
 				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
 				{
 					app->combat->EnableTargetButton(5);
@@ -192,6 +186,7 @@ bool Bard::Update(float dt)
 
 				if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1] && app->combat->targeted_Character != nullptr)
 				{
+					//Damage to Targeted Enemy
 					if (app->combat->targeted_Character != nullptr) {
 						if (!app->input->godMode_B)
 						{
@@ -212,7 +207,7 @@ bool Bard::Update(float dt)
 			//ATAQUE 3 Heal en area
 			if (app->combat->lastPressedAbility_I == 3)
 			{
-
+				//Enable Buttons if allies are alive
 				if (app->combat->allies[1] != nullptr && app->combat->allies[1]->alive == true)
 				{
 					app->combat->EnableTargetButton(2);
@@ -221,8 +216,8 @@ bool Bard::Update(float dt)
 				{
 					app->combat->EnableTargetButton(3);
 				}
-
 				if (app->combat->targeted_Character == app->combat->allies[0] || app->combat->targeted_Character == app->combat->allies[1] && app->combat->targeted_Character != nullptr) {
+					//Heal 1rst ally
 					if (app->combat->allies[0] != nullptr) {
 						if (!app->input->godMode_B)
 						{
@@ -235,6 +230,7 @@ bool Bard::Update(float dt)
 						}
 						
 					}
+					//Heal 2nd Ally
 					if (app->combat->allies[1] != nullptr) {
 						if (!app->input->godMode_B)
 						{
@@ -251,9 +247,10 @@ bool Bard::Update(float dt)
 				}
 
 			}
-			//ATAQUE 4 Damage area
+			//Habilidad 4 Damage 3r y 4to enemigo
 			if (app->combat->lastPressedAbility_I == 4)
 			{
+				//Enable Buttons if enemies are alive
 				if (app->combat->enemies[2] != nullptr && app->combat->enemies[2]->alive == true)
 				{
 					app->combat->EnableTargetButton(6);
@@ -266,6 +263,7 @@ bool Bard::Update(float dt)
 
 
 				if (app->combat->targeted_Character == app->combat->enemies[2] || app->combat->targeted_Character == app->combat->enemies[3] && app->combat->targeted_Character != nullptr) {
+					//Damage to 3rd enemy
 					if (app->combat->enemies[2] != nullptr)
 					{
 						if (!app->input->godMode_B)
@@ -279,7 +277,7 @@ bool Bard::Update(float dt)
 						}
 					
 					}
-
+					//Damage to 4rth enemy
 					if (app->combat->enemies[3] != nullptr)
 					{
 						if (!app->input->godMode_B)

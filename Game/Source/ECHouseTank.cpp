@@ -77,6 +77,7 @@ bool HouseTank::Update(float dt)
 	const char* ch_hp = s_hp.c_str();
 	app->render->TextDraw(ch_hp, 628 + 127 * positionCombat_I, 220, 20, UI, { 125,0,0 });
 
+	//Si vida es 0 o menor, eliminar enemy
 	if (currentHp <= 0)
 	{
 		app->combat->EliminateCombatant(this);
@@ -93,23 +94,10 @@ bool HouseTank::Update(float dt)
 	
 	if (onTurn)
 	{
-		/*if (this->currentHp <= 0)
 		{
-			this->alive = false;
-		}
-
-		if (this->alive == false) {
-			app->combat->NextTurn();
-			onTurn = false;
-		}
-
-		else*/
-		{
+			//Elegir numero random de 1 al 3
 			int randomNum = std::rand() % 3 + 1;
-
-			//Timer(4);
-
-			//Mejor con un switch
+			//Si es 1, ataca a 1r aliado
 			if (randomNum == 1)
 			{
 				if (app->combat->allies[0] != nullptr)
@@ -122,6 +110,7 @@ bool HouseTank::Update(float dt)
 				}
 				app->combat->NextTurn();
 			}
+			//Si es 2, hace daño a 2ndo aliado
 			if (randomNum == 2)
 			{
 				if (!(app->combat->allies[1] == nullptr))
@@ -131,32 +120,35 @@ bool HouseTank::Update(float dt)
 					{
 						app->combat->allies[1]->ModifyHP(-damage);
 					}
-					
 				}
 				app->combat->NextTurn();
 			}
+			//Si es 3, hace daño a 1r y 2ndo aliado
 			if (randomNum == 3)
 			{
+				//Ataque a 1r aliado
 				if (!(app->combat->allies[0] == nullptr))
 				{
-					float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
-					app->combat->allies[0]->ModifyHP(-damage);
-				}
-
-				if (!(app->combat->allies[1] == nullptr))
-				{
-					float damage = app->combat->allies[1]->CalculateDamage(attack * 0.25);
 					if (!app->input->godMode_B)
 					{
-						app->combat->allies[1]->ModifyHP(-damage);
+						float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
+						app->combat->allies[0]->ModifyHP(-damage);
+					}
+				}
+				//Ataque a 2ndo aliado
+				if (!(app->combat->allies[1] == nullptr))
+				{
+					if (!app->input->godMode_B)
+					{
+						float damage = app->combat->allies[1]->CalculateDamage(attack * 0.25);
+						if (!app->input->godMode_B)
+						{
+							app->combat->allies[1]->ModifyHP(-damage);
+						}
 					}
 				}
 				app->combat->NextTurn();
 			}
-			//render barra de habilidades
-			// Para seleccionar app->input->GetMousePosition o 
-			//app->combat->NextTurn();
-
 			onTurn = false;
 		}
 	}
