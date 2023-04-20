@@ -49,25 +49,26 @@ public:
 
 public:
 
+	int npcSetID;
+
 	Player* player;
 	bool frcap_B = true;
-	bool pause_B;
+	bool pause_B = false;
+	bool settings_B = false;
 	bool mute_B = true;
 
 	pugi::xml_node sceneNode;
 
 private:
 
-	//Music
+	//Music path
 	const char* musHauntedPath;
 
 	// Settings
 	Settings* pSettings;
-
-	//Pause* pPause = &pauseMenu;
+	Pause* pPause;
 
 	bool exit_B;
-
 };
 
 #endif // __HOUSEOFTERRORS_H__

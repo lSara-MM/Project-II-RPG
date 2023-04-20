@@ -49,25 +49,25 @@ public:
 
 public:
 
+	int npcSetID;
+
 	Player* player;
 	bool frcap_B = true;
-	bool pause_B;
+	bool pause_B = false;
+	bool settings_B = false;
 	bool mute_B = true;
 
 	pugi::xml_node sceneNode;
 
 private:
 
-	//Path music
+	//Music path
 	const char* circusMusPath;
 
 	// Settings
 	Settings* pSettings;
-
-	//Pause* pPause = &pauseMenu;
+	Pause* pPause;
 
 	bool exit_B;
-
 };
-
 #endif // __CIRCUS_H__

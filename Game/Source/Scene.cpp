@@ -51,7 +51,7 @@ bool Scene::Awake(pugi::xml_node& config)
 
 bool Scene::Start()
 {
-	app->audio->PlayMusic(lobby_music, 1);
+	app->audio->PlayMusic(lobby_music, 0);
 
 	//Load Map
 	app->map->Load(0);
@@ -61,24 +61,22 @@ bool Scene::Start()
 	npcSetID = 1;
 
 	// Settings
-	pSettings = new Settings(this);
+	pSettings = nullptr;
+	pPause = nullptr;
 	pause_B = false;
 	settings_B = false;
 
 	// Pause 
 
-	//Camera pos temporal Sara no convulsiones
-	app->render->camera.x = -2800;
-	app->render->camera.y = -800;
-	
 	InitEntities();
 	app->entityManager->Enable();
+	player->Start();
 
-	if (app->iScene->continueGame_B)
-	{
-		app->LoadGameRequest();
-		app->iScene->continueGame_B = false;
-	}
+	//if (app->iScene->continueGame_B)
+	//{
+	//	app->LoadGameRequest();
+	//	app->iScene->continueGame_B = false;
+	//}
 
 	return true;
 }
@@ -103,7 +101,8 @@ bool Scene::Update(float dt)
 	//ERIC: Prueba que no funciona.
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || app->input->controller.X != 0) {
 		app->fade->FadingToBlack(this, (Module*)app->combat, 30);
-		//app->SaveGameRequest();//guardar para volver misma posicion al volver de combate
+		app->SaveGameRequest();//guardar para volver misma posicion al volver de combate
+		app->iScene->continueGame_B = true;
 	}
 		
 
@@ -170,9 +169,7 @@ bool Scene::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	// player->Disable();
-
-	app->entityManager->Disable();
+	app->entityManager->CleanUp();
 
 	if (pSettings != nullptr)
 	{
@@ -305,6 +302,7 @@ bool Scene::InitEntities()
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = sceneNode.child("player");
 	player->Awake();
+
 	switch (app->entityManager->tpID)
 	{
 	case 0:
@@ -318,6 +316,9 @@ bool Scene::InitEntities()
 	case 21:
 		player->position.x = 3437;
 		player->position.y = 1085;
+		break;
+
+	default:
 		break;
 	}
 

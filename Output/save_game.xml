@@ -11,18 +11,19 @@
 		<previousGame state_B="true" />
 	</introScene>
 	<scene />
+	<Circus />
+	<HouseOfTerrors />
+	<practiceTent />
 	<loseScene />
 	<map />
 	<entitymanager>
-		<player x="120" y="260" />
-		<bard currentHp="0" />
-		<protagonist currentHp="0" />
+		<player x="3429" y="1155" />
 	</entitymanager>
 	<combat />
 	<dialogue />
 	<guiManager />
 	<fadeToBlack />
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="-2809" y="-822" />
 	</renderer>
 </save_state>

@@ -1,309 +1,99 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\Player.cpp" />
-    <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp">
-      <Filter>App\PugiXml</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Log.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\App.cpp">
-      <Filter>App</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Main.cpp">
-      <Filter>App</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Audio.cpp">
-      <Filter>Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Map.cpp">
-      <Filter>Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Physics.cpp">
-      <Filter>Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Render.cpp">
-      <Filter>Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Textures.cpp">
-      <Filter>Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Window.cpp">
-      <Filter>Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FadeToBlack.cpp">
-      <Filter>Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EntityManager.cpp">
-      <Filter>Modules\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Pathfinding.cpp">
-      <Filter>Modules\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PerfTimer.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Timer.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GuiButton.cpp">
-      <Filter>Modules\Core\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GuiManager.cpp">
-      <Filter>Modules\Core\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\IntroScene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\LogoScene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\LoseScene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GuiCheckBox.cpp">
-      <Filter>Modules\Core\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GuiSliderBar.cpp">
-      <Filter>Modules\Core\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Combat.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PCProtagonist.cpp">
-      <Filter>Modules\Entities\Combat\PCs</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ECHouseTank.cpp">
-      <Filter>Modules\Entities\Combat\EC</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DialogueSystem.cpp">
-      <Filter>Modules\Core\Dialogue System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DialogueTree.cpp">
-      <Filter>Modules\Core\Dialogue System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Input.cpp">
-      <Filter>Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Characther.cpp">
-      <Filter>Modules\Entities\Combat</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CombatEnemy.cpp">
-      <Filter>Modules\Entities\Combat</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PartyMember.cpp">
-      <Filter>Modules\Entities\Combat</Filter>
-    </ClCompile>
+    <ClCompile Include="Source\Characther.cpp" />
+    <ClCompile Include="Source\Circus.cpp" />
+    <ClCompile Include="Source\Combat.cpp" />
+    <ClCompile Include="Source\CombatEnemy.cpp" />
+    <ClCompile Include="Source\ECHouseDPS.cpp" />
+    <ClCompile Include="Source\ECHouseHealer.cpp" />
+    <ClCompile Include="Source\DialogueSystem.cpp" />
+    <ClCompile Include="Source\DialogueTree.cpp" />
+    <ClCompile Include="Source\ECHouseTank.cpp" />
+    <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\FadeToBlack.cpp" />
+    <ClCompile Include="Source\GuiButton.cpp" />
+    <ClCompile Include="Source\GuiCheckBox.cpp" />
+    <ClCompile Include="Source\GuiManager.cpp" />
+    <ClCompile Include="Source\GuiSliderBar.cpp" />
+    <ClCompile Include="Source\HouseOfTerrors.cpp" />
+    <ClCompile Include="Source\Input.cpp" />
+    <ClCompile Include="Source\IntroScene.cpp" />
+    <ClCompile Include="Source\LogoScene.cpp" />
+    <ClCompile Include="Source\LoseScene.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\App.cpp" />
+    <ClCompile Include="Source\Audio.cpp" />
+    <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\NPC.cpp" />
-    <ClCompile Include="Source\Circus.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\HouseOfTerrors.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PracticeTent.cpp">
-      <Filter>Scenes</Filter>
-    <ClCompile Include="Source\ECHouseDPS.cpp">
-      <Filter>Modules\Entities\Combat\EC</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ECHouseHealer.cpp">
-      <Filter>Modules\Entities\Combat\EC</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PCBard.cpp">
-      <Filter>Modules\Entities\Combat\PCs</Filter>
-    </ClCompile>
+    <ClCompile Include="Source\PartyMember.cpp" />
+    <ClCompile Include="Source\Pathfinding.cpp" />
+    <ClCompile Include="Source\PCBard.cpp" />
+    <ClCompile Include="Source\PCProtagonist.cpp" />
+    <ClCompile Include="Source\PerfTimer.cpp" />
+    <ClCompile Include="Source\Physics.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PracticeTent.cpp" />
+    <ClCompile Include="Source\Scene.cpp" />
+    <ClCompile Include="Source\Render.cpp" />
+    <ClCompile Include="Source\Textures.cpp" />
+    <ClCompile Include="Source\Timer.cpp" />
+    <ClCompile Include="Source\Window.cpp" />
+    <ClCompile Include="Source\Log.cpp" />
+    <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Player.h" />
-    <ClInclude Include="Source\Animation.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Defs.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DynArray.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\List.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Point.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Queue.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp">
-      <Filter>App\PugiXml</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp">
-      <Filter>App\PugiXml</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Log.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SString.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\App.h">
-      <Filter>App</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Audio.h">
-      <Filter>Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Map.h">
-      <Filter>Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Physics.h">
-      <Filter>Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Render.h">
-      <Filter>Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Textures.h">
-      <Filter>Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Window.h">
-      <Filter>Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Module.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FadeToBlack.h">
-      <Filter>Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EntityManager.h">
-      <Filter>Modules\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Entity.h">
-      <Filter>Modules\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Pathfinding.h">
-      <Filter>Modules\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PerfTimer.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Timer.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GuiButton.h">
-      <Filter>Modules\Core\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GuiControl.h">
-      <Filter>Modules\Core\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GuiManager.h">
-      <Filter>Modules\Core\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\IntroScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\LogoScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\LoseScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GuiCheckBox.h">
-      <Filter>Modules\Core\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GuiSliderBar.h">
-      <Filter>Modules\Core\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Settings.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
+    <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Characther.h" />
+    <ClInclude Include="Source\Circus.h" />
+    <ClInclude Include="Source\Combat.h" />
+    <ClInclude Include="Source\CombatEnemy.h" />
+    <ClInclude Include="Source\ECHouseDPS.h" />
+    <ClInclude Include="Source\ECHouseHealer.h" />
+    <ClInclude Include="Source\DialogueSystem.h" />
+    <ClInclude Include="Source\DialogueTree.h" />
+    <ClInclude Include="Source\ECHouseTank.h" />
     <ClInclude Include="Source\Enemy.h" />
-    <ClInclude Include="Source\Combat.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PCProtagonist.h">
-      <Filter>Modules\Entities\Combat\PCs</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ECHouseTank.h">
-      <Filter>Modules\Entities\Combat\EC</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DialogueSystem.h">
-      <Filter>Modules\Core\Dialogue System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DialogueTree.h">
-      <Filter>Modules\Core\Dialogue System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input.h">
-      <Filter>Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Characther.h">
-      <Filter>Modules\Entities\Combat</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CombatEnemy.h">
-      <Filter>Modules\Entities\Combat</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PartyMember.h">
-      <Filter>Modules\Entities\Combat</Filter>
-    </ClInclude>
+    <ClInclude Include="Source\Entity.h" />
+    <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\FadeToBlack.h" />
+    <ClInclude Include="Source\GuiButton.h" />
+    <ClInclude Include="Source\GuiCheckBox.h" />
+    <ClInclude Include="Source\GuiControl.h" />
+    <ClInclude Include="Source\GuiManager.h" />
+    <ClInclude Include="Source\GuiSliderBar.h" />
+    <ClInclude Include="Source\HouseOfTerrors.h" />
+    <ClInclude Include="Source\Input.h" />
+    <ClInclude Include="Source\IntroScene.h" />
+    <ClInclude Include="Source\LogoScene.h" />
+    <ClInclude Include="Source\LoseScene.h" />
+    <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\NPC.h" />
-    <ClInclude Include="Source\Circus.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\HouseOfTerrors.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PracticeTent.h">
-      <Filter>Scenes</Filter>
-    <ClInclude Include="Source\ECHouseDPS.h">
-      <Filter>Modules\Entities\Combat\EC</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ECHouseHealer.h">
-      <Filter>Modules\Entities\Combat\EC</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PCBard.h">
-      <Filter>Modules\Entities\Combat\PCs</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{b19458f8-0940-4d6b-be0c-ca4697febc70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="App">
-      <UniqueIdentifier>{ca132901-f760-4cd8-b9c8-61dd673d3bb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules">
-      <UniqueIdentifier>{9f12145a-edf9-4c46-819d-a9a7f4071634}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Core">
-      <UniqueIdentifier>{e3912c26-a29e-40c1-a192-9b91aa748e49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="App\PugiXml">
-      <UniqueIdentifier>{f869ed14-2d64-47b5-90d6-187a9d357b60}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Entities">
-      <UniqueIdentifier>{232a7a67-5c13-49f5-b915-a198ac08296f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Core\GUI">
-      <UniqueIdentifier>{45c302ec-1d81-41d5-a52d-167fc2483d41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes">
-      <UniqueIdentifier>{59396da5-13ff-4cbf-85fc-91a7386282ba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Core\Dialogue System">
-      <UniqueIdentifier>{785cf3fe-fa6d-49b9-a075-19fdc110902d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Entities\Combat">
-      <UniqueIdentifier>{22185b4f-ffea-4c83-bf5a-fd849d8df9c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Entities\Combat\EC">
-      <UniqueIdentifier>{2c344999-e73e-47ae-9538-5822c1886e1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Entities\Combat\PCs">
-      <UniqueIdentifier>{c5d6774c-26c4-4529-a462-f01c7599a39a}</UniqueIdentifier>
-    </Filter>
+    <ClInclude Include="Source\PartyMember.h" />
+    <ClInclude Include="Source\Pathfinding.h" />
+    <ClInclude Include="Source\PCBard.h" />
+    <ClInclude Include="Source\PCProtagonist.h" />
+    <ClInclude Include="Source\PerfTimer.h" />
+    <ClInclude Include="Source\Physics.h" />
+    <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\PracticeTent.h" />
+    <ClInclude Include="Source\Queue.h" />
+    <ClInclude Include="Source\Scene.h" />
+    <ClInclude Include="Source\Audio.h" />
+    <ClInclude Include="Source\App.h" />
+    <ClInclude Include="Source\Module.h" />
+    <ClInclude Include="Source\Render.h" />
+    <ClInclude Include="Source\Settings.h" />
+    <ClInclude Include="Source\Textures.h" />
+    <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\Window.h" />
+    <ClInclude Include="Source\Defs.h" />
+    <ClInclude Include="Source\List.h" />
+    <ClInclude Include="Source\Log.h" />
+    <ClInclude Include="Source\Point.h" />
+    <ClInclude Include="Source\SString.h" />
+    <ClInclude Include="Source\DynArray.h" />
+    <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
+    <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
   </ItemGroup>
 </Project>

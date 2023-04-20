@@ -54,6 +54,12 @@ bool Combat::Start()
 	textureBackground = app->tex->Load(texturePathBackground);
 	textureTargetButton = app->tex->Load(texturePathTargetButton);
 
+	for (int i = 0; i < 4; i++)
+	{
+		allies[i] = nullptr;
+		enemies[i] = nullptr;
+	}
+
 	//Zona aliados
 	for (int i = 0; i < 4; i++)
 	{
@@ -76,7 +82,7 @@ bool Combat::Start()
 	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, this, { 107 + 167, 600, 140, 50 }, ButtonType::START, actions[3], 20));
 
 	//Inventory Button
-	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, this, { 60, 60, 50, 50 }, ButtonType::START, "Inv", 20));
+	//listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, this, { 60, 60, 50, 50 }, ButtonType::START, "Inv", 20));
 	
 	//Inicializar Combatientes (si no se hace aqui por algun motivo se dejan de ver)
 	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_BARD);
@@ -117,7 +123,7 @@ bool Combat::Start()
 	enemy3->parameters = app->scene->sceneNode.child("enemyHealer");
 	enemy3->Awake();
 
-
+	//app->entityManager->Disable();
 
 	//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDAIS AVISADOS!!!
 	app->combat->AddCombatant((Character*)enemy1, 0);
@@ -268,7 +274,7 @@ bool Combat::PostUpdate()
 {
 	bool ret = true;
 
-	if (exit) return false;
+	//if (exit_B) return false;
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -296,7 +302,7 @@ bool Combat::CleanUp()
 	{
 		if(allies[i] != nullptr)
 		{
-			allies[i]->Disable();
+			allies[i]->CleanUp();
 			app->entityManager->DestroyEntity(allies[i]);
 		}
 		allies[i] = nullptr;
@@ -305,21 +311,16 @@ bool Combat::CleanUp()
 	{
 		if (enemies[i] != nullptr)
 		{
-			enemies[i]->Disable();
+			enemies[i]->CleanUp();
 			app->entityManager->DestroyEntity(enemies[i]);
 		}
 		enemies[i] = nullptr;
 	}
 
 
-	app->entityManager->entities.Clear();
+	//app->entityManager->entities.Clear();
 
 	listInitiative.Clear();
-	
-	app->entityManager->Disable();
-
-
-	
 
 	return true;
 }
@@ -570,7 +571,8 @@ bool Combat::EliminateCombatant(Character* chara)
 	default:
 		break;
 	}
-
+	app->entityManager->DestroyEntity(chara);
+	//chara->Disable();
 	listInitiative.Del(listInitiative.At(listInitiative.Find(chara)));
 
 	return true;

@@ -89,9 +89,10 @@ private:
 
 	int mouseX_combat, mouseY_combat;
 	float mouse_Speed;
-	// Settings
-	Settings* pSettings;
-	Pause* pPause;
+	
+	//// Settings
+	//Settings* pSettings;
+	//Pause* pPause;
 
 	pugi::xml_node combatNode;
 
@@ -108,7 +109,7 @@ private:
 
 	const char* actions[4] = { "Atk 1", "Atk 2", "Atk 3", "Atk 4" };
 
-	bool exit;
+	bool exit_B;
 };
 
 #endif // __COMBAT_H__

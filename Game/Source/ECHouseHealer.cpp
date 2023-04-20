@@ -77,15 +77,10 @@ bool HouseHealer::Update(float dt)
 	const char* ch_hp = s_hp.c_str();
 	app->render->TextDraw(ch_hp, 628 + 127 * positionCombat_I, 220, 20, UI, { 125,0,0 });
 
-	if (this->currentHp <= 0)
-	{
-		this->alive = false;
-	}
-	else { this->alive = true; }
-
-	if (this->alive == false)
+	if (currentHp <= 0)
 	{
 		app->combat->EliminateCombatant(this);
+		return true;
 	}
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();

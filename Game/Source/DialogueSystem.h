@@ -38,7 +38,7 @@ public:
 
 	DialogueChoice* playerInput;
 
-	DialogueTree* activeTree;
+	DialogueTree* activeTree = nullptr;
 	//vector <DialogueTree*> treeList;
 
 	bool hasEnded;
