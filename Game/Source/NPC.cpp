@@ -67,7 +67,7 @@ bool Npc::Awake() {
 }
 
 bool Npc::Start() {
-	srand(time(NULL));
+	//srand(time(NULL));
 
 	texture = app->tex->Load(texturePath);
 	currentAnimation = &idleAnim;

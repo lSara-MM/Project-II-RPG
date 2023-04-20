@@ -72,14 +72,14 @@ bool Scene::Start()
 	settings_B = false;
 
 	InitEntities();
-	app->entityManager->Enable();
-	player->Start();
 
-	//if (app->iScene->continueGame_B)
-	//{
-	//	app->LoadGameRequest();
-	//	app->iScene->continueGame_B = false;
-	//}
+	app->entityManager->Enable();
+	
+	if (app->iScene->continueGame_B)
+	{
+		app->LoadGameRequest();
+		app->iScene->continueGame_B = false;
+	}
 
 	return true;
 }

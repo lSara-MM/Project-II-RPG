@@ -247,7 +247,7 @@ bool Combat::Update(float dt)
 		EliminateCombatant(enemies[0]);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN || app->input->controller.B != 0)
 	{
 		app->input->currentHP_Bard = allies[1]->GetHealth();
 		app->input->currentHP_Protagonist = allies[0]->GetHealth();
@@ -317,8 +317,7 @@ bool Combat::CleanUp()
 		enemies[i] = nullptr;
 	}
 
-
-	//app->entityManager->entities.Clear();
+	app->entityManager->Disable();
 
 	listInitiative.Clear();
 

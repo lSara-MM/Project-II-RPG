@@ -15,6 +15,8 @@
 #include "Defs.h"
 #include "Log.h"
 
+#include "EntityManager.h"
+
 #include <iostream>
 using namespace std;
 #include <sstream>
@@ -151,6 +153,8 @@ bool IntroScene::CleanUp()
 
 	delete pSettings;
 	pSettings = nullptr;
+
+	app->entityManager->Disable();
 
 	app->guiManager->CleanUp();
 	return true;
