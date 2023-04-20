@@ -96,8 +96,9 @@ bool Player::Start()
 
 	currentAnimation = &currentAnim;
 
-	pbody = app->physics->CreateRectangle(position.x - width / 2, position.y - height / 2, width + 5, height + 5, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x - width / 2, position.y - height / 2, 16, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
+	flipType = SDL_FLIP_NONE;
 
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;

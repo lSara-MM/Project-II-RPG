@@ -231,7 +231,7 @@ void Scene::Debug()
 	}
 
 	// Pause menu
-	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || app->input->controller.START == 1))
+	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->controller.START == 1))
 	{
 		pause_B = true;	
 
