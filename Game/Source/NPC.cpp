@@ -103,9 +103,6 @@ bool Npc::Update(float dt)
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
-	// borrar al final
-	app->render->TextDraw(name.GetString(), position.x, position.y - FONT_SIZE * 2, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
-
 	return true;
 }
 

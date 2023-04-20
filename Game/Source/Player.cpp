@@ -9,9 +9,6 @@
 #include "Textures.h"
 
 #include "Scene.h"
-#include "HouseOfTerrors.h"
-#include "Circus.h"
-#include "PracticeTent.h"
 
 #include "FadeToBlack.h"
 #include "EntityManager.h"
@@ -57,10 +54,10 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	idleRigthAnim.PushBack({ 128, 192, 64, 64 });
 
-	downAnim.speed = 0.08f;
-	upAnim.speed = 0.08f;
-	rigthAnim.speed = 0.08f;
-	leftAnim.speed = 0.08f;
+	downAnim.speed = 0.1f;
+	upAnim.speed = 0.1f;
+	rigthAnim.speed = 0.1f;
+	leftAnim.speed = 0.1f;
 
 	active = true;
 }
@@ -85,11 +82,12 @@ bool Player::Awake() {
 bool Player::Start() {
 
 	texture = app->tex->Load(texturePath);
+	textureE = app->tex->Load("Assets/GUI/UI_E.png");
+
 	currentAnimation = &currentAnim;
 	
-	pbody = app->physics->CreateRectangle(position.x - width / 2, position.y - height / 2, width + 5, height + 5, bodyType::DYNAMIC);
-	pbody->body->SetFixedRotation(true);
-	
+	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
+	pbody->body->SetFixedRotation(true);	
 	pbody->listener = this; 
 	pbody->ctype = ColliderType::PLAYER;
 	
@@ -101,9 +99,6 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	app->render->camera.y = -position.y + 360 - height;
-	app->render->camera.x = -position.x + 640 - width;
-
 	pbody->body->SetGravityScale(0);
 
 	if (app->scene->pause_B)
@@ -126,20 +121,20 @@ bool Player::Update(float dt)
 	currentAnimation->Update();
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x - width - 2, position.y - height, &rect, 1.0f, NULL, NULL, NULL, flipType);
+	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
-	//Sara aqu� tienes tu parte, donde cuando el player est� dentro de la zona interactuable con el npc
-	if (npcInteract) 
+	if (npcInteract)
 	{
-		app->render->DrawRectangle({ npcTalkingTo->position.x, npcTalkingTo->position.y - 60, 24, 24 },
-			255, 255, 255, 200);
-		app->render->TextDraw("E", npcTalkingTo->position.x + npcTalkingTo->width / 2, npcTalkingTo->position.y - 57, 16, Font::TEXT);
-
+		app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
+		
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->controller.A != 0)
 		{
 			lockMovement = true;
+			app->dialogueSystem->Enable();
 			npcTalkingTo->PerformDialogue();
 		}
+		if (app->dialogueSystem->hasEnded) { lockMovement = false; }
+
 
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y < 0)
 		{
@@ -165,12 +160,12 @@ bool Player::Update(float dt)
 			currentAnimation = &idleRigthAnim;
 		}
 	}
-	else 
+	else
 	{
 		lockMovement = false;
 	}
 
-	if(!lockMovement)
+	if (!lockMovement)
 	{
 		Controller(dtP);
 	}
@@ -194,6 +189,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 	switch (physB->ctype)
 	{
 	case ColliderType::NPC:
+		LOG("NPC Interact");
 
 		i = app->scene->listNpc.start;
 
@@ -205,40 +201,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 				break;
 			}
 		}
+
 		npcInteract = true;
 		break;
-
-	case ColliderType::PORTAL:
-		switch (physB->id)
-		{
-		case 0:
-			if (app->scene->active == true)
-			{
-				app->map->mapPendingtoDelete = true;
-				app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
-			}
-			if (app->hTerrors->active == true)
-			{
-				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
-			}
-			if (app->practiceTent->active == true)
-			{
-				app->fade->FadingToBlack((Module*)app->practiceTent, (Module*)app->scene, 90);
-			}
-			if (app->circus->active == true)
-			{
-				app->fade->FadingToBlack((Module*)app->circus, (Module*)app->scene, 90);
-			}
-			break;
-		case 1:
-			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
-			break;
-		case 2:
-			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, 90);
-			break;
-		}
-		break;
-
 	default:
 		break;
 	}
@@ -265,16 +230,15 @@ void Player::Controller(float dt)
 			{
 				keyLockUp = true;
 				currentAnimation = &upAnim;
-				currentAnim.speed = currentAnim.speed * 4;
-				vel.y = -125 * 3;
+				vel.y = -125 * 2;
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || app->input->controller.j1_x > 0)
 				{
-					vel.x = 125 * 3;
+					vel.x = 125 * 2;
 				}
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || app->input->controller.j1_x < 0)
 				{
-					vel.x = -125 * 3;
+					vel.x = -125 * 2;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y < 0)
@@ -289,16 +253,15 @@ void Player::Controller(float dt)
 			{
 				keyLockDown = true;
 				currentAnimation = &downAnim;
-				currentAnim.speed = currentAnim.speed * 4;
-				vel.y = 125 * 3;
+				vel.y = 125 * 2;
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || app->input->controller.j1_x > 0)
 				{
-					vel.x = 125 * 3;
+					vel.x = 125 * 2;
 				}
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || app->input->controller.j1_x < 0)
 				{
-					vel.x = -125 * 3;
+					vel.x = -125 * 2;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y > 0)
@@ -313,16 +276,15 @@ void Player::Controller(float dt)
 			{
 				keyLockLeft = true;
 				currentAnimation = &leftAnim;
-				currentAnim.speed = currentAnim.speed * 4;
-				vel.x = -125 * 3;
+				vel.x = -125 * 2;
 
 				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
 				{
-					vel.y = 125 * 3;
+					vel.y = 125 * 2;
 				}
 				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
 				{
-					vel.y = -125 * 3;
+					vel.y = -125 * 2;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP || app->input->controller.j1_x < 0)
@@ -337,16 +299,15 @@ void Player::Controller(float dt)
 			{
 				keyLockRigth = true;
 				currentAnimation = &rigthAnim;
-				currentAnim.speed = currentAnim.speed * 4;
-				vel.x = 125 * 3;
+				vel.x = 125 * 2;
 
 				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
 				{
-					vel.y = 125 * 3;
+					vel.y = 125 * 2;
 				}
 				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
 				{
-					vel.y = -125 * 3;
+					vel.y = -125 * 2;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP || app->input->controller.j1_x > 0)
@@ -362,6 +323,7 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
 			{
+				app->render->camera.y += 125 * dtP;
 				keyLockUp = true;
 				currentAnimation = &upAnim;
 				vel.y = -125;
@@ -377,6 +339,7 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
 			{
+				app->render->camera.y += -125 * dtP;
 				keyLockDown = true;
 				currentAnimation = &downAnim;
 				vel.y = 125;
@@ -392,6 +355,7 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || app->input->controller.j1_x < 0)
 			{
+				app->render->camera.x += 125 * dtP;
 				keyLockLeft = true;
 				currentAnimation = &leftAnim;
 				vel.x = -125;
@@ -407,6 +371,7 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || app->input->controller.j1_x > 0)
 			{
+				app->render->camera.x += -125 * dtP;
 				keyLockRigth = true;
 				currentAnimation = &rigthAnim;
 				vel.x = 125;

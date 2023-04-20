@@ -97,6 +97,7 @@ private:
 	void DisableAtStart();
 	friend class Scene;
 	friend class Physics;
+
 public:
 
 	// Modules
@@ -122,7 +123,6 @@ public:
 	PracticeTent* practiceTent;
 	Circus* circus;
 	LoseScene* loseScene;
-	LeaderboardScene* leadScene;
 	FadeToBlack* fade;
 
 	// Time control

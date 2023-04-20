@@ -27,6 +27,9 @@
 	<fadeToBlack>
 	</fadeToBlack>
 
+	<dialogue textBoxBg="Assets/GUI/UI_TextBox.png">
+	</dialogue>
+
 	<logoScene background="Assets/Maps/logo_bg.png" audioLogoPath ="Assets/Audio/Music/music_logo.ogg"/>
 	<loseScene background="Assets/Maps/lose_bg.png" losebutton1="Assets/Maps/rect_pa.png" losebutton2="Assets/Maps/rect_gu.png"
 		musicLose="Assets/Audio/Music/the_end.ogg"/>
@@ -41,29 +44,30 @@
 	   coinspath="Assets/Maps/coin.png" heartspath="Assets/Maps/heart.png"
 		settingsPath ="Assets/Textures/setting_menu.png" mouseSpeed =" 0.5">
 		
-	<player x="3000" y="1000" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
-			texturepath="Assets/Textures/CH_Protagonist_Sprites.png"
-			velocity="400" width="20" height="27" FUYMGravity="250"
-			audiopathCoin="Assets/Audio/Fx/Coin.wav"
-			audiopathGem="Assets/Audio/Fx/Gem.wav"
-			audiopathJump ="Assets/Audio/Fx/sfx_jump.wav "
-			audiopathLand ="Assets/Audio/Fx/sfx_landing.wav"
-			audiopathDeath ="Assets/Audio/Fx/sfx_vaporizing.wav"
-			audiopathAttack="Assets/Audio/Fx/sfx_attack.wav"
-			audiopathSecret ="Assets/Audio/Fx/sfx_secret.wav"
-			audiopathCd ="Assets/Audio/Fx/sfx_Attack_Up.wav"
-			audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
-			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"/>
-		
-	<npc name="GUIA" dialogueID="1"
-		x="0" y="0" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
+		<player x="3000" y="1000" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
+				texturepath="Assets/Textures/CH_Protagonist_Sprites.png"
+				velocity="400" width="20" height="27" FUYMGravity="250"
+				audiopathCoin="Assets/Audio/Fx/Coin.wav"
+				audiopathGem="Assets/Audio/Fx/Gem.wav"
+				audiopathJump ="Assets/Audio/Fx/sfx_jump.wav "
+				audiopathLand ="Assets/Audio/Fx/sfx_landing.wav"
+				audiopathDeath ="Assets/Audio/Fx/sfx_vaporizing.wav"
+				audiopathAttack="Assets/Audio/Fx/sfx_attack.wav"
+				audiopathSecret ="Assets/Audio/Fx/sfx_secret.wav"
+				audiopathCd ="Assets/Audio/Fx/sfx_Attack_Up.wav"
+				audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
+				audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"/>
+			
+		<npc name="GUIA" dialogueID="1"
+			x="0" y="0" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
 
-	<npc name="ORACULO" dialogueID="2"
-		x="420" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
-		
-	<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
-		x="900" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
-</scene>
+		<npc name="ORACULO" dialogueID="2"
+			x="420" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
+			
+		<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
+			x="900" y="260" width="20" height="27" texturepath="Assets/Textures/CH_Protagonist_Sprites.png"/>
+	</scene>
+
 	<map>
 		<mapfolder path="Assets/Maps/"/>
 		<mapfile path="Assets/Maps/map1.tmx"/>
@@ -81,8 +85,8 @@
 		<mapcircusfile path="Assets/Maps/mapCircus.tmx"/>
 		<mapcircusbackground path="Assets/Maps/CircusMap.png"/>
 
+		<map1>
+		</map1>
 	</map>
-
-
 
 </config>

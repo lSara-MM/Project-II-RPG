@@ -475,5 +475,6 @@ void App::DisableAtStart()
 	practiceTent->active = false;
 	loseScene->active = false;
 	entityManager->active = false;
+	dialogueSystem->active = false;
 	combat->active = false;
 }

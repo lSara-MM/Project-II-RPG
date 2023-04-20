@@ -472,7 +472,7 @@ public:
 		rect = { 341, 0, 90, 93 };
 		app->render->DrawTexture(settingsTexture, 789 - app->render->camera.x, 100 - app->render->camera.y, &rect);
 
-		app->render->DrawLine(490, 250, 490, 600, 0, 0, 0);
+		app->render->DrawLine(490 - app->render->camera.x, 250 - app->render->camera.y, 490 - app->render->camera.x, 600 - app->render->camera.y, 0, 0, 0);
 		app->render->TextDraw("Settings", 600, 121, 40, Font::UI, { 255, 255, 255 });
 
 

@@ -51,7 +51,7 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 	max_chars_line = FONT_SIZE * 3;
 
 	// descomentar quan els noms dels npc estiguin al dialogues xml
-	//app->render->TextDraw(activeNode->name.GetString(), pos.x + 50, pos.y - FONT_SIZE * 2, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
+	app->render->TextDraw(activeNode->name.GetString(), pos.x + 50, pos.y - FONT_SIZE * 2, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
 	
 	if (!app->input->playerName.empty())
 	{
@@ -66,7 +66,7 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 	size_t lines = activeNode->texts.size();
 	for (size_t i = 0; i < lines; i++)
 	{
-		app->render->TextDraw(activeNode->texts[i].GetString(), pos.x + 100, pos.y + 20 + 50 * i, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(activeNode->texts[i].GetString(), pos.x + 100, pos.y + 50 + 50 * i, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
 	}
 
 	EventReturn(mod, pos);

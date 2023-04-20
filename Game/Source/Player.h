@@ -73,7 +73,6 @@ public:
 
 	iPoint position;
 
-	bool npcInteract;
 
 private:
 
@@ -81,8 +80,10 @@ private:
 	const char* texturePath;
 
 	Npc* npcTalkingTo;
+	bool npcInteract;
 	
 	int width, height;
+	SDL_Texture* textureE;
 };
 
 #endif // __PLAYER_H__

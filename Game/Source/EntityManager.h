@@ -45,6 +45,8 @@ public:
 
 	List<Entity*> entities;
 
+	//Pido perd�n no borren 
+	int tpID = 21;
 
 };
 

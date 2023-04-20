@@ -50,12 +50,17 @@ bool Scene::Start()
 {
 	//Load Map
 	app->map->Load(0);
+	backGround = app->tex->Load("Assets/Maps/TwistedTentMap.png");
+	exit_B = false;
 
-	//pause menu
-	pause_B = false;
+	npcSetID = 1;
 
+	// Settings
+	pSettings = new Settings(this);
 	pause_B = false;
 	settings_B = false;
+
+	// Pause 
 
 	//Camera pos temporal Sara no convulsiones
 	app->render->camera.x = -2800;
@@ -80,10 +85,9 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
-	//Draw Map
-	app->map->Draw();
+	//Render background
+	app->render->DrawTexture(backGround, 0, 0);
 
-	//Load Debug keys
 	Debug();
 
 	app->input->GetMousePosition(mouseX_scene, mouseY_scene);
@@ -162,11 +166,10 @@ bool Scene::PostUpdate()
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
+		app->dialogueSystem->Enable();
 		app->dialogueSystem->CleanUp();
 		app->dialogueSystem->LoadDialogue(0);
 	}
-
-	app->render->TextDraw("F1: start dialogue 1", 50, 50, 16, Font::TEXT, { 255, 255, 255 });
 
 	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 	{
@@ -187,11 +190,6 @@ bool Scene::PostUpdate()
 	if (settings_B) { pSettings->OpenSettings(); }
 	app->guiManager->Draw();
 
-	if (app->map->mapPendingtoDelete == true)
-	{
-		app->map->CleanUp();
-	}
-
 	return ret;
 }
 
@@ -203,7 +201,7 @@ bool Scene::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	//player->Disable();
+	// player->Disable();
 
 	app->entityManager->Disable();
 
@@ -218,6 +216,7 @@ bool Scene::CleanUp()
 	
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
+	app->tex->UnLoad(backGround);
 
 	return true;
 }
@@ -337,6 +336,21 @@ bool Scene::InitEntities()
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = sceneNode.child("player");
 	player->Awake();
+	switch (app->entityManager->tpID)
+	{
+	case 0:
+		player->position.x = 2365;
+		player->position.y = 4429;
+		break;
+	case 1:
+		player->position.x = 4277;
+		player->position.y = 3869;
+		break;
+	case 21:
+		player->position.x = 3437;
+		player->position.y = 1085;
+		break;
+	}
 
 	for (pugi::xml_node itemNode = sceneNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
 	{

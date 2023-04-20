@@ -26,6 +26,7 @@ bool DialogueSystem::Awake(pugi::xml_node& config)
 bool DialogueSystem::Start()
 {
 	textBox_tex = app->tex->Load(textBox_path);
+	hasEnded = false;
 	return true;
 }
 
@@ -34,8 +35,8 @@ bool DialogueSystem::Update(float dt)
 	if (activeTree != nullptr)
 	{
 		//Text box
-		iPoint pos = { 0, (app->win->GetHeight() - 353) };
-		app->render->DrawTexture(textBox_tex, pos.x, pos.y);
+		iPoint pos = { 0, (app->win->GetHeight() - 245) };
+		app->render->DrawTexture(textBox_tex, pos.x - app->render->camera.x, pos.y - app->render->camera.y);
 
 		activeTree->UpdateTree(dt, app->dialogueSystem, pos);
 		app->guiManager->Draw();
@@ -65,6 +66,7 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 	else
 	{
 		activeTree->activeNode = nullptr;
+		hasEnded = true;
 		CleanUp();
 	}
 	
@@ -84,7 +86,7 @@ bool DialogueSystem::CleanUp()
 
 	app->input->getInput_B = false;
 	app->input->nameEntered_B = false;
-	app->input->playerName.clear();
+	hasEnded = false;
 
 	app->guiManager->CleanUp();
 
