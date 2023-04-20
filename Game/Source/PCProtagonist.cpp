@@ -146,6 +146,7 @@ bool Protagonist::Update(float dt)
 
 		else*/
 		{
+			//ATAQUE 1 Daño a una sola unidad
 			if (app->combat->lastPressedAbility_I == 1) //Only allows targeting 2 and 3
 			{
 				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
@@ -164,7 +165,7 @@ bool Protagonist::Update(float dt)
 
 					if (!app->input->godMode_B)
 					{
-						float damage = app->combat->targeted_Character->CalculateDamage(attack);
+						float damage = app->combat->targeted_Character->CalculateDamage(1.3*attack);
 						app->combat->targeted_Character->ModifyHP(-damage);
 					}
 					else
@@ -176,19 +177,20 @@ bool Protagonist::Update(float dt)
 				}
 
 			}
+			//ATAQUE 2 Auto Heal
 			if (app->combat->lastPressedAbility_I == 2)
 			{
-					app->combat->EnableTargetButton(3);
-					if (app->combat->targeted_Character == app->combat->allies[0])
-					{
+				app->combat->EnableTargetButton(3);
+				if (app->combat->targeted_Character == app->combat->allies[0]) //ERIC:Solo puede usarse en posicion 0? Porque si no esto puede curar a otros personajes
+				{
 					if (!app->input->godMode_B)
 					{
-						float heal = app->combat->targeted_Character->CalculateDamage(attack*0.6);
+						float heal = attack*0.6;
 						app->combat->targeted_Character->ModifyHP(heal);
 					}
 					else
 					{
-						app->combat->targeted_Character->ModifyHP(+99999);
+					app->combat->targeted_Character->ModifyHP(+99999);
 					}
 
 					onTurn = false;
@@ -196,37 +198,7 @@ bool Protagonist::Update(float dt)
 				}
 					
 			}
-			/*if (app->combat->lastPressedAbility_I == 2)
-			{
-				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
-				{
-					app->combat->EnableTargetButton(5);
-				}
-				if (app->combat->enemies[0] != nullptr && app->combat->enemies[0]->alive == true)
-				{
-					app->combat->EnableTargetButton(4);
-				}
-
-				if (app->combat->targeted_Character == app->combat->enemies[0] || app->combat->targeted_Character == app->combat->enemies[1])
-				{
-					if (app->combat->targeted_Character != nullptr) {
-						if (!app->input->godMode_B)
-						{
-							float damage = app->combat->targeted_Character->CalculateDamage(attack);
-							app->combat->targeted_Character->ModifyHP(-damage);
-						}
-						else
-						{
-							app->combat->targeted_Character->ModifyHP(-99999);
-						}
-
-						onTurn = false;
-						app->combat->NextTurn();
-					}
-
-				}
-
-			}*/
+			//ATAQUE 3
 			if (app->combat->lastPressedAbility_I == 3)
 			{
 
@@ -264,7 +236,7 @@ bool Protagonist::Update(float dt)
 						}
 					}
 					
-					app->combat->NextTurn();
+					if (app->combat->enemies[0] != nullptr || app->combat->enemies[1] != nullptr) { app->combat->NextTurn(); }
 					onTurn = false;
 				}
 
@@ -306,7 +278,7 @@ bool Protagonist::Update(float dt)
 							app->combat->enemies[1]->ModifyHP(-99999);
 						}
 					}
-					app->combat->NextTurn();
+					if (app->combat->enemies[1] != nullptr || app->combat->enemies[3] != nullptr) { app->combat->NextTurn(); }
 					onTurn = false;
 				}
 			}

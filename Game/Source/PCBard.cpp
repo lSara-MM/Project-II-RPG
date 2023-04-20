@@ -147,6 +147,7 @@ bool Bard::Update(float dt)
 
 		else*/
 		{
+			//ATAQUE 1 Daño un solo objetivo
 			if (app->combat->lastPressedAbility_I == 1) //Only allows targeting 2 and 3
 			{
 				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
@@ -177,6 +178,7 @@ bool Bard::Update(float dt)
 				}
 
 			}
+			//ATAQUE 2 Damage un objetivo
 			if (app->combat->lastPressedAbility_I == 2)
 			{
 				if (app->combat->enemies[1] != nullptr && app->combat->enemies[1]->alive == true)
@@ -207,6 +209,7 @@ bool Bard::Update(float dt)
 				}
 
 			}
+			//ATAQUE 3 Heal en area
 			if (app->combat->lastPressedAbility_I == 3)
 			{
 
@@ -223,7 +226,7 @@ bool Bard::Update(float dt)
 					if (app->combat->allies[0] != nullptr) {
 						if (!app->input->godMode_B)
 						{
-							float heal = app->combat->allies[0]->CalculateDamage(attack * 0.4);
+							float heal = attack * 0.5;
 							app->combat->allies[0]->ModifyHP(heal);
 						}
 						else
@@ -235,7 +238,7 @@ bool Bard::Update(float dt)
 					if (app->combat->allies[1] != nullptr) {
 						if (!app->input->godMode_B)
 						{
-							float heal = app->combat->allies[1]->CalculateDamage(attack * 0.4);
+							float heal = attack * 0.5;
 							app->combat->allies[1]->ModifyHP(heal);
 						}
 						else
@@ -248,6 +251,7 @@ bool Bard::Update(float dt)
 				}
 
 			}
+			//ATAQUE 4 Damage area
 			if (app->combat->lastPressedAbility_I == 4)
 			{
 				if (app->combat->enemies[2] != nullptr && app->combat->enemies[2]->alive == true)
@@ -289,7 +293,7 @@ bool Bard::Update(float dt)
 						}
 						
 					}
-					app->combat->NextTurn();
+					if (app->combat->enemies[2] != nullptr || app->combat->enemies[3] != nullptr) { app->combat->NextTurn(); }
 					onTurn = false;
 				}
 			}
