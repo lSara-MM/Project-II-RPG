@@ -9,6 +9,9 @@
 #include "Textures.h"
 
 #include "Scene.h"
+#include "HouseOfTerrors.h"
+#include "PracticeTent.h"
+#include"Circus.h"
 
 #include "FadeToBlack.h"
 #include "EntityManager.h"
@@ -79,18 +82,19 @@ bool Player::Awake() {
 	return true;
 }
 
-bool Player::Start() {
-
+bool Player::Start() 
+{
 	texture = app->tex->Load(texturePath);
 	textureE = app->tex->Load("Assets/GUI/UI_E.png");
 
 	currentAnimation = &currentAnim;
-	
-	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
-	pbody->body->SetFixedRotation(true);	
-	pbody->listener = this; 
+
+	pbody = app->physics->CreateRectangle(position.x - width / 2, position.y - height / 2, width + 5, height + 5, bodyType::DYNAMIC);
+	pbody->body->SetFixedRotation(true);
+
+	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
-	
+
 	playerName = app->input->playerName.c_str();
 	npcInteract = false;
 
@@ -99,8 +103,6 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	pbody->body->SetGravityScale(0);
-
 	if (app->scene->pause_B)
 	{
 		dtP = 0;
@@ -110,73 +112,84 @@ bool Player::Update(float dt)
 		dtP = dt / 1000;
 	}
 
-	vel = b2Vec2(vel.x * dtP, vel.y * dtP);
-	//Set the velocity of the pbody of the player
-	pbody->body->SetLinearVelocity(vel);
-
-	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2;
-
-	currentAnimation->Update();
-
-	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
-
-	if (npcInteract)
+	if (pbody != nullptr)
 	{
-		app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
-		
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->controller.A != 0)
-		{
-			lockMovement = true;
-			app->dialogueSystem->Enable();
-			npcTalkingTo->PerformDialogue();
-		}
-		if (app->dialogueSystem->hasEnded) { lockMovement = false; }
+		app->render->camera.y = -position.y + 360 - height;
+		app->render->camera.x = -position.x + 640 - width;
 
+		pbody->body->SetGravityScale(0);
 
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y < 0)
+		vel = b2Vec2(vel.x * dtP, vel.y * dtP);
+		//Set the velocity of the pbody of the player
+		pbody->body->SetLinearVelocity(vel);
+
+		//Update player position in pixels
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2;
+
+		currentAnimation->Update();
+
+		SDL_Rect rect = currentAnimation->GetCurrentFrame();
+		app->render->DrawTexture(texture, position.x - width - 2, position.y - height, &rect, 1.0f, NULL, NULL, NULL, flipType);
+
+		if (npcInteract)
 		{
-			keyLockUp = false;
-			currentAnimation = &idleUpAnim;
+			app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
+
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->controller.Y != 0)
+			{
+				lockMovement = true;
+				app->dialogueSystem->Enable();
+				npcTalkingTo->PerformDialogue();
+			}
+
+			if (app->dialogueSystem->hasEnded) { lockMovement = false; }
+
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y < 0)
+			{
+				keyLockUp = false;
+				currentAnimation = &idleUpAnim;
+			}
+
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y > 0)
+			{
+				keyLockDown = false;
+				currentAnimation = &idleDownAnim;
+			}
+
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP || app->input->controller.j1_x < 0)
+			{
+				keyLockLeft = false;
+				currentAnimation = &idleLeftAnim;
+			}
+
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP || app->input->controller.j1_x > 0)
+			{
+				keyLockRigth = false;
+				currentAnimation = &idleRigthAnim;
+			}
+		}
+		else
+		{
+			lockMovement = false;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y > 0)
+		if (!lockMovement)
 		{
-			keyLockDown = false;
-			currentAnimation = &idleDownAnim;
+			Controller(dtP);
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP || app->input->controller.j1_x < 0)
-		{
-			keyLockLeft = false;
-			currentAnimation = &idleLeftAnim;
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP || app->input->controller.j1_x > 0)
-		{
-			keyLockRigth = false;
-			currentAnimation = &idleRigthAnim;
-		}
+		return true;
 	}
-	else
-	{
-		lockMovement = false;
-	}
-
-	if (!lockMovement)
-	{
-		Controller(dtP);
-	}
-
-	return true;
 }
 
 bool Player::CleanUp()
 {
-	app->tex->UnLoad(texture);
-	pbody->body->GetWorld()->DestroyBody(pbody->body);
+	if (pbody != nullptr)
+	{
+		app->tex->UnLoad(texture);
+		pbody->body->GetWorld()->DestroyBody(pbody->body);
+	}
 	
 	return true;
 }
@@ -204,10 +217,43 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 
 		npcInteract = true;
 		break;
-	default:
+
+	case ColliderType::PORTAL:
+		switch (physB->id)
+		{
+		case 0:
+			if (app->scene->active == true)
+			{
+				app->map->mapPendingtoDelete = true;
+				app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
+			}
+			if (app->hTerrors->active == true)
+			{
+				app->entityManager->tpID = 0;
+				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
+			}
+			if (app->practiceTent->active == true)
+			{
+				app->entityManager->tpID = 1;
+				app->fade->FadingToBlack((Module*)app->practiceTent, (Module*)app->scene, 90);
+			}
+			if (app->circus->active == true)
+			{
+				app->entityManager->tpID = 21;
+				app->fade->FadingToBlack((Module*)app->circus, (Module*)app->scene, 90);
+			}
+			break;
+		case 1:
+			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
+			break;
+		case 2:
+			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, 90);
+			break;
+		}
 		break;
 	}
 }
+
 void Player::EndContact(PhysBody* physA, PhysBody* physB) 
 {
 	switch (physB->ctype)

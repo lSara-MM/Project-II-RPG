@@ -153,7 +153,7 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x -= ceil(speed);
 
-	if (pause_B) { app->input->HandleGamepadMouse(mouseX_scene, mouseY_scene, mouseSpeed, dt); }
+	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_scene, mouseY_scene, mouseSpeed, dt); }
 
 	return true;
 }
