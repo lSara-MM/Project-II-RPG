@@ -81,14 +81,14 @@ bool Npc::Start() {
 	pSensor->ctype = ColliderType::NPC;
 	pSensor->listener = this;
 
+	pbody->body->SetGravityScale(0);
+	pSensor->body->SetGravityScale(0);
+
 	return true;
 }
 
 bool Npc::Update(float dt)
 {
-	pbody->body->SetGravityScale(0);
-	pSensor->body->SetGravityScale(0);
-
 	if (app->scene->pause_B)//ERROR
 	{
 		dtP = 0;
