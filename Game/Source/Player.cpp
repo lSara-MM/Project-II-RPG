@@ -25,7 +25,7 @@
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
-	name.Create("Player");
+	name.Create("player");
 
 	currentAnim.PushBack({ 64, 0, 64, 64 });
 
@@ -105,6 +105,8 @@ bool Player::Start()
 	playerName = app->input->playerName.c_str();
 	npcInteract = false;
 
+	pbody->body->SetGravityScale(0);
+
 	return true;
 }
 
@@ -123,8 +125,6 @@ bool Player::Update(float dt)
 	{
 		app->render->camera.y = -position.y + 360 - height;
 		app->render->camera.x = -position.x + 640 - width;
-
-		pbody->body->SetGravityScale(0);
 
 		vel = b2Vec2(vel.x * dtP, vel.y * dtP);
 		//Set the velocity of the pbody of the player
@@ -286,15 +286,15 @@ void Player::Controller(float dt)
 
 				keyLockUp = true;
 				currentAnimation = &upAnim;
-				vel.y = -125 * 2;
+				vel.y = -125 * 6;
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || app->input->controller.j1_x > 0)
 				{
-					vel.x = 125 * 2;
+					vel.x = 125 * 6;
 				}
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || app->input->controller.j1_x < 0)
 				{
-					vel.x = -125 * 2;
+					vel.x = -125 * 6;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y < 0)
@@ -311,15 +311,15 @@ void Player::Controller(float dt)
 
 				keyLockDown = true;
 				currentAnimation = &downAnim;
-				vel.y = 125 * 2;
+				vel.y = 125 * 6;
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || app->input->controller.j1_x > 0)
 				{
-					vel.x = 125 * 2;
+					vel.x = 125 * 6;
 				}
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || app->input->controller.j1_x < 0)
 				{
-					vel.x = -125 * 2;
+					vel.x = -125 * 6;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y > 0)
@@ -336,15 +336,15 @@ void Player::Controller(float dt)
 
 				keyLockLeft = true;
 				currentAnimation = &leftAnim;
-				vel.x = -125 * 2;
+				vel.x = -125 * 6;
 
 				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
 				{
-					vel.y = 125 * 2;
+					vel.y = 125 * 6;
 				}
 				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
 				{
-					vel.y = -125 * 2;
+					vel.y = -125 * 6;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP || app->input->controller.j1_x < 0)
@@ -361,15 +361,15 @@ void Player::Controller(float dt)
 
 				keyLockRigth = true;
 				currentAnimation = &rigthAnim;
-				vel.x = 125 * 2;
+				vel.x = 125 * 6;
 
 				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
 				{
-					vel.y = 125 * 2;
+					vel.y = 125 * 6;
 				}
 				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
 				{
-					vel.y = -125 * 2;
+					vel.y = -125 * 6;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP || app->input->controller.j1_x > 0)
@@ -390,7 +390,7 @@ void Player::Controller(float dt)
 				app->render->camera.y += 125 * dtP;
 				keyLockUp = true;
 				currentAnimation = &upAnim;
-				vel.y = -125;
+				vel.y = -125 * 2;
 				vel.x = 0;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y < 0)
@@ -408,7 +408,7 @@ void Player::Controller(float dt)
 				app->render->camera.y += -125 * dtP;
 				keyLockDown = true;
 				currentAnimation = &downAnim;
-				vel.y = 125;
+				vel.y = 125 * 2;
 				vel.x = 0;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y > 0)
@@ -426,7 +426,7 @@ void Player::Controller(float dt)
 				app->render->camera.x += 125 * dtP;
 				keyLockLeft = true;
 				currentAnimation = &leftAnim;
-				vel.x = -125;
+				vel.x = -125 * 2;
 				vel.y = 0;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP || app->input->controller.j1_x < 0)
@@ -444,7 +444,7 @@ void Player::Controller(float dt)
 				app->render->camera.x += -125 * dtP;
 				keyLockRigth = true;
 				currentAnimation = &rigthAnim;
-				vel.x = 125;
+				vel.x = 125 * 2;
 				vel.y = 0;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP || app->input->controller.j1_x > 0)
