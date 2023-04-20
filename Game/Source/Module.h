@@ -91,7 +91,6 @@ public:
 
 	void Module::Disable()
 	{
-		
 		if (active)
 		{
 			active = false;

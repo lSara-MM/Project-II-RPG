@@ -49,7 +49,6 @@ bool Combat::Awake(pugi::xml_node& config)
 
 bool Combat::Start()
 {
-
 	//Cargar texturas
 	textureBackground = app->tex->Load(texturePathBackground);
 	textureTargetButton = app->tex->Load(texturePathTargetButton);
@@ -318,7 +317,8 @@ bool Combat::CleanUp()
 	}
 
 
-	//app->entityManager->entities.Clear();
+	app->entityManager->entities.Clear();
+	app->entityManager->Disable();
 
 	listInitiative.Clear();
 
