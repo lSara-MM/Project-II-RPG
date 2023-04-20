@@ -158,11 +158,17 @@ bool Combat::PreUpdate()
 
 	//Check if not combat
 	bool someoneOnTurn=false;
-	for (int i = 1; listInitiative.Count() >= i; i++)
+	for (int i = 1; listInitiative.Count() > i; i++)
 	{
 		if (listInitiative.At(i - 1)->data->onTurn) { someoneOnTurn = true; };
 	}
-	if (!someoneOnTurn && listInitiative.Count()>1) { listInitiative.At(charaInTurn)->data->onTurn = true; }
+	if (!someoneOnTurn && (listInitiative.Count()>0) ) 
+	{ 
+		if(listInitiative.At(charaInTurn) != nullptr)
+		{
+		listInitiative.At(charaInTurn)->data->onTurn = true; 
+		}
+	}
 
 	return true;
 }
@@ -188,19 +194,22 @@ bool Combat::Update(float dt)
 			}
 
 			SDL_Rect rect = { 10 + 140 * i,20,130,40 };
-			switch (listInitiative.At(c)->data->charaType_I)
+			if (listInitiative.At(c) != nullptr )
 			{
-			case 0: //Aliado
-				app->render->DrawRectangle(rect, 0, 230, 0, 220);
-				
-				break;
-			case 1: //Enemigo
-				app->render->DrawRectangle(rect, 230, 0, 0, 220);
-				break;
-			default:
-				break;
+				switch (listInitiative.At(c)->data->charaType_I)
+				{
+				case 0: //Aliado
+					app->render->DrawRectangle(rect, 0, 230, 0, 220);
+					break;
+				case 1: //Enemigo
+					app->render->DrawRectangle(rect, 230, 0, 0, 220);
+					break;
+				default:
+					break;
+				}
+				app->render->TextDraw(listInitiative.At(c)->data->name.GetString(), 15 + 140 * i, 25, 12);
 			}
-			app->render->TextDraw(listInitiative.At(c)->data->name.GetString(), 15 + 140 * i, 25, 12);
+			
 			
 			
 		}
