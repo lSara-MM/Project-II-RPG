@@ -107,7 +107,6 @@ bool Scene::Update(float dt)
 		app->SaveGameRequest();//guardar para volver misma posicion al volver de combate
 		app->iScene->continueGame_B = true;
 	}
-		
 
 	//Borrar
 	float speed = 0.2 * dt;
@@ -302,6 +301,15 @@ void Scene::Debug()
 
 bool Scene::InitEntities()
 {
+	for (pugi::xml_node itemNode = sceneNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	{
+		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
+		npc->parameters = itemNode;
+		npc->Awake();
+
+		listNpc.Add(npc);
+	}
+
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = sceneNode.child("player");
 	player->Awake();
@@ -323,15 +331,6 @@ bool Scene::InitEntities()
 
 	default:
 		break;
-	}
-
-	for (pugi::xml_node itemNode = sceneNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
-	{
-		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
-		npc->parameters = itemNode;
-		npc->Awake();
-
-		listNpc.Add(npc);
 	}
 
 	//app->entityManager->Awake();

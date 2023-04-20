@@ -23,13 +23,14 @@ void DialogueNode::SplitText(SString text_, vector<SString>* pTexts, int fontSiz
 			}
 			
 			b = line.find_first_of(" ", a);	// find first " " (space) from last trimmed to the end. 
-			b++;
 
 			if (b == -1)
 			{
 				b = line.find_first_of(".", a);
 			}
 			
+			b++;
+
 			// If we reached the end of the word or the end of the input.
 			string temp;
 			temp.append(line, startIndex, b - startIndex);	// string text to append, int index start, int size of text to append
