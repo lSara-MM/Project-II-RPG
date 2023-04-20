@@ -60,12 +60,6 @@ bool Protagonist::Start() {
 
 	texture = app->tex->Load(texturePath);
 	
-	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
-	pbody->body->SetFixedRotation(true);
-
-	pbody->listener = this; 
-
-	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::PC_PROTAGONIST;
 	this->charaType_I = CharacterType::ALLY;
 	this->name = "Protagonista"; //Hay que poner el nombre assigando al principio del juego
@@ -296,7 +290,7 @@ bool Protagonist::Update(float dt)
 bool Protagonist::CleanUp()
 {
 	app->tex->UnLoad(texture);
-	pbody->body->GetWorld()->DestroyBody(pbody->body);
+	
 	
 	return true;
 }

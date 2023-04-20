@@ -137,6 +137,9 @@ bool Combat::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	
+	//Desactivar physics
+	app->physics->Disable();
+
 	StartCombat();
 
 	return true;
@@ -159,7 +162,7 @@ bool Combat::PreUpdate()
 	{
 		if (listInitiative.At(i - 1)->data->onTurn) { someoneOnTurn = true; };
 	}
-	if (!someoneOnTurn) { listInitiative.At(charaInTurn)->data->onTurn = true; }
+	if (!someoneOnTurn && listInitiative.Count()>1) { listInitiative.At(charaInTurn)->data->onTurn = true; }
 
 	return true;
 }
@@ -301,9 +304,6 @@ bool Combat::CleanUp()
 {
 	LOG("Freeing scene");
 
-	app->render->camera.x = 0;
-	app->render->camera.y = 0;
-
 	listButtons.Clear();
 
 	//pSettings->CleanUp();
@@ -334,6 +334,9 @@ bool Combat::CleanUp()
 	app->entityManager->Disable();
 
 	listInitiative.Clear();
+
+	//Reactivar physics
+	app->physics->Enable();
 
 	return true;
 }

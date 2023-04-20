@@ -84,6 +84,7 @@ bool DialogueSystem::CleanUp()
 		activeTree = nullptr;
 	}
 
+	app->tex->UnLoad(textBox_tex);
 	app->input->getInput_B = false;
 	app->input->nameEntered_B = false;
 

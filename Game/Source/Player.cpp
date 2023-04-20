@@ -178,7 +178,11 @@ bool Player::Update(float dt)
 				}
 			}
 
-			if (app->dialogueSystem->hasEnded) { lockMovement = false; }
+			if (app->dialogueSystem->hasEnded) 
+			{
+				lockMovement = false; 
+				app->dialogueSystem->Disable();
+			}
 		}
 		else
 		{
