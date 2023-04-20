@@ -36,7 +36,7 @@ bool IntroScene::Awake(pugi::xml_node& config)
 	// iterate all objects in the IntroScene
 	// Check https://pugixml.org/docs/quickstart.html#access
 	music_intro = config.attribute("audioIntroPath").as_string();
-	//mouse_Speed = config.attribute("mouseSpeed").as_int();
+	mouse_Speed = config.attribute("mouseSpeed").as_float();
 
 	//Save boton continue
 	pugi::xml_document gameStateFile;
@@ -58,8 +58,7 @@ bool IntroScene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool IntroScene::Start()
 {
-	mouse_Speed = 0.5f;
-
+	
 	app->audio->PlayMusic(music_intro, 0);
 
 	// buttons
@@ -105,29 +104,7 @@ bool IntroScene::Update(float dt)
 		listButtons.start->next->data->state = GuiControlState::DISABLED;
 	}
 
-	if (app->input->controller.j1_x > 0)
-	{
-		SDL_WarpMouseInWindow(app->win->window, mouseX_intro + (mouse_Speed * dt), mouseY_intro);
-
-	}
-
-	else if (app->input->controller.j1_x < 0)
-	{
-		SDL_WarpMouseInWindow(app->win->window, mouseX_intro - (mouse_Speed * dt), mouseY_intro);
-
-	}
-
-	else if (app->input->controller.j1_y > 0)
-	{
-		SDL_WarpMouseInWindow(app->win->window, mouseX_intro, mouseY_intro + (mouse_Speed * dt));
-
-	}
-
-	else if (app->input->controller.j1_y < 0)
-	{
-		SDL_WarpMouseInWindow(app->win->window, mouseX_intro, mouseY_intro - (mouse_Speed * dt));
-
-	}
+	app->input->HandleGamepadMouse(mouseX_intro, mouseY_intro, mouse_Speed, dt);
 
 	return true;
 }

@@ -87,7 +87,7 @@ bool Scene::Update(float dt)
 	app->entityManager->AddEntity(entidad2);*/
 	
 	//ERIC: Prueba que no funciona.
-	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) 
+	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || app->input->controller.X != 0) 
 	{ 
 		Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_BARD);
 		app->entityManager->AddEntity(prota1); //No se esta metiendo

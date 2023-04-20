@@ -118,6 +118,8 @@ public:
 
 	void HandleInput(SDL_Event event);
 
+	void HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt);
+
 public:
 	string playerName;
 	bool nameEntered_B = false;

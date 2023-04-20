@@ -224,3 +224,29 @@ void Input::HandleInput(SDL_Event event)
 		playerName.erase(playerName.length() - 1);
 	}
 }
+
+void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt)
+{
+	if (app->input->controller.j1_x > 0)
+	{
+		SDL_WarpMouseInWindow(app->win->window, mouseX + (mouseSpeed * dt), mouseY);
+
+	}
+
+	else if (app->input->controller.j1_x < 0)
+	{
+		SDL_WarpMouseInWindow(app->win->window, mouseX - (mouseSpeed * dt), mouseY);
+	}
+
+	else if (app->input->controller.j1_y > 0)
+	{
+		SDL_WarpMouseInWindow(app->win->window, mouseX, mouseY + (mouseSpeed * dt));
+
+	}
+
+	else if (app->input->controller.j1_y < 0)
+	{
+		SDL_WarpMouseInWindow(app->win->window, mouseX, mouseY - (mouseSpeed * dt));
+
+	}
+}

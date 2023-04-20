@@ -42,14 +42,13 @@ bool Combat::Awake(pugi::xml_node& config)
 
 	texturePathBackground = "Assets/Textures/combat_background_placeholder.png"; //FondoActual (habra que cambiarlo por los de la dungeon actual)
 	texturePathTargetButton = "Assets/GUI/UI_button_charactherSelection.png"; //De momento lo he puesto aqui para ver como se ve pero quiza haya que borrarlos
-		mouse_Speed = config.attribute("mouseSpeed").as_int();
+	mouse_Speed = config.attribute("mouseSpeed").as_float();
+
 	return ret;
 }
 
 bool Combat::Start()
 {
-
-	mouse_Speed = 0.5f;
 
 	//Cargar texturas
 	textureBackground = app->tex->Load(texturePathBackground);
@@ -133,30 +132,7 @@ bool Combat::Update(float dt)
 	app->render->DrawRectangle({ 430, 470, 730, 220 }, 255, 255, 255, 250, true);
 
 
-
-	if (app->input->controller.j1_x > 0)
-	{
-		SDL_WarpMouseInWindow(app->win->window, mouseX_combat + (mouse_Speed * dt), mouseY_combat);
-
-	}
-
-	else if (app->input->controller.j1_x < 0)
-	{
-		SDL_WarpMouseInWindow(app->win->window, mouseX_combat - (mouse_Speed * dt), mouseY_combat);
-
-	}
-
-	else if (app->input->controller.j1_y > 0)
-	{
-		SDL_WarpMouseInWindow(app->win->window, mouseX_combat, mouseY_combat + (mouse_Speed * dt));
-
-	}
-
-	else if (app->input->controller.j1_y < 0)
-	{
-		SDL_WarpMouseInWindow(app->win->window, mouseX_combat, mouseY_combat - (mouse_Speed * dt));
-
-	}
+	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
 
 	return true;
 }
