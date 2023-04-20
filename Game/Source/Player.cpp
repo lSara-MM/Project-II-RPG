@@ -269,6 +269,8 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 	case ColliderType::NPC:
 		npcInteract = false;
 		break;
+	case ColliderType::PORTAL:
+		app->audio->PlayFx(enterZone, 0);
 	default:
 		break;
 	}
