@@ -142,13 +142,40 @@ bool Player::Update(float dt)
 		if (npcInteract)
 		{
 			app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
+			
+			if (!lockMovement)
+			{
+				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->controller.Y != 0)
+				{
+					app->dialogueSystem->hasEnded = false;
+					lockMovement = true;
+					app->dialogueSystem->Enable();
+					npcTalkingTo->PerformDialogue();
 
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->controller.Y != 0 && !lockMovement)
-			{					
-				app->dialogueSystem->hasEnded = false;
-				lockMovement = true;
-				app->dialogueSystem->Enable();
-				npcTalkingTo->PerformDialogue();
+					if (keyLockUp)
+					{
+						keyLockUp = false;
+						currentAnimation = &idleUpAnim;
+					}
+
+					if (keyLockDown)
+					{
+						keyLockDown = false;
+						currentAnimation = &idleDownAnim;
+					}
+
+					if (keyLockLeft)
+					{
+						keyLockLeft = false;
+						currentAnimation = &idleLeftAnim;
+					}
+
+					if (keyLockRigth)
+					{
+						keyLockRigth = false;
+						currentAnimation = &idleRigthAnim;
+					}
+				}
 			}
 
 			if (app->dialogueSystem->hasEnded) { lockMovement = false; }
