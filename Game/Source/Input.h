@@ -126,6 +126,8 @@ public:
 	bool getInput_B = false;
 
 	bool godMode_B = false;
+	int currentHP_Bard = 0;
+	int currentHP_Protagonist = 0;
 
 	SDL_GameController* sdl_controller;
 	GameController controller;

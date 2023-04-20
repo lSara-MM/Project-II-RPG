@@ -65,12 +65,28 @@
 			enterZone="Assets/Audio/Fx/entrar_sala.wav"/>
 			
 		
+	<bard name ="Bard" maxHp="1000" currentHp="1000" attack="200" armor="8" speed="6"
+		   texturePath ="Assets/Textures/AllyBard.png"/>
+
+	<protagonist name ="Protagonista" maxHp="1150" currentHp="1150" attack="190" armor="10" speed="5"
+				  texturePath ="Assets/Textures/AllyProtagonist.png"/>
+
+	<enemyTank name ="Bewitched Wardrobe" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
+			    texturePath ="Assets/Textures/marioneta2.png"/>
+		
+	<enemyDPS name ="Cursed Puppet" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
+			  texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
+
+	<enemyHealer name ="Possessed Painting" maxHp="850" currentHp="850" attack="140" armor="8" speed="2"
+				  texturePath ="Assets/Textures/marioneta3.png"/>
+			
+
 	<npc name="GUIA" dialogueID="1"
 		x="3710" y="985" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
 
 	<npc name="ORACULO" dialogueID="2"
 		x="2595" y="4438" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
-		
+
 	<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
 		x="3600" y="2625" width="150" height="38" texturepath=""/>
 </scene>

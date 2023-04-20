@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<save_state>
+	<input />
+	<window />
+	<textures />
+	<audio />
+	<:anonymous />
+	<pathfinding />
+	<logoScene />
+	<introScene>
+		<previousGame state_B="true" />
+	</introScene>
+	<scene />
+	<loseScene />
+	<map />
+	<entitymanager>
+		<player x="120" y="260" />
+		<bard currentHp="0" />
+		<protagonist currentHp="0" />
+	</entitymanager>
+	<combat />
+	<dialogue />
+	<guiManager />
+	<fadeToBlack />
+	<renderer>
+		<camera x="0" y="0" />
+	</renderer>
+</save_state>

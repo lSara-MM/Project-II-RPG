@@ -50,7 +50,6 @@ public:
 	PhysBody* pbody;
 
 	
-
 	
 
 private:

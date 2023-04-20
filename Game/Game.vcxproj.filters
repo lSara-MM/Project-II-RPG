@@ -99,9 +99,6 @@
       <Filter>Modules\Entities\Combat</Filter>
     </ClCompile>
     <ClCompile Include="Source\NPC.cpp" />
-    <ClCompile Include="Source\ECHouseDPS.cpp" />
-    <ClCompile Include="Source\ECHouseHealer.cpp" />
-    <ClCompile Include="Source\PCBard.cpp" />
     <ClCompile Include="Source\Circus.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -110,6 +107,14 @@
     </ClCompile>
     <ClCompile Include="Source\PracticeTent.cpp">
       <Filter>Scenes</Filter>
+    <ClCompile Include="Source\ECHouseDPS.cpp">
+      <Filter>Modules\Entities\Combat\EC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ECHouseHealer.cpp">
+      <Filter>Modules\Entities\Combat\EC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PCBard.cpp">
+      <Filter>Modules\Entities\Combat\PCs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +250,6 @@
       <Filter>Modules\Entities\Combat</Filter>
     </ClInclude>
     <ClInclude Include="Source\NPC.h" />
-    <ClInclude Include="Source\ECHouseDPS.h" />
-    <ClInclude Include="Source\ECHouseHealer.h" />
-    <ClInclude Include="Source\PCBard.h" />
     <ClInclude Include="Source\Circus.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -256,6 +258,14 @@
     </ClInclude>
     <ClInclude Include="Source\PracticeTent.h">
       <Filter>Scenes</Filter>
+    <ClInclude Include="Source\ECHouseDPS.h">
+      <Filter>Modules\Entities\Combat\EC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ECHouseHealer.h">
+      <Filter>Modules\Entities\Combat\EC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PCBard.h">
+      <Filter>Modules\Entities\Combat\PCs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

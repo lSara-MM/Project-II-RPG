@@ -33,12 +33,13 @@ HouseDPS::~HouseDPS() {
 
 bool HouseDPS::Awake() {
 
-	position.x = parameters.attribute("x").as_int();
-	position.y = parameters.attribute("y").as_int();
-
-
-	//texturePath = parameters.attribute("texturepath").as_string();
-	texturePath = "Assets/Textures/EnemyCursedPuppet.png";
+	this->name = parameters.attribute("name").as_string();
+	this->maxHp = parameters.attribute("maxHp").as_int();
+	this->currentHp = parameters.attribute("currentHp").as_int();
+	this->attack = parameters.attribute("attack").as_int();
+	this->armor = parameters.attribute("armor").as_int();
+	this->speed = parameters.attribute("speed").as_int();
+	texturePath = parameters.attribute("texturePath").as_string();
 
 	return true;
 }
@@ -54,15 +55,10 @@ bool HouseDPS::Start() {
 
 	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::ENEMY_DPS_HOUSE;
-	this->charaType_I = CharatherType::ENEMY;
-	this->name = "Cursed Puppet";
-	this->maxHp = 600;
-	this->currentHp = 600;
-	this->attack = 200;
-	this->armor = 0;
-	this->speed = 5;
+	this->charaType_I = CharacterType::ENEMY;
 
 	this->positionCombat_I = 1;
+	this->alive = true;
 
 	return true;
 }
@@ -74,59 +70,107 @@ bool HouseDPS::Update(float dt)
 
 	//Health Bar
 	int auxhp = ((currentHp * 100) / maxHp) * 0.90;
-	app->render->DrawRectangle({ 722 + 107 * positionCombat_I, 280, 90, 20 }, 255, 0, 255, 255, true);
-	app->render->DrawRectangle({ 722 + 107 * positionCombat_I, 280, auxhp, 20 }, 255, 255, 255, 255, true);
+	app->render->DrawRectangle({ 628 + 127 * positionCombat_I, 250, 90, 20 }, 1, 1, 1, 255, true);
+	app->render->DrawRectangle({ 628 + 127 * positionCombat_I, 250, auxhp, 20 }, 255, 0, 0, 255, true);
 
-	// Modify Health Bar
-	/*if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
-		currentHp--;
-	}*/
+	string s_hp = std::to_string(this->currentHp);
+	const char* ch_hp = s_hp.c_str();
+	app->render->TextDraw(ch_hp, 628 + 127 * positionCombat_I, 220, 20, UI, { 125,0,0 });
+
+	if (this->currentHp <= 0)
+	{
+		this->alive = false;
+	}
+	else { this->alive = true; }
+
+	if (this->alive == false)
+	{
+		app->combat->EliminateCombatant(this);
+	}
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	//app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
 	rect = { 0,0,258,496 };
-	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formación
-	app->render->DrawTexture(texture, 736 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
+	
+	//Numeros no exactos pero los allies van mas cerca de 0 en la pantalla cuanto mas atras esten en la formaciï¿½n
 
+	app->render->DrawTexture(texture, 608 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
+	
+	
 	if (onTurn)
 	{
-		
-		int randomNum = std::rand() % 3 + 1;
-		//Mejor con un switch
-		if (randomNum == 1)
+		/*if (this->currentHp <= 0)
 		{
+			this->alive = false;
+		}
 
-			float damage = app->combat->allies[0]->CalculateDamage(attack);
+		if (this->alive == false) {
+			app->combat->NextTurn();
+			onTurn = false;
+			app->combat->EliminateCombatant(this);
+		}
 
-			if (!app->input->godMode_B)//Hace daño si no hay godmode
+		else*/
+		{
+			int randomNum = std::rand() % 3 + 1;
+
+			//Mejor con un switch
+			if (randomNum == 1 )
 			{
-				app->combat->enemies[0]->ModifyHP(-damage);
+				if (!(app->combat->allies[0] == nullptr))
+				{
+					float damage = app->combat->allies[0]->CalculateDamage(attack);
+					if (!app->input->godMode_B)//Hace daï¿½o si no hay godmode
+					{
+						app->combat->allies[0]->ModifyHP(-damage);
+					}
+					app->combat->NextTurn();
+				}
 			}
+			if (randomNum == 2)
+			{
+				if (!(app->combat->allies[1] == nullptr))
+				{
+					float damage = app->combat->allies[1]->CalculateDamage(attack);
+					if (!app->input->godMode_B)
+					{
+						app->combat->allies[1]->ModifyHP(-damage);
+					}
+				
+					
+				}
+				app->combat->NextTurn();
+			}
+			if (randomNum == 3)
+			{
+				if (!(app->combat->allies[0] == nullptr))
+				{
+					float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
+					if (!app->input->godMode_B)
+					{
+						app->combat->allies[0]->ModifyHP(-damage);
+					}
+				
+				}
 
-			app->combat->NextTurn();
+				if (!(app->combat->allies[1] == nullptr))
+				{
+					float damage = app->combat->allies[1]->CalculateDamage(attack * 0.5);
+					if (!app->input->godMode_B)
+					{
+						app->combat->allies[1]->ModifyHP(-damage);
+					}
+				}
+				app->combat->NextTurn();
+			}
+			//render barra de habilidades
+			// Para seleccionar app->input->GetMousePosition o 
+			//app->combat->NextTurn();
+
+			onTurn = false;
 		}
-		if (randomNum == 2)
-		{
-
-			float damage = app->combat->allies[1]->CalculateDamage(attack);
-			app->combat->enemies[1]->ModifyHP(-damage);
-			app->combat->NextTurn();
-		}
-		if (randomNum == 3)
-		{
-
-			float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
-			app->combat->enemies[0]->ModifyHP(-damage);
-			app->combat->enemies[1]->ModifyHP(-damage);
-			app->combat->NextTurn();
-		}
-		//render barra de habilidades
-		// Para seleccionar app->input->GetMousePosition o 
-		//app->combat->NextTurn();
-		onTurn = false;
-
 	}
 
 

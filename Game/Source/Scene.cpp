@@ -101,47 +101,11 @@ bool Scene::Update(float dt)
 	app->entityManager->AddEntity(entidad2);*/
 	
 	//ERIC: Prueba que no funciona.
-	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || app->input->controller.X != 0) 
-	{ 
-		Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_BARD);
-		app->entityManager->AddEntity(prota1); //No se esta metiendo
-
-		Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-		app->entityManager->AddEntity(prota2);
-
-		{/*Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-		app->entityManager->AddEntity(prota3);
-
-		Entity* prota4 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
-		app->entityManager->AddEntity(prota4);*/}
-
-		Entity* enemy1 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
-		app->entityManager->AddEntity(enemy1);
-
-		Entity* enemy2 = app->entityManager->CreateEntity(EntityType::ENEMY_DPS_HOUSE);
-		app->entityManager->AddEntity(enemy2);
-		
-		Entity* enemy3 = app->entityManager->CreateEntity(EntityType::ENEMY_HEALER_HOUSE);
-		app->entityManager->AddEntity(enemy3);
-
+	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || app->input->controller.X != 0) {
 		app->fade->FadingToBlack(this, (Module*)app->combat, 30);
-
-		//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDAIS AVISADOS!!!
-		app->combat->AddCombatant((Character*)enemy1, 0);
-		app->combat->AddCombatant((Character*)enemy2, 5);
-		app->combat->AddCombatant((Character*)enemy3, 3);
-		app->combat->AddCombatant((Character*)prota1, 1);
-		app->combat->AddCombatant((Character*)prota2, -2);
-		/*app->combat->AddCombatant((Character*)prota3, 5);
-		app->combat->AddCombatant((Character*)prota4, 9);*/
+		//app->SaveGameRequest();//guardar para volver misma posicion al volver de combate
 	}
-	
-	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
-	{
-		app->combat->MoveAllies(1,4);
-		/*app->combat->AddCombatant((Characther*)prota2, -2);
-		app->combat->AddCombatant((Characther*)prota3, 5);*/
-	}
+		
 
 	//Borrar
 	float speed = 0.2 * dt;

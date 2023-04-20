@@ -8,7 +8,7 @@
 #include "Textures.h"
 #include "Window.h"
 
-
+#include "Scene.h"
 #include "IntroScene.h"
 #include "LoseScene.h"
 
@@ -77,12 +77,72 @@ bool Combat::Start()
 
 	//Inventory Button
 	listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, this, { 60, 60, 50, 50 }, ButtonType::START, "Inv", 20));
+	
+	//Inicializar Combatientes (si no se hace aqui por algun motivo se dejan de ver)
+	Entity* prota1 = app->entityManager->CreateEntity(EntityType::PC_BARD);
+	app->entityManager->AddEntity(prota1); //No se esta metiendo
+	prota1->parameters = app->scene->sceneNode.child("bard");
+	prota1->Awake();
+	Entity* prota2 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota2);
+	prota2->parameters = app->scene->sceneNode.child("protagonist");
+	prota2->Awake();
+
+	if (!app->scene->isCharacterLoaded_B)
+	{
+		app->scene->isCharacterLoaded_B = true;
+	}
+
+	/*Entity* prota3 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota3);
+	prota3->parameters = app->scene->sceneNode.child("protagonist");
+	prota3->Awake();
+	Entity* prota4 = app->entityManager->CreateEntity(EntityType::PC_PROTAGONIST);
+	app->entityManager->AddEntity(prota4);
+	prota4->parameters = app->scene->sceneNode.child("protagonist");
+	prota4->Awake();*/
+	
+	Entity* enemy1 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
+	app->entityManager->AddEntity(enemy1);
+	enemy1->parameters = app->scene->sceneNode.child("enemyTank");
+	enemy1->Awake();
+
+	Entity* enemy2 = app->entityManager->CreateEntity(EntityType::ENEMY_DPS_HOUSE);
+	app->entityManager->AddEntity(enemy2);
+	enemy2->parameters = app->scene->sceneNode.child("enemyDPS");
+	enemy2->Awake();
+
+	Entity* enemy3 = app->entityManager->CreateEntity(EntityType::ENEMY_HEALER_HOUSE);
+	app->entityManager->AddEntity(enemy3);
+	enemy3->parameters = app->scene->sceneNode.child("enemyHealer");
+	enemy3->Awake();
+
+
+
+	//!!!PONERLOS ORDENADOS, SI NO, PETA EL CODIGO Y PRINTA MENOS PERSONAJES, QUEDAIS AVISADOS!!!
+	app->combat->AddCombatant((Character*)enemy1, 0);
+	app->combat->AddCombatant((Character*)enemy2, 5);
+	app->combat->AddCombatant((Character*)enemy3, 3);
+	app->combat->AddCombatant((Character*)prota1, 1);
+	app->combat->AddCombatant((Character*)prota2, 13);
+	/*app->combat->AddCombatant((Character*)prota3, 5);
+	app->combat->AddCombatant((Character*)prota4, 9);*/
+	
+	StartCombat();
 
 	return true;
 }
 
 bool Combat::PreUpdate()
 {
+	if (allies[0] == nullptr && allies[1] == nullptr && allies[2] == nullptr && allies[3] == nullptr)
+	{
+		app->fade->FadingToBlack(this, (Module*)app->scene, 30);
+	}
+	if (enemies[0] == nullptr && enemies[1] == nullptr && enemies[2] == nullptr && enemies[3] == nullptr)
+	{
+		app->fade->FadingToBlack(this, (Module*)app->scene, 30);
+	}
 	return true;
 }
 
@@ -92,8 +152,39 @@ bool Combat::Update(float dt)
 
 	Debug();
 
+	//Printar barra de Turnos Cutre momentaria
 	app->render->DrawTexture(textureBackground, 0, 0);
-	app->render->TextDraw(listInitiative.At(charaInTurn)->data->name.GetString(), 560, 20,20);
+	if (true)
+	{
+		for (int i = 0; i < listInitiative.Count(); i++)
+		{
+			int c = charaInTurn+i;
+
+			//Reiniciar la lista
+			if (c >= listInitiative.Count())
+			{
+				c -= listInitiative.Count();
+			}
+
+			SDL_Rect rect = { 10 + 140 * i,20,130,40 };
+			switch (listInitiative.At(c)->data->charaType_I)
+			{
+			case 0: //Aliado
+				app->render->DrawRectangle(rect, 0, 230, 0, 220);
+				
+				break;
+			case 1: //Enemigo
+				app->render->DrawRectangle(rect, 230, 0, 0, 220);
+				break;
+			default:
+				break;
+			}
+			app->render->TextDraw(listInitiative.At(c)->data->name.GetString(), 15 + 140 * i, 25, 12);
+			
+			
+		}
+	}
+	
 
 	//Si algo esta vacio desactivarlo
 	for (int i = 0; i <= 3; i++)
@@ -105,32 +196,68 @@ bool Combat::Update(float dt)
 		if (allies[3 - i] == nullptr) { DisableTargetButton(i); }
 	}
 
-	//Pruebas de mover positiones
-	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
-	{
-		StartCombat();
-	}
+	
 
-	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
-	{
-		DisableTargetButton(6);
-	}
-	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
-	{
-		EnableTargetButton(6);
-	}
-
+	//Call Upadate of Characters in Combat
 	for (int i=1;listInitiative.Count()>=i;i++) 
 	{
 		listInitiative.At(i-1)->data->Update(dt);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
-
 	//Rectangulo donde va la Info abajo derecha {x,y,w,h} r, g, b, opacity(0 = 100% & 255 = 0%)
 	app->render->DrawRectangle({ 430, 470, 730, 220 }, 255, 255, 255, 250, true);
 
+	//Printar barra de turnos
+	if (listInitiative.At(charaInTurn) != nullptr)
+	{
+		if(listInitiative.At(charaInTurn)->data->charaType_I==0)
+		{
+			if(lastPressedAbility_I>0)
+			{
+			app->render->TextDraw(listInitiative.At(charaInTurn)->data->skills_C[lastPressedAbility_I - 1].GetString(), 460, 500, 40);
+			}
+		}
+	}
+
+
+	//IMPUT DE CONTROL
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	{
+		MoveAllies(1, 2);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	{
+		MoveEnemies(3, 1);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN && app->input->godMode_B)
+	{
+		EliminateCombatant(allies[0]);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN && app->input->godMode_B)
+	{
+		EliminateCombatant(enemies[0]);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		app->input->currentHP_Bard = allies[1]->GetHealth();
+		app->input->currentHP_Protagonist = allies[0]->GetHealth();
+
+		app->fade->FadingToBlack(this, (Module*)app->scene, 30);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		app->input->godMode_B = !app->input->godMode_B;
+	}
 
 	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
 
@@ -159,13 +286,41 @@ bool Combat::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	//player->Disable();
+	listButtons.Clear();
 
+	//pSettings->CleanUp();
+	
+	app->guiManager->CleanUp();
+
+	for (int i = 0; i <= 3; i++)
+	{
+		if(allies[i] != nullptr)
+		{
+			allies[i]->Disable();
+			app->entityManager->DestroyEntity(allies[i]);
+		}
+		allies[i] = nullptr;
+	}
+	for (int i = 0; i <= 3; i++)
+	{
+		if (enemies[i] != nullptr)
+		{
+			enemies[i]->Disable();
+			app->entityManager->DestroyEntity(enemies[i]);
+		}
+		enemies[i] = nullptr;
+	}
+
+
+	app->entityManager->entities.Clear();
+
+	listInitiative.Clear();
+	
 	app->entityManager->Disable();
 
-	pSettings->CleanUp();
-	//pPause->CleanUp();
-	app->guiManager->CleanUp();
+
+	
+
 	return true;
 }
 
@@ -196,11 +351,11 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		targeted_Character = allies[2];
 		break;
 	case 2:
-		LOG("Allies Slot 2 click");
+		LOG("Allies Slot 3 click");
 		targeted_Character = allies[1];
 		break;
 	case 3:
-		LOG("Allies Slot 3 (first frontline) click");
+		LOG("Allies Slot 4 (first frontline) click");
 		targeted_Character = allies[0];
 		break;
 	case 4:
@@ -225,28 +380,50 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	
 	case 8:
 		LOG("Attack 1");
-		lastPressedAbility_I = 1;
+		targeted_Character = nullptr;
+		if (lastPressedAbility_I == 1)
+		{
+			lastPressedAbility_I = 0;
+		}
+		else { lastPressedAbility_I = 1; }
+
 		break;
 
 	case 9:
 		LOG("Attack 2");
-		lastPressedAbility_I = 2;
+		targeted_Character = nullptr;
+		if (lastPressedAbility_I == 2)
+		{
+			lastPressedAbility_I = 0;
+		}
+		else { lastPressedAbility_I = 2; }
 		break;
 
 	case 10:
 		LOG("Attack 3");
-		lastPressedAbility_I = 3;
+		targeted_Character = nullptr;
+		if (lastPressedAbility_I == 3)
+		{
+			lastPressedAbility_I = 0;
+		}
+		else{lastPressedAbility_I = 3;}
+		
 		break;
 
 	case 11:
 		LOG("Attack 4");
-		lastPressedAbility_I = 4;
+		targeted_Character = nullptr;
+		if (lastPressedAbility_I == 4)
+		{
+			lastPressedAbility_I = 0;
+		}
+		else { lastPressedAbility_I = 4; }
 		break;
 	//PLayer OnTurn Action Buttons
 
 	//Inventory
 	case 12:
-		LOG("Attack 4");
+		LOG("Open Inventory");
 		break;
 	
 
@@ -350,6 +527,71 @@ bool Combat::OrderBySpeed()
 	return true;
 }
 
+bool Combat::EliminateCombatant(Character* chara)
+{
+	if (chara==nullptr)
+	{
+		return false;
+	}
+
+	//Mover chara al fondo antes de matarlo para ordenar los arrays
+	switch (chara->charaType_I)
+	{
+	case chara->CharacterType::ALLY:
+		for (int i = 3; i >= 0; i--)
+		{
+			if (allies[i] != nullptr)
+			{
+				MoveAllies(chara->positionCombat_I, i+1);
+				delete allies[i];
+				allies[i]=nullptr;
+				break;
+			}
+		}
+		
+		
+		break;
+
+	case chara->CharacterType::ENEMY:
+		for (int i = 3; i >= 0; i--)
+		{
+			if (enemies[i] != nullptr)
+			{
+				MoveEnemies(chara->positionCombat_I, i+1);
+				enemies[i] = nullptr;
+				break;
+			}
+		}
+		break;
+
+	case chara->CharacterType::NONE:
+		break;
+
+	default:
+		break;
+	}
+
+	listInitiative.Del(listInitiative.At(listInitiative.Find(chara)));
+
+	return true;
+}
+
+bool Combat::StartCombat()
+{
+	OrderBySpeed();
+
+	lastPressedAbility_I = 0;
+	targeted_Character = nullptr;
+	for (int i = 0; i < 7; i++)
+	{
+		EnableTargetButton(i);
+		EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
+	}
+	listInitiative.start->data->onTurn = true;
+	charaInTurn = 0;
+	
+	return true;
+}
 
 bool Combat::NextTurn()
 {
@@ -395,14 +637,10 @@ bool Combat::NextTurn()
 bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 {
 	//DUDA: Esto solo es para evitar errores de acceso , no se si quitarlo porque teoricamente no se deberia poder poner esos valores.
-	if (charaPosition_I>4||charaPosition_I<0)
-	{
-		return false;
-	}
-	if (newPosition_I > 4 || newPosition_I < 0)
-	{
-		return false;
-	}
+	if (charaPosition_I>4||charaPosition_I<0) {return false;}
+	if (newPosition_I > 4 || newPosition_I < 0) {return false;}
+	//Evitar que se acceda a un nullptr
+	if (allies[newPosition_I-1] == nullptr || allies[charaPosition_I-1] == nullptr) {return false;}
 
 	//Guardar las referencias a cosas
 	Character* aux = new Character;
@@ -420,50 +658,77 @@ bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 	//En caso de retroceder los avanza hacia adelante. (los otros characthers)
 	if (charaPosition_I < newPosition_I) //Retroceder a la backline
 	{
-		for (size_t i = charaPosition_I - 1; i < newPosition_I - 1; i++)//Desplazar hacia atras a los demas
+		for (int i = charaPosition_I - 1; i < newPosition_I - 1; i++)//Desplazar hacia atras a los demas
 		{
 			allies[i] = allies[i + 1];
 			if(allies[i]!=nullptr)
 			{
-			allies[i]->positionCombat_I = i - 1;
+			allies[i]->positionCombat_I = i + 1;
 			}
 		}
 
 	}
 
 	allies[newPosition_I - 1]=aux;//Colocamos el alliado en la posicion objetivo
+	allies[newPosition_I - 1]->positionCombat_I = newPosition_I;
 
 	return true;
 }
 
-bool Combat::StartCombat()
+bool Combat::MoveEnemies(int charaPosition_I, int newPosition_I)
 {
-	OrderBySpeed();
+	//DUDA: Esto solo es para evitar errores de acceso , no se si quitarlo porque teoricamente no se deberia poder poner esos valores.
+	if (charaPosition_I > 4 || charaPosition_I < 0) { return false; }
+	if (newPosition_I > 4 || newPosition_I < 0) { return false; }
+	//Evitar que se acceda a un nullptr
+	if (enemies[newPosition_I - 1] == nullptr || enemies[charaPosition_I - 1] == nullptr) { return false; }
 
-	lastPressedAbility_I = 0;
-	targeted_Character = nullptr;
-	for (int i = 0; i < 7; i++)
+	//Guardar las referencias a cosas
+	Character* aux = new Character;
+	aux = enemies[charaPosition_I - 1]; //Ally que queremos mover.
+
+	//En caso de avanzar los desplaza hacia atras. (los otros characthers)
+	if (charaPosition_I > newPosition_I) //Avanzar hacia la frontline
 	{
-		EnableTargetButton(i);
-		EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
+		for (size_t i = charaPosition_I - 1; i > newPosition_I - 1; i--)//Desplazar hacia atras a los demas
+		{
+			enemies[i] = enemies[i - 1];
+			enemies[i]->positionCombat_I = i + 1;
+		}
 	}
-	listInitiative.start->data->onTurn = true;
-	charaInTurn = 0;
-	
+	//En caso de retroceder los avanza hacia adelante. (los otros characthers)
+	if (charaPosition_I < newPosition_I) //Retroceder a la backline
+	{
+		for (int i = charaPosition_I - 1; i < newPosition_I - 1; i++)//Desplazar hacia atras a los demas
+		{
+			enemies[i] = enemies[i + 1];
+			if (allies[i] != nullptr)
+			{
+				enemies[i]->positionCombat_I = i + 1;
+			}
+		}
+
+	}
+
+	enemies[newPosition_I - 1] = aux;//Colocamos el alliado en la posicion objetivo
+	enemies[newPosition_I - 1]->positionCombat_I = newPosition_I;
+
 	return true;
 }
+
+
 
 bool Combat::DisableTargetButton(int id)
 {
 	//Evitar que pete o acceder a botones que no deberia 
-	if (id<0)
+	if (id<0 || id > 7)
 	{
 		return false;
 	}
-	if (id > 7)
-	{
-		return false;
-	}
+	//if (id > 7)
+	//{
+	//	return false;
+	//}
 
 	listButtons.At(id)->data->state = GuiControlState::DISABLED;
 
@@ -474,14 +739,14 @@ bool Combat::DisableTargetButton(int id)
 bool Combat::EnableTargetButton(int id)
 {
 	//Evitar que pete o acceder a botones que no deberia 
-	if (id < 0)
+	if (id < 0 || id > 7)
 	{
 		return false;
 	}
-	if (id > 7)
+	/*if (id > 7)
 	{
 		return false;
-	}
+	}*/
 
 	listButtons.At(id)->data->state = GuiControlState::NORMAL;
 
@@ -492,14 +757,14 @@ bool Combat::EnableTargetButton(int id)
 bool Combat::EnableSkillButton(int skillNum)
 {
 	//Evitar que pete o acceder a botones que no deberia 
-	if (skillNum < 1)
+	if (skillNum < 1 || skillNum > 4)
 	{
 		return false;
 	}
-	if (skillNum > 4)
-	{
-		return false;
-	}
+	//if (skillNum > 4)
+	//{
+	//	return false;
+	//}
 
 	listButtons.At(7 + skillNum)->data->state = GuiControlState::NORMAL;
 
@@ -509,14 +774,14 @@ bool Combat::EnableSkillButton(int skillNum)
 bool Combat::DisableSkillButton(int skillNum)
 {
 	//Evitar que pete o acceder a botones que no deberia 
-	if (skillNum < 1)
+	if (skillNum < 1 || skillNum > 4)
 	{
 		return false;
 	}
-	if (skillNum > 4)
-	{
-		return false;
-	}
+	//if (skillNum > 4)
+	//{
+	//	return false;
+	//}
 
 	listButtons.At(7 + skillNum)->data->state = GuiControlState::DISABLED;
 

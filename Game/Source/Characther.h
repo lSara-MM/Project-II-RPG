@@ -66,13 +66,13 @@ public:
 
 	//Posicion combate
 	int positionCombat_I; //Del uno al cuatro
-	enum CharatherType
+	enum CharacterType
 	{
 		ALLY,
 		ENEMY,
 		NONE 
 	};
-	CharatherType charaType_I; //Va del 1 al 4
+	CharacterType charaType_I; //Ally o Enemy
 	
 	int GetHealth() { return currentHp; }
 	int GetAttack() { return attack; }
@@ -80,6 +80,8 @@ public:
 	int GetSpeed() { return speed; }
 	int GetMaxHP() { return maxHp; }
 	
+	//Skills Descriptions
+	SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
 
 private:
 

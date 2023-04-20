@@ -47,14 +47,21 @@ public:
 	
 	bool AddCombatant(Character* chara, int modifier); //Eric:A�adir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
 	bool OrderBySpeed();
-	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
-	//Swap de un PC en una posicion hasta otra posicion
-	bool MoveAllies(int charaPosition_I, int newPosition_I);
+	//Es muy importante que antes de 
+	bool EliminateCombatant(Character* chara); 
+	
 	bool StartCombat();
+	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
+	
+	//Swap de un PC en una posicion hasta otra posicion, las posiciones van del 1 (front) al 4 (back)
+	bool MoveAllies(int charaPosition_I, int newPosition_I);
+	//Swap de un Enemy en una posicion hasta otra posicion, las posiciones van del 1 (front) al 4 (back)
+	bool MoveEnemies(int charaPosition_I, int newPosition_I);
+	
 //TargetControl
-	// Del 0 al 7
+	// Del 0-3 allies al 4-7 enemies 
 	bool DisableTargetButton(int id);
-	// Del 0 al 7
+	// Del 0-3 allies al 4-7 enemies
 	bool EnableTargetButton(int id); 
 	
 	//Del 1 al 4
@@ -66,12 +73,12 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 public:
-	Player* player;
+	//Player* player;
 	bool frcap;
 
 	//Turn Order
 	List<Character*> listInitiative;
-	int charaInTurn=1;
+	int charaInTurn=0; //Empieza en 0, max 7
 
 	Character* allies[4]; //3 es backline, 0 es frontline
 	Character* enemies[4]; //3 es backline, 0 es frontline
@@ -85,6 +92,8 @@ private:
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;
+
+	pugi::xml_node combatNode;
 
 	//TEXTURAS
 		//Fondo
