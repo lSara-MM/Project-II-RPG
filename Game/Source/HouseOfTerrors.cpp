@@ -206,7 +206,7 @@ void HouseOfTerrors::Debug()
 	}
 
 	// Pause menu
-	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || app->input->controller.START == 1))
+	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->controller.START == 1))
 	{
 		pause_B = true;
 
@@ -276,7 +276,6 @@ bool HouseOfTerrors::InitEntities()
 	player->Awake();
 	player->position.x = 1817;
 	player->position.y = 1250;
-	player->Start();
 
 	return true;
 }

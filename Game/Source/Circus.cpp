@@ -202,7 +202,7 @@ void Circus::Debug()
 	}
 
 	// Pause menu
-	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || app->input->controller.START == 1))
+	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->controller.START == 1))
 	{
 		pause_B = true;
 
@@ -273,7 +273,6 @@ bool Circus::InitEntities()
 	player->Awake();
 	player->position.x = 653;
 	player->position.y = 1265;
-	player->Start();
 
 	return true;
 }
