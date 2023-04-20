@@ -111,9 +111,9 @@ bool HouseDPS::Update(float dt)
 
 		else*/
 		{
+			//Elegir numero random de 1 al 3
 			int randomNum = std::rand() % 3 + 1;
-
-			//Mejor con un switch
+			//Si es 1, hace daño al 1r aliado
 			if (randomNum == 1 )
 			{
 				if (!(app->combat->allies[0] == nullptr))
@@ -126,6 +126,7 @@ bool HouseDPS::Update(float dt)
 					app->combat->NextTurn();
 				}
 			}
+			//Si es 2, hace daño a 2ndo aliado
 			if (randomNum == 2)
 			{
 				if (!(app->combat->allies[1] == nullptr))
@@ -140,8 +141,10 @@ bool HouseDPS::Update(float dt)
 				}
 				app->combat->NextTurn();
 			}
+			//Si es 3, hace daño a 1r y 2ndo aliado
 			if (randomNum == 3)
 			{
+				//Daño al 1r aliado
 				if (!(app->combat->allies[0] == nullptr))
 				{
 					float damage = app->combat->allies[0]->CalculateDamage(attack * 0.5);
@@ -151,7 +154,7 @@ bool HouseDPS::Update(float dt)
 					}
 				
 				}
-
+				//Daño al 2ndo aliado
 				if (!(app->combat->allies[1] == nullptr))
 				{
 					float damage = app->combat->allies[1]->CalculateDamage(attack * 0.5);
@@ -162,9 +165,6 @@ bool HouseDPS::Update(float dt)
 				}
 				app->combat->NextTurn();
 			}
-			//render barra de habilidades
-			// Para seleccionar app->input->GetMousePosition o 
-			//app->combat->NextTurn();
 
 			onTurn = false;
 		}
