@@ -166,9 +166,6 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	app->render->camera.x = 0;
-	app->render->camera.y = 0;
-
 	app->entityManager->CleanUp();
 
 	if (pSettings != nullptr)
