@@ -139,7 +139,7 @@
 			<choice id="1" option="Farewell." nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="0" name="MERCANTE" text="Nothing at the moment. But be ready for our potions mate.">
+		<node id="1" name="MERCANTE" text="Nothing at the moment. But be ready for our potions mate.">
 			<choice id="0" option="Nice." nextNode="-1" eventReturn="0"/>
 		</node>
 
