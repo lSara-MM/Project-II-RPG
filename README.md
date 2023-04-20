@@ -32,10 +32,19 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Intro menu -> Accept / Enter
 
+* Pause menu -> P
+
 ### Debug
 
 * God Mode -> F10
-
+* God Mode Combat -> F10
+* Show UI in Combat -> F2
+* Access to Combat -> C
+* Show Colliders -> F8
+* Show UI in Play Scene -> F7
+* Skip to Play Scene from Start Menu -> F1
+* From Combat to Play Scene -> F1
+* Skip to Start Menu from Logo Menu -> F2
 
 ## Pikum Studios Members
 
@@ -46,8 +55,8 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 * [Éric Segovia Baena](https://github.com/Icefenix7198)
 * [Andreu Miro Sabater](https://github.com/AndreuMiroSabate)
 * [Pau Garriga Brotons](https://github.com/DonnoNonno)
-* [Guillem Pol Aixut](???)
-* [Jose Antonio Tur](???)
+* [Guillem Pol Aixut](https://github.com/GuillemAixut)
+* [Jose Antonio Tur](https://github.com/flishflash)
 
 
 ## License
