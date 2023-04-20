@@ -256,9 +256,9 @@ void Scene::Debug()
 	}
 
 	// Pause menu
-	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || app->input->controller.START == 1)
 	{
-		pause_B = !pause_B;	
+		pause_B = true;	
 
 		if (pause_B)
 		{
@@ -275,9 +275,9 @@ void Scene::Debug()
 		LOG("PAUSE");
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->controller.B == 1)//POSAR CONTROL NORMAL
 	{
-		pause_B = !pause_B;
+		pause_B = false;
 
 		if (pause_B)
 		{
@@ -293,6 +293,7 @@ void Scene::Debug()
 
 		LOG("PAUSE");
 	}
+
 
 	// Mute / unmute
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {

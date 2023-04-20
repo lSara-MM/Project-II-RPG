@@ -34,7 +34,7 @@ enum KeyState
 
 struct GameController
 {
-	float j1_x, j1_y,j2_x, j2_y, RT, LT, A, B, X, Y;
+	float j1_x, j1_y,j2_x, j2_y, RT, LT, A, B, X, Y, START;
 };
 
 enum KeyType
