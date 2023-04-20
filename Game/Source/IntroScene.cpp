@@ -37,6 +37,7 @@ bool IntroScene::Awake(pugi::xml_node& config)
 	// Check https://pugixml.org/docs/quickstart.html#access
 	music_intro = config.attribute("audioIntroPath").as_string();
 	mouse_Speed = config.attribute("mouseSpeed").as_float();
+	texturePath = config.attribute("background").as_string();
 
 	//Save boton continue
 	pugi::xml_document gameStateFile;
@@ -60,6 +61,9 @@ bool IntroScene::Start()
 {
 	
 	app->audio->PlayMusic(music_intro, 0);
+	texture = app->tex->Load(texturePath);
+
+	
 
 	// buttons
 	for (int i = 0; buttons[i] != "\n"; i++)
@@ -87,6 +91,10 @@ bool IntroScene::PreUpdate()
 bool IntroScene::Update(float dt)
 {
 	app->input->GetMousePosition(mouseX_intro, mouseY_intro);
+	app->render->DrawTexture(texture, 0, 0);
+
+	app->render->TextDraw("TWISTED", 100, 50, 100, Font::TITLE, { 181, 33, 33 });
+	app->render->TextDraw("TENT", 250, 160, 100, Font::TITLE, { 181, 33, 33 });
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
@@ -143,6 +151,8 @@ bool IntroScene::CleanUp()
 	listButtons.Clear();
 
 	pSettings->CleanUp();
+
+	app->tex->UnLoad(texture);
 
 	delete pSettings;
 	pSettings = nullptr;

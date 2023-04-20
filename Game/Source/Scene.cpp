@@ -49,16 +49,17 @@ bool Scene::Awake(pugi::xml_node& config)
 bool Scene::Start()
 {
 	//Load Map
-	app->map->Load();
-	backGround = app->tex->Load("Assets/Maps/TwistedTentMap.png");
-	exit_B = false;
+	app->map->Load(0);
+
+	//pause menu
+	pause_B = false;
 
 	pause_B = false;
 	settings_B = false;
 
-	//Camera pos
-	/*app->render->camera.x = -2800;
-	app->render->camera.y = -800;*/
+	//Camera pos temporal Sara no convulsiones
+	app->render->camera.x = -2800;
+	app->render->camera.y = -800;
 	
 	InitEntities();
 	app->entityManager->Enable();
@@ -79,9 +80,10 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
-	//Render background
-	app->render->DrawTexture(backGround, 0, 0);
+	//Draw Map
+	app->map->Draw();
 
+	//Load Debug keys
 	Debug();
 
 	app->input->GetMousePosition(mouseX_scene, mouseY_scene);
@@ -185,6 +187,11 @@ bool Scene::PostUpdate()
 	if (settings_B) { pSettings->OpenSettings(); }
 	app->guiManager->Draw();
 
+	if (app->map->mapPendingtoDelete == true)
+	{
+		app->map->CleanUp();
+	}
+
 	return ret;
 }
 
@@ -196,7 +203,7 @@ bool Scene::CleanUp()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	// player->Disable();
+	//player->Disable();
 
 	app->entityManager->Disable();
 
@@ -211,7 +218,6 @@ bool Scene::CleanUp()
 	
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
-	app->tex->UnLoad(backGround);
 
 	return true;
 }
