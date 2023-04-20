@@ -60,7 +60,6 @@ bool Scene::Start()
 
 	//Load Map
 	app->map->Load(0);
-	backGround = app->tex->Load("Assets/Maps/TwistedTentMap.png");
 	exit_B = false;
 
 	npcSetID = 1;
@@ -72,13 +71,14 @@ bool Scene::Start()
 	settings_B = false;
 
 	InitEntities();
-	app->entityManager->Enable();
 
-	//if (app->iScene->continueGame_B)
-	//{
-	//	app->LoadGameRequest();
-	//	app->iScene->continueGame_B = false;
-	//}
+	app->entityManager->Enable();
+	
+	if (app->iScene->continueGame_B)
+	{
+		app->LoadGameRequest();
+		app->iScene->continueGame_B = false;
+	}
 
 	return true;
 }
@@ -90,8 +90,7 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
-	//Render background
-	app->render->DrawTexture(backGround, 0, 0);
+	app->map->Draw();
 
 	Debug();
 
@@ -166,9 +165,6 @@ bool Scene::PostUpdate()
 bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
-
-	app->render->camera.x = 0;
-	app->render->camera.y = 0;
 
 	app->entityManager->CleanUp();
 
