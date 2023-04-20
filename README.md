@@ -36,6 +36,12 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 ### Combat
 
+* Go to Play Scene -> F1
+
+* Show GUI -> F2
+
+* God Mode -> F10
+
 * Swap position allies -> E
 
 * Swap position enemies -> S
@@ -70,7 +76,7 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Load game -> F6
 
-* Show UI -> F7
+* Show GUI -> F7
 
 * Show collisions -> F8
 
@@ -83,13 +89,6 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 * Exit Pause -> Return/B button Gamepad
 
 * Enter combat -> C key/X button Gamepad
-
-
-#### Combat
-
-* Go to Play Scene -> F1
-* God Mode -> F10
-
 
 
 ## Pikum Studios Members
