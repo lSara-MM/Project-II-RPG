@@ -61,6 +61,7 @@
 		    <choice id="0" option="Where should I go first?" nextNode="1" eventReturn="0"/>
 		    <choice id="1" option="Talk me about this place." nextNode="2" eventReturn="0"/>
 		    <choice id="2" option="Talk me about The Showman." nextNode="3" eventReturn="0"/>
+		    <choice id="3" option="Bye" nextNode="-1" eventReturn="0"/>
 	    </node>
 
 	    <node id="1" name="GUIA" text="Enjoy this place, don't be so serious, nobody likes serious magicians. I recommend the house of terror, there is a very nice man at the door.">
@@ -98,6 +99,7 @@
 			<choice id="0" option="Toss a coin." nextNode="1" eventReturn="0"/>
 			<choice id="1" option="Why should I pay you?" nextNode="2" eventReturn="0"/>
 			<choice id="2" option="You ain't for help, right" nextNode="3" eventReturn="0"/>
+			<choice id="2" option="Bye" nextNode="-1" eventReturn="0"/>
 		</node>
 
 		<node id="1" name="ORACULO" text="Another stupid boy to make me rich. I got a lot of knowledge from the dungeon you are about to go. Toss another coin if that is what you want.">
