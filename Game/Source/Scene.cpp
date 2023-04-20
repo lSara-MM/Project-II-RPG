@@ -167,6 +167,7 @@ bool Scene::CleanUp()
 	LOG("Freeing scene");
 
 	app->entityManager->CleanUp();
+	app->entityManager->Disable();
 
 	if (pSettings != nullptr)
 	{
