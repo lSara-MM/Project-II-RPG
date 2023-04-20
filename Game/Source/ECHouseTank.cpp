@@ -48,12 +48,6 @@ bool HouseTank::Start() {
 
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
-	pbody->body->SetFixedRotation(true);
-
-	pbody->listener = this;
-
-	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::ENEMY_TANK_HOUSE;
 	this->charaType_I = CharacterType::ENEMY;
 
@@ -163,7 +157,6 @@ bool HouseTank::Update(float dt)
 bool HouseTank::CleanUp()
 {
 	app->tex->UnLoad(texture);
-	pbody->body->GetWorld()->DestroyBody(pbody->body);
 
 	return true;
 }

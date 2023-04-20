@@ -60,8 +60,6 @@ private:
 
 	iPoint  position;
 	int width, height;
-	int auxtres;
-
 };
 
 #endif // __PCPROTAGONIST_H__

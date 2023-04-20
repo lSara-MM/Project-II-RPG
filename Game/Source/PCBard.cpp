@@ -63,12 +63,6 @@ bool Bard::Start() {
 
 	texture = app->tex->Load(texturePath);
 	
-	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::DYNAMIC);
-	pbody->body->SetFixedRotation(true);
-	
-	pbody->listener = this; 
-
-	pbody->ctype = ColliderType::PLAYER;
 	this->type = EntityType::PC_BARD;
 	this->charaType_I = CharacterType::ALLY;
 
@@ -303,7 +297,6 @@ bool Bard::Update(float dt)
 bool Bard::CleanUp()
 {
 	app->tex->UnLoad(texture);
-	pbody->body->GetWorld()->DestroyBody(pbody->body);
 	
 	return true;
 }

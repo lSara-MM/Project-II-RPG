@@ -38,20 +38,11 @@ public:
 
 	// A set of animations
 	Animation idleAnim;
-	Animation forwardAnim;
-	Animation jumpAnim;
-	Animation hurtAnim;
-	Animation deathAnim;
-	Animation attackAnim;
 
 	float dtP;
 
 	SDL_RendererFlip flipType;
-	PhysBody* pbody;
-
 	
-	
-
 private:
 
 	SDL_Texture* texture;
@@ -59,7 +50,6 @@ private:
 
 	iPoint  position;
 	int width, height;
-	int auxtres;
 };
 
 #endif // __PCBARD_H__
