@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
 <save_choices>
-	<player player_name="as" />
+	<player player_name="Player" />
+	<node id="1" answer="0" text="Sounds dangerous, but I'm up for the challenge. Do you have any information?" />
 </save_choices>

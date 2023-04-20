@@ -162,7 +162,7 @@ bool Combat::PreUpdate()
 	{
 		if (listInitiative.At(i - 1)->data->onTurn) { someoneOnTurn = true; };
 	}
-	if (!someoneOnTurn) { listInitiative.At(charaInTurn)->data->onTurn = true; }
+	if (!someoneOnTurn && listInitiative.Count()>1) { listInitiative.At(charaInTurn)->data->onTurn = true; }
 
 	return true;
 }
@@ -303,9 +303,6 @@ bool Combat::PostUpdate()
 bool Combat::CleanUp()
 {
 	LOG("Freeing scene");
-
-	app->render->camera.x = 0;
-	app->render->camera.y = 0;
 
 	listButtons.Clear();
 
