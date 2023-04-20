@@ -64,6 +64,8 @@ public:
 
 private:
 
+	int mouseX_scene, mouseY_scene;
+	float mouseSpeed;
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;

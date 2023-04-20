@@ -41,6 +41,8 @@ bool Scene::Awake(pugi::xml_node& config)
 
 	sceneNode = config;
 
+	mouseSpeed = config.attribute("mouseSpeed").as_float();
+
 	return ret;
 }
 
@@ -82,7 +84,8 @@ bool Scene::Update(float dt)
 
 	Debug();
 
-	
+	app->input->GetMousePosition(mouseX_scene, mouseY_scene);
+
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(entidad2);*/
 	
@@ -143,6 +146,8 @@ bool Scene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x -= ceil(speed);
+
+	if (pause_B) { app->input->HandleGamepadMouse(mouseX_scene, mouseY_scene, mouseSpeed, dt); }
 
 	return true;
 }

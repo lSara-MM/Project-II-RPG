@@ -35,7 +35,7 @@ bool GuiSliderBar::Update(float dt)
 				//LOG("Change state from %d to %d", previousState, state);
 			}
 
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->controller.A != 0)
 			{
 				state = GuiControlState::PRESSED;
 	
