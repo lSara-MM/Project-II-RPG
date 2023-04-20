@@ -34,6 +34,16 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Pause menu -> P
 
+### Combat
+
+* Swap position allies -> E
+
+* Swap position enemies -> S
+
+* Kill First Ally -> 9 (only God Mode)
+
+* Kill First Enemy -> 0 (only God Mode)
+
 ### Debug
 
 * God Mode -> F10
