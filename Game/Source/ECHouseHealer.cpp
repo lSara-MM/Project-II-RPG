@@ -77,6 +77,7 @@ bool HouseHealer::Update(float dt)
 	const char* ch_hp = s_hp.c_str();
 	app->render->TextDraw(ch_hp, 628 + 127 * positionCombat_I, 220, 20, UI, { 125,0,0 });
 
+	//Si vida es 0 o menor, eliminar enemy
 	if (currentHp <= 0)
 	{
 		app->combat->EliminateCombatant(this);
@@ -100,9 +101,10 @@ bool HouseHealer::Update(float dt)
 			{
 				if (app->combat->allies[0] != nullptr)
 				{
-					float damage = app->combat->allies[0]->CalculateDamage(attack);
+					
 					if (!app->input->godMode_B)//Hace daño si no hay godmode
 					{
+						float damage = app->combat->allies[0]->CalculateDamage(attack);
 						app->combat->allies[0]->ModifyHP(-damage);
 					}
 					app->combat->NextTurn();
