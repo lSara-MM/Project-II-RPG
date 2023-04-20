@@ -76,7 +76,7 @@ bool Npc::Start() {
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
 
-	pSensor = app->physics->CreateRectangleSensor(position.x + width / 2, position.y + height / 2, width * 2, height * 2, bodyType::STATIC, app->scene->npcSetID++);
+	pSensor = app->physics->CreateRectangleSensor(position.x + width / 2, position.y + height / 2, width * 3, height * 3, bodyType::STATIC, app->scene->npcSetID++);
 	pSensor->body->SetFixedRotation(true);
 	pSensor->ctype = ColliderType::NPC;
 	pSensor->listener = this;
