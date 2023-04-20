@@ -98,6 +98,7 @@ bool Player::Start()
 
 	pbody = app->physics->CreateCircle(position.x - width / 2, position.y - height / 2, 16, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
+	flipType = SDL_FLIP_NONE;
 
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;

@@ -75,6 +75,7 @@ bool Npc::Start() {
 	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::STATIC);
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
+	flipType = SDL_FLIP_NONE;
 
 	pSensor = app->physics->CreateRectangleSensor(position.x + width / 2, position.y + height / 2, width * 2, height * 2, bodyType::STATIC, app->scene->npcSetID++);
 	pSensor->body->SetFixedRotation(true);
