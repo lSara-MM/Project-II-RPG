@@ -192,51 +192,18 @@ bool Combat::Update(float dt)
 		if (allies[3 - i] == nullptr) { DisableTargetButton(i); }
 	}
 
-	//Iniciar el combate
-	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
-	{
-		StartCombat();
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-	{
-		MoveAllies(1, 2);
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-	{
-		MoveEnemies(3, 1);
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
-	{
-		EliminateCombatant(allies[0]);
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
-	{
-		EliminateCombatant(enemies[0]);
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-	{
-		MoveEnemies(3, 1);
-	}
 	
+
+	//Call Upadate of Characters in Combat
 	for (int i=1;listInitiative.Count()>=i;i++) 
 	{
 		listInitiative.At(i-1)->data->Update(dt);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-	{
-		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
-	}
-
 	//Rectangulo donde va la Info abajo derecha {x,y,w,h} r, g, b, opacity(0 = 100% & 255 = 0%)
 	app->render->DrawRectangle({ 430, 470, 730, 220 }, 255, 255, 255, 250, true);
 
-	//PROTEGER VS NULLPTR
+	//Printar barra de turnos
 	if (listInitiative.At(charaInTurn) != nullptr)
 	{
 		if(listInitiative.At(charaInTurn)->data->charaType_I==0)
@@ -247,7 +214,28 @@ bool Combat::Update(float dt)
 			}
 		}
 	}
-	
+
+
+	//IMPUT DE CONTROL
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	{
+		MoveAllies(1, 2);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	{
+		MoveEnemies(3, 1);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN && app->input->godMode_B)
+	{
+		EliminateCombatant(allies[0]);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN && app->input->godMode_B)
+	{
+		EliminateCombatant(enemies[0]);
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
@@ -255,6 +243,11 @@ bool Combat::Update(float dt)
 		app->input->currentHP_Protagonist = allies[0]->GetHealth();
 
 		app->fade->FadingToBlack(this, (Module*)app->scene, 30);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
