@@ -40,6 +40,9 @@ bool HouseOfTerrors::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	musHauntedPath = config.attribute("musicD1").as_string();
+	mute_B = false;
+
 	sceneNode = config;
 
 	return ret;
@@ -55,6 +58,9 @@ bool HouseOfTerrors::Start()
 
 	// Settings
 	pSettings = new Settings(this);
+
+	//Music
+	app->audio->PlayMusic(musHauntedPath, 1);
 
 	// Pause 
 	//pPause->GUI_id = pSettings->GUI_id;

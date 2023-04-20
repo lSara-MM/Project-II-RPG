@@ -79,6 +79,13 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 
+	const char* grass_path;
+	uint walk_grass;
+
+	// entrar sala
+	const char* enterPath;
+	uint enterZone;
+
 	Npc* npcTalkingTo;
 	bool npcInteract;
 	

@@ -40,6 +40,11 @@ bool Circus::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	mute_B = false;
+	circusMusPath = config.attribute("musicCircus").as_string();
+
+	sceneNode = config;
+
 	return ret;
 }
 
@@ -58,6 +63,8 @@ bool Circus::Start()
 	//pPause->GUI_id = pSettings->GUI_id;
 	//pPause->CreatePause(this);
 
+	app->audio->PlayMusic(circusMusPath, 1);
+	
 	InitEntities();
 	app->entityManager->Enable();
 	return true;

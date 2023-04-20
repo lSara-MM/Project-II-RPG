@@ -79,6 +79,13 @@ bool Player::Awake() {
 
 	texturePath = parameters.attribute("texturepath").as_string();
 
+	grass_path = "Assets/Audio/Fx/Pasos_Hierba.wav";
+	walk_grass = app->audio->LoadFx(grass_path);
+
+	//fx enter zone
+	enterPath = "Assets/Audio/Fx/entrar_sala.wav";
+	enterZone = app->audio->LoadFx(enterPath);
+
 	return true;
 }
 
@@ -256,6 +263,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 
 void Player::EndContact(PhysBody* physA, PhysBody* physB) 
 {
+	app->audio->PlayFx(enterZone, 0);
 	switch (physB->ctype)
 	{
 	case ColliderType::NPC:
@@ -274,6 +282,8 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
 			{
+				app->audio->PlayFx(walk_grass, 0);
+
 				keyLockUp = true;
 				currentAnimation = &upAnim;
 				vel.y = -125 * 2;
@@ -297,6 +307,8 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
 			{
+				app->audio->PlayFx(walk_grass, 0);
+
 				keyLockDown = true;
 				currentAnimation = &downAnim;
 				vel.y = 125 * 2;
@@ -320,6 +332,8 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || app->input->controller.j1_x < 0)
 			{
+				app->audio->PlayFx(walk_grass, 0);
+
 				keyLockLeft = true;
 				currentAnimation = &leftAnim;
 				vel.x = -125 * 2;
@@ -343,6 +357,8 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || app->input->controller.j1_x > 0)
 			{
+				app->audio->PlayFx(walk_grass, 0);
+
 				keyLockRigth = true;
 				currentAnimation = &rigthAnim;
 				vel.x = 125 * 2;
@@ -369,6 +385,8 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
 			{
+				app->audio->PlayFx(walk_grass, 0);
+
 				app->render->camera.y += 125 * dtP;
 				keyLockUp = true;
 				currentAnimation = &upAnim;
@@ -385,6 +403,8 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
 			{
+				app->audio->PlayFx(walk_grass, 0);
+
 				app->render->camera.y += -125 * dtP;
 				keyLockDown = true;
 				currentAnimation = &downAnim;
@@ -401,6 +421,8 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || app->input->controller.j1_x < 0)
 			{
+				app->audio->PlayFx(walk_grass, 0);
+
 				app->render->camera.x += 125 * dtP;
 				keyLockLeft = true;
 				currentAnimation = &leftAnim;
@@ -417,6 +439,8 @@ void Player::Controller(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || app->input->controller.j1_x > 0)
 			{
+				app->audio->PlayFx(walk_grass, 0);
+
 				app->render->camera.x += -125 * dtP;
 				keyLockRigth = true;
 				currentAnimation = &rigthAnim;

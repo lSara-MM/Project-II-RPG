@@ -238,3 +238,15 @@ bool Audio::ChangeFxVolume(int vol)
 	return false;
 }
 
+bool Audio::lowerBgMusic()
+{
+	Mix_VolumeMusic(volume_music / 2);
+	return false;
+}
+
+bool Audio::upperBgMusic()
+{
+	Mix_VolumeMusic(volume_music * 2);
+	return false;
+}
+

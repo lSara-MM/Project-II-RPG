@@ -62,9 +62,7 @@ bool IntroScene::Start()
 	
 	app->audio->PlayMusic(music_intro, 0);
 	texture = app->tex->Load(texturePath);
-
 	
-
 	// buttons
 	for (int i = 0; buttons[i] != "\n"; i++)
 	{

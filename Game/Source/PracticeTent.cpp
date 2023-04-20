@@ -29,7 +29,7 @@ using namespace std;
 
 PracticeTent::PracticeTent() : Module()
 {
-	name.Create("scene");
+	name.Create("practiceTent");
 }
 
 PracticeTent::~PracticeTent()
@@ -40,6 +40,8 @@ bool PracticeTent::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	practisePath = config.attribute("musTent").as_string();
+	mute_B = false;
 	sceneNode = config;
 
 	return ret;
@@ -59,6 +61,9 @@ bool PracticeTent::Start()
 	// Pause 
 	//pPause->GUI_id = pSettings->GUI_id;
 	//pPause->CreatePause(this);
+
+	//Music
+	app->audio->PlayMusic(practisePath, 0);
 	
 	InitEntities();
 	app->entityManager->Enable();

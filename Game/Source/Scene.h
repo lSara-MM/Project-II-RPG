@@ -66,6 +66,7 @@ private:
 
 	int mouseX_scene, mouseY_scene;
 	float mouseSpeed;
+	const char* lobby_music;
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;
