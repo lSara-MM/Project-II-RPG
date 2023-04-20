@@ -107,3 +107,34 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 ## License
 
 This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
+
+## Audio Licenses
+
+Practise tent:
+The following music was used for this media project:
+Music: Circus Monkey by Alexander Nakarada
+Free download: https://filmmusic.io/song/8423-circus-monkey
+License (CC BY 4.0): https://filmmusic.io/standard-license
+
+Intro theme:
+Track: Circus Of Dread: Robert Austin
+Music provided by Musicflix24.
+Watch: Circus of Dread =...
+Free Download / Stream: Download: https://goo.gl/6Ivaxs
+Licensed under Creative Commons Attribution 3.0
+https://creativecommons.org/licenses/...
+
+Lobby theme:
+The following music was used for this media project:
+The Clown's Nightmare by Robert Austin Music
+Creative Commons - YouTube Help
+
+Circus theme:
+The following music was used for this media project:
+Secrets of the Carnival by ErikMMusic
+Creative Commons - YouTube Help
+
+House of terrors:
+The following music was used for this media project:
+Playground Lullaby by Robert Austin Music
+Creative Commons - YouTube Help
