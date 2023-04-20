@@ -77,6 +77,7 @@ bool HouseHealer::Update(float dt)
 	const char* ch_hp = s_hp.c_str();
 	app->render->TextDraw(ch_hp, 628 + 127 * positionCombat_I, 220, 20, UI, { 125,0,0 });
 
+	//Si vida es 0 o menor, eliminar enemy
 	if (currentHp <= 0)
 	{
 		app->combat->EliminateCombatant(this);
@@ -92,60 +93,60 @@ bool HouseHealer::Update(float dt)
 	app->render->DrawTexture(texture, 608 + 128 * positionCombat_I, 280/* ,&rect, 1.0f, NULL, NULL, NULL, flipType*/); //PrintBueno
 	if (onTurn)
 	{
-		/*if (this->currentHp <= 0)
 		{
-			this->alive = false;
-		}
-
-		if (this->alive == false) {
-			app->combat->NextTurn();
-			onTurn = false;
-		}
-
-		else*/
-		{
+			//Crear numero random del 1 al 3
 			int randomNum = std::rand() % 3 + 1;
-			//Esto mejor con un switch en vez de 3 IFs
+			//Si es 1, ataca al primer aliado
 			if (randomNum == 1)
-
 			{
 				if (app->combat->allies[0] != nullptr)
 				{
-					float damage = app->combat->allies[0]->CalculateDamage(attack);
+					
 					if (!app->input->godMode_B)//Hace daño si no hay godmode
 					{
+						float damage = app->combat->allies[0]->CalculateDamage(attack);
 						app->combat->allies[0]->ModifyHP(-damage);
 					}
 					app->combat->NextTurn();
 				}
 			}
+			//Si es 2, cuara al 2ndo enemigo
 			if (randomNum == 2)
 			{
-				if (app->combat->enemies[1] != nullptr) {
-					float heal = this->attack * 0.5;
-					app->combat->enemies[1]->ModifyHP(heal);
-					app->combat->NextTurn();
+				if (!app->input->godMode_B)//Hace daño si no hay godmode
+				{
+					if (app->combat->enemies[1] != nullptr) {
+						float heal = this->attack * 0.5;
+						app->combat->enemies[1]->ModifyHP(heal);
+						app->combat->NextTurn();
+					}
 				}
 				
 			}
+			//si es 3, ataca al 1r y 2ndo aliado
 			if (randomNum == 3)
 			{
+				//ataque a 1r aliado
 				if (app->combat->allies[0] != nullptr)
 				{
-					float damage = app->combat->allies[0]->CalculateDamage(attack * 0.8);
-					app->combat->allies[0]->ModifyHP(-damage);
+					if (!app->input->godMode_B)//Hace daño si no hay godmode
+					{
+						float damage = app->combat->allies[0]->CalculateDamage(attack * 0.8);
+						app->combat->allies[0]->ModifyHP(-damage);
+					}
 				}
+				//Ataque a 2ndo aliado
 				if (app->combat->allies[1] != nullptr)
 				{
-					float damage = app->combat->allies[1]->CalculateDamage(attack * 0.3);
-					app->combat->allies[1]->ModifyHP(-damage);
+					if (!app->input->godMode_B)//Hace daño si no hay godmode
+					{
+						float damage = app->combat->allies[1]->CalculateDamage(attack * 0.3);
+						app->combat->allies[1]->ModifyHP(-damage);
+					}
 				}
 				if (app->combat->allies[0] != nullptr || app->combat->allies[1] != nullptr) { app->combat->NextTurn(); }
 
 			}
-			//render barra de habilidades
-			// Para seleccionar app->input->GetMousePosition o 
-			//app->combat->NextTurn(); //Se generan 2 next turn
 
 			onTurn = false;
 		}
