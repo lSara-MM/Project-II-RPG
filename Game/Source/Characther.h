@@ -61,7 +61,7 @@ public:
 	int precision; //La base es 100%, es un porcentaje que se enfrenta vs la resistencia y precision
 	int armor; //MAXIMO ABSOLUTO 200, mas menos full items en tanque 120
 	int esquiva; //Probabilidad de no recibir nada de daño, base es 0%
-	int resistencia; //Probabilidad de no recibir un efecto de estado 10%
+	int resistencia; //Probabilidad de no recibir un efecto de estado, base 10%
 	int speed; //Indicador quien va primero en la iniciativa
 
 	//Posicion combate
