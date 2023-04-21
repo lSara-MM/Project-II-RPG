@@ -31,7 +31,9 @@ public:
 
 	void ModifyHP(int cantidad); //Positivo para curar negativo para dañar
 
-	int CalculateDamage(int damage);
+	int CalculateDamage(int damage); //ERIC:Va haber que poner muchos mas atributos
+
+	bool CalculateRandomProbability(int bonus_I, int against_I = 0); //Retorna true si logras el chance, false si no
 
 public:
 	// The pointer to the current player animation
