@@ -52,11 +52,17 @@ public:
 	//Stats
 	SString name;
 
-	int maxHp;
+	//STATS
+	int maxHp; //La base a level 0/1 es 1000
 	int currentHp;
-	int attack;
+	int attack; //200 mas menos es la base
+	int critProbability; // Base 10, es un porcentaje
+	int critDamage; // Base 120, , luego se ha de dividir entre 100 a lo 120= x1,2
+	int precision; //La base es 100%, es un porcentaje que se enfrenta vs la resistencia y precision
 	int armor; //MAXIMO ABSOLUTO 200, mas menos full items en tanque 120
-	int speed;
+	int esquiva; //Probabilidad de no recibir nada de daño, base es 0%
+	int resistencia; //Probabilidad de no recibir un efecto de estado 10%
+	int speed; //Indicador quien va primero en la iniciativa
 
 	//Posicion combate
 	int positionCombat_I; //Del uno al cuatro
