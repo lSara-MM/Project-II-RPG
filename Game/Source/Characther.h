@@ -29,11 +29,14 @@ public:
 
 	bool Render(); //Se llama a ser printado desde combat(?)
 
+	bool CalculateRandomProbability(int bonus_I, int against_I = 0); //Retorna true si logras el chance, false si no
+
 	void ModifyHP(int cantidad); //Positivo para curar negativo para dañar
 
 	int CalculateDamage(int damage); //ERIC:Va haber que poner muchos mas atributos
 
-	bool CalculateRandomProbability(int bonus_I, int against_I = 0); //Retorna true si logras el chance, false si no
+	bool ResistStatusEffect(/*efecto,precision*/); //Hacer cuando se hagan status effects, aun no.
+	
 
 public:
 	// The pointer to the current player animation
@@ -76,11 +79,13 @@ public:
 	};
 	CharacterType charaType_I; //Ally o Enemy
 	
+	//Gets, dan las stats sumadas (base+eqipo+buffos)
+	int GetMaxHP() { return maxHp; }
 	int GetHealth() { return currentHp; }
 	int GetAttack() { return attack; }
 	int GetArmor() { return armor; }
 	int GetSpeed() { return speed; }
-	int GetMaxHP() { return maxHp; }
+	
 	
 	//Skills Descriptions
 	SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat

@@ -73,6 +73,26 @@ bool Character::Render()
 	return true;
 }
 
+bool Character::CalculateRandomProbability(int bonus_I, int against_I = 0)
+{
+	//Generamos numero aleatorio
+	int randomNum_I = rand() % 100 + 1;
+
+	int finalRand_I = randomNum_I + bonus_I - against_I; //Aplicamos el bonus de stat y restamos el del enemigo
+
+	if (finalRand_I >= 100)
+	{
+		//El numero final supera el 100, por lo tanto acierta
+		return true;
+	}
+	else
+	{
+		//Numero menor que 100, falla 
+		return false;
+	}
+
+}
+
 void Character::ModifyHP(int num)
 {
 	if ((this->currentHp + num) > this->maxHp) 
@@ -113,5 +133,6 @@ int Character::CalculateDamage(int initialDmg)
 
 	return realDmg;
 }
+
 
 
