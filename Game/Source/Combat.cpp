@@ -175,8 +175,6 @@ bool Combat::PreUpdate()
 
 bool Combat::Update(float dt)
 {
-	app->input->GetMousePosition(mouseX_combat, mouseY_combat);
-
 	Debug();
 
 	//Printar barra de Turnos Cutre momentaria
@@ -215,8 +213,7 @@ bool Combat::Update(float dt)
 		}
 	}
 	
-
-	//Si algo esta vacio desactivarlo
+	//Desactivar target buttons si las posiciones estan vacias
 	for (int i = 0; i <= 3; i++)
 	{
 		if (enemies[i] == nullptr) { DisableTargetButton(4 + i); }
@@ -226,9 +223,8 @@ bool Combat::Update(float dt)
 		if (allies[3 - i] == nullptr) { DisableTargetButton(i); }
 	}
 
-	
-
 	//Call Upadate of Characters in Combat
+	//ESTO ES CACA HAY QUE QUITARLO
 	for (int i=1;listInitiative.Count()>=i;i++) 
 	{
 		listInitiative.At(i-1)->data->Update(dt);

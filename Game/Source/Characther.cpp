@@ -73,7 +73,7 @@ bool Character::Render()
 	return true;
 }
 
-bool Character::CalculateRandomProbability(int bonus_I, int against_I = 0)
+bool Character::CalculateRandomProbability(int bonus_I, int against_I )
 {
 	//Generamos numero aleatorio
 	int randomNum_I = rand() % 100 + 1;
