@@ -660,8 +660,10 @@ bool Combat::NextTurn()
 bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 {
 	//DUDA: Esto solo es para evitar errores de acceso , no se si quitarlo porque teoricamente no se deberia poder poner esos valores.
-	if (charaPosition_I>4||charaPosition_I<0) {return false;}
-	if (newPosition_I > 4 || newPosition_I < 0) {return false;}
+	if (charaPosition_I>4||charaPosition_I<1) {return false;}
+	//Si te fueras a salir del array te empuja hacia el limite (4 backline, 1 frontline) pero no te deja sobrepasarte
+	if (newPosition_I > 4) { newPosition_I = 4; } 
+	if (newPosition_I < 1) { newPosition_I = 1; }
 	//Evitar que se acceda a un nullptr
 	if (allies[newPosition_I-1] == nullptr || allies[charaPosition_I-1] == nullptr) {return false;}
 
