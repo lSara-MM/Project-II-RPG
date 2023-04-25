@@ -46,7 +46,7 @@ public:
 	bool InitEntities();
 
 
-	bool AddCombatant(Character* chara, int modifier); //Eric:A�adir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
+	bool AddCombatant(int id);
 	bool OrderBySpeed();
 	//Es muy importante que antes de 
 	bool EliminateCombatant(Character* chara);
@@ -81,8 +81,8 @@ public:
 	List<Character*> listInitiative;
 	int charaInTurn = 0; //Empieza en 0, max 7
 
-	vector<Character*> allies;
-	vector<Character*> enemies;
+	vector<Character*> alliesList;
+	vector<Character*> enemiesList;
 
 	Character* targeted_Character = nullptr; //Last button selected
 	int lastPressedAbility_I = 0;

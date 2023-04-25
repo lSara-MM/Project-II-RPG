@@ -10,6 +10,7 @@
 
 #include "Animation.h"
 #include "NPC.h"
+#include "Character.h"
 #include "SString.h"
 
 struct SDL_Texture;
@@ -72,6 +73,7 @@ public:
 	PhysBody* pbody;
 
 	iPoint position;
+
 
 
 private:

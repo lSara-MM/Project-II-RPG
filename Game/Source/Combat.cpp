@@ -45,6 +45,8 @@ bool Combat::Awake(pugi::xml_node& config)
 	texturePathTargetButton = "Assets/GUI/UI_button_charactherSelection.png"; //De momento lo he puesto aqui para ver como se ve pero quiza haya que borrarlos
 	mouse_Speed = config.attribute("mouseSpeed").as_float();
 
+	combatNode = config;
+
 	return ret;
 }
 
@@ -140,7 +142,22 @@ void Combat::Debug()
 
 bool Combat::InitEntities()
 {
+	for (pugi::xml_node itemNode = combatNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	{
+		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
+		chara->parameters = itemNode;
+		chara->Awake();
 
+		if (chara->charaType == CharacterType::ALLY)
+		{
+			alliesList.push_back(chara);
+		}
+		else if (chara->charaType == CharacterType::ENEMY)
+		{
+			enemiesList.push_back(chara);
+		}
+		
+	}
 	return true;
 }
 
@@ -153,7 +170,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-bool Combat::AddCombatant(Character* pChara, int mod)
+bool Combat::AddCombatant(int id)
 {
 	
 
