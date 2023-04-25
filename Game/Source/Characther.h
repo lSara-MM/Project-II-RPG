@@ -11,13 +11,13 @@
 
 struct SDL_Texture;
 
-class Character : public Entity
+class Characther : public Entity
 {
 public:
 
-	Character();
+	Characther();
 
-	virtual ~Character();
+	virtual ~Characther();
 
 	bool Awake();
 
@@ -86,31 +86,31 @@ public:
 	int GetArmor() { return armor; }
 	int GetSpeed() { return speed; }
 	
-	class Skill
-	{
-	public:
-		Skill() { name = " "; };
-		~Skill();
+	//class Skill
+	//{
+	//public:
+	//	Skill() { name = " "; };
+	//	~Skill();
 
-		Skill() {}
-		SString name;
-		SString description;
-		
-		//Quiza hay que hacer un struct para las posiciones en plan posinicial y pos final
-		//Posicion para hacer la skill (min 1 max 4)
-		int posToUseStart_I; //Posicion mas baja donde puedes usar el ataque
-		int posToUseEnd_I; //Posicion mas alta donde puedes hacer el ataque, si es solo una pues poner el mismo numero que la inicial
+	//	Skill() {}
+	//	SString name;
+	//	SString description;
+	//	
+	//	//Quiza hay que hacer un struct para las posiciones en plan posinicial y pos final
+	//	//Posicion para hacer la skill (min 1 max 4)
+	//	int posToUseStart_I; //Posicion mas baja donde puedes usar el ataque
+	//	int posToUseEnd_I; //Posicion mas alta donde puedes hacer el ataque, si es solo una pues poner el mismo numero que la inicial
 
-		//Posicion que puedes targetear (quiza hay que meter si es area o no)
+	//	//Posicion que puedes targetear (quiza hay que meter si es area o no)
 
-		//Gestion movimiento
-		int movement; //0 si no te mueve, -x si te mueve hacia delante +x si te mueve hacia atras
+	//	//Gestion movimiento
+	//	int movement; //0 si no te mueve, -x si te mueve hacia delante +x si te mueve hacia atras
 
-	private:
+	//private:
 
-	};
+	//};
 
-	//Skills Descriptions
+	////Skills Descriptions
 	SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
 
 private:

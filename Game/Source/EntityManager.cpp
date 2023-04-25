@@ -102,21 +102,7 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::NPC:
 		entity = new Npc();
 		break;
-	case EntityType::PC_PROTAGONIST:
-		entity = new Protagonist();
-		break;
-	case EntityType::PC_BARD:
-		entity = new Bard();
-		break;
-	case EntityType::ENEMY_TANK_HOUSE:
-		entity = new HouseTank();
-		break;
-	case EntityType::ENEMY_DPS_HOUSE:
-		entity = new HouseDPS();
-		break;
-	case EntityType::ENEMY_HEALER_HOUSE:
-		entity = new HouseHealer();
-		break;
+	
 
 	default: break;
 	}

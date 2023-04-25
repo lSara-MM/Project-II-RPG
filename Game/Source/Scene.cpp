@@ -101,7 +101,7 @@ bool Scene::Update(float dt)
 	
 	//ERIC: Prueba que no funciona.
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || app->input->controller.X != 0) {
-		app->fade->FadingToBlack(this, (Module*)app->combat, 30);
+		//app->fade->FadingToBlack(this, (Module*)app->combat, 30);
 		app->SaveGameRequest();//guardar para volver misma posicion al volver de combate
 		app->iScene->continueGame_B = true;
 	}

@@ -95,15 +95,26 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\Characther.cpp" />
     <ClCompile Include="Source\Circus.cpp" />
-    <ClCompile Include="Source\Combat.cpp" />
-    <ClCompile Include="Source\CombatEnemy.cpp" />
-    <ClCompile Include="Source\ECHouseDPS.cpp" />
-    <ClCompile Include="Source\ECHouseHealer.cpp" />
+    <ClCompile Include="Source\Combat.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\CombatEnemy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Source\DialogueSystem.cpp" />
     <ClCompile Include="Source\DialogueTree.cpp" />
-    <ClCompile Include="Source\ECHouseTank.cpp" />
+    <ClCompile Include="Source\ECHouseDPS.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\ECHouseHealer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\ECHouseTank.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\GuiButton.cpp" />
@@ -120,10 +131,16 @@
     <ClCompile Include="Source\Audio.cpp" />
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\NPC.cpp" />
-    <ClCompile Include="Source\PartyMember.cpp" />
+    <ClCompile Include="Source\PartyMember.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Source\Pathfinding.cpp" />
-    <ClCompile Include="Source\PCBard.cpp" />
-    <ClCompile Include="Source\PCProtagonist.cpp" />
+    <ClCompile Include="Source\PCBard.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\PCProtagonist.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Player.cpp" />
@@ -134,16 +151,29 @@
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Character.h" />
     <ClInclude Include="Source\Characther.h" />
     <ClInclude Include="Source\Circus.h" />
-    <ClInclude Include="Source\Combat.h" />
-    <ClInclude Include="Source\CombatEnemy.h" />
-    <ClInclude Include="Source\ECHouseDPS.h" />
-    <ClInclude Include="Source\ECHouseHealer.h" />
+    <ClInclude Include="Source\Combat.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Source\CombatEnemy.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Source\DialogueSystem.h" />
     <ClInclude Include="Source\DialogueTree.h" />
-    <ClInclude Include="Source\ECHouseTank.h" />
-    <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\ECHouseDPS.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Source\ECHouseHealer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Source\ECHouseTank.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\FadeToBlack.h" />
@@ -159,10 +189,16 @@
     <ClInclude Include="Source\LoseScene.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\NPC.h" />
-    <ClInclude Include="Source\PartyMember.h" />
+    <ClInclude Include="Source\PartyMember.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Source\Pathfinding.h" />
-    <ClInclude Include="Source\PCBard.h" />
-    <ClInclude Include="Source\PCProtagonist.h" />
+    <ClInclude Include="Source\PCBard.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Source\PCProtagonist.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\Player.h" />

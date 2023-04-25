@@ -5,7 +5,7 @@
 
 #include "Module.h"
 #include "Player.h"
-#include "Characther.h"
+#include "Character.h"
 
 #include "GuiButton.h"
 #include "GuiCheckBox.h"
@@ -43,31 +43,32 @@ public:
 	bool CleanUp();
 
 	void Debug();
-	bool InitEntities(); //No se si quitarlo o que 
-	
-	bool AddCombatant(Character* chara, int modifier); //Eric:A�adir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
+	bool InitEntities();
+
+
+	bool AddCombatant(Characther* chara, int modifier); //Eric:A�adir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
 	bool OrderBySpeed();
 	//Es muy importante que antes de 
-	bool EliminateCombatant(Character* chara); 
-	
+	bool EliminateCombatant(Characther* chara);
+
 	bool StartCombat();
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
-	
+
 	//Swap de un PC en una posicion hasta otra posicion, las posiciones van del 1 (front) al 4 (back)
 	bool MoveAllies(int charaPosition_I, int newPosition_I);
 	//Swap de un Enemy en una posicion hasta otra posicion, las posiciones van del 1 (front) al 4 (back)
 	bool MoveEnemies(int charaPosition_I, int newPosition_I);
-	
-//TargetControl
-	// Del 0-3 allies al 4-7 enemies 
+
+	//TargetControl
+		// Del 0-3 allies al 4-7 enemies 
 	bool DisableTargetButton(int id);
 	// Del 0-3 allies al 4-7 enemies
-	bool EnableTargetButton(int id); 
-	
+	bool EnableTargetButton(int id);
+
 	//Del 1 al 4
-	bool EnableSkillButton(int skillNum); 
+	bool EnableSkillButton(int skillNum);
 	//Del 1 al 4
-	bool DisableSkillButton(int skillNum); 
+	bool DisableSkillButton(int skillNum);
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
@@ -77,31 +78,26 @@ public:
 	bool frcap;
 
 	//Turn Order
-	List<Character*> listInitiative;
-	int charaInTurn=0; //Empieza en 0, max 7
+	List<Characther*> listInitiative;
+	int charaInTurn = 0; //Empieza en 0, max 7
 
-	Character* allies[4]; //3 es backline, 0 es frontline
-	Character* enemies[4]; //3 es backline, 0 es frontline
-	Character* targeted_Character=nullptr; //Last button selected
+	vector<Character*> allies;
+	vector<Character*> enemies;
+
+	Characther* targeted_Character = nullptr; //Last button selected
 	int lastPressedAbility_I = 0;
 
 private:
-
 	int mouseX_combat, mouseY_combat;
 	float mouse_Speed;
-	
-	//// Settings
-	//Settings* pSettings;
-	//Pause* pPause;
 
 	pugi::xml_node combatNode;
 
-	//TEXTURAS
-		//Fondo
-		const char* texturePathBackground;
-		SDL_Texture* textureBackground;
-		const char* texturePathTargetButton;
-		SDL_Texture* textureTargetButton;
+	//Fondo
+	const char* texturePathBackground;
+	SDL_Texture* textureBackground;
+	const char* texturePathTargetButton;
+	SDL_Texture* textureTargetButton;
 
 
 	// buttons
