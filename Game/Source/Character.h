@@ -103,6 +103,7 @@ public:
 
 	////Skills Descriptions
 	SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
+	//vector<Skills*> skillsList;
 
 private:
 

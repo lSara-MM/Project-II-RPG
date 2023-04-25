@@ -46,10 +46,10 @@ public:
 	bool InitEntities();
 
 
-	bool AddCombatant(Characther* chara, int modifier); //Eric:A�adir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
+	bool AddCombatant(Character* chara, int modifier); //Eric:A�adir charathers a la lista de personajes, el int es para la variabilidad de los enemigos y QUIZA bosses con dos acciones
 	bool OrderBySpeed();
 	//Es muy importante que antes de 
-	bool EliminateCombatant(Characther* chara);
+	bool EliminateCombatant(Character* chara);
 
 	bool StartCombat();
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
@@ -78,13 +78,13 @@ public:
 	bool frcap;
 
 	//Turn Order
-	List<Characther*> listInitiative;
+	List<Character*> listInitiative;
 	int charaInTurn = 0; //Empieza en 0, max 7
 
 	vector<Character*> allies;
 	vector<Character*> enemies;
 
-	Characther* targeted_Character = nullptr; //Last button selected
+	Character* targeted_Character = nullptr; //Last button selected
 	int lastPressedAbility_I = 0;
 
 private:

@@ -21,6 +21,7 @@
 #include "Defs.h"
 #include "Log.h"
 
+#include "Skills.h"
 #include "Character.h"
 
 #include <iostream>
@@ -233,7 +234,6 @@ bool Combat::EliminateCombatant(Character* chara)
 	////chara->Disable();
 	//listInitiative.Del(listInitiative.At(listInitiative.Find(chara)));
 
-	
 	return true;
 }
 

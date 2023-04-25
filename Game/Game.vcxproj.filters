@@ -285,6 +285,9 @@
     <ClInclude Include="Source\Character.h">
       <Filter>Modules\Entities\Combat</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Skills.h">
+      <Filter>Modules\Entities\Combat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">

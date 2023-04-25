@@ -48,8 +48,7 @@ bool Character::Awake()
 
 
 	charaType = (CharacterType)parameters.attribute("type").as_int();
-	charaClass = (CharacterClassparameters.attribute("class").as_int();
-
+	charaClass = (CharacterClass)parameters.attribute("class").as_int();
 	
 
 
