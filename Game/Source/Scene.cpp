@@ -51,7 +51,7 @@ bool Scene::Awake(pugi::xml_node& config)
 
 bool Scene::Start()
 {
-	app->audio->PlayMusic(lobby_music, 0);
+	app->audio->PlayMusic(lobby_music, 3.0);
 
 	if (app->input->playerName.empty())
 	{

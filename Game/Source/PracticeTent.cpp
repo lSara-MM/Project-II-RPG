@@ -54,7 +54,7 @@ bool PracticeTent::Start()
 	app->map->Load(3);
 
 	//Music
-	app->audio->PlayMusic(practisePath, 0);
+	app->audio->PlayMusic(practisePath, 3.0f);
 	exit_B = false;
 
 	npcSetID = 1;

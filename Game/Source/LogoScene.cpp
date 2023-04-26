@@ -48,7 +48,7 @@ bool LogoScene::Start()
 	logoTexture = app->tex->Load(logoPath);
 	logoCitmTexture = app->tex->Load(logoCitmPath);
 
-	app->audio->PlayMusic(musicLogo, 0);
+	app->audio->PlayMusic(musicLogo, 3.0f);
 	
 	return true;
 }

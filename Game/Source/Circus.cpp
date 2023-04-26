@@ -53,7 +53,7 @@ bool Circus::Start()
 	//Load Map
 	app->map->Load(2);
 
-	app->audio->PlayMusic(circusMusPath, 0);
+	app->audio->PlayMusic(circusMusPath, 3.0);
 
 	exit_B = false;
 
