@@ -513,12 +513,12 @@ bool Combat::DisableSkillButton(int skillNum)
 void Combat::MoveCharacter(vector<Character*> arr, Character* chara, int movement_I)
 {
 	//swap(arr.at(currentPosition_I), arr.at(newPosition_I));
-	//Dejar el espacio hueco
+
 	arr.erase(arr.begin() + chara->positionCombat_I);
-	int newPos = chara->positionCombat_I + chara->positionCombat_I;
+	int newPos = chara->positionCombat_I + movement_I;
 	
 	//Evitar que se pase de posicion.
-	if (newPos<0)
+	if (newPos < 0)
 	{
 		newPos = 0;
 	}
@@ -526,15 +526,29 @@ void Combat::MoveCharacter(vector<Character*> arr, Character* chara, int movemen
 	{
 		newPos = 3;
 	}
+
 	//Insertar en nueva posicion
 	chara->positionCombat_I = newPos;
 	arr.insert(arr.begin() + newPos, chara);
-	
 }
 
 void Combat::RemoveCharacter(vector<Character*> arr, Character* chara)
 {
+	// Delete from its type vector
 	arr.erase(arr.begin() + chara->positionCombat_I);
-	//Hay tambien que eliminarlo del entity manager y del initiativeList y demases
+
+	// Delete & free memory (should work?)
+
+	// Delete from initiative list
+	int del = listInitiative.Find(chara);
+	delete listInitiative.At(del)->data;
+	listInitiative.At(del)->data = nullptr;
+	listInitiative.Del(listInitiative.At(del));
+
+	// Delete from entity manager list
+	del = app->entityManager->entities.Find(chara);
+	delete app->entityManager->entities.At(del)->data;
+	app->entityManager->entities.At(del)->data = nullptr;
+	app->entityManager->entities.Del(app->entityManager->entities.At(del));
 }
 
