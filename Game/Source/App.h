@@ -143,7 +143,6 @@ private:
 	Timer timer;
 	PerfTimer ptimer;
 
-
 	Timer startupTime;
 	Timer frameTime;
 	Timer lastSecFrameTime;

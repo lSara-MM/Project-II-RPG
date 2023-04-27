@@ -74,7 +74,7 @@ public:
 
 	iPoint position;
 
-
+	array<Character*, 4> listParty;
 
 private:
 

@@ -60,14 +60,13 @@ bool Combat::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	
-	//Desactivar physics
-	app->physics->Disable();
 	//Activar entityManager que es lo que controlara que enemy  
 	app->entityManager->Enable();
 
 	app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 
-
+	//Desactivar physics
+	app->physics->Disable();
 	StartCombat();
 
 	return true;
@@ -147,7 +146,7 @@ void Combat::Debug()
 
 bool Combat::InitEntities()
 {
-	for (pugi::xml_node itemNode = combatNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	for (pugi::xml_node itemNode = combatNode.child("character"); itemNode; itemNode = itemNode.next_sibling("character"))
 	{
 		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 		chara->parameters = itemNode;
@@ -155,11 +154,11 @@ bool Combat::InitEntities()
 
 		if (chara->charaType == CharacterType::ALLY)
 		{
-			alliesList.push_back(chara);
+			listAllies.push_back(chara);
 		}
 		else if (chara->charaType == CharacterType::ENEMY)
 		{
-			enemiesList.push_back(chara);
+			listEnemies.push_back(chara);
 		}
 		
 	}
@@ -318,6 +317,41 @@ bool Combat::StartCombat()
 //	return true;
 //}
 
+	//Reactivar todos los posibles targets, los vacios desactivarlos
+
+//	for (int i = 0; i < 7; i++)
+//	{
+//		EnableTargetButton(i);
+//	}
+//	for (int i = 1; i < 4; i++)
+//	{
+//		EnableSkillButton(i);
+//	}
+//
+//	//Si algo esta vacio desactivarlo
+//	for (int i = 0; i <= 3; i++)
+//	{
+//		if (enemies[i] == nullptr) { DisableTargetButton(4 + i); }
+//	}
+//	for (int i = 0; i <= 3; i++)
+//	{
+//		if (allies[3-i] == nullptr) { DisableTargetButton(i); }
+//	}
+//	
+//
+//
+//
+//	if (listInitiative.Count()-1 <= charaInTurn) { charaInTurn = 0; }
+//	else
+//	{
+//		listInitiative.At(charaInTurn)->data->onTurn = false;
+//		++charaInTurn; 
+//	}
+//	listInitiative.At(charaInTurn)->data->onTurn = true;
+//
+//	return true;
+//}
+
 //bool Combat::MoveAllies(int charaPosition_I, int newPosition_I)
 //{
 //	//DUDA: Esto solo es para evitar errores de acceso , no se si quitarlo porque teoricamente no se deberia poder poner esos valores.
@@ -403,7 +437,6 @@ bool Combat::StartCombat()
 //}
 
 
-
 bool Combat::DisableTargetButton(int id)
 {
 	//Evitar que pete o acceder a botones que no deberia 
@@ -473,3 +506,19 @@ bool Combat::DisableSkillButton(int skillNum)
 
 	return true;
 }
+
+
+
+
+void Combat::MoveCharacter(vector<Character*> arr, Character* chara, int newPosition_I)
+{
+	//swap(arr.at(currentPosition_I), arr.at(newPosition_I));
+	arr.erase(arr.begin() + chara->positionCombat_I);
+	arr.insert(arr.begin() + chara->positionCombat_I, chara);
+}
+
+void Combat::RemoveCharacter(vector<Character*> arr, Character* chara)
+{
+	arr.erase(arr.begin() + chara->positionCombat_I);
+}
+

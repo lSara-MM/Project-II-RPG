@@ -8,17 +8,18 @@
 #include "List.h"
 
 #include "Animation.h"
+#include <array>
 
 struct SDL_Texture;
 
-enum CharacterType
+enum class CharacterType
 {
-	ALLY=0,
+	ALLY = 0,
 	ENEMY,
 	NONE
 };
 
-enum CharacterClass
+enum class CharacterClass
 {
 	MELEE_DPS,
 	RANGED_DPS,
