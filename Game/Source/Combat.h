@@ -54,6 +54,7 @@ public:
 	bool StartCombat();
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
 
+
 	//Swap de un PC en una posicion hasta otra posicion, las posiciones van del 1 (front) al 4 (back)
 	bool MoveAllies(int charaPosition_I, int newPosition_I);
 	//Swap de un Enemy en una posicion hasta otra posicion, las posiciones van del 1 (front) al 4 (back)
@@ -73,6 +74,13 @@ public:
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+
+
+	// Sara functions, to test
+	void MoveCharacter(vector<Character*> arr, Character* chara, int newPosition_I);
+	void RemoveCharacter(vector<Character*> arr, Character* chara);
+
+
 public:
 	//Player* player;
 	bool frcap;
@@ -81,8 +89,11 @@ public:
 	List<Character*> listInitiative;
 	int charaInTurn = 0; //Empieza en 0, max 7
 
-	vector<Character*> alliesList;
-	vector<Character*> enemiesList;
+	vector<Character*> listAllies;
+	vector<Character*> listEnemies;
+
+	/*array<Character*, 4> listAllies;
+	array<Character*, 4> listEnemies;*/
 
 	Character* targeted_Character = nullptr; //Last button selected
 	int lastPressedAbility_I = 0;
@@ -102,7 +113,7 @@ private:
 
 	// buttons
 	List<GuiButton*> listButtons;
-
+	
 	const char* actions[4] = { "Atk 1", "Atk 2", "Atk 3", "Atk 4" };
 
 	bool exit_B;
