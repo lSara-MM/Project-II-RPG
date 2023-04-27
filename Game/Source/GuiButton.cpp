@@ -33,6 +33,8 @@ bool GuiButton::Update(float dt)
 		
 			state = GuiControlState::FOCUSED;
 			
+			NotifyObserverOfHover();
+
 			if (previousState != state) 
 			{
 				//LOG("Change state from %d to %d", previousState, state);
@@ -46,7 +48,7 @@ bool GuiButton::Update(float dt)
 			// If mouse button pressed -> Generate event!
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->controller.A != 0)
 			{
-				NotifyObserver();
+				NotifyObserverOfClick();
 			}
 		}
 

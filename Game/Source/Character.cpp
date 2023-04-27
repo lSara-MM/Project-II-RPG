@@ -29,7 +29,9 @@ Character::~Character()
 
 bool Character::Awake()
 {
+	//COSA PARA PROBARLO EN EL MOMENTO
 	int id = 1;
+	//Idea identificacion cada Chara cual es
 	while (parameters.attribute("id").as_int() != id && parameters != NULL)
 	{
 		parameters = parameters.next_sibling();
