@@ -19,7 +19,7 @@
 
 Character::Character() : Entity(EntityType::COMBAT_CHARA)
 {
-	name.Create("Combat character");
+	name.Create("CombatCharacter");
 	active = true;
 }
 
@@ -29,6 +29,12 @@ Character::~Character()
 
 bool Character::Awake()
 {
+	int id = 1;
+	while (parameters.attribute("id").as_int() != id && parameters != NULL)
+	{
+		parameters = parameters.next_sibling();
+	}
+
 	name = parameters.attribute("name").as_string();
 
 	maxHp = parameters.attribute("maxHp").as_int();
@@ -61,5 +67,17 @@ bool Character::Awake()
 
 bool Character::Start()
 {
+	
+	return false;
+}
+
+bool Character::Update(float dt)
+{
+	return false;
+}
+
+bool Character::CleanUp()
+{
+
 	return false;
 }

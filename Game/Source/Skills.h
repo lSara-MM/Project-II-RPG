@@ -20,8 +20,10 @@
 #include "SDL/include/SDL.h"
 
 // prueba
-int skill1() {
+bool skill1() 
+{
 
+	return true;
 }
 
 #endif // __SKILLS_H__

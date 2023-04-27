@@ -102,7 +102,8 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::NPC:
 		entity = new Npc();
 		break;
-	
+	case EntityType::COMBAT_CHARA:
+		entity = new Character();
 
 	default: break;
 	}

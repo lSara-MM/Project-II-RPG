@@ -13,7 +13,7 @@ struct SDL_Texture;
 
 enum CharacterType
 {
-	ALLY,
+	ALLY=0,
 	ENEMY,
 	NONE
 };
