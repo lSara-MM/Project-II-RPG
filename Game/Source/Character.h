@@ -96,7 +96,7 @@ public:
 	int res; //Probabilidad de no recibir un efecto de estado, base 10%
 	int speed; // Indicador quien va primero en la iniciativa
 
-	// Posicion combate
+	// Posicion combate (va del 0 al 3)
 	int positionCombat_I;
 	
 	CharacterType charaType; // Ally o Enemy

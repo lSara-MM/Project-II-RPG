@@ -510,15 +510,31 @@ bool Combat::DisableSkillButton(int skillNum)
 
 
 
-void Combat::MoveCharacter(vector<Character*> arr, Character* chara, int newPosition_I)
+void Combat::MoveCharacter(vector<Character*> arr, Character* chara, int movement_I)
 {
 	//swap(arr.at(currentPosition_I), arr.at(newPosition_I));
+	//Dejar el espacio hueco
 	arr.erase(arr.begin() + chara->positionCombat_I);
-	arr.insert(arr.begin() + chara->positionCombat_I, chara);
+	int newPos = chara->positionCombat_I + chara->positionCombat_I;
+	
+	//Evitar que se pase de posicion.
+	if (newPos<0)
+	{
+		newPos = 0;
+	}
+	if (newPos > 3)
+	{
+		newPos = 3;
+	}
+	//Insertar en nueva posicion
+	chara->positionCombat_I = newPos;
+	arr.insert(arr.begin() + newPos, chara);
+	
 }
 
 void Combat::RemoveCharacter(vector<Character*> arr, Character* chara)
 {
 	arr.erase(arr.begin() + chara->positionCombat_I);
+	//Hay tambien que eliminarlo del entity manager y del initiativeList y demases
 }
 
