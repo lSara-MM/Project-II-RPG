@@ -51,6 +51,8 @@ bool Scene::Awake(pugi::xml_node& config)
 
 bool Scene::Start()
 {
+	app->input->godMode_B = false;
+
 	app->audio->PlayMusic(lobby_music, 3.0);
 
 	if (app->input->playerName.empty())

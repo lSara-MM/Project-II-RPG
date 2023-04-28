@@ -90,6 +90,10 @@
 	<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
 		x="3570" y="2670" width="150" height="150" texturepath=""/>
 </scene>
+  <SceneWin_Lose>
+    <win texturepath="Assets/Textures/Concept_WinScreen.jpg"/>
+    <lose texturepath="Assets/Textures/Concept_LoseScreen.jpg"/>
+  </SceneWin_Lose>
 	<map>
 		<mapfolder path="Assets/Maps/"/>
 		<mapfile path="Assets/Maps/map1.tmx"/>

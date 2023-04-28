@@ -95,5 +95,6 @@
     <ClInclude Include="Source\DynArray.h" />
     <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="Source\SceneWin_Lose.h" />
   </ItemGroup>
 </Project>
