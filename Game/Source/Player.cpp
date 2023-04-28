@@ -27,35 +27,35 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("player");
 
-	currentAnim.PushBack({ 64, 0, 64, 64 });
+	currentAnim.PushBack({ 128, 0, 128, 128 });
 
-	downAnim.PushBack({ 0, 0, 64, 64 });
-	downAnim.PushBack({ 64, 0, 64, 64 });
-	downAnim.PushBack({ 128, 0, 64, 64 });
-	downAnim.PushBack({ 64, 0, 64, 64 });
+	downAnim.PushBack({ 0, 0, 128, 128 });
+	downAnim.PushBack({ 128, 0, 128, 128 });
+	downAnim.PushBack({ 256, 0, 128, 128 });
+	downAnim.PushBack({ 128, 0, 128, 128 });
 
-	idleDownAnim.PushBack({ 64, 0, 64, 64 });
+	idleDownAnim.PushBack({128, 0, 128, 128 });
 
-	upAnim.PushBack({ 0, 64, 64, 64 });
-	upAnim.PushBack({ 64, 64, 64, 64 });
-	upAnim.PushBack({ 128, 64, 64, 64 });
-	upAnim.PushBack({ 64, 64, 64, 64 });	
+	upAnim.PushBack({ 0, 128, 128, 128 });
+	upAnim.PushBack({ 128, 128, 128, 128 });
+	upAnim.PushBack({ 256, 128, 128, 128 });
+	upAnim.PushBack({ 128, 128, 128, 128 });
 
-	idleUpAnim.PushBack({ 128, 64, 64, 64 });
+	idleUpAnim.PushBack({128, 128, 128, 128 });
 	
-	leftAnim.PushBack({ 0, 128, 64, 64 });
-	leftAnim.PushBack({ 64, 128, 64, 64 });
-	leftAnim.PushBack({ 128, 128, 64, 64 });
-	leftAnim.PushBack({ 64, 128, 64, 64 });
+	leftAnim.PushBack({ 0, 256, 128, 128 });
+	leftAnim.PushBack({ 128, 256, 128,128 });
+	leftAnim.PushBack({ 256, 256, 128, 128 });
+	leftAnim.PushBack({ 128, 256, 128, 128 });
 
-	idleLeftAnim.PushBack({ 128, 128, 64, 64 });
+	idleLeftAnim.PushBack({ 128, 256, 128, 128 });
 
-	rigthAnim.PushBack({ 0, 192, 64, 64 });
-	rigthAnim.PushBack({ 64, 192, 64, 64 });
-	rigthAnim.PushBack({ 128, 192, 64, 64 });
-	rigthAnim.PushBack({ 64, 192, 64, 64 });
+	rigthAnim.PushBack({ 0, 384, 128,128 });
+	rigthAnim.PushBack({ 128, 384, 128, 128 });
+	rigthAnim.PushBack({ 256, 384, 128, 128 });
+	rigthAnim.PushBack({ 128, 384, 128, 128 });
 
-	idleRigthAnim.PushBack({ 128, 192, 64, 64 });
+	idleRigthAnim.PushBack({ 128, 384, 128, 128 });
 
 	downAnim.speed = 0.1f;
 	upAnim.speed = 0.1f;
