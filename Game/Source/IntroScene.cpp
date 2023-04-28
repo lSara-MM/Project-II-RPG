@@ -61,7 +61,7 @@ bool IntroScene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool IntroScene::Start()
 {
-	app->audio->PlayMusic(music_intro, 3.0f);
+	app->audio->PlayMusic(music_intro, 1.0f);
 	texture = app->tex->Load(texturePath);
 	
 	// buttons

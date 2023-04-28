@@ -53,7 +53,7 @@ bool Scene::Start()
 {
 	app->input->godMode_B = false;
 
-	app->audio->PlayMusic(lobby_music, 3.0);
+	app->audio->PlayMusic(lobby_music, 1.0);
 
 	if (app->input->playerName.empty())
 	{

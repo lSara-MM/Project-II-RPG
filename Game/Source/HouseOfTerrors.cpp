@@ -56,7 +56,7 @@ bool HouseOfTerrors::Start()
 	app->map->Load(1);
 
 	//Music
-	app->audio->PlayMusic(musHauntedPath, 3.0f);
+	app->audio->PlayMusic(musHauntedPath, 1.0f);
 
 	exit_B = false;
 
