@@ -18,7 +18,6 @@ bool ItemManager::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Items");
 	bool ret = true;
-	textBox_path = config.attribute("textBoxBg").as_string();
 
 	return ret;
 }
@@ -104,6 +103,7 @@ ItemNode* ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 			node->resistencia = pugiNode.attribute("resistencia").as_int();
 			node->speed = pugiNode.attribute("speed").as_int();
 		}
+		textBox_path = pugiNode.attribute("texturepath").as_string();
 
 		item->nodeList.push_back(node);
 
