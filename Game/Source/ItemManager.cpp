@@ -25,21 +25,12 @@ bool ItemManager::Awake(pugi::xml_node& config)
 bool ItemManager::Start()
 {
 	textBox_tex = app->tex->Load(textBox_path);
-	hasEnded = false;
+	LoadItems();
 	return true;
 }
 
 bool ItemManager::Update(float dt)
 {
-	if (activeTree != nullptr)
-	{
-		//Text box
-		iPoint pos = { 0, (app->win->GetHeight() - 245) };
-		app->render->DrawTexture(textBox_tex, pos.x - app->render->camera.x, pos.y - app->render->camera.y);
-
-		activeTree->UpdateTree(dt, app->dialogueSystem, pos);
-		app->guiManager->Draw();
-	}
 
 	return true;
 }
