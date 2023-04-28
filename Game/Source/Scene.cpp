@@ -339,10 +339,17 @@ bool Scene::InitEntities()
 
 void Scene::InitCombat()
 {
-	int randSize = rand() % 4 + 1;
-	int randId = rand() % enemyRange_I;
+	int randSize = rand() % 3 + 2;
+	int randId;
+	vector<int> arr;
 
-	app->combat->InitCharacters(name);
+	for (int i = 0; i < randSize; i++)
+	{
+		randId = rand() % enemyRange_I;
+		arr.push_back(randId);
+	}
+
+	app->combat->InitEnemies(name, arr);
 }
 
 bool Scene::OnGuiMouseClickEvent(GuiControl* control)

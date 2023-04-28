@@ -43,7 +43,7 @@ public:
 	bool CleanUp();
 
 	void Debug();
-	bool InitCharacters(SString scene);
+	bool InitEnemies(SString scene, vector<int> arr);
 
 
 	bool AddCombatant(int id);
