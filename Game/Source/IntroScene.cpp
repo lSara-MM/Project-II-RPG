@@ -175,6 +175,12 @@ bool IntroScene::SaveState(pugi::xml_node& data)
 	return true;
 }
 
+bool IntroScene::OnGuiMouseHoverEvent(GuiControl* control)
+{
+	
+
+	return true;
+}
 
 bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 {
