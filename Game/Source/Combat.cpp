@@ -147,25 +147,21 @@ void Combat::Debug()
 bool Combat::InitEnemies(SString scene, vector<int> arr)
 {
 	// to finish
-	for (pugi::xml_node itemNode = combatNode.child("scenes"); itemNode; itemNode = itemNode.next_sibling("character"))
+	for (pugi::xml_node sceneNode = combatNode.child("scenes"); sceneNode; sceneNode = sceneNode.next_sibling("scenes"))
 	{
 		// to test if string compare works
-		if (itemNode.attribute("name").as_string() == scene.GetString())
+		if (sceneNode.attribute("name").as_string() == scene.GetString())
 		{
-			for (pugi::xml_node itemNode = combatNode.child(scene.GetString()).child("character"); itemNode; itemNode = itemNode.next_sibling("character"))
+			for (pugi::xml_node itemNode = sceneNode.child(scene.GetString()).child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
 			{
-				Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
-				chara->parameters = itemNode;
-				chara->Awake();
+				/*	if (itemNode.attribute("id").as_int() == arr)
+					{
+						Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
+						chara->parameters = itemNode;
+						chara->Awake();
 
-				if (chara->charaType == CharacterType::ALLY)
-				{
-					listAllies.push_back(chara);
-				}
-				else if (chara->charaType == CharacterType::ENEMY)
-				{
-					listEnemies.push_back(chara);
-				}
+						listEnemies.push_back(chara);
+					}*/
 			}
 		}
 	}

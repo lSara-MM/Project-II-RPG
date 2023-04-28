@@ -124,13 +124,13 @@
 <combat>
 	<scenes name="scene" numEnemies="3">
 	<!-- Placeholder -->
-		<enemyTank name ="Bewitched Wardrobe" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
+		<enemy name ="Bewitched Wardrobe" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
 			    texturePath ="Assets/Textures/marioneta2.png"/>
 		
-		<enemyDPS name ="Cursed Puppet" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
+		<enemy name ="Cursed Puppet" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
 			  texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
 
-		<enemyHealer name ="Possessed Painting" maxHp="850" currentHp="850" attack="140" armor="8" speed="2"
+		<enemy name ="Possessed Painting" maxHp="850" currentHp="850" attack="140" armor="8" speed="2"
 				  texturePath ="Assets/Textures/marioneta3.png"/>
 	<!-- Placeholder -->
 	</scenes>
