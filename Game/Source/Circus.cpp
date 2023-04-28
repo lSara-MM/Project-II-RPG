@@ -269,7 +269,7 @@ void Circus::Debug()
 bool Circus::InitEntities()
 {
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	player->parameters = app->scene->sceneNode.child("player");
+	player->parameters = app->entityManager->entityNode.child("player");
 	player->Awake();
 	player->position.x = 653;
 	player->position.y = 1265;

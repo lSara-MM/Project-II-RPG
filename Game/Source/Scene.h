@@ -45,6 +45,9 @@ public:
 	void Debug();
 	bool InitEntities();
 
+	void InitCombat();
+
+
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
@@ -64,8 +67,6 @@ public:
 	int currentHP_Protagonist = 0;
 	bool isCharacterLoaded_B = true;
 
-	pugi::xml_node sceneNode;
-
 private:
 
 	int mouseX_scene, mouseY_scene;
@@ -77,7 +78,9 @@ private:
 	Pause* pPause;
 
 	bool exit_B;
+	int enemyRange_I;
 
+	pugi::xml_node sceneNode;
 };
 
 #endif // __SCENE_H__
