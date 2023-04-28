@@ -41,6 +41,7 @@ public:
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
+	bool OnGuiMouseHoverEvent(GuiControl* control);
 
 	//Load / Save methods
 	bool LoadState(pugi::xml_node&);
