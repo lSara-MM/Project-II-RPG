@@ -39,11 +39,11 @@ public:
 	//Get A list with the type of characters you want to have
 	List<Entity*> GetEntitiesByType(EntityType type);
 
-
-
 public:
 
 	List<Entity*> entities;
+
+	pugi::xml_node entityNode;
 
 	//Pido perd�n no borren 
 	int tpID = 21;

@@ -43,7 +43,7 @@ public:
 	bool CleanUp();
 
 	void Debug();
-	bool InitEntities();
+	bool InitCharacters(SString scene);
 
 
 	bool AddCombatant(int id);
@@ -53,12 +53,6 @@ public:
 
 	bool StartCombat();
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
-
-
-	//Swap de un PC en una posicion hasta otra posicion, las posiciones van del 1 (front) al 4 (back)
-	bool MoveAllies(int charaPosition_I, int newPosition_I);
-	//Swap de un Enemy en una posicion hasta otra posicion, las posiciones van del 1 (front) al 4 (back)
-	bool MoveEnemies(int charaPosition_I, int newPosition_I);
 
 	//TargetControl
 		// Del 0-3 allies al 4-7 enemies 

@@ -42,9 +42,10 @@ bool Scene::Awake(pugi::xml_node& config)
 	lobby_music = config.attribute("music").as_string();
 	mute_B = false;
 
-	sceneNode = config;
-
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
+	enemyRange_I = config.attribute("enemyRange").as_int();;
+
+	sceneNode = config;
 
 	return ret;
 }
@@ -165,6 +166,9 @@ bool Scene::PostUpdate()
 bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
+
+	// to test
+	app->combat->listAllies.insert(app->combat->listAllies.end(),begin(player->listParty), end(player->listParty));
 
 	app->entityManager->CleanUp();
 	app->entityManager->Disable();
@@ -307,7 +311,7 @@ bool Scene::InitEntities()
 	}
 
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	player->parameters = sceneNode.child("player");
+	player->parameters = app->entityManager->entityNode.child("player");
 	player->Awake();
 
 	switch (app->entityManager->tpID)
@@ -331,6 +335,14 @@ bool Scene::InitEntities()
 
 	//app->entityManager->Awake();
 	return true;
+}
+
+void Scene::InitCombat()
+{
+	int randSize = rand() % 4 + 1;
+	int randId = rand() % enemyRange_I;
+
+	app->combat->InitCharacters(name);
 }
 
 bool Scene::OnGuiMouseClickEvent(GuiControl* control)
