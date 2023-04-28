@@ -46,6 +46,9 @@ public:
 
 	int LoadItems();
 	ItemNode* LoadNodes(pugi::xml_node& xml_trees, ItemNode* item);
+	ItemNode* LoadQuantity(pugi::xml_node& xml_trees, ItemNode* item);
+
+
 
 	bool LoadItemState();
 	bool SaveItemState();
@@ -53,6 +56,7 @@ public:
 public:
 
 	vector <ItemNode*> nodeList;
+	vector <ItemNode*> itemCount;
 
 	SDL_Texture* textItem_tex;
 	const char* textItem_path;

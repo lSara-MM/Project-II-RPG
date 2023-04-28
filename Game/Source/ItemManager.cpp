@@ -75,7 +75,7 @@ int ItemManager::LoadItems()
 		}
 	}
 
-	return dialogueID;
+	return 1;
 }
 
 ItemNode* ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
@@ -107,6 +107,44 @@ ItemNode* ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 
 		item->nodeList.push_back(node);
 
+	}
+	LoadQuantity(xml_trees, item);
+
+	return first_node;
+}
+
+ItemNode* ItemManager::LoadQuantity(pugi::xml_node& xml_trees, ItemNode* item)
+{
+	ItemNode* first_node = new ItemNode;
+
+	for (pugi::xml_node pugiNode = xml_trees.child("node"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("node"))
+	{
+		ItemNode* node = new ItemNode;
+
+		node->quantity = pugiNode.attribute("type").as_int();
+
+		for (int n=0; n<=node->quantity; n++)
+		{
+			node->type = pugiNode.attribute("type").as_int();
+			node->name = pugiNode.attribute("name").as_string();
+			node->type = pugiNode.attribute("type").as_int();
+			if (node->type == 1) { node->kind = pugiNode.attribute("kind").as_int(); }
+			node->hp = pugiNode.attribute("hp").as_int();
+			if (node->type == 2)
+			{
+				node->attack = pugiNode.attribute("attack").as_int();
+				node->critProbability = pugiNode.attribute("critProbability").as_int();
+				node->critDamage = pugiNode.attribute("critDamage").as_int();
+				node->precision = pugiNode.attribute("precision").as_int();
+				node->armor = pugiNode.attribute("armor").as_int();
+				node->esquiva = pugiNode.attribute("esquiva").as_int();
+				node->resistencia = pugiNode.attribute("resistencia").as_int();
+				node->speed = pugiNode.attribute("speed").as_int();
+			}
+			textBox_path = pugiNode.attribute("texturepath").as_string();
+
+			item->itemCount.push_back(node);
+		}
 	}
 
 	return first_node;
