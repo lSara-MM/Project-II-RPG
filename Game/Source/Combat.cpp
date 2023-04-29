@@ -146,25 +146,32 @@ void Combat::Debug()
 
 bool Combat::InitEnemies(SString scene, vector<int> arr)
 {
-	// to finish
+	// to test
 	for (pugi::xml_node sceneNode = combatNode.child("scenes"); sceneNode; sceneNode = sceneNode.next_sibling("scenes"))
 	{
 		// to test if string compare works
-		if (sceneNode.attribute("name").as_string() == scene.GetString())
+		if (strcmp(sceneNode.attribute("name").as_string(), scene.GetString()) == 0)
 		{
-			for (pugi::xml_node itemNode = sceneNode.child(scene.GetString()).child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
+			for (pugi::xml_node itemNode = sceneNode.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
 			{
-				/*	if (itemNode.attribute("id").as_int() == arr)
+				for (int i = 0; i < arr.size(); i++)
+				{
+					if (itemNode.attribute("id").as_int() == arr[i])
 					{
 						Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 						chara->parameters = itemNode;
 						chara->Awake();
 
-						listEnemies.push_back(chara);
-					}*/
+						listEnemies.push_back(chara);					
+					}
+				}
+
+				// if list enemies full, stop checking pugi
+				if (listEnemies.size() == arr.size())	return true;
 			}
 		}
 	}
+
 	return true;
 }
 

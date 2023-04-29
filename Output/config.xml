@@ -54,8 +54,6 @@
 
 	<introScene background="Assets/Textures/intro_bg.png" audioIntroPath ="Assets/Audio/Music/Intro_mus.ogg"
 				settingsPath="Assets/Textures/setting_menu.png" mouseSpeed ="0.5"/>
-	
-	<combat mouseSpeed =" 0.5" />
 
 	<HouseOfTerrors musicD1="Assets/Audio/Music/Haunted_House.ogg" mouseSpeed ="0.5"/>
 	<Circus musicCircus="Assets/Audio/Music/CircusTent_mus.ogg" mouseSpeed ="0.5"/>
@@ -121,26 +119,26 @@
 		</map1>
 	</map>
 
-<combat>
+<combat mouseSpeed =" 0.5">
 	<scenes name="scene" numEnemies="3">
 	<!-- Placeholder -->
-		<enemy name ="Bewitched Wardrobe" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
+		<enemy name ="Bewitched Wardrobe" id="0" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
 			    texturePath ="Assets/Textures/marioneta2.png"/>
 		
-		<enemy name ="Cursed Puppet" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
+		<enemy name ="Cursed Puppet"  id="1" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
 			  texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
 
-		<enemy name ="Possessed Painting" maxHp="850" currentHp="850" attack="140" armor="8" speed="2"
+		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="140" armor="8" speed="2"
 				  texturePath ="Assets/Textures/marioneta3.png"/>
 	<!-- Placeholder -->
 	</scenes>
 
 	<scenes name="PracticeTent" numEnemies="2">
 	<!-- Placeholder -->
-		<enemyTank name ="Bewitched Wardrobe" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
+		<enemyTank name ="Bewitched Wardrobe"  id="0" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
 			    texturePath ="Assets/Textures/marioneta2.png"/>
 		
-		<enemyDPS name ="Cursed Puppet" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
+		<enemyDPS name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
 			  texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
 	<!-- Placeholder -->
 	</scenes>

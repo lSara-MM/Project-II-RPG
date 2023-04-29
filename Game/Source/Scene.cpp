@@ -25,6 +25,7 @@
 #include <iostream>
 using namespace std;
 #include <sstream>
+#include <time.h>
 
 Scene::Scene() : Module()
 {
@@ -295,6 +296,12 @@ void Scene::Debug()
 		mute_B = !mute_B;
 		LOG("MUTE");
 	}
+
+	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
+		LOG("Combat");
+		InitCombat();
+		int a;
+	}
 		
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
 }
@@ -339,13 +346,15 @@ bool Scene::InitEntities()
 
 void Scene::InitCombat()
 {
+	srand(time(NULL));
+
 	int randSize = rand() % 3 + 2;
 	int randId;
 	vector<int> arr;
 
 	for (int i = 0; i < randSize; i++)
 	{
-		randId = rand() % enemyRange_I;
+		randId = rand() % 3;
 		arr.push_back(randId);
 	}
 

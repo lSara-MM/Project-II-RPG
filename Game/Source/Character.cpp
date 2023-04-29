@@ -30,12 +30,12 @@ Character::~Character()
 bool Character::Awake()
 {
 	//COSA PARA PROBARLO EN EL MOMENTO
-	int id = 1;
-	//Idea identificacion cada Chara cual es
-	while (parameters.attribute("id").as_int() != id && parameters != NULL)
-	{
-		parameters = parameters.next_sibling();
-	}
+	//int id = 1;
+	////Idea identificacion cada Chara cual es
+	//while (parameters.attribute("id").as_int() != id && parameters != NULL)
+	//{
+	//	parameters = parameters.next_sibling();
+	//}
 
 	name = parameters.attribute("name").as_string();
 
@@ -64,22 +64,22 @@ bool Character::Awake()
 	height = parameters.attribute("height").as_int();
 
 	texturePath = parameters.attribute("texturepath").as_string();
-	return false;
+	return true;
 }
 
 bool Character::Start()
 {
 	
-	return false;
+	return true;
 }
 
 bool Character::Update(float dt)
 {
-	return false;
+	return true;
 }
 
 bool Character::CleanUp()
 {
 
-	return false;
+	return true;
 }

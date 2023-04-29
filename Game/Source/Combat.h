@@ -43,7 +43,6 @@ public:
 	bool CleanUp();
 
 	void Debug();
-	bool InitEnemies(SString scene, vector<int> arr);
 
 
 	bool AddCombatant(int id);
@@ -74,6 +73,7 @@ public:
 	void MoveCharacter(vector<Character*> arr, Character* chara, int newPosition_I);
 	void RemoveCharacter(vector<Character*> arr, Character* chara);
 
+	bool InitEnemies(SString scene, vector<int> arr);
 
 public:
 	//Player* player;
