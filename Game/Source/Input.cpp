@@ -18,6 +18,10 @@ Input::Input() : Module()
 	keyboard = new KeyState[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(KeyState) * MAX_KEYS);
 	memset(mouseButtons, KEY_IDLE, sizeof(KeyState) * NUM_MOUSE_BUTTONS);
+
+	gamepadState = new ButtonState[MAX_BUTTONS];
+	memset(gamepadState, BUTTON_IDLE, sizeof(ButtonState) * MAX_BUTTONS);
+	
 }
 
 // Destructor
@@ -59,7 +63,6 @@ bool Input::Start()
 bool Input::PreUpdate()
 {
 	static SDL_Event event;
-
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 
 	for(int i = 0; i < MAX_KEYS; ++i)
@@ -144,19 +147,65 @@ bool Input::PreUpdate()
 
 	SDL_GameControllerUpdate();
 
-
-	controller.j1_x = SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTX);
-	controller.j1_y = SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTY);
-	controller.j2_x = SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTX);
-	controller.j2_y = SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTY);
-	controller.RT = SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
-	controller.LT = SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERLEFT);
 	controller.A = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_A);
 	controller.B = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_B);
 	controller.X = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_X);
 	controller.Y = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_Y);
-
+	controller.DPAD_DOWN = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
+	controller.DPAD_UP = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
+	controller.DPAD_LEFT = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_DPAD_LEFT);
+	controller.DPAD_RIGHT = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_DPAD_RIGHT);
 	controller.START = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_START);
+
+	//BOTONES EXTRA PORSI
+	controller.BACK = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_BACK);
+	controller.GUIDE = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_GUIDE);
+	controller.BUTTON_LEFTSTICK = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_LEFTSTICK);
+	controller.BUTTON_RIGHTSTICK = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_RIGHTSTICK);
+	controller.BUTTON_LEFTSHOULDER = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_LEFTSHOULDER);
+	controller.BUTTON_RIGHTSHOULDER = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER);
+
+	//SDL no tiene el equivalente de SDL_GetKeyboardState para mando, lo he hecho de esta manera para mapear todos los botones que tiene
+	buttons[0] = controller.A;
+	buttons[1] = controller.B;
+	buttons[2] = controller.X;
+	buttons[3] = controller.Y;
+	buttons[4] = controller.BACK;
+	buttons[5] = controller.GUIDE;
+	buttons[6] = controller.START;
+	buttons[7] = controller.BUTTON_LEFTSTICK;
+	buttons[8] = controller.BUTTON_RIGHTSTICK;
+	buttons[9] = controller.BUTTON_LEFTSHOULDER;
+	buttons[10] = controller.BUTTON_RIGHTSHOULDER;
+	buttons[11] = controller.DPAD_UP;
+	buttons[12] = controller.DPAD_DOWN;
+	buttons[13] = controller.DPAD_LEFT;
+	buttons[14] = controller.DPAD_RIGHT;
+
+	for (int i = 0; i < MAX_BUTTONS; ++i)
+	{
+		if (buttons[i] == 1.0)
+		{
+			if (gamepadState[i] == BUTTON_IDLE)
+				gamepadState[i] = BUTTON_DOWN;
+			else
+				gamepadState[i] = BUTTON_REPEAT;
+		}
+		else
+		{
+			if (gamepadState[i] == BUTTON_REPEAT || gamepadState[i] == BUTTON_DOWN)
+				gamepadState[i] = BUTTON_UP;
+			else
+				gamepadState[i] = BUTTON_IDLE;
+		}
+	}
+
+	controller.j1_x = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTX)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTX) : 0;
+	controller.j1_y = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTY)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTY) : 0;
+	controller.j2_x = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTX)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTX) : 0;
+	controller.j2_y = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTY)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTY) : 0;
+	controller.RT = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERRIGHT)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERRIGHT) : 0;
+	controller.LT = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERLEFT)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERLEFT) : 0;
 
 	return true;
 }

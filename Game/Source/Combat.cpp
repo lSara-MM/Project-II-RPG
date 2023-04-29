@@ -271,7 +271,7 @@ bool Combat::Update(float dt)
 		EliminateCombatant(enemies[0]);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN || app->input->controller.B != 0)
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_DOWN)
 	{
 		app->input->currentHP_Bard = allies[1]->GetHealth();
 		app->input->currentHP_Protagonist = allies[0]->GetHealth();

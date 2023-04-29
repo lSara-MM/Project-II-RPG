@@ -146,7 +146,7 @@ bool Player::Update(float dt)
 			
 			if (!lockMovement)
 			{
-				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->controller.Y != 0)
+				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_Y) == BUTTON_DOWN)
 				{
 					app->dialogueSystem->hasEnded = false;
 					lockMovement = true;
@@ -488,7 +488,7 @@ void Player::Controller(float dt)
 			}
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT || app->input->controller.B != 0) {
+		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_REPEAT) {
 			vel.x = vel.x * 2;
 			vel.y = vel.y * 2;
 			currentAnim.speed = currentAnim.speed * 3;

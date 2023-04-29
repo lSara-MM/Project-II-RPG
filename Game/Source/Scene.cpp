@@ -102,7 +102,7 @@ bool Scene::Update(float dt)
 	app->entityManager->AddEntity(entidad2);*/
 	
 	//ERIC: Prueba que no funciona.
-	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || app->input->controller.X != 0) {
+	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_X) == BUTTON_DOWN) {
 		app->fade->FadingToBlack(this, (Module*)app->combat, 30);
 		app->SaveGameRequest();//guardar para volver misma posicion al volver de combate
 		app->iScene->continueGame_B = true;
@@ -233,7 +233,7 @@ void Scene::Debug()
 	}
 
 	// Pause menu
-	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->controller.START == 1))
+	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
 	{
 		pause_B = true;	
 
@@ -252,7 +252,7 @@ void Scene::Debug()
 		LOG("PAUSE");
 	}
 
-	if (pause_B == true && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->controller.B == 1))//POSAR CONTROL NORMAL
+	if (pause_B == true && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_DOWN))//POSAR CONTROL NORMAL
 	{
 		
 		if (settings_B == true)

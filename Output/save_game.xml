@@ -17,13 +17,13 @@
 	<loseScene />
 	<map />
 	<entitymanager>
-		<player x="3417" y="1058" />
+		<player x="3782" y="2889" />
 	</entitymanager>
 	<combat />
 	<dialogue />
 	<guiManager />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2797" y="-725" />
+		<camera x="-3162" y="-2556" />
 	</renderer>
 </save_state>

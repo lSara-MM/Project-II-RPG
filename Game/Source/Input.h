@@ -11,6 +11,8 @@
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
 #define NAME_MAX_CHARS 10
+#define DEAD_ZONE 3200
+#define MAX_BUTTONS 15
 
 using namespace std;
 
@@ -32,9 +34,19 @@ enum KeyState
 	KEY_UP
 };
 
+enum ButtonState
+{
+	BUTTON_IDLE = 0,
+	BUTTON_DOWN,
+	BUTTON_REPEAT,
+	BUTTON_UP
+};
+
 struct GameController
 {
-	float j1_x, j1_y,j2_x, j2_y, RT, LT, A, B, X, Y, START;
+	float j1_x, j1_y,j2_x, j2_y, RT, LT, A, B, X, Y, START, DPAD_UP, DPAD_DOWN, DPAD_RIGHT, DPAD_LEFT,
+		GUIDE, BUTTON_LEFTSTICK, BUTTON_RIGHTSTICK, BUTTON_LEFTSHOULDER, BUTTON_RIGHTSHOULDER, BUTTON_MAX,BACK;
+
 };
 
 enum KeyType
@@ -109,6 +121,11 @@ public:
 		return mouseButtons[id - 1];
 	}
 
+	ButtonState GetGamepadButton(int id) const
+	{
+		return gamepadState[id];
+	}
+
 	// Check if a certain window event happened
 	bool GetWindowEvent(EventWindow ev);
 
@@ -136,6 +153,10 @@ private:
 	bool windowEvents[WE_COUNT];
 	KeyState*	keyboard;
 	KeyState mouseButtons[NUM_MOUSE_BUTTONS];
+
+	ButtonState* gamepadState;
+	float buttons[MAX_BUTTONS];
+
 	int	mouseMotionX;
 	int mouseMotionY;
 	int mouseX;

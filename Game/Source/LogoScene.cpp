@@ -62,7 +62,7 @@ bool LogoScene::PreUpdate()
 // Called each loop iteration
 bool LogoScene::Update(float dt)
 {	
-	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->controller.A)
+	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
