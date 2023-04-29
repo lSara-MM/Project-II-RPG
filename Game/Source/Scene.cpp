@@ -169,9 +169,9 @@ bool Scene::CleanUp()
 	LOG("Freeing scene");
 
 	// to test
-	app->combat->listAllies.insert(app->combat->listAllies.end(),begin(player->listParty), end(player->listParty));
+	//app->combat->listAllies.insert(app->combat->listAllies.end(),begin(player->listParty), end(player->listParty));
 
-	app->entityManager->CleanUp();
+	//app->entityManager->CleanUp();
 	app->entityManager->Disable();
 
 	if (pSettings != nullptr)
@@ -187,6 +187,7 @@ bool Scene::CleanUp()
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 
+	InitCombat();
 	return true;
 }
 
@@ -299,10 +300,9 @@ void Scene::Debug()
 
 	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
 		LOG("Combat");
-		InitCombat();
-		int a;
+		app->fade->FadingToBlack(this, (Module*)app->combat, 0);
 	}
-		
+	
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
 }
 

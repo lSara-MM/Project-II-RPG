@@ -14,6 +14,7 @@ enum class EntityType
 	NPC,
 
 	COMBAT_CHARA,
+	MENU_CHARA,
 
 	UNKNOWN
 };

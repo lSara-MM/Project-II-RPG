@@ -7,6 +7,7 @@
 #include "SDL/include/SDL.h"
 #include "List.h"
 
+#include "GuiButton.h"
 #include "Animation.h"
 #include <array>
 
@@ -39,6 +40,7 @@ class Character : public Entity
 public:
 
 	Character();
+	Character(EntityType type_);
 
 	virtual ~Character();
 
@@ -103,8 +105,10 @@ public:
 	CharacterClass charaClass;
 
 	////Skills Descriptions
-	SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
+	//SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
 	//vector<Skills*> skillsList;
+
+	GuiButton* button;
 
 private:
 

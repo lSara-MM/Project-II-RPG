@@ -63,11 +63,18 @@ bool Combat::Start()
 	//Activar entityManager que es lo que controlara que enemy  
 	app->entityManager->Enable();
 
-	app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
+	//app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 
 	//Desactivar physics
 	app->physics->Disable();
 	StartCombat();
+
+	// set buttons ID (de momento no hay allies)
+	/*for (int i = 0; i < listAllies.size(); i++)
+	{ listAllies.at(i)->button->id = i; }*/
+
+	for (int i = 0; i < listEnemies.size(); i++) 
+	{ listEnemies.at(i)->button->id = 10 + i; }
 
 	return true;
 }
@@ -95,6 +102,13 @@ bool Combat::Update(float dt)
 	{
 		app->input->godMode_B = !app->input->godMode_B;
 	}
+
+	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
+		LOG("Change chara");
+
+		MoveCharacter(&listEnemies, listEnemies.at(1), 1);
+	}
+
 
 	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
 
@@ -146,6 +160,8 @@ void Combat::Debug()
 
 bool Combat::InitEnemies(SString scene, vector<int> arr)
 {
+	int cPos = 0;
+
 	// to test
 	for (pugi::xml_node sceneNode = combatNode.child("scenes"); sceneNode; sceneNode = sceneNode.next_sibling("scenes"))
 	{
@@ -162,7 +178,10 @@ bool Combat::InitEnemies(SString scene, vector<int> arr)
 						chara->parameters = itemNode;
 						chara->Awake();
 
-						listEnemies.push_back(chara);					
+						chara->charaType = CharacterType::ENEMY;
+						chara->positionCombat_I = cPos++;
+
+						listEnemies.push_back(chara);
 					}
 				}
 
@@ -181,6 +200,8 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	
 	app->audio->PlayFx(control->fxControl);
 
+	// enemies so far start from 10.
+	// line 159
 	return true;
 }
 
@@ -274,11 +295,11 @@ bool Combat::StartCombat()
 
 	lastPressedAbility_I = 0;
 	targeted_Character = nullptr;
-	for (int i = 0; i < 7; i++)
-	{
-		EnableTargetButton(i);
-		EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
-	}
+	//for (int i = 0; i < 7; i++)
+	//{
+	//	EnableTargetButton(i);
+	//	EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
+	//}
 	//listInitiative.start->data->onTurn = true;
 	charaInTurn = 0;
 	
@@ -436,11 +457,11 @@ bool Combat::DisableSkillButton(int skillNum)
 
 
 
-void Combat::MoveCharacter(vector<Character*> arr, Character* chara, int movement_I)
+void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int movement_I)
 {
 	//swap(arr.at(currentPosition_I), arr.at(newPosition_I));
 
-	arr.erase(arr.begin() + chara->positionCombat_I);
+	arr->erase(arr->begin() + chara->positionCombat_I);
 	int newPos = chara->positionCombat_I + movement_I;
 	
 	//Evitar que se pase de posicion.
@@ -454,8 +475,23 @@ void Combat::MoveCharacter(vector<Character*> arr, Character* chara, int movemen
 	}
 
 	//Insertar en nueva posicion
-	chara->positionCombat_I = newPos;
-	arr.insert(arr.begin() + newPos, chara);
+	arr->insert(arr->begin() + newPos, chara);
+	
+	// Update combat and buttons position
+	for (int i = 0; i < arr->size(); i++)
+	{
+		arr->at(i)->positionCombat_I = i;
+
+		if (chara->charaType == CharacterType::ALLY)
+		{
+			arr->at(i)->button->bounds.x = 300 - 100 * arr->at(i)->positionCombat_I;
+		}
+
+		if (chara->charaType == CharacterType::ENEMY)
+		{
+			arr->at(i)->button->bounds.x = 600 + 100 * arr->at(i)->positionCombat_I;
+		}
+	}
 }
 
 void Combat::RemoveCharacter(vector<Character*> arr, Character* chara)
@@ -473,10 +509,5 @@ void Combat::RemoveCharacter(vector<Character*> arr, Character* chara)
 
 	// Delete from entity manager list
 	app->entityManager->DestroyEntity(chara);
-
-	/*del = app->entityManager->entities.Find(chara);
-	delete app->entityManager->entities.At(del)->data;
-	app->entityManager->entities.At(del)->data = nullptr;
-	app->entityManager->entities.Del(app->entityManager->entities.At(del));*/
 }
 

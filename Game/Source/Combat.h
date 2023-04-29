@@ -70,7 +70,7 @@ public:
 
 
 	// Sara functions, to test
-	void MoveCharacter(vector<Character*> arr, Character* chara, int newPosition_I);
+	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);
 	void RemoveCharacter(vector<Character*> arr, Character* chara);
 
 	bool InitEnemies(SString scene, vector<int> arr);

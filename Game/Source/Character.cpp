@@ -29,14 +29,6 @@ Character::~Character()
 
 bool Character::Awake()
 {
-	//COSA PARA PROBARLO EN EL MOMENTO
-	//int id = 1;
-	////Idea identificacion cada Chara cual es
-	//while (parameters.attribute("id").as_int() != id && parameters != NULL)
-	//{
-	//	parameters = parameters.next_sibling();
-	//}
-
 	name = parameters.attribute("name").as_string();
 
 	maxHp = parameters.attribute("maxHp").as_int();
@@ -69,7 +61,35 @@ bool Character::Awake()
 
 bool Character::Start()
 {
+	SDL_Rect buttonBounds;
+	ButtonType buttonType;
+
+	switch (type)
+	{
+	case EntityType::COMBAT_CHARA:
+		
+		if (charaType == CharacterType::ALLY)
+		{
+			buttonBounds = { 300 - 100 * positionCombat_I, 200, 90, 120 };
+		}
+
+		if (charaType == CharacterType::ENEMY)
+		{
+			buttonBounds = { 600 + 100 * positionCombat_I, 200, 90, 120 };
+		}
+
+		buttonType = ButtonType::COMBAT_TARGET;
+		break;
+
+		// later on, inventory idea purposes
+	case EntityType::MENU_CHARA:
+		break;
+	default:
+		break;
+	}
 	
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, ButtonType::COMBAT_TARGET);
+
 	return true;
 }
 
@@ -80,6 +100,8 @@ bool Character::Update(float dt)
 
 bool Character::CleanUp()
 {
+	delete button;
+	button = nullptr;
 
 	return true;
 }
