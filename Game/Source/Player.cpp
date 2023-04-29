@@ -290,7 +290,8 @@ void Player::Controller(float dt)
 	{
 		if (!keyLockDown && !keyLockLeft && !keyLockRigth)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || 
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_REPEAT || app->input->controller.j1_y < 0)
 			{
 				if (!app->scene->pause_B)
 				{
@@ -301,16 +302,19 @@ void Player::Controller(float dt)
 				currentAnimation = &upAnim;
 				vel.y = -125 * 6;
 
-				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || app->input->controller.j1_x > 0)
+				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || 
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_REPEAT || app->input->controller.j1_x > 0)
 				{
 					vel.x = 125 * 6;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || app->input->controller.j1_x < 0)
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_REPEAT || app->input->controller.j1_x < 0)
 				{
 					vel.x = -125 * 6;
 				}
 			}
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y < 0)
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_UP || app->input->controller.j1_y == -10)
 			{
 				keyLockUp = false;
 				currentAnimation = &idleUpAnim;
@@ -318,7 +322,8 @@ void Player::Controller(float dt)
 		}
 		if (!keyLockUp && !keyLockLeft && !keyLockRigth)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || 
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_REPEAT || app->input->controller.j1_y > 0)
 			{
 				if (!app->scene->pause_B)
 				{
@@ -329,16 +334,19 @@ void Player::Controller(float dt)
 				currentAnimation = &downAnim;
 				vel.y = 125 * 6;
 
-				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || app->input->controller.j1_x > 0)
+				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_REPEAT || app->input->controller.j1_x > 0)
 				{
 					vel.x = 125 * 6;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || app->input->controller.j1_x < 0)
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_REPEAT || app->input->controller.j1_x < 0)
 				{
 					vel.x = -125 * 6;
 				}
 			}
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y > 0)
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_UP || app->input->controller.j1_y == 10)
 			{
 				keyLockDown = false;
 				currentAnimation = &idleDownAnim;
@@ -346,7 +354,8 @@ void Player::Controller(float dt)
 		}
 		if (!keyLockDown && !keyLockUp && !keyLockRigth)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || app->input->controller.j1_x < 0)
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || 
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_REPEAT || app->input->controller.j1_x < 0)
 			{
 				if (!app->scene->pause_B)
 				{
@@ -357,16 +366,19 @@ void Player::Controller(float dt)
 				currentAnimation = &leftAnim;
 				vel.x = -125 * 6;
 
-				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
+				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_REPEAT || app->input->controller.j1_y > 0)
 				{
 					vel.y = 125 * 6;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
+				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_REPEAT || app->input->controller.j1_y < 0)
 				{
 					vel.y = -125 * 6;
 				}
 			}
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP || app->input->controller.j1_x < 0)
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_UP || app->input->controller.j1_x == -10)
 			{
 				keyLockLeft = false;
 				currentAnimation = &idleLeftAnim;
@@ -374,7 +386,8 @@ void Player::Controller(float dt)
 		}
 		if (!keyLockDown && !keyLockLeft && !keyLockUp)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || app->input->controller.j1_x > 0)
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_REPEAT || app->input->controller.j1_x > 0)
 			{
 				if (!app->scene->pause_B)
 				{
@@ -385,16 +398,19 @@ void Player::Controller(float dt)
 				currentAnimation = &rigthAnim;
 				vel.x = 125 * 6;
 
-				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
+				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || 
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_REPEAT || app->input->controller.j1_y > 0)
 				{
 					vel.y = 125 * 6;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
+				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || 
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_REPEAT || app->input->controller.j1_y < 0)
 				{
 					vel.y = -125 * 6;
 				}
 			}
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP || app->input->controller.j1_x > 0)
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_UP || app->input->controller.j1_x == 10)
 			{
 				keyLockRigth = false;
 				currentAnimation = &idleRigthAnim;
@@ -405,7 +421,8 @@ void Player::Controller(float dt)
 	{
 		if (!keyLockDown && !keyLockLeft && !keyLockRigth)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || app->input->controller.j1_y < 0)
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_REPEAT || app->input->controller.j1_y < 0)
 			{
 				if (!app->scene->pause_B)
 				{
@@ -418,7 +435,8 @@ void Player::Controller(float dt)
 				vel.y = -125 * 2;
 				vel.x = 0;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP || app->input->controller.j1_y < 0)
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_UP || app->input->controller.j1_y == -10)
 			{
 				keyLockUp = false;
 				currentAnimation = &idleUpAnim;
@@ -426,7 +444,8 @@ void Player::Controller(float dt)
 		}
 		if (!keyLockUp && !keyLockLeft && !keyLockRigth)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || app->input->controller.j1_y > 0)
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_REPEAT || app->input->controller.j1_y > 0)
 			{
 				if (!app->scene->pause_B)
 				{
@@ -439,7 +458,8 @@ void Player::Controller(float dt)
 				vel.y = 125 * 2;
 				vel.x = 0;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP || app->input->controller.j1_y > 0)
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_UP || app->input->controller.j1_y == 10)
 			{
 				keyLockDown = false;
 				currentAnimation = &idleDownAnim;
@@ -447,7 +467,8 @@ void Player::Controller(float dt)
 		}
 		if (!keyLockDown && !keyLockUp && !keyLockRigth)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || app->input->controller.j1_x < 0)
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_REPEAT || app->input->controller.j1_x < 0)
 			{
 				if (!app->scene->pause_B)
 				{
@@ -460,7 +481,8 @@ void Player::Controller(float dt)
 				vel.x = -125 * 2;
 				vel.y = 0;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP || app->input->controller.j1_x < 0)
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_UP || app->input->controller.j1_x == -10)
 			{
 				keyLockLeft = false;
 				currentAnimation = &idleLeftAnim;
@@ -468,7 +490,8 @@ void Player::Controller(float dt)
 		}
 		if (!keyLockDown && !keyLockLeft && !keyLockUp)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || app->input->controller.j1_x > 0)
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_REPEAT || app->input->controller.j1_x > 0)
 			{
 				if (!app->scene->pause_B)
 				{
@@ -481,7 +504,8 @@ void Player::Controller(float dt)
 				vel.x = 125 * 2;
 				vel.y = 0;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP || app->input->controller.j1_x > 0)
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP ||
+				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_UP || app->input->controller.j1_x == 10)
 			{
 				keyLockRigth = false;
 				currentAnimation = &idleRigthAnim;

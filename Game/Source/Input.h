@@ -11,7 +11,7 @@
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
 #define NAME_MAX_CHARS 10
-#define DEAD_ZONE 3200
+
 #define MAX_BUTTONS 15
 
 using namespace std;

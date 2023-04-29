@@ -152,7 +152,7 @@ bool Input::PreUpdate()
 	controller.X = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_X);
 	controller.Y = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_Y);
 	controller.DPAD_DOWN = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
-	controller.DPAD_UP = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
+	controller.DPAD_UP = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_DPAD_UP);
 	controller.DPAD_LEFT = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_DPAD_LEFT);
 	controller.DPAD_RIGHT = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_DPAD_RIGHT);
 	controller.START = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_START);
@@ -200,12 +200,12 @@ bool Input::PreUpdate()
 		}
 	}
 
-	controller.j1_x = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTX)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTX) : 0;
-	controller.j1_y = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTY)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTY) : 0;
-	controller.j2_x = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTX)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTX) : 0;
-	controller.j2_y = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTY)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTY) : 0;
-	controller.RT = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERRIGHT)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERRIGHT) : 0;
-	controller.LT = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERLEFT)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERLEFT) : 0;
+	controller.j1_x = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTX)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTX) : 0.0f;
+	controller.j1_y = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTY)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_LEFTY) : 0.0f;
+	controller.j2_x = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTX)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTX) : 0.0f;
+	controller.j2_y = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTY)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTY) : 0.0f;
+	controller.RT = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERRIGHT)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERRIGHT) : 0.0f;
+	controller.LT = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERLEFT)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERLEFT) : 0.0f;
 
 	return true;
 }
