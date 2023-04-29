@@ -95,6 +95,8 @@ bool Character::Start()
 
 bool Character::Update(float dt)
 {
+	app->render->DrawTexture(this->texture, 30, 30);
+
 	return true;
 }
 

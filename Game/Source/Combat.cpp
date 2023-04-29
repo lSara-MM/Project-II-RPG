@@ -73,8 +73,8 @@ bool Combat::Start()
 	/*for (int i = 0; i < listAllies.size(); i++)
 	{ listAllies.at(i)->button->id = i; }*/
 
-	for (int i = 0; i < listEnemies.size(); i++) 
-	{ listEnemies.at(i)->button->id = 10 + i; }
+	/*for (int i = 0; i < listEnemies.size(); i++) //De momento esta petando muy fuerte
+	{ listEnemies.at(i)->button->id = 10 + i; }*/
 
 	return true;
 }

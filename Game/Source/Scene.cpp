@@ -187,7 +187,7 @@ bool Scene::CleanUp()
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 
-	InitCombat();
+	//InitCombat(); //Comentado porque
 	return true;
 }
 
@@ -300,7 +300,9 @@ void Scene::Debug()
 
 	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
 		LOG("Combat");
+		//InitCombat(); //Lo pongo aqui porque llamarlo tras cada cleanUp trae problemas
 		app->fade->FadingToBlack(this, (Module*)app->combat, 0);
+		InitCombat(); //Lo pongo aqui porque llamarlo tras cada cleanUp trae problemas
 	}
 	
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
