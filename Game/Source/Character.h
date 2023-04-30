@@ -60,7 +60,7 @@ public:
 
 	bool ResistStatusEffect(/*efecto,precision*/); //Hacer cuando se hagan status effects, aun no.
 	
-
+	
 
 	//Gets, dan las stats sumadas (base+eqipo+buffos)
 	/*int GetMaxHP() { return maxHp; }
@@ -82,6 +82,8 @@ public:
 	// Gestion de Turnos
 	bool onTurn;
 	bool alive;
+	Timer turnDelay;
+	bool delayOn=false;
 
 	// Stats
 	SString name;

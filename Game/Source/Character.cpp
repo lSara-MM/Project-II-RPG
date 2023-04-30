@@ -109,6 +109,61 @@ bool Character::Update(float dt)
 	}
 
 	app->render->DrawTexture(texture, position.x, position.y);
+	
+	
+	if(app->input->godMode_B)
+	{
+		onTurn = true;
+		string position_C = std::to_string(positionCombat_I);
+		const char* ch_pos = position_C.c_str();
+		app->render->TextDraw(ch_pos, position.x+ 60, position.y - 20, 15);
+		app->render->TextDraw(name.GetString(), position.x+5 , position.y +180, 10);
+	}
+	
+
+	//Si es su turno pues hace cosas
+	if(onTurn)
+	{
+			//testing
+			string time ;
+			const char* tempus;
+			
+
+		switch (charaType)
+		{
+		case CharacterType::ALLY:
+
+			break;
+		case CharacterType::ENEMY:
+
+			if(!delayOn)
+			{
+				turnDelay.Start();
+				delayOn = true;
+			}
+			if (turnDelay.ReadMSec()>2000 && delayOn)
+			{
+			
+				//TURNO CON SUS COSAS
+			
+				
+
+			}
+			if (turnDelay.ReadMSec() > 4000)
+			{
+				delayOn = false;
+				//NEXT TURN
+			}
+
+
+			break;
+		case CharacterType::NONE:
+			break;
+		default:
+			break;
+		}
+	}
+
 
 	return true;
 }
@@ -120,3 +175,4 @@ bool Character::CleanUp()
 
 	return true;
 }
+
