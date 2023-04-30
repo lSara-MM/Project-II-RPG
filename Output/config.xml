@@ -123,20 +123,20 @@
 	<scenes name="scene" numEnemies="3">
 	<!-- Placeholder -->
 		<enemy name ="Bewitched Wardrobe" id="0" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
-			    texturePath ="Assets/Textures/marioneta2.png"/>
+			    texturePath ="Assets/Textures/EnemyBewitchedWardrobe.png"/>
 		
 		<enemy name ="Cursed Puppet"  id="1" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
 			  texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
 
 		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="140" armor="8" speed="2"
-				  texturePath ="Assets/Textures/marioneta3.png"/>
+				  texturePath ="Assets/Textures/EnemyPossessedPainting.png"/>
 	<!-- Placeholder -->
 	</scenes>
 
 	<scenes name="PracticeTent" numEnemies="2">
 	<!-- Placeholder -->
 		<enemyTank name ="Bewitched Wardrobe"  id="0" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
-			    texturePath ="Assets/Textures/marioneta2.png"/>
+			    texturePath ="Assets/Textures/EnemyBewitchedWardrobe.png"/>
 		
 		<enemyDPS name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
 			  texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>

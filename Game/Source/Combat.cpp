@@ -470,14 +470,20 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 	{
 		newPos = 0;
 	}
-	if (newPos > 3)
+	if (newPos > arr->size()-1)
 	{
-		newPos = 3;
+		newPos = arr->size() - 1;
 	}
 
 	//Insertar en nueva posicion
 	arr->insert(arr->begin() + newPos, chara);
 	
+	////Reasignar Combat Position variable
+	//for (int i = 0; i < arr->size()-1; i++)
+	//{
+	//	arr->at(i)->positionCombat_I = i;
+	//}
+
 	// Update combat and buttons position
 	for (int i = 0; i < arr->size(); i++)
 	{
@@ -485,12 +491,12 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 
 		if (chara->charaType == CharacterType::ALLY)
 		{
-			arr->at(i)->button->bounds.x = 300 - 100 * arr->at(i)->positionCombat_I;
+			arr->at(i)->button->bounds.x = 400 - 126 * arr->at(i)->positionCombat_I;
 		}
 
 		if (chara->charaType == CharacterType::ENEMY)
 		{
-			arr->at(i)->button->bounds.x = 600 + 100 * arr->at(i)->positionCombat_I;
+			arr->at(i)->button->bounds.x = 700 + 126 * arr->at(i)->positionCombat_I;
 		}
 	}
 }
