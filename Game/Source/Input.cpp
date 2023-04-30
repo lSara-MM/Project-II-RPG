@@ -9,6 +9,12 @@
 
 #include "SDL/include/SDL.h"
 
+
+#include "GuiManager.h"
+
+#include "GuiButton.h"
+
+
 #define MAX_KEYS 300
 
 Input::Input() : Module()
@@ -301,3 +307,4 @@ void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float d
 
 	}
 }
+

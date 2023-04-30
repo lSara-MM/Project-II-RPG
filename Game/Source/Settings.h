@@ -19,7 +19,59 @@
 
 #include "SDL/include/SDL.h"
 
-class GameSettings
+class HandleSettings
+{
+public:
+
+	HandleSettings() {};
+	~HandleSettings() {};
+
+	void HandleGampeadGUI(List<GuiButton*>* listButtons)
+	{
+		for (int i = 0; i < listButtons->Count(); i++)
+		{
+			if (listButtons->At(i)->data->state == GuiControlState::FOCUSED)
+			{
+				if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN)
+				{
+					if (listButtons->At(i)->next == NULL)
+					{
+						listButtons->At(i)->data->state = GuiControlState::NORMAL;
+						listButtons->start->data->state = GuiControlState::FOCUSED;
+					}
+
+					else
+					{
+						listButtons->At(i)->data->state = GuiControlState::NORMAL;
+						listButtons->At(i)->next->data->state = GuiControlState::FOCUSED;
+					}
+				}
+				else if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN)
+				{
+					if (listButtons->At(i)->prev == NULL)
+					{
+						listButtons->At(i)->data->state = GuiControlState::NORMAL;
+						listButtons->end->data->state = GuiControlState::FOCUSED;
+					}
+
+					else
+					{
+						listButtons->At(i)->data->state = GuiControlState::NORMAL;
+						listButtons->At(i)->prev->data->state = GuiControlState::FOCUSED;
+					}
+				}
+				break;
+			}
+
+		}
+
+	}
+private:
+
+};
+
+
+class GameSettings : public HandleSettings
 {
 public:
 
@@ -68,6 +120,19 @@ public:
 				i->data->state = GuiControlState::NORMAL;
 			}
 		}
+		if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
+			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
+		{
+			app->input->gamepadGUI_B = true;
+
+		}
+		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
+		{
+			app->input->gamepadGUI_B = false;
+		}
+
+		HandleGampeadGUI(&listGameButtons);
+
 		return true;
 	}
 
@@ -111,7 +176,7 @@ public:
 	bool open_game_B;
 };
 
-class ControlSettings
+class ControlSettings : public HandleSettings
 {
 public:
 
@@ -162,6 +227,18 @@ public:
 	
 			open_control_B = true;
 		}
+		if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
+			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
+		{
+			app->input->gamepadGUI_B = true;
+
+		}
+		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
+		{
+			app->input->gamepadGUI_B = false;
+		}
+
+		HandleGampeadGUI(&listControlButtons);
 
 		return true;
 	}
@@ -204,7 +281,7 @@ public:
 	bool open_control_B;
 };
 
-class GraphicsSettings
+class GraphicsSettings : public HandleSettings
 {
 public:
 
@@ -270,6 +347,19 @@ public:
 			open_graphics_B = true;
 		}
 
+		if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
+			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
+		{
+			app->input->gamepadGUI_B = true;
+
+		}
+		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
+		{
+			app->input->gamepadGUI_B = false;
+		}
+
+		HandleGampeadGUI(&listGraphicsButtons);
+
 		return true;
 	}
 
@@ -322,7 +412,7 @@ public:
 	bool open_graphics_B;
 };
 
-class AudioSettings
+class AudioSettings : public HandleSettings
 {
 public:
 
@@ -429,7 +519,7 @@ public:
 	bool open_audio_B;
 };
 
-class Settings
+class Settings : public HandleSettings
 {
 public:
 
@@ -490,6 +580,19 @@ public:
 
 			open_settings_B = true;
 		}
+
+		if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
+			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
+		{
+			app->input->gamepadGUI_B = true;
+
+		}
+		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
+		{
+			app->input->gamepadGUI_B = false;
+		}
+
+		HandleGampeadGUI(&listSettingsButtons);
 
 		return true;
 	}
@@ -560,7 +663,7 @@ public:
 };
 
 
-class Pause
+class Pause : public HandleSettings
 {
 public:
 
@@ -609,6 +712,19 @@ public:
 			open_pause_B = true;
 		}
 
+		if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
+			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
+		{
+			app->input->gamepadGUI_B = true;
+
+		}
+		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
+		{
+			app->input->gamepadGUI_B = false;
+		}
+
+		HandleGampeadGUI(&listPauseButtons);
+
 		return true;
 	}
 
@@ -649,6 +765,7 @@ public:
 
 	Settings* pSettings;
 };
+
 
 #endif // __SETTINGS_H__
 

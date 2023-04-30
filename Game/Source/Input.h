@@ -148,6 +148,8 @@ public:
 
 	SDL_GameController* sdl_controller;
 	GameController controller;
+	
+	bool gamepadGUI_B = false;
 
 private:
 	bool windowEvents[WE_COUNT];
@@ -161,8 +163,6 @@ private:
 	int mouseMotionY;
 	int mouseX;
 	int mouseY;
-
-
 
 	KeyBinding* move_up_k = new KeyBinding(KeyType::KEY_MOVE_UP, 'W');
 	KeyBinding* move_left_k = new KeyBinding(KeyType::KEY_MOVE_UP, SDL_SCANCODE_A);

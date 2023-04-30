@@ -22,38 +22,60 @@ bool GuiButton::Update(float dt)
 {
 	if (state != GuiControlState::DISABLED)
 	{
-		app->input->GetMousePosition(mouseX, mouseY);
-		//LOG("Mouse x: %d Mouse y: %d", mouseX, mouseY);
-		//LOG("bounds.x: %d bounds.h: %d", bounds.x, bounds.y);
+		if (!app->input->gamepadGUI_B)
+		{
+			app->input->GetMousePosition(mouseX, mouseY);
+			//LOG("Mouse x: %d Mouse y: %d", mouseX, mouseY);
+			//LOG("bounds.x: %d bounds.h: %d", bounds.x, bounds.y);
 
-		GuiControlState previousState = state;
+			GuiControlState previousState = state;
 
-		if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
-			mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
-		
-			state = GuiControlState::FOCUSED;
-			
-			if (previousState != state) 
-			{
-				//LOG("Change state from %d to %d", previousState, state);
+			if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
+				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
+
+				state = GuiControlState::FOCUSED;
+
+				if (previousState != state)
+				{
+					//LOG("Change state from %d to %d", previousState, state);
+				}
+
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
+				{
+					state = GuiControlState::PRESSED;
+				}
+
+				// If mouse button pressed -> Generate event!
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
+				{
+					NotifyObserver();
+				}
 			}
 
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A)==ButtonState::BUTTON_REPEAT)
+			else
 			{
-				state = GuiControlState::PRESSED;
+				state = GuiControlState::NORMAL;
+			}
+		}
+
+		else
+		{
+			if (state==GuiControlState::FOCUSED)
+			{
+				if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
+				{
+					state = GuiControlState::PRESSED;
+				}
+				
 			}
 
-			// If mouse button pressed -> Generate event!
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
+			if (state == GuiControlState::PRESSED && app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
 			{
 				NotifyObserver();
+				state = GuiControlState::FOCUSED;
 			}
 		}
-
-		else 
-		{
-			state = GuiControlState::NORMAL;
-		}
+		
 	}
 
 	return false;
@@ -200,3 +222,4 @@ bool GuiButton::Draw(Render* render)
 
 	return false;
 }
+
