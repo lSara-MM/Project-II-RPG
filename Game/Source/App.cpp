@@ -12,6 +12,7 @@
 #include "LogoScene.h"
 #include "LoseScene.h"
 #include "Scene.h"
+#include "SceneWin_Lose.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
@@ -57,6 +58,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	circus = new Circus();
 	loseScene = new LoseScene();
 	fade = new FadeToBlack();
+	sceneWin_Lose = new SceneWin_Lose();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -81,6 +83,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(combat);
 	AddModule(dialogueSystem);
 	AddModule(guiManager);
+	AddModule(sceneWin_Lose);
 
 
 	AddModule(fade);
@@ -477,4 +480,5 @@ void App::DisableAtStart()
 	entityManager->active = false;
 	dialogueSystem->active = false;
 	combat->active = false;
+	sceneWin_Lose->active = false;
 }

@@ -45,6 +45,10 @@ bool SceneWin_Lose::Start()
 	Win = app->tex->Load(texturepathWin);
 	Lose = app->tex->Load(texturepathLose);
 
+	win = false;
+	lose = false;
+
+
 	return true;
 }
 
@@ -55,6 +59,32 @@ bool SceneWin_Lose::PreUpdate()
 
 bool SceneWin_Lose::Update(float dt)
 {
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+	{
+
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		lose = false;
+		win = true;
+	}
+	if(app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) 
+	{
+
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		win = false;
+		lose = true;
+	}
+
+	if (win)
+	{
+		app->render->DrawTexture(Win, 0, 0);
+	}
+	if (lose)
+	{
+		app->render->DrawTexture(Lose, 0, 0);
+	}
+
 	/*if (app->combat->win) 
 	{
 		app->render->DrawTexture(Win, 0, 0);
@@ -67,8 +97,8 @@ bool SceneWin_Lose::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
+	/*if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;*/
 
 	return true;
 }
@@ -113,7 +143,7 @@ void SceneWin_Lose::Debug()
 	// Show Gui 
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
 
-		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
+		//app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
 	}
 
 	// Show collisions
@@ -144,42 +174,4 @@ void SceneWin_Lose::Debug()
 	}
 
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
-}
-
-bool Scene::InitEntities()
-{
-	for (pugi::xml_node itemNode = sceneNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
-	{
-		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
-		npc->parameters = itemNode;
-		npc->Awake();
-
-		listNpc.Add(npc);
-	}
-
-	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	player->parameters = sceneNode.child("player");
-	player->Awake();
-
-	switch (app->entityManager->tpID)
-	{
-	case 0:
-		player->position.x = 2365;
-		player->position.y = 4429;
-		break;
-	case 1:
-		player->position.x = 4277;
-		player->position.y = 3869;
-		break;
-	case 21:
-		player->position.x = 3437;
-		player->position.y = 1085;
-		break;
-
-	default:
-		break;
-	}
-
-	//app->entityManager->Awake();
-	return true;
 }

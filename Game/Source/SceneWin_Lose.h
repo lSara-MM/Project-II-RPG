@@ -43,9 +43,6 @@ public:
 
 	void Debug();
 
-	// Settings
-	bool OnGuiMouseClickEvent(GuiControl* control);
-
 public:
 
 	pugi::xml_node sceneNode;
@@ -53,14 +50,17 @@ public:
 	bool frcap_B = true;
 	bool mute_B = true;
 
+	bool win;
+	bool lose;
+
+	SDL_Texture* Win;
+	SDL_Texture* Lose;
+
 private:
 
 	int mouseX_scene, mouseY_scene;
 	float mouseSpeed;
 	const char* lobby_music;
-
-	SDL_Texture* Win;
-	SDL_Texture* Lose;
 
 	const char* texturepathWin;
 	const char* texturepathLose;

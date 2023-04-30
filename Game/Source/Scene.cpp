@@ -108,6 +108,9 @@ bool Scene::Update(float dt)
 		app->iScene->continueGame_B = true;
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) 
+		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 30);
+
 	//Borrar
 	float speed = 0.2 * dt;
 
