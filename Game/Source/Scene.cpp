@@ -171,7 +171,8 @@ bool Scene::CleanUp()
 	// to test
 	//app->combat->listAllies.insert(app->combat->listAllies.end(),begin(player->listParty), end(player->listParty));
 
-	//app->entityManager->CleanUp();
+	app->entityManager->CleanUp();
+	app->entityManager->CleanUp();
 	app->entityManager->Disable();
 
 	if (pSettings != nullptr)
@@ -187,7 +188,11 @@ bool Scene::CleanUp()
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 
-	//InitCombat(); //Comentado porque
+	if (app->combat->active==true)
+	{InitCombat();
+	app->combat->active = false; //Es tremenda guarrada pero sino no se hace el enable del combate
+	}//Comentado porque peta
+	
 	return true;
 }
 
@@ -301,8 +306,9 @@ void Scene::Debug()
 	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
 		LOG("Combat");
 		//InitCombat(); //Lo pongo aqui porque llamarlo tras cada cleanUp trae problemas
-		app->fade->FadingToBlack(this, (Module*)app->combat, 0);
-		InitCombat(); //Lo pongo aqui porque llamarlo tras cada cleanUp trae problemas
+		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+		app->combat->active = true;
+		//InitCombat(); //Lo pongo aqui porque llamarlo tras cada cleanUp trae problemas
 	}
 	
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();

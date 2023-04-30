@@ -73,8 +73,8 @@ bool Combat::Start()
 	/*for (int i = 0; i < listAllies.size(); i++)
 	{ listAllies.at(i)->button->id = i; }*/
 
-	/*for (int i = 0; i < listEnemies.size(); i++) //De momento esta petando muy fuerte
-	{ listEnemies.at(i)->button->id = 10 + i; }*/
+	for (int i = 0; i < listEnemies.size(); i++) //De momento esta petando muy fuerte
+	{ listEnemies.at(i)->button->id = 10 + i; }
 
 	return true;
 }
@@ -177,6 +177,7 @@ bool Combat::InitEnemies(SString scene, vector<int> arr)
 						Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 						chara->parameters = itemNode;
 						chara->Awake();
+						chara->Start();
 
 						chara->charaType = CharacterType::ENEMY;
 						chara->positionCombat_I = cPos++;

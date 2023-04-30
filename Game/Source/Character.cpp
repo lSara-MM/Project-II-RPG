@@ -55,12 +55,14 @@ bool Character::Awake()
 	width = parameters.attribute("width").as_int();
 	height = parameters.attribute("height").as_int();
 
-	texturePath = parameters.attribute("texturepath").as_string();
+	texturePath = parameters.attribute("texturePath").as_string();
 	return true;
 }
 
 bool Character::Start()
 {
+	texture=app->tex->Load(texturePath);
+
 	SDL_Rect buttonBounds;
 	ButtonType buttonType;
 
@@ -95,14 +97,14 @@ bool Character::Start()
 
 bool Character::Update(float dt)
 {
-	app->render->DrawTexture(this->texture, 30, 30);
+	app->render->DrawTexture(texture, 30, 30);
 
 	return true;
 }
 
 bool Character::CleanUp()
 {
-	delete button;
+	//delete button;
 	button = nullptr;
 
 	return true;
