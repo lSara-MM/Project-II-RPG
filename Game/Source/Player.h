@@ -73,6 +73,7 @@ public:
 
 	iPoint position;
 
+	bool PadLock;
 
 private:
 

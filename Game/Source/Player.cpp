@@ -108,6 +108,8 @@ bool Player::Start()
 
 	pbody->body->SetGravityScale(0);
 
+	PadLock = false;
+
 	return true;
 }
 
@@ -290,6 +292,16 @@ void Player::Controller(float dt)
 	{
 		if (!keyLockDown && !keyLockLeft && !keyLockRigth)
 		{
+			if (PadLock == false && keyLockUp)
+			{
+				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_UP || app->input->controller.j1_y == 0)
+				{
+					PadLock = true;
+					keyLockUp = false;
+					currentAnimation = &idleUpAnim;
+				}
+			}
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || 
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_REPEAT || app->input->controller.j1_y < 0)
 			{
@@ -297,7 +309,7 @@ void Player::Controller(float dt)
 				{
 					app->audio->PlayFx(walk_grass, 0);
 				}
-			
+
 				keyLockUp = true;
 				currentAnimation = &upAnim;
 				vel.y = -125 * 6;
@@ -313,15 +325,19 @@ void Player::Controller(float dt)
 					vel.x = -125 * 6;
 				}
 			}
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP ||
-				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_UP || app->input->controller.j1_y == 0)
-			{
-				keyLockUp = false;
-				currentAnimation = &idleUpAnim;
-			}
 		}
 		if (!keyLockUp && !keyLockLeft && !keyLockRigth)
 		{
+			if (PadLock == false && keyLockDown)
+			{
+				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_UP || app->input->controller.j1_y == 0)
+				{
+					PadLock = true;
+					keyLockDown = false;
+					currentAnimation = &idleDownAnim;
+				}
+			}
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || 
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_REPEAT || app->input->controller.j1_y > 0)
 			{
@@ -345,15 +361,19 @@ void Player::Controller(float dt)
 					vel.x = -125 * 6;
 				}
 			}
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP ||
-				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_UP || app->input->controller.j1_y == 0)
-			{
-				keyLockDown = false;
-				currentAnimation = &idleDownAnim;
-			}
 		}
 		if (!keyLockDown && !keyLockUp && !keyLockRigth)
 		{
+			if (PadLock == false && keyLockLeft)
+			{
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_UP || app->input->controller.j1_x == 0)
+				{
+					PadLock = true;
+					keyLockLeft = false;
+					currentAnimation = &idleLeftAnim;
+				}
+			}
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || 
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_REPEAT || app->input->controller.j1_x < 0)
 			{
@@ -377,15 +397,19 @@ void Player::Controller(float dt)
 					vel.y = -125 * 6;
 				}
 			}
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP ||
-				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_UP || app->input->controller.j1_x == 0)
-			{
-				keyLockLeft = false;
-				currentAnimation = &idleLeftAnim;
-			}
 		}
 		if (!keyLockDown && !keyLockLeft && !keyLockUp)
 		{
+			if (PadLock == false && keyLockRigth)
+			{
+				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_UP || app->input->controller.j1_x == 0)
+				{
+					PadLock = true;
+					keyLockRigth = false;
+					currentAnimation = &idleRigthAnim;
+				}
+			}
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT ||
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_REPEAT || app->input->controller.j1_x > 0)
 			{
@@ -409,18 +433,22 @@ void Player::Controller(float dt)
 					vel.y = -125 * 6;
 				}
 			}
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP ||
-				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_UP || app->input->controller.j1_x == 0)
-			{
-				keyLockRigth = false;
-				currentAnimation = &idleRigthAnim;
-			}
 		}
 	}
 	else
 	{
 		if (!keyLockDown && !keyLockLeft && !keyLockRigth)
 		{
+			if (PadLock == false && keyLockUp)
+			{
+				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_UP || app->input->controller.j1_y == 0)
+				{
+					PadLock = true;
+					keyLockUp = false;
+					currentAnimation = &idleUpAnim;
+				}
+			}
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT ||
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_REPEAT || app->input->controller.j1_y < 0)
 			{
@@ -435,15 +463,19 @@ void Player::Controller(float dt)
 				vel.y = -125 * 2;
 				vel.x = 0;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP || app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP ||
-				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_UP || app->input->controller.j1_y == 0)
-			{
-				keyLockUp = false;
-				currentAnimation = &idleUpAnim;
-			}
 		}
 		if (!keyLockUp && !keyLockLeft && !keyLockRigth)
 		{
+			if (PadLock == false && keyLockDown)
+			{
+				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_UP || app->input->controller.j1_y == 0)
+				{
+					PadLock = true;
+					keyLockDown = false;
+					currentAnimation = &idleDownAnim;
+				}
+			}
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT ||
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_REPEAT || app->input->controller.j1_y > 0)
 			{
@@ -458,15 +490,19 @@ void Player::Controller(float dt)
 				vel.y = 125 * 2;
 				vel.x = 0;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP ||
-				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_UP || app->input->controller.j1_y == 0)
-			{
-				keyLockDown = false;
-				currentAnimation = &idleDownAnim;
-			}
 		}
 		if (!keyLockDown && !keyLockUp && !keyLockRigth)
 		{
+			if (PadLock == false && keyLockLeft)
+			{
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_UP || app->input->controller.j1_x == 0)
+				{
+					PadLock = true;
+					keyLockLeft = false;
+					currentAnimation = &idleLeftAnim;
+				}
+			}
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT ||
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_REPEAT || app->input->controller.j1_x < 0)
 			{
@@ -481,15 +517,19 @@ void Player::Controller(float dt)
 				vel.x = -125 * 2;
 				vel.y = 0;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_UP || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP ||
-				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_UP || app->input->controller.j1_x == 0)
-			{
-				keyLockLeft = false;
-				currentAnimation = &idleLeftAnim;
-			}
 		}
 		if (!keyLockDown && !keyLockLeft && !keyLockUp)
 		{
+			if (PadLock == false && keyLockRigth)
+			{
+				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP ||
+					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_UP || app->input->controller.j1_x == 0)
+				{
+					PadLock = true;
+					keyLockRigth = false;
+					currentAnimation = &idleRigthAnim;
+				}
+			}
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT ||
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_REPEAT || app->input->controller.j1_x > 0)
 			{
@@ -504,12 +544,6 @@ void Player::Controller(float dt)
 				vel.x = 125 * 2;
 				vel.y = 0;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP ||
-				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_UP || app->input->controller.j1_x == 0)
-			{
-				keyLockRigth = false;
-				currentAnimation = &idleRigthAnim;
-			}
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_REPEAT) {
@@ -517,6 +551,7 @@ void Player::Controller(float dt)
 			vel.y = vel.y * 2;
 			currentAnim.speed = currentAnim.speed * 3;
 		}
-
 	}
+	
+	PadLock = false;
 }
