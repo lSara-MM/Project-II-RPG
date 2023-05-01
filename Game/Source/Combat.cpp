@@ -52,6 +52,9 @@ bool Combat::Awake(pugi::xml_node& config)
 
 bool Combat::Start()
 {
+	//Load
+	//LoadCombat();
+
 	//Cargar texturas
 	textureBackground = app->tex->Load(texturePathBackground);
 	textureTargetButton = app->tex->Load(texturePathTargetButton);
@@ -133,6 +136,8 @@ bool Combat::PostUpdate()
 bool Combat::CleanUp()
 {
 	LOG("Freeing scene");
+	//Save al terminar
+	//SaveCombat();
 
 	listButtons.Clear();
 
@@ -193,6 +198,66 @@ bool Combat::InitEnemies(SString scene, vector<int> arr)
 	}
 
 	return true;
+}
+
+bool Combat::SaveCombat()
+{
+	bool ret = true;
+
+	pugi::xml_document* saveDoc = new pugi::xml_document();
+	pugi::xml_node node = saveDoc->append_child("save_stats");
+
+	pugi::xml_node protagonist = node.append_child("protagonist");
+
+	//protagonist.append_attribute("currentHp") = app->scene->currentHP_Protagonist;
+
+	pugi::xml_node bard = node.append_child("bard");
+
+	//bard.append_attribute("currentHp") = app->scene->currentHP_Bard;
+
+	ret = saveDoc->save_file("save_dialogue.xml");
+
+	return ret;
+}
+
+bool Combat::LoadCombat()
+{
+	pugi::xml_document gameStateFile;
+	pugi::xml_parse_result result = gameStateFile.load_file("save_combat.xml");
+	pugi::xml_node node = gameStateFile.child("save_stats");
+
+	bool ret = true;
+
+	if (result == NULL)
+	{
+		LOG("Could not load xml file save_dialogue.xml. pugi error: %s", result.description());
+		ret = false;
+	}
+	else
+	{
+		//app->scene->currentHP_Bard = node.child("bard").attribute("currentHp").as_int();
+		//app->scene->currentHP_Protagonist = node.child("protagonist").attribute("currentHp").as_int();
+	}
+
+	return ret;
+}
+
+bool Combat::RestartCombatData()
+{
+	bool ret = true;
+
+	pugi::xml_document* saveDoc = new pugi::xml_document();
+	pugi::xml_node node = saveDoc->append_child("save_stats");
+
+	pugi::xml_node protagonist = node.append_child("protagonist");
+
+	//todo
+
+	pugi::xml_node bard = node.append_child("bard");
+
+	//todo
+
+	ret = saveDoc->save_file("save_dialogue.xml");
 }
 
 bool Combat::OnGuiMouseClickEvent(GuiControl* control)

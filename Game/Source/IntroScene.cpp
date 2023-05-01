@@ -16,6 +16,7 @@
 #include "Log.h"
 
 #include "EntityManager.h"
+#include "Combat.h"
 
 #include <iostream>
 using namespace std;
@@ -198,6 +199,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		}
 		else
 		{
+			//app->combat->RestartCombatData();
 			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		}
 		break;
