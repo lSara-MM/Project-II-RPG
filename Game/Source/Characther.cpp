@@ -17,18 +17,18 @@
 #include "Log.h"
 #include "Point.h"
 
-Character::Character() : Entity(EntityType::UNKNOWN)
+Characther::Characther() : Entity(EntityType::UNKNOWN)
 {
 	name.Create("Character");
 
 	active = true;
 }
 
-Character::~Character() {
+Characther::~Characther() {
 
 }
 
-bool Character::Awake() {
+bool Characther::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -39,7 +39,7 @@ bool Character::Awake() {
 	return true;
 }
 
-bool Character::Start() {
+bool Characther::Start() {
 
 	texture = app->tex->Load(texturePath);
 	
@@ -48,7 +48,7 @@ bool Character::Start() {
 	return true;
 }
 
-bool Character::Update(float dt)
+bool Characther::Update(float dt)
 {
 	currentAnimation = &idleAnim;
 	currentAnimation->Update();
@@ -59,21 +59,41 @@ bool Character::Update(float dt)
 	return true;
 }
 
-bool Character::CleanUp()
+bool Characther::CleanUp()
 {
 	app->tex->UnLoad(texture);
 	
 	return true;
 }
 
-bool Character::Render()
+bool Characther::Render()
 {
 	app->render->DrawTexture(texture, position.x, position.y);
 
 	return true;
 }
 
-void Character::ModifyHP(int num)
+bool Characther::CalculateRandomProbability(int bonus_I, int against_I )
+{
+	//Generamos numero aleatorio
+	int randomNum_I = rand() % 100 + 1;
+
+	int finalRand_I = randomNum_I + bonus_I - against_I; //Aplicamos el bonus de stat y restamos el del enemigo
+
+	if (finalRand_I >= 100)
+	{
+		//El numero final supera el 100, por lo tanto acierta
+		return true;
+	}
+	else
+	{
+		//Numero menor que 100, falla 
+		return false;
+	}
+
+}
+
+void Characther::ModifyHP(int num)
 {
 	if ((this->currentHp + num) > this->maxHp) 
 	{
@@ -84,7 +104,7 @@ void Character::ModifyHP(int num)
 	{
 		this->currentHp = 0;
 
-		app->combat->EliminateCombatant(this);
+	//	app->combat->EliminateCombatant(this);
 		//Muere? No muere? Hay que hablar si hay death door
 	}
 	else if ((this->currentHp + num) > this->maxHp)
@@ -97,7 +117,7 @@ void Character::ModifyHP(int num)
 	}
 }
 
-int Character::CalculateDamage(int initialDmg) 
+int Characther::CalculateDamage(int initialDmg) 
 {
 	int realDmg;
 	//Idea 1, crecimiento lento
@@ -113,5 +133,6 @@ int Character::CalculateDamage(int initialDmg)
 
 	return realDmg;
 }
+
 
 

@@ -25,6 +25,7 @@
 #include <iostream>
 using namespace std;
 #include <sstream>
+#include <time.h>
 
 Scene::Scene() : Module()
 {
@@ -42,9 +43,10 @@ bool Scene::Awake(pugi::xml_node& config)
 	lobby_music = config.attribute("music").as_string();
 	mute_B = false;
 
-	sceneNode = config;
-
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
+	enemyRange_I = config.attribute("enemyRange").as_int();;
+
+	sceneNode = config;
 
 	return ret;
 }
@@ -166,6 +168,10 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
+	// to test
+	//app->combat->listAllies.insert(app->combat->listAllies.end(),begin(player->listParty), end(player->listParty));
+
+	app->entityManager->CleanUp();
 	app->entityManager->CleanUp();
 	app->entityManager->Disable();
 
@@ -182,6 +188,11 @@ bool Scene::CleanUp()
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 
+	if (app->combat->active==true)
+	{InitCombat();
+	app->combat->active = false; //Es tremenda guarrada pero sino no se hace el enable del combate
+	}//Comentado porque peta
+	
 	return true;
 }
 
@@ -291,7 +302,15 @@ void Scene::Debug()
 		mute_B = !mute_B;
 		LOG("MUTE");
 	}
-		
+
+	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
+		LOG("Combat");
+		//InitCombat(); //Lo pongo aqui porque llamarlo tras cada cleanUp trae problemas
+		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+		app->combat->active = true;
+		//InitCombat(); //Lo pongo aqui porque llamarlo tras cada cleanUp trae problemas
+	}
+	
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
 }
 
@@ -307,7 +326,7 @@ bool Scene::InitEntities()
 	}
 
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	player->parameters = sceneNode.child("player");
+	player->parameters = app->entityManager->entityNode.child("player");
 	player->Awake();
 
 	switch (app->entityManager->tpID)
@@ -331,6 +350,23 @@ bool Scene::InitEntities()
 
 	//app->entityManager->Awake();
 	return true;
+}
+
+void Scene::InitCombat()
+{
+	srand(time(NULL));
+
+	int randSize = rand() % 3 + 2;
+	int randId;
+	vector<int> arr;
+
+	for (int i = 0; i < randSize; i++)
+	{
+		randId = rand() % 3;
+		arr.push_back(randId);
+	}
+
+	app->combat->InitEnemies(name, arr);
 }
 
 bool Scene::OnGuiMouseClickEvent(GuiControl* control)

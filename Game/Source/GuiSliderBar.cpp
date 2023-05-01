@@ -48,7 +48,7 @@ bool GuiSliderBar::Update(float dt)
 			// If mouse button pressed -> Generate event!
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
 			{
-				NotifyObserver();
+				NotifyObserverOfClick();
 			}
 		}
 		else

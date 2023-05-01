@@ -16,6 +16,7 @@
 #include "Log.h"
 
 #include "EntityManager.h"
+#include "Combat.h"
 
 #include <iostream>
 using namespace std;
@@ -175,6 +176,12 @@ bool IntroScene::SaveState(pugi::xml_node& data)
 	return true;
 }
 
+bool IntroScene::OnGuiMouseHoverEvent(GuiControl* control)
+{
+	
+
+	return true;
+}
 
 bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 {
@@ -192,6 +199,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		}
 		else
 		{
+			//app->combat->RestartCombatData();
 			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		}
 		break;

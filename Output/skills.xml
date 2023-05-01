@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<!--eventReturn
+POR HACER
+-->
+
+<!--
+  IMPORTANT. Some special characters may crash the game
+  Ex. % -> use %% (it will only show 1 %)
+  https://stackoverflow.com/questions/45328047/how-can-i-avoiding-crashing-at-vsprintf-s-while-printing-character-similar-to
+-->
+
+<skills>
+      
+	
+</skills>
+
+<!--<node id="0" text="Got nothing to offer yet. Be patient. I’ll see you arround.">-->

@@ -39,6 +39,8 @@ bool EntityManager::Awake(pugi::xml_node& config)
 	LOG("Loading Entity Manager");
 	bool ret = true;
 
+	entityNode = config;
+
 	//Iterates over the entities and calls the Awake
 	ListItem<Entity*>* item;
 	Entity* pEntity = NULL;
@@ -102,20 +104,14 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::NPC:
 		entity = new Npc();
 		break;
-	case EntityType::PC_PROTAGONIST:
-		entity = new Protagonist();
+	case EntityType::COMBAT_CHARA:
+		entity = new Character();
 		break;
-	case EntityType::PC_BARD:
-		entity = new Bard();
-		break;
-	case EntityType::ENEMY_TANK_HOUSE:
-		entity = new HouseTank();
-		break;
-	case EntityType::ENEMY_DPS_HOUSE:
-		entity = new HouseDPS();
-		break;
-	case EntityType::ENEMY_HEALER_HOUSE:
-		entity = new HouseHealer();
+
+		// To test. Guarrada to fea
+	case EntityType::MENU_CHARA:
+		entity = new Character();
+		entity->type == EntityType::MENU_CHARA;
 		break;
 
 	default: break;

@@ -29,7 +29,7 @@ using namespace std;
 
 PracticeTent::PracticeTent() : Module()
 {
-	name.Create("practiceTent");
+	name.Create("PracticeTent");
 }
 
 PracticeTent::~PracticeTent()
@@ -269,7 +269,7 @@ void PracticeTent::Debug()
 bool PracticeTent::InitEntities()
 {
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	player->parameters = app->scene->sceneNode.child("player");
+	player->parameters = app->entityManager->entityNode.child("player");
 	player->Awake();
 	player->position.x = 105;
 	player->position.y = 341;

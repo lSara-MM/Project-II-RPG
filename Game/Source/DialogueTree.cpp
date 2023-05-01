@@ -50,6 +50,8 @@ void DialogueNode::CleanUp()
 {
 	for (int j = 0; j < choicesList.size(); j++) { delete choicesList[j]; }
 	choicesList.clear();
+	
+	texts.clear();
 }
 
 

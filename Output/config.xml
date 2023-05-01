@@ -27,6 +27,24 @@
 	<fadeToBlack>
 	</fadeToBlack>
 
+	<entitymanager>
+		<player x="3000" y="1000" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
+					texturepath="Assets/Textures/CH_Protagonist_Sprites.png"
+					velocity="400" width="20" height="27" FUYMGravity="250"
+					audiopathCoin="Assets/Audio/Fx/Coin.wav"
+					audiopathGem="Assets/Audio/Fx/Gem.wav"
+					audiopathJump ="Assets/Audio/Fx/sfx_jump.wav "
+					audiopathLand ="Assets/Audio/Fx/sfx_landing.wav"
+					audiopathDeath ="Assets/Audio/Fx/sfx_vaporizing.wav"
+					audiopathAttack="Assets/Audio/Fx/sfx_attack.wav"
+					audiopathSecret ="Assets/Audio/Fx/sfx_secret.wav"
+					audiopathCd ="Assets/Audio/Fx/sfx_Attack_Up.wav"
+					audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
+					audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"
+					grassStep="Assets/Audio/Fx/Pasos_Hierba.wav"
+					enterZone="Assets/Audio/Fx/entrar_sala.wav"/>
+	</entitymanager>
+
 	<dialogue textBoxBg="Assets/GUI/UI_TextBox.png">
 	</dialogue>
 
@@ -36,34 +54,15 @@
 
 	<introScene background="Assets/Textures/intro_bg.png" audioIntroPath ="Assets/Audio/Music/Intro_mus.ogg"
 				settingsPath="Assets/Textures/setting_menu.png" mouseSpeed ="0.5"/>
-	
-	<combat mouseSpeed =" 0.5" />
 
 	<HouseOfTerrors musicD1="Assets/Audio/Music/Haunted_House.ogg" mouseSpeed ="0.5"/>
 	<Circus musicCircus="Assets/Audio/Music/CircusTent_mus.ogg" mouseSpeed ="0.5"/>
-	<practiceTent musTent="Assets/Audio/Music/sala_Entrenamiento.ogg" mouseSpeed ="0.5"/>
+	<PracticeTent musTent="Assets/Audio/Music/sala_Entrenamiento.ogg" mouseSpeed ="0.5"/>
 	
 	<scene music="Assets/Audio/Music/Lobby_Music.ogg" textureAttackPath="Assets/Textures/attack.png"
 	   background1 ="Assets/Maps/clouds_bg.png" background2 ="Assets/Maps/clouds_mg_1.png" background3 ="Assets/Maps/clouds_mg_2.png"
 	   coinspath="Assets/Maps/coin.png" heartspath="Assets/Maps/heart.png"
-		settingsPath ="Assets/Textures/setting_menu.png" mouseSpeed =" 0.5">
-		
-	<player x="3000" y="1000" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
-			texturepath="Assets/Textures/CH_Protagonist_Sprites.png"
-			velocity="400" width="20" height="27" FUYMGravity="250"
-			audiopathCoin="Assets/Audio/Fx/Coin.wav"
-			audiopathGem="Assets/Audio/Fx/Gem.wav"
-			audiopathJump ="Assets/Audio/Fx/sfx_jump.wav "
-			audiopathLand ="Assets/Audio/Fx/sfx_landing.wav"
-			audiopathDeath ="Assets/Audio/Fx/sfx_vaporizing.wav"
-			audiopathAttack="Assets/Audio/Fx/sfx_attack.wav"
-			audiopathSecret ="Assets/Audio/Fx/sfx_secret.wav"
-			audiopathCd ="Assets/Audio/Fx/sfx_Attack_Up.wav"
-			audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
-			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"
-			grassStep="Assets/Audio/Fx/Pasos_Hierba.wav"
-			enterZone="Assets/Audio/Fx/entrar_sala.wav"/>
-			
+		settingsPath ="Assets/Textures/setting_menu.png" mouseSpeed =" 0.5">			
 		
 	<bard name ="Bard" maxHp="1000" currentHp="1000" attack="200" critProbability="10" critDamage="20" precision="100" armor="8"   esquiva="10" resistencia="5" speed="6"
 		   texturePath ="Assets/Textures/AllyBard.png"/>
@@ -80,6 +79,15 @@
 	<enemyHealer name ="Possessed Painting" maxHp="850" currentHp="850" attack="140" armor="8" speed="2"
 				  texturePath ="Assets/Textures/marioneta3.png"/>
 			
+	<!--IDEA PARA HACER CARGA CHARACTERS COMBAT, WIP QUIZA SE TENGA QUE DESCARTAR-->
+
+		<CombatCharacter name ="Bard" id="1" CharacterType="0" CharacterClass="5"
+			maxHp="1000" currentHp="1000" attack="200" critProbability="10" critDamage="20" precision="100" armor="8"   esquiva="10" resistencia="5" speed="6"
+		   texturePath ="Assets/Textures/AllyBard.png"/>
+
+		<CombatCharacter name ="Bard" id="2" CharacterType="0" CharacterClass="5"
+			maxHp="1000" currentHp="1000" attack="200" critProbability="10" critDamage="20" precision="100" armor="8"   esquiva="10" resistencia="5" speed="6"
+		   texturePath ="Assets/Textures/AllyBard.png"/>
 
 	<npc name="GUIA" dialogueID="1"
 		x="3710" y="985" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
@@ -110,5 +118,32 @@
 		<map1>
 		</map1>
 	</map>
+
+<combat mouseSpeed =" 0.5">
+	<scenes name="scene" numEnemies="3">
+	<!-- Placeholder -->
+		<enemy name ="Bewitched Wardrobe" id="0" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
+			    texturePath ="Assets/Textures/EnemyBewitchedWardrobe.png"/>
+		
+		<enemy name ="Cursed Puppet"  id="1" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
+			  texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
+
+		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="140" armor="8" speed="2"
+				  texturePath ="Assets/Textures/EnemyPossessedPainting.png"/>
+	<!-- Placeholder -->
+	</scenes>
+
+	<scenes name="PracticeTent" numEnemies="2">
+	<!-- Placeholder -->
+		<enemyTank name ="Bewitched Wardrobe"  id="0" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
+			    texturePath ="Assets/Textures/EnemyBewitchedWardrobe.png"/>
+		
+		<enemyDPS name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
+			  texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
+	<!-- Placeholder -->
+	</scenes>
+
+</combat>
+
 
 </config>

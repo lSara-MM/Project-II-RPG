@@ -10,6 +10,7 @@
 
 #include "Animation.h"
 #include "NPC.h"
+#include "Character.h"
 #include "SString.h"
 
 struct SDL_Texture;
@@ -73,6 +74,7 @@ public:
 
 	iPoint position;
 
+	array<Character*, 4> listParty;
 
 private:
 
