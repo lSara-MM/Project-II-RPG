@@ -258,6 +258,8 @@ bool Combat::RestartCombatData()
 	//todo
 
 	ret = saveDoc->save_file("save_dialogue.xml");
+
+	return ret;
 }
 
 bool Combat::OnGuiMouseClickEvent(GuiControl* control)
