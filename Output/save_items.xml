@@ -1,14 +1,6 @@
 <?xml version="1.0"?>
-
-<!--
-type 1 = usable
-type 2 = wearable
-type 3 = usable timed use
--->
-<!--
-kind 1 = apply to player
-kind 2 = apply to enemy
--->
 <save_state>
-
+	<items>
+		<item quantity="4" />
+	</items>
 </save_state>

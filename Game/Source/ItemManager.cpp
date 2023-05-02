@@ -31,6 +31,14 @@ bool ItemManager::Start()
 
 bool ItemManager::Update(float dt)
 {
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		AddQuantity(items, "potion");
+	}
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		AddQuantity(items, "granade");
+	}
 
 	return true;
 }
@@ -45,7 +53,7 @@ bool ItemManager::CleanUp()
 int ItemManager::LoadItems()
 {
 	const char* file = "items.xml";
-	pugi::xml_parse_result result = items.load_file(file);
+	result = items.load_file(file);
 
 	if (result == NULL)
 	{
@@ -54,23 +62,36 @@ int ItemManager::LoadItems()
 	}
 	else
 	{
-		pugi::xml_node pugiNode = items.first_child().first_child();
+		pugi::xml_node pugiNode = items.first_child();
 
 		while (pugiNode != NULL)
 		{
 			LoadNodes(pugiNode, tree);
-			pugiNode = pugiNode.next_sibling("item");
+			pugiNode = pugiNode.next_sibling("items");
 		}
 	}
 
 	return 1;
 }
 
-ItemNode* ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
+void ItemManager::AddQuantity(pugi::xml_node& xml_trees, const char* name)
 {
-	ItemNode* first_node = new ItemNode;
+	for (size_t i = 0; i < nodeList.size(); i++)
+	{
+		if (nodeList[i]->name == name)
+		{
+			nodeList[i]->quantity++;
+			LoadQuantity(xml_trees, tree);
+		}
+		break;
+	}
+	
+}
 
-	for (pugi::xml_node pugiNode = xml_trees.child("node"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("node"))
+void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
+{
+
+	for (pugi::xml_node pugiNode = xml_trees.child("item"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
 	{
 		ItemNode* node = new ItemNode;
 
@@ -98,44 +119,42 @@ ItemNode* ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 	}
 	LoadQuantity(xml_trees, item);
 
-	return first_node;
 }
 
-ItemNode* ItemManager::LoadQuantity(pugi::xml_node& xml_trees, ItemNode* item)
+void ItemManager::LoadQuantity(pugi::xml_node& xml_trees, ItemNode* item)
 {
-	ItemNode* first_node = new ItemNode;
 
-	for (pugi::xml_node pugiNode = xml_trees.child("node"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("node"))
+	for (pugi::xml_node pugiNode = xml_trees.child("item"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
 	{
 		ItemNode* node = new ItemNode;
 
-		node->quantity = pugiNode.attribute("type").as_int();
-
-		for (int n=0; n<=node->quantity; n++)
+		for (size_t i = 0; i < nodeList.size(); i++)
 		{
-			node->type = pugiNode.attribute("type").as_int();
-			node->name = pugiNode.attribute("name").as_string();
-			node->type = pugiNode.attribute("type").as_int();
-			if (node->type == 1) { node->kind = pugiNode.attribute("kind").as_int(); }
-			node->hp = pugiNode.attribute("hp").as_int();
-			if (node->type == 2)
+			for (int n = 0; n <= nodeList[i]->quantity; n++)
 			{
-				node->attack = pugiNode.attribute("attack").as_int();
-				node->critProbability = pugiNode.attribute("critProbability").as_int();
-				node->critDamage = pugiNode.attribute("critDamage").as_int();
-				node->precision = pugiNode.attribute("precision").as_int();
-				node->armor = pugiNode.attribute("armor").as_int();
-				node->esquiva = pugiNode.attribute("esquiva").as_int();
-				node->resistencia = pugiNode.attribute("resistencia").as_int();
-				node->speed = pugiNode.attribute("speed").as_int();
-			}
-			textItem_path = pugiNode.attribute("texturepath").as_string();
+				node->type = pugiNode.attribute("type").as_int();
+				node->name = pugiNode.attribute("name").as_string();
+				node->type = pugiNode.attribute("type").as_int();
+				if (node->type == 1) { node->kind = pugiNode.attribute("kind").as_int(); }
+				node->hp = pugiNode.attribute("hp").as_int();
+				if (node->type == 2)
+				{
+					node->attack = pugiNode.attribute("attack").as_int();
+					node->critProbability = pugiNode.attribute("critProbability").as_int();
+					node->critDamage = pugiNode.attribute("critDamage").as_int();
+					node->precision = pugiNode.attribute("precision").as_int();
+					node->armor = pugiNode.attribute("armor").as_int();
+					node->esquiva = pugiNode.attribute("esquiva").as_int();
+					node->resistencia = pugiNode.attribute("resistencia").as_int();
+					node->speed = pugiNode.attribute("speed").as_int();
+				}
+				textItem_path = pugiNode.attribute("texturepath").as_string();
 
-			itemCount.push_back(node);
+				itemCount.push_back(node);
+			}
 		}
 	}
-
-	return first_node;
+	SaveItemState();
 }
 
 bool ItemManager::SaveItemState()
@@ -151,6 +170,7 @@ bool ItemManager::SaveItemState()
 	// save items
 	for (size_t i = 0; i < nodeList.size(); i++)
 	{
+		SString name = nodeList[i]->name;
 		item = items.append_child("item");
 		item.append_attribute("quantity") = nodeList[i]->quantity;
 		break;
