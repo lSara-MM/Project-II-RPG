@@ -40,7 +40,6 @@ class Character : public Entity
 public:
 
 	Character();
-	Character(EntityType type_);
 
 	virtual ~Character();
 
@@ -54,7 +53,7 @@ public:
 
 	bool CalculateRandomProbability(int bonus_I, int against_I = 0); //Retorna true si logras el chance, false si no
 
-	void ModifyHP(int cantidad); //Positivo para curar negativo para dañar
+	void ModifyHP(int hp); //Positivo para curar negativo para dañar
 
 	int CalculateDamage(int damage); //ERIC:Va haber que poner muchos mas atributos
 
@@ -85,9 +84,8 @@ public:
 
 	// Gestion de Turnos
 	bool onTurn;
-	bool alive;
 	Timer turnDelay;
-	bool delayOn=false;
+	bool delayOn = false;
 
 	// Stats
 	SString name;
@@ -101,7 +99,7 @@ public:
 	int precision; // La base es 100%, es un porcentaje que se enfrenta vs la resistencia y precision
 	int armor; // MAXIMO ABSOLUTO 200, mas menos full items en tanque 120
 	int dodge; // Probabilidad de no recibir nada de daño, base es 0%
-	int res; //Probabilidad de no recibir un efecto de estado, base 10%
+	int res; // Probabilidad de no recibir un efecto de estado, base 10%
 	int speed; // Indicador quien va primero en la iniciativa
 
 	// Posicion combate (va del 0 al 3)

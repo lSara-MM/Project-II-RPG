@@ -124,6 +124,9 @@
     <ClCompile Include="Source\Character.cpp">
       <Filter>Modules\Entities\Combat</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Skills.cpp">
+      <Filter>Modules\Entities\Combat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">

@@ -51,7 +51,6 @@ bool Character::Awake()
 	charaClass = (CharacterClass)parameters.attribute("class").as_int();
 	
 
-
 	width = parameters.attribute("width").as_int();
 	height = parameters.attribute("height").as_int();
 
@@ -161,9 +160,26 @@ bool Character::Update(float dt)
 
 bool Character::CleanUp()
 {
-	//delete button;
+	app->tex->UnLoad(texture);
+
+	delete button;
 	button = nullptr;
 
 	return true;
 }
 
+void Character::ModifyHP(int hp)
+{
+	currentHp += hp;
+
+	if (currentHp >= maxHp)
+	{
+		currentHp = maxHp;
+	}
+
+	if (currentHp <= 0)
+	{
+		if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(app->combat->listAllies, this); }
+		else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(app->combat->listEnemies, this); }
+	}
+}
