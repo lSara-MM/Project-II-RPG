@@ -212,7 +212,7 @@ bool Combat::SaveCombat()
 
 	//bard.append_attribute("currentHp") = app->scene->currentHP_Bard;
 
-	ret = saveDoc->save_file("save_dialogue.xml");
+	ret = saveDoc->save_file("save_combat.xml");
 
 	return ret;
 }
@@ -227,7 +227,7 @@ bool Combat::LoadCombat()
 
 	if (result == NULL)
 	{
-		LOG("Could not load xml file save_dialogue.xml. pugi error: %s", result.description());
+		LOG("Could not load xml file save_combat.xml. pugi error: %s", result.description());
 		ret = false;
 	}
 	else
@@ -242,19 +242,31 @@ bool Combat::LoadCombat()
 bool Combat::RestartCombatData()
 {
 	bool ret = true;
+	//cargar config.xml
+	pugi::xml_document gameStateFile;
+	pugi::xml_parse_result result = gameStateFile.load_file("config.xml");
+	pugi::xml_node nodeConfig = gameStateFile.child("save_stats");
 
-	pugi::xml_document* saveDoc = new pugi::xml_document();
-	pugi::xml_node node = saveDoc->append_child("save_stats");
+	if (result == NULL)
+	{
+		LOG("Could not load xml file config.xml. pugi error: %s", result.description());
+		ret = false;
+	}
+	else
+	{
+		pugi::xml_document* saveDoc = new pugi::xml_document();
+		pugi::xml_node nodeCombat = saveDoc->append_child("save_stats");
 
-	pugi::xml_node protagonist = node.append_child("protagonist");
+		pugi::xml_node protagonist = nodeCombat.append_child("protagonist");
 
-	//todo
+		//protagonist.append_attribute("currentHp") = nodeConfig.child("protagonist").attribute("currentHp").as_int();
 
-	pugi::xml_node bard = node.append_child("bard");
+		pugi::xml_node bard = nodeCombat.append_child("bard");
 
-	//todo
+		//bard.append_attribute("currentHp") = nodeConfig.child("bard").attribute("currentHp").as_int();
 
-	ret = saveDoc->save_file("save_dialogue.xml");
+		ret = saveDoc->save_file("save_stats.xml");
+	}
 
 	return ret;
 }
