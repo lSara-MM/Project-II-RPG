@@ -14,6 +14,7 @@
 #include "Scene.h"
 
 #include "EntityManager.h"
+#include "ItemManager.h"
 #include "FadeToBlack.h"
 #include "Combat.h"
 #include "DialogueSystem.h"
@@ -45,6 +46,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	pathfinding = new PathFinding();
 
 	entityManager = new EntityManager();
+	itemManager = new ItemManager();
 	combat = new Combat();
 	dialogueSystem = new DialogueSystem();
 	guiManager = new GuiManager();
@@ -79,6 +81,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(map);
 	AddModule(entityManager);
+	AddModule(itemManager);
 	AddModule(dialogueSystem);
 	AddModule(guiManager);
 

@@ -21,6 +21,7 @@ class Textures;
 class Audio;
 
 class EntityManager;
+class ItemManager;
 class Combat;
 class DialogueSystem;
 class GuiManager;
@@ -108,6 +109,7 @@ public:
 	Audio* audio;
 	
 	EntityManager* entityManager;
+	ItemManager* itemManager;
 	Combat* combat;
 	DialogueSystem* dialogueSystem;
 	GuiManager* guiManager;

@@ -5,6 +5,7 @@
 #include "Textures.h"
 #include "Window.h"
 
+
 ItemManager::ItemManager() : Module()
 {
 	name.Create("items");
@@ -24,7 +25,6 @@ bool ItemManager::Awake(pugi::xml_node& config)
 
 bool ItemManager::Start()
 {
-	textBox_tex = app->tex->Load(textBox_path);
 	LoadItems();
 	return true;
 }
@@ -37,9 +37,8 @@ bool ItemManager::Update(float dt)
 
 bool ItemManager::CleanUp()
 {
-	nodeList.clear()
-	app->tex->UnLoad(textBox_tex);
-
+	nodeList.clear();
+	itemCount.clear();
 	return true;
 }
 
@@ -47,8 +46,6 @@ int ItemManager::LoadItems()
 {
 	const char* file = "items.xml";
 	pugi::xml_parse_result result = items.load_file(file);
-
-	ItemNode* tree = new ItemNode;
 
 	if (result == NULL)
 	{
@@ -59,9 +56,9 @@ int ItemManager::LoadItems()
 	{
 		pugi::xml_node pugiNode = items.first_child().first_child();
 
-		for (pugiNode != NULL)
+		while (pugiNode != NULL)
 		{
-			tree->activeNode = LoadNodes(pugiNode, tree);
+			LoadNodes(pugiNode, tree);
 			pugiNode = pugiNode.next_sibling("item");
 		}
 	}
@@ -94,9 +91,9 @@ ItemNode* ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 			node->resistencia = pugiNode.attribute("resistencia").as_int();
 			node->speed = pugiNode.attribute("speed").as_int();
 		}
-		textBox_path = pugiNode.attribute("texturepath").as_string();
+		textItem_path = pugiNode.attribute("texturepath").as_string();
 
-		item->nodeList.push_back(node);
+		nodeList.push_back(node);
 
 	}
 	LoadQuantity(xml_trees, item);
@@ -132,9 +129,9 @@ ItemNode* ItemManager::LoadQuantity(pugi::xml_node& xml_trees, ItemNode* item)
 				node->resistencia = pugiNode.attribute("resistencia").as_int();
 				node->speed = pugiNode.attribute("speed").as_int();
 			}
-			textBox_path = pugiNode.attribute("texturepath").as_string();
+			textItem_path = pugiNode.attribute("texturepath").as_string();
 
-			item->itemCount.push_back(node);
+			itemCount.push_back(node);
 		}
 	}
 
@@ -148,18 +145,15 @@ bool ItemManager::SaveItemState()
 	pugi::xml_document* saveDoc = new pugi::xml_document();
 	pugi::xml_node node = saveDoc->append_child("save_state");
 
+	pugi::xml_node items = node.append_child("items");
+	pugi::xml_node item;
+
 	// save items
-	if (activeTree != nullptr)
+	for (size_t i = 0; i < nodeList.size(); i++)
 	{
-		for (size_t i = 0; i < activeTree->nodeList.size(); i++)
-		{
-			for (int j = 0; j < activeTree->nodeList[i]->choicesList.size(); j++)
-			{
-					player = node.append_child("item");
-					player.append_attribute("quantity") = activeTree->nodeList[i]->quantity;
-					break;
-			}
-		}
+		item = items.append_child("item");
+		item.append_attribute("quantity") = nodeList[i]->quantity;
+		break;
 	}
 
 	ret = saveDoc->save_file("save_items.xml");

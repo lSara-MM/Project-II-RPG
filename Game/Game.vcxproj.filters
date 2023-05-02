@@ -124,6 +124,9 @@
     <ClCompile Include="Source\Character.cpp">
       <Filter>Modules\Entities\Combat</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ItemManager.cpp">
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -287,6 +290,9 @@
     </ClInclude>
     <ClInclude Include="Source\Skills.h">
       <Filter>Modules\Entities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ItemManager.h">
+      <Filter>Modules\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

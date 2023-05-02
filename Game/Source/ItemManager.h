@@ -1,18 +1,21 @@
 #ifndef __ITEMMANAGER_H__
 #define __ITEMMANAGER_H__
 
-#include "ItemManager.h"
-
 #include "App.h"
 #include "Module.h"
+#include "Log.h"
+#include "Point.h"
+#include "SString.h"
+#include "Render.h"
+
+#include <vector>
+using namespace std;
 
 class ItemNode
 {
 public:
 	ItemNode() {};
 	~ItemNode() {};
-
-	void CleanUp();
 
 public:
 	SString name;
@@ -29,7 +32,7 @@ public:
 	int esquiva;
 	int resistencia;
 	int speed;
-	
+
 };
 
 class ItemManager : public Module
@@ -53,11 +56,12 @@ public:
 
 public:
 
+	ItemNode* tree = new ItemNode;
+
+	const char* textItem_path;
+
 	vector <ItemNode*> nodeList;
 	vector <ItemNode*> itemCount;
-
-	SDL_Texture* textItem_tex;
-	const char* textItem_path;
 
 private:
 	pugi::xml_document items;
