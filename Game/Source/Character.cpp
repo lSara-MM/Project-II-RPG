@@ -133,8 +133,31 @@ bool Character::Update(float dt)
 			}
 			if (turnDelay.ReadMSec()>2000 && delayOn)
 			{
-			
-				//TURNO CON SUS COSAS
+				switch (charaClass) //La idea es que cada classe tenga un comportamiento generico
+				{
+				case CharacterClass::MELEE_DPS:
+					break;
+				case CharacterClass::RANGED_DPS:
+					break;
+				case CharacterClass::ASSASSIN:
+					break;
+				case CharacterClass::AOE_DPS:
+					break;
+				case CharacterClass::HEALER:
+					break;
+				case CharacterClass::TANK:
+					break;
+				case CharacterClass::BUFFER:
+					break;
+				case CharacterClass::DEBUFFER:
+					break;
+				case CharacterClass::DOT:
+					break;
+				case CharacterClass::NO_CLASS:
+					break;
+				default:
+					break;
+				}
 			
 				
 
@@ -168,6 +191,7 @@ bool Character::CleanUp()
 	return true;
 }
 
+
 void Character::ModifyHP(int hp)
 {
 	currentHp += hp;
@@ -182,4 +206,56 @@ void Character::ModifyHP(int hp)
 		if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(app->combat->listAllies, this); }
 		else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(app->combat->listEnemies, this); }
 	}
+}
+
+bool Character::CalculateRandomProbability(int bonus_I, int against_I)
+{
+	//Generamos numero aleatorio
+	int randomNum_I = rand() % 100 + 1;
+
+	int finalRand_I = randomNum_I + bonus_I - against_I; //Aplicamos el bonus de stat y restamos el del enemigo
+
+	if (finalRand_I >= 100)
+	{
+		//El numero final supera el 100, por lo tanto acierta
+		return true;
+	}
+	else
+	{
+		//Numero menor que 100, falla 
+		return false;
+	}
+
+}
+
+int Character::CalculateDamage(Skill* skill, Character* caster, Character* defender)
+{
+	if (skill->multiplierDmg>0) //Curacion, no hace falta calcular esquiva ni nada 
+	{
+		return(caster->attack * skill->multiplierDmg);
+	}
+	else //Es un ataque 
+	{
+		if (!CalculateRandomProbability((skill->bonusPrecision+caster->precision),defender->dodge)) 
+		{
+			//Enemigo esquiva
+			return 0;
+		}
+		else
+		{
+			int damage;
+			damage = skill->multiplierDmg * caster->attack;
+			if (CalculateRandomProbability(skill->bonusCritRate+caster->critRate)) //Si true hay critico
+			{
+				damage *= (skill->bonusCritDamage + caster->critDamage);
+			}
+
+			// Calcular reduccion de la defensa
+			float armorRelevance = (defender->armor / abs(damage)) + 1;
+			damage=+ ((defender->armor / 2) * armorRelevance); //Esta con mas ya que damage es negativo
+			
+			return damage;
+		}
+	}
+	
 }

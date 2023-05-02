@@ -44,7 +44,38 @@ public:
 	SString name;
 	SString description;
 
+
 	SkillType type;
+
+		//Gestion movimiento
+		int movement; //0 si no te mueve, -x si te mueve hacia delante +x si te mueve hacia atras
+
+		//Gestion potencia
+		float multiplierDmg;
+		int bonusPrecision;
+		int bonusCritRate;
+		int bonusCritDamage;
+		//Variable de que tipo de stat usan para el escaldo?
+
+		enum skillType //Quiza no haga falta
+		{
+			ATTACK=0,
+			HEAL, 
+			BUFF,
+			DEBUFF,
+		};
+
+		//FUNCIONES
+		bool CanBeUsed(int positionCharacter)
+		{
+			//True si dentro del rango, false si no
+			return (positionCharacter >= posToTargetStart_I && positionCharacter <= posToTargetEnd_I);
+		}
+
+	private:
+
+	
+
 
 
 

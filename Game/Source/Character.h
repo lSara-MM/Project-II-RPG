@@ -10,6 +10,7 @@
 #include "GuiButton.h"
 #include "Animation.h"
 #include <array>
+#include "Skills.h"
 
 struct SDL_Texture;
 
@@ -24,12 +25,12 @@ enum class CharacterClass
 {
 	MELEE_DPS,
 	RANGED_DPS,
+	ASSASSIN,
 	AOE_DPS,
 	HEALER,
 	TANK,
 	BUFFER,
 	DEBUFFER,
-	ASSASSIN,
 	DOT,
 
 	NO_CLASS
@@ -51,16 +52,15 @@ public:
 
 	bool CleanUp();
 
-	bool CalculateRandomProbability(int bonus_I, int against_I = 0); //Retorna true si logras el chance, false si no
+	//Retorna true si logras el chance, false si no
+	bool CalculateRandomProbability(int bonus_I, int against_I = 0); 
 
 	void ModifyHP(int hp); //Positivo para curar negativo para dañar
 
-	int CalculateDamage(int damage); //ERIC:Va haber que poner muchos mas atributos
+	int CalculateDamage(Skill* skill,Character* caster, Character* defender); //ERIC:Va haber que poner muchos mas atributos
 
 	bool ResistStatusEffect(/*efecto,precision*/); //Hacer cuando se hagan status effects, aun no.
 	
-	
-
 	//Gets, dan las stats sumadas (base+eqipo+buffos)
 	/*int GetMaxHP() { return maxHp; }
 	int GetHealth() { return currentHp; }
