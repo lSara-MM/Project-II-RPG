@@ -61,7 +61,7 @@ bool Character::Awake()
 
 bool Character::Start()
 {
-	texture=app->tex->Load(texturePath);
+	texture = app->tex->Load(texturePath);
 
 	SDL_Rect buttonBounds;
 	ButtonType buttonType;
@@ -73,11 +73,13 @@ bool Character::Start()
 		if (charaType == CharacterType::ALLY)
 		{
 			buttonBounds = { 400 - 126 * positionCombat_I, 200, 125, 180 };
+			position = { 400 - 126 * positionCombat_I, 200 };
 		}
 
 		if (charaType == CharacterType::ENEMY)
 		{
 			buttonBounds = { 700 + 126 * positionCombat_I, 200, 125, 180 };
+			position = { 700 + 126 * positionCombat_I, 200 };
 		}
 
 		buttonType = ButtonType::COMBAT_TARGET;
@@ -97,17 +99,6 @@ bool Character::Start()
 
 bool Character::Update(float dt)
 {
-	//Asignar posicion en funcion de combat position y type
-	if (charaType == CharacterType::ALLY)
-	{
-		position = { 400 - 126 * positionCombat_I, 200};
-	}
-
-	if (charaType == CharacterType::ENEMY)
-	{
-		position = { 700 + 126 * positionCombat_I, 200};
-	}
-
 	app->render->DrawTexture(texture, position.x, position.y);
 	
 	

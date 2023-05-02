@@ -70,6 +70,10 @@ public:
 	int GetSpeed() { return speed; }*/
 
 public:
+
+	// Texture position
+	iPoint  position;
+
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
@@ -111,13 +115,12 @@ public:
 	//vector<Skills*> skillsList;
 
 	GuiButton* button;
-
+	
 private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
 
-	iPoint  position;
 	int width, height;
 };
 

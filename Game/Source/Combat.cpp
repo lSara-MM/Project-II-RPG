@@ -62,13 +62,8 @@ bool Combat::Start()
 	//Poner la camara en su lugar
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
-	
-	//Activar entityManager que es lo que controlara que enemy  
+
 	app->entityManager->Enable();
-
-	//app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
-
-	//Desactivar physics
 	app->physics->Disable();
 	StartCombat();
 
@@ -182,6 +177,8 @@ bool Combat::InitEnemies(SString scene, vector<int> arr)
 						Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 						chara->parameters = itemNode;
 						chara->Awake();
+
+						// to delete
 						chara->Start();
 
 						chara->charaType = CharacterType::ENEMY;
@@ -258,6 +255,8 @@ bool Combat::RestartCombatData()
 	//todo
 
 	ret = saveDoc->save_file("save_dialogue.xml");
+
+	return ret;
 }
 
 bool Combat::OnGuiMouseClickEvent(GuiControl* control)
@@ -281,13 +280,24 @@ bool Combat::AddCombatant(int id)
 bool Combat::OrderBySpeed()
 {
 	//Order by initiative
-	int n = listInitiative.Count();
-	listInitiative.At(2)->data->speed;
+	int n = listInitiative.Count(); // ?
 
-	for (int i = 0; i < n - 1; i++) {
-		
-		for (int j = 0; j < n - i - 1; j++) {
+	for (int i = 0; i < listAllies.size(); i++)
+	{
+		listInitiative.Add(listAllies.at(i));
+	}
 
+	for (int i = 0; i < listEnemies.size(); i++)
+	{
+		listInitiative.Add(listEnemies.at(i));
+	}
+
+	//int n = listInitiative.Count();
+
+	for (int i = 0; i < n - 1; i++) 
+	{
+		for (int j = 0; j < n - i - 1; j++) 
+		{
 			if (listInitiative.At(j)->data->speed > listInitiative.At(j + 1)->data->speed)
 			{
 				//SWAP WIP
@@ -299,7 +309,6 @@ bool Combat::OrderBySpeed()
 				delete aux;
 			}
 		}
-		
 	}
 
 	return true;
@@ -366,7 +375,7 @@ bool Combat::StartCombat()
 	//	EnableTargetButton(i);
 	//	EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
 	//}
-	//listInitiative.start->data->onTurn = true;
+	listInitiative.start->data->onTurn = true;
 	charaInTurn = 0;
 	
 	return true;
@@ -557,11 +566,13 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 		if (chara->charaType == CharacterType::ALLY)
 		{
 			arr->at(i)->button->bounds.x = 400 - 126 * arr->at(i)->positionCombat_I;
+			arr->at(i)->position.x = 400 - 126 * arr->at(i)->positionCombat_I;
 		}
 
 		if (chara->charaType == CharacterType::ENEMY)
 		{
 			arr->at(i)->button->bounds.x = 700 + 126 * arr->at(i)->positionCombat_I;
+			arr->at(i)->position.x = 700 + 126 * arr->at(i)->positionCombat_I;
 		}
 	}
 }
