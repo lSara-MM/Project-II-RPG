@@ -204,14 +204,13 @@ bool Combat::SaveCombat()
 	pugi::xml_document* saveDoc = new pugi::xml_document();
 	pugi::xml_node node = saveDoc->append_child("save_stats");
 
-	pugi::xml_node protagonist = node.append_child("protagonist");
+	//for (c = app->scene->listAllies.start; c != NULL; c = c->next) {
 
-	//protagonist.append_attribute("currentHp") = app->scene->currentHP_Protagonist;
+	//	pugi::xml_node character = node.append_child("CombatCharacter");
+	//	character.append_attribute("currentHp") = c->currentHP;//hacerlo para todas las stats
 
-	pugi::xml_node bard = node.append_child("bard");
-
-	//bard.append_attribute("currentHp") = app->scene->currentHP_Bard;
-
+	//}
+	
 	ret = saveDoc->save_file("save_combat.xml");
 
 	return ret;
@@ -232,8 +231,13 @@ bool Combat::LoadCombat()
 	}
 	else
 	{
-		//app->scene->currentHP_Bard = node.child("bard").attribute("currentHp").as_int();
-		//app->scene->currentHP_Protagonist = node.child("protagonist").attribute("currentHp").as_int();
+		/*for (pugi::xml_node itemNode = node.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter"))
+		{
+
+			app->scene->listAllies[i] = itemNode.attribute("currentHp").as_int();
+
+		}*/
+	
 	}
 
 	return ret;
@@ -245,27 +249,28 @@ bool Combat::RestartCombatData()
 	//cargar config.xml
 	pugi::xml_document gameStateFile;
 	pugi::xml_parse_result result = gameStateFile.load_file("config.xml");
-	pugi::xml_node nodeConfig = gameStateFile.child("save_stats");
+	pugi::xml_node nodeConfig = gameStateFile.child("CombatCharacter");
 
 	if (result == NULL)
 	{
 		LOG("Could not load xml file config.xml. pugi error: %s", result.description());
 		ret = false;
 	}
+
 	else
 	{
+
 		pugi::xml_document* saveDoc = new pugi::xml_document();
 		pugi::xml_node nodeCombat = saveDoc->append_child("save_stats");
 
-		pugi::xml_node protagonist = nodeCombat.append_child("protagonist");
+		for (pugi::xml_node itemNode = nodeConfig.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter")){
 
-		//protagonist.append_attribute("currentHp") = nodeConfig.child("protagonist").attribute("currentHp").as_int();
+				pugi::xml_node character = nodeCombat.append_child("CombatCharacter");
+				character.append_attribute("currentHp") = itemNode.attribute("currentHp").as_int();
+			 
+		}
 
-		pugi::xml_node bard = nodeCombat.append_child("bard");
-
-		//bard.append_attribute("currentHp") = nodeConfig.child("bard").attribute("currentHp").as_int();
-
-		ret = saveDoc->save_file("save_stats.xml");
+		ret = saveDoc->save_file("save_combat.xml");
 	}
 
 	return ret;
