@@ -51,9 +51,9 @@ public:
 	void AddQuantity(pugi::xml_node& xml_trees, const char* name);
 
 	void LoadNodes(pugi::xml_node& xml_trees, ItemNode* item);
-	void LoadQuantity(pugi::xml_node& xml_trees, ItemNode* item);
+	void LoadQuantity(pugi::xml_node& xml_trees);
 
-	bool LoadItemState(pugi::xml_node& xml_trees, ItemNode* coso);
+	bool LoadItemState(pugi::xml_node& xml_trees);
 	bool SaveItemState();
 
 public:
@@ -67,7 +67,7 @@ public:
 
 private:
 	pugi::xml_document items;
-	pugi::xml_parse_result result;
+	
 };
 
 #endif // __ITEMMANAGER_H__

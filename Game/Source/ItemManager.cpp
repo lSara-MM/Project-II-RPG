@@ -33,11 +33,13 @@ bool ItemManager::Update(float dt)
 {
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		AddQuantity(items, "potion");
+		pugi::xml_node pugiNode = items.first_child();
+		AddQuantity(pugiNode, "potion");
 	}
 	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
-		AddQuantity(items, "granade");
+		pugi::xml_node pugiNode = items.first_child();
+		AddQuantity(pugiNode, "granade");
 	}
 
 	return true;
@@ -53,7 +55,7 @@ bool ItemManager::CleanUp()
 int ItemManager::LoadItems()
 {
 	const char* file = "items.xml";
-	result = items.load_file(file);
+	pugi::xml_parse_result result = items.load_file(file);
 
 	if (result == NULL)
 	{
@@ -66,6 +68,7 @@ int ItemManager::LoadItems()
 
 		while (pugiNode != NULL)
 		{
+			LoadItemState(pugiNode);
 			LoadNodes(pugiNode, tree);
 			pugiNode = pugiNode.next_sibling("items");
 		}
@@ -76,14 +79,16 @@ int ItemManager::LoadItems()
 
 void ItemManager::AddQuantity(pugi::xml_node& xml_trees, const char* name)
 {
-	for (size_t i = 0; i < nodeList.size(); i++)
+	size_t i = 0;
+	for (pugi::xml_node pugiNode = xml_trees.child("item"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
 	{
-		if (nodeList[i]->name == name)
-		{
-			nodeList[i]->quantity++;
-			LoadQuantity(xml_trees, tree);
-		}
-		break;
+			if (nodeList[i]->name == name)
+			{
+				nodeList[i]->quantity++;	
+				LoadQuantity(xml_trees);
+				LoadItemState(xml_trees);
+			}
+			i++;
 	}
 	
 }
@@ -116,11 +121,11 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 		nodeList.push_back(node);
 
 	}
-	LoadQuantity(xml_trees, item);
+	LoadQuantity(xml_trees);
 
 }
 
-void ItemManager::LoadQuantity(pugi::xml_node& xml_trees, ItemNode* item)
+void ItemManager::LoadQuantity(pugi::xml_node& xml_trees)
 {
 
 	for (pugi::xml_node pugiNode = xml_trees.child("item"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
@@ -171,7 +176,6 @@ bool ItemManager::SaveItemState()
 		item = items.append_child("item");
 		item.append_attribute("quantity") = nodeList[i]->quantity;
 		item.append_attribute("name") = nodeList[i]->name.GetString();
-		break;
 	}
 
 	ret = saveDoc->save_file("save_items.xml");
@@ -179,31 +183,25 @@ bool ItemManager::SaveItemState()
 	return ret;
 }
 
-bool ItemManager::LoadItemState(pugi::xml_node& xml_trees, ItemNode* coso)
+bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 {
 	bool ret = true;
 
-	pugi::xml_document* saveDoc = new pugi::xml_document();
-	pugi::xml_node node = saveDoc->append_child("save_state");
-
-	pugi::xml_node items = node.append_child("items");
-	pugi::xml_node item;
-
+	const char* file = "save_items.xml";
+	pugi::xml_parse_result result = items.load_file(file);
+	
 	// load items
-	for (pugi::xml_node pugiNode = xml_trees.child("item"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
+	for (pugi::xml_node pugiNode = items.first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
 	{
-		ItemNode* node = new ItemNode;
 		for (size_t i = 0; i < nodeList.size(); i++)
 		{
-			if (node->name==nodeList[i]->name)
+			if (strcmp(pugiNode.append_attribute("name").as_string(), nodeList[i]->name.GetString()))
 			{
-				node->quantity = nodeList[i]->quantity;
+				  nodeList[i]->quantity = pugiNode.append_attribute("quantity").as_int();
 			}
-			
-			break;
 		}
 	}
-	LoadQuantity(xml_trees, coso);
+	LoadQuantity(xml_trees);
 
 	return ret;
 }
