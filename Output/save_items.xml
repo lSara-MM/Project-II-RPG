@@ -1,4 +1,11 @@
 <?xml version="1.0"?>
 <save_state>
-
+	<items>
+		<item quantity="2" name="potion" />
+		<item quantity="2" name="granade" />
+		<item quantity="0" name="legging" />
+		<item quantity="0" name="ring" />
+		<item quantity="0" name="chest" />
+		<item quantity="0" name="pendant" />
+	</items>
 </save_state>

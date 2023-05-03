@@ -68,7 +68,6 @@ int ItemManager::LoadItems()
 
 		while (pugiNode != NULL)
 		{
-			LoadItemState(pugiNode);
 			LoadNodes(pugiNode, tree);
 			pugiNode = pugiNode.next_sibling("items");
 		}
@@ -79,18 +78,15 @@ int ItemManager::LoadItems()
 
 void ItemManager::AddQuantity(pugi::xml_node& xml_trees, const char* name)
 {
-	size_t i = 0;
-	for (pugi::xml_node pugiNode = xml_trees.child("item"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
+	for (size_t i = 0; i < nodeList.size(); i++)
 	{
-			if (nodeList[i]->name == name)
-			{
-				nodeList[i]->quantity++;	
-				LoadQuantity(xml_trees);
-				LoadItemState(xml_trees);
-			}
-			i++;
+		if (nodeList[i]->name == name)
+		{
+			nodeList[i]->quantity++;
+			SaveItemState();
+			LoadQuantity(xml_trees);
+		}
 	}
-	
 }
 
 void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
@@ -121,7 +117,7 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 		nodeList.push_back(node);
 
 	}
-	LoadQuantity(xml_trees);
+	LoadItemState(xml_trees);
 
 }
 
@@ -157,7 +153,6 @@ void ItemManager::LoadQuantity(pugi::xml_node& xml_trees)
 			}
 		}
 	}
-	SaveItemState();
 }
 
 bool ItemManager::SaveItemState()
@@ -195,12 +190,13 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 	{
 		for (size_t i = 0; i < nodeList.size(); i++)
 		{
-			if (strcmp(pugiNode.append_attribute("name").as_string(), nodeList[i]->name.GetString()))
+			if (strcmp(pugiNode.attribute("name").as_string(), nodeList[i]->name.GetString()))
 			{
-				  nodeList[i]->quantity = pugiNode.append_attribute("quantity").as_int();
+				  nodeList[i]->quantity = pugiNode.attribute("quantity").as_int();
 			}
 		}
 	}
+
 	LoadQuantity(xml_trees);
 
 	return ret;
