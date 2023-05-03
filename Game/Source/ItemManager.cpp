@@ -123,8 +123,8 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 
 void ItemManager::LoadQuantity(pugi::xml_node& xml_trees)
 {
-
-	for (pugi::xml_node pugiNode = xml_trees.child("item"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
+	
+	for (pugi::xml_node pugiNode = xml_trees; pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
 	{
 		ItemNode* node = new ItemNode;
 
@@ -169,8 +169,8 @@ bool ItemManager::SaveItemState()
 	for (size_t i = 0; i < nodeList.size(); i++)
 	{
 		item = items.append_child("item");
-		item.append_attribute("quantity") = nodeList[i]->quantity;
 		item.append_attribute("name") = nodeList[i]->name.GetString();
+		item.append_attribute("quantity") = nodeList[i]->quantity;
 	}
 
 	ret = saveDoc->save_file("save_items.xml");
@@ -186,11 +186,11 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 	pugi::xml_parse_result result = items.load_file(file);
 	
 	// load items
-	for (pugi::xml_node pugiNode = items.first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
+	for (pugi::xml_node pugiNode = items.first_child().first_child().first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
 	{
 		for (size_t i = 0; i < nodeList.size(); i++)
 		{
-			if (strcmp(pugiNode.attribute("name").as_string(), nodeList[i]->name.GetString()))
+			if (strcmp(pugiNode.attribute("name").as_string(), nodeList[i]->name.GetString()) == 1)
 			{
 				  nodeList[i]->quantity = pugiNode.attribute("quantity").as_int();
 			}
