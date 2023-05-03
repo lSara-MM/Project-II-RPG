@@ -36,6 +36,9 @@ public:
 
 	void Controller(float dt);
 
+	void LoadAllPC();
+	void SetParty();
+
 public:
 	SString playerName;
 
@@ -75,6 +78,7 @@ public:
 	iPoint position;
 
 	array<Character*, 4> listParty;
+	vector<Character*> listPC;
 
 private:
 

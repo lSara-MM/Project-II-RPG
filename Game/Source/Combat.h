@@ -45,12 +45,9 @@ public:
 	void Debug();
 
 
-	bool AddCombatant(int id);
-	bool OrderBySpeed();
-	//Es muy importante que antes de 
-	bool EliminateCombatant(Character* chara);
-
 	bool StartCombat();
+	bool OrderBySpeed();
+
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
 
 	//TargetControl

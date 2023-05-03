@@ -86,6 +86,7 @@ bool Player::Awake() {
 	enterPath = "Assets/Audio/Fx/entrar_sala.wav";
 	enterZone = app->audio->LoadFx(enterPath);
 
+
 	return true;
 }
 
@@ -496,3 +497,26 @@ void Player::Controller(float dt)
 
 	}
 }
+
+void Player::LoadAllPC()
+{
+	for (pugi::xml_node itemNode = app->entityManager->entityNode.child("CombatCharacter"); itemNode; itemNode = itemNode.next_sibling("CombatCharacter"))
+	{
+		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::MENU_CHARA);
+		chara->parameters = itemNode;
+		chara->Awake();
+
+		chara->Start();
+
+		chara->charaType = CharacterType::ALLY;
+		listPC.push_back(chara);
+	}
+}
+
+void Player::SetParty()
+{
+	// to change when party available
+	copy_n(listPC.begin(), listParty, listPC.begin());
+}
+
+

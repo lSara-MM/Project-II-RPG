@@ -168,9 +168,6 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	// to test
-	//app->combat->listAllies.insert(app->combat->listAllies.end(),begin(player->listParty), end(player->listParty));
-
 	app->entityManager->CleanUp();
 	app->entityManager->CleanUp();
 	app->entityManager->Disable();
@@ -188,10 +185,18 @@ bool Scene::CleanUp()
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 
-	if (app->combat->active==true)
-	{InitCombat();
-	app->combat->active = false; //Es tremenda guarrada pero sino no se hace el enable del combate
-	}//Comentado porque peta
+	if (app->combat->active == true)
+	{
+		// this shouldnt be here later
+		player->LoadAllPC();
+		player->SetParty();
+		//
+
+		InitCombat();
+		app->combat->listAllies.insert(app->combat->listAllies.end(), begin(player->listParty), end(player->listParty));
+
+		app->combat->active = false;
+	}
 	
 	return true;
 }

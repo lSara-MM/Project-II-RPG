@@ -162,7 +162,6 @@ bool Combat::InitEnemies(SString scene, vector<int> arr)
 {
 	int cPos = 0;
 
-	// to test
 	for (pugi::xml_node sceneNode = combatNode.child("scenes"); sceneNode; sceneNode = sceneNode.next_sibling("scenes"))
 	{
 		// to test if string compare works
@@ -287,9 +286,26 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-bool Combat::AddCombatant(int id)
+
+bool Combat::StartCombat()
 {
-	
+	for (int i = 0; i < listAllies.size(); i++)
+	{
+		listAllies.at(i)->type = EntityType::COMBAT_CHARA;
+		listAllies.at(i)->positionCombat_I = i;
+	}
+
+	OrderBySpeed();
+
+	lastPressedAbility_I = 0;
+	targeted_Character = nullptr;
+	//for (int i = 0; i < 7; i++)
+	//{
+	//	EnableTargetButton(i);
+	//	EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
+	//}
+	listInitiative.start->data->onTurn = true;
+	charaInTurn = 0;
 
 	return true;
 }
@@ -331,75 +347,9 @@ bool Combat::OrderBySpeed()
 	return true;
 }
 
-bool Combat::EliminateCombatant(Character* chara)
+
+bool Combat::NextTurn()
 {
-	if (chara==nullptr)
-	{
-		return false;
-	}
-
-	////Mover chara al fondo antes de matarlo para ordenar los arrays
-	//switch (chara->charaType_I)
-	//{
-	//case chara->CharacterType::ALLY:
-	//	for (int i = 3; i >= 0; i--)
-	//	{
-	//		if (allies[i] != nullptr)
-	//		{
-	//			MoveAllies(chara->positionCombat_I, i+1);
-	//			delete allies[i];
-	//			allies[i]=nullptr;
-	//			break;
-	//		}
-	//	}
-	//	
-	//	
-	//	break;
-
-	//case chara->CharacterType::ENEMY:
-	//	for (int i = 3; i >= 0; i--)
-	//	{
-	//		if (enemies[i] != nullptr)
-	//		{
-	//			MoveEnemies(chara->positionCombat_I, i+1);
-	//			enemies[i] = nullptr;
-	//			break;
-	//		}
-	//	}
-	//	break;
-
-	//case chara->CharacterType::NONE:
-	//	break;
-
-	//default:
-	//	break;
-	//}
-	//app->entityManager->DestroyEntity(chara);
-	////chara->Disable();
-	//listInitiative.Del(listInitiative.At(listInitiative.Find(chara)));
-
-	return true;
-}
-
-bool Combat::StartCombat()
-{
-	OrderBySpeed();
-
-	lastPressedAbility_I = 0;
-	targeted_Character = nullptr;
-	//for (int i = 0; i < 7; i++)
-	//{
-	//	EnableTargetButton(i);
-	//	EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
-	//}
-	listInitiative.start->data->onTurn = true;
-	charaInTurn = 0;
-	
-	return true;
-}
-
-//bool Combat::NextTurn()
-//{
 //	//Resetear los botones targeteados
 //	lastPressedAbility_I = 0;
 //	targeted_Character = nullptr;
@@ -472,8 +422,8 @@ bool Combat::StartCombat()
 //	}
 //	listInitiative.At(charaInTurn)->data->onTurn = true;
 //
-//	return true;
-//}
+	return true;
+}
 
 
 bool Combat::DisableTargetButton(int id)

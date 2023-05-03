@@ -85,13 +85,20 @@ bool Character::Start()
 		break;
 
 		// later on, inventory idea purposes
+		// the idea is to set a square smaller button with a section of the texture of the head
+		// the button should have a normal button texture and the character sprite would go ABOVE it and cropped to fit
+		// the SDL_Rect that defines the section from the spritesheet / the spritesheet used should depend on the character ID or something? idk
 	case EntityType::MENU_CHARA:
+		buttonBounds = { 500 + 130 * 1, 200, 125, 180 };
+		position = { 500 + 130 * 1, 200 };
+
+		buttonType = ButtonType::INVENTORY;
 		break;
 	default:
 		break;
 	}
 	
-	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, ButtonType::COMBAT_TARGET);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, buttonType);
 
 	return true;
 }
@@ -110,14 +117,13 @@ bool Character::Update(float dt)
 		app->render->TextDraw(name.GetString(), position.x+5 , position.y +180, 10);
 	}
 	
-
 	//Si es su turno pues hace cosas
-	if(onTurn)
+	if (onTurn)
 	{
-			//testing
-			string time ;
-			const char* tempus;
-			
+		//testing
+		string time;
+		const char* tempus;
+
 
 		switch (charaType)
 		{
@@ -126,12 +132,12 @@ bool Character::Update(float dt)
 			break;
 		case CharacterType::ENEMY:
 
-			if(!delayOn)
+			if (!delayOn)
 			{
 				turnDelay.Start();
 				delayOn = true;
 			}
-			if (turnDelay.ReadMSec()>2000 && delayOn)
+			if (turnDelay.ReadMSec() > 2000 && delayOn)
 			{
 				switch (charaClass) //La idea es que cada classe tenga un comportamiento generico
 				{
@@ -158,16 +164,13 @@ bool Character::Update(float dt)
 				default:
 					break;
 				}
-			
-				
-
 			}
+
 			if (turnDelay.ReadMSec() > 4000)
 			{
 				delayOn = false;
 				//NEXT TURN
 			}
-
 
 			break;
 		case CharacterType::NONE:
@@ -176,7 +179,6 @@ bool Character::Update(float dt)
 			break;
 		}
 	}
-
 
 	return true;
 }
@@ -225,7 +227,6 @@ bool Character::CalculateRandomProbability(int bonus_I, int against_I)
 		//Numero menor que 100, falla 
 		return false;
 	}
-
 }
 
 int Character::CalculateDamage(Skill* skill, Character* caster, Character* defender)
@@ -256,6 +257,5 @@ int Character::CalculateDamage(Skill* skill, Character* caster, Character* defen
 			
 			return damage;
 		}
-	}
-	
+	}	
 }
