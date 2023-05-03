@@ -95,10 +95,9 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 	{
 		ItemNode* node = new ItemNode;
 
-		node->quantity = pugiNode.attribute("type").as_int();
+		node->quantity = pugiNode.attribute("quantity").as_int();
 		node->type = pugiNode.attribute("type").as_int();
 		node->name = pugiNode.attribute("name").as_string();
-		node->type = pugiNode.attribute("type").as_int();
 		if (node->type == 1) { node->kind = pugiNode.attribute("kind").as_int(); }
 		node->hp = pugiNode.attribute("hp").as_int();
 		if (node->type == 2)
@@ -134,7 +133,6 @@ void ItemManager::LoadQuantity(pugi::xml_node& xml_trees, ItemNode* item)
 			{
 				node->type = pugiNode.attribute("type").as_int();
 				node->name = pugiNode.attribute("name").as_string();
-				node->type = pugiNode.attribute("type").as_int();
 				if (node->type == 1) { node->kind = pugiNode.attribute("kind").as_int(); }
 				node->hp = pugiNode.attribute("hp").as_int();
 				if (node->type == 2)
@@ -170,13 +168,42 @@ bool ItemManager::SaveItemState()
 	// save items
 	for (size_t i = 0; i < nodeList.size(); i++)
 	{
-		SString name = nodeList[i]->name;
 		item = items.append_child("item");
 		item.append_attribute("quantity") = nodeList[i]->quantity;
+		item.append_attribute("name") = nodeList[i]->name.GetString();
 		break;
 	}
 
 	ret = saveDoc->save_file("save_items.xml");
+
+	return ret;
+}
+
+bool ItemManager::LoadItemState(pugi::xml_node& xml_trees, ItemNode* coso)
+{
+	bool ret = true;
+
+	pugi::xml_document* saveDoc = new pugi::xml_document();
+	pugi::xml_node node = saveDoc->append_child("save_state");
+
+	pugi::xml_node items = node.append_child("items");
+	pugi::xml_node item;
+
+	// load items
+	for (pugi::xml_node pugiNode = xml_trees.child("item"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
+	{
+		ItemNode* node = new ItemNode;
+		for (size_t i = 0; i < nodeList.size(); i++)
+		{
+			if (node->name==nodeList[i]->name)
+			{
+				node->quantity = nodeList[i]->quantity;
+			}
+			
+			break;
+		}
+	}
+	LoadQuantity(xml_trees, coso);
 
 	return ret;
 }

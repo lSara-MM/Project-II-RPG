@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <save_state>
 	<items>
-		<item quantity="4" />
+		<item quantity="0" name="potion" />
 	</items>
 </save_state>

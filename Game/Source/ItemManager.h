@@ -53,7 +53,7 @@ public:
 	void LoadNodes(pugi::xml_node& xml_trees, ItemNode* item);
 	void LoadQuantity(pugi::xml_node& xml_trees, ItemNode* item);
 
-	bool LoadItemState();
+	bool LoadItemState(pugi::xml_node& xml_trees, ItemNode* coso);
 	bool SaveItemState();
 
 public:
