@@ -122,14 +122,24 @@
 <combat mouseSpeed =" 0.5">
 	<scenes name="scene" numEnemies="3">
 	<!-- Placeholder -->
-		<enemy name ="Bewitched Wardrobe" id="0" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
-			    texturePath ="Assets/Textures/EnemyBewitchedWardrobe.png"/>
+		<enemy name ="Bewitched Wardrobe" id="0" 
+        maxHp="1000" currentHp="1000" attack="120" armor="18" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="3"
+        type="1" class="4"
+               
+        width="0" heigth="0" texturePath="Assets/Textures/EnemyBewitchedWardrobe.png"/>
 		
-		<enemy name ="Cursed Puppet"  id="1" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
-			  texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
+		<enemy name ="Cursed Puppet"  id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="5"
+        type="1" class="0"
+               
+        width="0" heigth="0"  
+        texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
 
-		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="140" armor="8" speed="2"
-				  texturePath ="Assets/Textures/EnemyPossessedPainting.png"/>
+		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="140" armor="8" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="2"
+               
+        type="1" class="8"
+               
+        width="0" heigth="0"
+        texturePath ="Assets/Textures/EnemyPossessedPainting.png"/>
 	<!-- Placeholder -->
 	</scenes>
 

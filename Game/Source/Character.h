@@ -27,11 +27,12 @@ enum class CharacterClass
 	RANGED_DPS,
 	ASSASSIN,
 	AOE_DPS,
-	HEALER,
 	TANK,
+	DOT,
+	HEALER,
 	BUFFER,
 	DEBUFFER,
-	DOT,
+	
 
 	NO_CLASS
 };

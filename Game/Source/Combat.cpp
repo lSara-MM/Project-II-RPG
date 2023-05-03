@@ -568,12 +568,6 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 
 	//Insertar en nueva posicion
 	arr->insert(arr->begin() + newPos, chara);
-	
-	////Reasignar Combat Position variable
-	//for (int i = 0; i < arr->size()-1; i++)
-	//{
-	//	arr->at(i)->positionCombat_I = i;
-	//}
 
 	// Update combat and buttons position
 	for (int i = 0; i < arr->size(); i++)
