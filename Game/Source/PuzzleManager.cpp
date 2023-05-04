@@ -83,6 +83,8 @@ bool PuzzleManager::Start()
 	esc2 = false;
 	esc3 = false;
 
+	codeActive = false;
+
 	keyPalancas = 0;
 	keyEscape = 0;
 	keyRescue = 0;
@@ -141,8 +143,16 @@ bool PuzzleManager::Update(float dt)
 		{
 			//Introduce código, si acierta destruir puerta
 
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+				codeActive = !codeActive;
+
 			LOG("ESCAPE TRUE");
 		}
+	}
+
+	if (codeActive) 
+	{
+
 	}
 
 
@@ -171,8 +181,8 @@ bool PuzzleManager::CleanUp()
 	return true;
 }
 
-bool PuzzleManager::Palancas() {
-
+bool PuzzleManager::Palancas() 
+{
 	if (keyPalancas >= 1) 
 	{
 		app->tex->UnLoad(Door);
@@ -209,4 +219,15 @@ bool PuzzleManager::Escape() {
 bool PuzzleManager::Rescue() {
 	
 	return false;
+}
+
+bool PuzzleManager::CodeInput()
+{
+	SString temp;
+
+	temp = "Code:  %%";
+	temp.Substitute("%", code.GetString());
+	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 4, 650, 40, Font::TEXT, { 255, 255, 255 });
+
+	return app->input->nameEntered_B;
 }

@@ -52,6 +52,8 @@ public:
 
 	bool Rescue();
 
+	bool CodeInput();
+
 public:
 
 	pugi::xml_node sceneNode;
@@ -96,6 +98,10 @@ public:
 	bool esc1;
 	bool esc2;
 	bool esc3;
+
+	bool codeActive;
+
+	SString code;
 
 private:
 
