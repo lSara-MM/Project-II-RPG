@@ -35,6 +35,8 @@ enum class ColliderType {
 	ENEMY_WP,	// enemy weakpoint (now head)
 	ENEMY_LIMIT,
 	PORTAL,
+	PALANCA,
+	NOTA,
 	SAVE,
 	HEALTH,
 	NPC,

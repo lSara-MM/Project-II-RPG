@@ -39,6 +39,7 @@ class LoseScene;
 class LeaderboardScene;
 class FadeToBlack;
 class SceneWin_Lose;
+class PuzzleManager;
 
 class App
 {
@@ -126,6 +127,7 @@ public:
 	LoseScene* loseScene;
 	FadeToBlack* fade;
 	SceneWin_Lose* sceneWin_Lose;
+	PuzzleManager* puzzleManager;
 
 	// Time control
 	uint frames;

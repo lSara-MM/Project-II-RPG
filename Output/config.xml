@@ -63,7 +63,6 @@
 			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"
 			grassStep="Assets/Audio/Fx/Pasos_Hierba.wav"
 			enterZone="Assets/Audio/Fx/entrar_sala.wav"/>
-			
 		
 	<bard name ="Bard" maxHp="1000" currentHp="1000" attack="200" critProbability="10" critDamage="20" precision="100" armor="8"   esquiva="10" resistencia="5" speed="6"
 		   texturePath ="Assets/Textures/AllyBard.png"/>
@@ -94,7 +93,13 @@
     <win texturepath="Assets/Textures/Concept_WinScreen.jpg"/>
     <lose texturepath="Assets/Textures/Concept_LoseScreen.jpg"/>
   </SceneWin_Lose>
-	<map>
+  <PuzzleManager>
+    <Door texturepathDoor="Assets/Textures/BlueCube_NPC.jpg" width="10" height="10" x="30" y="30" x1="50" y2="50"/>
+    <Palanca texturepathPalanca="Assets/Textures/BlueCube_NPC.jpg" Xpalancas="30" Ypalancas="40" widthPalanca="5" heightPalanca="5"/>
+    <PalancaSens texturepathSensor="Assets/Textures/BlueCube_NPC.jpg"  widthPalancaSens="10" heightPalancaSens="10"/>
+    <Notas texturepathNotas="Assets/Textures/BlueCube_NPC.jpg"  x1="10" y1="10" x2="20" y2="20" x3="30" y3="30" widthNotas="5" heightNotas="5"/>
+	</PuzzleManager>
+  <map>
 		<mapfolder path="Assets/Maps/"/>
 		<mapfile path="Assets/Maps/map1.tmx"/>
 		<mapbackground path="Assets/Maps/TwistedTentMap.png"/>

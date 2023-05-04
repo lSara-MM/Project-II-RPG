@@ -12,6 +12,7 @@
 #include "HouseOfTerrors.h"
 #include "PracticeTent.h"
 #include"Circus.h"
+#include"PuzzleManager.h"
 
 #include "FadeToBlack.h"
 #include "EntityManager.h"
@@ -236,6 +237,38 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		npcInteract = true;
 		break;
 
+	//case ColliderType::PALANCA:
+	//	app->puzzleManager->keyPalancas += 1;
+	//	break;
+	//case ColliderType::NOTA:
+	//	switch (physB->id) //Abrir Nota + sumar puntos a keyScape
+	//	{
+	//	case 0:
+	//		if (!app->puzzleManager->esc1) {
+	//			app->puzzleManager->keyEscape += 1;
+	//			app->puzzleManager->esc1 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
+	//		}
+	//		//Abrir en UI el cartel de la nota 1
+
+	//		break;
+	//	case 1:
+	//		if (!app->puzzleManager->esc2) {
+	//			app->puzzleManager->keyEscape += 1;
+	//			app->puzzleManager->esc2 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
+	//		}
+	//		//Abrir en UI el cartel de la nota 2
+
+	//		break;
+	//	case 2:
+	//		if (!app->puzzleManager->esc3) {
+	//			app->puzzleManager->keyEscape += 1;
+	//			app->puzzleManager->esc3 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
+	//		}
+	//		//Abrir en UI el cartel de la nota 3
+
+	//		break;
+	//	}
+	//	break;
 	case ColliderType::PORTAL:
 		switch (physB->id)
 		{
@@ -243,11 +276,16 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			if (app->scene->active == true)
 			{
 				app->map->mapPendingtoDelete = true;
+				app->puzzleManager->active = true;
+				app->puzzleManager->Start();
 				app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
 			}
 			if (app->hTerrors->active == true)
 			{
 				app->entityManager->tpID = 0;
+				app->SaveGameRequest();
+				app->puzzleManager->CleanUp();
+				app->puzzleManager->active = false;
 				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
 			}
 			if (app->practiceTent->active == true)
@@ -281,6 +319,9 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 		break;
 	case ColliderType::PORTAL:
 		app->audio->PlayFx(enterZone, 0);
+	case ColliderType::NOTA:
+		//Apagar Dialogos
+		break;
 	default:
 		break;
 	}
