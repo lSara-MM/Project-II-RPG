@@ -193,7 +193,6 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 			if (strcmp(pugiNode.attribute("name").as_string(), nodeList[i]->name.GetString()) == 0)
 			{
 				nodeList[i]->quantity = pugiNode.attribute("quantity").as_int();
-				printf("\n %d, i=%d", nodeList[i]->quantity, i);
 			}
 		}
 	}
