@@ -183,16 +183,17 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 	bool ret = true;
 
 	const char* file = "save_items.xml";
-	pugi::xml_parse_result result = items.load_file(file);
+	items.load_file(file);
 	
 	// load items
 	for (pugi::xml_node pugiNode = items.first_child().first_child().first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
 	{
 		for (size_t i = 0; i < nodeList.size(); i++)
 		{
-			if (strcmp(pugiNode.attribute("name").as_string(), nodeList[i]->name.GetString()) == 1)
+			if (strcmp(pugiNode.attribute("name").as_string(), nodeList[i]->name.GetString()) == 0)
 			{
-				  nodeList[i]->quantity = pugiNode.attribute("quantity").as_int();
+				nodeList[i]->quantity = pugiNode.attribute("quantity").as_int();
+				printf("\n %d, i=%d", nodeList[i]->quantity, i);
 			}
 		}
 	}
