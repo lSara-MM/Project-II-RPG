@@ -116,6 +116,14 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
+	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
+	{
+		app->map->mapPendingtoDelete = true;
+		app->puzzleManager->active = true;
+		app->puzzleManager->Start();
+		app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
+	}
+
 	if (app->scene->pause_B || app->hTerrors->pause_B || app->circus->pause_B || app->practiceTent->pause_B)
 	{
 		dtP = 0;
@@ -237,38 +245,38 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		npcInteract = true;
 		break;
 
-	//case ColliderType::PALANCA:
-	//	app->puzzleManager->keyPalancas += 1;
-	//	break;
-	//case ColliderType::NOTA:
-	//	switch (physB->id) //Abrir Nota + sumar puntos a keyScape
-	//	{
-	//	case 0:
-	//		if (!app->puzzleManager->esc1) {
-	//			app->puzzleManager->keyEscape += 1;
-	//			app->puzzleManager->esc1 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
-	//		}
-	//		//Abrir en UI el cartel de la nota 1
+	case ColliderType::PALANCA:
+		app->puzzleManager->keyPalancas += 1;
+		break;
+	case ColliderType::NOTA:
+		switch (physB->id) //Abrir Nota + sumar puntos a keyScape
+		{
+		case 0:
+			if (!app->puzzleManager->esc1) {
+				app->puzzleManager->keyEscape += 1;
+				app->puzzleManager->esc1 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
+			}
+			//Abrir en UI el cartel de la nota 1
 
-	//		break;
-	//	case 1:
-	//		if (!app->puzzleManager->esc2) {
-	//			app->puzzleManager->keyEscape += 1;
-	//			app->puzzleManager->esc2 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
-	//		}
-	//		//Abrir en UI el cartel de la nota 2
+			break;
+		case 1:
+			if (!app->puzzleManager->esc2) {
+				app->puzzleManager->keyEscape += 1;
+				app->puzzleManager->esc2 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
+			}
+			//Abrir en UI el cartel de la nota 2
 
-	//		break;
-	//	case 2:
-	//		if (!app->puzzleManager->esc3) {
-	//			app->puzzleManager->keyEscape += 1;
-	//			app->puzzleManager->esc3 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
-	//		}
-	//		//Abrir en UI el cartel de la nota 3
+			break;
+		case 2:
+			if (!app->puzzleManager->esc3) {
+				app->puzzleManager->keyEscape += 1;
+				app->puzzleManager->esc3 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
+			}
+			//Abrir en UI el cartel de la nota 3
 
-	//		break;
-	//	}
-	//	break;
+			break;
+		}
+		break;
 	case ColliderType::PORTAL:
 		switch (physB->id)
 		{

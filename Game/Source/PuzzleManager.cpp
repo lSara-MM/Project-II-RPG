@@ -76,47 +76,47 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 
 bool PuzzleManager::Start()
 {
-//	palanc = false;
-//	escape = false;
-//
-//	esc1 = false;
-//	esc2 = false;
-//	esc3 = false;
-//
-//	keyPalancas = 0;
-//	keyEscape = 0;
-//	keyRescue = 0;
-//
-//	Door = app->tex->Load(texturepathDoor);
-//	palanca = app->tex->Load(texturepathPalanca);
-//	palancaSens = app->tex->Load(texturepathPalancaSens);
-//	notas = app->tex->Load(texturepathNotas);
-//
-//	Door1 = app->physics->CreateRectangle(posDoor1.x - widthDoor / 2, posDoor1.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
-//	Door1->body->SetFixedRotation(true);
-//
-//	Door2 = app->physics->CreateRectangle(posDoor2.x - widthDoor / 2, posDoor2.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
-//	Door2->body->SetFixedRotation(true);
-//
-//	Palanca = app->physics->CreateRectangle(posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca / 2, widthPalanca, heightPalanca, bodyType::STATIC);
-//	Palanca->body->SetFixedRotation(true);
-//
-//	PalancaSensor = app->physics->CreateRectangle(posPalancas.x - widthPalancaSens / 2, posPalancas.y - heightPalancaSens / 2, widthPalancaSens, heightPalancaSens, bodyType::STATIC);
-//	PalancaSensor->body->SetFixedRotation(true);
-//	PalancaSensor->ctype = ColliderType::PALANCA;
-//
-//	nota1 = app->physics->CreateRectangleSensor(posNotas1.x - widthNotas / 2, posNotas1.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
-//	nota1->body->SetFixedRotation(true);
-//	PalancaSensor->ctype = ColliderType::NOTA;
-//	
-//	nota2 = app->physics->CreateRectangleSensor(posNotas2.x - widthNotas / 2, posNotas2.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
-//	nota2->body->SetFixedRotation(true);
-//	PalancaSensor->ctype = ColliderType::NOTA;
-//	
-//	nota3 = app->physics->CreateRectangleSensor(posNotas3.x - widthNotas / 2, posNotas3.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
-//	nota3->body->SetFixedRotation(true);
-//	PalancaSensor->ctype = ColliderType::NOTA;
-//
+	palanc = false;
+	escape = false;
+
+	esc1 = false;
+	esc2 = false;
+	esc3 = false;
+
+	keyPalancas = 0;
+	keyEscape = 0;
+	keyRescue = 0;
+
+	Door = app->tex->Load(texturepathDoor);
+	palanca = app->tex->Load(texturepathPalanca);
+	palancaSens = app->tex->Load(texturepathPalancaSens);
+	notas = app->tex->Load(texturepathNotas);
+
+	Door1 = app->physics->CreateRectangle(posDoor1.x - widthDoor / 2, posDoor1.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
+	Door1->body->SetFixedRotation(true);
+
+	Door2 = app->physics->CreateRectangle(posDoor2.x - widthDoor / 2, posDoor2.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
+	Door2->body->SetFixedRotation(true);
+
+	Palanca = app->physics->CreateRectangle(posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca / 2, widthPalanca, heightPalanca, bodyType::STATIC);
+	Palanca->body->SetFixedRotation(true);
+
+	PalancaSensor = app->physics->CreateRectangle(posPalancas.x - widthPalancaSens / 2, posPalancas.y - heightPalancaSens / 2, widthPalancaSens, heightPalancaSens, bodyType::STATIC);
+	PalancaSensor->body->SetFixedRotation(true);
+	PalancaSensor->ctype = ColliderType::PALANCA;
+
+	nota1 = app->physics->CreateRectangleSensor(posNotas1.x - widthNotas / 2, posNotas1.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
+	nota1->body->SetFixedRotation(true);
+	PalancaSensor->ctype = ColliderType::NOTA;
+	
+	nota2 = app->physics->CreateRectangleSensor(posNotas2.x - widthNotas / 2, posNotas2.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
+	nota2->body->SetFixedRotation(true);
+	PalancaSensor->ctype = ColliderType::NOTA;
+	
+	nota3 = app->physics->CreateRectangleSensor(posNotas3.x - widthNotas / 2, posNotas3.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
+	nota3->body->SetFixedRotation(true);
+	PalancaSensor->ctype = ColliderType::NOTA;
+
 	return true;
 }
 
@@ -160,13 +160,13 @@ bool PuzzleManager::CleanUp()
 {
 	LOG("Freeing scene");
 
-	//app->tex->UnLoad(Door);
-	//app->tex->UnLoad(palanca);
-	//app->tex->UnLoad(palancaSens);
-	//Door1->body->GetWorld()->DestroyBody(Door1->body);
-	//Door2->body->GetWorld()->DestroyBody(Door2->body);
-	//Palanca->body->GetWorld()->DestroyBody(Palanca->body);
-	//PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
+	app->tex->UnLoad(Door);
+	app->tex->UnLoad(palanca);
+	app->tex->UnLoad(palancaSens);
+	Door1->body->GetWorld()->DestroyBody(Door1->body);
+	Door2->body->GetWorld()->DestroyBody(Door2->body);
+	Palanca->body->GetWorld()->DestroyBody(Palanca->body);
+	PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
 
 	return true;
 }

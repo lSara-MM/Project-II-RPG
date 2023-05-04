@@ -170,6 +170,7 @@
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\PracticeTent.h" />
+    <ClInclude Include="Source\PuzzleManager.h" />
     <ClInclude Include="Source\Queue.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Audio.h" />

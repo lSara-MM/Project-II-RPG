@@ -99,5 +99,6 @@
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
     <ClInclude Include="Source\SceneWin_Lose.h" />
     <ClInclude Include="PuzzleManager.h" />
+    <ClInclude Include="Source\PuzzleManager.h" />
   </ItemGroup>
 </Project>
