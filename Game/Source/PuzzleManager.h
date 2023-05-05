@@ -52,7 +52,7 @@ public:
 
 	bool Rescue();
 
-	SString CodeInput();
+	bool CodeInput();
 
 public:
 
@@ -96,6 +96,7 @@ public:
 	PhysBody* nota1;
 	PhysBody* nota2;
 	PhysBody* nota3;
+	PhysBody* DoorEscapeSensor;
 
 	bool palanc;
 	bool escape;

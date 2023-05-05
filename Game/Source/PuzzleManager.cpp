@@ -8,6 +8,8 @@
 #include "Textures.h"
 #include "Window.h"
 
+#include "Player.h"
+
 #include "Combat.h"
 
 #include "FadeToBlack.h"
@@ -93,6 +95,7 @@ bool PuzzleManager::Start()
 	esc3 = false;
 
 	codeActive = false;
+	app->scene->player->intoCode = false;
 
 	keyPalancas = 0;
 	keyEscape = 0;
@@ -114,6 +117,10 @@ bool PuzzleManager::Start()
 
 	DoorEscape = app->physics->CreateRectangle(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape, bodyType::STATIC);
 	DoorEscape->body->SetFixedRotation(true);
+
+	DoorEscapeSensor = app->physics->CreateRectangleSensor(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape*2, bodyType::STATIC);
+	DoorEscapeSensor->body->SetFixedRotation(true);
+	DoorEscapeSensor->ctype = ColliderType::DOORCODE;
 
 	Palanca = app->physics->CreateRectangle(posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca / 2, widthPalanca, heightPalanca, bodyType::STATIC);
 	Palanca->body->SetFixedRotation(true);
@@ -157,72 +164,8 @@ bool PuzzleManager::Update(float dt)
 
 	if (!escape) 
 	{
-		if(Escape())
-		{
-			//Introduce código, si acierta destruir puerta
-
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-				codeActive = !codeActive;
-
-			LOG("ESCAPE TRUE");
-		}
-	}
-
-	if (codeActive) 
-	{
-		codeToCompare = CodeInput();
-
-		if (strcmp(codeToCompare.GetString(), realCode.GetString()) == 0) 
-		{
-			if(doorEscape != nullptr)
-				app->tex->UnLoad(doorEscape);
-
-			if(DoorEscape != nullptr)
-				DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
-
-			if (notas != nullptr)
-				app->tex->UnLoad(notas);
-
-			if (nota1 != nullptr)
-				nota1->body->GetWorld()->DestroyBody(nota1->body);
-
-			if (nota2 != nullptr)
-				nota2->body->GetWorld()->DestroyBody(nota2->body);
-
-			if (nota3 != nullptr)
-				nota3->body->GetWorld()->DestroyBody(nota3->body);
-
-			codeActive = false;
-
-			LOG("YOU ESCAPE!");
-		}
-	}
-
-	if (esc1) 
-	{
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
-		{
-			//Abrir UI nota 1
-
-		}
-	}
-	
-	if (esc2) 
-	{
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
-		{
-			//Abrir UI nota 2
-
-		}
-	}
-	
-	if (esc3) 
-	{
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
-		{
-			//Abrir UI nota 3
-
-		}
+		Escape();
+		LOG("ESCAPE TRUE");	
 	}
 
 	return true;
@@ -316,11 +259,39 @@ bool PuzzleManager::Palancas()
 
 bool PuzzleManager::Escape() 
 {
-	if (keyEscape >= 3) 
+	if (app->scene->player->intoCode == true) 
 	{
-		escape = true;
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			codeActive = !codeActive;
+	}
+	else
+	{
+		if (esc1)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			{
+				//Abrir UI nota 1
 
-		return true;
+			}
+		}
+
+		if (esc2)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			{
+				//Abrir UI nota 2
+
+			}
+		}
+
+		if (esc3)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			{
+				//Abrir UI nota 3
+
+			}
+		}
 	}
 
 	return false;
@@ -332,13 +303,13 @@ bool PuzzleManager::Rescue()
 	return false;
 }
 
-SString PuzzleManager::CodeInput()
+bool PuzzleManager::CodeInput()
 {
 	SString temp;
 
 	temp = "Code:  %%";
-	temp.Substitute("%", code.GetString());
+	temp.Substitute("%", app->scene->player->codeToCompare.c_str());
 	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 4, 650, 40, Font::TEXT, { 255, 255, 255 });
 
-	return code;
+	return true;
 }

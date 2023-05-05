@@ -14,6 +14,8 @@
 
 struct SDL_Texture;
 
+using namespace std;
+
 class Player : public Entity
 {
 public:
@@ -63,6 +65,13 @@ public:
 	bool keyLockLeft = false;
 	bool keyLockRigth = false;
 	bool lockMovement = false;
+
+	bool intoCode;
+	bool codeActive;
+
+	string code;
+	string codeToCompare;
+	string realCode;
 
 	float dtP;
 	float grav;

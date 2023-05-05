@@ -116,6 +116,47 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
+	if (intoCode) 
+	{
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			codeActive = !codeActive;
+	}
+
+	if (codeActive)
+	{
+		if ((app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) && codeToCompare.empty())
+		{
+			codeToCompare.erase(codeToCompare.length() - 1);
+		}
+
+		app->puzzleManager->CodeInput();
+
+		if (strcmp(codeToCompare.c_str(), realCode.c_str()) == 0)
+		{
+			if (app->puzzleManager->doorEscape != nullptr)
+				app->tex->UnLoad(app->puzzleManager->doorEscape);
+
+			if (app->puzzleManager->DoorEscape != nullptr)
+				app->puzzleManager->DoorEscape->body->GetWorld()->DestroyBody(app->puzzleManager->DoorEscape->body);
+
+			if (app->puzzleManager->notas != nullptr)
+				app->tex->UnLoad(app->puzzleManager->notas);
+
+			if (app->puzzleManager->nota1 != nullptr)
+				app->puzzleManager->nota1->body->GetWorld()->DestroyBody(app->puzzleManager->nota1->body);
+
+			if (app->puzzleManager->nota2 != nullptr)
+				app->puzzleManager->nota2->body->GetWorld()->DestroyBody(app->puzzleManager->nota2->body);
+
+			if (app->puzzleManager->nota3 != nullptr)
+				app->puzzleManager->nota3->body->GetWorld()->DestroyBody(app->puzzleManager->nota3->body);
+
+			codeActive = false;
+
+			LOG("YOU ESCAPE!");
+		}
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 	{
 		app->map->mapPendingtoDelete = true;		
@@ -248,24 +289,27 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 	case ColliderType::PALANCA:
 		app->puzzleManager->keyPalancas += 1;
 		break;
+	case ColliderType::DOORCODE:
+		intoCode = true;
+		break;
 	case ColliderType::NOTA:
 		switch (physB->id) //Abrir Nota + sumar puntos a keyScape
 		{
 		case 0:
-			if (!app->puzzleManager->esc1) {
-				app->puzzleManager->keyEscape += 1;
+			if (!app->puzzleManager->esc1) 
+			{
 				app->puzzleManager->esc1 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
 			}
 			break;
 		case 1:
-			if (!app->puzzleManager->esc2) {
-				app->puzzleManager->keyEscape += 1;
+			if (!app->puzzleManager->esc2) 
+			{
 				app->puzzleManager->esc2 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
 			}
 			break;
 		case 2:
-			if (!app->puzzleManager->esc3) {
-				app->puzzleManager->keyEscape += 1;
+			if (!app->puzzleManager->esc3) 
+			{
 				app->puzzleManager->esc3 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
 			}
 			break;
@@ -318,6 +362,9 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 	case ColliderType::NPC:
 		npcInteract = false;
 		break;
+	case ColliderType::DOORCODE:
+		intoCode = false;
+		break;
 	case ColliderType::PORTAL:
 		app->audio->PlayFx(enterZone, 0);
 	case ColliderType::NOTA:
@@ -325,7 +372,6 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 		app->puzzleManager->esc1 = false;
 		app->puzzleManager->esc2 = false;
 		app->puzzleManager->esc3 = false;
-
 		break;
 	default:
 		break;
