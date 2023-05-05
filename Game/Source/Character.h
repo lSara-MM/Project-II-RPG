@@ -10,7 +10,7 @@
 #include "GuiButton.h"
 #include "Animation.h"
 #include <array>
-#include "Skills.h"
+//#include "Skills.h"
 
 struct SDL_Texture;
 
@@ -58,7 +58,7 @@ public:
 
 	void ModifyHP(int hp); //Positivo para curar negativo para dañar
 
-	int CalculateDamage(Skill* skill,Character* caster, Character* defender); //ERIC:Va haber que poner muchos mas atributos
+	int CalculateDamage(Character* caster, Character* defender); //ERIC:Va haber que poner muchos mas atributos
 
 	bool ResistStatusEffect(/*efecto,precision*/); //Hacer cuando se hagan status effects, aun no.
 	

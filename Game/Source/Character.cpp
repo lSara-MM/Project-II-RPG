@@ -229,15 +229,16 @@ bool Character::CalculateRandomProbability(int bonus_I, int against_I)
 	}
 }
 
-int Character::CalculateDamage(Skill* skill, Character* caster, Character* defender)
+//Provisional full
+int Character::CalculateDamage(Character* caster, Character* defender)
 {
-	if (skill->multiplierDmg>0) //Curacion, no hace falta calcular esquiva ni nada 
+	if (1 > 0) //Curacion, no hace falta calcular esquiva ni nada 
 	{
-		return(caster->attack * skill->multiplierDmg);
+		return(caster->attack /** skill->multiplierDmg*/);
 	}
 	else //Es un ataque 
 	{
-		if (!CalculateRandomProbability((skill->bonusPrecision+caster->precision),defender->dodge)) 
+		if (!CalculateRandomProbability((/*skill->bonusPrecision + */caster->precision), defender->dodge))
 		{
 			//Enemigo esquiva
 			return 0;
@@ -245,17 +246,17 @@ int Character::CalculateDamage(Skill* skill, Character* caster, Character* defen
 		else
 		{
 			int damage;
-			damage = skill->multiplierDmg * caster->attack;
-			if (CalculateRandomProbability(skill->bonusCritRate+caster->critRate)) //Si true hay critico
+			damage = /*skill->multiplierDmg **/ caster->attack;
+			if (CalculateRandomProbability(/*skill->bonusCritRate +*/ caster->critRate)) //Si true hay critico
 			{
-				damage *= (skill->bonusCritDamage + caster->critDamage);
+				damage *= (/*skill->bonusCritDmg +*/ caster->critDamage);
 			}
 
 			// Calcular reduccion de la defensa
 			float armorRelevance = (defender->armor / abs(damage)) + 1;
-			damage=+ ((defender->armor / 2) * armorRelevance); //Esta con mas ya que damage es negativo
-			
+			damage = +((defender->armor / 2) * armorRelevance); //Esta con mas ya que damage es negativo
+
 			return damage;
 		}
-	}	
+	}
 }
