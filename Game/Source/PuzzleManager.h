@@ -52,7 +52,7 @@ public:
 
 	bool Rescue();
 
-	bool CodeInput();
+	SString CodeInput();
 
 public:
 
@@ -66,11 +66,13 @@ public:
 	int widthPalanca;
 	int widthPalancaSens;
 	int widthNotas;
+	int widthDoorEscape;
 
 	int heightDoor;
 	int heightPalanca;
 	int heightPalancaSens;
 	int heightNotas;
+	int heightDoorEscape;
 
 	iPoint posDoor1;
 	iPoint posDoor2;
@@ -78,14 +80,17 @@ public:
 	iPoint posNotas1;
 	iPoint posNotas2;
 	iPoint posNotas3;
+	iPoint posDoorEscape;
 
 	SDL_Texture* Door;
 	SDL_Texture* palanca;
 	SDL_Texture* palancaSens;
 	SDL_Texture* notas;
+	SDL_Texture* doorEscape;
 
 	PhysBody* Door1;
 	PhysBody* Door2;
+	PhysBody* DoorEscape;
 	PhysBody* Palanca;
 	PhysBody* PalancaSensor;
 	PhysBody* nota1;
@@ -102,6 +107,8 @@ public:
 	bool codeActive;
 
 	SString code;
+	SString codeToCompare;
+	SString realCode;
 
 private:
 
@@ -109,6 +116,7 @@ private:
 	const char* texturepathPalanca;
 	const char* texturepathPalancaSens;
 	const char* texturepathNotas;
+	const char* texturepathDoorEscape;
 
 };
 

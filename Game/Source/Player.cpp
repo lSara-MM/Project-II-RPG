@@ -118,10 +118,10 @@ bool Player::Update(float dt)
 {
 	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 	{
-		app->map->mapPendingtoDelete = true;
+		app->map->mapPendingtoDelete = true;		
+		app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
 		app->puzzleManager->active = true;
 		app->puzzleManager->Start();
-		app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
 	}
 
 	if (app->scene->pause_B || app->hTerrors->pause_B || app->circus->pause_B || app->practiceTent->pause_B)
@@ -256,24 +256,18 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 				app->puzzleManager->keyEscape += 1;
 				app->puzzleManager->esc1 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
 			}
-			//Abrir en UI el cartel de la nota 1
-
 			break;
 		case 1:
 			if (!app->puzzleManager->esc2) {
 				app->puzzleManager->keyEscape += 1;
 				app->puzzleManager->esc2 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
 			}
-			//Abrir en UI el cartel de la nota 2
-
 			break;
 		case 2:
 			if (!app->puzzleManager->esc3) {
 				app->puzzleManager->keyEscape += 1;
 				app->puzzleManager->esc3 = true; //Este bool es para evitar sumar puntos al recoger la misma nota
 			}
-			//Abrir en UI el cartel de la nota 3
-
 			break;
 		}
 		break;
@@ -284,9 +278,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			if (app->scene->active == true)
 			{
 				app->map->mapPendingtoDelete = true;
-				app->puzzleManager->active = true;
-				app->puzzleManager->Start();
 				app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
+
 			}
 			if (app->hTerrors->active == true)
 			{
@@ -329,6 +322,10 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 		app->audio->PlayFx(enterZone, 0);
 	case ColliderType::NOTA:
 		//Apagar Dialogos
+		app->puzzleManager->esc1 = false;
+		app->puzzleManager->esc2 = false;
+		app->puzzleManager->esc3 = false;
+
 		break;
 	default:
 		break;

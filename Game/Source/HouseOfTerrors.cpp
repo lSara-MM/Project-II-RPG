@@ -12,6 +12,7 @@
 #include "IntroScene.h"
 #include "LoseScene.h"
 #include "Combat.h"
+#include "PuzzleManager.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
@@ -72,6 +73,9 @@ bool HouseOfTerrors::Start()
 
 	InitEntities();
 	app->entityManager->Enable();
+
+	app->puzzleManager->active = true;
+	app->puzzleManager->Start();
 
 	return true;
 }
