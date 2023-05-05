@@ -102,7 +102,7 @@
   <map>
 		<mapfolder path="Assets/Maps/"/>
 		<mapfile path="Assets/Maps/map1.tmx"/>
-		<mapbackground path="Assets/Maps/TwistedTentMap.png"/>
+		<mapbackground path="Assets/Maps/map1.tmx"/>
 		
 		<mapdungeonfolder path="Assets/Maps/"/>
 		<mapdungeonfile path="Assets/Maps/mapDungeon.tmx"/>
