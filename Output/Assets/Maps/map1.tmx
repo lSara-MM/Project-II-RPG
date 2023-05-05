@@ -9,14 +9,6 @@
  <tileset firstgid="89" source="Spritesheet Verde.tsx"/>
  <tileset firstgid="117" source="Pared y puerta tienda.tsx"/>
  <tileset firstgid="153" source="Spritesheet Ladrillos rojos.tsx"/>
- <imagelayer id="2" name="Background" visible="0">
-  <image source="TwistedTentMap.png" width="5120" height="5040"/>
-  <properties>
-   <property name="Draw" type="bool" value="true"/>
-   <property name="Navigation" type="bool" value="false"/>
-   <property name="collider" type="bool" value="false"/>
-  </properties>
- </imagelayer>
  <layer id="3" name="Void" width="82" height="79">
   <properties>
    <property name="Collider" type="bool" value="false"/>
