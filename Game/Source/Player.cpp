@@ -92,6 +92,9 @@ bool Player::Awake() {
 
 bool Player::Start() 
 {
+	//PuzzleManager
+	palanc = false;
+
 	texture = app->tex->Load(texturePath);
 	textureE = app->tex->Load("Assets/GUI/UI_E.png");
 
@@ -116,7 +119,16 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
-	if (intoCode) 
+	/*Pongo partes de puzzle aquí porque no logro comunicar este script con el PuzzleManager*/
+	if (!palanc)
+	{
+		if (Palancas())
+		{
+			LOG("PALANCAS TRUE");
+		}
+	}
+
+	if (intoCode)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			codeActive = !codeActive;
@@ -164,6 +176,8 @@ bool Player::Update(float dt)
 		app->puzzleManager->active = true;
 		app->puzzleManager->Start();
 	}
+
+	/*Hasta aquí PuzzleManager*/
 
 	if (app->scene->pause_B || app->hTerrors->pause_B || app->circus->pause_B || app->practiceTent->pause_B)
 	{
@@ -288,6 +302,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 
 	case ColliderType::PALANCA:
 		app->puzzleManager->keyPalancas += 1;
+		keyPalancas = 1;
+		break;
+	case ColliderType::BOSSDEAD:
+		app->puzzleManager->bossActive = true;
+		break;
+	case ColliderType::LOSET:
+		app->puzzleManager->losetActive = true;
 		break;
 	case ColliderType::DOORCODE:
 		intoCode = true;
@@ -361,6 +382,12 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 	{
 	case ColliderType::NPC:
 		npcInteract = false;
+		break;
+	case ColliderType::BOSSDEAD:
+		app->puzzleManager->bossActive = false;
+		break;
+	case ColliderType::LOSET:
+		app->puzzleManager->losetActive = false;
 		break;
 	case ColliderType::DOORCODE:
 		intoCode = false;
@@ -646,4 +673,37 @@ void Player::Controller(float dt)
 	}
 	
 	PadLock = false;
+}
+
+bool Player::Palancas()
+{
+	if (keyPalancas >= 1)
+	{
+		if (app->puzzleManager->Door != nullptr)
+			app->tex->UnLoad(app->puzzleManager->Door);
+
+		if (app->puzzleManager->palanca != nullptr)
+			app->tex->UnLoad(app->puzzleManager->palanca);
+
+		if (app->puzzleManager->palancaSens != nullptr)
+			app->tex->UnLoad(app->puzzleManager->palancaSens);
+
+		if (app->puzzleManager->Door1 != nullptr)
+			app->puzzleManager->Door1->body->GetWorld()->DestroyBody(app->puzzleManager->Door1->body);
+
+		if (app->puzzleManager->Door2 != nullptr)
+			app->puzzleManager->Door2->body->GetWorld()->DestroyBody(app->puzzleManager->Door2->body);
+
+		if (app->puzzleManager->Palanca != nullptr)
+			app->puzzleManager->Palanca->body->GetWorld()->DestroyBody(app->puzzleManager->Palanca->body);
+
+		if (app->puzzleManager->PalancaSensor != nullptr)
+			app->puzzleManager->PalancaSensor->body->GetWorld()->DestroyBody(app->puzzleManager->PalancaSensor->body);
+
+		palanc = true;
+
+		return true;
+	}
+
+	return false;
 }

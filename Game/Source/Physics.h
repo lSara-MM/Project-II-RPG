@@ -37,6 +37,8 @@ enum class ColliderType {
 	PORTAL,
 	PALANCA,
 	DOORCODE,
+	BOSSDEAD,
+	LOSET,
 	NOTA,
 	SAVE,
 	HEALTH,

@@ -37,6 +37,8 @@ public:
 
 	void Controller(float dt);
 
+	bool Palancas();
+
 public:
 	SString playerName;
 
@@ -68,6 +70,9 @@ public:
 
 	bool intoCode;
 	bool codeActive;
+
+	int keyPalancas;
+	bool palanc;
 
 	string code;
 	string codeToCompare;

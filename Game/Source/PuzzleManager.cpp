@@ -45,6 +45,8 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 	texturepathPalancaSens = config.child("PalancaSens").attribute("texturepathSensor").as_string();
 	texturepathNotas = config.child("Notas").attribute("texturepathNotas").as_string();
 	texturepathDoorEscape = config.child("DoorEscape").attribute("texturepathDoorEscape").as_string();
+	texturepathBoss = config.child("Boss").attribute("texturepathBoss").as_string();
+	texturepathLoset = config.child("Loset").attribute("texturepathLoset").as_string();
 
 	posNotas1.x = config.child("Notas").attribute("x1").as_int();
 	posNotas1.y = config.child("Notas").attribute("y1").as_int();	
@@ -59,7 +61,16 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 	posDoor1.y = config.child("Door").attribute("y").as_int();
 
 	posDoor2.x = config.child("Door").attribute("x1").as_int();
-	posDoor2.y = config.child("Door").attribute("y2").as_int();
+	posDoor2.y = config.child("Door").attribute("y1").as_int();
+	
+	posDoor3.x = config.child("Door").attribute("x2").as_int();
+	posDoor3.y = config.child("Door").attribute("y2").as_int();
+	
+	posBoss.x = config.child("Boss").attribute("x").as_int();
+	posBoss.y = config.child("Boss").attribute("y").as_int();	
+	
+	posLoset.x = config.child("Loset").attribute("x").as_int();
+	posLoset.y = config.child("Loset").attribute("y").as_int();
 
 	widthDoor = config.child("Door").attribute("width").as_int();
 	heightDoor = config.child("Door").attribute("height").as_int();
@@ -82,6 +93,12 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 	widthDoorEscape = config.child("DoorEscape").attribute("width").as_int();
 	heightDoorEscape = config.child("DoorEscape").attribute("height").as_int();
 	
+	widthBoss = config.child("Boss").attribute("width").as_int();
+	heightBoss = config.child("Boss").attribute("height").as_int();
+	
+	widthLoset= config.child("Boss").attribute("width").as_int();
+	heightLoset = config.child("Boss").attribute("height").as_int();
+	
 	return ret;
 }
 
@@ -89,12 +106,16 @@ bool PuzzleManager::Start()
 {
 	palanc = false;
 	escape = false;
+	rescue = false;
 
 	esc1 = false;
 	esc2 = false;
 	esc3 = false;
 
 	codeActive = false;
+	bossActive = false;
+	losetActive = false;
+	bossInvent = false;
 	app->scene->player->intoCode = false;
 
 	keyPalancas = 0;
@@ -108,12 +129,17 @@ bool PuzzleManager::Start()
 	palancaSens = app->tex->Load(texturepathPalancaSens);
 	notas = app->tex->Load(texturepathNotas);
 	doorEscape = app->tex->Load(texturepathDoorEscape);
+	boss = app->tex->Load(texturepathBoss);
+	loset = app->tex->Load(texturepathLoset);
 
 	Door1 = app->physics->CreateRectangle(posDoor1.x - widthDoor / 2, posDoor1.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
 	Door1->body->SetFixedRotation(true);
 
 	Door2 = app->physics->CreateRectangle(posDoor2.x - widthDoor / 2, posDoor2.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
 	Door2->body->SetFixedRotation(true);
+	
+	Door3 = app->physics->CreateRectangle(posDoor3.x - widthDoor / 2, posDoor3.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
+	Door3->body->SetFixedRotation(true);
 
 	DoorEscape = app->physics->CreateRectangle(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape, bodyType::STATIC);
 	DoorEscape->body->SetFixedRotation(true);
@@ -144,6 +170,14 @@ bool PuzzleManager::Start()
 	nota3->ctype = ColliderType::NOTA;
 	nota3->id = 2;
 
+	Boss = app->physics->CreateRectangleSensor(posBoss.x - widthBoss / 2, posBoss.y - heightBoss / 2, widthBoss, heightBoss, bodyType::STATIC);
+	Boss->body->SetFixedRotation(true);
+	Boss->ctype = ColliderType::BOSSDEAD;	
+	
+	Loset = app->physics->CreateRectangleSensor(posLoset.x - widthLoset / 2, posLoset.y - heightLoset / 2, widthLoset, heightLoset, bodyType::STATIC);
+	Loset->body->SetFixedRotation(true);
+	Loset->ctype = ColliderType::LOSET;
+
 	return true;
 }
 
@@ -166,6 +200,14 @@ bool PuzzleManager::Update(float dt)
 	{
 		Escape();
 		LOG("ESCAPE TRUE");	
+	}
+
+	if (!rescue)
+	{
+		if (Rescue())
+		{
+			LOG("RESCUE TRUE");
+		}
 	}
 
 	return true;
@@ -196,6 +238,12 @@ bool PuzzleManager::CleanUp()
 	
 	if (doorEscape != nullptr)
 		app->tex->UnLoad(doorEscape);
+	
+	if (boss != nullptr)
+		app->tex->UnLoad(boss);	
+	
+	if (loset != nullptr)
+		app->tex->UnLoad(loset);
 
 	if(Door1->body != nullptr)
 		Door1->body->GetWorld()->DestroyBody(Door1->body);
@@ -205,6 +253,9 @@ bool PuzzleManager::CleanUp()
 	
 	if (Door2->body != nullptr)
 		Door2->body->GetWorld()->DestroyBody(Door2->body);
+	
+	if (Door3->body != nullptr)
+		Door3->body->GetWorld()->DestroyBody(Door3->body);
 
 	if (Palanca->body != nullptr)
 		Palanca->body->GetWorld()->DestroyBody(Palanca->body);
@@ -221,6 +272,12 @@ bool PuzzleManager::CleanUp()
 	if (nota3->body != nullptr)
 		nota3->body->GetWorld()->DestroyBody(nota3->body);
 
+	if (Boss->body != nullptr)
+		Boss->body->GetWorld()->DestroyBody(Boss->body);	
+	
+	if (Loset->body != nullptr)
+		Loset->body->GetWorld()->DestroyBody(Loset->body);
+
 	return true;
 }
 
@@ -228,9 +285,6 @@ bool PuzzleManager::Palancas()
 {
 	if (keyPalancas >= 1) 
 	{
-		if (Door != nullptr)
-			app->tex->UnLoad(Door);
-
 		if(palanca != nullptr)
 			app->tex->UnLoad(palanca);
 
@@ -299,7 +353,46 @@ bool PuzzleManager::Escape()
 
 bool PuzzleManager::Rescue() 
 {
-	
+	if (bossActive) 
+	{
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
+		{
+			bossInvent = true;
+
+			if (boss != nullptr)
+				app->tex->UnLoad(boss);
+
+			if (Boss->body != nullptr)
+				Boss->body->GetWorld()->DestroyBody(Boss->body);
+
+			bossActive = false;
+		}
+	}
+
+	if (bossInvent) 
+	{
+		if (losetActive) 
+		{
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			{
+				if (Door != nullptr)
+					app->tex->UnLoad(Door);
+
+				if (Loset->body != nullptr)
+					Loset->body->GetWorld()->DestroyBody(Loset->body);
+
+				if (Door3->body != nullptr)
+					Door3->body->GetWorld()->DestroyBody(Door3->body);
+
+				if (loset != nullptr)
+					app->tex->UnLoad(loset);
+
+				losetActive = false;
+				bossInvent = false;
+			}
+		}
+	}
+
 	return false;
 }
 
