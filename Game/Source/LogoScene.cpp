@@ -33,9 +33,13 @@ bool LogoScene::Awake(pugi::xml_node& config)
 	musicLogo = config.attribute("audioLogoPath").as_string();
 	logoPath = config.attribute("background").as_string();
 	logoCitmPath = config.attribute("collaborator").as_string();
-	// iterate all objects in the LogoScene
-	// Check https://pugixml.org/docs/quickstart.html#access
-	
+
+	animationLogo.Set();
+	animationLogo.AddTween(100, 80, BACK_OUT);
+
+	animationCitm.Set();
+	animationCitm.AddTween(100, 120, BOUNCE_IN_OUT);
+
 	return ret;
 }
 
@@ -49,6 +53,8 @@ bool LogoScene::Start()
 	logoCitmTexture = app->tex->Load(logoCitmPath);
 
 	app->audio->PlayMusic(musicLogo, 1.0f);
+
+	transition = false;
 	
 	return true;
 }
@@ -62,14 +68,41 @@ bool LogoScene::PreUpdate()
 // Called each loop iteration
 bool LogoScene::Update(float dt)
 {	
-	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+	if (transition)
+	{
+		animationLogo.Backward();
+		animationCitm.Backward();
+	}
+	
+	else
+	{
+		animationLogo.Foward();
+		animationCitm.Foward();
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN) {
+		transition = true;
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 5);
+
+	animationLogo.Step(1, false);
+	animationCitm.Step(1, false);
+
+
+	float point = animationLogo.GetPoint();
+	int offset = -750;
+
+	app->render->DrawTexture(logoTexture, 200, offset + point * (0 - offset));
+
+	
+	point = animationCitm.GetPoint();
+	app->render->DrawTexture(logoCitmTexture, 850, offset + point * (550 - offset));
 
 	return true;
 }
@@ -82,8 +115,7 @@ bool LogoScene::PostUpdate()
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
-	app->render->DrawTexture(logoTexture, 200, 0);
-	app->render->DrawTexture(logoCitmTexture, 850, 550);
+
 	
 	return ret;
 }

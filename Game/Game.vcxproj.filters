@@ -43,6 +43,7 @@
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
     <ClCompile Include="Source\SceneWin_Lose.cpp" />
     <ClCompile Include="Source\PuzzleManager.cpp" />
+    <ClCompile Include="Source\Tweening.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h" />
@@ -100,5 +101,6 @@
     <ClInclude Include="Source\SceneWin_Lose.h" />
     <ClInclude Include="PuzzleManager.h" />
     <ClInclude Include="Source\PuzzleManager.h" />
+    <ClInclude Include="Source\Tweening.h" />
   </ItemGroup>
 </Project>

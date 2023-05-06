@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Player.h"
+#include "Tweening.h"
 
 
 struct SDL_Texture;
@@ -48,6 +49,10 @@ private:
 
 	SDL_Texture* logoCitmTexture;
 	const char* logoCitmPath;
+
+	Tween animationLogo;
+	Tween animationCitm;
+	bool transition;
 };
 
 #endif // __LOGOSCENE_H__

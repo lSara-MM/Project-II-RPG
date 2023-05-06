@@ -105,6 +105,7 @@
     <ClCompile Include="Source\DialogueTree.cpp" />
     <ClCompile Include="Source\ECHouseTank.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\Tweening.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\GuiButton.cpp" />
     <ClCompile Include="Source\GuiCheckBox.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Source\Settings.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\Tweening.h" />
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />
     <ClInclude Include="Source\List.h" />
