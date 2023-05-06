@@ -77,7 +77,7 @@ public:
 
 	iPoint position;
 
-	array<Character*, 4> listParty;
+	array<Character*, 4> arrParty;
 	vector<Character*> listPC;
 
 private:

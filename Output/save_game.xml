@@ -14,12 +14,12 @@
 	<Circus />
 	<HouseOfTerrors />
 	<PracticeTent />
+	<combat />
 	<loseScene />
 	<map />
 	<entitymanager>
 		<player x="3417" y="1058" />
 	</entitymanager>
-	<combat />
 	<dialogue />
 	<guiManager />
 	<fadeToBlack />

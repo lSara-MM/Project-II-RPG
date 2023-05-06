@@ -168,8 +168,6 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	app->entityManager->CleanUp();
-	app->entityManager->CleanUp();
 	app->entityManager->Disable();
 
 	if (pSettings != nullptr)
@@ -193,8 +191,6 @@ bool Scene::CleanUp()
 		//
 
 		InitCombat();
-		app->combat->listAllies.insert(app->combat->listAllies.end(), begin(player->listParty), end(player->listParty));
-
 		app->combat->active = false;
 	}
 	
@@ -372,6 +368,7 @@ void Scene::InitCombat()
 	}
 
 	app->combat->InitEnemies(name, arr);
+	app->combat->InitAllies(player->arrParty);
 }
 
 bool Scene::OnGuiMouseClickEvent(GuiControl* control)

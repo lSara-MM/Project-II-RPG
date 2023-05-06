@@ -111,6 +111,8 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		// To test. Guarrada to fea
 	case EntityType::MENU_CHARA:
 		entity = new Character();
+
+		// no entra xd
 		entity->type == EntityType::MENU_CHARA;
 		break;
 

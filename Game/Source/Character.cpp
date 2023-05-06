@@ -205,8 +205,8 @@ void Character::ModifyHP(int hp)
 
 	if (currentHp <= 0)
 	{
-		if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(app->combat->listAllies, this); }
-		else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(app->combat->listEnemies, this); }
+		if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(app->combat->vecAllies, this); }
+		else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(app->combat->vecEnemies, this); }
 	}
 }
 

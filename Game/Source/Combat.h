@@ -71,6 +71,7 @@ public:
 	void RemoveCharacter(vector<Character*> arr, Character* chara);
 
 	bool InitEnemies(SString scene, vector<int> arr);
+	bool InitAllies(array<Character*, 4> party);
 
 	bool SaveCombat();//guardar stats playable characters en xml combat
 	bool LoadCombat();//cargar stats playable characters desde xml combat
@@ -84,8 +85,8 @@ public:
 	List<Character*> listInitiative;
 	int charaInTurn = 0; //Empieza en 0, max 7
 
-	vector<Character*> listAllies;
-	vector<Character*> listEnemies;
+	vector<Character*> vecAllies;
+	vector<Character*> vecEnemies;
 
 	/*array<Character*, 4> listAllies;
 	array<Character*, 4> listEnemies;*/

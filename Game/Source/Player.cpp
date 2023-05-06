@@ -516,7 +516,7 @@ void Player::LoadAllPC()
 void Player::SetParty()
 {
 	// to change when party available
-	copy_n(listPC.begin(), listParty, listPC.begin());
+	copy_n(listPC.begin(), arrParty.size(), arrParty.begin());
 }
 
 

@@ -44,24 +44,31 @@
 					grassStep="Assets/Audio/Fx/Pasos_Hierba.wav"
 					enterZone="Assets/Audio/Fx/entrar_sala.wav"/>
 
-		
+
 		<!--Combat Characters -->
+
 		<CombatCharacter name ="Protagonist" id="0"
         maxHp="1150" currentHp="1150" attack="190" armor="12" critRate="20" critDamage="25" precision="15" res="10" dodge="10" speed="8"
         type="0" class="0"
                
         width="0" heigth="0"
 		texturePath="Assets/Textures/AllyProtagonist.png"/>
+		
 		<CombatCharacter name ="Companion" id="1"
         maxHp="1000" currentHp="1150" attack="200" armor="8" critRate="10" critDamage="20" precision="15" res="15" dodge="15" speed="7"
         type="0" class="7"
                
         width="0" heigth="0"
 		texturePath="Assets/Textures/AllyBard.png"/>
+
+		<CombatCharacter name ="Companion2" id="2"
+        maxHp="1000" currentHp="1150" attack="200" armor="8" critRate="10" critDamage="20" precision="15" res="15" dodge="15" speed="7"
+        type="0" class="7"
+               
+        width="0" heigth="0"
+		texturePath="Assets/Textures/AllyBard.png"/>
 		
-		
-		
-		
+
 	</entitymanager>
 
 	<dialogue textBoxBg="Assets/GUI/UI_TextBox.png">
@@ -86,7 +93,8 @@
 	<bard name ="Bard" maxHp="1000" currentHp="1000" attack="200" critProbability="10" critDamage="20" precision="100" armor="8"   esquiva="10" resistencia="5" speed="6"
 		   texturePath ="Assets/Textures/AllyBard.png"/>
 
-	
+	<protagonist name ="Protagonista" maxHp="1150" currentHp="1150" attack="190" armor="10" speed="5"
+				  texturePath ="Assets/Textures/AllyProtagonist.png"/>
 
 	<enemyTank name ="Bewitched Wardrobe" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
 			    texturePath ="Assets/Textures/marioneta2.png"/>
@@ -138,22 +146,41 @@
 	</map>
 
 <combat mouseSpeed =" 0.5">
+
+<!--
+enum class CharacterClass
+{
+	MELEE_DPS,
+	RANGED_DPS,
+	ASSASSIN,
+	AOE_DPS,
+	TANK,
+	DOT,
+	HEALER,
+	BUFFER,
+	DEBUFFER,
+	
+
+	NO_CLASS
+};
+-->
+
 	<scenes name="scene" numEnemies="3">
 	<!-- Placeholder -->
 		<enemy name ="Bewitched Wardrobe" id="0" 
         maxHp="1000" currentHp="1000" attack="120" armor="18" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="3"
         type="1" class="4"
                
-        width="0" heigth="0" 
-		texturePath="Assets/Textures/EnemyBewitchedWardrobe.png"/>
+        width="0" heigth="0" texturePath="Assets/Textures/EnemyBewitchedWardrobe.png"/>
 		
-		<enemy name ="Cursed Puppet"  id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="5"
+		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="5"
         type="1" class="0"
                
         width="0" heigth="0"  
         texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
 
-		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="140" armor="8" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="2"  
+		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="140" armor="8" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="2"
+               
         type="1" class="8"
                
         width="0" heigth="0"

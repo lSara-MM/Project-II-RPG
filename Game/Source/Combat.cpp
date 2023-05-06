@@ -63,16 +63,19 @@ bool Combat::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
+
+	// Set allies ID
+	for (int i = 0; i < vecAllies.size(); i++)
+	{
+		//vecAllies.at(i)->type = EntityType::COMBAT_CHARA;
+		vecAllies.at(i)->positionCombat_I = i;
+	}
+
+
 	app->entityManager->Enable();
 	app->physics->Disable();
+
 	StartCombat();
-
-	// set buttons ID (de momento no hay allies)
-	/*for (int i = 0; i < listAllies.size(); i++)
-	{ listAllies.at(i)->button->id = i; }*/
-
-	for (int i = 0; i < listEnemies.size(); i++) //De momento esta petando muy fuerte
-	{ listEnemies.at(i)->button->id = 10 + i; }
 
 	return true;
 }
@@ -104,7 +107,7 @@ bool Combat::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		LOG("Change chara");
 
-		MoveCharacter(&listEnemies, listEnemies.at(1), 1);
+		MoveCharacter(&vecEnemies, vecEnemies.at(1), 1);
 	}
 
 
@@ -178,21 +181,37 @@ bool Combat::InitEnemies(SString scene, vector<int> arr)
 						chara->Awake();
 
 						// to delete
-						chara->Start();
+						//chara->Start();
 
 						chara->charaType = CharacterType::ENEMY;
 						chara->positionCombat_I = cPos++;
 
-						listEnemies.push_back(chara);
+						vecEnemies.push_back(chara);
 					}
 				}
 
 				// if list enemies full, stop checking pugi
-				if (listEnemies.size() == arr.size())	return true;
+				if (vecEnemies.size() == arr.size())	return true;
 			}
 		}
 	}
 
+	return true;
+}
+
+bool Combat::InitAllies(array<Character*, 4> party)
+{
+	int j = 0;
+	for (int i = 0; i < party.size(); i++)
+	{
+		if (party.at(i) == nullptr)
+		{
+			j = i;
+			break;
+		}
+	}
+
+	vecAllies.insert(vecAllies.end(), begin(party), begin(party) + j);
 	return true;
 }
 
@@ -281,6 +300,15 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	
 	app->audio->PlayFx(control->fxControl);
 
+	if (control->id >= 10)
+	{
+		LOG("%s chara",vecEnemies.at(control->id - 10)->name.GetString());
+	}
+	else
+	{
+		LOG("%s chara", vecAllies.at(control->id)->name.GetString());
+	}
+
 	// enemies so far start from 10.
 	// line 159
 	return true;
@@ -289,10 +317,15 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 bool Combat::StartCombat()
 {
-	for (int i = 0; i < listAllies.size(); i++)
+	// set buttons ID
+	for (int i = 0; i < vecAllies.size(); i++)
 	{
-		listAllies.at(i)->type = EntityType::COMBAT_CHARA;
-		listAllies.at(i)->positionCombat_I = i;
+		vecAllies.at(i)->button->id = i;
+	}
+
+	for (int i = 0; i < vecEnemies.size(); i++)
+	{
+		vecEnemies.at(i)->button->id = 10 + i;
 	}
 
 	OrderBySpeed();
@@ -315,14 +348,14 @@ bool Combat::OrderBySpeed()
 	//Order by initiative
 	int n = listInitiative.Count(); // ?
 
-	for (int i = 0; i < listAllies.size(); i++)
+	for (int i = 0; i < vecAllies.size(); i++)
 	{
-		listInitiative.Add(listAllies.at(i));
+		listInitiative.Add(vecAllies.at(i));
 	}
 
-	for (int i = 0; i < listEnemies.size(); i++)
+	for (int i = 0; i < vecEnemies.size(); i++)
 	{
-		listInitiative.Add(listEnemies.at(i));
+		listInitiative.Add(vecEnemies.at(i));
 	}
 
 	//int n = listInitiative.Count();
