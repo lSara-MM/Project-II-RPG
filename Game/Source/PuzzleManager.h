@@ -110,7 +110,7 @@ public:
 	PhysBody* Boss;
 	PhysBody* Loset;
 
-	bool palanc;
+	bool palancas;
 	bool escape;
 	bool rescue;
 

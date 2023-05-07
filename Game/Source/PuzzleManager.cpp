@@ -104,7 +104,7 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 
 bool PuzzleManager::Start()
 {
-	palanc = false;
+	palancas = false;
 	escape = false;
 	rescue = false;
 
@@ -124,59 +124,73 @@ bool PuzzleManager::Start()
 
 	realCode = "1234";
 
-	Door = app->tex->Load(texturepathDoor);
-	palanca = app->tex->Load(texturepathPalanca);
-	palancaSens = app->tex->Load(texturepathPalancaSens);
-	notas = app->tex->Load(texturepathNotas);
-	doorEscape = app->tex->Load(texturepathDoorEscape);
-	boss = app->tex->Load(texturepathBoss);
-	loset = app->tex->Load(texturepathLoset);
+	app->LoadGameRequest();
 
-	Door1 = app->physics->CreateRectangle(posDoor1.x - widthDoor / 2, posDoor1.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
-	Door1->body->SetFixedRotation(true);
+	if (palancas == false) 
+	{
+		Door = app->tex->Load(texturepathDoor);
+		palanca = app->tex->Load(texturepathPalanca);
+		palancaSens = app->tex->Load(texturepathPalancaSens);
 
-	Door2 = app->physics->CreateRectangle(posDoor2.x - widthDoor / 2, posDoor2.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
-	Door2->body->SetFixedRotation(true);
-	
-	Door3 = app->physics->CreateRectangle(posDoor3.x - widthDoor / 2, posDoor3.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
-	Door3->body->SetFixedRotation(true);
+		Door1 = app->physics->CreateRectangle(posDoor1.x - widthDoor / 2, posDoor1.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
+		Door1->body->SetFixedRotation(true);
 
-	DoorEscape = app->physics->CreateRectangle(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape, bodyType::STATIC);
-	DoorEscape->body->SetFixedRotation(true);
+		Door2 = app->physics->CreateRectangle(posDoor2.x - widthDoor / 2, posDoor2.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
+		Door2->body->SetFixedRotation(true);
 
-	DoorEscapeSensor = app->physics->CreateRectangleSensor(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape*2, bodyType::STATIC);
-	DoorEscapeSensor->body->SetFixedRotation(true);
-	DoorEscapeSensor->ctype = ColliderType::DOORCODE;
+		Palanca = app->physics->CreateRectangle(posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca / 2, widthPalanca, heightPalanca, bodyType::STATIC);
+		Palanca->body->SetFixedRotation(true);
 
-	Palanca = app->physics->CreateRectangle(posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca / 2, widthPalanca, heightPalanca, bodyType::STATIC);
-	Palanca->body->SetFixedRotation(true);
+		PalancaSensor = app->physics->CreateRectangle(posPalancas.x - widthPalancaSens / 2, posPalancas.y - heightPalancaSens / 2, widthPalancaSens, heightPalancaSens, bodyType::STATIC);
+		PalancaSensor->body->SetFixedRotation(true);
+		PalancaSensor->ctype = ColliderType::PALANCA;
+	}
 
-	PalancaSensor = app->physics->CreateRectangle(posPalancas.x - widthPalancaSens / 2, posPalancas.y - heightPalancaSens / 2, widthPalancaSens, heightPalancaSens, bodyType::STATIC);
-	PalancaSensor->body->SetFixedRotation(true);
-	PalancaSensor->ctype = ColliderType::PALANCA;
+	if (rescue == false) 
+	{
+		Door = app->tex->Load(texturepathDoor);
+		boss = app->tex->Load(texturepathBoss);
+		loset = app->tex->Load(texturepathLoset);
+		
+		Boss = app->physics->CreateRectangleSensor(posBoss.x - widthBoss / 2, posBoss.y - heightBoss / 2, widthBoss, heightBoss, bodyType::STATIC);
+		Boss->body->SetFixedRotation(true);
+		Boss->ctype = ColliderType::BOSSDEAD;
 
-	nota1 = app->physics->CreateRectangleSensor(posNotas1.x - widthNotas / 2, posNotas1.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
-	nota1->body->SetFixedRotation(true);
-	nota1->ctype = ColliderType::NOTA;
-	nota1->id = 0;
-	
-	nota2 = app->physics->CreateRectangleSensor(posNotas2.x - widthNotas / 2, posNotas2.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
-	nota2->body->SetFixedRotation(true);
-	nota2->ctype = ColliderType::NOTA;
-	nota2->id = 1;
-	
-	nota3 = app->physics->CreateRectangleSensor(posNotas3.x - widthNotas / 2, posNotas3.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
-	nota3->body->SetFixedRotation(true);
-	nota3->ctype = ColliderType::NOTA;
-	nota3->id = 2;
+		Loset = app->physics->CreateRectangleSensor(posLoset.x - widthLoset / 2, posLoset.y - heightLoset / 2, widthLoset, heightLoset, bodyType::STATIC);
+		Loset->body->SetFixedRotation(true);
+		Loset->ctype = ColliderType::LOSET;
 
-	Boss = app->physics->CreateRectangleSensor(posBoss.x - widthBoss / 2, posBoss.y - heightBoss / 2, widthBoss, heightBoss, bodyType::STATIC);
-	Boss->body->SetFixedRotation(true);
-	Boss->ctype = ColliderType::BOSSDEAD;	
-	
-	Loset = app->physics->CreateRectangleSensor(posLoset.x - widthLoset / 2, posLoset.y - heightLoset / 2, widthLoset, heightLoset, bodyType::STATIC);
-	Loset->body->SetFixedRotation(true);
-	Loset->ctype = ColliderType::LOSET;
+		Door3 = app->physics->CreateRectangle(posDoor3.x - widthDoor / 2, posDoor3.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
+		Door3->body->SetFixedRotation(true);
+	}
+
+	if (escape == false)
+	{
+		notas = app->tex->Load(texturepathNotas);
+		doorEscape = app->tex->Load(texturepathDoorEscape);
+
+		DoorEscape = app->physics->CreateRectangle(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape, bodyType::STATIC);
+		DoorEscape->body->SetFixedRotation(true);
+
+		DoorEscapeSensor = app->physics->CreateRectangleSensor(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape * 2, bodyType::STATIC);
+		DoorEscapeSensor->body->SetFixedRotation(true);
+		DoorEscapeSensor->ctype = ColliderType::DOORCODE;
+
+		nota1 = app->physics->CreateRectangleSensor(posNotas1.x - widthNotas / 2, posNotas1.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
+		nota1->body->SetFixedRotation(true);
+		nota1->ctype = ColliderType::NOTA;
+		nota1->id = 0;
+
+		nota2 = app->physics->CreateRectangleSensor(posNotas2.x - widthNotas / 2, posNotas2.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
+		nota2->body->SetFixedRotation(true);
+		nota2->ctype = ColliderType::NOTA;
+		nota2->id = 1;
+
+		nota3 = app->physics->CreateRectangleSensor(posNotas3.x - widthNotas / 2, posNotas3.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
+		nota3->body->SetFixedRotation(true);
+		nota3->ctype = ColliderType::NOTA;
+		nota3->id = 2;
+	}
 
 	return true;
 }
@@ -188,7 +202,7 @@ bool PuzzleManager::PreUpdate()
 
 bool PuzzleManager::Update(float dt)
 {
-	if (!palanc)
+	if (!palancas)
 	{
 		if (Palancas())
 		{
@@ -303,7 +317,7 @@ bool PuzzleManager::Palancas()
 		if (PalancaSensor != nullptr)
 			PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
 
-		palanc = true;
+		palancas = true;
 
 		return true;
 	}
@@ -389,6 +403,7 @@ bool PuzzleManager::Rescue()
 
 				losetActive = false;
 				bossInvent = false;
+				rescue = true;
 			}
 		}
 	}

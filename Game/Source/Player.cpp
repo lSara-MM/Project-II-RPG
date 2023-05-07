@@ -674,7 +674,7 @@ void Player::Controller(float dt)
 	
 	PadLock = false;
 }
-
+/*PuzzleManager*/
 bool Player::Palancas()
 {
 	if (keyPalancas >= 1)
