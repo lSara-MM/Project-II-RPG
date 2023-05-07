@@ -301,7 +301,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		break;
 
 	case ColliderType::PALANCA:
-		app->puzzleManager->keyPalancas += 1;
+		app->puzzleManager->keyPalancas = 1;
 		keyPalancas = 1;
 		break;
 	case ColliderType::BOSSDEAD:

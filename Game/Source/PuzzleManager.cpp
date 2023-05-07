@@ -297,7 +297,7 @@ bool PuzzleManager::CleanUp()
 
 bool PuzzleManager::Palancas() 
 {
-	if (keyPalancas >= 1) 
+	if (keyPalancas == 1) 
 	{
 		if(palanca != nullptr)
 			app->tex->UnLoad(palanca);
