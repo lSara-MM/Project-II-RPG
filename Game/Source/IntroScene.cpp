@@ -77,7 +77,8 @@ bool IntroScene::Start()
 
 	pSettings = new Settings(this);
 	listButtons.Add(pSettings->listSettingsButtons.start->data);
-
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
 	transition_B = false;
 	exit_B = false;
 
