@@ -148,7 +148,7 @@ public:
 
 			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { x, 280 + 77 * y++, 34, 34 }, ButtonType::CONTROL_SETTINGS, buttons[i], 16);
 			button->state = GuiControlState::NONE;
-			listGUI.Add(button);
+			listGUI->Add(button);
 		}
 	}
 
