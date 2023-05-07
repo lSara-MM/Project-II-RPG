@@ -59,6 +59,8 @@ public:
 	int mouseX_intro, mouseY_intro;
 	float mouse_Speed;
 
+	Settings* pSettings;
+
 private:
 	const char* music_intro;
 
@@ -69,7 +71,6 @@ private:
 	List<GuiButton*> listButtons;
 	const char* buttons[6] = { "Play", "Continue", "Settings", "Exit", "\n" };
 	
-	Settings* pSettings;
 
 	bool introDone = false;
 	bool exit_B;

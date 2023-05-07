@@ -54,7 +54,7 @@ bool LogoScene::Start()
 
 	app->audio->PlayMusic(musicLogo, 1.0f);
 
-	transition = false;
+	transition__B = false;
 	
 	return true;
 }
@@ -68,7 +68,7 @@ bool LogoScene::PreUpdate()
 // Called each loop iteration
 bool LogoScene::Update(float dt)
 {	
-	if (transition)
+	if (transition__B)
 	{
 		animationLogo.Backward();
 		animationCitm.Backward();
@@ -81,7 +81,7 @@ bool LogoScene::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN) {
-		transition = true;
+		transition__B = true;
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
 	}
 

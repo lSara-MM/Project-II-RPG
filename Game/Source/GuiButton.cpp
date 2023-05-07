@@ -1,5 +1,6 @@
 #include "GuiButton.h"
 #include "GuiManager.h"
+#include "IntroScene.h"
 
 GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -7,6 +8,12 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	this->text = text;
 	this->fontSize = fontSize;
 	this->font = font;
+
+	boundsY_AUX = this->bounds.y;
+
+	isForward_B = true;
+	animationButton.Set();
+	animationButton.AddTween(100, 80, BACK_OUT);
 
 	buttonType = bType;
 
@@ -78,6 +85,21 @@ bool GuiButton::Update(float dt)
 		
 	}
 
+	if (isForward_B)
+	{
+		animationButton.Foward();
+	}
+
+	else
+	{
+		animationButton.Backward();
+	}
+
+	animationButton.Step(1, false);
+	float point = animationButton.GetPoint();
+	int offset = -750;
+	bounds.y = offset + point * (boundsY_AUX - offset);
+
 	return false;
 }
 
@@ -101,6 +123,8 @@ bool GuiButton::Draw(Render* render)
 	if (buttonType == ButtonType::SWAP_SKILL) { rect = { 90, 0, 82, 80 }; }*/
 
 	if (buttonType == ButtonType::COMBAT_TARGET) { rect = { 0, 0, 48 * 1, 92 }; } //48 anchura de solo 1 corchete, 92 es la altura que tiene DE MOMENTO.
+
+	
 
 	if (app->guiManager->GUI_debug)
 	{

@@ -17,6 +17,8 @@
 #include "Point.h"
 #include "SString.h"
 
+#include "Tweening.h"
+
 #include "SDL/include/SDL.h"
 
 class HandleSettings
@@ -66,7 +68,6 @@ public:
 		}
 
 	}
-private:
 
 };
 
@@ -117,6 +118,7 @@ public:
 		{
 			for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
 			{
+				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
 			}
 		}
@@ -143,7 +145,8 @@ public:
 
 		for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
 		{
-			i->data->state = GuiControlState::NONE;
+			i->data->isForward_B = false;
+			//i->data->state = GuiControlState::NONE;
 		}
 
 		return true;
@@ -222,6 +225,7 @@ public:
 		{
 			for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
 			{
+				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
 			}
 	
@@ -250,7 +254,8 @@ public:
 
 		for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
 		{
-			i->data->state = GuiControlState::NONE;
+			i->data->isForward_B = false;
+			//i->data->state = GuiControlState::NONE;
 		}
 
 		return true;
@@ -329,6 +334,7 @@ public:
 		{
 			for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
 			{
+				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
 			}
 
@@ -370,7 +376,8 @@ public:
 
 		for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
 		{
-			i->data->state = GuiControlState::NONE;
+			i->data->isForward_B = false;
+			//i->data->state = GuiControlState::NONE;
 		}
 
 		for (ListItem<GuiCheckBox*>* i = listGraphicsCheckbox.start; i != nullptr; i = i->next)
@@ -575,6 +582,7 @@ public:
 		{
 			for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
 			{
+				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
 			}
 
@@ -609,7 +617,8 @@ public:
 
 		for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
 		{
-			i->data->state = GuiControlState::NONE;
+			i->data->isForward_B = false;
+			//i->data->state = GuiControlState::NONE;
 		}
 
 		return true;
@@ -706,6 +715,7 @@ public:
 		{
 			for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
 			{
+				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
 			}
 
@@ -736,6 +746,7 @@ public:
 		open_pause_B = false;
 		for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
 		{
+			i->data->isForward_B = false;
 			i->data->state = GuiControlState::NONE;
 		}
 

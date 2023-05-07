@@ -6,6 +6,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "SString.h"
+#include "Tweening.h"
 
 class GuiButton : public GuiControl
 {
@@ -22,6 +23,13 @@ public:
 	SDL_Texture* buttonTex;
 	ButtonType buttonType;
 	Font font;
+	//control animation
+	bool isForward_B;
+
+	int boundsY_AUX;
+
+private:
+	Tween animationButton;
 };
 
 #endif // __GUIBUTTON_H__

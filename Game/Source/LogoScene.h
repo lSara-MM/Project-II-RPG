@@ -52,7 +52,7 @@ private:
 
 	Tween animationLogo;
 	Tween animationCitm;
-	bool transition;
+	bool transition__B;
 };
 
 #endif // __LOGOSCENE_H__

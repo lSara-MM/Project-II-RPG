@@ -1,3 +1,5 @@
+#ifndef __TWEENING_H__
+#define __TWEENING_H__
 #include "External/Tweeny/tweeny.h"
 
 enum Easings
@@ -479,5 +481,5 @@ private:
     int totalTweenings;
     int currentTweening;
 };
-
+#endif // __TWEENING_H__
 
