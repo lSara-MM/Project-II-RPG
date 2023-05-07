@@ -119,6 +119,7 @@ private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
+	List<int> listSkillsHistory; //Aqui guardamos un historial de que skills se ha usado.
 
 	int width, height;
 };
