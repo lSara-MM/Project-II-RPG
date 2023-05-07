@@ -100,7 +100,7 @@ bool IntroScene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
 
-	if (previousGame_B && !pSettings->settings_B)
+	if (previouscreated_B && !pSettings->created_B)
 	{
 		listButtons.start->next->data->state = GuiControlState::NORMAL;
 		LOG("Continue");
@@ -134,7 +134,7 @@ bool IntroScene::PostUpdate()
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		LOG("general %d, %d music, %d fx", pSettings->pAudio->general->volume100, pSettings->pAudio->music->volume100,pSettings->pAudio->fx->volume100);
 
-	if (pSettings->settings_B) { pSettings->OpenSettings(); }
+	if (pSettings->created_B) { pSettings->OpenOverlay(); }
 
 	app->guiManager->Draw();
 
@@ -163,7 +163,7 @@ bool IntroScene::CleanUp()
 
 bool IntroScene::LoadState(pugi::xml_node& data)
 {
-	previousGame_B = data.child("previousGame").attribute("state_B").as_bool();
+	previouscreated_B = data.child("previousGame").attribute("state_B").as_bool();
 
 	return true;
 }
@@ -206,11 +206,11 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 2:
 		LOG("Button continue click");
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
-		continueGame_B = true;
+		continuecreated_B = true;
 		break;
 	case 3:
 		LOG("Button settings click");
-		pSettings->settings_B = true;
+		pSettings->created_B = true;
 
 		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 		{
@@ -229,43 +229,43 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		{
 			i->data->state = GuiControlState::NORMAL;
 		}
-		pSettings->CloseSettings();
+		pSettings->CloseOverlay();
 		break;
 
 	case 802:
 		LOG("Game settings click");
-		pSettings->pGame->game_B = true;
+		pSettings->pGame->created_B = true;
 
-		pSettings->pControl->CloseControlSettings();
-		pSettings->pGraphics->CloseGraphics();
-		pSettings->pAudio->CloseAudioSettings();
+		pSettings->pControl->CloseOverlay();
+		pSettings->pGraphics->CloseOverlay();
+		pSettings->pAudio->CloseOverlay();
 		break;
 
 	case 803:
 		LOG("Controls settings click");
 		pSettings->pControl->control_B = true;
 
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pGraphics->CloseGraphics();
-		pSettings->pAudio->CloseAudioSettings();
+		pSettings->pGame->CloseOverlay();
+		pSettings->pGraphics->CloseOverlay();
+		pSettings->pAudio->CloseOverlay();
 		break;
 
 	case 804:
 		LOG("Graphics settings click");
-		pSettings->pGraphics->graphics_B = true;
+		pSettings->pGraphics->created_B = true;
 
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pControl->CloseControlSettings();
-		pSettings->pAudio->CloseAudioSettings();
+		pSettings->pGame->CloseOverlay();
+		pSettings->pControl->CloseOverlay();
+		pSettings->pAudio->CloseOverlay();
 		break;
 
 	case 805:
 		LOG("Audio settings click");
-		pSettings->pAudio->audio_B = true;
+		pSettings->pAudio->created_B = true;
 
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pControl->CloseControlSettings();
-		pSettings->pGraphics->CloseGraphics();
+		pSettings->pGame->CloseOverlay();
+		pSettings->pControl->CloseOverlay();
+		pSettings->pGraphics->CloseOverlay();
 		break;
 
 

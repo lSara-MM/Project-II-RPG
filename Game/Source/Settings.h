@@ -19,64 +19,26 @@
 
 #include "SDL/include/SDL.h"
 
-class GameSettings
+class Overlay
 {
 public:
 
-	GameSettings(Module* mod)
+	Overlay() 
 	{
-		//settingsTexture = app->tex->Load(settingsPath);
-
-		// settings buttons
-		game_B = true;
-		open_game_B = false;
-
-		// Language
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 290, 133, 33 }, ButtonType::SETTINGS, "English", 16);
-		button->state = GuiControlState::NONE;
-		listGameButtons.Add(button);
-
-		// Text Speed
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 367, 133, 33 }, ButtonType::SETTINGS, "Medium", 16);
-		button->state = GuiControlState::NONE;
-		listGameButtons.Add(button);
-
-		// Return to Title
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 444, 133, 33 }, ButtonType::SETTINGS, "Return to Title", 16);
-		button->state = GuiControlState::NONE;
-		listGameButtons.Add(button);
-
-		// Exit
-		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 521, 133, 33 }, ButtonType::SETTINGS, "Exit", 16);
-		button->state = GuiControlState::NONE;
-		listGameButtons.Add(button);
+		created_B = true;
+		open_B = false;
 	}
 
-	bool OpenGameSettings()
-	{
-		int x = 556; int y = 290; int offset = 77;
-		app->render->TextDraw("Language", x, y, 16);
-		app->render->TextDraw("Text Speed", x, y + offset, 16);
+	virtual ~Overlay() {}
 
-		if (!open_game_B)
-		{
-			for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
-			{
-				i->data->state = GuiControlState::NORMAL;
-			}
-		}
+	virtual bool OpenOverlay()
+	{
 		return true;
 	}
 
-	bool CloseGameSettings()
+	virtual bool CloseOverlay()
 	{
-		game_B = false;
-		open_game_B = false;
-
-		for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
+		for (ListItem<GuiControl*>* i = listGUI->start; i != nullptr; i = i->next)
 		{
 			i->data->state = GuiControlState::NONE;
 		}
@@ -84,44 +46,97 @@ public:
 		return true;
 	}
 
-	bool CleanUp()
+	bool Update()
 	{
-		/*for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
-		{
-			delete i->data;
-			i->data = nullptr;
-		}*/
+		if (created_B) { OpenOverlay(); }
+	}
 
-		listGameButtons.Clear();
+	virtual bool CleanUp()
+	{
+		listGUI->Clear();
 
+		app->tex->UnLoad(texture);
+
+		created_B = false;
+		open_B = false;
 		return true;
 	}
 
 public:
 
-	// buttons
-	int GUI_id = 806;
-	List<GuiButton*> listGameButtons;
+	int GUI_id;
+	SDL_Texture* texture;
+	const char* texturePath;
+	bool created_B;
+	bool open_B;
 
-	GuiSliderBar* music_P, * fx_P;
-
-	SDL_Texture* gameSettingsTexture;
-	const char* gameSettingsPath;
-	bool game_B;
-	bool open_game_B;
+	List <GuiControl*>* listGUI;
 };
 
-class ControlSettings
+
+
+class GameSettings : public Overlay
+{
+public:
+
+	GameSettings(Module* mod)
+	{
+		//settingsTexture = app->tex->Load(settingsPath);
+		
+		GUI_id = 806;
+
+		// Language
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 290, 133, 33 }, ButtonType::SETTINGS, "English", 16);
+		button->state = GuiControlState::NONE;
+		listGUI->Add(button);
+
+		// Text Speed
+		GUI_id++;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 367, 133, 33 }, ButtonType::SETTINGS, "Medium", 16);
+		button->state = GuiControlState::NONE;
+		listGUI->Add(button);
+
+		// Return to Title
+		GUI_id++;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 444, 133, 33 }, ButtonType::SETTINGS, "Return to Title", 16);
+		button->state = GuiControlState::NONE;
+		listGUI->Add(button);
+
+		// Exit
+		GUI_id++;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 521, 133, 33 }, ButtonType::SETTINGS, "Exit", 16);
+		button->state = GuiControlState::NONE;
+		listGUI->Add(button);
+	}
+
+	bool OpenOverlay()
+	{
+		int x = 556; int y = 290; int offset = 77;
+		app->render->TextDraw("Language", x, y, 16);
+		app->render->TextDraw("Text Speed", x, y + offset, 16);
+
+		if (!open_B)
+		{
+			for (ListItem<GuiButton*>* i = listGUI.start; i != nullptr; i = i->next)
+			{
+				i->data->state = GuiControlState::NORMAL;
+			}
+		}
+		return true;
+	}
+
+public:
+
+};
+
+class ControlSettings : public Overlay
 {
 public:
 
 	ControlSettings(Module* mod)
 	{
 		//settingsTexture = app->tex->Load(settingsPath);
-
-		// settings buttons
-		control_B = false;
-		open_control_B = false;
+		GUI_id = 810;
 
 		GuiButton* button;
 
@@ -133,11 +148,11 @@ public:
 
 			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { x, 280 + 77 * y++, 34, 34 }, ButtonType::CONTROL_SETTINGS, buttons[i], 16);
 			button->state = GuiControlState::NONE;
-			listControlButtons.Add(button);
+			listGUI.Add(button);
 		}
 	}
 
-	bool OpenControlSettings()
+	bool OpenOverlay()
 	{
 		int x = 530; int y = 290; int offset = 77;
 		app->render->TextDraw("Move up", x, y, 16);
@@ -153,58 +168,24 @@ public:
 		app->render->TextDraw("Map", x, y + offset * 3, 16);
 		app->render->TextDraw("Pause", x, y + offset * 4, 16);
 
-		if (!open_control_B)
+		if (!open_B)
 		{
 			for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
 			{
 				i->data->state = GuiControlState::NORMAL;
 			}
 	
-			open_control_B = true;
+			open_B = true;
 		}
-
-		return true;
-	}
-
-	bool CloseControlSettings()
-	{
-		control_B = false;
-		open_control_B = false;
-
-		for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
-		{
-			i->data->state = GuiControlState::NONE;
-		}
-
-		return true;
-	}
-
-	bool CleanUp()
-	{
-		/*for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
-		{
-			delete i->data;
-			i->data = nullptr;
-		}*/
-
-		listControlButtons.Clear();
 
 		return true;
 	}
 
 public:
-
-	// buttons
-	int GUI_id = 810;
-	List<GuiButton*> listControlButtons;
-
 	const char* buttons[21] = {"W", "A", "D", "S", "E", "I", "R", "J", "M", "Esc", "\n"};
-
-	bool control_B;
-	bool open_control_B;
 };
 
-class GraphicsSettings
+class GraphicsSettings : public Overlay
 {
 public:
 
@@ -212,35 +193,33 @@ public:
 	{
 		//settingsTexture = app->tex->Load(settingsPath);
 
-		// settings buttons
-		graphics_B = false;
-		open_graphics_B = false;
+		GUI_id = 828;
 
 		// Window Size
 		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 280, 133, 33 }, ButtonType::SETTINGS, "Window Size", 16);
 		button->state = GuiControlState::NONE;
-		listGraphicsButtons.Add(button);
+		listGUI.Add(button);
 
 		// Fullscreen	
 		GUI_id++;
 		GuiCheckBox* checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 871, 357, 46, 46 });
 		checkbox->state = GuiControlState::NONE;
-		listGraphicsCheckbox.Add(checkbox);
+		listGUI.Add(checkbox);
 
 		// Vsync
 		GUI_id++;
 		checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 871, 434, 46, 46 });
 		checkbox->state = GuiControlState::NONE;
-		listGraphicsCheckbox.Add(checkbox);
+		listGUI.Add(checkbox);
 
 		// Max fps
 		GUI_id++;
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::SETTINGS, "Max fps", 16);
 		button->state = GuiControlState::NONE;
-		listGraphicsButtons.Add(button);
+		listGUI.Add(button);
 	}
 
-	bool OpenGraphics()
+	bool OpenOverlay()
 	{
 		int x = 556; int y = 290; int offset = 77;
 		app->render->TextDraw("Windows Size", x, y, 16);
@@ -248,7 +227,7 @@ public:
 		app->render->TextDraw("Vsync", x, y + offset * 2, 16);
 		app->render->TextDraw("Max fps", x, y + offset * 3, 16);
 
-		if (!open_graphics_B)
+		if (!open_B)
 		{
 			for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
 			{
@@ -267,17 +246,14 @@ public:
 				}
 			}
 
-			open_graphics_B = true;
+			open_B = true;
 		}
 
 		return true;
 	}
 
-	bool CloseGraphics()
+	bool CloseOverlay()
 	{
-		graphics_B = false;
-		open_graphics_B = false;
-
 		for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->state = GuiControlState::NONE;
@@ -313,49 +289,42 @@ public:
 
 public:
 
-	// GUI
-	int GUI_id = 828;
 	List<GuiButton*> listGraphicsButtons;
 	List<GuiCheckBox*> listGraphicsCheckbox;
-
-	bool graphics_B;
-	bool open_graphics_B;
 };
 
-class AudioSettings
+class AudioSettings : public Overlay
 {
 public:
 
 	AudioSettings(Module* mod)
 	{
 		//settingsTexture = app->tex->Load(settingsPath);
-
-		// settings buttons
-		audio_B = false;
-		open_audio_B = false;
+		
+		GUI_id = 832;
 
 		// General volume
 		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 298, 219, 39 }, ButtonType::NONE, "general", 10, Font::UI, { 310, 298, 28, 39 });
 		sliderBar->state = GuiControlState::NONE;
 		general = sliderBar;
-		listSliderBars.Add(sliderBar);
+		listGUI.Add(sliderBar);
 
 		// music
 		GUI_id++;
 		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 375, 219, 39 }, ButtonType::NONE, "music", 10, Font::UI, { 310, 375, 28, 39 });
 		sliderBar->state = GuiControlState::NONE;
 		music = sliderBar;
-		listSliderBars.Add(sliderBar);
+		listGUI.Add(sliderBar);
 
 		// fx
 		GUI_id++;
 		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 452, 219, 39 }, ButtonType::NONE, "fx", 10, Font::UI, { 310, 452, 28, 39 });
 		sliderBar->state = GuiControlState::NONE;
 		fx = sliderBar;
-		listSliderBars.Add(sliderBar);
+		listGUI.Add(sliderBar);
 	}
 
-	bool OpenAudioSettings()
+	bool OpenOverlay()
 	{
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
@@ -364,7 +333,7 @@ public:
 		app->render->TextDraw("Music volume", x, y + offset, 16);
 		app->render->TextDraw("Fx volume", x, y + offset * 2, 16);
 	
-		if (!open_audio_B)
+		if (!open_B)
 		{
 			for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
 			{
@@ -381,7 +350,7 @@ public:
 			fx->volume100 = app->audio->volume_fx;
 
 
-			open_audio_B = true;
+			open_B = true;
 		}
 
 		if (app->audio->volume_general != general->volume100)app->audio->ChangeGeneralVolume(general->volume100);
@@ -391,11 +360,8 @@ public:
 		return true;
 	}
 
-	bool CloseAudioSettings()
+	bool CloseOverlay()
 	{
-		audio_B = false;
-		open_audio_B = false;
-
 		for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
 		{
 			i->data->state = GuiControlState::NONE;
@@ -419,27 +385,18 @@ public:
 
 public:
 
-	// GUI
-	int GUI_id = 832;
 	List<GuiSliderBar*> listSliderBars;
-
 	GuiSliderBar* general, * music, * fx;
-
-	bool audio_B;
-	bool open_audio_B;
 };
 
-class Settings
+class Settings : public Overlay
 {
 public:
 
 	Settings(Module* mod)
 	{
+		GUI_id = 801;
 		settingsTexture = app->tex->Load(settingsPath);
-
-		// settings buttons
-		settings_B = false;
-		open_settings_B = false;
 
 		// close
 		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 1038, 175, 57, 57 }, ButtonType::CLOSE);
@@ -460,7 +417,7 @@ public:
 		pAudio = new AudioSettings(mod);
 	}
 
-	bool OpenSettings()
+	bool OpenOverlay()
 	{
 		SDL_Rect rect = { 0, 0, 90, 93 };
 
@@ -476,33 +433,30 @@ public:
 		app->render->TextDraw("Settings", 600, 121, 40, Font::UI, { 255, 255, 255 });
 
 
-		if (pGame->game_B) { pGame->OpenGameSettings(); }
-		if (pControl->control_B) { pControl->OpenControlSettings(); }
-		if (pGraphics->graphics_B) { pGraphics->OpenGraphics(); }
-		if (pAudio->audio_B) { pAudio->OpenAudioSettings(); }
+		if (pGame->created_B) { pGame->OpenOverlay(); }
+		if (pControl->created_B) { pControl->OpenOverlay(); }
+		if (pGraphics->created_B) { pGraphics->OpenOverlay(); }
+		if (pAudio->created_B) { pAudio->OpenOverlay(); }
 
-		if (!open_settings_B)
+		if (!open_B)
 		{
 			for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
 			{
 				i->data->state = GuiControlState::NORMAL;
 			}
 
-			open_settings_B = true;
+			open_B = true;
 		}
 
 		return true;
 	}
 
-	bool CloseSettings()
+	bool CloseOverlay()
 	{
-		settings_B = false;
-		open_settings_B = false;
-
-		pGame->CloseGameSettings();
-		pControl->CloseControlSettings();
-		pGraphics->CloseGraphics();
-		pAudio->CloseAudioSettings();
+		pGame->CloseOverlay();
+		pControl->CloseOverlay();
+		pGraphics->CloseOverlay();
+		pAudio->CloseOverlay();
 
 		for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
 		{
@@ -514,17 +468,6 @@ public:
 
 	bool CleanUp()
 	{
-		app->tex->UnLoad(settingsTexture);
-
-		listSettingsButtons.Clear();
-		settings_B = false;
-		
-		// no li agraden els clean ups aquests
-		/*pGame->CleanUp();
-		pControl->CleanUp();
-		pGraphics->CleanUp();
-		pAudio->CleanUp();*/
-
 		delete pGame;
 		pGame = nullptr;
 
@@ -543,16 +486,14 @@ public:
 public:
 
 	// buttons
-	int GUI_id = 801;
 	List<GuiButton*> listSettingsButtons;
 	const char* buttons[5] = { "Game", "Controls", "Graphics", "Audio", "\n" };
 
 	SDL_Texture* settingsTexture;
 	const char* settingsPath = "Assets/GUI/UI_Marker_L.png";
-	bool settings_B;
-	bool open_settings_B;
 
-	
+	Overlay* pOverlay;
+
 	GameSettings* pGame;
 	ControlSettings* pControl;
 	GraphicsSettings* pGraphics;
@@ -657,7 +598,6 @@ public:
 // Settings gui manager template
 
 /*
-
 	switch (a)
 	{
 
@@ -665,7 +605,7 @@ public:
 	case 801:
 		LOG("Button Close settings click");
 		pause_P->OpenPause();
-		settings_P->CloseSettings();
+		settings_P->CloseOverlay();
 		break;
 
 	case 802:
@@ -840,5 +780,4 @@ public:
 
 		break;
 	}
-
 */

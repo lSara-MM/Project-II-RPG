@@ -106,10 +106,10 @@ bool GuiManager::CleanUp()
 {
 	ListItem<GuiControl*>* control = guiControlsList.start;
 
-	/*while (control != nullptr)
+	while (control != nullptr)
 	{
 		RELEASE(control);
-	}*/
+	}
 
 	guiControlsList.Clear();
 

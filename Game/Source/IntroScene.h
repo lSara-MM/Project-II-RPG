@@ -54,8 +54,8 @@ public:
 	pugi::xml_node IntroSaveNode;
 	pugi::xml_node IntroLoadNode;
 
-	bool previousGame_B = false;
-	bool continueGame_B = false;
+	bool previouscreated_B = false;
+	bool continuecreated_B = false;
 
 	int mouseX_intro, mouseY_intro;
 	float mouse_Speed;

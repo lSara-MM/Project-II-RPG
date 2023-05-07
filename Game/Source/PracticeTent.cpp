@@ -122,13 +122,13 @@ bool PracticeTent::PostUpdate()
 		}
 		else
 		{
-			pSettings->CloseSettings();
+			pSettings->CloseOverlay();
 			pSettings->CleanUp();
 		}
 	}
 
 	if (pause_B) { pPause->OpenPause(); }
-	if (settings_B) { pSettings->OpenSettings(); }
+	if (settings_B) { pSettings->OpenOverlay(); }
 	app->guiManager->Draw();
 
 	return ret;
@@ -211,7 +211,7 @@ void PracticeTent::Debug()
 			pPause = new Pause(this);
 			pSettings = pPause->pSettings;
 
-			pSettings->settings_B = !pSettings->settings_B;
+			pSettings->created_B = !pSettings->created_B;
 		}
 		else
 		{
@@ -232,7 +232,7 @@ void PracticeTent::Debug()
 			}
 
 			settings_B = false;
-			pSettings->CloseSettings();
+			pSettings->CloseOverlay();
 			pSettings->CleanUp();
 		}
 		else
@@ -243,7 +243,7 @@ void PracticeTent::Debug()
 				pPause = new Pause(this);
 				pSettings = pPause->pSettings;
 
-				pSettings->settings_B = !pSettings->settings_B;
+				pSettings->created_B = !pSettings->created_B;
 			}
 			else
 			{
@@ -342,44 +342,44 @@ bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 		}
 
 		settings_B = false;
-		pSettings->CloseSettings();
+		pSettings->CloseOverlay();
 		pSettings->CleanUp();
 		break;
 
 	case 802:
 		LOG("Game settings click");
-		pSettings->pGame->game_B = true;
+		pSettings->pGame->created_B = true;
 
-		pSettings->pControl->CloseControlSettings();
-		pSettings->pGraphics->CloseGraphics();
-		pSettings->pAudio->CloseAudioSettings();
+		pSettings->pControl->CloseOverlay();
+		pSettings->pGraphics->CloseOverlay();
+		pSettings->pAudio->CloseOverlay();
 		break;
 
 	case 803:
 		LOG("Controls settings click");
 		pSettings->pControl->control_B = true;
 
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pGraphics->CloseGraphics();
-		pSettings->pAudio->CloseAudioSettings();
+		pSettings->pGame->CloseOverlay();
+		pSettings->pGraphics->CloseOverlay();
+		pSettings->pAudio->CloseOverlay();
 		break;
 
 	case 804:
 		LOG("Graphics settings click");
-		pSettings->pGraphics->graphics_B = true;
+		pSettings->pGraphics->created_B = true;
 
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pControl->CloseControlSettings();
-		pSettings->pAudio->CloseAudioSettings();
+		pSettings->pGame->CloseOverlay();
+		pSettings->pControl->CloseOverlay();
+		pSettings->pAudio->CloseOverlay();
 		break;
 
 	case 805:
 		LOG("Audio settings click");
-		pSettings->pAudio->audio_B = true;
+		pSettings->pAudio->created_B = true;
 
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pControl->CloseControlSettings();
-		pSettings->pGraphics->CloseGraphics();
+		pSettings->pGame->CloseOverlay();
+		pSettings->pControl->CloseOverlay();
+		pSettings->pGraphics->CloseOverlay();
 		break;
 
 
