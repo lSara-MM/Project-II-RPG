@@ -96,19 +96,46 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 
 void Map::Draw()
 {
-    if(mapLoaded == false)
+    if (mapLoaded == false)
         return;
-
+    /*
+    ListItem<TileSet*>* tileset;
+    tileset = mapData.tilesets.start;
+    while (tileset != NULL) {
+        app->render->DrawTexture(tileset->data->texture,0,0);
+        tileset = tileset->next;
+    }
+    */
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
- 
+
     while (mapLayerItem != NULL) {
 
-        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value == true) {
-            
-            app->render->DrawTexture(backGround, 0, 0);
+        //L06: DONE 7: use GetProperty method to ask each layer if your “Draw” property is true.
+        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
+
+            for (int x = 0; x < mapLayerItem->data->width; x++)
+            {
+                for (int y = 0; y < mapLayerItem->data->height; y++)
+                {
+                    // L05: DONE 9: Complete the draw function
+                    int gid = mapLayerItem->data->Get(x, y);
+
+                    //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
+                    TileSet* tileset = GetTilesetFromTileId(gid);
+
+                    SDL_Rect r = tileset->GetTileRect(gid);
+                    iPoint pos = MapToWorld(x, y);
+
+                    app->render->DrawTexture(tileset->texture,
+                        pos.x,
+                        pos.y,
+                        &r);
+                }
+            }
         }
         mapLayerItem = mapLayerItem->next;
+
     }
     
 }
