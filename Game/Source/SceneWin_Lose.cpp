@@ -37,6 +37,9 @@ bool SceneWin_Lose::Awake(pugi::xml_node& config)
 	texturepathWin = config.child("win").attribute("texturepath").as_string();
 	texturepathLose = config.child("lose").attribute("texturepath").as_string();
 
+	backgroundAnimation.Set();
+	backgroundAnimation.AddTween(100, 120, BOUNCE_IN_OUT);
+
 	return ret;
 }
 
@@ -48,6 +51,7 @@ bool SceneWin_Lose::Start()
 	win = false;
 	lose = false;
 
+	transition_B = false;//para animacion
 
 	return true;
 }
@@ -59,6 +63,16 @@ bool SceneWin_Lose::PreUpdate()
 
 bool SceneWin_Lose::Update(float dt)
 {
+	if (transition_B)
+	{
+		backgroundAnimation.Backward();
+	}
+
+	else
+	{
+		backgroundAnimation.Foward();
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
 
@@ -76,13 +90,18 @@ bool SceneWin_Lose::Update(float dt)
 		lose = true;
 	}
 
+	backgroundAnimation.Step(1, false);
+
+	float point = backgroundAnimation.GetPoint();
+	int offset = 1300;
+
 	if (win)
 	{
-		app->render->DrawTexture(Win, 0, 0);
+		app->render->DrawTexture(Win, offset + point * (0 - offset), 0);
 	}
 	if (lose)
 	{
-		app->render->DrawTexture(Lose, 0, 0);
+		app->render->DrawTexture(Lose, offset + point * (0 - offset), 0);
 	}
 
 	/*if (app->combat->win) 
@@ -94,8 +113,11 @@ bool SceneWin_Lose::Update(float dt)
 		app->render->DrawTexture(Lose, 0, 0);
 	}*/
 
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		transition_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
+	}
+		
 
 	/*if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;*/
@@ -124,12 +146,15 @@ bool SceneWin_Lose::CleanUp()
 void SceneWin_Lose::Debug()
 {
 	// Start again level
-	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
+		transition_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 0);
-
+	}
+		
 	// Return Title
 	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
 	{
+		transition_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 0);
 	}
 

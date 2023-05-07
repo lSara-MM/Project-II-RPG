@@ -49,11 +49,16 @@ bool IntroScene::Awake(pugi::xml_node& config)
 
 	LoadState(IntroLoadNode);
 
-
 	pugi::xml_document* saveDoc = new pugi::xml_document();
 	pugi::xml_node saveStateNode = saveDoc->append_child("save_state");
 
 	IntroSaveNode = saveStateNode.append_child("introScene");
+
+	animationTitle.Set();
+	animationTitle.AddTween(100, 100, BOUNCE_IN_OUT);
+
+	animationBackground.Set();
+	animationBackground.AddTween(100, 80, BACK_OUT);
 
 	return ret;
 }
@@ -73,6 +78,7 @@ bool IntroScene::Start()
 	pSettings = new Settings(this);
 	listButtons.Add(pSettings->listSettingsButtons.start->data);
 
+	transition_B = false;
 	exit_B = false;
 
 	return true;
@@ -88,13 +94,38 @@ bool IntroScene::PreUpdate()
 bool IntroScene::Update(float dt)
 {
 	app->input->GetMousePosition(mouseX_intro, mouseY_intro);
-	app->render->DrawTexture(texture, 0, 0);
 
-	app->render->TextDraw("TWISTED", 100, 50, 100, Font::TITLE, { 181, 33, 33 });
-	app->render->TextDraw("TENT", 250, 160, 100, Font::TITLE, { 181, 33, 33 });
+	if (transition_B)
+	{
+		animationTitle.Backward();
+		animationBackground.Backward();
+	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	else
+	{
+		animationTitle.Foward();
+		animationBackground.Foward();
+	}
+
+
+	animationTitle.Step(1, false);
+	animationBackground.Step(1, false);
+
+	float point = animationBackground.GetPoint();
+	int offset = -1300;
+
+	app->render->DrawTexture(texture, offset + point * (0 - offset), 0);
+
+	point = animationTitle.GetPoint();
+	
+	app->render->TextDraw("TWISTED", 100, offset + point * (50 - offset), 100, Font::TITLE, { 181, 33, 33 });
+	app->render->TextDraw("TENT", 250, offset + point * (160 - offset), 100, Font::TITLE, { 181, 33, 33 });
+
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		transition_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
+	}
+		
 
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
@@ -196,6 +227,7 @@ bool IntroScene::PostUpdate()
 	if (app->input->getInput_B) PlayerNameInput();
 	if (app->input->nameEntered_B && !introDone) 
 	{
+		transition_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
 		introDone = true;
 	}
@@ -207,6 +239,11 @@ bool IntroScene::PostUpdate()
 		LOG("general %d, %d music, %d fx", pSettings->pAudio->general->volume100, pSettings->pAudio->music->volume100,pSettings->pAudio->fx->volume100);
 
 	if (pSettings->settings_B) { pSettings->OpenSettings(); }
+
+	else if (!pSettings->settings_B)
+	{
+		pSettings->CloseSettings();
+	}
 
 	app->guiManager->Draw();
 
@@ -265,11 +302,13 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		}
 		else
 		{
+			transition_B = true;
 			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		}
 		break;
 	case 2:
 		LOG("Button continue click");
+		transition_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		continueGame_B = true;
 		break;

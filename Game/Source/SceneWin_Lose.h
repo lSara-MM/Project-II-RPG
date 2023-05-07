@@ -11,6 +11,7 @@
 #include "GuiSliderBar.h"
 
 #include "Settings.h"
+#include "Tweening.h"
 
 struct SDL_Texture;
 
@@ -68,6 +69,8 @@ private:
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;
+	bool transition_B;
+	Tween backgroundAnimation;
 
 	bool exit_B;
 };

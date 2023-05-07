@@ -110,9 +110,9 @@ public:
 
 	bool OpenGameSettings()
 	{
-		int x = 556; int y = 290; int offset = 77;
+	/*	int x = 556; int y = 290; int offset = 77;
 		app->render->TextDraw("Language", x, y, 16);
-		app->render->TextDraw("Text Speed", x, y + offset, 16);
+		app->render->TextDraw("Text Speed", x, y + offset, 16);*/
 
 		if (!open_game_B)
 		{
@@ -207,19 +207,19 @@ public:
 
 	bool OpenControlSettings()
 	{
-		int x = 530; int y = 290; int offset = 77;
-		app->render->TextDraw("Move up", x, y, 16);
-		app->render->TextDraw("Move left", x, y + offset, 16);
-		app->render->TextDraw("Move right", x, y + offset * 2, 16);
-		app->render->TextDraw("Move down", x, y + offset * 3, 16);
-		app->render->TextDraw("Interact", x, y + offset * 4, 16);
+		//int x = 530; int y = 290; int offset = 77;
+		//app->render->TextDraw("Move up", x, y, 16);
+		//app->render->TextDraw("Move left", x, y + offset, 16);
+		//app->render->TextDraw("Move right", x, y + offset * 2, 16);
+		//app->render->TextDraw("Move down", x, y + offset * 3, 16);
+		//app->render->TextDraw("Interact", x, y + offset * 4, 16);
 
-		x = 800;
-		app->render->TextDraw("Inventory", x, y, 16);
-		app->render->TextDraw("Party", x, y + offset, 16);
-		app->render->TextDraw("Quests", x, y + offset * 2, 16);
-		app->render->TextDraw("Map", x, y + offset * 3, 16);
-		app->render->TextDraw("Pause", x, y + offset * 4, 16);
+		//x = 800;
+		//app->render->TextDraw("Inventory", x, y, 16);
+		//app->render->TextDraw("Party", x, y + offset, 16);
+		//app->render->TextDraw("Quests", x, y + offset * 2, 16);
+		//app->render->TextDraw("Map", x, y + offset * 3, 16);
+		//app->render->TextDraw("Pause", x, y + offset * 4, 16);
 
 		if (!open_control_B)
 		{
@@ -324,11 +324,11 @@ public:
 
 	bool OpenGraphics()
 	{
-		int x = 556; int y = 290; int offset = 77;
+		/*int x = 556; int y = 290; int offset = 77;
 		app->render->TextDraw("Windows Size", x, y, 16);
 		app->render->TextDraw("Fullscreen", x, y + offset, 16);
 		app->render->TextDraw("Vsync", x, y + offset * 2, 16);
-		app->render->TextDraw("Max fps", x, y + offset * 3, 16);
+		app->render->TextDraw("Max fps", x, y + offset * 3, 16);*/
 
 		if (!open_graphics_B)
 		{
@@ -456,10 +456,10 @@ public:
 	{
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
-		int x = 556; int y = 290; int offset = 77;
+	/*	int x = 556; int y = 290; int offset = 77;
 		app->render->TextDraw("General volume", x, y, 16);
 		app->render->TextDraw("Music volume", x, y + offset, 16);
-		app->render->TextDraw("Fx volume", x, y + offset * 2, 16);
+		app->render->TextDraw("Fx volume", x, y + offset * 2, 16);*/
 	
 		if (!open_audio_B)
 		{
@@ -555,28 +555,97 @@ public:
 		pControl = new ControlSettings(mod);
 		pGraphics = new GraphicsSettings(mod);
 		pAudio = new AudioSettings(mod);
+
+		animationMenu.Set();
+		animationMenu.AddTween(100, 80, BACK_OUT);
+		animationAudio.Set();
+		animationAudio.AddTween(100, 80, BACK_OUT);
+		animationControl.Set();
+		animationControl.AddTween(100, 80, BACK_OUT);
+		animationGame.Set();
+		animationGame.AddTween(100, 80, BACK_OUT);
+		animationGraphics.Set();
+		animationGraphics.AddTween(100, 80, BACK_OUT);
 	}
+
 
 	bool OpenSettings()
 	{
+		//animaciones cosas menu
+		animationMenu.Foward();
+		animationMenu.Step(1, false);
+		float point = animationMenu.GetPoint();
+		int offsetAnimation = -750;
+		//formula int(offsetAnimation + point * (0 - offsetAnimation))
+
 		SDL_Rect rect = { 0, 0, 90, 93 };
 
-		app->render->DrawRectangle({ 290 - app->render->camera.x, 203 - app->render->camera.y, 730, 463 }, 163, 163, 163, 200, true);
+		app->render->DrawRectangle({ 290 - app->render->camera.x, int(offsetAnimation + point * (203 - app->render->camera.y - offsetAnimation)), 730, 463 }, 163, 163, 163, 200, true);
 		
-		app->render->DrawTexture(settingsTexture, 450 - app->render->camera.x, 100 - app->render->camera.y, &rect);
+		app->render->DrawTexture(settingsTexture, 450 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
 		rect = { 91, 0, 249, 93 };
-		app->render->DrawTexture(settingsTexture, 540 - app->render->camera.x, 100 - app->render->camera.y, &rect);
+		app->render->DrawTexture(settingsTexture, 540 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
 		rect = { 341, 0, 90, 93 };
-		app->render->DrawTexture(settingsTexture, 789 - app->render->camera.x, 100 - app->render->camera.y, &rect);
+		app->render->DrawTexture(settingsTexture, 789 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
 
-		app->render->DrawLine(490 - app->render->camera.x, 250 - app->render->camera.y, 490 - app->render->camera.x, 600 - app->render->camera.y, 0, 0, 0);
-		app->render->TextDraw("Settings", 600, 121, 40, Font::UI, { 255, 255, 255 });
+		app->render->DrawLine(490 - app->render->camera.x, 250 - app->render->camera.y, 490 - app->render->camera.x, int(offsetAnimation + point * (600 - app->render->camera.y - offsetAnimation)), 0, 0, 0);
+		app->render->TextDraw("Settings", 600, int(offsetAnimation + point * (121 - app->render->camera.y - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
 
 
-		if (pGame->game_B) { pGame->OpenGameSettings(); }
-		if (pControl->control_B) { pControl->OpenControlSettings(); }
-		if (pGraphics->graphics_B) { pGraphics->OpenGraphics(); }
-		if (pAudio->audio_B) { pAudio->OpenAudioSettings(); }
+		if (pGame->game_B) { 
+			pGame->OpenGameSettings();
+			animationGame.Foward();
+			animationGame.Step(1, false);
+			float point2 = animationGame.GetPoint();
+			
+			int x = 556; int y = 290; int offset = 77;
+			app->render->TextDraw("Language", x, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
+			app->render->TextDraw("Text Speed", x, int(offsetAnimation + point2 * (y + offset - offsetAnimation)), 16);
+		}
+
+		if (pControl->control_B) { 
+			pControl->OpenControlSettings();
+			animationControl.Foward();
+			animationControl.Step(1, false);
+			float point2 = animationControl.GetPoint();
+
+			int x = 530; int y = 290; int offset = 77;
+			app->render->TextDraw("Move up", x, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
+			app->render->TextDraw("Move left", x, int(offsetAnimation + point2 * (y + offset - offsetAnimation)), 16);
+			app->render->TextDraw("Move right", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
+			app->render->TextDraw("Move down", x, int(offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation)), 16);
+			app->render->TextDraw("Interact", x, int(offsetAnimation + point2 * ((y + offset * 4) - offsetAnimation)), 16);
+
+			x = 800;
+			app->render->TextDraw("Inventory", x, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
+			app->render->TextDraw("Party", x, int(offsetAnimation + point2 * ((y + offset ) - offsetAnimation)), 16);
+			app->render->TextDraw("Quests", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
+			app->render->TextDraw("Map", x, int(offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation)), 16);
+			app->render->TextDraw("Pause", x, int(offsetAnimation + point2 * ((y + offset * 4) - offsetAnimation)), 16);
+		}
+		if (pGraphics->graphics_B) { 
+			pGraphics->OpenGraphics();
+			animationGraphics.Foward();
+			animationGraphics.Step(1, false);
+			float point2 = animationGraphics.GetPoint();
+
+			int x = 556; int y = 290; int offset = 77;
+			app->render->TextDraw("Windows Size", x, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
+			app->render->TextDraw("Fullscreen", x, int(offsetAnimation + point2 * ((y + offset) - offsetAnimation)), 16);
+			app->render->TextDraw("Vsync", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
+			app->render->TextDraw("Max fps", x, int(offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation)), 16);
+		}
+		if (pAudio->audio_B) { 
+			pAudio->OpenAudioSettings();
+			animationAudio.Foward();
+			animationAudio.Step(1, false);
+			float point2 = animationAudio.GetPoint();
+			int x = 556; int y = 290; int offset = 77;
+			app->render->TextDraw("General volume", x, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
+			app->render->TextDraw("Music volume", x, int(offsetAnimation + point2 * ((y + offset) - offsetAnimation)), 16);
+			app->render->TextDraw("Fx volume", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
+		}
+
 
 		if (!open_settings_B)
 		{
@@ -607,6 +676,26 @@ public:
 
 	bool CloseSettings()
 	{
+		//animaciones cosas menu
+		animationMenu.Backward();
+		animationMenu.Step(1, false);
+		float point = animationMenu.GetPoint();
+		int offsetAnimation = -750;
+		//formula int(offsetAnimation + point * (0 - offsetAnimation))
+
+		SDL_Rect rect = { 0, 0, 90, 93 };
+
+		app->render->DrawRectangle({ 290 - app->render->camera.x, int(offsetAnimation + point * (203 - app->render->camera.y - offsetAnimation)), 730, 463 }, 163, 163, 163, 200, true);
+
+		app->render->DrawTexture(settingsTexture, 450 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
+		rect = { 91, 0, 249, 93 };
+		app->render->DrawTexture(settingsTexture, 540 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
+		rect = { 341, 0, 90, 93 };
+		app->render->DrawTexture(settingsTexture, 789 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
+
+		app->render->DrawLine(490 - app->render->camera.x, 250 - app->render->camera.y, 490 - app->render->camera.x, int(offsetAnimation + point * (600 - app->render->camera.y - offsetAnimation)), 0, 0, 0);
+		app->render->TextDraw("Settings", 600, int(offsetAnimation + point * (121 - app->render->camera.y - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
+
 		settings_B = false;
 		open_settings_B = false;
 
@@ -669,6 +758,12 @@ public:
 	ControlSettings* pControl;
 	GraphicsSettings* pGraphics;
 	AudioSettings* pAudio;
+
+	Tween animationControl;
+	Tween animationGraphics;
+	Tween animationAudio;
+	Tween animationGame;
+	Tween animationMenu;
 };
 
 

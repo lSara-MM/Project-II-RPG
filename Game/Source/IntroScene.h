@@ -70,7 +70,9 @@ private:
 	// buttons
 	List<GuiButton*> listButtons;
 	const char* buttons[6] = { "Play", "Continue", "Settings", "Exit", "\n" };
-	
+	Tween animationTitle;
+	Tween animationBackground;
+	bool transition_B;
 
 	bool introDone = false;
 	bool exit_B;
