@@ -91,7 +91,7 @@
 </scene>
   <SceneWin_Lose>
     <win texturepath="Assets/Textures/Concept_WinScreen.jpg"/>
-    <lose texturepath="Assets/Textures/Concept_LoseScreen.jpg"/>
+    <lose texturepath="Assets/Textures/Concept_LoseScreen.jpg" music="Assets/Audio/Music/mus_loose_scene.ogg"/>
   </SceneWin_Lose>
   <PuzzleManager>
     <Door texturepathDoor="Assets/Textures/BlueCube_NPC.jpg" width="20" height="50" x="1400" y="1250" x1="1450" y1="1250" x2="1275" y2="575"/>

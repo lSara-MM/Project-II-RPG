@@ -18,6 +18,9 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	buttonType = bType;
 
 	buttonTex = app->tex->Load("Assets/GUI/UI_buttons.png");
+
+	fxHoverPath = "Assets/Audio/Fx/on_button.wav";
+	fxHover = app->audio->LoadFx(fxHoverPath);
 }
 
 GuiButton::~GuiButton()
@@ -41,7 +44,6 @@ bool GuiButton::Update(float dt)
 				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
 
 				state = GuiControlState::FOCUSED;
-
 				if (previousState != state)
 				{
 					//LOG("Change state from %d to %d", previousState, state);
@@ -147,7 +149,6 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::FOCUSED:
 		{
 			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 255, 0, 255, 200, true, false);
-
 		} break;
 
 		case GuiControlState::PRESSED:

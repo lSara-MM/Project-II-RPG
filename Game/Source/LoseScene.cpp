@@ -31,6 +31,8 @@ bool LoseScene::Awake(pugi::xml_node& config)
 	LOG("Loading LoseScene");
 	bool ret = true;
 
+	loseMusicPath = config.attribute("music").as_string();
+
 	return ret;
 }
 
@@ -39,6 +41,8 @@ bool LoseScene::Start()
 {
 	SString title("You lost");
 	app->win->SetTitle(title.GetString());
+
+	app->audio->PlayMusic(loseMusicPath, 1.0);
 
 	// buttons
 	for (int i = 0; buttons[i] != "\n"; i++)

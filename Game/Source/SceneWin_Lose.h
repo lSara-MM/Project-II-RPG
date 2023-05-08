@@ -72,6 +72,9 @@ private:
 	bool transition_B;
 	Tween backgroundAnimation;
 
+	//Music
+	const char* WinMusicPath;
+
 	bool exit_B;
 };
 

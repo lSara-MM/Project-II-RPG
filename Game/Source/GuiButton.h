@@ -28,6 +28,10 @@ public:
 
 	int boundsY_AUX;
 
+	const char* fxHoverPath;
+	uint fxHover;
+	int hoverTest;
+
 private:
 	Tween animationButton;
 };

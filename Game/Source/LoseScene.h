@@ -57,6 +57,9 @@ private:
 
 	bool retry_B;
 
+	//Music
+	const char* loseMusicPath;
+
 	// buttons
 	List<GuiButton*> listButtons;
 	//const char* buttons[3] = { "Retry", "Give up", "Leaderboard" };
