@@ -207,8 +207,8 @@ bool Character::Update(float dt)
 					{
 						//usar skill 4 (daño + debuff)
 						listSkillsHistory.Add(3);
-						app->combat->vecAllies.at(1)->ModifyHP(-130);//TEMPORAL
-						app->combat->vecAllies.at(1)->attack-=10;
+						app->combat->vecAllies.at(0)->ModifyHP(-130);//TEMPORAL
+						app->combat->vecAllies.at(0)->attack-=10;
 						break;
 					}
 					else
