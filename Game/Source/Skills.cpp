@@ -11,6 +11,8 @@
 #include "Module.h"
 #include "Render.h"
 #include "Window.h"
+#include "Character.h"
+#include "Combat.h"
 
 Skill::Skill()
 {
@@ -22,6 +24,10 @@ Skill::~Skill()
 }
 
 Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I) 
+{
+}
+
+bool Skill::PosCanBeUsed(int pos)
 {
 }
 
