@@ -87,6 +87,14 @@ bool Player::Awake() {
 	enterPath = "Assets/Audio/Fx/entrar_sala.wav";
 	enterZone = app->audio->LoadFx(enterPath);
 
+	//fx enter interaction
+	interactionPath = "Assets/Audio/Fx/Npc_interaction_sensor.wav";
+	interactionfx = app->audio->LoadFx(interactionPath);
+
+	//fx confirm interaction
+	confirmPath = "Assets/Audio/Fx/confirm_interaction.wav";
+	confirmInteractfx = app->audio->LoadFx(confirmPath);
+
 	return true;
 }
 
@@ -209,11 +217,12 @@ bool Player::Update(float dt)
 		if (npcInteract)
 		{
 			app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
-			
+
 			if (!lockMovement)
 			{
 				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_Y) == BUTTON_DOWN)
 				{
+					app->audio->PlayFx(confirmInteractfx);
 					app->dialogueSystem->hasEnded = false;
 					lockMovement = true;
 					app->dialogueSystem->Enable();

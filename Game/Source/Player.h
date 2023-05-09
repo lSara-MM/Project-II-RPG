@@ -105,6 +105,10 @@ private:
 	const char* interactionPath;
 	uint interactionfx;
 
+	// interact fx
+	const char* confirmPath;
+	uint confirmInteractfx;
+
 	Npc* npcTalkingTo;
 	bool npcInteract;
 	
