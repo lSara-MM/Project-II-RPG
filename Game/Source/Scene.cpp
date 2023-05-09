@@ -46,6 +46,9 @@ bool Scene::Awake(pugi::xml_node& config)
 
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
 
+	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
+	pausefx = app->audio->LoadFx(fxpausepath);
+
 	return ret;
 }
 
@@ -238,6 +241,7 @@ void Scene::Debug()
 	// Pause menu
 	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
 	{
+		app->audio->PlayFx(pausefx);
 		pause_B = true;	
 
 		if (pause_B)

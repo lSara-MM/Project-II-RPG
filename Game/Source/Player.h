@@ -101,6 +101,10 @@ private:
 	const char* enterPath;
 	uint enterZone;
 
+	// interact fx
+	const char* interactionPath;
+	uint interactionfx;
+
 	Npc* npcTalkingTo;
 	bool npcInteract;
 	
