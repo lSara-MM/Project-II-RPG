@@ -10,7 +10,7 @@
 #include "GuiButton.h"
 #include "Animation.h"
 #include <array>
-//#include "Skills.h"
+#include "Skills.h"
 
 struct SDL_Texture;
 
@@ -111,7 +111,7 @@ public:
 
 	////Skills Descriptions
 	//SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
-	//vector<Skills*> skillsList;
+	array<Skill*, 4>* arrSkills;
 
 	GuiButton* button;
 	

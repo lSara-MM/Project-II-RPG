@@ -109,6 +109,9 @@ bool Combat::Update(float dt)
 	{
 		app->render->TextDraw("Press D to destroy first ally", 10, 80, 12);
 		app->render->TextDraw("Press A to destroy first enemy", 10, 100, 12);
+		app->render->TextDraw("Press 1 to move enemy[1] two positions (may crash)", 10, 120, 12);
+		app->render->TextDraw("Press 2 to destroy enemy[1]", 10, 140, 12);
+		app->render->TextDraw("Press 3 next turn", 10, 160, 12);
 	}
 
 	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
@@ -164,11 +167,6 @@ void Combat::Debug()
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) { RemoveCharacter(&vecEnemies, vecEnemies.at(0)); }
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-	{
-		app->input->godMode_B = !app->input->godMode_B;
-	}
-
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
@@ -188,11 +186,6 @@ void Combat::Debug()
 		LOG("Remove chara");
 
 		RemoveCharacter(&vecEnemies, vecEnemies.at(1));
-	}
-	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN) {
-		LOG("Next turn");
-
-		NextTurn();
 	}
 	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN) {
 		LOG("Next turn");
@@ -243,7 +236,7 @@ bool Combat::InitAllies(array<Character*, 4> party)
 {
 	for (int i = 0; i < party.size(); i++)
 	{
-		if (party.at(i) == nullptr) { break; }
+		if (party.at(i) == nullptr) { return true; }
 		vecAllies.push_back(party.at(i));
 	}
 

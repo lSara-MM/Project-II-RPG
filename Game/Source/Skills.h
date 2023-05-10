@@ -5,7 +5,7 @@
 #include "GuiManager.h"
 
 #include "GuiButton.h"
-#include "Character.h"
+//#include "Character.h"
 
 #include "Log.h"
 #include "SString.h"
@@ -32,7 +32,7 @@ public:
 
 	bool PosCanBeUsed(int positionCharacter);
 
-	int RangeCanTarget(vector<Character> vec);
+	//int RangeCanTarget(vector<Character> vec);
 
 public:
 	SString name;
@@ -43,7 +43,7 @@ public:
 
 	//Gestion movimiento
 	int movement; //0 si no te mueve, -x si te mueve hacia delante +x si te mueve hacia atras
-	Character* charaToMove;
+	//Character* charaToMove;
 
 	//Gestion potencia
 	float multiplierDmg;
@@ -59,7 +59,7 @@ private:
 	int posToUseEnd_I; //Posicion mas alta donde puedes hacer el ataque, si es solo una pues poner el mismo numero que la inicial
 
 	//Posicion que puedes targetear (quiza hay que meter si es area o no)
-	CharacterType typeTargeted;	// Pa que se necesita eso si tienes el personaje que hace el target?
+	//CharacterType typeTargeted;	// Pa que se necesita eso si tienes el personaje que hace el target?
 	int posToTargetStart_I; //Posicion mas baja donde puedes usar el ataque
 	int posToTargetEnd_I; //Posicion mas alta donde puedes targetear el ataque, si es solo una pues poner el mismo numero que la inicial
 	bool areaSkill; //Si es true al hacerse la skill targetea todo da igual que posicion hayas pulsado
