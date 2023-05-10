@@ -14,6 +14,7 @@
 
 #include "FadeToBlack.h"
 #include "GuiManager.h"
+#include "DialogueSystem.h"
 #include "Map.h"
 
 #include "Defs.h"
@@ -339,7 +340,8 @@ bool PuzzleManager::Escape()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				//Abrir UI nota 1
-
+				int id = 100; // ID DEL DIALOGUES.XML DIALOGUE_TREE!!!!!!!!!!!!!!!!!!!!!!!!!1
+				app->dialogueSystem->LoadDialogue(id);
 			}
 		}
 
