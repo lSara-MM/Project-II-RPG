@@ -498,7 +498,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile, int ID){
         }
         break;
     case 1:
-        for (tileset = mapFile.child("dungeon").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
         {
             TileSet* set = new TileSet();
 
@@ -520,7 +520,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile, int ID){
         break;
 
     case 2:
-        for (tileset = mapFile.child("circus").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
         {
             TileSet* set = new TileSet();
 
@@ -542,7 +542,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile, int ID){
         break;
 
     case 3:
-        for (tileset = mapFile.child("practice").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
         {
             TileSet* set = new TileSet();
 

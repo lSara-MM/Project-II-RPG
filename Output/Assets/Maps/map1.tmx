@@ -25982,6 +25982,11 @@
   </data>
  </layer>
  <layer id="7" name="Casas" width="82" height="79">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+   <property name="Navigation" type="bool" value="false"/>
+   <property name="collider" type="bool" value="false"/>
+  </properties>
   <data>
    <tile/>
    <tile/>

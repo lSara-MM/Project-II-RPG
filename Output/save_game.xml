@@ -17,7 +17,8 @@
 	<loseScene />
 	<map />
 	<entitymanager>
-		<player x="2315" y="4514" />
+		<player x="2310" y="4501" />
+		<puzzle palancas="false" escape="false" rescue="false" keyPalancas="0" keyEscape="0" keyRescue="0" />
 	</entitymanager>
 	<combat />
 	<dialogue />
