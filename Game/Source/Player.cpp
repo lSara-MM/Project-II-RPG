@@ -506,7 +506,7 @@ void Player::LoadAllPC()
 		chara->parameters = itemNode;
 		chara->Awake();
 
-		chara->Start();
+		//chara->Start();
 
 		chara->charaType = CharacterType::ALLY;
 		listPC.push_back(chara);
@@ -515,8 +515,13 @@ void Player::LoadAllPC()
 
 void Player::SetParty()
 {
+	
 	// to change when party available
 	copy_n(listPC.begin(), arrParty.size(), arrParty.begin());
+	for(int i=0; i>arrParty.size();i++)
+	{
+		arrParty.at(i)->positionCombat_I = i;
+	}
 }
 
 
