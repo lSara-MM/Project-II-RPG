@@ -205,21 +205,21 @@ bool PuzzleManager::Update(float dt)
 	{
 		if (Palancas())
 		{
-			LOG("PALANCAS TRUE");
+
 		}
 	}
 
 	if (!escape) 
 	{
 		Escape();
-		LOG("ESCAPE TRUE");	
+
 	}
 
 	if (!rescue)
 	{
 		if (Rescue())
 		{
-			LOG("RESCUE TRUE");
+
 		}
 	}
 
@@ -344,6 +344,7 @@ bool PuzzleManager::Escape()
 				//Abrir UI nota 1
 				int id = 100; // ID DEL DIALOGUES.XML DIALOGUE_TREE!!!!!!!!!!!!!!!!!!!!!!!!!1
 				app->dialogueSystem->LoadDialogue(id);
+				esc1 = false;
 			}
 		}
 
@@ -352,7 +353,9 @@ bool PuzzleManager::Escape()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				//Abrir UI nota 2
-
+				int id = 101; // ID DEL DIALOGUES.XML DIALOGUE_TREE!!!!!!!!!!!!!!!!!!!!!!!!!1
+				app->dialogueSystem->LoadDialogue(id);
+				esc2 = false;
 			}
 		}
 
@@ -361,7 +364,9 @@ bool PuzzleManager::Escape()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				//Abrir UI nota 3
-
+				int id = 102; // ID DEL DIALOGUES.XML DIALOGUE_TREE!!!!!!!!!!!!!!!!!!!!!!!!!1
+				app->dialogueSystem->LoadDialogue(id);
+				esc3 = false;
 			}
 		}
 	}

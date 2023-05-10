@@ -164,7 +164,34 @@
 		</node>
 
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
-	</dialogueTree>
+  </dialogueTree>
+  
+  <dialogueTree ID="100">
+
+      <node id="0" name="NOTA1" text="Adivina adivinanza">
+        <choice id="0" option="Close." nextNode="-1" eventReturn="0"/>
+      </node>
+
+      <node id="-1" text ="End of conversation -F1- to talk again"></node>
+  </dialogueTree>
+  
+  <dialogueTree ID="101">
+
+        <node id="0" name="NOTA2" text="Adivina adivinanza 2">
+          <choice id="0" option="Close." nextNode="-1" eventReturn="0"/>
+        </node>
+
+        <node id="-1" text ="End of conversation -F1- to talk again"></node>
+  </dialogueTree>
+  
+  <dialogueTree ID="102">
+
+    <node id="0" name="NOTA3" text="Adivina adivinanza 3">
+      <choice id="0" option="Close." nextNode="-1" eventReturn="0"/>
+    </node>
+
+    <node id="-1" text ="End of conversation -F1- to talk again"></node>
+  </dialogueTree>
 	
 </dialogues>
 
