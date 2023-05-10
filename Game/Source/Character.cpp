@@ -259,7 +259,7 @@ bool Character::Update(float dt)
 bool Character::CleanUp()
 {
 	app->tex->UnLoad(texture);
-
+	RELEASE(button);
 	return true;
 }
 

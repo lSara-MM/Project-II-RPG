@@ -85,8 +85,15 @@ bool Combat::Update(float dt)
 	//Printar Fondo
 	app->render->DrawTexture(textureBackground, 0, 0);
 
-	//Printar Barra Turnos
-	app->render->DrawRectangle({ 20,640,20,20 }, 255, 0, 0);
+	//Printar Barra Turnos (UI WORK)
+	for (int i = 0; i < listInitiative.Count(); i++)
+	{
+		//El calculo largo es para que la barra este centrada siempre aprox
+		app->render->DrawRectangle({ 640 - ((int)listInitiative.Count())*50 +i*100 ,20,80,80 }, 240, 0, 120);
+		//El nombre es temporal, luego ira la head del character
+		app->render->TextDraw(listInitiative.At(i)->data->name.GetString(), 640 - ((int)listInitiative.Count()) * 50 + i * 100, 30, 10);
+	}
+	
 
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
