@@ -30,7 +30,6 @@ public:
 
 	Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I);
 
-
 	bool PosCanBeUsed(int positionCharacter)
 	{
 		//True si dentro del rango, false si no

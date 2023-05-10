@@ -211,6 +211,7 @@ bool Combat::InitAllies(array<Character*, 4> party)
 		}
 	}
 
+	//Aqui esta el problema
 	vecAllies.insert(vecAllies.end(), begin(party), begin(party) + j);
 	return true;
 }

@@ -27,9 +27,9 @@ Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUs
 {
 }
 
-bool Skill::PosCanBeUsed(int pos)
-{
-}
+//bool Skill::PosCanBeUsed(int pos)
+//{
+//}
 
 // idea WIP
 void Skill::GetRange(int target, vector<Character*>* arr)

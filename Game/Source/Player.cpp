@@ -518,7 +518,7 @@ void Player::SetParty()
 	
 	// to change when party available
 	copy_n(listPC.begin(), arrParty.size(), arrParty.begin());
-	for(int i=0; i>arrParty.size();i++)
+	for(int i=0; i<listPC.size();i++)
 	{
 		arrParty.at(i)->positionCombat_I = i;
 	}

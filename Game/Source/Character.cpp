@@ -100,6 +100,8 @@ bool Character::Start()
 	
 	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, buttonType);
 
+	onTurn = false; //Empiezan sin tocarle a nadie
+
 	return true;
 }
 
