@@ -35,9 +35,6 @@ public:
 	bool PerformDialogue();
 
 public:
-
-	SString name;
-
 	iPoint position;
 	int width, height;
 

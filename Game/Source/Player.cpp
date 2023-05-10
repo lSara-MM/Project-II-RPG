@@ -25,7 +25,7 @@
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
-	name.Create("player");
+	//name.Create("player");
 
 	currentAnim.PushBack({ 64, 0, 64, 64 });
 
@@ -104,7 +104,7 @@ bool Player::Start()
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
-	playerName = app->input->playerName.c_str();
+	name = app->input->playerName.c_str();
 	npcInteract = false;
 
 	pbody->body->SetGravityScale(0);

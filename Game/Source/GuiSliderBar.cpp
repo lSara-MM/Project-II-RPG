@@ -12,7 +12,8 @@ GuiSliderBar::GuiSliderBar(uint32 id, SDL_Rect bounds, SDL_Rect sliderBounds) : 
 
 GuiSliderBar::~GuiSliderBar()
 {
-	delete SliderBarTex;
+	//delete SliderBarTex;
+	app->tex->UnLoad(SliderBarTex);
 }
 
 bool GuiSliderBar::Update(float dt)

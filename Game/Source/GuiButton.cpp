@@ -15,7 +15,11 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 
 GuiButton::~GuiButton()
 {
-	delete buttonTex;
+	//delete buttonTex;
+	app->tex->UnLoad(buttonTex);
+
+	// arreglo feo temporal? com se borra un boto, pregunta seria
+	state = GuiControlState::NONE;
 }
 
 bool GuiButton::Update(float dt)

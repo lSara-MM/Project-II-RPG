@@ -10,7 +10,8 @@ GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds) : GuiControl(GuiControlType
 
 GuiCheckBox::~GuiCheckBox()
 {
-	delete checkBoxTex;
+	//delete checkBoxTex;
+	app->tex->UnLoad(checkBoxTex);
 }
 
 bool GuiCheckBox::Update(float dt)

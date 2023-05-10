@@ -101,12 +101,12 @@ bool Combat::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		LOG("Change chara");
 
-		MoveCharacter(&vecEnemies, vecEnemies.at(1), 1);
+		MoveCharacter(&vecEnemies, vecEnemies.at(0), 2);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
-		LOG("Change chara");
+		LOG("Remove chara");
 
-		RemoveCharacter(vecEnemies, vecEnemies.at(1));
+		RemoveCharacter(&vecEnemies, vecEnemies.at(1));
 	}
 
 	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
@@ -549,33 +549,14 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 
 	//Insertar en nueva posicion
 	arr->insert(arr->begin() + newPos, chara);
-
-	// Update combat and buttons position
-	/*for (int i = 0; i < arr->size(); i++)
-	{
-		arr->at(i)->positionCombat_I = i;
-
-		if (chara->charaType == CharacterType::ALLY)
-		{
-			arr->at(i)->button->bounds.x = 400 - 126 * arr->at(i)->positionCombat_I;
-			arr->at(i)->position.x = 400 - 126 * arr->at(i)->positionCombat_I;
-		}
-
-		if (chara->charaType == CharacterType::ENEMY)
-		{
-			arr->at(i)->button->bounds.x = 700 + 126 * arr->at(i)->positionCombat_I;
-			arr->at(i)->position.x = 700 + 126 * arr->at(i)->positionCombat_I;
-		}
-	}*/
-
-	UpdatePositions(arr);
+	UpdatePositions(arr, chara->positionCombat_I);
 }
 
-void Combat::RemoveCharacter(vector<Character*> arr, Character* chara)
+void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 {
 	// Delete from its type vector
-	arr.erase(arr.begin() + chara->positionCombat_I);
-
+	arr->erase(arr->begin() + chara->positionCombat_I);
+	
 	// Delete & free memory (should work?)
 
 	// Delete from initiative list
@@ -586,14 +567,13 @@ void Combat::RemoveCharacter(vector<Character*> arr, Character* chara)
 
 	// Delete from entity manager list
 	app->entityManager->DestroyEntity(chara);
-
-	UpdatePositions(&arr);
+	UpdatePositions(arr, chara->positionCombat_I);	
 }
 
-void Combat::UpdatePositions(vector<Character*>* arr)
+void Combat::UpdatePositions(vector<Character*>* arr, int pos)
 {
 	// Update combat and buttons position
-	for (int i = 0; i < arr->size(); i++)
+	for (int i = pos; i < arr->size(); i++)
 	{
 		arr->at(i)->positionCombat_I = i;
 

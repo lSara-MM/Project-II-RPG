@@ -19,17 +19,19 @@
 
 Character::Character() : Entity(EntityType::COMBAT_CHARA)
 {
-	name.Create("CombatCharacter");
+	//name.Create("CombatCharacter");
 	active = true;
 }
 
 Character::~Character()
 {
+	delete button;
+	button = nullptr;
 }
 
 bool Character::Awake()
 {
-	chara_name = parameters.attribute("name").as_string();
+	name = parameters.attribute("name").as_string();
 
 	maxHp = parameters.attribute("maxHp").as_int();
 	currentHp = parameters.attribute("currentHp").as_int();
@@ -159,67 +161,67 @@ bool Character::Update(float dt)
 					break;
 				case CharacterClass::TANK:
 					
-					int probSkill;
-					if (currentHp>=maxHp/2) //Alto de vida
-					{
-						if (listSkillsHistory.end->data == 4)//Si se uso el turno pasado no se usa
-						{
-							probSkill = 10;						
-						}
-						else //Si no se uso pues casi siempre la usa
-						{
-							probSkill = 60;
-						}
-						if (CalculateRandomProbability(probSkill))
-						{
-							//usar skill 4 (tanqueo high HP)
-							listSkillsHistory.Add(4);
-							armor += 5; //TEMPORAL
-							break;
-						}
-						else
-						{
-							probSkill = 75;
-						} 
+					//int probSkill;
+					//if (currentHp>=maxHp/2) //Alto de vida
+					//{
+					//	if (listSkillsHistory.end->data == 4)//Si se uso el turno pasado no se usa
+					//	{
+					//		probSkill = 10;						
+					//	}
+					//	else //Si no se uso pues casi siempre la usa
+					//	{
+					//		probSkill = 60;
+					//	}
+					//	if (CalculateRandomProbability(probSkill))
+					//	{
+					//		//usar skill 4 (tanqueo high HP)
+					//		listSkillsHistory.Add(4);
+					//		armor += 5; //TEMPORAL
+					//		break;
+					//	}
+					//	else
+					//	{
+					//		probSkill = 75;
+					//	} 
 
-					}
-					else //Bajo de vida
-					{
-						if (listSkillsHistory.end->data==2)//Si se uso el turno pasado no se repite casi
-						{
-							probSkill = 15;
-						}
-						else //Si no se uso pues casi siempre la usa
-						{
-							probSkill = 80;
+					//}
+					//else //Bajo de vida
+					//{
+					//	if (listSkillsHistory.end->data==2)//Si se uso el turno pasado no se repite casi
+					//	{
+					//		probSkill = 15;
+					//	}
+					//	else //Si no se uso pues casi siempre la usa
+					//	{
+					//		probSkill = 80;
 
-						}
-						if (CalculateRandomProbability(probSkill))
-						{
-							//usar skill 2
-							listSkillsHistory.Add(2);
-							this->ModifyHP(400); //TEMPORAL
-							break;
-						}
-						{
-							probSkill = 25;
-						}
-					}
-					if (CalculateRandomProbability(probSkill))//Ataques
-					{
-						//usar skill 4 (daño + debuff)
-						listSkillsHistory.Add(3);
-						app->combat->vecAllies.at(0)->ModifyHP(-130);//TEMPORAL
-						app->combat->vecAllies.at(0)->attack-=10;
-						break;
-					}
-					else
-					{
-						//usar skill 1 (daño solo)
-						listSkillsHistory.Add(1);
-						app->combat->vecAllies.at(0)->ModifyHP(-150);//TEMPORAL
-						break;
-					}
+					//	}
+					//	if (CalculateRandomProbability(probSkill))
+					//	{
+					//		//usar skill 2
+					//		listSkillsHistory.Add(2);
+					//		this->ModifyHP(400); //TEMPORAL
+					//		break;
+					//	}
+					//	{
+					//		probSkill = 25;
+					//	}
+					//}
+					//if (CalculateRandomProbability(probSkill))//Ataques
+					//{
+					//	//usar skill 4 (daño + debuff)
+					//	listSkillsHistory.Add(3);
+					//	app->combat->vecAllies.at(0)->ModifyHP(-130);//TEMPORAL
+					//	app->combat->vecAllies.at(0)->attack-=10;
+					//	break;
+					//}
+					//else
+					//{
+					//	//usar skill 1 (daño solo)
+					//	listSkillsHistory.Add(1);
+					//	app->combat->vecAllies.at(0)->ModifyHP(-150);//TEMPORAL
+					//	break;
+					//}
 
 			
 			
@@ -258,9 +260,6 @@ bool Character::CleanUp()
 {
 	app->tex->UnLoad(texture);
 
-	delete button;
-	button = nullptr;
-
 	return true;
 }
 
@@ -276,8 +275,8 @@ void Character::ModifyHP(int hp)
 
 	if (currentHp <= 0)
 	{
-		if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(app->combat->vecAllies, this); }
-		else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(app->combat->vecEnemies, this); }
+		if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(&app->combat->vecAllies, this); }
+		else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(&app->combat->vecEnemies, this); }
 	}
 }
 
