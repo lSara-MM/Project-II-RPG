@@ -109,7 +109,11 @@ bool Combat::Update(float dt)
 
 		MoveCharacter(&vecEnemies, vecEnemies.at(1), 1);
 	}
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+		LOG("Change chara");
 
+		RemoveCharacter(vecEnemies, vecEnemies.at(1));
+	}
 
 	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
 
@@ -211,7 +215,6 @@ bool Combat::InitAllies(array<Character*, 4> party)
 		}
 	}
 
-	//Aqui esta el problema
 	vecAllies.insert(vecAllies.end(), begin(party), begin(party) + j);
 	return true;
 }
@@ -554,7 +557,7 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 	arr->insert(arr->begin() + newPos, chara);
 
 	// Update combat and buttons position
-	for (int i = 0; i < arr->size(); i++)
+	/*for (int i = 0; i < arr->size(); i++)
 	{
 		arr->at(i)->positionCombat_I = i;
 
@@ -569,7 +572,9 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 			arr->at(i)->button->bounds.x = 700 + 126 * arr->at(i)->positionCombat_I;
 			arr->at(i)->position.x = 700 + 126 * arr->at(i)->positionCombat_I;
 		}
-	}
+	}*/
+
+	UpdatePositions(arr);
 }
 
 void Combat::RemoveCharacter(vector<Character*> arr, Character* chara)
@@ -587,5 +592,28 @@ void Combat::RemoveCharacter(vector<Character*> arr, Character* chara)
 
 	// Delete from entity manager list
 	app->entityManager->DestroyEntity(chara);
+
+	UpdatePositions(&arr);
+}
+
+void Combat::UpdatePositions(vector<Character*>* arr)
+{
+	// Update combat and buttons position
+	for (int i = 0; i < arr->size(); i++)
+	{
+		arr->at(i)->positionCombat_I = i;
+
+		if (arr->at(i)->charaType == CharacterType::ALLY)
+		{
+			arr->at(i)->button->bounds.x = 400 - 126 * arr->at(i)->positionCombat_I;
+			arr->at(i)->position.x = 400 - 126 * arr->at(i)->positionCombat_I;
+		}
+
+		if (arr->at(i)->charaType == CharacterType::ENEMY)
+		{
+			arr->at(i)->button->bounds.x = 700 + 126 * arr->at(i)->positionCombat_I;
+			arr->at(i)->position.x = 700 + 126 * arr->at(i)->positionCombat_I;
+		}
+	}
 }
 
