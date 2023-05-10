@@ -61,12 +61,8 @@ public:
 	//Del 1 al 4
 	bool DisableSkillButton(int skillNum);
 
-	// Settings
-	bool OnGuiMouseClickEvent(GuiControl* control);
 
 
-
-	// Sara functions, to test
 	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);
 	void RemoveCharacter(vector<Character*>* arr, Character* chara);
 	void UpdatePositions(vector<Character*>* arr, int pos);
@@ -74,9 +70,13 @@ public:
 	bool InitEnemies(SString scene, vector<int> arr);
 	bool InitAllies(array<Character*, 4> party);
 
-	bool SaveCombat();//guardar stats playable characters en xml combat
-	bool LoadCombat();//cargar stats playable characters desde xml combat
-	bool RestartCombatData();//al empezar partida nueva, poner stats xml combat igual a xml config
+	// Settings
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
+	// Save/Load
+	bool SaveCombat(); //guardar stats playable characters en xml combat
+	bool LoadCombat(); //cargar stats playable characters desde xml combat
+	bool RestartCombatData(); //al empezar partida nueva, poner stats xml combat igual a xml config
 
 public:
 	//Player* player;
@@ -88,9 +88,6 @@ public:
 
 	vector<Character*> vecAllies;
 	vector<Character*> vecEnemies;
-
-	/*array<Character*, 4> listAllies;
-	array<Character*, 4> listEnemies;*/
 
 	Character* targeted_Character = nullptr; //Last button selected
 	int lastPressedAbility_I = 0;
@@ -104,6 +101,10 @@ private:
 	//Fondo
 	const char* texturePathBackground;
 	SDL_Texture* textureBackground;
+
+	const char* texturePathTurnsBar;
+	SDL_Texture* textureTurnsBar;
+
 	const char* texturePathTargetButton;
 	SDL_Texture* textureTargetButton;
 

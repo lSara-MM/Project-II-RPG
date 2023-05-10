@@ -25,8 +25,7 @@ Character::Character() : Entity(EntityType::COMBAT_CHARA)
 
 Character::~Character()
 {
-	delete button;
-	button = nullptr;
+	CleanUp();
 }
 
 bool Character::Awake()
@@ -65,44 +64,23 @@ bool Character::Start()
 	texture = app->tex->Load(texturePath);
 
 	SDL_Rect buttonBounds;
-	ButtonType buttonType;
 
-	switch (type)
+	if (charaType == CharacterType::ALLY)
 	{
-	case EntityType::COMBAT_CHARA:
-		
-		if (charaType == CharacterType::ALLY)
-		{
-			buttonBounds = { 400 - 126 * positionCombat_I, 200, 125, 180 };
-			position = { 400 - 126 * positionCombat_I, 200 };
-		}
+		buttonBounds = { 400 - 126 * positionCombat_I, 200, 125, 180 };
+		position = { 400 - 126 * positionCombat_I, 200 };
+	}
 
-		if (charaType == CharacterType::ENEMY)
-		{
-			buttonBounds = { 700 + 126 * positionCombat_I, 200, 125, 180 };
-			position = { 700 + 126 * positionCombat_I, 200 };
-		}
-
-		buttonType = ButtonType::COMBAT_TARGET;
-		break;
-
-		// later on, inventory idea purposes
-		// the idea is to set a square smaller button with a section of the texture of the head
-		// the button should have a normal button texture and the character sprite would go ABOVE it and cropped to fit
-		// the SDL_Rect that defines the section from the spritesheet / the spritesheet used should depend on the character ID or something? idk
-	case EntityType::MENU_CHARA:
-		buttonBounds = { 500 + 130 * 1, 200, 125, 180 };
-		position = { 500 + 130 * 1, 200 };
-
-		buttonType = ButtonType::INVENTORY;
-		break;
-	default:
-		break;
+	if (charaType == CharacterType::ENEMY)
+	{
+		buttonBounds = { 700 + 126 * positionCombat_I, 200, 125, 180 };
+		position = { 700 + 126 * positionCombat_I, 200 };
 	}
 	
-	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, buttonType);
-
-	onTurn = false; //Empiezan sin tocarle a nadie
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, ButtonType::COMBAT_TARGET);
+	// TO uncomment later
+	//button->state = GuiControlState::DISABLED;
+	onTurn = false;
 
 	return true;
 }
@@ -117,8 +95,8 @@ bool Character::Update(float dt)
 		onTurn = true;
 		string position_C = std::to_string(positionCombat_I);
 		const char* ch_pos = position_C.c_str();
-		app->render->TextDraw(ch_pos, position.x+ 60, position.y - 20, 15);
-		app->render->TextDraw(name.GetString(), position.x+5 , position.y +180, 10);
+		app->render->TextDraw(ch_pos, position.x + 60, position.y - 20, 15);
+		app->render->TextDraw(name.GetString(), position.x + 5, position.y + 180, 10);
 	}
 	
 	//Si es su turno pues hace cosas
@@ -259,6 +237,10 @@ bool Character::Update(float dt)
 bool Character::CleanUp()
 {
 	app->tex->UnLoad(texture);
+
+	/*delete button;
+	button = nullptr;*/
+
 	RELEASE(button);
 	return true;
 }

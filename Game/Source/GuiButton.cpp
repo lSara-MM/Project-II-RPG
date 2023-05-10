@@ -18,7 +18,7 @@ GuiButton::~GuiButton()
 	//delete buttonTex;
 	app->tex->UnLoad(buttonTex);
 
-	// arreglo feo temporal? com se borra un boto, pregunta seria
+	// TO DELETE: arreglo feo temporal? com se borra un boto, pregunta seria
 	state = GuiControlState::NONE;
 }
 

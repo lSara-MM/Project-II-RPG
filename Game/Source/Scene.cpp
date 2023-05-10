@@ -263,7 +263,6 @@ void Scene::Debug()
 
 		LOG("PAUSE");
 	}
-
 	if (pause_B == true && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->controller.B == 1))//POSAR CONTROL NORMAL
 	{
 		
@@ -308,10 +307,8 @@ void Scene::Debug()
 
 	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
 		LOG("Combat");
-		//InitCombat(); //Lo pongo aqui porque llamarlo tras cada cleanUp trae problemas
 		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
 		app->combat->active = true;
-		//InitCombat(); //Lo pongo aqui porque llamarlo tras cada cleanUp trae problemas
 	}
 	
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();

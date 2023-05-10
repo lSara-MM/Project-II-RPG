@@ -89,31 +89,8 @@
 	   background1 ="Assets/Maps/clouds_bg.png" background2 ="Assets/Maps/clouds_mg_1.png" background3 ="Assets/Maps/clouds_mg_2.png"
 	   coinspath="Assets/Maps/coin.png" heartspath="Assets/Maps/heart.png"
 		settingsPath ="Assets/Textures/setting_menu.png" mouseSpeed =" 0.5">			
-		
-	<bard name ="Bard" maxHp="1000" currentHp="1000" attack="200" critProbability="10" critDamage="20" precision="100" armor="8"   esquiva="10" resistencia="5" speed="6"
-		   texturePath ="Assets/Textures/AllyBard.png"/>
 
-	<protagonist name ="Protagonista" maxHp="1150" currentHp="1150" attack="190" armor="10" speed="5"
-				  texturePath ="Assets/Textures/AllyProtagonist.png"/>
-
-	<enemyTank name ="Bewitched Wardrobe" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
-			    texturePath ="Assets/Textures/marioneta2.png"/>
-		
-	<enemyDPS name ="Cursed Puppet" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
-			  texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
-
-	<enemyHealer name ="Possessed Painting" maxHp="850" currentHp="850" attack="140" armor="8" speed="2"
-				  texturePath ="Assets/Textures/marioneta3.png"/>
-			
-	<!--IDEA PARA HACER CARGA CHARACTERS COMBAT, WIP QUIZA SE TENGA QUE DESCARTAR-->
-
-		<CombatCharacter name ="Bard" id="1" CharacterType="0" CharacterClass="5"
-			maxHp="1000" currentHp="1000" attack="200" critProbability="10" critDamage="20" precision="100" armor="8"   esquiva="10" resistencia="5" speed="6"
-		   texturePath ="Assets/Textures/AllyBard.png"/>
-
-		<CombatCharacter name ="Bard" id="2" CharacterType="0" CharacterClass="5"
-			maxHp="1000" currentHp="1000" attack="200" critProbability="10" critDamage="20" precision="100" armor="8"   esquiva="10" resistencia="5" speed="6"
-		   texturePath ="Assets/Textures/AllyBard.png"/>
+	<!--NPCs-->
 
 	<npc name="GUIA" dialogueID="1"
 		x="3710" y="985" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
@@ -145,7 +122,8 @@
 		</map1>
 	</map>
 
-<combat mouseSpeed =" 0.5">
+<combat mouseSpeed =" 0.5" 
+bgTexture="Assets/Textures/combat_background_placeholder.png" targetTexture="Assets/GUI/UI_button_charactherSelection.png" turnBarTexture="Assets/GUI/UI_battle_turnsBar.png">
 
 <!--
 enum class CharacterClass
