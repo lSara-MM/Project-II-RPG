@@ -349,19 +349,17 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		switch (physB->id)
 		{
 		case 0:
+			if (app->hTerrors->active == true)
+			{
+				app->entityManager->tpID = 0;
+				app->SaveGameRequest();
+				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
+			}
 			if (app->scene->active == true)
 			{
 				app->map->mapPendingtoDelete = true;
 				app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
 
-			}
-			if (app->hTerrors->active == true)
-			{
-				app->entityManager->tpID = 0;
-				app->SaveGameRequest();
-				app->puzzleManager->CleanUp();
-				app->puzzleManager->active = false;
-				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
 			}
 			if (app->practiceTent->active == true)
 			{

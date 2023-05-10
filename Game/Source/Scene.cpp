@@ -9,6 +9,7 @@
 #include "Window.h"
 
 #include "IntroScene.h"
+#include "PuzzleManager.h"
 #include "LoseScene.h"
 #include "Combat.h"
 
@@ -55,6 +56,12 @@ bool Scene::Awake(pugi::xml_node& config)
 bool Scene::Start()
 {
 	app->input->godMode_B = false;
+
+	if (app->puzzleManager->active == true) {
+		app->puzzleManager->CleanUp();
+	}
+
+	app->puzzleManager->active = false;
 
 	app->audio->PlayMusic(lobby_music, 1.0);
 
