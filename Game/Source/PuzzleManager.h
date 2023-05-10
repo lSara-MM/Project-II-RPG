@@ -89,9 +89,8 @@ public:
 	iPoint posBoss;
 	iPoint posLoset;
 
-	SDL_Texture* Door;
+	SDL_Texture* door;
 	SDL_Texture* palanca;
-	SDL_Texture* palancaSens;
 	SDL_Texture* notas;
 	SDL_Texture* doorEscape;
 	SDL_Texture* boss;
@@ -132,7 +131,6 @@ private:
 
 	const char* texturepathDoor;
 	const char* texturepathPalanca;
-	const char* texturepathPalancaSens;
 	const char* texturepathNotas;
 	const char* texturepathDoorEscape;
 	const char* texturepathBoss;

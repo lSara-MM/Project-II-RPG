@@ -688,14 +688,11 @@ bool Player::Palancas()
 {
 	if (keyPalancas >= 1)
 	{
-		if (app->puzzleManager->Door != nullptr)
-			app->tex->UnLoad(app->puzzleManager->Door);
+		if (app->puzzleManager->door != nullptr)
+			app->tex->UnLoad(app->puzzleManager->door);
 
 		if (app->puzzleManager->palanca != nullptr)
 			app->tex->UnLoad(app->puzzleManager->palanca);
-
-		if (app->puzzleManager->palancaSens != nullptr)
-			app->tex->UnLoad(app->puzzleManager->palancaSens);
 
 		if (app->puzzleManager->Door1 != nullptr)
 			app->puzzleManager->Door1->body->GetWorld()->DestroyBody(app->puzzleManager->Door1->body);

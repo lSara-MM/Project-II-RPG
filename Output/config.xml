@@ -94,13 +94,13 @@
     <lose texturepath="Assets/Textures/Concept_LoseScreen.jpg" music="Assets/Audio/Music/mus_loose_scene.ogg"/>
   </SceneWin_Lose>
   <PuzzleManager>
-    <Door texturepathDoor="Assets/Textures/BlueCube_NPC.jpg" width="20" height="50" x="1400" y="1250" x1="1450" y1="1250" x2="1275" y2="575"/>
-    <DoorEscape texturepathDoorEscape="Assets/Textures/BlueCube_NPC.jpg" width="80" height="80" x="1420" y="910"/>
-    <Palanca texturepathPalanca="Assets/Textures/BlueCube_NPC.jpg" Xpalancas="1380" Ypalancas="1250" widthPalanca="5" heightPalanca="5"/>
-    <PalancaSens texturepathSensor="Assets/Textures/BlueCube_NPC.jpg"  widthPalancaSens="30" heightPalancaSens="30"/>
-    <Boss texturepathBoss="Assets/Textures/BlueCube_NPC.jpg" x="1520"  y="830"  width="70" height="70"/>
-    <Loset texturepathLoset="Assets/Textures/BlueCube_NPC.jpg" x="1730"  y="760"  width="30" height="30"/>
-    <Notas texturepathNotas="Assets/Textures/BlueCube_NPC.jpg"  x1="1350" y1="1250" x2="1350" y2="1240" x3="1350" y3="1220" widthNotas="50" heightNotas="50"/>
+    <Door texturepathDoor="Assets/Textures/AllyBard.png" width="20" height="50" x="1400" y="1250" x1="1450" y1="1250" x2="1275" y2="575"/>
+    <DoorEscape texturepathDoorEscape="Assets/Textures/AllyBard.png" width="80" height="80" x="1420" y="910"/>
+    <Palanca texturepathPalanca="Assets/Textures/AllyBard.png" Xpalancas="1380" Ypalancas="1250" widthPalanca="5" heightPalanca="5"/>
+    <PalancaSens texturepathSensor="Assets/Textures/AllyBard.png"  widthPalancaSens="30" heightPalancaSens="30"/>
+    <Boss texturepathBoss="Assets/Textures/AllyBard.png" x="1520"  y="830"  width="70" height="70"/>
+    <Loset texturepathLoset="Assets/Textures/AllyBard.png" x="1730"  y="760"  width="30" height="30"/>
+    <Notas texturepathNotas="Assets/Textures/AllyBard.png"  x1="1350" y1="1250" x2="1350" y2="1240" x3="1350" y3="1220" widthNotas="50" heightNotas="50"/>
 	</PuzzleManager>
   <map>
 		<mapfolder path="Assets/Maps/"/>

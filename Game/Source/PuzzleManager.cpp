@@ -43,7 +43,6 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 
 	texturepathDoor = config.child("Door").attribute("texturepathDoor").as_string();
 	texturepathPalanca = config.child("Palanca").attribute("texturepathPalanca").as_string();
-	texturepathPalancaSens = config.child("PalancaSens").attribute("texturepathSensor").as_string();
 	texturepathNotas = config.child("Notas").attribute("texturepathNotas").as_string();
 	texturepathDoorEscape = config.child("DoorEscape").attribute("texturepathDoorEscape").as_string();
 	texturepathBoss = config.child("Boss").attribute("texturepathBoss").as_string();
@@ -129,9 +128,8 @@ bool PuzzleManager::Start()
 
 	if (palancas == false) 
 	{
-		Door = app->tex->Load(texturepathDoor);
+		door = app->tex->Load(texturepathDoor);
 		palanca = app->tex->Load(texturepathPalanca);
-		palancaSens = app->tex->Load(texturepathPalancaSens);
 
 		Door1 = app->physics->CreateRectangle(posDoor1.x - widthDoor / 2, posDoor1.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
 		Door1->body->SetFixedRotation(true);
@@ -149,7 +147,7 @@ bool PuzzleManager::Start()
 
 	if (rescue == false) 
 	{
-		Door = app->tex->Load(texturepathDoor);
+		door = app->tex->Load(texturepathDoor);
 		boss = app->tex->Load(texturepathBoss);
 		loset = app->tex->Load(texturepathLoset);
 		
@@ -239,14 +237,11 @@ bool PuzzleManager::CleanUp()
 {
 	LOG("Freeing scene");
 
-	if(Door != nullptr)
-		app->tex->UnLoad(Door);
+	if(door != nullptr)
+		app->tex->UnLoad(door);
 
 	if (palanca != nullptr)
 		app->tex->UnLoad(palanca);
-
-	if (palancaSens != nullptr)
-		app->tex->UnLoad(palancaSens);
 	
 	if (notas != nullptr)
 		app->tex->UnLoad(notas);
@@ -298,13 +293,14 @@ bool PuzzleManager::CleanUp()
 
 bool PuzzleManager::Palancas() 
 {
+	app->render->DrawTexture(palanca, posPalancas.x, posPalancas.y);
+	app->render->DrawTexture(door, posDoor1.x, posDoor1.y);
+	app->render->DrawTexture(door, posDoor2.x, posDoor2.y);
+
 	if (keyPalancas == 1) 
 	{
 		if(palanca != nullptr)
 			app->tex->UnLoad(palanca);
-
-		if(palancaSens != nullptr)
-			app->tex->UnLoad(palancaSens);
 		
 		if (Door1 != nullptr)
 			Door1->body->GetWorld()->DestroyBody(Door1->body);
@@ -328,6 +324,12 @@ bool PuzzleManager::Palancas()
 
 bool PuzzleManager::Escape() 
 {
+	app->render->DrawTexture(doorEscape, posDoorEscape.x, posDoorEscape.y);
+	app->render->DrawTexture(notas, posNotas1.x, posNotas1.y);
+	app->render->DrawTexture(notas, posNotas2.x, posNotas2.y);
+	app->render->DrawTexture(notas, posNotas3.x, posNotas3.y);
+
+
 	if (app->scene->player->intoCode == true) 
 	{
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
@@ -369,6 +371,10 @@ bool PuzzleManager::Escape()
 
 bool PuzzleManager::Rescue() 
 {
+	app->render->DrawTexture(boss, posBoss.x, posBoss.y);
+	app->render->DrawTexture(door, posDoor3.x, posDoor3.y);
+	app->render->DrawTexture(loset, posLoset.x, posLoset.y);
+
 	if (bossActive) 
 	{
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
@@ -391,8 +397,8 @@ bool PuzzleManager::Rescue()
 		{
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
-				if (Door != nullptr)
-					app->tex->UnLoad(Door);
+				if (door != nullptr)
+					app->tex->UnLoad(door);
 
 				if (Loset->body != nullptr)
 					Loset->body->GetWorld()->DestroyBody(Loset->body);
