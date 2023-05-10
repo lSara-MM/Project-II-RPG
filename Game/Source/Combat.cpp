@@ -147,7 +147,6 @@ bool Combat::CleanUp()
 	app->guiManager->CleanUp();
 
 
-
 	app->entityManager->entities.Clear();
 	app->entityManager->Disable();
 

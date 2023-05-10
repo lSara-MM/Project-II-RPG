@@ -202,7 +202,23 @@ bool GuiButton::Draw(Render* render)
 	int x = (rect.w - offsetX) / 2;
 	int y = (rect.h - fontSize) / 2;
 
-	if(text != "") app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
+
+	// TO TEST
+
+	// Text
+	vector<SString> texts;
+	int max_chars_line = fontSize;
+	app->render->SplitText(text, &texts, fontSize, max_chars_line);
+
+	if (text != "")
+	{
+		/*size_t lines = texts.size();
+		for (size_t i = 0; i < lines; i++)
+		{
+			app->render->TextDraw(texts.at(i).GetString(), bounds.x + x, bounds.y + y + (fontSize + 3) * i, fontSize, font);
+		}*/
+		app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
+	}
 
 	return false;
 }

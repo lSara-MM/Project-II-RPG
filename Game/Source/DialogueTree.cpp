@@ -5,46 +5,6 @@
 #include "Textures.h"
 #include "Window.h"
 
-using namespace std;
-
-void DialogueNode::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, int max_chars_line_)
-{
-	string line = text_.GetString();
-
-	if (text_.Length() > max_chars_line_)
-	{
-		int a, b, startIndex = 0;
-		for (int j = 0; j <= line.length() / max_chars_line_; j++)	// <= -> in case of decimal, get the round up number 
-		{
-			a = max_chars_line_ + startIndex;
-			if (a > line.size())
-			{
-				a = line.size() - startIndex;
-			}
-			
-			b = line.find_first_of(" ", a);	// find first " " (space) from last trimmed to the end. 
-
-			if (b == -1)
-			{
-				b = line.find_first_of(".", a);
-			}
-			
-			b++;
-
-			// If we reached the end of the word or the end of the input.
-			string temp;
-			temp.append(line, startIndex, b - startIndex);	// string text to append, int index start, int size of text to append
-			pTexts->push_back(temp.c_str());
-			startIndex = b;
-		}
-	}
-	else
-	{
-		pTexts->push_back(line.c_str());
-	}
-
-	trimmed = true;
-}
 
 void DialogueNode::CleanUp()
 {
@@ -74,7 +34,8 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 
 	if (!activeNode->trimmed)
 	{
-		activeNode->SplitText(activeNode->text, &activeNode->texts, FONT_SIZE, max_chars_line);
+		app->render->SplitText(activeNode->text, &activeNode->texts, FONT_SIZE, max_chars_line);
+		activeNode->trimmed = true;
 	}
 
 	size_t lines = activeNode->texts.size();
@@ -87,24 +48,25 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 
 	if (!updateOptions)
 	{
-		updateOptions = UpdateNodes(mod, pos, FONT_SIZE);
+		updateOptions = UpdateNodes(mod, pos);
 	}
 
 	return true;
 }
 
-bool DialogueTree::UpdateNodes(Module* mod, iPoint pos, int fontSize)
+bool DialogueTree::UpdateNodes(Module* mod, iPoint pos)
 {
 	GuiButton* button;
 
 	for (int i = 0; i < activeNode->choicesList.size(); i++)
 	{
 		const char* ch_option = activeNode->choicesList[i]->text.GetString();	// SString to const char*	
-		int w = activeNode->choicesList[i]->text.Length() * fontSize * 0.5 + 50;
-		int h = fontSize * 1.5f;
-		SDL_Rect bounds = { app->win->GetWidth() - w, pos.y - (h + fontSize) * (i + 1), w, h};
+		int w = FONT_SIZE * 15;
+		int h = FONT_SIZE * 3;
+		SDL_Rect bounds = { app->win->GetWidth() - w, pos.y - (h + FONT_SIZE) * (i + 1), w, h};
+		//SDL_Rect bounds = { 900, pos.y - (h + FONT_SIZE) * (i + 1), w, h };
 
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id, mod, bounds, ButtonType::LARGE, ch_option, fontSize);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id, mod, bounds, ButtonType::LARGE, ch_option, FONT_SIZE);
 		button->state = GuiControlState::NORMAL;
 		listDialogueButtons.Add(button);
 	}

@@ -39,8 +39,6 @@ public:
 	DialogueNode() {};
 	~DialogueNode() {};
 	
-	void SplitText(SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_);
-
 	void CleanUp();
 
 public:
@@ -64,7 +62,7 @@ public:
 	~DialogueTree() {};
 
 	bool UpdateTree(float dt, Module* mod, iPoint pos);
-	bool UpdateNodes(Module* mod, iPoint pos, int fontSize);
+	bool UpdateNodes(Module* mod, iPoint pos);
 	bool EventReturn(Module* mod, iPoint pos);
 	void CleanUp();
 

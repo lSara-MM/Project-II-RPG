@@ -108,6 +108,11 @@ bool Player::Start()
 	npcInteract = false;
 
 	pbody->body->SetGravityScale(0);
+	
+	for (int i = 0; i < arrParty.size(); i++)
+	{
+		arrParty.at(i) = nullptr;
+	}
 
 	return true;
 }
