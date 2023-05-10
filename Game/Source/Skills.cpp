@@ -35,6 +35,8 @@ bool Skill::PosCanBeUsed(int positionCharacter)
 
 int Skill::RangeCanTarget(vector<Character> vec)
 {
+	Character a;
+	a.charaType == CharacterType::ALLY;
 	//Mirar size del vector
 	//si mas pequeño el vector que 
 	return 0;

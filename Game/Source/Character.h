@@ -13,6 +13,7 @@
 #include "Skills.h"
 
 struct SDL_Texture;
+class Skill;
 
 enum class CharacterType
 {

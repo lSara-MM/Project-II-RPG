@@ -234,6 +234,7 @@ bool Combat::InitEnemies(SString scene, vector<int> arr)
 
 bool Combat::InitAllies(array<Character*, 4> party)
 {
+	// TO TEST
 	for (int i = 0; i < party.size(); i++)
 	{
 		if (party.at(i) == nullptr) { return true; }
