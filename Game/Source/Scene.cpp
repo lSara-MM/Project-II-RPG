@@ -183,6 +183,8 @@ bool Scene::CleanUp()
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 
+	player->active;
+
 	if (app->combat->active == true)
 	{
 		// this shouldnt be here later

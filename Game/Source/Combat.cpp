@@ -63,15 +63,6 @@ bool Combat::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-
-	// Set allies ID
-	for (int i = 0; i < vecAllies.size(); i++)
-	{
-		//vecAllies.at(i)->type = EntityType::COMBAT_CHARA;
-		vecAllies.at(i)->positionCombat_I = i;
-	}
-
-
 	app->entityManager->Enable();
 	app->physics->Disable();
 
@@ -91,8 +82,11 @@ bool Combat::Update(float dt)
 {
 	Debug();
 
-	//Printar barra de Turnos Cutre momentaria
+	//Printar Fondo
 	app->render->DrawTexture(textureBackground, 0, 0);
+
+	//Printar Barra Turnos
+	app->render->DrawRectangle({ 20,640,20,20 }, 255, 0, 0);
 
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{

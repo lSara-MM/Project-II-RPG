@@ -27,12 +27,15 @@ Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUs
 {
 }
 
-//bool Skill::PosCanBeUsed(int pos)
-//{
-//}
-
-// idea WIP
-void Skill::GetRange(int target, vector<Character*>* arr)
+bool Skill::PosCanBeUsed(int positionCharacter)
 {
-	arr->at(target);
+	//True si dentro del rango, false si no
+	return (positionCharacter >= posToTargetStart_I && positionCharacter <= posToTargetEnd_I);
+}
+
+int Skill::RangeCanTarget(vector<Character> vec)
+{
+	//Mirar size del vector
+	//si mas pequeño el vector que 
+	return 0;
 }

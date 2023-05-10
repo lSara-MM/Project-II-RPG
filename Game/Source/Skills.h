@@ -30,14 +30,9 @@ public:
 
 	Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I);
 
-	bool PosCanBeUsed(int positionCharacter)
-	{
-		//True si dentro del rango, false si no
-		return (positionCharacter >= posToTargetStart_I && positionCharacter <= posToTargetEnd_I);
-	}
+	bool PosCanBeUsed(int positionCharacter);
 
-	// Calculate how many characters affect and type
-	void GetRange(int target, vector<Character*>* arr);
+	int RangeCanTarget(vector<Character> vec);
 
 public:
 	SString name;
