@@ -94,6 +94,12 @@ bool Combat::Update(float dt)
 		app->render->TextDraw(listInitiative.At(i)->data->name.GetString(), 640 - ((int)listInitiative.Count()) * 50 + i * 100, 30, 10);
 	}
 	
+	//God Mode Info
+	if (app->input->godMode_B)
+	{
+		app->render->TextDraw("Press D to destroy first ally", 10, 80, 12);
+		app->render->TextDraw("Press A to destroy first enemy", 10, 100, 12);
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
@@ -126,6 +132,12 @@ bool Combat::PostUpdate()
 	bool ret = true;
 
 	//if (exit_B) return false;
+
+	if (app->input->godMode_B)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) { RemoveCharacter(&vecAllies, vecAllies.at(0)); }
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) { RemoveCharacter(&vecEnemies, vecEnemies.at(0)); }
+	}
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
