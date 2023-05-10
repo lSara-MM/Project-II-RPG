@@ -72,7 +72,7 @@ bool IntroScene::Start()
 	}
 
 	pSettings = new Settings(this);
-	listButtons.Add(pSettings->listSettingsButtons.start->data);
+	//listButtons.Add(pSettings->listGUI->start->data);
 
 	exit_B = false;
 
@@ -243,7 +243,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 803:
 		LOG("Controls settings click");
-		pSettings->pControl->control_B = true;
+		pSettings->pControl->created_B = true;
 
 		pSettings->pGame->CloseOverlay();
 		pSettings->pGraphics->CloseOverlay();
