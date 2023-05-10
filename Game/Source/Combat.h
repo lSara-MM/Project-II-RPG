@@ -69,6 +69,7 @@ public:
 	// Sara functions, to test
 	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);
 	void RemoveCharacter(vector<Character*> arr, Character* chara);
+	void UpdatePositions(vector<Character*>* arr);
 
 	bool InitEnemies(SString scene, vector<int> arr);
 	bool InitAllies(array<Character*, 4> party);

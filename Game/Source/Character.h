@@ -89,7 +89,7 @@ public:
 	bool delayOn = false;
 
 	// Stats
-	SString name;
+	SString chara_name;
 
 	// STATS
 	int maxHp; // La base a level 0/1 es 1000
