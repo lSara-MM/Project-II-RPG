@@ -29,7 +29,7 @@ Character::~Character()
 
 bool Character::Awake()
 {
-	name = parameters.attribute("name").as_string();
+	chara_name = parameters.attribute("name").as_string();
 
 	maxHp = parameters.attribute("maxHp").as_int();
 	currentHp = parameters.attribute("currentHp").as_int();
