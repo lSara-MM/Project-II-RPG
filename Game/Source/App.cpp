@@ -14,6 +14,7 @@
 #include "Scene.h"
 #include "SceneWin_Lose.h"
 #include "PuzzleManager.h"
+#include "QuestManager.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
@@ -61,6 +62,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	fade = new FadeToBlack();
 	sceneWin_Lose = new SceneWin_Lose();
 	puzzleManager = new PuzzleManager();
+	questManager = new QuestManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -87,6 +89,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(guiManager);
 	AddModule(sceneWin_Lose);
 	AddModule(puzzleManager);
+	AddModule(questManager);
 
 
 	AddModule(fade);
