@@ -125,6 +125,20 @@ bool Character::Update(float dt)
 		{
 		case CharacterType::ALLY:
 
+			//Activar y desactivar botones usables
+			for (int i = 0; i < 4; i++)
+			{
+				if(arrSkills->at(i)->PosCanBeUsed(positionCombat_I))
+				{
+					app->combat->EnableSkillButton(i);
+				}
+				else
+				{
+					app->combat->DisableSkillButton(i);
+				}
+			}
+
+
 			break;
 		case CharacterType::ENEMY:
 
