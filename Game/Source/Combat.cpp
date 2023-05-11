@@ -148,8 +148,16 @@ bool Combat::CleanUp()
 {
 	LOG("Freeing scene");
 	//Save al terminar
-	SaveCombat();
+	//if (win)
+	//{
+	//	if (firstCombat_B)
+	//	{
+	//		firstCombat_B = false;
+	//	}
 
+	//	SaveCombat();
+	//}
+	
 	listButtons.Clear();
 
 	//pSettings->CleanUp();
