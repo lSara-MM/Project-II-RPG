@@ -33,9 +33,6 @@ public:
 
 	void AddQuest(Quest* quest);
 
-	bool LoadState(pugi::xml_node&);
-	bool SaveState(pugi::xml_node&);
-
 	//Get A list with the type of characters you want to have
 	List<Quest*> GetQuestByType(QuestType type);
 
