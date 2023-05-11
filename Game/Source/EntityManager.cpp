@@ -16,13 +16,7 @@
 #include "NPC.h"
 
 #include "Characther.h" 
-//PCs
-#include "PCProtagonist.h"
-#include "PCBard.h"
-//ECs
-#include "ECHouseTank.h"
-#include "ECHouseDPS.h"
-#include "ECHouseHealer.h"
+
 
 EntityManager::EntityManager() : Module()
 { 

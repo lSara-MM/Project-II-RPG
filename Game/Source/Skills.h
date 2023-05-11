@@ -31,7 +31,10 @@ public:
 	Skill();
 	~Skill();
 
-	Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I);
+	Skill(SString name, SString description, 
+		int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I,
+		int movementCaster,	int movementTarget, bool areaSkill, bool autoTarget,
+		float multiplierDmg,int bonusPrecision,	int bonusCritRate,int bonusCritDamage);
 
 	bool PosCanBeUsed(int positionCharacter);
 
@@ -45,7 +48,8 @@ public:
 	SkillType type;
 
 	//Gestion movimiento
-	int movement; //0 si no te mueve, -x si te mueve hacia delante +x si te mueve hacia atras
+	int movementCaster; //0 si no te mueve, -x si te mueve hacia delante +x si te mueve hacia atras
+	int movementTarget;
 	Character* charaToMove;
 
 	//Gestion potencia
@@ -66,6 +70,7 @@ private:
 	int posToTargetStart_I; //Posicion mas baja donde puedes usar el ataque
 	int posToTargetEnd_I; //Posicion mas alta donde puedes targetear el ataque, si es solo una pues poner el mismo numero que la inicial
 	bool areaSkill; //Si es true al hacerse la skill targetea todo da igual que posicion hayas pulsado
+	bool autoTarget;
 };
 
 #endif // __SKILLS_H__

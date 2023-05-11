@@ -56,6 +56,20 @@ bool Character::Awake()
 	height = parameters.attribute("height").as_int();
 
 	texturePath = parameters.attribute("texturePath").as_string();
+
+	int skill1ID[4];
+	//int skill1ID[0] = parameters.attribute("skill1ID").as_int();
+	//int skill2ID[1] = parameters.attribute("skill1ID").as_int();
+	//int skill3ID[2] = parameters.attribute("skill1ID").as_int();
+	//int skill4ID[3] = parameters.attribute("skill1ID").as_int();
+
+	skill1ID[0] = 1;
+	skill1ID[1] = 2;
+	skill1ID[2] = 3;
+	skill1ID[3] = 4;
+	
+	LoadSkill(skill1ID);
+
 	return true;
 }
 
@@ -282,7 +296,7 @@ bool Character::CalculateRandomProbability(int bonus_I, int against_I)
 }
 
 //Provisional full
-int Character::CalculateDamage(Character* caster, Character* defender)
+int Character::CalculateDamage(Character* caster, Character* defender, Skill* skill)
 {
 	if (1 > 0) //Curacion, no hace falta calcular esquiva ni nada 
 	{
@@ -312,3 +326,43 @@ int Character::CalculateDamage(Character* caster, Character* defender)
 		}
 	}
 }
+
+void Character::LoadSkill(int arr[4])
+{
+	//Cargar skills
+	pugi::xml_parse_result parseResult = skillsFile.load_file("skills.xml");
+	skillNode = skillsFile.child("skills");
+	for (int i = 0; i < 3; i++)
+	{
+		for (pugi::xml_node aux = skillNode.child("skill"); aux; aux = aux.next_sibling("skill"))
+		{
+			if (aux.attribute("id").as_int() == arr[i])
+			{
+				SString nombre = aux.attribute("name").as_string();
+				SString descripcion = aux.attribute("description").as_string();
+				SkillType tipo = (SkillType)aux.attribute("name").as_int();
+				
+				float mult = aux.attribute("multiplierDmg").as_float();
+				int dmgCrit = aux.attribute("bonusCritDamage").as_int();
+				int probCrit = aux.attribute("bonusCritRate").as_int();
+				int precision = aux.attribute("bonusPrecision").as_int();
+				int movTarget = aux.attribute("movementTarget").as_int();
+
+				int movUsuario = aux.attribute("movementCaster").as_int();
+				int posInicialUso = aux.attribute("posToUseStart_I").as_int();
+				int posFinallUso = aux.attribute("posToUseEnd_I").as_int();
+				
+				int posInicialTarget = aux.attribute("posToTargetStart_I").as_int();
+				int posFinallTarget = aux.attribute("posToTargetEnd_I").as_int();
+				bool area = aux.attribute("areaSkill").as_bool();
+				bool autoTarget = aux.attribute("areaSkill").as_bool();
+
+				/*arrSkills[i] = new Skill(nombre, descripcion,
+					posInicialUso, posFinallUso,posInicialTarget, posFinallTarget,
+					movUsuario,movTarget,area,autoTarget,mult,precision,probCrit,dmgCrit);*/
+			}
+		}
+	}
+}
+
+
