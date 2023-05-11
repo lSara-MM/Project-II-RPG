@@ -109,6 +109,10 @@ bool Combat::Update(float dt)
 		app->render->TextDraw(listInitiative.At(j)->data->name.GetString(), 640 - ((int)listInitiative.Count()) * 50 + i * 110, 30, 11);
 		j++;
 	}
+
+	//Barra skills + name
+	app->render->DrawRectangle({ 20,450,500,120 }, 220, 220, 220);
+
 	
 	//God Mode Info
 	if (app->input->godMode_B)
