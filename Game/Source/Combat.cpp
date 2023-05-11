@@ -71,6 +71,12 @@ bool Combat::Start()
 
 	StartCombat();
 
+	//Load, modificar currentHP, hacer luego de cargar allies
+	if (!firstCombat_B)
+	{
+		LoadCombat();
+	}
+
 	return true;
 }
 
@@ -138,7 +144,7 @@ bool Combat::CleanUp()
 {
 	LOG("Freeing scene");
 	//Save al terminar
-	//SaveCombat();
+	SaveCombat();
 
 	listButtons.Clear();
 
@@ -515,6 +521,13 @@ bool Combat::SaveCombat()
 
 	//}
 
+	for (int i = 0; i < vecAllies.size(); i++)
+	{
+		pugi::xml_node character = node.append_child("CombatCharacter");
+		character.append_attribute("currentHp") = vecAllies[i]->currentHp;
+		
+	}
+
 	ret = saveDoc->save_file("save_combat.xml");
 
 	return ret;
@@ -535,12 +548,17 @@ bool Combat::LoadCombat()
 	}
 	else
 	{
-		/*for (pugi::xml_node itemNode = node.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter"))
+		int i = 0;
+
+		for (pugi::xml_node itemNode = node.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter"))
 		{
-
-			app->scene->listAllies[i] = itemNode.attribute("currentHp").as_int();
-
-		}*/
+			if (i<app->scene->player->listPC.size())
+			{
+				break;
+			}
+			app->scene->player->listPC[i]->currentHp = itemNode.attribute("currentHp").as_int();
+			i++;
+		}
 
 	}
 

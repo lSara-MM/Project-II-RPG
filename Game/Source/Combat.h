@@ -92,6 +92,8 @@ public:
 	Character* targeted_Character = nullptr; //Last button selected
 	int lastPressedAbility_I = 0;
 
+	bool firstCombat_B = false;//determinar si es la primera vez que se lucha en la partida, en true significa que no se ha luchado todavia
+
 private:
 	int mouseX_combat, mouseY_combat;
 	float mouse_Speed;
