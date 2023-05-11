@@ -40,6 +40,7 @@ class LeaderboardScene;
 class FadeToBlack;
 class SceneWin_Lose;
 class PuzzleManager;
+class QuestManager;
 
 class App
 {
@@ -128,6 +129,7 @@ public:
 	FadeToBlack* fade;
 	SceneWin_Lose* sceneWin_Lose;
 	PuzzleManager* puzzleManager;
+	QuestManager* questManager;
 
 	// Time control
 	uint frames;
