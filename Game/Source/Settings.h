@@ -791,6 +791,8 @@ public:
 			listPauseButtons.Add(button);
 		}
 
+		pauseAnimation.Set();
+		pauseAnimation.AddTween(100, 80, BACK_OUT);
 
 		// Settings
 		pSettings = new Settings(mod);
@@ -798,13 +800,20 @@ public:
 
 	bool OpenPause()
 	{
+		//animaciones cosas menu
+		pauseAnimation.Foward();
+		pauseAnimation.Step(1, false);
+		float point = pauseAnimation.GetPoint();
+		int offsetAnimation = -750;
+		//formula int(offsetAnimation + point * (0 - offsetAnimation))
+
 		SDL_Rect rect = { 0, 0, 226, 261 };
 
 		app->audio->lowerBgMusic();
 
-		app->render->DrawRectangle({ 0 - app->render->camera.x, 0 - app->render->camera.y, app->win->GetWidth(), app->win->GetHeight()}, 255, 255, 255);
+		app->render->DrawRectangle({ 0 - app->render->camera.x,int(offsetAnimation + point * (0 - app->render->camera.y-offsetAnimation)), app->win->GetWidth(), app->win->GetHeight()}, 255, 255, 255);
 		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
-		app->render->TextDraw("Pause", 600, 121, 40, Font::UI);
+		app->render->TextDraw("Pause", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI);
 
 		if (!open_pause_B)
 		{
@@ -837,6 +846,21 @@ public:
 	{
 		app->audio->upperBgMusic();
 
+		pauseAnimation.Backward();
+		pauseAnimation.Step(1, false);
+		float point = pauseAnimation.GetPoint();
+		int offsetAnimation = -750;
+		//formula int(offsetAnimation + point * (0 - offsetAnimation))
+
+		SDL_Rect rect = { 0, 0, 226, 261 };
+
+		app->audio->lowerBgMusic();
+
+		app->render->DrawRectangle({ 0 - app->render->camera.x,int(offsetAnimation + point * (0 - app->render->camera.y - offsetAnimation)), app->win->GetWidth(), app->win->GetHeight() }, 255, 255, 255);
+		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
+		app->render->TextDraw("Pause", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI);
+
+		
 		pause_B = false;
 		open_pause_B = false;
 		for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
@@ -870,6 +894,8 @@ public:
 	bool open_pause_B;
 
 	Settings* pSettings;
+	Tween pauseAnimation;
+
 };
 
 
