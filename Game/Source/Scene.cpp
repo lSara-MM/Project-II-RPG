@@ -56,6 +56,7 @@ bool Scene::Awake(pugi::xml_node& config)
 bool Scene::Start()
 {
 	app->input->godMode_B = false;
+	app->physics->collisions = false;
 
 	if (app->puzzleManager->active == true) {
 		app->puzzleManager->CleanUp();

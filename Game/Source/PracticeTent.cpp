@@ -50,6 +50,8 @@ bool PracticeTent::Awake(pugi::xml_node& config)
 
 bool PracticeTent::Start()
 {
+	app->input->godMode_B = false;
+	app->physics->collisions = false;
 	//Load Map
 	app->map->Load(3);
 

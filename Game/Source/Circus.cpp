@@ -50,6 +50,8 @@ bool Circus::Awake(pugi::xml_node& config)
 
 bool Circus::Start()
 {
+	app->input->godMode_B = false;
+	app->physics->collisions = false;
 	//Load Map
 	app->map->Load(2);
 
