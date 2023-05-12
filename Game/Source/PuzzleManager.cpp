@@ -212,7 +212,6 @@ bool PuzzleManager::Update(float dt)
 	if (!escape) 
 	{
 		Escape();
-
 	}
 
 	if (!rescue)
@@ -228,6 +227,11 @@ bool PuzzleManager::Update(float dt)
 
 bool PuzzleManager::PostUpdate()
 {
+	if (app->input->getInput_B)
+	{
+		iPoint pos = { app->win->GetWidth() / 4, 650 };
+		app->input->RenderTempText("Code:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
+	}
 
 	return true;
 }
@@ -422,15 +426,4 @@ bool PuzzleManager::Rescue()
 	}
 
 	return false;
-}
-
-bool PuzzleManager::CodeInput()
-{
-	SString temp;
-
-	temp = "Code:  %%";
-	temp.Substitute("%", app->scene->player->codeToCompare.c_str());
-	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 4, 650, 40, Font::TEXT, { 255, 255, 255 });
-
-	return true;
 }

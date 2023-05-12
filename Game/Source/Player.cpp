@@ -149,7 +149,12 @@ bool Player::Update(float dt)
 			codeToCompare.erase(codeToCompare.length() - 1);
 		}
 
-		app->puzzleManager->CodeInput();
+		if (!app->input->numCode->input_entered)
+		{
+			app->input->GetInput(app->input->numCode);
+
+			codeToCompare = app->input->numCode->input.c_str();
+		}
 
 		if (strcmp(codeToCompare.c_str(), realCode.c_str()) == 0)
 		{

@@ -62,6 +62,7 @@ bool Input::Start()
 	//SDL_EnableUNICODE(SDL_ENABLE);
 
 	playerName = new PlayerInput("", MAX_PLAYER_CHARS, false);
+	numCode = new PlayerInput("", MAX_PLAYER_CHARS, false);
 
 	getInput_B = false;
 
@@ -227,6 +228,7 @@ bool Input::CleanUp()
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 
 	RELEASE(playerName);
+	RELEASE(numCode);
 	RELEASE(playerInput_S);
 
 	//Disable Unicode

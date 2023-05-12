@@ -81,10 +81,12 @@ public:
 
 public:
 
+	SString name;
 	SString title;
 	SString desc;
 	QuestType type;
 	bool active = false;
+	bool complete = false;
 	int state = 0;
 	pugi::xml_node parameters;
 
@@ -94,4 +96,55 @@ public:
 	bool renderable = true;
 };
 
-#endif // __ENTITY_H__
+class Quest1 : public Quest 
+{
+public:
+
+	Quest1();
+
+	virtual ~Quest1();
+
+	bool Awake();
+
+	bool Start();
+
+	bool Update(float dt);
+
+	bool CleanUp();
+};
+
+class Quest2 : public Quest
+{
+public:
+
+	Quest2();
+
+	virtual ~Quest2();
+
+	bool Awake();
+
+	bool Start();
+
+	bool Update(float dt);
+
+	bool CleanUp();
+};
+
+class Quest3 : public Quest
+{
+public:
+
+	Quest3();
+
+	virtual ~Quest3();
+
+	bool Awake();
+
+	bool Start();
+
+	bool Update(float dt);
+
+	bool CleanUp();
+};
+
+#endif // __QUEST_H__

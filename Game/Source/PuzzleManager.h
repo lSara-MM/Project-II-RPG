@@ -52,8 +52,6 @@ public:
 
 	bool Rescue();
 
-	bool CodeInput();
-
 public:
 
 	pugi::xml_node sceneNode;

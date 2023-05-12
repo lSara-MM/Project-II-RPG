@@ -123,6 +123,7 @@ public:
 public:
 
 	PlayerInput* playerName;
+	PlayerInput* numCode;
 
 	// Keep a copy of the current version of the string
 	string temp;

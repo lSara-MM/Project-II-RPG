@@ -37,7 +37,7 @@ public:
 	List<Quest*> GetQuestByType(QuestType type);
 
 public:
-
+	Quest* quest1;
 	List<Quest*> quests;
 
 };
