@@ -304,7 +304,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button start click");
 		if (!app->input->playerName->input_entered)
 		{
-			app->input->GetInput(app->input->playerName);
+			app->input->ActiveGetInput(app->input->playerName);
 		}
 		else
 		{

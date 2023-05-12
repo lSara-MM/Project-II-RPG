@@ -191,6 +191,10 @@ bool PuzzleManager::Start()
 		nota3->id = 2;
 	}
 
+
+
+	numCode = new PlayerInput("", 4, false);
+
 	return true;
 }
 
@@ -292,6 +296,8 @@ bool PuzzleManager::CleanUp()
 	if (Loset->body != nullptr)
 		Loset->body->GetWorld()->DestroyBody(Loset->body);
 
+	RELEASE(numCode);
+
 	return true;
 }
 
@@ -382,11 +388,11 @@ bool PuzzleManager::Escape()
 			codeToCompare.erase(codeToCompare.length() - 1);
 		}
 
-		if (!app->input->numCode->input_entered)
+		if (!app->puzzleManager->numCode->input_entered)
 		{
-			app->input->GetInput(app->input->numCode);
+			app->input->ActiveGetInput(app->puzzleManager->numCode);
 
-			codeToCompare = app->input->numCode->input.c_str();
+			codeToCompare = app->puzzleManager->numCode->input.c_str();
 		}
 
 		if (strcmp(codeToCompare.c_str(), realCode.c_str()) == 0)

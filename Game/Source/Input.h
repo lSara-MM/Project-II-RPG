@@ -118,7 +118,7 @@ public:
 	
 	// Active getting input
 	// Needs the Struct of text input (ex. GetInput(playerName) will change playerName text)
-	void GetInput(PlayerInput* i);
+	void ActiveGetInput(PlayerInput* i);
 
 	// Render what player is writing, temporal
 	void RenderTempText(SString temp, const char* subs, iPoint pos, int fontsize = 10, Font font = Font::TEXT, SDL_Color color = { 0,0,0 });
@@ -128,7 +128,6 @@ public:
 public:
 
 	PlayerInput* playerName;
-	PlayerInput* numCode;
 
 	// Keep a copy of the current version of the string
 	string temp;

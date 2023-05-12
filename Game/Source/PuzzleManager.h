@@ -4,6 +4,7 @@
 #include "App.h"
 
 #include "Module.h"
+#include "Input.h"
 #include "Combat.h"
 
 #include "Point.h"
@@ -125,6 +126,9 @@ public:
 	string code;
 	string codeToCompare;
 	string realCode;
+
+
+	PlayerInput* numCode;
 
 private:
 
