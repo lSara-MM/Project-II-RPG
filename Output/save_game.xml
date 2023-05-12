@@ -17,14 +17,14 @@
 	<loseScene />
 	<map />
 	<entitymanager>
-		<player x="2290" y="4347" />
+		<player x="2310" y="4501" />
+		<puzzle palancas="false" escape="false" rescue="false" keyPalancas="0" keyEscape="0" keyRescue="0" />
 	</entitymanager>
 	<combat />
 	<dialogue />
 	<guiManager />
 	<SceneWin_Lose />
 	<PuzzleManager />
-	<questmanager />
 	<fadeToBlack />
 	<renderer>
 		<camera x="-1197" y="-917" />

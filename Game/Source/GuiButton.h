@@ -30,7 +30,7 @@ public:
 
 	const char* fxHoverPath;
 	uint fxHover;
-	bool hoverTest;
+	int hoverTest;
 
 private:
 	Tween animationButton;

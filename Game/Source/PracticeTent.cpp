@@ -41,13 +41,9 @@ bool PracticeTent::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	practisePath = config.attribute("musTent").as_string();
-	musPause = config.attribute("pause").as_string();
 	mute_B = false;
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
 	sceneNode = config;
-
-	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
-	pausefx = app->audio->LoadFx(fxpausepath);
 
 	return ret;
 }
@@ -218,7 +214,6 @@ void PracticeTent::Debug()
 			pSettings = pPause->pSettings;
 
 			pSettings->settings_B = !pSettings->settings_B;
-			app->audio->PlayMusic(musPause, 1.0);
 		}
 		else
 		{
@@ -310,14 +305,12 @@ bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button Close pause click");
 		pause_B = false;
 		pPause->CleanUp();
-		app->audio->PlayMusic(practisePath, 1.0);
 		break;
 
 	case 702:
 		LOG("Button Resume click");
 		pause_B = false;
 		pPause->CleanUp();
-		app->audio->PlayMusic(practisePath, 1.0);
 		break;
 
 	case 703:
@@ -353,7 +346,6 @@ bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 		settings_B = false;
 		pSettings->CloseSettings();
 		pSettings->CleanUp();
-		app->audio->PlayMusic(practisePath, 1.0);
 		break;
 
 	case 802:

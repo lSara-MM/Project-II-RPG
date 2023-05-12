@@ -21,7 +21,6 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 
 	fxHoverPath = "Assets/Audio/Fx/on_button.wav";
 	fxHover = app->audio->LoadFx(fxHoverPath);
-	hoverTest = false;
 }
 
 GuiButton::~GuiButton()
@@ -45,11 +44,6 @@ bool GuiButton::Update(float dt)
 				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
 
 				state = GuiControlState::FOCUSED;
-				if (hoverTest == false)
-				{
-					app->audio->PlayFx(fxHover);
-					hoverTest = true;
-				}
 				if (previousState != state)
 				{
 					//LOG("Change state from %d to %d", previousState, state);
@@ -70,7 +64,6 @@ bool GuiButton::Update(float dt)
 			else
 			{
 				state = GuiControlState::NORMAL;
-				hoverTest = false;
 			}
 		}
 
@@ -78,11 +71,6 @@ bool GuiButton::Update(float dt)
 		{
 			if (state==GuiControlState::FOCUSED)
 			{
-				if (hoverTest == false)
-				{
-					app->audio->PlayFx(fxHover);
-					hoverTest == true;
-				}
 				if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 				{
 					state = GuiControlState::PRESSED;

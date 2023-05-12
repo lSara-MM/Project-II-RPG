@@ -39,12 +39,11 @@
 	
 	<combat mouseSpeed =" 0.5" />
 
-	<HouseOfTerrors musicD1="Assets/Audio/Music/Haunted_House.ogg" pause="Assets/Audio/Music/mus_pause.ogg" mouseSpeed ="0.5"/>
-	<Circus musicCircus="Assets/Audio/Music/CircusTent_mus.ogg" pause="Assets/Audio/Music/mus_pause.ogg" mouseSpeed ="0.5"/>
-	<practiceTent musTent="Assets/Audio/Music/sala_Entrenamiento.ogg" pause="Assets/Audio/Music/mus_pause.ogg" mouseSpeed ="0.5"/>
+	<HouseOfTerrors musicD1="Assets/Audio/Music/Haunted_House.ogg" mouseSpeed ="0.5"/>
+	<Circus musicCircus="Assets/Audio/Music/CircusTent_mus.ogg" mouseSpeed ="0.5"/>
+	<practiceTent musTent="Assets/Audio/Music/sala_Entrenamiento.ogg" mouseSpeed ="0.5"/>
 	
-	<scene music="Assets/Audio/Music/Lobby_Music.ogg" pause="Assets/Audio/Music/mus_pause.ogg"
-		textureAttackPath="Assets/Textures/attack.png"
+	<scene music="Assets/Audio/Music/Lobby_Music.ogg" textureAttackPath="Assets/Textures/attack.png"
 	   background1 ="Assets/Maps/clouds_bg.png" background2 ="Assets/Maps/clouds_mg_1.png" background3 ="Assets/Maps/clouds_mg_2.png"
 	   coinspath="Assets/Maps/coin.png" heartspath="Assets/Maps/heart.png"
 		settingsPath ="Assets/Textures/setting_menu.png" mouseSpeed =" 0.5">
