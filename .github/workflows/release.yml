@@ -29,11 +29,11 @@ jobs:
        uses: thedoctor0/zip-release@master
        with:
         filename: 'release.zip'
-        exclusions: '*.gitignore* *.git* *.github*'
+        exclusions: '*.gitignore* *.git* *.github* *Game* *docs* *Development.sln*'
       # Creates a release uploading the release.zip file. The github token is usually under secrets.GITHUB_TOKEN, however in the future this may be different.
      - name: Create Release
        uses: ncipollo/release-action@v1.12.0
        with:
-        tag: FUNCIONAPLSPLS
+        tag: Fix release
         artifacts: "release.zip"
         token: ${{ secrets.GITHUB_TOKEN }}
