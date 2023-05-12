@@ -65,11 +65,6 @@ private:
 	//Music path
 	const char* practisePath;
 
-	const char* musPause;
-
-	const char* fxpausepath;
-	uint pausefx;
-
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;

@@ -61,10 +61,6 @@ bool Input::Start()
 	//Enable Unicode
 	//SDL_EnableUNICODE(SDL_ENABLE);
 
-	playerName = new PlayerInput("", MAX_PLAYER_CHARS, false);
-
-	getInput_B = false;
-
 	SDL_StopTextInput();
 	return true;
 }
@@ -131,7 +127,7 @@ bool Input::PreUpdate()
 			break;
 
 			case SDL_KEYDOWN:
-				if (getInput_B) { HandleInput(event, playerInput_S); }
+				if (getInput_B) { HandleInput(event); }
 				break;
 
 			case SDL_MOUSEBUTTONDOWN:
@@ -226,9 +222,6 @@ bool Input::CleanUp()
 	LOG("Quitting SDL event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 
-	RELEASE(playerName);
-	RELEASE(playerInput_S);
-
 	//Disable Unicode
 	//SDL_EnableUNICODE(SDL_DISABLE);
 	return true;
@@ -253,64 +246,48 @@ void Input::GetMouseMotion(int& x, int& y)
 }
 
 
-bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
+void Input::HandleInput(SDL_Event event)
 {
-	//temp = *input;
+	// Keep a copy of the current version of the string
+	string temp = playerName;
 
 	// If the string less than maximum size
-	if (temp.length() <= playerInput->max_chars)
+	if (playerName.length() <= NAME_MAX_CHARS)
 	{
 		//Append the character
-		temp += (char)event.key.keysym.sym;
+		playerName += (char)event.key.keysym.sym;
 	}
 
 	// If backspace was pressed and the string isn't blank
-	if ((event.key.keysym.sym == SDLK_BACKSPACE) && !temp.empty())
+	if ((event.key.keysym.sym == SDLK_BACKSPACE) && !playerName.empty())
 	{
 		// Remove a character from the end
-		temp.erase(temp.length() - 1);
-		temp.erase(temp.length() - 1);
+		playerName.erase(playerName.length() - 1);
+		playerName.erase(playerName.length() - 1);
 	}
 
-	if ((event.key.keysym.sym == SDLK_RETURN) && !temp.empty())
+	if ((event.key.keysym.sym == SDLK_RETURN) && !playerName.empty())
 	{
-		temp.erase(temp.length() - 1);
-		// TODO Call Save name
-		app->dialogueSystem->SaveDialogueState();	
+		playerName.erase(playerName.length() - 1);
+		app->dialogueSystem->SaveDialogueState();		
+		nameEntered_B = true;
 		getInput_B = false;
-
-		playerInput->input = temp;
-		playerInput->input_entered = true;
-		return true;
 	}
 
 	// Ignore shift
 	if (event.key.keysym.sym == SDLK_LSHIFT || event.key.keysym.sym == SDLK_RSHIFT)
 	{
 		// Append the character
-		temp.erase(temp.length() - 1);
+		playerName.erase(playerName.length() - 1);
 	}
 }
-
-void Input::ActiveGetInput(PlayerInput* i)
-{
-	getInput_B = true;
-	playerInput_S = i;
-}
-
-void Input::RenderTempText(SString temp, const char* subs, iPoint pos, int fontsize, Font font, SDL_Color color)
-{
-	// Substitute("character to substitute", new characters)
-	temp.Substitute("%", subs);
-	app->render->TextDraw(temp.GetString(), pos.x, pos.y, fontsize, font, color);
-}
-
 
 void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt)
 {
 	if (app->input->controller.j1_x > 0)
 	{
 		SDL_WarpMouseInWindow(app->win->window, mouseX + (mouseSpeed * dt), mouseY);
+
 	}
 
 	else if (app->input->controller.j1_x < 0)
@@ -321,11 +298,13 @@ void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float d
 	else if (app->input->controller.j1_y > 0)
 	{
 		SDL_WarpMouseInWindow(app->win->window, mouseX, mouseY + (mouseSpeed * dt));
+
 	}
 
 	else if (app->input->controller.j1_y < 0)
 	{
 		SDL_WarpMouseInWindow(app->win->window, mouseX, mouseY - (mouseSpeed * dt));
+
 	}
 }
 

@@ -81,12 +81,10 @@ public:
 
 public:
 
-	SString name;
 	SString title;
 	SString desc;
 	QuestType type;
 	bool active = false;
-	bool complete = false;
 	int state = 0;
 	pugi::xml_node parameters;
 
@@ -96,4 +94,4 @@ public:
 	bool renderable = true;
 };
 
-#endif // __QUEST_H__
+#endif // __ENTITY_H__

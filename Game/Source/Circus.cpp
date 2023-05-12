@@ -42,12 +42,8 @@ bool Circus::Awake(pugi::xml_node& config)
 
 	mute_B = false;
 	circusMusPath = config.attribute("musicCircus").as_string();
-	musPause = config.attribute("pause").as_string();
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
 	sceneNode = config;
-
-	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
-	pausefx = app->audio->LoadFx(fxpausepath);
 
 	return ret;
 }
@@ -218,7 +214,6 @@ void Circus::Debug()
 			pSettings = pPause->pSettings;
 
 			pSettings->settings_B = !pSettings->settings_B;
-			app->audio->PlayMusic(musPause, 1.0);
 		}
 		else
 		{
@@ -310,14 +305,12 @@ bool Circus::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button Close pause click");
 		pause_B = false;
 		pPause->CleanUp();
-		app->audio->PlayMusic(circusMusPath, 1.0);
 		break;
 
 	case 702:
 		LOG("Button Resume click");
 		pause_B = false;
 		pPause->CleanUp();
-		app->audio->PlayMusic(circusMusPath, 1.0);
 		break;
 
 	case 703:
@@ -353,7 +346,6 @@ bool Circus::OnGuiMouseClickEvent(GuiControl* control)
 		settings_B = false;
 		pSettings->CloseSettings();
 		pSettings->CleanUp();
-		app->audio->PlayMusic(circusMusPath, 1.0);
 		break;
 
 	case 802:
