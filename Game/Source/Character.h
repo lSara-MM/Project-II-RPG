@@ -59,11 +59,13 @@ public:
 
 	void ModifyHP(int hp); //Positivo para curar negativo para dañar
 
-	int CalculateDamage(Character* caster, Character* defender,Skill* skill); //ERIC:Va haber que poner muchos mas atributos
+	int ApplySkill(Character* caster, Character* defender,Skill* skill); //ERIC:Va haber que poner muchos mas atributos
 
 	bool ResistStatusEffect(/*efecto,precision*/); //Hacer cuando se hagan status effects, aun no.
 	
 	void LoadSkill(int arr[4]);
+
+	bool UseSkill(Skill* skill);
 	//Gets, dan las stats sumadas (base+eqipo+buffos)
 	/*int GetMaxHP() { return maxHp; }
 	int GetHealth() { return currentHp; }

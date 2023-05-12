@@ -180,9 +180,10 @@ bool Character::Update(float dt)
 						}
 						if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
 						{
-							//usar skill 3 (tanqueo high HP)
-							listSkillsHistory.Add(4);
-							armor += 5; //TEMPORAL
+							//usar skill 2 (tanqueo high HP)
+							UseSkill(listSkills.At(2)->data);
+
+							listSkillsHistory.Add(2);
 							break;
 						}
 						else
@@ -204,9 +205,10 @@ bool Character::Update(float dt)
 						}
 						if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
 						{
-							//usar skill 2
-							listSkillsHistory.Add(2);
-							this->ModifyHP(400); //TEMPORAL
+							//usar skill 1
+							UseSkill(listSkills.At(1)->data);
+
+							listSkillsHistory.Add(1);
 							break;
 						}
 						{
@@ -215,18 +217,18 @@ bool Character::Update(float dt)
 					}
 					if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))//Ataques
 					{
-						//usar skill 4 (daño + debuff)
-						int target = listSkills.At(3)->data->RandomTarget(listSkills.At(3)->data->posToUseStart_I, listSkills.At(3)->data->RangeCanTarget(app->combat->vecAllies));
+						//usar skill 3 (daño + debuff)
+						UseSkill(listSkills.At(3)->data);
+						
 						listSkillsHistory.Add(3);
-						app->combat->vecAllies.at(0)->ModifyHP(-130);//TEMPORAL
-						app->combat->vecAllies.at(0)->attack-=10;
 						break;
 					}
 					else
 					{
-						//usar skill 1 (daño solo) (es la skill mas debil)
-						listSkillsHistory.Add(1);
-						app->combat->vecAllies.at(0)->ModifyHP(-150);//TEMPORAL
+						//usar skill 0 (daño solo) (es la skill mas debil)
+						UseSkill(listSkills.At(0)->data);
+
+						listSkillsHistory.Add(0);
 						break;
 					}
 
@@ -249,7 +251,7 @@ bool Character::Update(float dt)
 			if (turnDelay.ReadMSec() > 4000)
 			{
 				delayOn = false;
-				//NEXT TURN
+				app->combat->NextTurn();
 			}
 
 			break;
@@ -311,15 +313,15 @@ bool Character::CalculateRandomProbability(int bonus_I, int against_I)
 }
 
 //Provisional full
-int Character::CalculateDamage(Character* caster, Character* defender, Skill* skill)
+int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 {
-	if (1 > 0) //Curacion, no hace falta calcular esquiva ni nada 
+	if (skill->multiplierDmg > 0) //Curacion, no hace falta calcular esquiva ni nada 
 	{
-		return(caster->attack /** skill->multiplierDmg*/);
+		return(caster->attack * skill->multiplierDmg);
 	}
 	else //Es un ataque 
 	{
-		if (!CalculateRandomProbability((/*skill->bonusPrecision + */caster->precision), defender->dodge))
+		if (!CalculateRandomProbability((skill->bonusPrecision + caster->precision), defender->dodge))
 		{
 			//Enemigo esquiva
 			return 0;
@@ -327,10 +329,10 @@ int Character::CalculateDamage(Character* caster, Character* defender, Skill* sk
 		else
 		{
 			int damage;
-			damage = /*skill->multiplierDmg **/ caster->attack;
-			if (CalculateRandomProbability(/*skill->bonusCritRate +*/ caster->critRate)) //Si true hay critico
+			damage = skill->multiplierDmg * caster->attack;
+			if (CalculateRandomProbability(skill->bonusCritRate + caster->critRate)) //Si true hay critico
 			{
-				damage *= (/*skill->bonusCritDmg +*/ caster->critDamage);
+				damage *= (skill->bonusCritDamage + caster->critDamage);
 			}
 
 			// Calcular reduccion de la defensa
@@ -369,15 +371,142 @@ void Character::LoadSkill(int arr[4])
 				
 				int posInicialTarget = aux.attribute("posToTargetStart_I").as_int();
 				int posFinallTarget = aux.attribute("posToTargetEnd_I").as_int();
+				bool friendlyFire = aux.attribute("friendlyFire").as_bool();
 				bool area = aux.attribute("areaSkill").as_bool();
 				bool autoTarget = aux.attribute("areaSkill").as_bool();
 
 				listSkills.Add( new Skill(nombre, descripcion,
 					posInicialUso, posFinallUso,posInicialTarget, posFinallTarget,
-					movUsuario,movTarget,area,autoTarget,mult,precision,probCrit,dmgCrit));
+					movUsuario,movTarget, friendlyFire,area,autoTarget,mult,precision,probCrit,dmgCrit));
 			}
 		}
 	}
+}
+
+//Funcion para la maquina 
+bool Character::UseSkill(Skill* skill)
+{
+	if(skill->autoTarget)
+	{
+		this->ModifyHP(ApplySkill(this, this, skill)); //Lanzarsela a si mismo
+	}
+
+	if(skill->targetFriend) //Targetea a gente de su propio grupo
+	{
+		//ERIC: QUIZA HAYA QUE CAMBIAR A QUE NO HAYA FALLO POSIBLE, IDK
+		switch (charaType)
+		{
+			int endRange;
+		case CharacterType::ALLY:
+
+			endRange = skill->RangeCanTarget(app->combat->vecAllies);
+			if (endRange == -1)
+			{
+				return false;
+			}
+
+			if (skill->areaSkill)
+			{
+				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+				{
+					//Atacar a todos
+					app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
+				}
+			}
+			else
+			{
+				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange);
+				app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill));
+			}
+			break;
+		case CharacterType::ENEMY:
+			endRange = skill->RangeCanTarget(app->combat->vecEnemies);
+			if (endRange == -1)
+			{
+				return false;
+			}
+
+			if (skill->areaSkill)
+			{
+				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+				{
+					//Atacar a todos
+					app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill));
+				}
+			}
+			else
+			{
+				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange);
+				app->combat->vecEnemies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(objective), skill));
+			}
+			break;
+			
+		case CharacterType::NONE:
+			break;
+		default:
+			break;
+		}
+	}
+	else //Targetea party contraria
+	{
+		switch (charaType)
+		{
+		int endRange;
+		case CharacterType::ALLY:
+
+			endRange = skill->RangeCanTarget(app->combat->vecEnemies);
+			if (endRange == -1)
+			{
+				return false;
+			}
+
+			if (skill->areaSkill)
+			{
+				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+				{
+					//Atacar a todos
+					app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill));
+				}
+			}
+			else
+			{
+				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange);
+				app->combat->vecEnemies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(objective), skill));
+			}
+			break;
+
+			break;
+		case CharacterType::ENEMY:
+
+			endRange = skill->RangeCanTarget(app->combat->vecAllies);
+			if (endRange == -1)
+			{
+				return false;
+			}
+
+			if (skill->areaSkill)
+			{
+				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+				{
+					//Atacar a todos
+					app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
+				}
+			}
+			else
+			{
+				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange);
+				app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill));
+			}
+			break;
+
+			break;
+		default:
+			break;
+		}
+	}
+	
+
+	return true;
 }
 
 

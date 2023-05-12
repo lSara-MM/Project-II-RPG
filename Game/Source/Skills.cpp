@@ -18,7 +18,7 @@ Skill::~Skill()
 {
 }
 
-Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I, int movementCaster, int movementTarget, bool areaSkill, bool autoTarget, float multiplierDmg, int bonusPrecision, int bonusCritRate, int bonusCritDamage)
+Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I, int movementCaster, int movementTarget,bool friendlyFire, bool areaSkill, bool autoTarget, float multiplierDmg, int bonusPrecision, int bonusCritRate, int bonusCritDamage)
 {
 	//Info
 	this->name = name;
@@ -40,6 +40,7 @@ Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUs
 	//Targeting
 	this->posToTargetStart_I = posToTargetStart_I;
 	this->posToTargetEnd_I = posToTargetEnd_I;
+	this->targetFriend =
 	this->areaSkill = areaSkill;
 	this->autoTarget = autoTarget;
 }
@@ -67,10 +68,11 @@ int Skill::RangeCanTarget(vector<Character*> vec)
 int Skill::RandomTarget(int posInicial, int posFinal, TargetingMethod method)
 {
 	int pos= posInicial;
+	int width = posFinal - posInicial + 1;
 	switch (method)
 	{
 	case TargetingMethod::RANDOM:
-		int width = posFinal - posInicial +1;
+		
 		pos = rand() % width + posInicial;
 		break;
 
