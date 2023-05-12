@@ -72,6 +72,8 @@ private:
 	float mouseSpeed;
 	const char* lobby_music;
 
+	const char* pause_music;
+
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;

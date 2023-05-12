@@ -41,6 +41,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	lobby_music = config.attribute("music").as_string();
+	pause_music = config.attribute("pause").as_string();
 	mute_B = false;
 
 	sceneNode = config;
@@ -258,12 +259,12 @@ void Scene::Debug()
 			pSettings = pPause->pSettings;
 
 			pSettings->settings_B = !pSettings->settings_B;
+			app->audio->PlayMusic(pause_music, 1.0);
 		}
 		else
 		{
 			pPause->CleanUp();
 		}
-
 		LOG("PAUSE");
 	}
 
@@ -297,7 +298,6 @@ void Scene::Debug()
 			}
 
 		}
-		
 		LOG("PAUSE");
 	}
 
@@ -376,12 +376,14 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button Close pause click");
 		pause_B = false;
 		pPause->CleanUp();
+		app->audio->PlayMusic(lobby_music, 1.0);
 		break;
 		
 	case 702: 
 		LOG("Button Resume click");
 		pause_B = false;
 		pPause->CleanUp();
+		app->audio->PlayMusic(lobby_music, 1.0);
 		break;
 		
 	case 703: 
@@ -417,6 +419,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		settings_B = false;
 		pSettings->CloseSettings();
 		pSettings->CleanUp();
+		app->audio->PlayMusic(lobby_music, 1.0);
 		break;
 
 	case 802:
