@@ -34,6 +34,6 @@ jobs:
      - name: Create Release
        uses: ncipollo/release-action@v1.12.0
        with:
-        tag: Test1
+        tag: Prova
         artifacts: "release.zip"
         token: $
