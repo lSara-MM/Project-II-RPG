@@ -4,6 +4,7 @@
 #include "App.h"
 
 #include "Module.h"
+#include "Input.h"
 #include "Combat.h"
 
 #include "Point.h"
@@ -51,8 +52,6 @@ public:
 	bool Escape();
 
 	bool Rescue();
-
-	bool CodeInput();
 
 public:
 
@@ -117,15 +116,19 @@ public:
 	bool esc2;
 	bool esc3;
 
+	bool intoCode;
 	bool codeActive;
 
 	bool bossActive;
 	bool bossInvent;
 	bool losetActive;
 
-	SString code;
-	SString codeToCompare;
-	SString realCode;
+	string code;
+	string codeToCompare;
+	string realCode;
+
+
+	PlayerInput* numCode;
 
 private:
 

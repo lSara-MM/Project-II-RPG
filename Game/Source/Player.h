@@ -37,8 +37,6 @@ public:
 
 	void Controller(float dt);
 
-	bool Palancas();
-
 public:
 	SString playerName;
 
@@ -67,16 +65,6 @@ public:
 	bool keyLockLeft = false;
 	bool keyLockRigth = false;
 	bool lockMovement = false;
-
-	bool intoCode;
-	bool codeActive;
-
-	int keyPalancas;
-	bool palanc;
-
-	string code;
-	string codeToCompare;
-	string realCode;
 
 	float dtP;
 	float grav;
