@@ -225,8 +225,13 @@ bool IntroScene::PostUpdate()
 	bool ret = true;
 
 	if (exit_B) return false;
-	if (app->input->getInput_B) PlayerNameInput();
-	if (app->input->nameEntered_B && !introDone) 
+	if (app->input->getInput_B)
+	{
+		iPoint pos = { app->win->GetWidth() / 4, 650 };
+		app->input->RenderTempText("Sign:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
+	}
+
+	if (app->input->playerName->input_entered && !introDone) 
 	{
 		transition_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
@@ -297,9 +302,9 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	{
 	case 1:
 		LOG("Button start click");
-		if (!app->input->nameEntered_B)
+		if (!app->input->playerName->input_entered)
 		{
-			app->input->GetInput(&app->input->playerName, MAX_PLAYER_CHARS);
+			app->input->GetInput(app->input->playerName);
 		}
 		else
 		{
@@ -528,15 +533,4 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	return true;
-}
-
-bool IntroScene::PlayerNameInput()
-{
-	SString temp;
-
-	temp = "Sign:  %%";
-	temp.Substitute("%", app->input->playerName.c_str());
-	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 4, 650, 40, Font::TEXT, { 255, 255, 255 });
-
-	return app->input->nameEntered_B;
 }

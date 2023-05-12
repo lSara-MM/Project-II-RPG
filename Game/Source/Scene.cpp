@@ -66,9 +66,9 @@ bool Scene::Start()
 
 	app->audio->PlayMusic(lobby_music, 1.0);
 
-	if (app->input->playerName.empty())
+	if (app->input->playerName->input.empty())
 	{
-		app->input->playerName = "Player";
+		app->input->playerName->input = "Player";
 	}
 
 	//Load Map

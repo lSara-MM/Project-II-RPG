@@ -2,7 +2,9 @@
 #define __INPUT_H__
 
 #include "Module.h"
+#include "Render.h"
 #include "SDL/include/SDL.h"
+#include "Point.h"
 
 #include "External/SDL/include/SDL_gamecontroller.h"
 
@@ -112,18 +114,25 @@ public:
 	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
 
-	void HandleInput(SDL_Event event, string* input, int max_chars_);
-	void GetInput(PlayerInput i);
-
+	bool HandleInput(SDL_Event event, PlayerInput* playerInput);
+	void GetInput(PlayerInput* i);
+	void RenderTempText(SString temp, const char* subs, iPoint pos, int fontsize = 10, Font font = Font::TEXT, SDL_Color color = { 0,0,0 });
 
 	void HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt);
 
 public:
 
 	PlayerInput* playerName;
+
+	// Keep a copy of the current version of the string
+	string temp;
 	bool getInput_B = false;
 
 	bool godMode_B = false;
+
+	// TO DELETE
+	int currentHP_Bard = 0;
+	int currentHP_Protagonist = 0;
 
 	SDL_GameController* sdl_controller;
 	GameController controller;
@@ -144,8 +153,7 @@ private:
 	int mouseY;
 
 	// Handle input
-	string* input_S;
-	int max_chars_I;
+	PlayerInput* playerInput_S;
 };
 
 #endif // __INPUT_H__

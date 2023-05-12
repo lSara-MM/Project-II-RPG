@@ -61,7 +61,7 @@ bool Input::Start()
 	//Enable Unicode
 	//SDL_EnableUNICODE(SDL_ENABLE);
 
-	playerName = new PlayerInput("player", MAX_PLAYER_CHARS, false);
+	playerName = new PlayerInput("", MAX_PLAYER_CHARS, false);
 
 	getInput_B = false;
 
@@ -131,7 +131,7 @@ bool Input::PreUpdate()
 			break;
 
 			case SDL_KEYDOWN:
-				if (getInput_B) { HandleInput(event, input_S, max_chars_I); }
+				if (getInput_B) { HandleInput(event, playerInput_S); }
 				break;
 
 			case SDL_MOUSEBUTTONDOWN:
@@ -227,6 +227,7 @@ bool Input::CleanUp()
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 
 	RELEASE(playerName);
+	RELEASE(playerInput_S);
 
 	//Disable Unicode
 	//SDL_EnableUNICODE(SDL_DISABLE);
@@ -252,13 +253,12 @@ void Input::GetMouseMotion(int& x, int& y)
 }
 
 
-void Input::HandleInput(SDL_Event event, string* input, int max_chars_)
+bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 {
-	// Keep a copy of the current version of the string
-	string temp = *input;
+	//temp = *input;
 
 	// If the string less than maximum size
-	if (temp.length() <= max_chars_)
+	if (temp.length() <= playerInput->max_chars)
 	{
 		//Append the character
 		temp += (char)event.key.keysym.sym;
@@ -275,12 +275,13 @@ void Input::HandleInput(SDL_Event event, string* input, int max_chars_)
 	if ((event.key.keysym.sym == SDLK_RETURN) && !temp.empty())
 	{
 		temp.erase(temp.length() - 1);
-		app->dialogueSystem->SaveDialogueState();		
-		//nameEntered_B = true;
+		// TODO Call Save name
+		app->dialogueSystem->SaveDialogueState();	
 		getInput_B = false;
 
-		delete input;
-		input = &temp;
+		playerInput->input = temp;
+		playerInput->input_entered = true;
+		return true;
 	}
 
 	// Ignore shift
@@ -291,13 +292,17 @@ void Input::HandleInput(SDL_Event event, string* input, int max_chars_)
 	}
 }
 
-void Input::GetInput(PlayerInput i)
+void Input::GetInput(PlayerInput* i)
 {
 	getInput_B = true;
-	input_S = &i.input;
-	max_chars_I = i.max_chars;
+	playerInput_S = i;
 }
 
+void Input::RenderTempText(SString temp, const char* subs, iPoint pos, int fontsize, Font font, SDL_Color color)
+{
+	temp.Substitute("%", subs);
+	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 4, 650, 40, Font::TEXT, { 255, 255, 255 });
+}
 
 
 void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt)
@@ -305,7 +310,6 @@ void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float d
 	if (app->input->controller.j1_x > 0)
 	{
 		SDL_WarpMouseInWindow(app->win->window, mouseX + (mouseSpeed * dt), mouseY);
-
 	}
 
 	else if (app->input->controller.j1_x < 0)
@@ -316,13 +320,11 @@ void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float d
 	else if (app->input->controller.j1_y > 0)
 	{
 		SDL_WarpMouseInWindow(app->win->window, mouseX, mouseY + (mouseSpeed * dt));
-
 	}
 
 	else if (app->input->controller.j1_y < 0)
 	{
 		SDL_WarpMouseInWindow(app->win->window, mouseX, mouseY - (mouseSpeed * dt));
-
 	}
 }
 
