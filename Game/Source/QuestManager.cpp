@@ -218,4 +218,6 @@ bool QuestManager::initQuest()
 	quest3 = (Quest*)app->questManager->CreateQuest(QuestType::INTERACT);
 	quest3->parameters = questNode.child("Quest3");
 	quest3->Awake();
+
+	return true;
 }
