@@ -19,6 +19,7 @@
 #include "Combat.h"
 #include "DialogueSystem.h"
 #include "GuiManager.h"
+#include "Inventory.h"
 #include "Map.h"
 #include "Pathfinding.h"
 #include "Physics.h"
@@ -50,6 +51,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	combat = new Combat();
 	dialogueSystem = new DialogueSystem();
 	guiManager = new GuiManager();
+	inventory = new Inventory();
 	
 	lScene = new LogoScene();
 	iScene = new IntroScene();
@@ -84,6 +86,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(itemManager);
 	AddModule(dialogueSystem);
 	AddModule(guiManager);
+	AddModule(inventory);
 
 
 	AddModule(fade);
@@ -416,7 +419,6 @@ void App::SaveGameRequest()
 }
 
 
-
 bool App::LoadFromFile()
 {
 	bool ret = true;
@@ -480,4 +482,5 @@ void App::DisableAtStart()
 	entityManager->active = false;
 	dialogueSystem->active = false;
 	combat->active = false;
+	inventory->active = false;
 }

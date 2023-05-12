@@ -6,29 +6,42 @@ type 2 = wearable
 type 3 = usable timed use
 -->
 <!--
-kind 1 = apply to player
-kind 2 = apply to enemy
+type 1
+{
+	kind 1 = apply to player
+	kind 2 = apply to enemy
+}
+-->
+<!--
+type 2
+{
+	kind 1 = pantalon
+	kind 2 = chestplate
+	kind 3 = pies
+	kind 4 = colgante
+	kind 5 = ring
+}
 -->
 
 <items>
 
-	<item quantity="0" name="potion" type="1" kind="1" hp="999"
-		  texturepath="Assets/Textures/items">
+	<item quantity="0" name="potion" type="1" kind="1" hp="999" max="10"
+		  texturepath="Assets/Textures/items.png">
 	</item>
-	<item quantity="0" name="granade" type="1" kind="2" hp="-999"
-		  texturepath="Assets/Textures/items">
+	<item quantity="0" name="granade" type="1" kind="2" hp="-999" max="10"
+		  texturepath="Assets/Textures/items.png">
 	</item>
-	<item quantity="0" name="legging" type="2" hp="9999" attack="500" critProbability="100" critDamage="100" precision="100" armor="10"   esquiva="10" resistencia="10" speed="10"
-		  texturepath="Assets/Textures/items">
+	<item quantity="0" name="legging" type="2" kind="1" hp="9999" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1"
+		  texturepath="Assets/Textures/items.png">
 	</item>
-	<item quantity="0" name="ring" type="2" hp="999" attack="500" critProbability="100" critDamage="100" precision="100" armor="10"   esquiva="10" resistencia="10" speed="10"
-		  texturepath="Assets/Textures/items">
+	<item quantity="0" name="ring" type="2" kind="5" hp="999" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1"
+		  texturepath="Assets/Textures/items.png">
 	</item>
-	<item quantity="0" name="chest" type="2" hp="99" attack="500" critProbability="100" critDamage="100" precision="100" armor="10"   esquiva="10" resistencia="10" speed="10"
-		  texturepath="Assets/Textures/items">
+	<item quantity="0" name="chest" type="2" kind="2" hp="99" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1"
+		  texturepath="Assets/Textures/items.png">
 	</item>
-	<item quantity="0" name="pendant" type="2" hp="9" attack="500" critProbability="100" critDamage="100" precision="100" armor="10"   esquiva="10" resistencia="10" speed="10"
-		  texturepath="Assets/Textures/items">
+	<item quantity="0" name="pendant" type="2" kind="4" hp="9" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1"
+		  texturepath="Assets/Textures/items.png">
 	</item>
 	
 </items>

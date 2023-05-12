@@ -7,6 +7,11 @@
 #include "Point.h"
 #include "SString.h"
 #include "Render.h"
+#include "Scene.h"
+#include "GuiButton.h"
+#include "GuiManager.h"
+#include "Inventory.h"
+#include "Combat.h"
 
 #include <vector>
 using namespace std;
@@ -19,11 +24,13 @@ public:
 
 public:
 	SString name;
+	SString path;
 
 	int quantity;
 	int type;
 	int kind;
 	int hp;
+	int maxhp;
 	int attack;
 	int critProbability;
 	int critDamage;
@@ -32,7 +39,19 @@ public:
 	int esquiva;
 	int resistencia;
 	int speed;
+	bool equiped = false;
+	int max;
 
+	int ID;
+
+	GuiButton* button;
+
+	bool CleanUp()
+	{
+		RELEASE(button);
+
+		return true;
+	}
 };
 
 class ItemManager : public Module
@@ -51,7 +70,11 @@ public:
 	void AddQuantity(pugi::xml_node& xml_trees, const char* name);
 
 	void LoadNodes(pugi::xml_node& xml_trees, ItemNode* item);
-	void LoadQuantity(pugi::xml_node& xml_trees);
+	void LoadQuantity(int x, int y);
+	void LoadButtons(int x, int y, int ID);
+	void MinusQuantity(const char* name);
+
+	void UseItem(ItemNode* item);
 
 	bool LoadItemState(pugi::xml_node& xml_trees);
 	bool SaveItemState();
@@ -60,10 +83,9 @@ public:
 
 	ItemNode* tree = new ItemNode;
 
-	const char* textItem_path;
+	SDL_Texture* itemsTexture;
 
 	vector <ItemNode*> nodeList;
-	vector <ItemNode*> itemCount;
 
 private:
 	pugi::xml_document items;

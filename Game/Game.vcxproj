@@ -111,6 +111,7 @@
     <ClCompile Include="Source\HouseOfTerrors.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\IntroScene.cpp" />
+    <ClCompile Include="Source\Inventory.cpp" />
     <ClCompile Include="Source\ItemManager.cpp" />
     <ClCompile Include="Source\LogoScene.cpp" />
     <ClCompile Include="Source\LoseScene.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Source\HouseOfTerrors.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\IntroScene.h" />
+    <ClInclude Include="Source\Inventory.h" />
     <ClInclude Include="Source\ItemManager.h" />
     <ClInclude Include="Source\LogoScene.h" />
     <ClInclude Include="Source\LoseScene.h" />

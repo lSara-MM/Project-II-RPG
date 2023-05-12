@@ -18,12 +18,14 @@
 	<loseScene />
 	<map />
 	<entitymanager>
-		<player x="3407" y="1112" />
+		<player x="3417" y="1058" />
 	</entitymanager>
+	<items />
 	<dialogue />
 	<guiManager />
+	<Inventory />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2787" y="-779" />
+		<camera x="-2797" y="-725" />
 	</renderer>
 </save_state>
