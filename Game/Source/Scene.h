@@ -67,6 +67,8 @@ public:
 	int currentHP_Protagonist = 0;
 	bool isCharacterLoaded_B = true;
 
+	bool changeToCombat;
+
 private:
 
 	int mouseX_scene, mouseY_scene;

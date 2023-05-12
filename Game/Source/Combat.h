@@ -45,12 +45,9 @@ public:
 	void Debug();
 
 
-	bool AddCombatant(int id);
-	bool OrderBySpeed();
-	//Es muy importante que antes de 
-	bool EliminateCombatant(Character* chara);
-
 	bool StartCombat();
+	bool OrderBySpeed();
+
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
 
 	//TargetControl
@@ -64,20 +61,22 @@ public:
 	//Del 1 al 4
 	bool DisableSkillButton(int skillNum);
 
+
+
+	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);
+	void RemoveCharacter(vector<Character*>* arr, Character* chara);
+	void UpdatePositions(vector<Character*>* arr, int pos);
+
+	bool InitEnemies(SString scene, vector<int> arr);
+	bool InitAllies(array<Character*, 4> party);
+
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
-
-
-	// Sara functions, to test
-	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);
-	void RemoveCharacter(vector<Character*> arr, Character* chara);
-
-	bool InitEnemies(SString scene, vector<int> arr);
-
-	bool SaveCombat();//guardar stats playable characters en xml combat
-	bool LoadCombat();//cargar stats playable characters desde xml combat
-	bool RestartCombatData();//al empezar partida nueva, poner stats xml combat igual a xml config
+	// Save/Load
+	bool SaveCombat(); //guardar stats playable characters en xml combat
+	bool LoadCombat(); //cargar stats playable characters desde xml combat
+	bool RestartCombatData(); //al empezar partida nueva, poner stats xml combat igual a xml config
 
 public:
 	//Player* player;
@@ -87,14 +86,13 @@ public:
 	List<Character*> listInitiative;
 	int charaInTurn = 0; //Empieza en 0, max 7
 
-	vector<Character*> listAllies;
-	vector<Character*> listEnemies;
-
-	/*array<Character*, 4> listAllies;
-	array<Character*, 4> listEnemies;*/
+	vector<Character*> vecAllies;
+	vector<Character*> vecEnemies;
 
 	Character* targeted_Character = nullptr; //Last button selected
 	int lastPressedAbility_I = 0;
+
+	bool firstCombat_B = false;//determinar si es la primera vez que se lucha en la partida, en true significa que no se ha luchado todavia
 
 private:
 	int mouseX_combat, mouseY_combat;
@@ -105,6 +103,10 @@ private:
 	//Fondo
 	const char* texturePathBackground;
 	SDL_Texture* textureBackground;
+
+	const char* texturePathTurnsBar;
+	SDL_Texture* textureTurnsBar;
+
 	const char* texturePathTargetButton;
 	SDL_Texture* textureTargetButton;
 

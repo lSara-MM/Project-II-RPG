@@ -67,9 +67,6 @@
     <ClCompile Include="Source\PracticeTent.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Characther.cpp">
-      <Filter>Modules\Entities\Combat</Filter>
-    </ClCompile>
     <ClCompile Include="Source\NPC.cpp">
       <Filter>Modules\Entities\Explore</Filter>
     </ClCompile>
@@ -100,32 +97,14 @@
     <ClCompile Include="Source\Window.cpp">
       <Filter>Modules\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CombatEnemy.cpp">
-      <Filter>Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ECHouseDPS.cpp">
-      <Filter>Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ECHouseHealer.cpp">
-      <Filter>Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ECHouseTank.cpp">
-      <Filter>Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PartyMember.cpp">
-      <Filter>Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PCBard.cpp">
-      <Filter>Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PCProtagonist.cpp">
-      <Filter>Garbage</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Character.cpp">
       <Filter>Modules\Entities\Combat</Filter>
     </ClCompile>
     <ClCompile Include="Source\ItemManager.cpp">
       <Filter>Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Skills.cpp">
+      <Filter>Modules\Entities\Combat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,9 +207,6 @@
     <ClInclude Include="Source\PracticeTent.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Characther.h">
-      <Filter>Modules\Entities\Combat</Filter>
-    </ClInclude>
     <ClInclude Include="Source\NPC.h">
       <Filter>Modules\Entities\Explore</Filter>
     </ClInclude>
@@ -260,30 +236,6 @@
     </ClInclude>
     <ClInclude Include="Source\Window.h">
       <Filter>Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CombatEnemy.h">
-      <Filter>Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ECHouseDPS.h">
-      <Filter>Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ECHouseHealer.h">
-      <Filter>Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ECHouseTank.h">
-      <Filter>Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Enemy.h">
-      <Filter>Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PartyMember.h">
-      <Filter>Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PCBard.h">
-      <Filter>Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PCProtagonist.h">
-      <Filter>Garbage</Filter>
     </ClInclude>
     <ClInclude Include="Source\Character.h">
       <Filter>Modules\Entities\Combat</Filter>
@@ -322,9 +274,6 @@
     </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{fe659973-7733-481d-ae47-394713e9f6a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Garbage">
-      <UniqueIdentifier>{c28a4255-c362-4bd2-bd1e-49acaeb41d59}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Entities\Combat">
       <UniqueIdentifier>{4efa096c-1704-4065-bacf-3fc666063d85}</UniqueIdentifier>

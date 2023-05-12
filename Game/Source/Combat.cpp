@@ -40,9 +40,11 @@ bool Combat::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
+	
+	texturePathBackground = config.attribute("bgTexture").as_string(); //FondoActual (habra que cambiarlo por los de la dungeon actual)
+	texturePathTargetButton = config.attribute("targetTexture").as_string();
+	texturePathTurnsBar = config.attribute("turnBarTexture").as_string();
 
-	texturePathBackground = "Assets/Textures/combat_background_placeholder.png"; //FondoActual (habra que cambiarlo por los de la dungeon actual)
-	texturePathTargetButton = "Assets/GUI/UI_button_charactherSelection.png"; //De momento lo he puesto aqui para ver como se ve pero quiza haya que borrarlos
 	mouse_Speed = config.attribute("mouseSpeed").as_float();
 
 	combatNode = config;
@@ -58,26 +60,29 @@ bool Combat::Start()
 	//Cargar texturas
 	textureBackground = app->tex->Load(texturePathBackground);
 	textureTargetButton = app->tex->Load(texturePathTargetButton);
+	textureTurnsBar = app->tex->Load(texturePathTurnsBar);
 
 	//Poner la camara en su lugar
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
-	
-	//Activar entityManager que es lo que controlara que enemy  
+
 	app->entityManager->Enable();
-
-	//app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
-
-	//Desactivar physics
 	app->physics->Disable();
+
+	GuiButton* button;
+	for (int i = 0; i < 5; i++)
+	{
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 10, this, { 40 + i * 100, 470, 80, 80 });
+		listButtons.Add(button);
+	}
+
 	StartCombat();
 
-	// set buttons ID (de momento no hay allies)
-	/*for (int i = 0; i < listAllies.size(); i++)
-	{ listAllies.at(i)->button->id = i; }*/
-
-	for (int i = 0; i < listEnemies.size(); i++) //De momento esta petando muy fuerte
-	{ listEnemies.at(i)->button->id = 10 + i; }
+	//Load, modificar currentHP, hacer luego de cargar allies
+	if (!firstCombat_B)
+	{
+		LoadCombat();
+	}
 
 	return true;
 }
@@ -93,25 +98,37 @@ bool Combat::Update(float dt)
 {
 	Debug();
 
-	//Printar barra de Turnos Cutre momentaria
 	app->render->DrawTexture(textureBackground, 0, 0);
 
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	// Printar Barra Turnos (UI WORK)
+	int j = charaInTurn;
+	for (int i = 0; i < listInitiative.Count(); i++)
 	{
-		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
+		if (listInitiative.At(j) == nullptr) { j = 0; }
+
+		//El calculo largo es para que la barra este centrada siempre aprox
+		SDL_Color color;
+		if (listInitiative.At(j)->data->charaType == CharacterType::ALLY) { color = { 0, 255, 100, 200 }; }
+		if (listInitiative.At(j)->data->charaType == CharacterType::ENEMY) { color = { 255, 0, 100, 200 }; }
+		app->render->DrawRectangle({ 640 - ((int)listInitiative.Count()) * 50 + i * 110, 20, 90, 90 }, color.r, color.g, color.b, color.a);
+
+		//El nombre es temporal, luego ira la head del character
+		app->render->TextDraw(listInitiative.At(j)->data->name.GetString(), 640 - ((int)listInitiative.Count()) * 50 + i * 110, 30, 11);
+		j++;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	//Barra skills + name
+	//app->render->DrawRectangle({ 20,450,500,120 }, 220, 220, 220);
+	
+	//God Mode Info
+	if (app->input->godMode_B)
 	{
-		app->input->godMode_B = !app->input->godMode_B;
+		app->render->TextDraw("Press D to destroy first ally", 10, 80, 12);
+		app->render->TextDraw("Press A to destroy first enemy", 10, 100, 12);
+		app->render->TextDraw("Press 1 to move enemy[1] two positions (may crash)", 10, 120, 12);
+		app->render->TextDraw("Press 2 to destroy enemy[1]", 10, 140, 12);
+		app->render->TextDraw("Press 3 next turn", 10, 160, 12);
 	}
-
-	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
-		LOG("Change chara");
-
-		MoveCharacter(&listEnemies, listEnemies.at(1), 1);
-	}
-
 
 	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
 
@@ -122,7 +139,7 @@ bool Combat::PostUpdate()
 {
 	bool ret = true;
 
-	//if (exit_B) return false;
+	//if (exit_B) return false;	
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -137,14 +154,21 @@ bool Combat::CleanUp()
 {
 	LOG("Freeing scene");
 	//Save al terminar
-	//SaveCombat();
+	//if (win)
+	//{
+	//	if (firstCombat_B)
+	//	{
+	//		firstCombat_B = false;
+	//	}
 
+	//	SaveCombat();
+	//}
+	
 	listButtons.Clear();
 
 	//pSettings->CleanUp();
 	
 	app->guiManager->CleanUp();
-
 
 
 	app->entityManager->entities.Clear();
@@ -160,14 +184,43 @@ bool Combat::CleanUp()
 
 void Combat::Debug()
 {
+	if (app->input->godMode_B)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) { RemoveCharacter(&vecAllies, vecAllies.at(0)); }
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) { RemoveCharacter(&vecEnemies, vecEnemies.at(0)); }
+	}
 
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		app->input->godMode_B = !app->input->godMode_B;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
+		LOG("Change chara");
+
+		MoveCharacter(&vecEnemies, vecEnemies.at(0), 2);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) {
+		LOG("Remove chara");
+
+		RemoveCharacter(&vecEnemies, vecEnemies.at(1));
+	}
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN) {
+		LOG("Next turn");
+
+		NextTurn();
+	}
 }
 
 bool Combat::InitEnemies(SString scene, vector<int> arr)
 {
 	int cPos = 0;
 
-	// to test
 	for (pugi::xml_node sceneNode = combatNode.child("scenes"); sceneNode; sceneNode = sceneNode.next_sibling("scenes"))
 	{
 		// to test if string compare works
@@ -182,17 +235,19 @@ bool Combat::InitEnemies(SString scene, vector<int> arr)
 						Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 						chara->parameters = itemNode;
 						chara->Awake();
-						chara->Start();
+
+						// to delete
+						//chara->Start();
 
 						chara->charaType = CharacterType::ENEMY;
 						chara->positionCombat_I = cPos++;
 
-						listEnemies.push_back(chara);
+						vecEnemies.push_back(chara);
 					}
 				}
 
 				// if list enemies full, stop checking pugi
-				if (listEnemies.size() == arr.size())	return true;
+				if (vecEnemies.size() == arr.size())	return true;
 			}
 		}
 	}
@@ -200,45 +255,14 @@ bool Combat::InitEnemies(SString scene, vector<int> arr)
 	return true;
 }
 
-bool Combat::SaveCombat()
+bool Combat::InitAllies(array<Character*, 4> party)
 {
-	bool ret = true;
-
-	pugi::xml_document* saveDoc = new pugi::xml_document();
-	pugi::xml_node node = saveDoc->append_child("save_stats");
-
-	pugi::xml_node protagonist = node.append_child("protagonist");
-
-	//protagonist.append_attribute("currentHp") = app->scene->currentHP_Protagonist;
-
-	pugi::xml_node bard = node.append_child("bard");
-
-	//bard.append_attribute("currentHp") = app->scene->currentHP_Bard;
-
-	ret = saveDoc->save_file("save_dialogue.xml");
-
-	return ret;
-}
-
-bool Combat::LoadCombat()
-{
-	pugi::xml_document gameStateFile;
-	pugi::xml_parse_result result = gameStateFile.load_file("save_combat.xml");
-	pugi::xml_node node = gameStateFile.child("save_stats");
-
-	bool ret = true;
-
-	if (result == NULL)
+	// TO TEST
+	for (int i = 0; i < party.size(); i++)
 	{
-		LOG("Could not load xml file save_dialogue.xml. pugi error: %s", result.description());
-		ret = false;
+		if (party.at(i) == nullptr) { return true; }
+		vecAllies.push_back(party.at(i));
 	}
-	else
-	{
-		//app->scene->currentHP_Bard = node.child("bard").attribute("currentHp").as_int();
-		//app->scene->currentHP_Protagonist = node.child("protagonist").attribute("currentHp").as_int();
-	}
-
 	return ret;
 }
 
@@ -270,95 +294,25 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 	// enemies so far start from 10.
 	// line 159
-	return true;
-}
-
-bool Combat::AddCombatant(int id)
-{
-	
+	//vecAllies.insert(vecAllies.end(), begin(party), begin(party) + j);
 
 	return true;
 }
 
-bool Combat::OrderBySpeed()
-{
-	//Order by initiative
-	int n = listInitiative.Count();
-	listInitiative.At(2)->data->speed;
-
-	for (int i = 0; i < n - 1; i++) {
-		
-		for (int j = 0; j < n - i - 1; j++) {
-
-			if (listInitiative.At(j)->data->speed > listInitiative.At(j + 1)->data->speed)
-			{
-				//SWAP WIP
-				ListItem<Character*>* aux = new ListItem<Character*>(listInitiative.At(j)->data); /*new ListItem<Characther*>*/; //Esta petando el switchhh
-				/*aux = listInitiative.At(j);
-				aux->data = listInitiative.At(j)->data;*/
-				listInitiative.At(j)->data = listInitiative.At(j + 1)->data;
-				listInitiative.At(j + 1)->data = aux->data;
-				delete aux;
-			}
-		}
-		
-	}
-
-	return true;
-}
-
-bool Combat::EliminateCombatant(Character* chara)
-{
-	if (chara==nullptr)
-	{
-		return false;
-	}
-
-	////Mover chara al fondo antes de matarlo para ordenar los arrays
-	//switch (chara->charaType_I)
-	//{
-	//case chara->CharacterType::ALLY:
-	//	for (int i = 3; i >= 0; i--)
-	//	{
-	//		if (allies[i] != nullptr)
-	//		{
-	//			MoveAllies(chara->positionCombat_I, i+1);
-	//			delete allies[i];
-	//			allies[i]=nullptr;
-	//			break;
-	//		}
-	//	}
-	//	
-	//	
-	//	break;
-
-	//case chara->CharacterType::ENEMY:
-	//	for (int i = 3; i >= 0; i--)
-	//	{
-	//		if (enemies[i] != nullptr)
-	//		{
-	//			MoveEnemies(chara->positionCombat_I, i+1);
-	//			enemies[i] = nullptr;
-	//			break;
-	//		}
-	//	}
-	//	break;
-
-	//case chara->CharacterType::NONE:
-	//	break;
-
-	//default:
-	//	break;
-	//}
-	//app->entityManager->DestroyEntity(chara);
-	////chara->Disable();
-	//listInitiative.Del(listInitiative.At(listInitiative.Find(chara)));
-
-	return true;
-}
 
 bool Combat::StartCombat()
 {
+	// set buttons ID
+	for (int i = 0; i < vecAllies.size(); i++)
+	{
+		vecAllies.at(i)->button->id = i;
+	}
+
+	for (int i = 0; i < vecEnemies.size(); i++)
+	{
+		vecEnemies.at(i)->button->id = 5 + i;
+	}
+
 	OrderBySpeed();
 
 	lastPressedAbility_I = 0;
@@ -368,88 +322,81 @@ bool Combat::StartCombat()
 	//	EnableTargetButton(i);
 	//	EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
 	//}
-	//listInitiative.start->data->onTurn = true;
+	listInitiative.start->data->onTurn = true;
 	charaInTurn = 0;
-	
+
 	return true;
 }
 
-//bool Combat::NextTurn()
-//{
-//	//Resetear los botones targeteados
-//	lastPressedAbility_I = 0;
-//	targeted_Character = nullptr;
-//
-//	//Reactivar todos los posibles targets, los vacios desactivarlos
-//
-//	for (int i = 0; i < 7; i++)
-//	{
-//		EnableTargetButton(i);
-//	}
-//	for (int i = 1; i < 4; i++)
-//	{
-//		EnableSkillButton(i);
-//	}
-//
-//	//Si algo esta vacio desactivarlo
-//	for (int i = 0; i <= 3; i++)
-//	{
-//		if (enemies[i] == nullptr) { DisableTargetButton(4 + i); }
-//	}
-//	for (int i = 0; i <= 3; i++)
-//	{
-//		if (allies[3-i] == nullptr) { DisableTargetButton(i); }
-//	}
-//	
-//	
-//
-//
-//
-//	if (listInitiative.Count()-1 <= charaInTurn) { charaInTurn = 0; }
-//	else
-//	{
-//		listInitiative.At(charaInTurn)->data->onTurn = false;
-//		++charaInTurn; 
-//	}
-//	listInitiative.At(charaInTurn)->data->onTurn = true;
-//
-//	return true;
-//}
+bool Combat::OrderBySpeed()
+{
+	for (int i = 0; i < vecAllies.size(); i++)
+	{
+		listInitiative.Add(vecAllies.at(i));
+	}
 
-	//Reactivar todos los posibles targets, los vacios desactivarlos
+	for (int i = 0; i < vecEnemies.size(); i++)
+	{
+		listInitiative.Add(vecEnemies.at(i));
+	}
 
-//	for (int i = 0; i < 7; i++)
-//	{
-//		EnableTargetButton(i);
-//	}
-//	for (int i = 1; i < 4; i++)
-//	{
-//		EnableSkillButton(i);
-//	}
-//
-//	//Si algo esta vacio desactivarlo
-//	for (int i = 0; i <= 3; i++)
-//	{
-//		if (enemies[i] == nullptr) { DisableTargetButton(4 + i); }
-//	}
-//	for (int i = 0; i <= 3; i++)
-//	{
-//		if (allies[3-i] == nullptr) { DisableTargetButton(i); }
-//	}
-//	
-//
-//
-//
-//	if (listInitiative.Count()-1 <= charaInTurn) { charaInTurn = 0; }
-//	else
-//	{
-//		listInitiative.At(charaInTurn)->data->onTurn = false;
-//		++charaInTurn; 
-//	}
-//	listInitiative.At(charaInTurn)->data->onTurn = true;
-//
-//	return true;
-//}
+	int n = listInitiative.Count();
+
+	for (int i = 0; i < n - 1; i++) 
+	{
+		for (int j = 0; j < n - i - 1; j++) 
+		{
+			if (listInitiative.At(j)->data->speed < listInitiative.At(j + 1)->data->speed)
+			{
+				ListItem<Character*>* aux = new ListItem<Character*>(listInitiative.At(j)->data);
+				listInitiative.At(j)->data = listInitiative.At(j + 1)->data;
+				listInitiative.At(j + 1)->data = aux->data;
+				delete aux;
+				aux = nullptr;
+			}
+		}
+	}
+
+	return true;
+}
+
+bool Combat::NextTurn()
+{
+	lastPressedAbility_I = 0;
+	targeted_Character = nullptr;
+	//	//Resetear los botones targeteados
+	//	lastPressedAbility_I = 0;
+	//	targeted_Character = nullptr;
+	//
+	//	//Reactivar todos los posibles targets, los vacios desactivarlos
+	//
+	//	for (int i = 0; i < 7; i++)
+	//	{
+	//		EnableTargetButton(i);
+	//	}
+	//	for (int i = 1; i < 4; i++)
+	//	{
+	//		EnableSkillButton(i);
+	//	}
+	//	
+	//	if (listInitiative.Count()-1 <= charaInTurn) { charaInTurn = 0; }
+	//	else
+	//	{
+	//		listInitiative.At(charaInTurn)->data->onTurn = false;
+	//		++charaInTurn; 
+	//	}
+	//	listInitiative.At(charaInTurn)->data->onTurn = true;
+
+
+	listInitiative.At(charaInTurn++)->data->onTurn = false;
+	
+	if (listInitiative.Count() == charaInTurn) { charaInTurn = 0; }
+	listInitiative.At(charaInTurn)->data->onTurn = true;
+
+	LOG("%s turn - num %d", listInitiative.At(charaInTurn)->data->name.GetString(), charaInTurn);
+
+	return true;
+}
 
 
 bool Combat::DisableTargetButton(int id)
@@ -491,7 +438,7 @@ bool Combat::EnableTargetButton(int id)
 bool Combat::EnableSkillButton(int skillNum)
 {
 	//Evitar que pete o acceder a botones que no deberia 
-	if (skillNum < 1 || skillNum > 4)
+	if (skillNum < 0 || skillNum > 3)
 	{
 		return false;
 	}
@@ -524,7 +471,7 @@ bool Combat::DisableSkillButton(int skillNum)
 
 
 
-
+// Combat mechanics
 void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int movement_I)
 {
 	//swap(arr.at(currentPosition_I), arr.at(newPosition_I));
@@ -544,35 +491,14 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 
 	//Insertar en nueva posicion
 	arr->insert(arr->begin() + newPos, chara);
-	
-	////Reasignar Combat Position variable
-	//for (int i = 0; i < arr->size()-1; i++)
-	//{
-	//	arr->at(i)->positionCombat_I = i;
-	//}
-
-	// Update combat and buttons position
-	for (int i = 0; i < arr->size(); i++)
-	{
-		arr->at(i)->positionCombat_I = i;
-
-		if (chara->charaType == CharacterType::ALLY)
-		{
-			arr->at(i)->button->bounds.x = 400 - 126 * arr->at(i)->positionCombat_I;
-		}
-
-		if (chara->charaType == CharacterType::ENEMY)
-		{
-			arr->at(i)->button->bounds.x = 700 + 126 * arr->at(i)->positionCombat_I;
-		}
-	}
+	UpdatePositions(arr, chara->positionCombat_I);
 }
 
-void Combat::RemoveCharacter(vector<Character*> arr, Character* chara)
+void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 {
 	// Delete from its type vector
-	arr.erase(arr.begin() + chara->positionCombat_I);
-
+	arr->erase(arr->begin() + chara->positionCombat_I);
+	
 	// Delete & free memory (should work?)
 
 	// Delete from initiative list
@@ -583,5 +509,141 @@ void Combat::RemoveCharacter(vector<Character*> arr, Character* chara)
 
 	// Delete from entity manager list
 	app->entityManager->DestroyEntity(chara);
+	UpdatePositions(arr, chara->positionCombat_I);	
+}
+
+void Combat::UpdatePositions(vector<Character*>* arr, int pos)
+{
+	// Update combat and buttons position
+	for (int i = pos; i < arr->size(); i++)
+	{
+		arr->at(i)->positionCombat_I = i;
+
+		if (arr->at(i)->charaType == CharacterType::ALLY)
+		{
+			arr->at(i)->button->bounds.x = 400 - 126 * arr->at(i)->positionCombat_I;
+			arr->at(i)->position.x = 400 - 126 * arr->at(i)->positionCombat_I;
+		}
+
+		if (arr->at(i)->charaType == CharacterType::ENEMY)
+		{
+			arr->at(i)->button->bounds.x = 700 + 126 * arr->at(i)->positionCombat_I;
+			arr->at(i)->position.x = 700 + 126 * arr->at(i)->positionCombat_I;
+		}
+	}
+}
+
+
+// Settings
+bool Combat::OnGuiMouseClickEvent(GuiControl* control)
+{
+	LOG("Event by %d ", control->id);
+
+	app->audio->PlayFx(control->fxControl);
+
+	if (control->id >= 5)
+	{
+		LOG("%s chara", vecEnemies.at(control->id - 5)->name.GetString());
+	}
+	else
+	{
+		LOG("%s chara", vecAllies.at(control->id)->name.GetString());
+	}
+
+	// enemies so far start from 10.
+	// line 159
+	return true;
+}
+
+// Save/Load
+bool Combat::SaveCombat()
+{
+	bool ret = true;
+
+	pugi::xml_document* saveDoc = new pugi::xml_document();
+	pugi::xml_node node = saveDoc->append_child("save_stats");
+
+	//for (c = app->scene->listAllies.start; c != NULL; c = c->next) {
+
+	//	pugi::xml_node character = node.append_child("CombatCharacter");
+	//	character.append_attribute("currentHp") = c->currentHP;//hacerlo para todas las stats
+
+	//}
+
+	for (int i = 0; i < vecAllies.size(); i++)
+	{
+		pugi::xml_node character = node.append_child("CombatCharacter");
+		character.append_attribute("currentHp") = vecAllies[i]->currentHp;
+		
+	}
+
+	ret = saveDoc->save_file("save_combat.xml");
+
+	return ret;
+}
+
+bool Combat::LoadCombat()
+{
+	pugi::xml_document gameStateFile;
+	pugi::xml_parse_result result = gameStateFile.load_file("save_combat.xml");
+	pugi::xml_node node = gameStateFile.child("save_stats");
+
+	bool ret = true;
+
+	if (result == NULL)
+	{
+		LOG("Could not load xml file save_combat.xml. pugi error: %s", result.description());
+		ret = false;
+	}
+	else
+	{
+		int i = 0;
+
+		for (pugi::xml_node itemNode = node.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter"))
+		{
+			if (i<app->scene->player->listPC.size())
+			{
+				break;
+			}
+			app->scene->player->listPC[i]->currentHp = itemNode.attribute("currentHp").as_int();
+			i++;
+		}
+
+	}
+
+	return ret;
+}
+
+bool Combat::RestartCombatData()
+{
+	bool ret = true;
+	//cargar config.xml
+	pugi::xml_document gameStateFile;
+	pugi::xml_parse_result result = gameStateFile.load_file("config.xml");
+	pugi::xml_node nodeConfig = gameStateFile.child("CombatCharacter");
+
+	if (result == NULL)
+	{
+		LOG("Could not load xml file config.xml. pugi error: %s", result.description());
+		ret = false;
+	}
+
+	else
+	{
+
+		pugi::xml_document* saveDoc = new pugi::xml_document();
+		pugi::xml_node nodeCombat = saveDoc->append_child("save_stats");
+
+		for (pugi::xml_node itemNode = nodeConfig.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter")) {
+
+			pugi::xml_node character = nodeCombat.append_child("CombatCharacter");
+			character.append_attribute("currentHp") = itemNode.attribute("currentHp").as_int();
+
+		}
+
+		ret = saveDoc->save_file("save_combat.xml");
+	}
+
+	return ret;
 }
 

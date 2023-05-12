@@ -14,15 +14,9 @@
 //CHARACTHERS
 #include "Player.h"
 #include "NPC.h"
+#include "Character.h"
 
-#include "Characther.h" 
-//PCs
-#include "PCProtagonist.h"
-#include "PCBard.h"
-//ECs
-#include "ECHouseTank.h"
-#include "ECHouseDPS.h"
-#include "ECHouseHealer.h"
+
 
 EntityManager::EntityManager() : Module()
 { 
@@ -111,6 +105,8 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		// To test. Guarrada to fea
 	case EntityType::MENU_CHARA:
 		entity = new Character();
+
+		// no entra xd
 		entity->type == EntityType::MENU_CHARA;
 		break;
 

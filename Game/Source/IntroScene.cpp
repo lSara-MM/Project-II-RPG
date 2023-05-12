@@ -94,8 +94,11 @@ bool IntroScene::Update(float dt)
 	app->render->TextDraw("TWISTED", 100, 50, 100, Font::TITLE, { 181, 33, 33 });
 	app->render->TextDraw("TENT", 250, 160, 100, Font::TITLE, { 181, 33, 33 });
 
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		app->combat->firstCombat_B = false;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
+	}
+		
 
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
@@ -124,6 +127,7 @@ bool IntroScene::PostUpdate()
 	if (app->input->getInput_B) PlayerNameInput();
 	if (app->input->nameEntered_B && !introDone) 
 	{
+		app->combat->firstCombat_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
 		introDone = true;
 	}
@@ -199,12 +203,13 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		}
 		else
 		{
-			//app->combat->RestartCombatData();
+			app->combat->firstCombat_B = true;
 			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		}
 		break;
 	case 2:
 		LOG("Button continue click");
+		app->combat->firstCombat_B = false;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		continueGame_B = true;
 		break;

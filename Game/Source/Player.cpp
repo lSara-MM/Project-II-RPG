@@ -25,7 +25,7 @@
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
-	name.Create("player");
+	//name.Create("player");
 
 	currentAnim.PushBack({ 64, 0, 64, 64 });
 
@@ -86,6 +86,7 @@ bool Player::Awake() {
 	enterPath = "Assets/Audio/Fx/entrar_sala.wav";
 	enterZone = app->audio->LoadFx(enterPath);
 
+
 	return true;
 }
 
@@ -103,10 +104,15 @@ bool Player::Start()
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
-	playerName = app->input->playerName.c_str();
+	name = app->input->playerName.c_str();
 	npcInteract = false;
 
 	pbody->body->SetGravityScale(0);
+	
+	for (int i = 0; i < arrParty.size(); i++)
+	{
+		arrParty.at(i) = nullptr;
+	}
 
 	return true;
 }
@@ -207,6 +213,7 @@ bool Player::CleanUp()
 		pbody->body->GetWorld()->DestroyBody(pbody->body);
 	}
 	
+
 	return true;
 }
 
@@ -496,3 +503,29 @@ void Player::Controller(float dt)
 
 	}
 }
+
+void Player::LoadAllPC()
+{
+	for (pugi::xml_node itemNode = app->entityManager->entityNode.child("CombatCharacter"); itemNode; itemNode = itemNode.next_sibling("CombatCharacter"))
+	{
+		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::MENU_CHARA);
+		chara->parameters = itemNode;
+		chara->Awake();
+
+		//chara->Start();
+
+		chara->charaType = CharacterType::ALLY;
+		listPC.push_back(chara);
+	}
+}
+
+void Player::SetParty()
+{	
+	// to change when party available
+	for (int i = 0; i < listPC.size(); i++)
+	{
+		arrParty.at(i) = listPC.at(i);
+		arrParty.at(i)->positionCombat_I = i;
+	}
+}
+

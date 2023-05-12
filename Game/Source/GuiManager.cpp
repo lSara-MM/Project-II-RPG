@@ -104,14 +104,20 @@ bool GuiManager::Draw() {
 
 bool GuiManager::CleanUp()
 {
-	ListItem<GuiControl*>* control = guiControlsList.start;
+	/*ListItem<GuiControl*>* control = guiControlsList.start;
 
-	/*while (control != nullptr)
+	while (control != nullptr)
 	{
 		RELEASE(control);
+		
 	}*/
 
-	guiControlsList.Clear();
+	ListItem<GuiControl*>* item;
+
+	for (item = guiControlsList.start; item != NULL; item = item->next)
+	{
+		guiControlsList.Del(item);
+	}
 
 	return true;
 }

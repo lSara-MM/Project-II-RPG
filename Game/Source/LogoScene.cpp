@@ -13,6 +13,7 @@
 #include "IntroScene.h"
 #include "Scene.h"
 #include "FadeToBlack.h"
+#include "Combat.h"
 
 
 LogoScene::LogoScene() : Module()
@@ -65,8 +66,11 @@ bool LogoScene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->controller.A)
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
 
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		app->combat->firstCombat_B = false;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
+	}
+		
 
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 5);

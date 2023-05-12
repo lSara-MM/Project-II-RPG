@@ -168,11 +168,6 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	// to test
-	//app->combat->listAllies.insert(app->combat->listAllies.end(),begin(player->listParty), end(player->listParty));
-
-	app->entityManager->CleanUp();
-	app->entityManager->CleanUp();
 	app->entityManager->Disable();
 
 	if (pSettings != nullptr)
@@ -188,10 +183,18 @@ bool Scene::CleanUp()
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 
-	if (app->combat->active==true)
-	{InitCombat();
-	app->combat->active = false; //Es tremenda guarrada pero sino no se hace el enable del combate
-	}//Comentado porque peta
+	player->active;
+
+	if (changeToCombat == true)
+	{
+		// this shouldnt be here later
+		player->LoadAllPC();
+		player->SetParty();
+		//
+
+		InitCombat();
+		changeToCombat = false;
+	}
 	
 	return true;
 }
@@ -260,7 +263,6 @@ void Scene::Debug()
 
 		LOG("PAUSE");
 	}
-
 	if (pause_B == true && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->controller.B == 1))//POSAR CONTROL NORMAL
 	{
 		
@@ -305,10 +307,8 @@ void Scene::Debug()
 
 	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
 		LOG("Combat");
-		//InitCombat(); //Lo pongo aqui porque llamarlo tras cada cleanUp trae problemas
 		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
-		app->combat->active = true;
-		//InitCombat(); //Lo pongo aqui porque llamarlo tras cada cleanUp trae problemas
+		changeToCombat = true;
 	}
 	
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
@@ -367,6 +367,7 @@ void Scene::InitCombat()
 	}
 
 	app->combat->InitEnemies(name, arr);
+	app->combat->InitAllies(player->arrParty);
 }
 
 bool Scene::OnGuiMouseClickEvent(GuiControl* control)

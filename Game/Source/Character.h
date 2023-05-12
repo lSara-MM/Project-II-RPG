@@ -10,8 +10,10 @@
 #include "GuiButton.h"
 #include "Animation.h"
 #include <array>
+#include "Skills.h"
 
 struct SDL_Texture;
+class Skill;
 
 enum class CharacterType
 {
@@ -24,13 +26,14 @@ enum class CharacterClass
 {
 	MELEE_DPS,
 	RANGED_DPS,
+	ASSASSIN,
 	AOE_DPS,
-	HEALER,
 	TANK,
+	DOT,
+	HEALER,
 	BUFFER,
 	DEBUFFER,
-	ASSASSIN,
-	DOT,
+	
 
 	NO_CLASS
 };
@@ -40,7 +43,6 @@ class Character : public Entity
 public:
 
 	Character();
-	Character(EntityType type_);
 
 	virtual ~Character();
 
@@ -52,16 +54,16 @@ public:
 
 	bool CleanUp();
 
-	bool CalculateRandomProbability(int bonus_I, int against_I = 0); //Retorna true si logras el chance, false si no
+	//Retorna true si logras el chance, false si no
+	bool CalculateRandomProbability(int bonus_I, int against_I = 0); 
 
-	void ModifyHP(int cantidad); //Positivo para curar negativo para dañar
+	void ModifyHP(int hp); //Positivo para curar negativo para dañar
 
-	int CalculateDamage(int damage); //ERIC:Va haber que poner muchos mas atributos
+	int CalculateDamage(Character* caster, Character* defender,Skill* skill); //ERIC:Va haber que poner muchos mas atributos
 
 	bool ResistStatusEffect(/*efecto,precision*/); //Hacer cuando se hagan status effects, aun no.
 	
-	
-
+	void LoadSkill(int arr[4]);
 	//Gets, dan las stats sumadas (base+eqipo+buffos)
 	/*int GetMaxHP() { return maxHp; }
 	int GetHealth() { return currentHp; }
@@ -70,6 +72,10 @@ public:
 	int GetSpeed() { return speed; }*/
 
 public:
+
+	// Texture position
+	iPoint  position;
+
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
@@ -81,12 +87,11 @@ public:
 
 	// Gestion de Turnos
 	bool onTurn;
-	bool alive;
 	Timer turnDelay;
-	bool delayOn=false;
+	bool delayOn = false;
 
 	// Stats
-	SString name;
+	SString chara_name;
 
 	// STATS
 	int maxHp; // La base a level 0/1 es 1000
@@ -97,7 +102,7 @@ public:
 	int precision; // La base es 100%, es un porcentaje que se enfrenta vs la resistencia y precision
 	int armor; // MAXIMO ABSOLUTO 200, mas menos full items en tanque 120
 	int dodge; // Probabilidad de no recibir nada de daño, base es 0%
-	int res; //Probabilidad de no recibir un efecto de estado, base 10%
+	int res; // Probabilidad de no recibir un efecto de estado, base 10%
 	int speed; // Indicador quien va primero en la iniciativa
 
 	// Posicion combate (va del 0 al 3)
@@ -108,17 +113,20 @@ public:
 
 	////Skills Descriptions
 	//SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
-	//vector<Skills*> skillsList;
+	List<Skill*> listSkills;
 
 	GuiButton* button;
-
+	
 private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
+	List<int> listSkillsHistory; //Aqui guardamos un historial de que skills se ha usado.
 
-	iPoint  position;
 	int width, height;
+
+	pugi::xml_document skillsFile;
+	pugi::xml_node skillNode;
 };
 
 #endif // __CHARACTER_H__

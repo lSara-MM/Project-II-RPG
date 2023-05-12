@@ -36,8 +36,10 @@ public:
 
 	void Controller(float dt);
 
+	void LoadAllPC();
+	void SetParty();
+
 public:
-	SString playerName;
 
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
@@ -74,7 +76,8 @@ public:
 
 	iPoint position;
 
-	array<Character*, 4> listParty;
+	array<Character*, 4> arrParty;
+	vector<Character*> listPC;
 
 private:
 

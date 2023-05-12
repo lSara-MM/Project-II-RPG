@@ -6,6 +6,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "SString.h"
+#include <vector>
 
 class GuiButton : public GuiControl
 {
