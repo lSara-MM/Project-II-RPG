@@ -52,11 +52,35 @@ bool Skill::PosCanBeUsed(int positionCharacter)
 	return (positionCharacter >= posToTargetStart_I && positionCharacter <= posToTargetEnd_I);
 }
 
-int Skill::RangeCanTarget(vector<Character> vec)
+int Skill::RangeCanTarget(vector<Character*> vec)
 {
-	Character a;
-	a.charaType == CharacterType::ALLY;
+	
 	//Mirar size del vector
+	int max = vec.size();
 	//si mas pequeño el vector que 
-	return 0;
+	if (max < posToTargetEnd_I) { return max; }
+	else if (max < posToTargetStart_I){return posToTargetEnd_I;}
+	else { return -1; } //No se puede usar
+	
 }
+
+int Skill::RandomTarget(int posInicial, int posFinal, TargetingMethod method)
+{
+	int pos= posInicial;
+	switch (method)
+	{
+	case TargetingMethod::RANDOM:
+		int width = posFinal - posInicial +1;
+		pos = rand() % width + posInicial;
+		break;
+
+	case TargetingMethod::LOWER_HP:
+		break;
+
+	default:
+		break;
+	}
+
+	return pos;
+}
+

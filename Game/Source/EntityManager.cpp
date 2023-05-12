@@ -14,8 +14,8 @@
 //CHARACTHERS
 #include "Player.h"
 #include "NPC.h"
+#include "Character.h"
 
-#include "Characther.h" 
 
 
 EntityManager::EntityManager() : Module()

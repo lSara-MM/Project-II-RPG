@@ -408,7 +408,7 @@ bool Combat::EnableTargetButton(int id)
 bool Combat::EnableSkillButton(int skillNum)
 {
 	//Evitar que pete o acceder a botones que no deberia 
-	if (skillNum < 1 || skillNum > 4)
+	if (skillNum < 0 || skillNum > 3)
 	{
 		return false;
 	}

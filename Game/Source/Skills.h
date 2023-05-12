@@ -24,6 +24,11 @@ enum class SkillType //
 	DEBUFF,
 };
 
+enum class TargetingMethod //Como se ataca
+{
+	RANDOM=0,
+	LOWER_HP
+};
 // prueba
 class Skill
 {
@@ -38,7 +43,9 @@ public:
 
 	bool PosCanBeUsed(int positionCharacter);
 
-	int RangeCanTarget(vector<Character> vec);
+	int RangeCanTarget(vector<Character*> vec);
+
+	int RandomTarget(int posInicial, int posFinal, TargetingMethod method = TargetingMethod::RANDOM);
 
 public:
 	SString name;
@@ -59,8 +66,6 @@ public:
 	int bonusCritDamage;
 	//Variable de que tipo de stat usan para el escaldo?
 
-private:
-
 	//Posicion para hacer la skill (min 0 max 3)
 	int posToUseStart_I; //Posicion mas baja donde puedes usar el ataque
 	int posToUseEnd_I; //Posicion mas alta donde puedes hacer el ataque, si es solo una pues poner el mismo numero que la inicial
@@ -71,6 +76,10 @@ private:
 	int posToTargetEnd_I; //Posicion mas alta donde puedes targetear el ataque, si es solo una pues poner el mismo numero que la inicial
 	bool areaSkill; //Si es true al hacerse la skill targetea todo da igual que posicion hayas pulsado
 	bool autoTarget;
+
+private:
+
+	
 };
 
 #endif // __SKILLS_H__

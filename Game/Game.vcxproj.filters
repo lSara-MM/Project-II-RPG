@@ -67,9 +67,6 @@
     <ClCompile Include="Source\PracticeTent.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Characther.cpp">
-      <Filter>Modules\Entities\Combat</Filter>
-    </ClCompile>
     <ClCompile Include="Source\NPC.cpp">
       <Filter>Modules\Entities\Explore</Filter>
     </ClCompile>
@@ -206,9 +203,6 @@
     </ClInclude>
     <ClInclude Include="Source\PracticeTent.h">
       <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Characther.h">
-      <Filter>Modules\Entities\Combat</Filter>
     </ClInclude>
     <ClInclude Include="Source\NPC.h">
       <Filter>Modules\Entities\Explore</Filter>

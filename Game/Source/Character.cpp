@@ -216,6 +216,7 @@ bool Character::Update(float dt)
 					if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))//Ataques
 					{
 						//usar skill 4 (daño + debuff)
+						int target = listSkills.At(3)->data->RandomTarget(listSkills.At(3)->data->posToUseStart_I, listSkills.At(3)->data->RangeCanTarget(app->combat->vecAllies));
 						listSkillsHistory.Add(3);
 						app->combat->vecAllies.at(0)->ModifyHP(-130);//TEMPORAL
 						app->combat->vecAllies.at(0)->attack-=10;

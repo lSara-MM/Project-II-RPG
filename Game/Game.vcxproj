@@ -96,7 +96,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Character.cpp" />
-    <ClCompile Include="Source\Characther.cpp" />
     <ClCompile Include="Source\Circus.cpp" />
     <ClCompile Include="Source\Combat.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -132,7 +131,6 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Character.h" />
-    <ClInclude Include="Source\Characther.h" />
     <ClInclude Include="Source\Circus.h" />
     <ClInclude Include="Source\Combat.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
