@@ -115,7 +115,12 @@ public:
 	void GetMouseMotion(int& x, int& y);
 
 	bool HandleInput(SDL_Event event, PlayerInput* playerInput);
+	
+	// Active getting input
+	// Needs the Struct of text input (ex. GetInput(playerName) will change playerName text)
 	void GetInput(PlayerInput* i);
+
+	// Render what player is writing, temporal
 	void RenderTempText(SString temp, const char* subs, iPoint pos, int fontsize = 10, Font font = Font::TEXT, SDL_Color color = { 0,0,0 });
 
 	void HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt);

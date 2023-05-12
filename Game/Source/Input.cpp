@@ -302,8 +302,9 @@ void Input::GetInput(PlayerInput* i)
 
 void Input::RenderTempText(SString temp, const char* subs, iPoint pos, int fontsize, Font font, SDL_Color color)
 {
+	// Substitute("character to substitute", new characters)
 	temp.Substitute("%", subs);
-	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 4, 650, 40, Font::TEXT, { 255, 255, 255 });
+	app->render->TextDraw(temp.GetString(), pos.x, pos.y, fontsize, font, color);
 }
 
 
