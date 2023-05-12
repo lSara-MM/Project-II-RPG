@@ -61,6 +61,10 @@ bool Input::Start()
 	//Enable Unicode
 	//SDL_EnableUNICODE(SDL_ENABLE);
 
+	playerName = new PlayerInput("player", MAX_PLAYER_CHARS, false);
+
+	getInput_B = false;
+
 	SDL_StopTextInput();
 	return true;
 }
@@ -127,7 +131,7 @@ bool Input::PreUpdate()
 			break;
 
 			case SDL_KEYDOWN:
-				if (getInput_B) { HandleInput(event); }
+				if (getInput_B) { HandleInput(event, input_S, max_chars_I); }
 				break;
 
 			case SDL_MOUSEBUTTONDOWN:
@@ -222,6 +226,8 @@ bool Input::CleanUp()
 	LOG("Quitting SDL event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 
+	RELEASE(playerName);
+
 	//Disable Unicode
 	//SDL_EnableUNICODE(SDL_DISABLE);
 	return true;
@@ -246,41 +252,53 @@ void Input::GetMouseMotion(int& x, int& y)
 }
 
 
-void Input::HandleInput(SDL_Event event)
+void Input::HandleInput(SDL_Event event, string* input, int max_chars_)
 {
 	// Keep a copy of the current version of the string
-	string temp = playerName;
+	string temp = *input;
 
 	// If the string less than maximum size
-	if (playerName.length() <= NAME_MAX_CHARS)
+	if (temp.length() <= max_chars_)
 	{
 		//Append the character
-		playerName += (char)event.key.keysym.sym;
+		temp += (char)event.key.keysym.sym;
 	}
 
 	// If backspace was pressed and the string isn't blank
-	if ((event.key.keysym.sym == SDLK_BACKSPACE) && !playerName.empty())
+	if ((event.key.keysym.sym == SDLK_BACKSPACE) && !temp.empty())
 	{
 		// Remove a character from the end
-		playerName.erase(playerName.length() - 1);
-		playerName.erase(playerName.length() - 1);
+		temp.erase(temp.length() - 1);
+		temp.erase(temp.length() - 1);
 	}
 
-	if ((event.key.keysym.sym == SDLK_RETURN) && !playerName.empty())
+	if ((event.key.keysym.sym == SDLK_RETURN) && !temp.empty())
 	{
-		playerName.erase(playerName.length() - 1);
+		temp.erase(temp.length() - 1);
 		app->dialogueSystem->SaveDialogueState();		
-		nameEntered_B = true;
+		//nameEntered_B = true;
 		getInput_B = false;
+
+		delete input;
+		input = &temp;
 	}
 
 	// Ignore shift
 	if (event.key.keysym.sym == SDLK_LSHIFT || event.key.keysym.sym == SDLK_RSHIFT)
 	{
 		// Append the character
-		playerName.erase(playerName.length() - 1);
+		temp.erase(temp.length() - 1);
 	}
 }
+
+void Input::GetInput(PlayerInput i)
+{
+	getInput_B = true;
+	input_S = &i.input;
+	max_chars_I = i.max_chars;
+}
+
+
 
 void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt)
 {

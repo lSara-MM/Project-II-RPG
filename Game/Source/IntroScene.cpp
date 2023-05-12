@@ -299,7 +299,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button start click");
 		if (!app->input->nameEntered_B)
 		{
-			app->input->getInput_B = true;
+			app->input->GetInput(&app->input->playerName, MAX_PLAYER_CHARS);
 		}
 		else
 		{
