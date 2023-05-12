@@ -8,7 +8,7 @@
 
 ItemManager::ItemManager() : Module()
 {
-	name.Create("items");
+	name.Create("itemmanager");
 }
 
 ItemManager::~ItemManager()
@@ -19,6 +19,8 @@ bool ItemManager::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Items");
 	bool ret = true;
+
+	texturePath = config.attribute("inventorypath").as_string();
 
 	return ret;
 }
@@ -48,33 +50,15 @@ bool ItemManager::Update(float dt)
 	{
 		pugi::xml_node pugiNode = items.first_child();
 		AddQuantity(pugiNode, "potion");
-	}
-	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	{
-		pugi::xml_node pugiNode = items.first_child();
 		AddQuantity(pugiNode, "granade");
-	}
-	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-	{
-		pugi::xml_node pugiNode = items.first_child();
 		AddQuantity(pugiNode, "legging");
-	}
-	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
-	{
-		pugi::xml_node pugiNode = items.first_child();
 		AddQuantity(pugiNode, "ring");
-	}
-	if (app->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
-	{
-		pugi::xml_node pugiNode = items.first_child();
 		AddQuantity(pugiNode, "chest");
-	}
-	if (app->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
-	{
-		pugi::xml_node pugiNode = items.first_child();
+		AddQuantity(pugiNode, "chest_2");
 		AddQuantity(pugiNode, "pendant");
+		AddQuantity(pugiNode, "shoe");
+		AddQuantity(pugiNode, "hat");
 	}
-
 	return true;
 }
 
@@ -141,14 +125,16 @@ void ItemManager::MinusQuantity(const char* name)
 			if (nodeList[i]->type != 2)
 			{
 				nodeList[i]->quantity--;
-				SaveItemState();
 			}
 			else
 			{
 				nodeList[i]->equiped = !nodeList[i]->equiped;
+				nodeList[i]->CleanUp();
 			}
+			SaveItemState();
 			UseItem(nodeList[i]);	
 		}
+
 	}
 }
 
@@ -209,6 +195,10 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 		node->type = pugiNode.attribute("type").as_int();
 		node->name = pugiNode.attribute("name").as_string();
 		node->kind = pugiNode.attribute("kind").as_int();
+		if (node->kind == 5 || node->kind == 6)
+		{
+			node->space = pugiNode.attribute("space").as_int();
+		}
 		node->hp = pugiNode.attribute("hp").as_int();
 		if (node->type == 2)
 		{
@@ -231,65 +221,110 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 
 }
 
-void ItemManager::LoadQuantity(int x, int y)
+void ItemManager::LoadQuantity(int x, int y, int i)
 {
-	for (size_t i = 0; i < nodeList.size(); i++)
+	if (nodeList[i]->quantity > 0)
 	{
-		if (nodeList[i]->quantity > 0)
+		LoadButtons(x, y, i);
+
+		nodeList[i]->ID = i;
+
+		if (!nodeList[i]->equiped)
 		{
-			LoadButtons(x, y, i);
+			itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
+			app->render->DrawTexture(itemsTexture, (700 + 52 * x) - app->render->camera.x, y - app->render->camera.y);
 
-			nodeList[i]->ID = i;
-
-			if (!nodeList[i]->equiped)
-			{
-				itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
-				app->render->DrawTexture(itemsTexture, (1000 + 52 * i), y);
-
-				string c = to_string(nodeList[i]->quantity);
-				app->render->TextDraw(c.c_str(), (840 + 52 * i), y + 26, 20, Font::TEXT, { 0, 0, 0 });
-			}
-			else if (nodeList[i]->equiped)
-			{
-				switch (nodeList[i]->kind)
-				{
-				case 1:
-					itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
-					app->render->DrawTexture(itemsTexture, (1000 + 52 * i), y);
-					break;
-				case 2:
-					itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
-					app->render->DrawTexture(itemsTexture, (1000 + 52 * i), y);
-					break;
-				case 3:
-					itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
-					app->render->DrawTexture(itemsTexture, (1000 + 52 * i), y);
-					break;
-				case 4:
-					itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
-					app->render->DrawTexture(itemsTexture, (1000 + 52 * i), y);
-					break;
-				case 5:
-					itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
-					app->render->DrawTexture(itemsTexture, (1000 + 52 * i), y);
-					break;
-				}
-			}
-
-			app->tex->UnLoad(itemsTexture);
-			itemsTexture = NULL;
+			string c = to_string(nodeList[i]->quantity);
+			app->render->TextDraw(c.c_str(), (732 + 52 * x), y + 26, 20, Font::TEXT, { 0, 0, 0 });
 		}
+		else if (nodeList[i]->equiped)
+		{
+			switch (nodeList[i]->kind)
+			{
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			case 6:
+				break;
+			}
+		}
+		app->tex->UnLoad(itemsTexture);
+		itemsTexture = NULL;
 	}
 }
 
 void ItemManager::LoadButtons(int x, int y, int ID)
 {
 	SDL_Rect buttonBounds;
-	if (nodeList[ID]->button == NULL)
+	int x_;
+
+	if (nodeList[ID]->button == NULL && nodeList[ID]->equiped == false)
 	{
-		int x_ = (800 + 52 * ID);
+		x_ = (700 + 52 * x);
 		buttonBounds = { x_, y, 52, 52 };
 		nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+	}
+	
+	if (nodeList[ID]->button == NULL && nodeList[ID]->equiped)
+	{
+		switch (nodeList[ID]->kind)
+		{
+		case 1:
+			x_ = (200 + 52);
+			buttonBounds = { x_, 332, 52, 52 };
+			nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+			break;
+		case 2:
+			x_ = (200 + 52);
+			buttonBounds = { x_, 270, 52, 52 };
+			nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+			break;
+		case 3:
+			x_ = (200 + 52);
+			buttonBounds = { x_, 392, 52, 52 };
+			nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+			break;
+		case 4:
+			x_ = (200 + 52);
+			buttonBounds = { x_, 208, 52, 52 };
+			nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+			break;
+		case 5:
+			if (nodeList[ID]->space==1)
+			{
+				x_ = (510 + 52);
+				buttonBounds = { x_, 210, 52, 52 };
+				nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+			}
+			else
+			{
+				x_ = (510 + 52);
+				buttonBounds = { x_, 270, 52, 52 };
+				nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+			}
+			break;
+		case 6:
+			if (nodeList[ID]->space == 1)
+			{
+				x_ = (510 + 52);
+				buttonBounds = { x_, 335, 52, 52 };
+				nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+			}
+			else
+			{
+				x_ = (510 + 52);
+				buttonBounds = { x_, 400, 52, 52 };
+				nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+			}
+			break;
+		}
 	}
 }
 
@@ -310,6 +345,7 @@ bool ItemManager::SaveItemState()
 		item.append_attribute("name") = nodeList[i]->name.GetString();
 		item.append_attribute("quantity") = nodeList[i]->quantity;
 		item.append_attribute("equiped") = nodeList[i]->equiped;
+		item.append_attribute("space") = nodeList[i]->space;
 	}
 
 	ret = saveDoc->save_file("save_items.xml");
@@ -332,7 +368,8 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 			if (strcmp(pugiNode.attribute("name").as_string(), nodeList[i]->name.GetString()) == 0)
 			{
 				nodeList[i]->quantity = pugiNode.attribute("quantity").as_int();
-				nodeList[i]->equiped = pugiNode.attribute("equipped").as_bool();
+				nodeList[i]->equiped = pugiNode.attribute("equiped").as_bool();
+				nodeList[i]->space = pugiNode.attribute("space").as_bool();
 			}
 		}
 	}

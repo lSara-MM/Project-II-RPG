@@ -88,7 +88,7 @@
 	<scene music="Assets/Audio/Music/Lobby_Music.ogg" textureAttackPath="Assets/Textures/attack.png"
 	   background1 ="Assets/Maps/clouds_bg.png" background2 ="Assets/Maps/clouds_mg_1.png" background3 ="Assets/Maps/clouds_mg_2.png"
 	   coinspath="Assets/Maps/coin.png" heartspath="Assets/Maps/heart.png"
-		settingsPath ="Assets/Textures/setting_menu.png" mouseSpeed =" 0.5">			
+		settingsPath ="Assets/Textures/setting_menu.png" mouseSpeed =" 0.5">		
 
 	<!--NPCs-->
 
@@ -101,6 +101,9 @@
 	<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
 		x="3570" y="2670" width="150" height="150" texturepath=""/>
 </scene>
+	
+	<itemmanager inventorypath="Assets/Textures/Inventory.png"/>
+
 	<map>
 		<mapfolder path="Assets/Maps/"/>
 		<mapfile path="Assets/Maps/map1.tmx"/>

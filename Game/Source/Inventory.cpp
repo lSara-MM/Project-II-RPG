@@ -23,6 +23,7 @@ Inventory::~Inventory()
 
 bool Inventory::Start()
 {
+	inventoryIMG = app->tex->Load(app->itemManager->texturePath);
 
 	return true;
 }
@@ -37,20 +38,25 @@ bool Inventory::Update(float dt)
 {
 	bool ret = true;
 
-	y = 200;
+	app->render->DrawTexture(inventoryIMG, 225 - app->render->camera.x, 60 - app->render->camera.y);
+
+	y = 132;
 	int x = 0;
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 	{
-		for (int n = 0; n < app->itemManager->nodeList[i]->quantity; n++)
+		if (cap == x)
 		{
-			if (cap == x)
+			y += 52;
+			x = 0;
+		}
+		app->itemManager->LoadQuantity(x, y, i);
+		if (app->itemManager->nodeList[i]->equiped == false)
+		{
+			if (app->itemManager->nodeList[i]->quantity > 0)
 			{
-				y += 52;
-				x = 0;
+				x++;
 			}
 		}
-		app->itemManager->LoadQuantity(x, y);
-		x++;
 	}
 	
 	return ret;
@@ -66,16 +72,75 @@ bool Inventory::CleanUp()
 			app->itemManager->nodeList[i]->CleanUp();
 		}
 	}
+
+	app->tex->UnLoad(inventoryIMG);
+
 	return true;
 }
 
 bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 {
-	int j = 0;
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 	{
 		if (app->itemManager->nodeList[i]->ID == control->id)
 		{
+			if (app->itemManager->nodeList[i]->type == 1 && app->itemManager->nodeList[i]->kind == 2) break;
+			for (size_t j = 0; j < app->itemManager->nodeList.size(); j++)
+			{
+				if (app->itemManager->nodeList[j]->type == app->itemManager->nodeList[i]->type)
+				{
+					if (app->itemManager->nodeList[j]->kind == app->itemManager->nodeList[i]->kind)
+					{
+						if (app->itemManager->nodeList[j]->equiped)
+						{
+							if (j!=i)
+							{
+								if (app->itemManager->nodeList[j]->kind == 5 || app->itemManager->nodeList[j]->kind == 6)
+								{
+									app->itemManager->nodeList[i]->space = 2;
+									for (size_t p = 0; p < app->itemManager->nodeList.size(); p++)
+									{
+										if (app->itemManager->nodeList[p]->space != NULL)
+										{
+											if (app->itemManager->nodeList[j]->kind == app->itemManager->nodeList[p]->kind)
+											{
+												if (p != j)
+												{
+													if (app->itemManager->nodeList[j]->space == 1)
+													{
+														app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->name.GetString());
+														app->itemManager->nodeList[j]->CleanUp();
+														app->itemManager->nodeList[i]->space = 1;
+														app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
+														break;
+													}
+													else
+													{
+														app->itemManager->MinusQuantity(app->itemManager->nodeList[p]->name.GetString());
+														app->itemManager->nodeList[p]->CleanUp();
+														app->itemManager->nodeList[i]->space = 1;
+														app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
+														break;
+													}
+												}
+											}
+										}
+									}
+								}
+								else
+								{
+									app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->name.GetString());
+									app->itemManager->nodeList[j]->CleanUp();
+								}
+							}
+						}
+					}
+				}
+			}
+			if (app->itemManager->nodeList[i]->kind == 5 || app->itemManager->nodeList[i]->kind == 6)
+			{
+				app->itemManager->nodeList[i]->space = 1;
+			}
 			app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
 		}
 	}

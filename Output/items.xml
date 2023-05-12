@@ -18,8 +18,9 @@ type 2
 	kind 1 = pantalon
 	kind 2 = chestplate
 	kind 3 = pies
-	kind 4 = colgante
-	kind 5 = ring
+	kind 4 = sombrero
+	kind 5 = colgante
+	kind 6 = ring
 }
 -->
 
@@ -34,14 +35,23 @@ type 2
 	<item quantity="0" name="legging" type="2" kind="1" hp="9999" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1"
 		  texturepath="Assets/Textures/items.png">
 	</item>
-	<item quantity="0" name="ring" type="2" kind="5" hp="999" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1"
+	<item quantity="0" name="ring" type="2" kind="6" hp="999" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1" space="0"
 		  texturepath="Assets/Textures/items.png">
 	</item>
 	<item quantity="0" name="chest" type="2" kind="2" hp="99" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1"
 		  texturepath="Assets/Textures/items.png">
 	</item>
-	<item quantity="0" name="pendant" type="2" kind="4" hp="9" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1"
+	<item quantity="0" name="chest_2" type="2" kind="2" hp="1" maxhp="1" attack="1" critProbability="1" critDamage="1" precision="1" armor="1" esquiva="1" resistencia="1" speed="1" equiped="false" max="1"
+	  texturepath="Assets/Textures/items.png">
+	</item>
+	<item quantity="0" name="pendant" type="2" kind="5" hp="9" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1" space="0"
 		  texturepath="Assets/Textures/items.png">
+	</item>
+	<item quantity="0" name="shoe" type="2" kind="3" hp="9" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="0" speed="100" equiped="false" max="1"
+	  texturepath="Assets/Textures/items.png">
+	</item>
+	<item quantity="0" name="hat" type="2" kind="4" hp="9" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="0" speed="0" equiped="false" max="1"
+	  texturepath="Assets/Textures/items.png">
 	</item>
 	
 </items>

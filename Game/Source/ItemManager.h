@@ -42,6 +42,8 @@ public:
 	bool equiped = false;
 	int max;
 
+	int space=0;
+
 	int ID;
 
 	GuiButton* button;
@@ -70,7 +72,7 @@ public:
 	void AddQuantity(pugi::xml_node& xml_trees, const char* name);
 
 	void LoadNodes(pugi::xml_node& xml_trees, ItemNode* item);
-	void LoadQuantity(int x, int y);
+	void LoadQuantity(int x, int y, int i);
 	void LoadButtons(int x, int y, int ID);
 	void MinusQuantity(const char* name);
 
@@ -84,6 +86,8 @@ public:
 	ItemNode* tree = new ItemNode;
 
 	SDL_Texture* itemsTexture;
+
+	const char* texturePath;
 
 	vector <ItemNode*> nodeList;
 

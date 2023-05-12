@@ -483,4 +483,5 @@ void App::DisableAtStart()
 	dialogueSystem->active = false;
 	combat->active = false;
 	inventory->active = false;
+	itemManager->active = false;
 }

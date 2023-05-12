@@ -16,6 +16,7 @@
 #include "FadeToBlack.h"
 #include "DialogueSystem.h"
 #include "GuiManager.h"
+#include "ItemManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
 
@@ -44,7 +45,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	mute_B = false;
 
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
-	enemyRange_I = config.attribute("enemyRange").as_int();;
+	enemyRange_I = config.attribute("enemyRange").as_int();
 
 	sceneNode = config;
 
@@ -75,6 +76,8 @@ bool Scene::Start()
 	InitEntities();
 
 	app->entityManager->Enable();
+
+	app->itemManager->Enable();
 	
 	if (app->iScene->continueGame_B)
 	{
@@ -247,6 +250,9 @@ void Scene::Debug()
 	// Pause menu
 	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->controller.START == 1))
 	{
+		//inventory off
+		app->inventory->Disable();
+
 		pause_B = true;	
 
 		if (pause_B)

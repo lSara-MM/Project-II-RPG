@@ -16,7 +16,7 @@ class Inventory : public Module
 public:
 
 	// Constructors & Destructors
-	Inventory(unsigned cap = 8);
+	Inventory(unsigned cap = 6);
 	~Inventory();
 
 	// Main module steps
@@ -31,7 +31,8 @@ public:
 
 public:
 
-	SDL_Texture* itemsTexture;
+	SDL_Texture* inventoryIMG;
+
 
 	unsigned cap;
 	int y;
