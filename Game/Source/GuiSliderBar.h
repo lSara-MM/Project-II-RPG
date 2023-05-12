@@ -6,13 +6,13 @@
 #include "Log.h"
 #include "Point.h"
 #include "SString.h"
-
+#include "Tweening.h"
 
 class GuiSliderBar : public GuiControl
 {
 public:
 
-	GuiSliderBar(uint32 id, SDL_Rect bounds, SDL_Rect sliderBounds);
+	GuiSliderBar(uint32 id, SDL_Rect bounds, SDL_Rect sliderBounds, int speed = 1, Easings eType = Easings::BACK_OUT);
 	virtual ~GuiSliderBar();
 
 	bool Update(float dt);
@@ -24,6 +24,14 @@ public:
 	int volume, volume100;
 
 	SDL_Texture* SliderBarTex;
+
+	bool isForward_B;
+
+	int boundsY_AUX;
+	int sliderBoundsY_AUX;
+private:
+	Tween animationButton;
+	int step;
 };
 
 #endif // __GUI_SLIDERBAR_H__

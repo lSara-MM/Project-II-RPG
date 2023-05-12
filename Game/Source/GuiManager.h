@@ -9,6 +9,8 @@
 #include "Point.h"
 #include "SString.h"
 
+#include "Tweening.h"
+
 class GuiManager : public Module
 {
 public:
@@ -30,7 +32,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	GuiControl* CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType = ButtonType::NONE, const char* text = "", int fontSize = 12, Font font = Font::UI, SDL_Rect sliderBounds = {0,0,0,0});
+	GuiControl* CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType = ButtonType::NONE, const char* text = "", int fontSize = 12, Font font = Font::UI, SDL_Rect sliderBounds = {0,0,0,0}, int speed = 1, Easings eType = Easings::BACK_OUT);
 	//void DestroyGuiControl(GuiControl* gui);
 	//void AddGuiControl(GuiControl* gui);
 

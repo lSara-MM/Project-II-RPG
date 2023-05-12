@@ -1,10 +1,18 @@
 #include "GuiSliderBar.h"
 #include "GuiManager.h"
 
-GuiSliderBar::GuiSliderBar(uint32 id, SDL_Rect bounds, SDL_Rect sliderBounds) : GuiControl(GuiControlType::SLIDERBAR, id)
+GuiSliderBar::GuiSliderBar(uint32 id, SDL_Rect bounds, SDL_Rect sliderBounds, int speed, Easings eType) : GuiControl(GuiControlType::SLIDERBAR, id)
 {
 	this->bounds = bounds;
 	this->sliderBounds = sliderBounds;
+
+	this->step = speed;//velocidad actualiza animacion
+
+	boundsY_AUX = this->bounds.y;
+	sliderBoundsY_AUX = this->sliderBounds.y;
+	isForward_B = true;
+	animationButton.Set();
+	animationButton.AddTween(100, 80, eType);
 
 	//SliderBarTex = app->tex->Load("Assets/GUI/UI_slider.png");
 	SliderBarTex = app->tex->Load("Assets/GUI/UI_slider2.png");
@@ -56,6 +64,23 @@ bool GuiSliderBar::Update(float dt)
 			state = GuiControlState::NORMAL;
 		}
 	}
+
+	if (isForward_B)
+	{
+		animationButton.Foward();
+	}
+
+	else
+	{
+		animationButton.Backward();
+	}
+
+	animationButton.Step(step, false);
+	float point = animationButton.GetPoint();
+	int offset = -750;
+	bounds.y = offset + point * (boundsY_AUX - offset);
+
+	sliderBounds.y = offset + point * (sliderBoundsY_AUX - offset);
 
 	return false;
 }

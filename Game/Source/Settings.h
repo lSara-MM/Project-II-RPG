@@ -85,25 +85,25 @@ public:
 		open_game_B = false;
 
 		// Language
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 290, 133, 33 }, ButtonType::SETTINGS, "English", 16);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 290, 133, 33 }, ButtonType::SETTINGS, "English", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
 		// Text Speed
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 367, 133, 33 }, ButtonType::SETTINGS, "Medium", 16);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 367, 133, 33 }, ButtonType::SETTINGS, "Medium", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
 		// Return to Title
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 444, 133, 33 }, ButtonType::SETTINGS, "Return to Title", 16);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 444, 133, 33 }, ButtonType::SETTINGS, "Return to Title", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
 		// Exit
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 521, 133, 33 }, ButtonType::SETTINGS, "Exit", 16);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 521, 133, 33 }, ButtonType::SETTINGS, "Exit", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 	}
@@ -199,7 +199,7 @@ public:
 		{
 			if (i == 5) { x = 900; y = 0; }
 
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { x, 280 + 77 * y++, 34, 34 }, ButtonType::CONTROL_SETTINGS, buttons[i], 16);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { x, 280 + 77 * y++, 34, 34 }, ButtonType::CONTROL_SETTINGS, buttons[i], 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
 			button->state = GuiControlState::NONE;
 			listControlButtons.Add(button);
 		}
@@ -299,7 +299,7 @@ public:
 		open_graphics_B = false;
 
 		// Window Size
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 280, 133, 33 }, ButtonType::SETTINGS, "Window Size", 16);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 280, 133, 33 }, ButtonType::SETTINGS, "Window Size", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
 		button->state = GuiControlState::NONE;
 		listGraphicsButtons.Add(button);
 
@@ -317,7 +317,7 @@ public:
 
 		// Max fps
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::SETTINGS, "Max fps", 16);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::SETTINGS, "Max fps", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
 		button->state = GuiControlState::NONE;
 		listGraphicsButtons.Add(button);
 	}
@@ -340,6 +340,7 @@ public:
 
 			for (ListItem<GuiCheckBox*>* i = listGraphicsCheckbox.start; i != nullptr; i = i->next)
 			{
+				i->data->isForward_B = true;
 				if (app->win->fullscreen || app->render->vSync_B)	// to change later (if as default is on, it should be shown activated 
 				{
 					i->data->state = GuiControlState::SELECTED;
@@ -382,6 +383,7 @@ public:
 
 		for (ListItem<GuiCheckBox*>* i = listGraphicsCheckbox.start; i != nullptr; i = i->next)
 		{
+			i->data->isForward_B = false;
 			i->data->state = GuiControlState::NONE;
 		}
 
@@ -465,6 +467,7 @@ public:
 		{
 			for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
 			{
+				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
 			}
 
@@ -495,6 +498,7 @@ public:
 
 		for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
 		{
+			i->data->isForward_B = false;
 			i->data->state = GuiControlState::NONE;
 		}
 
@@ -546,7 +550,7 @@ public:
 		// buttons
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 290, 300 + 75 * i, 136, 50 }, ButtonType::SETTINGS, buttons[i], 32);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 290, 300 + 75 * i, 136, 50 }, ButtonType::SETTINGS, buttons[i], 32, Font::UI, { 0,0,0,0 }, 5,Easings::CUBIC_IN);
 			button->state = GuiControlState::NONE;
 			listSettingsButtons.Add(button);
 		}
@@ -786,7 +790,7 @@ public:
 
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 50, 300 + 77 * i, 200, 70 }, ButtonType::EXTRA_LARGE, buttons[i], 20);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 50, 300 + 77 * i, 200, 70 }, ButtonType::EXTRA_LARGE, buttons[i], 20, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
 			button->state = GuiControlState::NONE;
 			listPauseButtons.Add(button);
 		}

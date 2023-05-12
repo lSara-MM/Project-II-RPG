@@ -2,18 +2,20 @@
 #include "GuiManager.h"
 #include "IntroScene.h"
 
-GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font) : GuiControl(GuiControlType::BUTTON, id)
+GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font, int speed, Easings eType) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
 	this->text = text;
 	this->fontSize = fontSize;
 	this->font = font;
+	
+	this->step = speed;//velocidad actualiza animacion
 
 	boundsY_AUX = this->bounds.y;
 
 	isForward_B = true;
 	animationButton.Set();
-	animationButton.AddTween(100, 80, BACK_OUT);
+	animationButton.AddTween(100, 80, eType);
 
 	buttonType = bType;
 
@@ -109,7 +111,7 @@ bool GuiButton::Update(float dt)
 		animationButton.Backward();
 	}
 
-	animationButton.Step(1, false);
+	animationButton.Step(step, false);
 	float point = animationButton.GetPoint();
 	int offset = -750;
 	bounds.y = offset + point * (boundsY_AUX - offset);

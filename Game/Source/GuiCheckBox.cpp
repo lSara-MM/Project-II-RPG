@@ -1,10 +1,15 @@
 #include "GuiCheckBox.h"
 #include "GuiManager.h"
 
-GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds) : GuiControl(GuiControlType::CHECKBOX, id)
+GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, int speed, Easings eType) : GuiControl(GuiControlType::CHECKBOX, id)
 {
 	this->bounds = bounds;
+	this->step = speed;
+	animationButton.Set();
+	animationButton.AddTween(100, 80, eType);
 
+	boundsY_AUX = this->bounds.y;
+	isForward_B = true;
 	checkBoxTex = app->tex->Load("Assets/Textures/checkbox.png");
 }
 
@@ -45,6 +50,21 @@ bool GuiCheckBox::Update(float dt)
 			}
 		}
 	}
+
+	if (isForward_B)
+	{
+		animationButton.Foward();
+	}
+
+	else
+	{
+		animationButton.Backward();
+	}
+
+	animationButton.Step(step, false);
+	float point = animationButton.GetPoint();
+	int offset = -750;
+	bounds.y = offset + point * (boundsY_AUX - offset);
 
 	return false;
 }

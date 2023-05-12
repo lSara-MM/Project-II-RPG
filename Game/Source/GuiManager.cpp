@@ -8,6 +8,8 @@
 #include "GuiCheckBox.h"
 #include "GuiSliderBar.h"
 
+#include "Tweening.h"
+
 GuiManager::GuiManager() :Module()
 {
 	name.Create("guiManager");
@@ -20,7 +22,7 @@ bool GuiManager::Start()
 	return true;
 }
 
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font, SDL_Rect sliderBounds)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font, SDL_Rect sliderBounds, int speed, Easings eType)
 {
 	GuiControl* guiControl = nullptr;
 
@@ -28,17 +30,17 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* ob
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		guiControl = (GuiControl*) new GuiButton(id, bounds, bType,  text, fontSize, font);
+		guiControl = (GuiControl*) new GuiButton(id, bounds, bType,  text, fontSize, font, speed, eType);
 		break;
 	case GuiControlType::TOGGLE:
 		break;
 	case GuiControlType::CHECKBOX:
-		guiControl = (GuiControl*) new GuiCheckBox(id, bounds);
+		guiControl = (GuiControl*) new GuiCheckBox(id, bounds,speed,eType);
 		break;
 	case GuiControlType::SLIDER:
 		break;
 	case GuiControlType::SLIDERBAR:
-		guiControl = (GuiControl*) new GuiSliderBar(id, bounds, sliderBounds);
+		guiControl = (GuiControl*) new GuiSliderBar(id, bounds, sliderBounds, speed, eType);
 		break;
 	case GuiControlType::COMBOBOX:
 		break;
