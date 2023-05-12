@@ -171,17 +171,6 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 		app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
 	}
 
-	app->puzzleManager->palancas = data.child("puzzle").attribute("palancas").as_bool();
-	app->puzzleManager->escape = data.child("puzzle").attribute("escape").as_bool();
-	app->puzzleManager->rescue = data.child("puzzle").attribute("rescue").as_bool();
-	app->puzzleManager->keyPalancas = data.child("puzzle").attribute("keyPalancas").as_int();
-	app->puzzleManager->keyEscape = data.child("puzzle").attribute("keyEscape").as_int();
-	app->puzzleManager->keyRescue = data.child("puzzle").attribute("keyRescue").as_int();
-
-	app->questManager->quest1->complete = data.child("quests").attribute("quest1").as_bool();
-	app->questManager->quest2->complete = data.child("quests").attribute("quest2").as_bool();
-	app->questManager->quest3->complete = data.child("quests").attribute("quest3").as_bool();
-
 	//app->scene->currentHP_Bard = data.child("bard").attribute("currentHp").as_int();
 	//app->scene->currentHP_Protagonist = data.child("protagonist").attribute("currentHp").as_int();
 
@@ -192,23 +181,10 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 bool EntityManager::SaveState(pugi::xml_node& data)
 {
 	pugi::xml_node player = data.append_child("player");
-	pugi::xml_node puzzle = data.append_child("puzzle");
-	pugi::xml_node quests = data.append_child("quests");
 
 	player.append_attribute("x") = app->scene->player->position.x;
 	player.append_attribute("y") = app->scene->player->position.y;
 	
-	puzzle.append_attribute("palancas") = app->puzzleManager->palancas;
-	puzzle.append_attribute("escape") = app->puzzleManager->escape;
-	puzzle.append_attribute("rescue") = app->puzzleManager->rescue;
-	puzzle.append_attribute("keyPalancas") = app->puzzleManager->keyPalancas;
-	puzzle.append_attribute("keyEscape") = app->puzzleManager->keyEscape;
-	puzzle.append_attribute("keyRescue") = app->puzzleManager->keyRescue;
-
-	quests.append_attribute("quest1") = app->questManager->quest1->complete;
-	quests.append_attribute("quest2") = app->questManager->quest2->complete;
-	quests.append_attribute("quest3") = app->questManager->quest3->complete;
-
 	if (!app->iScene->previousGame_B)
 	{
 		app->iScene->previousGame_B = true;

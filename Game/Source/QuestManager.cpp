@@ -60,7 +60,7 @@ bool QuestManager::Start() {
 	bool ret = true;
 
 	initQuest();
-	//app->LoadGameRequest();
+	LoadState();
 
 	quest1->title = "Let's Start";
 	quest2->title = "Enter the Dungeon";
@@ -192,7 +192,7 @@ bool QuestManager::Update(float dt)
 		if (quest1->complete)
 		{
 			//Quest1 Completed
-			app->SaveGameRequest();
+			SaveState();
 			quest1->active = false;
 		}
 	}
@@ -213,7 +213,7 @@ bool QuestManager::Update(float dt)
 		if (quest2->complete)
 		{
 			//Quest2 Completed
-			app->SaveGameRequest();
+			SaveState();
 			quest2->active = false;
 		}
 	}
@@ -233,7 +233,7 @@ bool QuestManager::Update(float dt)
 		if (quest3->complete)
 		{
 			//Quest3 Completed
-			app->SaveGameRequest();
+			SaveState();
 			quest3->active = false;
 		}
 	}
@@ -269,4 +269,64 @@ bool QuestManager::initQuest()
 	quest3->Awake();
 
 	return true;
+}
+
+bool QuestManager::LoadState() {
+	bool ret = true;
+
+	pugi::xml_document gameStateFile;
+	pugi::xml_parse_result result = gameStateFile.load_file("save_game_Puzzle_Quest.xml");
+
+	if (result == NULL)
+	{
+		LOG("Could not load xml file save_game_Puzzle_Quest.xml. pugi error: %s", result.description());
+		ret = false;
+	}
+	else
+	{
+		app->puzzleManager->palancas = gameStateFile.child("puzzle").attribute("palancas").as_bool();
+		app->puzzleManager->escape = gameStateFile.child("puzzle").attribute("escape").as_bool();
+		app->puzzleManager->rescue = gameStateFile.child("puzzle").attribute("rescue").as_bool();
+		app->puzzleManager->keyPalancas = gameStateFile.child("puzzle").attribute("keyPalancas").as_int();
+		app->puzzleManager->keyEscape = gameStateFile.child("puzzle").attribute("keyEscape").as_int();
+		app->puzzleManager->keyRescue = gameStateFile.child("puzzle").attribute("keyRescue").as_int();
+
+		quest1->active = gameStateFile.child("quests").attribute("quest1").as_bool();
+		quest2->active = gameStateFile.child("quests").attribute("quest2").as_bool();
+		quest3->active = gameStateFile.child("quests").attribute("quest3").as_bool();
+		quest1->complete = gameStateFile.child("quests").attribute("quest1_Complete").as_bool();
+		quest2->complete = gameStateFile.child("quests").attribute("quest2_Complete").as_bool();
+		quest3->complete = gameStateFile.child("quests").attribute("quest3_Complete").as_bool();
+	}
+
+	return ret;
+}
+
+bool QuestManager::SaveState() 
+{
+	bool ret = false;
+
+	pugi::xml_document* saveDoc = new pugi::xml_document();
+	pugi::xml_node saveStateNode = saveDoc->append_child("save_state");
+
+	pugi::xml_node puzzle = saveStateNode.append_child("puzzle");
+	pugi::xml_node quests = saveStateNode.append_child("quests");
+
+	puzzle.append_attribute("palancas") = app->puzzleManager->palancas;
+	puzzle.append_attribute("escape") = app->puzzleManager->escape;
+	puzzle.append_attribute("rescue") = app->puzzleManager->rescue;
+	puzzle.append_attribute("keyPalancas") = app->puzzleManager->keyPalancas;
+	puzzle.append_attribute("keyEscape") = app->puzzleManager->keyEscape;
+	puzzle.append_attribute("keyRescue") = app->puzzleManager->keyRescue;
+
+	quests.append_attribute("quest1") = quest1->active;
+	quests.append_attribute("quest2") = quest2->active;
+	quests.append_attribute("quest3") = quest3->active;
+	quests.append_attribute("quest1_Complete") = quest1->complete;
+	quests.append_attribute("quest2_Complete") = quest2->complete;
+	quests.append_attribute("quest3_Complete") = quest3->complete;
+
+	ret = saveDoc->save_file("save_game_Puzzle_Quest.xml");
+
+	return ret;
 }

@@ -38,6 +38,9 @@ public:
 
 	bool initQuest();
 
+	bool SaveState();
+	bool LoadState();
+
 public:
 
 	pugi::xml_node questNode;

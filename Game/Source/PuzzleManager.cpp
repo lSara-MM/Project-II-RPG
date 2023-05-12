@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "PuzzleManager.h"
+#include "QuestManager.h"
 #include "App.h"
 #include "Audio.h"
 #include "Input.h"
@@ -124,7 +125,7 @@ bool PuzzleManager::Start()
 
 	realCode = "1234";
 
-	app->LoadGameRequest();
+	app->questManager->LoadState();
 
 	if (palancas == false) 
 	{
@@ -207,10 +208,7 @@ bool PuzzleManager::Update(float dt)
 {
 	if (!palancas)
 	{
-		if (Palancas())
-		{
-
-		}
+		Palancas();
 	}
 
 	if (!escape) 
@@ -220,10 +218,7 @@ bool PuzzleManager::Update(float dt)
 
 	if (!rescue)
 	{
-		if (Rescue())
-		{
-
-		}
+		Rescue();
 	}
 
 	return true;
@@ -320,6 +315,7 @@ bool PuzzleManager::Palancas()
 			PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
 
 		palancas = true;
+		app->questManager->SaveState();
 
 		return true;
 	}
@@ -412,6 +408,7 @@ bool PuzzleManager::Escape()
 
 			codeActive = false;
 			escape = true;
+			app->questManager->SaveState();
 		}
 	}
 
@@ -461,6 +458,7 @@ bool PuzzleManager::Rescue()
 				losetActive = false;
 				bossInvent = false;
 				rescue = true;
+				app->questManager->SaveState();
 			}
 		}
 	}
