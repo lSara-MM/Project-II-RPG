@@ -34,7 +34,7 @@ bool ItemManager::Start()
 bool ItemManager::Update(float dt)
 {
 	//Inventory
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
 	{
 		if (app->inventory->active)
 		{
@@ -53,6 +53,7 @@ bool ItemManager::Update(float dt)
 		AddQuantity(pugiNode, "granade");
 		AddQuantity(pugiNode, "legging");
 		AddQuantity(pugiNode, "ring");
+		AddQuantity(pugiNode, "ring_2");
 		AddQuantity(pugiNode, "chest");
 		AddQuantity(pugiNode, "chest_2");
 		AddQuantity(pugiNode, "pendant");
@@ -167,6 +168,11 @@ void ItemManager::UseItem(ItemNode* item)
 			app->combat->vecAllies[i]->dodge -= item->esquiva;
 			app->combat->vecAllies[i]->speed -= item->speed;
 			app->combat->vecAllies[i]->res -= item->resistencia;
+
+			if (item->space > 0)
+			{
+				item->space = 0;
+			}
 		}
 
 		if (item->type == 1)
@@ -175,6 +181,21 @@ void ItemManager::UseItem(ItemNode* item)
 			{
 				app->combat->vecAllies[i]->currentHp += item->hp;
 			}
+		}
+	}
+
+	for (size_t i = 0; i < nodeList.size(); i++)
+	{
+		nodeList[i]->CleanUp();
+		
+	}
+
+	//Temporal
+	if (item->type == 2 && item->equiped == false)
+	{
+		if (item->space > 0)
+		{
+			item->space = 0;
 		}
 	}
 
@@ -229,9 +250,10 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 
 		nodeList[i]->ID = i;
 
+		itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
+
 		if (!nodeList[i]->equiped)
 		{
-			itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
 			app->render->DrawTexture(itemsTexture, (700 + 52 * x) - app->render->camera.x, y - app->render->camera.y);
 
 			string c = to_string(nodeList[i]->quantity);
@@ -242,17 +264,36 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 			switch (nodeList[i]->kind)
 			{
 			case 1:
+				app->render->DrawTexture(itemsTexture, (200 + 52) - app->render->camera.x, 332 - app->render->camera.y);
 				break;
 			case 2:
+				app->render->DrawTexture(itemsTexture, (200 + 52) - app->render->camera.x, 270 - app->render->camera.y);
 				break;
 			case 3:
+				app->render->DrawTexture(itemsTexture, (200 + 52) - app->render->camera.x, 392 - app->render->camera.y);
 				break;
 			case 4:
+				app->render->DrawTexture(itemsTexture, (200 + 52) - app->render->camera.x, 208 - app->render->camera.y);
 				break;
 			case 5:
+				if (nodeList[i]->space == 1)
+				{
+					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 210 - app->render->camera.y);
+				}
+				else
+				{
+					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 270 - app->render->camera.y);
+				}
 				break;
 			case 6:
-				break;
+				if (nodeList[i]->space == 1)
+				{
+					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 335 - app->render->camera.y);
+				}
+				else
+				{
+					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 400 - app->render->camera.y);
+				}
 			}
 		}
 		app->tex->UnLoad(itemsTexture);

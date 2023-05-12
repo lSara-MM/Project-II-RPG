@@ -100,16 +100,15 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 									app->itemManager->nodeList[i]->space = 2;
 									for (size_t p = 0; p < app->itemManager->nodeList.size(); p++)
 									{
-										if (app->itemManager->nodeList[p]->space != NULL)
+										if (app->itemManager->nodeList[p]->space > 0)
 										{
 											if (app->itemManager->nodeList[j]->kind == app->itemManager->nodeList[p]->kind)
 											{
-												if (p != j)
+												if (p != j && p != i)
 												{
 													if (app->itemManager->nodeList[j]->space == 1)
 													{
 														app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->name.GetString());
-														app->itemManager->nodeList[j]->CleanUp();
 														app->itemManager->nodeList[i]->space = 1;
 														app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
 														break;
@@ -117,7 +116,6 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 													else
 													{
 														app->itemManager->MinusQuantity(app->itemManager->nodeList[p]->name.GetString());
-														app->itemManager->nodeList[p]->CleanUp();
 														app->itemManager->nodeList[i]->space = 1;
 														app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
 														break;
@@ -130,14 +128,13 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 								else
 								{
 									app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->name.GetString());
-									app->itemManager->nodeList[j]->CleanUp();
 								}
 							}
 						}
 					}
 				}
 			}
-			if (app->itemManager->nodeList[i]->kind == 5 || app->itemManager->nodeList[i]->kind == 6)
+			if ((app->itemManager->nodeList[i]->kind == 5 || app->itemManager->nodeList[i]->kind == 6) && app->itemManager->nodeList[i]->space == 0)
 			{
 				app->itemManager->nodeList[i]->space = 1;
 			}
