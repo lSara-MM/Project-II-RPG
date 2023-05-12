@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "IntroScene.h"
 #include "PuzzleManager.h"
+#include "QuestManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -174,6 +175,10 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 	app->puzzleManager->keyEscape = data.child("puzzle").attribute("keyEscape").as_int();
 	app->puzzleManager->keyRescue = data.child("puzzle").attribute("keyRescue").as_int();
 
+	app->questManager->quest1->complete = data.child("quests").attribute("quest1").as_bool();
+	app->questManager->quest2->complete = data.child("quests").attribute("quest2").as_bool();
+	app->questManager->quest3->complete = data.child("quests").attribute("quest3").as_bool();
+
 	//app->scene->currentHP_Bard = data.child("bard").attribute("currentHp").as_int();
 	//app->scene->currentHP_Protagonist = data.child("protagonist").attribute("currentHp").as_int();
 
@@ -185,6 +190,7 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 {
 	pugi::xml_node player = data.append_child("player");
 	pugi::xml_node puzzle = data.append_child("puzzle");
+	pugi::xml_node quests = data.append_child("quests");
 
 	player.append_attribute("x") = app->scene->player->position.x;
 	player.append_attribute("y") = app->scene->player->position.y;
@@ -195,6 +201,10 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 	puzzle.append_attribute("keyPalancas") = app->puzzleManager->keyPalancas;
 	puzzle.append_attribute("keyEscape") = app->puzzleManager->keyEscape;
 	puzzle.append_attribute("keyRescue") = app->puzzleManager->keyRescue;
+
+	quests.append_attribute("quest1") = app->questManager->quest1->complete;
+	quests.append_attribute("quest2") = app->questManager->quest2->complete;
+	quests.append_attribute("quest3") = app->questManager->quest3->complete;
 
 	if (!app->iScene->previousGame_B)
 	{

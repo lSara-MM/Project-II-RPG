@@ -115,15 +115,16 @@ public:
 	bool esc2;
 	bool esc3;
 
+	bool intoCode;
 	bool codeActive;
 
 	bool bossActive;
 	bool bossInvent;
 	bool losetActive;
 
-	SString code;
-	SString codeToCompare;
-	SString realCode;
+	string code;
+	string codeToCompare;
+	string realCode;
 
 private:
 

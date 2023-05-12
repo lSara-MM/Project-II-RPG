@@ -61,6 +61,22 @@ bool QuestManager::Start() {
 
 	initQuest();
 
+	quest1->title = "Let's Start";
+	quest2->title = "Quest2";
+	quest3->title = "Quest3";
+
+	quest1->desc = "Go to the Practice Tent";
+	quest2->desc = "Desc2";
+	quest3->desc = "Desc3";
+
+	quest1->complete = false;
+	quest2->complete = false;
+	quest3->complete = false;
+
+	quest1->active = false;
+	quest2->active = false;
+	quest3->active = false;
+
 	//Iterates over the entities and calls Start
 	ListItem<Quest*>* item;
 	Quest* pQuest = NULL;
@@ -170,7 +186,15 @@ List<Quest*> QuestManager::GetQuestByType(QuestType type)
 
 bool QuestManager::initQuest() 
 {
-	//quest1 = (Quest*)app->questManager->CreateQuest(QuestType::INTERACT);
-	//quest1->parameters = sceneNode.child("player");
-	//quest1->Awake();
+	quest1 = (Quest*)app->questManager->CreateQuest(QuestType::INTERACT);
+	quest1->parameters = questNode.child("Quest1");
+	quest1->Awake();
+
+	quest2 = (Quest*)app->questManager->CreateQuest(QuestType::INTERACT);
+	quest2->parameters = questNode.child("Quest2");
+	quest2->Awake();	
+	
+	quest3 = (Quest*)app->questManager->CreateQuest(QuestType::INTERACT);
+	quest3->parameters = questNode.child("Quest3");
+	quest3->Awake();
 }

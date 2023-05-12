@@ -116,7 +116,7 @@ bool PuzzleManager::Start()
 	bossActive = false;
 	losetActive = false;
 	bossInvent = false;
-	app->scene->player->intoCode = false;
+	intoCode = false;
 
 	keyPalancas = 0;
 	keyEscape = 0;
@@ -334,7 +334,7 @@ bool PuzzleManager::Escape()
 	app->render->DrawTexture(notas, posNotas3.x, posNotas3.y);
 
 
-	if (app->scene->player->intoCode == true) 
+	if (intoCode == true) 
 	{
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			codeActive = !codeActive;
@@ -372,6 +372,45 @@ bool PuzzleManager::Escape()
 				app->dialogueSystem->LoadDialogue(id);
 				esc3 = false;
 			}
+		}
+	}
+
+	if (codeActive)
+	{
+		if ((app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) && codeToCompare.empty())
+		{
+			codeToCompare.erase(codeToCompare.length() - 1);
+		}
+
+		if (!app->input->numCode->input_entered)
+		{
+			app->input->GetInput(app->input->numCode);
+
+			codeToCompare = app->input->numCode->input.c_str();
+		}
+
+		if (strcmp(codeToCompare.c_str(), realCode.c_str()) == 0)
+		{
+			if (app->puzzleManager->doorEscape != nullptr)
+				app->tex->UnLoad(app->puzzleManager->doorEscape);
+
+			if (app->puzzleManager->DoorEscape != nullptr)
+				app->puzzleManager->DoorEscape->body->GetWorld()->DestroyBody(app->puzzleManager->DoorEscape->body);
+
+			if (app->puzzleManager->notas != nullptr)
+				app->tex->UnLoad(app->puzzleManager->notas);
+
+			if (app->puzzleManager->nota1 != nullptr)
+				app->puzzleManager->nota1->body->GetWorld()->DestroyBody(app->puzzleManager->nota1->body);
+
+			if (app->puzzleManager->nota2 != nullptr)
+				app->puzzleManager->nota2->body->GetWorld()->DestroyBody(app->puzzleManager->nota2->body);
+
+			if (app->puzzleManager->nota3 != nullptr)
+				app->puzzleManager->nota3->body->GetWorld()->DestroyBody(app->puzzleManager->nota3->body);
+
+			codeActive = false;
+			escape = true;
 		}
 	}
 
