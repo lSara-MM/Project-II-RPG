@@ -34,6 +34,6 @@ jobs:
      - name: Create Release
        uses: ncipollo/release-action@v1.12.0
        with:
-        tag: ReleaseTest
+        tag: FUNCIONAPLS
         artifacts: "release.zip"
         token: ${{ secrets.GITHUB_TOKEN }}
