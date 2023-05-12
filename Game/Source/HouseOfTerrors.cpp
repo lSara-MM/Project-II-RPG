@@ -42,11 +42,15 @@ bool HouseOfTerrors::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	musHauntedPath = config.attribute("musicD1").as_string();
+	musPause = config.attribute("pause").as_string();
 	mute_B = false;
 
 	sceneNode = config;
 
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
+
+	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
+	pausefx = app->audio->LoadFx(fxpausepath);
 
 	return ret;
 }
@@ -214,6 +218,7 @@ void HouseOfTerrors::Debug()
 	// Pause menu
 	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
 	{
+		app->audio->PlayFx(pausefx);
 		pause_B = true;
 
 		if (pause_B)
@@ -222,6 +227,7 @@ void HouseOfTerrors::Debug()
 			pSettings = pPause->pSettings;
 
 			pSettings->settings_B = !pSettings->settings_B;
+			app->audio->PlayMusic(musPause, 1.0);
 		}
 		else
 		{
@@ -312,12 +318,14 @@ bool HouseOfTerrors::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button Close pause click");
 		pause_B = false;
 		pPause->CleanUp();
+		app->audio->PlayMusic(musHauntedPath, 1.0);
 		break;
 
 	case 702:
 		LOG("Button Resume click");
 		pause_B = false;
 		pPause->CleanUp();
+		app->audio->PlayMusic(musHauntedPath, 1.0);
 		break;
 
 	case 703:
@@ -353,6 +361,7 @@ bool HouseOfTerrors::OnGuiMouseClickEvent(GuiControl* control)
 		settings_B = false;
 		pSettings->CloseSettings();
 		pSettings->CleanUp();
+		app->audio->PlayMusic(musHauntedPath, 1.0);
 		break;
 
 	case 802:
