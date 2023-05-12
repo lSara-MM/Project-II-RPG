@@ -166,7 +166,10 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 	float x = data.child("player").attribute("x").as_int();
 	float y = data.child("player").attribute("y").as_int();
 
-	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
+	if (app->scene->player != nullptr)
+	{
+		app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
+	}
 
 	app->puzzleManager->palancas = data.child("puzzle").attribute("palancas").as_bool();
 	app->puzzleManager->escape = data.child("puzzle").attribute("escape").as_bool();

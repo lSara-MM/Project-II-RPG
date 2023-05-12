@@ -100,7 +100,6 @@
     <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
     <ClInclude Include="Source\SceneWin_Lose.h" />
-    <ClInclude Include="PuzzleManager.h" />
     <ClInclude Include="Source\PuzzleManager.h" />
     <ClInclude Include="Source\Tweening.h" />
     <ClInclude Include="Source\QuestManager.h" />

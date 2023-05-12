@@ -60,18 +60,24 @@ bool QuestManager::Start() {
 	bool ret = true;
 
 	initQuest();
+	//app->LoadGameRequest();
 
 	quest1->title = "Let's Start";
-	quest2->title = "Quest2";
+	quest2->title = "Enter the Dungeon";
 	quest3->title = "Quest3";
 
 	quest1->desc = "Go to the Practice Tent";
-	quest2->desc = "Desc2";
+	quest2->desc = "Find the dungeon";
 	quest3->desc = "Desc3";
 
-	quest1->complete = false;
-	quest2->complete = false;
-	quest3->complete = false;
+	if(!quest1->complete)
+		quest1->complete = false;
+
+	if(!quest2->complete)
+		quest2->complete = false;
+	
+	if(!quest3->complete)
+		quest3->complete = false;
 
 	quest1->active = false;
 	quest2->active = false;
@@ -160,6 +166,13 @@ bool QuestManager::Update(float dt)
 	ListItem<Quest*>* item;
 	Quest* pQuest = NULL;
 
+	//Draw Quest and check if completed
+	if (quest1->active || quest2->active || quest3->active)
+	{
+		iPoint pos = { app->win->GetWidth() - 240, 50 };
+		app->render->TextDraw("Quests:", pos.x, pos.y, 40, Font::TEXT, { 255, 255, 255 });
+	}
+
 	for (item = quests.start; item != NULL && ret == true; item = item->next)
 	{
 		pQuest = item->data;
@@ -168,25 +181,61 @@ bool QuestManager::Update(float dt)
 		ret = item->data->Update(dt);
 	}
 
-	if (quest1->complete) 
+	if (quest1->active)
 	{
-		LOG("QUEST1 COMPLETED");
-		app->SaveGameRequest();
-		quest1->active = false;
+		iPoint pos = { app->win->GetWidth() - 240, 100 };
+
+		//Draw Quest1
+		app->render->TextDraw(quest1->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(quest1->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
+
+		if (quest1->complete)
+		{
+			//Quest1 Completed
+			app->SaveGameRequest();
+			quest1->active = false;
+		}
 	}
-
-	if (quest2->complete) 
+	if (quest2->active)
 	{
-		LOG("QUEST2 COMPLETED");
-		app->SaveGameRequest();
-		quest2->active = false;
-	}	
+		iPoint pos = { app->win->GetWidth() - 240, 170 };
 
-	if (quest3->complete) 
+		//That's for a dynamic quest list position
+		if (!quest1->active)
+		{
+			pos.y -= 70;
+		}
+
+		//Draw Quest2
+		app->render->TextDraw(quest2->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(quest2->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
+
+		if (quest2->complete)
+		{
+			//Quest2 Completed
+			app->SaveGameRequest();
+			quest2->active = false;
+		}
+	}
+	if (quest3->active)
 	{
-		LOG("QUEST3 COMPLETED");
-		app->SaveGameRequest();
-		quest3->active = false;
+		iPoint pos = { app->win->GetWidth() - 240, 240 };
+
+		//That's for a dynamic quest list position
+		if (!quest2->active)
+		{
+			pos.y -= 70;
+		}
+		//Draw Quest3
+		app->render->TextDraw(quest3->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(quest3->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
+
+		if (quest3->complete)
+		{
+			//Quest3 Completed
+			app->SaveGameRequest();
+			quest3->active = false;
+		}
 	}
 
 	return ret;

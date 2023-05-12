@@ -304,6 +304,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		case 0:
 			if (app->hTerrors->active == true)
 			{
+				app->questManager->quest2->complete = true;
 				app->entityManager->tpID = 0;
 				app->SaveGameRequest();
 				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);

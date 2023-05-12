@@ -231,11 +231,6 @@ bool PuzzleManager::Update(float dt)
 
 bool PuzzleManager::PostUpdate()
 {
-	if (app->input->getInput_B)
-	{
-		iPoint pos = { app->win->GetWidth() / 4, 650 };
-		app->input->RenderTempText("Code:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
-	}
 
 	return true;
 }
@@ -263,37 +258,37 @@ bool PuzzleManager::CleanUp()
 	if (loset != nullptr)
 		app->tex->UnLoad(loset);
 
-	if(Door1->body != nullptr)
+	if(Door1 != nullptr)
 		Door1->body->GetWorld()->DestroyBody(Door1->body);
 
 	if (DoorEscape->body != nullptr)
 		DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
 	
-	if (Door2->body != nullptr)
+	if (Door2 != nullptr)
 		Door2->body->GetWorld()->DestroyBody(Door2->body);
 	
-	if (Door3->body != nullptr)
+	if (Door3 != nullptr)
 		Door3->body->GetWorld()->DestroyBody(Door3->body);
 
-	if (Palanca->body != nullptr)
+	if (Palanca != nullptr)
 		Palanca->body->GetWorld()->DestroyBody(Palanca->body);
 
 	if (PalancaSensor->body != nullptr)
 		PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
 	
-	if (nota1->body != nullptr)
+	if (nota1 != nullptr)
 		nota1->body->GetWorld()->DestroyBody(nota1->body);
 	
-	if (nota2->body != nullptr)
+	if (nota2 != nullptr)
 		nota2->body->GetWorld()->DestroyBody(nota2->body);
 	
-	if (nota3->body != nullptr)
+	if (nota3 != nullptr)
 		nota3->body->GetWorld()->DestroyBody(nota3->body);
 
-	if (Boss->body != nullptr)
+	if (Boss != nullptr)
 		Boss->body->GetWorld()->DestroyBody(Boss->body);	
 	
-	if (Loset->body != nullptr)
+	if (Loset != nullptr)
 		Loset->body->GetWorld()->DestroyBody(Loset->body);
 
 	RELEASE(numCode);

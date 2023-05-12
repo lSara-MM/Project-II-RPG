@@ -137,7 +137,6 @@
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Window.cpp" />
-    <ClInclude Include="PuzzleManager.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Characther.h" />
     <ClInclude Include="Source\Circus.h" />
