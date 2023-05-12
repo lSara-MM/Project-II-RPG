@@ -128,7 +128,7 @@ bool Character::Update(float dt)
 			//Activar y desactivar botones usables
 			for (int i = 0; i < 4; i++)
 			{
-				if(arrSkills->at(i)->PosCanBeUsed(positionCombat_I))
+				if(listSkills.At(i)->data->PosCanBeUsed(positionCombat_I))
 				{
 					app->combat->EnableSkillButton(i);
 				}
@@ -178,9 +178,9 @@ bool Character::Update(float dt)
 						{
 							probSkill = 60;
 						}
-						if (CalculateRandomProbability(probSkill))
+						if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
 						{
-							//usar skill 4 (tanqueo high HP)
+							//usar skill 3 (tanqueo high HP)
 							listSkillsHistory.Add(4);
 							armor += 5; //TEMPORAL
 							break;
@@ -202,7 +202,7 @@ bool Character::Update(float dt)
 							probSkill = 80;
 
 						}
-						if (CalculateRandomProbability(probSkill))
+						if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
 						{
 							//usar skill 2
 							listSkillsHistory.Add(2);
@@ -213,7 +213,7 @@ bool Character::Update(float dt)
 							probSkill = 25;
 						}
 					}
-					if (CalculateRandomProbability(probSkill))//Ataques
+					if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))//Ataques
 					{
 						//usar skill 4 (daño + debuff)
 						listSkillsHistory.Add(3);
@@ -223,7 +223,7 @@ bool Character::Update(float dt)
 					}
 					else
 					{
-						//usar skill 1 (daño solo)
+						//usar skill 1 (daño solo) (es la skill mas debil)
 						listSkillsHistory.Add(1);
 						app->combat->vecAllies.at(0)->ModifyHP(-150);//TEMPORAL
 						break;
@@ -371,9 +371,9 @@ void Character::LoadSkill(int arr[4])
 				bool area = aux.attribute("areaSkill").as_bool();
 				bool autoTarget = aux.attribute("areaSkill").as_bool();
 
-				/*arrSkills[i] = new Skill(nombre, descripcion,
+				listSkills.Add( new Skill(nombre, descripcion,
 					posInicialUso, posFinallUso,posInicialTarget, posFinallTarget,
-					movUsuario,movTarget,area,autoTarget,mult,precision,probCrit,dmgCrit);*/
+					movUsuario,movTarget,area,autoTarget,mult,precision,probCrit,dmgCrit));
 			}
 		}
 	}

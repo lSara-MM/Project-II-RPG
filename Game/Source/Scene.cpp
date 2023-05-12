@@ -185,7 +185,7 @@ bool Scene::CleanUp()
 
 	player->active;
 
-	if (app->combat->active == true)
+	if (changeToCombat == true)
 	{
 		// this shouldnt be here later
 		player->LoadAllPC();
@@ -193,7 +193,7 @@ bool Scene::CleanUp()
 		//
 
 		InitCombat();
-		app->combat->active = false;
+		changeToCombat = false;
 	}
 	
 	return true;
@@ -308,7 +308,7 @@ void Scene::Debug()
 	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
 		LOG("Combat");
 		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
-		app->combat->active = true;
+		changeToCombat = true;
 	}
 	
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();

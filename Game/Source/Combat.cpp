@@ -69,6 +69,13 @@ bool Combat::Start()
 	app->entityManager->Enable();
 	app->physics->Disable();
 
+	GuiButton* button;
+	for (int i = 0; i < 5; i++)
+	{
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 10, this, { 40 + i * 100, 470, 80, 80 });
+		listButtons.Add(button);
+	}
+
 	StartCombat();
 
 	//Load, modificar currentHP, hacer luego de cargar allies
@@ -111,7 +118,7 @@ bool Combat::Update(float dt)
 	}
 
 	//Barra skills + name
-	app->render->DrawRectangle({ 20,450,500,120 }, 220, 220, 220);
+	//app->render->DrawRectangle({ 20,450,500,120 }, 220, 220, 220);
 
 	
 	//God Mode Info
@@ -273,7 +280,7 @@ bool Combat::StartCombat()
 
 	for (int i = 0; i < vecEnemies.size(); i++)
 	{
-		vecEnemies.at(i)->button->id = 10 + i;
+		vecEnemies.at(i)->button->id = 5 + i;
 	}
 
 	OrderBySpeed();
@@ -504,9 +511,9 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 	app->audio->PlayFx(control->fxControl);
 
-	if (control->id >= 10)
+	if (control->id >= 5)
 	{
-		LOG("%s chara", vecEnemies.at(control->id - 10)->name.GetString());
+		LOG("%s chara", vecEnemies.at(control->id - 5)->name.GetString());
 	}
 	else
 	{

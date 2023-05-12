@@ -113,7 +113,7 @@ public:
 
 	////Skills Descriptions
 	//SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
-	array<Skill*, 4>* arrSkills;
+	List<Skill*> listSkills;
 
 	GuiButton* button;
 	
