@@ -168,6 +168,27 @@ bool QuestManager::Update(float dt)
 		ret = item->data->Update(dt);
 	}
 
+	if (quest1->complete) 
+	{
+		LOG("QUEST1 COMPLETED");
+		app->SaveGameRequest();
+		quest1->active = false;
+	}
+
+	if (quest2->complete) 
+	{
+		LOG("QUEST2 COMPLETED");
+		app->SaveGameRequest();
+		quest2->active = false;
+	}	
+
+	if (quest3->complete) 
+	{
+		LOG("QUEST3 COMPLETED");
+		app->SaveGameRequest();
+		quest3->active = false;
+	}
+
 	return ret;
 }
 

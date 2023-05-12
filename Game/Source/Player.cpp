@@ -101,8 +101,11 @@ bool Player::Awake() {
 
 bool Player::Start() 
 {
-	//PuzzleManager
-	palanc = false;
+	//QuestManager prove to try a quest
+	if (!app->questManager->quest1->complete)
+	{
+		app->questManager->quest1->active = true;
+	}
 
 	texture = app->tex->Load(texturePath);
 	textureE = app->tex->Load("Assets/GUI/UI_E.png");
@@ -270,7 +273,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		app->puzzleManager->losetActive = true;
 		break;
 	case ColliderType::DOORCODE:
-		intoCode = true;
+		app->puzzleManager->intoCode = true;
 		break;
 	case ColliderType::NOTA:
 		switch (physB->id) //Abrir Nota + sumar puntos a keyScape
@@ -329,8 +332,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			if (!app->questManager->quest1->complete)
 			{
 				app->questManager->quest1->complete = true;
-				app->questManager->quest1->active = false;
-				app->SaveGameRequest();
 			}
 			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, 90);
 			break;
@@ -353,7 +354,7 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 		app->puzzleManager->losetActive = false;
 		break;
 	case ColliderType::DOORCODE:
-		intoCode = false;
+		app->puzzleManager->intoCode = false;
 		break;
 	case ColliderType::PORTAL:
 		app->audio->PlayFx(enterZone, 0);
