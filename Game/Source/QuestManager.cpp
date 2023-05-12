@@ -59,6 +59,8 @@ bool QuestManager::Start() {
 
 	bool ret = true;
 
+	initQuest();
+
 	//Iterates over the entities and calls Start
 	ListItem<Quest*>* item;
 	Quest* pQuest = NULL;
@@ -164,4 +166,11 @@ List<Quest*> QuestManager::GetQuestByType(QuestType type)
 	}
 
 	return result;
+}
+
+bool QuestManager::initQuest() 
+{
+	//quest1 = (Quest*)app->questManager->CreateQuest(QuestType::INTERACT);
+	//quest1->parameters = sceneNode.child("player");
+	//quest1->Awake();
 }

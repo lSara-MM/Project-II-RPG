@@ -36,6 +36,8 @@ public:
 	//Get A list with the type of characters you want to have
 	List<Quest*> GetQuestByType(QuestType type);
 
+	bool initQuest();
+
 public:
 	Quest* quest1;
 	List<Quest*> quests;
