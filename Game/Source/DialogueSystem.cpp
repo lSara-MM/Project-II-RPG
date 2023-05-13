@@ -169,7 +169,6 @@ void DialogueSystem::LoadChoices(pugi::xml_node& xml_node, DialogueNode* node)
 	}
 }
 
-
 bool DialogueSystem::LoadDialogueState()
 {
 	pugi::xml_document gameStateFile;
