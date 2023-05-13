@@ -338,7 +338,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			}
 
 			// Calcular reduccion de la defensa
-			float armorRelevance = (defender->armor / abs(damage)) + 1;
+			float armorRelevance = (defender->armor / abs(damage+1)) + 1;
 			damage = +((defender->armor / 2) * armorRelevance); //Esta con mas ya que damage es negativo
 
 			return damage;
@@ -351,7 +351,7 @@ void Character::LoadSkill(int arr[4])
 	//Cargar skills
 	pugi::xml_parse_result parseResult = skillsFile.load_file("skills.xml");
 	skillNode = skillsFile.child("skills");
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i <= 3; i++)
 	{
 		for (pugi::xml_node aux = skillNode.child("skill"); aux; aux = aux.next_sibling("skill"))
 		{

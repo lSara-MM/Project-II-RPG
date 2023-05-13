@@ -522,8 +522,6 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("%s chara", vecAllies.at(control->id)->name.GetString());
 	}
 
-<<<<<<< Updated upstream
-=======
 	//Gestion Skills
 	int posStart;
 	int posEnd;
@@ -627,9 +625,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	default:
 		break;
 	}
-	// enemies so far start from 10.
-	// line 159
->>>>>>> Stashed changes
+
 	return true;
 }
 
