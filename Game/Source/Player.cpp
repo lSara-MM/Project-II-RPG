@@ -113,7 +113,7 @@ bool Player::Start()
 
 	currentAnimation = &currentAnim;
 
-	pbody = app->physics->CreateCircle(position.x - width / 2, position.y - height / 2, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x - width / 2, position.y - height / 2, 16*1.8, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 	flipType = SDL_FLIP_NONE;
 
@@ -137,8 +137,6 @@ bool Player::Update(float dt)
 	{
 		app->map->mapPendingtoDelete = true;		
 		app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
-		app->puzzleManager->active = true;
-		app->puzzleManager->Start();
 	}
 
 	/*Hasta aquí PuzzleManager*/
