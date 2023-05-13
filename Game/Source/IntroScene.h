@@ -45,8 +45,6 @@ public:
 	//Load / Save methods
 	bool LoadState(pugi::xml_node&);
 	bool SaveState(pugi::xml_node&);
-	// Player's name input
-	bool PlayerNameInput();
 
 public:
 

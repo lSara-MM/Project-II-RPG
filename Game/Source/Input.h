@@ -2,7 +2,9 @@
 #define __INPUT_H__
 
 #include "Module.h"
+#include "Render.h"
 #include "SDL/include/SDL.h"
+#include "Point.h"
 
 #include "External/SDL/include/SDL_gamecontroller.h"
 
@@ -10,9 +12,10 @@
 #define NUM_MOUSE_BUTTONS 5
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
-#define NAME_MAX_CHARS 10
 #define DEAD_ZONE 32000
 #define MAX_BUTTONS 15
+
+#define MAX_PLAYER_CHARS 10
 
 using namespace std;
 
@@ -49,44 +52,22 @@ struct GameController
 
 };
 
-enum KeyType
+struct PlayerInput
 {
-	KEY_MOVE_UP,
-	KEY_MOVE_LEFT,
-	KEY_MOVE_RIGHT,
-	KEY_MOVE_DOWN,
-	KEY_INTERACT,
-	KEY_INVENTORY,
-	KEY_PARTY,
-	KEY_QUESTS,
-	KEY_MAP,
-	KEY_SETTINGS
-};
-
-struct KeyBinding
-{
-	KeyType keyType;
-	const char* key;		// character
-	int key_num;	// scancode number
-
-	KeyBinding(KeyType type, char num)
+public:
+	PlayerInput(string input_, int max_chars_, bool entered_)
 	{
-		keyType = type;
-		//key = num;
-		key_num = (Uint16)num;
-		//printf("%d", key_num);
-		//printf(" scancode %d", SDL_SCANCODE_W);
+		input = input_;
+		max_chars = max_chars_;
+		input_entered = entered_;
 	}
 
-	KeyBinding(KeyType type, SDL_Scancode num)
-	{
-		keyType = type;
-		key = SDL_GetScancodeName(num);
-		key_num = num;
-	}
-
-	~KeyBinding() {};
+public:
+	string input;
+	int max_chars;
+	bool input_entered = false;
 };
+
 
 class Input : public Module
 {
@@ -133,16 +114,28 @@ public:
 	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
 
-	void HandleInput(SDL_Event event);
+	bool HandleInput(SDL_Event event, PlayerInput* playerInput);
+	
+	// Active getting input
+	// Needs the Struct of text input (ex. GetInput(playerName) will change playerName text)
+	void ActiveGetInput(PlayerInput* i);
+
+	// Render what player is writing, temporal
+	void RenderTempText(SString temp, const char* subs, iPoint pos, int fontsize = 10, Font font = Font::TEXT, SDL_Color color = { 0,0,0 });
 
 	void HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt);
 
 public:
-	string playerName;
-	bool nameEntered_B = false;
+
+	PlayerInput* playerName;
+
+	// Keep a copy of the current version of the string
+	string temp;
 	bool getInput_B = false;
 
 	bool godMode_B = false;
+
+	// TO DELETE
 	int currentHP_Bard = 0;
 	int currentHP_Protagonist = 0;
 
@@ -164,30 +157,8 @@ private:
 	int mouseX;
 	int mouseY;
 
-	KeyBinding* move_up_k = new KeyBinding(KeyType::KEY_MOVE_UP, 'W');
-	KeyBinding* move_left_k = new KeyBinding(KeyType::KEY_MOVE_UP, SDL_SCANCODE_A);
-	KeyBinding* move_right_k;
-	KeyBinding* move_down_k;
-	KeyBinding* interact_k;
-
-	KeyBinding* move_up_g;
-	KeyBinding* move_left_g;
-	KeyBinding* move_right_g;
-	KeyBinding* move_down_g;
-	KeyBinding* interact_g;
-
-
-	KeyBinding* invetory_k;
-	KeyBinding* party_k;
-	KeyBinding* quests_k;
-	KeyBinding* map_k;
-	KeyBinding* settings_k;
-
-	KeyBinding* invetory_g;
-	KeyBinding* party_g;
-	KeyBinding* quests_g;
-	KeyBinding* map_g;
-	KeyBinding* settings_g;
+	// Handle input
+	PlayerInput* playerInput_S;
 };
 
 #endif // __INPUT_H__
