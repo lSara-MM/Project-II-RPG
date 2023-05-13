@@ -49,6 +49,11 @@ bool Combat::Awake(pugi::xml_node& config)
 
 	combatNode = config;
 
+	musCombat = config.attribute("music").as_string();
+
+	swapPath = "Assets/Audio/Fx/change_position.wav";
+	swapPositionfx = app->audio->LoadFx(swapPath);
+
 	return ret;
 }
 
@@ -56,6 +61,9 @@ bool Combat::Start()
 {
 	//Load
 	//LoadCombat();
+
+	//Music combat
+	app->audio->PlayMusic(musCombat, 1.0);
 
 	//Cargar texturas
 	textureBackground = app->tex->Load(texturePathBackground);
@@ -473,6 +481,7 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 	//Insertar en nueva posicion
 	arr->insert(arr->begin() + newPos, chara);
 	UpdatePositions(arr, chara->positionCombat_I);
+	app->audio->PlayFx(swapPositionfx);
 }
 
 void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)

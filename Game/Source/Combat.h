@@ -112,6 +112,13 @@ private:
 	array<Character*, 4> arrParty;
 	SString sceneFromName;
 	vector<int> arrSetEnemies;
+
+	//music combat
+	const char* musCombat;
+
+	//fx
+	const char* swapPath;
+	uint swapPositionfx;
 };
 
 #endif // __COMBAT_H__
