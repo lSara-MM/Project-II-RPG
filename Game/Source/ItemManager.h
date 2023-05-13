@@ -93,6 +93,17 @@ public:
 
 private:
 	pugi::xml_document items;
+
+	//print stats
+	int maxhp;
+	int attack;
+	int critProbability;
+	int critDamage;
+	int precision;
+	int armor;
+	int esquiva;
+	int resistencia;
+	int speed;
 	
 };
 
