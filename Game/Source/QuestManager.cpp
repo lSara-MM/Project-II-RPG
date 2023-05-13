@@ -184,21 +184,31 @@ bool QuestManager::Update(float dt)
 	if (quest1->active)
 	{
 		iPoint pos = { app->win->GetWidth() - 240, 100 };
-
-		//Draw Quest1
-		app->render->TextDraw(quest1->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
-		app->render->TextDraw(quest1->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
+		Uint8 R = 255;
+		Uint8 G = 255;
+		Uint8 B = 255;
 
 		if (quest1->complete)
 		{
 			//Quest1 Completed
 			SaveState();
-			quest1->active = false;
+			//quest1->active = false;
+
+			R = 124;
+			G = 252;
+			B = 0;
 		}
+
+		//Draw Quest1
+		app->render->TextDraw(quest1->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(quest1->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
 	}
 	if (quest2->active)
 	{
 		iPoint pos = { app->win->GetWidth() - 240, 170 };
+		Uint8 R = 255;
+		Uint8 G = 255;
+		Uint8 B = 255;
 
 		//That's for a dynamic quest list position
 		if (!quest1->active)
@@ -206,36 +216,45 @@ bool QuestManager::Update(float dt)
 			pos.y -= 70;
 		}
 
-		//Draw Quest2
-		app->render->TextDraw(quest2->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
-		app->render->TextDraw(quest2->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
-
 		if (quest2->complete)
 		{
 			//Quest2 Completed
 			SaveState();
-			quest2->active = false;
+			//quest2->active = false;
+			R = 124;
+			G = 252;
+			B = 0;
 		}
+
+		//Draw Quest2
+		app->render->TextDraw(quest2->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { R, G, B });
+		app->render->TextDraw(quest2->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { R, G, B });
 	}
 	if (quest3->active)
 	{
 		iPoint pos = { app->win->GetWidth() - 240, 240 };
+		Uint8 R = 255;
+		Uint8 G = 255;
+		Uint8 B = 255;
 
 		//That's for a dynamic quest list position
 		if (!quest2->active)
 		{
 			pos.y -= 70;
 		}
-		//Draw Quest3
-		app->render->TextDraw(quest3->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
-		app->render->TextDraw(quest3->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
-
 		if (quest3->complete)
 		{
 			//Quest3 Completed
 			SaveState();
-			quest3->active = false;
+			//quest3->active = false;
+			R = 124;
+			G = 252;
+			B = 0;
 		}
+
+		//Draw Quest3
+		app->render->TextDraw(quest3->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(quest3->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
 	}
 
 	return ret;

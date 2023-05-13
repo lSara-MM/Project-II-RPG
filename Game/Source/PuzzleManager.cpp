@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "PuzzleManager.h"
 #include "QuestManager.h"
+#include "HouseOfTerrors.h"
 #include "App.h"
 #include "Audio.h"
 #include "Input.h"
@@ -124,6 +125,19 @@ bool PuzzleManager::Start()
 
 	realCode = "123";
 
+	Door1 = nullptr;
+	Door2 = nullptr;
+	Door3 = nullptr;
+	DoorEscape = nullptr;
+	Palanca = nullptr;
+	PalancaSensor = nullptr;
+	nota1 = nullptr;
+	nota2 = nullptr;
+	nota3 = nullptr;
+	DoorEscapeSensor = nullptr;
+	Boss = nullptr;
+	Loset = nullptr;
+
 	app->questManager->LoadState();
 
 	if (palancas == false) 
@@ -232,56 +246,101 @@ bool PuzzleManager::CleanUp()
 {
 	LOG("Freeing scene");
 
+	if (palancas) 
+	{
+		if (palanca != nullptr)
+			app->tex->UnLoad(palanca);
+
+		if (Door1 != nullptr)
+			Door1->body->GetWorld()->DestroyBody(Door1->body);
+
+		if (Door2 != nullptr)
+			Door2->body->GetWorld()->DestroyBody(Door2->body);
+
+		if (Palanca != nullptr)
+			Palanca->body->GetWorld()->DestroyBody(Palanca->body);
+
+		if (PalancaSensor->body != nullptr)
+			PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
+	}
+
+	if (escape) 
+	{
+		if (notas != nullptr)
+			app->tex->UnLoad(notas);
+
+		if (doorEscape != nullptr)
+			app->tex->UnLoad(doorEscape);
+
+		if (DoorEscape->body != nullptr)
+			DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
+
+		if (nota1 != nullptr)
+			nota1->body->GetWorld()->DestroyBody(nota1->body);
+
+		if (nota2 != nullptr)
+			nota2->body->GetWorld()->DestroyBody(nota2->body);
+
+		if (nota3 != nullptr)
+			nota3->body->GetWorld()->DestroyBody(nota3->body);
+	}
+
+	if (rescue) 
+	{
+		if (boss != nullptr)
+			app->tex->UnLoad(boss);
+
+		if (Boss != nullptr)
+			Boss->body->GetWorld()->DestroyBody(Boss->body);
+
+		if (loset != nullptr)
+			app->tex->UnLoad(loset);
+
+		if (Door3 != nullptr)
+			Door3->body->GetWorld()->DestroyBody(Door3->body);
+
+		if (Loset != nullptr)
+			Loset->body->GetWorld()->DestroyBody(Loset->body);
+	}
+
 	if(door != nullptr)
 		app->tex->UnLoad(door);
 
-	if (palanca != nullptr)
-		app->tex->UnLoad(palanca);
-	
-	if (notas != nullptr)
-		app->tex->UnLoad(notas);
-	
-	if (doorEscape != nullptr)
-		app->tex->UnLoad(doorEscape);
-	
-	if (boss != nullptr)
-		app->tex->UnLoad(boss);	
-	
-	if (loset != nullptr)
-		app->tex->UnLoad(loset);
+	delete Door1;
+	Door1 = nullptr;
 
-	if(Door1 != nullptr)
-		Door1->body->GetWorld()->DestroyBody(Door1->body);
+	delete Door2;
+	Door2 = nullptr;
 
-	if (DoorEscape->body != nullptr)
-		DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
-	
-	if (Door2 != nullptr)
-		Door2->body->GetWorld()->DestroyBody(Door2->body);
-	
-	if (Door3 != nullptr)
-		Door3->body->GetWorld()->DestroyBody(Door3->body);
+	delete Door3;
+	Door3 = nullptr;
 
-	if (Palanca != nullptr)
-		Palanca->body->GetWorld()->DestroyBody(Palanca->body);
+	delete DoorEscape;
+	DoorEscape = nullptr;
 
-	if (PalancaSensor->body != nullptr)
-		PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
-	
-	if (nota1 != nullptr)
-		nota1->body->GetWorld()->DestroyBody(nota1->body);
-	
-	if (nota2 != nullptr)
-		nota2->body->GetWorld()->DestroyBody(nota2->body);
-	
-	if (nota3 != nullptr)
-		nota3->body->GetWorld()->DestroyBody(nota3->body);
+	delete Palanca;
+	Palanca = nullptr;
 
-	if (Boss != nullptr)
-		Boss->body->GetWorld()->DestroyBody(Boss->body);	
-	
-	if (Loset != nullptr)
-		Loset->body->GetWorld()->DestroyBody(Loset->body);
+	delete PalancaSensor;
+	PalancaSensor = nullptr;
+
+	delete nota1;
+	nota1 = nullptr;
+
+	delete nota2;
+	nota2 = nullptr;
+
+	delete nota3;
+	nota3 = nullptr;
+
+	delete DoorEscapeSensor;
+	DoorEscapeSensor = nullptr;
+
+	delete Boss;
+	Boss = nullptr;
+
+	delete Loset;
+	Loset = nullptr;
 
 	RELEASE(numCode);
 
@@ -298,10 +357,10 @@ bool PuzzleManager::Palancas()
 	{
 		if(palanca != nullptr)
 			app->tex->UnLoad(palanca);
-		
+
 		if (Door1 != nullptr)
 			Door1->body->GetWorld()->DestroyBody(Door1->body);
-		
+
 		if(Door2 != nullptr)
 			Door2->body->GetWorld()->DestroyBody(Door2->body);
 
@@ -310,6 +369,18 @@ bool PuzzleManager::Palancas()
 
 		if (PalancaSensor != nullptr)
 			PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
+
+		delete Door1;
+		Door1 = nullptr;
+		
+		delete Door2;
+		Door2 = nullptr;
+		
+		delete Palanca;
+		Palanca = nullptr;
+		
+		delete PalancaSensor;
+		PalancaSensor = nullptr;
 
 		palancas = true;
 		app->questManager->SaveState();
@@ -340,8 +411,10 @@ bool PuzzleManager::Escape()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				//Abrir UI nota 1
-				int id = 100; // ID DEL DIALOGUES.XML DIALOGUE_TREE!!!!!!!!!!!!!!!!!!!!!!!!!1
-				app->dialogueSystem->LoadDialogue(id);
+				app->dialogueSystem->Enable();
+				vector<int> id = { 100 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
+				app->dialogueSystem->PerformDialogue(id);
+				app->hTerrors->player->lockMovement = true;
 				esc1 = false;
 			}
 		}
@@ -351,8 +424,10 @@ bool PuzzleManager::Escape()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				//Abrir UI nota 2
-				int id = 101; // ID DEL DIALOGUES.XML DIALOGUE_TREE!!!!!!!!!!!!!!!!!!!!!!!!!1
-				app->dialogueSystem->LoadDialogue(id);
+				app->dialogueSystem->Enable();
+				vector<int> id = { 101 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
+				app->dialogueSystem->PerformDialogue(id);
+				app->hTerrors->player->lockMovement = true;
 				esc2 = false;
 			}
 		}
@@ -362,10 +437,19 @@ bool PuzzleManager::Escape()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				//Abrir UI nota 3
-				int id = 102; // ID DEL DIALOGUES.XML DIALOGUE_TREE!!!!!!!!!!!!!!!!!!!!!!!!!1
-				app->dialogueSystem->LoadDialogue(id);
+				app->dialogueSystem->Enable();
+				vector<int> id = { 102 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
+				app->dialogueSystem->PerformDialogue(id);
+				app->hTerrors->player->lockMovement = true;
 				esc3 = false;
 			}
+		}
+
+		if (app->dialogueSystem->hasEnded)
+		{
+			app->dialogueSystem->Disable();
+			app->hTerrors->player->lockMovement = false;
+			app->dialogueSystem->hasEnded = false;
 		}
 	}
 
@@ -397,6 +481,18 @@ bool PuzzleManager::Escape()
 			if (nota3 != nullptr)
 				nota3->body->GetWorld()->DestroyBody(nota3->body);
 
+			delete DoorEscape;
+			DoorEscape = nullptr;
+
+			delete nota1;
+			nota1 = nullptr;
+
+			delete nota2;
+			nota2 = nullptr;
+
+			delete nota3;
+			nota3 = nullptr;
+
 			codeActive = false;
 			escape = true;
 			app->questManager->SaveState();
@@ -424,6 +520,9 @@ bool PuzzleManager::Rescue()
 			if (Boss->body != nullptr)
 				Boss->body->GetWorld()->DestroyBody(Boss->body);
 
+			delete Boss;
+			Boss = nullptr;
+
 			bossActive = false;
 		}
 	}
@@ -445,6 +544,12 @@ bool PuzzleManager::Rescue()
 
 				if (loset != nullptr)
 					app->tex->UnLoad(loset);
+
+				delete Loset;
+				Loset = nullptr;
+				
+				delete Door3;
+				Door3 = nullptr;
 
 				losetActive = false;
 				bossInvent = false;

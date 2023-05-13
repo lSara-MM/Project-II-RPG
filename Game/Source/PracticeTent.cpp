@@ -143,6 +143,9 @@ bool PracticeTent::CleanUp()
 
 	app->entityManager->Disable();
 
+	delete player;
+	player = nullptr;
+
 	if (pSettings != nullptr)
 	{
 		pSettings->CleanUp();

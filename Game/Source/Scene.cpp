@@ -201,6 +201,12 @@ bool Scene::CleanUp()
 
 	app->entityManager->CleanUp();
 	app->entityManager->Disable();
+	delete player;
+	player = nullptr;
+
+	app->questManager->quest1->active = false;
+	app->questManager->quest2->active = false;
+	app->questManager->quest3->active = false;
 
 	if (pSettings != nullptr)
 	{
