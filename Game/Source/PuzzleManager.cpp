@@ -109,6 +109,7 @@ bool PuzzleManager::Start()
 	escape = false;
 	rescue = false;
 
+	//Notas false
 	esc1 = false;
 	esc2 = false;
 	esc3 = false;
@@ -120,10 +121,8 @@ bool PuzzleManager::Start()
 	intoCode = false;
 
 	keyPalancas = 0;
-	keyEscape = 0;
-	keyRescue = 0;
 
-	realCode = "1234";
+	realCode = "123";
 
 	app->questManager->LoadState();
 
@@ -192,9 +191,7 @@ bool PuzzleManager::Start()
 		nota3->id = 2;
 	}
 
-
-
-	numCode = new PlayerInput("", 4, false);
+	numCode = new PlayerInput("", 3, false);
 
 	return true;
 }
@@ -334,7 +331,7 @@ bool PuzzleManager::Escape()
 	if (intoCode == true) 
 	{
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-			codeActive = !codeActive;
+			app->input->ActiveGetInput(numCode);
 	}
 	else
 	{
@@ -372,39 +369,33 @@ bool PuzzleManager::Escape()
 		}
 	}
 
-	if (codeActive)
+	if (app->input->getInput_B)
 	{
-		if ((app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) && codeToCompare.empty())
+		iPoint pos = { app->win->GetWidth() / 4, 650 };
+		app->input->RenderTempText("Code:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
+	}
+
+	if (numCode->input_entered)
+	{
+		if (strcmp(numCode->input.c_str(), realCode.c_str()) == 0)
 		{
-			codeToCompare.erase(codeToCompare.length() - 1);
-		}
+			if (doorEscape != nullptr)
+				app->tex->UnLoad(doorEscape);
 
-		if (!app->puzzleManager->numCode->input_entered)
-		{
-			app->input->ActiveGetInput(app->puzzleManager->numCode);
+			if (DoorEscape != nullptr)
+				DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
 
-			codeToCompare = app->puzzleManager->numCode->input.c_str();
-		}
+			if (notas != nullptr)
+				app->tex->UnLoad(notas);
 
-		if (strcmp(codeToCompare.c_str(), realCode.c_str()) == 0)
-		{
-			if (app->puzzleManager->doorEscape != nullptr)
-				app->tex->UnLoad(app->puzzleManager->doorEscape);
+			if (nota1 != nullptr)
+				nota1->body->GetWorld()->DestroyBody(nota1->body);
 
-			if (app->puzzleManager->DoorEscape != nullptr)
-				app->puzzleManager->DoorEscape->body->GetWorld()->DestroyBody(app->puzzleManager->DoorEscape->body);
+			if (nota2 != nullptr)
+				nota2->body->GetWorld()->DestroyBody(nota2->body);
 
-			if (app->puzzleManager->notas != nullptr)
-				app->tex->UnLoad(app->puzzleManager->notas);
-
-			if (app->puzzleManager->nota1 != nullptr)
-				app->puzzleManager->nota1->body->GetWorld()->DestroyBody(app->puzzleManager->nota1->body);
-
-			if (app->puzzleManager->nota2 != nullptr)
-				app->puzzleManager->nota2->body->GetWorld()->DestroyBody(app->puzzleManager->nota2->body);
-
-			if (app->puzzleManager->nota3 != nullptr)
-				app->puzzleManager->nota3->body->GetWorld()->DestroyBody(app->puzzleManager->nota3->body);
+			if (nota3 != nullptr)
+				nota3->body->GetWorld()->DestroyBody(nota3->body);
 
 			codeActive = false;
 			escape = true;
