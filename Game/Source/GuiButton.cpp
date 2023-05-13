@@ -22,7 +22,38 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 
 	buttonType = bType;
 
-	buttonTex = app->tex->Load("Assets/GUI/UI_buttons.png");
+	switch (bType)
+	{
+	case ButtonType::NONE:
+		break;
+	case ButtonType::EXTRA_LARGE:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/Generic.png");
+		break;
+	case ButtonType::START:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/Start.png");
+		break;
+	case ButtonType::CLOSE:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/Close.png");
+		break;
+	case ButtonType::DIALOGUE:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/Dialogue.png");
+		break;
+	case ButtonType::SETTINGS:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
+		break;
+	case ButtonType::IN_SETTINGS:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonInSettings.png");
+		break;
+	case ButtonType::CONTROL_SETTINGS:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
+		break;
+	case ButtonType::INVENTORY:
+		break;
+	case ButtonType::COMBAT_TARGET:
+		break;
+	default:
+		break;
+	}
 
 	fxHoverPath = "Assets/Audio/Fx/on_button.wav";
 	fxHover = app->audio->LoadFx(fxHoverPath);
@@ -212,84 +243,334 @@ bool GuiButton::Draw(Render* render)
 	}
 	else
 	{
-		// Draw the right button depending on state
-		switch (state)
+		if (buttonType == ButtonType::SETTINGS)
 		{
-
-		case GuiControlState::DISABLED:
-		{
-			render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-		} break;
-
-		case GuiControlState::NORMAL:
-		{
-			render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-		} break;
-
-		case GuiControlState::FOCUSED:
-		{
-			/*switch (buttonType)
+			// Draw the right button depending on state
+			switch (state)
 			{
-			case ButtonType::NONE:
+
+			case GuiControlState::DISABLED:
+			{
+
+			} break;
+
+			case GuiControlState::NORMAL:
+			{
+				rect = { 0, 0, 136, 50 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::FOCUSED:
+			{
+				rect = { 0, 53, 136, 50 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::PRESSED:
+			{
+				rect = { 0, 105, 136, 50 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::SELECTED: 
 				break;
-			case ButtonType::EXTRA_LARGE:
-				break;
-			case ButtonType::LARGE:
-				break;
-			case ButtonType::SMALL:
-				break;
-			case ButtonType::START:
-				rect = { 94, 39, 93, 50 };
-				break;
-			case ButtonType::CLOSE:
-				break;
-			case ButtonType::MENU:
-				break;
-			case ButtonType::SETTINGS:
-				rect = { 94, 39, 93, 118 };
-				break;
-			case ButtonType::IN_SETTINGS:
-				break;
-			case ButtonType::CONTROL_SETTINGS:
-				break;
-			case ButtonType::INVENTORY:
-				break;
-			case ButtonType::INV_NEXT_PAGE:
-				break;
-			case ButtonType::INV_PAGES:
-				break;
-			case ButtonType::SWAP_SKILL:
-				break;
+
 			default:
 				break;
-			}*/
-			
-			render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-		} break;
-
-		case GuiControlState::PRESSED:
+			}
+		}
+		if (buttonType == ButtonType::IN_SETTINGS)
 		{
-			render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+			switch (state)
+			{
 
-		} break;
+			case GuiControlState::DISABLED:
+			{
 
-		case GuiControlState::SELECTED: //render->DrawRectangle(bounds, 0, 255, 0, 255);
-			break;
+			} break;
 
-		default:
-			break;
+			case GuiControlState::NORMAL:
+			{
+				rect = { 0, 0, 155, 52 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::FOCUSED:
+			{
+				rect = { 0, 53, 155, 52 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::PRESSED:
+			{
+				rect = { 0, 105, 155, 52 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::SELECTED: 
+				break;
+
+			default:
+				break;
+			}
+		}
+		if (buttonType == ButtonType::CONTROL_SETTINGS)
+		{
+			// Draw the right button depending on state
+			switch (state)
+			{
+
+			case GuiControlState::DISABLED:
+			{
+
+			} break;
+
+			case GuiControlState::NORMAL:
+			{
+				rect = { 0, 0, 34, 34 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::FOCUSED:
+			{
+				rect = { 0, 53, 34, 34 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::PRESSED:
+			{
+				rect = { 0, 105, 34, 34 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::SELECTED: 
+				break;
+
+			default:
+				break;
+			}
+		}
+		if (buttonType == ButtonType::CLOSE)
+		{
+			switch (state)
+			{
+
+			case GuiControlState::DISABLED:
+			{
+
+			} break;
+
+			case GuiControlState::NORMAL:
+			{
+				rect = { 1, 3, 57, 57 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::FOCUSED:
+			{
+				rect = { 1, 66, 57, 57 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::PRESSED:
+			{
+				rect = { 1, 127, 57, 57 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::SELECTED:
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		if (buttonType == ButtonType::EXTRA_LARGE)
+		{
+			switch (state)
+			{
+
+			case GuiControlState::DISABLED:
+			{
+
+			} break;
+
+			case GuiControlState::NORMAL:
+			{
+				rect = { 0, 0, 200, 50 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::FOCUSED:
+			{
+				rect = { 0, 53, 200, 50 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::PRESSED:
+			{
+				rect = { 0, 105, 200, 50 };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::SELECTED:
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		if (buttonType == ButtonType::DIALOGUE)
+		{
+			switch (state)
+			{
+
+			case GuiControlState::DISABLED:
+			{
+
+			} break;
+
+			case GuiControlState::NORMAL:
+			{
+				rect = { 5, 5, bounds.x, bounds.y };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::FOCUSED:
+			{
+				rect = { 5, 65, bounds.x, bounds.y };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::PRESSED:
+			{
+				rect = { 5, 125, bounds.x, bounds.y };
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+
+			} break;
+
+			case GuiControlState::SELECTED:
+				break;
+
+			default:
+				break;
+			}
+		}
+		if (buttonType == ButtonType::START)
+		{
+			switch (state)
+			{
+
+			case GuiControlState::DISABLED:
+			{
+
+			} break;
+
+			case GuiControlState::NORMAL:
+			{
+				rect = { 5, 77, 20, 26 };
+				render->DrawTexture(buttonTex, bounds.x+bounds.w/7, bounds.y+bounds.h/2.7, &rect);
+
+			} break;
+
+			case GuiControlState::FOCUSED:
+			{
+				rect = { 5, 5, 20, 26 };
+				render->DrawTexture(buttonTex, bounds.x+ bounds.w / 7, bounds.y+ bounds.h / 2.7, &rect);
+
+			} break;
+
+			case GuiControlState::PRESSED:
+			{
+				rect = { 5, 41, 20, 26 };
+				render->DrawTexture(buttonTex, bounds.x+ bounds.w / 7, bounds.y+ bounds.h / 2.7, &rect);
+
+			} break;
+
+			case GuiControlState::SELECTED:
+				break;
+
+			default:
+				break;
+			}
 		}
 	}
 
-	int offsetX = text.Length() * fontSize / 2;
-	
-	int x = (rect.w - offsetX) / 2;
-	int y = (rect.h - fontSize) / 2;
 
-	if(text != "") app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
+
+	if (buttonType == ButtonType::START )
+	{
+		if (text != "")
+		{
+			int offsetX = text.Length() * fontSize / 2;
+
+			int x = (bounds.w - offsetX) / 2;
+			int y = (bounds.h - fontSize) / 2;
+
+			switch (state)
+			{
+
+			case GuiControlState::DISABLED:
+			{
+				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 200,200,200 });
+			} break;
+
+			case GuiControlState::NORMAL:
+			{
+				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 163,163,163 });
+
+			} break;
+
+			case GuiControlState::FOCUSED:
+			{
+				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 249,224,58 });
+
+			} break;
+
+			case GuiControlState::PRESSED:
+			{
+				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 180,34,42 });
+
+			} break;
+
+			case GuiControlState::SELECTED:
+				break;
+
+			default:
+				break;
+			}
+		}
+		
+	}
+
+	else
+	{
+		int offsetX = text.Length() * fontSize / 2;
+
+		int x = (rect.w - offsetX) / 2;
+		int y = (rect.h - fontSize) / 2;
+		if (text != "") app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
+	}
+
 
 	return false;
 }

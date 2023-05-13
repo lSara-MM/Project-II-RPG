@@ -14,7 +14,7 @@ GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, int speed, Easings eType, A
 	boundsX_AUX = this->bounds.x;
 
 	isForward_B = true;
-	checkBoxTex = app->tex->Load("Assets/Textures/checkbox.png");
+	checkBoxTex = app->tex->Load("Assets/GUI/UIArt/Close.png");
 }
 
 GuiCheckBox::~GuiCheckBox()
@@ -151,7 +151,7 @@ bool GuiCheckBox::Draw(Render* render)
 
 		case GuiControlState::NORMAL:
 		{
-			rect = { 0, 0, 30, 30 };
+			rect = { 1, 3, 57, 57 };
 			render->DrawTexture(checkBoxTex, bounds.x, bounds.y, &rect);
 
 		} break;
@@ -168,7 +168,7 @@ bool GuiCheckBox::Draw(Render* render)
 
 		case GuiControlState::SELECTED:
 		{
-			rect = { 30, 0, 30, 30 };
+			rect = { 1, 127, 57, 57 };
 			render->DrawTexture(checkBoxTex, bounds.x, bounds.y, &rect);
 		} break;
 
