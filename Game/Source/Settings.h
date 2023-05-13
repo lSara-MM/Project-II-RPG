@@ -855,7 +855,7 @@ public:
 		app->audio->upperBgMusic();
 
 		pauseAnimation.Backward();
-		pauseAnimation.Step(1, false);
+		pauseAnimation.Step(animationSpeed, false);
 		float point = pauseAnimation.GetPoint();
 		int offsetAnimation = -750;
 		//formula int(offsetAnimation + point * (0 - offsetAnimation))
