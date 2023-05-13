@@ -85,25 +85,25 @@ public:
 		open_game_B = false;
 
 		// Language
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 290, 133, 33 }, ButtonType::SETTINGS, "English", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN,AnimationAxis::RIGHT_X);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 290, 133, 33 }, ButtonType::IN_SETTINGS, "English", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN,AnimationAxis::RIGHT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
 		// Text Speed
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 367, 133, 33 }, ButtonType::SETTINGS, "Medium", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN,AnimationAxis::RIGHT_X);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 367, 133, 33 }, ButtonType::IN_SETTINGS, "Medium", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN,AnimationAxis::RIGHT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
 		// Return to Title
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 444, 133, 33 }, ButtonType::SETTINGS, "Return to Title", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 444, 133, 33 }, ButtonType::IN_SETTINGS, "Return to Title", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
 		// Exit
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 521, 133, 33 }, ButtonType::SETTINGS, "Exit", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 521, 133, 33 }, ButtonType::IN_SETTINGS, "Exit", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 	}
@@ -299,7 +299,7 @@ public:
 		open_graphics_B = false;
 
 		// Window Size
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 280, 133, 33 }, ButtonType::SETTINGS, "Window Size", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 280, 133, 33 }, ButtonType::IN_SETTINGS, "Window Size", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGraphicsButtons.Add(button);
 
@@ -317,7 +317,7 @@ public:
 
 		// Max fps
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::SETTINGS, "Max fps", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::IN_SETTINGS, "Max fps", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGraphicsButtons.Add(button);
 	}
@@ -594,7 +594,7 @@ public:
 		rect = { 341, 0, 90, 93 };
 		app->render->DrawTexture(settingsTexture, 789 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
 
-		app->render->DrawLine(490 - app->render->camera.x, 250 - app->render->camera.y, 490 - app->render->camera.x, int(offsetAnimation + point * (600 - app->render->camera.y - offsetAnimation)), 0, 0, 0);
+		//app->render->DrawLine(490 - app->render->camera.x, int(offsetAnimation + point * (250 - app->render->camera.y - offsetAnimation)), 490 - app->render->camera.x, 600 - app->render->camera.y , 0, 0, 0);
 		app->render->TextDraw("Settings", 600, int(offsetAnimation + point * (121 - app->render->camera.y - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
 
 
@@ -699,7 +699,7 @@ public:
 		rect = { 341, 0, 90, 93 };
 		app->render->DrawTexture(settingsTexture, 789 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
 
-		app->render->DrawLine(490 - app->render->camera.x, 250 - app->render->camera.y, 490 - app->render->camera.x, int(offsetAnimation + point * (600 - app->render->camera.y - offsetAnimation)), 0, 0, 0);
+		//app->render->DrawLine(490 - app->render->camera.x, int(offsetAnimation + point * (250 - app->render->camera.y - offsetAnimation)), 490 - app->render->camera.x, 600 - app->render->camera.y, 0, 0, 0);
 		app->render->TextDraw("Settings", 600, int(offsetAnimation + point * (121 - app->render->camera.y - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
 
 		settings_B = false;
@@ -787,7 +787,7 @@ public:
 		open_pause_B = false;
 
 		// close
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 1200, 57, 57, 57 }, ButtonType::SMALL, "x", 20);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 1200, 57, 57, 57 }, ButtonType::CLOSE, "x", 20);
 		button->state = GuiControlState::NONE;
 		listPauseButtons.Add(button);
 
@@ -803,7 +803,7 @@ public:
 		animationSpeed = 4;
 
 		// Settings
-		pSettings = new Settings(mod);
+		//pSettings = new Settings(mod);
 	}
 
 	bool OpenPause()
@@ -815,7 +815,7 @@ public:
 		int offsetAnimation = -750;
 		//formula int(offsetAnimation + point * (0 - offsetAnimation))
 
-		SDL_Rect rect = { 0, 0, 226, 261 };
+		//SDL_Rect rect = { 0, 0, 226, 261 };
 
 		app->audio->lowerBgMusic();
 
@@ -860,7 +860,7 @@ public:
 		int offsetAnimation = -750;
 		//formula int(offsetAnimation + point * (0 - offsetAnimation))
 
-		SDL_Rect rect = { 0, 0, 226, 261 };
+		//SDL_Rect rect = { 0, 0, 226, 261 };
 
 		app->audio->lowerBgMusic();
 
