@@ -62,7 +62,8 @@ bool Input::Start()
 	//SDL_EnableUNICODE(SDL_ENABLE);
 
 	playerName = new PlayerInput("", MAX_PLAYER_CHARS, false);
-
+	
+	temp = "";
 	getInput_B = false;
 
 	SDL_StopTextInput();
@@ -266,13 +267,15 @@ bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 	if ((event.key.keysym.sym == SDLK_BACKSPACE) && !temp.empty())
 	{
 		// Remove a character from the end
-		temp.erase(temp.length() - 1);
+		if (temp.length() < playerInput->max_chars - 1) { temp.erase(temp.length() - 1); }
+		
 		temp.erase(temp.length() - 1);
 	}
 
 	if ((event.key.keysym.sym == SDLK_RETURN) && !temp.empty())
 	{
-		temp.erase(temp.length() - 1);
+		if (temp.length() < playerInput->max_chars - 1) { temp.erase(temp.length() - 1); }
+
 		// TODO Call Save name
 		app->dialogueSystem->SaveDialogueState();	
 		getInput_B = false;
@@ -302,7 +305,6 @@ void Input::RenderTempText(SString temp, const char* subs, iPoint pos, int fonts
 	temp.Substitute("%", subs);
 	app->render->TextDraw(temp.GetString(), pos.x, pos.y, fontsize, font, color);
 }
-
 
 void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt)
 {

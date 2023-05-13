@@ -49,7 +49,6 @@ struct GameController
 {
 	float j1_x, j1_y,j2_x, j2_y, RT, LT, A, B, X, Y, START, DPAD_UP, DPAD_DOWN, DPAD_RIGHT, DPAD_LEFT,
 		GUIDE, BUTTON_LEFTSTICK, BUTTON_RIGHTSTICK, BUTTON_LEFTSHOULDER, BUTTON_RIGHTSHOULDER, BUTTON_MAX,BACK;
-
 };
 
 struct PlayerInput
@@ -71,7 +70,6 @@ public:
 
 class Input : public Module
 {
-
 public:
 
 	Input();

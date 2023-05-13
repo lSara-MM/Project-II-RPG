@@ -261,9 +261,9 @@ bool IntroScene::PostUpdate()
 bool IntroScene::CleanUp()
 {
 	LOG("Freeing IntroScene");
-	
-	listButtons.Clear();
+	app->input->temp = "";
 
+	listButtons.Clear();
 	pSettings->CleanUp();
 
 	app->tex->UnLoad(texture);
