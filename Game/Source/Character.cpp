@@ -126,6 +126,13 @@ bool Character::Update(float dt)
 		{
 		case CharacterType::ALLY:
 			
+			if(app->combat->lastPressedAbility_I!=-1)
+			{
+				if(app->combat->targeted_Character!=nullptr)
+				{
+					UseSkill(listSkills.At(app->combat->lastPressedAbility_I)->data, app->combat->targeted_Character);
+				}
+			}
 			//app->combat->HandleSkillsButtons(listSkills);
 
 			////Activar y desactivar botones usables
@@ -351,7 +358,7 @@ void Character::LoadSkill(int arr[4])
 	//Cargar skills
 	pugi::xml_parse_result parseResult = skillsFile.load_file("skills.xml");
 	skillNode = skillsFile.child("skills");
-	for (int i = 0; i <= 3; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		for (pugi::xml_node aux = skillNode.child("skill"); aux; aux = aux.next_sibling("skill"))
 		{
@@ -507,6 +514,42 @@ bool Character::UseSkill(Skill* skill)
 		}
 	}
 	
+
+	return true;
+}
+
+//Para aliados
+bool Character::UseSkill(Skill* skill, Character* target)
+{
+	int endRange;
+	if (skill->targetFriend) { endRange = skill->RangeCanTarget(app->combat->vecAllies); }
+	else { endRange = skill->RangeCanTarget(app->combat->vecAllies); }
+
+	if (skill->areaSkill)
+	{
+		for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+		{
+			//Atacar a todos
+			switch (target->charaType)
+			{
+			case CharacterType::ALLY:
+				app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
+				break;
+			case CharacterType::ENEMY:
+				app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
+				break;
+			case CharacterType::NONE:
+				break;
+			default:
+				break;
+			}
+			
+		}
+	}
+	else
+	{
+		target->ModifyHP(ApplySkill(this, target, skill));
+	}
 
 	return true;
 }

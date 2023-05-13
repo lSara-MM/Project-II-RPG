@@ -66,6 +66,8 @@ public:
 	void LoadSkill(int arr[4]);
 
 	bool UseSkill(Skill* skill);
+
+	bool UseSkill(Skill* skill,Character* target);
 	//Gets, dan las stats sumadas (base+eqipo+buffos)
 	/*int GetMaxHP() { return maxHp; }
 	int GetHealth() { return currentHp; }

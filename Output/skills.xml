@@ -25,7 +25,7 @@ POR HACER
 	<skill name="Avanzada vorpal" id="3" description="Ataque de embestida que ataca a los puntos debiles y crea retroceso" 
 		   type="0" movementCaster="-2"  movementTarget="2"
 		   multiplier="0.8" bonusPrecision="90" bonusCritRate="30" bonusCritDamage="50"
-		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd_I="1" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd_I="1" friendlyFire="false" areaSkill="false" autoTarget="false"
 	/>
 	<skill name="Barrido Fugaz" id="4" description="Un golpe de barrido capaz de dejar anonadado hasta el mas firme rival"
 		   type="0" movementCaster="0"  movementTarget="0"

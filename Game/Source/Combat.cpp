@@ -431,14 +431,18 @@ void Combat::HandleSkillsButtons(List<Skill*> listSkills_)
 	{
 		// If character in turn is in position to use skill, enable button;
 		// skill > can be used funtion of charater in turn 
-		if (listSkills_.At(i)->data->PosCanBeUsed(listInitiative.At(charaInTurn)->data->positionCombat_I))
+		if(listSkills_.start!=nullptr)
 		{
-			listButtons.At(offset + i)->data->state = GuiControlState::NORMAL;
+			if (listSkills_.At(i)->data->PosCanBeUsed(listInitiative.At(charaInTurn)->data->positionCombat_I))
+			{
+				listButtons.At(offset + i)->data->state = GuiControlState::NORMAL;
+			}
+			else
+			{
+				listButtons.At(offset + i)->data->state = GuiControlState::DISABLED;
+			}
 		}
-		else
-		{
-			listButtons.At(offset + i)->data->state = GuiControlState::DISABLED;
-		}
+		
 	}
 }
 
