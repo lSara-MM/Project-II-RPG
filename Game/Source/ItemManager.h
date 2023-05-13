@@ -104,6 +104,9 @@ public:
 
 	Player* player;
 
+	//
+	bool event;
+
 private:
 	pugi::xml_document items;
 

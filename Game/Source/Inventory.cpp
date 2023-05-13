@@ -58,7 +58,8 @@ bool Inventory::Update(float dt)
 			}
 		}
 	}
-	
+	app->itemManager->event = false;
+
 	return ret;
 }
 

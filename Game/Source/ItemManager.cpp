@@ -32,6 +32,8 @@ bool ItemManager::Start()
 	player->LoadAllPC();
 	player->SetParty();
 
+	event = true;
+
 	return true;
 }
 
@@ -119,6 +121,7 @@ void ItemManager::AddQuantity(pugi::xml_node& xml_trees, const char* name)
 			SaveItemState();
 		}
 	}
+	event = true;
 }
 
 void ItemManager::MinusQuantity(const char* name)
@@ -223,6 +226,8 @@ void ItemManager::UseItem(ItemNode* item)
 			item->space = 0;
 		}
 	}
+
+	event = true;
 }
 
 void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
@@ -352,56 +357,59 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 
 void ItemManager::LoadButtons(int x, int y, int ID)
 {
-	SDL_Rect buttonBounds;
-	buttonBounds = { (700 + 52 * x), y, 52, 52 };
-
-	if (nodeList[ID]->button == nullptr)
+	if (event)
 	{
-		nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
-	}
+		SDL_Rect buttonBounds;
+		buttonBounds = { (700 + 52 * x), y, 52, 52 };
 
-	if (nodeList[ID]->equiped)
-	{
-		switch (nodeList[ID]->kind)
+		if (nodeList[ID]->button == nullptr)
 		{
-		case 1:
-			buttonBounds = { (200 + 52), 332, 52, 52 };
-			break;
-		case 2:
-			buttonBounds = { (200 + 52), 270, 52, 52 };
-			break;
-		case 3:
-			buttonBounds = { (200 + 52), 392, 52, 52 };
-			break;
-		case 4:
-			buttonBounds = { (200 + 52), 208, 52, 52 };
-			break;
-		case 5:
-			if (nodeList[ID]->space == 1)
-			{
-				buttonBounds = { (510 + 52), 210, 52, 52 };
-			}
-			else
-			{
-				buttonBounds = { (510 + 52), 270, 52, 52 };
-			}
-			break;
-		case 6:
-			if (nodeList[ID]->space == 1)
-			{
-				buttonBounds = { (510 + 52), 335, 52, 52 };
-			}
-			else
-			{
-				buttonBounds = { (510 + 52), 400, 52, 52 };
-			}
-			break;
+			nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
 		}
-	}
 
-	if (nodeList[ID]->button != NULL)
-	{
-		nodeList[ID]->button->bounds = buttonBounds;
+		if (nodeList[ID]->equiped)
+		{
+			switch (nodeList[ID]->kind)
+			{
+			case 1:
+				buttonBounds = { (200 + 52), 332, 52, 52 };
+				break;
+			case 2:
+				buttonBounds = { (200 + 52), 270, 52, 52 };
+				break;
+			case 3:
+				buttonBounds = { (200 + 52), 392, 52, 52 };
+				break;
+			case 4:
+				buttonBounds = { (200 + 52), 208, 52, 52 };
+				break;
+			case 5:
+				if (nodeList[ID]->space == 1)
+				{
+					buttonBounds = { (510 + 52), 210, 52, 52 };
+				}
+				else
+				{
+					buttonBounds = { (510 + 52), 270, 52, 52 };
+				}
+				break;
+			case 6:
+				if (nodeList[ID]->space == 1)
+				{
+					buttonBounds = { (510 + 52), 335, 52, 52 };
+				}
+				else
+				{
+					buttonBounds = { (510 + 52), 400, 52, 52 };
+				}
+				break;
+			}
+		}
+
+		if (nodeList[ID]->button != NULL)
+		{
+			nodeList[ID]->button->bounds = buttonBounds;
+		}
 	}
 }
 
