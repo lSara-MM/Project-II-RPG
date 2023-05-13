@@ -44,33 +44,23 @@ public:
 
 	void Debug();
 
+	// Init everything
+	bool PreLoadCombat(array<Character*, 4> arrParty_, SString n);
+	bool InitEnemies(vector<int> arr);
+	bool InitAllies(array<Character*, 4> party);
+
 
 	bool StartCombat();
 	bool OrderBySpeed();
-
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
 
-	//TargetControl
-		// Del 0-3 allies al 4-7 enemies 
-	bool DisableTargetButton(int id);
-	// Del 0-3 allies al 4-7 enemies
-	bool EnableTargetButton(int id);
-
-	//Del 1 al 4
-	bool EnableSkillButton(int skillNum);
-	//Del 1 al 4
-	bool DisableSkillButton(int skillNum);
-
-	// Characters to disable/enable buttons
+	// Handle buttons
 	void HandleCharaButtons(vector<Character*>* arr, int pos1, int pos2);
+	void HandleSkillsButtons(List<Skill*> listSkills_);
 
 	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);
 	void RemoveCharacter(vector<Character*>* arr, Character* chara);
 	void UpdatePositions(vector<Character*>* arr, int pos);
-
-	bool PreLoadCombat(array<Character*, 4> arrParty_, SString n);
-	bool InitEnemies(vector<int> arr);
-	bool InitAllies(array<Character*, 4> party);
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);

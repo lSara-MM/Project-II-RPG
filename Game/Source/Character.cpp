@@ -125,20 +125,21 @@ bool Character::Update(float dt)
 		switch (charaType)
 		{
 		case CharacterType::ALLY:
+			
+			//app->combat->HandleSkillsButtons(listSkills);
 
-			//Activar y desactivar botones usables
-			for (int i = 0; i < 4; i++)
-			{
-				if(listSkills.At(i)->data->PosCanBeUsed(positionCombat_I))
-				{
-					app->combat->EnableSkillButton(i);
-				}
-				else
-				{
-					app->combat->DisableSkillButton(i);
-				}
-			}
-
+			////Activar y desactivar botones usables
+			//for (int i = 0; i < 4; i++)
+			//{
+			//	if(listSkills.At(i)->data->PosCanBeUsed(positionCombat_I))
+			//	{
+			//		app->combat->EnableSkillButton(i);
+			//	}
+			//	else
+			//	{
+			//		app->combat->DisableSkillButton(i);
+			//	}
+			//}
 
 			break;
 		case CharacterType::ENEMY:

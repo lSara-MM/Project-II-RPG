@@ -34,41 +34,41 @@ POR HACER
 	/>
 
 	<!--Skills Prota-->
-	<skill name="" id="1" description="" 
+	<skill name="" id="10" description="" 
 		   type="0" movementCaster="-1"  movementTarget="0"
 		   multiplier="" bonusPrecision="" bonusCritRate="" bonusCritDamage=""
 		   posToUseStart="" posToUseEnd="" posToTargetStart="" posToTargetEnd_I="" friendlyFire="" areaSkill="" autoTarget=""
 	/>
-	<skill name="" id="1" description="" 
+	<skill name="" id="10" description="" 
 		   type="0" movementCaster="-1"  movementTarget="0"
 		   multiplier="" bonusPrecision="" bonusCritRate="" bonusCritDamage=""
 		   posToUseStart="" posToUseEnd="" posToTargetStart="" posToTargetEnd_I="" friendlyFire="false" areaSkill="" autoTarget=""
 	/>
-	<skill name="" id="1" description="" 
+	<skill name="" id="10" description="" 
 		   type="0" movementCaster="-1"  movementTarget="0"
 		   multiplier="" bonusPrecision="" bonusCritRate="" bonusCritDamage=""
 		   posToUseStart="" posToUseEnd="" posToTargetStart="" posToTargetEnd_I="" friendlyFire="false" areaSkill="" autoTarget=""
 	/>
-	<skill name="" id="1" description="" 
+	<skill name="" id="10" description="" 
 		   type="0" movementCaster="-1"  movementTarget="0"
 		   multiplier="" bonusPrecision="" bonusCritRate="" bonusCritDamage=""
 		   posToUseStart="" posToUseEnd="" posToTargetStart="" posToTargetEnd_I="" friendlyFire="false" areaSkill="" autoTarget=""
 	/>
 
 	<!--Skills Prota-->
-	<skill name="" id="1" description="" type="" movement=""
+	<skill name="" id="10" description="" type="" movement=""
 		   multiplier="" bonusPrecision="" bonusCritRate="" bonusCritDamage=""
 		   posToUseStart="" posToUseEnd="" posToTargetStart="" posToTargetEnd_I="" areaSkill=""
 	/>
-	<skill name="" id="1" description="" type="" movement=""
+	<skill name="" id="10" description="" type="" movement=""
 		   multiplier="" bonusPrecision="" bonusCritRate="" bonusCritDamage=""
 		   posToUseStart="" posToUseEnd="" posToTargetStart="" posToTargetEnd_I="" areaSkill=""
 	/>
-	<skill name="" id="1" description="" type="" movement=""
+	<skill name="" id="10" description="" type="" movement=""
 		   multiplier="" bonusPrecision="" bonusCritRate="" bonusCritDamage=""
 		   posToUseStart="" posToUseEnd="" posToTargetStart="" posToTargetEnd_I="" areaSkill=""
 	/>
-	<skill name="" id="1" description="" type="" movement=""
+	<skill name="" id="10" description="" type="" movement=""
 		   multiplier="" bonusPrecision="" bonusCritRate="" bonusCritDamage=""
 		   posToUseStart="" posToUseEnd="" posToTargetStart="" posToTargetEnd_I="" areaSkill=""
 	/>

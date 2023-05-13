@@ -228,7 +228,6 @@ void Combat::Debug()
 
 		HandleCharaButtons(&vecAllies, 1, 2);
 	}
-	int a = listButtons.start->data->id;
 }
 
 bool Combat::PreLoadCombat(array<Character*, 4> arrParty_, SString n)
@@ -399,89 +398,19 @@ bool Combat::NextTurn()
 }
 
 
-bool Combat::DisableTargetButton(int id)
-{
-	//Evitar que pete o acceder a botones que no deberia 
-	if (id<0 || id > 7)
-	{
-		return false;
-	}
-	//if (id > 7)
-	//{
-	//	return false;
-	//}
-
-	//listButtons.At(id)->data->state = GuiControlState::DISABLED;
-
-
-	return true;
-}
-
-bool Combat::EnableTargetButton(int id)
-{
-	//Evitar que pete o acceder a botones que no deberia 
-	if (id < 0 || id > 7)
-	{
-		return false;
-	}
-	/*if (id > 7)
-	{
-		return false;
-	}*/
-
-	//listButtons.At(id)->data->state = GuiControlState::NORMAL;
-
-
-	return true;
-}
-
-bool Combat::EnableSkillButton(int skillNum)
-{
-	//Evitar que pete o acceder a botones que no deberia 
-	if (skillNum < 0 || skillNum > 3)
-	{
-		return false;
-	}
-	//if (skillNum > 4)
-	//{
-	//	return false;
-	//}
-
-	//listButtons.At(7 + skillNum)->data->state = GuiControlState::NORMAL;
-
-	return true;
-}
-
-bool Combat::DisableSkillButton(int skillNum)
-{
-	//Evitar que pete o acceder a botones que no deberia 
-	if (skillNum < 1 || skillNum > 4)
-	{
-		return false;
-	}
-	//if (skillNum > 4)
-	//{
-	//	return false;
-	//}
-
-	//listButtons.At(7 + skillNum)->data->state = GuiControlState::DISABLED;
-
-	return true;
-}
-
-// TO TEST
+// Handle buttons
 void Combat::HandleCharaButtons(vector<Character*>* arr, int pos1, int pos2)
 {
 	for (int i = 0; i < vecAllies.size(); i++)
 	{
 		vecAllies.at(i)->button->state = GuiControlState::DISABLED;
-		LOG("disabled %d", vecAllies.at(i)->button->id);
+		//LOG("disabled %d", vecAllies.at(i)->button->id);
 	}
 
 	for (int i = 0; i < vecEnemies.size(); i++)
 	{
 		vecEnemies.at(i)->button->state = GuiControlState::DISABLED;
-		LOG("disabled %d", vecEnemies.at(i)->button->id);
+		//LOG("disabled %d", vecEnemies.at(i)->button->id);
 	}
 
 	for (int i = 0; i < arr->size(); i++)
@@ -494,6 +423,24 @@ void Combat::HandleCharaButtons(vector<Character*>* arr, int pos1, int pos2)
 	}
 }
 
+// TO TEST
+void Combat::HandleSkillsButtons(List<Skill*> listSkills_)
+{
+	int offset = vecAllies.size() + vecEnemies.size();
+	for (int i = 0; i < listSkills_.Count(); i++)
+	{
+		// If character in turn is in position to use skill, enable button;
+		// skill > can be used funtion of charater in turn 
+		if (listSkills_.At(i)->data->PosCanBeUsed(listInitiative.At(charaInTurn)->data->positionCombat_I))
+		{
+			listButtons.At(offset + i)->data->state = GuiControlState::NORMAL;
+		}
+		else
+		{
+			listButtons.At(offset + i)->data->state = GuiControlState::DISABLED;
+		}
+	}
+}
 
 
 // Combat mechanics
@@ -566,17 +513,15 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 	app->audio->PlayFx(control->fxControl);
 
-	if (control->id >= 5)
+	if (control->id >= 5 && control->id < 10)
 	{
 		LOG("%s chara", vecEnemies.at(control->id - 5)->name.GetString());
 	}
-	else
+	else if (control->id < 5)
 	{
 		LOG("%s chara", vecAllies.at(control->id)->name.GetString());
 	}
 
-	// enemies so far start from 10.
-	// line 159
 	return true;
 }
 
