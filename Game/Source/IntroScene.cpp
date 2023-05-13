@@ -16,6 +16,7 @@
 #include "Log.h"
 
 #include "EntityManager.h"
+#include "QuestManager.h"
 
 #include <iostream>
 using namespace std;
@@ -66,6 +67,10 @@ bool IntroScene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool IntroScene::Start()
 {
+	app->questManager->quest1->active = false;
+	app->questManager->quest2->active = false;
+	app->questManager->quest3->active = false;
+
 	app->audio->PlayMusic(music_intro, 1.0f);
 	texture = app->tex->Load(texturePath);
 	
