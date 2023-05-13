@@ -328,32 +328,32 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 		//print stats
 
 		string h = to_string(maxhp);
-		app->render->TextDraw(h.c_str(), 350, 520, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("MAXHP: ", 250, 520, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(h.c_str(), 350, 540, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw("MAXHP: ", 250, 540, 15, Font::TEXT, { 0, 0, 0 });
 		string at = to_string(attack);
-		app->render->TextDraw(at.c_str(), 350, 540, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("ATTACK: ", 250, 540, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(at.c_str(), 350, 560, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw("ATTACK: ", 250, 560, 15, Font::TEXT, { 0, 0, 0 });
 		string cP = to_string(critProbability);
-		app->render->TextDraw(cP.c_str(), 350, 560, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("CRIT RATE: ", 250, 560, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(cP.c_str(), 350, 580, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw("CRIT RATE: ", 250, 580, 15, Font::TEXT, { 0, 0, 0 });
 		string cD = to_string(critDamage);
-		app->render->TextDraw(cD.c_str(), 350, 580, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("CRIT DMG: ", 250, 580, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(cD.c_str(), 350, 600, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw("CRIT DMG: ", 250, 600, 15, Font::TEXT, { 0, 0, 0 });
 		string p = to_string(precision);
-		app->render->TextDraw(p.c_str(), 350, 600, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("PRECISION: ", 250, 600, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(p.c_str(), 350, 620, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw("PRECISION: ", 250, 620, 15, Font::TEXT, { 0, 0, 0 });
 		string ar = to_string(armor);
-		app->render->TextDraw(ar.c_str(), 550, 520, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("ARMOR: ", 450, 520, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(ar.c_str(), 550, 540, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw("ARMOR: ", 450, 540, 15, Font::TEXT, { 0, 0, 0 });
 		string e = to_string(esquiva);
-		app->render->TextDraw(e.c_str(), 550, 540, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("DODGE: ", 450, 540, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(e.c_str(), 550, 560, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw("DODGE: ", 450, 560, 15, Font::TEXT, { 0, 0, 0 });
 		string r = to_string(resistencia);
-		app->render->TextDraw(r.c_str(), 550, 560, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("RES: ", 450, 560, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(r.c_str(), 550, 580, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw("RES: ", 450, 580, 15, Font::TEXT, { 0, 0, 0 });
 		string s = to_string(speed);
-		app->render->TextDraw(s.c_str(), 550, 580, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("SPEED", 450, 580, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(s.c_str(), 550, 600, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw("SPEED", 450, 600, 15, Font::TEXT, { 0, 0, 0 });
 
 
 		app->tex->UnLoad(itemsTexture);
