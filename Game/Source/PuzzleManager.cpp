@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "PuzzleManager.h"
+#include "QuestManager.h"
 #include "App.h"
 #include "Audio.h"
 #include "Input.h"
@@ -116,7 +117,7 @@ bool PuzzleManager::Start()
 	bossActive = false;
 	losetActive = false;
 	bossInvent = false;
-	app->scene->player->intoCode = false;
+	intoCode = false;
 
 	keyPalancas = 0;
 	keyEscape = 0;
@@ -124,7 +125,7 @@ bool PuzzleManager::Start()
 
 	realCode = "1234";
 
-	app->LoadGameRequest();
+	app->questManager->LoadState();
 
 	if (palancas == false) 
 	{
@@ -191,6 +192,10 @@ bool PuzzleManager::Start()
 		nota3->id = 2;
 	}
 
+
+
+	numCode = new PlayerInput("", 4, false);
+
 	return true;
 }
 
@@ -203,24 +208,17 @@ bool PuzzleManager::Update(float dt)
 {
 	if (!palancas)
 	{
-		if (Palancas())
-		{
-
-		}
+		Palancas();
 	}
 
 	if (!escape) 
 	{
 		Escape();
-
 	}
 
 	if (!rescue)
 	{
-		if (Rescue())
-		{
-
-		}
+		Rescue();
 	}
 
 	return true;
@@ -255,38 +253,40 @@ bool PuzzleManager::CleanUp()
 	if (loset != nullptr)
 		app->tex->UnLoad(loset);
 
-	if(Door1->body != nullptr)
+	if(Door1 != nullptr)
 		Door1->body->GetWorld()->DestroyBody(Door1->body);
 
 	if (DoorEscape->body != nullptr)
 		DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
 	
-	if (Door2->body != nullptr)
+	if (Door2 != nullptr)
 		Door2->body->GetWorld()->DestroyBody(Door2->body);
 	
-	if (Door3->body != nullptr)
+	if (Door3 != nullptr)
 		Door3->body->GetWorld()->DestroyBody(Door3->body);
 
-	if (Palanca->body != nullptr)
+	if (Palanca != nullptr)
 		Palanca->body->GetWorld()->DestroyBody(Palanca->body);
 
 	if (PalancaSensor->body != nullptr)
 		PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
 	
-	if (nota1->body != nullptr)
+	if (nota1 != nullptr)
 		nota1->body->GetWorld()->DestroyBody(nota1->body);
 	
-	if (nota2->body != nullptr)
+	if (nota2 != nullptr)
 		nota2->body->GetWorld()->DestroyBody(nota2->body);
 	
-	if (nota3->body != nullptr)
+	if (nota3 != nullptr)
 		nota3->body->GetWorld()->DestroyBody(nota3->body);
 
-	if (Boss->body != nullptr)
+	if (Boss != nullptr)
 		Boss->body->GetWorld()->DestroyBody(Boss->body);	
 	
-	if (Loset->body != nullptr)
+	if (Loset != nullptr)
 		Loset->body->GetWorld()->DestroyBody(Loset->body);
+
+	RELEASE(numCode);
 
 	return true;
 }
@@ -315,6 +315,7 @@ bool PuzzleManager::Palancas()
 			PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
 
 		palancas = true;
+		app->questManager->SaveState();
 
 		return true;
 	}
@@ -330,7 +331,7 @@ bool PuzzleManager::Escape()
 	app->render->DrawTexture(notas, posNotas3.x, posNotas3.y);
 
 
-	if (app->scene->player->intoCode == true) 
+	if (intoCode == true) 
 	{
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			codeActive = !codeActive;
@@ -368,6 +369,46 @@ bool PuzzleManager::Escape()
 				app->dialogueSystem->LoadDialogue(id);
 				esc3 = false;
 			}
+		}
+	}
+
+	if (codeActive)
+	{
+		if ((app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) && codeToCompare.empty())
+		{
+			codeToCompare.erase(codeToCompare.length() - 1);
+		}
+
+		if (!app->puzzleManager->numCode->input_entered)
+		{
+			app->input->ActiveGetInput(app->puzzleManager->numCode);
+
+			codeToCompare = app->puzzleManager->numCode->input.c_str();
+		}
+
+		if (strcmp(codeToCompare.c_str(), realCode.c_str()) == 0)
+		{
+			if (app->puzzleManager->doorEscape != nullptr)
+				app->tex->UnLoad(app->puzzleManager->doorEscape);
+
+			if (app->puzzleManager->DoorEscape != nullptr)
+				app->puzzleManager->DoorEscape->body->GetWorld()->DestroyBody(app->puzzleManager->DoorEscape->body);
+
+			if (app->puzzleManager->notas != nullptr)
+				app->tex->UnLoad(app->puzzleManager->notas);
+
+			if (app->puzzleManager->nota1 != nullptr)
+				app->puzzleManager->nota1->body->GetWorld()->DestroyBody(app->puzzleManager->nota1->body);
+
+			if (app->puzzleManager->nota2 != nullptr)
+				app->puzzleManager->nota2->body->GetWorld()->DestroyBody(app->puzzleManager->nota2->body);
+
+			if (app->puzzleManager->nota3 != nullptr)
+				app->puzzleManager->nota3->body->GetWorld()->DestroyBody(app->puzzleManager->nota3->body);
+
+			codeActive = false;
+			escape = true;
+			app->questManager->SaveState();
 		}
 	}
 
@@ -417,20 +458,10 @@ bool PuzzleManager::Rescue()
 				losetActive = false;
 				bossInvent = false;
 				rescue = true;
+				app->questManager->SaveState();
 			}
 		}
 	}
 
 	return false;
-}
-
-bool PuzzleManager::CodeInput()
-{
-	SString temp;
-
-	temp = "Code:  %%";
-	temp.Substitute("%", app->scene->player->codeToCompare.c_str());
-	app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 4, 650, 40, Font::TEXT, { 255, 255, 255 });
-
-	return true;
 }

@@ -85,9 +85,6 @@ bool DialogueSystem::CleanUp()
 	}
 
 	app->tex->UnLoad(textBox_tex);
-	app->input->getInput_B = false;
-	app->input->nameEntered_B = false;
-
 	app->guiManager->CleanUp();
 
 	return true;
@@ -183,8 +180,8 @@ bool DialogueSystem::LoadDialogueState()
 	else
 	{
 		string temp = node.child("player").attribute("player_name").as_string();
-		app->input->playerName = temp.c_str();
-		app->input->nameEntered_B = true;
+		app->input->playerName->input = temp.c_str();
+		app->input->playerName->input_entered = true;
 
 		for (size_t i = 0; i < activeTree->nodeList.size() && !node.child("node").empty(); i++)
 		{
@@ -214,7 +211,7 @@ bool DialogueSystem::SaveDialogueState()
 	pugi::xml_node player = node.append_child("player");
 
 	// save player's name
-	player.append_attribute("player_name") = app->input->playerName.c_str();
+	player.append_attribute("player_name") = app->input->playerName->input.c_str();
 
 	// save important choices
 	if (activeTree != nullptr)
