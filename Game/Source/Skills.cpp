@@ -51,6 +51,7 @@ bool Skill::PosCanBeUsed(int positionCharacter)
 	return (positionCharacter >= posToTargetStart_I && positionCharacter <= posToTargetEnd_I);
 }
 
+//Retorna ultima posicion usable
 int Skill::RangeCanTarget(vector<Character*> vec)
 {
 	//Mirar size del vector
