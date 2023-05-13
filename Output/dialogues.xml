@@ -57,78 +57,98 @@
 
     <dialogueTree ID="1">
 
-	    <node id="0" name="GUIA" text="The fair is big %%x. Go around and discover the place, now everything will be closed, but surely there are people you can talk to.">
+	    <node id="0" name="GUIDE" text="The fair is big %%x. Go around and discover the place, now everything will be closed, but surely there are people you can talk to.">
 		    <choice id="0" option="Where should I go first?" nextNode="1" eventReturn="0"/>
 		    <choice id="1" option="Talk me about this place." nextNode="2" eventReturn="0"/>
 		    <choice id="2" option="Talk me about The Showman." nextNode="3" eventReturn="0"/>
-		    <choice id="3" option="Bye" nextNode="-1" eventReturn="0"/>
+		    <choice id="3" option="There are oracles everywhere. What is the deal with that? (MISSION)" nextNode="6" eventReturn="0"/>
+		    <choice id="3" option="Is there somewhere to train my abilities? (MISSION)" nextNode="8" eventReturn="0"/>
+		    <choice id="4" option="Bye" nextNode="-1" eventReturn="0"/>
 	    </node>
 
-	    <node id="1" name="GUIA" text="Enjoy this place, don't be so serious, nobody likes serious magicians. I recommend the house of terror, there is a very nice man at the door.">
+	    <node id="1" name="GUIDE" text="Enjoy this place, don't be so serious, nobody likes serious magicians. I recommend the house of terror, there is a very nice man at the door.">
 		    <choice id="0" option="Thanks. I guess." nextNode="0"  eventReturn="0"/>
 		    <choice id="1" option="I will greet him from you." nextNode="-1"  eventReturn="0"/>
 	    </node>
 
-	    <node id="2" name="GUIA" text="How this place. This is the best fair in the world. They all have unique powers to cheer people up, or smash the faces of little busybodies. They can be a bit aggressive, but they are nice, sometimes.">
+	    <node id="2" name="GUIDE" text="How this place. This is the best fair in the world. They all have unique powers to cheer people up, or smash the faces of little busybodies. They can be a bit aggressive, but they are nice, sometimes.">
 		    <choice id="0" option="I see..." nextNode="0" eventReturn="0"/>
 		    <choice id="1" option="And about the fair attractions." nextNode="4" eventReturn="0"/>
 		    <choice id="2" option="Busybodies... Like me you would say." nextNode="5" eventReturn="0"/>
 	    </node>
 
-	    <node id="3" name="GUIA" text="Ooh! The Showman. He is a sweetheart! Always thinking of others, specifically their souls Isn't that sweet? He's the one keeping this alive, and with magic. Never forget, he is a powerful man, you don't want to make enmity with him. Although as adorable as he is, I don't think you'll be able to anger him.">
+	    <node id="3" name="GUIDE" text="Ooh! The Showman. He is a sweetheart! Always thinking of others, specifically their souls Isn't that sweet? He's the one keeping this alive, and with magic. Never forget, he is a powerful man, you don't want to make enmity with him. Although as adorable as he is, I don't think you'll be able to anger him.">
 		    <choice id="0" option="So he gave me my powers in exchange for my soul. He smell a rat." nextNode="0" eventReturn="0"/>
 		    <choice id="1" option="I bet I can anger him." nextNode="-1" eventReturn="0"/>
 	    </node>
 
-	    <node id="4" name="GUIA" text="That's so exciting! There are attractions of all kinds. A house of terror that becomes the house of mirrors, a carousel, a Ferris wheel, the circus where the Showman lives and much more. You will surely have a great time. You will see! You will see! You will see!">
+	    <node id="4" name="GUIDE" text="That's so exciting! There are attractions of all kinds. A house of terror that becomes the house of mirrors, a carousel, a Ferris wheel, the circus where the Showman lives and much more. You will surely have a great time. You will see! You will see! You will see!">
 		    <choice id="0" option="Sure" nextNode="0" eventReturn="0"/>
 		    <choice id="1" option="Yeah well... I can't wait to see that..." nextNode="-1" eventReturn="0"/>
 	    </node>
 
-	    <node id="5" name="GUIA" text="Well... I wouldn't say that. But maybe they do. Just in case, go practicing your powers. You never know.">
+	    <node id="5" name="GUIDE" text="Well... I wouldn't say that. But maybe they do. Just in case, go practicing your powers. You never know.">
 		    <choice id="0" option="Either way, I won't be caught by surprise." nextNode="-1" eventReturn="0"/>
 		    <choice id="1" option="Let me ask you something else." nextNode="0" eventReturn="0"/>
 	    </node>
+
+		<node id="6" name="GUIDE" text="That is my favorite person, machine, thing... whatever. Look, you pay him and then he talks to you, isn't that awesome? I love it.">
+			<choice id="0" option="I really do not understand you." nextNode="7" eventReturn="0"/>
+			<choice id="1" option=" Sure." nextNode="7" eventReturn="0"/>
+		</node>
+		
+		<node id="7" name="GUIDE" text="He has an irascible character, it is so fun to talk to him. He has these clever answers. I dare you to anger him, if you do so I will give you some rewards. I am sure you will like it.">
+			<choice id="0" option="Accept the challenge." nextNode="-1" eventReturn="0"/>
+		</node>
+		
+		<node id="8" name="GUIDE" text="Indeed! We have the training tent just next to the stores. Go there if you want to practice.">
+			<choice id="0" option="Thanks, that was actually helpful." nextNode="-1" eventReturn="0"/>
+		</node>
 
 	    <node id="-1" text ="End of conversation -F1- to talk again"></node>
     </dialogueTree>
 
 	<dialogueTree ID="2">
 
-		<node id="0" name="ORACULO" text="If there is something you want to know, toss a coin to see what's wrong.">
+		<node id="0" name="ORACLE" text="If there is something you want to know, toss a coin to see what's wrong.">
 			<choice id="0" option="Toss a coin." nextNode="1" eventReturn="0"/>
 			<choice id="1" option="Why should I pay you?" nextNode="2" eventReturn="0"/>
 			<choice id="2" option="You ain't for help, right" nextNode="3" eventReturn="0"/>
 			<choice id="2" option="Bye" nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="1" name="ORACULO" text="Another stupid boy to make me rich. I got a lot of knowledge from the dungeon you are about to go. Toss another coin if that is what you want.">
+		<node id="1" name="ORACLE" text="Another stupid boy to make me rich. I got a lot of knowledge from the dungeon you are about to go. Toss another coin if that is what you want.">
 			<choice id="0" option="Toss another coin." nextNode="4"  eventReturn="0"/>
-			<choice id="1" option="You just colled me stupid. Go f*ck yourself." nextNode="-1"  eventReturn="0"/>
+			<choice id="1" option="You just colled me stupid. Fuck off." nextNode="-1"  eventReturn="0"/>
 		</node>
 
-		<node id="2" name="ORACULO" text="You should pay me just to be talking to you, idiot. I offer information from the future, maybe you are not even able to read my name. I can tell you what you will find when you enter here, or if you have a special question, I can answer it for a coin, always for a coin.">
+		<node id="2" name="ORACLE" text="You should pay me just to be talking to you, idiot. I offer information from the future, maybe you are not even able to read my name. I can tell you what you will find when you enter here, or if you have a special question, I can answer it for a coin, always for a coin.">
 			<choice id="0" option="Pay" nextNode="1" eventReturn="0"/>
 			<choice id="1" option="Unbearable busybody." nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="3" name="ORACULO" text="How dare you. I am always helpful. Always! Now the fee goes up to two coins you cocky jerk.">
+		<node id="3" name="ORACLE" text="How dare you. I am always helpful. Always! Now the fee goes up to two coins you cocky jerk.">
 			<choice id="0" option="Pay" nextNode="1" eventReturn="0"/>
 			<choice id="1" option="You can mess with me but I don't even know what you do, you look like nothing but junk." nextNode="6" eventReturn="3"/>
 		</node>
 
-		<node id="4" name="ORACULO" text="I can't believe my eyes, you just paid, silly-billy. I got no more to say, this place is more than closed, you can go in without fear. You will find an empty House of Terrors. But if you want to toss one more coin...">
+		<node id="4" name="ORACLE" text="I can't believe my eyes, you just paid, silly-billy. I got no more to say, this place is more than closed, you can go in without fear. You will find an empty House of Terrors. But if you want to toss one more coin...">
 			<choice id="0" option="Toss a coin." nextNode="5" eventReturn="0"/>
 			<choice id="1" option="I'll pay no more..." nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="5" name="ORACULO" text="HAHAHAHA! You're truly an idiot, aren't you? I have never met anyone more useless in my life and I have worked with people who have been decapitated. But seriously, you thought I was going to tell you something else. HAHAHAHA!">
+		<node id="5" name="ORACLE" text="HAHAHAHA! You're truly an idiot, aren't you? I have never met anyone more useless in my life and I have worked with people who have been decapitated. But seriously, you thought I was going to tell you something else. HAHAHAHA!">
 			<choice id="0" option="Say nothing" nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="6" name="ORACULO" text="Junk?! I'm not junk, idiot. I offer information from the future, maybe you are not even able to read my name. I can tell you what you will find when you enter here, or if you have a special question, I can answer it for a coin, always for a coin. It will be two for you now">
-			<choice id="0" option="Pay." nextNode="1" eventReturn="0"/>
-			<choice id="1" option="Get lost asshole." nextNode="-1" eventReturn="0"/>
+		<node id="6" name="ORACLE" text="Junk?! I'm not junk, idiot. I offer information from the future, maybe you are not even able to read my name. I can tell you what you will find when you enter here, or if you have a special question, I can answer it for coins, always for coins. The fee goes up again for you.">
+			<choice id="0" option="Pay." nextNode="0" eventReturn="0"/>
+			<choice id="1" option="That acrobat was right, this is a lot of fun. See you jerk" nextNode="7" eventReturn="0"/>
+			<choice id="2" option="Get lost asshole." nextNode="-1" eventReturn="0"/>
+		</node>
+		
+		<node id="7" name="ORACLE" text="I got a special mission for you bod, go fuck yourself.">
+			<choice id="0" option="..." nextNode="-1" eventReturn="0"/>
 		</node>
 		
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
@@ -136,33 +156,144 @@
 
 	<dialogueTree ID="3">
 
-		<node id="0" name="MERCANTE" text="We are closed mate. Go arround. I'll be ready for the next delivery.">
+		<node id="0" name="TWINS" text="We are closed mate. Go arround. I'll be ready for the next delivery.">
 			<choice id="0" option="What do you sell?" nextNode="1" eventReturn="0"/>
-			<choice id="1" option="Farewell." nextNode="-1" eventReturn="0"/>
+			<choice id="2" option="Tell me about the House Of Terrors" nextNode="2" eventReturn="0"/>
+			<choice id="3" option="Farewell." nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="1" name="MERCANTE" text="Nothing at the moment. But be ready for our potions mate.">
+		<node id="1" name="TWINS" text="Nothing at the moment. But be ready for our potions mate.">
 			<choice id="0" option="Nice." nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="-1" name="MERCANTE" text ="End of conversation -F1- to talk again"></node>
+		<node id="2" name="TWINS" text="TWIN 1: I do not want to talk about that place.">
+			<choice id="0" option="..." nextNode="3" eventReturn="0"/>
+		</node>
+
+		<node id="3" name="TWINS" text="TWIN 2: I will. That is an awful place. Scary. Creepy. Terrifying.">
+			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
+		</node>
+
+		<node id="4" name="TWINS" text="TWIN 1: You idiot. He already knows that. The House Of Terrors is a jail.">
+			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
+		</node>
+
+		<node id="5" name="TWINS" text="TWIN 2: Yes! A jail. They kept our friend locked. He is still there actually.">
+			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
+		</node>
+
+		<node id="6" name="TWINS" text="TWIN 1: You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
+			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
+		</node>
+
+		<node id="7" name="TWINS" text="TWIN 2: Save our friend! He is a nice smith, and a fighter.">
+			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
+		</node>
+
+		<node id="8" name="TWINS" text="TWIN 1: The best I would say. I'm sure it will help you if you save him.">
+			<choice id="0" option="..." nextNode="9" eventReturn="0"/>
+		</node>
+
+		<node id="9" name="TWINS" text="TWIN 2: And maybe we give you some thanks.">
+			<choice id="0" option="..." nextNode="10" eventReturn="0"/>
+		</node>
+
+		<node id="10" name="TWINS" text="Save our friend and we will reward you.">
+			<choice id="0" option="Accept." nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="-1" name="TWINS" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 
 	<dialogueTree ID="4">
 
-		<node id="0" name="MERCANTE" text="We are still preparing for the opening. Keep calm and explore.">
-			<choice id="0" option="Farewell." nextNode="-1" eventReturn="0"/>
+		<node id="0" name="TWINS" text="We are still preparing for the opening. Keep calm and explore.">
+			<choice id="0" option="Tell me about the House Of Terrors (MISION)" nextNode="1" eventReturn="0"/>
+			<choice id="1" option="Farewell." nextNode="-1" eventReturn="0"/>
+		</node>
+		
+		<node id="1" name="TWINS" text="TWIN 1: I do not want to talk about that place.">
+			<choice id="0" option="..." nextNode="2" eventReturn="0"/>
 		</node>
 
-		<node id="-1" name="MERCANTE" text ="End of conversation -F1- to talk again"></node>
+		<node id="2" name="TWINS" text="TWIN 2: I will. That is an awful place. Scary. Creepy. Terrifying.">
+			<choice id="0" option="..." nextNode="3" eventReturn="0"/>
+		</node>
+
+		<node id="3" name="TWINS" text="TWIN 1: You idiot. He already knows that. The House Of Terrors is a jail.">
+			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
+		</node>
+
+		<node id="4" name="TWINS" text="TWIN 2: Yes! A jail. They kept our friend locked. He is still there actually.">
+			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
+		</node>
+		
+		<node id="5" name="TWINS" text="TWIN 1: You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
+			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
+		</node>
+
+		<node id="6" name="TWINS" text="TWIN 2: Save our friend! He is a nice smith, and a fighter.">
+			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
+		</node>
+		
+		<node id="7" name="TWINS" text="TWIN 1: The best I would say. I'm sure it will help you if you save him.">
+			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
+		</node>
+
+		<node id="8" name="TWINS" text="TWIN 2: And maybe we give you some thanks.">
+			<choice id="0" option="..." nextNode="9" eventReturn="0"/>
+		</node>
+		
+		<node id="9" name="TWINS" text="Save our friend and we will reward you.">
+			<choice id="0" option="Accept." nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="-1" name="TWINS" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 
 	<dialogueTree ID="5">
 
-		<node id="0" name="MERCANTE" text="Got nothing to offer yet. Be patient. I'll see you arround.">
-			<choice id="0" option="Bye MERCANT." nextNode="-1" eventReturn="0"/>
+		<node id="0" name="TWINS" text="Got nothing to offer yet. Be patient. I'll see you arround.">
+			<choice id="0" option="Tell me about the House Of Terrors (MISION)" nextNode="1" eventReturn="0"/>
+			<choice id="1" option="Bye MERCANT." nextNode="-1" eventReturn="0"/>
+		</node>
+		
+		<node id="1" name="TWINS" text="TWIN 1: I do not want to talk about that place.">
+			<choice id="0" option="..." nextNode="2" eventReturn="0"/>
 		</node>
 
+		<node id="2" name="TWINS" text="TWIN 2: I will. That is an awful place. Scary. Creepy. Terrifying.">
+			<choice id="0" option="..." nextNode="3" eventReturn="0"/>
+		</node>
+
+		<node id="3" name="TWINS" text="TWIN 1: You idiot. He already knows that. The House Of Terrors is a jail.">
+			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
+		</node>
+
+		<node id="4" name="TWINS" text="TWIN 2: Yes! A jail. They kept our friend locked. He is still there actually.">
+			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
+		</node>
+
+		<node id="5" name="TWINS" text="TWIN 1: You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
+			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
+		</node>
+
+		<node id="6" name="TWINS" text="TWIN 2: Save our friend! He is a nice smith, and a fighter.">
+			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
+		</node>
+
+		<node id="7" name="TWINS" text="TWIN 1: The best I would say. I'm sure it will help you if you save him.">
+			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
+		</node>
+
+		<node id="8" name="TWINS" text="TWIN 2: And maybe we give you some thanks.">
+			<choice id="0" option="..." nextNode="9" eventReturn="0"/>
+		</node>
+
+		<node id="9" name="TWINS" text="Save our friend and we will reward you.">
+			<choice id="0" option="Accept." nextNode="-1" eventReturn="0"/>
+		</node>
+		
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
   </dialogueTree>
   

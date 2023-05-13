@@ -255,10 +255,8 @@ void Input::GetMouseMotion(int& x, int& y)
 
 bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 {
-	//temp = *input;
-	int h = 0;
 	// If the string less than maximum size
-	if (temp.length() <= playerInput->max_chars)
+	if (temp.length() < playerInput->max_chars)
 	{
 		//Append the character
 		temp += (char)event.key.keysym.sym;
