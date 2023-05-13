@@ -36,7 +36,18 @@ public:
 	//Get A list with the type of characters you want to have
 	List<Quest*> GetQuestByType(QuestType type);
 
+	bool initQuest();
+
+	bool SaveState();
+	bool LoadState();
+
 public:
+
+	pugi::xml_node questNode;
+
+	Quest* quest1;
+	Quest* quest2;
+	Quest* quest3;
 
 	List<Quest*> quests;
 

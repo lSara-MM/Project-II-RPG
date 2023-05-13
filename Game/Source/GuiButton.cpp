@@ -49,6 +49,11 @@ bool GuiButton::Update(float dt)
 			if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
 				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
 
+				if (hoverTest == false)
+				{
+					app->audio->PlayFx(fxHover);
+					hoverTest = true;
+				}
 				state = GuiControlState::FOCUSED;
 				if (hoverTest == false)
 				{

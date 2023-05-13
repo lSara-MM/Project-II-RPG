@@ -13,6 +13,7 @@
 #include "PracticeTent.h"
 #include"Circus.h"
 #include"PuzzleManager.h"
+#include"QuestManager.h"
 
 #include "FadeToBlack.h"
 #include "EntityManager.h"
@@ -90,6 +91,7 @@ bool Player::Awake() {
 	//fx enter interaction
 	interactionPath = "Assets/Audio/Fx/Npc_interaction_sensor.wav";
 	interactionfx = app->audio->LoadFx(interactionPath);
+	interactionTest = false;
 
 	//fx confirm interaction
 	confirmPath = "Assets/Audio/Fx/confirm_interaction.wav";
@@ -100,8 +102,11 @@ bool Player::Awake() {
 
 bool Player::Start() 
 {
-	//PuzzleManager
-	palanc = false;
+	//QuestManager prove to try a quest
+	if (!app->questManager->quest1->complete)
+	{
+		app->questManager->quest1->active = true;
+	}
 
 	texture = app->tex->Load(texturePath);
 	textureE = app->tex->Load("Assets/GUI/UI_E.png");
@@ -115,7 +120,7 @@ bool Player::Start()
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
-	playerName = app->input->playerName.c_str();
+	playerName = app->input->playerName->input.c_str();
 	npcInteract = false;
 
 	pbody->body->SetGravityScale(0);
@@ -127,55 +132,6 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
-	/*Pongo partes de puzzle aquí porque no logro comunicar este script con el PuzzleManager*/
-	if (!palanc)
-	{
-		if (Palancas())
-		{
-			LOG("PALANCAS TRUE");
-		}
-	}
-
-	if (intoCode)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-			codeActive = !codeActive;
-	}
-
-	if (codeActive)
-	{
-		if ((app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) && codeToCompare.empty())
-		{
-			codeToCompare.erase(codeToCompare.length() - 1);
-		}
-
-		app->puzzleManager->CodeInput();
-
-		if (strcmp(codeToCompare.c_str(), realCode.c_str()) == 0)
-		{
-			if (app->puzzleManager->doorEscape != nullptr)
-				app->tex->UnLoad(app->puzzleManager->doorEscape);
-
-			if (app->puzzleManager->DoorEscape != nullptr)
-				app->puzzleManager->DoorEscape->body->GetWorld()->DestroyBody(app->puzzleManager->DoorEscape->body);
-
-			if (app->puzzleManager->notas != nullptr)
-				app->tex->UnLoad(app->puzzleManager->notas);
-
-			if (app->puzzleManager->nota1 != nullptr)
-				app->puzzleManager->nota1->body->GetWorld()->DestroyBody(app->puzzleManager->nota1->body);
-
-			if (app->puzzleManager->nota2 != nullptr)
-				app->puzzleManager->nota2->body->GetWorld()->DestroyBody(app->puzzleManager->nota2->body);
-
-			if (app->puzzleManager->nota3 != nullptr)
-				app->puzzleManager->nota3->body->GetWorld()->DestroyBody(app->puzzleManager->nota3->body);
-
-			codeActive = false;
-
-			LOG("YOU ESCAPE!");
-		}
-	}
 
 	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 	{
@@ -217,6 +173,12 @@ bool Player::Update(float dt)
 		if (npcInteract)
 		{
 			app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
+
+			if (interactionTest == false)
+			{
+				app->audio->PlayFx(interactionfx);
+				interactionTest = true;
+			}
 
 			if (!lockMovement)
 			{
@@ -311,7 +273,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 
 	case ColliderType::PALANCA:
 		app->puzzleManager->keyPalancas = 1;
-		keyPalancas = 1;
 		break;
 	case ColliderType::BOSSDEAD:
 		app->puzzleManager->bossActive = true;
@@ -320,7 +281,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		app->puzzleManager->losetActive = true;
 		break;
 	case ColliderType::DOORCODE:
-		intoCode = true;
+		app->puzzleManager->intoCode = true;
 		break;
 	case ColliderType::NOTA:
 		switch (physB->id) //Abrir Nota + sumar puntos a keyScape
@@ -351,8 +312,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		case 0:
 			if (app->hTerrors->active == true)
 			{
+				app->questManager->quest2->complete = true;
 				app->entityManager->tpID = 0;
-				app->SaveGameRequest();
 				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
 			}
 			if (app->scene->active == true)
@@ -373,6 +334,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			}
 			break;
 		case 1:
+			if (!app->questManager->quest1->complete)
+			{
+				app->questManager->quest1->complete = true;
+			}
 			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
 			break;
 		case 2:
@@ -389,6 +354,7 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 	{
 	case ColliderType::NPC:
 		npcInteract = false;
+		interactionTest = false;
 		break;
 	case ColliderType::BOSSDEAD:
 		app->puzzleManager->bossActive = false;
@@ -397,7 +363,7 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 		app->puzzleManager->losetActive = false;
 		break;
 	case ColliderType::DOORCODE:
-		intoCode = false;
+		app->puzzleManager->intoCode = false;
 		break;
 	case ColliderType::PORTAL:
 		app->audio->PlayFx(enterZone, 0);
@@ -680,34 +646,4 @@ void Player::Controller(float dt)
 	}
 	
 	PadLock = false;
-}
-/*PuzzleManager*/
-bool Player::Palancas()
-{
-	if (keyPalancas >= 1)
-	{
-		if (app->puzzleManager->door != nullptr)
-			app->tex->UnLoad(app->puzzleManager->door);
-
-		if (app->puzzleManager->palanca != nullptr)
-			app->tex->UnLoad(app->puzzleManager->palanca);
-
-		if (app->puzzleManager->Door1 != nullptr)
-			app->puzzleManager->Door1->body->GetWorld()->DestroyBody(app->puzzleManager->Door1->body);
-
-		if (app->puzzleManager->Door2 != nullptr)
-			app->puzzleManager->Door2->body->GetWorld()->DestroyBody(app->puzzleManager->Door2->body);
-
-		if (app->puzzleManager->Palanca != nullptr)
-			app->puzzleManager->Palanca->body->GetWorld()->DestroyBody(app->puzzleManager->Palanca->body);
-
-		if (app->puzzleManager->PalancaSensor != nullptr)
-			app->puzzleManager->PalancaSensor->body->GetWorld()->DestroyBody(app->puzzleManager->PalancaSensor->body);
-
-		palanc = true;
-
-		return true;
-	}
-
-	return false;
 }

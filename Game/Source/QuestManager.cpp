@@ -59,6 +59,30 @@ bool QuestManager::Start() {
 
 	bool ret = true;
 
+	initQuest();
+	LoadState();
+
+	quest1->title = "Let's Start";
+	quest2->title = "Enter the Dungeon";
+	quest3->title = "Quest3";
+
+	quest1->desc = "Go to the Practice Tent";
+	quest2->desc = "Find the dungeon";
+	quest3->desc = "Desc3";
+
+	if(!quest1->complete)
+		quest1->complete = false;
+
+	if(!quest2->complete)
+		quest2->complete = false;
+	
+	if(!quest3->complete)
+		quest3->complete = false;
+
+	quest1->active = false;
+	quest2->active = false;
+	quest3->active = false;
+
 	//Iterates over the entities and calls Start
 	ListItem<Quest*>* item;
 	Quest* pQuest = NULL;
@@ -142,12 +166,76 @@ bool QuestManager::Update(float dt)
 	ListItem<Quest*>* item;
 	Quest* pQuest = NULL;
 
+	//Draw Quest and check if completed
+	if (quest1->active || quest2->active || quest3->active)
+	{
+		iPoint pos = { app->win->GetWidth() - 240, 50 };
+		app->render->TextDraw("Quests:", pos.x, pos.y, 40, Font::TEXT, { 255, 255, 255 });
+	}
+
 	for (item = quests.start; item != NULL && ret == true; item = item->next)
 	{
 		pQuest = item->data;
 
 		if (pQuest->active == false) continue;
 		ret = item->data->Update(dt);
+	}
+
+	if (quest1->active)
+	{
+		iPoint pos = { app->win->GetWidth() - 240, 100 };
+
+		//Draw Quest1
+		app->render->TextDraw(quest1->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(quest1->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
+
+		if (quest1->complete)
+		{
+			//Quest1 Completed
+			SaveState();
+			quest1->active = false;
+		}
+	}
+	if (quest2->active)
+	{
+		iPoint pos = { app->win->GetWidth() - 240, 170 };
+
+		//That's for a dynamic quest list position
+		if (!quest1->active)
+		{
+			pos.y -= 70;
+		}
+
+		//Draw Quest2
+		app->render->TextDraw(quest2->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(quest2->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
+
+		if (quest2->complete)
+		{
+			//Quest2 Completed
+			SaveState();
+			quest2->active = false;
+		}
+	}
+	if (quest3->active)
+	{
+		iPoint pos = { app->win->GetWidth() - 240, 240 };
+
+		//That's for a dynamic quest list position
+		if (!quest2->active)
+		{
+			pos.y -= 70;
+		}
+		//Draw Quest3
+		app->render->TextDraw(quest3->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(quest3->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
+
+		if (quest3->complete)
+		{
+			//Quest3 Completed
+			SaveState();
+			quest3->active = false;
+		}
 	}
 
 	return ret;
@@ -164,4 +252,81 @@ List<Quest*> QuestManager::GetQuestByType(QuestType type)
 	}
 
 	return result;
+}
+
+bool QuestManager::initQuest() 
+{
+	quest1 = (Quest*)app->questManager->CreateQuest(QuestType::INTERACT);
+	quest1->parameters = questNode.child("Quest1");
+	quest1->Awake();
+
+	quest2 = (Quest*)app->questManager->CreateQuest(QuestType::INTERACT);
+	quest2->parameters = questNode.child("Quest2");
+	quest2->Awake();	
+	
+	quest3 = (Quest*)app->questManager->CreateQuest(QuestType::INTERACT);
+	quest3->parameters = questNode.child("Quest3");
+	quest3->Awake();
+
+	return true;
+}
+
+bool QuestManager::LoadState() {
+	bool ret = true;
+
+	pugi::xml_document gameStateFile;
+	pugi::xml_parse_result result = gameStateFile.load_file("save_game_Puzzle_Quest.xml");
+
+	if (result == NULL)
+	{
+		LOG("Could not load xml file save_game_Puzzle_Quest.xml. pugi error: %s", result.description());
+		ret = false;
+	}
+	else
+	{
+		app->puzzleManager->palancas = gameStateFile.child("puzzle").attribute("palancas").as_bool();
+		app->puzzleManager->escape = gameStateFile.child("puzzle").attribute("escape").as_bool();
+		app->puzzleManager->rescue = gameStateFile.child("puzzle").attribute("rescue").as_bool();
+		app->puzzleManager->keyPalancas = gameStateFile.child("puzzle").attribute("keyPalancas").as_int();
+		app->puzzleManager->keyEscape = gameStateFile.child("puzzle").attribute("keyEscape").as_int();
+		app->puzzleManager->keyRescue = gameStateFile.child("puzzle").attribute("keyRescue").as_int();
+
+		quest1->active = gameStateFile.child("quests").attribute("quest1").as_bool();
+		quest2->active = gameStateFile.child("quests").attribute("quest2").as_bool();
+		quest3->active = gameStateFile.child("quests").attribute("quest3").as_bool();
+		quest1->complete = gameStateFile.child("quests").attribute("quest1_Complete").as_bool();
+		quest2->complete = gameStateFile.child("quests").attribute("quest2_Complete").as_bool();
+		quest3->complete = gameStateFile.child("quests").attribute("quest3_Complete").as_bool();
+	}
+
+	return ret;
+}
+
+bool QuestManager::SaveState() 
+{
+	bool ret = false;
+
+	pugi::xml_document* saveDoc = new pugi::xml_document();
+	pugi::xml_node saveStateNode = saveDoc->append_child("save_state");
+
+	pugi::xml_node puzzle = saveStateNode.append_child("puzzle");
+	pugi::xml_node quests = saveStateNode.append_child("quests");
+
+	puzzle.append_attribute("palancas") = app->puzzleManager->palancas;
+	puzzle.append_attribute("escape") = app->puzzleManager->escape;
+	puzzle.append_attribute("rescue") = app->puzzleManager->rescue;
+	puzzle.append_attribute("keyPalancas") = app->puzzleManager->keyPalancas;
+	puzzle.append_attribute("keyEscape") = app->puzzleManager->keyEscape;
+	puzzle.append_attribute("keyRescue") = app->puzzleManager->keyRescue;
+
+	quests.append_attribute("quest1") = quest1->active;
+	quests.append_attribute("quest2") = quest2->active;
+	quests.append_attribute("quest3") = quest3->active;
+	quests.append_attribute("quest1_Complete") = quest1->complete;
+	quests.append_attribute("quest2_Complete") = quest2->complete;
+	quests.append_attribute("quest3_Complete") = quest3->complete;
+
+	ret = saveDoc->save_file("save_game_Puzzle_Quest.xml");
+
+	return ret;
 }

@@ -65,9 +65,9 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 	// descomentar quan els noms dels npc estiguin al dialogues xml
 	app->render->TextDraw(activeNode->name.GetString(), pos.x + 50, pos.y - FONT_SIZE * 2, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
 	
-	if (!app->input->playerName.empty())
+	if (!app->input->playerName->input.empty())
 	{
-		activeNode->text.Substitute("%x", app->input->playerName.c_str());
+		activeNode->text.Substitute("%x", app->input->playerName->input.c_str());
 	}
 
 	if (!activeNode->trimmed)

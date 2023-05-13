@@ -37,8 +37,6 @@ public:
 
 	void Controller(float dt);
 
-	bool Palancas();
-
 public:
 	SString playerName;
 
@@ -68,16 +66,6 @@ public:
 	bool keyLockRigth = false;
 	bool lockMovement = false;
 
-	bool intoCode;
-	bool codeActive;
-
-	int keyPalancas;
-	bool palanc;
-
-	string code;
-	string codeToCompare;
-	string realCode;
-
 	float dtP;
 	float grav;
 	b2Vec2 vel = { 0, 0 };
@@ -104,6 +92,7 @@ private:
 	// interact fx
 	const char* interactionPath;
 	uint interactionfx;
+	bool interactionTest;
 
 	// interact fx
 	const char* confirmPath;
