@@ -266,6 +266,7 @@ bool Combat::InitEnemies(vector<int> arr)
 						Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 						chara->parameters = itemNode;
 						chara->Awake();
+						
 
 						//chara->charaType = CharacterType::ENEMY;
 						chara->positionCombat_I = cPos++;
@@ -281,6 +282,7 @@ bool Combat::InitEnemies(vector<int> arr)
 		}
 	}
 
+	//Este codigo no se esta ejecutando
 	for (int i = 0; i < vecEnemies.size(); i++) { vecEnemies.at(i)->button->id = 5 + i; }
 
 	return true;
@@ -317,9 +319,12 @@ bool Combat::StartCombat()
 	InitAllies(arrParty);
 	InitEnemies(arrSetEnemies);
 	
+	for (int i = 0; i < vecEnemies.size(); i++) 
+	{ vecEnemies.at(i)->button->id = 5 + i; }
+
 	OrderBySpeed();
 
-	lastPressedAbility_I = 0;
+	lastPressedAbility_I = -1;
 	targeted_Character = nullptr;
 	listInitiative.start->data->onTurn = true;
 	charaInTurn = 0;
@@ -533,22 +538,38 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	switch (control->id)
 	{
 	case 0:
+		LOG("Position 0 Ally");
+		targeted_Character = vecAllies.at(0);
 		break;
 	case 1:
+		LOG("Position 1 Ally");
+		targeted_Character = vecAllies.at(1);
 		break;
 	case 2:
+		LOG("Position 2 Ally");
+		targeted_Character = vecAllies.at(2);
 		break;
 	case 3:
+		LOG("Position 3 Ally");
+		targeted_Character = vecAllies.at(3);
 		break;
 	case 4:
 		break;
 	case 5:
+		LOG("Position 0 Enemy");
+		targeted_Character = vecEnemies.at(0);
 		break;
 	case 6:
+		LOG("Position 1 Enemy");
+		targeted_Character = vecEnemies.at(1);
 		break;
 	case 7:
+		LOG("Position 2 Enemy");
+		targeted_Character = vecEnemies.at(2);
 		break;
 	case 8:
+		LOG("Position 3 Enemy");
+		targeted_Character = vecEnemies.at(3);
 		break; 
 	case 9:
 		break;

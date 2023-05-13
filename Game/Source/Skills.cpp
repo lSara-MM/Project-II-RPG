@@ -58,7 +58,7 @@ int Skill::RangeCanTarget(vector<Character*> vec)
 	int max = vec.size();
 	//si mas pequeño el vector que 
 	if (max < posToTargetEnd_I) { return max; }
-	else if (max < posToTargetStart_I){return posToTargetEnd_I;}
+	else if (max > posToTargetStart_I){return posToTargetEnd_I;}
 	else { return -1; } //No se puede usar
 	
 }

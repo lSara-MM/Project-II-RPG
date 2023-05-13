@@ -112,6 +112,9 @@ bool Character::Update(float dt)
 		const char* ch_pos = position_C.c_str();
 		app->render->TextDraw(ch_pos, position.x + 60, position.y - 20, 15);
 		app->render->TextDraw(name.GetString(), position.x + 5, position.y + 180, 10);
+		string HP_C = std::to_string(currentHp);
+		const char* ch_hp = HP_C.c_str();
+		app->render->TextDraw(ch_hp, position.x + 60, position.y - 40, 15);
 	}
 	
 	//Si es su turno pues hace cosas
@@ -131,6 +134,9 @@ bool Character::Update(float dt)
 				if(app->combat->targeted_Character!=nullptr)
 				{
 					UseSkill(listSkills.At(app->combat->lastPressedAbility_I)->data, app->combat->targeted_Character);
+					app->combat->targeted_Character = nullptr;
+					onTurn = false;
+					app->combat->NextTurn();
 				}
 			}
 			//app->combat->HandleSkillsButtons(listSkills);
@@ -324,7 +330,7 @@ bool Character::CalculateRandomProbability(int bonus_I, int against_I)
 //Provisional full
 int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 {
-	if (skill->multiplierDmg > 0) //Curacion, no hace falta calcular esquiva ni nada 
+	if (skill->multiplierDmg < 0) //Curacion, no hace falta calcular esquiva ni nada 
 	{
 		return(caster->attack * skill->multiplierDmg);
 	}
