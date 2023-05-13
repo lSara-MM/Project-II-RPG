@@ -113,7 +113,6 @@ bool Player::Start()
 	{
 		arrParty.at(i) = nullptr;
 	}
-
 	return true;
 }
 
@@ -512,7 +511,7 @@ void Player::LoadAllPC()
 		chara->parameters = itemNode;
 		chara->Awake();
 
-		//chara->Start();
+		chara->Start();
 
 		chara->charaType = CharacterType::ALLY;
 		listPC.push_back(chara);

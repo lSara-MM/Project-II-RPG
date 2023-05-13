@@ -92,8 +92,10 @@ bool Character::Start()
 	}
 	
 	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, ButtonType::COMBAT_TARGET);
+	app->combat->listButtons.Add(button);
+	
 	// TO uncomment later
-	//button->state = GuiControlState::DISABLED;
+	button->state = GuiControlState::DISABLED;
 	onTurn = false;
 
 	return true;
@@ -102,7 +104,6 @@ bool Character::Start()
 bool Character::Update(float dt)
 {
 	app->render->DrawTexture(texture, position.x, position.y);
-	
 	
 	if(app->input->godMode_B)
 	{

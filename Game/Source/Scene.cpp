@@ -168,6 +168,7 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
+
 	app->entityManager->Disable();
 
 	if (pSettings != nullptr)
@@ -179,22 +180,22 @@ bool Scene::CleanUp()
 		pPause->CleanUp();
 	}
 	
-	app->dialogueSystem->CleanUp();
+	app->dialogueSystem->Disable();
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 
-	player->active;
+	//player->active;
 
-	if (changeToCombat == true)
-	{
-		// this shouldnt be here later
-		player->LoadAllPC();
-		player->SetParty();
-		//
+	//if (changeToCombat == true)
+	//{
+	//	// this shouldnt be here later
+	//	player->LoadAllPC();
+	//	player->SetParty();
+	//	//
 
-		InitCombat();
-		changeToCombat = false;
-	}
+	//	InitCombat();
+	//	changeToCombat = false;
+	//}
 	
 	return true;
 }
@@ -307,8 +308,11 @@ void Scene::Debug()
 
 	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
 		LOG("Combat");
+		player->LoadAllPC();
+		player->SetParty();
+		app->combat->PreLoadCombat(player->arrParty, name);
 		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
-		changeToCombat = true;
+		//changeToCombat = true;
 	}
 	
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
@@ -352,23 +356,23 @@ bool Scene::InitEntities()
 	return true;
 }
 
-void Scene::InitCombat()
-{
-	srand(time(NULL));
-
-	int randSize = rand() % 3 + 2;
-	int randId;
-	vector<int> arr;
-
-	for (int i = 0; i < randSize; i++)
-	{
-		randId = rand() % 3;
-		arr.push_back(randId);
-	}
-
-	app->combat->InitEnemies(name, arr);
-	app->combat->InitAllies(player->arrParty);
-}
+//void Scene::InitCombat()
+//{
+//	srand(time(NULL));
+//
+//	int randSize = rand() % 3 + 2;
+//	int randId;
+//	vector<int> arr;
+//
+//	for (int i = 0; i < randSize; i++)
+//	{
+//		randId = rand() % 3;
+//		arr.push_back(randId);
+//	}
+//
+//	app->combat->InitAllies(player->arrParty);
+//	app->combat->InitEnemies(name, arr);
+//}
 
 bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 {

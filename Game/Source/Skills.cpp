@@ -45,8 +45,6 @@ Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUs
 	this->autoTarget = autoTarget;
 }
 
-
-
 bool Skill::PosCanBeUsed(int positionCharacter)
 {
 	//True si dentro del rango, false si no
@@ -55,7 +53,6 @@ bool Skill::PosCanBeUsed(int positionCharacter)
 
 int Skill::RangeCanTarget(vector<Character*> vec)
 {
-	
 	//Mirar size del vector
 	int max = vec.size();
 	//si mas pequeño el vector que 

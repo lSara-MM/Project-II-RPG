@@ -66,8 +66,12 @@ bool Combat::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	app->entityManager->Enable();
+	
 	app->physics->Disable();
+	app->entityManager->active = true;
+
+	StartCombat();
+	
 
 	GuiButton* button;
 	for (int i = 0; i < 5; i++)
@@ -75,8 +79,6 @@ bool Combat::Start()
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 10, this, { 40 + i * 100, 470, 80, 80 });
 		listButtons.Add(button);
 	}
-
-	StartCombat();
 
 	//Load, modificar currentHP, hacer luego de cargar allies
 	if (!firstCombat_B)
@@ -216,16 +218,45 @@ void Combat::Debug()
 
 		NextTurn();
 	}
+	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN) {
+		LOG("Button handle");
+
+		HandleCharaButtons(&vecEnemies, 0, 2);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN) {
+		LOG("Button handle");
+
+		HandleCharaButtons(&vecAllies, 1, 2);
+	}
+	int a = listButtons.start->data->id;
 }
 
-bool Combat::InitEnemies(SString scene, vector<int> arr)
+bool Combat::PreLoadCombat(array<Character*, 4> arrParty_, SString n)
+{
+	arrParty = arrParty_;
+	srand(time(NULL));
+
+	int randSize = rand() % 3 + 2;
+	int randId;
+
+	for (int i = 0; i < randSize; i++)
+	{
+		randId = rand() % 3;
+		arrSetEnemies.push_back(randId);
+	}
+
+	sceneFromName = n;
+	return true;
+}
+
+bool Combat::InitEnemies(vector<int> arr)
 {
 	int cPos = 0;
 
 	for (pugi::xml_node sceneNode = combatNode.child("scenes"); sceneNode; sceneNode = sceneNode.next_sibling("scenes"))
 	{
 		// to test if string compare works
-		if (strcmp(sceneNode.attribute("name").as_string(), scene.GetString()) == 0)
+		if (strcmp(sceneNode.attribute("name").as_string(), sceneFromName.GetString()) == 0)
 		{
 			for (pugi::xml_node itemNode = sceneNode.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
 			{
@@ -237,11 +268,9 @@ bool Combat::InitEnemies(SString scene, vector<int> arr)
 						chara->parameters = itemNode;
 						chara->Awake();
 
-						// to delete
-						//chara->Start();
-
-						chara->charaType = CharacterType::ENEMY;
+						//chara->charaType = CharacterType::ENEMY;
 						chara->positionCombat_I = cPos++;
+						chara->Start();
 
 						vecEnemies.push_back(chara);
 					}
@@ -253,45 +282,46 @@ bool Combat::InitEnemies(SString scene, vector<int> arr)
 		}
 	}
 
+	for (int i = 0; i < vecEnemies.size(); i++) { vecEnemies.at(i)->button->id = 5 + i; }
+
 	return true;
 }
 
 bool Combat::InitAllies(array<Character*, 4> party)
 {
+	int cPos = 0;
+
 	// TO TEST
 	for (int i = 0; i < party.size(); i++)
 	{
 		if (party.at(i) == nullptr) { return true; }
-		vecAllies.push_back(party.at(i));
+		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
+		chara->parameters = party.at(i)->parameters;
+		chara->Awake();
+
+		RELEASE(party.at(i));
+
+		chara->positionCombat_I = cPos++;
+
+		chara->Start();
+		chara->button->id = i;
+
+		vecAllies.push_back(chara);
 	}
 
-	//vecAllies.insert(vecAllies.end(), begin(party), begin(party) + j);
 	return true;
 }
 
 
 bool Combat::StartCombat()
 {
-	// set buttons ID
-	for (int i = 0; i < vecAllies.size(); i++)
-	{
-		vecAllies.at(i)->button->id = i;
-	}
-
-	for (int i = 0; i < vecEnemies.size(); i++)
-	{
-		vecEnemies.at(i)->button->id = 5 + i;
-	}
-
+	InitAllies(arrParty);
+	InitEnemies(arrSetEnemies);
+	
 	OrderBySpeed();
 
 	lastPressedAbility_I = 0;
 	targeted_Character = nullptr;
-	//for (int i = 0; i < 7; i++)
-	//{
-	//	EnableTargetButton(i);
-	//	EnableSkillButton(i); //Es quiza una guarrada pero no deberia haber problema
-	//}
 	listInitiative.start->data->onTurn = true;
 	charaInTurn = 0;
 
@@ -437,6 +467,31 @@ bool Combat::DisableSkillButton(int skillNum)
 	//listButtons.At(7 + skillNum)->data->state = GuiControlState::DISABLED;
 
 	return true;
+}
+
+// TO TEST
+void Combat::HandleCharaButtons(vector<Character*>* arr, int pos1, int pos2)
+{
+	for (int i = 0; i < vecAllies.size(); i++)
+	{
+		vecAllies.at(i)->button->state = GuiControlState::DISABLED;
+		LOG("disabled %d", vecAllies.at(i)->button->id);
+	}
+
+	for (int i = 0; i < vecEnemies.size(); i++)
+	{
+		vecEnemies.at(i)->button->state = GuiControlState::DISABLED;
+		LOG("disabled %d", vecEnemies.at(i)->button->id);
+	}
+
+	for (int i = 0; i < arr->size(); i++)
+	{
+		if (i >= pos1 && i <= pos2)
+		{
+			arr->at(i)->button->state = GuiControlState::NORMAL;
+			LOG("enabled %d", arr->at(i)->button->id);
+		}
+	}
 }
 
 

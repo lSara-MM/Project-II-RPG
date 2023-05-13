@@ -61,13 +61,15 @@ public:
 	//Del 1 al 4
 	bool DisableSkillButton(int skillNum);
 
-
+	// Characters to disable/enable buttons
+	void HandleCharaButtons(vector<Character*>* arr, int pos1, int pos2);
 
 	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);
 	void RemoveCharacter(vector<Character*>* arr, Character* chara);
 	void UpdatePositions(vector<Character*>* arr, int pos);
 
-	bool InitEnemies(SString scene, vector<int> arr);
+	bool PreLoadCombat(array<Character*, 4> arrParty_, SString n);
+	bool InitEnemies(vector<int> arr);
 	bool InitAllies(array<Character*, 4> party);
 
 	// Settings
@@ -94,6 +96,8 @@ public:
 
 	bool firstCombat_B = false;//determinar si es la primera vez que se lucha en la partida, en true significa que no se ha luchado todavia
 
+	// buttons
+	List<GuiButton*> listButtons;
 private:
 	int mouseX_combat, mouseY_combat;
 	float mouse_Speed;
@@ -109,14 +113,15 @@ private:
 
 	const char* texturePathTargetButton;
 	SDL_Texture* textureTargetButton;
-
-
-	// buttons
-	List<GuiButton*> listButtons;
 	
 	const char* actions[4] = { "Atk 1", "Atk 2", "Atk 3", "Atk 4" };
 
 	bool exit_B;
+
+	// Scene transition
+	array<Character*, 4> arrParty;
+	SString sceneFromName;
+	vector<int> arrSetEnemies;
 };
 
 #endif // __COMBAT_H__
