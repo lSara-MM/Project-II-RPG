@@ -15,6 +15,52 @@
 struct SDL_Texture;
 class Skill;
 
+// Status effect
+enum class EffectType
+{
+	CURRENT_HP,
+	ATTACK,
+	CRIT_RATE,
+	CRIT_DMG,
+	PRECISION,
+	ARMOR,
+	DODGE,
+	RES, 
+};
+
+struct StatusEffect
+{
+public:
+
+	StatusEffect(int quantity_, int turnsLeft_, bool isPositive_, EffectType type_)
+	{
+		quantity = quantity_;
+		turnsLeft = turnsLeft_;
+		isPositive = isPositive_;
+		type = type_;
+	}
+
+	/*bool StatusUpdate(int* affectedStat)
+	{
+		if (turnsLeft > 0)
+		{
+			affectedStat += quantity;
+			turnsLeft--;
+			return true;
+		}
+		return false;
+	}*/
+
+public:
+	
+	int quantity;
+	int turnsLeft;
+	bool isPositive; // true positive - false negative
+	EffectType type;
+};
+
+
+// Character
 enum class CharacterType
 {
 	ALLY = 0,
@@ -33,10 +79,11 @@ enum class CharacterClass
 	HEALER,
 	BUFFER,
 	DEBUFFER,
-	
+
 
 	NO_CLASS
 };
+
 
 class Character : public Entity
 {
@@ -59,7 +106,7 @@ public:
 
 	void ModifyHP(int hp); //Positivo para curar negativo para dañar
 
-	int ApplySkill(Character* caster, Character* defender,Skill* skill); //ERIC:Va haber que poner muchos mas atributos
+	int ApplySkill(Character* caster, Character* defender, Skill* skill); //ERIC:Va haber que poner muchos mas atributos
 
 	bool ResistStatusEffect(/*efecto,precision*/); //Hacer cuando se hagan status effects, aun no.
 	
@@ -67,19 +114,13 @@ public:
 
 	bool UseSkill(Skill* skill);
 
-	bool UseSkill(Skill* skill,Character* target);
-	//Gets, dan las stats sumadas (base+eqipo+buffos)
-	/*int GetMaxHP() { return maxHp; }
-	int GetHealth() { return currentHp; }
-	int GetAttack() { return attack; }
-	int GetArmor() { return armor; }
-	int GetSpeed() { return speed; }*/
+	bool UseSkill(Skill* skill, Character* target);
+
+	//
+
+	int GetStat(EffectType statType);
 
 public:
-
-	// Texture position
-	iPoint  position;
-
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
@@ -93,9 +134,6 @@ public:
 	bool onTurn;
 	Timer turnDelay;
 	bool delayOn = false;
-
-	// Stats
-	SString chara_name;
 
 	// STATS
 	int maxHp; // La base a level 0/1 es 1000
@@ -118,13 +156,19 @@ public:
 	////Skills Descriptions
 	//SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
 	List<Skill*> listSkills;
+	List<StatusEffect*> listStatusEffects;
 
+	// Texture position
+	iPoint  position;
 	GuiButton* button;
+
+	bool isCombatant;
 	
 private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
+	SDL_Rect* sectionRect;
 	List<int> listSkillsHistory; //Aqui guardamos un historial de que skills se ha usado.
 
 	int width, height;

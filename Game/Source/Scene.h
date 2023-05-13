@@ -45,12 +45,9 @@ public:
 	void Debug();
 	bool InitEntities();
 
-	void InitCombat();
-
-
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
-
+	
 public:
 
 	Player* player;
@@ -66,8 +63,6 @@ public:
 	int currentHP_Bard = 0;
 	int currentHP_Protagonist = 0;
 	bool isCharacterLoaded_B = true;
-
-	bool changeToCombat;
 
 private:
 

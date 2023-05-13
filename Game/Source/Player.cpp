@@ -211,7 +211,6 @@ bool Player::CleanUp()
 		app->tex->UnLoad(texture);
 		pbody->body->GetWorld()->DestroyBody(pbody->body);
 	}
-	
 
 	return true;
 }
@@ -509,7 +508,9 @@ void Player::LoadAllPC()
 	{
 		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::MENU_CHARA);
 		chara->parameters = itemNode;
+
 		chara->Awake();
+		chara->isCombatant = false;
 
 		chara->Start();
 
@@ -520,7 +521,7 @@ void Player::LoadAllPC()
 
 void Player::SetParty()
 {	
-	// to change when party available
+	// TODO when party available
 	for (int i = 0; i < listPC.size(); i++)
 	{
 		arrParty.at(i) = listPC.at(i);

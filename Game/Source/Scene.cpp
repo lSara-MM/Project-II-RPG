@@ -168,7 +168,6 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-
 	app->entityManager->Disable();
 
 	if (pSettings != nullptr)
@@ -183,19 +182,6 @@ bool Scene::CleanUp()
 	app->dialogueSystem->Disable();
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
-
-	//player->active;
-
-	//if (changeToCombat == true)
-	//{
-	//	// this shouldnt be here later
-	//	player->LoadAllPC();
-	//	player->SetParty();
-	//	//
-
-	//	InitCombat();
-	//	changeToCombat = false;
-	//}
 	
 	return true;
 }
@@ -292,7 +278,6 @@ void Scene::Debug()
 			{
 				pPause->CleanUp();
 			}
-
 		}
 		
 		LOG("PAUSE");
@@ -312,7 +297,6 @@ void Scene::Debug()
 		player->SetParty();
 		app->combat->PreLoadCombat(player->arrParty, name);
 		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
-		//changeToCombat = true;
 	}
 	
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();

@@ -107,7 +107,6 @@ bool Combat::PreUpdate()
 bool Combat::Update(float dt)
 {
 	Debug();
-
 	app->render->DrawTexture(textureBackground, 0, 0);
 
 	// Printar Barra Turnos (UI WORK)
@@ -262,7 +261,6 @@ bool Combat::InitEnemies(vector<int> arr)
 
 	for (pugi::xml_node sceneNode = combatNode.child("scenes"); sceneNode; sceneNode = sceneNode.next_sibling("scenes"))
 	{
-		// to test if string compare works
 		if (strcmp(sceneNode.attribute("name").as_string(), sceneFromName.GetString()) == 0)
 		{
 			for (pugi::xml_node itemNode = sceneNode.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
@@ -376,6 +374,7 @@ bool Combat::NextTurn()
 {
 	lastPressedAbility_I = 0;
 	targeted_Character = nullptr;
+
 	//	//Resetear los botones targeteados
 	//	lastPressedAbility_I = 0;
 	//	targeted_Character = nullptr;
@@ -398,7 +397,6 @@ bool Combat::NextTurn()
 	//		++charaInTurn; 
 	//	}
 	//	listInitiative.At(charaInTurn)->data->onTurn = true;
-
 
 	listInitiative.At(charaInTurn++)->data->onTurn = false;
 	
@@ -455,7 +453,6 @@ void Combat::HandleSkillsButtons(List<Skill*> listSkills_)
 				listButtons.At(offset + i)->data->state = GuiControlState::DISABLED;
 			}
 		}
-		
 	}
 }
 
@@ -531,84 +528,31 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 	app->audio->PlayFx(control->fxControl);
 
+	//Gestion Skills
+	int posStart = 0, posEnd = 0;
+
 	if (control->id >= 5 && control->id < 10)
 	{
 		LOG("%s chara", vecEnemies.at(control->id - 5)->name.GetString());
+		targeted_Character = vecEnemies.at(control->id - 5);
 	}
 	else if (control->id < 5)
 	{
 		LOG("%s chara", vecAllies.at(control->id)->name.GetString());
+		targeted_Character = vecAllies.at(control->id);
+	}
+	else
+	{
+		if (lastPressedAbility_I == control->id - 10) { lastPressedAbility_I = -1; } // Si already clicked deseleccionar
+		lastPressedAbility_I = control->id - 10;
+
+		posStart = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
+		posEnd = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
 	}
 
-	//Gestion Skills
-	int posStart;
-	int posEnd;
-
-	switch (control->id)
+	//
+	if (lastPressedAbility_I != -1)
 	{
-	case 0:
-		LOG("Position 0 Ally");
-		targeted_Character = vecAllies.at(0);
-		break;
-	case 1:
-		LOG("Position 1 Ally");
-		targeted_Character = vecAllies.at(1);
-		break;
-	case 2:
-		LOG("Position 2 Ally");
-		targeted_Character = vecAllies.at(2);
-		break;
-	case 3:
-		LOG("Position 3 Ally");
-		targeted_Character = vecAllies.at(3);
-		break;
-	case 4:
-		break;
-	case 5:
-		LOG("Position 0 Enemy");
-		targeted_Character = vecEnemies.at(0);
-		break;
-	case 6:
-		LOG("Position 1 Enemy");
-		targeted_Character = vecEnemies.at(1);
-		break;
-	case 7:
-		LOG("Position 2 Enemy");
-		targeted_Character = vecEnemies.at(2);
-		break;
-	case 8:
-		LOG("Position 3 Enemy");
-		targeted_Character = vecEnemies.at(3);
-		break; 
-	case 9:
-		break;
-	case 10:
-		LOG("First skill button");
-		
-		if (lastPressedAbility_I == 0) { lastPressedAbility_I = -1; } //Si already clicked deseleccionar
-		lastPressedAbility_I = 0;
-
-		posStart = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
-		posEnd = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
-		
-		if(vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->targetFriend)
-		{
-			HandleCharaButtons(&vecAllies, posStart, posEnd);
-		}
-		else 
-		{
-			HandleCharaButtons(&vecEnemies, posStart, posEnd);
-		}
-
-		break;
-	case 11:
-
-		if (lastPressedAbility_I == 1) { lastPressedAbility_I = -1; } //Si already clicked deseleccionar
-		lastPressedAbility_I = 1;
-
-		posStart = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
-		posEnd = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
-
 		if (vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->targetFriend)
 		{
 			HandleCharaButtons(&vecAllies, posStart, posEnd);
@@ -617,47 +561,6 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		{
 			HandleCharaButtons(&vecEnemies, posStart, posEnd);
 		}
-
-		break;
-	case 12:
-
-		if (lastPressedAbility_I == 2) { lastPressedAbility_I = -1; } //Si already clicked deseleccionar
-		lastPressedAbility_I = 2;
-
-		posStart = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
-		posEnd = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
-
-		if (vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->targetFriend)
-		{
-			HandleCharaButtons(&vecAllies, posStart, posEnd);
-		}
-		else
-		{
-			HandleCharaButtons(&vecEnemies, posStart, posEnd);
-		}
-		break;
-	case 13:
-		if (lastPressedAbility_I == 3) { lastPressedAbility_I = -1; } //Si already clicked deseleccionar
-		lastPressedAbility_I = 3;
-
-		posStart = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
-		posEnd = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
-
-		if (vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->targetFriend)
-		{
-			HandleCharaButtons(&vecAllies, posStart, posEnd);
-		}
-		else
-		{
-			HandleCharaButtons(&vecEnemies, posStart, posEnd);
-		}
-		break;
-	case 14:
-		break;
-	case 15:
-		break;
-	default:
-		break;
 	}
 
 	return true;
