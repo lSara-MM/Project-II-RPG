@@ -32,8 +32,6 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	bool PerformDialogue();
-
 public:
 
 	SString name;

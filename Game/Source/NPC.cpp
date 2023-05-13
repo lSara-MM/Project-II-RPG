@@ -123,11 +123,3 @@ void Npc::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	}
 }
-
-bool Npc::PerformDialogue()
-{
-	int id = rand() % dialoguesID.size();
-	app->dialogueSystem->LoadDialogue(dialoguesID.at(id));
-
-	return true;
-}

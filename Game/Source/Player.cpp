@@ -186,8 +186,8 @@ bool Player::Update(float dt)
 					app->dialogueSystem->hasEnded = false;
 					lockMovement = true;
 					app->dialogueSystem->Enable();
-					npcTalkingTo->PerformDialogue();
-
+					app->dialogueSystem->PerformDialogue(npcTalkingTo->dialoguesID);
+;					
 					if (keyLockUp)
 					{
 						keyLockUp = false;

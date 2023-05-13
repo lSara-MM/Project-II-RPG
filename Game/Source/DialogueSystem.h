@@ -23,7 +23,7 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 	bool CleanUp();
 
-	void PerformDialogue(int treeId);
+	void PerformDialogue(vector<int> dialoguesID = { 0 });
 
 	int LoadDialogue(int dialogueID);
 	DialogueNode* LoadNodes(pugi::xml_node& xml_trees, DialogueTree* tree);

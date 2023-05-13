@@ -90,6 +90,12 @@ bool DialogueSystem::CleanUp()
 	return true;
 }
 
+void DialogueSystem::PerformDialogue(vector<int> dialoguesID)
+{
+	int id = rand() % dialoguesID.size();
+	app->dialogueSystem->LoadDialogue(dialoguesID.at(id));
+}
+
 
 int DialogueSystem::LoadDialogue(int dialogueID)
 {
