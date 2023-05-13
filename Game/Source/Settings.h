@@ -85,25 +85,25 @@ public:
 		open_game_B = false;
 
 		// Language
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 290, 133, 33 }, ButtonType::SETTINGS, "English", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 290, 133, 33 }, ButtonType::SETTINGS, "English", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN,AnimationAxis::RIGHT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
 		// Text Speed
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 367, 133, 33 }, ButtonType::SETTINGS, "Medium", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 367, 133, 33 }, ButtonType::SETTINGS, "Medium", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN,AnimationAxis::RIGHT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
 		// Return to Title
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 444, 133, 33 }, ButtonType::SETTINGS, "Return to Title", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 444, 133, 33 }, ButtonType::SETTINGS, "Return to Title", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
 		// Exit
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 521, 133, 33 }, ButtonType::SETTINGS, "Exit", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 521, 133, 33 }, ButtonType::SETTINGS, "Exit", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 	}
@@ -199,7 +199,7 @@ public:
 		{
 			if (i == 5) { x = 900; y = 0; }
 
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { x, 280 + 77 * y++, 34, 34 }, ButtonType::CONTROL_SETTINGS, buttons[i], 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { x, 280 + 77 * y++, 34, 34 }, ButtonType::CONTROL_SETTINGS, buttons[i], 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 			button->state = GuiControlState::NONE;
 			listControlButtons.Add(button);
 		}
@@ -299,25 +299,25 @@ public:
 		open_graphics_B = false;
 
 		// Window Size
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 280, 133, 33 }, ButtonType::SETTINGS, "Window Size", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 280, 133, 33 }, ButtonType::SETTINGS, "Window Size", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGraphicsButtons.Add(button);
 
 		// Fullscreen	
 		GUI_id++;
-		GuiCheckBox* checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 871, 357, 46, 46 });
-		checkbox->state = GuiControlState::NONE;
+		GuiCheckBox* checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 871, 357, 46, 46 },ButtonType::NONE, "", 12, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::NONE;
 		listGraphicsCheckbox.Add(checkbox);
 
 		// Vsync
 		GUI_id++;
-		checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 871, 434, 46, 46 });
+		checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 871, 434, 46, 46 },ButtonType::NONE, "", 12, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
 		checkbox->state = GuiControlState::NONE;
 		listGraphicsCheckbox.Add(checkbox);
 
 		// Max fps
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::SETTINGS, "Max fps", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::SETTINGS, "Max fps", 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGraphicsButtons.Add(button);
 	}
@@ -384,7 +384,7 @@ public:
 		for (ListItem<GuiCheckBox*>* i = listGraphicsCheckbox.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-			i->data->state = GuiControlState::NONE;
+			//i->data->state = GuiControlState::NONE;
 		}
 
 		return true;
@@ -433,22 +433,23 @@ public:
 		audio_B = false;
 		open_audio_B = false;
 
+		//animacion sliders en eje x no va bien
 		// General volume
-		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 298, 219, 39 }, ButtonType::NONE, "general", 10, Font::UI, { 310, 298, 28, 39 });
+		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 298, 219, 39 }, ButtonType::NONE, "general", 10, Font::UI, { 310, 298, 28, 39 }, 4, Easings::CUBIC_IN, AnimationAxis::DOWN_Y);
 		sliderBar->state = GuiControlState::NONE;
 		general = sliderBar;
 		listSliderBars.Add(sliderBar);
-
+		
 		// music
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 375, 219, 39 }, ButtonType::NONE, "music", 10, Font::UI, { 310, 375, 28, 39 });
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 375, 219, 39 }, ButtonType::NONE, "music", 10, Font::UI, { 310, 375, 28, 39 }, 5, Easings::CUBIC_IN, AnimationAxis::UP_Y);
 		sliderBar->state = GuiControlState::NONE;
 		music = sliderBar;
 		listSliderBars.Add(sliderBar);
 
 		// fx
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 452, 219, 39 }, ButtonType::NONE, "fx", 10, Font::UI, { 310, 452, 28, 39 });
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 452, 219, 39 }, ButtonType::NONE, "fx", 10, Font::UI, { 310, 452, 28, 39 }, 5, Easings::CUBIC_IN, AnimationAxis::UP_Y);
 		sliderBar->state = GuiControlState::NONE;
 		fx = sliderBar;
 		listSliderBars.Add(sliderBar);
@@ -499,7 +500,7 @@ public:
 		for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-			i->data->state = GuiControlState::NONE;
+			//i->data->state = GuiControlState::NONE;
 		}
 
 		return true;
@@ -543,14 +544,14 @@ public:
 		open_settings_B = false;
 
 		// close
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 1038, 175, 57, 57 }, ButtonType::CLOSE);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 1038, 175, 57, 57 }, ButtonType::CLOSE, "", 12, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
 		button->state = GuiControlState::NONE;
 		listSettingsButtons.Add(button);
 
 		// buttons
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 290, 300 + 75 * i, 136, 50 }, ButtonType::SETTINGS, buttons[i], 32, Font::UI, { 0,0,0,0 }, 5,Easings::CUBIC_IN);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 290, 300 + 75 * i, 136, 50 }, ButtonType::SETTINGS, buttons[i], 32, Font::UI, { 0,0,0,0 }, 4,Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
 			button->state = GuiControlState::NONE;
 			listSettingsButtons.Add(button);
 		}
@@ -560,6 +561,7 @@ public:
 		pGraphics = new GraphicsSettings(mod);
 		pAudio = new AudioSettings(mod);
 
+		animationSpeed = 5;
 		animationMenu.Set();
 		animationMenu.AddTween(100, 80, BACK_OUT);
 		animationAudio.Set();
@@ -577,7 +579,7 @@ public:
 	{
 		//animaciones cosas menu
 		animationMenu.Foward();
-		animationMenu.Step(1, false);
+		animationMenu.Step(animationSpeed, false);
 		float point = animationMenu.GetPoint();
 		int offsetAnimation = -750;
 		//formula int(offsetAnimation + point * (0 - offsetAnimation))
@@ -599,7 +601,7 @@ public:
 		if (pGame->game_B) { 
 			pGame->OpenGameSettings();
 			animationGame.Foward();
-			animationGame.Step(1, false);
+			animationGame.Step(animationSpeed, false);
 			float point2 = animationGame.GetPoint();
 			
 			int x = 556; int y = 290; int offset = 77;
@@ -610,7 +612,7 @@ public:
 		if (pControl->control_B) { 
 			pControl->OpenControlSettings();
 			animationControl.Foward();
-			animationControl.Step(1, false);
+			animationControl.Step(animationSpeed, false);
 			float point2 = animationControl.GetPoint();
 
 			int x = 530; int y = 290; int offset = 77;
@@ -630,7 +632,7 @@ public:
 		if (pGraphics->graphics_B) { 
 			pGraphics->OpenGraphics();
 			animationGraphics.Foward();
-			animationGraphics.Step(1, false);
+			animationGraphics.Step(animationSpeed, false);
 			float point2 = animationGraphics.GetPoint();
 
 			int x = 556; int y = 290; int offset = 77;
@@ -642,7 +644,7 @@ public:
 		if (pAudio->audio_B) { 
 			pAudio->OpenAudioSettings();
 			animationAudio.Foward();
-			animationAudio.Step(1, false);
+			animationAudio.Step(animationSpeed, false);
 			float point2 = animationAudio.GetPoint();
 			int x = 556; int y = 290; int offset = 77;
 			app->render->TextDraw("General volume", x, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
@@ -682,7 +684,7 @@ public:
 	{
 		//animaciones cosas menu
 		animationMenu.Backward();
-		animationMenu.Step(1, false);
+		animationMenu.Step(animationSpeed, false);
 		float point = animationMenu.GetPoint();
 		int offsetAnimation = -750;
 		//formula int(offsetAnimation + point * (0 - offsetAnimation))
@@ -768,6 +770,7 @@ public:
 	Tween animationAudio;
 	Tween animationGame;
 	Tween animationMenu;
+	int animationSpeed;
 };
 
 
@@ -790,13 +793,14 @@ public:
 
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 50, 300 + 77 * i, 200, 70 }, ButtonType::EXTRA_LARGE, buttons[i], 20, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 50, 300 + 77 * i, 200, 70 }, ButtonType::EXTRA_LARGE, buttons[i], 20, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
 			button->state = GuiControlState::NONE;
 			listPauseButtons.Add(button);
 		}
 
 		pauseAnimation.Set();
 		pauseAnimation.AddTween(100, 80, BACK_OUT);
+		animationSpeed = 4;
 
 		// Settings
 		pSettings = new Settings(mod);
@@ -806,7 +810,7 @@ public:
 	{
 		//animaciones cosas menu
 		pauseAnimation.Foward();
-		pauseAnimation.Step(1, false);
+		pauseAnimation.Step(animationSpeed, false);
 		float point = pauseAnimation.GetPoint();
 		int offsetAnimation = -750;
 		//formula int(offsetAnimation + point * (0 - offsetAnimation))
@@ -899,6 +903,7 @@ public:
 
 	Settings* pSettings;
 	Tween pauseAnimation;
+	int animationSpeed;
 
 };
 

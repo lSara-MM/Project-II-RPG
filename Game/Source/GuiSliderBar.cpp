@@ -1,15 +1,19 @@
 #include "GuiSliderBar.h"
 #include "GuiManager.h"
 
-GuiSliderBar::GuiSliderBar(uint32 id, SDL_Rect bounds, SDL_Rect sliderBounds, int speed, Easings eType) : GuiControl(GuiControlType::SLIDERBAR, id)
+GuiSliderBar::GuiSliderBar(uint32 id, SDL_Rect bounds, SDL_Rect sliderBounds, int speed, Easings eType, AnimationAxis axisType) : GuiControl(GuiControlType::SLIDERBAR, id)
 {
 	this->bounds = bounds;
 	this->sliderBounds = sliderBounds;
 
 	this->step = speed;//velocidad actualiza animacion
+	this->axisType = axisType;
 
 	boundsY_AUX = this->bounds.y;
+	boundsX_AUX = this->bounds.x;
 	sliderBoundsY_AUX = this->sliderBounds.y;
+	sliderBoundsX_AUX = this->sliderBounds.x;
+
 	isForward_B = true;
 	animationButton.Set();
 	animationButton.AddTween(100, 80, eType);
@@ -76,17 +80,44 @@ bool GuiSliderBar::Update(float dt)
 	}
 
 	animationButton.Step(step, false);
-	float point = animationButton.GetPoint();
-	int offset = -750;
-	bounds.y = offset + point * (boundsY_AUX - offset);
 
-	sliderBounds.y = offset + point * (sliderBoundsY_AUX - offset);
 
 	return false;
 }
 
 bool GuiSliderBar::Draw(Render* render)
 {
+	switch (axisType)
+	{
+	case AnimationAxis::DOWN_Y:
+		point = animationButton.GetPoint();
+		offset = -750;
+		bounds.y = offset + point * (boundsY_AUX - offset);
+		sliderBounds.y = offset + point * (sliderBoundsY_AUX - offset);
+		break;
+	case AnimationAxis::UP_Y:
+		point = animationButton.GetPoint();
+		offset = 750;
+		bounds.y = offset + point * (boundsY_AUX - offset);
+		sliderBounds.y = offset + point * (sliderBoundsY_AUX - offset);
+		break;
+	case AnimationAxis::LEFT_X:
+		point = animationButton.GetPoint();
+		offset = 1300;
+		bounds.x = offset + point * (boundsX_AUX - offset);
+		sliderBounds.x = offset + point * (sliderBoundsX_AUX - offset);
+		break;
+	case AnimationAxis::RIGHT_X:
+		point = animationButton.GetPoint();
+		offset = -1300;
+		bounds.x = offset + point * (boundsX_AUX - offset);
+		sliderBounds.x = offset + point * (sliderBoundsX_AUX - offset);
+		break;
+	default:
+		break;
+	}
+
+
 	SDL_Rect button_rect = { 233, 0, 28, 39 };
 	SDL_Rect slider_static_rect = { 0, 10, 233, 9 };
 	SDL_Rect slider_dynamic_rect = { 0, 0, sliderBounds.x - bounds.x + 14, 9 };

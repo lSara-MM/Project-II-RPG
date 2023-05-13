@@ -102,7 +102,7 @@ bool DialogueTree::UpdateNodes(Module* mod, iPoint pos, int fontSize)
 		int h = fontSize * 1.5f;
 		SDL_Rect bounds = { app->win->GetWidth() - w, pos.y - (h + fontSize) * (i + 1), w, h};
 
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id, mod, bounds, ButtonType::LARGE, ch_option, fontSize);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id, mod, bounds, ButtonType::LARGE, ch_option, fontSize, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NORMAL;
 		listDialogueButtons.Add(button);
 	}
