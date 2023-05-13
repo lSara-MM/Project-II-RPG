@@ -166,35 +166,35 @@
 			<choice id="0" option="Nice." nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="2" name="TWINS" text="TWIN 1: I do not want to talk about that place.">
+		<node id="2" name="TWIN 1" text="I do not want to talk about that place.">
 			<choice id="0" option="..." nextNode="3" eventReturn="0"/>
 		</node>
 
-		<node id="3" name="TWINS" text="TWIN 2: I will. That is an awful place. Scary. Creepy. Terrifying.">
+		<node id="3" name="TWINS 2" text="I will. That is an awful place. Scary. Creepy. Terrifying.">
 			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
 		</node>
 
-		<node id="4" name="TWINS" text="TWIN 1: You idiot. He already knows that. The House Of Terrors is a jail.">
+		<node id="4" name="TWINS 1" text="You idiot. He already knows that. The House Of Terrors is a jail.">
 			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
 		</node>
 
-		<node id="5" name="TWINS" text="TWIN 2: Yes! A jail. They kept our friend locked. He is still there actually.">
+		<node id="5" name="TWINS 2" text="Yes! A jail. They kept our friend locked. He is still there actually.">
 			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
 		</node>
 
-		<node id="6" name="TWINS" text="TWIN 1: You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
+		<node id="6" name="TWINS 1" text="You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
 			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
 		</node>
 
-		<node id="7" name="TWINS" text="TWIN 2: Save our friend! He is a nice smith, and a fighter.">
+		<node id="7" name="TWINS 2" text="Save our friend! He is a nice smith, and a fighter.">
 			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
 		</node>
 
-		<node id="8" name="TWINS" text="TWIN 1: The best I would say. I'm sure it will help you if you save him.">
+		<node id="8" name="TWINS 1" text="The best I would say. I'm sure it will help you if you save him.">
 			<choice id="0" option="..." nextNode="9" eventReturn="0"/>
 		</node>
 
-		<node id="9" name="TWINS" text="TWIN 2: And maybe we give you some thanks.">
+		<node id="9" name="TWINS 2" text="And maybe we give you some thanks.">
 			<choice id="0" option="..." nextNode="10" eventReturn="0"/>
 		</node>
 
@@ -212,35 +212,35 @@
 			<choice id="1" option="Farewell." nextNode="-1" eventReturn="0"/>
 		</node>
 		
-		<node id="1" name="TWINS" text="TWIN 1: I do not want to talk about that place.">
+		<node id="1" name="TWINS 1" text="I do not want to talk about that place.">
 			<choice id="0" option="..." nextNode="2" eventReturn="0"/>
 		</node>
 
-		<node id="2" name="TWINS" text="TWIN 2: I will. That is an awful place. Scary. Creepy. Terrifying.">
+		<node id="2" name="TWINS 2" text="I will. That is an awful place. Scary. Creepy. Terrifying.">
 			<choice id="0" option="..." nextNode="3" eventReturn="0"/>
 		</node>
 
-		<node id="3" name="TWINS" text="TWIN 1: You idiot. He already knows that. The House Of Terrors is a jail.">
+		<node id="3" name="TWINS 1" text="You idiot. He already knows that. The House Of Terrors is a jail.">
 			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
 		</node>
 
-		<node id="4" name="TWINS" text="TWIN 2: Yes! A jail. They kept our friend locked. He is still there actually.">
+		<node id="4" name="TWINS 2" text="Yes! A jail. They kept our friend locked. He is still there actually.">
 			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
 		</node>
 		
-		<node id="5" name="TWINS" text="TWIN 1: You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
+		<node id="5" name="TWINS 1" text="You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
 			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
 		</node>
 
-		<node id="6" name="TWINS" text="TWIN 2: Save our friend! He is a nice smith, and a fighter.">
+		<node id="6" name="TWINS 2" text="Save our friend! He is a nice smith, and a fighter.">
 			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
 		</node>
 		
-		<node id="7" name="TWINS" text="TWIN 1: The best I would say. I'm sure it will help you if you save him.">
+		<node id="7" name="TWINS 1" text="The best I would say. I'm sure it will help you if you save him.">
 			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
 		</node>
 
-		<node id="8" name="TWINS" text="TWIN 2: And maybe we give you some thanks.">
+		<node id="8" name="TWINS 2" text="And maybe we give you some thanks.">
 			<choice id="0" option="..." nextNode="9" eventReturn="0"/>
 		</node>
 		
@@ -257,36 +257,36 @@
 			<choice id="0" option="Tell me about the House Of Terrors (MISION)" nextNode="1" eventReturn="0"/>
 			<choice id="1" option="Bye MERCANT." nextNode="-1" eventReturn="0"/>
 		</node>
-		
-		<node id="1" name="TWINS" text="TWIN 1: I do not want to talk about that place.">
+
+		<node id="1" name="TWINS 1" text="I do not want to talk about that place.">
 			<choice id="0" option="..." nextNode="2" eventReturn="0"/>
 		</node>
 
-		<node id="2" name="TWINS" text="TWIN 2: I will. That is an awful place. Scary. Creepy. Terrifying.">
+		<node id="2" name="TWINS 2" text="I will. That is an awful place. Scary. Creepy. Terrifying.">
 			<choice id="0" option="..." nextNode="3" eventReturn="0"/>
 		</node>
 
-		<node id="3" name="TWINS" text="TWIN 1: You idiot. He already knows that. The House Of Terrors is a jail.">
+		<node id="3" name="TWINS 1" text="You idiot. He already knows that. The House Of Terrors is a jail.">
 			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
 		</node>
 
-		<node id="4" name="TWINS" text="TWIN 2: Yes! A jail. They kept our friend locked. He is still there actually.">
+		<node id="4" name="TWINS 2" text="Yes! A jail. They kept our friend locked. He is still there actually.">
 			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
 		</node>
 
-		<node id="5" name="TWINS" text="TWIN 1: You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
+		<node id="5" name="TWINS 1" text="You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
 			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
 		</node>
 
-		<node id="6" name="TWINS" text="TWIN 2: Save our friend! He is a nice smith, and a fighter.">
+		<node id="6" name="TWINS 2" text="Save our friend! He is a nice smith, and a fighter.">
 			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
 		</node>
 
-		<node id="7" name="TWINS" text="TWIN 1: The best I would say. I'm sure it will help you if you save him.">
+		<node id="7" name="TWINS 1" text="The best I would say. I'm sure it will help you if you save him.">
 			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
 		</node>
 
-		<node id="8" name="TWINS" text="TWIN 2: And maybe we give you some thanks.">
+		<node id="8" name="TWINS 2" text="And maybe we give you some thanks.">
 			<choice id="0" option="..." nextNode="9" eventReturn="0"/>
 		</node>
 
