@@ -16,6 +16,7 @@
 #define DIALOGUE_INPUT 2
 #define DIALOGUE_SAVE 3
 #define DIALOGUE_IF 4
+#define DIALOGUE_QUEST 5
 
 using namespace std;
 

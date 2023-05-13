@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "IntroScene.h"
 #include "PuzzleManager.h"
+#include "DialogueSystem.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -62,13 +63,13 @@ bool QuestManager::Start() {
 	initQuest();
 	LoadState();
 
-	quest1->title = "Let's Start";
-	quest2->title = "Enter the Dungeon";
-	quest3->title = "Quest3";
+	quest1->title = "Find The Fire Guy";
+	quest2->title = "Drive the Oracle crazy";
+	quest3->title = "Train is life, train is love";
 
-	quest1->desc = "Go to the Practice Tent";
-	quest2->desc = "Find the dungeon";
-	quest3->desc = "Desc3";
+	quest1->desc = "Save Fire Guy from the dungeon";
+	quest2->desc = "Talk to the Oracle and make him angry";
+	quest3->desc = "Practice into the Practice Tent";
 
 	if(!quest1->complete)
 		quest1->complete = false;
@@ -306,6 +307,7 @@ bool QuestManager::LoadState() {
 		app->puzzleManager->palancas = gameStateFile.child("puzzle").attribute("palancas").as_bool();
 		app->puzzleManager->escape = gameStateFile.child("puzzle").attribute("escape").as_bool();
 		app->puzzleManager->rescue = gameStateFile.child("puzzle").attribute("rescue").as_bool();
+		app->puzzleManager->teamMate = gameStateFile.child("puzzle").attribute("teamMate").as_bool();
 		app->puzzleManager->keyPalancas = gameStateFile.child("puzzle").attribute("keyPalancas").as_int();
 		app->puzzleManager->keyEscape = gameStateFile.child("puzzle").attribute("keyEscape").as_int();
 		app->puzzleManager->keyRescue = gameStateFile.child("puzzle").attribute("keyRescue").as_int();
@@ -334,6 +336,7 @@ bool QuestManager::SaveState()
 	puzzle.append_attribute("palancas") = app->puzzleManager->palancas;
 	puzzle.append_attribute("escape") = app->puzzleManager->escape;
 	puzzle.append_attribute("rescue") = app->puzzleManager->rescue;
+	puzzle.append_attribute("teamMate") = app->puzzleManager->teamMate;
 	puzzle.append_attribute("keyPalancas") = app->puzzleManager->keyPalancas;
 	puzzle.append_attribute("keyEscape") = app->puzzleManager->keyEscape;
 	puzzle.append_attribute("keyRescue") = app->puzzleManager->keyRescue;

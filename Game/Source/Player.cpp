@@ -102,12 +102,6 @@ bool Player::Awake() {
 
 bool Player::Start() 
 {
-	//QuestManager prove to try a quest
-	if (!app->questManager->quest1->complete)
-	{
-		app->questManager->quest1->active = true;
-	}
-
 	texture = app->tex->Load(texturePath);
 	textureE = app->tex->Load("Assets/GUI/UI_E.png");
 
@@ -270,7 +264,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		break;
 
 	case ColliderType::PALANCA:
-		app->puzzleManager->keyPalancas = 1;
+		app->puzzleManager->palancasActive = true;
 		break;
 	case ColliderType::BOSSDEAD:
 		app->puzzleManager->bossActive = true;
@@ -280,6 +274,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		break;
 	case ColliderType::DOORCODE:
 		app->puzzleManager->intoCode = true;
+		break;
+	case ColliderType::FIREGUY:
+		app->puzzleManager->saveFireGuy = true;
 		break;
 	case ColliderType::NOTA:
 		switch (physB->id) //Abrir Nota + sumar puntos a keyScape
@@ -310,7 +307,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		case 0:
 			if (app->hTerrors->active == true)
 			{
-				app->questManager->quest2->complete = true;
 				app->entityManager->tpID = 0;
 				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
 			}
@@ -318,7 +314,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			{
 				app->map->mapPendingtoDelete = true;
 				app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
-
 			}
 			if (app->practiceTent->active == true)
 			{
@@ -332,13 +327,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			}
 			break;
 		case 1:
-			if (!app->questManager->quest1->complete)
-			{
-				app->questManager->quest1->complete = true;
-			}
 			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
 			break;
 		case 2:
+			if (app->questManager->quest3->active)
+			{
+				app->questManager->quest3->complete = true;
+			}
 			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, 90);
 			break;
 		}
@@ -354,6 +349,9 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 		npcInteract = false;
 		interactionTest = false;
 		break;
+	case ColliderType::PALANCA:
+		app->puzzleManager->palancasActive = false;
+		break;
 	case ColliderType::BOSSDEAD:
 		app->puzzleManager->bossActive = false;
 		break;
@@ -362,6 +360,9 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 		break;
 	case ColliderType::DOORCODE:
 		app->puzzleManager->intoCode = false;
+		break;
+	case ColliderType::FIREGUY:
+		app->puzzleManager->saveFireGuy = false;
 		break;
 	case ColliderType::PORTAL:
 		app->audio->PlayFx(enterZone, 0);

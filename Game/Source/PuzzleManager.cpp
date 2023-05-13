@@ -49,6 +49,7 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 	texturepathDoorEscape = config.child("DoorEscape").attribute("texturepathDoorEscape").as_string();
 	texturepathBoss = config.child("Boss").attribute("texturepathBoss").as_string();
 	texturepathLoset = config.child("Loset").attribute("texturepathLoset").as_string();
+	texturepathFireGuy = config.child("FireGuy").attribute("texturepathFireGuy").as_string();
 
 	posNotas1.x = config.child("Notas").attribute("x1").as_int();
 	posNotas1.y = config.child("Notas").attribute("y1").as_int();	
@@ -73,9 +74,15 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 	
 	posLoset.x = config.child("Loset").attribute("x").as_int();
 	posLoset.y = config.child("Loset").attribute("y").as_int();
+	
+	posFireGuy.x = config.child("FireGuy").attribute("x").as_int();
+	posFireGuy.y = config.child("FireGuy").attribute("y").as_int();
 
-	widthDoor = config.child("Door").attribute("width").as_int();
-	heightDoor = config.child("Door").attribute("height").as_int();
+	widthVertical = config.child("Door").attribute("widthVertical").as_int();
+	heightVertical = config.child("Door").attribute("heightVertical").as_int();
+	
+	widthHoritzontal = config.child("Door").attribute("widthHoritzontal").as_int();
+	heightHoritzontal = config.child("Door").attribute("heightHoritzontal").as_int();
 
 	posPalancas.x = config.child("Palanca").attribute("Xpalancas").as_int();
 	posPalancas.y = config.child("Palanca").attribute("Ypalancas").as_int();
@@ -88,6 +95,9 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 		
 	widthNotas = config.child("Notas").attribute("widthNotas").as_int();
 	heightNotas = config.child("Notas").attribute("heightNotas").as_int();
+	
+	widthFireGuy = config.child("FireGuy").attribute("width").as_int();
+	heightFireGuy = config.child("FireGuy").attribute("height").as_int();
 
 	posDoorEscape.x = config.child("DoorEscape").attribute("x").as_int();
 	posDoorEscape.y = config.child("DoorEscape").attribute("y").as_int();
@@ -109,6 +119,7 @@ bool PuzzleManager::Start()
 	palancas = false;
 	escape = false;
 	rescue = false;
+	teamMate = false;
 
 	//Notas false
 	esc1 = false;
@@ -121,9 +132,9 @@ bool PuzzleManager::Start()
 	bossInvent = false;
 	intoCode = false;
 
-	keyPalancas = 0;
+	palancasActive = false;
 
-	realCode = "123";
+	realCode = "344";
 
 	Door1 = nullptr;
 	Door2 = nullptr;
@@ -137,6 +148,7 @@ bool PuzzleManager::Start()
 	DoorEscapeSensor = nullptr;
 	Boss = nullptr;
 	Loset = nullptr;
+	FireGuy = nullptr;
 
 	app->questManager->LoadState();
 
@@ -145,16 +157,16 @@ bool PuzzleManager::Start()
 		door = app->tex->Load(texturepathDoor);
 		palanca = app->tex->Load(texturepathPalanca);
 
-		Door1 = app->physics->CreateRectangle(posDoor1.x - widthDoor / 2, posDoor1.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
+		Door1 = app->physics->CreateRectangle(posDoor1.x, posDoor1.y - heightHoritzontal / 2, widthHoritzontal * 2, heightHoritzontal, bodyType::STATIC);
 		Door1->body->SetFixedRotation(true);
 
-		Door2 = app->physics->CreateRectangle(posDoor2.x - widthDoor / 2, posDoor2.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
+		Door2 = app->physics->CreateRectangle(posDoor2.x - widthHoritzontal / 2, posDoor2.y - heightHoritzontal / 2, widthHoritzontal, heightHoritzontal, bodyType::STATIC);
 		Door2->body->SetFixedRotation(true);
 
-		Palanca = app->physics->CreateRectangle(posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca / 2, widthPalanca, heightPalanca, bodyType::STATIC);
+		Palanca = app->physics->CreateRectangle(posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca, widthPalanca, heightPalanca, bodyType::STATIC);
 		Palanca->body->SetFixedRotation(true);
 
-		PalancaSensor = app->physics->CreateRectangle(posPalancas.x - widthPalancaSens / 2, posPalancas.y - heightPalancaSens / 2, widthPalancaSens, heightPalancaSens, bodyType::STATIC);
+		PalancaSensor = app->physics->CreateRectangleSensor(posPalancas.x - widthPalancaSens / 2, posPalancas.y - heightPalancaSens / 2, widthPalancaSens, heightPalancaSens, bodyType::STATIC);
 		PalancaSensor->body->SetFixedRotation(true);
 		PalancaSensor->ctype = ColliderType::PALANCA;
 	}
@@ -169,11 +181,11 @@ bool PuzzleManager::Start()
 		Boss->body->SetFixedRotation(true);
 		Boss->ctype = ColliderType::BOSSDEAD;
 
-		Loset = app->physics->CreateRectangleSensor(posLoset.x - widthLoset / 2, posLoset.y - heightLoset / 2, widthLoset, heightLoset, bodyType::STATIC);
+		Loset = app->physics->CreateRectangleSensor(posLoset.x - widthLoset / 2, posLoset.y - heightLoset / 2, widthLoset - 32, heightLoset - 32, bodyType::STATIC);
 		Loset->body->SetFixedRotation(true);
 		Loset->ctype = ColliderType::LOSET;
 
-		Door3 = app->physics->CreateRectangle(posDoor3.x - widthDoor / 2, posDoor3.y - heightDoor / 2, widthDoor, heightDoor, bodyType::STATIC);
+		Door3 = app->physics->CreateRectangle(posDoor3.x - widthVertical / 2, posDoor3.y - heightVertical / 2, widthVertical, heightVertical, bodyType::STATIC);
 		Door3->body->SetFixedRotation(true);
 	}
 
@@ -185,7 +197,7 @@ bool PuzzleManager::Start()
 		DoorEscape = app->physics->CreateRectangle(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape, bodyType::STATIC);
 		DoorEscape->body->SetFixedRotation(true);
 
-		DoorEscapeSensor = app->physics->CreateRectangleSensor(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape * 2, bodyType::STATIC);
+		DoorEscapeSensor = app->physics->CreateRectangleSensor(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape, bodyType::STATIC);
 		DoorEscapeSensor->body->SetFixedRotation(true);
 		DoorEscapeSensor->ctype = ColliderType::DOORCODE;
 
@@ -204,6 +216,17 @@ bool PuzzleManager::Start()
 		nota3->ctype = ColliderType::NOTA;
 		nota3->id = 2;
 	}
+
+	if (teamMate == false) 
+	{
+		fireGuy = app->tex->Load(texturepathFireGuy);
+
+		FireGuy = app->physics->CreateRectangleSensor(posFireGuy.x - widthFireGuy / 2, posFireGuy.y - heightFireGuy / 2, widthFireGuy, heightFireGuy * 2, bodyType::STATIC);
+		FireGuy->body->SetFixedRotation(true);
+		FireGuy->ctype = ColliderType::FIREGUY;
+	}
+
+	los = { 131, 66, 64, 64 };
 
 	numCode = new PlayerInput("", 3, false);
 
@@ -231,6 +254,27 @@ bool PuzzleManager::Update(float dt)
 	{
 		Rescue();
 	}
+
+	if (!teamMate) 
+	{
+		TeamMate();
+	}
+
+	SDL_Rect palan = { 361, 75, 29, 46 };
+
+	app->render->DrawTexture(palanca, posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca, &palan);
+
+	SDL_Rect not = { 268, 76, 51, 45 };
+
+	app->render->DrawTexture(notas, posNotas1.x - widthNotas, posNotas1.y - heightNotas, &not);
+	app->render->DrawTexture(notas, posNotas2.x - widthNotas, posNotas2.y - heightNotas, &not);
+	app->render->DrawTexture(notas, posNotas3.x - widthNotas, posNotas3.y - heightNotas, &not);
+
+	SDL_Rect bos = { 0, 0, 0, 0 };
+
+	app->render->DrawTexture(boss, posBoss.x - widthBoss, posBoss.y - heightBoss, &bos);
+
+	app->render->DrawTexture(loset, posLoset.x - widthLoset + 16, posLoset.y - heightLoset + 16, &los);
 
 	return true;
 }
@@ -260,7 +304,7 @@ bool PuzzleManager::CleanUp()
 		if (Palanca != nullptr)
 			Palanca->body->GetWorld()->DestroyBody(Palanca->body);
 
-		if (PalancaSensor->body != nullptr)
+		if (PalancaSensor != nullptr)
 			PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
 	}
 
@@ -272,7 +316,7 @@ bool PuzzleManager::CleanUp()
 		if (doorEscape != nullptr)
 			app->tex->UnLoad(doorEscape);
 
-		if (DoorEscape->body != nullptr)
+		if (DoorEscape != nullptr)
 			DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
 
 		if (nota1 != nullptr)
@@ -349,54 +393,47 @@ bool PuzzleManager::CleanUp()
 
 bool PuzzleManager::Palancas() 
 {
-	app->render->DrawTexture(palanca, posPalancas.x, posPalancas.y);
-	app->render->DrawTexture(door, posDoor1.x, posDoor1.y);
-	app->render->DrawTexture(door, posDoor2.x, posDoor2.y);
+	SDL_Rect dor = { 1, 1, 64, 14 };
 
-	if (keyPalancas == 1) 
+	app->render->DrawTexture(door, posDoor1.x - widthHoritzontal, posDoor1.y - heightHoritzontal / 2, &dor);
+	app->render->DrawTexture(door, posDoor1.x, posDoor1.y - heightHoritzontal / 2, &dor);
+	app->render->DrawTexture(door, posDoor2.x - widthHoritzontal, posDoor2.y - heightHoritzontal / 2, &dor);
+
+	if (palancasActive)
 	{
-		if(palanca != nullptr)
-			app->tex->UnLoad(palanca);
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			if (Door1 != nullptr)
+				Door1->body->GetWorld()->DestroyBody(Door1->body);
 
-		if (Door1 != nullptr)
-			Door1->body->GetWorld()->DestroyBody(Door1->body);
+			if (Door2 != nullptr)
+				Door2->body->GetWorld()->DestroyBody(Door2->body);
 
-		if(Door2 != nullptr)
-			Door2->body->GetWorld()->DestroyBody(Door2->body);
+			if (PalancaSensor != nullptr)
+				PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
 
-		if (Palanca != nullptr)
-			Palanca->body->GetWorld()->DestroyBody(Palanca->body);
+			delete Door1;
+			Door1 = nullptr;
 
-		if (PalancaSensor != nullptr)
-			PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
+			delete Door2;
+			Door2 = nullptr;
 
-		delete Door1;
-		Door1 = nullptr;
-		
-		delete Door2;
-		Door2 = nullptr;
-		
-		delete Palanca;
-		Palanca = nullptr;
-		
-		delete PalancaSensor;
-		PalancaSensor = nullptr;
+			delete PalancaSensor;
+			PalancaSensor = nullptr;
 
-		palancas = true;
-		app->questManager->SaveState();
-
-		return true;
+			palancas = true;
+			app->questManager->SaveState();
+		}
 	}
 
-	return false;
+	return true;
 }
 
 bool PuzzleManager::Escape() 
 {
-	app->render->DrawTexture(doorEscape, posDoorEscape.x, posDoorEscape.y);
-	app->render->DrawTexture(notas, posNotas1.x, posNotas1.y);
-	app->render->DrawTexture(notas, posNotas2.x, posNotas2.y);
-	app->render->DrawTexture(notas, posNotas3.x, posNotas3.y);
+	SDL_Rect dorEsc = { 130, 1, 14, 64 };
+
+	app->render->DrawTexture(doorEscape, posDoorEscape.x - widthDoorEscape, posDoorEscape.y - heightDoorEscape, &dorEsc);
 
 
 	if (intoCode == true) 
@@ -469,29 +506,8 @@ bool PuzzleManager::Escape()
 			if (DoorEscape != nullptr)
 				DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
 
-			if (notas != nullptr)
-				app->tex->UnLoad(notas);
-
-			if (nota1 != nullptr)
-				nota1->body->GetWorld()->DestroyBody(nota1->body);
-
-			if (nota2 != nullptr)
-				nota2->body->GetWorld()->DestroyBody(nota2->body);
-
-			if (nota3 != nullptr)
-				nota3->body->GetWorld()->DestroyBody(nota3->body);
-
 			delete DoorEscape;
 			DoorEscape = nullptr;
-
-			delete nota1;
-			nota1 = nullptr;
-
-			delete nota2;
-			nota2 = nullptr;
-
-			delete nota3;
-			nota3 = nullptr;
 
 			codeActive = false;
 			escape = true;
@@ -499,14 +515,14 @@ bool PuzzleManager::Escape()
 		}
 	}
 
-	return false;
+	return true;
 }
 
 bool PuzzleManager::Rescue() 
 {
-	app->render->DrawTexture(boss, posBoss.x, posBoss.y);
-	app->render->DrawTexture(door, posDoor3.x, posDoor3.y);
-	app->render->DrawTexture(loset, posLoset.x, posLoset.y);
+	SDL_Rect dor = { 377, 1, 14, 64 };
+
+	app->render->DrawTexture(door, posDoor3.x - widthVertical, posDoor3.y - heightVertical, &dor);
 
 	if (bossActive) 
 	{
@@ -536,14 +552,13 @@ bool PuzzleManager::Rescue()
 				if (door != nullptr)
 					app->tex->UnLoad(door);
 
-				if (Loset->body != nullptr)
-					Loset->body->GetWorld()->DestroyBody(Loset->body);
+				los = { 196, 66, 64, 64 };
 
 				if (Door3->body != nullptr)
 					Door3->body->GetWorld()->DestroyBody(Door3->body);
-
-				if (loset != nullptr)
-					app->tex->UnLoad(loset);
+				
+				if (Loset->body != nullptr)
+					Loset->body->GetWorld()->DestroyBody(Loset->body);
 
 				delete Loset;
 				Loset = nullptr;
@@ -559,5 +574,35 @@ bool PuzzleManager::Rescue()
 		}
 	}
 
-	return false;
+	return true;
+}
+
+bool PuzzleManager::TeamMate() 
+{
+	app->render->DrawTexture(fireGuy, posFireGuy.x - widthFireGuy * 2, posFireGuy.y - heightFireGuy * 2);
+
+	if (saveFireGuy) 
+	{
+		if(app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			if (fireGuy != nullptr)
+				app->tex->UnLoad(fireGuy);
+
+			if (FireGuy->body != nullptr)
+				FireGuy->body->GetWorld()->DestroyBody(FireGuy->body);
+
+			delete FireGuy;
+			FireGuy = nullptr;
+
+			teamMate = true;
+			if (app->questManager->quest1->active) 
+			{
+				app->questManager->quest1->complete = true;
+			}
+
+			app->questManager->SaveState();
+		}
+	}
+
+	return true;
 }

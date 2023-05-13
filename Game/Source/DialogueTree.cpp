@@ -1,4 +1,5 @@
 #include "DialogueTree.h"
+#include "QuestManager.h"
 
 #include "Input.h"
 #include "Render.h"
@@ -142,6 +143,40 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 			break;
 		case DIALOGUE_IF:
 
+		case DIALOGUE_QUEST:
+			if (activeNode->name == "TWINS") 
+			{
+				if (!app->questManager->quest1->complete) 
+				{
+					app->questManager->quest1->active = true;
+				}
+			}
+
+			if (activeNode->name == "ORACLE") 
+			{
+				if (app->questManager->quest2->active == true) 
+				{
+					app->questManager->quest2->complete = true;
+				}
+			}
+
+			if (activeNode->name == "GUIDE")
+			{
+				if(activeNode->nodeID == 7)
+				{
+					if (!app->questManager->quest2->complete)
+					{
+						app->questManager->quest2->active = true;
+					}
+				}
+				if (activeNode->nodeID == 8)
+				{
+					if (!app->questManager->quest3->complete)
+					{
+						app->questManager->quest3->active = true;
+					}
+				}
+			}
 
 			break;
 		default:

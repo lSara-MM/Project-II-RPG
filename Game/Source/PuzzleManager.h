@@ -53,6 +53,8 @@ public:
 
 	bool Rescue();
 
+	bool TeamMate();
+
 public:
 
 	pugi::xml_node sceneNode;
@@ -61,21 +63,25 @@ public:
 	int keyEscape;
 	int keyRescue;
 
-	int widthDoor;
+	int widthVertical;
+	int widthHoritzontal;
 	int widthPalanca;
 	int widthPalancaSens;
 	int widthNotas;
 	int widthDoorEscape;
 	int widthBoss;
 	int widthLoset;
+	int widthFireGuy;
 
-	int heightDoor;
+	int heightVertical;
+	int heightHoritzontal;
 	int heightPalanca;
 	int heightPalancaSens;
 	int heightNotas;
 	int heightDoorEscape;
 	int heightBoss;
 	int heightLoset;
+	int heightFireGuy;
 
 	iPoint posDoor1;
 	iPoint posDoor2;
@@ -87,6 +93,7 @@ public:
 	iPoint posDoorEscape;
 	iPoint posBoss;
 	iPoint posLoset;
+	iPoint posFireGuy;
 
 	SDL_Texture* door;
 	SDL_Texture* palanca;
@@ -94,6 +101,7 @@ public:
 	SDL_Texture* doorEscape;
 	SDL_Texture* boss;
 	SDL_Texture* loset;
+	SDL_Texture* fireGuy;
 
 	PhysBody* Door1;
 	PhysBody* Door2;
@@ -107,10 +115,12 @@ public:
 	PhysBody* DoorEscapeSensor;
 	PhysBody* Boss;
 	PhysBody* Loset;
+	PhysBody* FireGuy;
 
 	bool palancas;
 	bool escape;
 	bool rescue;
+	bool teamMate;
 
 	bool esc1;
 	bool esc2;
@@ -119,16 +129,21 @@ public:
 	bool intoCode;
 	bool codeActive;
 
+	bool palancasActive;
+
 	bool bossActive;
 	bool bossInvent;
 	bool losetActive;
+
+	bool saveFireGuy;
 
 	string code;
 	string codeToCompare;
 	string realCode;
 
-
 	PlayerInput* numCode;
+
+	SDL_Rect los;
 
 private:
 
@@ -138,6 +153,7 @@ private:
 	const char* texturepathDoorEscape;
 	const char* texturepathBoss;
 	const char* texturepathLoset;
+	const char* texturepathFireGuy;
 
 };
 

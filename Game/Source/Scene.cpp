@@ -59,10 +59,6 @@ bool Scene::Start()
 	app->input->godMode_B = false;
 	app->physics->collisions = false;
 
-	app->questManager->quest1->active = true;
-	app->questManager->quest2->active = true;
-	app->questManager->quest3->active = true;
-
 	if (app->puzzleManager->active == true) {
 		app->puzzleManager->CleanUp();
 	}

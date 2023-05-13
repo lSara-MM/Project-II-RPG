@@ -39,6 +39,7 @@ enum class ColliderType {
 	DOORCODE,
 	BOSSDEAD,
 	LOSET,
+	FIREGUY,
 	NOTA,
 	SAVE,
 	HEALTH,

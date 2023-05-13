@@ -6,6 +6,7 @@
 2 - input
 3 - save choice
 4 - conditional
+5 - Quest
 -->
 
 <!--
@@ -98,11 +99,11 @@
 		</node>
 		
 		<node id="7" name="GUIDE" text="He has an irascible character, it is so fun to talk to him. He has these clever answers. I dare you to anger him, if you do so I will give you some rewards. I am sure you will like it.">
-			<choice id="0" option="Accept the challenge." nextNode="-1" eventReturn="0"/>
+			<choice id="0" option="Accept the challenge." nextNode="-1" eventReturn="5"/>
 		</node>
 		
 		<node id="8" name="GUIDE" text="Indeed! We have the training tent just next to the stores. Go there if you want to practice.">
-			<choice id="0" option="Thanks, that was actually helpful." nextNode="-1" eventReturn="0"/>
+			<choice id="0" option="Thanks, that was actually helpful." nextNode="-1" eventReturn="5"/>
 		</node>
 
 	    <node id="-1" text ="End of conversation -F1- to talk again"></node>
@@ -148,7 +149,7 @@
 		</node>
 		
 		<node id="7" name="ORACLE" text="I got a special mission for you bod, go fuck yourself.">
-			<choice id="0" option="..." nextNode="-1" eventReturn="0"/>
+			<choice id="0" option="..." nextNode="-1" eventReturn="5"/>
 		</node>
 		
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
@@ -199,7 +200,7 @@
 		</node>
 
 		<node id="10" name="TWINS" text="Save our friend and we will reward you.">
-			<choice id="0" option="Accept." nextNode="-1" eventReturn="0"/>
+			<choice id="0" option="Accept." nextNode="-1" eventReturn="5"/>
 		</node>
 
 		<node id="-1" name="TWINS" text ="End of conversation -F1- to talk again"></node>
@@ -245,7 +246,7 @@
 		</node>
 		
 		<node id="9" name="TWINS" text="Save our friend and we will reward you.">
-			<choice id="0" option="Accept." nextNode="-1" eventReturn="0"/>
+			<choice id="0" option="Accept." nextNode="-1" eventReturn="5"/>
 		</node>
 
 		<node id="-1" name="TWINS" text ="End of conversation -F1- to talk again"></node>
@@ -291,7 +292,7 @@
 		</node>
 
 		<node id="9" name="TWINS" text="Save our friend and we will reward you.">
-			<choice id="0" option="Accept." nextNode="-1" eventReturn="0"/>
+			<choice id="0" option="Accept." nextNode="-1" eventReturn="5"/>
 		</node>
 		
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
@@ -299,7 +300,7 @@
   
   <dialogueTree ID="100">
 
-      <node id="0" name="NOTE 1" text="Adivina adivinanza">
+      <node id="0" name="NOTE 1" text="Guess how many sleigh bells does the puppet have to know the first number of the sequences">
         <choice id="0" option="Close." nextNode="-1" eventReturn="0"/>
       </node>
 
@@ -308,7 +309,7 @@
   
   <dialogueTree ID="101">
 
-        <node id="0" name="NOTE 2" text="Adivina adivinanza 2">
+        <node id="0" name="NOTE 2" text="In the mirror it is found, count the knives to get the second number of the sequences">
           <choice id="0" option="Close." nextNode="-1" eventReturn="0"/>
         </node>
 
@@ -317,7 +318,7 @@
   
   <dialogueTree ID="102">
 
-    <node id="0" name="NOTE 3" text="Adivina adivinanza 3">
+    <node id="0" name="NOTE 3" text="It has this creepy look, the closet scratched by how many claws? that will be the third and last">
       <choice id="0" option="Close." nextNode="-1" eventReturn="0"/>
     </node>
 

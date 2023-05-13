@@ -1,4 +1,5 @@
 #include "DialogueSystem.h"
+#include "QuestManager.h"
 
 #include "Input.h"
 #include "Render.h"

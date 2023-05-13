@@ -77,6 +77,9 @@ public:
 
 	bool PadLock;
 
+	Npc* npcTalkingTo;
+	bool npcInteract;
+
 private:
 
 	SDL_Texture* texture;
@@ -97,9 +100,6 @@ private:
 	// interact fx
 	const char* confirmPath;
 	uint confirmInteractfx;
-
-	Npc* npcTalkingTo;
-	bool npcInteract;
 	
 	int width, height;
 	SDL_Texture* textureE;
