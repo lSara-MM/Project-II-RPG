@@ -19,6 +19,7 @@
 #include "GuiManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
+#include "ItemManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -54,6 +55,9 @@ bool HouseOfTerrors::Start()
 {
 	//Load Map
 	app->map->Load(1);
+
+	//Init player inventory
+	app->itemManager->SetPlayerForScene(player);
 
 	//Music
 	app->audio->PlayMusic(musHauntedPath, 0);

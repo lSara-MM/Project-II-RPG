@@ -28,6 +28,10 @@ bool ItemManager::Awake(pugi::xml_node& config)
 bool ItemManager::Start()
 {
 	LoadItems();
+
+	player->LoadAllPC();
+	player->SetParty();
+
 	return true;
 }
 
@@ -135,51 +139,53 @@ void ItemManager::MinusQuantity(const char* name)
 			SaveItemState();
 			UseItem(nodeList[i]);	
 		}
-
 	}
 }
 
 void ItemManager::UseItem(ItemNode* item)
 {
-	for (size_t i = 0; i < app->combat->vecAllies.size(); i++)
+	for (size_t i = 0; i < player->arrParty.size(); i++)
 	{
-		if (item->type==2 && item->equiped==true)
+		if (player->arrParty.at(i) != nullptr)
 		{
-			app->combat->vecAllies[i]->currentHp += item->hp;
-			app->combat->vecAllies[i]->maxHp += item->maxhp;
-			app->combat->vecAllies[i]->armor += item->armor;
-			app->combat->vecAllies[i]->attack += item->attack;
-			app->combat->vecAllies[i]->critDamage += item->critDamage;
-			app->combat->vecAllies[i]->critRate += item->critProbability;
-			app->combat->vecAllies[i]->precision += item->precision;
-			app->combat->vecAllies[i]->dodge += item->esquiva;
-			app->combat->vecAllies[i]->speed += item->speed;
-			app->combat->vecAllies[i]->res += item->resistencia;
-		}
-		else if (item->type == 2 && item->equiped == false)
-		{
-			app->combat->vecAllies[i]->currentHp -= item->hp;
-			app->combat->vecAllies[i]->maxHp -= item->maxhp;
-			app->combat->vecAllies[i]->armor -= item->armor;
-			app->combat->vecAllies[i]->attack -= item->attack;
-			app->combat->vecAllies[i]->critDamage -= item->critDamage;
-			app->combat->vecAllies[i]->critRate -= item->critProbability;
-			app->combat->vecAllies[i]->precision -= item->precision;
-			app->combat->vecAllies[i]->dodge -= item->esquiva;
-			app->combat->vecAllies[i]->speed -= item->speed;
-			app->combat->vecAllies[i]->res -= item->resistencia;
-
-			if (item->space > 0)
+			if (item->type == 2 && item->equiped == true)
 			{
-				item->space = 0;
+				player->arrParty.at(i)->currentHp += item->hp;
+				player->arrParty.at(i)->maxHp += item->maxhp;
+				player->arrParty.at(i)->armor += item->armor;
+				player->arrParty.at(i)->attack += item->attack;
+				player->arrParty.at(i)->critDamage += item->critDamage;
+				player->arrParty.at(i)->critRate += item->critProbability;
+				player->arrParty.at(i)->precision += item->precision;
+				player->arrParty.at(i)->dodge += item->esquiva;
+				player->arrParty.at(i)->speed += item->speed;
+				player->arrParty.at(i)->res += item->resistencia;
 			}
-		}
-
-		if (item->type == 1)
-		{
-			if (item->kind == 1)
+			else if (item->type == 2 && item->equiped == false)
 			{
-				app->combat->vecAllies[i]->currentHp += item->hp;
+				player->arrParty.at(i)->currentHp -= item->hp;
+				player->arrParty.at(i)->maxHp -= item->maxhp;
+				player->arrParty.at(i)->armor -= item->armor;
+				player->arrParty.at(i)->attack -= item->attack;
+				player->arrParty.at(i)->critDamage -= item->critDamage;
+				player->arrParty.at(i)->critRate -= item->critProbability;
+				player->arrParty.at(i)->precision -= item->precision;
+				player->arrParty.at(i)->dodge -= item->esquiva;
+				player->arrParty.at(i)->speed -= item->speed;
+				player->arrParty.at(i)->res -= item->resistencia;
+
+				if (item->space > 0)
+				{
+					item->space = 0;
+				}
+			}
+
+			if (item->type == 1)
+			{
+				if (item->kind == 1)
+				{
+					player->arrParty.at(i)->currentHp += item->hp;
+				}
 			}
 		}
 	}
@@ -210,12 +216,6 @@ void ItemManager::UseItem(ItemNode* item)
 		resistencia -= item->resistencia;
 	}
 
-	for (size_t i = 0; i < nodeList.size(); i++)
-	{
-		nodeList[i]->CleanUp();
-		
-	}
-
 	//Temporal
 	if (item->type == 2 && item->equiped == false)
 	{
@@ -224,16 +224,10 @@ void ItemManager::UseItem(ItemNode* item)
 			item->space = 0;
 		}
 	}
-
-	if (item->quantity <= 0)
-	{
-		item->CleanUp();
-	}
 }
 
 void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 {
-
 	for (pugi::xml_node pugiNode = xml_trees.child("item"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
 	{
 		ItemNode* node = new ItemNode;
@@ -266,7 +260,6 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 		nodeList.push_back(node);
 	}
 	LoadItemState(xml_trees);
-
 }
 
 void ItemManager::LoadQuantity(int x, int y, int i)
@@ -324,37 +317,34 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 			}
 		}
 
-
 		//print stats
-
 		string h = to_string(maxhp);
-		app->render->TextDraw(h.c_str(), 350, 540, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("MAXHP: ", 250, 540, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(h.c_str(), 350, 540, 15);
+		app->render->TextDraw("MAXHP: ", 250, 540, 15);
 		string at = to_string(attack);
-		app->render->TextDraw(at.c_str(), 350, 560, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("ATTACK: ", 250, 560, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(at.c_str(), 350, 560, 15);
+		app->render->TextDraw("ATTACK: ", 250, 560, 15);
 		string cP = to_string(critProbability);
-		app->render->TextDraw(cP.c_str(), 350, 580, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("CRIT RATE: ", 250, 580, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(cP.c_str(), 350, 580, 15);
+		app->render->TextDraw("CRIT RATE: ", 250, 580, 15);
 		string cD = to_string(critDamage);
-		app->render->TextDraw(cD.c_str(), 350, 600, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("CRIT DMG: ", 250, 600, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(cD.c_str(), 350, 600, 15);
+		app->render->TextDraw("CRIT DMG: ", 250, 600, 15);
 		string p = to_string(precision);
-		app->render->TextDraw(p.c_str(), 350, 620, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("PRECISION: ", 250, 620, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(p.c_str(), 350, 620, 15);
+		app->render->TextDraw("PRECISION: ", 250, 620, 15);
 		string ar = to_string(armor);
-		app->render->TextDraw(ar.c_str(), 550, 540, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("ARMOR: ", 450, 540, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(ar.c_str(), 550, 540, 15);
+		app->render->TextDraw("ARMOR: ", 450, 540, 15);
 		string e = to_string(esquiva);
-		app->render->TextDraw(e.c_str(), 550, 560, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("DODGE: ", 450, 560, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(e.c_str(), 550, 560, 15);
+		app->render->TextDraw("DODGE: ", 450, 560, 15);
 		string r = to_string(resistencia);
-		app->render->TextDraw(r.c_str(), 550, 580, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("RES: ", 450, 580, 15, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(r.c_str(), 550, 580, 15);
+		app->render->TextDraw("RES: ", 450, 580, 15);
 		string s = to_string(speed);
-		app->render->TextDraw(s.c_str(), 550, 600, 15, Font::TEXT, { 0, 0, 0 });
-		app->render->TextDraw("SPEED", 450, 600, 15, Font::TEXT, { 0, 0, 0 });
-
+		app->render->TextDraw(s.c_str(), 550, 600, 15);
+		app->render->TextDraw("SPEED", 450, 600, 15);
 
 		app->tex->UnLoad(itemsTexture);
 		itemsTexture = NULL;
@@ -364,68 +354,55 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 void ItemManager::LoadButtons(int x, int y, int ID)
 {
 	SDL_Rect buttonBounds;
-	int x_;
+	buttonBounds = { (700 + 52 * x), y, 52, 52 };
 
-	if (nodeList[ID]->button == NULL && nodeList[ID]->equiped == false)
+	if (nodeList[ID]->button == NULL)
 	{
-		x_ = (700 + 52 * x);
-		buttonBounds = { x_, y, 52, 52 };
 		nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
 	}
-	
-	if (nodeList[ID]->button == NULL && nodeList[ID]->equiped)
+
+	if (nodeList[ID]->equiped)
 	{
 		switch (nodeList[ID]->kind)
 		{
 		case 1:
-			x_ = (200 + 52);
-			buttonBounds = { x_, 332, 52, 52 };
-			nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+			buttonBounds = { (200 + 52), 332, 52, 52 };
 			break;
 		case 2:
-			x_ = (200 + 52);
-			buttonBounds = { x_, 270, 52, 52 };
-			nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+			buttonBounds = { (200 + 52), 270, 52, 52 };
 			break;
 		case 3:
-			x_ = (200 + 52);
-			buttonBounds = { x_, 392, 52, 52 };
-			nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+			buttonBounds = { (200 + 52), 392, 52, 52 };
 			break;
 		case 4:
-			x_ = (200 + 52);
-			buttonBounds = { x_, 208, 52, 52 };
-			nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+			buttonBounds = { (200 + 52), 208, 52, 52 };
 			break;
 		case 5:
-			if (nodeList[ID]->space==1)
+			if (nodeList[ID]->space == 1)
 			{
-				x_ = (510 + 52);
-				buttonBounds = { x_, 210, 52, 52 };
-				nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+				buttonBounds = { (510 + 52), 210, 52, 52 };
 			}
 			else
 			{
-				x_ = (510 + 52);
-				buttonBounds = { x_, 270, 52, 52 };
-				nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+				buttonBounds = { (510 + 52), 270, 52, 52 };
 			}
 			break;
 		case 6:
 			if (nodeList[ID]->space == 1)
 			{
-				x_ = (510 + 52);
-				buttonBounds = { x_, 335, 52, 52 };
-				nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+				buttonBounds = { (510 + 52), 335, 52, 52 };
 			}
 			else
 			{
-				x_ = (510 + 52);
-				buttonBounds = { x_, 400, 52, 52 };
-				nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+				buttonBounds = { (510 + 52), 400, 52, 52 };
 			}
 			break;
 		}
+	}
+
+	if (nodeList[ID]->button != NULL)
+	{
+		nodeList[ID]->button->bounds = buttonBounds;
 	}
 }
 
@@ -461,7 +438,7 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 	const char* file = "save_items.xml";
 	items.load_file(file);
 	
-	// load items
+	//Load items
 	for (pugi::xml_node pugiNode = items.first_child().first_child().first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
 	{
 		for (size_t i = 0; i < nodeList.size(); i++)

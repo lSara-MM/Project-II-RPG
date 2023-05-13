@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Entity.h"
+#include "Player.h"
 #include "GuiButton.h"
 
 #include "Box2D/Box2D/Box2D.h"
@@ -32,7 +33,6 @@ public:
 public:
 
 	SDL_Texture* inventoryIMG;
-
 
 	unsigned cap;
 	int y;

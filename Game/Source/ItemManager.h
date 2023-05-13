@@ -11,7 +11,7 @@
 #include "GuiButton.h"
 #include "GuiManager.h"
 #include "Inventory.h"
-#include "Combat.h"
+#include "Player.h"
 
 #include <vector>
 using namespace std;
@@ -86,6 +86,12 @@ public:
 	bool LoadItemState(pugi::xml_node& xml_trees);
 	bool SaveItemState();
 
+	void SetPlayerForScene(Player* player_)
+	{
+		player = player_;
+	}
+
+
 public:
 
 	ItemNode* tree = new ItemNode;
@@ -95,6 +101,8 @@ public:
 	const char* texturePath;
 
 	vector <ItemNode*> nodeList;
+
+	Player* player;
 
 private:
 	pugi::xml_document items;

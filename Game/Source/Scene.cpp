@@ -61,6 +61,7 @@ bool Scene::Start()
 		app->input->playerName = "Player";
 	}
 
+
 	//Load Map
 	app->map->Load(0);
 	exit_B = false;
@@ -77,8 +78,11 @@ bool Scene::Start()
 
 	app->entityManager->Enable();
 
+	//Init player inventory
+	app->itemManager->SetPlayerForScene(player);
+
 	app->itemManager->Enable();
-	
+
 	if (app->iScene->continueGame_B)
 	{
 		app->LoadGameRequest();

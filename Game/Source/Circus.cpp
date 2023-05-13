@@ -19,6 +19,7 @@
 #include "GuiManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
+#include "ItemManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -52,6 +53,9 @@ bool Circus::Start()
 {
 	//Load Map
 	app->map->Load(2);
+
+	//Init player inventory
+	app->itemManager->SetPlayerForScene(player);
 
 	app->audio->PlayMusic(circusMusPath, 0);
 
