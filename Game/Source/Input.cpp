@@ -66,6 +66,8 @@ bool Input::Start()
 	temp = "";
 	getInput_B = false;
 
+	backSpaceMax = false;
+
 	SDL_StopTextInput();
 	return true;
 }
@@ -266,10 +268,16 @@ bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 	// If backspace was pressed and the string isn't blank
 	if ((event.key.keysym.sym == SDLK_BACKSPACE) && !temp.empty())
 	{
+		if (backSpaceMax) 
+		{
+			temp.erase(temp.length() - 1);
+			backSpaceMax = false;
+		}
 		// Remove a character from the end
-		if (temp.length() < playerInput->max_chars - 1) { temp.erase(temp.length() - 1); }
-		
+
 		temp.erase(temp.length() - 1);
+		backSpaceMax = true;
+		
 	}
 
 	if ((event.key.keysym.sym == SDLK_RETURN) && !temp.empty())

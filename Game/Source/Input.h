@@ -133,6 +133,9 @@ public:
 
 	bool godMode_B = false;
 
+	//Este bool hace que te borre una vez hacia atras, cuando haya superado el numero máximo de caracteres.
+	bool backSpaceMax = false;
+
 	// TO DELETE
 	int currentHP_Bard = 0;
 	int currentHP_Protagonist = 0;

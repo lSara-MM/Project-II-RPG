@@ -170,7 +170,7 @@ bool QuestManager::Update(float dt)
 	//Draw Quest and check if completed
 	if (quest1->active || quest2->active || quest3->active)
 	{
-		iPoint pos = { app->win->GetWidth() - 240, 50 };
+		iPoint pos = { 10, 50 };
 		app->render->TextDraw("Quests:", pos.x, pos.y, 40, Font::TEXT, { 255, 255, 255 });
 	}
 
@@ -184,7 +184,7 @@ bool QuestManager::Update(float dt)
 
 	if (quest1->active)
 	{
-		iPoint pos = { app->win->GetWidth() - 240, 100 };
+		iPoint pos = { 10, 100 };
 		Uint8 R = 255;
 		Uint8 G = 255;
 		Uint8 B = 255;
@@ -206,7 +206,7 @@ bool QuestManager::Update(float dt)
 	}
 	if (quest2->active)
 	{
-		iPoint pos = { app->win->GetWidth() - 240, 170 };
+		iPoint pos = { 10, 170 };
 		Uint8 R = 255;
 		Uint8 G = 255;
 		Uint8 B = 255;
@@ -233,7 +233,7 @@ bool QuestManager::Update(float dt)
 	}
 	if (quest3->active)
 	{
-		iPoint pos = { app->win->GetWidth() - 240, 240 };
+		iPoint pos = { 10, 240 };
 		Uint8 R = 255;
 		Uint8 G = 255;
 		Uint8 B = 255;
