@@ -42,6 +42,7 @@ bool HouseOfTerrors::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	musHauntedPath = config.attribute("musicD1").as_string();
+	pause_music = config.attribute("pause").as_string();
 	mute_B = false;
 
 	sceneNode = config;
@@ -246,7 +247,7 @@ void HouseOfTerrors::Debug()
 
 	if (pause_B == true && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_DOWN))//POSAR CONTROL NORMAL
 	{
-
+		app->audio->PlayMusic(pause_music);
 		if (settings_B == true)
 		{
 			for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
@@ -324,12 +325,14 @@ bool HouseOfTerrors::OnGuiMouseClickEvent(GuiControl* control)
 	case 701:
 		LOG("Button Close pause click");
 		pause_B = false;
+		app->audio->PlayMusic(musHauntedPath);
 		//pPause->CleanUp();
 		break;
 
 	case 702:
 		LOG("Button Resume click");
 		pause_B = false;
+		app->audio->PlayMusic(musHauntedPath);
 		//pPause->CleanUp();
 		break;
 
@@ -364,6 +367,7 @@ bool HouseOfTerrors::OnGuiMouseClickEvent(GuiControl* control)
 		}
 
 		settings_B = false;
+		app->audio->PlayMusic(musHauntedPath);
 		pSettings->CloseSettings();
 		//pSettings->CleanUp();
 		break;

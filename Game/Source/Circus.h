@@ -65,6 +65,8 @@ private:
 	//Music path
 	const char* circusMusPath;
 
+	const char* pause_music;
+
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;

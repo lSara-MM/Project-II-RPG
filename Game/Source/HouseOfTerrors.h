@@ -64,6 +64,8 @@ private:
 	//Music path
 	const char* musHauntedPath;
 
+	const char* pause_music;
+
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;

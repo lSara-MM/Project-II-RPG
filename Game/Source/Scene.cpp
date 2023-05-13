@@ -42,6 +42,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	lobby_music = config.attribute("music").as_string();
+	pause_music = config.attribute("pause").as_string();
 	mute_B = false;
 
 	sceneNode = config;
@@ -269,6 +270,7 @@ void Scene::Debug()
 	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
 	{
 		app->audio->PlayFx(pausefx);
+		app->audio->PlayMusic(pause_music);
 		pause_B = true;	
 
 		if (pause_B)
@@ -394,12 +396,14 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	case 701: 
 		LOG("Button Close pause click");
 		pause_B = false;
+		app->audio->PlayMusic(lobby_music);
 		//pPause->CleanUp();
 		break;
 		
 	case 702: 
 		LOG("Button Resume click");
 		pause_B = false;
+		app->audio->PlayMusic(lobby_music);
 		//pPause->CleanUp();
 		break;
 		
@@ -435,6 +439,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 
 		settings_B = false;
 		pSettings->CloseSettings();
+		app->audio->PlayMusic(lobby_music);
 		//pSettings->CleanUp();
 		break;
 

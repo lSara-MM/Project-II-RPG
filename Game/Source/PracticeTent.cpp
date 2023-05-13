@@ -41,6 +41,7 @@ bool PracticeTent::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	practisePath = config.attribute("musTent").as_string();
+	pause_music = config.attribute("pause").as_string();
 	mute_B = false;
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
 	sceneNode = config;
@@ -210,6 +211,7 @@ void PracticeTent::Debug()
 	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
 	{
 		pause_B = true;
+		app->audio->PlayMusic(pause_music);
 
 		if (pause_B)
 		{
@@ -307,12 +309,14 @@ bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 	case 701:
 		LOG("Button Close pause click");
 		pause_B = false;
+		app->audio->PlayMusic(practisePath);
 		pPause->CleanUp();
 		break;
 
 	case 702:
 		LOG("Button Resume click");
 		pause_B = false;
+		app->audio->PlayMusic(practisePath);
 		pPause->CleanUp();
 		break;
 
@@ -347,6 +351,7 @@ bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 		}
 
 		settings_B = false;
+		app->audio->PlayMusic(practisePath);
 		pSettings->CloseSettings();
 		pSettings->CleanUp();
 		break;

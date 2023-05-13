@@ -65,6 +65,8 @@ private:
 	//Music path
 	const char* practisePath;
 
+	const char* pause_music;
+
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;
