@@ -261,7 +261,7 @@ bool Render::TextDraw(const char* text, int x, int y, int size, Font font, SDL_C
 
 	//load a font into memory
 
-	if (font == Font::UI)	{ ttf_font = TTF_OpenFont("Assets/Fonts/Fondamento-Regular.ttf", size); }
+	if (font == Font::UI)	{ ttf_font = TTF_OpenFont("Assets/Fonts/Milonga-Regular.ttf", size); }
 	else if (font == Font::TEXT) { ttf_font = TTF_OpenFont("Assets/Fonts/FingerPaint-Regular.ttf", size); }
 	else if (font == Font::TITLE) { ttf_font = TTF_OpenFont("Assets/Fonts/Circus.ttf", size); }
 	

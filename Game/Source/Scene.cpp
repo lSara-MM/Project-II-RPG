@@ -439,7 +439,6 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 
 		settings_B = false;
 		pSettings->CloseSettings();
-		app->audio->PlayMusic(lobby_music);
 		//pSettings->CleanUp();
 		break;
 

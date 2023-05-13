@@ -819,7 +819,7 @@ public:
 
 		app->audio->lowerBgMusic();
 
-		app->render->DrawRectangle({ 0 - app->render->camera.x,int(offsetAnimation + point * (0 - app->render->camera.y-offsetAnimation)), app->win->GetWidth(), app->win->GetHeight()}, 255, 255, 255);
+		app->render->DrawRectangle({ 0 - app->render->camera.x,int(offsetAnimation + point * (0 - app->render->camera.y-offsetAnimation)), app->win->GetWidth(), app->win->GetHeight()}, 64, 58, 57);
 		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
 		app->render->TextDraw("Pause", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI);
 
