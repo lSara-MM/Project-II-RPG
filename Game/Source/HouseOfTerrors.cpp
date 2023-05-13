@@ -66,8 +66,9 @@ bool HouseOfTerrors::Start()
 	npcSetID = 1;
 
 	// Settings
-	pSettings = nullptr;
-	pPause = nullptr;
+	pSettings = new Settings(this);
+	pPause = new Pause(this);
+	pPause->pSettings = pSettings;
 	pause_B = false;
 	settings_B = false;
 
@@ -122,23 +123,32 @@ bool HouseOfTerrors::PostUpdate()
 
 	if (exit_B) return false;
 
-	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
-	{
-		settings_B = !settings_B;
+	//if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	//{
+	//	settings_B = !settings_B;
 
-		if (settings_B)
-		{
-			pSettings = new Settings(this);
-		}
-		else
-		{
-			pSettings->CloseSettings();
-			pSettings->CleanUp();
-		}
-	}
+	//	if (settings_B)
+	//	{
+	//		pSettings = new Settings(this);
+	//	}
+	//	else
+	//	{
+	//		pSettings->CloseSettings();
+	//		pSettings->CleanUp();
+	//	}
+	//}
 
 	if (pause_B) { pPause->OpenPause(); }
+	else
+	{
+		pPause->ClosePause();
+	}
 	if (settings_B) { pSettings->OpenSettings(); }
+	else
+	{
+		pSettings->CloseSettings();
+	}
+
 	app->guiManager->Draw();
 
 	return ret;
@@ -218,15 +228,15 @@ void HouseOfTerrors::Debug()
 
 		if (pause_B)
 		{
-			pPause = new Pause(this);
-			pSettings = pPause->pSettings;
+			/*pPause = new Pause(this);
+			pSettings = pPause->pSettings;*/
 
 			pSettings->settings_B = !pSettings->settings_B;
 		}
-		else
+		/*else
 		{
 			pPause->CleanUp();
-		}
+		}*/
 
 		LOG("PAUSE");
 	}
@@ -242,22 +252,22 @@ void HouseOfTerrors::Debug()
 			}
 
 			settings_B = false;
-			pSettings->CloseSettings();
-			pSettings->CleanUp();
+			/*pSettings->CloseSettings();
+			pSettings->CleanUp();*/
 		}
 		else
 		{
 			pause_B = false;
 			if (pause_B)
 			{
-				pPause = new Pause(this);
+			/*	pPause = new Pause(this);*/
 				pSettings = pPause->pSettings;
 
 				pSettings->settings_B = !pSettings->settings_B;
 			}
 			else
 			{
-				pPause->CleanUp();
+				/*pPause->CleanUp();*/
 			}
 
 		}
@@ -311,13 +321,13 @@ bool HouseOfTerrors::OnGuiMouseClickEvent(GuiControl* control)
 	case 701:
 		LOG("Button Close pause click");
 		pause_B = false;
-		pPause->CleanUp();
+		//pPause->CleanUp();
 		break;
 
 	case 702:
 		LOG("Button Resume click");
 		pause_B = false;
-		pPause->CleanUp();
+		//pPause->CleanUp();
 		break;
 
 	case 703:
@@ -333,7 +343,7 @@ bool HouseOfTerrors::OnGuiMouseClickEvent(GuiControl* control)
 		}
 
 		settings_B = true;
-		pSettings = new Settings(this);
+		//pSettings = new Settings(this);
 		break;
 
 	case 705:
@@ -352,7 +362,7 @@ bool HouseOfTerrors::OnGuiMouseClickEvent(GuiControl* control)
 
 		settings_B = false;
 		pSettings->CloseSettings();
-		pSettings->CleanUp();
+		//pSettings->CleanUp();
 		break;
 
 	case 802:
