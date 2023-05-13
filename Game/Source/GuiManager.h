@@ -32,7 +32,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	GuiControl* CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType = ButtonType::NONE, const char* text = "", int fontSize = 12, Font font = Font::UI, SDL_Rect sliderBounds = {0,0,0,0}, int speed = 1, Easings eType = Easings::BACK_OUT);
+	GuiControl* CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType = ButtonType::NONE, const char* text = "", int fontSize = 12, Font font = Font::UI, SDL_Rect sliderBounds = {0,0,0,0}, int speed = 1, Easings eType = Easings::BACK_OUT, AnimationAxis axisType = AnimationAxis::DOWN_Y);
 	//void DestroyGuiControl(GuiControl* gui);
 	//void AddGuiControl(GuiControl* gui);
 

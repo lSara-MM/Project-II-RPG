@@ -61,6 +61,14 @@ enum class ButtonType
 	COMBAT_TARGET,
 };
 
+enum class AnimationAxis
+{
+	DOWN_Y,
+	UP_Y,
+	LEFT_X,
+	RIGHT_X,
+};
+
 
 class GuiControl
 {

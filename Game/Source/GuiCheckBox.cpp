@@ -1,14 +1,18 @@
 #include "GuiCheckBox.h"
 #include "GuiManager.h"
 
-GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, int speed, Easings eType) : GuiControl(GuiControlType::CHECKBOX, id)
+GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, int speed, Easings eType, AnimationAxis axisType) : GuiControl(GuiControlType::CHECKBOX, id)
 {
 	this->bounds = bounds;
 	this->step = speed;
 	animationButton.Set();
 	animationButton.AddTween(100, 80, eType);
 
+	this->axisType = axisType;
+
 	boundsY_AUX = this->bounds.y;
+	boundsX_AUX = this->bounds.x;
+
 	isForward_B = true;
 	checkBoxTex = app->tex->Load("Assets/Textures/checkbox.png");
 }
@@ -62,15 +66,39 @@ bool GuiCheckBox::Update(float dt)
 	}
 
 	animationButton.Step(step, false);
-	float point = animationButton.GetPoint();
-	int offset = -750;
-	bounds.y = offset + point * (boundsY_AUX - offset);
+
 
 	return false;
 }
 
 bool GuiCheckBox::Draw(Render* render)
 {
+	switch (axisType)
+	{
+	case AnimationAxis::DOWN_Y:
+		point = animationButton.GetPoint();
+		offset = -750;
+		bounds.y = offset + point * (boundsY_AUX - offset);
+		break;
+	case AnimationAxis::UP_Y:
+		point = animationButton.GetPoint();
+		offset = 750;
+		bounds.y = offset + point * (boundsY_AUX - offset);
+		break;
+	case AnimationAxis::LEFT_X:
+		point = animationButton.GetPoint();
+		offset = 1300;
+		bounds.x = offset + point * (boundsX_AUX - offset);
+		break;
+	case AnimationAxis::RIGHT_X:
+		point = animationButton.GetPoint();
+		offset = -1300;
+		bounds.x = offset + point * (boundsX_AUX - offset);
+		break;
+	default:
+		break;
+	}
+
 	SDL_Rect rect = { 0, 0, 0, 0 };
 	if (app->guiManager->GUI_debug)
 	{

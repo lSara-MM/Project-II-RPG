@@ -22,7 +22,7 @@ bool GuiManager::Start()
 	return true;
 }
 
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font, SDL_Rect sliderBounds, int speed, Easings eType)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* observer, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font, SDL_Rect sliderBounds, int speed, Easings eType, AnimationAxis axisType)
 {
 	GuiControl* guiControl = nullptr;
 
@@ -30,17 +30,17 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* ob
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		guiControl = (GuiControl*) new GuiButton(id, bounds, bType,  text, fontSize, font, speed, eType);
+		guiControl = (GuiControl*) new GuiButton(id, bounds, bType,  text, fontSize, font, speed, eType, axisType);
 		break;
 	case GuiControlType::TOGGLE:
 		break;
 	case GuiControlType::CHECKBOX:
-		guiControl = (GuiControl*) new GuiCheckBox(id, bounds,speed,eType);
+		guiControl = (GuiControl*) new GuiCheckBox(id, bounds,speed,eType, axisType);
 		break;
 	case GuiControlType::SLIDER:
 		break;
 	case GuiControlType::SLIDERBAR:
-		guiControl = (GuiControl*) new GuiSliderBar(id, bounds, sliderBounds, speed, eType);
+		guiControl = (GuiControl*) new GuiSliderBar(id, bounds, sliderBounds, speed, eType, axisType);
 		break;
 	case GuiControlType::COMBOBOX:
 		break;

@@ -12,7 +12,7 @@ class GuiButton : public GuiControl
 {
 public:
 
-	GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text = "", int fontSize = 12, Font font = Font::UI, int speed = 1, Easings eType = Easings::BACK_OUT);
+	GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text = "", int fontSize = 12, Font font = Font::UI, int speed = 1, Easings eType = Easings::BACK_OUT, AnimationAxis axisType= AnimationAxis::DOWN_Y);
 	virtual ~GuiButton();
 
 	bool Update(float dt);
@@ -27,14 +27,19 @@ public:
 	bool isForward_B;
 
 	int boundsY_AUX;
+	int boundsX_AUX;
 
 	const char* fxHoverPath;
 	uint fxHover;
-	int hoverTest;
+	bool hoverTest;
 
 private:
 	Tween animationButton;
 	int step;
+	AnimationAxis axisType;
+
+	float point;
+	int offset;
 };
 
 #endif // __GUIBUTTON_H__
