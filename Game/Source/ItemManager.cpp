@@ -134,7 +134,6 @@ void ItemManager::MinusQuantity(const char* name)
 			else
 			{
 				nodeList[i]->equiped = !nodeList[i]->equiped;
-				nodeList[i]->CleanUp();
 			}
 			SaveItemState();
 			UseItem(nodeList[i]);	
@@ -356,7 +355,7 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 	SDL_Rect buttonBounds;
 	buttonBounds = { (700 + 52 * x), y, 52, 52 };
 
-	if (nodeList[ID]->button == NULL)
+	if (nodeList[ID]->button == nullptr)
 	{
 		nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
 	}
