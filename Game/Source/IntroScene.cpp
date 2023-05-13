@@ -129,6 +129,11 @@ bool IntroScene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		transition_B = true;
+		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->isForward_B = false;
+
+		}
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 	}
 		
@@ -240,6 +245,11 @@ bool IntroScene::PostUpdate()
 	if (app->input->playerName->input_entered && !introDone)
 	{
 		transition_B = true;
+		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->isForward_B = false;
+
+		}
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
 		introDone = true;
 	}
@@ -315,12 +325,22 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		else
 		{
 			transition_B = true;
+			for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
+			{
+				i->data->isForward_B = false;
+				
+			}
 			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		}
 		break;
 	case 2:
 		LOG("Button continue click");
 		transition_B = true;
+		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->isForward_B = false;
+
+		}
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		continueGame_B = true;
 		break;

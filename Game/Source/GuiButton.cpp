@@ -2,7 +2,7 @@
 #include "GuiManager.h"
 #include "IntroScene.h"
 
-GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font, int speed, Easings eType) : GuiControl(GuiControlType::BUTTON, id)
+GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font, int speed, Easings eType, AnimationAxis axisType) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
 	this->text = text;
@@ -11,7 +11,10 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	
 	this->step = speed;//velocidad actualiza animacion
 
-	boundsY_AUX = this->bounds.y;
+	this->axisType = axisType;
+
+	boundsY_AUX = this->bounds.y;//auxliar controlar movimiento animacion
+	boundsX_AUX = this->bounds.x;
 
 	isForward_B = true;
 	animationButton.Set();
@@ -52,6 +55,11 @@ bool GuiButton::Update(float dt)
 					hoverTest = true;
 				}
 				state = GuiControlState::FOCUSED;
+				if (hoverTest == false)
+				{
+					app->audio->PlayFx(fxHover);
+					hoverTest = true;
+				}
 				if (previousState != state)
 				{
 					//LOG("Change state from %d to %d", previousState, state);
@@ -80,6 +88,11 @@ bool GuiButton::Update(float dt)
 		{
 			if (state==GuiControlState::FOCUSED)
 			{
+				if (hoverTest == false)
+				{
+					app->audio->PlayFx(fxHover);
+					hoverTest == true;
+				}
 				if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 				{
 					state = GuiControlState::PRESSED;
@@ -107,15 +120,39 @@ bool GuiButton::Update(float dt)
 	}
 
 	animationButton.Step(step, false);
-	float point = animationButton.GetPoint();
-	int offset = -750;
-	bounds.y = offset + point * (boundsY_AUX - offset);
+
 
 	return false;
 }
 
 bool GuiButton::Draw(Render* render)
 {
+	switch (axisType)
+	{
+	case AnimationAxis::DOWN_Y:
+		point = animationButton.GetPoint();
+		offset = -750;
+		bounds.y = offset + point * (boundsY_AUX - offset);
+		break;
+	case AnimationAxis::UP_Y:
+		point = animationButton.GetPoint();
+		offset = 750;
+		bounds.y = offset + point * (boundsY_AUX - offset);
+		break;
+	case AnimationAxis::LEFT_X:
+		point = animationButton.GetPoint();
+		offset = 1300;
+		bounds.x = offset + point * (boundsX_AUX - offset);
+		break;
+	case AnimationAxis::RIGHT_X:
+		point = animationButton.GetPoint();
+		offset = -1300;
+		bounds.x = offset + point * (boundsX_AUX - offset);
+		break;
+	default:
+		break;
+	}
+
 	SDL_Rect rect = { 0, 0, bounds.w, bounds.h };
 
 	/*if (buttonType == ButtonType::EXTRA_LARGE) { rect = { 0, 0, 93, 118 }; offsetX = 50;	offsetY = 10; }
