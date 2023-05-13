@@ -50,7 +50,12 @@ public:
 
 	bool CleanUp()
 	{
-		RELEASE(button);
+		//RELEASE(button);
+		if (button != nullptr)
+		{
+			delete(button);
+			button = nullptr;
+		}
 
 		return true;
 	}
