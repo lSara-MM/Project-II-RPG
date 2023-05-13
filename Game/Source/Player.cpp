@@ -90,6 +90,7 @@ bool Player::Awake() {
 	//fx enter interaction
 	interactionPath = "Assets/Audio/Fx/Npc_interaction_sensor.wav";
 	interactionfx = app->audio->LoadFx(interactionPath);
+	interactionTest = false;
 
 	//fx confirm interaction
 	confirmPath = "Assets/Audio/Fx/confirm_interaction.wav";
@@ -217,6 +218,12 @@ bool Player::Update(float dt)
 		if (npcInteract)
 		{
 			app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
+
+			if (interactionTest == false)
+			{
+				app->audio->PlayFx(interactionfx);
+				interactionTest = true;
+			}
 
 			if (!lockMovement)
 			{
@@ -389,6 +396,7 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 	{
 	case ColliderType::NPC:
 		npcInteract = false;
+		interactionTest = false;
 		break;
 	case ColliderType::BOSSDEAD:
 		app->puzzleManager->bossActive = false;

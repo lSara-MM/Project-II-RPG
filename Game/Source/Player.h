@@ -104,6 +104,7 @@ private:
 	// interact fx
 	const char* interactionPath;
 	uint interactionfx;
+	bool interactionTest;
 
 	// interact fx
 	const char* confirmPath;

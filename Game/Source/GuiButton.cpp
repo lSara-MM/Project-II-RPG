@@ -23,6 +23,7 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 
 	fxHoverPath = "Assets/Audio/Fx/on_button.wav";
 	fxHover = app->audio->LoadFx(fxHoverPath);
+	hoverTest = false;
 }
 
 GuiButton::~GuiButton()
@@ -45,6 +46,11 @@ bool GuiButton::Update(float dt)
 			if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
 				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
 
+				if (hoverTest == false)
+				{
+					app->audio->PlayFx(fxHover);
+					hoverTest = true;
+				}
 				state = GuiControlState::FOCUSED;
 				if (previousState != state)
 				{
@@ -66,6 +72,7 @@ bool GuiButton::Update(float dt)
 			else
 			{
 				state = GuiControlState::NORMAL;
+				hoverTest = false;
 			}
 		}
 
