@@ -107,6 +107,7 @@ bool Character::Start()
 
 		// Texture section
 		sectionRect = nullptr;
+		button->state = GuiControlState::SELECTED;
 	}
 	else
 	{
@@ -119,11 +120,10 @@ bool Character::Start()
 		// Texture section
 		SDL_Rect rect = { 0, 0, 0, 0 };
 		sectionRect = &rect;
+
+		button->state = GuiControlState::NONE;
 	}
 	
-	
-	// TODO change al final to Selected
-	button->state = GuiControlState::DISABLED;
 	onTurn = false;
 
 	return true;
