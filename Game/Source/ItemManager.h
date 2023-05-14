@@ -42,6 +42,8 @@ public:
 	bool equiped = false;
 	int max;
 
+	int whom=0;
+
 	int space=0;
 
 	int ID;
@@ -104,8 +106,7 @@ public:
 
 	Player* player;
 
-	//
-	bool event;
+	int invPos;
 
 private:
 	pugi::xml_document items;

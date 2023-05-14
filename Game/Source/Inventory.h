@@ -17,7 +17,7 @@ class Inventory : public Module
 public:
 
 	// Constructors & Destructors
-	Inventory(unsigned cap = 6);
+	Inventory(unsigned cap = 8);
 	~Inventory();
 
 	// Main module steps
@@ -37,6 +37,7 @@ public:
 	unsigned cap;
 	int y;
 
+	GuiButton* selectCharacter[4];
 };
 
 #endif // __ITEMMANAGER_H__

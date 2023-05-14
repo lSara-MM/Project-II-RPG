@@ -27,12 +27,10 @@ bool ItemManager::Awake(pugi::xml_node& config)
 
 bool ItemManager::Start()
 {
-	LoadItems();
-
 	player->LoadAllPC();
 	player->SetParty();
 
-	event = true;
+	LoadItems();
 
 	return true;
 }
@@ -71,6 +69,8 @@ bool ItemManager::Update(float dt)
 
 bool ItemManager::CleanUp()
 {
+	SaveItemState();
+
 	for (size_t i = 0; i < nodeList.size(); i++)
 	{
 		if (nodeList[i]->quantity > 0)
@@ -118,10 +118,8 @@ void ItemManager::AddQuantity(pugi::xml_node& xml_trees, const char* name)
 			{
 				nodeList[i]->quantity++;
 			}
-			SaveItemState();
 		}
 	}
-	event = true;
 }
 
 void ItemManager::MinusQuantity(const char* name)
@@ -138,7 +136,6 @@ void ItemManager::MinusQuantity(const char* name)
 			{
 				nodeList[i]->equiped = !nodeList[i]->equiped;
 			}
-			SaveItemState();
 			UseItem(nodeList[i]);	
 		}
 	}
@@ -148,8 +145,9 @@ void ItemManager::UseItem(ItemNode* item)
 {
 	for (size_t i = 0; i < player->arrParty.size(); i++)
 	{
-		if (player->arrParty.at(i) != nullptr)
+		if (player->arrParty.at(i) != nullptr && invPos==i)
 		{
+
 			if (item->type == 2 && item->equiped == true)
 			{
 				player->arrParty.at(i)->currentHp += item->hp;
@@ -189,33 +187,9 @@ void ItemManager::UseItem(ItemNode* item)
 					player->arrParty.at(i)->currentHp += item->hp;
 				}
 			}
-		}
-	}
 
-	//Temporal hasta que pueda acceder a los aliados
-	if (item->type == 2 && item->equiped == true)
-	{
-		maxhp += item->maxhp;
-		armor += item->armor;
-		attack += item->attack;
-		critDamage += item->critDamage;
-		critProbability += item->critProbability;
-		precision += item->precision;
-		esquiva += item->esquiva;
-		speed += item->speed;
-		resistencia += item->resistencia;
-	}
-	else if (item->type == 2 && item->equiped == false)
-	{
-		maxhp -= item->maxhp;
-		armor -= item->armor;
-		attack -= item->attack;
-		critDamage -= item->critDamage;
-		critProbability -= item->critProbability;
-		precision -= item->precision;
-		esquiva -= item->esquiva;
-		speed -= item->speed;
-		resistencia -= item->resistencia;
+			item->whom = i;
+		}
 	}
 
 	//Temporal
@@ -226,8 +200,6 @@ void ItemManager::UseItem(ItemNode* item)
 			item->space = 0;
 		}
 	}
-
-	event = true;
 }
 
 void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
@@ -278,77 +250,92 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 
 		if (!nodeList[i]->equiped)
 		{
-			app->render->DrawTexture(itemsTexture, (700 + 52 * x) - app->render->camera.x, y - app->render->camera.y);
+			app->render->DrawTexture(itemsTexture, (671 + 42 * x) - app->render->camera.x, y - app->render->camera.y);
+
+			nodeList[i]->whom = invPos;
 
 			string c = to_string(nodeList[i]->quantity);
-			app->render->TextDraw(c.c_str(), (732 + 52 * x), y + 26, 20, Font::TEXT, { 0, 0, 0 });
+			app->render->TextDraw(c.c_str(), (671 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
 		}
-		else if (nodeList[i]->equiped)
+		else if (nodeList[i]->equiped && nodeList[i]->whom == invPos)
 		{
 			switch (nodeList[i]->kind)
 			{
 			case 1:
-				app->render->DrawTexture(itemsTexture, (200 + 52) - app->render->camera.x, 332 - app->render->camera.y);
+				app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 295 - app->render->camera.y);
 				break;
 			case 2:
-				app->render->DrawTexture(itemsTexture, (200 + 52) - app->render->camera.x, 270 - app->render->camera.y);
+				app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 245 - app->render->camera.y);
 				break;
 			case 3:
-				app->render->DrawTexture(itemsTexture, (200 + 52) - app->render->camera.x, 392 - app->render->camera.y);
+				app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 345 - app->render->camera.y);
 				break;
 			case 4:
-				app->render->DrawTexture(itemsTexture, (200 + 52) - app->render->camera.x, 208 - app->render->camera.y);
+				app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 195 - app->render->camera.y);
 				break;
 			case 5:
 				if (nodeList[i]->space == 1)
 				{
-					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 210 - app->render->camera.y);
+					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 185 - app->render->camera.y);
 				}
 				else
 				{
-					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 270 - app->render->camera.y);
+					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 235 - app->render->camera.y);
 				}
 				break;
 			case 6:
 				if (nodeList[i]->space == 1)
 				{
-					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 335 - app->render->camera.y);
+					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 300 - app->render->camera.y);
 				}
 				else
 				{
-					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 400 - app->render->camera.y);
+					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 348 - app->render->camera.y);
 				}
+			}
+		}
+		else if (nodeList[i]->equiped && nodeList[i]->whom != invPos)
+		{
+			nodeList[i]->CleanUp();
+		}
+
+
+		//LOAD STATS
+		for (size_t i = 0; i < player->arrParty.size(); i++)
+		{
+			if (player->arrParty.at(i) != nullptr && invPos == i)
+			{
+				maxhp = player->arrParty.at(i)->maxHp;
+				armor = player->arrParty.at(i)->armor;
+				attack = player->arrParty.at(i)->attack;
+				critDamage = player->arrParty.at(i)->critDamage;
+				critProbability = player->arrParty.at(i)->critRate;
+				precision = player->arrParty.at(i)->precision;
+				esquiva = player->arrParty.at(i)->dodge;
+				speed = player->arrParty.at(i)->speed;
+				resistencia = player->arrParty.at(i)->res;
 			}
 		}
 
 		//print stats
 		string h = to_string(maxhp);
-		app->render->TextDraw(h.c_str(), 350, 540, 15);
-		app->render->TextDraw("MAXHP: ", 250, 540, 15);
+		app->render->TextDraw(h.c_str(), 330, 460, 15, Font::TEXT, { 0, 0, 0 });
 		string at = to_string(attack);
-		app->render->TextDraw(at.c_str(), 350, 560, 15);
-		app->render->TextDraw("ATTACK: ", 250, 560, 15);
+		app->render->TextDraw(at.c_str(), 330, 485, 15, Font::TEXT, { 0, 0, 0 });
 		string cP = to_string(critProbability);
-		app->render->TextDraw(cP.c_str(), 350, 580, 15);
-		app->render->TextDraw("CRIT RATE: ", 250, 580, 15);
+		app->render->TextDraw(cP.c_str(), 330, 510, 15, Font::TEXT, { 0, 0, 0 });
 		string cD = to_string(critDamage);
-		app->render->TextDraw(cD.c_str(), 350, 600, 15);
-		app->render->TextDraw("CRIT DMG: ", 250, 600, 15);
+		app->render->TextDraw(cD.c_str(), 330, 535, 15, Font::TEXT, { 0, 0, 0 });
 		string p = to_string(precision);
-		app->render->TextDraw(p.c_str(), 350, 620, 15);
-		app->render->TextDraw("PRECISION: ", 250, 620, 15);
+		app->render->TextDraw(p.c_str(), 330, 560, 15, Font::TEXT, { 0, 0, 0 });
 		string ar = to_string(armor);
-		app->render->TextDraw(ar.c_str(), 550, 540, 15);
-		app->render->TextDraw("ARMOR: ", 450, 540, 15);
+		app->render->TextDraw(ar.c_str(), 520, 485, 15, Font::TEXT, { 0, 0, 0 });
 		string e = to_string(esquiva);
-		app->render->TextDraw(e.c_str(), 550, 560, 15);
-		app->render->TextDraw("DODGE: ", 450, 560, 15);
+		app->render->TextDraw(e.c_str(), 520, 510, 15, Font::TEXT, { 0, 0, 0 });
 		string r = to_string(resistencia);
-		app->render->TextDraw(r.c_str(), 550, 580, 15);
-		app->render->TextDraw("RES: ", 450, 580, 15);
+		app->render->TextDraw(r.c_str(), 520, 535, 15, Font::TEXT, { 0, 0, 0 });
 		string s = to_string(speed);
-		app->render->TextDraw(s.c_str(), 550, 600, 15);
-		app->render->TextDraw("SPEED", 450, 600, 15);
+		app->render->TextDraw(s.c_str(), 520, 560, 15, Font::TEXT, { 0, 0, 0 });
 
 		app->tex->UnLoad(itemsTexture);
 		itemsTexture = NULL;
@@ -357,59 +344,59 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 
 void ItemManager::LoadButtons(int x, int y, int ID)
 {
-	if (event)
+
+	SDL_Rect buttonBounds;
+	buttonBounds = { (671 + 42 * x), y, 40, 40 };
+
+	if (nodeList[ID]->button != nullptr || (nodeList[ID]->equiped && nodeList[ID]->whom != invPos))
+	{	}
+	else
 	{
-		SDL_Rect buttonBounds;
-		buttonBounds = { (700 + 52 * x), y, 52, 52 };
+		nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+	}
 
-		if (nodeList[ID]->button == nullptr)
+	if (nodeList[ID]->equiped)
+	{
+		switch (nodeList[ID]->kind)
 		{
-			nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
-		}
-
-		if (nodeList[ID]->equiped)
-		{
-			switch (nodeList[ID]->kind)
+		case 1:
+			buttonBounds = { (218 + 52), 295, 32, 32 };
+			break;
+		case 2:
+			buttonBounds = { (218 + 52), 245, 32, 32 };
+			break;
+		case 3:
+			buttonBounds = { (218 + 52), 345, 32, 32 };
+			break;
+		case 4:
+			buttonBounds = { (218 + 52), 195, 32, 32 };
+			break;
+		case 5:
+			if (nodeList[ID]->space == 1)
 			{
-			case 1:
-				buttonBounds = { (200 + 52), 332, 52, 52 };
-				break;
-			case 2:
-				buttonBounds = { (200 + 52), 270, 52, 52 };
-				break;
-			case 3:
-				buttonBounds = { (200 + 52), 392, 52, 52 };
-				break;
-			case 4:
-				buttonBounds = { (200 + 52), 208, 52, 52 };
-				break;
-			case 5:
-				if (nodeList[ID]->space == 1)
-				{
-					buttonBounds = { (510 + 52), 210, 52, 52 };
-				}
-				else
-				{
-					buttonBounds = { (510 + 52), 270, 52, 52 };
-				}
-				break;
-			case 6:
-				if (nodeList[ID]->space == 1)
-				{
-					buttonBounds = { (510 + 52), 335, 52, 52 };
-				}
-				else
-				{
-					buttonBounds = { (510 + 52), 400, 52, 52 };
-				}
-				break;
+				buttonBounds = { (510 + 52), 185, 32, 32 };
 			}
+			else
+			{
+				buttonBounds = { (510 + 52), 235, 32, 32 };
+			}
+			break;
+		case 6:
+			if (nodeList[ID]->space == 1)
+			{
+				buttonBounds = { (510 + 52), 300, 32, 32 };
+			}
+			else
+			{
+				buttonBounds = { (510 + 52), 348, 32, 32 };
+			}
+			break;
 		}
+	}
 
-		if (nodeList[ID]->button != NULL)
-		{
-			nodeList[ID]->button->bounds = buttonBounds;
-		}
+	if (nodeList[ID]->button != NULL)
+	{
+		nodeList[ID]->button->bounds = buttonBounds;
 	}
 }
 
@@ -431,6 +418,7 @@ bool ItemManager::SaveItemState()
 		item.append_attribute("quantity") = nodeList[i]->quantity;
 		item.append_attribute("equiped") = nodeList[i]->equiped;
 		item.append_attribute("space") = nodeList[i]->space;
+		item.append_attribute("whom") = nodeList[i]->whom;
 	}
 
 	ret = saveDoc->save_file("save_items.xml");
@@ -455,6 +443,7 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 				nodeList[i]->quantity = pugiNode.attribute("quantity").as_int();
 				nodeList[i]->equiped = pugiNode.attribute("equiped").as_bool();
 				nodeList[i]->space = pugiNode.attribute("space").as_bool();
+				nodeList[i]->whom = pugiNode.attribute("whom").as_bool();
 				if (nodeList[i]->equiped)
 				{
 					UseItem(nodeList[i]);

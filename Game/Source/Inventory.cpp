@@ -25,6 +25,13 @@ bool Inventory::Start()
 {
 	inventoryIMG = app->tex->Load(app->itemManager->texturePath);
 
+	for (int i=0; i <= 3; i++)
+	{
+		SDL_Rect buttonBounds;
+		buttonBounds = { (362 + 37 * i), 404, 25, 25 };
+		selectCharacter[i] = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1000 + i, this, buttonBounds, ButtonType::SMALL);
+	}
+
 	return true;
 }
 
@@ -38,15 +45,15 @@ bool Inventory::Update(float dt)
 {
 	bool ret = true;
 
-	app->render->DrawTexture(inventoryIMG, 225 - app->render->camera.x, 60 - app->render->camera.y);
+	app->render->DrawTexture(inventoryIMG, 0 - app->render->camera.x, 0 - app->render->camera.y);
 
-	y = 132;
+	y = 148;
 	int x = 0;
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 	{
 		if (cap == x)
 		{
-			y += 52;
+			y += 42;
 			x = 0;
 		}
 		app->itemManager->LoadQuantity(x, y, i);
@@ -58,7 +65,6 @@ bool Inventory::Update(float dt)
 			}
 		}
 	}
-	app->itemManager->event = false;
 
 	return ret;
 }
@@ -98,28 +104,34 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 							{
 								if (app->itemManager->nodeList[j]->kind == 5 || app->itemManager->nodeList[j]->kind == 6)
 								{
-									app->itemManager->nodeList[i]->space = 2;
-									for (size_t p = 0; p < app->itemManager->nodeList.size(); p++)
+									if (app->itemManager->nodeList[i]->whom == app->itemManager->nodeList[j]->whom)
 									{
-										if (app->itemManager->nodeList[p]->space > 0)
+										app->itemManager->nodeList[i]->space = 2;
+										for (size_t p = 0; p < app->itemManager->nodeList.size(); p++)
 										{
-											if (app->itemManager->nodeList[j]->kind == app->itemManager->nodeList[p]->kind)
+											if (app->itemManager->nodeList[i]->whom == app->itemManager->nodeList[p]->whom && app->itemManager->nodeList[j]->whom == app->itemManager->nodeList[p]->whom)
 											{
-												if (p != j && p != i)
+												if (app->itemManager->nodeList[p]->space > 0)
 												{
-													if (app->itemManager->nodeList[j]->space == 1)
+													if (app->itemManager->nodeList[j]->kind == app->itemManager->nodeList[p]->kind)
 													{
-														app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->name.GetString());
-														app->itemManager->nodeList[i]->space = 1;
-														app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
-														break;
-													}
-													else
-													{
-														app->itemManager->MinusQuantity(app->itemManager->nodeList[p]->name.GetString());
-														app->itemManager->nodeList[i]->space = 1;
-														app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
-														break;
+														if (p != j && p != i)
+														{
+															if (app->itemManager->nodeList[j]->space == 1)
+															{
+																app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->name.GetString());
+																app->itemManager->nodeList[i]->space = 1;
+																app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
+																break;
+															}
+															else
+															{
+																app->itemManager->MinusQuantity(app->itemManager->nodeList[p]->name.GetString());
+																app->itemManager->nodeList[i]->space = 1;
+																app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
+																break;
+															}
+														}
 													}
 												}
 											}
@@ -128,7 +140,11 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 								}
 								else
 								{
-									app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->name.GetString());
+									//Si es armadura
+									if (app->itemManager->nodeList[i]->whom == app->itemManager->nodeList[j]->whom)
+									{
+										app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->name.GetString());
+									}
 								}
 							}
 						}
@@ -141,6 +157,21 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			}
 			app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
 		}
+	}
+	switch (control->id)
+	{
+		case 1000:
+			app->itemManager->invPos = 0;
+			break;
+		case 1001:
+			app->itemManager->invPos = 1;
+			break;
+		case 1002:
+			app->itemManager->invPos = 2;
+			break;
+		case 1003:
+			app->itemManager->invPos = 3;
+			break;
 	}
 
 	return true;
