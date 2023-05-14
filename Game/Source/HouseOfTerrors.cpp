@@ -84,8 +84,12 @@ bool HouseOfTerrors::Start()
 
 	app->puzzleManager->active = true;
 	app->puzzleManager->Start();
+
 	//Init player inventory
 	app->itemManager->SetPlayerForScene(player);
+
+	//GUARRADA SUPER TEMPORAL
+	app->itemManager->comb = 2;
 
 	//enter combat
 	steps_I = 0;

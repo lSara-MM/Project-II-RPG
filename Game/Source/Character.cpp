@@ -424,7 +424,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		{
 			if(CalculateRandomProbability(skill->bonusPrecision + caster->GetStat(EffectType::PRECISION), defender->GetStat(EffectType::RES)))
 			{
-				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(69, 3, true, EffectType::NONE));
+				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
 			}
 		}
 	}
@@ -446,13 +446,13 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 
 			if (skill->positiveEffect) //Efecto de estado positivo
 			{
-				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(69, 3, true, EffectType::NONE));
+				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
 			}
 			else
 			{
 				if (CalculateRandomProbability(skill->bonusPrecision + caster->GetStat(EffectType::PRECISION), defender->GetStat(EffectType::RES)))
 				{
-					defender->listStatusEffects.Add(&StatusEffect::StatusEffect(69, 3, true, EffectType::NONE));
+					defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
 				}
 			}
 
