@@ -182,11 +182,12 @@ bool Combat::CleanUp()
 	//}
 	
 	listButtons.Clear();
-
-	//pSettings->CleanUp();
-	
 	app->guiManager->CleanUp();
 
+	//pSettings->CleanUp();
+
+	vecAllies.clear();
+	vecEnemies.clear();
 
 	app->entityManager->entities.Clear();
 	app->entityManager->Disable();
@@ -275,14 +276,12 @@ bool Combat::InitEnemies(vector<int> arr)
 			{
 				for (int i = 0; i < arr.size(); i++)
 				{
-					if (itemNode.attribute("id").as_int() == arr[i])
+					if (itemNode.attribute("id").as_int() == arr.at(i))
 					{
 						Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 						chara->parameters = itemNode;
 						chara->Awake();
 						
-
-						//chara->charaType = CharacterType::ENEMY;
 						chara->positionCombat_I = cPos++;
 						chara->Start();
 
@@ -304,14 +303,13 @@ bool Combat::InitAllies(array<Character*, 4> party)
 	int cPos = 0;
 
 	// TO TEST
+	Character* chara;
 	for (int i = 0; i < party.size(); i++)
 	{
 		if (party.at(i) == nullptr) { return true; }
-		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
+		chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 		chara->parameters = party.at(i)->parameters;
 		chara->Awake();
-
-		RELEASE(party.at(i));
 
 		chara->positionCombat_I = cPos++;
 
@@ -319,8 +317,11 @@ bool Combat::InitAllies(array<Character*, 4> party)
 		chara->button->id = i;
 
 		vecAllies.push_back(chara);
+		//RELEASE(party.at(i));
 	}
 
+	//delete &chara;
+	//chara = nullptr;
 	return true;
 }
 
