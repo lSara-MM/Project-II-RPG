@@ -597,14 +597,22 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	//
 	if (lastPressedAbility_I != -1 && !isMoving)
 	{
-		if (vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->targetFriend)
+		if (vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->autoTarget == true)
 		{
-			HandleCharaButtons(&vecAllies, posStart, posEnd);
+			HandleCharaButtons(&vecAllies, vecAllies.at(charaInTurn)->positionCombat_I, vecAllies.at(charaInTurn)->positionCombat_I);
 		}
 		else
 		{
-			HandleCharaButtons(&vecEnemies, posStart, posEnd);
+			if (vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->targetFriend==true)
+			{
+				HandleCharaButtons(&vecAllies, posStart, posEnd);
+			}
+			else
+			{
+				HandleCharaButtons(&vecEnemies, posStart, posEnd);
+			}
 		}
+		
 	}
 
 	return true;

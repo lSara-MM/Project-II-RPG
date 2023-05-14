@@ -92,7 +92,7 @@ STATUS ID
 	   statusID="0" postive="true" duration="2" intensity="10"
 	/>
 
-	<skill name="Healing for sale" id="12" description=""
+	<skill name="Healing for sale" id="12" description="An offer for everyone, heal every party memeber 1/10 of maxHP"
 		   type="1" movementCaster="0"  movementTarget="0"
 	   multiplierDmg="0.4" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
@@ -117,14 +117,14 @@ STATUS ID
 	<skill name="Seas of Fire" id="15" description=""
 		   type="0" movementCaster="1"  movementTarget="0"
 	   multiplierDmg="-0.6" bonusPrecision="80" bonusCritRate="0" bonusCritDamage="0"
-		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 	   statusID="0" postive="false" duration="2" intensity="-5"
 	/>
 
 	<skill name="Oil Spit" id="16" description=""
 		   type="0" movementCaster="0"  movementTarget="0"
 	   multiplierDmg="-0.4" bonusPrecision="130" bonusCritRate="-10" bonusCritDamage="0"
-		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 	   statusID="7" postive="false" duration="3" intensity="-30"
 	/>
 
