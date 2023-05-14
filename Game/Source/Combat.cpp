@@ -109,6 +109,12 @@ bool Combat::Update(float dt)
 	Debug();
 	app->render->DrawTexture(textureBackground, 0, 0);
 
+	// TO DO, remove DEBUG info
+	if (isMoving)
+	{
+		app->render->TextDraw("Is moving", 10, 500, 12);
+	}
+
 	// Printar Barra Turnos (UI WORK)
 	int j = charaInTurn;
 	for (int i = 0; i < listInitiative.Count(); i++)
@@ -237,6 +243,7 @@ void Combat::Debug()
 	}
 }
 
+// Start Combat
 bool Combat::PreLoadCombat(array<Character*, 4> arrParty_, SString n)
 {
 	arrParty = arrParty_;
@@ -288,9 +295,6 @@ bool Combat::InitEnemies(vector<int> arr)
 		}
 	}
 
-	//Este codigo no se esta ejecutando
-	for (int i = 0; i < vecEnemies.size(); i++) { vecEnemies.at(i)->button->id = 5 + i; }
-
 	return true;
 }
 
@@ -319,7 +323,6 @@ bool Combat::InitAllies(array<Character*, 4> party)
 	return true;
 }
 
-
 bool Combat::StartCombat()
 {
 	InitAllies(arrParty);
@@ -337,6 +340,7 @@ bool Combat::StartCombat()
 
 	return true;
 }
+
 
 bool Combat::OrderBySpeed()
 {
@@ -372,7 +376,7 @@ bool Combat::OrderBySpeed()
 
 bool Combat::NextTurn()
 {
-	lastPressedAbility_I = 0;
+	lastPressedAbility_I = -1;
 	targeted_Character = nullptr;
 
 	//	//Resetear los botones targeteados
@@ -450,6 +454,7 @@ void Combat::HandleSkillsButtons(List<Skill*> listSkills_)
 			}
 			else
 			{
+				// TO DO change to selected
 				listButtons.At(offset + i)->data->state = GuiControlState::DISABLED;
 			}
 		}
@@ -466,18 +471,18 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 	int newPos = chara->positionCombat_I + movement_I;
 	
 	//Evitar que se pase de posicion.
-	if (newPos < 0)
+	/*if (newPos < 0)
 	{
 		newPos = 0;
 	}
-	if (newPos > arr->size()-1)
+	if (newPos >= arr->size() - 1)
 	{
 		newPos = arr->size() - 1;
-	}
+	}*/
 
 	//Insertar en nueva posicion
 	arr->insert(arr->begin() + newPos, chara);
-	UpdatePositions(arr, chara->positionCombat_I);
+	UpdatePositions(arr);
 	app->audio->PlayFx(swapPositionfx);
 }
 
@@ -531,17 +536,46 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	//Gestion Skills
 	int posStart = 0, posEnd = 0;
 
-	if (control->id >= 5 && control->id < 10)
+	// target allies
+	if (control->id < 5)
+	{
+		LOG("%s chara", vecAllies.at(control->id)->name.GetString());
+
+		for (int i = 0; i < vecAllies.size(); i++)
+		{
+			if (vecAllies.at(i)->button->id == control->id)
+			{
+				targeted_Character = vecAllies.at(i);
+				break;
+			}
+		}		
+		
+		if (isMoving)
+		{
+			int a = targeted_Character->positionCombat_I - listInitiative.At(charaInTurn)->data->positionCombat_I;
+			MoveCharacter(&vecAllies, listInitiative.At(charaInTurn)->data, a);
+
+			isMoving = false;
+			NextTurn();
+		}
+	}
+	// target enemies
+	else if (control->id >= 5 && control->id < 10)
 	{
 		LOG("%s chara", vecEnemies.at(control->id - 5)->name.GetString());
 		targeted_Character = vecEnemies.at(control->id - 5);
-	}
-	else if (control->id < 5)
-	{
-		LOG("%s chara", vecAllies.at(control->id)->name.GetString());
-		targeted_Character = vecAllies.at(control->id);
-	}
-	else
+
+		for (int i = 0; i < vecAllies.size(); i++)
+		{
+			if (vecAllies.at(i)->button->id == control->id)
+			{
+				targeted_Character = vecEnemies.at(i);
+				break;
+			}
+		}
+	} 
+	// skills buttons
+	else if(control->id >= 10 && control->id < 14)
 	{
 		if (lastPressedAbility_I == control->id - 10) { lastPressedAbility_I = -1; } // Si already clicked deseleccionar
 		lastPressedAbility_I = control->id - 10;
@@ -549,9 +583,16 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		posStart = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
 		posEnd = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
 	}
+	// move character
+	else if (control->id >= 14)
+	{
+		HandleCharaButtons(&vecAllies, 0, vecAllies.size()); 
+		listInitiative.At(charaInTurn)->data->button->state = GuiControlState::DISABLED;
+		isMoving = true;
+	}
 
 	//
-	if (lastPressedAbility_I != -1)
+	if (lastPressedAbility_I != -1 && !isMoving)
 	{
 		if (vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->targetFriend)
 		{

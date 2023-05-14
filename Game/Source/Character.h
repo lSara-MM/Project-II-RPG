@@ -18,15 +18,15 @@ class Skill;
 // Status effect
 enum class EffectType
 {
-	NONE=-1,
-	CURRENT_HP=0,
+	NONE = -1,
+	CURRENT_HP = 0,
 	ATTACK,
 	CRIT_RATE,
 	CRIT_DMG,
 	PRECISION,
 	ARMOR,
 	DODGE,
-	RES, 
+	RES,
 };
 
 struct StatusEffect
@@ -174,6 +174,13 @@ private:
 
 	pugi::xml_document skillsFile;
 	pugi::xml_node skillNode;
+
+	//fx
+	const char* healPath;
+	uint healfx;
+
+	const char* hitPath;
+	uint hitfx;
 };
 
 #endif // __CHARACTER_H__
