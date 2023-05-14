@@ -29,6 +29,11 @@ bool ItemManager::Start()
 {
 	LoadItems();
 
+	for (size_t i = 0; i < nodeList.size(); i++)
+	{
+		nodeList[i]->Start();
+	}
+
 	return true;
 }
 
@@ -59,7 +64,7 @@ bool ItemManager::CleanUp()
 
 	for (size_t i = 0; i < nodeList.size(); i++)
 	{
-		if (nodeList[i]->quantity > 0)
+		if (nodeList[i]->quantity > 0 && nodeList[i]->quantity > 0)
 		{
 			nodeList[i]->CleanUp();
 		}
@@ -234,7 +239,7 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 
 		itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
 
-		if (!nodeList[i]->equiped)
+		if (nodeList[i]->equiped == false)
 		{
 			app->render->DrawTexture(itemsTexture, (671 + 42 * x) - app->render->camera.x, y - app->render->camera.y);
 
@@ -297,10 +302,10 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 	buttonBounds = { (671 + 42 * x), y, 40, 40 };
 
 	if (nodeList[ID]->button != nullptr || (nodeList[ID]->equiped && nodeList[ID]->whom != invPos))
-	{	}
+	{}
 	else
 	{
-		nodeList[ID]->button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, ID, app->inventory, buttonBounds, ButtonType::SMALL);
+		nodeList[ID]->Start();
 	}
 
 	if (nodeList[ID]->equiped)
@@ -345,6 +350,7 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 	if (nodeList[ID]->button != nullptr)
 	{
 		nodeList[ID]->button->bounds = buttonBounds;
+		nodeList[ID]->button->id = ID;
 	}
 }
 
