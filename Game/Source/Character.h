@@ -116,10 +116,11 @@ public:
 	List<Skill*> listSkills;
 
 	GuiButton* button;
+
+	SDL_Texture* texture;
 	
 private:
 
-	SDL_Texture* texture;
 	const char* texturePath;
 	List<int> listSkillsHistory; //Aqui guardamos un historial de que skills se ha usado.
 

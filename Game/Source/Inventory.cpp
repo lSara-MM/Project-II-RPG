@@ -66,6 +66,12 @@ bool Inventory::Update(float dt)
 		}
 	}
 
+	//Print Character
+	if (app->itemManager->player->arrParty.at(app->itemManager->invPos)->texture != NULL)
+	{
+		app->render->DrawTexture(app->itemManager->player->arrParty.at(app->itemManager->invPos)->texture, 100 - app->render->camera.x, 0 - app->render->camera.y);
+	}
+
 	//LOAD STATS
 	for (size_t i = 0; i < app->itemManager->player->arrParty.size(); i++)
 	{
@@ -115,6 +121,12 @@ bool Inventory::CleanUp()
 		{
 			app->itemManager->nodeList[i]->CleanUp();
 		}
+	}
+
+	for (int i = 0; i <= 3; i++)
+	{
+		delete(selectCharacter[i]);
+		selectCharacter[i] = nullptr;
 	}
 
 	app->tex->UnLoad(inventoryIMG);
