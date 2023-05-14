@@ -73,7 +73,8 @@ private:
 	Tween backgroundAnimation;
 
 	//Music
-	const char* WinMusicPath;
+	const char* winMusicPath;
+	const char* looseMusicPath;
 
 	bool exit_B;
 };
