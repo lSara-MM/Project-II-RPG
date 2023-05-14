@@ -302,7 +302,8 @@ bool Character::Update(float dt)
 
 bool Character::CleanUp()
 {
-	app->tex->UnLoad(texture);
+	if(texture != nullptr)
+		app->tex->UnLoad(texture);
 
 	/*delete button;
 	button = nullptr;*/

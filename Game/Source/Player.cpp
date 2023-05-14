@@ -231,9 +231,14 @@ bool Player::Update(float dt)
 
 bool Player::CleanUp()
 {
+	if(texture != nullptr)
+		app->tex->UnLoad(texture);
+
+	if(textureE != nullptr)
+		app->tex->UnLoad(textureE);
+
 	if (pbody != nullptr)
 	{
-		app->tex->UnLoad(texture);
 		pbody->body->GetWorld()->DestroyBody(pbody->body);
 	}
 
