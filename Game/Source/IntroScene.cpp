@@ -263,6 +263,7 @@ bool IntroScene::PostUpdate()
 		app->puzzleManager->teamMate = false;
 
 		app->questManager->active = true;
+		app->questManager->Start();
 
 		if (app->questManager->active)
 		{
