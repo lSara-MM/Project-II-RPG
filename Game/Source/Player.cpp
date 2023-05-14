@@ -241,7 +241,7 @@ bool Player::CleanUp()
 
 	for (int i = 0; i < arrParty.size(); i++)
 	{
-		delete arrParty.at(i);
+		//delete arrParty.at(i);
 		arrParty.at(i) = nullptr;
 	}
 
