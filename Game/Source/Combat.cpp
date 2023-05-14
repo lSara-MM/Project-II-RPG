@@ -81,7 +81,7 @@ bool Combat::Start()
 
 	StartCombat();
 	
-
+	// Skill button
 	GuiButton* button;	int j = 10;
 	for (int i = 0; i < 5; i++)
 	{
@@ -90,6 +90,7 @@ bool Combat::Start()
 		j++;
 	}
 
+	// Skip button
 	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, j, this, { 576, 85, 134, 40});
 	listButtons.Add(button);
 
@@ -390,7 +391,9 @@ bool Combat::NextTurn()
 	if (listInitiative.Count() == charaInTurn) { charaInTurn = 0; }
 	listInitiative.At(charaInTurn)->data->onTurn = true;
 	listInitiative.At(charaInTurn)->data->ModifyHP(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CURRENT_HP));
-	
+
+	if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ENEMY) { listButtons.end->data->state = GuiControlState::DISABLED; }
+	else { listButtons.end->data->state = GuiControlState::NORMAL; }
 
 	LOG("%s turn - num %d", listInitiative.At(charaInTurn)->data->name.GetString(), charaInTurn);
 
