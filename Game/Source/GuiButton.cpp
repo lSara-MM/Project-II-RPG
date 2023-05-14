@@ -71,6 +71,7 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	fxHoverPath = "Assets/Audio/Fx/on_button.wav";
 	fxHover = app->audio->LoadFx(fxHoverPath);
 	hoverTest = false;
+	isSelected = false;
 }
 
 GuiButton::~GuiButton()
@@ -78,7 +79,7 @@ GuiButton::~GuiButton()
 	//delete buttonTex;
 	app->tex->UnLoad(buttonTex);
 
-	// TO DELETE: arreglo feo temporal? com se borra un boto, pregunta seria
+	// TO DO: arreglo feo temporal? com se borra un boto, pregunta seria
 	state = GuiControlState::NONE;
 }
 
@@ -96,6 +97,22 @@ bool GuiButton::Update(float dt)
 
 			if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
 				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
+
+				if (state != GuiControlState::SELECTED)
+				{
+					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
+					{
+						state = GuiControlState::PRESSED;
+					}
+
+					// If mouse button pressed -> Generate event!
+					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
+					{
+							NotifyObserverOfClick();
+					}
+				}
+
+
 				state = GuiControlState::FOCUSED;
 				NotifyObserverOfHover();
 
@@ -109,31 +126,16 @@ bool GuiButton::Update(float dt)
 					//LOG("Change state from %d to %d", previousState, state);
 				}
 
-				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
-				{
-					state = GuiControlState::PRESSED;
-				}
-
-				// If mouse button pressed -> Generate event!
-				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
-				{
-					if (state != GuiControlState::SELECTED)
-					{
-						NotifyObserverOfClick();
-					}
-				}
 			}
-
 			else
 			{
-				state = GuiControlState::NORMAL;
+				(isSelected) ? state = GuiControlState::SELECTED : state = GuiControlState::NORMAL;
 				hoverTest = false;
 			}
 		}
-
 		else
 		{
-			if (state==GuiControlState::FOCUSED)
+			if (state == GuiControlState::FOCUSED)
 			{
 				if (hoverTest == false)
 				{
@@ -144,7 +146,6 @@ bool GuiButton::Update(float dt)
 				{
 					state = GuiControlState::PRESSED;
 				}
-				
 			}
 
 			if (state == GuiControlState::PRESSED && app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
@@ -241,6 +242,7 @@ bool GuiButton::Draw(Render* render)
 		} break;
 
 		case GuiControlState::SELECTED:
+			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 150, 50, 200, true, false);
 			break;
 
 		default:

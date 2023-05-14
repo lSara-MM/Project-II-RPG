@@ -37,8 +37,6 @@ class Scene;
 class HouseOfTerrors;
 class PracticeTent;
 class Circus;
-class LoseScene;
-class LeaderboardScene;
 class FadeToBlack;
 class SceneWin_Lose;
 class PuzzleManager;
@@ -132,7 +130,6 @@ public:
 	HouseOfTerrors* hTerrors;
 	PracticeTent* practiceTent;
 	Circus* circus;
-	LoseScene* loseScene;
 	FadeToBlack* fade;
 	SceneWin_Lose* sceneWin_Lose;
 	PuzzleManager* puzzleManager;

@@ -10,7 +10,6 @@
 #include "PracticeTent.h"
 #include "Circus.h"
 #include "LogoScene.h"
-#include "LoseScene.h"
 #include "Scene.h"
 #include "SceneWin_Lose.h"
 #include "PuzzleManager.h"
@@ -65,7 +64,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	hTerrors = new HouseOfTerrors();
 	practiceTent = new PracticeTent();
 	circus = new Circus();
-	loseScene = new LoseScene();
 	fade = new FadeToBlack();
 	sceneWin_Lose = new SceneWin_Lose();
 	puzzleManager = new PuzzleManager();
@@ -91,7 +89,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(hTerrors);
 	AddModule(practiceTent);
 	AddModule(combat);
-	AddModule(loseScene);
 
 	AddModule(map);
 	AddModule(entityManager);
@@ -496,7 +493,6 @@ void App::DisableAtStart()
 	hTerrors->active = false;
 	circus->active = false;
 	practiceTent->active = false;
-	loseScene->active = false;
 	entityManager->active = false;
 	dialogueSystem->active = false;
 	combat->active = false;

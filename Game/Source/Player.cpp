@@ -242,6 +242,14 @@ bool Player::CleanUp()
 		pbody->body->GetWorld()->DestroyBody(pbody->body);
 	}
 
+	listPC.clear();
+
+	for (int i = 0; i < arrParty.size(); i++)
+	{
+		//delete arrParty.at(i);
+		arrParty.at(i) = nullptr;
+	}
+
 	return true;
 }
 

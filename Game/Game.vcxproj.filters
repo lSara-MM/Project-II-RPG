@@ -65,9 +65,6 @@
     <ClCompile Include="Source\LogoScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LoseScene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Scene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -203,9 +200,6 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\LogoScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\LoseScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene.h">

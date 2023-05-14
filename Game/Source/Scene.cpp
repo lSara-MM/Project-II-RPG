@@ -11,7 +11,6 @@
 #include "IntroScene.h"
 #include "PuzzleManager.h"
 #include "QuestManager.h"
-#include "LoseScene.h"
 #include "Combat.h"
 
 #include "EntityManager.h"

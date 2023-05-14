@@ -10,7 +10,7 @@
 
 #include "Scene.h"
 #include "IntroScene.h"
-#include "LoseScene.h"
+#include "SceneWin_Lose.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
@@ -182,11 +182,13 @@ bool Combat::CleanUp()
 	//}
 	
 	listButtons.Clear();
-
-	//pSettings->CleanUp();
-	
 	app->guiManager->CleanUp();
 
+	//pSettings->CleanUp();
+
+	vecAllies.clear();
+	vecEnemies.clear();
+	arrSetEnemies.clear();
 
 	app->entityManager->entities.Clear();
 	app->entityManager->Disable();
@@ -275,14 +277,12 @@ bool Combat::InitEnemies(vector<int> arr)
 			{
 				for (int i = 0; i < arr.size(); i++)
 				{
-					if (itemNode.attribute("id").as_int() == arr[i])
+					if (itemNode.attribute("id").as_int() == arr.at(i))
 					{
 						Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 						chara->parameters = itemNode;
 						chara->Awake();
 						
-
-						//chara->charaType = CharacterType::ENEMY;
 						chara->positionCombat_I = cPos++;
 						chara->Start();
 
@@ -304,14 +304,13 @@ bool Combat::InitAllies(array<Character*, 4> party)
 	int cPos = 0;
 
 	// TO TEST
+	Character* chara;
 	for (int i = 0; i < party.size(); i++)
 	{
 		if (party.at(i) == nullptr) { return true; }
-		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
+		chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 		chara->parameters = party.at(i)->parameters;
 		chara->Awake();
-
-		RELEASE(party.at(i));
 
 		chara->positionCombat_I = cPos++;
 
@@ -319,8 +318,11 @@ bool Combat::InitAllies(array<Character*, 4> party)
 		chara->button->id = i;
 
 		vecAllies.push_back(chara);
+		//RELEASE(party.at(i));
 	}
 
+	//delete &chara;
+	//chara = nullptr;
 	return true;
 }
 
@@ -383,29 +385,6 @@ bool Combat::NextTurn()
 	// Disable all buttons
 	HandleCharaButtons(&app->combat->vecEnemies);
 
-	//	//Resetear los botones targeteados
-	//	lastPressedAbility_I = 0;
-	//	targeted_Character = nullptr;
-	//
-	//	//Reactivar todos los posibles targets, los vacios desactivarlos
-	//
-	//	for (int i = 0; i < 7; i++)
-	//	{
-	//		EnableTargetButton(i);
-	//	}
-	//	for (int i = 1; i < 4; i++)
-	//	{
-	//		EnableSkillButton(i);
-	//	}
-	//	
-	//	if (listInitiative.Count()-1 <= charaInTurn) { charaInTurn = 0; }
-	//	else
-	//	{
-	//		listInitiative.At(charaInTurn)->data->onTurn = false;
-	//		++charaInTurn; 
-	//	}
-	//	listInitiative.At(charaInTurn)->data->onTurn = true;
-
 	listInitiative.At(charaInTurn++)->data->onTurn = false;
 	
 	if (listInitiative.Count() == charaInTurn) { charaInTurn = 0; }
@@ -424,13 +403,15 @@ void Combat::HandleCharaButtons(vector<Character*>* arr, int pos1, int pos2)
 {
 	for (int i = 0; i < vecAllies.size(); i++)
 	{
-		vecAllies.at(i)->button->state = GuiControlState::DISABLED;
+		vecAllies.at(i)->button->state = GuiControlState::SELECTED;
+		vecAllies.at(i)->button->isSelected = true;
 		//LOG("disabled %d", vecAllies.at(i)->button->id);
 	}
 
 	for (int i = 0; i < vecEnemies.size(); i++)
 	{
-		vecEnemies.at(i)->button->state = GuiControlState::DISABLED;
+		vecEnemies.at(i)->button->state = GuiControlState::SELECTED;
+		vecEnemies.at(i)->button->isSelected = true;
 		//LOG("disabled %d", vecEnemies.at(i)->button->id);
 	}
 
@@ -441,6 +422,7 @@ void Combat::HandleCharaButtons(vector<Character*>* arr, int pos1, int pos2)
 			if (i >= pos1 && i <= pos2)
 			{
 				arr->at(i)->button->state = GuiControlState::NORMAL;
+				arr->at(i)->button->isSelected = false;
 				//LOG("enabled %d", arr->at(i)->button->id);
 			}
 		}
@@ -460,11 +442,12 @@ void Combat::HandleSkillsButtons(List<Skill*> listSkills_)
 			if (listSkills_.At(i)->data->PosCanBeUsed(listInitiative.At(charaInTurn)->data->positionCombat_I))
 			{
 				listButtons.At(offset + i)->data->state = GuiControlState::NORMAL;
+				listButtons.At(offset + i)->data->isSelected = false;
 			}
 			else
 			{
-				// TO DO change to selected
-				listButtons.At(offset + i)->data->state = GuiControlState::DISABLED;
+				listButtons.At(offset + i)->data->state = GuiControlState::SELECTED;
+				listButtons.At(offset + i)->data->isSelected = true;
 			}
 		}
 	}
@@ -505,7 +488,17 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 
 	// Delete from entity manager list
 	app->entityManager->DestroyEntity(chara);
-	UpdatePositions(arr, chara->positionCombat_I);	
+	if (arr->empty())
+	{
+		(chara->charaType == CharacterType::ALLY) ? app->sceneWin_Lose->win = false : app->sceneWin_Lose->win = true;
+		// TO TEST: VA TO LENTO EL FADE, SE QUEDA COMO UN MONTON DE RATO EN EL COMBATE PARALIZADO Y LUEGO SE RALENTIZA TODO? LA ANIMACION DEL 
+		// FONDO DE LOSE VA LENTO PERO EL DE WIN NO a veces XD?
+		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);
+	}
+	else
+	{
+		UpdatePositions(arr, chara->positionCombat_I);
+	}
 }
 
 void Combat::UpdatePositions(vector<Character*>* arr, int pos)
@@ -592,7 +585,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id == 14)
 	{
 		HandleCharaButtons(&vecAllies, 0, vecAllies.size()); 
-		listInitiative.At(charaInTurn)->data->button->state = GuiControlState::DISABLED;
+		listInitiative.At(charaInTurn)->data->button->state = GuiControlState::SELECTED;
 		isMoving = true;
 	}
 	else if (control->id == 15)
@@ -604,14 +597,22 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	//
 	if (lastPressedAbility_I != -1 && !isMoving)
 	{
-		if (vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->targetFriend)
+		if (vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->autoTarget == true)
 		{
-			HandleCharaButtons(&vecAllies, posStart, posEnd);
+			HandleCharaButtons(&vecAllies, vecAllies.at(charaInTurn)->positionCombat_I, vecAllies.at(charaInTurn)->positionCombat_I);
 		}
 		else
 		{
-			HandleCharaButtons(&vecEnemies, posStart, posEnd);
+			if (vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->targetFriend==true)
+			{
+				HandleCharaButtons(&vecAllies, posStart, posEnd);
+			}
+			else
+			{
+				HandleCharaButtons(&vecEnemies, posStart, posEnd);
+			}
 		}
+		
 	}
 
 	return true;
@@ -692,7 +693,6 @@ bool Combat::RestartCombatData()
 
 	else
 	{
-
 		pugi::xml_document* saveDoc = new pugi::xml_document();
 		pugi::xml_node nodeCombat = saveDoc->append_child("save_stats");
 

@@ -33,6 +33,7 @@ public:
 	const char* fxHoverPath;
 	uint fxHover;
 	bool hoverTest;
+	bool isSelected;
 
 private:
 	Tween animationButton;

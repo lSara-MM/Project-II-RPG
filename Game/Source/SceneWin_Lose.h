@@ -51,8 +51,7 @@ public:
 	bool frcap_B = true;
 	bool mute_B = true;
 
-	bool win;
-	bool lose;
+	bool win; // True - win / False - lose
 
 	SDL_Texture* Win;
 	SDL_Texture* Lose;
@@ -66,9 +65,6 @@ private:
 	const char* texturepathWin;
 	const char* texturepathLose;
 
-	// Settings
-	Settings* pSettings;
-	Pause* pPause;
 	bool transition_B;
 	Tween backgroundAnimation;
 

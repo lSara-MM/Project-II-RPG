@@ -1,5 +1,5 @@
-#include "Scene.h"
 #include "SceneWin_Lose.h"
+
 #include "App.h"
 #include "Audio.h"
 #include "Input.h"
@@ -8,6 +8,7 @@
 #include "Textures.h"
 #include "Window.h"
 
+#include "Scene.h"
 #include "Combat.h"
 
 #include "FadeToBlack.h"
@@ -24,6 +25,7 @@ using namespace std;
 SceneWin_Lose::SceneWin_Lose() : Module()
 {
 	name.Create("SceneWin_Lose");
+	win = false;
 }
 
 SceneWin_Lose::~SceneWin_Lose()
@@ -51,9 +53,6 @@ bool SceneWin_Lose::Start()
 	Win = app->tex->Load(texturepathWin);
 	Lose = app->tex->Load(texturepathLose);
 
-	win = false;
-	lose = false;
-
 	transition_B = false;//para animacion
 
 	return true;
@@ -70,7 +69,6 @@ bool SceneWin_Lose::Update(float dt)
 	{
 		backgroundAnimation.Backward();
 	}
-
 	else
 	{
 		backgroundAnimation.Foward();
@@ -86,29 +84,16 @@ bool SceneWin_Lose::Update(float dt)
 		app->render->DrawTexture(Win, offset + point * (0 - offset), 0);
 		app->audio->PlayMusic(winMusicPath);
 	}
-	if (lose)
+	if (!win)
 	{
 		app->render->DrawTexture(Lose, offset + point * (0 - offset), 0);
 		app->audio->PlayMusic(looseMusicPath);
 	}
 
-	/*if (app->combat->win) 
-	{
-		app->render->DrawTexture(Win, 0, 0);
-	}
-	if (app->combat->lose) 
-	{
-		app->render->DrawTexture(Lose, 0, 0);
-	}*/
-
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		transition_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 	}
-		
-
-	/*if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;*/
 
 	return true;
 }

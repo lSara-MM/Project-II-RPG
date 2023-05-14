@@ -118,7 +118,6 @@
     <ClCompile Include="Source\Inventory.cpp" />
     <ClCompile Include="Source\ItemManager.cpp" />
     <ClCompile Include="Source\LogoScene.cpp" />
-    <ClCompile Include="Source\LoseScene.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -161,7 +160,6 @@
     <ClInclude Include="Source\Inventory.h" />
     <ClInclude Include="Source\ItemManager.h" />
     <ClInclude Include="Source\LogoScene.h" />
-    <ClInclude Include="Source\LoseScene.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\NPC.h" />
     <ClInclude Include="Source\Pathfinding.h" />
