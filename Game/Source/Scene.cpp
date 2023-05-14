@@ -108,6 +108,9 @@ bool Scene::Start()
 		app->iScene->continueGame_B = false;
 	}
 
+	//GUARRADA SUPER TEMPORAL
+	app->itemManager->comb = 0;
+
 	return true;
 }
 
