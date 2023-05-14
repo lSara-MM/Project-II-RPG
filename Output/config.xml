@@ -211,7 +211,35 @@ enum class CharacterClass
         texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
 	<!-- Placeholder -->
 	</scenes>
+	<scenes name="HouseOfTerrors" numEnemies="3">
+		<!-- Placeholder -->
+		<enemy name ="Bewitched Wardrobe" id="0"
+        maxHp="1000" currentHp="1000" attack="120" armor="18" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="3"
+        type="1" class="4" skill1ID="21" skill2ID="22" skill3ID="23" skill4ID="24"
+               
+        width="0" heigth="0" texturePath="Assets/Textures/EnemyBewitchedWardrobe.png"/>
 
+		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="5"
+        type="1" class="0" skill1ID="25" skill2ID="26" skill3ID="27" skill4ID="28"
+               
+        width="0" heigth="0"
+        texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
+
+		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="140" armor="8" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="2"
+               
+        type="1" class="8" skill1ID="29" skill2ID="30" skill3ID="31" skill4ID="32"
+               
+        width="0" heigth="0"
+        texturePath ="Assets/Textures/EnemyPossessedPainting.png"/>
+
+		<enemy name ="The Specter" id="0" maxHp="2550" currentHp="2550" attack="220" armor="20" critRate="10" critDamage="25" precision="20" res="35" dodge="0" speed="6"
+               
+        type="1" class="10" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
+               
+        width="0" heigth="0"
+        texturePath ="Assets/Textures/EnemyBossSpecter.png"/>
+		<!-- Placeholder -->
+	</scenes>
 </combat>
 
 
