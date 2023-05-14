@@ -90,6 +90,8 @@ packages/
 !/Optick
 !/Optick/*
 
+!/PhysFS
+!/PhysFS/*
 
 !Game/Source/External/SDL_ttf/libx86/SDL2_ttf.lib
 
@@ -99,3 +101,7 @@ packages/
 
 !Game/Source/External/Optick/lib/releaseLib/OptickCore.dll
 !Game/Source/External/Optick/lib/releaseLib/OptickCore.lib
+
+!Game/Source/External/PhysFS/include/physfs.h
+!Game/Source/External/PhysFS/libx86/physfs.lib
+!Output/physfs.dll

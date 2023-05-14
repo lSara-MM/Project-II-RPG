@@ -91,12 +91,12 @@ void InitAllResourcesFromZip::LoadTexFile(const pugi::xml_document& dataFile)
 
 void InitAllResourcesFromZip::LoadAudioFile(const pugi::xml_document& dataFile)
 {
-	/*pugi::xml_node fx = dataFile.child("data").child("fx");
-	app->audio->LoadFx(fx.attribute("file").as_string());*/
+	pugi::xml_node audio = dataFile.child("data").child("fx");
+	//app->audio->LoadFx(fx.attribute("file").as_string());
 }
 
 void InitAllResourcesFromZip::LoadGUI(const pugi::xml_document& dataFile)
 {
-	//pugi::xml_node mus = dataFile.child("data").child("mus");
+	pugi::xml_node GUI = dataFile.child("data").child("mus");
 	//app->audio->PlayMusic(mus.attribute("file").as_string());
 }
