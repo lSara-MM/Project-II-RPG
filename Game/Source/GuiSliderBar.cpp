@@ -20,6 +20,9 @@ GuiSliderBar::GuiSliderBar(uint32 id, SDL_Rect bounds, SDL_Rect sliderBounds, in
 
 	//SliderBarTex = app->tex->Load("Assets/GUI/UI_slider.png");
 	SliderBarTex = app->tex->Load("Assets/GUI/UI_slider2.png");
+
+	slidepath = "Assets/Audio/Fx/slider.wav";
+	slidefx = app->audio->LoadFx(slidepath);
 }
 
 GuiSliderBar::~GuiSliderBar()
@@ -68,6 +71,11 @@ bool GuiSliderBar::Update(float dt)
 		{
 			state = GuiControlState::NORMAL;
 		}
+	}
+
+	if (state == GuiControlState::PRESSED)
+	{
+		app->audio->PlayFx(slidefx);
 	}
 
 	if (isForward_B)
