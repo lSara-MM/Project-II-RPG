@@ -117,6 +117,9 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 
 	confirmPath = "Assets/Audio/Fx/confirm_interaction.wav";
 	confirmInteractfx = app->audio->LoadFx(confirmPath);
+
+	solvedpath = "Assets/Audio/Fx/puzzle_solved.wav";
+	solvedfx = app->audio->LoadFx(solvedpath);
 	
 	return ret;
 }
@@ -518,6 +521,7 @@ bool PuzzleManager::Palancas()
 			PalancaSensor = nullptr;
 
 			palancas = true;
+			app->audio->PlayFx(solvedfx);
 			app->audio->PlayFx(palancafx);
 			app->questManager->SaveState();
 		}
@@ -564,6 +568,7 @@ bool PuzzleManager::Escape()
 
 			codeActive = false;
 			escape = true;
+			app->audio->PlayFx(solvedfx);
 			app->questManager->SaveState();
 		}
 
@@ -630,6 +635,7 @@ bool PuzzleManager::Rescue()
 					losetActive = false;
 					bossInvent = false;
 					rescue = true;
+					app->audio->PlayFx(solvedfx);
 					app->questManager->SaveState();
 				}
 			}
