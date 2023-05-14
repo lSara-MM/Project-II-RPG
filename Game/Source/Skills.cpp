@@ -23,7 +23,6 @@ Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUs
 	//Info
 	this->name = name;
 	this->description = description;
-	this->type = type;
 
 	//Stats
 	this->multiplierDmg = multiplierDmg;

@@ -186,7 +186,6 @@ bool Character::Update(float dt)
 				}
 				if (!delayOn)
 				{
-					app->combat->HandleCharaButtons(&app->combat->vecEnemies);
 					turnDelay.Start();
 					delayOn = true;
 				}
@@ -429,18 +428,18 @@ void Character::LoadSkill(int arr[4])
 				int movTarget = aux.attribute("movementTarget").as_int();
 
 				int movUsuario = aux.attribute("movementCaster").as_int();
-				int posInicialUso = aux.attribute("posToUseStart_I").as_int();
-				int posFinallUso = aux.attribute("posToUseEnd_I").as_int();
+				int posInicialUso = aux.attribute("posToUseStart").as_int();
+				int posFinallUso = aux.attribute("posToUseEnd").as_int();
 				
-				int posInicialTarget = aux.attribute("posToTargetStart_I").as_int();
-				int posFinallTarget = aux.attribute("posToTargetEnd_I").as_int();
+				int posInicialTarget = aux.attribute("posToTargetStart").as_int();
+				int posFinalTarget = aux.attribute("posToTargetEnd").as_int();
 				bool friendlyFire = aux.attribute("friendlyFire").as_bool();
 				bool area = aux.attribute("areaSkill").as_bool();
 				bool autoTarget = aux.attribute("areaSkill").as_bool();
 
-				listSkills.Add( new Skill(nombre, descripcion,
-					posInicialUso, posFinallUso,posInicialTarget, posFinallTarget,
-					movUsuario,movTarget, friendlyFire,area,autoTarget,mult,precision,probCrit,dmgCrit));
+				listSkills.Add(new Skill(nombre, descripcion,
+					posInicialUso, posFinallUso, posInicialTarget, posFinalTarget,
+					movUsuario, movTarget, friendlyFire, area, autoTarget, mult, precision, probCrit, dmgCrit));
 			}
 		}
 	}

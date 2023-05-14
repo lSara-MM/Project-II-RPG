@@ -380,6 +380,9 @@ bool Combat::NextTurn()
 	lastPressedAbility_I = -1;
 	targeted_Character = nullptr;
 
+	// Disable all buttons
+	HandleCharaButtons(&app->combat->vecEnemies);
+
 	//	//Resetear los botones targeteados
 	//	lastPressedAbility_I = 0;
 	//	targeted_Character = nullptr;
@@ -583,6 +586,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	// skills buttons
 	else if(control->id >= 10 && control->id < 14)
 	{
+		isMoving = false;
 		if (lastPressedAbility_I == control->id - 10) { lastPressedAbility_I = -1; } // Si already clicked deseleccionar
 		lastPressedAbility_I = control->id - 10;
 
