@@ -540,6 +540,7 @@ void Player::Controller(float dt)
 					PadLock = true;
 					keyLockUp = false;
 					currentAnimation = &idleUpAnim;
+					app->hTerrors->steps_I++;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT ||
@@ -555,6 +556,7 @@ void Player::Controller(float dt)
 				currentAnimation = &upAnim;
 				vel.y = -125 * 2;
 				vel.x = 0;
+				app->hTerrors->steps_I++;
 			}
 		}
 		if (!keyLockUp && !keyLockLeft && !keyLockRigth)
@@ -567,6 +569,7 @@ void Player::Controller(float dt)
 					PadLock = true;
 					keyLockDown = false;
 					currentAnimation = &idleDownAnim;
+					app->hTerrors->steps_I++;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT ||
@@ -582,6 +585,7 @@ void Player::Controller(float dt)
 				currentAnimation = &downAnim;
 				vel.y = 125 * 2;
 				vel.x = 0;
+				app->hTerrors->steps_I++;
 			}
 		}
 		if (!keyLockDown && !keyLockUp && !keyLockRigth)
@@ -594,6 +598,7 @@ void Player::Controller(float dt)
 					PadLock = true;
 					keyLockLeft = false;
 					currentAnimation = &idleLeftAnim;
+					app->hTerrors->steps_I++;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT ||
@@ -609,6 +614,7 @@ void Player::Controller(float dt)
 				currentAnimation = &leftAnim;
 				vel.x = -125 * 2;
 				vel.y = 0;
+				app->hTerrors->steps_I++;
 			}
 		}
 		if (!keyLockDown && !keyLockLeft && !keyLockUp)
@@ -621,6 +627,7 @@ void Player::Controller(float dt)
 					PadLock = true;
 					keyLockRigth = false;
 					currentAnimation = &idleRigthAnim;
+					app->hTerrors->steps_I++;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT ||
@@ -636,6 +643,7 @@ void Player::Controller(float dt)
 				currentAnimation = &rigthAnim;
 				vel.x = 125 * 2;
 				vel.y = 0;
+				app->hTerrors->steps_I++;
 			}
 		}
 

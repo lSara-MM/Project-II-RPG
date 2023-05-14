@@ -421,6 +421,7 @@ bool PuzzleManager::CleanUp()
 		delete FireGuy;
 		FireGuy = nullptr;
 	}
+	app->tex->UnLoad(fireGuy);//no entiendo nada, lo pongo aqui
 
 	if (palanca != nullptr)
 		app->tex->UnLoad(palanca);

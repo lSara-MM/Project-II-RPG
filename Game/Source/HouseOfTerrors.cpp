@@ -87,6 +87,9 @@ bool HouseOfTerrors::Start()
 	//Init player inventory
 	app->itemManager->SetPlayerForScene(player);
 
+	//enter combat
+	steps_I = 0;
+
 	return true;
 }
 
@@ -132,6 +135,14 @@ bool HouseOfTerrors::Update(float dt)
 		app->render->camera.x -= ceil(speed);
 
 	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_pos, mouseY_pos, mouseSpeed, dt); }
+
+	if (steps_I > 450)
+	{
+		LOG("Combat");
+		app->combat->PreLoadCombat(player->arrParty, name);
+		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+		steps_I = 0;
+	}
 
 	return true;
 }

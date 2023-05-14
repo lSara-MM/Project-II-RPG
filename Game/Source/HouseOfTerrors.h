@@ -59,6 +59,9 @@ public:
 
 	pugi::xml_node sceneNode;
 
+	//enter combat;
+	int steps_I;
+
 private:
 	int mouseX_pos, mouseY_pos;
 	//Music path
