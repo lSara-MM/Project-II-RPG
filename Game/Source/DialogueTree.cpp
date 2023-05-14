@@ -19,6 +19,7 @@ void DialogueNode::CleanUp()
 
 DialogueTree::DialogueTree(bool a)
 {
+	updateOptions = false;
 	active = a;
 }
 

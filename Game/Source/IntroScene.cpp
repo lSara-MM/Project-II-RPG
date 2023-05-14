@@ -85,6 +85,23 @@ bool IntroScene::Start()
 	transition_B = false;
 	exit_B = false;
 
+	//puzzle+quest
+
+	app->puzzleManager->palancas = false;
+	app->puzzleManager->escape = false;
+	app->puzzleManager->rescue = false;
+	app->puzzleManager->teamMate = false;
+
+	app->questManager->quest1->active = false;
+	app->questManager->quest2->active = false;
+	app->questManager->quest3->active = false;
+
+	app->questManager->quest1->complete = false;
+	app->questManager->quest2->complete = false;
+	app->questManager->quest3->complete = false;
+
+	app->questManager->SaveState();
+
 	return true;
 }
 
@@ -248,20 +265,6 @@ bool IntroScene::PostUpdate()
 
 		}
 
-		app->puzzleManager->palancas = false;
-		app->puzzleManager->escape = false;
-		app->puzzleManager->rescue = false;
-		app->puzzleManager->teamMate = false;
-
-		app->questManager->quest1->active = false;
-		app->questManager->quest2->active = false;
-		app->questManager->quest3->active = false;
-
-		app->questManager->quest1->complete = false;
-		app->questManager->quest2->complete = false;
-		app->questManager->quest3->complete = false;
-
-		app->questManager->SaveState();
 
 		app->combat->firstCombat_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 

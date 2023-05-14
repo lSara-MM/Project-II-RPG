@@ -29,7 +29,7 @@
 
 	<entitymanager>
 		<player x="3000" y="1000" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
-					texturepath="Assets/Textures/CH_Protagonist_Sprites.png"
+					texturepath="Assets/Textures/CH_Protagonist_Sprites2.png"
 					velocity="400" width="20" height="27" FUYMGravity="250"
 					audiopathCoin="Assets/Audio/Fx/Coin.wav"
 					audiopathGem="Assets/Audio/Fx/Gem.wav"

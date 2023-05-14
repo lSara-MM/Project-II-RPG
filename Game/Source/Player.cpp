@@ -114,7 +114,7 @@ bool Player::Start()
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
-	playerName = app->input->playerName->input.c_str();
+	name = app->input->playerName->input.c_str();
 	npcInteract = false;
 
 	pbody->body->SetGravityScale(0);
