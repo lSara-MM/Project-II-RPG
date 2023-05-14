@@ -174,6 +174,13 @@ private:
 
 	pugi::xml_document skillsFile;
 	pugi::xml_node skillNode;
+
+	//fx
+	const char* healPath;
+	uint healfx;
+
+	const char* hitPath;
+	uint hitfx;
 };
 
 #endif // __CHARACTER_H__

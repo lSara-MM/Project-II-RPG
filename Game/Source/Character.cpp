@@ -67,6 +67,13 @@ bool Character::Awake()
 	LoadSkill(skillIDs);
 	isCombatant = true;
 
+	//fx
+	healPath = "Assets/Audio/Fx/heal.wav";
+	healfx = app->audio->LoadFx(healPath);
+
+	hitPath = "Assets/Audio/Fx/hit.wav";
+	hitfx = app->audio->LoadFx(hitPath);
+
 	return true;
 }
 
@@ -587,9 +594,11 @@ bool Character::UseSkill(Skill* skill, Character* target)
 			{
 			case CharacterType::ALLY:
 				app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
+				app->audio->PlayFx(healfx);
 				break;
 			case CharacterType::ENEMY:
 				app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
+				app->audio->PlayFx(hitfx);
 				break;
 			case CharacterType::NONE:
 				break;
