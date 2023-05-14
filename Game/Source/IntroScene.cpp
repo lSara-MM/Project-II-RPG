@@ -17,6 +17,7 @@
 
 #include "EntityManager.h"
 #include "QuestManager.h"
+#include "PuzzleManager.h"
 
 #include <iostream>
 using namespace std;
@@ -246,6 +247,22 @@ bool IntroScene::PostUpdate()
 			i->data->isForward_B = false;
 
 		}
+
+		app->puzzleManager->palancas = false;
+		app->puzzleManager->escape = false;
+		app->puzzleManager->rescue = false;
+		app->puzzleManager->teamMate = false;
+
+		app->questManager->quest1->active = false;
+		app->questManager->quest2->active = false;
+		app->questManager->quest3->active = false;
+
+		app->questManager->quest1->complete = false;
+		app->questManager->quest2->complete = false;
+		app->questManager->quest3->complete = false;
+
+		app->questManager->SaveState();
+
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
 		introDone = true;
 	}

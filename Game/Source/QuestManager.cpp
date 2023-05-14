@@ -61,7 +61,6 @@ bool QuestManager::Start() {
 	bool ret = true;
 
 	initQuest();
-	LoadState();
 
 	quest1->title = "Find The Fire Guy";
 	quest2->title = "Drive the Oracle crazy";
@@ -71,18 +70,16 @@ bool QuestManager::Start() {
 	quest2->desc = "Talk to the Oracle and make him angry";
 	quest3->desc = "Practice into the Practice Tent";
 
-	if(!quest1->complete)
-		quest1->complete = false;
 
-	if(!quest2->complete)
-		quest2->complete = false;
-	
-	if(!quest3->complete)
-		quest3->complete = false;
+	quest1->complete = false;
+	quest2->complete = false;
+	quest3->complete = false;
 
 	quest1->active = false;
 	quest2->active = false;
 	quest3->active = false;
+
+	LoadState();
 
 	//Iterates over the entities and calls Start
 	ListItem<Quest*>* item;

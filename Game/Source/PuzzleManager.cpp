@@ -157,22 +157,20 @@ bool PuzzleManager::Start()
 	Loset = nullptr;
 	FireGuy = nullptr;
 
+	los = { 131, 66, 64, 64 };
+
 	app->questManager->active = true;
 	app->questManager->LoadState();
 
 	if (palancas == false) 
 	{
 		door = app->tex->Load(texturepathDoor);
-		palanca = app->tex->Load(texturepathPalanca);
 
 		Door1 = app->physics->CreateRectangle(posDoor1.x, posDoor1.y - heightHoritzontal / 2, widthHoritzontal * 2, heightHoritzontal, bodyType::STATIC);
 		Door1->body->SetFixedRotation(true);
 
 		Door2 = app->physics->CreateRectangle(posDoor2.x - widthHoritzontal / 2, posDoor2.y - heightHoritzontal / 2, widthHoritzontal, heightHoritzontal, bodyType::STATIC);
 		Door2->body->SetFixedRotation(true);
-
-		Palanca = app->physics->CreateRectangle(posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca, widthPalanca, heightPalanca, bodyType::STATIC);
-		Palanca->body->SetFixedRotation(true);
 
 		PalancaSensor = app->physics->CreateRectangleSensor(posPalancas.x - widthPalancaSens / 2, posPalancas.y - heightPalancaSens / 2, widthPalancaSens, heightPalancaSens, bodyType::STATIC);
 		PalancaSensor->body->SetFixedRotation(true);
@@ -183,9 +181,6 @@ bool PuzzleManager::Start()
 	{
 		door = app->tex->Load(texturepathDoor);
 		boss = app->tex->Load(texturepathBoss);
-		loset = app->tex->Load(texturepathLoset);
-
-		textureE = app->tex->Load("Assets/GUI/UI_E.png");
 		
 		Boss = app->physics->CreateRectangleSensor(posBoss.x - widthBoss / 2, posBoss.y - heightBoss / 2, widthBoss, heightBoss, bodyType::STATIC);
 		Boss->body->SetFixedRotation(true);
@@ -198,10 +193,13 @@ bool PuzzleManager::Start()
 		Door3 = app->physics->CreateRectangle(posDoor3.x - widthVertical / 2, posDoor3.y - heightVertical / 2, widthVertical, heightVertical, bodyType::STATIC);
 		Door3->body->SetFixedRotation(true);
 	}
+	else
+	{
+		los = { 196, 66, 64, 64 };
+	}
 
 	if (escape == false)
 	{
-		notas = app->tex->Load(texturepathNotas);
 		doorEscape = app->tex->Load(texturepathDoorEscape);
 
 		DoorEscape = app->physics->CreateRectangle(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape, bodyType::STATIC);
@@ -210,21 +208,6 @@ bool PuzzleManager::Start()
 		DoorEscapeSensor = app->physics->CreateRectangleSensor(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape, bodyType::STATIC);
 		DoorEscapeSensor->body->SetFixedRotation(true);
 		DoorEscapeSensor->ctype = ColliderType::DOORCODE;
-
-		nota1 = app->physics->CreateRectangleSensor(posNotas1.x - widthNotas / 2, posNotas1.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
-		nota1->body->SetFixedRotation(true);
-		nota1->ctype = ColliderType::NOTA;
-		nota1->id = 0;
-
-		nota2 = app->physics->CreateRectangleSensor(posNotas2.x - widthNotas / 2, posNotas2.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
-		nota2->body->SetFixedRotation(true);
-		nota2->ctype = ColliderType::NOTA;
-		nota2->id = 1;
-
-		nota3 = app->physics->CreateRectangleSensor(posNotas3.x - widthNotas / 2, posNotas3.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
-		nota3->body->SetFixedRotation(true);
-		nota3->ctype = ColliderType::NOTA;
-		nota3->id = 2;
 	}
 
 	if (teamMate == false) 
@@ -236,7 +219,28 @@ bool PuzzleManager::Start()
 		FireGuy->ctype = ColliderType::FIREGUY;
 	}
 
-	los = { 131, 66, 64, 64 };
+	textureE = app->tex->Load("Assets/GUI/UI_E.png");
+	notas = app->tex->Load(texturepathNotas);
+	loset = app->tex->Load(texturepathLoset);
+	palanca = app->tex->Load(texturepathPalanca);
+
+	Palanca = app->physics->CreateRectangle(posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca, widthPalanca, heightPalanca, bodyType::STATIC);
+	Palanca->body->SetFixedRotation(true);
+
+	nota1 = app->physics->CreateRectangleSensor(posNotas1.x - widthNotas / 2, posNotas1.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
+	nota1->body->SetFixedRotation(true);
+	nota1->ctype = ColliderType::NOTA;
+	nota1->id = 0;
+
+	nota2 = app->physics->CreateRectangleSensor(posNotas2.x - widthNotas / 2, posNotas2.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
+	nota2->body->SetFixedRotation(true);
+	nota2->ctype = ColliderType::NOTA;
+	nota2->id = 1;
+
+	nota3 = app->physics->CreateRectangleSensor(posNotas3.x - widthNotas / 2, posNotas3.y - heightNotas / 2, widthNotas, heightNotas, bodyType::STATIC);
+	nota3->body->SetFixedRotation(true);
+	nota3->ctype = ColliderType::NOTA;
+	nota3->id = 2;
 
 	numCode = new PlayerInput("", 3, false);
 
@@ -268,6 +272,61 @@ bool PuzzleManager::Update(float dt)
 	if (!teamMate) 
 	{
 		TeamMate();
+	}
+
+	if (esc1)
+	{
+		app->render->DrawTexture(textureE, posNotas1.x - 32, posNotas1.y - 80);
+
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			//Abrir UI nota 1
+			app->audio->PlayFx(confirmInteractfx);
+			app->dialogueSystem->Enable();
+			vector<int> id = { 100 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
+			app->dialogueSystem->PerformDialogue(id);
+			app->hTerrors->player->lockMovement = true;
+			esc1 = false;
+		}
+	}
+
+	if (esc2)
+	{
+		app->render->DrawTexture(textureE, posNotas2.x - 32, posNotas2.y - 80);
+
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			//Abrir UI nota 2
+			app->audio->PlayFx(confirmInteractfx);
+			app->dialogueSystem->Enable();
+			vector<int> id = { 101 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
+			app->dialogueSystem->PerformDialogue(id);
+			app->hTerrors->player->lockMovement = true;
+			esc2 = false;
+		}
+	}
+
+	if (esc3)
+	{
+		app->render->DrawTexture(textureE, posNotas3.x - 32, posNotas3.y - 80);
+
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			//Abrir UI nota 3
+			app->audio->PlayFx(confirmInteractfx);
+			app->dialogueSystem->Enable();
+			vector<int> id = { 102 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
+			app->dialogueSystem->PerformDialogue(id);
+			app->hTerrors->player->lockMovement = true;
+			esc3 = false;
+		}
+	}
+
+	if (app->dialogueSystem->hasEnded)
+	{
+		app->dialogueSystem->Disable();
+		app->hTerrors->player->lockMovement = false;
+		app->dialogueSystem->hasEnded = false;
 	}
 
 	SDL_Rect palan = { 361, 75, 29, 46 };
@@ -302,17 +361,11 @@ bool PuzzleManager::CleanUp()
 
 	if (palancas) 
 	{
-		if (palanca != nullptr)
-			app->tex->UnLoad(palanca);
-
 		if (Door1 != nullptr)
 			Door1->body->GetWorld()->DestroyBody(Door1->body);
 
 		if (Door2 != nullptr)
 			Door2->body->GetWorld()->DestroyBody(Door2->body);
-
-		if (Palanca != nullptr)
-			Palanca->body->GetWorld()->DestroyBody(Palanca->body);
 
 		if (PalancaSensor != nullptr)
 			PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
@@ -320,23 +373,12 @@ bool PuzzleManager::CleanUp()
 
 	if (escape) 
 	{
-		if (notas != nullptr)
-			app->tex->UnLoad(notas);
 
 		if (doorEscape != nullptr)
 			app->tex->UnLoad(doorEscape);
 
 		if (DoorEscape != nullptr)
 			DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
-
-		if (nota1 != nullptr)
-			nota1->body->GetWorld()->DestroyBody(nota1->body);
-
-		if (nota2 != nullptr)
-			nota2->body->GetWorld()->DestroyBody(nota2->body);
-
-		if (nota3 != nullptr)
-			nota3->body->GetWorld()->DestroyBody(nota3->body);
 	}
 
 	if (rescue) 
@@ -347,9 +389,6 @@ bool PuzzleManager::CleanUp()
 		if (Boss != nullptr)
 			Boss->body->GetWorld()->DestroyBody(Boss->body);
 
-		if (loset != nullptr)
-			app->tex->UnLoad(loset);
-
 		if (Door3 != nullptr)
 			Door3->body->GetWorld()->DestroyBody(Door3->body);
 
@@ -357,11 +396,44 @@ bool PuzzleManager::CleanUp()
 			Loset->body->GetWorld()->DestroyBody(Loset->body);
 	}
 
+	if (teamMate) 
+	{
+		if (fireGuy != nullptr)
+			app->tex->UnLoad(fireGuy);
+
+		if (FireGuy != nullptr)
+			FireGuy->body->GetWorld()->DestroyBody(FireGuy->body);
+
+		delete FireGuy;
+		FireGuy = nullptr;
+	}
+
+	if (palanca != nullptr)
+		app->tex->UnLoad(palanca);
+
+	if (notas != nullptr)
+		app->tex->UnLoad(notas);
+
+	if (loset != nullptr)
+		app->tex->UnLoad(loset);
+
 	if(door != nullptr)
 		app->tex->UnLoad(door);
 	
 	if(textureE != nullptr)
 		app->tex->UnLoad(textureE);
+
+	if (Palanca != nullptr)
+		Palanca->body->GetWorld()->DestroyBody(Palanca->body);
+
+	if (nota1 != nullptr)
+		nota1->body->GetWorld()->DestroyBody(nota1->body);
+
+	if (nota2 != nullptr)
+		nota2->body->GetWorld()->DestroyBody(nota2->body);
+
+	if (nota3 != nullptr)
+		nota3->body->GetWorld()->DestroyBody(nota3->body);
 
 	delete Door1;
 	Door1 = nullptr;
@@ -451,7 +523,6 @@ bool PuzzleManager::Escape()
 
 	app->render->DrawTexture(doorEscape, posDoorEscape.x - widthDoorEscape, posDoorEscape.y - heightDoorEscape, &dorEsc);
 
-
 	if (intoCode == true) 
 	{
 		app->render->DrawTexture(textureE, posDoorEscape.x + 20, posDoorEscape.y + 10);
@@ -460,63 +531,6 @@ bool PuzzleManager::Escape()
 		{
 			app->hTerrors->player->lockMovement = true;
 			app->input->ActiveGetInput(numCode);
-		}
-	}
-	else
-	{
-		if (esc1)
-		{
-			app->render->DrawTexture(textureE, posNotas1.x - 32, posNotas1.y - 80);
-
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-			{
-				//Abrir UI nota 1
-				app->audio->PlayFx(confirmInteractfx);
-				app->dialogueSystem->Enable();
-				vector<int> id = { 100 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
-				app->dialogueSystem->PerformDialogue(id);
-				app->hTerrors->player->lockMovement = true;
-				esc1 = false;
-			}
-		}
-
-		if (esc2)
-		{
-			app->render->DrawTexture(textureE, posNotas2.x - 32, posNotas2.y - 80);
-
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-			{
-				//Abrir UI nota 2
-				app->audio->PlayFx(confirmInteractfx);
-				app->dialogueSystem->Enable();
-				vector<int> id = { 101 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
-				app->dialogueSystem->PerformDialogue(id);
-				app->hTerrors->player->lockMovement = true;
-				esc2 = false;
-			}
-		}
-
-		if (esc3)
-		{
-			app->render->DrawTexture(textureE, posNotas3.x - 32, posNotas3.y - 80);
-
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-			{
-				//Abrir UI nota 3
-				app->audio->PlayFx(confirmInteractfx);
-				app->dialogueSystem->Enable();
-				vector<int> id = { 102 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
-				app->dialogueSystem->PerformDialogue(id);
-				app->hTerrors->player->lockMovement = true;
-				esc3 = false;
-			}
-		}
-
-		if (app->dialogueSystem->hasEnded)
-		{
-			app->dialogueSystem->Disable();
-			app->hTerrors->player->lockMovement = false;
-			app->dialogueSystem->hasEnded = false;
 		}
 	}
 
@@ -588,8 +602,6 @@ bool PuzzleManager::Rescue()
 				if (door != nullptr)
 					app->tex->UnLoad(door);
 
-				los = { 196, 66, 64, 64 };
-
 				if (Door3->body != nullptr)
 					Door3->body->GetWorld()->DestroyBody(Door3->body);
 				
@@ -626,13 +638,14 @@ bool PuzzleManager::TeamMate()
 			if (fireGuy != nullptr)
 				app->tex->UnLoad(fireGuy);
 
-			if (FireGuy->body != nullptr)
+			if (FireGuy != nullptr)
 				FireGuy->body->GetWorld()->DestroyBody(FireGuy->body);
 
 			delete FireGuy;
 			FireGuy = nullptr;
 
 			teamMate = true;
+
 			if (app->questManager->quest1->active) 
 			{
 				app->questManager->quest1->complete = true;
