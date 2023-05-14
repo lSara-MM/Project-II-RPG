@@ -18,6 +18,7 @@
 #include "EntityManager.h"
 #include "QuestManager.h"
 #include "PuzzleManager.h"
+#include "Combat.h"
 
 #include <iostream>
 using namespace std;
@@ -103,7 +104,6 @@ bool IntroScene::Update(float dt)
 		animationTitle.Backward();
 		animationBackground.Backward();
 	}
-
 	else
 	{
 		animationTitle.Foward();
@@ -129,8 +129,8 @@ bool IntroScene::Update(float dt)
 		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-
 		}
+		app->combat->firstCombat_B = false;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 	}
 		
@@ -263,6 +263,7 @@ bool IntroScene::PostUpdate()
 
 		app->questManager->SaveState();
 
+		app->combat->firstCombat_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
 		introDone = true;
 	}
@@ -320,6 +321,12 @@ bool IntroScene::SaveState(pugi::xml_node& data)
 	return true;
 }
 
+bool IntroScene::OnGuiMouseHoverEvent(GuiControl* control)
+{
+	
+
+	return true;
+}
 
 bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 {
@@ -343,6 +350,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 				i->data->isForward_B = false;
 				
 			}
+			app->combat->firstCombat_B = true;
 			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		}
 		break;
@@ -354,6 +362,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 			i->data->isForward_B = false;
 
 		}
+		app->combat->firstCombat_B = false;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		continueGame_B = true;
 		break;

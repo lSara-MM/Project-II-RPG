@@ -80,6 +80,11 @@ public:
 		return true;
 	}
 
+	virtual bool OnGuiMouseHoverEvent(GuiControl* control)
+	{
+		return true;
+	}
+
 	void Module::Enable()
 	{
 		if (!active)

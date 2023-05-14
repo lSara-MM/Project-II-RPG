@@ -12,6 +12,8 @@ void DialogueNode::CleanUp()
 {
 	for (int j = 0; j < choicesList.size(); j++) { delete choicesList[j]; }
 	choicesList.clear();
+	
+	texts.clear();
 }
 
 
@@ -60,8 +62,7 @@ bool DialogueTree::UpdateNodes(Module* mod, iPoint pos)
 	for (int i = 0; i < activeNode->choicesList.size(); i++)
 	{
 		const char* ch_option = activeNode->choicesList[i]->text.GetString();	// SString to const char*	
-		int w = activeNode->choicesList[i]->text.Length() * FONT_SIZE * 0.5 + 50;
-		w = FONT_SIZE * 20;
+		int w = FONT_SIZE * 20;
 		int h = FONT_SIZE * 2;
 		SDL_Rect bounds = { app->win->GetWidth() - w, pos.y - (h + FONT_SIZE) * (i + 1), w, h};
 

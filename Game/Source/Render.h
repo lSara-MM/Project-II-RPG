@@ -4,10 +4,13 @@
 #include "Module.h"
 
 #include "Point.h"
+#include "SString.h"
 #include <vector>
 
 #include "SDL/include/SDL.h"
 #include "SDL_ttf/include/SDL_ttf.h"
+using namespace std;
+
 using namespace std;
 
 enum Font
@@ -54,6 +57,7 @@ public:
 	bool TextDraw(const char* text, int x, int y, int size, Font font = Font::UI, SDL_Color color = { 0, 0, 0 });
 	// Text to split, vector to store trimmed text, fontsize, max characters in line
 	void SplitText(SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_);
+
 
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);

@@ -110,9 +110,14 @@ public:
 		observer = module;
 	}
 
-	void NotifyObserver()
+	void NotifyObserverOfClick()
 	{
 		observer->OnGuiMouseClickEvent(this);
+	}
+
+	void NotifyObserverOfHover()
+	{
+		observer->OnGuiMouseHoverEvent(this);
 	}
 
 public:

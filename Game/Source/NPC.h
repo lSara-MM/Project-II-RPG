@@ -33,9 +33,6 @@ public:
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 public:
-
-	SString name;
-
 	iPoint position;
 	int width, height;
 

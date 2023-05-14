@@ -24,7 +24,8 @@ GuiSliderBar::GuiSliderBar(uint32 id, SDL_Rect bounds, SDL_Rect sliderBounds, in
 
 GuiSliderBar::~GuiSliderBar()
 {
-	delete SliderBarTex;
+	//delete SliderBarTex;
+	app->tex->UnLoad(SliderBarTex);
 }
 
 bool GuiSliderBar::Update(float dt)
@@ -60,7 +61,7 @@ bool GuiSliderBar::Update(float dt)
 			// If mouse button pressed -> Generate event!
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
 			{
-				NotifyObserver();
+				NotifyObserverOfClick();
 			}
 		}
 		else

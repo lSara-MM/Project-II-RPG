@@ -27,6 +27,57 @@
 	<fadeToBlack>
 	</fadeToBlack>
 
+	<entitymanager>
+		<player x="3000" y="1000" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
+					texturepath="Assets/Textures/CH_Protagonist_Sprites.png"
+					velocity="400" width="20" height="27" FUYMGravity="250"
+					audiopathCoin="Assets/Audio/Fx/Coin.wav"
+					audiopathGem="Assets/Audio/Fx/Gem.wav"
+					audiopathJump ="Assets/Audio/Fx/sfx_jump.wav "
+					audiopathLand ="Assets/Audio/Fx/sfx_landing.wav"
+					audiopathDeath ="Assets/Audio/Fx/sfx_vaporizing.wav"
+					audiopathAttack="Assets/Audio/Fx/sfx_attack.wav"
+					audiopathSecret ="Assets/Audio/Fx/sfx_secret.wav"
+					audiopathCd ="Assets/Audio/Fx/sfx_Attack_Up.wav"
+					audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
+					audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"
+					grassStep="Assets/Audio/Fx/Pasos_Hierba.wav"
+					enterZone="Assets/Audio/Fx/entrar_sala.wav"/>
+
+
+		<!--Combat Characters -->
+
+		<CombatCharacter name ="" id="0"
+        maxHp="1150" currentHp="1150" attack="190" armor="12" critRate="20" critDamage="25" precision="15" res="10" dodge="10" speed="8"
+        type="0" class="0" skill1ID="1" skill2ID="2" skill3ID="3" skill4ID="4"
+               
+        width="0" heigth="0"
+		texturePath="Assets/Textures/AllyProtagonist.png"/>
+		
+		<CombatCharacter name ="Companion" id="1"
+        maxHp="1000" currentHp="1150" attack="200" armor="8" critRate="10" critDamage="20" precision="15" res="15" dodge="15" speed="7"
+        type="0" class="7" skill1ID="5" skill2ID="6" skill3ID="7" skill4ID="8"
+               
+        width="0" heigth="0"
+		texturePath="Assets/Textures/AllyBard.png"/>
+
+		<CombatCharacter name ="Healer Twins" id="2"
+        maxHp="1150" currentHp="1150" attack="190" armor="12" critRate="20" critDamage="25" precision="15" res="10" dodge="10" speed="8"
+        type="0" class="0" skill1ID="9" skill2ID="10" skill3ID="11" skill4ID="12"
+               
+        width="0" heigth="0"
+		texturePath="Assets/Textures/AllyHealer.png"/>
+
+		<CombatCharacter name ="Fire Eater" id="3"
+        maxHp="1150" currentHp="1150" attack="190" armor="12" critRate="20" critDamage="25" precision="15" res="10" dodge="10" speed="8"
+        type="0" class="0" skill1ID="13" skill2ID="14" skill3ID="15" skill4ID="16"
+               
+        width="0" heigth="0"
+		texturePath="Assets/Textures/AllyDOTS.png"/>
+		
+
+	</entitymanager>
+
 	<dialogue textBoxBg="Assets/GUI/UI_TextBox.png">
 	</dialogue>
 
@@ -36,8 +87,6 @@
 
 	<introScene background="Assets/Textures/intro_bg.png" audioIntroPath ="Assets/Audio/Music/Intro_mus.ogg"
 				settingsPath="Assets/Textures/setting_menu.png" mouseSpeed ="0.5"/>
-	
-	<combat mouseSpeed =" 0.5" />
 
 	<HouseOfTerrors musicD1="Assets/Audio/Music/Haunted_House.ogg" pause="Assets/Audio/Music/mus_pause.ogg" mouseSpeed ="0.5"/>
 	<Circus musicCircus="Assets/Audio/Music/CircusTent_mus.ogg" pause="Assets/Audio/Music/mus_pause.ogg" mouseSpeed ="0.5"/>
@@ -47,39 +96,9 @@
 		textureAttackPath="Assets/Textures/attack.png"
 	   background1 ="Assets/Maps/clouds_bg.png" background2 ="Assets/Maps/clouds_mg_1.png" background3 ="Assets/Maps/clouds_mg_2.png"
 	   coinspath="Assets/Maps/coin.png" heartspath="Assets/Maps/heart.png"
-		settingsPath ="Assets/Textures/setting_menu.png" mouseSpeed =" 0.5">
-		
-	<player x="3000" y="1000" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
-			texturepath="Assets/Textures/CH_Protagonist_Sprites2.png"
-			velocity="400" width="20" height="27" FUYMGravity="250"
-			audiopathCoin="Assets/Audio/Fx/Coin.wav"
-			audiopathGem="Assets/Audio/Fx/Gem.wav"
-			audiopathJump ="Assets/Audio/Fx/sfx_jump.wav "
-			audiopathLand ="Assets/Audio/Fx/sfx_landing.wav"
-			audiopathDeath ="Assets/Audio/Fx/sfx_vaporizing.wav"
-			audiopathAttack="Assets/Audio/Fx/sfx_attack.wav"
-			audiopathSecret ="Assets/Audio/Fx/sfx_secret.wav"
-			audiopathCd ="Assets/Audio/Fx/sfx_Attack_Up.wav"
-			audiopathHealth="Assets/Audio/Fx/sfx_health.wav"
-			audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"
-			grassStep="Assets/Audio/Fx/Pasos_Hierba.wav"
-			enterZone="Assets/Audio/Fx/entrar_sala.wav"/>
-		
-	<bard name ="Bard" maxHp="1000" currentHp="1000" attack="200" critProbability="10" critDamage="20" precision="100" armor="8"   esquiva="10" resistencia="5" speed="6"
-		   texturePath ="Assets/Textures/AllyBard.png"/>
+		settingsPath ="Assets/Textures/setting_menu.png" mouseSpeed =" 0.5">			
 
-	<protagonist name ="Protagonista" maxHp="1150" currentHp="1150" attack="190" armor="10" speed="5"
-				  texturePath ="Assets/Textures/AllyProtagonist.png"/>
-
-	<enemyTank name ="Bewitched Wardrobe" maxHp="1000" currentHp="1000" attack="120" armor="18" speed="3"
-			    texturePath ="Assets/Textures/marioneta2.png"/>
-		
-	<enemyDPS name ="Cursed Puppet" maxHp="600" currentHp="600" attack="200" armor="0" speed="5" 
-			  texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
-
-	<enemyHealer name ="Possessed Painting" maxHp="850" currentHp="850" attack="140" armor="8" speed="2"
-				  texturePath ="Assets/Textures/marioneta3.png"/>
-			
+	<!--NPCs-->
 
 	<npc name="GUIA" dialogueID="1"
 		x="3710" y="985" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
@@ -124,5 +143,75 @@
 		<map1>
 		</map1>
 	</map>
+
+<combat mouseSpeed =" 0.5" music ="Assets/Audio/Music/mus_combat.ogg"
+bgTexture="Assets/Textures/combat_background_placeholder.png" targetTexture="Assets/GUI/UI_button_charactherSelection.png" turnBarTexture="Assets/GUI/UI_battle_turnsBar.png">
+
+<!--
+enum class CharacterClass
+{
+	MELEE_DPS,
+	RANGED_DPS,
+	ASSASSIN,
+	AOE_DPS,
+	TANK,
+	DOT,
+	HEALER,
+	BUFFER,
+	DEBUFFER,
+	
+
+	NO_CLASS
+};
+-->
+
+	<scenes name="scene" numEnemies="3">
+	<!-- Placeholder -->
+		<enemy name ="Bewitched Wardrobe" id="0" 
+        maxHp="1000" currentHp="1000" attack="120" armor="18" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="3"
+        type="1" class="4" skill1ID="21" skill2ID="22" skill3ID="23" skill4ID="24"
+               
+        width="0" heigth="0" texturePath="Assets/Textures/EnemyBewitchedWardrobe.png"/>
+		
+		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="5"
+        type="1" class="0" skill1ID="25" skill2ID="26" skill3ID="27" skill4ID="28"
+               
+        width="0" heigth="0"  
+        texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
+
+		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="140" armor="8" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="2"
+               
+        type="1" class="8" skill1ID="29" skill2ID="30" skill3ID="31" skill4ID="32"
+               
+        width="0" heigth="0"
+        texturePath ="Assets/Textures/EnemyPossessedPainting.png"/>
+
+		<enemy name ="The Specter" id="0" maxHp="2550" currentHp="2550" attack="220" armor="20" critRate="10" critDamage="25" precision="20" res="35" dodge="0" speed="6"
+               
+        type="1" class="10" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
+               
+        width="0" heigth="0"
+        texturePath ="Assets/Textures/EnemyBossSpecter.png"/>
+	<!-- Placeholder -->
+	</scenes>
+
+	<scenes name="PracticeTent" numEnemies="2">
+	<!-- Placeholder -->
+		<enemy name ="Bewitched Wardrobe" id="0"
+        maxHp="1000" currentHp="1000" attack="120" armor="18" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="3"
+        type="1" class="4" skill1ID="17" skill2ID="18" skill3ID="19" skill4ID="20"
+               
+        width="0" heigth="0" texturePath="Assets/Textures/EnemyBewitchedWardrobe.png"/>
+
+		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="5"
+        type="1" class="0" skill1ID="21" skill2ID="22" skill3ID="23" skill4ID="24"
+               
+        width="0" heigth="0"
+        texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
+	<!-- Placeholder -->
+	</scenes>
+
+</combat>
+
 
 </config>

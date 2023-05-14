@@ -10,17 +10,11 @@ class PhysBody;
 
 enum class EntityType
 {
-	PLAYER, //ERIC: Para Out of Combat
+	PLAYER,
 	NPC,
-	//Lista de todos los Characthers
-		//PCs
-	PC_PROTAGONIST,
-	PC_BARD,
 
-		//Enemies
-	ENEMY_TANK_HOUSE,
-	ENEMY_DPS_HOUSE,
-	ENEMY_HEALER_HOUSE,
+	COMBAT_CHARA,
+	MENU_CHARA,
 
 	UNKNOWN
 };

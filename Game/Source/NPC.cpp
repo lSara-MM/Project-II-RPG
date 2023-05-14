@@ -24,7 +24,7 @@
 
 Npc::Npc() : Entity(EntityType::NPC)
 {
-	name.Create("Npc");
+	//name.Create("Npc");
 
 	idleAnim.PushBack({ 0, 0, 96, 96 });
 	idleAnim.PushBack({ 0, 0, 96, 96 });

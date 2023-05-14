@@ -40,8 +40,6 @@ public:
 	DialogueNode() {};
 	~DialogueNode() {};
 	
-	void SplitText(SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_);
-
 	void CleanUp();
 
 public:

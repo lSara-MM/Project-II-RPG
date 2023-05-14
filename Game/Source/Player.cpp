@@ -27,7 +27,7 @@
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
-	name.Create("player");
+	//name.Create("player");
 
 	currentAnim.PushBack({ 96, 0, 96, 96 });
 
@@ -121,7 +121,11 @@ bool Player::Start()
 
 	PadLock = false;
 	lockMovement = false;
-
+	
+	for (int i = 0; i < arrParty.size(); i++)
+	{
+		arrParty.at(i) = nullptr;
+	}
 	return true;
 }
 
@@ -134,7 +138,7 @@ bool Player::Update(float dt)
 		app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 0);
 	}
 
-	/*Hasta aquí PuzzleManager*/
+	/*Hasta aquï¿½ PuzzleManager*/
 
 	if (app->scene->pause_B || app->hTerrors->pause_B || app->circus->pause_B || app->practiceTent->pause_B)
 	{
@@ -232,7 +236,7 @@ bool Player::CleanUp()
 		app->tex->UnLoad(texture);
 		pbody->body->GetWorld()->DestroyBody(pbody->body);
 	}
-	
+
 	return true;
 }
 
@@ -643,3 +647,31 @@ void Player::Controller(float dt)
 	
 	PadLock = false;
 }
+
+void Player::LoadAllPC()
+{
+	for (pugi::xml_node itemNode = app->entityManager->entityNode.child("CombatCharacter"); itemNode; itemNode = itemNode.next_sibling("CombatCharacter"))
+	{
+		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::MENU_CHARA);
+		chara->parameters = itemNode;
+
+		chara->Awake();
+		chara->isCombatant = false;
+
+		chara->Start();
+
+		chara->charaType = CharacterType::ALLY;
+		listPC.push_back(chara);
+	}
+}
+
+void Player::SetParty()
+{	
+	// TODO when party available
+	for (int i = 0; i < listPC.size(); i++)
+	{
+		arrParty.at(i) = listPC.at(i);
+		arrParty.at(i)->positionCombat_I = i;
+	}
+}
+

@@ -86,11 +86,11 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(circus);
 	AddModule(hTerrors);
 	AddModule(practiceTent);
+	AddModule(combat);
 	AddModule(loseScene);
 
 	AddModule(map);
 	AddModule(entityManager);
-	AddModule(combat);
 	AddModule(dialogueSystem);
 	AddModule(guiManager);
 	AddModule(sceneWin_Lose);

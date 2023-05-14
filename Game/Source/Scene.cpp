@@ -27,6 +27,7 @@
 #include <iostream>
 using namespace std;
 #include <sstream>
+#include <time.h>
 
 Scene::Scene() : Module()
 {
@@ -45,9 +46,10 @@ bool Scene::Awake(pugi::xml_node& config)
 	pause_music = config.attribute("pause").as_string();
 	mute_B = false;
 
-	sceneNode = config;
-
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
+	enemyRange_I = config.attribute("enemyRange").as_int();;
+
+	sceneNode = config;
 
 	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
 	pausefx = app->audio->LoadFx(fxpausepath);
@@ -196,7 +198,6 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	app->entityManager->CleanUp();
 	app->entityManager->Disable();
 	delete player;
 	player = nullptr;
@@ -214,10 +215,10 @@ bool Scene::CleanUp()
 		pPause->CleanUp();
 	}
 	
-	app->dialogueSystem->CleanUp();
+	app->dialogueSystem->Disable();
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
-
+	
 	return true;
 }
 
@@ -317,7 +318,6 @@ void Scene::Debug()
 			{
 				/*pPause->CleanUp();*/
 			}
-
 		}
 		
 		LOG("PAUSE");
@@ -330,7 +330,15 @@ void Scene::Debug()
 		mute_B = !mute_B;
 		LOG("MUTE");
 	}
-		
+
+	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
+		LOG("Combat");
+		player->LoadAllPC();
+		player->SetParty();
+		app->combat->PreLoadCombat(player->arrParty, name);
+		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+	}
+	
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
 }
 
@@ -346,7 +354,7 @@ bool Scene::InitEntities()
 	}
 
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	player->parameters = sceneNode.child("player");
+	player->parameters = app->entityManager->entityNode.child("player");
 	player->Awake();
 
 	switch (app->entityManager->tpID)
@@ -371,6 +379,24 @@ bool Scene::InitEntities()
 	//app->entityManager->Awake();
 	return true;
 }
+
+//void Scene::InitCombat()
+//{
+//	srand(time(NULL));
+//
+//	int randSize = rand() % 3 + 2;
+//	int randId;
+//	vector<int> arr;
+//
+//	for (int i = 0; i < randSize; i++)
+//	{
+//		randId = rand() % 3;
+//		arr.push_back(randId);
+//	}
+//
+//	app->combat->InitAllies(player->arrParty);
+//	app->combat->InitEnemies(name, arr);
+//}
 
 bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 {

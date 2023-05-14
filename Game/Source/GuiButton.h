@@ -7,6 +7,7 @@
 #include "Point.h"
 #include "SString.h"
 #include "Tweening.h"
+#include <vector>
 
 class GuiButton : public GuiControl
 {

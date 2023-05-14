@@ -75,7 +75,11 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 
 GuiButton::~GuiButton()
 {
-	delete buttonTex;
+	//delete buttonTex;
+	app->tex->UnLoad(buttonTex);
+
+	// TO DELETE: arreglo feo temporal? com se borra un boto, pregunta seria
+	state = GuiControlState::NONE;
 }
 
 bool GuiButton::Update(float dt)
@@ -92,13 +96,9 @@ bool GuiButton::Update(float dt)
 
 			if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
 				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
-
-				if (hoverTest == false)
-				{
-					app->audio->PlayFx(fxHover);
-					hoverTest = true;
-				}
 				state = GuiControlState::FOCUSED;
+				NotifyObserverOfHover();
+
 				if (hoverTest == false)
 				{
 					app->audio->PlayFx(fxHover);
@@ -117,7 +117,7 @@ bool GuiButton::Update(float dt)
 				// If mouse button pressed -> Generate event!
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
 				{
-					NotifyObserver();
+					NotifyObserverOfClick();
 				}
 			}
 
@@ -146,7 +146,7 @@ bool GuiButton::Update(float dt)
 
 			if (state == GuiControlState::PRESSED && app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
 			{
-				NotifyObserver();
+				NotifyObserverOfClick();
 				state = GuiControlState::FOCUSED;
 			}
 		}
@@ -471,6 +471,22 @@ bool GuiButton::Draw(Render* render)
 		}
 
 	}
+	// TO TEST
+
+	// Text
+	//vector<SString> texts;
+	//int max_chars_line = fontSize;
+	//app->render->SplitText(text, &texts, fontSize, max_chars_line);
+
+	//if (text != "")
+	//{
+		/*size_t lines = texts.size();
+		for (size_t i = 0; i < lines; i++)
+		{
+			app->render->TextDraw(texts.at(i).GetString(), bounds.x + x, bounds.y + y + (fontSize + 3) * i, fontSize, font);
+		}*/
+		//app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
+	//}
 
 	return false;
 }

@@ -47,7 +47,7 @@ public:
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
-
+	
 public:
 
 	Player* player;
@@ -63,8 +63,6 @@ public:
 	int currentHP_Bard = 0;
 	int currentHP_Protagonist = 0;
 	bool isCharacterLoaded_B = true;
-
-	pugi::xml_node sceneNode;
 
 private:
 
@@ -83,7 +81,9 @@ private:
 
 
 	bool exit_B;
+	int enemyRange_I;
 
+	pugi::xml_node sceneNode;
 };
 
 #endif // __SCENE_H__

@@ -19,7 +19,8 @@ GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, int speed, Easings eType, A
 
 GuiCheckBox::~GuiCheckBox()
 {
-	delete checkBoxTex;
+	//delete checkBoxTex;
+	app->tex->UnLoad(checkBoxTex);
 }
 
 bool GuiCheckBox::Update(float dt)
@@ -50,7 +51,7 @@ bool GuiCheckBox::Update(float dt)
 			// If mouse button pressed -> Generate event!
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_UP)
 			{
-				NotifyObserver();
+				NotifyObserverOfClick();
 			}
 		}
 	}
