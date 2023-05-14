@@ -37,6 +37,9 @@ bool SceneWin_Lose::Awake(pugi::xml_node& config)
 	texturepathWin = config.child("win").attribute("texturepath").as_string();
 	texturepathLose = config.child("lose").attribute("texturepath").as_string();
 
+	looseMusicPath = config.attribute("musicl").as_string();
+	winMusicPath = config.attribute("musicw").as_string();
+
 	backgroundAnimation.Set();
 	backgroundAnimation.AddTween(100, 120, BOUNCE_IN_OUT);
 
@@ -98,10 +101,12 @@ bool SceneWin_Lose::Update(float dt)
 	if (win)
 	{
 		app->render->DrawTexture(Win, offset + point * (0 - offset), 0);
+		app->audio->PlayMusic(winMusicPath);
 	}
 	if (lose)
 	{
 		app->render->DrawTexture(Lose, offset + point * (0 - offset), 0);
+		app->audio->PlayMusic(looseMusicPath);
 	}
 
 	/*if (app->combat->win) 

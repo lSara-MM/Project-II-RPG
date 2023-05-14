@@ -166,6 +166,9 @@ private:
 	const char* confirmPath;
 	uint confirmInteractfx;
 
+	const char* solvedpath;
+	uint solvedfx;
+
 };
 
 #endif // __SCENE_H__
