@@ -65,9 +65,6 @@ private:
 	const char* texturepathWin;
 	const char* texturepathLose;
 
-	// Settings
-	Settings* pSettings;
-	Pause* pPause;
 	bool transition_B;
 	Tween backgroundAnimation;
 
