@@ -32,6 +32,11 @@ Character::~Character()
 bool Character::Awake()
 {
 	name = parameters.attribute("name").as_string();
+	
+	if (strcmp(name.GetString(), "") == 0)
+	{
+		name = app->input->playerName.c_str();
+	}
 
 	maxHp = parameters.attribute("maxHp").as_int();
 	currentHp = parameters.attribute("currentHp").as_int();

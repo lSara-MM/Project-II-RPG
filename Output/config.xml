@@ -47,7 +47,7 @@
 
 		<!--Combat Characters -->
 
-		<CombatCharacter name ="Protagonist" id="0"
+		<CombatCharacter name ="" id="0"
         maxHp="1150" currentHp="1150" attack="190" armor="12" critRate="20" critDamage="25" precision="15" res="10" dodge="10" speed="8"
         type="0" class="0" skill1ID="1" skill2ID="2" skill3ID="3" skill4ID="4"
                

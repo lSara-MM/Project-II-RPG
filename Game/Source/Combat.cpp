@@ -82,12 +82,18 @@ bool Combat::Start()
 	StartCombat();
 	
 
-	GuiButton* button;
+	GuiButton* button;	int j = 10;
 	for (int i = 0; i < 5; i++)
 	{
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 10, this, { 40 + i * 100, 470, 80, 80 });
 		listButtons.Add(button);
+		j++;
 	}
+
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, j, this, { 576, 85, 134, 40});
+	listButtons.Add(button);
+
+	button = nullptr;
 
 	//Load, modificar currentHP, hacer luego de cargar allies
 	if (!firstCombat_B)
@@ -109,12 +115,6 @@ bool Combat::Update(float dt)
 {
 	Debug();
 	app->render->DrawTexture(textureBackground, 0, 0);
-
-	// TO DO, remove DEBUG info
-	if (isMoving)
-	{
-		app->render->TextDraw("Is moving", 10, 700, 12);
-	}
 
 	// Printar Barra Turnos (UI WORK)
 	int j = charaInTurn;
@@ -594,11 +594,16 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		posEnd = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
 	}
 	// move character
-	else if (control->id >= 14)
+	else if (control->id == 14)
 	{
 		HandleCharaButtons(&vecAllies, 0, vecAllies.size()); 
 		listInitiative.At(charaInTurn)->data->button->state = GuiControlState::DISABLED;
 		isMoving = true;
+	}
+	else if (control->id == 15)
+	{
+		HandleCharaButtons(&vecAllies, 0, vecAllies.size());
+		NextTurn();
 	}
 
 	//
