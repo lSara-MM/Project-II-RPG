@@ -79,13 +79,13 @@ bool Character::Awake()
 	hitPath = "Assets/Audio/Fx/hit.wav";
 	hitfx = app->audio->LoadFx(hitPath);
 
-	texture = app->tex->Load(texturePath);
-
 	return true;
 }
 
 bool Character::Start()
 {
+	texture = app->tex->Load(texturePath);
+
 	SDL_Rect buttonBounds;
 
 	if (isCombatant)

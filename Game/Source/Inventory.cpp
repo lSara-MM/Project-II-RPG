@@ -8,6 +8,7 @@
 #include "ItemManager.h"
 
 
+
 Inventory::Inventory(unsigned cap) : Module()
 {
 	name.Create("Inventory");

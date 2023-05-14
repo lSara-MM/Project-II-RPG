@@ -342,7 +342,7 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 		}
 	}
 
-	if (nodeList[ID]->button != NULL)
+	if (nodeList[ID]->button != nullptr)
 	{
 		nodeList[ID]->button->bounds = buttonBounds;
 	}

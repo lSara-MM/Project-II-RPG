@@ -13,7 +13,7 @@ class GuiButton : public GuiControl
 {
 public:
 
-	GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text = "", int fontSize = 12, Font font = Font::UI, int speed = 1, Easings eType = Easings::BACK_OUT, AnimationAxis axisType= AnimationAxis::DOWN_Y);
+	GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text = "", int fontSize = 12, Font font = Font::UI, int speed = 1, Easings eType = Easings::DEF, AnimationAxis axisType= AnimationAxis::DOWN_Y);
 	virtual ~GuiButton();
 
 	bool Update(float dt);

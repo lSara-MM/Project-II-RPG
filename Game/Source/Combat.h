@@ -58,7 +58,7 @@ public:
 	void HandleCharaButtons(vector<Character*>* arr, int pos1 = -1, int pos2 = -1);	// If -1, disable all
 	void HandleSkillsButtons(List<Skill*> listSkills_);
 
-	void MoveCharacter(vector<Character*>* arr, Character* chara, int movement_I);
+	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);
 	void RemoveCharacter(vector<Character*>* arr, Character* chara);
 	void UpdatePositions(vector<Character*>* arr, int pos = 0);
 

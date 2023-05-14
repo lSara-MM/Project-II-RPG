@@ -12,6 +12,7 @@
 #include "GuiManager.h"
 #include "Inventory.h"
 #include "Player.h"
+#include "Character.h"
 
 #include <vector>
 using namespace std;
