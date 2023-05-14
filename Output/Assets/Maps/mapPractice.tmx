@@ -9,14 +9,6 @@
  <tileset firstgid="33" name="Pared y puerta tienda" tilewidth="64" tileheight="64" spacing="1" margin="1" tilecount="36" columns="6">
   <image source="Pared y puerta tienda.png" width="391" height="391"/>
  </tileset>
- <imagelayer id="3" name="Background" visible="0">
-  <image source="PracticeMap.png" width="1280" height="640"/>
-  <properties>
-   <property name="Draw" type="bool" value="true"/>
-   <property name="Navigation" type="bool" value="false"/>
-   <property name="collider" type="bool" value="false"/>
-  </properties>
- </imagelayer>
  <layer id="2" name="Vacio" width="20" height="10">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -227,6 +219,11 @@
   </data>
  </layer>
  <layer id="4" name="Suelo y pared" width="20" height="10">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+   <property name="Navigation" type="bool" value="false"/>
+   <property name="collider" type="bool" value="false"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
