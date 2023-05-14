@@ -103,6 +103,18 @@ bool Scene::Update(float dt)
 
 	Debug();
 
+	//Inventory
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	{
+		if (app->inventory->active)
+		{
+			app->inventory->Disable();
+		}
+		else {
+			app->inventory->Enable();
+		}
+	}
+
 	app->input->GetMousePosition(mouseX_scene, mouseY_scene);
 
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
@@ -203,6 +215,8 @@ bool Scene::CleanUp()
 		changeToCombat = false;
 	}
 	
+	delete player;
+
 	return true;
 }
 

@@ -67,9 +67,9 @@ bool Inventory::Update(float dt)
 	}
 
 	//Print Character
-	if (app->itemManager->player->arrParty.at(app->itemManager->invPos)->texture != NULL)
+	if (app->itemManager->player->arrParty.at(app->itemManager->invPos) != nullptr)
 	{
-		app->render->DrawTexture(app->itemManager->player->arrParty.at(app->itemManager->invPos)->texture, 100 - app->render->camera.x, 0 - app->render->camera.y);
+		app->render->DrawTexture(app->itemManager->player->arrParty.at(app->itemManager->invPos)->texture, 370 - app->render->camera.x, 180 - app->render->camera.y);
 	}
 
 	//LOAD STATS

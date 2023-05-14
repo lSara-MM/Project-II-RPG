@@ -27,9 +27,6 @@ bool ItemManager::Awake(pugi::xml_node& config)
 
 bool ItemManager::Start()
 {
-	player->LoadAllPC();
-	player->SetParty();
-
 	LoadItems();
 
 	return true;
@@ -37,17 +34,6 @@ bool ItemManager::Start()
 
 bool ItemManager::Update(float dt)
 {
-	//Inventory
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
-	{
-		if (app->inventory->active)
-		{
-			app->inventory->Disable();
-		}
-		else {
-			app->inventory->Enable();
-		}
-	}
 
 	//Add items HardCode
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)

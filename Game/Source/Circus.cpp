@@ -54,9 +54,6 @@ bool Circus::Start()
 	//Load Map
 	app->map->Load(2);
 
-	//Init player inventory
-	app->itemManager->SetPlayerForScene(player);
-
 	app->audio->PlayMusic(circusMusPath, 0);
 
 	exit_B = false;
@@ -74,6 +71,9 @@ bool Circus::Start()
 	InitEntities();
 	app->entityManager->Enable();
 
+	//Init player inventory
+	app->itemManager->SetPlayerForScene(player);
+
 	return true;
 }
 
@@ -88,6 +88,18 @@ bool Circus::Update(float dt)
 	app->map->Draw();
 
 	app->input->GetMousePosition(mouseX_pos, mouseY_pos);
+
+	//Inventory
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	{
+		if (app->inventory->active)
+		{
+			app->inventory->Disable();
+		}
+		else {
+			app->inventory->Enable();
+		}
+	}
 
 	//Load Debug keys
 	Debug();

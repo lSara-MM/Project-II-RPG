@@ -91,6 +91,8 @@ public:
 	void SetPlayerForScene(Player* player_)
 	{
 		player = player_;
+		player->LoadAllPC();
+		player->SetParty();
 	}
 
 

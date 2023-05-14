@@ -54,9 +54,6 @@ bool PracticeTent::Start()
 	//Load Map
 	app->map->Load(3);
 
-	//Init player inventory
-	app->itemManager->SetPlayerForScene(player);
-
 	//Music
 	app->audio->PlayMusic(practisePath, 0);
 	exit_B = false;
@@ -73,6 +70,10 @@ bool PracticeTent::Start()
 
 	InitEntities();
 	app->entityManager->Enable();
+
+	//Init player inventory
+	app->itemManager->SetPlayerForScene(player);
+
 	return true;
 }
 
@@ -88,6 +89,18 @@ bool PracticeTent::Update(float dt)
 
 	//Load Debug keys
 	Debug();
+
+	//Inventory
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	{
+		if (app->inventory->active)
+		{
+			app->inventory->Disable();
+		}
+		else {
+			app->inventory->Enable();
+		}
+	}
 
 	app->input->GetMousePosition(mouseX_pos, mouseY_pos);
 

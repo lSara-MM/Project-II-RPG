@@ -70,13 +70,13 @@ bool Character::Awake()
 	
 	LoadSkill(skill1ID);
 
+	texture = app->tex->Load(texturePath);
+
 	return true;
 }
 
 bool Character::Start()
 {
-	texture = app->tex->Load(texturePath);
-
 	SDL_Rect buttonBounds;
 
 	if (charaType == CharacterType::ALLY)
