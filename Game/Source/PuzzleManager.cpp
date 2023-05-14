@@ -341,6 +341,11 @@ bool PuzzleManager::Update(float dt)
 		app->dialogueSystem->hasEnded = false;
 	}
 
+	if(app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	{
+		bossIsDead = !bossIsDead;
+	}
+
 	SDL_Rect palan = { 361, 75, 29, 46 };
 
 	app->render->DrawTexture(palanca, posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca, &palan);
