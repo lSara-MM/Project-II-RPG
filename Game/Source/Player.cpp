@@ -120,6 +120,7 @@ bool Player::Start()
 	pbody->body->SetGravityScale(0);
 
 	PadLock = false;
+	lockMovement = false;
 
 	return true;
 }
@@ -213,10 +214,6 @@ bool Player::Update(float dt)
 				lockMovement = false; 
 				app->dialogueSystem->Disable();
 			}
-		}
-		else
-		{
-			lockMovement = false;
 		}
 
 		if (!lockMovement)

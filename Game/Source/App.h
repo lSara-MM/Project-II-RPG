@@ -42,6 +42,9 @@ class SceneWin_Lose;
 class PuzzleManager;
 class QuestManager;
 
+//class InitAllResourcesFromZip;
+//class AssetsManager;
+
 class App
 {
 public:
@@ -130,6 +133,9 @@ public:
 	SceneWin_Lose* sceneWin_Lose;
 	PuzzleManager* puzzleManager;
 	QuestManager* questManager;
+	
+	/*InitAllResourcesFromZip* initiAllResourcesFromZip;
+	AssetsManager* assetsManager;*/
 
 	// Time control
 	uint frames;

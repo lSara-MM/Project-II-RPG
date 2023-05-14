@@ -157,6 +157,7 @@ bool PuzzleManager::Start()
 	Loset = nullptr;
 	FireGuy = nullptr;
 
+	app->questManager->active = true;
 	app->questManager->LoadState();
 
 	if (palancas == false) 
@@ -183,6 +184,8 @@ bool PuzzleManager::Start()
 		door = app->tex->Load(texturepathDoor);
 		boss = app->tex->Load(texturepathBoss);
 		loset = app->tex->Load(texturepathLoset);
+
+		textureE = app->tex->Load("Assets/GUI/UI_E.png");
 		
 		Boss = app->physics->CreateRectangleSensor(posBoss.x - widthBoss / 2, posBoss.y - heightBoss / 2, widthBoss, heightBoss, bodyType::STATIC);
 		Boss->body->SetFixedRotation(true);
@@ -356,6 +359,9 @@ bool PuzzleManager::CleanUp()
 
 	if(door != nullptr)
 		app->tex->UnLoad(door);
+	
+	if(textureE != nullptr)
+		app->tex->UnLoad(textureE);
 
 	delete Door1;
 	Door1 = nullptr;
@@ -408,6 +414,8 @@ bool PuzzleManager::Palancas()
 
 	if (palancasActive)
 	{
+		app->render->DrawTexture(textureE, posPalancas.x - 30, posPalancas.y - 60);
+
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
 			if (Door1 != nullptr)
@@ -446,13 +454,20 @@ bool PuzzleManager::Escape()
 
 	if (intoCode == true) 
 	{
+		app->render->DrawTexture(textureE, posDoorEscape.x + 20, posDoorEscape.y + 10);
+
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			app->hTerrors->player->lockMovement = true;
 			app->input->ActiveGetInput(numCode);
+		}
 	}
 	else
 	{
 		if (esc1)
 		{
+			app->render->DrawTexture(textureE, posNotas1.x - 32, posNotas1.y - 80);
+
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				//Abrir UI nota 1
@@ -467,6 +482,8 @@ bool PuzzleManager::Escape()
 
 		if (esc2)
 		{
+			app->render->DrawTexture(textureE, posNotas2.x - 32, posNotas2.y - 80);
+
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				//Abrir UI nota 2
@@ -481,6 +498,8 @@ bool PuzzleManager::Escape()
 
 		if (esc3)
 		{
+			app->render->DrawTexture(textureE, posNotas3.x - 32, posNotas3.y - 80);
+
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				//Abrir UI nota 3
@@ -524,6 +543,8 @@ bool PuzzleManager::Escape()
 			escape = true;
 			app->questManager->SaveState();
 		}
+
+		app->hTerrors->player->lockMovement = false;
 	}
 
 	return true;
@@ -537,6 +558,8 @@ bool PuzzleManager::Rescue()
 
 	if (bossActive) 
 	{
+		app->render->DrawTexture(textureE, posBoss.x - 64, posBoss.y - 145);
+
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
 		{
 			bossInvent = true;
@@ -558,6 +581,8 @@ bool PuzzleManager::Rescue()
 	{
 		if (losetActive) 
 		{
+			app->render->DrawTexture(textureE, posLoset.x - 64, posLoset.y - 120);
+
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				if (door != nullptr)
@@ -594,6 +619,8 @@ bool PuzzleManager::TeamMate()
 
 	if (saveFireGuy) 
 	{
+		app->render->DrawTexture(textureE, posFireGuy.x - 32, posFireGuy.y + 30);
+
 		if(app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
 			if (fireGuy != nullptr)
@@ -612,6 +639,9 @@ bool PuzzleManager::TeamMate()
 			}
 
 			app->questManager->SaveState();
+
+			app->entityManager->tpID = 0;
+			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
 		}
 	}
 

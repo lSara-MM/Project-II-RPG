@@ -102,6 +102,7 @@ public:
 	SDL_Texture* boss;
 	SDL_Texture* loset;
 	SDL_Texture* fireGuy;
+	SDL_Texture* textureE;
 
 	PhysBody* Door1;
 	PhysBody* Door2;

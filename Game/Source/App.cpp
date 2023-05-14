@@ -16,6 +16,9 @@
 #include "PuzzleManager.h"
 #include "QuestManager.h"
 
+#include "InitiAllResourcesFromZip.h"
+#include "AssetsManager.h"
+
 #include "EntityManager.h"
 #include "FadeToBlack.h"
 #include "Combat.h"
@@ -64,6 +67,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	puzzleManager = new PuzzleManager();
 	questManager = new QuestManager();
 
+	/*initiAllResourcesFromZip = new InitAllResourcesFromZip();
+	assetsManager = new AssetsManager();*/
+
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(input);
@@ -90,6 +96,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(sceneWin_Lose);
 	AddModule(puzzleManager);
 	AddModule(questManager);
+	
+	//AddModule(initiAllResourcesFromZip);
+	//AddModule(assetsManager);
 
 
 	AddModule(fade);
@@ -488,4 +497,7 @@ void App::DisableAtStart()
 	combat->active = false;
 	sceneWin_Lose->active = false;
 	puzzleManager->active = false;
+	//Este debe estar siempre activo para poder cargar correctamente los path en el momento que se necesiten
+	//initiAllResourcesFromZip->active = true;
+	//assetsManager->active = true;
 }

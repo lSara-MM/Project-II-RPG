@@ -297,6 +297,7 @@ bool QuestManager::LoadState() {
 	pugi::xml_document gameStateFile;
 	pugi::xml_parse_result result = gameStateFile.load_file("save_game_Puzzle_Quest.xml");
 
+
 	if (result == NULL)
 	{
 		LOG("Could not load xml file save_game_Puzzle_Quest.xml. pugi error: %s", result.description());
@@ -304,20 +305,20 @@ bool QuestManager::LoadState() {
 	}
 	else
 	{
-		app->puzzleManager->palancas = gameStateFile.child("puzzle").attribute("palancas").as_bool();
-		app->puzzleManager->escape = gameStateFile.child("puzzle").attribute("escape").as_bool();
-		app->puzzleManager->rescue = gameStateFile.child("puzzle").attribute("rescue").as_bool();
-		app->puzzleManager->teamMate = gameStateFile.child("puzzle").attribute("teamMate").as_bool();
-		app->puzzleManager->keyPalancas = gameStateFile.child("puzzle").attribute("keyPalancas").as_int();
-		app->puzzleManager->keyEscape = gameStateFile.child("puzzle").attribute("keyEscape").as_int();
-		app->puzzleManager->keyRescue = gameStateFile.child("puzzle").attribute("keyRescue").as_int();
+		app->puzzleManager->palancas = gameStateFile.child("save_state").child("puzzle").attribute("palancas").as_bool();
+		app->puzzleManager->escape = gameStateFile.child("save_state").child("puzzle").attribute("escape").as_bool();
+		app->puzzleManager->rescue = gameStateFile.child("save_state").child("puzzle").attribute("rescue").as_bool();
+		app->puzzleManager->teamMate = gameStateFile.child("save_state").child("puzzle").attribute("teamMate").as_bool();
+		app->puzzleManager->keyPalancas = gameStateFile.child("save_state").child("puzzle").attribute("keyPalancas").as_int();
+		app->puzzleManager->keyEscape = gameStateFile.child("save_state").child("puzzle").attribute("keyEscape").as_int();
+		app->puzzleManager->keyRescue = gameStateFile.child("save_state").child("puzzle").attribute("keyRescue").as_int();
 
-		quest1->active = gameStateFile.child("quests").attribute("quest1").as_bool();
-		quest2->active = gameStateFile.child("quests").attribute("quest2").as_bool();
-		quest3->active = gameStateFile.child("quests").attribute("quest3").as_bool();
-		quest1->complete = gameStateFile.child("quests").attribute("quest1_Complete").as_bool();
-		quest2->complete = gameStateFile.child("quests").attribute("quest2_Complete").as_bool();
-		quest3->complete = gameStateFile.child("quests").attribute("quest3_Complete").as_bool();
+		quest1->active = gameStateFile.child("save_state").child("quests").attribute("quest1").as_bool();
+		quest2->active = gameStateFile.child("save_state").child("quests").attribute("quest2").as_bool();
+		quest3->active = gameStateFile.child("save_state").child("quests").attribute("quest3").as_bool();
+		quest1->complete = gameStateFile.child("save_state").child("quests").attribute("quest1_Complete").as_bool();
+		quest2->complete = gameStateFile.child("save_state").child("quests").attribute("quest2_Complete").as_bool();
+		quest3->complete = gameStateFile.child("save_state").child("quests").attribute("quest3_Complete").as_bool();
 	}
 
 	return ret;

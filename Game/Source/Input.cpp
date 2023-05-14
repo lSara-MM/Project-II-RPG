@@ -275,8 +275,11 @@ bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 		}
 		// Remove a character from the end
 
-		temp.erase(temp.length() - 1);
-		backSpaceMax = true;
+		if(temp.length() > 0)
+		{
+			temp.erase(temp.length() - 1);
+			backSpaceMax = true;
+		}
 		
 	}
 
@@ -304,6 +307,7 @@ bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 void Input::ActiveGetInput(PlayerInput* i)
 {
 	getInput_B = true;
+	i->input_entered = false;
 	playerInput_S = i;
 }
 
