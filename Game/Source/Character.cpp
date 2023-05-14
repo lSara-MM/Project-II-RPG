@@ -190,6 +190,65 @@ bool Character::Update(float dt)
 					switch (charaClass) //La idea es que cada classe tenga un comportamiento generico
 					{
 					case CharacterClass::MELEE_DPS:
+
+					{
+						int probSkill;
+						if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Alto de vida
+						{
+							//usar skill 2 (avance)
+							UseSkill(listSkills.At(2)->data);
+
+							listSkillsHistory.Add(2);
+							break;
+						}
+						else
+						{
+							if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se usa
+							{
+								probSkill = 0;
+							}
+							else //Si no se uso pues casi siempre la usa
+							{
+								probSkill = 25;
+							}
+							if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+							{
+								//usar skill 1 (buff ofensivo)
+								UseSkill(listSkills.At(1)->data);
+
+								listSkillsHistory.Add(1);
+								break;
+							}
+							else
+							{
+								if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se usa
+								{
+									probSkill = 75;
+								}
+								else
+								{
+									probSkill = 25;
+								}
+							}
+							if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+							{
+								//usar skill 3 (atk area)
+								UseSkill(listSkills.At(3)->data);
+
+								listSkillsHistory.Add(3);
+								break;
+							}
+							else
+							{
+								//usar skill 0 (atk basico)
+								UseSkill(listSkills.At(0)->data);
+
+								listSkillsHistory.Add(0);
+								break;
+							}
+						}
+					}
+
 						break;
 					case CharacterClass::RANGED_DPS:
 						break;
@@ -201,6 +260,7 @@ bool Character::Update(float dt)
 						break;
 					case CharacterClass::TANK:
 
+						{
 						int probSkill;
 						if (currentHp >= maxHp / 2) //Alto de vida
 						{
@@ -265,7 +325,7 @@ bool Character::Update(float dt)
 							listSkillsHistory.Add(0);
 							break;
 						}
-
+					}
 
 
 						break;
@@ -280,13 +340,15 @@ bool Character::Update(float dt)
 					default:
 						break;
 					}
+				
+					
+				app->combat->NextTurn();
+				delayOn = false;
+
 				}
 
-				if (turnDelay.ReadMSec() > 4000)
-				{
-					delayOn = false;
-					app->combat->NextTurn();
-				}
+				
+				
 
 				break;
 			case CharacterType::NONE:
@@ -302,7 +364,8 @@ bool Character::Update(float dt)
 
 bool Character::CleanUp()
 {
-	app->tex->UnLoad(texture);
+	if(texture != nullptr)
+		app->tex->UnLoad(texture);
 
 	/*delete button;
 	button = nullptr;*/
@@ -361,7 +424,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		{
 			if(CalculateRandomProbability(skill->bonusPrecision + caster->GetStat(EffectType::PRECISION), defender->GetStat(EffectType::RES)))
 			{
-				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(69, 3, true, EffectType::NONE));
+				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
 			}
 		}
 	}
@@ -378,18 +441,18 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			damage = skill->multiplierDmg * caster->GetStat(EffectType::ATTACK);
 			if (CalculateRandomProbability(skill->bonusCritRate + caster->GetStat(EffectType::CRIT_RATE))) //Si true hay critico
 			{
-				damage *= (skill->bonusCritDamage + caster->GetStat(EffectType::CRIT_DMG));
+				damage *= (100+(skill->bonusCritDamage + caster->GetStat(EffectType::CRIT_DMG)))/100;
 			}
 
 			if (skill->positiveEffect) //Efecto de estado positivo
 			{
-				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(69, 3, true, EffectType::NONE));
+				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
 			}
 			else
 			{
 				if (CalculateRandomProbability(skill->bonusPrecision + caster->GetStat(EffectType::PRECISION), defender->GetStat(EffectType::RES)))
 				{
-					defender->listStatusEffects.Add(&StatusEffect::StatusEffect(69, 3, true, EffectType::NONE));
+					defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
 				}
 			}
 
@@ -453,7 +516,8 @@ bool Character::UseSkill(Skill* skill)
 	if(skill->autoTarget)
 	{
 		this->ModifyHP(ApplySkill(this, this, skill)); //Lanzarsela a si mismo
-		app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster);
+		if(skill->movementCaster!=0)
+		{app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster); }
 		return true;
 	}
 
@@ -568,6 +632,7 @@ bool Character::UseSkill(Skill* skill)
 				app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill));
 				if (CalculateRandomProbability(skill->bonusPrecision + this->precision, app->combat->vecAllies.at(objective)->res)) 
 				{
+					if (skill->movementTarget != 0)
 					app->combat->MoveCharacter(&app->combat->vecAllies, app->combat->vecAllies.at(objective), skill->movementTarget);
 				}
 			}
@@ -579,7 +644,7 @@ bool Character::UseSkill(Skill* skill)
 		}
 	}
 	
-	app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster);
+	
 	return true;
 }
 
@@ -618,9 +683,13 @@ bool Character::UseSkill(Skill* skill, Character* target)
 		target->ModifyHP(ApplySkill(this, target, skill));
 		if (CalculateRandomProbability(skill->bonusPrecision + this->precision, target->res))
 		{
+			if (skill->movementTarget != 0)
 			app->combat->MoveCharacter(&app->combat->vecEnemies, target, skill->movementTarget);
 		}
 	}
+
+	if (skill->movementCaster != 0)
+	app->combat->MoveCharacter(&app->combat->vecEnemies, target, skill->movementTarget);
 
 	return true;
 }
@@ -642,6 +711,7 @@ int Character::GetStat(EffectType statType)
 			{
 				output = output + i->data->intensity;
 			}
+			i->data->turnsLeft--;
 		}
 
 		return (base * output / 100);
@@ -678,6 +748,10 @@ int Character::GetStat(EffectType statType)
 		{
 			output = output + i->data->intensity;
 		}
+		if (i->data->type != EffectType::CURRENT_HP)
+		{
+			i->data->turnsLeft--;
+		}		
 	}
 
 	return base * ((100 + output) / 100);

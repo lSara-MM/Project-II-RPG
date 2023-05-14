@@ -81,7 +81,7 @@ bool LogoScene::Update(float dt)
 		animationCitm.Foward();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN) {
 		transition__B = true;
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
 	}

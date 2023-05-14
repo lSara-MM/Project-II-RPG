@@ -108,6 +108,9 @@ bool Scene::Start()
 		app->iScene->continueGame_B = false;
 	}
 
+	//GUARRADA SUPER TEMPORAL
+	app->itemManager->comb = 0;
+
 	return true;
 }
 
@@ -221,6 +224,8 @@ bool Scene::CleanUp()
 	app->entityManager->Disable();
 	delete player;
 	player = nullptr;
+
+	listNpc.Clear();
 
 	if (pSettings != nullptr)
 	{
