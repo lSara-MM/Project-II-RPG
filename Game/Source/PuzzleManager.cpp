@@ -110,6 +110,13 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 	
 	widthLoset= config.child("Boss").attribute("width").as_int();
 	heightLoset = config.child("Boss").attribute("height").as_int();
+
+	//fx
+	palancaPath = "Assets/Audio/Fx/palanca.wav";
+	palancafx = app->audio->LoadFx(palancaPath);
+
+	confirmPath = "Assets/Audio/Fx/confirm_interaction.wav";
+	confirmInteractfx = app->audio->LoadFx(confirmPath);
 	
 	return ret;
 }
@@ -422,6 +429,7 @@ bool PuzzleManager::Palancas()
 			PalancaSensor = nullptr;
 
 			palancas = true;
+			app->audio->PlayFx(palancafx);
 			app->questManager->SaveState();
 		}
 	}
@@ -448,6 +456,7 @@ bool PuzzleManager::Escape()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				//Abrir UI nota 1
+				app->audio->PlayFx(confirmInteractfx);
 				app->dialogueSystem->Enable();
 				vector<int> id = { 100 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
 				app->dialogueSystem->PerformDialogue(id);
@@ -461,6 +470,7 @@ bool PuzzleManager::Escape()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				//Abrir UI nota 2
+				app->audio->PlayFx(confirmInteractfx);
 				app->dialogueSystem->Enable();
 				vector<int> id = { 101 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
 				app->dialogueSystem->PerformDialogue(id);
@@ -474,6 +484,7 @@ bool PuzzleManager::Escape()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				//Abrir UI nota 3
+				app->audio->PlayFx(confirmInteractfx);
 				app->dialogueSystem->Enable();
 				vector<int> id = { 102 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
 				app->dialogueSystem->PerformDialogue(id);

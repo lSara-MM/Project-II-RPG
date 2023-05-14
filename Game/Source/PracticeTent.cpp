@@ -46,6 +46,9 @@ bool PracticeTent::Awake(pugi::xml_node& config)
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
 	sceneNode = config;
 
+	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
+	pausefx = app->audio->LoadFx(fxpausepath);
+
 	return ret;
 }
 
@@ -211,6 +214,7 @@ void PracticeTent::Debug()
 	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
 	{
 		pause_B = true;
+		app->audio->PlayFx(pausefx);
 		app->audio->PlayMusic(pause_music);
 
 		if (pause_B)
@@ -239,6 +243,7 @@ void PracticeTent::Debug()
 			}
 
 			settings_B = false;
+			app->audio->PlayMusic(practisePath);
 			pSettings->CloseSettings();
 			pSettings->CleanUp();
 		}

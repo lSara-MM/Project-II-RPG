@@ -71,6 +71,9 @@ private:
 	Settings* pSettings;
 	Pause* pPause;
 
+	const char* fxpausepath;
+	uint pausefx;
+
 	bool exit_B;
 };
 
