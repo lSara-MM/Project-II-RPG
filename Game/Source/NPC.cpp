@@ -109,9 +109,14 @@ bool Npc::Update(float dt)
 
 bool Npc::CleanUp()
 {
-	app->tex->UnLoad(texture);
-	pbody->body->GetWorld()->DestroyBody(pbody->body);
-	pSensor->body->GetWorld()->DestroyBody(pSensor->body);
+	if(texture != nullptr)
+		app->tex->UnLoad(texture);
+
+	if(pbody != nullptr)
+		pbody->body->GetWorld()->DestroyBody(pbody->body);
+
+	if(pSensor != nullptr)
+		pSensor->body->GetWorld()->DestroyBody(pSensor->body);
 	
 	return true;
 }

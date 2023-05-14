@@ -154,11 +154,11 @@ public:
 
 	bool CleanUp()
 	{
-		/*for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
+		for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
 		{
 			delete i->data;
 			i->data = nullptr;
-		}*/
+		}
 
 		listGameButtons.Clear();
 
@@ -263,11 +263,11 @@ public:
 
 	bool CleanUp()
 	{
-		/*for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
+		for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
 		{
 			delete i->data;
 			i->data = nullptr;
-		}*/
+		}
 
 		listControlButtons.Clear();
 
@@ -392,7 +392,7 @@ public:
 
 	bool CleanUp()
 	{
-		/*for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
+		for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
 		{
 			delete i->data;
 			i->data = nullptr;
@@ -402,7 +402,7 @@ public:
 		{
 			delete i->data;
 			i->data = nullptr;
-		}*/
+		}
 
 		listGraphicsButtons.Clear();
 		listGraphicsCheckbox.Clear();
@@ -727,10 +727,10 @@ public:
 		settings_B = false;
 		
 		// no li agraden els clean ups aquests
-		/*pGame->CleanUp();
+		pGame->CleanUp();
 		pControl->CleanUp();
 		pGraphics->CleanUp();
-		pAudio->CleanUp();*/
+		pAudio->CleanUp();
 
 		delete pGame;
 		pGame = nullptr;
