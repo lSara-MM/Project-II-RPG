@@ -29,14 +29,17 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	case ButtonType::EXTRA_LARGE:
 		buttonTex = app->tex->Load("Assets/GUI/UIArt/Generic.png");
 		break;
+	case ButtonType::LARGE:
+		break;
+	case ButtonType::SMALL:
+		break;
 	case ButtonType::START:
 		buttonTex = app->tex->Load("Assets/GUI/UIArt/Start.png");
 		break;
 	case ButtonType::CLOSE:
 		buttonTex = app->tex->Load("Assets/GUI/UIArt/Close.png");
 		break;
-	case ButtonType::DIALOGUE:
-		buttonTex = app->tex->Load("Assets/GUI/UIArt/Dialogue.png");
+	case ButtonType::MENU:
 		break;
 	case ButtonType::SETTINGS:
 		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
@@ -44,10 +47,20 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	case ButtonType::IN_SETTINGS:
 		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonInSettings.png");
 		break;
+	case ButtonType::DIALOGUE:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/Dialogue.png");
+		break;
+	case ButtonType::CHECK:
+		break;
 	case ButtonType::CONTROL_SETTINGS:
 		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
-		break;
 	case ButtonType::INVENTORY:
+		break;
+	case ButtonType::INV_NEXT_PAGE:
+		break;
+	case ButtonType::INV_PAGES:
+		break;
+	case ButtonType::SWAP_SKILL:
 		break;
 	case ButtonType::COMBAT_TARGET:
 		break;
@@ -186,22 +199,9 @@ bool GuiButton::Draw(Render* render)
 
 	SDL_Rect rect = { 0, 0, bounds.w, bounds.h };
 
-	/*if (buttonType == ButtonType::EXTRA_LARGE) { rect = { 0, 0, 93, 118 }; offsetX = 50;	offsetY = 10; }
-	if (buttonType == ButtonType::LARGE) { rect = { 0, 0, 93, 118 }; offsetX = 20;	offsetY = 3; }
-	if (buttonType == ButtonType::SMALL) { rect = { 0, 0, 93, 118 }; offsetX = -15;	offsetY = 6; }
-
-	if (buttonType == ButtonType::START) { rect = { 0, 0, 93, 118 }; offsetX = 50;	offsetY = 10; }
-	if (buttonType == ButtonType::CLOSE) { rect = { 188, 89, 100, 96 }; offsetX = 50;	offsetY = 10; }
-	if (buttonType == ButtonType::MENU) { rect = { 94, 39, 93, 118 }; offsetX = 20;	offsetY = 3; }
-	if (buttonType == ButtonType::SETTINGS) { rect = { 90, 0, 26, 28 }; offsetX = -15;	offsetY = 6; }
-	if (buttonType == ButtonType::IN_SETTINGS) { rect = { 90, 0, 26, 28 }; offsetX = -15;	offsetY = 6; }
-	if (buttonType == ButtonType::CONTROL_SETTINGS) { rect = { 90, 0, 89, 90 }; offsetX = 50;	offsetY = 10; }
-	if (buttonType == ButtonType::INVENTORY) { rect = { 188, 0, 89, 88 }; offsetX = 50;	offsetY = 10; }
-	if (buttonType == ButtonType::INV_NEXT_PAGE) { rect = { 188, 189, 53, 57 }; offsetX = 20;	offsetY = 3; }
-	if (buttonType == ButtonType::INV_PAGES) { rect = { 156, 160, 19, 20 }; offsetX = -15;	offsetY = 6; }
-	if (buttonType == ButtonType::SWAP_SKILL) { rect = { 90, 0, 82, 80 }; }*/
-
 	if (buttonType == ButtonType::COMBAT_TARGET) { rect = { 0, 0, 48 * 1, 92 }; } //48 anchura de solo 1 corchete, 92 es la altura que tiene DE MOMENTO.
+	else if(buttonType==ButtonType::START) { rect = { 5, 5, 20, 26 }; }
+	else if (buttonType == ButtonType::DIALOGUE) { rect.x = 5; }
 
 	// TO DO, EN DIALOGO LOS BOTONES DEBERIAN TENER MENOS OFFSET, ES DECIR, SE DEBERIAN PRINTAR CON JUSTIFICADO A LA IZQUIERDA, NO EN MEDIO
 	// ADEMAS DE HACER LO DEL TRIM TEXT PARA QUE SI LA OPCION ES MAS LARGA SE PRINTE EN LINEAS DISTINTAS.
@@ -246,288 +246,190 @@ bool GuiButton::Draw(Render* render)
 	}
 	else
 	{
-		if (buttonType == ButtonType::SETTINGS)
+		switch (state)
 		{
-			// Draw the right button depending on state
-			switch (state)
+		case GuiControlState::NONE:
+			break;
+		case GuiControlState::DISABLED:
+			break;
+		case GuiControlState::NORMAL:
+			switch (buttonType)
 			{
-
-			case GuiControlState::DISABLED:
-			{
-
-			} break;
-
-			case GuiControlState::NORMAL:
-			{
-				rect = { 0, 0, 136, 50 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::FOCUSED:
-			{
-				rect = { 0, 53, 136, 50 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::PRESSED:
-			{
-				rect = { 0, 105, 136, 50 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::SELECTED: 
+			case ButtonType::NONE:
 				break;
-
-			default:
+			case ButtonType::EXTRA_LARGE:
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
-			}
-		}
-		if (buttonType == ButtonType::IN_SETTINGS)
-		{
-			switch (state)
-			{
-
-			case GuiControlState::DISABLED:
-			{
-
-			} break;
-
-			case GuiControlState::NORMAL:
-			{
-				rect = { 0, 0, 155, 52 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::FOCUSED:
-			{
-				rect = { 0, 53, 155, 52 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::PRESSED:
-			{
-				rect = { 0, 105, 155, 52 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::SELECTED: 
+			case ButtonType::LARGE:
 				break;
-
-			default:
+			case ButtonType::SMALL:
 				break;
-			}
-		}
-		if (buttonType == ButtonType::CONTROL_SETTINGS)
-		{
-			// Draw the right button depending on state
-			switch (state)
-			{
-
-			case GuiControlState::DISABLED:
-			{
-
-			} break;
-
-			case GuiControlState::NORMAL:
-			{
-				rect = { 0, 0, 34, 34 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::FOCUSED:
-			{
-				rect = { 0, 53, 34, 34 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::PRESSED:
-			{
-				rect = { 0, 105, 34, 34 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::SELECTED: 
-				break;
-
-			default:
-				break;
-			}
-		}
-		if (buttonType == ButtonType::CLOSE)
-		{
-			switch (state)
-			{
-
-			case GuiControlState::DISABLED:
-			{
-
-			} break;
-
-			case GuiControlState::NORMAL:
-			{
-				rect = { 1, 3, 57, 57 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::FOCUSED:
-			{
-				rect = { 1, 66, 57, 57 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::PRESSED:
-			{
-				rect = { 1, 127, 57, 57 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::SELECTED:
-				break;
-
-			default:
-				break;
-			}
-		}
-
-		if (buttonType == ButtonType::EXTRA_LARGE)
-		{
-			switch (state)
-			{
-
-			case GuiControlState::DISABLED:
-			{
-
-			} break;
-
-			case GuiControlState::NORMAL:
-			{
-				rect = { 0, 0, 200, 50 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::FOCUSED:
-			{
-				rect = { 0, 53, 200, 50 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::PRESSED:
-			{
-				rect = { 0, 105, 200, 50 };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::SELECTED:
-				break;
-
-			default:
-				break;
-			}
-		}
-
-		if (buttonType == ButtonType::DIALOGUE)
-		{
-			switch (state)
-			{
-
-			case GuiControlState::DISABLED:
-			{
-
-			} break;
-
-			case GuiControlState::NORMAL:
-			{
-				rect = { 5, 5, bounds.w, bounds.h };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::FOCUSED:
-			{
-				rect = { 5, 65, bounds.w, bounds.h };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::PRESSED:
-			{
-				rect = { 5, 125,bounds.w, bounds.h };
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-
-			} break;
-
-			case GuiControlState::SELECTED:
-				break;
-
-			default:
-				break;
-			}
-		}
-		if (buttonType == ButtonType::START)
-		{
-			switch (state)
-			{
-
-			case GuiControlState::DISABLED:
-			{
-
-			} break;
-
-			case GuiControlState::NORMAL:
-			{
-				rect = { 5, 77, 20, 26 };
+			case ButtonType::START:
+				rect.y = 77;
 				render->DrawTexture(buttonTex, bounds.x + bounds.w / 7, bounds.y + bounds.h / 2.7, &rect);
-
-			} break;
-
-			case GuiControlState::FOCUSED:
-			{
-				rect = { 5, 5, 20, 26 };
-				render->DrawTexture(buttonTex, bounds.x + bounds.w / 7, bounds.y + bounds.h / 2.7, &rect);
-
-			} break;
-
-			case GuiControlState::PRESSED:
-			{
-				rect = { 5, 41, 20, 26 };
-				render->DrawTexture(buttonTex, bounds.x + bounds.w / 7, bounds.y + bounds.h / 2.7, &rect);
-
-			} break;
-
-			case GuiControlState::SELECTED:
 				break;
-
+			case ButtonType::CLOSE:
+				rect.y = 3;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::MENU:
+				break;
+			case ButtonType::SETTINGS:
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::IN_SETTINGS:
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::DIALOGUE:
+				rect.y = 5;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::CHECK:
+				break;
+			case ButtonType::CONTROL_SETTINGS:
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::INVENTORY:
+				break;
+			case ButtonType::INV_NEXT_PAGE:
+				break;
+			case ButtonType::INV_PAGES:
+				break;
+			case ButtonType::SWAP_SKILL:
+				break;
+			case ButtonType::COMBAT_TARGET:
+				break;
 			default:
 				break;
 			}
+			break;
+		case GuiControlState::FOCUSED:
+			switch (buttonType)
+			{
+			case ButtonType::NONE:
+				break;
+			case ButtonType::EXTRA_LARGE:
+				rect.y = 53;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::LARGE:
+				break;
+			case ButtonType::SMALL:
+				break;
+			case ButtonType::START:
+				rect.y = 5;
+				render->DrawTexture(buttonTex, bounds.x + bounds.w / 7, bounds.y + bounds.h / 2.7, &rect);
+				break;
+			case ButtonType::CLOSE:
+				rect.y = 66;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::MENU:
+				break;
+			case ButtonType::SETTINGS:
+				rect.y = 53;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::IN_SETTINGS:
+				rect.y = 53;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::DIALOGUE:
+				rect.y = 65;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::CHECK:
+				break;
+			case ButtonType::CONTROL_SETTINGS:
+				rect.y = 53;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::INVENTORY:
+				break;
+			case ButtonType::INV_NEXT_PAGE:
+				break;
+			case ButtonType::INV_PAGES:
+				break;
+			case ButtonType::SWAP_SKILL:
+				break;
+			case ButtonType::COMBAT_TARGET:
+				break;
+			default:
+				break;
+			}
+			break;
+		case GuiControlState::PRESSED:
+			switch (buttonType)
+			{
+			case ButtonType::NONE:
+				break;
+			case ButtonType::EXTRA_LARGE:
+				rect.y = 105;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::LARGE:
+				break;
+			case ButtonType::SMALL:
+				break;
+			case ButtonType::START:
+				rect.y = 41;
+				render->DrawTexture(buttonTex, bounds.x + bounds.w / 7, bounds.y + bounds.h / 2.7, &rect);
+				break;
+			case ButtonType::CLOSE:
+				rect.y = 127;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::MENU:
+				break;
+			case ButtonType::SETTINGS:
+				rect.y = 105;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::IN_SETTINGS:
+				rect.y = 105;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::DIALOGUE:
+				rect.y = 125;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::CHECK:
+				break;
+			case ButtonType::CONTROL_SETTINGS:
+				rect.y = 105;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::INVENTORY:
+				break;
+			case ButtonType::INV_NEXT_PAGE:
+				break;
+			case ButtonType::INV_PAGES:
+				break;
+			case ButtonType::SWAP_SKILL:
+				break;
+			case ButtonType::COMBAT_TARGET:
+				break;
+			default:
+				break;
+			}
+			break;
+		case GuiControlState::SELECTED:
+			break;
+		default:
+			break;
 		}
 	}
 
 
-
-	if (buttonType == ButtonType::START )
+	if (text != "")
 	{
-		if (text != "")
-		{
-			int offsetX = text.Length() * fontSize / 2;
+		int offsetX = text.Length() * fontSize / 2;
 
-			int x = (bounds.w - offsetX) / 2;
-			int y = (bounds.h - fontSize) / 2;
+		int x = (bounds.w - offsetX) / 2;
+		int y = (bounds.h - fontSize) / 2;
+
+		if (buttonType == ButtonType::START) {
+			
 
 			switch (state)
 			{
@@ -562,17 +464,13 @@ bool GuiButton::Draw(Render* render)
 				break;
 			}
 		}
+			
+		else
+		{
+			app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
+		}
+
 	}
-
-	else
-	{
-		int offsetX = text.Length() * fontSize / 2;
-
-		int x = (rect.w - offsetX) / 2;
-		int y = (rect.h - fontSize) / 2;
-		if (text != "") app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
-	}
-
 
 	return false;
 }
