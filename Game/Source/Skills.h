@@ -40,7 +40,8 @@ public:
 	Skill(SString name, SString description, 
 		int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I,
 		int movementCaster,	int movementTarget,bool targetFriend, bool areaSkill, bool autoTarget,
-		float multiplierDmg,int bonusPrecision,	int bonusCritRate,int bonusCritDamage);
+		float multiplierDmg,int bonusPrecision,	int bonusCritRate,int bonusCritDamage, 
+		int status,bool positiveEffect,int duration,int intensity);
 
 	bool PosCanBeUsed(int positionCharacter);
 
@@ -67,6 +68,12 @@ public:
 	int bonusCritRate;
 	int bonusCritDamage;
 	//Variable de que tipo de stat usan para el escaldo?
+
+	//Status Effects
+	int status;
+	bool positiveEffect;
+	int duration;
+	int intensity;
 
 	//Posicion para hacer la skill (min 0 max 3)
 	int posToUseStart_I; //Posicion mas baja donde puedes usar el ataque

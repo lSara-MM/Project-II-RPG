@@ -432,6 +432,11 @@ void Character::LoadSkill(int arr[4])
 				int precision = aux.attribute("bonusPrecision").as_int();
 				int movTarget = aux.attribute("movementTarget").as_int();
 
+				int statusID = aux.attribute("statusID").as_int();
+				bool positiveEffect = aux.attribute("positive").as_bool();
+				int duration = aux.attribute("duration").as_int();
+				int intensity = aux.attribute("intensity").as_int();
+
 				int movUsuario = aux.attribute("movementCaster").as_int();
 				int posInicialUso = aux.attribute("posToUseStart").as_int();
 				int posFinallUso = aux.attribute("posToUseEnd").as_int();
@@ -444,7 +449,8 @@ void Character::LoadSkill(int arr[4])
 
 				listSkills.Add(new Skill(nombre, descripcion,
 					posInicialUso, posFinallUso, posInicialTarget, posFinalTarget,
-					movUsuario, movTarget, friendlyFire, area, autoTarget, mult, precision, probCrit, dmgCrit));
+					movUsuario, movTarget, friendlyFire, area, autoTarget, 
+					mult, precision, probCrit, dmgCrit, statusID,positiveEffect,duration,intensity));
 			}
 		}
 	}
@@ -641,7 +647,7 @@ int Character::GetStat(EffectType statType)
 		{
 			if (i->data->type == statType)
 			{
-				output = output + i->data->quantity;
+				output = output + i->data->intensity;
 			}
 		}
 
@@ -677,7 +683,7 @@ int Character::GetStat(EffectType statType)
 	{
 		if (i->data->type == statType)
 		{
-			output = output + i->data->quantity;
+			output = output + i->data->intensity;
 		}
 	}
 
