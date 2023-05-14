@@ -230,7 +230,6 @@ bool Input::CleanUp()
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 
 	RELEASE(playerName);
-	RELEASE(playerInput_S);
 
 	//Disable Unicode
 	//SDL_EnableUNICODE(SDL_DISABLE);
@@ -280,7 +279,6 @@ bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 			temp.erase(temp.length() - 1);
 			backSpaceMax = true;
 		}
-		
 	}
 
 	if ((event.key.keysym.sym == SDLK_RETURN) && !temp.empty())

@@ -131,7 +131,7 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 	{
 		app->map->mapPendingtoDelete = true;		
-		app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
+		app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 0);
 	}
 
 	/*Hasta aquí PuzzleManager*/
