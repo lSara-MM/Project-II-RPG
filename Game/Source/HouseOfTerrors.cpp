@@ -49,6 +49,9 @@ bool HouseOfTerrors::Awake(pugi::xml_node& config)
 
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
 
+	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
+	pausefx = app->audio->LoadFx(fxpausepath);
+
 	return ret;
 }
 
@@ -229,7 +232,8 @@ void HouseOfTerrors::Debug()
 	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
 	{
 		pause_B = true;
-
+		app->audio->PlayFx(pausefx);
+		app->audio->PlayMusic(pause_music);
 		if (pause_B)
 		{
 			/*pPause = new Pause(this);
@@ -247,7 +251,6 @@ void HouseOfTerrors::Debug()
 
 	if (pause_B == true && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_DOWN))//POSAR CONTROL NORMAL
 	{
-		app->audio->PlayMusic(pause_music);
 		if (settings_B == true)
 		{
 			for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
@@ -256,6 +259,7 @@ void HouseOfTerrors::Debug()
 			}
 
 			settings_B = false;
+			app->audio->PlayMusic(musHauntedPath);
 			/*pSettings->CloseSettings();
 			pSettings->CleanUp();*/
 		}

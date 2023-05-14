@@ -155,6 +155,13 @@ private:
 	const char* texturepathLoset;
 	const char* texturepathFireGuy;
 
+	//fx
+	const char* palancaPath;
+	uint palancafx;
+
+	const char* confirmPath;
+	uint confirmInteractfx;
+
 };
 
 #endif // __SCENE_H__

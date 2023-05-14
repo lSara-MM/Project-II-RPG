@@ -46,6 +46,9 @@ bool Circus::Awake(pugi::xml_node& config)
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
 	sceneNode = config;
 
+	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
+	pausefx = app->audio->LoadFx(fxpausepath);
+
 	return ret;
 }
 
@@ -212,7 +215,7 @@ void Circus::Debug()
 	{
 		pause_B = true;
 		app->audio->PlayMusic(pause_music);
-
+		app->audio->PlayFx(pausefx);
 		if (pause_B)
 		{
 			pPause = new Pause(this);
@@ -239,6 +242,7 @@ void Circus::Debug()
 			}
 
 			settings_B = false;
+			app->audio->PlayMusic(circusMusPath);
 			pSettings->CloseSettings();
 			pSettings->CleanUp();
 		}

@@ -72,6 +72,9 @@ private:
 
 	float mouseSpeed;
 
+	const char* fxpausepath;
+	uint pausefx;
+
 	bool exit_B;
 };
 
