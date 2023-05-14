@@ -35,6 +35,11 @@ private:
 	AnimationAxis axisType;
 	float point;
 	int offset;
+	
+	//fx
+	const char* slidepath;
+	uint slidefx;
+
 };
 
 #endif // __GUI_SLIDERBAR_H__
