@@ -76,23 +76,6 @@ bool SceneWin_Lose::Update(float dt)
 		backgroundAnimation.Foward();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
-	{
-
-		app->render->camera.x = 0;
-		app->render->camera.y = 0;
-		lose = false;
-		win = true;
-	}
-	if(app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) 
-	{
-
-		app->render->camera.x = 0;
-		app->render->camera.y = 0;
-		win = false;
-		lose = true;
-	}
-
 	backgroundAnimation.Step(1, false);
 
 	float point = backgroundAnimation.GetPoint();

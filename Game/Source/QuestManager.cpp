@@ -25,7 +25,9 @@ QuestManager::QuestManager() : Module()
 
 // Destructor
 QuestManager::~QuestManager()
-{}
+{
+
+}
 
 // Called before render is available
 bool QuestManager::Awake(pugi::xml_node& config)
