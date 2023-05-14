@@ -62,6 +62,8 @@ bool Scene::Start()
 {
 	app->input->godMode_B = false;
 	app->physics->collisions = false;
+	app->questManager->active = true;
+	app->questManager->Start();
 
 	if (app->puzzleManager->active == true) {
 		app->puzzleManager->CleanUp();
@@ -220,10 +222,6 @@ bool Scene::CleanUp()
 	app->entityManager->Disable();
 	delete player;
 	player = nullptr;
-
-	app->questManager->quest1->active = false;
-	app->questManager->quest2->active = false;
-	app->questManager->quest3->active = false;
 
 	if (pSettings != nullptr)
 	{

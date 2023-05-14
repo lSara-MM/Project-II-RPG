@@ -25,7 +25,9 @@ QuestManager::QuestManager() : Module()
 
 // Destructor
 QuestManager::~QuestManager()
-{}
+{
+
+}
 
 // Called before render is available
 bool QuestManager::Awake(pugi::xml_node& config)
@@ -62,6 +64,17 @@ bool QuestManager::Start() {
 	quest2->desc = "Talk to the Oracle and make him angry";
 	quest3->desc = "Practice into the Practice Tent";
 
+	RQ1 = 255;
+	GQ1 = 255;
+	BQ1 = 255;
+
+	RQ2 = 255;
+	GQ2 = 255;
+	BQ2 = 255;
+
+	RQ3 = 255;
+	GQ3 = 255;
+	BQ3 = 255;
 
 	quest1->complete = false;
 	quest2->complete = false;
@@ -174,31 +187,24 @@ bool QuestManager::Update(float dt)
 	if (quest1->active)
 	{
 		iPoint pos = { 10, 100 };
-		Uint8 R = 255;
-		Uint8 G = 255;
-		Uint8 B = 255;
 
 		if (quest1->complete)
 		{
 			//Quest1 Completed
-			SaveState();
 			//quest1->active = false;
 
-			R = 124;
-			G = 252;
-			B = 0;
+			RQ1 = 124;
+			GQ1 = 252;
+			BQ1 = 0;
 		}
 
 		//Draw Quest1
-		app->render->TextDraw(quest1->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
-		app->render->TextDraw(quest1->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(quest1->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { RQ1, GQ1, BQ1 });
+		app->render->TextDraw(quest1->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { RQ1, GQ1, BQ1 });
 	}
 	if (quest2->active)
 	{
 		iPoint pos = { 10, 170 };
-		Uint8 R = 255;
-		Uint8 G = 255;
-		Uint8 B = 255;
 
 		//That's for a dynamic quest list position
 		if (!quest1->active)
@@ -209,23 +215,19 @@ bool QuestManager::Update(float dt)
 		if (quest2->complete)
 		{
 			//Quest2 Completed
-			SaveState();
 			//quest2->active = false;
-			R = 124;
-			G = 252;
-			B = 0;
+			RQ2 = 124;
+			GQ2 = 252;
+			BQ2 = 0;
 		}
 
 		//Draw Quest2
-		app->render->TextDraw(quest2->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { R, G, B });
-		app->render->TextDraw(quest2->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { R, G, B });
+		app->render->TextDraw(quest2->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { RQ2, GQ2, BQ2 });
+		app->render->TextDraw(quest2->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { RQ2, GQ2, BQ2 });
 	}
 	if (quest3->active)
 	{
 		iPoint pos = { 10, 240 };
-		Uint8 R = 255;
-		Uint8 G = 255;
-		Uint8 B = 255;
 
 		//That's for a dynamic quest list position
 		if (!quest2->active)
@@ -235,16 +237,15 @@ bool QuestManager::Update(float dt)
 		if (quest3->complete)
 		{
 			//Quest3 Completed
-			SaveState();
 			//quest3->active = false;
-			R = 124;
-			G = 252;
-			B = 0;
+			RQ3 = 124;
+			GQ3 = 252;
+			BQ3 = 0;
 		}
 
 		//Draw Quest3
-		app->render->TextDraw(quest3->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { 255, 255, 255 });
-		app->render->TextDraw(quest3->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(quest3->title.GetString(), pos.x, pos.y, 25, Font::TEXT, { RQ3, GQ3, BQ3 });
+		app->render->TextDraw(quest3->desc.GetString(), pos.x, pos.y + 30, 15, Font::TEXT, { RQ3, GQ3, BQ3 });
 	}
 
 	return ret;

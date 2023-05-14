@@ -341,6 +341,11 @@ bool PuzzleManager::Update(float dt)
 		app->dialogueSystem->hasEnded = false;
 	}
 
+	if(app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	{
+		bossIsDead = !bossIsDead;
+	}
+
 	SDL_Rect palan = { 361, 75, 29, 46 };
 
 	app->render->DrawTexture(palanca, posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca, &palan);
@@ -371,7 +376,7 @@ bool PuzzleManager::CleanUp()
 {
 	LOG("Freeing scene");
 
-	if (palancas) 
+	if (!palancas) 
 	{
 		if (Door1 != nullptr)
 			Door1->body->GetWorld()->DestroyBody(Door1->body);
@@ -383,7 +388,7 @@ bool PuzzleManager::CleanUp()
 			PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
 	}
 
-	if (escape) 
+	if (!escape) 
 	{
 
 		if (doorEscape != nullptr)
@@ -393,7 +398,7 @@ bool PuzzleManager::CleanUp()
 			DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
 	}
 
-	if (rescue) 
+	if (!rescue) 
 	{
 		if (Boss != nullptr)
 			Boss->body->GetWorld()->DestroyBody(Boss->body);
@@ -405,7 +410,7 @@ bool PuzzleManager::CleanUp()
 			Loset->body->GetWorld()->DestroyBody(Loset->body);
 	}
 
-	if (teamMate) 
+	if (!teamMate) 
 	{
 		if (fireGuy != nullptr)
 			app->tex->UnLoad(fireGuy);
@@ -416,6 +421,7 @@ bool PuzzleManager::CleanUp()
 		delete FireGuy;
 		FireGuy = nullptr;
 	}
+	app->tex->UnLoad(fireGuy);//no entiendo nada, lo pongo aqui
 
 	if (palanca != nullptr)
 		app->tex->UnLoad(palanca);

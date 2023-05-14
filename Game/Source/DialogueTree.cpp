@@ -115,6 +115,7 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 				if (!app->questManager->quest1->complete) 
 				{
 					app->questManager->quest1->active = true;
+					app->questManager->SaveState();
 				}
 			}
 
@@ -123,6 +124,7 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 				if (app->questManager->quest2->active == true) 
 				{
 					app->questManager->quest2->complete = true;
+					app->questManager->SaveState();
 				}
 			}
 
