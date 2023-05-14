@@ -23,7 +23,6 @@
     >
 </texture>
 <Audio
-  
     Adivino="Audio/Fx/adivino.wav"
     Button_Menu="Audio/Fx/Button_Menu.wav"
     Change_Position="Audio/Fx/change position.wav"
