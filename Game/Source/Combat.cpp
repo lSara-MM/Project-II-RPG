@@ -67,6 +67,7 @@ bool Combat::Start()
 
 	//Cargar texturas
 	textureBackground = app->tex->Load(texturePathBackground);
+	LOG("LOAD COMBAT TEXTURE");
 	textureTargetButton = app->tex->Load(texturePathTargetButton);
 	textureTurnsBar = app->tex->Load(texturePathTurnsBar);
 
@@ -112,7 +113,7 @@ bool Combat::Update(float dt)
 	// TO DO, remove DEBUG info
 	if (isMoving)
 	{
-		app->render->TextDraw("Is moving", 10, 500, 12);
+		app->render->TextDraw("Is moving", 10, 700, 12);
 	}
 
 	// Printar Barra Turnos (UI WORK)
@@ -406,6 +407,8 @@ bool Combat::NextTurn()
 	
 	if (listInitiative.Count() == charaInTurn) { charaInTurn = 0; }
 	listInitiative.At(charaInTurn)->data->onTurn = true;
+	listInitiative.At(charaInTurn)->data->ModifyHP(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CURRENT_HP));
+	
 
 	LOG("%s turn - num %d", listInitiative.At(charaInTurn)->data->name.GetString(), charaInTurn);
 
@@ -428,12 +431,15 @@ void Combat::HandleCharaButtons(vector<Character*>* arr, int pos1, int pos2)
 		//LOG("disabled %d", vecEnemies.at(i)->button->id);
 	}
 
-	for (int i = 0; i < arr->size(); i++)
+	if (pos1 != -1 || pos2 != -1) // If -1, disable all
 	{
-		if (i >= pos1 && i <= pos2)
+		for (int i = 0; i < arr->size(); i++)
 		{
-			arr->at(i)->button->state = GuiControlState::NORMAL;
-			LOG("enabled %d", arr->at(i)->button->id);
+			if (i >= pos1 && i <= pos2)
+			{
+				arr->at(i)->button->state = GuiControlState::NORMAL;
+				//LOG("enabled %d", arr->at(i)->button->id);
+			}
 		}
 	}
 }

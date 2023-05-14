@@ -40,7 +40,7 @@ Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUs
 	//Targeting
 	this->posToTargetStart_I = posToTargetStart_I;
 	this->posToTargetEnd_I = posToTargetEnd_I;
-	this->targetFriend =
+	this->targetFriend = friendlyFire;
 	this->areaSkill = areaSkill;
 	this->autoTarget = autoTarget;
 }
