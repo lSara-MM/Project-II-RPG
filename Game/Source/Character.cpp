@@ -58,18 +58,13 @@ bool Character::Awake()
 
 	texturePath = parameters.attribute("texturePath").as_string();
 
-	int skill1ID[4];
-	//int skill1ID[0] = parameters.attribute("skill1ID").as_int();
-	//int skill2ID[1] = parameters.attribute("skill1ID").as_int();
-	//int skill3ID[2] = parameters.attribute("skill1ID").as_int();
-	//int skill4ID[3] = parameters.attribute("skill1ID").as_int();
-
-	skill1ID[0] = 1;
-	skill1ID[1] = 2;
-	skill1ID[2] = 3;
-	skill1ID[3] = 4;
+	int skillIDs[4];
+	skillIDs[0] = parameters.attribute("skill1ID").as_int();
+	skillIDs[1] = parameters.attribute("skill2ID").as_int();
+	skillIDs[2] = parameters.attribute("skill3ID").as_int();
+	skillIDs[3] = parameters.attribute("skill4ID").as_int();
 	
-	LoadSkill(skill1ID);
+	LoadSkill(skillIDs);
 	isCombatant = true;
 
 	return true;
@@ -350,11 +345,22 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 {
 	if (skill->multiplierDmg < 0) //Curacion, no hace falta calcular esquiva ni nada 
 	{
-		return(caster->attack * skill->multiplierDmg);
+		return(caster->maxHp/5 * skill->multiplierDmg);
+		if (true) //Efecto de estado positivo
+		{
+			defender->listStatusEffects.Add(&StatusEffect::StatusEffect(69, 3, true, EffectType::NONE));
+		}
+		else
+		{
+			if(CalculateRandomProbability(skill->bonusPrecision + caster->GetStat(EffectType::PRECISION), defender->GetStat(EffectType::RES)))
+			{
+				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(69, 3, true, EffectType::NONE));
+			}
+		}
 	}
 	else //Es un ataque 
 	{
-		if (!CalculateRandomProbability((skill->bonusPrecision + caster->precision), defender->dodge))
+		if (!CalculateRandomProbability(skill->bonusPrecision + caster->GetStat(EffectType::PRECISION), defender->GetStat(EffectType::DODGE)))
 		{
 			//Enemigo esquiva
 			return 0;
@@ -362,15 +368,27 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		else
 		{
 			int damage;
-			damage = skill->multiplierDmg * caster->attack;
-			if (CalculateRandomProbability(skill->bonusCritRate + caster->critRate)) //Si true hay critico
+			damage = skill->multiplierDmg * caster->GetStat(EffectType::ATTACK);
+			if (CalculateRandomProbability(skill->bonusCritRate + caster->GetStat(EffectType::CRIT_RATE))) //Si true hay critico
 			{
-				damage *= (skill->bonusCritDamage + caster->critDamage);
+				damage *= (skill->bonusCritDamage + caster->GetStat(EffectType::CRIT_DMG));
+			}
+
+			if (true) //Efecto de estado positivo
+			{
+				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(69, 3, true, EffectType::NONE));
+			}
+			else
+			{
+				if (CalculateRandomProbability(skill->bonusPrecision + caster->GetStat(EffectType::PRECISION), defender->GetStat(EffectType::RES)))
+				{
+					defender->listStatusEffects.Add(&StatusEffect::StatusEffect(69, 3, true, EffectType::NONE));
+				}
 			}
 
 			// Calcular reduccion de la defensa
-			float armorRelevance = (defender->armor / abs(damage+1)) + 1;
-			damage = +((defender->armor / 2) * armorRelevance); //Esta con mas ya que damage es negativo
+			float armorRelevance = (defender->GetStat(EffectType::ARMOR) / abs(damage+1)) + 1;
+			damage = +((defender->GetStat(EffectType::ARMOR) / 2) * armorRelevance); //Esta con mas ya que damage es negativo
 
 			return damage;
 		}
@@ -523,12 +541,20 @@ bool Character::UseSkill(Skill* skill)
 				{
 					//Atacar a todos
 					app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
+					if (CalculateRandomProbability(skill->bonusPrecision + this->precision, app->combat->vecAllies.at(i)->res))
+					{
+
+					}
 				}
 			}
 			else
 			{
 				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange);
 				app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill));
+				if (CalculateRandomProbability(skill->bonusPrecision + this->precision, app->combat->vecAllies.at(objective)->res)) 
+				{
+					app->combat->MoveCharacter(&app->combat->vecAllies, app->combat->vecAllies.at(objective), skill->movementTarget);
+				}
 			}
 			break;
 
@@ -538,6 +564,9 @@ bool Character::UseSkill(Skill* skill)
 		}
 	}
 	
+	app->combat->MoveCharacter(&app->combat->vecEnemies,this,skill->movementCaster);
+	
+
 
 	return true;
 }
@@ -551,7 +580,7 @@ bool Character::UseSkill(Skill* skill, Character* target)
 
 	if (skill->areaSkill)
 	{
-		for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+		for (size_t i = skill->posToTargetStart_I; i < endRange; i++) //Creo que las skills de area hay que lanzarlas de atras a delante
 		{
 			//Atacar a todos
 			switch (target->charaType)
@@ -573,14 +602,19 @@ bool Character::UseSkill(Skill* skill, Character* target)
 	else
 	{
 		target->ModifyHP(ApplySkill(this, target, skill));
+		if (CalculateRandomProbability(skill->bonusPrecision + this->precision, target->res))
+		{
+			app->combat->MoveCharacter(&app->combat->vecEnemies, target, skill->movementTarget);
+		}
 	}
 
 	return true;
 }
 
+//ERIC: Lo cambio a solo obtener el bufo, no que te lo sume solo ya que el buffo es %
 int Character::GetStat(EffectType statType)
 {
-	int output = 0, base = 0;
+	float output = 0, int base = 0;;
 
 	switch (statType)
 	{
@@ -616,11 +650,14 @@ int Character::GetStat(EffectType statType)
 	{
 		if (i->data->type == statType)
 		{
-			output = base + i->data->quantity;
+			output = output + i->data->quantity;
 		}
 	}
 
-	return output;
+	
+
+
+	return base*((100+output)/100);
 }
 
 

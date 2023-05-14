@@ -18,7 +18,8 @@ class Skill;
 // Status effect
 enum class EffectType
 {
-	CURRENT_HP,
+	NONE=-1,
+	CURRENT_HP=0,
 	ATTACK,
 	CRIT_RATE,
 	CRIT_DMG,
@@ -107,8 +108,6 @@ public:
 	void ModifyHP(int hp); //Positivo para curar negativo para dañar
 
 	int ApplySkill(Character* caster, Character* defender, Skill* skill); //ERIC:Va haber que poner muchos mas atributos
-
-	bool ResistStatusEffect(/*efecto,precision*/); //Hacer cuando se hagan status effects, aun no.
 	
 	void LoadSkill(int arr[4]);
 
