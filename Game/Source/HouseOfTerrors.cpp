@@ -13,6 +13,7 @@
 #include "LoseScene.h"
 #include "Combat.h"
 #include "PuzzleManager.h"
+#include "QuestManager.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
@@ -141,6 +142,9 @@ bool HouseOfTerrors::Update(float dt)
 		LOG("Combat");
 		app->combat->PreLoadCombat(player->arrParty, name);
 		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+		app->questManager->SaveState();
+		app->puzzleManager->CleanUp();
+		app->puzzleManager->active = false;
 		steps_I = 0;
 	}
 
