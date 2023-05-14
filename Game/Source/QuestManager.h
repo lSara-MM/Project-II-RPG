@@ -49,6 +49,18 @@ public:
 	Quest* quest2;
 	Quest* quest3;
 
+	Uint8 RQ1;
+	Uint8 GQ1;
+	Uint8 BQ1;
+
+	Uint8 RQ2;
+	Uint8 GQ2;
+	Uint8 BQ2;
+
+	Uint8 RQ3;
+	Uint8 GQ3;
+	Uint8 BQ3;
+
 	List<Quest*> quests;
 
 };

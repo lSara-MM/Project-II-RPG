@@ -72,6 +72,11 @@ bool IntroScene::Start()
 	app->audio->PlayMusic(music_intro, 1.0f);
 	texture = app->tex->Load(texturePath);
 	
+	if (app->questManager->active) 
+	{
+		app->questManager->active = false;
+	}
+
 	// buttons
 	for (int i = 0; buttons[i] != "\n"; i++)
 	{
@@ -84,23 +89,6 @@ bool IntroScene::Start()
 	app->render->camera.y = 0;
 	transition_B = false;
 	exit_B = false;
-
-	//puzzle+quest
-
-	app->puzzleManager->palancas = false;
-	app->puzzleManager->escape = false;
-	app->puzzleManager->rescue = false;
-	app->puzzleManager->teamMate = false;
-
-	app->questManager->quest1->active = false;
-	app->questManager->quest2->active = false;
-	app->questManager->quest3->active = false;
-
-	app->questManager->quest1->complete = false;
-	app->questManager->quest2->complete = false;
-	app->questManager->quest3->complete = false;
-
-	app->questManager->SaveState();
 
 	return true;
 }
@@ -265,10 +253,24 @@ bool IntroScene::PostUpdate()
 
 		}
 
-
 		app->combat->firstCombat_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
 		introDone = true;
+
+		app->questManager->quest1->active = false;
+		app->questManager->quest2->active = false;
+		app->questManager->quest3->active = false;
+
+		app->questManager->quest1->complete = false;
+		app->questManager->quest2->complete = false;
+		app->questManager->quest3->complete = false;
+
+		app->puzzleManager->palancas = false;
+		app->puzzleManager->escape = false;
+		app->puzzleManager->rescue = false;
+		app->puzzleManager->teamMate = false;
+
+		app->questManager->SaveState();
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
@@ -353,6 +355,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 				i->data->isForward_B = false;
 				
 			}
+
 			app->combat->firstCombat_B = true;
 			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		}

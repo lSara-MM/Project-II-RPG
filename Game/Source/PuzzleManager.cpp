@@ -371,7 +371,7 @@ bool PuzzleManager::CleanUp()
 {
 	LOG("Freeing scene");
 
-	if (palancas) 
+	if (!palancas) 
 	{
 		if (Door1 != nullptr)
 			Door1->body->GetWorld()->DestroyBody(Door1->body);
@@ -383,7 +383,7 @@ bool PuzzleManager::CleanUp()
 			PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
 	}
 
-	if (escape) 
+	if (!escape) 
 	{
 
 		if (doorEscape != nullptr)
@@ -393,7 +393,7 @@ bool PuzzleManager::CleanUp()
 			DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
 	}
 
-	if (rescue) 
+	if (!rescue) 
 	{
 		if (Boss != nullptr)
 			Boss->body->GetWorld()->DestroyBody(Boss->body);
@@ -405,7 +405,7 @@ bool PuzzleManager::CleanUp()
 			Loset->body->GetWorld()->DestroyBody(Loset->body);
 	}
 
-	if (teamMate) 
+	if (!teamMate) 
 	{
 		if (fireGuy != nullptr)
 			app->tex->UnLoad(fireGuy);

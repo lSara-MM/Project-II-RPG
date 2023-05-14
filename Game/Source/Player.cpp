@@ -334,6 +334,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			if (app->questManager->quest3->active)
 			{
 				app->questManager->quest3->complete = true;
+				app->questManager->SaveState();
 			}
 			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, 90);
 			break;

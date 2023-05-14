@@ -502,6 +502,7 @@ void App::DisableAtStart()
 	combat->active = false;
 	sceneWin_Lose->active = false;
 	puzzleManager->active = false;
+	questManager->active = false;
 	//Este debe estar siempre activo para poder cargar correctamente los path en el momento que se necesiten
 	//initiAllResourcesFromZip->active = true;
 	//assetsManager->active = true;
