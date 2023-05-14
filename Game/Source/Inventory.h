@@ -28,8 +28,6 @@ public:
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
-	vector <GuiButton*> use;
-
 public:
 
 	SDL_Texture* inventoryIMG;
