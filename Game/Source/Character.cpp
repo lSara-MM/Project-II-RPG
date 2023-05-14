@@ -340,13 +340,15 @@ bool Character::Update(float dt)
 					default:
 						break;
 					}
+				
+					
+				app->combat->NextTurn();
+				delayOn = false;
+
 				}
 
-				if (turnDelay.ReadMSec() > 4000)
-				{
-					delayOn = false;
-					app->combat->NextTurn();
-				}
+				
+				
 
 				break;
 			case CharacterType::NONE:
@@ -439,7 +441,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			damage = skill->multiplierDmg * caster->GetStat(EffectType::ATTACK);
 			if (CalculateRandomProbability(skill->bonusCritRate + caster->GetStat(EffectType::CRIT_RATE))) //Si true hay critico
 			{
-				damage *= (skill->bonusCritDamage + caster->GetStat(EffectType::CRIT_DMG));
+				damage *= (100+(skill->bonusCritDamage + caster->GetStat(EffectType::CRIT_DMG)))/100;
 			}
 
 			if (skill->positiveEffect) //Efecto de estado positivo
