@@ -117,7 +117,10 @@ bool GuiButton::Update(float dt)
 				// If mouse button pressed -> Generate event!
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
 				{
-					NotifyObserverOfClick();
+					if (state != GuiControlState::SELECTED)
+					{
+						NotifyObserverOfClick();
+					}
 				}
 			}
 

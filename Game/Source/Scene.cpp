@@ -355,8 +355,6 @@ void Scene::Debug()
 
 	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
 		LOG("Combat");
-		player->LoadAllPC();
-		player->SetParty();
 		app->combat->PreLoadCombat(player->arrParty, name);
 		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
 	}

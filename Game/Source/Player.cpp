@@ -671,6 +671,7 @@ void Player::SetParty()
 	// TODO when party available
 	for (int i = 0; i < listPC.size(); i++)
 	{
+		if (i == arrParty.size()) break;
 		arrParty.at(i) = listPC.at(i);
 		arrParty.at(i)->positionCombat_I = i;
 	}
