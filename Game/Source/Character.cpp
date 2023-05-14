@@ -190,6 +190,65 @@ bool Character::Update(float dt)
 					switch (charaClass) //La idea es que cada classe tenga un comportamiento generico
 					{
 					case CharacterClass::MELEE_DPS:
+
+					{
+						int probSkill;
+						if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Alto de vida
+						{
+							//usar skill 2 (avance)
+							UseSkill(listSkills.At(2)->data);
+
+							listSkillsHistory.Add(2);
+							break;
+						}
+						else
+						{
+							if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se usa
+							{
+								probSkill = 0;
+							}
+							else //Si no se uso pues casi siempre la usa
+							{
+								probSkill = 25;
+							}
+							if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+							{
+								//usar skill 1 (buff ofensivo)
+								UseSkill(listSkills.At(1)->data);
+
+								listSkillsHistory.Add(1);
+								break;
+							}
+							else
+							{
+								if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se usa
+								{
+									probSkill = 75;
+								}
+								else
+								{
+									probSkill = 25;
+								}
+							}
+							if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+							{
+								//usar skill 3 (atk area)
+								UseSkill(listSkills.At(3)->data);
+
+								listSkillsHistory.Add(3);
+								break;
+							}
+							else
+							{
+								//usar skill 0 (atk basico)
+								UseSkill(listSkills.At(0)->data);
+
+								listSkillsHistory.Add(0);
+								break;
+							}
+						}
+					}
+
 						break;
 					case CharacterClass::RANGED_DPS:
 						break;
@@ -201,6 +260,7 @@ bool Character::Update(float dt)
 						break;
 					case CharacterClass::TANK:
 
+						{
 						int probSkill;
 						if (currentHp >= maxHp / 2) //Alto de vida
 						{
@@ -265,7 +325,7 @@ bool Character::Update(float dt)
 							listSkillsHistory.Add(0);
 							break;
 						}
-
+					}
 
 
 						break;
@@ -453,7 +513,8 @@ bool Character::UseSkill(Skill* skill)
 	if(skill->autoTarget)
 	{
 		this->ModifyHP(ApplySkill(this, this, skill)); //Lanzarsela a si mismo
-		app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster);
+		if(skill->movementCaster!=0)
+		{app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster); }
 		return true;
 	}
 
@@ -568,6 +629,7 @@ bool Character::UseSkill(Skill* skill)
 				app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill));
 				if (CalculateRandomProbability(skill->bonusPrecision + this->precision, app->combat->vecAllies.at(objective)->res)) 
 				{
+					if (skill->movementTarget != 0)
 					app->combat->MoveCharacter(&app->combat->vecAllies, app->combat->vecAllies.at(objective), skill->movementTarget);
 				}
 			}
@@ -579,7 +641,7 @@ bool Character::UseSkill(Skill* skill)
 		}
 	}
 	
-	app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster);
+	
 	return true;
 }
 
@@ -618,9 +680,13 @@ bool Character::UseSkill(Skill* skill, Character* target)
 		target->ModifyHP(ApplySkill(this, target, skill));
 		if (CalculateRandomProbability(skill->bonusPrecision + this->precision, target->res))
 		{
+			if (skill->movementTarget != 0)
 			app->combat->MoveCharacter(&app->combat->vecEnemies, target, skill->movementTarget);
 		}
 	}
+
+	if (skill->movementCaster != 0)
+	app->combat->MoveCharacter(&app->combat->vecEnemies, target, skill->movementTarget);
 
 	return true;
 }
