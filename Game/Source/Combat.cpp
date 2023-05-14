@@ -475,24 +475,19 @@ void Combat::HandleSkillsButtons(List<Skill*> listSkills_)
 void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int movement_I)
 {
 	//swap(arr.at(currentPosition_I), arr.at(newPosition_I));
-
-	arr->erase(arr->begin() + chara->positionCombat_I);
-	int newPos = chara->positionCombat_I + movement_I;
+	
+	int newPos = chara->positionCombat_I + movement_I;	
 	
 	//Evitar que se pase de posicion.
-	/*if (newPos < 0)
+	if (arr->size() > newPos)
 	{
-		newPos = 0;
-	}
-	if (newPos >= arr->size() - 1)
-	{
-		newPos = arr->size() - 1;
-	}*/
+		arr->erase(arr->begin() + chara->positionCombat_I);
 
-	//Insertar en nueva posicion
-	arr->insert(arr->begin() + newPos, chara);
-	UpdatePositions(arr);
-	app->audio->PlayFx(swapPositionfx);
+		//Insertar en nueva posicion
+		arr->insert(arr->begin() + newPos, chara);
+		UpdatePositions(arr);
+		app->audio->PlayFx(swapPositionfx);
+	}
 }
 
 void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
