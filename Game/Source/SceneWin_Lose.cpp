@@ -13,6 +13,7 @@
 
 #include "FadeToBlack.h"
 #include "GuiManager.h"
+#include "ItemManager.h"
 #include "Map.h"
 
 #include "Defs.h"
@@ -93,6 +94,22 @@ bool SceneWin_Lose::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		transition_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+	{
+		switch (app->itemManager->comb)
+		{
+		case 0:
+			app->fade->FadingToBlack(this, (Module*)app->scene, 5);
+			break;
+		case 1:
+			app->fade->FadingToBlack(this, (Module*)app->practiceTent, 5);
+			break;
+		case 2:
+			app->fade->FadingToBlack(this, (Module*)app->hTerrors, 5);
+			break;
+		}
 	}
 
 	return true;

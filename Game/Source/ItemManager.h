@@ -125,6 +125,10 @@ public:
 	int resistencia= 0;
 	int speed= 0;
 	
+
+	//GUARRADA SUPER TEMPORAL
+	int comb = 0;
+
 };
 
 #endif // __ITEMMANAGER_H__

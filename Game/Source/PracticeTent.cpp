@@ -79,6 +79,9 @@ bool PracticeTent::Start()
 	//Init player inventory
 	app->itemManager->SetPlayerForScene(player);
 
+	//GUARRADA SUPER TEMPORAL
+	app->itemManager->comb = 1;
+
 	return true;
 }
 
