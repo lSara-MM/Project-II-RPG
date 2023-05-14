@@ -47,25 +47,25 @@ STATUS ID
 	<!--Skills Bard-->
 	<skill name="Funny Stabing" id="5" description="A powerful attack with the dagger that deals high critical damage, if you make it crit" 
 		   type="0" movementCaster="0"  movementTarget="0"
-		   multiplier="-0.8" bonusPrecision="100" bonusCritRate="-15" bonusCritDamage="70"
+	   multiplierDmg="-0.8" bonusPrecision="100" bonusCritRate="-15" bonusCritDamage="70"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   statusID="-1" postive="false" duration="0" intensity="0"
 	/>
 	<skill name="Encourging Words" id="6" description="A funny jest that inspires the whole team increasing its crit rate" 
 		   type="3" movementCaster="0"  movementTarget="0"
-		   multiplier="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
 		   statusID="2" postive="true" duration="3" intensity="20"
 	/>
 	<skill name="I trust you!" id="7" description="" 
 		   type="3" movementCaster="0"  movementTarget="-1"
-		   multiplier="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="1" posToTargetStart="2" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
 	   statusID="5" postive="true" duration="1" intensity="40"
 	/>
 	<skill name="Humiliation" id="8" description="" 
 		   type="2" movementCaster="0"  movementTarget="-1"
-		   multiplier="0" bonusPrecision="105" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="0" bonusPrecision="105" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   statusID="5" postive="false" duration="3" intensity="-15"
 	/>
@@ -73,28 +73,28 @@ STATUS ID
 	<!--Skills Healer-->
 	<skill name="Just a Prick" id="9" description=""
 		   type="0" movementCaster="0"  movementTarget="0"
-		   multiplier="-0.8" bonusPrecision="110" bonusCritRate="10" bonusCritDamage="15"
+	   multiplierDmg="-0.8" bonusPrecision="110" bonusCritRate="10" bonusCritDamage="15"
 		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   statusID="4" postive="false" duration="2" intensity="-18"
 	/>
 
 	<skill name="Free Trial" id="10" description=""
 		   type="1" movementCaster="0"  movementTarget="0"
-		   multiplier="1.3" bonusPrecision="0" bonusCritRate="10" bonusCritDamage="0"
+	   multiplierDmg="1.3" bonusPrecision="0" bonusCritRate="10" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="1" friendlyFire="true" areaSkill="false" autoTarget="false"
 	   statusID="-1" postive="false" duration="0" intensity="0"
 	/>
 
 	<skill name="I have somethig for that" id="11" description=""
 		   type="3" movementCaster="0"  movementTarget="0"
-		   multiplier="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
 	   statusID="0" postive="true" duration="2" intensity="10"
 	/>
 
 	<skill name="Healing for sale" id="12" description=""
 		   type="1" movementCaster="0"  movementTarget="0"
-		   multiplier="0.4" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="0.4" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
 	   statusID="-1" postive="true" duration="0" intensity="0"
 	/>
@@ -102,28 +102,28 @@ STATUS ID
 	<!--Skills FireMage-->
 	<skill name="Fire Breath" id="13" description=""
 		   type="0" movementCaster="0"  movementTarget="0"
-		   multiplier="-1.1" bonusPrecision="120" bonusCritRate="0" bonusCritDamage="10"
+	   multiplierDmg="-1.1" bonusPrecision="120" bonusCritRate="0" bonusCritDamage="10"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   statusID="0" postive="false" duration="3" intensity="-10"
 	/>
 
 	<skill name="MORE FIRE" id="14" description=""
 		   type="3" movementCaster="0"  movementTarget="0"
-		   multiplier="1.3" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="1.3" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="1" friendlyFire="true" areaSkill="false" autoTarget="true"
 	   statusID="1" postive="true" duration="4" intensity="35"
 	/>
 
 	<skill name="Seas of Fire" id="15" description=""
 		   type="0" movementCaster="1"  movementTarget="0"
-		   multiplier="-0.6" bonusPrecision="80" bonusCritRate="0" bonusCritDamage="0"
+	   multiplierDmg="-0.6" bonusPrecision="80" bonusCritRate="0" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
 	   statusID="0" postive="false" duration="2" intensity="-5"
 	/>
 
 	<skill name="Oil Spit" id="16" description=""
 		   type="0" movementCaster="0"  movementTarget="0"
-		   multiplier="-0.4" bonusPrecision="130" bonusCritRate="-10" bonusCritDamage="0"
+	   multiplierDmg="-0.4" bonusPrecision="130" bonusCritRate="-10" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
 	   statusID="7" postive="false" duration="3" intensity="-30"
 	/>
@@ -182,6 +182,36 @@ STATUS ID
 	/>
 
 	<skill name="Claw cleave" id="28" description="A strike in a huge area"
+		   type="0" movementCaster="0"  movementTarget="0"
+	   multiplierDmg="-0.6" bonusPrecision="70" bonusCritRate="20" bonusCritDamage="30"
+		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="2" friendlyFire="false" areaSkill="true" autoTarget="false"
+		   statusID="-1" postive="false" duration="0" intensity="0"
+	/>
+
+	<!--Skills Cuadro-->
+
+	<skill name="Vicious Strike" id="29" description="A strike to the vital points, with high crit chance"
+		   type="0" movementCaster="0"  movementTarget="0"
+	   multiplierDmg="-1.4" bonusPrecision="90" bonusCritRate="50" bonusCritDamage="10"
+		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="2" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   statusID="-1" postive="false" duration="0" intensity="0"
+	/>
+
+	<skill name="Carving Claws" id="30" description="An ofensive buff that increses the power of its critical hits"
+		   type="3" movementCaster="0"  movementTarget="0"
+	   multiplierDmg="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
+		   statusID="3" postive="true" duration="3" intensity="50"
+	/>
+
+	<skill name="Go to the party" id="31" description="A dashing attack foward to reposition"
+		   type="0" movementCaster="-2"  movementTarget="0"
+	   multiplierDmg="-1.1" bonusPrecision="90" bonusCritRate="0" bonusCritDamage="10"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="0" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   statusID="-1" postive="false" duration="0" intensity="0"
+	/>
+
+	<skill name="Claw cleave" id="32" description="A strike in a huge area"
 		   type="0" movementCaster="0"  movementTarget="0"
 	   multiplierDmg="-0.6" bonusPrecision="70" bonusCritRate="20" bonusCritDamage="30"
 		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="2" friendlyFire="false" areaSkill="true" autoTarget="false"

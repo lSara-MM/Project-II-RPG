@@ -169,19 +169,6 @@ bool Character::Update(float dt)
 				}
 				//app->combat->HandleSkillsButtons(listSkills);
 
-					////Activar y desactivar botones usables
-					//for (int i = 0; i < 4; i++)
-					//{
-					//	if(listSkills.At(i)->data->PosCanBeUsed(positionCombat_I))
-					//	{
-					//		app->combat->EnableSkillButton(i);
-					//	}
-					//	else
-					//	{
-					//		app->combat->DisableSkillButton(i);
-					//	}
-					//}
-
 				break;
 			case CharacterType::ENEMY:
 
@@ -213,7 +200,7 @@ bool Character::Update(float dt)
 						int probSkill;
 						if (currentHp >= maxHp / 2) //Alto de vida
 						{
-							if (listSkillsHistory.end->data == 4)//Si se uso el turno pasado no se usa
+							if (listSkillsHistory.end->data == 2)//Si se uso el turno pasado no se usa
 							{
 								probSkill = 10;
 							}
@@ -237,7 +224,7 @@ bool Character::Update(float dt)
 						}
 						else //Bajo de vida
 						{
-							if (listSkillsHistory.end->data == 2)//Si se uso el turno pasado no se repite casi
+							if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se repite casi
 							{
 								probSkill = 15;
 							}
@@ -359,12 +346,12 @@ bool Character::CalculateRandomProbability(int bonus_I, int against_I)
 //Provisional full
 int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 {
-	if (skill->multiplierDmg < 0) //Curacion, no hace falta calcular esquiva ni nada 
+	if (skill->multiplierDmg >= 0) //Curacion o buffo, no hace falta calcular esquiva ni nada 
 	{
 		return(caster->maxHp/5 * skill->multiplierDmg);
-		if (true) //Efecto de estado positivo
+		if (skill->positiveEffect) //Efecto de estado positivo
 		{
-			defender->listStatusEffects.Add(&StatusEffect::StatusEffect(69, 3, true, EffectType::NONE));
+			defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
 		}
 		else
 		{
@@ -390,7 +377,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				damage *= (skill->bonusCritDamage + caster->GetStat(EffectType::CRIT_DMG));
 			}
 
-			if (true) //Efecto de estado positivo
+			if (skill->positiveEffect) //Efecto de estado positivo
 			{
 				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(69, 3, true, EffectType::NONE));
 			}
@@ -404,7 +391,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 
 			// Calcular reduccion de la defensa
 			float armorRelevance = (defender->GetStat(EffectType::ARMOR) / abs(damage+1)) + 1;
-			damage = +((defender->GetStat(EffectType::ARMOR) / 2) * armorRelevance); //Esta con mas ya que damage es negativo
+			damage += ((defender->GetStat(EffectType::ARMOR) / 2) * armorRelevance); //Esta con mas ya que damage es negativo
 
 			return damage;
 		}
@@ -445,7 +432,7 @@ void Character::LoadSkill(int arr[4])
 				int posFinalTarget = aux.attribute("posToTargetEnd").as_int();
 				bool friendlyFire = aux.attribute("friendlyFire").as_bool();
 				bool area = aux.attribute("areaSkill").as_bool();
-				bool autoTarget = aux.attribute("areaSkill").as_bool();
+				bool autoTarget = aux.attribute("autoTarget").as_bool();
 
 				listSkills.Add(new Skill(nombre, descripcion,
 					posInicialUso, posFinallUso, posInicialTarget, posFinalTarget,
@@ -462,6 +449,8 @@ bool Character::UseSkill(Skill* skill)
 	if(skill->autoTarget)
 	{
 		this->ModifyHP(ApplySkill(this, this, skill)); //Lanzarsela a si mismo
+		app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster);
+		return true;
 	}
 
 	if(skill->targetFriend) //Targetea a gente de su propio grupo
@@ -480,7 +469,7 @@ bool Character::UseSkill(Skill* skill)
 
 			if (skill->areaSkill)
 			{
-				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+				for (size_t i = skill->posToTargetStart_I; i <= endRange; i++)
 				{
 					//Atacar a todos
 					app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
@@ -501,7 +490,7 @@ bool Character::UseSkill(Skill* skill)
 
 			if (skill->areaSkill)
 			{
-				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+				for (size_t i = skill->posToTargetStart_I; i <= endRange; i++)
 				{
 					//Atacar a todos
 					app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill));
@@ -535,7 +524,7 @@ bool Character::UseSkill(Skill* skill)
 
 			if (skill->areaSkill)
 			{
-				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+				for (size_t i = skill->posToTargetStart_I; i <= endRange; i++)
 				{
 					//Atacar a todos
 					app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill));
@@ -559,7 +548,7 @@ bool Character::UseSkill(Skill* skill)
 
 			if (skill->areaSkill)
 			{
-				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+				for (int i = skill->posToTargetStart_I; i <= endRange; i++)
 				{
 					//Atacar a todos
 					app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
@@ -595,11 +584,11 @@ bool Character::UseSkill(Skill* skill, Character* target)
 {
 	int endRange;
 	if (skill->targetFriend) { endRange = skill->RangeCanTarget(app->combat->vecAllies); }
-	else { endRange = skill->RangeCanTarget(app->combat->vecAllies); }
+	else { endRange = skill->RangeCanTarget(app->combat->vecEnemies); }
 
 	if (skill->areaSkill)
 	{
-		for (size_t i = skill->posToTargetStart_I; i < endRange; i++) //Creo que las skills de area hay que lanzarlas de atras a delante
+		for (size_t i = skill->posToTargetStart_I; i <= endRange; i++) //Creo que las skills de area hay que lanzarlas de atras a delante
 		{
 			//Atacar a todos
 			switch (target->charaType)
@@ -609,7 +598,7 @@ bool Character::UseSkill(Skill* skill, Character* target)
 				app->audio->PlayFx(healfx);
 				break;
 			case CharacterType::ENEMY:
-				app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
+				app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill));
 				app->audio->PlayFx(hitfx);
 				break;
 			case CharacterType::NONE:
