@@ -18,7 +18,7 @@ Skill::~Skill()
 {
 }
 
-Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I, int movementCaster, int movementTarget,bool friendlyFire, bool areaSkill, bool autoTarget, float multiplierDmg, int bonusPrecision, int bonusCritRate, int bonusCritDamage)
+Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I, int movementCaster, int movementTarget,bool friendlyFire, bool areaSkill, bool autoTarget, float multiplierDmg, int bonusPrecision, int bonusCritRate, int bonusCritDamage, int status, bool positiveEffect,int duration, int intensity)
 {
 	//Info
 	this->name = name;
@@ -30,6 +30,12 @@ Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUs
 	this->bonusCritRate = bonusCritRate;
 	this->bonusPrecision = bonusPrecision;
 	this->movementTarget = movementTarget;
+
+	//Status Effects
+	this->status = status;
+	this->positiveEffect = positiveEffect;
+	this->duration = duration;
+	this->intensity = intensity;
 
 	//Movement & position
 	this->movementCaster = movementCaster;

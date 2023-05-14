@@ -33,9 +33,9 @@ struct StatusEffect
 {
 public:
 
-	StatusEffect(int quantity_, int turnsLeft_, bool isPositive_, EffectType type_)
+	StatusEffect(int intensity_, int turnsLeft_, bool isPositive_, EffectType type_)
 	{
-		quantity = quantity_;
+		intensity = intensity_;
 		turnsLeft = turnsLeft_;
 		isPositive = isPositive_;
 		type = type_;
@@ -45,7 +45,7 @@ public:
 	{
 		if (turnsLeft > 0)
 		{
-			affectedStat += quantity;
+			affectedStat += intensity;
 			turnsLeft--;
 			return true;
 		}
@@ -54,7 +54,7 @@ public:
 
 public:
 	
-	int quantity;
+	int intensity;
 	int turnsLeft;
 	bool isPositive; // true positive - false negative
 	EffectType type;
