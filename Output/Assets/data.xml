@@ -53,7 +53,7 @@
     Sala_Entrenamiento="Audio/Music/sala_Entrenamiento.ogg"
     >
 </Audio>
-  <gui 
+<gui 
     UI_Battle_HealthBar="GUI/UI_battle_healtBar.png"
     UI_Battle_TurnBar="GUI/UI_battle_turnsBar.png"
     UI_Button_CharacterSelect="GUI/UI_button_charactherSelection.png"
@@ -80,5 +80,5 @@
     Generic="GUI/UIArt/Generic.png"
     Start="GUI/UIArt/Start.png"
       >
-  </gui>
+</gui>
 </data>

@@ -66,6 +66,8 @@ SDL_Texture* const Textures::Load(const char* path)
 	SDL_Texture* texture = NULL;
 	SDL_Surface* surface = IMG_Load(path);
 
+	//surface = IMG_Load_RW(app->assetsManager->Load(path), 1);
+
 	if(surface == NULL)
 	{
 		LOG("Could not load surface with path: %s. IMG_Load: %s", path, IMG_GetError());

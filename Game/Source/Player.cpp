@@ -161,7 +161,7 @@ bool Player::Update(float dt)
 		currentAnimation->Update();
 
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		app->render->DrawTexture(texture, position.x - width - 2, position.y - height, &rect, 1.0f, NULL, NULL, NULL, flipType);
+		app->render->DrawTexture(texture, position.x - width * 2, position.y - height * 2, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
 		if (npcInteract)
 		{

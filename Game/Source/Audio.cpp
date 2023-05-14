@@ -112,6 +112,7 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 	}
 
 	music = Mix_LoadMUS(path);
+	//music = Mix_LoadMUS_RW(app->assetsManager->Load(path), 1);
 
 	if(music == NULL)
 	{
@@ -163,6 +164,7 @@ unsigned int Audio::LoadFx(const char* path)
 		return 0;
 
 	Mix_Chunk* chunk = Mix_LoadWAV(path);
+	//chunk = Mix_LoadWAV_RW(app->assetsManager->Load(path), 1);
 
 	if(chunk == NULL)
 	{
