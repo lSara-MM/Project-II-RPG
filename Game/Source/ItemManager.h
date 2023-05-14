@@ -88,13 +88,7 @@ public:
 	bool LoadItemState(pugi::xml_node& xml_trees);
 	bool SaveItemState();
 
-	void SetPlayerForScene(Player* player_)
-	{
-		player = player_;
-		player->LoadAllPC();
-		player->SetParty();
-	}
-
+	void SetPlayerForScene(Player* player_);
 
 public:
 
@@ -108,22 +102,22 @@ public:
 
 	Player* player;
 
-	int invPos;
+	int invPos = 0;
 
 private:
 	pugi::xml_document items;
 
 public:
 	//print stats
-	int maxhp;
-	int attack;
-	int critProbability;
-	int critDamage;
-	int precision;
-	int armor;
-	int esquiva;
-	int resistencia;
-	int speed;
+	int maxhp = 0;
+	int attack= 0;
+	int critProbability= 0;
+	int critDamage= 0;
+	int precision= 0;
+	int armor= 0;
+	int esquiva= 0;
+	int resistencia= 0;
+	int speed= 0;
 	
 };
 

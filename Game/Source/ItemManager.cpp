@@ -402,3 +402,10 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 
 	return ret;
 }
+
+void  ItemManager::SetPlayerForScene(Player* player_)
+{
+	player = player_;
+	player->LoadAllPC();
+	player->SetParty();
+}
