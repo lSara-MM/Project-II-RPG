@@ -135,6 +135,7 @@ bool PuzzleManager::Start()
 
 	codeActive = false;
 	bossActive = false;
+	bossIsDead = false;
 	losetActive = false;
 	bossInvent = false;
 	intoCode = false;
@@ -180,7 +181,6 @@ bool PuzzleManager::Start()
 	if (rescue == false) 
 	{
 		door = app->tex->Load(texturepathDoor);
-		boss = app->tex->Load(texturepathBoss);
 		
 		Boss = app->physics->CreateRectangleSensor(posBoss.x - widthBoss / 2, posBoss.y - heightBoss / 2, widthBoss, heightBoss, bodyType::STATIC);
 		Boss->body->SetFixedRotation(true);
@@ -224,6 +224,8 @@ bool PuzzleManager::Start()
 	loset = app->tex->Load(texturepathLoset);
 	palanca = app->tex->Load(texturepathPalanca);
 
+	boss = app->tex->Load(texturepathBoss);
+
 	Palanca = app->physics->CreateRectangle(posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca, widthPalanca, heightPalanca, bodyType::STATIC);
 	Palanca->body->SetFixedRotation(true);
 
@@ -243,6 +245,9 @@ bool PuzzleManager::Start()
 	nota3->id = 2;
 
 	numCode = new PlayerInput("", 3, false);
+
+
+	bos = { 3, 1, 47, 53 };
 
 	return true;
 }
@@ -267,6 +272,10 @@ bool PuzzleManager::Update(float dt)
 	if (!rescue)
 	{
 		Rescue();
+	}
+	else 
+	{
+		app->render->DrawTexture(boss, posLoset.x - widthBoss, posLoset.y - heightBoss, &bos);
 	}
 
 	if (!teamMate) 
@@ -383,9 +392,6 @@ bool PuzzleManager::CleanUp()
 
 	if (rescue) 
 	{
-		if (boss != nullptr)
-			app->tex->UnLoad(boss);
-
 		if (Boss != nullptr)
 			Boss->body->GetWorld()->DestroyBody(Boss->body);
 
@@ -422,6 +428,9 @@ bool PuzzleManager::CleanUp()
 	
 	if(textureE != nullptr)
 		app->tex->UnLoad(textureE);
+
+	if (boss != nullptr)
+		app->tex->UnLoad(boss);
 
 	if (Palanca != nullptr)
 		Palanca->body->GetWorld()->DestroyBody(Palanca->body);
@@ -569,55 +578,60 @@ bool PuzzleManager::Rescue()
 	SDL_Rect dor = { 377, 1, 14, 64 };
 
 	app->render->DrawTexture(door, posDoor3.x - widthVertical, posDoor3.y - heightVertical, &dor);
-
-	if (bossActive) 
+	
+	if (bossIsDead) 
 	{
-		app->render->DrawTexture(textureE, posBoss.x - 64, posBoss.y - 145);
-
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) 
+		if (!bossInvent)
 		{
-			bossInvent = true;
-
-			if (boss != nullptr)
-				app->tex->UnLoad(boss);
-
-			if (Boss->body != nullptr)
-				Boss->body->GetWorld()->DestroyBody(Boss->body);
-
-			delete Boss;
-			Boss = nullptr;
-
-			bossActive = false;
+			app->render->DrawTexture(boss, posBoss.x - widthBoss, posBoss.y - heightBoss, &bos);
 		}
-	}
 
-	if (bossInvent) 
-	{
-		if (losetActive) 
+		if (bossActive)
 		{
-			app->render->DrawTexture(textureE, posLoset.x - 64, posLoset.y - 120);
+			app->render->DrawTexture(textureE, posBoss.x - 64, posBoss.y - 145);
 
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
-				if (door != nullptr)
-					app->tex->UnLoad(door);
+				bossInvent = true;
 
-				if (Door3->body != nullptr)
-					Door3->body->GetWorld()->DestroyBody(Door3->body);
-				
-				if (Loset->body != nullptr)
-					Loset->body->GetWorld()->DestroyBody(Loset->body);
+				if (Boss->body != nullptr)
+					Boss->body->GetWorld()->DestroyBody(Boss->body);
 
-				delete Loset;
-				Loset = nullptr;
-				
-				delete Door3;
-				Door3 = nullptr;
+				delete Boss;
+				Boss = nullptr;
 
-				losetActive = false;
-				bossInvent = false;
-				rescue = true;
-				app->questManager->SaveState();
+				bossActive = false;
+			}
+		}
+
+		if (bossInvent)
+		{
+			if (losetActive)
+			{
+				app->render->DrawTexture(textureE, posLoset.x - 64, posLoset.y - 120);
+
+				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+				{
+					if (door != nullptr)
+						app->tex->UnLoad(door);
+
+					if (Door3->body != nullptr)
+						Door3->body->GetWorld()->DestroyBody(Door3->body);
+
+					if (Loset->body != nullptr)
+						Loset->body->GetWorld()->DestroyBody(Loset->body);
+
+					delete Loset;
+					Loset = nullptr;
+
+					delete Door3;
+					Door3 = nullptr;
+
+					losetActive = false;
+					bossInvent = false;
+					rescue = true;
+					app->questManager->SaveState();
+				}
 			}
 		}
 	}

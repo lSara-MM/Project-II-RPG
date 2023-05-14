@@ -134,6 +134,7 @@ public:
 
 	bool bossActive;
 	bool bossInvent;
+	bool bossIsDead;
 	bool losetActive;
 
 	bool saveFireGuy;
@@ -145,6 +146,8 @@ public:
 	PlayerInput* numCode;
 
 	SDL_Rect los;
+
+	SDL_Rect bos;
 
 private:
 

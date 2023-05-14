@@ -19,6 +19,7 @@
     Oraculo = "Textures/oraculo.png"
     Protagonist = "Textures/Protagonist.png"
     Puzzles = "Textures/Spritesheet_puzzles.png"
+    Boss_Sprite = "Textures/boss_sprite.png"
     >
 </texture>
 <Audio
