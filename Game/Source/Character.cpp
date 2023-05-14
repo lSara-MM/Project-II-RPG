@@ -119,7 +119,6 @@ bool Character::Update(float dt)
 	{
 		if (app->input->godMode_B)
 		{
-			onTurn = true;
 			string position_C = std::to_string(positionCombat_I);
 			const char* ch_pos = position_C.c_str();
 			app->render->TextDraw(ch_pos, position.x + 60, position.y - 20, 15);
