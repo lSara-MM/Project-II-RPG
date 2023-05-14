@@ -449,21 +449,21 @@ bool GuiButton::Draw(Render* render)
 
 			case GuiControlState::NORMAL:
 			{
-				rect = { 5, 5, bounds.x, bounds.y };
+				rect = { 5, 5, bounds.w, bounds.h };
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 
 			} break;
 
 			case GuiControlState::FOCUSED:
 			{
-				rect = { 5, 65, bounds.x, bounds.y };
+				rect = { 5, 65, bounds.w, bounds.h };
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 
 			} break;
 
 			case GuiControlState::PRESSED:
 			{
-				rect = { 5, 125, bounds.x, bounds.y };
+				rect = { 5, 125,bounds.w, bounds.h };
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 
 			} break;
