@@ -299,44 +299,6 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 			nodeList[i]->CleanUp();
 		}
 
-
-		//LOAD STATS
-		for (size_t i = 0; i < player->arrParty.size(); i++)
-		{
-			if (player->arrParty.at(i) != nullptr && invPos == i)
-			{
-				maxhp = player->arrParty.at(i)->maxHp;
-				armor = player->arrParty.at(i)->armor;
-				attack = player->arrParty.at(i)->attack;
-				critDamage = player->arrParty.at(i)->critDamage;
-				critProbability = player->arrParty.at(i)->critRate;
-				precision = player->arrParty.at(i)->precision;
-				esquiva = player->arrParty.at(i)->dodge;
-				speed = player->arrParty.at(i)->speed;
-				resistencia = player->arrParty.at(i)->res;
-			}
-		}
-
-		//print stats
-		string h = to_string(maxhp);
-		app->render->TextDraw(h.c_str(), 330, 460, 15, Font::TEXT, { 0, 0, 0 });
-		string at = to_string(attack);
-		app->render->TextDraw(at.c_str(), 330, 485, 15, Font::TEXT, { 0, 0, 0 });
-		string cP = to_string(critProbability);
-		app->render->TextDraw(cP.c_str(), 330, 510, 15, Font::TEXT, { 0, 0, 0 });
-		string cD = to_string(critDamage);
-		app->render->TextDraw(cD.c_str(), 330, 535, 15, Font::TEXT, { 0, 0, 0 });
-		string p = to_string(precision);
-		app->render->TextDraw(p.c_str(), 330, 560, 15, Font::TEXT, { 0, 0, 0 });
-		string ar = to_string(armor);
-		app->render->TextDraw(ar.c_str(), 520, 485, 15, Font::TEXT, { 0, 0, 0 });
-		string e = to_string(esquiva);
-		app->render->TextDraw(e.c_str(), 520, 510, 15, Font::TEXT, { 0, 0, 0 });
-		string r = to_string(resistencia);
-		app->render->TextDraw(r.c_str(), 520, 535, 15, Font::TEXT, { 0, 0, 0 });
-		string s = to_string(speed);
-		app->render->TextDraw(s.c_str(), 520, 560, 15, Font::TEXT, { 0, 0, 0 });
-
 		app->tex->UnLoad(itemsTexture);
 		itemsTexture = NULL;
 	}

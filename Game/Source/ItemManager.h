@@ -111,6 +111,7 @@ public:
 private:
 	pugi::xml_document items;
 
+public:
 	//print stats
 	int maxhp;
 	int attack;

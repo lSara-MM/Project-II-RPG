@@ -1,15 +1,4 @@
 <?xml version="1.0"?>
 <save_state>
-	<items>
-		<item name="potion" quantity="1" equiped="false" space="0" whom="1" />
-		<item name="granade" quantity="1" equiped="false" space="0" whom="1" />
-		<item name="legging" quantity="1" equiped="false" space="0" whom="1" />
-		<item name="ring" quantity="1" equiped="true" space="1" whom="1" />
-		<item name="ring_2" quantity="1" equiped="true" space="1" whom="0" />
-		<item name="chest" quantity="1" equiped="true" space="0" whom="1" />
-		<item name="chest_2" quantity="1" equiped="true" space="0" whom="0" />
-		<item name="pendant" quantity="1" equiped="false" space="0" whom="1" />
-		<item name="shoe" quantity="1" equiped="false" space="0" whom="1" />
-		<item name="hat" quantity="1" equiped="false" space="0" whom="1" />
-	</items>
+
 </save_state>

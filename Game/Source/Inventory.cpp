@@ -66,6 +66,43 @@ bool Inventory::Update(float dt)
 		}
 	}
 
+	//LOAD STATS
+	for (size_t i = 0; i < app->itemManager->player->arrParty.size(); i++)
+	{
+		if (app->itemManager->player->arrParty.at(i) != nullptr && app->itemManager->invPos == i)
+		{
+			app->itemManager->maxhp = app->itemManager->player->arrParty.at(i)->maxHp;
+			app->itemManager->armor = app->itemManager->player->arrParty.at(i)->armor;
+			app->itemManager->attack = app->itemManager->player->arrParty.at(i)->attack;
+			app->itemManager->critDamage = app->itemManager->player->arrParty.at(i)->critDamage;
+			app->itemManager->critProbability = app->itemManager->player->arrParty.at(i)->critRate;
+			app->itemManager->precision = app->itemManager->player->arrParty.at(i)->precision;
+			app->itemManager->esquiva = app->itemManager->player->arrParty.at(i)->dodge;
+			app->itemManager->speed = app->itemManager->player->arrParty.at(i)->speed;
+			app->itemManager->resistencia = app->itemManager->player->arrParty.at(i)->res;
+		}
+	}
+
+	//print stats
+	string h = to_string(app->itemManager->maxhp);
+	app->render->TextDraw(h.c_str(), 330, 460, 15, Font::TEXT, { 0, 0, 0 });
+	string at = to_string(app->itemManager->attack);
+	app->render->TextDraw(at.c_str(), 330, 485, 15, Font::TEXT, { 0, 0, 0 });
+	string cP = to_string(app->itemManager->critProbability);
+	app->render->TextDraw(cP.c_str(), 330, 510, 15, Font::TEXT, { 0, 0, 0 });
+	string cD = to_string(app->itemManager->critDamage);
+	app->render->TextDraw(cD.c_str(), 330, 535, 15, Font::TEXT, { 0, 0, 0 });
+	string p = to_string(app->itemManager->precision);
+	app->render->TextDraw(p.c_str(), 330, 560, 15, Font::TEXT, { 0, 0, 0 });
+	string ar = to_string(app->itemManager->armor);
+	app->render->TextDraw(ar.c_str(), 520, 485, 15, Font::TEXT, { 0, 0, 0 });
+	string e = to_string(app->itemManager->esquiva);
+	app->render->TextDraw(e.c_str(), 520, 510, 15, Font::TEXT, { 0, 0, 0 });
+	string r = to_string(app->itemManager->resistencia);
+	app->render->TextDraw(r.c_str(), 520, 535, 15, Font::TEXT, { 0, 0, 0 });
+	string s = to_string(app->itemManager->speed);
+	app->render->TextDraw(s.c_str(), 520, 560, 15, Font::TEXT, { 0, 0, 0 });
+
 	return ret;
 }
 
