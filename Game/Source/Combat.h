@@ -60,7 +60,7 @@ public:
 
 	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);
 	void RemoveCharacter(vector<Character*>* arr, Character* chara);
-	void UpdatePositions(vector<Character*>* arr, int pos);
+	void UpdatePositions(vector<Character*>* arr, int pos = 0);
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
@@ -89,6 +89,10 @@ public:
 	// buttons
 	List<GuiButton*> listButtons;
 private:
+
+	bool isMoving;
+
+	//
 	int mouseX_combat, mouseY_combat;
 	float mouse_Speed;
 

@@ -96,6 +96,11 @@ bool Character::Start()
 			buttonBounds = { 700 + 126 * positionCombat_I, 200, 125, 180 };
 			position = { 700 + 126 * positionCombat_I, 200 };
 		}
+
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, ButtonType::COMBAT_TARGET);
+		app->combat->listButtons.Add(button);
+
+		// Texture section
 		sectionRect = nullptr;
 	}
 	else
@@ -104,12 +109,13 @@ bool Character::Start()
 		buttonBounds = { 700 + 126 * positionCombat_I, 200, 125, 180 };
 		position = { 700 + 126 * positionCombat_I, 200 };
 
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, ButtonType::COMBAT_TARGET);
+
+		// Texture section
 		SDL_Rect rect = { 0, 0, 0, 0 };
 		sectionRect = &rect;
 	}
 	
-	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, ButtonType::COMBAT_TARGET);
-	app->combat->listButtons.Add(button);
 	
 	// TODO change al final to Selected
 	button->state = GuiControlState::DISABLED;
@@ -571,7 +577,7 @@ bool Character::UseSkill(Skill* skill)
 		}
 	}
 	
-	app->combat->MoveCharacter(&app->combat->vecEnemies,this,skill->movementCaster);
+	app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster);
 	
 
 
@@ -664,10 +670,8 @@ int Character::GetStat(EffectType statType)
 		}
 	}
 
-	
 
-
-	return base*((100+output)/100);
+	return base * ((100 + output) / 100);
 }
 
 

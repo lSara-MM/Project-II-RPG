@@ -18,15 +18,15 @@ class Skill;
 // Status effect
 enum class EffectType
 {
-	NONE=-1,
-	CURRENT_HP=0,
+	NONE = -1,
+	CURRENT_HP = 0,
 	ATTACK,
 	CRIT_RATE,
 	CRIT_DMG,
 	PRECISION,
 	ARMOR,
 	DODGE,
-	RES, 
+	RES,
 };
 
 struct StatusEffect
