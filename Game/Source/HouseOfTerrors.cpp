@@ -10,7 +10,6 @@
 #include "Window.h"
 
 #include "IntroScene.h"
-#include "LoseScene.h"
 #include "Combat.h"
 #include "PuzzleManager.h"
 #include "QuestManager.h"

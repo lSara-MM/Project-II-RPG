@@ -17,6 +17,9 @@
 #include "Log.h"
 #include "Point.h"
 
+// TO TEST
+#include "SceneWin_Lose.h"
+
 Character::Character() : Entity(EntityType::COMBAT_CHARA)
 {
 	//name.Create("CombatCharacter");
@@ -88,7 +91,7 @@ bool Character::Start()
 
 	SDL_Rect buttonBounds;
 
-	if (isCombatant)
+	if (isCombatant && !app->sceneWin_Lose->active) // TO TEST: win/lose active if necessary
 	{
 		if (charaType == CharacterType::ALLY)
 		{
@@ -108,6 +111,7 @@ bool Character::Start()
 		// Texture section
 		sectionRect = nullptr;
 		button->state = GuiControlState::SELECTED;
+		button->isSelected = true;
 	}
 	else
 	{
