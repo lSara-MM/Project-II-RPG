@@ -305,10 +305,11 @@ void Scene::Debug()
 		else 
 		{
 			pause_B = false;
+			app->audio->PlayMusic(lobby_music);
 			if (pause_B)
 			{
 				/*pPause = new Pause(this);*/
-				pSettings = pPause->pSettings;
+				/*pSettings = pPause->pSettings;*/
 
 				pSettings->settings_B = !pSettings->settings_B;
 			}
