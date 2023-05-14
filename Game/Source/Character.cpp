@@ -362,7 +362,8 @@ bool Character::Update(float dt)
 
 bool Character::CleanUp()
 {
-	app->tex->UnLoad(texture);
+	if(texture != nullptr)
+		app->tex->UnLoad(texture);
 
 	/*delete button;
 	button = nullptr;*/
@@ -708,6 +709,7 @@ int Character::GetStat(EffectType statType)
 			{
 				output = output + i->data->intensity;
 			}
+			i->data->turnsLeft--;
 		}
 
 		return (base * output / 100);
@@ -744,6 +746,10 @@ int Character::GetStat(EffectType statType)
 		{
 			output = output + i->data->intensity;
 		}
+		if (i->data->type != EffectType::CURRENT_HP)
+		{
+			i->data->turnsLeft--;
+		}		
 	}
 
 	return base * ((100 + output) / 100);

@@ -222,6 +222,8 @@ bool Scene::CleanUp()
 	delete player;
 	player = nullptr;
 
+	listNpc.Clear();
+
 	if (pSettings != nullptr)
 	{
 		pSettings->CleanUp();

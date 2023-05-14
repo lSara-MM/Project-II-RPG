@@ -188,6 +188,7 @@ bool Combat::CleanUp()
 
 	vecAllies.clear();
 	vecEnemies.clear();
+	arrSetEnemies.clear();
 
 	app->entityManager->entities.Clear();
 	app->entityManager->Disable();
