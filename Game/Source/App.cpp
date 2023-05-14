@@ -20,10 +20,12 @@
 #include "AssetsManager.h"
 
 #include "EntityManager.h"
+#include "ItemManager.h"
 #include "FadeToBlack.h"
 #include "Combat.h"
 #include "DialogueSystem.h"
 #include "GuiManager.h"
+#include "Inventory.h"
 #include "Map.h"
 #include "Pathfinding.h"
 #include "Physics.h"
@@ -51,9 +53,11 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	pathfinding = new PathFinding();
 
 	entityManager = new EntityManager();
+	itemManager = new ItemManager();
 	combat = new Combat();
 	dialogueSystem = new DialogueSystem();
 	guiManager = new GuiManager();
+	inventory = new Inventory();
 	
 	lScene = new LogoScene();
 	iScene = new IntroScene();
@@ -91,6 +95,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(map);
 	AddModule(entityManager);
+	AddModule(itemManager);
 	AddModule(dialogueSystem);
 	AddModule(guiManager);
 	AddModule(sceneWin_Lose);
@@ -99,6 +104,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	
 	//AddModule(initiAllResourcesFromZip);
 	//AddModule(assetsManager);
+	AddModule(inventory);
 
 
 	AddModule(fade);
@@ -431,7 +437,6 @@ void App::SaveGameRequest()
 }
 
 
-
 bool App::LoadFromFile()
 {
 	bool ret = true;
@@ -500,4 +505,6 @@ void App::DisableAtStart()
 	//Este debe estar siempre activo para poder cargar correctamente los path en el momento que se necesiten
 	//initiAllResourcesFromZip->active = true;
 	//assetsManager->active = true;
+	inventory->active = false;
+	itemManager->active = false;
 }

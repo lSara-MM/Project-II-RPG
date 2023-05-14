@@ -21,9 +21,11 @@ class Textures;
 class Audio;
 
 class EntityManager;
+class ItemManager;
 class Combat;
 class DialogueSystem;
 class GuiManager;
+class Inventory;
 
 class Map;
 class PathFinding;
@@ -114,9 +116,11 @@ public:
 	Audio* audio;
 	
 	EntityManager* entityManager;
+	ItemManager* itemManager;
 	Combat* combat;
 	DialogueSystem* dialogueSystem;
 	GuiManager* guiManager;
+	Inventory* inventory;
 	
 	Map* map;
 	PathFinding* pathfinding;

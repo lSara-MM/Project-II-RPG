@@ -113,8 +113,14 @@
     <ClCompile Include="Source\Character.cpp">
       <Filter>Modules\Entities\Combat</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ItemManager.cpp">
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Skills.cpp">
       <Filter>Modules\Entities\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Inventory.cpp">
+      <Filter>Modules\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +258,12 @@
     </ClInclude>
     <ClInclude Include="Source\Skills.h">
       <Filter>Modules\Entities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ItemManager.h">
+      <Filter>Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Inventory.h">
+      <Filter>Modules\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,7 @@
 #include "GuiManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
+#include "ItemManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -75,6 +76,10 @@ bool PracticeTent::Start()
 
 	InitEntities();
 	app->entityManager->Enable();
+
+	//Init player inventory
+	app->itemManager->SetPlayerForScene(player);
+
 	return true;
 }
 
@@ -90,6 +95,18 @@ bool PracticeTent::Update(float dt)
 
 	//Load Debug keys
 	Debug();
+
+	//Inventory
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	{
+		if (app->inventory->active)
+		{
+			app->inventory->Disable();
+		}
+		else {
+			app->inventory->Enable();
+		}
+	}
 
 	app->input->GetMousePosition(mouseX_pos, mouseY_pos);
 

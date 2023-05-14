@@ -135,7 +135,6 @@ bool Combat::Update(float dt)
 
 	//Barra skills + name
 	//app->render->DrawRectangle({ 20,450,500,120 }, 220, 220, 220);
-
 	
 	//God Mode Info
 	if (app->input->godMode_B)
@@ -303,6 +302,7 @@ bool Combat::InitAllies(array<Character*, 4> party)
 {
 	int cPos = 0;
 
+	bool ret = true;
 	// TO TEST
 	for (int i = 0; i < party.size(); i++)
 	{
@@ -320,6 +320,38 @@ bool Combat::InitAllies(array<Character*, 4> party)
 
 		vecAllies.push_back(chara);
 	}
+	return ret;
+}
+
+bool Combat::RestartCombatData()
+{
+	bool ret = true;
+
+	pugi::xml_document* saveDoc = new pugi::xml_document();
+	pugi::xml_node node = saveDoc->append_child("save_stats");
+
+	pugi::xml_node protagonist = node.append_child("protagonist");
+
+	//todo
+
+	pugi::xml_node bard = node.append_child("bard");
+
+	//todo
+
+	ret = saveDoc->save_file("save_dialogue.xml");
+
+	return ret;
+}
+
+bool Combat::OnGuiMouseClickEvent(GuiControl* control)
+{
+	LOG("Event by %d ", control->id);
+	
+	app->audio->PlayFx(control->fxControl);
+
+	// enemies so far start from 10.
+	// line 159
+	//vecAllies.insert(vecAllies.end(), begin(party), begin(party) + j);
 
 	return true;
 }
@@ -676,36 +708,36 @@ bool Combat::LoadCombat()
 	return ret;
 }
 
-bool Combat::RestartCombatData()
-{
-	bool ret = true;
-	//cargar config.xml
-	pugi::xml_document gameStateFile;
-	pugi::xml_parse_result result = gameStateFile.load_file("config.xml");
-	pugi::xml_node nodeConfig = gameStateFile.child("CombatCharacter");
-
-	if (result == NULL)
-	{
-		LOG("Could not load xml file config.xml. pugi error: %s", result.description());
-		ret = false;
-	}
-
-	else
-	{
-
-		pugi::xml_document* saveDoc = new pugi::xml_document();
-		pugi::xml_node nodeCombat = saveDoc->append_child("save_stats");
-
-		for (pugi::xml_node itemNode = nodeConfig.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter")) {
-
-			pugi::xml_node character = nodeCombat.append_child("CombatCharacter");
-			character.append_attribute("currentHp") = itemNode.attribute("currentHp").as_int();
-
-		}
-
-		ret = saveDoc->save_file("save_combat.xml");
-	}
-
-	return ret;
-}
+//bool Combat::RestartCombatData()
+//{
+//	bool ret = true;
+//	//cargar config.xml
+//	pugi::xml_document gameStateFile;
+//	pugi::xml_parse_result result = gameStateFile.load_file("config.xml");
+//	pugi::xml_node nodeConfig = gameStateFile.child("CombatCharacter");
+//
+//	if (result == NULL)
+//	{
+//		LOG("Could not load xml file config.xml. pugi error: %s", result.description());
+//		ret = false;
+//	}
+//
+//	else
+//	{
+//
+//		pugi::xml_document* saveDoc = new pugi::xml_document();
+//		pugi::xml_node nodeCombat = saveDoc->append_child("save_stats");
+//
+//		for (pugi::xml_node itemNode = nodeConfig.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter")) {
+//
+//			pugi::xml_node character = nodeCombat.append_child("CombatCharacter");
+//			character.append_attribute("currentHp") = itemNode.attribute("currentHp").as_int();
+//
+//		}
+//
+//		ret = saveDoc->save_file("save_combat.xml");
+//	}
+//
+//	return ret;
+//}
 

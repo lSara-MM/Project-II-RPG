@@ -19,6 +19,7 @@
 #include "GuiManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
+#include "ItemManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -76,6 +77,9 @@ bool Circus::Start()
 	InitEntities();
 	app->entityManager->Enable();
 
+	//Init player inventory
+	app->itemManager->SetPlayerForScene(player);
+
 	return true;
 }
 
@@ -90,6 +94,18 @@ bool Circus::Update(float dt)
 	app->map->Draw();
 
 	app->input->GetMousePosition(mouseX_pos, mouseY_pos);
+
+	//Inventory
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	{
+		if (app->inventory->active)
+		{
+			app->inventory->Disable();
+		}
+		else {
+			app->inventory->Enable();
+		}
+	}
 
 	//Load Debug keys
 	Debug();

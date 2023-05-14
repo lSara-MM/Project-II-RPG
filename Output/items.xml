@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<!--
+type 1 = usable
+type 2 = wearable
+type 3 = usable timed use
+-->
+<!--
+type 1
+{
+	kind 1 = apply to player
+	kind 2 = apply to enemy
+}
+-->
+<!--
+type 2
+{
+	kind 1 = pantalon
+	kind 2 = chestplate
+	kind 3 = pies
+	kind 4 = sombrero
+	kind 5 = colgante
+	kind 6 = ring
+}
+-->
+
+<items>
+
+	<item quantity="0" name="potion" type="1" kind="1" hp="999" max="10"
+		  texturepath="Assets/Textures/potion.png">
+	</item>
+	<item quantity="0" name="granade" type="1" kind="2" hp="-999" max="10"
+		  texturepath="Assets/Textures/items.png">
+	</item>
+	<item quantity="0" name="legging" type="2" kind="1" hp="0" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1"
+		  texturepath="Assets/Textures/pantalon.png">
+	</item>
+	<item quantity="0" name="ring" type="2" kind="6" hp="0" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1" space="0"
+		  texturepath="Assets/Textures/ring.png">
+	</item>
+	<item quantity="0" name="ring_2" type="2" kind="6" hp="0" maxhp="37" attack="37" critProbability="37" critDamage="37" precision="37" armor="37" esquiva="37" resistencia="0" speed="0" equiped="false" max="1" space="0"
+	  texturepath="Assets/Textures/ring_2.png">
+	</item>
+	<item quantity="0" name="chest" type="2" kind="2" hp="0" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1"
+		  texturepath="Assets/Textures/chestplate.png">
+	</item>
+	<item quantity="0" name="chest_2" type="2" kind="2" hp="0" maxhp="1" attack="1" critProbability="1" critDamage="1" precision="1" armor="1" esquiva="1" resistencia="1" speed="1" equiped="false" max="1"
+	  texturepath="Assets/Textures/chestplate_2.png">
+	</item>
+	<item quantity="0" name="pendant" type="2" kind="5" hp="0" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="10" speed="10" equiped="false" max="1" space="0"
+		  texturepath="Assets/Textures/collar.png">
+	</item>
+	<item quantity="0" name="shoe" type="2" kind="3" hp="0" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="0" speed="100" equiped="false" max="1"
+	  texturepath="Assets/Textures/shoe.png">
+	</item>
+	<item quantity="0" name="hat" type="2" kind="4" hp="0" maxhp="50" attack="500" critProbability="100" critDamage="100" precision="100" armor="10" esquiva="10" resistencia="0" speed="0" equiped="false" max="1"
+	  texturepath="Assets/Textures/hat.png">
+	</item>
+	
+</items>

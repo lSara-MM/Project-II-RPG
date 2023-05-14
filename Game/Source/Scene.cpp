@@ -18,6 +18,7 @@
 #include "FadeToBlack.h"
 #include "DialogueSystem.h"
 #include "GuiManager.h"
+#include "ItemManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
 
@@ -47,7 +48,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	mute_B = false;
 
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
-	enemyRange_I = config.attribute("enemyRange").as_int();;
+	enemyRange_I = config.attribute("enemyRange").as_int();
 
 	sceneNode = config;
 
@@ -75,6 +76,7 @@ bool Scene::Start()
 		app->input->playerName->input = "Player";
 	}
 
+
 	//Load Map
 	app->map->Load(0);
 	exit_B = false;
@@ -93,7 +95,12 @@ bool Scene::Start()
 	InitEntities();
 
 	app->entityManager->Enable();
-	
+
+	//Init player inventory
+	app->itemManager->SetPlayerForScene(player);
+
+	app->itemManager->Enable();
+
 	if (app->iScene->continueGame_B)
 	{
 		app->LoadGameRequest();
@@ -113,6 +120,18 @@ bool Scene::Update(float dt)
 	app->map->Draw();
 
 	Debug();
+
+	//Inventory
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	{
+		if (app->inventory->active)
+		{
+			app->inventory->Disable();
+		}
+		else {
+			app->inventory->Enable();
+		}
+	}
 
 	app->input->GetMousePosition(mouseX_scene, mouseY_scene);
 
@@ -219,6 +238,8 @@ bool Scene::CleanUp()
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
 	
+	delete player;
+
 	return true;
 }
 
@@ -272,6 +293,9 @@ void Scene::Debug()
 	{
 		app->audio->PlayFx(pausefx);
 		app->audio->PlayMusic(pause_music);
+		//inventory off
+		app->inventory->Disable();
+
 		pause_B = true;	
 
 		if (pause_B)

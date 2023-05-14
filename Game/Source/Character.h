@@ -105,7 +105,7 @@ public:
 	//Retorna true si logras el chance, false si no
 	bool CalculateRandomProbability(int bonus_I, int against_I = 0); 
 
-	void ModifyHP(int hp); //Positivo para curar negativo para dañar
+	void ModifyHP(int hp); //Positivo para curar negativo para daï¿½ar
 
 	int ApplySkill(Character* caster, Character* defender, Skill* skill); //ERIC:Va haber que poner muchos mas atributos
 	
@@ -142,7 +142,7 @@ public:
 	int critDamage; // Base 120, , luego se ha de dividir entre 100 a lo 120= x1,2
 	int precision; // La base es 100%, es un porcentaje que se enfrenta vs la resistencia y precision
 	int armor; // MAXIMO ABSOLUTO 200, mas menos full items en tanque 120
-	int dodge; // Probabilidad de no recibir nada de daño, base es 0%
+	int dodge; // Probabilidad de no recibir nada de daï¿½o, base es 0%
 	int res; // Probabilidad de no recibir un efecto de estado, base 10%
 	int speed; // Indicador quien va primero en la iniciativa
 
@@ -162,10 +162,10 @@ public:
 	GuiButton* button;
 
 	bool isCombatant;
+	SDL_Texture* texture;
 	
 private:
 
-	SDL_Texture* texture;
 	const char* texturePath;
 	SDL_Rect* sectionRect;
 	List<int> listSkillsHistory; //Aqui guardamos un historial de que skills se ha usado.

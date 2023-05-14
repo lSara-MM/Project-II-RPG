@@ -96,7 +96,7 @@
 		textureAttackPath="Assets/Textures/attack.png"
 	   background1 ="Assets/Maps/clouds_bg.png" background2 ="Assets/Maps/clouds_mg_1.png" background3 ="Assets/Maps/clouds_mg_2.png"
 	   coinspath="Assets/Maps/coin.png" heartspath="Assets/Maps/heart.png"
-		settingsPath ="Assets/Textures/setting_menu.png" mouseSpeed =" 0.5">			
+		settingsPath ="Assets/Textures/setting_menu.png" mouseSpeed =" 0.5">		
 
 	<!--NPCs-->
 
@@ -123,7 +123,11 @@
     <Loset texturepathLoset="Assets/Textures/Spritesheet_puzzles.png" x="320"  y="1088"  width="64" height="64"/>
     <Notas texturepathNotas="Assets/Textures/Spritesheet_puzzles.png" x1="704" y1="832" x2="1216" y2="1344" x3="1792" y3="2240" widthNotas="50" heightNotas="50"/>
 	</PuzzleManager>
-  <map>
+ 
+	
+	<itemmanager inventorypath="Assets/Textures/Inventory.png"/>
+
+	<map>
 		<mapfolder path="Assets/Maps/"/>
 		<mapfile path="Assets/Maps/map1.tmx"/>
 		
@@ -138,10 +142,7 @@
 
 		<mapcircusfolder path="Assets/Maps/"/>
 		<mapcircusfile path="Assets/Maps/mapCircus.tmx"/>
-		
-
-		<map1>
-		</map1>
+	
 	</map>
 
 <combat mouseSpeed =" 0.5" music ="Assets/Audio/Music/mus_combat.ogg"

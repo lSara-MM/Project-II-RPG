@@ -107,7 +107,7 @@ int DialogueSystem::LoadDialogue(int dialogueID)
 
 	if (result == NULL)
 	{
-		LOG("Could not load map xml file %s. pugi error: %s", file, result.description());
+		LOG("Could not load dialog xml file %s. pugi error: %s", file, result.description());
 		return -1;
 	}
 	else
