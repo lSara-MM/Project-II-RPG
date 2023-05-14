@@ -355,7 +355,6 @@ bool Circus::OnGuiMouseClickEvent(GuiControl* control)
 		}
 
 		settings_B = false;
-		app->audio->PlayMusic(circusMusPath);
 		pSettings->CloseSettings();
 		pSettings->CleanUp();
 		break;

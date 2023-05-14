@@ -371,7 +371,6 @@ bool HouseOfTerrors::OnGuiMouseClickEvent(GuiControl* control)
 		}
 
 		settings_B = false;
-		app->audio->PlayMusic(musHauntedPath);
 		pSettings->CloseSettings();
 		//pSettings->CleanUp();
 		break;
