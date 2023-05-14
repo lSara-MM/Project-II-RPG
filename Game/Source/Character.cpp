@@ -614,7 +614,8 @@ bool Character::UseSkill(Skill* skill, Character* target)
 //ERIC: Lo cambio a solo obtener el bufo, no que te lo sume solo ya que el buffo es %
 int Character::GetStat(EffectType statType)
 {
-	float output = 0, int base = 0;;
+	float output = 0;
+	int base = 0;
 
 	switch (statType)
 	{
