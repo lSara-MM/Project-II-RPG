@@ -65,7 +65,7 @@ public:
 	~DialogueTree() {};
 
 	bool UpdateTree(float dt, Module* mod, iPoint pos);
-	bool UpdateNodes(Module* mod, iPoint pos, int fontSize);
+	bool UpdateNodes(Module* mod, iPoint pos);
 	bool EventReturn(Module* mod, iPoint pos);
 	void CleanUp();
 

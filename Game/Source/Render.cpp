@@ -308,6 +308,45 @@ bool Render::TextDraw(const char* text, int x, int y, int size, Font font, SDL_C
 	return ret;
 }
 
+void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, int max_chars_line_)
+{
+	string line = text_.GetString();
+
+	if (text_.Length() > max_chars_line_)
+	{
+		int a, b, startIndex = 0;
+		for (int j = 0; j <= line.length() / max_chars_line_; j++)	// <= -> in case of decimal, get the round up number 
+		{
+			a = max_chars_line_ + startIndex;
+			if (a > line.size())
+			{
+				a = line.size() - startIndex;
+			}
+
+			b = line.find_first_of(" ", a);	// find first " " (space) from last trimmed to the end. 
+
+			if (b == -1)
+			{
+				b = line.find_first_of(".", a);
+			}
+
+			b++;
+
+			// If we reached the end of the word or the end of the input.
+			string temp;
+			temp.append(line, startIndex, b - startIndex);	// string text to append, int index start, int size of text to append
+			pTexts->push_back(temp.c_str());
+			startIndex = b;
+		}
+	}
+	else
+	{
+		pTexts->push_back(line.c_str());
+	}
+}
+
+
+
 bool Render::VSyncOn()
 {
 	(vSync_B) ? flags = SDL_RENDERER_ACCELERATED : flags |= SDL_RENDERER_PRESENTVSYNC;

@@ -203,7 +203,10 @@ bool GuiButton::Draw(Render* render)
 
 	if (buttonType == ButtonType::COMBAT_TARGET) { rect = { 0, 0, 48 * 1, 92 }; } //48 anchura de solo 1 corchete, 92 es la altura que tiene DE MOMENTO.
 
-	
+	// TO DO, EN DIALOGO LOS BOTONES DEBERIAN TENER MENOS OFFSET, ES DECIR, SE DEBERIAN PRINTAR CON JUSTIFICADO A LA IZQUIERDA, NO EN MEDIO
+	// ADEMAS DE HACER LO DEL TRIM TEXT PARA QUE SI LA OPCION ES MAS LARGA SE PRINTE EN LINEAS DISTINTAS.
+	// POR OTRO LADO INCLUSO EN CASO DE TENER UNA OPCION CON MAS DE UNA LINEA, QUIZAS INTERESARIA QUE EL FONTSIZE SEA MENOR PARA QUE SE ADAPTE 
+	// A LA TEXTURA/BOUNDS DEL BOTON EN SI
 
 	if (app->guiManager->GUI_debug)
 	{
@@ -488,21 +491,21 @@ bool GuiButton::Draw(Render* render)
 			case GuiControlState::NORMAL:
 			{
 				rect = { 5, 77, 20, 26 };
-				render->DrawTexture(buttonTex, bounds.x+bounds.w/7, bounds.y+bounds.h/2.7, &rect);
+				render->DrawTexture(buttonTex, bounds.x + bounds.w / 7, bounds.y + bounds.h / 2.7, &rect);
 
 			} break;
 
 			case GuiControlState::FOCUSED:
 			{
 				rect = { 5, 5, 20, 26 };
-				render->DrawTexture(buttonTex, bounds.x+ bounds.w / 7, bounds.y+ bounds.h / 2.7, &rect);
+				render->DrawTexture(buttonTex, bounds.x + bounds.w / 7, bounds.y + bounds.h / 2.7, &rect);
 
 			} break;
 
 			case GuiControlState::PRESSED:
 			{
 				rect = { 5, 41, 20, 26 };
-				render->DrawTexture(buttonTex, bounds.x+ bounds.w / 7, bounds.y+ bounds.h / 2.7, &rect);
+				render->DrawTexture(buttonTex, bounds.x + bounds.w / 7, bounds.y + bounds.h / 2.7, &rect);
 
 			} break;
 
@@ -559,7 +562,6 @@ bool GuiButton::Draw(Render* render)
 				break;
 			}
 		}
-		
 	}
 
 	else
