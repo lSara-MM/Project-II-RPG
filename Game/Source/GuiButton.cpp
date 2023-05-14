@@ -55,7 +55,6 @@ bool GuiButton::Update(float dt)
 				NotifyObserverOfClick();
 			}
 		}
-
 		else 
 		{
 			state = GuiControlState::NORMAL;

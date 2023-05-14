@@ -130,7 +130,7 @@ bool Character::Update(float dt)
 	
 	if (isCombatant)
 	{
-		if (app->input->godMode_B)
+		//if (app->input->godMode_B)
 		{
 			string position_C = std::to_string(positionCombat_I);
 			const char* ch_pos = position_C.c_str();
@@ -147,7 +147,6 @@ bool Character::Update(float dt)
 			//testing
 			string time;
 			const char* tempus;
-
 
 			switch (charaType)
 			{
@@ -187,6 +186,7 @@ bool Character::Update(float dt)
 				}
 				if (!delayOn)
 				{
+					app->combat->HandleCharaButtons(&app->combat->vecEnemies);
 					turnDelay.Start();
 					delayOn = true;
 				}
@@ -577,9 +577,6 @@ bool Character::UseSkill(Skill* skill)
 	}
 	
 	app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster);
-	
-
-
 	return true;
 }
 
@@ -625,7 +622,7 @@ bool Character::UseSkill(Skill* skill, Character* target)
 	return true;
 }
 
-//ERIC: Lo cambio a solo obtener el bufo, no que te lo sume solo ya que el buffo es %
+// Status Effects
 int Character::GetStat(EffectType statType)
 {
 	float output = 0;
@@ -634,7 +631,18 @@ int Character::GetStat(EffectType statType)
 	switch (statType)
 	{
 	case EffectType::CURRENT_HP:
-		base = currentHp;
+		base = maxHp;
+
+		for (ListItem<StatusEffect*>* i = listStatusEffects.start; i != nullptr; i = i->next)
+		{
+			if (i->data->type == statType)
+			{
+				output = output + i->data->quantity;
+			}
+		}
+
+		return (base * output / 100);
+
 		break;
 	case EffectType::ATTACK:
 		base = attack;
@@ -669,8 +677,5 @@ int Character::GetStat(EffectType statType)
 		}
 	}
 
-
 	return base * ((100 + output) / 100);
 }
-
-

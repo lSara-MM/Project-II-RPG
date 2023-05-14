@@ -55,7 +55,7 @@ public:
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
 
 	// Handle buttons
-	void HandleCharaButtons(vector<Character*>* arr, int pos1, int pos2);
+	void HandleCharaButtons(vector<Character*>* arr, int pos1 = -1, int pos2 = -1);	// If -1, disable all
 	void HandleSkillsButtons(List<Skill*> listSkills_);
 
 	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);
