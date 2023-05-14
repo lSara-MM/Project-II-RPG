@@ -83,12 +83,17 @@ bool Combat::Start()
 	
 
 	GuiButton* button;	int j = 10;
-	for (int i = 0; i < 5; i++)
-	{
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 10, this, { 40 + i * 100, 470, 80, 80 });
-		listButtons.Add(button);
-		j++;
-	}
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 10, this, { 40 + i * 100, 470, 80, 80 }, ButtonType::COMBAT_TARGET);
+	//	listButtons.Add(button);
+	//	j++;
+	//}
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, this, { 40 + 100, 470, 47, 47 }, ButtonType::SKILL_1);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10+1, this, { 40 + 1*100, 470, 47, 47 }, ButtonType::SKILL_2);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10+2, this, { 40 + 2*100, 470, 47, 47 }, ButtonType::SKILL_3);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10+3, this, { 40 + 3*100, 470, 47, 47 }, ButtonType::SKILL_4);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10+4, this, { 40 + 4*100, 470, 47, 47 }, ButtonType::CHANGE_POSITION);
 
 	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, j, this, { 576, 85, 134, 40});
 	listButtons.Add(button);

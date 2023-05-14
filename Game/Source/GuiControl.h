@@ -61,6 +61,11 @@ enum class ButtonType
 
 	//For combat
 	COMBAT_TARGET,
+	SKILL_1,
+	SKILL_2,
+	SKILL_3,
+	SKILL_4,
+	CHANGE_POSITION,
 };
 
 enum class AnimationAxis
