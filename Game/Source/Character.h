@@ -105,7 +105,7 @@ public:
 	//Retorna true si logras el chance, false si no
 	bool CalculateRandomProbability(int bonus_I, int against_I = 0); 
 
-	void ModifyHP(int hp); //Positivo para curar negativo para dañar
+	bool ModifyHP(int hp); //Positivo para curar negativo para dañar
 
 	int ApplySkill(Character* caster, Character* defender, Skill* skill); //ERIC:Va haber que poner muchos mas atributos
 	

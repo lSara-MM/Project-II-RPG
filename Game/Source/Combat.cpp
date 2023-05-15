@@ -502,7 +502,7 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 	}
 }
 
-void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
+bool Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 {
 	// Delete from its type vector
 	arr->erase(arr->begin() + chara->positionCombat_I);
@@ -523,11 +523,14 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 		// TO TEST: VA TO LENTO EL FADE, SE QUEDA COMO UN MONTON DE RATO EN EL COMBATE PARALIZADO Y LUEGO SE RALENTIZA TODO? LA ANIMACION DEL 
 		// FONDO DE LOSE VA LENTO PERO EL DE WIN NO a veces XD?
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);
+		return false;
 	}
 	else
 	{
 		UpdatePositions(arr, chara->positionCombat_I);
 	}
+
+	return true;
 }
 
 void Combat::UpdatePositions(vector<Character*>* arr, int pos)
@@ -566,9 +569,10 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	// target allies
 	if (control->id < 5)
 	{
-		LOG("%s chara", vecAllies.at(control->id)->name.GetString());
 		posInVec = SearchInVec(vecAllies, control->id);
 		targeted_Character = vecAllies.at(posInVec);
+
+		LOG("%s chara", vecAllies.at(posInVec)->name.GetString());
 
 		if (isMoving)
 		{
@@ -582,11 +586,11 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	// target enemies
 	else if (control->id >= 5 && control->id < 10)
 	{
-		LOG("%s chara", vecEnemies.at(control->id - 5)->name.GetString());
-
 		//Busca el target ya que al moverse las posiciones del vector cambia
 		posInVec = SearchInVec(vecEnemies, control->id);
-		targeted_Character = vecEnemies.at(posInVec);
+		targeted_Character = vecEnemies.at(posInVec); 
+		
+		LOG("%s chara", vecEnemies.at(posInVec)->name.GetString());
 	} 
 	// skills buttons
 	else if(control->id >= 10 && control->id < 14)

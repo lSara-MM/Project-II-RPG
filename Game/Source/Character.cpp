@@ -151,7 +151,7 @@ bool Character::Update(float dt)
 
 			if (onTurn)
 			{
-				app->render->DrawRectangle({ position.x+10,position.y + 195,106, 10 }, 255, 0, 0);
+				app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
 			}
 		}
 
@@ -404,7 +404,7 @@ bool Character::CleanUp()
 }
 
 
-void Character::ModifyHP(int hp)
+bool Character::ModifyHP(int hp)
 {
 	currentHp += hp;
 
@@ -415,9 +415,11 @@ void Character::ModifyHP(int hp)
 
 	if (currentHp <= 0)
 	{
-		if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(&app->combat->vecAllies, this); }
-		else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(&app->combat->vecEnemies, this); }
+		if (charaType == CharacterType::ALLY) { if (!app->combat->RemoveCharacter(&app->combat->vecAllies, this)) { return false; } }
+		else if (charaType == CharacterType::ENEMY) { if (!app->combat->RemoveCharacter(&app->combat->vecEnemies, this)) { return false; } }
 	}
+
+	return true;
 }
 
 bool Character::CalculateRandomProbability(int bonus_I, int against_I)
@@ -444,7 +446,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 {
 	if (skill->multiplierDmg >= 0) //Curacion o buffo, no hace falta calcular esquiva ni nada 
 	{
-		return(caster->maxHp/5 * skill->multiplierDmg);
+		return(caster->maxHp / 5 * skill->multiplierDmg);
 		if (skill->positiveEffect) //Efecto de estado positivo
 		{
 			defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
@@ -470,7 +472,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			damage = skill->multiplierDmg * caster->GetStat(EffectType::ATTACK);
 			if (CalculateRandomProbability(skill->bonusCritRate + caster->GetStat(EffectType::CRIT_RATE))) //Si true hay critico
 			{
-				damage *= (100+(skill->bonusCritDamage + caster->GetStat(EffectType::CRIT_DMG)))/100;
+				damage *= (100 + (skill->bonusCritDamage + caster->GetStat(EffectType::CRIT_DMG))) / 100;
 			}
 
 			if (skill->positiveEffect) //Efecto de estado positivo
@@ -486,7 +488,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			}
 
 			// Calcular reduccion de la defensa
-			float armorRelevance = (defender->GetStat(EffectType::ARMOR) / abs(damage+1)) + 1;
+			float armorRelevance = (defender->GetStat(EffectType::ARMOR) / abs(damage + 1)) + 1;
 			damage += ((defender->GetStat(EffectType::ARMOR) / 2) * armorRelevance); //Esta con mas ya que damage es negativo
 
 			return damage;
@@ -565,16 +567,16 @@ bool Character::UseSkill(Skill* skill)
 
 			if (skill->areaSkill)
 			{
-				for (size_t i = skill->posToTargetStart_I; i <= endRange; i++)
+				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
 				{
 					//Atacar a todos
-					app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
+					if (!app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill))) { break; }
 				}
 			}
 			else
 			{
 				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies.size());
-				app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill));
+				if (!app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill))) { break; }
 			}
 			break;
 		case CharacterType::ENEMY:
@@ -586,10 +588,10 @@ bool Character::UseSkill(Skill* skill)
 
 			if (skill->areaSkill)
 			{
-				for (size_t i = skill->posToTargetStart_I; i <= endRange; i++)
+				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
 				{
 					//Atacar a todos
-					app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill));
+					if (!app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill))) { break; }
 				}
 			}
 			else
@@ -620,10 +622,10 @@ bool Character::UseSkill(Skill* skill)
 
 			if (skill->areaSkill)
 			{
-				for (size_t i = skill->posToTargetStart_I; i <= endRange; i++)
+				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
 				{
 					//Atacar a todos
-					app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill));
+					if (!app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill))) { break; }
 				}
 			}
 			else
@@ -649,8 +651,8 @@ bool Character::UseSkill(Skill* skill)
 					//Atacar a todos
 					//if (i < app->combat->vecAllies.size())
 					{
-						app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
-					}					
+						if (!app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill))) { break; }
+					}
 					if (CalculateRandomProbability(skill->bonusPrecision + this->precision, app->combat->vecAllies.at(i)->res))
 					{
 
@@ -660,7 +662,8 @@ bool Character::UseSkill(Skill* skill)
 			else
 			{
 				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies.size());
-				app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill));
+				if (!app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill))) { break; }
+				
 				if (CalculateRandomProbability(skill->bonusPrecision + this->precision, app->combat->vecAllies.at(objective)->res)) 
 				{
 					if (skill->movementTarget != 0)
