@@ -160,7 +160,47 @@ bool Character::Update(float dt)
 		{
 			// TO DO: change to texture 
 			app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
-
+			app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
+			SDL_Rect rect = { 0,0,588,179 };
+			SDL_Rect rect2 = { 0,0,588,90 };
+			switch (charaType)
+			{
+			case CharacterType::ALLY:
+				switch (id)
+				{
+				case 0:
+					app->render->DrawTexture(skillTex, 36, 527, &rect);
+					app->render->DrawTexture(profileTex, 38, 407, &rect2);
+					break;
+				case 1:
+					rect.y = 179;
+					rect2.y = 90;
+					app->render->DrawTexture(skillTex, 36, 527, &rect);
+					app->render->DrawTexture(profileTex, 38, 407, &rect2);
+					break;
+				case 2:
+					rect.y = 179 * 2;
+					rect2.y = 90 * 2;
+					app->render->DrawTexture(skillTex, 36, 527, &rect);
+					app->render->DrawTexture(profileTex, 38, 407, &rect2);
+					break;
+				case 3:
+					rect.y = 179 * 3;
+					rect2.y = 90 * 3;
+					app->render->DrawTexture(skillTex, 36, 527, &rect);
+					app->render->DrawTexture(profileTex, 38, 407, &rect2);
+					break;
+				default:
+					break;
+				}
+				break;
+			case CharacterType::ENEMY:
+				break;
+			case CharacterType::NONE:
+				break;
+			default:
+				break;
+			}
 			//testing
 			string time;
 			const char* tempus;
