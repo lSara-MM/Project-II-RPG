@@ -45,6 +45,7 @@ bool Combat::Awake(pugi::xml_node& config)
 	texturePathBackground = config.attribute("bgTexture").as_string(); //FondoActual (habra que cambiarlo por los de la dungeon actual)
 	texturePathTargetButton = config.attribute("targetTexture").as_string();
 	texturePathTurnsBar = config.attribute("turnBarTexture").as_string();
+	PathlastSelectedSkill = config.attribute("lastSkillTexture").as_string();
 
 	mouse_Speed = config.attribute("mouseSpeed").as_float();
 
@@ -71,6 +72,8 @@ bool Combat::Start()
 	LOG("LOAD COMBAT TEXTURE");
 	textureTargetButton = app->tex->Load(texturePathTargetButton);
 	textureTurnsBar = app->tex->Load(texturePathTurnsBar);
+
+	textureLastSelectedSkill = app->tex->Load(PathlastSelectedSkill);
 
 	//Poner la camara en su lugar
 	app->render->camera.x = 0;
@@ -183,6 +186,46 @@ bool Combat::PostUpdate()
 		ret = false;
 	
 	app->guiManager->Draw();
+
+	for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
+	{
+
+		SDL_Rect rect = { 0, 0, 53, 53 };
+		int offset = 3;
+
+		switch (i->data->buttonType)
+		{
+
+		case ButtonType::SKILL_1:
+			if (lastPressedAbility_I==0)
+			{
+				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x- offset, i->data->bounds.y- offset, &rect);
+			}
+			break;
+		case ButtonType::SKILL_2:
+			if (lastPressedAbility_I == 1)
+			{
+				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x - offset, i->data->bounds.y- offset, &rect);
+			}
+			break;
+		case ButtonType::SKILL_3:
+			if (lastPressedAbility_I == 2)
+			{
+				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x - offset, i->data->bounds.y- offset, &rect);
+			}
+			break;
+		case ButtonType::SKILL_4:
+			if (lastPressedAbility_I == 3)
+			{
+				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x - offset, i->data->bounds.y- offset, &rect);
+			}
+			break;
+		default:
+			break;
+		}
+	
+	
+	}
 
 	return ret;
 }
@@ -597,17 +640,13 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		isMoving = false;
 
-		if (lastPressedAbility_I == control->id - 10)// Si already clicked deseleccionar
-		{
-			lastPressedAbility_I = -1; 
-		} 
-		else 
-		{
-			lastPressedAbility_I = control->id - 10;
+		if (lastPressedAbility_I == control->id - 10) 
+		{ lastPressedAbility_I = -1; } // Si already clicked deseleccionar
+		lastPressedAbility_I = control->id - 10;
 
 			posStart = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
 			posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
-		}
+	}
 	}
 	// move character
 	else if (control->id == 14)

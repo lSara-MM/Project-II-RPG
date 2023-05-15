@@ -1,7 +1,5 @@
-#include "Scene.h"
 #include "PuzzleManager.h"
-#include "QuestManager.h"
-#include "HouseOfTerrors.h"
+
 #include "App.h"
 #include "Audio.h"
 #include "Input.h"
@@ -13,10 +11,14 @@
 #include "Player.h"
 
 #include "Combat.h"
+#include "Scene.h"
+#include "HouseOfTerrors.h"
 
 #include "FadeToBlack.h"
 #include "GuiManager.h"
 #include "DialogueSystem.h"
+#include "ItemManager.h"
+#include "QuestManager.h"
 #include "Map.h"
 
 #include "Defs.h"
@@ -679,7 +681,7 @@ bool PuzzleManager::TeamMate()
 			teamMate = true;
 			
 			// TO DO, hay que ponerlo de forma bien, no puede estar asi hardcoded porque a la minima que hagamos cambios en los nombres habra errores
-			app->hTerrors->player->AddCharaToParty("Fire Eater");
+			app->itemManager->AddCharaToParty("Fire Eater");
 
 			if (app->questManager->quest1->active) 
 			{

@@ -68,24 +68,24 @@ bool Inventory::Update(float dt)
 	}
 
 	//Print Character
-	if (app->itemManager->player->arrParty.at(app->itemManager->invPos) != nullptr)
+	if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
 	{
-		app->render->DrawTexture(app->itemManager->player->arrParty.at(app->itemManager->invPos)->texture, 370 - app->render->camera.x, 180 - app->render->camera.y);
+		app->render->DrawTexture(app->itemManager->arrParty.at(app->itemManager->invPos)->texture, 370 - app->render->camera.x, 180 - app->render->camera.y);
 	}
 
 	//LOAD STATS
 
-	if (app->itemManager->player->arrParty.at(app->itemManager->invPos) != nullptr)
+	if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
 	{
-		app->itemManager->maxhp = app->itemManager->player->arrParty.at(app->itemManager->invPos)->maxHp;
-		app->itemManager->armor = app->itemManager->player->arrParty.at(app->itemManager->invPos)->armor;
-		app->itemManager->attack = app->itemManager->player->arrParty.at(app->itemManager->invPos)->attack;
-		app->itemManager->critDamage = app->itemManager->player->arrParty.at(app->itemManager->invPos)->critDamage;
-		app->itemManager->critProbability = app->itemManager->player->arrParty.at(app->itemManager->invPos)->critRate;
-		app->itemManager->precision = app->itemManager->player->arrParty.at(app->itemManager->invPos)->precision;
-		app->itemManager->esquiva = app->itemManager->player->arrParty.at(app->itemManager->invPos)->dodge;
-		app->itemManager->speed = app->itemManager->player->arrParty.at(app->itemManager->invPos)->speed;
-		app->itemManager->resistencia = app->itemManager->player->arrParty.at(app->itemManager->invPos)->res;
+		app->itemManager->maxhp = app->itemManager->arrParty.at(app->itemManager->invPos)->maxHp;
+		app->itemManager->armor = app->itemManager->arrParty.at(app->itemManager->invPos)->armor;
+		app->itemManager->attack = app->itemManager->arrParty.at(app->itemManager->invPos)->attack;
+		app->itemManager->critDamage = app->itemManager->arrParty.at(app->itemManager->invPos)->critDamage;
+		app->itemManager->critProbability = app->itemManager->arrParty.at(app->itemManager->invPos)->critRate;
+		app->itemManager->precision = app->itemManager->arrParty.at(app->itemManager->invPos)->precision;
+		app->itemManager->esquiva = app->itemManager->arrParty.at(app->itemManager->invPos)->dodge;
+		app->itemManager->speed = app->itemManager->arrParty.at(app->itemManager->invPos)->speed;
+		app->itemManager->resistencia = app->itemManager->arrParty.at(app->itemManager->invPos)->res;
 
 		//print stats
 		string h = to_string(app->itemManager->maxhp);
