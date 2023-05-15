@@ -822,18 +822,13 @@ public:
 		app->render->DrawRectangle({ 0 - app->render->camera.x,int(offsetAnimation + point * (0 - app->render->camera.y-offsetAnimation)), app->win->GetWidth(), app->win->GetHeight()}, 64, 58, 57);
 		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
 		app->render->TextDraw("Pause", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI);
-		for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
-		{
-			i->data->isForward_B = true;
-			i->data->state = GuiControlState::NORMAL;//fix guarro no se aaaaaaaaaaaaa
-		}
 		if (!open_pause_B)
 		{
-			/*for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
+			for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
 			{
 				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
-			}*/
+			}
 
 			open_pause_B = true;
 		}
