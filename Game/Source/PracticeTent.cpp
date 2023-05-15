@@ -129,7 +129,7 @@ bool PracticeTent::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
 			LOG("Combat");
-			app->combat->PreLoadCombat(player->arrParty, name);
+			app->combat->PreLoadCombat(app->itemManager->arrParty, name);
 			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
 
 			if (app->questManager->quest3->active)
