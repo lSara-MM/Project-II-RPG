@@ -117,6 +117,7 @@ public:
 	int GetStat(EffectType statType);
 
 public:
+	bool isCombatant;
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
@@ -154,19 +155,16 @@ public:
 	List<Skill*> listSkills;
 	List<StatusEffect*> listStatusEffects;
 
-	// Texture position
-	iPoint  position;
 	GuiButton* button;
 
-	bool isCombatant;
+	// Texture position
+	iPoint  position;
 	SDL_Texture* texture;
+	SDL_Rect texSection;
 	
 private:
-
 	const char* texturePath;
-	SDL_Rect* sectionRect;
 	List<int> listSkillsHistory; //Aqui guardamos un historial de que skills se ha usado.
-
 
 	SDL_Texture* profileTex;//ui profile character
 	SDL_Texture* skillTex;//ui skill character
