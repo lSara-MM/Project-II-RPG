@@ -242,7 +242,7 @@ bool Player::CleanUp()
 		pbody->body->GetWorld()->DestroyBody(pbody->body);
 	}
 
-	listPC.clear();
+	vecPC.clear();
 
 	for (int i = 0; i < arrParty.size(); i++)
 	{
@@ -671,6 +671,7 @@ void Player::Controller(float dt)
 	PadLock = false;
 }
 
+// Party
 void Player::LoadAllPC()
 {
 	for (pugi::xml_node itemNode = app->entityManager->entityNode.child("CombatCharacter"); itemNode; itemNode = itemNode.next_sibling("CombatCharacter"))
@@ -684,17 +685,39 @@ void Player::LoadAllPC()
 		chara->Start();
 
 		chara->charaType = CharacterType::ALLY;
-		listPC.push_back(chara);
+		vecPC.push_back(chara);
+	}
+}
+
+// TO TEST
+void Player::AddCharaToParty(SString chara)
+{
+	for (int i = 0; i < vecPC.size(); i++)
+	{
+		if (strcmp(vecPC.at(i)->name.GetString(), chara.GetString()) == 0)
+		{
+			for (int i = 0; i < arrParty.size(); i++)
+			{
+				if (arrParty.at(i) == nullptr) 
+				{
+					arrParty.at(i) = vecPC.at(i);
+					arrParty.at(i)->positionCombat_I = i;
+					break;
+				}
+			}
+		}
 	}
 }
 
 void Player::SetParty()
 {	
-	// TODO when party available
-	for (int i = 0; i < listPC.size(); i++)
+	// TO DO when party available
+	for (int i = 0; i < vecPC.size(); i++)
 	{
+		// TO DO: change commented per uncommented
+		//if (i == arrParty.size() - 1) break;
 		if (i == arrParty.size()) break;
-		arrParty.at(i) = listPC.at(i);
+		arrParty.at(i) = vecPC.at(i);
 		arrParty.at(i)->positionCombat_I = i;
 	}
 }

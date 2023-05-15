@@ -347,6 +347,11 @@ bool PuzzleManager::Update(float dt)
 		bossIsDead = !bossIsDead;
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		saveFireGuy = true;
+	}
+
 	SDL_Rect palan = { 361, 75, 29, 46 };
 
 	app->render->DrawTexture(palanca, posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca, &palan);
@@ -672,6 +677,9 @@ bool PuzzleManager::TeamMate()
 			FireGuy = nullptr;
 
 			teamMate = true;
+			
+			// TO DO, hay que ponerlo de forma bien, no puede estar asi hardcoded porque a la minima que hagamos cambios en los nombres habra errores
+			app->hTerrors->player->AddCharaToParty("Fire Eater");
 
 			if (app->questManager->quest1->active) 
 			{
