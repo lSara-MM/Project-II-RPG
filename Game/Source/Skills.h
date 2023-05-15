@@ -47,7 +47,7 @@ public:
 
 	int RangeCanTarget(vector<Character*> vec);
 
-	int RandomTarget(int posInicial, int posFinal, TargetingMethod method = TargetingMethod::RANDOM);
+	int RandomTarget(int posInicial, int posFinal, int vecSize, TargetingMethod method = TargetingMethod::RANDOM);
 
 	 
 public:

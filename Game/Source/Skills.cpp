@@ -68,15 +68,18 @@ int Skill::RangeCanTarget(vector<Character*> vec)
 	
 }
 
-int Skill::RandomTarget(int posInicial, int posFinal, TargetingMethod method)
+int Skill::RandomTarget(int posInicial, int posFinal, int vecSize, TargetingMethod method)
 {
 	int pos= posInicial;
 	int width = posFinal - posInicial + 1;
 	switch (method)
 	{
 	case TargetingMethod::RANDOM:
-		
-		pos = rand() % width + posInicial;
+		do 
+		{
+			pos = rand() % width + posInicial;
+		} while (pos >= vecSize);
+
 		break;
 
 	case TargetingMethod::LOWER_HP:
