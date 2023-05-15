@@ -469,6 +469,10 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::SWAP_SKILL:
 				break;
 			case ButtonType::COMBAT_TARGET:
+				rect.y = 12;
+				rect.w = 120;
+				rect.h = 12;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y + bounds.h + 7, &rect);
 				break;
 			case ButtonType::SKILL_1:
 				rect.x = 47;
@@ -548,11 +552,10 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::SWAP_SKILL:
 				break;
 			case ButtonType::COMBAT_TARGET:
-				rect.y = 12;
+				rect.y = 24;
 				rect.w = 120;
-				rect.h = 14;
+				rect.h = 12;
 				render->DrawTexture(buttonTex, bounds.x, bounds.y + bounds.h + 7, &rect);
-				break;
 				break;
 			case ButtonType::SKILL_1:
 				break;
