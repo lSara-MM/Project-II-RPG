@@ -11,6 +11,7 @@
 #include "Scene.h"
 #include "IntroScene.h"
 #include "SceneWin_Lose.h"
+#include "QuestManager.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
@@ -113,6 +114,13 @@ bool Combat::Start()
 		LoadCombat();
 	}
 
+	//Quest Manager desactivate
+
+	if (app->questManager->active)
+	{
+		app->questManager->active = false;
+	}
+
 	return true;
 }
 
@@ -209,6 +217,12 @@ bool Combat::CleanUp()
 
 	//Reactivar physics
 	app->physics->Enable();
+
+	//QuestManager reactivate
+	if (!app->questManager->active)
+	{
+		app->questManager->active = true;
+	}
 
 	return true;
 }
