@@ -56,7 +56,6 @@ public:
 
 	// Handle buttons
 	void HandleCharaButtons(vector<Character*>* arr, int pos1 = -1, int pos2 = -1);	// If -1, disable all
-	void HandleSkillsButtons(List<Skill*> listSkills_);
 	bool HandleSkillsButtons(Character* chara);
 
 	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);

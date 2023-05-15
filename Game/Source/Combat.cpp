@@ -509,30 +509,6 @@ void Combat::HandleCharaButtons(vector<Character*>* arr, int pos1, int pos2)
 	}
 }
 
-// TO TEST
-void Combat::HandleSkillsButtons(List<Skill*> listSkills_)
-{
-	int offset = vecAllies.size() + vecEnemies.size();
-	for (int i = 0; i < listSkills_.Count(); i++)
-	{
-		// If character in turn is in position to use skill, enable button;
-		// skill > can be used funtion of charater in turn 
-		if(listSkills_.start!=nullptr)
-		{
-			if (listSkills_.At(i)->data->PosCanBeUsed(listInitiative.At(charaInTurn)->data->positionCombat_I))
-			{
-				listButtons.At(offset + i)->data->state = GuiControlState::NORMAL;
-				listButtons.At(offset + i)->data->isSelected = false;
-			}
-			else
-			{
-				listButtons.At(offset + i)->data->state = GuiControlState::SELECTED;
-				listButtons.At(offset + i)->data->isSelected = true;
-			}
-		}
-	}
-}
-
 bool Combat::HandleSkillsButtons(Character* chara)
 {
 	int offset = vecAllies.size() + vecEnemies.size();
@@ -709,7 +685,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 			}
 		}
 	}
-	if (lastPressedAbility_I == -1)
+	if (lastPressedAbility_I == -1 && !isMoving)
 	{
 		for (int i = 0; i < listInitiative.Count(); i++)
 		{
