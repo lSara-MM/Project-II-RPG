@@ -109,6 +109,9 @@ private:
 
 	const char* texturePathTargetButton;
 	SDL_Texture* textureTargetButton;
+
+	const char* PathlastSelectedSkill;
+	SDL_Texture* textureLastSelectedSkill;
 	
 	const char* actions[4] = { "Atk 1", "Atk 2", "Atk 3", "Atk 4" };
 
