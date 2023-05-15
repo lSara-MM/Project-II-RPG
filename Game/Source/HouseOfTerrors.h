@@ -78,6 +78,9 @@ private:
 	const char* fxpausepath;
 	uint pausefx;
 
+	const char* enterCombatpath;
+	uint combatfx;
+
 	bool exit_B;
 };
 

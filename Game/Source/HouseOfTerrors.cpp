@@ -53,6 +53,9 @@ bool HouseOfTerrors::Awake(pugi::xml_node& config)
 	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
 	pausefx = app->audio->LoadFx(fxpausepath);
 
+	enterCombatpath = "Assets/Audio/Fx/entrar_sala.wav";
+	combatfx = app->audio->LoadFx(enterCombatpath);
+
 	return ret;
 }
 
@@ -147,6 +150,7 @@ bool HouseOfTerrors::Update(float dt)
 		if (steps_I > 450)
 		{
 			LOG("Combat");
+			app->audio->PlayFx(combatfx);
 			app->combat->PreLoadCombat(app->itemManager->arrParty, name);
 			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
 			app->questManager->SaveState();
