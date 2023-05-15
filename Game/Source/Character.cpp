@@ -545,7 +545,7 @@ bool Character::UseSkill(Skill* skill)
 			}
 			else
 			{
-				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange);
+				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies.size());
 				app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill));
 			}
 			break;
@@ -566,7 +566,7 @@ bool Character::UseSkill(Skill* skill)
 			}
 			else
 			{
-				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange);
+				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecEnemies.size());
 				app->combat->vecEnemies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(objective), skill));
 			}
 			break;
@@ -600,7 +600,7 @@ bool Character::UseSkill(Skill* skill)
 			}
 			else
 			{
-				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange);
+				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies.size());
 				app->combat->vecEnemies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(objective), skill));
 			}
 			break;
@@ -616,10 +616,13 @@ bool Character::UseSkill(Skill* skill)
 
 			if (skill->areaSkill)
 			{
-				for (int i = skill->posToTargetStart_I; i <= endRange; i++)
+				for (int i = skill->posToTargetStart_I; i < endRange; i++)
 				{
 					//Atacar a todos
-					app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
+					//if (i < app->combat->vecAllies.size())
+					{
+						app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
+					}					
 					if (CalculateRandomProbability(skill->bonusPrecision + this->precision, app->combat->vecAllies.at(i)->res))
 					{
 
@@ -628,7 +631,7 @@ bool Character::UseSkill(Skill* skill)
 			}
 			else
 			{
-				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange);
+				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies.size());
 				app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill));
 				if (CalculateRandomProbability(skill->bonusPrecision + this->precision, app->combat->vecAllies.at(objective)->res)) 
 				{
