@@ -264,6 +264,7 @@ bool IntroScene::PostUpdate()
 		app->puzzleManager->escape = false;
 		app->puzzleManager->rescue = false;
 		app->puzzleManager->teamMate = false;
+		app->puzzleManager->bossIsDead = false;
 
 		app->questManager->SaveState();
 
