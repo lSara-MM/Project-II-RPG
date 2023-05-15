@@ -52,7 +52,8 @@ bool Textures::CleanUp()
 
 	for(item = textures.start; item != NULL; item = item->next)
 	{
-		SDL_DestroyTexture(item->data);
+		if(item->data != nullptr)
+			SDL_DestroyTexture(item->data);
 	}
 
 	textures.Clear();

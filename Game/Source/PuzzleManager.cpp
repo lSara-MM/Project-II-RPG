@@ -356,7 +356,7 @@ bool PuzzleManager::Update(float dt)
 
 	SDL_Rect palan = { 361, 75, 29, 46 };
 
-	app->render->DrawTexture(palanca, posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca, &palan);
+	app->render->DrawTexture(palanca, posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca * 2, &palan);
 
 	SDL_Rect not = { 268, 76, 51, 45 };
 
@@ -512,7 +512,7 @@ bool PuzzleManager::Palancas()
 
 	if (palancasActive)
 	{
-		app->render->DrawTexture(textureE, posPalancas.x - 30, posPalancas.y - 60);
+		app->render->DrawTexture(textureE, posPalancas.x - 30, posPalancas.y - 10);
 
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
@@ -683,10 +683,8 @@ bool PuzzleManager::TeamMate()
 			// TO DO, hay que ponerlo de forma bien, no puede estar asi hardcoded porque a la minima que hagamos cambios en los nombres habra errores
 			app->itemManager->AddCharaToParty("Fire Eater");
 
-			if (app->questManager->quest1->active) 
-			{
-				app->questManager->quest1->complete = true;
-			}
+			app->questManager->quest1->complete = true;
+
 
 			app->questManager->SaveState();
 

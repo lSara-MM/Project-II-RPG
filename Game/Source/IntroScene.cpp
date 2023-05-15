@@ -257,6 +257,7 @@ bool IntroScene::PostUpdate()
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
 		introDone = true;
 
+		//Quests y puzzles reinicio
 		app->questManager->active = true;
 		app->questManager->Start();
 
@@ -280,6 +281,9 @@ bool IntroScene::PostUpdate()
 		}
 
 		app->questManager->SaveState();
+
+		//Fuerza que el jugador en una nueva partida aparezca al inicio
+		app->entityManager->tpID = 21;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
