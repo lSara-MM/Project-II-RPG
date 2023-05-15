@@ -143,11 +143,11 @@ bool Character::Update(float dt)
 		{
 			string position_C = std::to_string(positionCombat_I);
 			const char* ch_pos = position_C.c_str();
-			app->render->TextDraw(ch_pos, position.x + 60, position.y - 20, 15);
-			app->render->TextDraw(name.GetString(), position.x + 5, position.y + 180, 10);
+			app->render->TextDraw(ch_pos, position.x + 60, position.y - 20, 15, Font::UI, {255, 255, 255});
+			app->render->TextDraw(name.GetString(), position.x + 5, position.y + 180, 10, Font::UI, { 255, 255, 255 });
 			string HP_C = std::to_string(currentHp);
 			const char* ch_hp = HP_C.c_str();
-			app->render->TextDraw(ch_hp, position.x + 60, position.y - 40, 15);
+			app->render->TextDraw(ch_hp, position.x + 60, position.y - 40, 15, Font::UI, { 255, 255, 255 });
 
 			if (onTurn)
 			{
@@ -438,6 +438,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
 			}
 		}
+		app->audio->PlayFx(healfx);
 	}
 	else //Es un ataque 
 	{
@@ -471,6 +472,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			float armorRelevance = (defender->GetStat(EffectType::ARMOR) / abs(damage + 1)) + 1;
 			damage += ((defender->GetStat(EffectType::ARMOR) / 2) * armorRelevance); //Esta con mas ya que damage es negativo
 
+			app->audio->PlayFx(hitfx);
 			return damage;
 		}
 	}
@@ -527,6 +529,7 @@ bool Character::UseSkill(Skill* skill)
 	if(skill->autoTarget)
 	{
 		this->ModifyHP(ApplySkill(this, this, skill)); //Lanzarsela a si mismo
+		app->audio->PlayFx(healfx);
 		if (skill->movementCaster != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster); }
 		return true;
 	}
@@ -558,6 +561,7 @@ bool Character::UseSkill(Skill* skill)
 				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies.size());
 				if (!app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill))) { break; }
 			}
+			app->audio->PlayFx(healfx);
 			break;
 		case CharacterType::ENEMY:
 			endRange = skill->RangeCanTarget(app->combat->vecEnemies);
@@ -579,8 +583,8 @@ bool Character::UseSkill(Skill* skill)
 				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecEnemies.size());
 				app->combat->vecEnemies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(objective), skill));
 			}
+			app->audio->PlayFx(healfx);
 			break;
-
 		case CharacterType::NONE:
 			break;
 		default:
@@ -607,12 +611,15 @@ bool Character::UseSkill(Skill* skill)
 					//Atacar a todos
 					if (!app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill))) { break; }
 				}
+				app->audio->PlayFx(hitfx);
 			}
 			else
 			{
 				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies.size());
 				app->combat->vecEnemies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(objective), skill));
+				app->audio->PlayFx(hitfx);
 			}
+			app->audio->PlayFx(hitfx);
 			break;
 
 			break;
@@ -631,17 +638,20 @@ bool Character::UseSkill(Skill* skill)
 					//Atacar a todos
 					//if (i < app->combat->vecAllies.size())
 					{
-						if (!app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill))) { break; }
+						if (!app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill))) {break; }
+						
 					}
 					if (CalculateRandomProbability(skill->bonusPrecision + this->precision, app->combat->vecAllies.at(i)->res))
 					{
 
 					}
 				}
+				app->audio->PlayFx(hitfx);
 			}
 			else
 			{
 				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies.size());
+				app->audio->PlayFx(hitfx);
 				if (!app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill))) { break; }
 				
 				if (CalculateRandomProbability(skill->bonusPrecision + this->precision, app->combat->vecAllies.at(objective)->res)) 
@@ -649,9 +659,10 @@ bool Character::UseSkill(Skill* skill)
 					if (skill->movementTarget != 0)
 					app->combat->MoveCharacter(&app->combat->vecAllies, app->combat->vecAllies.at(objective), skill->movementTarget);
 				}
+				app->audio->PlayFx(hitfx);
 			}
 			break;
-
+			app->audio->PlayFx(hitfx);
 			break;
 		default:
 			break;
@@ -666,7 +677,7 @@ bool Character::UseSkill(Skill* skill)
 bool Character::UseSkill(Skill* skill, Character* target)
 {
 	int endRange;
-	if (skill->targetFriend) { endRange = skill->RangeCanTarget(app->combat->vecAllies); }
+	if (skill->targetFriend) { endRange = skill->RangeCanTarget(app->combat->vecAllies);}
 	else { endRange = skill->RangeCanTarget(app->combat->vecEnemies); }
 
 	if (skill->areaSkill)
@@ -678,11 +689,9 @@ bool Character::UseSkill(Skill* skill, Character* target)
 			{
 			case CharacterType::ALLY:
 				app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill));
-				app->audio->PlayFx(healfx);
 				break;
 			case CharacterType::ENEMY:
 				app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill));
-				app->audio->PlayFx(hitfx);
 				break;
 			case CharacterType::NONE:
 				break;
