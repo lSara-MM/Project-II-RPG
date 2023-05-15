@@ -117,21 +117,6 @@ bool GuiButton::Update(float dt)
 			if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
 				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
 
-				if (state != GuiControlState::SELECTED)
-				{
-					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
-					{
-						state = GuiControlState::PRESSED;
-					}
-
-					// If mouse button pressed -> Generate event!
-					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
-					{
-							NotifyObserverOfClick();
-					}
-				}
-
-
 				state = GuiControlState::FOCUSED;
 				NotifyObserverOfHover();
 
@@ -143,6 +128,20 @@ bool GuiButton::Update(float dt)
 				if (previousState != state)
 				{
 					//LOG("Change state from %d to %d", previousState, state);
+				}
+
+				if (!isSelected)
+				{
+					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
+					{
+						state = GuiControlState::PRESSED;
+					}
+
+					// If mouse button pressed -> Generate event!
+					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
+					{
+						NotifyObserverOfClick();
+					}
 				}
 
 			}

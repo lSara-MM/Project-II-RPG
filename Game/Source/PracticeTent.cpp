@@ -66,8 +66,11 @@ bool PracticeTent::Start()
 	npcSetID = 1;
 
 	// Settings
-	pSettings = nullptr;
-	pPause = nullptr;
+	//pSettings = nullptr;
+	//pPause = nullptr;
+	pSettings = new Settings(this);
+	pPause = new Pause(this);
+	pPause->pSettings = pSettings;
 	pause_B = false;
 	settings_B = false;
 
@@ -238,8 +241,8 @@ void PracticeTent::Debug()
 
 		if (pause_B)
 		{
-			pPause = new Pause(this);
-			pSettings = pPause->pSettings;
+			/*pPause = new Pause(this);
+			pSettings = pPause->pSettings;*/
 
 			pSettings->settings_B = !pSettings->settings_B;
 		}
