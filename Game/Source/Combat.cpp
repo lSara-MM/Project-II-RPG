@@ -469,7 +469,11 @@ bool Combat::NextTurn()
 	listInitiative.At(charaInTurn)->data->onTurn = true;
 	listInitiative.At(charaInTurn)->data->ModifyHP(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CURRENT_HP));
 
-	if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ENEMY) { listButtons.end->data->state = GuiControlState::DISABLED; }
+	if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ENEMY) 
+	{ 
+		listButtons.end->data->state = GuiControlState::DISABLED;
+		HandleSkillsButtons(listInitiative.At(charaInTurn)->data);
+	}
 	else { listButtons.end->data->state = GuiControlState::NORMAL; }
 
 	LOG("%s turn - num %d", listInitiative.At(charaInTurn)->data->name.GetString(), charaInTurn);
@@ -515,7 +519,7 @@ bool Combat::HandleSkillsButtons(Character* chara)
 
 	for (int i = 0; i < chara->listSkills.Count(); i++)
 	{
-		if (chara->listSkills.At(i)->data->posToUseStart_I<= chara->positionCombat_I && chara->positionCombat_I <= chara->listSkills.At(i)->data->posToUseEnd_I)
+		if (chara->listSkills.At(i)->data->posToUseStart_I<= chara->positionCombat_I && chara->positionCombat_I <= chara->listSkills.At(i)->data->posToUseEnd_I && chara->charaType==CharacterType::ALLY)
 		{
 			listButtons.At(offset + i)->data->state = GuiControlState::NORMAL;
 			listButtons.At(offset + i)->data->isSelected = false;
