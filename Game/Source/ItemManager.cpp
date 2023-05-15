@@ -243,9 +243,9 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 {
 	if (nodeList[i]->quantity > 0)
 	{
-		LoadButtons(x, y, i);
-
 		nodeList[i]->ID = i;
+
+		LoadButtons(x, y, i);
 
 		itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
 
@@ -360,7 +360,7 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 	if (nodeList[ID]->button != nullptr)
 	{
 		nodeList[ID]->button->bounds = buttonBounds;
-		nodeList[ID]->button->id = ID;
+		nodeList[ID]->button->id = nodeList[ID]->ID;
 	}
 }
 
