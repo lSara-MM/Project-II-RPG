@@ -165,8 +165,9 @@ bool Combat::Update(float dt)
 		app->render->TextDraw("Press 1 to move enemy[1] two positions (may crash)", 10, 80, 12);
 		app->render->TextDraw("Press 2 to destroy enemy[1]", 10, 100, 12);
 		app->render->TextDraw("Press 3 next turn", 10, 120, 12);
+		//app->render->TextDraw("Press 3 next turn", 10, 120, 12);
 	}
-
+	
 	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
 
 	return true;
