@@ -60,7 +60,7 @@ bool Skill::PosCanBeUsed(int positionCharacter)
 int Skill::RangeCanTarget(vector<Character*> vec)
 {
 	//Mirar size del vector
-	int max = vec.size();
+	int max = vec.size()-1;
 	//si mas pequeño el vector que 
 	if (max < posToTargetEnd_I) { return max; }
 	else if (max > posToTargetStart_I){return posToTargetEnd_I;}

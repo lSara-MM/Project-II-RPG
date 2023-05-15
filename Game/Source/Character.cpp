@@ -148,6 +148,11 @@ bool Character::Update(float dt)
 			string HP_C = std::to_string(currentHp);
 			const char* ch_hp = HP_C.c_str();
 			app->render->TextDraw(ch_hp, position.x + 60, position.y - 40, 15);
+
+			if (onTurn)
+			{
+				app->render->DrawRectangle({ position.x+10,position.y + 195,106, 10 }, 255, 0, 0);
+			}
 		}
 
 		//Si es su turno pues hace cosas
