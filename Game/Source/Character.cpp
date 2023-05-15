@@ -166,6 +166,8 @@ bool Character::Update(float dt)
 			{
 			case CharacterType::ALLY:
 
+				app->combat->HandleSkillsButtons(this);
+
 				//Check hay una habilidad seleccionada
 				if (app->combat->lastPressedAbility_I != -1)
 				{
@@ -178,7 +180,7 @@ bool Character::Update(float dt)
 						app->combat->NextTurn();
 					}
 				}
-				//app->combat->HandleSkillsButtons(listSkills);
+				
 
 				break;
 			case CharacterType::ENEMY:
