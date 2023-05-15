@@ -86,6 +86,11 @@ bool QuestManager::Start() {
 
 	LoadState();
 
+	if(app->puzzleManager->teamMate)
+	{
+		quest1->complete = true;
+	}
+
 	//Iterates over the entities and calls Start
 	ListItem<Quest*>* item;
 	Quest* pQuest = NULL;

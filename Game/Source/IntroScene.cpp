@@ -257,13 +257,15 @@ bool IntroScene::PostUpdate()
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
 		introDone = true;
 
+		app->questManager->active = true;
+		app->questManager->Start();
+
 		app->puzzleManager->palancas = false;
 		app->puzzleManager->escape = false;
 		app->puzzleManager->rescue = false;
 		app->puzzleManager->teamMate = false;
 
-		app->questManager->active = true;
-		app->questManager->Start();
+		app->questManager->SaveState();
 
 		if (app->questManager->active)
 		{
@@ -274,9 +276,9 @@ bool IntroScene::PostUpdate()
 			app->questManager->quest1->complete = false;
 			app->questManager->quest2->complete = false;
 			app->questManager->quest3->complete = false;
-
-			app->questManager->SaveState();
 		}
+
+		app->questManager->SaveState();
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
