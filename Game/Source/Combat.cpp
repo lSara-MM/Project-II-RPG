@@ -220,6 +220,14 @@ bool Combat::PostUpdate()
 				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x - offset, i->data->bounds.y- offset, &rect);
 			}
 			break;
+
+		case ButtonType::COMBAT_TARGET:
+			
+			rect = { 0,0,i->data->bounds.w,i->data->bounds.w };
+
+			app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x, i->data->bounds.y, &rect);
+			
+			break;
 		default:
 			break;
 		}
