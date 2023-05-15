@@ -13,6 +13,7 @@
 #include "Inventory.h"
 #include "Player.h"
 #include "Character.h"
+#include "Combat.h"
 
 #include <vector>
 using namespace std;

@@ -18,6 +18,7 @@
 #include "GuiManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
+#include "Inventory.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -63,6 +64,9 @@ bool Combat::Start()
 {
 	//Load
 	//LoadCombat();
+
+	//Load inventory
+	app->inventory->Enable();
 
 	//Music combat
 	app->audio->PlayMusic(musCombat, 1.0);
@@ -275,6 +279,9 @@ bool Combat::CleanUp()
 	{
 		app->questManager->active = true;
 	}
+
+	//Unload inventory
+	app->inventory->Disable();
 
 	return true;
 }

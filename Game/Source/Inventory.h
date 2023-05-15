@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "GuiButton.h"
+#include "Combat.h"
 
 #include "Box2D/Box2D/Box2D.h"
 

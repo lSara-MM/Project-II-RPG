@@ -26,7 +26,7 @@ type 2
 
 <items>
 
-	<item quantity="0" name="potion" type="1" kind="1" hp="999" max="10"
+	<item quantity="0" name="potion" type="1" kind="1" hp="100" max="10"
 		  texturepath="Assets/Textures/potion.png">
 	</item>
 	<item quantity="0" name="granade" type="1" kind="2" hp="-999" max="10"
