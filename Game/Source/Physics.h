@@ -38,6 +38,7 @@ enum class ColliderType {
 	PALANCA,
 	DOORCODE,
 	BOSSDEAD,
+	DUMMY,
 	LOSET,
 	FIREGUY,
 	NOTA,

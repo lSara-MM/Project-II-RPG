@@ -19,6 +19,7 @@
 #include "Map.h"
 #include "Pathfinding.h"
 #include "ItemManager.h"
+#include "QuestManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -29,7 +30,7 @@ using namespace std;
 
 PracticeTent::PracticeTent() : Module()
 {
-	name.Create("PracticeTent");
+	name.Create("practiceTent");
 }
 
 PracticeTent::~PracticeTent()
@@ -42,6 +43,13 @@ bool PracticeTent::Awake(pugi::xml_node& config)
 
 	practisePath = config.attribute("musTent").as_string();
 	pause_music = config.attribute("pause").as_string();
+
+	texturepathDummy = config.attribute("texturepathDummy").as_string();
+	widthDummy = config.attribute("widthCollider").as_int();
+	heigthDummy = config.attribute("heightCollider").as_int();
+	posDummy.x = config.attribute("xCollider").as_int();
+	posDummy.y = config.attribute("yCollider").as_int();
+
 	mute_B = false;
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
 	sceneNode = config;
@@ -54,6 +62,18 @@ bool PracticeTent::Awake(pugi::xml_node& config)
 
 bool PracticeTent::Start()
 {
+	dummy = app->tex->Load(texturepathDummy);
+	Dummy = app->physics->CreateRectangle(posDummy.x, posDummy.y, widthDummy, heigthDummy, bodyType::STATIC); 
+	Dummy->body->SetFixedRotation(true);
+
+	DummySens = app->physics->CreateRectangleSensor(posDummy.x + widthDummy / 8, posDummy.y + heigthDummy / 8, widthDummy * 2, heigthDummy * 2, bodyType::STATIC);
+	DummySens->body->SetFixedRotation(true);
+	DummySens->ctype = ColliderType::DUMMY;
+
+	textureE = app->tex->Load("Assets/GUI/UI_E.png");
+
+	DummySensor = false;
+
 	app->input->godMode_B = false;
 	app->physics->collisions = false;
 	//Load Map
@@ -98,6 +118,30 @@ bool PracticeTent::Update(float dt)
 	//Draw Map
 	app->map->Draw();
 
+	SDL_Rect rectDummy = {18, 13, widthDummy, heigthDummy };
+
+	app->render->DrawTexture(dummy, posDummy.x - widthDummy / 2, posDummy.y - heigthDummy / 2, &rectDummy);
+
+	if(DummySensor)
+	{
+		app->render->DrawTexture(textureE, posDummy.x + widthDummy / 2, posDummy.y + heigthDummy + 20);
+
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			LOG("Combat");
+			app->combat->PreLoadCombat(player->arrParty, name);
+			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+
+			if (app->questManager->quest3->active)
+			{
+				app->questManager->quest3->complete = true;
+				app->questManager->SaveState();
+			}
+
+			DummySensor = false;
+		}
+	}
+
 	//Load Debug keys
 	Debug();
 
@@ -106,9 +150,12 @@ bool PracticeTent::Update(float dt)
 	{
 		if (app->inventory->active)
 		{
+			player->lockMovement = false;
 			app->inventory->Disable();
 		}
-		else {
+		else 
+		{
+			player->lockMovement = true;
 			app->inventory->Enable();
 		}
 	}
@@ -166,6 +213,27 @@ bool PracticeTent::PostUpdate()
 bool PracticeTent::CleanUp()
 {
 	LOG("Freeing scene");
+
+	if (dummy != nullptr) 
+	{
+		app->tex->UnLoad(dummy);
+	}
+
+	if(textureE != nullptr)
+	{
+		app->tex->UnLoad(textureE);
+	}
+
+	if (Dummy != nullptr) 
+	{
+		Dummy->body->GetWorld()->DestroyBody(Dummy->body);
+	}
+	if (DummySens != nullptr) 
+	{
+		DummySens->body->GetWorld()->DestroyBody(DummySens->body);
+	}
+
+	DummySensor = false;
 
 	app->entityManager->Disable();
 
