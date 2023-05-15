@@ -286,10 +286,10 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 
 			if (nodeList[i]->equiped == false)
 			{
-				app->render->DrawTexture(itemsTexture, (680 + 42 * x) - app->render->camera.x, y - app->render->camera.y);
+				app->render->DrawTexture(itemsTexture, (671 + 42 * x) - app->render->camera.x, y - app->render->camera.y);
 
 				string c = to_string(nodeList[i]->quantity);
-				app->render->TextDraw(c.c_str(), (680 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(c.c_str(), (671 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
 			}
 			else if (nodeList[i]->equiped && nodeList[i]->whom == invPos)
 			{
@@ -343,10 +343,12 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 {
 
 	SDL_Rect buttonBounds;
-	buttonBounds = { (720 + 42 * x), y, 40, 40 };
+	buttonBounds = { (680 + 42 * x), y, 40, 40 };
 
 	if (app->combat->active)
 	{
+		buttonBounds = { (720 + 42 * x), y, 40, 40 };
+
 		if (nodeList[ID]->button != nullptr)
 		{}else
 		{ 
@@ -355,8 +357,6 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 	}
 	else
 	{
-		buttonBounds = { (680 + 42 * x), y, 40, 40 };
-
 		if (nodeList[ID]->button != nullptr || (nodeList[ID]->equiped && nodeList[ID]->whom != invPos))
 		{
 		}
