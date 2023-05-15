@@ -142,6 +142,7 @@ bool PuzzleManager::Start()
 	losetActive = false;
 	bossInvent = false;
 	intoCode = false;
+	saveFireGuy = false;
 
 	palancasActive = false;
 
