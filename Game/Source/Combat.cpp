@@ -655,7 +655,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 			posStart = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
 			posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
 	}
-	}
+	
 	// move character
 	else if (control->id == 14)
 	{

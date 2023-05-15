@@ -564,9 +564,70 @@ bool GuiButton::Draw(Render* render)
 			}
 			break;
 		case GuiControlState::SELECTED:
-			break;
-		default:
-			break;
+			switch (buttonType)
+			{
+			case ButtonType::NONE:
+				break;
+			case ButtonType::EXTRA_LARGE:
+				break;
+			case ButtonType::LARGE:
+				break;
+			case ButtonType::SMALL:
+				break;
+			case ButtonType::START:
+				break;
+			case ButtonType::CLOSE:
+				break;
+			case ButtonType::MENU:
+				break;
+			case ButtonType::SETTINGS:
+				break;
+			case ButtonType::IN_SETTINGS:
+				break;
+			case ButtonType::DIALOGUE:
+				break;
+			case ButtonType::CHECK:
+				break;
+			case ButtonType::CONTROL_SETTINGS:
+				break;
+			case ButtonType::INVENTORY:
+				break;
+			case ButtonType::INV_NEXT_PAGE:
+				break;
+			case ButtonType::INV_PAGES:
+				break;
+			case ButtonType::SWAP_SKILL:
+				break;
+			case ButtonType::COMBAT_TARGET:
+				break;
+			case ButtonType::SKILL_1:
+				rect.x = bounds.w * 2;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::SKILL_2:
+				rect.x = bounds.w * 11;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::SKILL_3:
+				rect.x = bounds.w * 14;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::SKILL_4:
+				rect.x = bounds.w * 5;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::CHANGE_POSITION:
+				rect.x = bounds.w * 8;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::SKIPPY:
+				rect.x = bounds.w * 2;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			default:
+				break;
+			}
+		
 		}
 	}
 

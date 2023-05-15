@@ -288,7 +288,7 @@ void Scene::Debug()
 	}
 
 	// Pause menu
-	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
+	if (pause_B == false && player->pauseEnabled_B && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
 	{
 		app->audio->PlayFx(pausefx);
 		app->audio->PlayMusic(pause_music);

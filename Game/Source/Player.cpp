@@ -121,6 +121,7 @@ bool Player::Start()
 
 	PadLock = false;
 	lockMovement = false;
+	pauseEnabled_B = true;
 
 	return true;
 }
@@ -180,6 +181,7 @@ bool Player::Update(float dt)
 					app->audio->PlayFx(confirmInteractfx);
 					app->dialogueSystem->hasEnded = false;
 					lockMovement = true;
+					pauseEnabled_B = false;
 					app->dialogueSystem->Enable();
 					app->dialogueSystem->PerformDialogue(npcTalkingTo->dialoguesID);
 ;					
@@ -212,6 +214,7 @@ bool Player::Update(float dt)
 			if (app->dialogueSystem->hasEnded) 
 			{
 				lockMovement = false; 
+				pauseEnabled_B = true;
 				app->dialogueSystem->Disable();
 			}
 		}
