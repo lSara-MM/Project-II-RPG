@@ -89,7 +89,7 @@ bool Combat::Start()
 	//	listButtons.Add(button);
 	//	j++;
 	//}
-	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, this, { 40 + 100, 470, 47, 47 }, ButtonType::SKILL_1);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, this, { 40 + 0, 470, 47, 47 }, ButtonType::SKILL_1);
 	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10+1, this, { 40 + 1*100, 470, 47, 47 }, ButtonType::SKILL_2);
 	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10+2, this, { 40 + 2*100, 470, 47, 47 }, ButtonType::SKILL_3);
 	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10+3, this, { 40 + 3*100, 470, 47, 47 }, ButtonType::SKILL_4);

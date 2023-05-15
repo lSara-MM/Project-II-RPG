@@ -65,19 +65,19 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	case ButtonType::COMBAT_TARGET :
 		break;
 	case ButtonType::SKILL_1:
-		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
+		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
 		break;
 	case ButtonType::SKILL_2:
-		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
+		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
 		break;
 	case ButtonType::SKILL_3:
-		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
+		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
 		break;
 	case ButtonType::SKILL_4:
-		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
+		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
 		break;
 	case ButtonType::CHANGE_POSITION:
-		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
+		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
 		break;
 	default:
 		break;
@@ -308,14 +308,24 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::COMBAT_TARGET:
 				break;
 			case ButtonType::SKILL_1:
+				rect.x = bounds.w * 2;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::SKILL_2:
+				rect.x = bounds.w * 11;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::SKILL_3:
+				rect.x = bounds.w * 14;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::SKILL_4:
+				rect.x = bounds.w * 5;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::CHANGE_POSITION:
+				rect.x = bounds.w * 8;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			default:
 				break;
@@ -369,14 +379,23 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::COMBAT_TARGET:
 				break;
 			case ButtonType::SKILL_1:
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::SKILL_2:
+				rect.x = bounds.w*9;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::SKILL_3:
+				rect.x = bounds.w * 12;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::SKILL_4:
+				rect.x = bounds.w * 3;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::CHANGE_POSITION:
+				rect.x = bounds.w * 6;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			default:
 				break;
@@ -434,14 +453,24 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::COMBAT_TARGET:
 				break;
 			case ButtonType::SKILL_1:
+				rect.x = 47;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::SKILL_2:
+				rect.x = bounds.w * 10;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::SKILL_3:
+				rect.x = bounds.w * 13;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::SKILL_4:
+				rect.x = bounds.w * 4;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::CHANGE_POSITION:
+				rect.x = bounds.w * 7;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			default:
 				break;
