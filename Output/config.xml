@@ -72,7 +72,7 @@
         width="0" heigth="0"
 		texturePath="Assets/Textures/AllyHealer.png"
 		
-		sectionX="126" sectionY="178"/>
+		sectionX="15" sectionY="42"/>
 
 		<CombatCharacter name ="Fire Eater" id="3"
         maxHp="1150" currentHp="1150" attack="190" armor="12" critRate="20" critDamage="25" precision="15" res="10" dodge="10" speed="8"
