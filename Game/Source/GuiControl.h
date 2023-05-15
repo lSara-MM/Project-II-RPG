@@ -66,6 +66,7 @@ enum class ButtonType
 	SKILL_3,
 	SKILL_4,
 	CHANGE_POSITION,
+	SKIPPY,
 };
 
 enum class AnimationAxis

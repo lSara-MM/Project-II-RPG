@@ -79,6 +79,9 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	case ButtonType::CHANGE_POSITION:
 		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
 		break;
+	case ButtonType::SKIPPY:
+		buttonTex = app->tex->Load("Assets/GUI/spritesheetSkip.png");
+		break;
 	default:
 		break;
 	}
@@ -327,6 +330,11 @@ bool GuiButton::Draw(Render* render)
 				rect.x = bounds.w * 8;
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
+			case ButtonType::SKIPPY:
+				rect.x = bounds.w * 2;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+
 			default:
 				break;
 			}
@@ -395,6 +403,9 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::CHANGE_POSITION:
 				rect.x = bounds.w * 6;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::SKIPPY:
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			default:
@@ -470,6 +481,10 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::CHANGE_POSITION:
 				rect.x = bounds.w * 7;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::SKIPPY:
+				rect.x = bounds.w;
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			default:
