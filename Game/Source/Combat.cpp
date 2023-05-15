@@ -149,23 +149,18 @@ bool Combat::Update(float dt)
 	{
 		if (listInitiative.At(j) == nullptr) { j = 0; }
 
+		int x = 640 - ((int)listInitiative.Count()) * 50 + i * 110;
+
 		//El calculo largo es para que la barra este centrada siempre aprox
 		SDL_Color color;
 		if (listInitiative.At(j)->data->charaType == CharacterType::ALLY) { color = { 33, 180, 33, 170 }; }
 		if (listInitiative.At(j)->data->charaType == CharacterType::ENEMY) { color = { 180, 33, 33, 170 }; }
-		app->render->DrawRectangle({ 640 - ((int)listInitiative.Count()) * 50 + i * 110, 20, 76, 76 }, color.r, color.g, color.b, color.a);
+		app->render->DrawRectangle({ x, 20, 76, 76 }, color.r, color.g, color.b, color.a);
 
-		int x = 640 - ((int)listInitiative.Count()) * 50 + i * 74;
-		app->render->DrawTexture(listInitiative.At(j)->data->texture, x, 20, &listInitiative.At(j)->data->texSection);
-
-		//El nombre es temporal, luego ira la head del character
-		//app->render->TextDraw(listInitiative.At(j)->data->name.GetString(), 640 - ((int)listInitiative.Count()) * 50 + i * 110, 30, 11);
+		
+		app->render->DrawTexture(listInitiative.At(j)->data->texture, x + 1, 21, &listInitiative.At(j)->data->texSection);
 		j++;
 	}
-
-	//Barra skills + name
-	//app->render->DrawRectangle({ 20,450,500,120 }, 220, 220, 220);
-
 	
 	//God Mode Info
 	if (app->input->godMode_B)
@@ -175,7 +170,6 @@ bool Combat::Update(float dt)
 		app->render->TextDraw("Press 1 to move enemy[1] two positions (may crash)", 10, 80, 12);
 		app->render->TextDraw("Press 2 to destroy enemy[1]", 10, 100, 12);
 		app->render->TextDraw("Press 3 next turn", 10, 120, 12);
-		//app->render->TextDraw("Press 3 next turn", 10, 120, 12);
 	}
 	
 	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
@@ -478,7 +472,8 @@ bool Combat::NextTurn()
 
 	if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ENEMY) 
 	{ 
-		listButtons.end->data->state = GuiControlState::DISABLED;
+		listButtons.end->prev->data->state = GuiControlState::DISABLED;	// change position
+		listButtons.end->data->state = GuiControlState::DISABLED;	// skip
 		HandleSkillsButtons(listInitiative.At(charaInTurn)->data);
 	}
 	else { listButtons.end->data->state = GuiControlState::NORMAL; }
@@ -649,16 +644,18 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("%s chara", vecEnemies.at(posInVec)->name.GetString());
 	} 
 	// skills buttons
-	else if(control->id >= 10 && control->id < 14)
+	else if (control->id >= 10 && control->id < 14)
 	{
 		isMoving = false;
 
-		if (lastPressedAbility_I == control->id - 10) 
-		{ lastPressedAbility_I = -1; } // Si already clicked deseleccionar
+		if (lastPressedAbility_I == control->id - 10)
+		{
+			lastPressedAbility_I = -1;
+		} // Si already clicked deseleccionar
 		lastPressedAbility_I = control->id - 10;
 
-			posStart = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
-			posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
+		posStart = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
+		posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
 	}
 	
 	// move character
@@ -778,7 +775,6 @@ bool Combat::LoadCombat()
 			app->scene->player->vecPC[i]->currentHp = itemNode.attribute("currentHp").as_int();
 			i++;
 		}
-
 	}
 
 	return ret;
@@ -807,7 +803,6 @@ bool Combat::RestartCombatData()
 
 			pugi::xml_node character = nodeCombat.append_child("CombatCharacter");
 			character.append_attribute("currentHp") = itemNode.attribute("currentHp").as_int();
-
 		}
 
 		ret = saveDoc->save_file("save_combat.xml");
