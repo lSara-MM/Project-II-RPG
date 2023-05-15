@@ -59,11 +59,26 @@ public:
 
 	pugi::xml_node sceneNode;
 
+	SDL_Texture* dummy;
+	SDL_Texture* textureE;
+
+	PhysBody* Dummy;
+	PhysBody* DummySens;
+
+	int widthDummy;
+	int heigthDummy;
+
+	iPoint posDummy;
+
+	bool DummySensor;
+
 private:
 	int mouseX_pos, mouseY_pos;
 	float mouseSpeed;
 	//Music path
 	const char* practisePath;
+
+	const char* texturepathDummy;
 
 	const char* pause_music;
 

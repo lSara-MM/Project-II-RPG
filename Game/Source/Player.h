@@ -78,7 +78,7 @@ public:
 	iPoint position;
 
 	bool PadLock;
-
+	bool pauseEnabled_B = true;
 	Npc* npcTalkingTo;
 	bool npcInteract;
 	vector<Character*> vecPC;

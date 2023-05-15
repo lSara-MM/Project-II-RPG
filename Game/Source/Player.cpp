@@ -121,6 +121,7 @@ bool Player::Start()
 
 	PadLock = false;
 	lockMovement = false;
+	pauseEnabled_B = true;
 
 	return true;
 }
@@ -180,6 +181,7 @@ bool Player::Update(float dt)
 					app->audio->PlayFx(confirmInteractfx);
 					app->dialogueSystem->hasEnded = false;
 					lockMovement = true;
+					pauseEnabled_B = false;
 					app->dialogueSystem->Enable();
 					app->dialogueSystem->PerformDialogue(npcTalkingTo->dialoguesID);
 ;					
@@ -212,6 +214,7 @@ bool Player::Update(float dt)
 			if (app->dialogueSystem->hasEnded) 
 			{
 				lockMovement = false; 
+				pauseEnabled_B = true;
 				app->dialogueSystem->Disable();
 			}
 		}
@@ -267,6 +270,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		npcInteract = true;
 		break;
 
+	case ColliderType::DUMMY:
+		app->practiceTent->DummySensor = true;
+		break;
 	case ColliderType::PALANCA:
 		app->puzzleManager->palancasActive = true;
 		break;
@@ -335,11 +341,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
 			break;
 		case 2:
-			if (app->questManager->quest3->active)
-			{
-				app->questManager->quest3->complete = true;
-				app->questManager->SaveState();
-			}
 			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, 90);
 			break;
 		}
@@ -354,6 +355,9 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 	case ColliderType::NPC:
 		npcInteract = false;
 		interactionTest = false;
+		break; 
+	case ColliderType::DUMMY:
+		app->practiceTent->DummySensor = false;
 		break;
 	case ColliderType::PALANCA:
 		app->puzzleManager->palancasActive = false;
