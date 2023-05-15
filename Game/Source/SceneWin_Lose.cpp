@@ -40,8 +40,8 @@ bool SceneWin_Lose::Awake(pugi::xml_node& config)
 	texturepathWin = config.child("win").attribute("texturepath").as_string();
 	texturepathLose = config.child("lose").attribute("texturepath").as_string();
 
-	looseMusicPath = config.attribute("musicl").as_string();
-	winMusicPath = config.attribute("musicw").as_string();
+	looseMusicPath = config.child("lose").attribute("musicl").as_string();
+	winMusicPath = config.child("win").attribute("musicw").as_string();
 
 	backgroundAnimation.Set();
 	backgroundAnimation.AddTween(100, 120, BOUNCE_IN_OUT);
@@ -66,6 +66,7 @@ bool SceneWin_Lose::PreUpdate()
 
 bool SceneWin_Lose::Update(float dt)
 {
+	app->audio->PlayMusic(winMusicPath);
 	if (transition_B)
 	{
 		backgroundAnimation.Backward();
@@ -82,13 +83,14 @@ bool SceneWin_Lose::Update(float dt)
 
 	if (win)
 	{
-		app->render->DrawTexture(Win, offset + point * (0 - offset), 0);
 		app->audio->PlayMusic(winMusicPath);
+		app->render->DrawTexture(Win, offset + point * (0 - offset), 0);
 	}
 	if (!win)
 	{
-		app->render->DrawTexture(Lose, offset + point * (0 - offset), 0);
 		app->audio->PlayMusic(looseMusicPath);
+		app->render->DrawTexture(Lose, offset + point * (0 - offset), 0);
+
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {

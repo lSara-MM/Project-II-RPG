@@ -109,9 +109,9 @@
 	<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
 		x="3570" y="2670" width="150" height="150" texturepath=""/>
 </scene>
-  <SceneWin_Lose musicl="Assets/Audio/Music/mus_loose_scene.ogg" musicw="Assets/Audio/Music/mus_ending.ogg">
-    <win texturepath="Assets/Textures/winLetra.png"/>
-    <lose texturepath="Assets/Textures/failedLetra.png"/>
+  <SceneWin_Lose>
+    <win texturepath="Assets/Textures/winLetra.png" musicw="Assets/Audio/Music/mus_ending.ogg"/>
+    <lose texturepath="Assets/Textures/failedLetra.png" musicl="Assets/Audio/Music/mus_loose_scene.ogg"/>
   </SceneWin_Lose>
   <PuzzleManager>
     <FireGuy texturepathFireGuy="Assets/Textures/fueguito_chibi.png" width="40" height="40" x="544" y="224"/>
