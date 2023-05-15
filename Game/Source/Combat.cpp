@@ -546,6 +546,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		LOG("%s chara", vecAllies.at(control->id)->name.GetString());
 
+		//Busca el target ya que al moverse las posiciones del vector cambia
 		for (int i = 0; i < vecAllies.size(); i++)
 		{
 			if (vecAllies.at(i)->button->id == control->id)
@@ -568,11 +569,11 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id >= 5 && control->id < 10)
 	{
 		LOG("%s chara", vecEnemies.at(control->id - 5)->name.GetString());
-		targeted_Character = vecEnemies.at(control->id - 5);
-
-		for (int i = 0; i < vecAllies.size(); i++)
+		
+		//Busca el target ya que al moverse las posiciones del vector cambia
+		for (int i = 0; i < vecEnemies.size(); i++)
 		{
-			if (vecAllies.at(i)->button->id == control->id)
+			if (vecEnemies.at(i)->button->id == control->id)
 			{
 				targeted_Character = vecEnemies.at(i);
 				break;
@@ -586,8 +587,8 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		if (lastPressedAbility_I == control->id - 10) { lastPressedAbility_I = -1; } // Si already clicked deseleccionar
 		lastPressedAbility_I = control->id - 10;
 
-		posStart = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
-		posEnd = vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
+		posStart = listInitiative.At(charaInTurn)->data->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
+		posEnd = listInitiative.At(charaInTurn)->data->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
 	}
 	// move character
 	else if (control->id == 14)
