@@ -77,7 +77,6 @@ bool HouseOfTerrors::Start()
 	pause_B = false;
 	settings_B = false;
 
-	// Pause 
 
 	InitEntities();
 	app->entityManager->Enable();
@@ -143,7 +142,7 @@ bool HouseOfTerrors::Update(float dt)
 	if (steps_I > 450)
 	{
 		LOG("Combat");
-		app->combat->PreLoadCombat(player->arrParty, name);
+		app->combat->PreLoadCombat(app->itemManager->arrParty, name);
 		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
 		app->questManager->SaveState();
 		app->puzzleManager->CleanUp();

@@ -95,6 +95,8 @@ public:
 	bool SaveItemState();
 
 	void SetPlayerForScene(Player* player_);
+	void AddCharaToParty(SString chara);
+	void SetParty();
 
 public:
 
@@ -107,6 +109,7 @@ public:
 	vector <ItemNode*> nodeList;
 
 	Player* player;
+	array<Character*, 4> arrParty;
 
 	int invPos = 0;
 
@@ -128,7 +131,6 @@ public:
 
 	//GUARRADA SUPER TEMPORAL
 	int comb = 0;
-
 };
 
 #endif // __ITEMMANAGER_H__
