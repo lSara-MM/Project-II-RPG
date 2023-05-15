@@ -82,12 +82,16 @@ bool Character::Awake()
 	hitPath = "Assets/Audio/Fx/hit.wav";
 	hitfx = app->audio->LoadFx(hitPath);
 
+	id = parameters.attribute("id").as_int();
+
 	return true;
 }
 
 bool Character::Start()
 {
 	texture = app->tex->Load(texturePath);
+	profileTex = app->tex->Load("Assets/Textures/CombatUISuperiorPart.png");
+	skillTex = app->tex->Load("Assets/Textures/CombatUIHabInfoPart.png");
 
 	SDL_Rect buttonBounds;
 
@@ -152,6 +156,46 @@ bool Character::Update(float dt)
 			if (onTurn)
 			{
 				app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
+				SDL_Rect rect = { 0,0,588,179 };
+				SDL_Rect rect2 = { 0,0,588,90 };
+				switch (charaType)
+				{
+				case CharacterType::ALLY:
+					switch (id)
+					{
+					case 0:
+						app->render->DrawTexture(skillTex, 36, 527, &rect);
+						app->render->DrawTexture(profileTex, 38, 407, &rect2);
+						break;
+					case 1:
+						rect.y = 179;
+						rect2.y = 90;
+						app->render->DrawTexture(skillTex, 36, 527, &rect);
+						app->render->DrawTexture(profileTex, 38, 407, &rect2);
+						break;
+					case 2:
+						rect.y = 179*2;
+						rect2.y = 90*2;
+						app->render->DrawTexture(skillTex, 36, 527, &rect);
+						app->render->DrawTexture(profileTex, 38, 407, &rect2);
+						break;
+					case 3:
+						rect.y = 179*3;
+						rect2.y = 90*3;
+						app->render->DrawTexture(skillTex, 36, 527, &rect);
+						app->render->DrawTexture(profileTex, 38, 407, &rect2);
+						break;
+					default:
+						break;
+					}
+					break;
+				case CharacterType::ENEMY:
+					break;
+				case CharacterType::NONE:
+					break;
+				default:
+					break;
+				}
 			}
 		}
 
@@ -375,6 +419,12 @@ bool Character::CleanUp()
 {
 	if(texture != nullptr)
 		app->tex->UnLoad(texture);
+	if (skillTex != nullptr)
+		app->tex->UnLoad(skillTex);
+	if (profileTex != nullptr)
+		app->tex->UnLoad(profileTex);
+
+
 
 	/*delete button;
 	button = nullptr;*/

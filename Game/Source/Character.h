@@ -170,6 +170,10 @@ private:
 	SDL_Rect* sectionRect;
 	List<int> listSkillsHistory; //Aqui guardamos un historial de que skills se ha usado.
 
+
+	SDL_Texture* profileTex;//ui profile character
+	SDL_Texture* skillTex;//ui skill character
+
 	int width, height;
 
 	pugi::xml_document skillsFile;
@@ -181,6 +185,9 @@ private:
 
 	const char* hitPath;
 	uint hitfx;
+
+	//para dibujar, estaba en xml y no se usaba, para aprovechar
+	int id;
 };
 
 #endif // __CHARACTER_H__
