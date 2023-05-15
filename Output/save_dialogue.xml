@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
 <save_choices>
-	<player player_name="Player" />
-	<node id="1" answer="2" text="I don't think I'm ready for something like that yet." />
+	<player player_name="" />
 </save_choices>
