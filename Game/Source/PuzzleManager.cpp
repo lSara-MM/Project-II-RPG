@@ -558,6 +558,7 @@ bool PuzzleManager::Escape()
 		{
 			app->hTerrors->player->lockMovement = true;
 			app->input->ActiveGetInput(numCode);
+			app->audio->PlayFx(confirmInteractfx);
 		}
 	}
 
@@ -612,6 +613,7 @@ bool PuzzleManager::Rescue()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				bossInvent = true;
+				app->audio->PlayFx(confirmInteractfx);
 
 				if (Boss->body != nullptr)
 					Boss->body->GetWorld()->DestroyBody(Boss->body);
