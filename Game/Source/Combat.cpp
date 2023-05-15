@@ -160,11 +160,11 @@ bool Combat::Update(float dt)
 	//God Mode Info
 	if (app->input->godMode_B)
 	{
-		app->render->TextDraw("Press D to destroy first ally", 10, 80, 12);
-		app->render->TextDraw("Press A to destroy first enemy", 10, 100, 12);
-		app->render->TextDraw("Press 1 to move enemy[1] two positions (may crash)", 10, 120, 12);
-		app->render->TextDraw("Press 2 to destroy enemy[1]", 10, 140, 12);
-		app->render->TextDraw("Press 3 next turn", 10, 160, 12);
+		app->render->TextDraw("Press D to destroy first ally", 10, 40, 12);
+		app->render->TextDraw("Press A to destroy first enemy", 10, 60, 12);
+		app->render->TextDraw("Press 1 to move enemy[1] two positions (may crash)", 10, 80, 12);
+		app->render->TextDraw("Press 2 to destroy enemy[1]", 10, 100, 12);
+		app->render->TextDraw("Press 3 next turn", 10, 120, 12);
 	}
 
 	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
