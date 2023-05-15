@@ -550,7 +550,7 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 	}
 }
 
-bool Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
+void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 {
 	// Delete from its type vector
 	arr->erase(arr->begin() + chara->positionCombat_I);
@@ -571,14 +571,11 @@ bool Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 		// TO TEST: VA TO LENTO EL FADE, SE QUEDA COMO UN MONTON DE RATO EN EL COMBATE PARALIZADO Y LUEGO SE RALENTIZA TODO? LA ANIMACION DEL 
 		// FONDO DE LOSE VA LENTO PERO EL DE WIN NO a veces XD?
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);
-		return false;
 	}
 	else
 	{
 		UpdatePositions(arr, chara->positionCombat_I);
 	}
-
-	return true;
 }
 
 void Combat::UpdatePositions(vector<Character*>* arr, int pos)

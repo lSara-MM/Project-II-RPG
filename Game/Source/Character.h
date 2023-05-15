@@ -107,16 +107,13 @@ public:
 
 	bool ModifyHP(int hp); //Positivo para curar negativo para dañar
 
-	int ApplySkill(Character* caster, Character* defender, Skill* skill); //ERIC:Va haber que poner muchos mas atributos
-	
+	int ApplySkill(Character* caster, Character* defender, Skill* skill); //ERIC:Va haber que poner muchos mas atributos	
 	void LoadSkill(int arr[4]);
 
 	bool UseSkill(Skill* skill);
-
 	bool UseSkill(Skill* skill, Character* target);
 
 	//
-
 	int GetStat(EffectType statType);
 
 public:

@@ -140,68 +140,27 @@ bool Character::Start()
 bool Character::Update(float dt)
 {
 	app->render->DrawTexture(texture, position.x, position.y, sectionRect);
-	
+
 	if (isCombatant)
 	{
-		//if (app->input->godMode_B)
-		{
-			string position_C = std::to_string(positionCombat_I);
-			const char* ch_pos = position_C.c_str();
-			app->render->TextDraw(ch_pos, position.x + 60, position.y - 20, 15, Font::UI, {255, 255, 255});
-			app->render->TextDraw(name.GetString(), position.x + 5, position.y + 180, 10, Font::UI, { 255, 255, 255 });
-			string HP_C = std::to_string(currentHp);
-			const char* ch_hp = HP_C.c_str();
-			app->render->TextDraw(ch_hp, position.x + 60, position.y - 40, 15, Font::UI, { 255, 255, 255 });
+		// Health
+		string HP_C = std::to_string(currentHp);
+		const char* ch_hp = HP_C.c_str();
+		app->render->TextDraw(ch_hp, position.x + 60, position.y - 57, 15, Font::UI, { 255, 255, 255 });
 
-			if (onTurn)
-			{
-				app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
-				SDL_Rect rect = { 0,0,588,179 };
-				SDL_Rect rect2 = { 0,0,588,90 };
-				switch (charaType)
-				{
-				case CharacterType::ALLY:
-					switch (id)
-					{
-					case 0:
-						app->render->DrawTexture(skillTex, 36, 527, &rect);
-						app->render->DrawTexture(profileTex, 38, 407, &rect2);
-						break;
-					case 1:
-						rect.y = 179;
-						rect2.y = 90;
-						app->render->DrawTexture(skillTex, 36, 527, &rect);
-						app->render->DrawTexture(profileTex, 38, 407, &rect2);
-						break;
-					case 2:
-						rect.y = 179*2;
-						rect2.y = 90*2;
-						app->render->DrawTexture(skillTex, 36, 527, &rect);
-						app->render->DrawTexture(profileTex, 38, 407, &rect2);
-						break;
-					case 3:
-						rect.y = 179*3;
-						rect2.y = 90*3;
-						app->render->DrawTexture(skillTex, 36, 527, &rect);
-						app->render->DrawTexture(profileTex, 38, 407, &rect2);
-						break;
-					default:
-						break;
-					}
-					break;
-				case CharacterType::ENEMY:
-					break;
-				case CharacterType::NONE:
-					break;
-				default:
-					break;
-				}
-			}
-		}
+		// Health bar
+		app->render->DrawRectangle({ position.x - 3, position.y - 37, 106, 16 }, 0, 0, 0);
+		app->render->DrawRectangle({ position.x, position.y - 34, (currentHp * 100 / maxHp), 10 }, 181, 33, 33);
+
+		// Character name
+		app->render->TextDraw(name.GetString(), position.x + 3, position.y - 20, 11, Font::UI, { 255, 255, 255 });
 
 		//Si es su turno pues hace cosas
 		if (onTurn)
 		{
+			// TO DO: change to texture 
+			app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
+
 			//testing
 			string time;
 			const char* tempus;
@@ -224,7 +183,6 @@ bool Character::Update(float dt)
 						app->combat->NextTurn();
 					}
 				}
-				
 
 				break;
 			case CharacterType::ENEMY:
@@ -243,7 +201,6 @@ bool Character::Update(float dt)
 					switch (charaClass) //La idea es que cada classe tenga un comportamiento generico
 					{
 					case CharacterClass::MELEE_DPS:
-
 					{
 						int probSkill;
 						if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Alto de vida
@@ -302,7 +259,7 @@ bool Character::Update(float dt)
 						}
 					}
 
-						break;
+					break;
 					case CharacterClass::RANGED_DPS:
 						break;
 					case CharacterClass::ASSASSIN:
@@ -312,8 +269,7 @@ bool Character::Update(float dt)
 					case CharacterClass::HEALER:
 						break;
 					case CharacterClass::TANK:
-
-						{
+					{
 						int probSkill;
 						if (currentHp >= maxHp / 2) //Alto de vida
 						{
@@ -337,7 +293,6 @@ bool Character::Update(float dt)
 							{
 								probSkill = 75;
 							}
-
 						}
 						else //Bajo de vida
 						{
@@ -348,7 +303,6 @@ bool Character::Update(float dt)
 							else //Si no se uso pues casi siempre la usa
 							{
 								probSkill = 80;
-
 							}
 							if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
 							{
@@ -379,9 +333,7 @@ bool Character::Update(float dt)
 							break;
 						}
 					}
-
-
-						break;
+					break;
 					case CharacterClass::BUFFER:
 						break;
 					case CharacterClass::DEBUFFER:
@@ -393,15 +345,10 @@ bool Character::Update(float dt)
 					default:
 						break;
 					}
-				
-					
-				app->combat->NextTurn();
-				delayOn = false;
 
+					app->combat->NextTurn();
+					delayOn = false;
 				}
-
-				
-				
 
 				break;
 			case CharacterType::NONE:
@@ -424,8 +371,6 @@ bool Character::CleanUp()
 	if (profileTex != nullptr)
 		app->tex->UnLoad(profileTex);
 
-
-
 	/*delete button;
 	button = nullptr;*/
 
@@ -445,8 +390,9 @@ bool Character::ModifyHP(int hp)
 
 	if (currentHp <= 0)
 	{
-		if (charaType == CharacterType::ALLY) { if (!app->combat->RemoveCharacter(&app->combat->vecAllies, this)) { return false; } }
-		else if (charaType == CharacterType::ENEMY) { if (!app->combat->RemoveCharacter(&app->combat->vecEnemies, this)) { return false; } }
+		if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(&app->combat->vecAllies, this); }
+		else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(&app->combat->vecEnemies, this); }
+		return false;
 	}
 
 	return true;

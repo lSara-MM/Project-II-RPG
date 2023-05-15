@@ -59,7 +59,7 @@ public:
 	bool HandleSkillsButtons(Character* chara);
 
 	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);
-	bool RemoveCharacter(vector<Character*>* arr, Character* chara);
+	void RemoveCharacter(vector<Character*>* arr, Character* chara);
 	void UpdatePositions(vector<Character*>* arr, int pos = 0);
 
 	// Settings
