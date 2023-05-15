@@ -545,7 +545,8 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	app->audio->PlayFx(control->fxControl);
 
 	//Gestion Skills
-	int posStart = 0, posEnd = 0, posInVec = SearchInVec(vecAllies, listInitiative.At(charaInTurn)->data);
+	int posStart = 0, posEnd = 0;
+	int posInVec = SearchInVec(vecAllies, listInitiative.At(charaInTurn)->data);
 
 	// target allies
 	if (control->id < 5)
@@ -569,7 +570,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("%s chara", vecEnemies.at(control->id - 5)->name.GetString());
 
 		//Busca el target ya que al moverse las posiciones del vector cambia
-		posInVec = SearchInVec(vecEnemies, listInitiative.At(charaInTurn)->data);
+		posInVec = SearchInVec(vecEnemies, control->id);
 		targeted_Character = vecEnemies.at(posInVec);
 	} 
 	// skills buttons
@@ -624,6 +625,17 @@ int Combat::SearchInVec(vector<Character*> arr, Character* chara)
 	for (int i = 0; i < arr.size(); i++)
 	{
 		if (arr.at(i) == chara) { return i; }
+	}
+
+	return -1;
+}
+
+// Busqueda mediante ID para onGuiClickEvent
+int Combat::SearchInVec(vector<Character*> arr, int id)
+{
+	for (int i = 0; i < arr.size(); i++)
+	{
+		if (arr.at(i)->button->id == id) { return i; }
 	}
 
 	return -1;
