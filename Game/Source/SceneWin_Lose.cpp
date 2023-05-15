@@ -79,17 +79,17 @@ bool SceneWin_Lose::Update(float dt)
 	backgroundAnimation.Step(1, false);
 
 	float point = backgroundAnimation.GetPoint();
-	int offset = 1300;
+	int offset = -750;
 
 	if (win)
 	{
 		app->audio->PlayMusic(winMusicPath);
-		app->render->DrawTexture(Win, offset + point * (0 - offset), 0);
+		app->render->DrawTexture(Win, 0, offset + point * (0 - offset));
 	}
 	if (!win)
 	{
 		app->audio->PlayMusic(looseMusicPath);
-		app->render->DrawTexture(Lose, offset + point * (0 - offset), 0);
+		app->render->DrawTexture(Lose, 0, offset + point * (0 - offset));
 
 	}
 

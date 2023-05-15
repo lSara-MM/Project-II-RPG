@@ -105,7 +105,7 @@ public:
 	//Retorna true si logras el chance, false si no
 	bool CalculateRandomProbability(int bonus_I, int against_I = 0); 
 
-	bool ModifyHP(int hp); //Positivo para curar negativo para dañar
+	bool ModifyHP(int hp); //Positivo para curar negativo para daï¿½ar
 
 	int ApplySkill(Character* caster, Character* defender, Skill* skill); //ERIC:Va haber que poner muchos mas atributos	
 	void LoadSkill(int arr[4]);
@@ -117,6 +117,7 @@ public:
 	int GetStat(EffectType statType);
 
 public:
+	bool isCombatant;
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
@@ -139,7 +140,7 @@ public:
 	int critDamage; // Base 120, , luego se ha de dividir entre 100 a lo 120= x1,2
 	int precision; // La base es 100%, es un porcentaje que se enfrenta vs la resistencia y precision
 	int armor; // MAXIMO ABSOLUTO 200, mas menos full items en tanque 120
-	int dodge; // Probabilidad de no recibir nada de daño, base es 0%
+	int dodge; // Probabilidad de no recibir nada de daï¿½o, base es 0%
 	int res; // Probabilidad de no recibir un efecto de estado, base 10%
 	int speed; // Indicador quien va primero en la iniciativa
 
@@ -154,20 +155,17 @@ public:
 	List<Skill*> listSkills;
 	List<StatusEffect*> listStatusEffects;
 
-	// Texture position
-	iPoint  position;
 	GuiButton* button;
 
-	bool isCombatant;
+	// Texture position
+	iPoint  position;
 	SDL_Texture* texture;
 
 	//para dibujar, estaba en xml y no se usaba, para aprovechar
 	int id;
 	
 private:
-
 	const char* texturePath;
-	SDL_Rect* sectionRect;
 	List<int> listSkillsHistory; //Aqui guardamos un historial de que skills se ha usado.
 
 

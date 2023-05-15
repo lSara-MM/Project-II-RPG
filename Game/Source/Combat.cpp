@@ -18,6 +18,7 @@
 #include "GuiManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
+#include "Inventory.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -63,6 +64,9 @@ bool Combat::Start()
 {
 	//Load
 	//LoadCombat();
+
+	//Load inventory
+	app->inventory->Enable();
 
 	//Music combat
 	app->audio->PlayMusic(musCombat, 1.0);
@@ -153,12 +157,15 @@ bool Combat::Update(float dt)
 
 		//El calculo largo es para que la barra este centrada siempre aprox
 		SDL_Color color;
-		if (listInitiative.At(j)->data->charaType == CharacterType::ALLY) { color = { 0, 255, 100, 200 }; }
-		if (listInitiative.At(j)->data->charaType == CharacterType::ENEMY) { color = { 255, 0, 100, 200 }; }
-		app->render->DrawRectangle({ 640 - ((int)listInitiative.Count()) * 50 + i * 110, 20, 90, 90 }, color.r, color.g, color.b, color.a);
+		if (listInitiative.At(j)->data->charaType == CharacterType::ALLY) { color = { 33, 180, 33, 170 }; }
+		if (listInitiative.At(j)->data->charaType == CharacterType::ENEMY) { color = { 180, 33, 33, 170 }; }
+		app->render->DrawRectangle({ 640 - ((int)listInitiative.Count()) * 50 + i * 110, 20, 76, 76 }, color.r, color.g, color.b, color.a);
+
+		int x = 640 - ((int)listInitiative.Count()) * 50 + i * 74;
+		app->render->DrawTexture(listInitiative.At(j)->data->texture, x, 20, &listInitiative.At(j)->data->texSection);
 
 		//El nombre es temporal, luego ira la head del character
-		app->render->TextDraw(listInitiative.At(j)->data->name.GetString(), 640 - ((int)listInitiative.Count()) * 50 + i * 110, 30, 11);
+		//app->render->TextDraw(listInitiative.At(j)->data->name.GetString(), 640 - ((int)listInitiative.Count()) * 50 + i * 110, 30, 11);
 		j++;
 	}
 
@@ -261,13 +268,10 @@ bool Combat::PostUpdate()
 			rect = { 0,0,i->data->bounds.w,i->data->bounds.w };
 
 			app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x, i->data->bounds.y, &rect);
-			
 			break;
 		default:
 			break;
 		}
-	
-	
 	}
 
 	return ret;
@@ -310,6 +314,9 @@ bool Combat::CleanUp()
 	{
 		app->questManager->active = true;
 	}
+
+	//Unload inventory
+	app->inventory->Disable();
 
 	return true;
 }

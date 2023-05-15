@@ -52,28 +52,36 @@
         type="0" class="0" skill1ID="1" skill2ID="2" skill3ID="3" skill4ID="4"
                
         width="0" heigth="0"
-		texturePath="Assets/Textures/AllyProtagonist.png"/>
+		texturePath="Assets/Textures/AllyProtagonist.png"
+		
+		sectionX="12" sectionY="22"/>
 		
 		<CombatCharacter name ="Companion" id="1"
         maxHp="1000" currentHp="1000" attack="200" armor="8" critRate="10" critDamage="20" precision="15" res="15" dodge="15" speed="7"
         type="0" class="7" skill1ID="5" skill2ID="6" skill3ID="7" skill4ID="8"
                
         width="0" heigth="0"
-		texturePath="Assets/Textures/AllyBard.png"/>
+		texturePath="Assets/Textures/AllyBard.png"
+		
+		sectionX="19" sectionY="20"/>
 
 		<CombatCharacter name ="Healer Twins" id="2"
         maxHp="1150" currentHp="1150" attack="190" armor="12" critRate="20" critDamage="25" precision="15" res="10" dodge="10" speed="8"
         type="0" class="0" skill1ID="9" skill2ID="10" skill3ID="11" skill4ID="12"
                
         width="0" heigth="0"
-		texturePath="Assets/Textures/AllyHealer.png"/>
+		texturePath="Assets/Textures/AllyHealer.png"
+		
+		sectionX="126" sectionY="178"/>
 
 		<CombatCharacter name ="Fire Eater" id="3"
         maxHp="1150" currentHp="1150" attack="190" armor="12" critRate="20" critDamage="25" precision="15" res="10" dodge="10" speed="8"
         type="0" class="0" skill1ID="13" skill2ID="14" skill3ID="15" skill4ID="16"
                
         width="0" heigth="0"
-		texturePath="Assets/Textures/AllyDOTS.png"/>
+		texturePath="Assets/Textures/AllyDOTS.png"
+
+		sectionX="38" sectionY="2"/>
 		
 
 	</entitymanager>
@@ -99,7 +107,6 @@
 		settingsPath ="Assets/Textures/setting_menu.png" mouseSpeed =" 0.5">		
 
 	<!--NPCs-->
-
 	<npc name="GUIA" dialogueID="1"
 		x="3710" y="985" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
 
@@ -129,16 +136,13 @@
 
 	<map>
 		<mapfolder path="Assets/Maps/"/>
-		<mapfile path="Assets/Maps/map1.tmx"/>
-		
+		<mapfile path="Assets/Maps/map1.tmx"/>		
 		
 		<mapdungeonfolder path="Assets/Maps/"/>
-		<mapdungeonfile path="Assets/Maps/mapDungeon.tmx"/>
-		
+		<mapdungeonfile path="Assets/Maps/mapDungeon.tmx"/>		
 		
 		<mappracticefolder path="Assets/Maps/"/>
-		<mappracticefile path="Assets/Maps/mapPractice.tmx"/>
-		
+		<mappracticefile path="Assets/Maps/mapPractice.tmx"/>		
 
 		<mapcircusfolder path="Assets/Maps/"/>
 		<mapcircusfile path="Assets/Maps/mapCircus.tmx"/>
@@ -172,27 +176,34 @@ enum class CharacterClass
         maxHp="1000" currentHp="1000" attack="120" armor="18" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="3"
         type="1" class="4" skill1ID="21" skill2ID="22" skill3ID="23" skill4ID="24"
                
-        width="0" heigth="0" texturePath="Assets/Textures/EnemyBewitchedWardrobe.png"/>
+        width="0" heigth="0" 
+		texturePath="Assets/Textures/EnemyBewitchedWardrobe.png"
+		
+		sectionX="35" sectionY="36"/>
 		
 		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="5"
         type="1" class="0" skill1ID="25" skill2ID="26" skill3ID="27" skill4ID="28"
                
         width="0" heigth="0"  
-        texturePath ="Assets/Textures/EnemyCursedPuppet.png"/>
+        texturePath ="Assets/Textures/EnemyCursedPuppet.png"
+		
+		sectionX="16" sectionY="26"/>
 
-		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="140" armor="8" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="2"
-               
+		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="140" armor="8" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="2"          
         type="1" class="8" skill1ID="29" skill2ID="30" skill3ID="31" skill4ID="32"
                
         width="0" heigth="0"
-        texturePath ="Assets/Textures/EnemyPossessedPainting.png"/>
+        texturePath ="Assets/Textures/EnemyPossessedPainting.png"
+		
+		sectionX="26" sectionY="30"/>
 
 		<enemy name ="The Specter" id="0" maxHp="2550" currentHp="2550" attack="220" armor="20" critRate="10" critDamage="25" precision="20" res="35" dodge="0" speed="6"
-               
         type="1" class="10" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
                
         width="0" heigth="0"
-        texturePath ="Assets/Textures/EnemyBossSpecter.png"/>
+        texturePath ="Assets/Textures/EnemyBossSpecter.png"
+		
+		sectionX="23" sectionY="0"/>
 	<!-- Placeholder -->
 	</scenes>
 

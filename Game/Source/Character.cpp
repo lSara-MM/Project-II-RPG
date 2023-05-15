@@ -66,6 +66,13 @@ bool Character::Awake()
 
 	texturePath = parameters.attribute("texturePath").as_string();
 
+	// texture section (for buttons and turns bar)
+	SDL_Rect rect;
+	rect.x = parameters.attribute("sectionX").as_int();
+	rect.y = parameters.attribute("sectionY").as_int();
+	rect.w = 74; rect.h = 74;
+	texSection = rect;
+
 	int skillIDs[4];
 	skillIDs[0] = parameters.attribute("skill1ID").as_int();
 	skillIDs[1] = parameters.attribute("skill2ID").as_int();
@@ -112,8 +119,6 @@ bool Character::Start()
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, ButtonType::COMBAT_TARGET);
 		app->combat->listButtons.Add(button);
 
-		// Texture section
-		sectionRect = nullptr;
 		button->state = GuiControlState::SELECTED;
 		button->isSelected = true;
 	}
@@ -127,7 +132,7 @@ bool Character::Start()
 
 		// Texture section
 		SDL_Rect rect = { 0, 0, 0, 0 };
-		sectionRect = &rect;
+		texSection = rect;
 
 		button->state = GuiControlState::NONE;
 	}
@@ -139,10 +144,11 @@ bool Character::Start()
 
 bool Character::Update(float dt)
 {
-	app->render->DrawTexture(texture, position.x, position.y, sectionRect);
-
 	if (isCombatant)
 	{
+		// Render character
+		app->render->DrawTexture(texture, position.x, position.y);
+
 		// Health
 		string HP_C = std::to_string(currentHp);
 		const char* ch_hp = HP_C.c_str();
@@ -323,7 +329,7 @@ bool Character::Update(float dt)
 							}
 							if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))//Ataques
 							{
-								//usar skill 3 (daño + debuff)
+								//usar skill 3 (daï¿½o + debuff)
 								UseSkill(listSkills.At(3)->data);
 
 								listSkillsHistory.Add(3);
@@ -331,7 +337,7 @@ bool Character::Update(float dt)
 							}
 							else
 							{
-								//usar skill 0 (daño solo) (es la skill mas debil)
+								//usar skill 0 (daï¿½o solo) (es la skill mas debil)
 								UseSkill(listSkills.At(0)->data);
 
 								listSkillsHistory.Add(0);

@@ -140,7 +140,7 @@ bool Circus::PostUpdate()
 
 	if (exit_B) return false;
 
-	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	/*if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 	{
 		settings_B = !settings_B;
 
@@ -153,10 +153,18 @@ bool Circus::PostUpdate()
 			pSettings->CloseSettings();
 			pSettings->CleanUp();
 		}
-	}
+	}*/
 
 	if (pause_B) { pPause->OpenPause(); }
+	else
+	{
+		pPause->ClosePause();
+	}
 	if (settings_B) { pSettings->OpenSettings(); }
+	else
+	{
+		pSettings->CloseSettings();
+	}
 	app->guiManager->Draw();
 
 	return ret;
@@ -244,10 +252,10 @@ void Circus::Debug()
 
 			pSettings->settings_B = !pSettings->settings_B;
 		}
-		else
+		/*else
 		{
 			pPause->CleanUp();
-		}
+		}*/
 
 		LOG("PAUSE");
 	}
@@ -264,22 +272,22 @@ void Circus::Debug()
 
 			settings_B = false;
 			app->audio->PlayMusic(circusMusPath);
-			pSettings->CloseSettings();
-			pSettings->CleanUp();
+			/*pSettings->CloseSettings();
+			pSettings->CleanUp();*/
 		}
 		else
 		{
 			pause_B = false;
 			if (pause_B)
 			{
-				pPause = new Pause(this);
-				pSettings = pPause->pSettings;
+				/*pPause = new Pause(this);
+				pSettings = pPause->pSettings;*/
 
 				pSettings->settings_B = !pSettings->settings_B;
 			}
 			else
 			{
-				pPause->CleanUp();
+				/*pPause->CleanUp();*/
 			}
 
 		}
@@ -335,14 +343,14 @@ bool Circus::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button Close pause click");
 		pause_B = false;
 		app->audio->PlayMusic(circusMusPath);
-		pPause->CleanUp();
+		/*pPause->CleanUp();*/
 		break;
 
 	case 702:
 		LOG("Button Resume click");
 		pause_B = false;
 		app->audio->PlayMusic(circusMusPath);
-		pPause->CleanUp();
+		/*pPause->CleanUp();*/
 		break;
 
 	case 703:
@@ -358,7 +366,7 @@ bool Circus::OnGuiMouseClickEvent(GuiControl* control)
 		}
 
 		settings_B = true;
-		pSettings = new Settings(this);
+		/*pSettings = new Settings(this);*/
 		break;
 
 	case 705:
@@ -377,7 +385,7 @@ bool Circus::OnGuiMouseClickEvent(GuiControl* control)
 
 		settings_B = false;
 		pSettings->CloseSettings();
-		pSettings->CleanUp();
+		/*pSettings->CleanUp();*/
 		break;
 
 	case 802:

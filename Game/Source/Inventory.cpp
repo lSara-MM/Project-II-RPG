@@ -26,11 +26,17 @@ bool Inventory::Start()
 {
 	inventoryIMG = app->tex->Load(app->itemManager->texturePath);
 
-	for (int i=0; i <= 3; i++)
+	if (app->combat->active)
 	{
-		SDL_Rect buttonBounds;
-		buttonBounds = { (362 + 37 * i), 404, 25, 25 };
-		selectCharacter[i] = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1000 + i, this, buttonBounds, ButtonType::SMALL);
+	}
+	else
+	{
+		for (int i = 0; i <= 3; i++)
+		{
+			SDL_Rect buttonBounds;
+			buttonBounds = { (362 + 34 * i), 407, 25, 25 };
+			selectCharacter[i] = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1000 + i, this, buttonBounds, ButtonType::SMALL);
+		}
 	}
 
 	return true;
@@ -46,10 +52,18 @@ bool Inventory::Update(float dt)
 {
 	bool ret = true;
 
-	app->render->DrawTexture(inventoryIMG, 0 - app->render->camera.x, 0 - app->render->camera.y);
-
-	y = 148;
 	int x = 0;
+
+	if (app->combat->active)
+	{
+		y = 460;
+	}
+	else
+	{
+		app->render->DrawTexture(inventoryIMG, 0 - app->render->camera.x, 0 - app->render->camera.y);
+
+		y = 148;
+	}
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 	{
 		if (cap == x)
@@ -67,45 +81,51 @@ bool Inventory::Update(float dt)
 		}
 	}
 
-	//Print Character
-	if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
+	if (app->combat->active)
 	{
-		app->render->DrawTexture(app->itemManager->arrParty.at(app->itemManager->invPos)->texture, 370 - app->render->camera.x, 180 - app->render->camera.y);
 	}
-
-	//LOAD STATS
-
-	if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
+	else
 	{
-		app->itemManager->maxhp = app->itemManager->arrParty.at(app->itemManager->invPos)->maxHp;
-		app->itemManager->armor = app->itemManager->arrParty.at(app->itemManager->invPos)->armor;
-		app->itemManager->attack = app->itemManager->arrParty.at(app->itemManager->invPos)->attack;
-		app->itemManager->critDamage = app->itemManager->arrParty.at(app->itemManager->invPos)->critDamage;
-		app->itemManager->critProbability = app->itemManager->arrParty.at(app->itemManager->invPos)->critRate;
-		app->itemManager->precision = app->itemManager->arrParty.at(app->itemManager->invPos)->precision;
-		app->itemManager->esquiva = app->itemManager->arrParty.at(app->itemManager->invPos)->dodge;
-		app->itemManager->speed = app->itemManager->arrParty.at(app->itemManager->invPos)->speed;
-		app->itemManager->resistencia = app->itemManager->arrParty.at(app->itemManager->invPos)->res;
+		//Print Character
+		if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
+		{
+			app->render->DrawTexture(app->itemManager->arrParty.at(app->itemManager->invPos)->texture, 370 - app->render->camera.x, 180 - app->render->camera.y);
+		}
 
-		//print stats
-		string h = to_string(app->itemManager->maxhp);
-		app->render->TextDraw(h.c_str(), 330, 460, 15, Font::TEXT, { 0, 0, 0 });
-		string at = to_string(app->itemManager->attack);
-		app->render->TextDraw(at.c_str(), 330, 485, 15, Font::TEXT, { 0, 0, 0 });
-		string cP = to_string(app->itemManager->critProbability);
-		app->render->TextDraw(cP.c_str(), 330, 510, 15, Font::TEXT, { 0, 0, 0 });
-		string cD = to_string(app->itemManager->critDamage);
-		app->render->TextDraw(cD.c_str(), 330, 535, 15, Font::TEXT, { 0, 0, 0 });
-		string p = to_string(app->itemManager->precision);
-		app->render->TextDraw(p.c_str(), 330, 560, 15, Font::TEXT, { 0, 0, 0 });
-		string ar = to_string(app->itemManager->armor);
-		app->render->TextDraw(ar.c_str(), 520, 485, 15, Font::TEXT, { 0, 0, 0 });
-		string e = to_string(app->itemManager->esquiva);
-		app->render->TextDraw(e.c_str(), 520, 510, 15, Font::TEXT, { 0, 0, 0 });
-		string r = to_string(app->itemManager->resistencia);
-		app->render->TextDraw(r.c_str(), 520, 535, 15, Font::TEXT, { 0, 0, 0 });
-		string s = to_string(app->itemManager->speed);
-		app->render->TextDraw(s.c_str(), 520, 560, 15, Font::TEXT, { 0, 0, 0 });
+		//LOAD STATS
+
+		if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
+		{
+			app->itemManager->maxhp = app->itemManager->arrParty.at(app->itemManager->invPos)->maxHp;
+			app->itemManager->armor = app->itemManager->arrParty.at(app->itemManager->invPos)->armor;
+			app->itemManager->attack = app->itemManager->arrParty.at(app->itemManager->invPos)->attack;
+			app->itemManager->critDamage = app->itemManager->arrParty.at(app->itemManager->invPos)->critDamage;
+			app->itemManager->critProbability = app->itemManager->arrParty.at(app->itemManager->invPos)->critRate;
+			app->itemManager->precision = app->itemManager->arrParty.at(app->itemManager->invPos)->precision;
+			app->itemManager->esquiva = app->itemManager->arrParty.at(app->itemManager->invPos)->dodge;
+			app->itemManager->speed = app->itemManager->arrParty.at(app->itemManager->invPos)->speed;
+			app->itemManager->resistencia = app->itemManager->arrParty.at(app->itemManager->invPos)->res;
+
+			//print stats
+			string h = to_string(app->itemManager->maxhp);
+			app->render->TextDraw(h.c_str(), 330, 460, 15, Font::TEXT, { 0, 0, 0 });
+			string at = to_string(app->itemManager->attack);
+			app->render->TextDraw(at.c_str(), 330, 485, 15, Font::TEXT, { 0, 0, 0 });
+			string cP = to_string(app->itemManager->critProbability);
+			app->render->TextDraw(cP.c_str(), 330, 510, 15, Font::TEXT, { 0, 0, 0 });
+			string cD = to_string(app->itemManager->critDamage);
+			app->render->TextDraw(cD.c_str(), 330, 535, 15, Font::TEXT, { 0, 0, 0 });
+			string p = to_string(app->itemManager->precision);
+			app->render->TextDraw(p.c_str(), 330, 560, 15, Font::TEXT, { 0, 0, 0 });
+			string ar = to_string(app->itemManager->armor);
+			app->render->TextDraw(ar.c_str(), 520, 485, 15, Font::TEXT, { 0, 0, 0 });
+			string e = to_string(app->itemManager->esquiva);
+			app->render->TextDraw(e.c_str(), 520, 510, 15, Font::TEXT, { 0, 0, 0 });
+			string r = to_string(app->itemManager->resistencia);
+			app->render->TextDraw(r.c_str(), 520, 535, 15, Font::TEXT, { 0, 0, 0 });
+			string s = to_string(app->itemManager->speed);
+			app->render->TextDraw(s.c_str(), 520, 560, 15, Font::TEXT, { 0, 0, 0 });
+		}
 	}
 
 	return ret;
