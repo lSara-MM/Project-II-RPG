@@ -75,12 +75,12 @@ bool Combat::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	
+
 	app->physics->Disable();
 	app->entityManager->active = true;
 
 	StartCombat();
-	
+
 	// Skill button
 	GuiButton* button;	int j = 10;
 	//for (int i = 0; i < 5; i++)
@@ -539,7 +539,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	app->audio->PlayFx(control->fxControl);
 
 	//Gestion Skills
-	int posStart = 0, posEnd = 0;
+	int posStart = 0, posEnd = 0, posInVec = 0;
 
 	// target allies
 	if (control->id < 5)
@@ -552,6 +552,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 			if (vecAllies.at(i)->button->id == control->id)
 			{
 				targeted_Character = vecAllies.at(i);
+				posInVec = i;
 				break;
 			}
 		}		
@@ -587,8 +588,8 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		if (lastPressedAbility_I == control->id - 10) { lastPressedAbility_I = -1; } // Si already clicked deseleccionar
 		lastPressedAbility_I = control->id - 10;
 
-		posStart = listInitiative.At(charaInTurn)->data->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
-		posEnd = listInitiative.At(charaInTurn)->data->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
+		posStart = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
+		posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
 	}
 	// move character
 	else if (control->id == 14)
@@ -606,13 +607,13 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	//
 	if (lastPressedAbility_I != -1 && !isMoving)
 	{
-		if (vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->autoTarget == true)
+		if (vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->autoTarget == true)
 		{
-			HandleCharaButtons(&vecAllies, vecAllies.at(charaInTurn)->positionCombat_I, vecAllies.at(charaInTurn)->positionCombat_I);
+			HandleCharaButtons(&vecAllies, vecAllies.at(posInVec)->positionCombat_I, vecAllies.at(posInVec)->positionCombat_I);
 		}
 		else
 		{
-			if (vecAllies.at(charaInTurn)->listSkills.At(lastPressedAbility_I)->data->targetFriend==true)
+			if (vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->targetFriend==true)
 			{
 				HandleCharaButtons(&vecAllies, posStart, posEnd);
 			}
@@ -621,7 +622,6 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 				HandleCharaButtons(&vecEnemies, posStart, posEnd);
 			}
 		}
-		
 	}
 
 	return true;

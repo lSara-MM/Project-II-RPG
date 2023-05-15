@@ -63,11 +63,11 @@ STATUS ID
 		   posToUseStart="1" posToUseEnd="1" posToTargetStart="2" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
 	   statusID="5" postive="true" duration="1" intensity="40"
 	/>
-	<skill name="Humiliation" id="8" description="" 
+	<skill name="Humiliation" id="8" description="A cruel mockery that reduces the armor of an enemy for a long duration" 
 		   type="2" movementCaster="0"  movementTarget="-1"
 	   multiplierDmg="0" bonusPrecision="105" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
-	   statusID="5" postive="false" duration="3" intensity="-15"
+	   statusID="5" postive="false" duration="4" intensity="-15"
 	/>
 
 	<!--Skills Healer-->

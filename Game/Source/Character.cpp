@@ -521,7 +521,7 @@ bool Character::UseSkill(Skill* skill)
 		return true;
 	}
 
-	if(skill->targetFriend) //Targetea a gente de su propio grupo
+	if (skill->targetFriend) //Targetea a gente de su propio grupo
 	{
 		//ERIC: QUIZA HAYA QUE CAMBIAR A QUE NO HAYA FALLO POSIBLE, IDK
 		switch (charaType)
@@ -570,7 +570,7 @@ bool Character::UseSkill(Skill* skill)
 				app->combat->vecEnemies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(objective), skill));
 			}
 			break;
-			
+
 		case CharacterType::NONE:
 			break;
 		default:
