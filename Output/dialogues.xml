@@ -63,8 +63,8 @@
 		    <choice id="1" option="Talk me about this place." nextNode="2" eventReturn="0"/>
 		    <choice id="2" option="Talk me about The Showman." nextNode="3" eventReturn="0"/>
 		    <choice id="3" option="There are oracles everywhere. What is the deal with that? (MISSION)" nextNode="6" eventReturn="0"/>
-		    <choice id="3" option="Is there somewhere to train my abilities? (MISSION)" nextNode="8" eventReturn="0"/>
-		    <choice id="4" option="Bye" nextNode="-1" eventReturn="0"/>
+		    <choice id="4" option="Is there somewhere to train my abilities? (MISSION)" nextNode="8" eventReturn="0"/>
+		    <choice id="5" option="Bye" nextNode="-1" eventReturn="0"/>
 	    </node>
 
 	    <node id="1" name="GUIDE" text="Enjoy this place, don't be so serious, nobody likes serious magicians. I recommend the house of terror, there is a very nice man at the door.">

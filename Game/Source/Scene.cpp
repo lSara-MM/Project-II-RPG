@@ -61,8 +61,7 @@ bool Scene::Start()
 {
 	app->input->godMode_B = false;
 	app->physics->collisions = false;
-	app->questManager->active = true;
-	app->questManager->Start();
+	app->questManager->Enable();
 
 	if (app->puzzleManager->active == true) {
 		app->puzzleManager->CleanUp();
@@ -99,8 +98,6 @@ bool Scene::Start()
 
 	//Init player inventory
 	app->itemManager->SetPlayerForScene(player);
-
-	app->itemManager->Enable();
 
 	if (app->iScene->continueGame_B)
 	{
@@ -362,7 +359,7 @@ void Scene::Debug()
 
 	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
 		LOG("Combat");
-		app->combat->PreLoadCombat(player->arrParty, name);
+		app->combat->PreLoadCombat(app->itemManager->arrParty, name);
 		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
 	}
 	

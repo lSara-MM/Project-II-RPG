@@ -146,7 +146,7 @@
 	</map>
 
 <combat mouseSpeed =" 0.5" music ="Assets/Audio/Music/mus_combat.ogg"
-bgTexture="Assets/Textures/combat_background_placeholder.png" targetTexture="Assets/GUI/UI_button_charactherSelection.png" turnBarTexture="Assets/GUI/UI_battle_turnsBar.png">
+bgTexture="Assets/Textures/combat_background_placeholder.png" targetTexture="Assets/GUI/UI_button_charactherSelection.png" turnBarTexture="Assets/GUI/UI_battle_turnsBar.png" lastSkillTexture ="Assets/GUI/Atack Selected.png">
 
 <!--
 enum class CharacterClass

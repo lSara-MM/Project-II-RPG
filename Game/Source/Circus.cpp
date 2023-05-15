@@ -66,8 +66,11 @@ bool Circus::Start()
 	npcSetID = 1;
 
 	// Settings
-	pSettings = nullptr;
-	pPause = nullptr;
+	/*pSettings = nullptr;
+	pPause = nullptr;*/
+	pSettings = new Settings(this);
+	pPause = new Pause(this);
+	pPause->pSettings = pSettings;
 	pause_B = false;
 	settings_B = false;
 
@@ -236,8 +239,8 @@ void Circus::Debug()
 		app->audio->PlayFx(pausefx);
 		if (pause_B)
 		{
-			pPause = new Pause(this);
-			pSettings = pPause->pSettings;
+			/*pPause = new Pause(this);
+			pSettings = pPause->pSettings;*/
 
 			pSettings->settings_B = !pSettings->settings_B;
 		}

@@ -121,11 +121,7 @@ bool Player::Start()
 
 	PadLock = false;
 	lockMovement = false;
-	
-	for (int i = 0; i < arrParty.size(); i++)
-	{
-		arrParty.at(i) = nullptr;
-	}
+
 	return true;
 }
 
@@ -243,12 +239,6 @@ bool Player::CleanUp()
 	}
 
 	vecPC.clear();
-
-	for (int i = 0; i < arrParty.size(); i++)
-	{
-		//delete arrParty.at(i);
-		arrParty.at(i) = nullptr;
-	}
 
 	return true;
 }
@@ -689,37 +679,3 @@ void Player::LoadAllPC()
 		vecPC.push_back(chara);
 	}
 }
-
-// TO TEST
-void Player::AddCharaToParty(SString chara)
-{
-	for (int i = 0; i < vecPC.size(); i++)
-	{
-		if (strcmp(vecPC.at(i)->name.GetString(), chara.GetString()) == 0)
-		{
-			for (int i = 0; i < arrParty.size(); i++)
-			{
-				if (arrParty.at(i) == nullptr) 
-				{
-					arrParty.at(i) = vecPC.at(i);
-					arrParty.at(i)->positionCombat_I = i;
-					break;
-				}
-			}
-		}
-	}
-}
-
-void Player::SetParty()
-{	
-	// TO DO when party available
-	for (int i = 0; i < vecPC.size(); i++)
-	{
-		// TO DO: change commented per uncommented
-		//if (i == arrParty.size() - 1) break;
-		if (i == arrParty.size()) break;
-		arrParty.at(i) = vecPC.at(i);
-		arrParty.at(i)->positionCombat_I = i;
-	}
-}
-

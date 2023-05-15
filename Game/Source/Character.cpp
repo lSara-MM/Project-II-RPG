@@ -172,32 +172,10 @@ bool Character::Update(float dt)
 					//Check que hay un target 
 					if (app->combat->targeted_Character != nullptr)
 					{
-						//Check target valido
-						int posTarget = -1;
-						if (listSkills.At(app->combat->lastPressedAbility_I)->data->targetFriend) //aliado
-						{
-							posTarget = app->combat->SearchInVec(app->combat->vecAllies, app->combat->targeted_Character);
-							if (listSkills.At(app->combat->lastPressedAbility_I)->data->posToTargetStart_I <= posTarget <= listSkills.At(app->combat->lastPressedAbility_I)->data->posToTargetEnd_I)
-							{
-								UseSkill(listSkills.At(app->combat->lastPressedAbility_I)->data, app->combat->targeted_Character);
-								app->combat->targeted_Character = nullptr;
-								onTurn = false;
-								app->combat->NextTurn();
-							}
-						}
-						else //enemigo
-						{
-							posTarget = app->combat->SearchInVec(app->combat->vecEnemies, app->combat->targeted_Character);
-							if (listSkills.At(app->combat->lastPressedAbility_I)->data->posToTargetStart_I <= posTarget >= listSkills.At(app->combat->lastPressedAbility_I)->data->posToTargetEnd_I)
-							{
-								UseSkill(listSkills.At(app->combat->lastPressedAbility_I)->data, app->combat->targeted_Character);
-								app->combat->targeted_Character = nullptr;
-								onTurn = false;
-								app->combat->NextTurn();
-							}
-						}
-
-						
+						UseSkill(listSkills.At(app->combat->lastPressedAbility_I)->data, app->combat->targeted_Character);
+						app->combat->targeted_Character = nullptr;
+						onTurn = false;
+						app->combat->NextTurn();
 					}
 				}
 				//app->combat->HandleSkillsButtons(listSkills);

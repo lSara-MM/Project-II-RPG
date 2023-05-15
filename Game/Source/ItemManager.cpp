@@ -34,12 +34,16 @@ bool ItemManager::Start()
 		nodeList[i]->Start();
 	}
 
+	for (int i = 0; i < arrParty.size(); i++)
+	{
+		arrParty.at(i) = nullptr;
+	}
+
 	return true;
 }
 
 bool ItemManager::Update(float dt)
 {
-
 	//Add items HardCode
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
@@ -71,6 +75,12 @@ bool ItemManager::CleanUp()
 	}
 
 	nodeList.clear();
+
+	for (int i = 0; i < arrParty.size(); i++)
+	{
+		//delete arrParty.at(i);
+		arrParty.at(i) = nullptr;
+	}
 
 	return true;
 }
@@ -134,36 +144,36 @@ void ItemManager::MinusQuantity(const char* name)
 
 void ItemManager::UseItem(ItemNode* item)
 {
-	for (size_t i = 0; i < player->arrParty.size(); i++)
+	for (size_t i = 0; i < arrParty.size(); i++)
 	{
-		if (player->arrParty.at(i) != nullptr && invPos==i)
+		if (arrParty.at(i) != nullptr && invPos==i)
 		{
 
 			if (item->type == 2 && item->equiped == true)
 			{
-				player->arrParty.at(i)->currentHp += item->hp;
-				player->arrParty.at(i)->maxHp += item->maxhp;
-				player->arrParty.at(i)->armor += item->armor;
-				player->arrParty.at(i)->attack += item->attack;
-				player->arrParty.at(i)->critDamage += item->critDamage;
-				player->arrParty.at(i)->critRate += item->critProbability;
-				player->arrParty.at(i)->precision += item->precision;
-				player->arrParty.at(i)->dodge += item->esquiva;
-				player->arrParty.at(i)->speed += item->speed;
-				player->arrParty.at(i)->res += item->resistencia;
+				arrParty.at(i)->currentHp += item->hp;
+				arrParty.at(i)->maxHp += item->maxhp;
+				arrParty.at(i)->armor += item->armor;
+				arrParty.at(i)->attack += item->attack;
+				arrParty.at(i)->critDamage += item->critDamage;
+				arrParty.at(i)->critRate += item->critProbability;
+				arrParty.at(i)->precision += item->precision;
+				arrParty.at(i)->dodge += item->esquiva;
+				arrParty.at(i)->speed += item->speed;
+				arrParty.at(i)->res += item->resistencia;
 			}
 			else if (item->type == 2 && item->equiped == false)
 			{
-				player->arrParty.at(i)->currentHp -= item->hp;
-				player->arrParty.at(i)->maxHp -= item->maxhp;
-				player->arrParty.at(i)->armor -= item->armor;
-				player->arrParty.at(i)->attack -= item->attack;
-				player->arrParty.at(i)->critDamage -= item->critDamage;
-				player->arrParty.at(i)->critRate -= item->critProbability;
-				player->arrParty.at(i)->precision -= item->precision;
-				player->arrParty.at(i)->dodge -= item->esquiva;
-				player->arrParty.at(i)->speed -= item->speed;
-				player->arrParty.at(i)->res -= item->resistencia;
+				arrParty.at(i)->currentHp -= item->hp;
+				arrParty.at(i)->maxHp -= item->maxhp;
+				arrParty.at(i)->armor -= item->armor;
+				arrParty.at(i)->attack -= item->attack;
+				arrParty.at(i)->critDamage -= item->critDamage;
+				arrParty.at(i)->critRate -= item->critProbability;
+				arrParty.at(i)->precision -= item->precision;
+				arrParty.at(i)->dodge -= item->esquiva;
+				arrParty.at(i)->speed -= item->speed;
+				arrParty.at(i)->res -= item->resistencia;
 
 				if (item->space > 0)
 				{
@@ -175,7 +185,7 @@ void ItemManager::UseItem(ItemNode* item)
 			{
 				if (item->kind == 1)
 				{
-					player->arrParty.at(i)->currentHp += item->hp;
+					arrParty.at(i)->currentHp += item->hp;
 				}
 			}
 
@@ -233,9 +243,9 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 {
 	if (nodeList[i]->quantity > 0)
 	{
-		LoadButtons(x, y, i);
-
 		nodeList[i]->ID = i;
+
+		LoadButtons(x, y, i);
 
 		itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
 
@@ -350,7 +360,7 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 	if (nodeList[ID]->button != nullptr)
 	{
 		nodeList[ID]->button->bounds = buttonBounds;
-		nodeList[ID]->button->id = ID;
+		nodeList[ID]->button->id = nodeList[ID]->ID;
 	}
 }
 
@@ -409,9 +419,42 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 	return ret;
 }
 
-void  ItemManager::SetPlayerForScene(Player* player_)
+void ItemManager::SetPlayerForScene(Player* player_)
 {
 	player = player_;
 	player->LoadAllPC();
-	player->SetParty();
+	SetParty();
+}
+
+// TO TEST
+void ItemManager::AddCharaToParty(SString chara)
+{
+	for (int i = 0; i < player->vecPC.size(); i++)
+	{
+		if (strcmp(player->vecPC.at(i)->name.GetString(), chara.GetString()) == 0)
+		{
+			for (int i = 0; i < arrParty.size(); i++)
+			{
+				if (arrParty.at(i) == nullptr)
+				{
+					arrParty.at(i) = player->vecPC.at(i);
+					arrParty.at(i)->positionCombat_I = i;
+					break;
+				}
+			}
+		}
+	}
+}
+
+void ItemManager::SetParty()
+{
+	// TO DO when party available
+	for (int i = 0; i < player->vecPC.size(); i++)
+	{
+		// TO DO: change commented per uncommented
+		if (i == arrParty.size() - 1) break;
+		//if (i == arrParty.size()) break;
+		arrParty.at(i) = player->vecPC.at(i);
+		arrParty.at(i)->positionCombat_I = i;
+	}
 }

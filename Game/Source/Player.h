@@ -39,8 +39,6 @@ public:
 	void Controller(float dt);
 
 	void LoadAllPC();
-	void AddCharaToParty(SString chara);
-	void SetParty();
 
 public:
 
@@ -83,7 +81,6 @@ public:
 
 	Npc* npcTalkingTo;
 	bool npcInteract;
-	array<Character*, 4> arrParty;
 	vector<Character*> vecPC;
 
 private:
