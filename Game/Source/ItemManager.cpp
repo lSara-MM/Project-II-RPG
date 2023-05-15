@@ -144,62 +144,81 @@ void ItemManager::MinusQuantity(const char* name)
 
 void ItemManager::UseItem(ItemNode* item)
 {
-	for (size_t i = 0; i < arrParty.size(); i++)
+	if (app->combat->active)
 	{
-		if (arrParty.at(i) != nullptr && invPos==i)
+		for (size_t i = 0; i < arrParty.size(); i++)
 		{
-
-			if (item->type == 2 && item->equiped == true)
+			if (arrParty.at(i) != nullptr && app->combat->charaInTurn == i)
 			{
-				arrParty.at(i)->currentHp += item->hp;
-				arrParty.at(i)->maxHp += item->maxhp;
-				arrParty.at(i)->armor += item->armor;
-				arrParty.at(i)->attack += item->attack;
-				arrParty.at(i)->critDamage += item->critDamage;
-				arrParty.at(i)->critRate += item->critProbability;
-				arrParty.at(i)->precision += item->precision;
-				arrParty.at(i)->dodge += item->esquiva;
-				arrParty.at(i)->speed += item->speed;
-				arrParty.at(i)->res += item->resistencia;
-			}
-			else if (item->type == 2 && item->equiped == false)
-			{
-				arrParty.at(i)->currentHp -= item->hp;
-				arrParty.at(i)->maxHp -= item->maxhp;
-				arrParty.at(i)->armor -= item->armor;
-				arrParty.at(i)->attack -= item->attack;
-				arrParty.at(i)->critDamage -= item->critDamage;
-				arrParty.at(i)->critRate -= item->critProbability;
-				arrParty.at(i)->precision -= item->precision;
-				arrParty.at(i)->dodge -= item->esquiva;
-				arrParty.at(i)->speed -= item->speed;
-				arrParty.at(i)->res -= item->resistencia;
-
-				if (item->space > 0)
+				if (item->kind != 2)
 				{
-					item->space = 0;
+					app->combat->listInitiative[i]->currentHp*(item->hp);
 				}
 			}
-
-			if (item->type == 1)
+		}
+	}
+	else
+	{
+		for (size_t i = 0; i < arrParty.size(); i++)
+		{
+			if (arrParty.at(i) != nullptr && invPos == i)
 			{
-				if (item->kind == 1)
+				if (item->type == 2 && item->equiped == true)
 				{
-					arrParty.at(i)->currentHp += item->hp;
+					arrParty.at(i)->ModifyHP(item->hp);
+					arrParty.at(i)->maxHp += item->maxhp;
+					arrParty.at(i)->armor += item->armor;
+					arrParty.at(i)->attack += item->attack;
+					arrParty.at(i)->critDamage += item->critDamage;
+					arrParty.at(i)->critRate += item->critProbability;
+					arrParty.at(i)->precision += item->precision;
+					arrParty.at(i)->dodge += item->esquiva;
+					arrParty.at(i)->speed += item->speed;
+					arrParty.at(i)->res += item->resistencia;
 				}
-			}
+				else if (item->type == 2 && item->equiped == false)
+				{
+					arrParty.at(i)->maxHp -= item->maxhp;
+					arrParty.at(i)->armor -= item->armor;
+					arrParty.at(i)->attack -= item->attack;
+					arrParty.at(i)->critDamage -= item->critDamage;
+					arrParty.at(i)->critRate -= item->critProbability;
+					arrParty.at(i)->precision -= item->precision;
+					arrParty.at(i)->dodge -= item->esquiva;
+					arrParty.at(i)->speed -= item->speed;
+					arrParty.at(i)->res -= item->resistencia;
 
-			item->whom = i;
+					if (item->space > 0)
+					{
+						item->space = 0;
+					}
+				}
+
+				if (item->type == 1)
+				{
+					if (item->kind == 1)
+					{
+						arrParty.at(i)->currentHp += item->hp;
+					}
+				}
+
+				item->whom = i;
+			}
+		}
+
+		//Temporal
+		if (item->type == 2 && item->equiped == false)
+		{
+			if (item->space > 0)
+			{
+				item->space = 0;
+			}
 		}
 	}
 
-	//Temporal
-	if (item->type == 2 && item->equiped == false)
+	if (item->quantity < 0)
 	{
-		if (item->space > 0)
-		{
-			item->space = 0;
-		}
+		item->CleanUp();
 	}
 }
 
@@ -245,63 +264,78 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 	{
 		nodeList[i]->ID = i;
 
-		LoadButtons(x, y, i);
-
 		itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
 
-		if (nodeList[i]->equiped == false)
+		if (app->combat->active)
 		{
-			app->render->DrawTexture(itemsTexture, (671 + 42 * x) - app->render->camera.x, y - app->render->camera.y);
-
-			nodeList[i]->whom = invPos;
-
-			string c = to_string(nodeList[i]->quantity);
-			app->render->TextDraw(c.c_str(), (671 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
-		}
-		else if (nodeList[i]->equiped && nodeList[i]->whom == invPos)
-		{
-			switch (nodeList[i]->kind)
+			if (nodeList[i]->type == 1)
 			{
-			case 1:
-				app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 295 - app->render->camera.y);
-				break;
-			case 2:
-				app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 245 - app->render->camera.y);
-				break;
-			case 3:
-				app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 345 - app->render->camera.y);
-				break;
-			case 4:
-				app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 195 - app->render->camera.y);
-				break;
-			case 5:
-				if (nodeList[i]->space == 1)
-				{
-					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 185 - app->render->camera.y);
-				}
-				else
-				{
-					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 235 - app->render->camera.y);
-				}
-				break;
-			case 6:
-				if (nodeList[i]->space == 1)
-				{
-					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 300 - app->render->camera.y);
-				}
-				else
-				{
-					app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 348 - app->render->camera.y);
-				}
+				LoadButtons(x, y, i);
+
+				app->render->DrawTexture(itemsTexture, (720 + 42 * x) - app->render->camera.x, y - app->render->camera.y);
+
+				string c = to_string(nodeList[i]->quantity);
+				app->render->TextDraw(c.c_str(), (720 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
 			}
 		}
-		else if (nodeList[i]->equiped && nodeList[i]->whom != invPos)
+		else
 		{
-			nodeList[i]->CleanUp();
-		}
+			nodeList[i]->whom = invPos;
 
-		app->tex->UnLoad(itemsTexture);
-		itemsTexture = NULL;
+			LoadButtons(x, y, i);
+
+			if (nodeList[i]->equiped == false)
+			{
+				app->render->DrawTexture(itemsTexture, (671 + 42 * x) - app->render->camera.x, y - app->render->camera.y);
+
+				string c = to_string(nodeList[i]->quantity);
+				app->render->TextDraw(c.c_str(), (671 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
+			}
+			else if (nodeList[i]->equiped && nodeList[i]->whom == invPos)
+			{
+				switch (nodeList[i]->kind)
+				{
+				case 1:
+					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 295 - app->render->camera.y);
+					break;
+				case 2:
+					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 245 - app->render->camera.y);
+					break;
+				case 3:
+					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 345 - app->render->camera.y);
+					break;
+				case 4:
+					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 195 - app->render->camera.y);
+					break;
+				case 5:
+					if (nodeList[i]->space == 1)
+					{
+						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 185 - app->render->camera.y);
+					}
+					else
+					{
+						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 235 - app->render->camera.y);
+					}
+					break;
+				case 6:
+					if (nodeList[i]->space == 1)
+					{
+						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 300 - app->render->camera.y);
+					}
+					else
+					{
+						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 348 - app->render->camera.y);
+					}
+				}
+			}
+			else if (nodeList[i]->equiped && nodeList[i]->whom != invPos)
+			{
+				nodeList[i]->CleanUp();
+			}
+
+			app->tex->UnLoad(itemsTexture);
+			itemsTexture = NULL;
+		}
 	}
 }
 
@@ -309,51 +343,65 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 {
 
 	SDL_Rect buttonBounds;
-	buttonBounds = { (671 + 42 * x), y, 40, 40 };
+	buttonBounds = { (680 + 42 * x), y, 40, 40 };
 
-	if (nodeList[ID]->button != nullptr || (nodeList[ID]->equiped && nodeList[ID]->whom != invPos))
-	{}
+	if (app->combat->active)
+	{
+		buttonBounds = { (720 + 42 * x), y, 40, 40 };
+
+		if (nodeList[ID]->button != nullptr)
+		{}else
+		{ 
+			nodeList[ID]->Start();
+		}
+	}
 	else
 	{
-		nodeList[ID]->Start();
-	}
-
-	if (nodeList[ID]->equiped)
-	{
-		switch (nodeList[ID]->kind)
+		if (nodeList[ID]->button != nullptr || (nodeList[ID]->equiped && nodeList[ID]->whom != invPos))
 		{
-		case 1:
-			buttonBounds = { (218 + 52), 295, 32, 32 };
-			break;
-		case 2:
-			buttonBounds = { (218 + 52), 245, 32, 32 };
-			break;
-		case 3:
-			buttonBounds = { (218 + 52), 345, 32, 32 };
-			break;
-		case 4:
-			buttonBounds = { (218 + 52), 195, 32, 32 };
-			break;
-		case 5:
-			if (nodeList[ID]->space == 1)
+		}
+		else
+		{
+			nodeList[ID]->Start();
+		}
+
+		if (nodeList[ID]->equiped)
+		{
+			switch (nodeList[ID]->kind)
 			{
-				buttonBounds = { (510 + 52), 185, 32, 32 };
+			case 1:
+				buttonBounds = { (218 + 52), 295, 32, 32 };
+				break;
+			case 2:
+				buttonBounds = { (218 + 52), 245, 32, 32 };
+				break;
+			case 3:
+				buttonBounds = { (218 + 52), 345, 32, 32 };
+				break;
+			case 4:
+				buttonBounds = { (218 + 52), 195, 32, 32 };
+				break;
+			case 5:
+				if (nodeList[ID]->space == 1)
+				{
+					buttonBounds = { (510 + 52), 185, 32, 32 };
+				}
+				else
+				{
+					buttonBounds = { (510 + 52), 235, 32, 32 };
+				}
+				break;
+			case 6:
+				if (nodeList[ID]->space == 1)
+				{
+					buttonBounds = { (510 + 52), 300, 32, 32 };
+				}
+				else
+				{
+					buttonBounds = { (510 + 52), 348, 32, 32 };
+				}
+				break;
 			}
-			else
-			{
-				buttonBounds = { (510 + 52), 235, 32, 32 };
-			}
-			break;
-		case 6:
-			if (nodeList[ID]->space == 1)
-			{
-				buttonBounds = { (510 + 52), 300, 32, 32 };
-			}
-			else
-			{
-				buttonBounds = { (510 + 52), 348, 32, 32 };
-			}
-			break;
 		}
 	}
 
