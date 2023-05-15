@@ -63,6 +63,7 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	case ButtonType::SWAP_SKILL:
 		break;
 	case ButtonType::COMBAT_TARGET :
+		buttonTex = app->tex->Load("Assets/GUI/Target_To_Select.png");
 		break;
 	case ButtonType::SKILL_1:
 		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
@@ -193,31 +194,35 @@ bool GuiButton::Update(float dt)
 
 bool GuiButton::Draw(Render* render)
 {
-	switch (axisType)
+	if (buttonType!=ButtonType::SMALL)
 	{
-	case AnimationAxis::DOWN_Y:
-		point = animationButton.GetPoint();
-		offset = -750;
-		bounds.y = offset + point * (boundsY_AUX - offset);
-		break;
-	case AnimationAxis::UP_Y:
-		point = animationButton.GetPoint();
-		offset = 750;
-		bounds.y = offset + point * (boundsY_AUX - offset);
-		break;
-	case AnimationAxis::LEFT_X:
-		point = animationButton.GetPoint();
-		offset = 1300;
-		bounds.x = offset + point * (boundsX_AUX - offset);
-		break;
-	case AnimationAxis::RIGHT_X:
-		point = animationButton.GetPoint();
-		offset = -1300;
-		bounds.x = offset + point * (boundsX_AUX - offset);
-		break;
-	default:
-		break;
+		switch (axisType)
+		{
+		case AnimationAxis::DOWN_Y:
+			point = animationButton.GetPoint();
+			offset = -750;
+			bounds.y = offset + point * (boundsY_AUX - offset);
+			break;
+		case AnimationAxis::UP_Y:
+			point = animationButton.GetPoint();
+			offset = 750;
+			bounds.y = offset + point * (boundsY_AUX - offset);
+			break;
+		case AnimationAxis::LEFT_X:
+			point = animationButton.GetPoint();
+			offset = 1300;
+			bounds.x = offset + point * (boundsX_AUX - offset);
+			break;
+		case AnimationAxis::RIGHT_X:
+			point = animationButton.GetPoint();
+			offset = -1300;
+			bounds.x = offset + point * (boundsX_AUX - offset);
+			break;
+		default:
+			break;
+		}
 	}
+
 
 	SDL_Rect rect = { 0, 0, bounds.w, bounds.h };
 
@@ -385,6 +390,9 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::SWAP_SKILL:
 				break;
 			case ButtonType::COMBAT_TARGET:
+				rect.w = 120;
+				rect.h = 14;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y+bounds.h+7, &rect);
 				break;
 			case ButtonType::SKILL_1:
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
