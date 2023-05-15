@@ -62,7 +62,22 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 		break;
 	case ButtonType::SWAP_SKILL:
 		break;
-	case ButtonType::COMBAT_TARGET:
+	case ButtonType::COMBAT_TARGET :
+		break;
+	case ButtonType::SKILL_1:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
+		break;
+	case ButtonType::SKILL_2:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
+		break;
+	case ButtonType::SKILL_3:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
+		break;
+	case ButtonType::SKILL_4:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
+		break;
+	case ButtonType::CHANGE_POSITION:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
 		break;
 	default:
 		break;
@@ -256,6 +271,55 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::NONE:
 			break;
 		case GuiControlState::DISABLED:
+			switch (buttonType)
+			{
+			case ButtonType::NONE:
+				break;
+			case ButtonType::EXTRA_LARGE:
+				break;
+			case ButtonType::LARGE:
+				break;
+			case ButtonType::SMALL:
+				break;
+			case ButtonType::START:
+				break;
+			case ButtonType::CLOSE:
+				break;
+			case ButtonType::MENU:
+				break;
+			case ButtonType::SETTINGS:
+				break;
+			case ButtonType::IN_SETTINGS:
+				break;
+			case ButtonType::DIALOGUE:
+				break;
+			case ButtonType::CHECK:
+				break;
+			case ButtonType::CONTROL_SETTINGS:
+				break;
+			case ButtonType::INVENTORY:
+				break;
+			case ButtonType::INV_NEXT_PAGE:
+				break;
+			case ButtonType::INV_PAGES:
+				break;
+			case ButtonType::SWAP_SKILL:
+				break;
+			case ButtonType::COMBAT_TARGET:
+				break;
+			case ButtonType::SKILL_1:
+				break;
+			case ButtonType::SKILL_2:
+				break;
+			case ButtonType::SKILL_3:
+				break;
+			case ButtonType::SKILL_4:
+				break;
+			case ButtonType::CHANGE_POSITION:
+				break;
+			default:
+				break;
+			}
 			break;
 		case GuiControlState::NORMAL:
 			switch (buttonType)
@@ -303,6 +367,16 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::SWAP_SKILL:
 				break;
 			case ButtonType::COMBAT_TARGET:
+				break;
+			case ButtonType::SKILL_1:
+				break;
+			case ButtonType::SKILL_2:
+				break;
+			case ButtonType::SKILL_3:
+				break;
+			case ButtonType::SKILL_4:
+				break;
+			case ButtonType::CHANGE_POSITION:
 				break;
 			default:
 				break;
@@ -359,6 +433,16 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::COMBAT_TARGET:
 				break;
+			case ButtonType::SKILL_1:
+				break;
+			case ButtonType::SKILL_2:
+				break;
+			case ButtonType::SKILL_3:
+				break;
+			case ButtonType::SKILL_4:
+				break;
+			case ButtonType::CHANGE_POSITION:
+				break;
 			default:
 				break;
 			}
@@ -414,6 +498,16 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::COMBAT_TARGET:
 				break;
+			case ButtonType::SKILL_1:
+				break;
+			case ButtonType::SKILL_2:
+				break;
+			case ButtonType::SKILL_3:
+				break;
+			case ButtonType::SKILL_4:
+				break;
+			case ButtonType::CHANGE_POSITION:
+				break;
 			default:
 				break;
 			}
@@ -441,7 +535,7 @@ bool GuiButton::Draw(Render* render)
 
 			case GuiControlState::DISABLED:
 			{
-				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 200,200,200 });
+				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 50,50,50 });
 			} break;
 
 			case GuiControlState::NORMAL:
