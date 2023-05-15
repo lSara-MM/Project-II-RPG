@@ -142,10 +142,13 @@ bool Inventory::CleanUp()
 		}
 	}
 
-	for (int i = 0; i <= 3; i++)
+	if (app->combat->active == false)
 	{
-		delete(selectCharacter[i]);
-		selectCharacter[i] = nullptr;
+		for (int i = 0; i <= 3; i++)
+		{
+			delete(selectCharacter[i]);
+			selectCharacter[i] = nullptr;
+		}
 	}
 
 	app->tex->UnLoad(inventoryIMG);
