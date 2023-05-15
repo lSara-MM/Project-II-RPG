@@ -64,6 +64,7 @@ public:
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
+	int SearchInVec(vector<Character*> arr, Character* chara);
 
 	// Save/Load
 	bool SaveCombat(); //guardar stats playable characters en xml combat

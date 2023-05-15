@@ -539,24 +539,15 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	app->audio->PlayFx(control->fxControl);
 
 	//Gestion Skills
-	int posStart = 0, posEnd = 0, posInVec = 0;
+	int posStart = 0, posEnd = 0, posInVec = SearchInVec(vecAllies, listInitiative.At(charaInTurn)->data);
 
 	// target allies
 	if (control->id < 5)
 	{
 		LOG("%s chara", vecAllies.at(control->id)->name.GetString());
+		posInVec = SearchInVec(vecAllies, listInitiative.At(charaInTurn)->data);
+		targeted_Character = vecAllies.at(posInVec);
 
-		//Busca el target ya que al moverse las posiciones del vector cambia
-		for (int i = 0; i < vecAllies.size(); i++)
-		{
-			if (vecAllies.at(i)->button->id == control->id)
-			{
-				targeted_Character = vecAllies.at(i);
-				posInVec = i;
-				break;
-			}
-		}		
-		
 		if (isMoving)
 		{
 			int a = targeted_Character->positionCombat_I - listInitiative.At(charaInTurn)->data->positionCombat_I;
@@ -570,21 +561,16 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	else if (control->id >= 5 && control->id < 10)
 	{
 		LOG("%s chara", vecEnemies.at(control->id - 5)->name.GetString());
-		
+
 		//Busca el target ya que al moverse las posiciones del vector cambia
-		for (int i = 0; i < vecEnemies.size(); i++)
-		{
-			if (vecEnemies.at(i)->button->id == control->id)
-			{
-				targeted_Character = vecEnemies.at(i);
-				break;
-			}
-		}
+		posInVec = SearchInVec(vecEnemies, listInitiative.At(charaInTurn)->data);
+		targeted_Character = vecEnemies.at(posInVec);
 	} 
 	// skills buttons
 	else if(control->id >= 10 && control->id < 14)
 	{
 		isMoving = false;
+
 		if (lastPressedAbility_I == control->id - 10) { lastPressedAbility_I = -1; } // Si already clicked deseleccionar
 		lastPressedAbility_I = control->id - 10;
 
@@ -613,7 +599,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		}
 		else
 		{
-			if (vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->targetFriend==true)
+			if (vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->targetFriend == true)
 			{
 				HandleCharaButtons(&vecAllies, posStart, posEnd);
 			}
@@ -625,6 +611,16 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	return true;
+}
+
+int Combat::SearchInVec(vector<Character*> arr, Character* chara)
+{
+	for (int i = 0; i < arr.size(); i++)
+	{
+		if (arr.at(i) == chara) { return i; }
+	}
+
+	return -1;
 }
 
 // Save/Load
