@@ -55,7 +55,7 @@
 		texturePath="Assets/Textures/AllyProtagonist.png"/>
 		
 		<CombatCharacter name ="Companion" id="1"
-        maxHp="1000" currentHp="1150" attack="200" armor="8" critRate="10" critDamage="20" precision="15" res="15" dodge="15" speed="7"
+        maxHp="1000" currentHp="1000" attack="200" armor="8" critRate="10" critDamage="20" precision="15" res="15" dodge="15" speed="7"
         type="0" class="7" skill1ID="5" skill2ID="6" skill3ID="7" skill4ID="8"
                
         width="0" heigth="0"
