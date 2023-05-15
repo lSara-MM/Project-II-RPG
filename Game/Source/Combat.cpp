@@ -564,7 +564,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 	//Gestion Skills
 	int posStart = 0, posEnd = 0;
-	int posInVec = SearchInVec(vecAllies, listInitiative.At(charaInTurn)->data);
+	int posInVec = SearchInSkills(vecAllies, listInitiative.At(charaInTurn)->data);
 
 	// target allies
 	if (control->id < 5)
@@ -597,11 +597,17 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		isMoving = false;
 
-		if (lastPressedAbility_I == control->id - 10) { lastPressedAbility_I = -1; } // Si already clicked deseleccionar
-		lastPressedAbility_I = control->id - 10;
+		if (lastPressedAbility_I == control->id - 10)// Si already clicked deseleccionar
+		{
+			lastPressedAbility_I = -1; 
+		} 
+		else 
+		{
+			lastPressedAbility_I = control->id - 10;
 
-		posStart = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
-		posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
+			posStart = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
+			posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
+		}
 	}
 	// move character
 	else if (control->id == 14)
@@ -635,11 +641,18 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 			}
 		}
 	}
+	if (lastPressedAbility_I == -1)
+	{
+		for (int i = 0; i < listInitiative.Count(); i++)
+		{
+			HandleCharaButtons(&vecAllies);
+		}
+	}
 
 	return true;
 }
 
-int Combat::SearchInVec(vector<Character*> arr, Character* chara)
+int Combat::SearchInSkills(vector<Character*> arr, Character* chara)
 {
 	for (int i = 0; i < arr.size(); i++)
 	{

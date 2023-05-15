@@ -64,7 +64,7 @@ public:
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
-	int SearchInVec(vector<Character*> arr, Character* chara);
+	int SearchInSkills(vector<Character*> arr, Character* chara);
 	int SearchInVec(vector<Character*> arr, int id);
 
 	// Save/Load
