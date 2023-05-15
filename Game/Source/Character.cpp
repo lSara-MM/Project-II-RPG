@@ -90,8 +90,8 @@ bool Character::Awake()
 bool Character::Start()
 {
 	texture = app->tex->Load(texturePath);
-	profileTex = app->tex->Load("Assets/Textures/CombatUISuperiorPart.png");
-	skillTex = app->tex->Load("Assets/Textures/CombatUIHabInfoPart.png");
+	//profileTex = app->tex->Load("Assets/Textures/CombatUISuperiorPart.png");
+	//skillTex = app->tex->Load("Assets/Textures/CombatUIHabInfoPart.png");
 
 	SDL_Rect buttonBounds;
 
@@ -161,169 +161,56 @@ bool Character::Update(float dt)
 			// TO DO: change to texture 
 			app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
 			app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
-			SDL_Rect rect = { 0,0,588,179 };
-			SDL_Rect rect2 = { 0,0,588,90 };
+			
 			switch (charaType)
 			{
 			case CharacterType::ALLY:
-				switch (id)
+				
+				//testing
+				string time;
+				const char* tempus;
+
+				switch (charaType)
 				{
-				case 0:
-					app->render->DrawTexture(skillTex, 36, 527, &rect);
-					app->render->DrawTexture(profileTex, 38, 407, &rect2);
-					break;
-				case 1:
-					rect.y = 179;
-					rect2.y = 90;
-					app->render->DrawTexture(skillTex, 36, 527, &rect);
-					app->render->DrawTexture(profileTex, 38, 407, &rect2);
-					break;
-				case 2:
-					rect.y = 179 * 2;
-					rect2.y = 90 * 2;
-					app->render->DrawTexture(skillTex, 36, 527, &rect);
-					app->render->DrawTexture(profileTex, 38, 407, &rect2);
-					break;
-				case 3:
-					rect.y = 179 * 3;
-					rect2.y = 90 * 3;
-					app->render->DrawTexture(skillTex, 36, 527, &rect);
-					app->render->DrawTexture(profileTex, 38, 407, &rect2);
-					break;
-				default:
-					break;
-				}
-				break;
-			case CharacterType::ENEMY:
-				break;
-			case CharacterType::NONE:
-				break;
-			default:
-				break;
-			}
-			//testing
-			string time;
-			const char* tempus;
+				case CharacterType::ALLY:
 
-			switch (charaType)
-			{
-			case CharacterType::ALLY:
+					app->combat->HandleSkillsButtons(this);
 
-				app->combat->HandleSkillsButtons(this);
-
-				//Check hay una habilidad seleccionada
-				if (app->combat->lastPressedAbility_I != -1)
-				{
-					//Check que hay un target 
-					if (app->combat->targeted_Character != nullptr)
+					//Check hay una habilidad seleccionada
+					if (app->combat->lastPressedAbility_I != -1)
 					{
-						UseSkill(listSkills.At(app->combat->lastPressedAbility_I)->data, app->combat->targeted_Character);
-						app->combat->targeted_Character = nullptr;
-						onTurn = false;
-						app->combat->NextTurn();
-					}
-				}
-
-				break;
-			case CharacterType::ENEMY:
-
-				if (listSkillsHistory.start == nullptr)
-				{
-					listSkillsHistory.Add(0); //Si esta vacia ponerle algo para que no pete
-				}
-				if (!delayOn)
-				{
-					turnDelay.Start();
-					delayOn = true;
-				}
-				if (turnDelay.ReadMSec() > 2000 && delayOn)
-				{
-					switch (charaClass) //La idea es que cada classe tenga un comportamiento generico
-					{
-					case CharacterClass::MELEE_DPS:
-					{
-						int probSkill;
-						if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Alto de vida
+						//Check que hay un target 
+						if (app->combat->targeted_Character != nullptr)
 						{
-							//usar skill 2 (avance)
-							UseSkill(listSkills.At(2)->data);
-
-							listSkillsHistory.Add(2);
-							break;
-						}
-						else
-						{
-							if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se usa
-							{
-								probSkill = 0;
-							}
-							else //Si no se uso pues casi siempre la usa
-							{
-								probSkill = 25;
-							}
-							if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
-							{
-								//usar skill 1 (buff ofensivo)
-								UseSkill(listSkills.At(1)->data);
-
-								listSkillsHistory.Add(1);
-								break;
-							}
-							else
-							{
-								if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se usa
-								{
-									probSkill = 75;
-								}
-								else
-								{
-									probSkill = 25;
-								}
-							}
-							if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
-							{
-								//usar skill 3 (atk area)
-								UseSkill(listSkills.At(3)->data);
-
-								listSkillsHistory.Add(3);
-								break;
-							}
-							else
-							{
-								//usar skill 0 (atk basico)
-								UseSkill(listSkills.At(0)->data);
-
-								listSkillsHistory.Add(0);
-								break;
-							}
+							UseSkill(listSkills.At(app->combat->lastPressedAbility_I)->data, app->combat->targeted_Character);
+							app->combat->targeted_Character = nullptr;
+							onTurn = false;
+							app->combat->NextTurn();
 						}
 					}
 
 					break;
-					case CharacterClass::RANGED_DPS:
-						break;
-					case CharacterClass::ASSASSIN:
-						break;
-					case CharacterClass::AOE_DPS:
-						break;
-					case CharacterClass::HEALER:
-						break;
-					case CharacterClass::TANK:
+				case CharacterType::ENEMY:
+
+					if (listSkillsHistory.start == nullptr)
 					{
-						int probSkill;
-						if (currentHp >= maxHp / 2) //Alto de vida
+						listSkillsHistory.Add(0); //Si esta vacia ponerle algo para que no pete
+					}
+					if (!delayOn)
+					{
+						turnDelay.Start();
+						delayOn = true;
+					}
+					if (turnDelay.ReadMSec() > 2000 && delayOn)
+					{
+						switch (charaClass) //La idea es que cada classe tenga un comportamiento generico
 						{
-							if (listSkillsHistory.end->data == 2)//Si se uso el turno pasado no se usa
+						case CharacterClass::MELEE_DPS:
+						{
+							int probSkill;
+							if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Alto de vida
 							{
-								probSkill = 10;
-							}
-							else //Si no se uso pues casi siempre la usa
-							{
-								probSkill = 60;
-							}
-							if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
-							{
-								//usar skill 2 (tanqueo high HP)
+								//usar skill 2 (avance)
 								UseSkill(listSkills.At(2)->data);
 
 								listSkillsHistory.Add(2);
@@ -331,85 +218,164 @@ bool Character::Update(float dt)
 							}
 							else
 							{
-								probSkill = 75;
+								if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se usa
+								{
+									probSkill = 0;
+								}
+								else //Si no se uso pues casi siempre la usa
+								{
+									probSkill = 25;
+								}
+								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+								{
+									//usar skill 1 (buff ofensivo)
+									UseSkill(listSkills.At(1)->data);
+
+									listSkillsHistory.Add(1);
+									break;
+								}
+								else
+								{
+									if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se usa
+									{
+										probSkill = 75;
+									}
+									else
+									{
+										probSkill = 25;
+									}
+								}
+								if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+								{
+									//usar skill 3 (atk area)
+									UseSkill(listSkills.At(3)->data);
+
+									listSkillsHistory.Add(3);
+									break;
+								}
+								else
+								{
+									//usar skill 0 (atk basico)
+									UseSkill(listSkills.At(0)->data);
+
+									listSkillsHistory.Add(0);
+									break;
+								}
 							}
 						}
-						else //Bajo de vida
-						{
-							if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se repite casi
-							{
-								probSkill = 15;
-							}
-							else //Si no se uso pues casi siempre la usa
-							{
-								probSkill = 80;
-							}
-							if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
-							{
-								//usar skill 1
-								UseSkill(listSkills.At(1)->data);
 
-								listSkillsHistory.Add(1);
+						break;
+						case CharacterClass::RANGED_DPS:
+							break;
+						case CharacterClass::ASSASSIN:
+							break;
+						case CharacterClass::AOE_DPS:
+							break;
+						case CharacterClass::HEALER:
+							break;
+						case CharacterClass::TANK:
+						{
+							int probSkill;
+							if (currentHp >= maxHp / 2) //Alto de vida
+							{
+								if (listSkillsHistory.end->data == 2)//Si se uso el turno pasado no se usa
+								{
+									probSkill = 10;
+								}
+								else //Si no se uso pues casi siempre la usa
+								{
+									probSkill = 60;
+								}
+								if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
+								{
+									//usar skill 2 (tanqueo high HP)
+									UseSkill(listSkills.At(2)->data);
+
+									listSkillsHistory.Add(2);
+									break;
+								}
+								else
+								{
+									probSkill = 75;
+								}
+							}
+							else //Bajo de vida
+							{
+								if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se repite casi
+								{
+									probSkill = 15;
+								}
+								else //Si no se uso pues casi siempre la usa
+								{
+									probSkill = 80;
+								}
+								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+								{
+									//usar skill 1
+									UseSkill(listSkills.At(1)->data);
+
+									listSkillsHistory.Add(1);
+									break;
+								}
+								{
+									probSkill = 25;
+								}
+							}
+							if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))//Ataques
+							{
+								//usar skill 3 (daño + debuff)
+								UseSkill(listSkills.At(3)->data);
+
+								listSkillsHistory.Add(3);
 								break;
 							}
+							else
 							{
-								probSkill = 25;
+								//usar skill 0 (daño solo) (es la skill mas debil)
+								UseSkill(listSkills.At(0)->data);
+
+								listSkillsHistory.Add(0);
+								break;
 							}
 						}
-						if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))//Ataques
-						{
-							//usar skill 3 (daño + debuff)
-							UseSkill(listSkills.At(3)->data);
-
-							listSkillsHistory.Add(3);
+						break;
+						case CharacterClass::BUFFER:
+							break;
+						case CharacterClass::DEBUFFER:
+							break;
+						case CharacterClass::DOT:
+							break;
+						case CharacterClass::NO_CLASS:
+							break;
+						default:
 							break;
 						}
-						else
-						{
-							//usar skill 0 (daño solo) (es la skill mas debil)
-							UseSkill(listSkills.At(0)->data);
 
-							listSkillsHistory.Add(0);
-							break;
-						}
+						app->combat->NextTurn();
+						delayOn = false;
 					}
+
 					break;
-					case CharacterClass::BUFFER:
-						break;
-					case CharacterClass::DEBUFFER:
-						break;
-					case CharacterClass::DOT:
-						break;
-					case CharacterClass::NO_CLASS:
-						break;
-					default:
-						break;
-					}
-
-					app->combat->NextTurn();
-					delayOn = false;
+				case CharacterType::NONE:
+					break;
+				default:
+					break;
 				}
-
-				break;
-			case CharacterType::NONE:
-				break;
-			default:
-				break;
 			}
 		}
-	}
 
-	return true;
+		return true;
+	}
 }
 
 bool Character::CleanUp()
 {
 	if(texture != nullptr)
 		app->tex->UnLoad(texture);
-	if (skillTex != nullptr)
+	/*if (skillTex != nullptr)
 		app->tex->UnLoad(skillTex);
 	if (profileTex != nullptr)
-		app->tex->UnLoad(profileTex);
+		app->tex->UnLoad(profileTex);*/
 
 	/*delete button;
 	button = nullptr;*/

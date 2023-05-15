@@ -74,6 +74,8 @@ bool Combat::Start()
 	textureTurnsBar = app->tex->Load(texturePathTurnsBar);
 
 	textureLastSelectedSkill = app->tex->Load(PathlastSelectedSkill);
+	profileTex = app->tex->Load("Assets/Textures/CombatUISuperiorPart.png");
+	skillTex = app->tex->Load("Assets/Textures/CombatUIHabInfoPart.png");
 
 	//Poner la camara en su lugar
 	app->render->camera.x = 0;
@@ -82,6 +84,10 @@ bool Combat::Start()
 
 	app->physics->Disable();
 	app->entityManager->active = true;
+
+	//Desactivar hover
+	showingHoverChara = false;
+
 
 	StartCombat();
 
@@ -129,7 +135,7 @@ bool Combat::Start()
 
 bool Combat::PreUpdate()
 {
-
+	
 
 	return true;
 }
@@ -156,10 +162,38 @@ bool Combat::Update(float dt)
 		j++;
 	}
 
-	//Barra skills + name
-	//app->render->DrawRectangle({ 20,450,500,120 }, 220, 220, 220);
-
+	//GUI character
+	SDL_Rect rect = { 0,0,588,179 };
+	SDL_Rect rect2 = { 0,0,588,90 };
 	
+		switch (listInitiative.At(charaInTurn)->data->id)
+		{
+		case 0:
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		case 1:
+			rect.y = 179;
+			rect2.y = 90;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		case 2:
+			rect.y = 179 * 2;
+			rect2.y = 90 * 2;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		case 3:
+			rect.y = 179 * 3;
+			rect2.y = 90 * 3;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		default:
+			break;
+		}
+				
 	//God Mode Info
 	if (app->input->godMode_B)
 	{
@@ -185,6 +219,7 @@ bool Combat::PostUpdate()
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 	
+	//showingHoverChara = false;
 	app->guiManager->Draw();
 
 	for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
@@ -534,7 +569,6 @@ bool Combat::HandleSkillsButtons(Character* chara)
 	return true;
 }
 
-
 // Combat mechanics
 void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int movement_I)
 {
@@ -695,6 +729,113 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	return true;
+}
+
+bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
+{
+	LOG("Event by %d ", control->id);
+
+	//GUI character
+	SDL_Rect rect = { 0,0,588,179 };
+	SDL_Rect rect2 = { 0,0,588,90 };
+	
+		switch (control->id)
+		{
+		case 0:
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		case 1:
+			rect.y = 179;
+			rect2.y = 90;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		case 2:
+			rect.y = 179 * 2;
+			rect2.y = 90 * 2;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		case 3:
+			rect.y = 179 * 3;
+			rect2.y = 90 * 3;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		default:
+			break;
+		}
+	
+		if (control->id >= 10 && control->id < 14)
+		{
+			if (listInitiative.At(charaInTurn)->data->charaType==CharacterType::ALLY)
+			{
+				Skill* skillPoint = listInitiative.At(charaInTurn)->data->listSkills.At(control->id - 10)->data;
+				//Name
+				app->render->TextDraw(skillPoint->name.GetString(),48,535,30);
+				
+				//Damage or Heal
+				string DMG_C;
+				if (skillPoint->multiplierDmg>0) //Heal
+				{
+					DMG_C = std::to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->maxHp/5));
+				}
+				else { DMG_C = std::to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->attack)); }
+				const char* ch_DMG = DMG_C.c_str();
+				app->render->TextDraw(ch_DMG, 450, 550, 18);
+
+				//Efect
+				SString effecto_C;
+				switch ((EffectType)skillPoint->status)
+				{
+				case EffectType::NONE:
+					effecto_C = "None";
+					break;
+				case EffectType::CURRENT_HP:
+					if (skillPoint->positiveEffect) { effecto_C = "Regeneration"; }
+					else { effecto_C = "Burn"; }
+					break;
+				case EffectType::ATTACK:
+					if (skillPoint->positiveEffect) { effecto_C = "Buff ATK"; }
+					else { effecto_C = "Debuff ATK"; }
+					break;
+				case EffectType::CRIT_RATE:
+					if (skillPoint->positiveEffect) { effecto_C = "Buff Crit Rate"; }
+					else { effecto_C = "DebuffCritRate"; }
+					break;
+				case EffectType::CRIT_DMG:
+					if (skillPoint->positiveEffect) { effecto_C = "BuffCritDMG"; }
+					else { effecto_C = "Debuff Crit DMG"; }
+					break;
+				case EffectType::PRECISION:
+					if (skillPoint->positiveEffect) { effecto_C = "Buff Precision"; }
+					else { effecto_C = "Debuff Precision"; }
+					break;
+				case EffectType::ARMOR:
+					if (skillPoint->positiveEffect) { effecto_C = "Buff Armor"; }
+					else { effecto_C = "Debuff Armor"; }
+					break;
+				case EffectType::DODGE:
+					if (skillPoint->positiveEffect) { effecto_C = "Buff Dodge"; }
+					else { effecto_C = "Debuff Dodge"; }
+					break;
+				case EffectType::RES:
+					if (skillPoint->positiveEffect) { effecto_C = "Buff Resistance"; }
+					else { effecto_C = "Debuff Resistance"; }
+					break;
+				default:
+					break;
+				}
+				app->render->TextDraw(effecto_C.GetString(), 530, 550, 18);
+			}
+		}
+
+	//showingHoverChara = true;
+
+
+
+	return false;
 }
 
 int Combat::SearchInSkills(vector<Character*> arr, Character* chara)

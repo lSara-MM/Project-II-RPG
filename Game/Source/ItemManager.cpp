@@ -452,8 +452,8 @@ void ItemManager::SetParty()
 	for (int i = 0; i < player->vecPC.size(); i++)
 	{
 		// TO DO: change commented per uncommented
-		if (i == arrParty.size() - 1) break;
-		//if (i == arrParty.size()) break;
+		//if (i == arrParty.size() - 1) break;
+		if (i == arrParty.size()) break;
 		arrParty.at(i) = player->vecPC.at(i);
 		arrParty.at(i)->positionCombat_I = i;
 	}

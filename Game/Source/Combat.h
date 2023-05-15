@@ -64,6 +64,7 @@ public:
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
+	bool OnGuiMouseHoverEvent(GuiControl* control);
 	int SearchInSkills(vector<Character*> arr, Character* chara);
 	int SearchInVec(vector<Character*> arr, int id);
 
@@ -112,9 +113,12 @@ private:
 
 	const char* PathlastSelectedSkill;
 	SDL_Texture* textureLastSelectedSkill;
-	
-	const char* actions[4] = { "Atk 1", "Atk 2", "Atk 3", "Atk 4" };
 
+	//UI characters
+	SDL_Texture* profileTex;//ui profile character
+	SDL_Texture* skillTex;//ui skill character
+	bool showingHoverChara;
+	
 	bool exit_B;
 
 	// Scene transition
