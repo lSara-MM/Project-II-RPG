@@ -140,14 +140,21 @@ bool HouseOfTerrors::Update(float dt)
 
 	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_pos, mouseY_pos, mouseSpeed, dt); }
 
-	if (steps_I > 450)
+	if (!app->input->godMode_B)
 	{
-		LOG("Combat");
-		app->combat->PreLoadCombat(player->arrParty, name);
-		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
-		app->questManager->SaveState();
-		app->puzzleManager->CleanUp();
-		app->puzzleManager->active = false;
+		if (steps_I > 450)
+		{
+			LOG("Combat");
+			app->combat->PreLoadCombat(player->arrParty, name);
+			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+			app->questManager->SaveState();
+			app->puzzleManager->CleanUp();
+			app->puzzleManager->active = false;
+			steps_I = 0;
+		}
+	}
+	else 
+	{
 		steps_I = 0;
 	}
 
@@ -375,6 +382,8 @@ bool HouseOfTerrors::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 703:
 		LOG("Button Return to title click");
+		app->puzzleManager->CleanUp();
+		app->puzzleManager->active = false;
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
 		break;
 
