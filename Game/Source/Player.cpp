@@ -336,6 +336,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			}
 			if (app->circus->active == true)
 			{
+				app->questManager->SaveState();
 				app->entityManager->tpID = 21;
 				app->fade->FadingToBlack((Module*)app->circus, (Module*)app->scene, 90);
 			}
