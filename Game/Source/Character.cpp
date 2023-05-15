@@ -516,8 +516,7 @@ bool Character::UseSkill(Skill* skill)
 	if(skill->autoTarget)
 	{
 		this->ModifyHP(ApplySkill(this, this, skill)); //Lanzarsela a si mismo
-		if(skill->movementCaster!=0)
-		{app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster); }
+		if (skill->movementCaster != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster); }
 		return true;
 	}
 
@@ -660,7 +659,7 @@ bool Character::UseSkill(Skill* skill, Character* target)
 
 	if (skill->areaSkill)
 	{
-		for (size_t i = skill->posToTargetStart_I; i <= endRange; i++) //Creo que las skills de area hay que lanzarlas de atras a delante
+		for (size_t i = skill->posToTargetStart_I; i < endRange; i++) //Creo que las skills de area hay que lanzarlas de atras a delante
 		{
 			//Atacar a todos
 			switch (target->charaType)

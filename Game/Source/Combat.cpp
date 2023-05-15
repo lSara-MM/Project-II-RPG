@@ -552,7 +552,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	if (control->id < 5)
 	{
 		LOG("%s chara", vecAllies.at(control->id)->name.GetString());
-		posInVec = SearchInVec(vecAllies, listInitiative.At(charaInTurn)->data);
+		posInVec = SearchInVec(vecAllies, control->id);
 		targeted_Character = vecAllies.at(posInVec);
 
 		if (isMoving)
@@ -687,11 +687,11 @@ bool Combat::LoadCombat()
 
 		for (pugi::xml_node itemNode = node.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter"))
 		{
-			if (i<app->scene->player->listPC.size())
+			if (i<app->scene->player->vecPC.size())
 			{
 				break;
 			}
-			app->scene->player->listPC[i]->currentHp = itemNode.attribute("currentHp").as_int();
+			app->scene->player->vecPC[i]->currentHp = itemNode.attribute("currentHp").as_int();
 			i++;
 		}
 
