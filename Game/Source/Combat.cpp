@@ -525,6 +525,27 @@ void Combat::HandleSkillsButtons(List<Skill*> listSkills_)
 	}
 }
 
+bool Combat::HandleSkillsButtons(Character* chara)
+{
+	int offset = vecAllies.size() + vecEnemies.size();
+
+	for (int i = 0; i < chara->listSkills.Count(); i++)
+	{
+		if (chara->listSkills.At(i)->data->posToUseStart_I<= chara->positionCombat_I && chara->positionCombat_I <= chara->listSkills.At(i)->data->posToUseEnd_I)
+		{
+			listButtons.At(offset + i)->data->state = GuiControlState::NORMAL;
+			listButtons.At(offset + i)->data->isSelected = false;
+		}
+		else
+		{
+			listButtons.At(offset + i)->data->state = GuiControlState::SELECTED;
+			listButtons.At(offset + i)->data->isSelected = true;
+		}
+	}
+
+	return true;
+}
+
 
 // Combat mechanics
 void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int movement_I)
@@ -646,7 +667,6 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 			posStart = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
 			posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
-	}
 	}
 	// move character
 	else if (control->id == 14)
