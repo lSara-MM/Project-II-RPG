@@ -20,6 +20,7 @@
 #include "Map.h"
 #include "Pathfinding.h"
 #include "Inventory.h"
+#include "HouseOfTerrors.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -423,6 +424,9 @@ bool Combat::CleanUp()
 	{
 		app->questManager->active = true;
 	}
+
+	//Para load de player en hTerror
+	app->hTerrors->combatEnd = true;
 
 	//Unload inventory
 	app->inventory->Disable();

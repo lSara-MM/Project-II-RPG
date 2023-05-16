@@ -678,6 +678,7 @@ bool PuzzleManager::Rescue()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				LOG("Combat");
+				app->SaveGameRequest();
 				app->audio->PlayFx(app->hTerrors->combatfx);
 				app->combat->PreLoadCombat(app->itemManager->arrParty, app->hTerrors->name);
 				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 5);
