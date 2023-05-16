@@ -286,7 +286,7 @@ bool PuzzleManager::Update(float dt)
 	}
 	else 
 	{
-		app->render->DrawTexture(boss, posLoset.x - widthBoss, posLoset.y - heightBoss, &bosDeath);
+		app->render->DrawTexture(bossDeath, posLoset.x - widthBoss + 25, posLoset.y - heightBoss + 22, &bosDeath);
 	}
 
 	if (!teamMate) 
