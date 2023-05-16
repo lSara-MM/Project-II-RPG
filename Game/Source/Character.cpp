@@ -428,6 +428,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 {
 	if (skill->multiplierDmg >= 0) //Curacion o buffo, no hace falta calcular esquiva ni nada 
 	{
+		app->audio->PlayFx(healfx);
 		return(caster->maxHp / 5 * skill->multiplierDmg);
 		if (skill->positiveEffect) //Efecto de estado positivo
 		{
@@ -440,7 +441,6 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
 			}
 		}
-		app->audio->PlayFx(healfx);
 	}
 	else //Es un ataque 
 	{
