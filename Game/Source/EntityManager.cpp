@@ -8,6 +8,9 @@
 #include "IntroScene.h"
 #include "PuzzleManager.h"
 #include "QuestManager.h"
+#include "HouseOfTerrors.h"
+#include "PracticeTent.h"
+#include "Circus.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -160,7 +163,35 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 
 	if (app->scene->player != nullptr)
 	{
-		app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
+		if (app->scene->active)
+		{
+			app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
+		}
+	}
+
+	if (app->hTerrors->player != nullptr)
+	{
+		if (app->hTerrors->active)
+		{
+			app->hTerrors->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
+
+		}
+	}
+	
+	if (app->practiceTent->player != nullptr)
+	{
+		if (app->practiceTent->active)
+		{
+			app->practiceTent->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
+		}
+	}	
+	
+	if (app->circus->player != nullptr)
+	{
+		if (app->circus->active)
+		{
+			app->circus->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
+		}
 	}
 
 	//app->scene->currentHP_Bard = data.child("bard").attribute("currentHp").as_int();
@@ -174,9 +205,30 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 {
 	pugi::xml_node player = data.append_child("player");
 
-	player.append_attribute("x") = app->scene->player->position.x;
-	player.append_attribute("y") = app->scene->player->position.y;
+	if (app->scene->active)
+	{
+		player.append_attribute("x") = app->scene->player->position.x;
+		player.append_attribute("y") = app->scene->player->position.y;
+	}
 	
+	if (app->hTerrors->active)
+	{
+		player.append_attribute("x") = app->hTerrors->player->position.x;
+		player.append_attribute("y") = app->hTerrors->player->position.y;
+	}	
+
+	if (app->practiceTent->active)
+	{
+		player.append_attribute("x") = app->practiceTent->player->position.x;
+		player.append_attribute("y") = app->practiceTent->player->position.y;
+	}	
+	
+	if (app->circus->active)
+	{
+		player.append_attribute("x") = app->circus->player->position.x;
+		player.append_attribute("y") = app->circus->player->position.y;
+	}
+
 	if (!app->iScene->previousGame_B)
 	{
 		app->iScene->previousGame_B = true;

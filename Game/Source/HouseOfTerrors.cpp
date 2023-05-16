@@ -85,6 +85,13 @@ bool HouseOfTerrors::Start()
 	app->entityManager->Enable();
 	app->puzzleManager->Enable();
 
+	if (combatEnd)
+	{
+		app->LoadGameRequest();
+
+		combatEnd = false;
+	}
+
 	//GUARRADA SUPER TEMPORAL
 	app->itemManager->comb = 2;
 
@@ -145,7 +152,7 @@ bool HouseOfTerrors::Update(float dt)
 		if (steps_I > 450)
 		{
 			LOG("Combat");
-			app->LoadGameRequest();
+			app->SaveGameRequest();
 			app->audio->PlayFx(combatfx);
 			app->combat->PreLoadCombat(app->itemManager->arrParty, name);
 			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
