@@ -283,7 +283,7 @@ bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 
 	if ((event.key.keysym.sym == SDLK_RETURN) && !temp.empty())
 	{
-		if (temp.length() < playerInput->max_chars - 1) { temp.erase(temp.length() - 1); }
+		if (temp.length() <= playerInput->max_chars) { temp.erase(temp.length() - 1); }
 
 		// TODO Call Save name
 		app->dialogueSystem->SaveDialogueState();	

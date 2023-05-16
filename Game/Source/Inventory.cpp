@@ -109,6 +109,12 @@ bool Inventory::Update(float dt)
 			app->itemManager->speed = app->itemManager->arrParty.at(app->itemManager->invPos)->speed;
 			app->itemManager->resistencia = app->itemManager->arrParty.at(app->itemManager->invPos)->res;
 
+			//Print Name
+			int offsetX = app->itemManager->arrParty.at(app->itemManager->invPos)->name.Length() * 30 / 2;
+
+			int x = (860 - offsetX) / 2;
+			app->render->TextDraw((app->itemManager->arrParty.at(app->itemManager->invPos)->name.GetString()), x, 100, 30, Font::TEXT, { 0, 0, 0 });
+
 			//print stats
 			string h = to_string(app->itemManager->maxhp);
 			app->render->TextDraw(h.c_str(), 330, 465, 15, Font::TEXT, { 0, 0, 0 });
