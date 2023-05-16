@@ -245,16 +245,28 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 	switch (control->id)
 	{
 		case 1000:
-			app->itemManager->invPos = 0;
+			if (app->itemManager->arrParty.at(0) != nullptr)
+			{
+				app->itemManager->invPos = 0;
+			}
 			break;
 		case 1001:
-			app->itemManager->invPos = 1;
+			if (app->itemManager->arrParty.at(1) != nullptr)
+			{
+				app->itemManager->invPos = 1;
+			}
 			break;
 		case 1002:
-			app->itemManager->invPos = 2;
+			if (app->itemManager->arrParty.at(2) != nullptr)
+			{
+				app->itemManager->invPos = 2;
+			}
 			break;
 		case 1003:
-			app->itemManager->invPos = 3;
+			if (app->itemManager->arrParty.at(3) != nullptr)
+			{
+				app->itemManager->invPos = 3;
+			}
 			break;
 	}
 
