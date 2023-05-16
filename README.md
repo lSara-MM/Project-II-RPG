@@ -28,6 +28,8 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Interact  -> E / Y button gamepad
 
+* Inventory -> I
+
 ### Menus
 
 * Intro menu -> Accept / Enter
@@ -38,7 +40,11 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Go to Play Scene -> F1
 
-* Show GUI -> F2
+* Insta win -> F3
+
+* Insta lose-> F4
+
+* Show GUI -> F7
 
 * God Mode -> F10
 
@@ -46,9 +52,15 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Swap position enemies -> S
 
-* Kill First Ally -> 9 (only God Mode)
+* Kill First Ally -> 1 (only God Mode)
 
-* Kill First Enemy -> 0 (only God Mode)
+* Kill First Enemy -> 2 (only God Mode)
+
+* Next turn -> 3 (only God Mode)
+
+* Enemies button handle -> 4 (only God Mode)
+
+* Allies button handle -> 5 (only God Mode)
 
 ### Debug
 
@@ -89,6 +101,16 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 * Exit Pause -> Return/B button Gamepad
 
 * Enter combat -> C key/X button Gamepad
+
+* Add one item of each type -> 1 
+
+* Start Combat -> X
+
+### hOUSE OF tERRORS
+
+* Add Fire Eater to party -> P + E
+
+* Add boss dead -> B
 
 
 ## Pikum Studios Members

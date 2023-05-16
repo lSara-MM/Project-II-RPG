@@ -9,7 +9,6 @@
 
 #include "SDL/include/SDL.h"
 #include "SDL_ttf/include/SDL_ttf.h"
-using namespace std;
 
 using namespace std;
 

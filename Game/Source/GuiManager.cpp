@@ -68,6 +68,11 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* ob
 	return guiControl;
 }
 
+void GuiManager::DestroyGuiControl(GuiControl* gui)
+{
+	guiControlsList.Del(guiControlsList.At(guiControlsList.Find(gui)));
+}
+
 bool GuiManager::Update(float dt)
 {	
 	accumulatedTime += dt;

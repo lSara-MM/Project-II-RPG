@@ -138,7 +138,12 @@ bool Combat::Start()
 
 bool Combat::PreUpdate()
 {
-
+	//TODO : Guarrada maxima
+	if (!listInitiative.At(charaInTurn)->data->onTurn)
+	{
+		charaInTurn++;
+		listInitiative.At(charaInTurn)->data->onTurn = true;
+	}
 
 	return true;
 }
@@ -641,11 +646,22 @@ bool Combat::NextTurn()
 	// Disable all buttons
 	HandleCharaButtons(&app->combat->vecEnemies);
 
+	//if (listInitiative.Count() >= charaInTurn) { charaInTurn--; }
+
 	listInitiative.At(charaInTurn++)->data->onTurn = false;
 	
 	if (listInitiative.Count() == charaInTurn) { charaInTurn = 0; }
-	listInitiative.At(charaInTurn)->data->onTurn = true;
-	listInitiative.At(charaInTurn)->data->ModifyHP(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CURRENT_HP));
+	
+	if (listInitiative.At(charaInTurn)->data->currentHp > 0)
+	{
+		listInitiative.At(charaInTurn)->data->onTurn = true;
+
+		listInitiative.At(charaInTurn)->data->ModifyHP(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CURRENT_HP));
+	}
+	else
+	{
+		listInitiative.At(charaInTurn + 1)->data->onTurn = true;
+	}
 
 	if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ENEMY) 
 	{ 
@@ -739,6 +755,9 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 
 void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 {
+	app->guiManager->DestroyGuiControl(chara->button);
+	chara->CleanUp();
+
 	// Delete from its type vector
 	arr->erase(arr->begin() + chara->positionCombat_I);
 	
@@ -752,6 +771,7 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 
 	// Delete from entity manager list
 	app->entityManager->DestroyEntity(chara);
+
 	if (arr->empty())
 	{
 		(chara->charaType == CharacterType::ALLY) ? app->sceneWin_Lose->win = false : app->sceneWin_Lose->win = true;
@@ -857,7 +877,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	//
-	if (lastPressedAbility_I != -1 && !isMoving)
+	if (lastPressedAbility_I != -1 && !isMoving && listInitiative.At(charaInTurn)->data->charaType==CharacterType::ALLY)
 	{
 		if (vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->autoTarget == true)
 		{
