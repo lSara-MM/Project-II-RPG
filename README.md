@@ -106,7 +106,9 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Start Combat -> X
 
-### hOUSE OF tERRORS
+### House of Terrors
+
+* Code puzzle = 344
 
 * Add Fire Eater to party -> P + E
 
