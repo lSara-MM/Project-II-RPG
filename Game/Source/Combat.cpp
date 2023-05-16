@@ -394,7 +394,7 @@ void Combat::Debug()
 }
 
 // Start Combat
-bool Combat::PreLoadCombat(array<Character*, 4> arrParty_, SString n)
+bool Combat::PreLoadCombat(array<Character*, 4> arrParty_, SString n, int boss)
 {
 	arrParty = arrParty_;
 	srand(time(NULL));
@@ -402,10 +402,17 @@ bool Combat::PreLoadCombat(array<Character*, 4> arrParty_, SString n)
 	int randSize = rand() % 3 + 2;
 	int randId;
 
-	for (int i = 0; i < randSize; i++)
+	if (boss != -1)
 	{
-		randId = rand() % 3;
-		arrSetEnemies.push_back(randId);
+		arrSetEnemies.push_back(20);
+	}
+	else
+	{
+		for (int i = 0; i < randSize; i++)
+		{
+			randId = rand() % 3;
+			arrSetEnemies.push_back(randId);
+		}
 	}
 
 	sceneFromName = n;
