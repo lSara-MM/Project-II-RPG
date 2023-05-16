@@ -187,7 +187,7 @@ void ItemManager::UseItem(ItemNode* item)
 	{
 		for (size_t i = 0; i < arrParty.size(); i++)
 		{
-			if (arrParty.at(i) != nullptr && invPos == i)
+			if (arrParty.at(i) != nullptr && item->whom == i)
 			{
 				if (item->type == 2 && item->equiped == true)
 				{
@@ -228,7 +228,6 @@ void ItemManager::UseItem(ItemNode* item)
 					}
 				}
 
-				item->whom = i;
 			}
 		}
 
@@ -294,6 +293,7 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 
 		if (app->combat->active)
 		{
+
 			if (nodeList[i]->type == 1)
 			{
 				LoadButtons(x, y, i);
@@ -309,16 +309,19 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 		}
 		else
 		{
-			nodeList[i]->whom = invPos;
+			if (nodeList[i]->equiped && nodeList[i]->whom != invPos)
+			{
+				nodeList[i]->CleanUp();
+			}
 
 			LoadButtons(x, y, i);
 
 			if (nodeList[i]->equiped == false)
 			{
-				app->render->DrawTexture(itemsTexture, (671 + 42 * x) - app->render->camera.x, y - app->render->camera.y);
+				app->render->DrawTexture(itemsTexture, (680 + 42 * x) - app->render->camera.x, y - app->render->camera.y);
 
 				string c = to_string(nodeList[i]->quantity);
-				app->render->TextDraw(c.c_str(), (671 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(c.c_str(), (680 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
 			}
 			else if (nodeList[i]->equiped && nodeList[i]->whom == invPos)
 			{
@@ -356,10 +359,6 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 348 - app->render->camera.y);
 					}
 				}
-			}
-			else if (nodeList[i]->equiped && nodeList[i]->whom != invPos)
-			{
-				nodeList[i]->CleanUp();
 			}
 
 			app->tex->UnLoad(itemsTexture);
