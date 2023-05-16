@@ -331,6 +331,16 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 			if (b == -1)
 			{
 				b = line.find_first_of(".", a);
+				
+				/*if (b == -1)
+				{
+					b = line.find_first_of("?", a);
+					
+					if (b == -1)
+					{
+						b = line.find_first_of(")", a);
+					}
+				}*/
 			}
 
 			b++;

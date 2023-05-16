@@ -164,9 +164,10 @@ public:
 	
 	//para dibujar, estaba en xml y no se usaba, para aprovechar
 	int id;
+
+	const char* texturePath;
 	
 private:
-	const char* texturePath;
 	List<int> listSkillsHistory; //Aqui guardamos un historial de que skills se ha usado.
 
 	int width, height;
