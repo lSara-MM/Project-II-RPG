@@ -569,6 +569,9 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::CHANGE_POSITION:
 				break;
+			case ButtonType::SKIPPY:
+				rect.x = bounds.w * 2;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 			default:
 				break;
 			}
