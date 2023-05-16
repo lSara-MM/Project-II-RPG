@@ -72,7 +72,6 @@ public:
 	bool SaveCombat(); //guardar stats playable characters en xml combat
 	bool LoadCombat(); //cargar stats playable characters desde xml combat
 	bool RestartCombatData(); //al empezar partida nueva, poner stats xml combat igual a xml config
-
 public:
 	//Player* player;
 	bool frcap;

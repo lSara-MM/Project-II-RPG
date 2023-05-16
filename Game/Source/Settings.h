@@ -341,33 +341,47 @@ public:
 			for (ListItem<GuiCheckBox*>* i = listGraphicsCheckbox.start; i != nullptr; i = i->next)
 			{
 				i->data->isForward_B = true;
-				if (app->win->fullscreen || app->render->vSync_B)	// to change later (if as default is on, it should be shown activated 
+				if (i->data->id == 829)
 				{
-					i->data->state = GuiControlState::SELECTED;
+					if (app->win->fullscreen)	// to change later (if as default is on, it should be shown activated 
+					{
+						i->data->state = GuiControlState::SELECTED;
+					}
+					else
+					{
+						i->data->state = GuiControlState::NORMAL;
+					}
 				}
-				else
+				else if (i->data->id == 830)
 				{
-					i->data->state = GuiControlState::NORMAL;
+					if (app->render->vSync_B)	// to change later (if as default is on, it should be shown activated 
+					{
+						i->data->state = GuiControlState::SELECTED;
+					}
+					else
+					{
+						i->data->state = GuiControlState::NORMAL;
+					}
 				}
+
+				open_graphics_B = true;
 			}
 
-			open_graphics_B = true;
+			if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
+				|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
+			{
+				app->input->gamepadGUI_B = true;
+
+			}
+			else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
+			{
+				app->input->gamepadGUI_B = false;
+			}
+
+			HandleGampeadGUI(&listGraphicsButtons);
+
+			return true;
 		}
-
-		if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
-			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
-		{
-			app->input->gamepadGUI_B = true;
-
-		}
-		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
-		{
-			app->input->gamepadGUI_B = false;
-		}
-
-		HandleGampeadGUI(&listGraphicsButtons);
-
-		return true;
 	}
 
 	bool CloseGraphics()

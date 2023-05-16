@@ -276,15 +276,15 @@ bool Combat::CleanUp()
 {
 	LOG("Freeing scene");
 	//Save al terminar
-	//if (win)
-	//{
-	//	if (firstCombat_B)
-	//	{
-	//		firstCombat_B = false;
-	//	}
+	if (app->sceneWin_Lose->win == true)
+	{
+		if (firstCombat_B)
+		{
+			firstCombat_B = false;
+		}
 
-	//	SaveCombat();
-	//}
+		SaveCombat();
+	}
 
 	if (skillTex != nullptr)
 		app->tex->UnLoad(skillTex);
