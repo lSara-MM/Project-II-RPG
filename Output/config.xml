@@ -247,7 +247,7 @@ enum class CharacterClass
 		sectionX="26" sectionY="30"/>
 
 		<enemy name ="The Specter" id="20" maxHp="2550" currentHp="2550" attack="220" armor="20" critRate="10" critDamage="25" precision="20" res="35" dodge="0" speed="6"
-        type="1" class="10" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
+        type="1" class="4" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
                
         width="0" heigth="0"
         texturePath ="Assets/Textures/EnemyBossSpecter.png"

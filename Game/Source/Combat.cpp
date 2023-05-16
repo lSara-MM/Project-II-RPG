@@ -173,7 +173,7 @@ bool Combat::Update(float dt)
 	//GUI chara in turn
 	SDL_Rect rect = { 0, 0, 588, 179 };
 	SDL_Rect rect2 = { 0, 0, 588, 90 };
-
+	
 	switch (listInitiative.At(charaInTurn)->data->id)
 	{
 	case 0:
@@ -835,8 +835,12 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		} // Si already clicked deseleccionar
 		lastPressedAbility_I = control->id - 10;
 
+		//Evitar petar boton amarillo
+		if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ALLY)
+		{
 		posStart = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
 		posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
+		}
 	}
 	
 	// move character
