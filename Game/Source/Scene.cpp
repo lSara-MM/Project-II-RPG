@@ -143,12 +143,6 @@ bool Scene::Update(float dt)
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(entidad2);*/
 	
-	//ERIC: Prueba que no funciona.
-	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_X) == BUTTON_DOWN) {
-		app->fade->FadingToBlack(this, (Module*)app->combat, 30);
-		app->SaveGameRequest();//guardar para volver misma posicion al volver de combate
-		app->iScene->continueGame_B = true;
-	}
 
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) 
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 30);
@@ -240,8 +234,6 @@ bool Scene::CleanUp()
 	app->dialogueSystem->Disable();
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
-	
-	delete player;
 
 	return true;
 }
@@ -318,7 +310,6 @@ void Scene::Debug()
 
 	if (pause_B == true && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_DOWN))//POSAR CONTROL NORMAL
 	{
-		
 		if (settings_B == true)
 		{
 			for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
@@ -404,24 +395,6 @@ bool Scene::InitEntities()
 	//app->entityManager->Awake();
 	return true;
 }
-
-//void Scene::InitCombat()
-//{
-//	srand(time(NULL));
-//
-//	int randSize = rand() % 3 + 2;
-//	int randId;
-//	vector<int> arr;
-//
-//	for (int i = 0; i < randSize; i++)
-//	{
-//		randId = rand() % 3;
-//		arr.push_back(randId);
-//	}
-//
-//	app->combat->InitAllies(player->arrParty);
-//	app->combat->InitEnemies(name, arr);
-//}
 
 bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 {
