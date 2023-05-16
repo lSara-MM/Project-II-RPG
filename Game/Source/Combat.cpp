@@ -834,7 +834,12 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				break;
 			}
 			app->render->TextDraw(effecto_C.GetString(), 480, 550, 18);
+			
+			//Description
+			app->render->TextDraw(skillPoint->description.GetString(), 55, 620, 15);
 		}
+
+		
 	}
 
 	return false;
