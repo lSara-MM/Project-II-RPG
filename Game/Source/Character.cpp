@@ -220,7 +220,7 @@ bool Character::Update(float dt)
 					turnDelay.Start();
 					delayOn = true;
 				}
-				if (turnDelay.ReadMSec() > 1200 && delayOn)
+				if ((turnDelay.ReadMSec() > 1200 && delayOn) || app->input->godMode_B)
 				{
 					switch (charaClass) //La idea es que cada classe tenga un comportamiento generico
 					{
@@ -281,7 +281,6 @@ bool Character::Update(float dt)
 									break;
 								}
 							}
-
 						}
 						break;
 						case CharacterClass::RANGED_DPS:
