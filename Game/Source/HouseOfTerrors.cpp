@@ -205,6 +205,7 @@ bool HouseOfTerrors::CleanUp()
 	LOG("Freeing scene");
 
 	app->entityManager->Disable();
+	app->inventory->Disable();
 
 	delete player;
 	player = nullptr;
