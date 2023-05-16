@@ -286,6 +286,7 @@ void Scene::Debug()
 	{
 		app->audio->PlayFx(pausefx);
 		app->audio->PlayMusic(pause_music);
+
 		//inventory off
 		app->inventory->Disable();
 
@@ -419,6 +420,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	case 701: 
 		LOG("Button Close pause click");
 		pause_B = false;
+		player->lockMovement = false;
 		app->audio->PlayMusic(lobby_music);
 		//pPause->CleanUp();
 		break;
@@ -426,6 +428,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	case 702: 
 		LOG("Button Resume click");
 		pause_B = false;
+		player->lockMovement = false;
 		app->audio->PlayMusic(lobby_music);
 		//pPause->CleanUp();
 		break;
