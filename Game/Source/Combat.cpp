@@ -771,7 +771,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 		{
 			Skill* skillPoint = listInitiative.At(charaInTurn)->data->listSkills.At(control->id - 10)->data;
 			//Name
-			app->render->TextDraw(skillPoint->name.GetString(), 48, 535, 30);
+			app->render->TextDraw(skillPoint->name.GetString(), 48, 545, 25);
 
 			//Damage or Heal
 			string DMG_C;
@@ -781,7 +781,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			}
 			else { DMG_C = std::to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->attack)); }
 			const char* ch_DMG = DMG_C.c_str();
-			app->render->TextDraw(ch_DMG, 450, 550, 18);
+			app->render->TextDraw(ch_DMG, 335, 550, 18);
 
 			//Efect
 			SString effecto_C;
@@ -825,7 +825,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			default:
 				break;
 			}
-			app->render->TextDraw(effecto_C.GetString(), 530, 550, 18);
+			app->render->TextDraw(effecto_C.GetString(), 480, 550, 18);
 		}
 	}
 
