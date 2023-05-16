@@ -685,8 +685,8 @@ bool PuzzleManager::TeamMate()
 
 			teamMate = true;
 			
-			// TO DO, hay que ponerlo de forma bien, no puede estar asi hardcoded porque a la minima que hagamos cambios en los nombres habra errores
-			app->itemManager->AddCharaToParty("Fire Eater");
+			
+			app->itemManager->AddCharaToParty("Yuroslava");
 
 			app->questManager->quest1->complete = true;
 
