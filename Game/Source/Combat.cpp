@@ -138,7 +138,12 @@ bool Combat::Start()
 
 bool Combat::PreUpdate()
 {
-
+	//TODO : Guarrada maxima
+	if (!listInitiative.At(charaInTurn)->data->onTurn)
+	{
+		charaInTurn++;
+		listInitiative.At(charaInTurn)->data->onTurn = true;
+	}
 
 	return true;
 }
@@ -872,7 +877,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	//
-	if (lastPressedAbility_I != -1 && !isMoving)
+	if (lastPressedAbility_I != -1 && !isMoving && listInitiative.At(charaInTurn)->data->charaType==CharacterType::ALLY)
 	{
 		if (vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->autoTarget == true)
 		{
