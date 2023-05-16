@@ -674,16 +674,15 @@ bool PuzzleManager::Rescue()
 		if (bossActive)
 		{
 			app->render->DrawTexture(textureE, posBoss.x - 64, posBoss.y - 145);
-
+			//pasar a house of terrors
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				LOG("Combat");
 				app->audio->PlayFx(app->hTerrors->combatfx);
-				app->combat->PreLoadCombat(app->itemManager->arrParty, name);
-				app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+				app->combat->PreLoadCombat(app->itemManager->arrParty, app->hTerrors->name);
+				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 5);
 				app->questManager->SaveState();
-				app->puzzleManager->CleanUp();
-				app->puzzleManager->active = false;
+				app->puzzleManager->Disable();
 				app->hTerrors->steps_I = 0;
 			}
 		}
