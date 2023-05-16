@@ -226,7 +226,6 @@ bool Combat::PostUpdate()
 
 	for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 	{
-
 		SDL_Rect rect = { 0, 0, 53, 53 };
 		int offset = 3;
 
@@ -282,6 +281,12 @@ bool Combat::CleanUp()
 		if (firstCombat_B)
 		{
 			firstCombat_B = false;
+		}
+
+		for (int i = 0; i < vecAllies.size(); i++)
+		{
+			if (app->itemManager->arrParty.at(i) == nullptr) { return true; }
+			app->itemManager->arrParty.at(i) = vecAllies.at(i);
 		}
 
 		SaveCombat();
@@ -515,7 +520,11 @@ bool Combat::NextTurn()
 		listButtons.end->data->state = GuiControlState::DISABLED;	// skip
 		HandleSkillsButtons(listInitiative.At(charaInTurn)->data);
 	}
-	else { listButtons.end->data->state = GuiControlState::NORMAL; }
+	else
+	{
+		listButtons.end->prev->data->state = GuiControlState::NORMAL;
+		listButtons.end->data->state = GuiControlState::NORMAL; 
+	}
 
 	LOG("%s turn - num %d", listInitiative.At(charaInTurn)->data->name.GetString(), charaInTurn);
 
@@ -940,9 +949,9 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			string DMG_C;
 			if (skillPoint->multiplierDmg > 0) //Heal
 			{
-				DMG_C = std::to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->maxHp / 5));
+				DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->maxHp / 5));
 			}
-			else { DMG_C = std::to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK))); }
+			else { DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK))); }
 			const char* ch_DMG = DMG_C.c_str();
 			app->render->TextDraw(ch_DMG, 335, 550, 18);
 
@@ -963,7 +972,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				break;
 			case EffectType::CRIT_RATE:
 				if (skillPoint->positiveEffect) { effecto_C = "Buff Crit Rate"; }
-				else { effecto_C = "DebuffCritRate"; }
+				else { effecto_C = "Debuff Crit Rate"; }
 				break;
 			case EffectType::CRIT_DMG:
 				if (skillPoint->positiveEffect) { effecto_C = "BuffCritDMG"; }
@@ -991,6 +1000,18 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			app->render->TextDraw(effecto_C.GetString(), 480, 550, 18);
 			
 			//Description
+			/*vector<SString> texts;
+			int max_chars_line = 40;
+			app->render->SplitText(skillPoint->description.GetString(), &texts, 15, max_chars_line);
+
+			size_t lines = texts.size();
+			for (size_t i = 0; i < lines; i++)
+			{
+				app->render->TextDraw(texts.at(i).GetString(), 55, 620 + 20 * i, 20 - lines * 1.5);
+			}
+			texts.clear();
+			texts.shrink_to_fit();*/
+
 			app->render->TextDraw(skillPoint->description.GetString(), 55, 620, 15);
 		}
 	}
@@ -1027,17 +1048,11 @@ bool Combat::SaveCombat()
 	pugi::xml_document* saveDoc = new pugi::xml_document();
 	pugi::xml_node node = saveDoc->append_child("save_stats");
 
-	//for (c = app->scene->listAllies.start; c != NULL; c = c->next) {
-
-	//	pugi::xml_node character = node.append_child("CombatCharacter");
-	//	character.append_attribute("currentHp") = c->currentHP;//hacerlo para todas las stats
-
-	//}
-
-	for (int i = 0; i < vecAllies.size(); i++)
+	for (int i = 0; i < app->itemManager->arrParty.size(); i++)
 	{
 		pugi::xml_node character = node.append_child("CombatCharacter");
-		character.append_attribute("currentHp") = vecAllies[i]->currentHp;
+		character.append_attribute("name") = app->itemManager->arrParty.at(i)->name.GetString();
+		character.append_attribute("currentHp") = app->itemManager->arrParty.at(i)->currentHp;
 		
 	}
 

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <save_state>
-	<puzzle palancas="false" escape="false" rescue="false" teamMate="true" keyPalancas="0" keyEscape="0" keyRescue="0" bossIsDead="false" />
-	<quests quest1="true" quest2="true" quest3="true" quest1_Complete="true" quest2_Complete="false" quest3_Complete="true" />
+	<puzzle palancas="false" escape="false" rescue="false" teamMate="true" keyPalancas="18059448" keyEscape="18059448" keyRescue="18059448" bossIsDead="false" />
+	<quests quest1="false" quest2="false" quest3="false" quest1_Complete="true" quest2_Complete="false" quest3_Complete="false" />
 </save_state>

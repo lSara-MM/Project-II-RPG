@@ -145,7 +145,7 @@ bool Character::Update(float dt)
 {
 	if (isCombatant)
 	{
-		if (currentHp == 0)
+		if (currentHp <= 0)
 		{
 			if (charaType == CharacterType::ALLY)
 			{
@@ -474,6 +474,7 @@ bool Character::ModifyHP(int hp)
 
 	if (currentHp <= 0)
 	{
+		LOG("%s died", name.GetString());
 		//if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(&app->combat->vecAllies, this); }
 		//else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(&app->combat->vecEnemies, this); }
 		return false;
@@ -762,7 +763,7 @@ bool Character::UseSkill(Skill* skill, Character* target)
 
 	if (skill->areaSkill)
 	{
-		for (size_t i = skill->posToTargetStart_I; i < endRange; i++) //Creo que las skills de area hay que lanzarlas de atras a delante
+		for (size_t i = skill->posToTargetStart_I; i <= endRange; i++) //Creo que las skills de area hay que lanzarlas de atras a delante
 		{
 			//Atacar a todos
 			switch (target->charaType)
