@@ -746,33 +746,187 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 	SDL_Rect rect = { 0,0,588,179 };
 	SDL_Rect rect2 = { 0,0,588,90 };
 
-	switch (control->id)
+	int xText1 = 60;//origen texto stat izq
+	int xNumber1 = 200;//origen numeor stat izq
+	int xText2 = 400;//origen numeor stat dch
+	int xNumber2 = 546;//origen numeor stat dch
+	int offsetY = 35;//offset distancia entre linias
+	int fontSize = 25;
+	int posY = 535;//y botones
+
+	if (control->id<=4)
 	{
-	case 0:
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
-		break;
-	case 1:
-		rect.y = 179;
-		rect2.y = 90;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
-		break;
-	case 2:
-		rect.y = 179 * 2;
-		rect2.y = 90 * 2;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
-		break;
-	case 3:
-		rect.y = 179 * 3;
-		rect2.y = 90 * 3;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
-		break;
-	default:
-		break;
+		string maxHP_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->maxHp);
+		const char* c_hp = maxHP_C.c_str();
+		string attack_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->attack);
+		const char* c_attack = attack_C.c_str();
+		string critR_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->critRate);
+		const char* c_critR = critR_C.c_str();
+		string critD_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->critDamage);
+		const char* c_critD = critD_C.c_str();
+		string precision_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->precision);
+		const char* c_precision = precision_C.c_str();
+		string position_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->positionCombat_I);
+		const char* c_position = position_C.c_str();
+		string armor_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->armor);
+		const char* c_armor = armor_C.c_str();
+		string dodge_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->dodge);
+		const char* c_dodge = dodge_C.c_str();
+		string resist_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->res);
+		const char* c_resist = resist_C.c_str();
+		string speed_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->speed);
+		const char* c_speed = speed_C.c_str();
+
+		switch (control->id)
+		{
+		case 0:
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+
+			app->render->TextDraw("MaxHP", xText1, posY, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_hp, xNumber1, posY, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Precision", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_precision, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+
+			break;
+		case 1:
+			rect.y = 179;
+			rect2.y = 90;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+
+			app->render->TextDraw("MaxHP", xText1, posY, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_hp, xNumber1, posY, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Precision", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_precision, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			break;
+		case 2:
+			rect.y = 179 * 2;
+			rect2.y = 90 * 2;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+
+			app->render->TextDraw("MaxHP", xText1, posY, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_hp, xNumber1, posY, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Precision", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_precision, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			break;
+		case 3:
+			rect.y = 179 * 3;
+			rect2.y = 90 * 3;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+
+			app->render->TextDraw("MaxHP", xText1, posY, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_hp, xNumber1, posY, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Precision", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_precision, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+
+			app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			break;
+		default:
+			break;
+		}
 	}
+	
 
 	if (control->id >= 10 && control->id < 14)
 	{
