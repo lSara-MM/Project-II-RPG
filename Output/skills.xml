@@ -51,7 +51,7 @@ STATUS ID
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   statusID="-1" postive="false" duration="0" intensity="0"
 	/>
-	<skill name="Encourging Words" id="6" description="A funny jest that inspires the whole team increasing its crit rate" 
+	<skill name="Upbeating Words" id="6" description="A funny jest that inspires the whole team increasing its crit rate" 
 		   type="3" movementCaster="0"  movementTarget="0"
 	   multiplierDmg="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
@@ -85,7 +85,7 @@ STATUS ID
 	   statusID="-1" postive="false" duration="0" intensity="0"
 	/>
 
-	<skill name="I have somethig for that" id="11" description="A tonic that gives 2 turns of regeneration, almost no secondary effects"
+	<skill name="I have somethig" id="11" description="A tonic that gives 2 turns of regeneration, almost no secondary effects"
 		   type="3" movementCaster="0"  movementTarget="0"
 	   multiplierDmg="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
@@ -190,32 +190,32 @@ STATUS ID
 
 	<!--Skills Cuadro-->
 
-	<skill name="Vicious Strike" id="29" description="A strike to the vital points, with high crit chance"
+	<skill name="Knife Throwing" id="29" description="A volley of knives that deal damage"
+		   type="0" movementCaster="1"  movementTarget="0"
+	   multiplierDmg="-0.9" bonusPrecision="90" bonusCritRate="50" bonusCritDamage="10"
+		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
+		   statusID="-1" postive="false" duration="0" intensity="0"
+	/>
+
+	<skill name="Coward Stab" id="30" description="A desesperate and punny attack"
 		   type="0" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="-1.4" bonusPrecision="90" bonusCritRate="50" bonusCritDamage="10"
-		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="2" friendlyFire="false" areaSkill="false" autoTarget="false"
+	   multiplierDmg="-1.2" bonusPrecision="80" bonusCritRate="5" bonusCritDamage="80"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   statusID="-1" postive="false" duration="0" intensity="0"
 	/>
 
-	<skill name="Carving Claws" id="30" description="An ofensive buff that increses the power of its critical hits"
-		   type="3" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
-		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
-		   statusID="3" postive="true" duration="3" intensity="50"
+	<skill name="Blinding Paint" id="31" description="A blinding wave of ghost paint"
+		   type="2" movementCaster="0"  movementTarget="0"
+	   multiplierDmg="0" bonusPrecision="120" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="true" autoTarget="false"
+		   statusID="4" postive="false" duration="2" intensity="-40"
 	/>
 
-	<skill name="Go to the party" id="31" description="A dashing attack foward to reposition"
-		   type="0" movementCaster="-2"  movementTarget="0"
-	   multiplierDmg="-1.1" bonusPrecision="90" bonusCritRate="0" bonusCritDamage="10"
-		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="0" friendlyFire="false" areaSkill="false" autoTarget="false"
-		   statusID="-1" postive="false" duration="0" intensity="0"
-	/>
-
-	<skill name="Claw cleave" id="32" description="A strike in a huge area"
-		   type="0" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="-0.6" bonusPrecision="70" bonusCritRate="20" bonusCritDamage="30"
-		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="2" friendlyFire="false" areaSkill="true" autoTarget="false"
-		   statusID="-1" postive="false" duration="0" intensity="0"
+	<skill name="Curse of pain" id="32" description="A strike in a huge area"
+		   type="2" movementCaster="0"  movementTarget="0"
+	   multiplierDmg="0" bonusPrecision="120" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="1" posToUseEnd="3" posToTargetStart="2" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
+		   statusID="5" postive="false" duration="4" intensity="-50"
 	/>
 	
 	
