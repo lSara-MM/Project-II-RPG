@@ -198,7 +198,7 @@ STATUS ID
 	/>
 
 	<skill name="Coward Stab" id="30" description="A desesperate and punny attack"
-		   type="0" movementCaster="0"  movementTarget="0"
+		   type="0" movementCaster="1"  movementTarget="0"
 	   multiplierDmg="-1.2" bonusPrecision="80" bonusCritRate="5" bonusCritDamage="80"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   statusID="-1" postive="false" duration="0" intensity="0"

@@ -357,7 +357,65 @@ bool Character::Update(float dt)
 						break;
 					case CharacterClass::DEBUFFER:
 
-						//A WORKEAR
+						int probSkill;
+						if (positionCombat_I>0) //Posicion comoda
+						{
+							if (listSkillsHistory.end->data == 1 || listSkillsHistory.end->data == 0)//Si ataque last turn poco probable usar attack
+							{
+								probSkill = 10;
+							}
+							else //Si no se uso pues casi siempre la usa
+							{
+								probSkill = 75;
+							}
+							if (CalculateRandomProbability(probSkill) && listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque
+							{
+								//usar skill 0 (atk)
+								UseSkill(listSkills.At(0)->data);
+
+								listSkillsHistory.Add(0);
+								break;
+							}
+							else
+							{
+								if (listSkillsHistory.end->data == 2 )//Usar buffo area
+								{
+									probSkill = 25;
+								}
+								else //Usar buffo unitario
+								{
+									probSkill = 75;
+								}
+								if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I)) //Usar debuff area
+								{
+									//usar skill 2 (area debuff)
+									UseSkill(listSkills.At(2)->data);
+
+									listSkillsHistory.Add(2);
+									break;
+								}
+								else if(CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Debuff unitario
+								{
+									//usar skill 2 (area debuff)
+									UseSkill(listSkills.At(3)->data);
+
+									listSkillsHistory.Add(3);
+									break;
+								}
+							}
+						}
+						else //Posicion jodido
+						{
+							if ( listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+							{
+								//usar skill 1 (debil de huida)
+								UseSkill(listSkills.At(1)->data);
+
+								listSkillsHistory.Add(1);
+								break;
+							}
+						}
+						break;
 
 						break;
 					case CharacterClass::DOT:
