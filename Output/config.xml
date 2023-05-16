@@ -238,7 +238,7 @@ enum class CharacterClass
 		
 		sectionX="16" sectionY="26"/>
 
-		<enemy name ="Possessed Painting" id="2" maxHp="750" currentHp="750" attack="150" armor="8" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="2"          
+		<enemy name ="Possessed Painting" id="2" maxHp="650" currentHp="650" attack="150" armor="8" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="2"          
         type="1" class="8" skill1ID="29" skill2ID="30" skill3ID="31" skill4ID="32"
                
         width="0" heigth="0"
