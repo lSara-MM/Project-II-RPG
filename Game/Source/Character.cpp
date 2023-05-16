@@ -145,6 +145,19 @@ bool Character::Update(float dt)
 {
 	if (isCombatant)
 	{
+		if (currentHp == 0)
+		{
+			if (charaType == CharacterType::ALLY)
+			{
+				app->combat->RemoveCharacter(&app->combat->vecAllies, this);
+			}
+			else
+			{
+				app->combat->RemoveCharacter(&app->combat->vecEnemies, this);
+			}
+			return true;
+		}
+
 		// Render character
 		app->render->DrawTexture(texture, position.x, position.y);
 
@@ -393,11 +406,15 @@ bool Character::ModifyHP(int hp)
 	{
 		currentHp = maxHp;
 	}
+	if (currentHp <= 0)
+	{
+		currentHp = 0;
+	}
 
 	if (currentHp <= 0)
 	{
-		if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(&app->combat->vecAllies, this); }
-		else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(&app->combat->vecEnemies, this); }
+		//if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(&app->combat->vecAllies, this); }
+		//else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(&app->combat->vecEnemies, this); }
 		return false;
 	}
 
