@@ -1,4 +1,4 @@
-#include "Character.h"
+ #include "Character.h"
 
 #include "App.h"
 #include "Audio.h"
@@ -35,11 +35,6 @@ Character::~Character()
 bool Character::Awake()
 {
 	name = parameters.attribute("name").as_string();
-	
-	if (strcmp(name.GetString(), "") == 0)
-	{
-		name = app->input->playerName->input.c_str();
-	}
 
 	maxHp = parameters.attribute("maxHp").as_int();
 	currentHp = parameters.attribute("currentHp").as_int();
@@ -96,8 +91,12 @@ bool Character::Awake()
 
 bool Character::Start()
 {
+	if (strcmp(name.GetString(), "") == 0)
+	{
+		name = app->input->playerName->input.c_str();
+	}
+
 	texture = app->tex->Load(texturePath);
-	
 
 	SDL_Rect buttonBounds;
 
