@@ -145,7 +145,7 @@ bool Character::Update(float dt)
 {
 	if (isCombatant)
 	{
-		if (currentHp == 0)
+		if (currentHp <= 0)
 		{
 			if (charaType == CharacterType::ALLY)
 			{
@@ -474,6 +474,7 @@ bool Character::ModifyHP(int hp)
 
 	if (currentHp <= 0)
 	{
+		LOG("%s died", name.GetString());
 		//if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(&app->combat->vecAllies, this); }
 		//else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(&app->combat->vecEnemies, this); }
 		return false;
