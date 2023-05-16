@@ -55,6 +55,7 @@ bool Inventory::Update(float dt)
 	if (app->combat->active)
 	{
 		y = 460;
+		combatFinish = true;
 	}
 	else
 	{
@@ -62,6 +63,7 @@ bool Inventory::Update(float dt)
 
 		y = 148;
 	}
+
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 	{
 		if (cap == x)
@@ -139,7 +141,7 @@ bool Inventory::CleanUp()
 		}
 	}
 
-	if (app->combat->active == false)
+	if (combatFinish == false)
 	{
 		for (int i = 0; i <= 3; i++)
 		{
@@ -147,6 +149,8 @@ bool Inventory::CleanUp()
 			selectCharacter[i] = nullptr;
 		}
 	}
+
+	combatFinish = false;
 
 	app->tex->UnLoad(inventoryIMG);
 

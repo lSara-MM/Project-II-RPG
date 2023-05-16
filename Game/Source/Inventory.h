@@ -35,6 +35,7 @@ public:
 
 	unsigned cap;
 	int y;
+	bool combatFinish = false;;
 
 	GuiButton* selectCharacter[4];
 };

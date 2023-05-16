@@ -303,8 +303,6 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 				string c = to_string(nodeList[i]->quantity);
 				app->render->TextDraw(c.c_str(), (720 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
 
-				app->tex->UnLoad(itemsTexture);
-				itemsTexture = NULL;
 			}
 		}
 		else
@@ -360,10 +358,10 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 					}
 				}
 			}
-
-			app->tex->UnLoad(itemsTexture);
-			itemsTexture = NULL;
 		}
+
+		app->tex->UnLoad(itemsTexture);
+		itemsTexture = NULL;
 	}
 }
 
