@@ -14,6 +14,7 @@
 #include "FadeToBlack.h"
 #include "GuiManager.h"
 #include "ItemManager.h"
+#include "QuestManager.h"
 #include "Map.h"
 
 #include "Defs.h"
@@ -55,6 +56,8 @@ bool SceneWin_Lose::Start()
 	Lose = app->tex->Load(texturepathLose);
 
 	transition_B = false;//para animacion
+
+	app->questManager->active = false;
 
 	return true;
 }
@@ -131,6 +134,8 @@ bool SceneWin_Lose::CleanUp()
 
 	app->tex->UnLoad(Win);
 	app->tex->UnLoad(Lose);
+
+	app->questManager->active = true;
 
 	return true;
 }
