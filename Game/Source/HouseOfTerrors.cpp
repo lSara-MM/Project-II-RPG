@@ -145,6 +145,7 @@ bool HouseOfTerrors::Update(float dt)
 		if (steps_I > 450)
 		{
 			LOG("Combat");
+			app->LoadGameRequest();
 			app->audio->PlayFx(combatfx);
 			app->combat->PreLoadCombat(app->itemManager->arrParty, name);
 			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
