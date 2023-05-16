@@ -153,7 +153,7 @@ bool GuiCheckBox::Draw(Render* render)
 		case GuiControlState::NORMAL:
 		{
 			rect = { 1, 3, 57, 57 };
-			render->DrawTexture(checkBoxTex, bounds.x, bounds.y, &rect);
+			render->DrawTexture(checkBoxTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 
 		} break;
 
@@ -170,7 +170,7 @@ bool GuiCheckBox::Draw(Render* render)
 		case GuiControlState::SELECTED:
 		{
 			rect = { 1, 127, 57, 57 };
-			render->DrawTexture(checkBoxTex, bounds.x, bounds.y, &rect);
+			render->DrawTexture(checkBoxTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 		} break;
 
 		default:

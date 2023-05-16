@@ -271,13 +271,14 @@ void Circus::Debug()
 			}
 
 			settings_B = false;
-			app->audio->PlayMusic(circusMusPath);
+			
 			/*pSettings->CloseSettings();
 			pSettings->CleanUp();*/
 		}
 		else
 		{
 			pause_B = false;
+			app->audio->PlayMusic(circusMusPath);
 			if (pause_B)
 			{
 				/*pPause = new Pause(this);

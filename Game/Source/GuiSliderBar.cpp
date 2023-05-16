@@ -174,8 +174,8 @@ bool GuiSliderBar::Draw(Render* render)
 	}
 	else
 	{
-		render->DrawTexture(SliderBarTex, bounds.x, bounds.y - 5, &slider_static_rect);
-		render->DrawTexture(SliderBarTex, bounds.x, bounds.y - 5, &slider_dynamic_rect);
+		render->DrawTexture(SliderBarTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y - 5, &slider_static_rect);
+		render->DrawTexture(SliderBarTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y - 5, &slider_dynamic_rect);
 
 		// Draw the right SliderBar depending on state
 		switch (state)
@@ -189,19 +189,19 @@ bool GuiSliderBar::Draw(Render* render)
 
 		case GuiControlState::NORMAL:
 		{
-			render->DrawTexture(SliderBarTex, sliderBounds.x, sliderBounds.y - sliderBounds.h / 2, &button_rect);
+			render->DrawTexture(SliderBarTex, sliderBounds.x - app->render->camera.x, sliderBounds.y - app->render->camera.y - sliderBounds.h / 2, &button_rect);
 
 		} break;
 
 		case GuiControlState::FOCUSED:
 		{
-			render->DrawTexture(SliderBarTex, sliderBounds.x, sliderBounds.y - sliderBounds.h / 2, &button_rect);
+			render->DrawTexture(SliderBarTex, sliderBounds.x - app->render->camera.x, sliderBounds.y - app->render->camera.y - sliderBounds.h / 2, &button_rect);
 
 		} break;
 
 		case GuiControlState::PRESSED:
 		{
-			render->DrawTexture(SliderBarTex, sliderBounds.x, sliderBounds.y - sliderBounds.h / 2, &button_rect);
+			render->DrawTexture(SliderBarTex, sliderBounds.x - app->render->camera.x, sliderBounds.y - app->render->camera.y - sliderBounds.h / 2, &button_rect);
 
 		} break;
 

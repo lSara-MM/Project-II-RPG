@@ -305,13 +305,14 @@ void HouseOfTerrors::Debug()
 			}
 
 			settings_B = false;
-			app->audio->PlayMusic(musHauntedPath);
+		
 			/*pSettings->CloseSettings();
 			pSettings->CleanUp();*/
 		}
 		else
 		{
 			pause_B = false;
+			app->audio->PlayMusic(musHauntedPath);
 			if (pause_B)
 			{
 			/*	pPause = new Pause(this);*/
