@@ -30,7 +30,7 @@ using namespace std;
 
 PracticeTent::PracticeTent() : Module()
 {
-	name.Create("practiceTent");
+	name.Create("PracticeTent");
 }
 
 PracticeTent::~PracticeTent()

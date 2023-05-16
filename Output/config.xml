@@ -98,7 +98,7 @@
 
 	<HouseOfTerrors musicD1="Assets/Audio/Music/Haunted_House.ogg" pause="Assets/Audio/Music/mus_pause.ogg" mouseSpeed ="0.5"/>
 	<Circus musicCircus="Assets/Audio/Music/CircusTent_mus.ogg" pause="Assets/Audio/Music/mus_pause.ogg" mouseSpeed ="0.5"/>
-	<practiceTent musTent="Assets/Audio/Music/sala_Entrenamiento.ogg" pause="Assets/Audio/Music/mus_pause.ogg" texturepathDummy="Assets/Textures/dummy_mapa.png" xCollider="576" yCollider="256" widthCollider="67" heightCollider="73" mouseSpeed ="0.5"/>
+	<PracticeTent musTent="Assets/Audio/Music/sala_Entrenamiento.ogg" pause="Assets/Audio/Music/mus_pause.ogg" texturepathDummy="Assets/Textures/dummy_mapa.png" xCollider="576" yCollider="256" widthCollider="67" heightCollider="73" mouseSpeed ="0.5"/>
 	
 	<scene music="Assets/Audio/Music/Lobby_Music.ogg" pause="Assets/Audio/Music/mus_pause.ogg"
 		textureAttackPath="Assets/Textures/attack.png"
@@ -207,18 +207,19 @@ enum class CharacterClass
 	<scenes name="PracticeTent" numEnemies="2">
 		<enemy name ="Bewitched Wardrobe" id="0"
         maxHp="1000" currentHp="1000" attack="120" armor="18" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="3"
-        type="1" class="4" skill1ID="17" skill2ID="18" skill3ID="19" skill4ID="20"
+        type="1" class="4" skill1ID="21" skill2ID="22" skill3ID="23" skill4ID="24"
                
-        width="0" heigth="0" 
-		texturePath="Assets/Textures/EnemyBewitchedWardrobe.png"
+        width="0" heigth="0"
+		texturePath="Assets/Textures/dummy_combate.png"
 		
 		sectionX="35" sectionY="36"/>
 
 		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="5"
-        type="1" class="0" skill1ID="21" skill2ID="22" skill3ID="23" skill4ID="24"
+        type="1" class="0" skill1ID="25" skill2ID="26" skill3ID="27" skill4ID="28"
                
         width="0" heigth="0"
-        texturePath ="Assets/Textures/EnemyCursedPuppet.png"
+        texturePath ="Assets/Textures/dummy_combate.png"
+		
 		sectionX="16" sectionY="26"/>
 	</scenes>
 	<scenes name="HouseOfTerrors" numEnemies="3">
