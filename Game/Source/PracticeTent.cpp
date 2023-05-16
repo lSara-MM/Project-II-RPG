@@ -124,7 +124,7 @@ bool PracticeTent::Update(float dt)
 
 	if(DummySensor)
 	{
-		app->render->DrawTexture(textureE, posDummy.x + widthDummy / 2, posDummy.y + heigthDummy + 20);
+		app->render->DrawTexture(textureE, posDummy.x - widthDummy / 2 + 20, posDummy.y + 50);
 
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
