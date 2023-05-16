@@ -222,6 +222,11 @@
   </data>
  </layer>
  <layer id="5" name="Entrada" width="20" height="10">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+   <property name="Navigation" type="bool" value="false"/>
+   <property name="collider" type="bool" value="false"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
