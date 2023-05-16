@@ -58,7 +58,7 @@
 
     <dialogueTree ID="1">
 
-	    <node id="0" name="GUIDE" text="The fair is big %%x. Go around and discover the place, now everything will be closed, but surely there are people you can talk to.">
+	    <node id="0" name="NIKITA" text="The fair is big %%x. Go around and discover the place, now everything will be closed, but surely there are people you can talk to.">
 		    <choice id="0" option="Where should I go first?" nextNode="1" eventReturn="0"/>
 		    <choice id="1" option="Talk me about this place." nextNode="2" eventReturn="0"/>
 		    <choice id="2" option="Talk me about The Showman." nextNode="3" eventReturn="0"/>
@@ -67,42 +67,42 @@
 		    <choice id="5" option="Bye" nextNode="-1" eventReturn="0"/>
 	    </node>
 
-	    <node id="1" name="GUIDE" text="Enjoy this place, don't be so serious, nobody likes serious magicians. I recommend the house of terror, there is a very nice man at the door.">
+	    <node id="1" name="NIKITA" text="Enjoy this place, don't be so serious, nobody likes serious magicians. I recommend the house of terror, there is a very nice man at the door.">
 		    <choice id="0" option="Thanks. I guess." nextNode="0"  eventReturn="0"/>
 		    <choice id="1" option="I will greet him from you." nextNode="-1"  eventReturn="0"/>
 	    </node>
 
-	    <node id="2" name="GUIDE" text="How this place. This is the best fair in the world. They all have unique powers to cheer people up, or smash the faces of little busybodies. They can be a bit aggressive, but they are nice, sometimes.">
+	    <node id="2" name="NIKITA" text="How this place. This is the best fair in the world. They all have unique powers to cheer people up, or smash the faces of little busybodies. They can be a bit aggressive, but they are nice, sometimes.">
 		    <choice id="0" option="I see..." nextNode="0" eventReturn="0"/>
 		    <choice id="1" option="And about the fair attractions." nextNode="4" eventReturn="0"/>
 		    <choice id="2" option="Busybodies... Like me you would say." nextNode="5" eventReturn="0"/>
 	    </node>
 
-	    <node id="3" name="GUIDE" text="Ooh! The Showman. He is a sweetheart! Always thinking of others, specifically their souls Isn't that sweet? He's the one keeping this alive, and with magic. Never forget, he is a powerful man, you don't want to make enmity with him. Although as adorable as he is, I don't think you'll be able to anger him.">
+	    <node id="3" name="NIKITA" text="Ooh! The Showman. He is a sweetheart! Always thinking of others, specifically their souls Isn't that sweet? He's the one keeping this alive, and with magic. Never forget, he is a powerful man, you don't want to make enmity with him. Although as adorable as he is, I don't think you'll be able to anger him.">
 		    <choice id="0" option="So he gave me my powers in exchange for my soul. He smell a rat." nextNode="0" eventReturn="0"/>
 		    <choice id="1" option="I bet I can anger him." nextNode="-1" eventReturn="0"/>
 	    </node>
 
-	    <node id="4" name="GUIDE" text="That's so exciting! There are attractions of all kinds. A house of terror that becomes the house of mirrors, a carousel, a Ferris wheel, the circus where the Showman lives and much more. You will surely have a great time. You will see! You will see! You will see!">
+	    <node id="4" name="NIKITA" text="That's so exciting! There are attractions of all kinds. A house of terror that becomes the house of mirrors, a carousel, a Ferris wheel, the circus where the Showman lives and much more. You will surely have a great time. You will see! You will see! You will see!">
 		    <choice id="0" option="Sure" nextNode="0" eventReturn="0"/>
 		    <choice id="1" option="Yeah well... I can't wait to see that..." nextNode="-1" eventReturn="0"/>
 	    </node>
 
-	    <node id="5" name="GUIDE" text="Well... I wouldn't say that. But maybe they do. Just in case, go practicing your powers. You never know.">
+	    <node id="5" name="NIKITA" text="Well... I wouldn't say that. But maybe they do. Just in case, go practicing your powers. You never know.">
 		    <choice id="0" option="Either way, I won't be caught by surprise." nextNode="-1" eventReturn="0"/>
 		    <choice id="1" option="Let me ask you something else." nextNode="0" eventReturn="0"/>
 	    </node>
 
-		<node id="6" name="GUIDE" text="That is my favorite person, machine, thing... whatever. Look, you pay him and then he talks to you, isn't that awesome? I love it.">
+		<node id="6" name="NIKITA" text="That is my favorite person, machine, thing... whatever. Look, you pay him and then he talks to you, isn't that awesome? I love it.">
 			<choice id="0" option="I really do not understand you." nextNode="7" eventReturn="0"/>
 			<choice id="1" option=" Sure." nextNode="7" eventReturn="0"/>
 		</node>
 		
-		<node id="7" name="GUIDE" text="He has an irascible character, it is so fun to talk to him. He has these clever answers. I dare you to anger him, if you do so I will give you some rewards. I am sure you will like it.">
+		<node id="7" name="NIKITA" text="He has an irascible character, it is so fun to talk to him. He has these clever answers. I dare you to anger him, if you do so I will give you some rewards. I am sure you will like it.">
 			<choice id="0" option="Accept the challenge." nextNode="-1" eventReturn="5"/>
 		</node>
 		
-		<node id="8" name="GUIDE" text="Indeed! We have the training tent just next to the stores. Go there if you want to practice.">
+		<node id="8" name="NIKITA" text="Indeed! We have the training tent just next to the stores. Go there if you want to practice.">
 			<choice id="0" option="Thanks, that was actually helpful." nextNode="-1" eventReturn="5"/>
 		</node>
 
@@ -157,146 +157,146 @@
 
 	<dialogueTree ID="3">
 
-		<node id="0" name="TWINS" text="We are closed mate. Go arround. I'll be ready for the next delivery.">
+		<node id="0" name="Igor and Ivan" text="We are closed mate. Go arround. I'll be ready for the next delivery.">
 			<choice id="0" option="What do you sell?" nextNode="1" eventReturn="0"/>
 			<choice id="1" option="Tell me about the House Of Terrors" nextNode="2" eventReturn="0"/>
 			<choice id="2" option="Farewell." nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="1" name="TWINS" text="Nothing at the moment. But be ready for our potions mate.">
+		<node id="1" name="Igor and Ivan" text="Nothing at the moment. But be ready for our potions mate.">
 			<choice id="0" option="Nice." nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="2" name="TWIN 1" text="I do not want to talk about that place.">
+		<node id="2" name="Igor" text="I do not want to talk about that place.">
 			<choice id="0" option="..." nextNode="3" eventReturn="0"/>
 		</node>
 
-		<node id="3" name="TWINS 2" text="I will. That is an awful place. Scary. Creepy. Terrifying.">
+		<node id="3" name="Ivan" text="I will. That is an awful place. Scary. Creepy. Terrifying.">
 			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
 		</node>
 
-		<node id="4" name="TWINS 1" text="You idiot. He already knows that. The House Of Terrors is a jail.">
+		<node id="4" name="Igor" text="You idiot. He already knows that. The House Of Terrors is a jail.">
 			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
 		</node>
 
-		<node id="5" name="TWINS 2" text="Yes! A jail. They kept our friend locked. He is still there actually.">
+		<node id="5" name="Ivan" text="Yes! A jail. They kept our friend locked. He is still there actually.">
 			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
 		</node>
 
-		<node id="6" name="TWINS 1" text="You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
+		<node id="6" name="Igor" text="You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
 			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
 		</node>
 
-		<node id="7" name="TWINS 2" text="Save our friend! He is a nice smith, and a fighter.">
+		<node id="7" name="Ivan" text="Save our friend! He is a nice smith, and a fighter.">
 			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
 		</node>
 
-		<node id="8" name="TWINS 1" text="The best I would say. I'm sure it will help you if you save him.">
+		<node id="8" name="Igor" text="The best I would say. I'm sure it will help you if you save him.">
 			<choice id="0" option="..." nextNode="9" eventReturn="0"/>
 		</node>
 
-		<node id="9" name="TWINS 2" text="And maybe we give you some thanks.">
+		<node id="9" name="Ivan" text="And maybe we give you some thanks.">
 			<choice id="0" option="..." nextNode="10" eventReturn="0"/>
 		</node>
 
-		<node id="10" name="TWINS" text="Save our friend and we will reward you.">
+		<node id="10" name="Igor and Ivan" text="Save our friend and we will reward you.">
 			<choice id="0" option="Accept." nextNode="-1" eventReturn="5"/>
 		</node>
 
-		<node id="-1" name="TWINS" text ="End of conversation -F1- to talk again"></node>
+		<node id="-1" name="Igor and Ivan" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 
 	<dialogueTree ID="4">
 
-		<node id="0" name="TWINS" text="We are still preparing for the opening. Keep calm and explore.">
+		<node id="0" name="Igor and Ivan" text="We are still preparing for the opening. Keep calm and explore.">
 			<choice id="1" option="Tell me about the House Of Terrors" nextNode="1" eventReturn="0"/>
 			<choice id="0" option="Farewell." nextNode="-1" eventReturn="0"/>
 		</node>
 		
-		<node id="1" name="TWINS 1" text="I do not want to talk about that place.">
+		<node id="1" name="Igor" text="I do not want to talk about that place.">
 			<choice id="0" option="..." nextNode="2" eventReturn="0"/>
 		</node>
 
-		<node id="2" name="TWINS 2" text="I will. That is an awful place. Scary. Creepy. Terrifying.">
+		<node id="2" name="Ivan" text="I will. That is an awful place. Scary. Creepy. Terrifying.">
 			<choice id="0" option="..." nextNode="3" eventReturn="0"/>
 		</node>
 
-		<node id="3" name="TWINS 1" text="You idiot. He already knows that. The House Of Terrors is a jail.">
+		<node id="3" name="Igor" text="You idiot. He already knows that. The House Of Terrors is a jail.">
 			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
 		</node>
 
-		<node id="4" name="TWINS 2" text="Yes! A jail. They kept our friend locked. He is still there actually.">
+		<node id="4" name="Ivan" text="Yes! A jail. They kept our friend locked. He is still there actually.">
 			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
 		</node>
 		
-		<node id="5" name="TWINS 1" text="You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
+		<node id="5" name="Igor" text="You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
 			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
 		</node>
 
-		<node id="6" name="TWINS 2" text="Save our friend! He is a nice smith, and a fighter.">
+		<node id="6" name="Ivan" text="Save our friend! He is a nice smith, and a fighter.">
 			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
 		</node>
 		
-		<node id="7" name="TWINS 1" text="The best I would say. I'm sure it will help you if you save him.">
+		<node id="7" name="Igor" text="The best I would say. I'm sure it will help you if you save him.">
 			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
 		</node>
 
-		<node id="8" name="TWINS 2" text="And maybe we give you some thanks.">
+		<node id="8" name="Ivan" text="And maybe we give you some thanks.">
 			<choice id="0" option="..." nextNode="9" eventReturn="0"/>
 		</node>
 		
-		<node id="9" name="TWINS" text="Save our friend and we will reward you.">
+		<node id="9" name="Igor and Ivan" text="Save our friend and we will reward you.">
 			<choice id="0" option="Accept." nextNode="-1" eventReturn="5"/>
 		</node>
 
-		<node id="-1" name="TWINS" text ="End of conversation -F1- to talk again"></node>
+		<node id="-1" name="Igor and Ivan" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 
 	<dialogueTree ID="5">
 
-		<node id="0" name="TWINS" text="Got nothing to offer yet. Be patient. I'll see you arround.">
+		<node id="0" name="Igor and Ivan" text="Got nothing to offer yet. Be patient. I'll see you arround.">
 			<choice id="1" option="Tell me about the House Of Terrors" nextNode="1" eventReturn="0"/>
 			<choice id="0" option="Bye MERCANT." nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="1" name="TWINS 1" text="I do not want to talk about that place.">
+		<node id="1" name="Igor" text="I do not want to talk about that place.">
 			<choice id="0" option="..." nextNode="2" eventReturn="0"/>
 		</node>
 
-		<node id="2" name="TWINS 2" text="I will. That is an awful place. Scary. Creepy. Terrifying.">
+		<node id="2" name="Ivan" text="I will. That is an awful place. Scary. Creepy. Terrifying.">
 			<choice id="0" option="..." nextNode="3" eventReturn="0"/>
 		</node>
 
-		<node id="3" name="TWINS 1" text="You idiot. He already knows that. The House Of Terrors is a jail.">
+		<node id="3" name="Igor" text="You idiot. He already knows that. The House Of Terrors is a jail.">
 			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
 		</node>
 
-		<node id="4" name="TWINS 2" text="Yes! A jail. They kept our friend locked. He is still there actually.">
+		<node id="4" name="Ivan" text="Yes! A jail. They kept our friend locked. He is still there actually.">
 			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
 		</node>
 
-		<node id="5" name="TWINS 1" text="You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
+		<node id="5" name="Igor" text="You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
 			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
 		</node>
 
-		<node id="6" name="TWINS 2" text="Save our friend! He is a nice smith, and a fighter.">
+		<node id="6" name="Ivan" text="Save our friend! He is a nice smith, and a fighter.">
 			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
 		</node>
 
-		<node id="7" name="TWINS 1" text="The best I would say. I'm sure it will help you if you save him.">
+		<node id="7" name="Igor" text="The best I would say. I'm sure it will help you if you save him.">
 			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
 		</node>
 
-		<node id="8" name="TWINS 2" text="And maybe we give you some thanks.">
+		<node id="8" name="Ivan" text="And maybe we give you some thanks.">
 			<choice id="0" option="..." nextNode="9" eventReturn="0"/>
 		</node>
 
-		<node id="9" name="TWINS" text="Save our friend and we will reward you.">
+		<node id="9" name="Igor and Ivan" text="Save our friend and we will reward you.">
 			<choice id="0" option="Accept." nextNode="-1" eventReturn="5"/>
 		</node>
-		
-		<node id="-1" text ="End of conversation -F1- to talk again"></node>
-  </dialogueTree>
+
+		<node id="-1" name="Igor and Ivan" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
   
   <dialogueTree ID="100">
 
