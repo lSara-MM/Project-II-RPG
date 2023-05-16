@@ -681,6 +681,7 @@ bool PuzzleManager::Rescue()
 				app->SaveGameRequest();
 				app->audio->PlayFx(app->hTerrors->combatfx);
 				app->combat->PreLoadCombat(app->itemManager->arrParty, app->hTerrors->name, 20);
+				fightBoss = true;
 				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 5);
 				app->questManager->SaveState();
 				app->puzzleManager->Disable();

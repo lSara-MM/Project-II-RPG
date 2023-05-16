@@ -86,6 +86,8 @@ bool Character::Awake()
 
 	id = parameters.attribute("id").as_int();
 
+	textureOnturn = app->tex->Load("Assets/GUI/humoTurnos.png");
+
 	return true;
 }
 
@@ -176,9 +178,13 @@ bool Character::Update(float dt)
 		if (onTurn)
 		{
 			// TO DO: change to texture 
-			app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
-			app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
-			
+			//app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
+			//app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
+
+			SDL_Rect rect = { 0, 0, 126, 178 };
+			/*app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
+			app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);*/
+			app->render->DrawTexture(textureOnturn, position.x, position.y, &rect);
 			//testing
 			string time;
 			const char* tempus;

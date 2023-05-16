@@ -15,6 +15,7 @@
 #include "GuiManager.h"
 #include "ItemManager.h"
 #include "QuestManager.h"
+#include "PuzzleManager.h"
 #include "Map.h"
 
 #include "Defs.h"
@@ -88,11 +89,21 @@ bool SceneWin_Lose::Update(float dt)
 	{
 		app->audio->PlayMusic(winMusicPath);
 		app->render->DrawTexture(Win, 0, offset + point * (0 - offset));
+		if (app->puzzleManager->fightBoss)
+		{
+			app->puzzleManager->bossIsDead = true;
+			app->questManager->SaveState();
+		}
 	}
 	if (!win)
 	{
 		app->audio->PlayMusic(looseMusicPath);
 		app->render->DrawTexture(Lose, 0, offset + point * (0 - offset));
+		if (app->puzzleManager->fightBoss)
+		{
+			app->puzzleManager->bossIsDead = false;
+			app->questManager->SaveState();
+		}
 
 	}
 
