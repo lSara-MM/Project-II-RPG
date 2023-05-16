@@ -297,8 +297,11 @@ bool Combat::CleanUp()
 	//pSettings->CleanUp();
 
 	vecAllies.clear();
+	vecAllies.shrink_to_fit();
 	vecEnemies.clear();
+	vecEnemies.shrink_to_fit();
 	arrSetEnemies.clear();
+	arrSetEnemies.shrink_to_fit();
 
 	app->entityManager->entities.Clear();
 	app->entityManager->Disable();
@@ -326,6 +329,11 @@ void Combat::Debug()
 	{
 		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) { vecAllies.at(0)->ModifyHP(-99999); }
 		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) { vecEnemies.at(0)->ModifyHP(-99999); }
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) 
+	{
+		app->fade->FadingToBlack(this, (Module*)app->scene, 0);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)

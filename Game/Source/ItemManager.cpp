@@ -477,7 +477,6 @@ void ItemManager::SetPlayerForScene(Player* player_)
 	SetParty();
 }
 
-// TO TEST
 void ItemManager::AddCharaToParty(SString chara)
 {
 	for (int i = 0; i < player->vecPC.size(); i++)

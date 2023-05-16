@@ -692,7 +692,8 @@ bool GuiButton::Draw(Render* render)
 			{
 				app->render->TextDraw(texts.at(i).GetString(), bounds.x + x, bounds.y + y + (fontSize + 3) * i, fontSize - lines * 1.5);
 			}
-			//app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
+			texts.clear();
+			texts.shrink_to_fit();
 		}
 		else
 		{

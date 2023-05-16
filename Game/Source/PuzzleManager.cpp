@@ -302,6 +302,7 @@ bool PuzzleManager::Update(float dt)
 			app->dialogueSystem->PerformDialogue(id);
 			app->hTerrors->player->lockMovement = true;
 			esc1 = false;
+			id.clear();
 		}
 	}
 
@@ -318,6 +319,7 @@ bool PuzzleManager::Update(float dt)
 			app->dialogueSystem->PerformDialogue(id);
 			app->hTerrors->player->lockMovement = true;
 			esc2 = false;
+			id.clear();
 		}
 	}
 
@@ -334,6 +336,7 @@ bool PuzzleManager::Update(float dt)
 			app->dialogueSystem->PerformDialogue(id);
 			app->hTerrors->player->lockMovement = true;
 			esc3 = false;
+			id.clear();
 		}
 	}
 

@@ -530,7 +530,7 @@ bool Character::UseSkill(Skill* skill)
 {
 	if(skill->autoTarget)
 	{
-		this->ModifyHP(ApplySkill(this, this, skill)); //Lanzarsela a si mismo
+		ModifyHP(ApplySkill(this, this, skill)); //Lanzarsela a si mismo
 		app->audio->PlayFx(healfx);
 		if (skill->movementCaster != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster); }
 		return true;
@@ -579,6 +579,7 @@ bool Character::UseSkill(Skill* skill)
 					//Atacar a todos
 					if (!app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill))) { break; }
 				}
+				break;
 			}
 			else
 			{
@@ -671,7 +672,6 @@ bool Character::UseSkill(Skill* skill)
 		}
 	}
 	
-	
 	return true;
 }
 
@@ -700,7 +700,6 @@ bool Character::UseSkill(Skill* skill, Character* target)
 			default:
 				break;
 			}
-			
 		}
 	}
 	else
