@@ -88,9 +88,9 @@
 		    <choice id="1" option="Yeah well... I can't wait to see that..." nextNode="-1" eventReturn="0"/>
 	    </node>
 
-	    <node id="5" name="NIKITA" text="Well... I wouldn't say that. But maybe they do. Just in case, go practicing your powers. You never know.">
-		    <choice id="0" option="Either way, I won't be caught by surprise." nextNode="-1" eventReturn="0"/>
-		    <choice id="1" option="Let me ask you something else." nextNode="0" eventReturn="0"/>
+	    <node id="5" name="NIKITA" text="Well, maybe they do. Just in case, go practicing your powers.">
+		    <choice id="0" option="Either way, I won't be surprised." nextNode="-1" eventReturn="0"/>
+		    <choice id="1" option="Let me ask something else." nextNode="0" eventReturn="0"/>
 	    </node>
 
 		<node id="6" name="NIKITA" text="That is my favorite person, machine, thing... whatever. Look, you pay him and then he talks to you, isn't that awesome? I love it.">
@@ -103,7 +103,7 @@
 		</node>
 		
 		<node id="8" name="NIKITA" text="Indeed! We have the training tent just next to the stores. Go there if you want to practice. ">
-			<choice id="0" option="Thanks, that was actually helpful." nextNode="-1" eventReturn="5"/>
+			<choice id="0" option="Thanks, that was actually helpful." nextNode="-1" eventReturn="0"/>
 		</node>
 
 	    <node id="-1" text ="End of conversation -F1- to talk again"></node>
@@ -130,7 +130,7 @@
 
 		<node id="3" name="ORACLE" text="How dare you. I am always helpful. Always! Now the fee goes up to two coins you cocky jerk.">
 			<choice id="0" option="Pay" nextNode="1" eventReturn="0"/>
-			<choice id="1" option="You can mess with me but I don't even know what you do, you look like nothing but junk." nextNode="6" eventReturn="3"/>
+			<choice id="1" option="You can mess with me, but you're just junk to me." nextNode="6" eventReturn="3"/>
 		</node>
 
 		<node id="4" name="ORACLE" text="I can't believe my eyes, you just paid, silly-billy. I got no more to say, this place is more than closed, you can go in without fear. You will find an empty House of Terrors. But if you want to toss one more coin...">
