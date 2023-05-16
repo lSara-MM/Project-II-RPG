@@ -356,6 +356,9 @@ bool Character::Update(float dt)
 					case CharacterClass::BUFFER:
 						break;
 					case CharacterClass::DEBUFFER:
+
+						//A WORKEAR
+
 						break;
 					case CharacterClass::DOT:
 						break;
