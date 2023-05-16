@@ -111,27 +111,29 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 		case DIALOGUE_IF:
 
 		case DIALOGUE_QUEST:
-			if (activeNode->name == "Igor and Ivan") 
+
+			if (activeNode->name == "Igor and Ivan" && !app->questManager->quest1->active)
 			{
 				app->questManager->quest1->active = true;
-
 				app->questManager->SaveState();
 			}
 
-			if (activeNode->name == "ORACLE") 
+			if (activeNode->name == "ORACLE" && !app->questManager->quest2->active)
 			{
 				app->questManager->quest2->complete = true;
+				app->questManager->quest2->active = true;
 				app->questManager->SaveState();
 			}
 
 			if (activeNode->name == "NIKITA")
 			{
-				if(activeNode->nodeID == 7)
+				if(activeNode->nodeID == 7 && !app->questManager->quest2->active)
 				{
 					app->questManager->quest2->active = true;
 					app->questManager->SaveState();
 				}
-				if (activeNode->nodeID == 8)
+
+				if (activeNode->nodeID == 8 && !app->questManager->quest3->active)
 				{
 					app->questManager->quest3->active = true;
 					app->questManager->SaveState();

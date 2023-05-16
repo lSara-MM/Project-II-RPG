@@ -139,6 +139,10 @@ bool Combat::Start()
 bool Combat::PreUpdate()
 {
 	//TODO : Guarrada maxima
+	if (charaInTurn >= listInitiative.Count())
+	{
+		charaInTurn = 0;
+	}
 	if (!listInitiative.At(charaInTurn)->data->onTurn)
 	{
 		charaInTurn++;
@@ -1211,6 +1215,7 @@ bool Combat::SaveCombat()
 		{
 			pugi::xml_node character = node.append_child("CombatCharacter");
 			character.append_attribute("name") = app->itemManager->arrParty.at(i)->name.GetString();
+			character.append_attribute("maxHp") = app->itemManager->arrParty.at(i)->maxHp;
 			character.append_attribute("currentHp") = app->itemManager->arrParty.at(i)->currentHp;
 		}
 	}
@@ -1243,7 +1248,15 @@ bool Combat::LoadCombat()
 			{
 				break;
 			}
-			app->itemManager->vecPC.at(i)->currentHp = itemNode.attribute("currentHp").as_int();
+
+			app->itemManager->arrParty.at(i)->name = itemNode.attribute("name").as_string();
+			app->itemManager->arrParty.at(i)->currentHp = itemNode.attribute("currentHp").as_int();
+	
+			if (app->itemManager->arrParty.at(i)->currentHp <= 0)
+			{
+				app->itemManager->arrParty.at(i)->currentHp = itemNode.attribute("maxHp").as_int();
+			}
+
 			i++;
 		}
 	}

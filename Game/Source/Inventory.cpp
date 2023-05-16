@@ -26,6 +26,12 @@ bool Inventory::Start()
 
 	if (app->combat->active)
 	{
+		for (int i = 0; i <= 3; i++)
+		{
+			SDL_Rect buttonBounds;
+			buttonBounds = { 0, 0, 0, 0 };
+			selectCharacter[i] = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1000 + i, this, buttonBounds, ButtonType::SMALL);
+		}
 	}
 	else
 	{

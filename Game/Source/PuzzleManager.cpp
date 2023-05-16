@@ -714,9 +714,9 @@ bool PuzzleManager::TeamMate()
 
 			teamMate = true;
 			
-			
 			app->itemManager->AddCharaToParty("Yuroslava");
 
+			app->questManager->quest1->active = true;
 			app->questManager->quest1->complete = true;
 
 			app->combat->SaveCombat();
@@ -726,6 +726,5 @@ bool PuzzleManager::TeamMate()
 			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
 		}
 	}
-
 	return true;
 }
