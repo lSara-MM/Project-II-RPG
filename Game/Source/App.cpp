@@ -91,13 +91,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(combat);
 
 	AddModule(map);
+	AddModule(puzzleManager);
+	AddModule(questManager);
 	AddModule(entityManager);
 	AddModule(itemManager);
 	AddModule(dialogueSystem);
 	AddModule(guiManager);
 	AddModule(sceneWin_Lose);
-	AddModule(puzzleManager);
-	AddModule(questManager);
 	
 	//AddModule(initiAllResourcesFromZip);
 	//AddModule(assetsManager);
