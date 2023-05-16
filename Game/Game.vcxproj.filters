@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\SceneWin_Lose.cpp" />
-    <ClCompile Include="Source\PuzzleManager.cpp" />
-    <ClCompile Include="Source\Tweening.cpp" />
-    <ClCompile Include="Source\QuestManager.cpp" />
-    <ClCompile Include="Source\AssetsManager.cpp" />
-    <ClCompile Include="Source\InitiAllResourcesFromZip.cpp" />
-    <ClInclude Include="Source\SceneWin_Lose.h" />
-    <ClInclude Include="Source\PuzzleManager.h" />
-    <ClInclude Include="Source\Tweening.h" />
-    <ClInclude Include="Source\QuestManager.h" />
-    <ClInclude Include="Source\Quest.h" />
-    <ClInclude Include="Source\AssetsManager.h" />
-    <ClInclude Include="Source\InitiAllResourcesFromZip.h" />
     <ClCompile Include="Source\App.cpp">
       <Filter>App</Filter>
     </ClCompile>
@@ -110,14 +97,29 @@
     <ClCompile Include="Source\Character.cpp">
       <Filter>Modules\Entities\Combat</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ItemManager.cpp">
-      <Filter>Modules\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Skills.cpp">
       <Filter>Modules\Entities\Combat</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PuzzleManager.cpp">
+      <Filter>Modules\Core\QuestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\QuestManager.cpp">
+      <Filter>Modules\Core\QuestSystem</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Inventory.cpp">
-      <Filter>Modules\Core</Filter>
+      <Filter>Modules\Core\ItemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ItemManager.cpp">
+      <Filter>Modules\Core\ItemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneWin_Lose.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AssetsManager.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InitiAllResourcesFromZip.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,11 +255,32 @@
     <ClInclude Include="Source\Skills.h">
       <Filter>Modules\Entities\Combat</Filter>
     </ClInclude>
+    <ClInclude Include="Source\PuzzleManager.h">
+      <Filter>Modules\Core\QuestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Quest.h">
+      <Filter>Modules\Core\QuestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\QuestManager.h">
+      <Filter>Modules\Core\QuestSystem</Filter>
+    </ClInclude>
     <ClInclude Include="Source\ItemManager.h">
-      <Filter>Modules\Core</Filter>
+      <Filter>Modules\Core\ItemManager</Filter>
     </ClInclude>
     <ClInclude Include="Source\Inventory.h">
-      <Filter>Modules\Core</Filter>
+      <Filter>Modules\Core\ItemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneWin_Lose.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AssetsManager.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InitiAllResourcesFromZip.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tweening.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -294,5 +317,16 @@
     <Filter Include="Modules\Entities\Explore">
       <UniqueIdentifier>{34467ecb-be3a-4ec9-90c6-5071a7e6af54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Core\QuestSystem">
+      <UniqueIdentifier>{8c278faa-4e35-4dac-bda0-98eaeee8ca9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Core\ItemManager">
+      <UniqueIdentifier>{245f7f64-b751-41ad-af33-1d06e45f0e80}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Tweening.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
