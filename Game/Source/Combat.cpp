@@ -145,6 +145,7 @@ bool Combat::PreUpdate()
 bool Combat::Update(float dt)
 {
 	Debug();
+
 	app->render->DrawTexture(textureBackground, 0, 0);
 
 	// Printar Barra Turnos (UI WORK)
@@ -201,11 +202,13 @@ bool Combat::Update(float dt)
 	//God Mode Info
 	if (app->input->godMode_B)
 	{
-		app->render->TextDraw("Press 1 to destroy first ally", 10, 40, 12, Font::UI, { 255, 255, 255 });
-		app->render->TextDraw("Press 2 to destroy first enemy", 10, 60, 12, Font::UI, { 255, 255, 255 });
-		app->render->TextDraw("Press 3 next turn", 10, 80, 12, Font::UI, { 255, 255, 255 });
-		app->render->TextDraw("Press 4 enemies button handle", 10, 100, 12, Font::UI, { 255, 255, 255 });
-		app->render->TextDraw("Press 5 allies button handle", 10, 120, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press F3 instant win", 10, 20, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press F4 instant lose", 10, 40, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press 1 to destroy first ally", 10, 60, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press 2 to destroy first enemy", 10, 80, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press 3 next turn", 10, 100, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press 4 enemies button handle", 10, 120, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press 5 allies button handle", 10, 140, 12, Font::UI, { 255, 255, 255 });
 	}
 	
 	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
@@ -331,17 +334,6 @@ bool Combat::CleanUp()
 
 void Combat::Debug()
 {
-	if (app->input->godMode_B)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) { vecAllies.at(0)->ModifyHP(-99999); }
-		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) { vecEnemies.at(0)->ModifyHP(-99999); }
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) 
-	{
-		app->fade->FadingToBlack(this, (Module*)app->scene, 0);
-	}
-
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)
 	{
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
@@ -352,20 +344,52 @@ void Combat::Debug()
 		app->input->godMode_B = !app->input->godMode_B;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN) {
-		LOG("Next turn");
+	if (app->input->godMode_B)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+		{
+			app->fade->FadingToBlack(this, (Module*)app->scene, 0);
+		}
 
-		NextTurn();
-	}
-	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN) {
-		LOG("Button handle");
+		if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+		{
+			app->sceneWin_Lose->win = true;
+			app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);
+		}
 
-		HandleCharaButtons(&vecEnemies, 0, 2);
-	}
-	if (app->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN) {
-		LOG("Button handle");
+		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
+		{
+			app->sceneWin_Lose->win = false;
+			app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);
+		}
 
-		HandleCharaButtons(&vecAllies, 1, 2);
+
+		// num
+		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+		{
+			vecAllies.at(0)->ModifyHP(-99999);
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+		{
+			vecEnemies.at(0)->ModifyHP(-99999);
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN) {
+			LOG("Next turn");
+
+			NextTurn();
+		}
+		if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN) {
+			LOG("Button handle");
+
+			HandleCharaButtons(&vecEnemies, 0, 2);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN) {
+			LOG("Button handle");
+
+			HandleCharaButtons(&vecAllies, 1, 2);
+		}
 	}
 }
 
@@ -1050,10 +1074,12 @@ bool Combat::SaveCombat()
 
 	for (int i = 0; i < app->itemManager->arrParty.size(); i++)
 	{
-		pugi::xml_node character = node.append_child("CombatCharacter");
-		character.append_attribute("name") = app->itemManager->arrParty.at(i)->name.GetString();
-		character.append_attribute("currentHp") = app->itemManager->arrParty.at(i)->currentHp;
-		
+		if (app->itemManager->arrParty.at(i) != nullptr)
+		{
+			pugi::xml_node character = node.append_child("CombatCharacter");
+			character.append_attribute("name") = app->itemManager->arrParty.at(i)->name.GetString();
+			character.append_attribute("currentHp") = app->itemManager->arrParty.at(i)->currentHp;
+		}
 	}
 
 	ret = saveDoc->save_file("save_combat.xml");

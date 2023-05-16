@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <save_stats>
-	<CombatCharacter name="" currentHp="1150" />
+	<CombatCharacter name="Player" currentHp="1150" />
 	<CombatCharacter name="Nikita" currentHp="1000" />
 	<CombatCharacter name="Igor and Ivan" currentHp="1500" />
-	<CombatCharacter name="Yuroslava" currentHp="850" />
 </save_stats>
