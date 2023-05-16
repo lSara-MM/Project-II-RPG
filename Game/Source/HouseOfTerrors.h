@@ -64,6 +64,7 @@ public:
 	//enter combat;
 	int steps_I;
 
+	SDL_Texture* DarkestDungeon;
 
 	const char* enterCombatpath;
 	uint combatfx;
@@ -74,6 +75,8 @@ private:
 	const char* musHauntedPath;
 
 	const char* pause_music;
+
+	const char* texturePathDarkestDungeon;
 
 	// Settings
 	Settings* pSettings;

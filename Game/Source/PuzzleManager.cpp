@@ -376,6 +376,8 @@ bool PuzzleManager::Update(float dt)
 
 	app->render->DrawTexture(boss, posBoss.x - widthBoss, posBoss.y - heightBoss, &bos);
 
+	app->render->DrawTexture(app->hTerrors->DarkestDungeon, app->hTerrors->player->position.x - app->win->GetWidth() / 2, app->hTerrors->player->position.y - app->win->GetHeight() / 2);
+
 	return true;
 }
 

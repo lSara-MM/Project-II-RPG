@@ -50,6 +50,8 @@ bool HouseOfTerrors::Awake(pugi::xml_node& config)
 
 	mouseSpeed = config.attribute("mouseSpeed").as_float();
 
+	texturePathDarkestDungeon = config.attribute("texturePathDark").as_string();
+
 	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
 	pausefx = app->audio->LoadFx(fxpausepath);
 
@@ -65,6 +67,8 @@ bool HouseOfTerrors::Start()
 	app->physics->collisions = false;
 	//Load Map
 	app->map->Load(1);
+
+	DarkestDungeon = app->tex->Load(texturePathDarkestDungeon);
 
 	//Music
 	app->audio->PlayMusic(musHauntedPath, 1.0f);
@@ -215,6 +219,8 @@ bool HouseOfTerrors::CleanUp()
 	app->entityManager->Disable();
 	app->inventory->Disable();
 
+	app->inventory->Disable();
+
 	delete player;
 	player = nullptr;
 
@@ -225,6 +231,11 @@ bool HouseOfTerrors::CleanUp()
 	if (pPause != nullptr)
 	{
 		pPause->CleanUp();
+	}
+
+	if (DarkestDungeon != nullptr) 
+	{
+		app->tex->UnLoad(DarkestDungeon);
 	}
 
 	app->guiManager->CleanUp();
