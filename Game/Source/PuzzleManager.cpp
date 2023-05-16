@@ -673,7 +673,7 @@ bool PuzzleManager::Rescue()
 
 		if (bossActive)
 		{
-			app->render->DrawTexture(textureE, posBoss.x - 64, posBoss.y - 145);
+			app->render->DrawTexture(textureE, posBoss.x, posBoss.y - 145);
 			//pasar a house of terrors
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
