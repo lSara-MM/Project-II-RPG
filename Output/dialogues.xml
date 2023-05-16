@@ -62,8 +62,8 @@
 		    <choice id="0" option="Where should I go first?" nextNode="1" eventReturn="0"/>
 		    <choice id="1" option="Talk me about this place." nextNode="2" eventReturn="0"/>
 		    <choice id="2" option="Talk me about The Showman." nextNode="3" eventReturn="0"/>
-		    <choice id="3" option="There are oracles everywhere. What is the deal with that? (MISSION)" nextNode="6" eventReturn="0"/>
-		    <choice id="4" option="Is there somewhere to train my abilities? (MISSION)" nextNode="8" eventReturn="0"/>
+		    <choice id="3" option="There are oracles everywhere. What is the deal with that? " nextNode="6" eventReturn="0"/>
+		    <choice id="4" option="Is there somewhere to train my abilities? " nextNode="8" eventReturn="0"/>
 		    <choice id="5" option="Bye" nextNode="-1" eventReturn="0"/>
 	    </node>
 
@@ -159,8 +159,8 @@
 
 		<node id="0" name="TWINS" text="We are closed mate. Go arround. I'll be ready for the next delivery.">
 			<choice id="0" option="What do you sell?" nextNode="1" eventReturn="0"/>
-			<choice id="2" option="Tell me about the House Of Terrors" nextNode="2" eventReturn="0"/>
-			<choice id="3" option="Farewell." nextNode="-1" eventReturn="0"/>
+			<choice id="1" option="Tell me about the House Of Terrors" nextNode="2" eventReturn="0"/>
+			<choice id="2" option="Farewell." nextNode="-1" eventReturn="0"/>
 		</node>
 
 		<node id="1" name="TWINS" text="Nothing at the moment. But be ready for our potions mate.">
@@ -209,8 +209,8 @@
 	<dialogueTree ID="4">
 
 		<node id="0" name="TWINS" text="We are still preparing for the opening. Keep calm and explore.">
-			<choice id="0" option="Tell me about the House Of Terrors (MISION)" nextNode="1" eventReturn="0"/>
-			<choice id="1" option="Farewell." nextNode="-1" eventReturn="0"/>
+			<choice id="1" option="Tell me about the House Of Terrors" nextNode="1" eventReturn="0"/>
+			<choice id="0" option="Farewell." nextNode="-1" eventReturn="0"/>
 		</node>
 		
 		<node id="1" name="TWINS 1" text="I do not want to talk about that place.">
@@ -255,8 +255,8 @@
 	<dialogueTree ID="5">
 
 		<node id="0" name="TWINS" text="Got nothing to offer yet. Be patient. I'll see you arround.">
-			<choice id="0" option="Tell me about the House Of Terrors (MISION)" nextNode="1" eventReturn="0"/>
-			<choice id="1" option="Bye MERCANT." nextNode="-1" eventReturn="0"/>
+			<choice id="1" option="Tell me about the House Of Terrors" nextNode="1" eventReturn="0"/>
+			<choice id="0" option="Bye MERCANT." nextNode="-1" eventReturn="0"/>
 		</node>
 
 		<node id="1" name="TWINS 1" text="I do not want to talk about that place.">
