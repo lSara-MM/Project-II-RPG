@@ -151,9 +151,9 @@ bool Inventory::CleanUp()
 		}
 	}
 
-	if (combatFinish == false)
+	for (int i = 0; i <= 3; i++)
 	{
-		for (int i = 0; i <= 3; i++)
+		if (selectCharacter[i] != nullptr)
 		{
 			delete(selectCharacter[i]);
 			selectCharacter[i] = nullptr;
