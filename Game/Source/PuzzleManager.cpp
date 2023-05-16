@@ -268,6 +268,8 @@ bool PuzzleManager::PreUpdate()
 
 bool PuzzleManager::Update(float dt)
 {
+	app->render->DrawTexture(loset, posLoset.x - widthLoset + 16, posLoset.y - heightLoset + 16, &los);
+
 	if (!palancas)
 	{
 		Palancas();
@@ -373,8 +375,6 @@ bool PuzzleManager::Update(float dt)
 	SDL_Rect bos = { 0, 0, 0, 0 };
 
 	app->render->DrawTexture(boss, posBoss.x - widthBoss, posBoss.y - heightBoss, &bos);
-
-	app->render->DrawTexture(loset, posLoset.x - widthLoset + 16, posLoset.y - heightLoset + 16, &los);
 
 	return true;
 }
