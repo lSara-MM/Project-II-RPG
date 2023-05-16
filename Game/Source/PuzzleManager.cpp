@@ -673,7 +673,7 @@ bool PuzzleManager::Rescue()
 
 		if (bossActive)
 		{
-			app->render->DrawTexture(textureE, posBoss.x - 64, posBoss.y - 145);
+			app->render->DrawTexture(textureE, posBoss.x, posBoss.y - 145);
 			//pasar a house of terrors
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
@@ -714,9 +714,9 @@ bool PuzzleManager::TeamMate()
 
 			teamMate = true;
 			
-			
 			app->itemManager->AddCharaToParty("Yuroslava");
 
+			app->questManager->quest1->active = true;
 			app->questManager->quest1->complete = true;
 
 			app->combat->SaveCombat();
@@ -726,6 +726,5 @@ bool PuzzleManager::TeamMate()
 			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
 		}
 	}
-
 	return true;
 }

@@ -132,9 +132,9 @@ bool PracticeTent::Update(float dt)
 			if (app->questManager->quest3->active)
 			{
 				app->questManager->quest3->complete = true;
+				app->questManager->quest3->active = true;
 				app->questManager->SaveState();
 			}
-
 			DummySensor = false;
 		}
 	}

@@ -20,6 +20,7 @@
 
 using namespace std;
 
+
 class DialogueChoice
 {
 public:
@@ -80,6 +81,7 @@ public:
 
 	bool updateOptions;
 	int max_chars_line;
+	bool condiciondia = 0;
 };
 
 #endif //__DIALOGTREE_H__

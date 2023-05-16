@@ -62,8 +62,8 @@
 		    <choice id="0" option="Where should I go first?" nextNode="1" eventReturn="0"/>
 		    <choice id="1" option="Talk me about this place." nextNode="2" eventReturn="0"/>
 		    <choice id="2" option="Talk me about The Showman." nextNode="3" eventReturn="0"/>
-		    <choice id="3" option="There are oracles everywhere. What is the deal with that? " nextNode="6" eventReturn="0"/>
-		    <choice id="4" option="Is there somewhere to train my abilities? " nextNode="8" eventReturn="0"/>
+		    <choice id="3" option="There are oracles everywhere. What is the deal with that?" nextNode="6" eventReturn="0"/>
+		    <choice id="4" option="Show me where can I train my abilities." nextNode="8" eventReturn="0"/>
 		    <choice id="5" option="Bye" nextNode="-1" eventReturn="0"/>
 	    </node>
 
@@ -102,7 +102,7 @@
 			<choice id="0" option="Accept the challenge." nextNode="-1" eventReturn="5"/>
 		</node>
 		
-		<node id="8" name="NIKITA" text="Indeed! We have the training tent just next to the stores. Go there if you want to practice.">
+		<node id="8" name="NIKITA" text="Indeed! We have the training tent just next to the stores. Go there if you want to practice. ">
 			<choice id="0" option="Thanks, that was actually helpful." nextNode="-1" eventReturn="5"/>
 		</node>
 
