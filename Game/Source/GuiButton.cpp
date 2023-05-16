@@ -349,7 +349,7 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::NONE:
 				break;
 			case ButtonType::EXTRA_LARGE:
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x-app->render->camera.x, bounds.y-app->render->camera.y, &rect);
 				break;
 			case ButtonType::LARGE:
 				break;
@@ -361,24 +361,24 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::CLOSE:
 				rect.y = 3;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::MENU:
 				break;
 			case ButtonType::SETTINGS:
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::IN_SETTINGS:
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::DIALOGUE:
 				rect.y = 5;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::CHECK:
 				break;
 			case ButtonType::CONTROL_SETTINGS:
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::INVENTORY:
 				break;
@@ -426,7 +426,7 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::EXTRA_LARGE:
 				rect.y = 53;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::LARGE:
 				break;
@@ -438,27 +438,27 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::CLOSE:
 				rect.y = 66;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::MENU:
 				break;
 			case ButtonType::SETTINGS:
 				rect.y = 53;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::IN_SETTINGS:
 				rect.y = 53;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::DIALOGUE:
 				rect.y = 65;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::CHECK:
 				break;
 			case ButtonType::CONTROL_SETTINGS:
 				rect.y = 53;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::INVENTORY:
 				break;
@@ -509,7 +509,7 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::EXTRA_LARGE:
 				rect.y = 105;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::LARGE:
 				break;
@@ -521,27 +521,27 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::CLOSE:
 				rect.y = 127;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::MENU:
 				break;
 			case ButtonType::SETTINGS:
 				rect.y = 105;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::IN_SETTINGS:
 				rect.y = 105;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::DIALOGUE:
 				rect.y = 125;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::CHECK:
 				break;
 			case ButtonType::CONTROL_SETTINGS:
 				rect.y = 105;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::INVENTORY:
 				break;
