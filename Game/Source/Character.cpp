@@ -454,12 +454,10 @@ bool Character::CleanUp()
 {
 	if(texture != nullptr)
 		app->tex->UnLoad(texture);
+
+	delete button;
+	button = nullptr;
 	
-
-	/*delete button;
-	button = nullptr;*/
-
-	RELEASE(button);
 	return true;
 }
 
