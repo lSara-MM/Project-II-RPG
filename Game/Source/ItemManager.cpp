@@ -131,19 +131,43 @@ void ItemManager::AddQuantity(pugi::xml_node& xml_trees, const char* name)
 
 void ItemManager::MinusQuantity(const char* name)
 {
-	for (size_t i = 0; i < nodeList.size(); i++)
+	if (app->combat->active)
 	{
-		if (nodeList[i]->name == name && nodeList[i]->quantity > 0)
+		if (app->combat->listInitiative[app->combat->charaInTurn]->charaType == CharacterType::ALLY)
 		{
-			if (nodeList[i]->type != 2)
+			for (size_t i = 0; i < nodeList.size(); i++)
 			{
-				nodeList[i]->quantity--;
+				if (nodeList[i]->name == name && nodeList[i]->quantity > 0)
+				{
+					if (nodeList[i]->type != 2)
+					{
+						nodeList[i]->quantity--;
+					}
+					else
+					{
+						nodeList[i]->equiped = !nodeList[i]->equiped;
+					}
+					UseItem(nodeList[i]);
+				}
 			}
-			else
+		}
+	}
+	else
+	{
+		for (size_t i = 0; i < nodeList.size(); i++)
+		{
+			if (nodeList[i]->name == name && nodeList[i]->quantity > 0)
 			{
-				nodeList[i]->equiped = !nodeList[i]->equiped;
+				if (nodeList[i]->type != 2)
+				{
+					nodeList[i]->quantity--;
+				}
+				else
+				{
+					nodeList[i]->equiped = !nodeList[i]->equiped;
+				}
+				UseItem(nodeList[i]);
 			}
-			UseItem(nodeList[i]);	
 		}
 	}
 }
@@ -152,16 +176,12 @@ void ItemManager::UseItem(ItemNode* item)
 {
 	if (app->combat->active)
 	{
-		for (size_t i = 0; i < arrParty.size(); i++)
+
+		if (item->kind != 2)
 		{
-			if (arrParty.at(i) != nullptr && app->combat->charaInTurn == i)
-			{
-				if (item->kind != 2)
-				{
-					app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(item->hp);
-				}
-			}
+			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(item->hp);
 		}
+
 	}
 	else
 	{
