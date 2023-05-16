@@ -55,7 +55,6 @@ bool Inventory::Update(float dt)
 	if (app->combat->active)
 	{
 		y = 460;
-		combatFinish = true;
 	}
 	else
 	{
@@ -159,8 +158,6 @@ bool Inventory::CleanUp()
 			selectCharacter[i] = nullptr;
 		}
 	}
-
-	combatFinish = false;
 
 	app->tex->UnLoad(inventoryIMG);
 
