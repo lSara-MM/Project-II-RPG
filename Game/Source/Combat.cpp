@@ -788,7 +788,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			{
 				DMG_C = std::to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->maxHp / 5));
 			}
-			else { DMG_C = std::to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->attack)); }
+			else { DMG_C = std::to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK))); }
 			const char* ch_DMG = DMG_C.c_str();
 			app->render->TextDraw(ch_DMG, 335, 550, 18);
 
