@@ -123,6 +123,7 @@ bool SceneWin_Lose::Update(float dt)
 bool SceneWin_Lose::PostUpdate()
 {
 	bool ret = true;
+	app->render->TextDraw("Press Enter to continue", 1100, 670, 20, Font::UI, { 255, 255, 255 });
 
 	return ret;
 }
