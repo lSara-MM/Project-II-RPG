@@ -215,6 +215,7 @@ bool Scene::CleanUp()
 
 	app->entityManager->Disable();
 	app->inventory->Disable();
+	
 	delete player;
 	player = nullptr;
 
@@ -228,7 +229,7 @@ bool Scene::CleanUp()
 	{
 		pPause->CleanUp();
 	}
-	
+
 	app->dialogueSystem->Disable();
 	app->guiManager->CleanUp();
 	app->map->CleanUp();

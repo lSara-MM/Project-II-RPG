@@ -362,7 +362,7 @@ bool Character::Update(float dt)
 						case CharacterClass::DEBUFFER:
 
 							int probSkill;
-							if (positionCombat_I>0) //Posicion comoda
+							if (positionCombat_I > 0) //Posicion comoda
 							{
 								if (listSkillsHistory.end->data == 1 || listSkillsHistory.end->data == 0)//Si ataque last turn poco probable usar attack
 								{
@@ -382,7 +382,7 @@ bool Character::Update(float dt)
 								}
 								else
 								{
-									if (listSkillsHistory.end->data == 2 )//Usar buffo area
+									if (listSkillsHistory.end->data == 2)//Usar buffo area
 									{
 										probSkill = 25;
 									}
@@ -398,7 +398,7 @@ bool Character::Update(float dt)
 										listSkillsHistory.Add(2);
 										break;
 									}
-									else if(CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Debuff unitario
+									else if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Debuff unitario
 									{
 										//usar skill 2 (area debuff)
 										UseSkill(listSkills.At(3)->data);
