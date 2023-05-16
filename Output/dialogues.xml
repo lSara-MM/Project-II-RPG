@@ -159,7 +159,7 @@
 
 		<node id="0" name="Igor and Ivan" text="We are closed mate. Go arround. I'll be ready for the next delivery.">
 			<choice id="0" option="What do you sell?" nextNode="1" eventReturn="0"/>
-			<choice id="1" option="Tell me about the House Of Terrors" nextNode="2" eventReturn="0"/>
+			<choice id="1" option="Tell me about the House Of Terrors." nextNode="2" eventReturn="0"/>
 			<choice id="2" option="Farewell." nextNode="-1" eventReturn="0"/>
 		</node>
 
@@ -209,7 +209,7 @@
 	<dialogueTree ID="4">
 
 		<node id="0" name="Igor and Ivan" text="We are still preparing for the opening. Keep calm and explore.">
-			<choice id="1" option="Tell me about the House Of Terrors" nextNode="1" eventReturn="0"/>
+			<choice id="1" option="Tell me about the House Of Terrors." nextNode="1" eventReturn="0"/>
 			<choice id="0" option="Farewell." nextNode="-1" eventReturn="0"/>
 		</node>
 		
@@ -255,7 +255,7 @@
 	<dialogueTree ID="5">
 
 		<node id="0" name="Igor and Ivan" text="Got nothing to offer yet. Be patient. I'll see you arround.">
-			<choice id="1" option="Tell me about the House Of Terrors" nextNode="1" eventReturn="0"/>
+			<choice id="1" option="Tell me about the House Of Terrors." nextNode="1" eventReturn="0"/>
 			<choice id="0" option="Bye MERCANT." nextNode="-1" eventReturn="0"/>
 		</node>
 

@@ -215,7 +215,7 @@ bool Character::Update(float dt)
 					turnDelay.Start();
 					delayOn = true;
 				}
-				if (turnDelay.ReadMSec() > 2000 && delayOn)
+				if (turnDelay.ReadMSec() > 1200 && delayOn)
 				{
 					switch (charaClass) //La idea es que cada classe tenga un comportamiento generico
 					{

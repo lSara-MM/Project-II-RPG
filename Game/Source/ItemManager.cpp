@@ -158,7 +158,7 @@ void ItemManager::UseItem(ItemNode* item)
 			{
 				if (item->kind != 2)
 				{
-					app->combat->listInitiative[i]->currentHp*(item->hp);
+					app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(item->hp);
 				}
 			}
 		}
