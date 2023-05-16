@@ -763,7 +763,7 @@ bool Character::UseSkill(Skill* skill, Character* target)
 
 	if (skill->areaSkill)
 	{
-		for (size_t i = skill->posToTargetStart_I; i < endRange; i++) //Creo que las skills de area hay que lanzarlas de atras a delante
+		for (size_t i = skill->posToTargetStart_I; i <= endRange; i++) //Creo que las skills de area hay que lanzarlas de atras a delante
 		{
 			//Atacar a todos
 			switch (target->charaType)
