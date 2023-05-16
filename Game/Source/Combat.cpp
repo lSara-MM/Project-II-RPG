@@ -897,8 +897,8 @@ bool Combat::SaveCombat()
 	for (int i = 0; i < app->itemManager->arrParty.size(); i++)
 	{
 		pugi::xml_node character = node.append_child("CombatCharacter");
-		character.append_attribute("name") = vecAllies.at(i)->name.GetString();
-		character.append_attribute("currentHp") = vecAllies.at(i)->currentHp;
+		character.append_attribute("name") = app->itemManager->arrParty.at(i)->name.GetString();
+		character.append_attribute("currentHp") = app->itemManager->arrParty.at(i)->currentHp;
 		
 	}
 
