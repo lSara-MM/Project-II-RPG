@@ -66,7 +66,7 @@
 		sectionX="19" sectionY="20"/>
 
 		<CombatCharacter name ="Igor and Ivan" id="2"
-        maxHp="2000" currentHp="2000" attack="120" armor="5" critRate="5" critDamage="20" precision="10" res="20" dodge="5" speed="3"
+        maxHp="1500" currentHp="1500" attack="120" armor="5" critRate="5" critDamage="20" precision="10" res="20" dodge="5" speed="3"
         type="0" class="6" skill1ID="9" skill2ID="10" skill3ID="11" skill4ID="12"
                
         width="0" heigth="0"

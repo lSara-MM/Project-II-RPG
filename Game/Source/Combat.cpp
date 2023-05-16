@@ -515,7 +515,11 @@ bool Combat::NextTurn()
 		listButtons.end->data->state = GuiControlState::DISABLED;	// skip
 		HandleSkillsButtons(listInitiative.At(charaInTurn)->data);
 	}
-	else { listButtons.end->data->state = GuiControlState::NORMAL; }
+	else
+	{
+		listButtons.end->prev->data->state = GuiControlState::NORMAL;
+		listButtons.end->data->state = GuiControlState::NORMAL; 
+	}
 
 	LOG("%s turn - num %d", listInitiative.At(charaInTurn)->data->name.GetString(), charaInTurn);
 
