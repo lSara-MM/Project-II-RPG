@@ -241,8 +241,6 @@ bool Player::CleanUp()
 		pbody->body->GetWorld()->DestroyBody(pbody->body);
 	}
 
-	vecPC.clear();
-
 	return true;
 }
 
@@ -663,22 +661,4 @@ void Player::Controller(float dt)
 	}
 	
 	PadLock = false;
-}
-
-// Party
-void Player::LoadAllPC()
-{
-	for (pugi::xml_node itemNode = app->entityManager->entityNode.child("CombatCharacter"); itemNode; itemNode = itemNode.next_sibling("CombatCharacter"))
-	{
-		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::MENU_CHARA);
-		chara->parameters = itemNode;
-
-		chara->Awake();
-		chara->isCombatant = false;
-
-		chara->Start();
-
-		chara->charaType = CharacterType::ALLY;
-		vecPC.push_back(chara);
-	}
 }

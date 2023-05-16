@@ -79,9 +79,6 @@ bool Circus::Start()
 	InitEntities();
 	app->entityManager->Enable();
 
-	//Init player inventory
-	app->itemManager->SetPlayerForScene(player);
-
 	return true;
 }
 

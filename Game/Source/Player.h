@@ -38,8 +38,6 @@ public:
 
 	void Controller(float dt);
 
-	void LoadAllPC();
-
 public:
 
 	// The pointer to the current player animation
@@ -81,7 +79,6 @@ public:
 	bool pauseEnabled_B = true;
 	Npc* npcTalkingTo;
 	bool npcInteract;
-	vector<Character*> vecPC;
 
 private:
 

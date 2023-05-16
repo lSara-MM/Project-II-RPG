@@ -12,6 +12,7 @@
 #include "IntroScene.h"
 #include "SceneWin_Lose.h"
 #include "QuestManager.h"
+#include "ItemManager.h"
 
 #include "EntityManager.h"
 #include "FadeToBlack.h"
@@ -838,8 +839,6 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			//Description
 			app->render->TextDraw(skillPoint->description.GetString(), 55, 620, 15);
 		}
-
-		
 	}
 
 	return false;
@@ -912,11 +911,11 @@ bool Combat::LoadCombat()
 
 		for (pugi::xml_node itemNode = node.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter"))
 		{
-			if (i<app->scene->player->vecPC.size())
+			if (i < app->itemManager->vecPC.size())
 			{
 				break;
 			}
-			app->scene->player->vecPC[i]->currentHp = itemNode.attribute("currentHp").as_int();
+			app->itemManager->vecPC.at(i)->currentHp = itemNode.attribute("currentHp").as_int();
 			i++;
 		}
 	}

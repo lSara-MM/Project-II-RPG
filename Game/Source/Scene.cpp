@@ -97,9 +97,6 @@ bool Scene::Start()
 
 	app->entityManager->Enable();
 
-	//Init player inventory
-	app->itemManager->SetPlayerForScene(player);
-
 	if (app->iScene->continueGame_B)
 	{
 		app->LoadGameRequest();

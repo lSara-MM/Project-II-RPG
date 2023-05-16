@@ -99,9 +99,6 @@ bool PracticeTent::Start()
 	InitEntities();
 	app->entityManager->Enable();
 
-	//Init player inventory
-	app->itemManager->SetPlayerForScene(player);
-
 	//GUARRADA SUPER TEMPORAL
 	app->itemManager->comb = 1;
 

@@ -47,7 +47,6 @@ public:
 
 	//Pido perd�n no borren 
 	int tpID = 21;
-
 };
 
 #endif // __ENTITYMANAGER_H__

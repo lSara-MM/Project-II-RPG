@@ -83,12 +83,7 @@ bool HouseOfTerrors::Start()
 
 	InitEntities();
 	app->entityManager->Enable();
-
-	app->puzzleManager->active = true;
-	app->puzzleManager->Start();
-
-	//Init player inventory
-	app->itemManager->SetPlayerForScene(player);
+	app->puzzleManager->Enable();
 
 	//GUARRADA SUPER TEMPORAL
 	app->itemManager->comb = 2;

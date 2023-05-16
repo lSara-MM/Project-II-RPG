@@ -7,8 +7,6 @@
 #include "Player.h"
 #include "ItemManager.h"
 
-
-
 Inventory::Inventory(unsigned cap) : Module()
 {
 	name.Create("Inventory");
@@ -93,7 +91,6 @@ bool Inventory::Update(float dt)
 		}
 
 		//LOAD STATS
-
 		if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
 		{
 			app->itemManager->maxhp = app->itemManager->arrParty.at(app->itemManager->invPos)->maxHp;

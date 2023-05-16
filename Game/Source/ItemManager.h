@@ -95,8 +95,8 @@ public:
 	bool LoadItemState(pugi::xml_node& xml_trees);
 	bool SaveItemState();
 
-	void SetPlayerForScene(Player* player_);
 	void AddCharaToParty(SString chara);
+	void LoadAllPC();
 	void SetParty();
 
 public:
@@ -109,8 +109,8 @@ public:
 
 	vector <ItemNode*> nodeList;
 
-	Player* player;
 	array<Character*, 4> arrParty;
+	vector<Character*> vecPC;
 
 	int invPos = 0;
 

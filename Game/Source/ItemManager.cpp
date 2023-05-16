@@ -5,6 +5,8 @@
 #include "Textures.h"
 #include "Window.h"
 
+#include "EntityManager.h"
+
 
 ItemManager::ItemManager() : Module()
 {
@@ -27,16 +29,20 @@ bool ItemManager::Awake(pugi::xml_node& config)
 
 bool ItemManager::Start()
 {
+	// Load playable characters and party
+	for (int i = 0; i < arrParty.size(); i++)
+	{
+		arrParty.at(i) = nullptr;
+	}
+
+	LoadAllPC();
+	SetParty();
+
 	LoadItems();
 
 	for (size_t i = 0; i < nodeList.size(); i++)
 	{
 		nodeList[i]->Start();
-	}
-
-	for (int i = 0; i < arrParty.size(); i++)
-	{
-		arrParty.at(i) = nullptr;
 	}
 
 	return true;
@@ -470,24 +476,18 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 	return ret;
 }
 
-void ItemManager::SetPlayerForScene(Player* player_)
-{
-	player = player_;
-	player->LoadAllPC();
-	SetParty();
-}
 
 void ItemManager::AddCharaToParty(SString chara)
 {
-	for (int i = 0; i < player->vecPC.size(); i++)
+	for (int i = 0; i < vecPC.size(); i++)
 	{
-		if (strcmp(player->vecPC.at(i)->name.GetString(), chara.GetString()) == 0)
+		if (strcmp(vecPC.at(i)->name.GetString(), chara.GetString()) == 0)
 		{
 			for (int i = 0; i < arrParty.size(); i++)
 			{
 				if (arrParty.at(i) == nullptr)
 				{
-					arrParty.at(i) = player->vecPC.at(i);
+					arrParty.at(i) = vecPC.at(i);
 					arrParty.at(i)->positionCombat_I = i;
 					break;
 				}
@@ -496,15 +496,33 @@ void ItemManager::AddCharaToParty(SString chara)
 	}
 }
 
+// Party
+void ItemManager::LoadAllPC()
+{
+	for (pugi::xml_node itemNode = app->entityManager->entityNode.child("CombatCharacter"); itemNode; itemNode = itemNode.next_sibling("CombatCharacter"))
+	{
+		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::MENU_CHARA);
+		chara->parameters = itemNode;
+
+		chara->Awake();
+		chara->isCombatant = false;
+
+		chara->Start();
+
+		chara->charaType = CharacterType::ALLY;
+		vecPC.push_back(chara);
+	}
+}
+
 void ItemManager::SetParty()
 {
 	// TO DO when party available
-	for (int i = 0; i < player->vecPC.size(); i++)
+	for (int i = 0; i < vecPC.size(); i++)
 	{
 		// TO DO: change commented per uncommented
 		if (i == arrParty.size() - 1) break;
 		//if (i == arrParty.size()) break;
-		arrParty.at(i) = player->vecPC.at(i);
+		arrParty.at(i) = vecPC.at(i);
 		arrParty.at(i)->positionCombat_I = i;
 	}
 }
