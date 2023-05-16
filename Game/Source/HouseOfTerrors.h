@@ -62,6 +62,10 @@ public:
 	//enter combat;
 	int steps_I;
 
+
+	const char* enterCombatpath;
+	uint combatfx;
+
 private:
 	int mouseX_pos, mouseY_pos;
 	//Music path
@@ -77,9 +81,6 @@ private:
 
 	const char* fxpausepath;
 	uint pausefx;
-
-	const char* enterCombatpath;
-	uint combatfx;
 
 	bool exit_B;
 };

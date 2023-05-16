@@ -100,6 +100,7 @@ public:
 	SDL_Texture* notas;
 	SDL_Texture* doorEscape;
 	SDL_Texture* boss;
+	SDL_Texture* bossDeath;
 	SDL_Texture* loset;
 	SDL_Texture* fireGuy;
 	SDL_Texture* textureE;
@@ -147,7 +148,7 @@ public:
 
 	SDL_Rect los;
 
-	SDL_Rect bos;
+	SDL_Rect bosDeath;
 
 private:
 
@@ -156,6 +157,7 @@ private:
 	const char* texturepathNotas;
 	const char* texturepathDoorEscape;
 	const char* texturepathBoss;
+	const char* texturepathBossDeath;
 	const char* texturepathLoset;
 	const char* texturepathFireGuy;
 
