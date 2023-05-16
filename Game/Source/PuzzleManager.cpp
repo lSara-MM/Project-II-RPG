@@ -49,6 +49,7 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 	texturepathPalanca = config.child("Palanca").attribute("texturepathPalanca").as_string();
 	texturepathNotas = config.child("Notas").attribute("texturepathNotas").as_string();
 	texturepathDoorEscape = config.child("DoorEscape").attribute("texturepathDoorEscape").as_string();
+	texturepathBossDeath = config.child("Boss").attribute("texturepathBossDeath").as_string();
 	texturepathBoss = config.child("Boss").attribute("texturepathBoss").as_string();
 	texturepathLoset = config.child("Loset").attribute("texturepathLoset").as_string();
 	texturepathFireGuy = config.child("FireGuy").attribute("texturepathFireGuy").as_string();
@@ -186,6 +187,8 @@ bool PuzzleManager::Start()
 
 	if (rescue == false) 
 	{
+		boss = app->tex->Load(texturepathBoss);
+
 		door = app->tex->Load(texturepathDoor);
 		
 		Boss = app->physics->CreateRectangleSensor(posBoss.x - widthBoss / 2, posBoss.y - heightBoss / 2, widthBoss, heightBoss, bodyType::STATIC);
@@ -230,7 +233,7 @@ bool PuzzleManager::Start()
 	loset = app->tex->Load(texturepathLoset);
 	palanca = app->tex->Load(texturepathPalanca);
 
-	boss = app->tex->Load(texturepathBoss);
+	bossDeath = app->tex->Load(texturepathBossDeath);
 
 	Palanca = app->physics->CreateRectangle(posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca, widthPalanca, heightPalanca, bodyType::STATIC);
 	Palanca->body->SetFixedRotation(true);
@@ -253,7 +256,7 @@ bool PuzzleManager::Start()
 	numCode = new PlayerInput("", 3, false);
 
 
-	bos = { 3, 1, 47, 53 };
+	bosDeath = { 3, 1, 47, 53 };
 
 	return true;
 }
@@ -281,7 +284,7 @@ bool PuzzleManager::Update(float dt)
 	}
 	else 
 	{
-		app->render->DrawTexture(boss, posLoset.x - widthBoss, posLoset.y - heightBoss, &bos);
+		app->render->DrawTexture(boss, posLoset.x - widthBoss, posLoset.y - heightBoss, &bosDeath);
 	}
 
 	if (!teamMate) 
@@ -411,6 +414,9 @@ bool PuzzleManager::CleanUp()
 
 	if (!rescue) 
 	{
+		if (boss != nullptr)
+			app->tex->UnLoad(boss);
+
 		if (Boss != nullptr)
 			Boss->body->GetWorld()->DestroyBody(Boss->body);
 
@@ -449,8 +455,8 @@ bool PuzzleManager::CleanUp()
 	if(textureE != nullptr)
 		app->tex->UnLoad(textureE);
 
-	if (boss != nullptr)
-		app->tex->UnLoad(boss);
+	if (bossDeath != nullptr)
+		app->tex->UnLoad(bossDeath);
 
 	if (Palanca != nullptr)
 		Palanca->body->GetWorld()->DestroyBody(Palanca->body);
@@ -606,7 +612,7 @@ bool PuzzleManager::Rescue()
 	{
 		if (!bossInvent)
 		{
-			app->render->DrawTexture(boss, posBoss.x - widthBoss, posBoss.y - heightBoss, &bos);
+			app->render->DrawTexture(bossDeath, posBoss.x - widthBoss, posBoss.y - heightBoss, &bosDeath);
 		}
 
 		if (bossActive)
@@ -657,6 +663,28 @@ bool PuzzleManager::Rescue()
 					app->audio->PlayFx(solvedfx);
 					app->questManager->SaveState();
 				}
+			}
+		}
+	}
+	else 
+	{
+		SDL_Rect bos = { 0, 0, 126, 178 };
+		app->render->DrawTexture(boss, posBoss.x - 126, posBoss.y - 178, &bos, 1.0f, NULL, NULL, NULL, SDL_FLIP_HORIZONTAL);
+
+		if (bossActive)
+		{
+			app->render->DrawTexture(textureE, posBoss.x - 64, posBoss.y - 145);
+
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			{
+				LOG("Combat");
+				app->audio->PlayFx(app->hTerrors->combatfx);
+				app->combat->PreLoadCombat(app->itemManager->arrParty, name);
+				app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+				app->questManager->SaveState();
+				app->puzzleManager->CleanUp();
+				app->puzzleManager->active = false;
+				app->hTerrors->steps_I = 0;
 			}
 		}
 	}

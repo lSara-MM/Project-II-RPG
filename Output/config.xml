@@ -124,7 +124,7 @@
     <DoorEscape texturepathDoorEscape="Assets/Textures/Spritesheet_puzzles.png" width="16" height="64" x="192" y="1408"/>
     <Palanca texturepathPalanca="Assets/Textures/Spritesheet_puzzles.png" Xpalancas="960" Ypalancas="2140" widthPalanca="32" heightPalanca="32"/>
     <PalancaSens texturepathSensor="Assets/Textures/Spritesheet_puzzles.png"  widthPalancaSens="64" heightPalancaSens="64"/>
-    <Boss texturepathBoss="Assets/Textures/boss_sprite.png" x="384"  y="1344"  width="96" height="96"/>
+    <Boss texturepathBoss="Assets/Textures/EnemyBossSpecter.png" texturepathBossDeath="Assets/Textures/boss_sprite.png" x="384" y="1408" width="96" height="96"/>
     <Loset texturepathLoset="Assets/Textures/Spritesheet_puzzles.png" x="320"  y="1088"  width="64" height="64"/>
     <Notas texturepathNotas="Assets/Textures/Spritesheet_puzzles.png" x1="704" y1="832" x2="1216" y2="1344" x3="1792" y3="2240" widthNotas="50" heightNotas="50"/>
 	</PuzzleManager>
