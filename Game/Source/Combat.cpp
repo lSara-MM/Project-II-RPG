@@ -163,140 +163,140 @@ bool Combat::Update(float dt)
 		if (listInitiative.At(j)->data->charaType == CharacterType::ENEMY) { color = { 180, 33, 33, 170 }; }
 		app->render->DrawRectangle({ x, 20, 76, 76 }, color.r, color.g, color.b, color.a);
 
-		
+
 		app->render->DrawTexture(listInitiative.At(j)->data->texture, x + 1, 21, &listInitiative.At(j)->data->texSection);
 		j++;
 	}
-
-
 
 	//GUI chara in turn
 	SDL_Rect rect = { 0, 0, 588, 179 };
 	SDL_Rect rect2 = { 0, 0, 588, 90 };
 	
-	switch (listInitiative.At(charaInTurn)->data->id)
+	if (listInitiative.Count() > charaInTurn)
 	{
-	case 0:
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
-		break;
-	case 1:
-		rect.y = 179;
-		rect2.y = 90;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
-		break;
-	case 2:
-		rect.y = 179 * 2;
-		rect2.y = 90 * 2;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
-		break;
-	case 3:
-		rect.y = 179 * 3;
-		rect2.y = 90 * 3;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
-		break;
-	default:
-		break;
-	}
-
-	//if (/*lastPressedAbility_I ==-1 &&*/ listInitiative.At(charaInTurn)->data->charaType==CharacterType::ALLY)
-	//{
-	//	listInitiative.At(charaInTurn);
-
-	//	int xText1 = 60;//origen texto stat izq
-	//	int xNumber1 = 200;//origen numeor stat izq
-	//	int xText2 = 400;//origen numeor stat dch
-	//	int xNumber2 = 546;//origen numeor stat dch
-	//	int offsetY = 35;//offset distancia entre linias
-	//	int fontSize = 25;
-	//	int posY = 535;//y botones
-
-	//	string maxHP_C = std::to_string(listInitiative.At(charaInTurn)->data->maxHp);
-	//	const char* c_hp = maxHP_C.c_str();
-	//	string attack_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK));
-	//	const char* c_attack = attack_C.c_str();
-	//	string critR_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CRIT_RATE));
-	//	const char* c_critR = critR_C.c_str();
-	//	string critD_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CRIT_DMG));
-	//	const char* c_critD = critD_C.c_str();
-	//	string precision_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::PRECISION));
-	//	const char* c_precision = precision_C.c_str();
-	//	string position_C = std::to_string(listInitiative.At(charaInTurn)->data->positionCombat_I);
-	//	const char* c_position = position_C.c_str();
-	//	string armor_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::ARMOR));
-	//	const char* c_armor = armor_C.c_str();
-	//	string dodge_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::DODGE));
-	//	const char* c_dodge = dodge_C.c_str();
-	//	string resist_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::RES));
-	//	const char* c_resist = resist_C.c_str();
-	//	string speed_C = std::to_string(listInitiative.At(charaInTurn)->data->speed);
-	//	const char* c_speed = speed_C.c_str();
-
-
-	//	app->render->TextDraw("MaxHP", xText1, posY, fontSize, Font::UI, { 0, 0, 0 });
-	//	app->render->TextDraw(c_hp, xNumber1, posY, fontSize, Font::UI, { 0, 0, 0 });
-
-	//	app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
-	//	app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
-
-	//	app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
-	//	app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
-
-	//	app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
-	//	app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
-
-	//	app->render->TextDraw("Precision", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-	//	app->render->TextDraw(c_precision, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-
-	//	app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
-	//	app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
-
-	//	app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
-	//	app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
-
-	//	app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
-	//	app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
-
-	//	app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
-	//	app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
-
-	//	app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-	//	app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-	//}
-	/*else
-	{
-		switch (lastPressedAbility_I)
+		switch (listInitiative.At(charaInTurn)->data->id)
 		{
-			case 0:
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
-		break;
-	case 1:
-		rect.y = 179;
-		rect2.y = 90;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
-		break;
-	case 2:
-		rect.y = 179 * 2;
-		rect2.y = 90 * 2;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
-		break;
-	case 3:
-		rect.y = 179 * 3;
-		rect2.y = 90 * 3;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
-		break;
+		case 0:
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		case 1:
+			rect.y = 179;
+			rect2.y = 90;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		case 2:
+			rect.y = 179 * 2;
+			rect2.y = 90 * 2;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		case 3:
+			rect.y = 179 * 3;
+			rect2.y = 90 * 3;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
 		default:
 			break;
 		}
-	}*/
-	
+
+		//if (/*lastPressedAbility_I ==-1 &&*/ listInitiative.At(charaInTurn)->data->charaType==CharacterType::ALLY)
+		//{
+		//	listInitiative.At(charaInTurn);
+
+		//	int xText1 = 60;//origen texto stat izq
+		//	int xNumber1 = 200;//origen numeor stat izq
+		//	int xText2 = 400;//origen numeor stat dch
+		//	int xNumber2 = 546;//origen numeor stat dch
+		//	int offsetY = 35;//offset distancia entre linias
+		//	int fontSize = 25;
+		//	int posY = 535;//y botones
+
+		//	string maxHP_C = std::to_string(listInitiative.At(charaInTurn)->data->maxHp);
+		//	const char* c_hp = maxHP_C.c_str();
+		//	string attack_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK));
+		//	const char* c_attack = attack_C.c_str();
+		//	string critR_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CRIT_RATE));
+		//	const char* c_critR = critR_C.c_str();
+		//	string critD_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CRIT_DMG));
+		//	const char* c_critD = critD_C.c_str();
+		//	string precision_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::PRECISION));
+		//	const char* c_precision = precision_C.c_str();
+		//	string position_C = std::to_string(listInitiative.At(charaInTurn)->data->positionCombat_I);
+		//	const char* c_position = position_C.c_str();
+		//	string armor_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::ARMOR));
+		//	const char* c_armor = armor_C.c_str();
+		//	string dodge_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::DODGE));
+		//	const char* c_dodge = dodge_C.c_str();
+		//	string resist_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::RES));
+		//	const char* c_resist = resist_C.c_str();
+		//	string speed_C = std::to_string(listInitiative.At(charaInTurn)->data->speed);
+		//	const char* c_speed = speed_C.c_str();
+
+
+		//	app->render->TextDraw("MaxHP", xText1, posY, fontSize, Font::UI, { 0, 0, 0 });
+		//	app->render->TextDraw(c_hp, xNumber1, posY, fontSize, Font::UI, { 0, 0, 0 });
+
+		//	app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+		//	app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+
+		//	app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+		//	app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+
+		//	app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+		//	app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+
+		//	app->render->TextDraw("Precision", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+		//	app->render->TextDraw(c_precision, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+
+		//	app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
+		//	app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
+
+		//	app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+		//	app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+
+		//	app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+		//	app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+
+		//	app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+		//	app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+
+		//	app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+		//	app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+		//}
+		/*else
+		{
+			switch (lastPressedAbility_I)
+			{
+				case 0:
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		case 1:
+			rect.y = 179;
+			rect2.y = 90;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		case 2:
+			rect.y = 179 * 2;
+			rect2.y = 90 * 2;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+		case 3:
+			rect.y = 179 * 3;
+			rect2.y = 90 * 3;
+			app->render->DrawTexture(skillTex, 36, 527, &rect);
+			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			break;
+			default:
+				break;
+			}
+		}*/
+	}
 	
 	//God Mode Info
 	if (app->input->godMode_B)
@@ -506,7 +506,7 @@ bool Combat::PreLoadCombat(array<Character*, 4> arrParty_, SString n, int boss)
 
 	if (boss != -1)
 	{
-		arrSetEnemies.push_back(20);
+		arrSetEnemies.push_back(boss);
 	}
 	else
 	{

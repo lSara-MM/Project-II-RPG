@@ -137,6 +137,7 @@ public:
 	bool bossInvent;
 	bool bossIsDead;
 	bool losetActive;
+	bool fightBoss = false;
 
 	bool saveFireGuy;
 
