@@ -105,23 +105,23 @@ bool Inventory::Update(float dt)
 
 			//print stats
 			string h = to_string(app->itemManager->maxhp);
-			app->render->TextDraw(h.c_str(), 330, 460, 15, Font::TEXT, { 0, 0, 0 });
+			app->render->TextDraw(h.c_str(), 330, 465, 15, Font::TEXT, { 0, 0, 0 });
 			string at = to_string(app->itemManager->attack);
-			app->render->TextDraw(at.c_str(), 330, 485, 15, Font::TEXT, { 0, 0, 0 });
+			app->render->TextDraw(at.c_str(), 330, 490, 15, Font::TEXT, { 0, 0, 0 });
 			string cP = to_string(app->itemManager->critProbability);
-			app->render->TextDraw(cP.c_str(), 330, 510, 15, Font::TEXT, { 0, 0, 0 });
+			app->render->TextDraw(cP.c_str(), 330, 515, 15, Font::TEXT, { 0, 0, 0 });
 			string cD = to_string(app->itemManager->critDamage);
-			app->render->TextDraw(cD.c_str(), 330, 535, 15, Font::TEXT, { 0, 0, 0 });
+			app->render->TextDraw(cD.c_str(), 330, 540, 15, Font::TEXT, { 0, 0, 0 });
 			string p = to_string(app->itemManager->precision);
-			app->render->TextDraw(p.c_str(), 330, 560, 15, Font::TEXT, { 0, 0, 0 });
+			app->render->TextDraw(p.c_str(), 330, 565, 15, Font::TEXT, { 0, 0, 0 });
 			string ar = to_string(app->itemManager->armor);
-			app->render->TextDraw(ar.c_str(), 520, 485, 15, Font::TEXT, { 0, 0, 0 });
+			app->render->TextDraw(ar.c_str(), 520, 490, 15, Font::TEXT, { 0, 0, 0 });
 			string e = to_string(app->itemManager->esquiva);
-			app->render->TextDraw(e.c_str(), 520, 510, 15, Font::TEXT, { 0, 0, 0 });
+			app->render->TextDraw(e.c_str(), 520, 515, 15, Font::TEXT, { 0, 0, 0 });
 			string r = to_string(app->itemManager->resistencia);
-			app->render->TextDraw(r.c_str(), 520, 535, 15, Font::TEXT, { 0, 0, 0 });
+			app->render->TextDraw(r.c_str(), 520, 540, 15, Font::TEXT, { 0, 0, 0 });
 			string s = to_string(app->itemManager->speed);
-			app->render->TextDraw(s.c_str(), 520, 560, 15, Font::TEXT, { 0, 0, 0 });
+			app->render->TextDraw(s.c_str(), 520, 565, 15, Font::TEXT, { 0, 0, 0 });
 		}
 	}
 
@@ -159,6 +159,8 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		if (app->itemManager->nodeList[i]->ID == control->id)
 		{
+			app->itemManager->nodeList[i]->whom = app->itemManager->invPos;
+
 			if (app->itemManager->nodeList[i]->type == 1 && app->itemManager->nodeList[i]->kind == 2) break;
 			for (size_t j = 0; j < app->itemManager->nodeList.size(); j++)
 			{
