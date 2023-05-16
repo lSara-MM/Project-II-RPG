@@ -15,20 +15,19 @@
 	<HouseOfTerrors />
 	<PracticeTent />
 	<combat />
-	<loseScene />
 	<map />
+	<PuzzleManager />
+	<questmanager />
 	<entitymanager>
-		<player x="3417" y="1058" />
+		<player x="290" y="1308" />
 	</entitymanager>
 	<itemmanager />
 	<dialogue />
 	<guiManager />
 	<SceneWin_Lose />
-	<PuzzleManager />
-	<questmanager />
 	<Inventory />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2797" y="-725" />
+		<camera x="328" y="-975" />
 	</renderer>
 </save_state>

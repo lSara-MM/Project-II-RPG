@@ -396,8 +396,17 @@ bool Combat::CleanUp()
 
 		for (int i = 0; i < vecAllies.size(); i++)
 		{
-			if (app->itemManager->arrParty.at(i) == nullptr) { return true; }
-			app->itemManager->arrParty.at(i) = vecAllies.at(i);
+			// TO DO: WHEN A CHARA HAS HP = 0, IT SHOULD DIE
+
+			// If es el mismo chara, cambiale el hp, sino se queda igual por lo que el chara muerto revive a 5 hp
+			if (strcmp(app->itemManager->arrParty.at(i)->name.GetString(), vecAllies.at(i)->name.GetString()) == 0)
+			{
+				app->itemManager->arrParty.at(i)->currentHp = vecAllies.at(i)->currentHp;
+			}
+			else
+			{
+				app->itemManager->arrParty.at(i)->currentHp = 5;
+			}
 		}
 
 		SaveCombat();
@@ -507,7 +516,7 @@ void Combat::Debug()
 // Start Combat
 bool Combat::PreLoadCombat(array<Character*, 4> arrParty_, SString n, int boss)
 {
-	arrParty = arrParty_;
+	arrAuxParty = arrParty_;
 	srand(time(NULL));
 
 	int randSize = rand() % 3 + 2;
@@ -569,31 +578,41 @@ bool Combat::InitAllies(array<Character*, 4> party)
 	int cPos = 0;
 
 	// TO TEST
-	Character* chara;
-	for (int i = 0; i < party.size(); i++)
-	{
-		if (party.at(i) == nullptr) { return true; }
-		chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
-		chara->parameters = party.at(i)->parameters;
-		chara->Awake();
+	//Character* chara;
+	//for (int i = 0; i < party.size(); i++)
+	//{
+	//	if (party.at(i) == nullptr) { return true; }
+	//	chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
+	//	chara->parameters = party.at(i)->parameters;
+	//	chara->Awake();
 
-		chara->positionCombat_I = cPos++;
+	//	chara->positionCombat_I = cPos++;
 
-		chara->Start();
-		chara->button->id = i;
+	//	chara->Start();
+	//	chara->button->id = i;
 
-		vecAllies.push_back(chara);
-		//RELEASE(party.at(i));
-	}
+	//	vecAllies.push_back(chara);
+	//	//RELEASE(party.at(i));
+	//}
 
 	//delete &chara;
 	//chara = nullptr;
+
+	for (int i = 0; i < party.size(); i++)
+	{
+		if (party.at(i) == nullptr) { break; }
+
+		party.at(i)->isCombatant = true;
+		vecAllies.push_back(party.at(i));
+		vecAllies.at(i)->Start();
+	}
+
 	return true;
 }
 
 bool Combat::StartCombat()
 {
-	InitAllies(arrParty);
+	InitAllies(arrAuxParty);
 	InitEnemies(arrSetEnemies);
 	
 	for (int i = 0; i < vecEnemies.size(); i++) 
@@ -1215,7 +1234,6 @@ bool Combat::SaveCombat()
 		{
 			pugi::xml_node character = node.append_child("CombatCharacter");
 			character.append_attribute("name") = app->itemManager->arrParty.at(i)->name.GetString();
-			character.append_attribute("maxHp") = app->itemManager->arrParty.at(i)->maxHp;
 			character.append_attribute("currentHp") = app->itemManager->arrParty.at(i)->currentHp;
 		}
 	}
@@ -1251,11 +1269,6 @@ bool Combat::LoadCombat()
 
 			app->itemManager->arrParty.at(i)->name = itemNode.attribute("name").as_string();
 			app->itemManager->arrParty.at(i)->currentHp = itemNode.attribute("currentHp").as_int();
-	
-			if (app->itemManager->arrParty.at(i)->currentHp <= 0)
-			{
-				app->itemManager->arrParty.at(i)->currentHp = itemNode.attribute("maxHp").as_int();
-			}
 
 			i++;
 		}

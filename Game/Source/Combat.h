@@ -120,7 +120,7 @@ private:
 	bool exit_B;
 
 	// Scene transition
-	array<Character*, 4> arrParty;
+	array<Character*, 4> arrAuxParty;
 	SString sceneFromName;
 	vector<int> arrSetEnemies;
 

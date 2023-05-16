@@ -45,26 +45,26 @@ STATUS ID
 	/>
 
 	<!--Skills Bard-->
-	<skill name="Funny Stabing" id="5" description="A powerful attack with the dagger that deals high critical damage, if you make it crit" 
+	<skill name="Funny Stabing" id="5" description="An attack with the dagger that deals high critical damage" 
 		   type="0" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="-0.8" bonusPrecision="100" bonusCritRate="-15" bonusCritDamage="70"
+	   multiplierDmg="-0.8" bonusPrecision="100" bonusCritRate="-10" bonusCritDamage="70"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   statusID="-1" positive="false" duration="0" intensity="0"
 	/>
 	<skill name="Upbeating Words" id="6" description="A funny jest that inspires the whole team increasing its crit rate" 
 		   type="3" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="0.8" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
 		   statusID="2" positive="true" duration="3" intensity="20"
 	/>
 	<skill name="I trust you!" id="7" description="Words of support and emotional manipulatioin that increases defense" 
-		   type="3" movementCaster="0"  movementTarget="-1"
-	   multiplierDmg="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
+		   type="3" movementCaster="1"  movementTarget="0"
+	   multiplierDmg="1.2" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="1" posToTargetStart="2" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
 	   statusID="5" positive="true" duration="1" intensity="40"
 	/>
-	<skill name="Humiliation" id="8" description="A cruel mockery that reduces the armor of an enemy for a long duration" 
-		   type="2" movementCaster="0"  movementTarget="-1"
+	<skill name="Humiliation" id="8" description="A cruel mockery that reduces the atracts an enemy" 
+		   type="2" movementCaster="0"  movementTarget="-2"
 	   multiplierDmg="0" bonusPrecision="105" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   statusID="5" positive="false" duration="4" intensity="-15"
@@ -85,10 +85,10 @@ STATUS ID
 	   statusID="-1" positive="false" duration="0" intensity="0"
 	/>
 
-	<skill name="I have somethig" id="11" description="A tonic that gives 2 turns of regeneration, almost no secondary effects"
+	<skill name="I have somethig" id="11" description="A lesser heal that can be used anywhere"
 		   type="3" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
-		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
+	   multiplierDmg="0.8" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
 	   statusID="0" positive="true" duration="2" intensity="10"
 	/>
 
@@ -139,14 +139,14 @@ STATUS ID
 
 	<skill name="Close doors" id="22" description="A defensive desesperated move to heal and endure"
 		   type="1" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="1.8" bonusPrecision="100" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="1.2" bonusPrecision="100" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
 		   statusID="5" positive="true" duration="1" intensity="40"
 	/>
 
 	<skill name="Maquination" id="23" description="Increases highly its precision"
 		   type="3" movementCaster="-1"  movementTarget="0"
-	   multiplierDmg="0" bonusPrecision="100" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="0.6" bonusPrecision="100" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
 		   statusID="4" positive="false" duration="2" intensity="60"
 	/>
@@ -169,7 +169,7 @@ STATUS ID
 
 	<skill name="Carving Claws" id="26" description="An ofensive buff that increses the power of its critical hits"
 		   type="3" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="0" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="0.5" bonusPrecision="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
 		   statusID="3" positive="true" duration="3" intensity="50"
 	/>
@@ -206,15 +206,15 @@ STATUS ID
 
 	<skill name="Blinding Paint" id="31" description="A blinding wave of ghost paint"
 		   type="2" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="0" bonusPrecision="120" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="-0.3" bonusPrecision="120" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   statusID="4" positive="false" duration="2" intensity="-40"
 	/>
 
-	<skill name="Curse of pain" id="32" description="A strike in a huge area"
+	<skill name="Curse of pain now healing" id="32" description="A strike in a huge area"
 		   type="2" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="0" bonusPrecision="120" bonusCritRate="-200" bonusCritDamage="0"
-		   posToUseStart="1" posToUseEnd="3" posToTargetStart="2" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
+	   multiplierDmg="1.3" bonusPrecision="120" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="1" posToUseEnd="3" posToTargetStart="2" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
 		   statusID="5" positive="false" duration="4" intensity="-50"
 	/>
 	
@@ -228,14 +228,14 @@ STATUS ID
 		   />
 	<skill name="Close doors" id="34" description="A defensive BUFF"
 		   type="3" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="0" bonusPrecision="100" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="1.3" bonusPrecision="100" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
 		   statusID="5" positive="true" duration="2" intensity="130"
 	/>
 
 	<skill name="Curse of pain boss" id="35" description="A strike in a huge area"
 		   type="2" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="0" bonusPrecision="120" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="-1.5" bonusPrecision="120" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="2" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   statusID="5" positive="false" duration="4" intensity="-90"
 	/>

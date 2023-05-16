@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <save_state>
 	<items>
-		<item name="potion" quantity="10" equiped="false" space="0" whom="1" />
-		<item name="granade" quantity="8" equiped="false" space="0" whom="1" />
+		<item name="potion" quantity="0" equiped="false" space="0" whom="1" />
+		<item name="granade" quantity="10" equiped="false" space="0" whom="1" />
 		<item name="legging" quantity="1" equiped="false" space="0" whom="1" />
 		<item name="ring" quantity="1" equiped="false" space="0" whom="1" />
 		<item name="ring_2" quantity="1" equiped="false" space="0" whom="1" />
