@@ -169,45 +169,42 @@ bool Combat::Update(float dt)
 	SDL_Rect rect = { 0, 0, 588, 179 };
 	SDL_Rect rect2 = { 0, 0, 588, 90 };
 	
-	
-		switch (listInitiative.At(charaInTurn)->data->id)
-		{
-		case 0:
-			app->render->DrawTexture(skillTex, 36, 527, &rect);
-			app->render->DrawTexture(profileTex, 38, 407, &rect2);
-			break;
-		case 1:
-			rect.y = 179;
-			rect2.y = 90;
-			app->render->DrawTexture(skillTex, 36, 527, &rect);
-			app->render->DrawTexture(profileTex, 38, 407, &rect2);
-			break;
-		case 2:
-			rect.y = 179 * 2;
-			rect2.y = 90 * 2;
-			app->render->DrawTexture(skillTex, 36, 527, &rect);
-			app->render->DrawTexture(profileTex, 38, 407, &rect2);
-			break;
-		case 3:
-			rect.y = 179 * 3;
-			rect2.y = 90 * 3;
-			app->render->DrawTexture(skillTex, 36, 527, &rect);
-			app->render->DrawTexture(profileTex, 38, 407, &rect2);
-			break;
-		default:
-			break;
-		}
-		
-	
+	switch (listInitiative.At(charaInTurn)->data->id)
+	{
+	case 0:
+		app->render->DrawTexture(skillTex, 36, 527, &rect);
+		app->render->DrawTexture(profileTex, 38, 407, &rect2);
+		break;
+	case 1:
+		rect.y = 179;
+		rect2.y = 90;
+		app->render->DrawTexture(skillTex, 36, 527, &rect);
+		app->render->DrawTexture(profileTex, 38, 407, &rect2);
+		break;
+	case 2:
+		rect.y = 179 * 2;
+		rect2.y = 90 * 2;
+		app->render->DrawTexture(skillTex, 36, 527, &rect);
+		app->render->DrawTexture(profileTex, 38, 407, &rect2);
+		break;
+	case 3:
+		rect.y = 179 * 3;
+		rect2.y = 90 * 3;
+		app->render->DrawTexture(skillTex, 36, 527, &rect);
+		app->render->DrawTexture(profileTex, 38, 407, &rect2);
+		break;
+	default:
+		break;
+	}
 	
 	//God Mode Info
 	if (app->input->godMode_B)
 	{
-		app->render->TextDraw("Press D to destroy first ally", 10, 40, 12);
-		app->render->TextDraw("Press A to destroy first enemy", 10, 60, 12);
-		app->render->TextDraw("Press 1 to move enemy[1] two positions (may crash)", 10, 80, 12);
-		app->render->TextDraw("Press 2 to destroy enemy[1]", 10, 100, 12);
-		app->render->TextDraw("Press 3 next turn", 10, 120, 12);
+		app->render->TextDraw("Press 1 to destroy first ally", 10, 40, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press 2 to destroy first enemy", 10, 60, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press 3 next turn", 10, 80, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press 4 enemies button handle", 10, 100, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press 5 allies button handle", 10, 120, 12, Font::UI, { 255, 255, 255 });
 	}
 	
 	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
@@ -327,8 +324,8 @@ void Combat::Debug()
 {
 	if (app->input->godMode_B)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) { RemoveCharacter(&vecAllies, vecAllies.at(0)); }
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) { RemoveCharacter(&vecEnemies, vecEnemies.at(0)); }
+		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) { vecAllies.at(0)->ModifyHP(-99999); }
+		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) { vecEnemies.at(0)->ModifyHP(-99999); }
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)
@@ -341,16 +338,6 @@ void Combat::Debug()
 		app->input->godMode_B = !app->input->godMode_B;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
-		LOG("Change chara");
-
-		MoveCharacter(&vecEnemies, vecEnemies.at(0), 2);
-	}
-	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) {
-		LOG("Remove chara");
-
-		RemoveCharacter(&vecEnemies, vecEnemies.at(1));
-	}
 	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN) {
 		LOG("Next turn");
 

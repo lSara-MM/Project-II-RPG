@@ -143,7 +143,6 @@ bool GuiButton::Update(float dt)
 						NotifyObserverOfClick();
 					}
 				}
-
 			}
 			else
 			{
@@ -186,8 +185,6 @@ bool GuiButton::Update(float dt)
 	}
 
 	animationButton.Step(step, false);
-
-
 	return false;
 }
 
@@ -222,17 +219,21 @@ bool GuiButton::Draw(Render* render)
 		}
 	}
 
-
 	SDL_Rect rect = { 0, 0, bounds.w, bounds.h };
 
 	if (buttonType == ButtonType::COMBAT_TARGET) { rect = { 0, 0, 48 * 1, 92 }; } //48 anchura de solo 1 corchete, 92 es la altura que tiene DE MOMENTO.
-	else if(buttonType==ButtonType::START) { rect = { 5, 5, 20, 26 }; }
+	else if (buttonType == ButtonType::START) { rect = { 5, 5, 20, 26 }; }
 	else if (buttonType == ButtonType::DIALOGUE) { rect.x = 5; }
 
 	// TO DO, EN DIALOGO LOS BOTONES DEBERIAN TENER MENOS OFFSET, ES DECIR, SE DEBERIAN PRINTAR CON JUSTIFICADO A LA IZQUIERDA, NO EN MEDIO
 	// ADEMAS DE HACER LO DEL TRIM TEXT PARA QUE SI LA OPCION ES MAS LARGA SE PRINTE EN LINEAS DISTINTAS.
 	// POR OTRO LADO INCLUSO EN CASO DE TENER UNA OPCION CON MAS DE UNA LINEA, QUIZAS INTERESARIA QUE EL FONTSIZE SEA MENOR PARA QUE SE ADAPTE 
 	// A LA TEXTURA/BOUNDS DEL BOTON EN SI
+
+	int offsetX = text.Length() * fontSize / 2;
+
+	int x = (bounds.w - offsetX) / 2;
+	int y = (bounds.h - fontSize) / 2;
 
 	if (app->guiManager->GUI_debug)
 	{
@@ -264,8 +265,9 @@ bool GuiButton::Draw(Render* render)
 		} break;
 
 		case GuiControlState::SELECTED:
+		{
 			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 150, 50, 200, true, false);
-			break;
+		} break;
 
 		default:
 			break;
@@ -635,24 +637,14 @@ bool GuiButton::Draw(Render* render)
 			default:
 				break;
 			}
-		
 		}
 	}
 
-
 	if (text != "")
 	{
-		int offsetX = text.Length() * fontSize / 2;
-
-		int x = (bounds.w - offsetX) / 2;
-		int y = (bounds.h - fontSize) / 2;
-
 		if (buttonType == ButtonType::START) {
-			
-
 			switch (state)
 			{
-
 			case GuiControlState::DISABLED:
 			{
 				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 50,50,50 });
@@ -682,30 +674,32 @@ bool GuiButton::Draw(Render* render)
 			default:
 				break;
 			}
+		}			
+		else if (buttonType == ButtonType::DIALOGUE)
+		{
+			offsetX = fontSize / 2;
+
+			x = offsetX;
+			y = offsetX / 2;
+
+			// TO TEST
+			vector<SString> texts;
+			int max_chars_line = fontSize * 2;
+			app->render->SplitText(text, &texts, fontSize, max_chars_line);
+
+			size_t lines = texts.size();
+			for (size_t i = 0; i < lines; i++)
+			{
+				app->render->TextDraw(texts.at(i).GetString(), bounds.x + x, bounds.y + y + (fontSize + 3) * i, fontSize - lines * 1.5);
+			}
+			//app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
 		}
-			
 		else
 		{
 			app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
 		}
 
 	}
-	// TO TEST
-
-	// Text
-	//vector<SString> texts;
-	//int max_chars_line = fontSize;
-	//app->render->SplitText(text, &texts, fontSize, max_chars_line);
-
-	//if (text != "")
-	//{
-		/*size_t lines = texts.size();
-		for (size_t i = 0; i < lines; i++)
-		{
-			app->render->TextDraw(texts.at(i).GetString(), bounds.x + x, bounds.y + y + (fontSize + 3) * i, fontSize, font);
-		}*/
-		//app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
-	//}
 
 	return false;
 }
