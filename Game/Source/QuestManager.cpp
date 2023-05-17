@@ -305,6 +305,7 @@ bool QuestManager::LoadState() {
 		app->puzzleManager->rescue = gameStateFile.child("save_state").child("puzzle").attribute("rescue").as_bool();
 		app->puzzleManager->teamMate = gameStateFile.child("save_state").child("puzzle").attribute("teamMate").as_bool();
 		app->puzzleManager->bossIsDead = gameStateFile.child("save_state").child("puzzle").attribute("bossIsDead").as_bool();
+		app->puzzleManager->bossInvent = gameStateFile.child("save_state").child("puzzle").attribute("bossInvent").as_bool();
 		app->puzzleManager->keyPalancas = gameStateFile.child("save_state").child("puzzle").attribute("keyPalancas").as_int();
 		app->puzzleManager->keyEscape = gameStateFile.child("save_state").child("puzzle").attribute("keyEscape").as_int();
 		app->puzzleManager->keyRescue = gameStateFile.child("save_state").child("puzzle").attribute("keyRescue").as_int();
@@ -338,6 +339,7 @@ bool QuestManager::SaveState()
 	puzzle.append_attribute("keyEscape") = app->puzzleManager->keyEscape;
 	puzzle.append_attribute("keyRescue") = app->puzzleManager->keyRescue;
 	puzzle.append_attribute("bossIsDead") = app->puzzleManager->bossIsDead;
+	puzzle.append_attribute("bossInvent") = app->puzzleManager->bossInvent;
 
 	quests.append_attribute("quest1") = quest1->active;
 	quests.append_attribute("quest2") = quest2->active;
