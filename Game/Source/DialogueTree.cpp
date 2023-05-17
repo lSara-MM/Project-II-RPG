@@ -118,7 +118,7 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 				app->questManager->SaveState();
 			}
 
-			if (activeNode->name == "ORACLE" && !app->questManager->quest2->active)
+			if (activeNode->name == "ORACLE")
 			{
 				app->questManager->quest2->complete = true;
 				app->questManager->quest2->active = true;
