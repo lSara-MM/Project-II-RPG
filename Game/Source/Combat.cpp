@@ -66,9 +66,7 @@ bool Combat::Start()
 {
 	//Load
 	//LoadCombat();
-
-	//Load inventory
-	app->inventory->Enable();
+	app->inventory->Disable();
 
 	//Music combat
 	app->audio->PlayMusic(musCombat, 1.0);
@@ -133,6 +131,9 @@ bool Combat::Start()
 	{
 		app->questManager->active = false;
 	}
+
+	//Load inventory
+	app->inventory->Enable();
 
 	return true;
 }
