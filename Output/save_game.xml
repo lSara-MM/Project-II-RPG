@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<save_state>
+	<input />
+	<window />
+	<textures />
+	<audio />
+	<:anonymous />
+	<pathfinding />
+	<logoScene />
+	<introScene>
+		<previousGame state_B="true" />
+	</introScene>
+	<scene />
+	<Circus />
+	<HouseOfTerrors />
+	<PracticeTent />
+	<combat />
+	<map />
+	<PuzzleManager />
+	<questmanager />
+	<entitymanager>
+		<player name="HouseOfTerrors" x="1170" y="1248" />
+	</entitymanager>
+	<itemmanager />
+	<dialogue />
+	<guiManager />
+	<SceneWin_Lose />
+	<Inventory />
+	<fadeToBlack />
+	<renderer>
+		<camera x="-550" y="-917" />
+	</renderer>
+</save_state>

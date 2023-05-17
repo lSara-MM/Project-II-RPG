@@ -104,7 +104,6 @@ bool SceneWin_Lose::Update(float dt)
 			app->puzzleManager->bossIsDead = false;
 			app->questManager->SaveState();
 		}
-
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {

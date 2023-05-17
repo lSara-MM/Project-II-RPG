@@ -130,7 +130,7 @@ public:
 	int speed= 0;
 	
 
-	//GUARRADA SUPER TEMPORAL
+	// TO DO GUARRADA SUPER TEMPORAL
 	int comb = 0;
 };
 

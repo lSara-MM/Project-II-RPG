@@ -44,7 +44,7 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 	size_t lines = activeNode->texts.size();
 	for (size_t i = 0; i < lines; i++)
 	{
-		app->render->TextDraw(activeNode->texts[i].GetString(), pos.x + 100, pos.y + 50 + (FONT_SIZE + 5) * i, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(activeNode->texts[i].GetString(), pos.x + 100, pos.y + 50 + (FONT_SIZE + 10) * i, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
 	}
 
 	EventReturn(mod, pos);

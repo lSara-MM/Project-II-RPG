@@ -94,10 +94,14 @@ bool PracticeTent::Start()
 	pause_B = false;
 	settings_B = false;
 
-	// Pause 
 
 	InitEntities();
 	app->entityManager->Enable();
+
+	if (app->input->coso)
+	{
+		app->LoadGameRequest();
+	}
 
 	//GUARRADA SUPER TEMPORAL
 	app->itemManager->comb = 1;
@@ -107,6 +111,12 @@ bool PracticeTent::Start()
 
 bool PracticeTent::PreUpdate()
 {
+	// If se ha guardado anteriormente, teleport el player donde estaba en el guardado
+	if (app->input->coso)
+	{
+		player->pbody->body->SetTransform({ PIXEL_TO_METERS(app->input->posX),PIXEL_TO_METERS(app->input->posY) }, 0);
+		app->input->coso = false;
+	}
 	return true;
 }
 
@@ -331,7 +341,6 @@ void PracticeTent::Debug()
 
 	if (pause_B == true && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_DOWN))//POSAR CONTROL NORMAL
 	{
-
 		if (settings_B == true)
 		{
 			for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
@@ -358,7 +367,6 @@ void PracticeTent::Debug()
 			{
 				/*pPause->CleanUp();*/
 			}
-
 		}
 
 		LOG("PAUSE");
