@@ -45,7 +45,7 @@ public:
 	void Debug();
 
 	// Init everything
-	bool PreLoadCombat(array<Character*, 4> arrParty_, SString n, int boss = -1);
+	bool PreLoadCombat(SString n, int boss = -1);
 	bool InitEnemies(vector<int> arr);
 	bool InitAllies(array<Character*, 4> party);
 
@@ -119,8 +119,6 @@ private:
 
 	bool exit_B;
 
-	// Scene transition
-	array<Character*, 4> arrAuxParty;
 	SString sceneFromName;
 	vector<int> arrSetEnemies;
 

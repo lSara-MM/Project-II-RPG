@@ -92,7 +92,14 @@ bool Combat::Start()
 	app->physics->Disable();
 	app->entityManager->active = true;
 
+	//Load, modificar currentHP, hacer luego de cargar allies
+	if (!firstCombat_B)
+	{
+		LoadCombat();
+	}
+
 	StartCombat();
+	
 
 	// Skill button
 	GuiButton* button;	int j = 10;
@@ -119,12 +126,6 @@ bool Combat::Start()
 	listButtons.Add(button);
 
 	button = nullptr;
-
-	//Load, modificar currentHP, hacer luego de cargar allies
-	if (!firstCombat_B)
-	{
-		LoadCombat();
-	}
 
 	//Quest Manager desactivate
 
@@ -514,9 +515,8 @@ void Combat::Debug()
 }
 
 // Start Combat
-bool Combat::PreLoadCombat(array<Character*, 4> arrParty_, SString n, int boss)
+bool Combat::PreLoadCombat(SString n, int boss)
 {
-	arrAuxParty = arrParty_;
 	srand(time(NULL));
 
 	int randSize = rand() % 3 + 2;
@@ -578,41 +578,47 @@ bool Combat::InitAllies(array<Character*, 4> party)
 	int cPos = 0;
 
 	// TO TEST
-	//Character* chara;
-	//for (int i = 0; i < party.size(); i++)
-	//{
-	//	if (party.at(i) == nullptr) { return true; }
-	//	chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
-	//	chara->parameters = party.at(i)->parameters;
-	//	chara->Awake();
+	Character* chara;
+	for (int i = 0; i < party.size(); i++)
+	{
+		if (party.at(i) == nullptr) { return true; }
+		chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
+		chara->parameters = party.at(i)->parameters;
+		chara->Awake();
 
-	//	chara->positionCombat_I = cPos++;
+		chara->positionCombat_I = cPos++;
 
-	//	chara->Start();
-	//	chara->button->id = i;
+		chara->Start();
+		chara->button->id = i;
 
-	//	vecAllies.push_back(chara);
-	//	//RELEASE(party.at(i));
-	//}
+		vecAllies.push_back(chara);
+
+		// TO DO, guarrada provisional
+		vecAllies.at(i)->currentHp = app->itemManager->arrParty.at(i)->currentHp;
+
+		//RELEASE(party.at(i));
+	}
+
 
 	//delete &chara;
 	//chara = nullptr;
 
-	for (int i = 0; i < party.size(); i++)
+	/*for (int i = 0; i < party.size(); i++)
 	{
 		if (party.at(i) == nullptr) { break; }
 
 		party.at(i)->isCombatant = true;
+		party.at(i)->positionCombat_I = i;
 		vecAllies.push_back(party.at(i));
 		vecAllies.at(i)->Start();
-	}
+	}*/
 
 	return true;
 }
 
 bool Combat::StartCombat()
 {
-	InitAllies(arrAuxParty);
+	InitAllies(app->itemManager->arrParty);
 	InitEnemies(arrSetEnemies);
 	
 	for (int i = 0; i < vecEnemies.size(); i++) 
@@ -1262,7 +1268,7 @@ bool Combat::LoadCombat()
 
 		for (pugi::xml_node itemNode = node.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter"))
 		{
-			if (i < app->itemManager->vecPC.size())
+			if (i >= app->itemManager->vecPC.size())
 			{
 				break;
 			}

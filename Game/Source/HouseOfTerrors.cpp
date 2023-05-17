@@ -158,7 +158,7 @@ bool HouseOfTerrors::Update(float dt)
 			LOG("Combat");
 			app->SaveGameRequest();
 			app->audio->PlayFx(combatfx);
-			app->combat->PreLoadCombat(app->itemManager->arrParty, name);
+			app->combat->PreLoadCombat(name);
 			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
 			app->questManager->SaveState();
 			app->puzzleManager->CleanUp();
