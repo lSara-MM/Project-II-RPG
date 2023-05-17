@@ -594,7 +594,16 @@ bool Combat::InitAllies(array<Character*, 4> party)
 		vecAllies.push_back(chara);
 
 		// TO DO, guarrada provisional
+		vecAllies.at(i)->maxHp = app->itemManager->arrParty.at(i)->maxHp;
 		vecAllies.at(i)->currentHp = app->itemManager->arrParty.at(i)->currentHp;
+		vecAllies.at(i)->attack = app->itemManager->arrParty.at(i)->attack;
+		vecAllies.at(i)->critRate = app->itemManager->arrParty.at(i)->critRate;
+		vecAllies.at(i)->critDamage = app->itemManager->arrParty.at(i)->critDamage;
+		vecAllies.at(i)->precision = app->itemManager->arrParty.at(i)->precision;
+		vecAllies.at(i)->armor = app->itemManager->arrParty.at(i)->armor;
+		vecAllies.at(i)->dodge = app->itemManager->arrParty.at(i)->dodge;
+		vecAllies.at(i)->res = app->itemManager->arrParty.at(i)->res;
+		vecAllies.at(i)->speed = app->itemManager->arrParty.at(i)->speed;
 
 		//RELEASE(party.at(i));
 	}
