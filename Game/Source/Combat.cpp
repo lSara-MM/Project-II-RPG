@@ -697,7 +697,7 @@ bool Combat::NextTurn()
 
 		listInitiative.At(charaInTurn)->data->ModifyHP(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CURRENT_HP));
 	}
-	else
+	else if (charaInTurn<listInitiative.Count())
 	{
 		listInitiative.At(charaInTurn + 1)->data->onTurn = true;
 	}
