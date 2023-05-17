@@ -136,14 +136,16 @@ public:
 	//Este bool hace que te borre una vez hacia atras, cuando haya superado el numero máximo de caracteres.
 	bool backSpaceMax = false;
 
-	// TO DELETE
-	int currentHP_Bard = 0;
-	int currentHP_Protagonist = 0;
-
 	SDL_GameController* sdl_controller;
 	GameController controller;
 	
 	bool gamepadGUI_B = false;
+
+
+	// TO DO guarradas 
+	int posX, posY;
+	string sceneNameSaved;
+	bool coso;
 
 private:
 	bool windowEvents[WE_COUNT];

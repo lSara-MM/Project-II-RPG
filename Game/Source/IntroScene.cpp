@@ -382,6 +382,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 
 		}
 		app->combat->firstCombat_B = false;
+
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		continueGame_B = true;
 		break;

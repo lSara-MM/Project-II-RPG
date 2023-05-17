@@ -1,21 +1,26 @@
 #include "EntityManager.h"
 
 #include "App.h"
+#include "Input.h"
 #include "Map.h"
 #include "Physics.h"
 #include "Textures.h"
+
 #include "Scene.h"
 #include "IntroScene.h"
-#include "PuzzleManager.h"
-#include "QuestManager.h"
 #include "HouseOfTerrors.h"
 #include "PracticeTent.h"
 #include "Circus.h"
+#include "Combat.h"
+
+#include "ItemManager.h"
+#include "PuzzleManager.h"
+#include "QuestManager.h"
+#include "FadeToBlack.h"
 
 #include "Defs.h"
 #include "Log.h"
 
-#include "Combat.h"
 //CHARACTHERS
 #include "Player.h"
 #include "NPC.h"
@@ -158,44 +163,31 @@ bool EntityManager::Update(float dt)
 
 bool EntityManager::LoadState(pugi::xml_node& data)
 {
-	float x = data.child("player").attribute("x").as_int();
-	float y = data.child("player").attribute("y").as_int();
-
-	if (app->scene->player != nullptr)
-	{
-		if (app->scene->active)
-		{
-			app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
-		}
-	}
-
-	if (app->hTerrors->player != nullptr)
-	{
-		if (app->hTerrors->active)
-		{
-			app->hTerrors->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
-
-		}
-	}
+	app->input->sceneNameSaved = data.child("player").attribute("name").as_string();
+	app->input->posX = data.child("player").attribute("x").as_int();
+	app->input->posY = data.child("player").attribute("y").as_int();
 	
-	if (app->practiceTent->player != nullptr)
+	app->input->coso = true;
+
+	if (strcmp(app->input->sceneNameSaved.c_str(), app->scene->name.GetString()) == 0)
 	{
-		if (app->practiceTent->active)
-		{
-			app->practiceTent->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
-		}
-	}	
-	
-	if (app->circus->player != nullptr)
-	{
-		if (app->circus->active)
-		{
-			app->circus->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
-		}
+
 	}
 
-	//app->scene->currentHP_Bard = data.child("bard").attribute("currentHp").as_int();
-	//app->scene->currentHP_Protagonist = data.child("protagonist").attribute("currentHp").as_int();
+	if (strcmp(app->input->sceneNameSaved.c_str(), app->circus->name.GetString()) == 0)
+	{
+		app->fade->FadingToBlack(app->scene, (Module*)app->circus, 0);
+	}
+
+	if (strcmp(app->input->sceneNameSaved.c_str(), app->hTerrors->name.GetString()) == 0)
+	{
+		app->fade->FadingToBlack(app->scene, (Module*)app->hTerrors, 0);
+	}
+
+	if (strcmp(app->input->sceneNameSaved.c_str(), app->practiceTent->name.GetString()) == 0)
+	{
+		app->fade->FadingToBlack(app->scene, (Module*)app->practiceTent, 0);
+	}
 
 	return true;
 }
@@ -207,24 +199,28 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 
 	if (app->scene->active)
 	{
+		player.append_attribute("name") = app->scene->name.GetString();
 		player.append_attribute("x") = app->scene->player->position.x;
 		player.append_attribute("y") = app->scene->player->position.y;
 	}
 	
 	if (app->hTerrors->active)
 	{
+		player.append_attribute("name") = app->hTerrors->name.GetString();
 		player.append_attribute("x") = app->hTerrors->player->position.x;
 		player.append_attribute("y") = app->hTerrors->player->position.y;
 	}	
 
 	if (app->practiceTent->active)
 	{
+		player.append_attribute("name") = app->practiceTent->name.GetString();
 		player.append_attribute("x") = app->practiceTent->player->position.x;
 		player.append_attribute("y") = app->practiceTent->player->position.y;
 	}	
 	
 	if (app->circus->active)
 	{
+		player.append_attribute("name") = app->circus->name.GetString();
 		player.append_attribute("x") = app->circus->player->position.x;
 		player.append_attribute("y") = app->circus->player->position.y;
 	}
@@ -236,14 +232,12 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 		app->iScene->SaveState(app->iScene->IntroSaveNode);
 	}
 
-	//pugi::xml_node bard = data.append_child("bard");
-	//bard.append_attribute("currentHp") = app->scene->currentHP_Bard;
-
-	//pugi::xml_node protagonist = data.append_child("protagonist");
-	//protagonist.append_attribute("currentHp") = app->scene->currentHP_Protagonist;
-
 	//app->scene->isCharacterLoaded_B = false;
  
+	app->combat->SaveCombat();
+	app->itemManager->SaveItemState();
+	app->questManager->SaveState();
+
 	return true;
 }
 

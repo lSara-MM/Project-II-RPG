@@ -87,14 +87,20 @@ bool HouseOfTerrors::Start()
 
 	InitEntities();
 	app->entityManager->Enable();
+
 	app->puzzleManager->Enable();
 
 	if (combatEnd)
 	{
 		app->LoadGameRequest();
-
 		combatEnd = false;
 	}
+
+	if (app->input->coso)
+	{
+		app->LoadGameRequest();
+	}	
+
 
 	//GUARRADA SUPER TEMPORAL
 	app->itemManager->comb = 2;
@@ -107,6 +113,13 @@ bool HouseOfTerrors::Start()
 
 bool HouseOfTerrors::PreUpdate()
 {
+	// If se ha guardado anteriormente, teleport el player donde estaba en el guardado
+	if (app->input->coso)
+	{
+		player->pbody->body->SetTransform({ PIXEL_TO_METERS(app->input->posX),PIXEL_TO_METERS(app->input->posY) }, 0);
+		app->input->coso = false;
+	}
+
 	return true;
 }
 
@@ -156,11 +169,13 @@ bool HouseOfTerrors::Update(float dt)
 		if (steps_I > 450)
 		{
 			LOG("Combat");
-			app->SaveGameRequest();
+			//app->SaveGameRequest();
 			app->audio->PlayFx(combatfx);
 			app->combat->PreLoadCombat(name);
-			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
-			app->questManager->SaveState();
+
+			app->SaveGameRequest();
+
+			app->fade->FadingToBlack(this, (Module*)app->combat, 5);			
 			app->puzzleManager->CleanUp();
 			app->puzzleManager->active = false;
 			steps_I = 0;

@@ -688,9 +688,9 @@ bool Combat::NextTurn()
 	//if (listInitiative.Count() >= charaInTurn) { charaInTurn--; }
 
 	listInitiative.At(charaInTurn++)->data->onTurn = false;
-	
+
 	if (listInitiative.Count() == charaInTurn) { charaInTurn = 0; }
-	
+
 	if (listInitiative.At(charaInTurn)->data->currentHp > 0)
 	{
 		listInitiative.At(charaInTurn)->data->onTurn = true;
@@ -702,8 +702,8 @@ bool Combat::NextTurn()
 		listInitiative.At(charaInTurn + 1)->data->onTurn = true;
 	}
 
-	if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ENEMY) 
-	{ 
+	if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ENEMY)
+	{
 		listButtons.end->prev->data->state = GuiControlState::DISABLED;	// change position
 		listButtons.end->data->state = GuiControlState::DISABLED;	// skip
 		HandleSkillsButtons(listInitiative.At(charaInTurn)->data);
@@ -711,7 +711,7 @@ bool Combat::NextTurn()
 	else
 	{
 		listButtons.end->prev->data->state = GuiControlState::NORMAL;
-		listButtons.end->data->state = GuiControlState::NORMAL; 
+		listButtons.end->data->state = GuiControlState::NORMAL;
 	}
 
 	LOG("%s turn - num %d", listInitiative.At(charaInTurn)->data->name.GetString(), charaInTurn);
