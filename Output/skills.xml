@@ -66,7 +66,7 @@ STATUS ID
 	<skill name="Humiliation" id="8" description="A cruel mockery that reduces the atracts an enemy" 
 		   type="2" movementCaster="0"  movementTarget="-2"
 	   multiplierDmg="0" bonusPrecision="105" bonusCritRate="-200" bonusCritDamage="0"
-		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="2" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   statusID="5" positive="false" duration="4" intensity="-15"
 	/>
 
