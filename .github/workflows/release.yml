@@ -34,6 +34,6 @@ jobs:
      - name: Create Release
        uses: ncipollo/release-action@v1.12.0
        with:
-        tag: Release
+        tag: Alpha
         artifacts: "Pikum-Twisted_Tentv0.8.zip"
         token: ${{ secrets.GITHUB_TOKEN }}
