@@ -103,7 +103,7 @@
 		</node>
 		
 		<node id="8" name="NIKITA" text="Indeed! We have the training tent just next to the stores. Go there if you want to practice. ">
-			<choice id="0" option="Thanks, that was actually helpful." nextNode="-1" eventReturn="0"/>
+			<choice id="0" option="Thanks, that was actually helpful." nextNode="-1" eventReturn="5"/>
 		</node>
 
 	    <node id="-1" text ="End of conversation -F1- to talk again"></node>
