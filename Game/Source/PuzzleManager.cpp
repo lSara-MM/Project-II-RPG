@@ -275,7 +275,7 @@ bool PuzzleManager::Update(float dt)
 		Palancas();
 	}
 
-	if (!escape) 
+	if (!escape)
 	{
 		Escape();
 	}
@@ -377,6 +377,12 @@ bool PuzzleManager::Update(float dt)
 	app->render->DrawTexture(boss, posBoss.x - widthBoss, posBoss.y - heightBoss, &bos);
 
 	app->render->DrawTexture(app->hTerrors->DarkestDungeon, app->hTerrors->player->position.x - app->win->GetWidth() / 2, app->hTerrors->player->position.y - app->win->GetHeight() / 2);
+
+	if (app->input->getInput_B)
+	{
+		iPoint pos = { app->win->GetWidth() / 4, 650 };
+		app->input->RenderTempText("Code:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
+	}
 
 	return true;
 }
@@ -571,12 +577,6 @@ bool PuzzleManager::Escape()
 			app->input->ActiveGetInput(numCode);
 			app->audio->PlayFx(confirmInteractfx);
 		}
-	}
-
-	if (app->input->getInput_B)
-	{
-		iPoint pos = { app->win->GetWidth() / 4, 650 };
-		app->input->RenderTempText("Code:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
 	}
 
 	if (numCode->input_entered)
