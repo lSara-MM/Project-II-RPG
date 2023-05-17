@@ -238,7 +238,7 @@ enum class CharacterClass
 		
 		sectionX="16" sectionY="26"/>
 
-		<enemy name ="Possessed Painting" id="2" maxHp="650" currentHp="650" attack="150" armor="8" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="2"          
+		<enemy name ="Possessed Painting" id="2" maxHp="650" currentHp="650" attack="150" armor="8" critRate="5" critDamage="15" precision="10" res="20" dodge="5" speed="4"          
         type="1" class="8" skill1ID="29" skill2ID="30" skill3ID="31" skill4ID="32"
                
         width="0" heigth="0"
@@ -246,7 +246,7 @@ enum class CharacterClass
 		
 		sectionX="26" sectionY="30"/>
 
-		<enemy name ="The Specter" id="20" maxHp="2550" currentHp="2550" attack="220" armor="20" critRate="10" critDamage="25" precision="20" res="35" dodge="0" speed="6"
+		<enemy name ="The Specter" id="20" maxHp="2550" currentHp="2550" attack="220" armor="20" critRate="30" critDamage="25" precision="20" res="35" dodge="20" speed="6"
         type="1" class="4" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
                
         width="0" heigth="0"
