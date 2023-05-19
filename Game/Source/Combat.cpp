@@ -141,10 +141,6 @@ bool Combat::Start()
 bool Combat::PreUpdate()
 {
 	//TODO : Guarrada maxima
-	if (charaInTurn >= listInitiative.Count()-1)
-	{
-		charaInTurn = 0;
-	}
 	if (!listInitiative.At(charaInTurn)->data->onTurn)
 	{
 		charaInTurn++;
@@ -685,9 +681,23 @@ bool Combat::NextTurn()
 	// Disable all buttons
 	HandleCharaButtons(&app->combat->vecEnemies);
 
-	//if (listInitiative.Count() >= charaInTurn) { charaInTurn--; }
+	//TO TEST, new method ERIC
+	//Quit turn previous chara 
+	if (charaInTurn>= listInitiative.Count())
+	{
+		charaInTurn = listInitiative.Count() - 1;
+	}
+	listInitiative.At(charaInTurn)->data->onTurn = false;
+	
+	//Change turn
+	charaInTurn++;
+	if (charaInTurn >= listInitiative.Count())
+	{
+		charaInTurn = 0;
+	}
+	listInitiative.At(charaInTurn)->data->onTurn = true;
 
-	listInitiative.At(charaInTurn++)->data->onTurn = false;
+	/*listInitiative.At(charaInTurn++)->data->onTurn = false;
 
 	if (listInitiative.Count() == charaInTurn) { charaInTurn = 0; }
 
@@ -700,7 +710,7 @@ bool Combat::NextTurn()
 	else if (charaInTurn<listInitiative.Count() && vecEnemies.size()==0)
 	{
 		listInitiative.At(charaInTurn + 1)->data->onTurn = true;
-	}
+	}*/
 
 	if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ENEMY)
 	{
