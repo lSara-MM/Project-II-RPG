@@ -717,7 +717,7 @@ bool Character::UseSkill(Skill* skill)
 
 			if (skill->areaSkill)
 			{
-				for (int i = skill->posToTargetStart_I; i < endRange; i++)
+				for (int i = skill->posToTargetStart_I; i <= endRange; i++)
 				{
 					//Atacar a todos
 					//if (i < app->combat->vecAllies.size())

@@ -141,7 +141,7 @@ bool Combat::Start()
 bool Combat::PreUpdate()
 {
 	//TODO : Guarrada maxima
-	if (charaInTurn >= listInitiative.Count())
+	if (charaInTurn >= listInitiative.Count()-1)
 	{
 		charaInTurn = 0;
 	}
