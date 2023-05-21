@@ -109,7 +109,7 @@ bool Inventory::Update(float dt)
 			app->itemManager->attack = app->itemManager->arrParty.at(app->itemManager->invPos)->attack;
 			app->itemManager->critDamage = app->itemManager->arrParty.at(app->itemManager->invPos)->critDamage;
 			app->itemManager->critProbability = app->itemManager->arrParty.at(app->itemManager->invPos)->critRate;
-			app->itemManager->precision = app->itemManager->arrParty.at(app->itemManager->invPos)->precision;
+			app->itemManager->accuracy = app->itemManager->arrParty.at(app->itemManager->invPos)->accuracy;
 			app->itemManager->esquiva = app->itemManager->arrParty.at(app->itemManager->invPos)->dodge;
 			app->itemManager->speed = app->itemManager->arrParty.at(app->itemManager->invPos)->speed;
 			app->itemManager->resistencia = app->itemManager->arrParty.at(app->itemManager->invPos)->res;
@@ -129,7 +129,7 @@ bool Inventory::Update(float dt)
 			app->render->TextDraw(cP.c_str(), 330, 515, 15, Font::TEXT, { 0, 0, 0 });
 			string cD = to_string(app->itemManager->critDamage);
 			app->render->TextDraw(cD.c_str(), 330, 540, 15, Font::TEXT, { 0, 0, 0 });
-			string p = to_string(app->itemManager->precision);
+			string p = to_string(app->itemManager->accuracy);
 			app->render->TextDraw(p.c_str(), 330, 565, 15, Font::TEXT, { 0, 0, 0 });
 			string ar = to_string(app->itemManager->armor);
 			app->render->TextDraw(ar.c_str(), 520, 490, 15, Font::TEXT, { 0, 0, 0 });

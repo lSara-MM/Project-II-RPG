@@ -45,7 +45,7 @@ bool Character::Awake()
 	critRate = parameters.attribute("critRate").as_int();
 	critDamage = parameters.attribute("critDamage").as_int();
 	
-	precision = parameters.attribute("precision").as_int();
+	accuracy = parameters.attribute("accuracy").as_int();
 	res = parameters.attribute("res").as_int();
 
 	dodge = parameters.attribute("dodge").as_int();
@@ -517,7 +517,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		}
 		else
 		{
-			if(CalculateRandomProbability(skill->bonusPrecision + caster->GetStat(EffectType::PRECISION), defender->GetStat(EffectType::RES)))
+			if(CalculateRandomProbability(skill->bonusAccuracy + caster->GetStat(EffectType::ACCURACY), defender->GetStat(EffectType::RES)))
 			{
 				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
 			}
@@ -525,7 +525,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 	}
 	else //Es un ataque 
 	{
-		if (!CalculateRandomProbability(skill->bonusPrecision + caster->GetStat(EffectType::PRECISION), defender->GetStat(EffectType::DODGE)))
+		if (!CalculateRandomProbability(skill->bonusAccuracy + caster->GetStat(EffectType::ACCURACY), defender->GetStat(EffectType::DODGE)))
 		{
 			//Enemigo esquiva
 			return 0;
@@ -545,7 +545,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			}
 			else
 			{
-				if (CalculateRandomProbability(skill->bonusPrecision + caster->GetStat(EffectType::PRECISION), defender->GetStat(EffectType::RES)))
+				if (CalculateRandomProbability(skill->bonusAccuracy + caster->GetStat(EffectType::ACCURACY), defender->GetStat(EffectType::RES)))
 				{
 					defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
 				}
@@ -579,7 +579,7 @@ void Character::LoadSkill(int arr[4])
 				float mult = aux.attribute("multiplierDmg").as_float();
 				int dmgCrit = aux.attribute("bonusCritDamage").as_int();
 				int probCrit = aux.attribute("bonusCritRate").as_int();
-				int precision = aux.attribute("bonusPrecision").as_int();
+				int accuracy = aux.attribute("bonusAccuracy").as_int();
 				int movTarget = aux.attribute("movementTarget").as_int();
 
 				int statusID = aux.attribute("statusID").as_int();
@@ -600,7 +600,7 @@ void Character::LoadSkill(int arr[4])
 				listSkills.Add(new Skill(nombre, descripcion,
 					posInicialUso, posFinallUso, posInicialTarget, posFinalTarget,
 					movUsuario, movTarget, friendlyFire, area, autoTarget, 
-					mult, precision, probCrit, dmgCrit, statusID,positiveEffect,duration,intensity));
+					mult, accuracy, probCrit, dmgCrit, statusID,positiveEffect,duration,intensity));
 			}
 		}
 	}
@@ -725,7 +725,7 @@ bool Character::UseSkill(Skill* skill)
 						if (!app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill))) {break; }
 						
 					}
-					if (CalculateRandomProbability(skill->bonusPrecision + this->precision, app->combat->vecAllies.at(i)->res))
+					if (CalculateRandomProbability(skill->bonusAccuracy + this->accuracy, app->combat->vecAllies.at(i)->res))
 					{
 
 					}
@@ -738,7 +738,7 @@ bool Character::UseSkill(Skill* skill)
 				app->audio->PlayFx(hitfx);
 				if (!app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill))) { break; }
 				
-				if (CalculateRandomProbability(skill->bonusPrecision + this->precision, app->combat->vecAllies.at(objective)->res)) 
+				if (CalculateRandomProbability(skill->bonusAccuracy + this->accuracy, app->combat->vecAllies.at(objective)->res)) 
 				{
 					if (skill->movementTarget != 0)
 					app->combat->MoveCharacter(&app->combat->vecAllies, app->combat->vecAllies.at(objective), skill->movementTarget);
@@ -786,7 +786,7 @@ bool Character::UseSkill(Skill* skill, Character* target)
 	else
 	{
 		target->ModifyHP(ApplySkill(this, target, skill));
-		if (CalculateRandomProbability(skill->bonusPrecision + this->precision, target->res))
+		if (CalculateRandomProbability(skill->bonusAccuracy + this->accuracy, target->res))
 		{
 			if (skill->movementTarget != 0)
 			app->combat->MoveCharacter(&app->combat->vecEnemies, target, skill->movementTarget);
@@ -831,8 +831,8 @@ int Character::GetStat(EffectType statType)
 	case EffectType::CRIT_DMG:
 		base = critDamage;
 		break;
-	case EffectType::PRECISION:
-		base = precision;
+	case EffectType::ACCURACY:
+		base = accuracy;
 		break;
 	case EffectType::ARMOR:
 		base = armor;

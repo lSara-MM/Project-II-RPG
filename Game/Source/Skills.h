@@ -40,7 +40,7 @@ public:
 	Skill(SString name, SString description, 
 		int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I,
 		int movementCaster,	int movementTarget,bool targetFriend, bool areaSkill, bool autoTarget,
-		float multiplierDmg,int bonusPrecision,	int bonusCritRate,int bonusCritDamage, 
+		float multiplierDmg,int bonusAccuracy,	int bonusCritRate,int bonusCritDamage, 
 		int status,bool positiveEffect,int duration,int intensity);
 
 	bool PosCanBeUsed(int positionCharacter);
@@ -64,7 +64,7 @@ public:
 
 	//Gestion potencia
 	float multiplierDmg;
-	int bonusPrecision;
+	int bonusAccuracy;
 	int bonusCritRate;
 	int bonusCritDamage;
 	//Variable de que tipo de stat usan para el escaldo?

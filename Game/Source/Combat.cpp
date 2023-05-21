@@ -141,10 +141,13 @@ bool Combat::Start()
 bool Combat::PreUpdate()
 {
 	//TODO : Guarrada maxima
+	if (charaInTurn >= listInitiative.Count()) 
+	{
+		charaInTurn = listInitiative.Count() - 1;
+	}
 	if (!listInitiative.At(charaInTurn)->data->onTurn)
 	{
-		charaInTurn++;
-		listInitiative.At(charaInTurn)->data->onTurn = true;
+		NextTurn();
 	}
 
 	return true;
@@ -229,8 +232,8 @@ bool Combat::Update(float dt)
 		//	const char* c_critR = critR_C.c_str();
 		//	string critD_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CRIT_DMG));
 		//	const char* c_critD = critD_C.c_str();
-		//	string precision_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::PRECISION));
-		//	const char* c_precision = precision_C.c_str();
+		//	string accuracy_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::ACCURACY));
+		//	const char* c_accuracy = accuracy_C.c_str();
 		//	string position_C = std::to_string(listInitiative.At(charaInTurn)->data->positionCombat_I);
 		//	const char* c_position = position_C.c_str();
 		//	string armor_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::ARMOR));
@@ -255,8 +258,8 @@ bool Combat::Update(float dt)
 		//	app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
 		//	app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
 
-		//	app->render->TextDraw("Precision", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-		//	app->render->TextDraw(c_precision, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+		//	app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+		//	app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
 
 		//	app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
 		//	app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
@@ -596,7 +599,7 @@ bool Combat::InitAllies(array<Character*, 4> party)
 		vecAllies.at(i)->attack = app->itemManager->arrParty.at(i)->attack;
 		vecAllies.at(i)->critRate = app->itemManager->arrParty.at(i)->critRate;
 		vecAllies.at(i)->critDamage = app->itemManager->arrParty.at(i)->critDamage;
-		vecAllies.at(i)->precision = app->itemManager->arrParty.at(i)->precision;
+		vecAllies.at(i)->accuracy = app->itemManager->arrParty.at(i)->accuracy;
 		vecAllies.at(i)->armor = app->itemManager->arrParty.at(i)->armor;
 		vecAllies.at(i)->dodge = app->itemManager->arrParty.at(i)->dodge;
 		vecAllies.at(i)->res = app->itemManager->arrParty.at(i)->res;
@@ -979,8 +982,8 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 		const char* c_critR = critR_C.c_str();
 		string critD_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->critDamage);
 		const char* c_critD = critD_C.c_str();
-		string precision_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->precision);
-		const char* c_precision = precision_C.c_str();
+		string accuracy_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->accuracy);
+		const char* c_accuracy = accuracy_C.c_str();
 		string position_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->positionCombat_I);
 		const char* c_position = position_C.c_str();
 		string armor_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->armor);
@@ -1010,8 +1013,8 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
 			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
 
-			app->render->TextDraw("Precision", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_precision, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
 
 			app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
 			app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
@@ -1047,8 +1050,8 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
 			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
 
-			app->render->TextDraw("Precision", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_precision, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
 
 			app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
 			app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
@@ -1083,8 +1086,8 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
 			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
 
-			app->render->TextDraw("Precision", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_precision, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
 
 			app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
 			app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
@@ -1119,8 +1122,8 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
 			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
 
-			app->render->TextDraw("Precision", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_precision, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
 
 			app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
 			app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
@@ -1151,15 +1154,45 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			//Name
 			app->render->TextDraw(skillPoint->name.GetString(), 48, 545, 25);
 
-			//Damage or Heal
+			//Stats to get
 			string DMG_C;
+			string Pre_C;
+			string CrRate_C;
+			string CrDMG_C;
+
+			//Damage or Heal
 			if (skillPoint->multiplierDmg > 0) //Heal
 			{
+				app->render->TextDraw("Healing:", 260, 550, 18);
 				DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->maxHp / 5));
+				const char* ch_DMG = DMG_C.c_str();
+				app->render->TextDraw(ch_DMG, 335, 550, 18);
 			}
-			else { DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK))); }
-			const char* ch_DMG = DMG_C.c_str();
-			app->render->TextDraw(ch_DMG, 335, 550, 18);
+			else 
+			{ 
+				app->render->TextDraw("Damage:", 260, 537, 18);
+				DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK)));
+				const char* ch_DMG = DMG_C.c_str();
+				app->render->TextDraw(ch_DMG, 335, 537, 18);
+
+				//Stats ataques
+				Pre_C = to_string((int)(skillPoint->bonusAccuracy + listInitiative.At(charaInTurn)->data->GetStat(EffectType::ACCURACY)));
+				CrRate_C = to_string((int)(skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->GetStat(EffectType::CRIT_RATE)));
+				CrDMG_C = to_string((int)(skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->GetStat(EffectType::CRIT_DMG)));
+				
+				//Printar stats
+				app->render->TextDraw("Accuracy.", 260, 560, 15);
+				const char* ch_Pre = Pre_C.c_str();
+				app->render->TextDraw(ch_Pre, 330, 560, 15);
+
+				app->render->TextDraw("Cr.Rate.", 260, 575, 15);
+				const char* ch_CrRate = CrRate_C.c_str();
+				app->render->TextDraw(ch_CrRate, 330, 575, 15);
+
+				app->render->TextDraw("Cr.Dmg.", 260, 590, 15);
+				const char* ch_CrDMG = CrDMG_C.c_str();
+				app->render->TextDraw(ch_CrDMG, 330, 590, 15);
+			}
 
 			//Efect
 			SString effecto_C;
@@ -1184,9 +1217,9 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				if (skillPoint->positiveEffect) { effecto_C = "BuffCritDMG"; }
 				else { effecto_C = "Debuff Crit DMG"; }
 				break;
-			case EffectType::PRECISION:
-				if (skillPoint->positiveEffect) { effecto_C = "Buff Precision"; }
-				else { effecto_C = "Debuff Precision"; }
+			case EffectType::ACCURACY:
+				if (skillPoint->positiveEffect) { effecto_C = "Buff accuracy"; }
+				else { effecto_C = "Debuff accuracy"; }
 				break;
 			case EffectType::ARMOR:
 				if (skillPoint->positiveEffect) { effecto_C = "Buff Armor"; }

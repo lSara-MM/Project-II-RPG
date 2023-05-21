@@ -1,5 +1,5 @@
 // ----------------------------------------------------
-// Fast timer with milisecons precision
+// Fast timer with milisecons accuracy
 // ----------------------------------------------------
 
 #include "Timer.h"

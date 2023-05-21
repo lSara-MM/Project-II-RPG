@@ -42,7 +42,7 @@ public:
 	int attack = 0;
 	int critProbability = 0;
 	int critDamage = 0;
-	int precision = 0;
+	int accuracy = 0;
 	int armor = 0;
 	int esquiva = 0;
 	int resistencia = 0;
@@ -123,7 +123,7 @@ public:
 	int attack= 0;
 	int critProbability= 0;
 	int critDamage= 0;
-	int precision= 0;
+	int accuracy= 0;
 	int armor= 0;
 	int esquiva= 0;
 	int resistencia= 0;

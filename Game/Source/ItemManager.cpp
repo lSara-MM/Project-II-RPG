@@ -197,7 +197,7 @@ void ItemManager::UseItem(ItemNode* item)
 					arrParty.at(i)->attack += item->attack;
 					arrParty.at(i)->critDamage += item->critDamage;
 					arrParty.at(i)->critRate += item->critProbability;
-					arrParty.at(i)->precision += item->precision;
+					arrParty.at(i)->accuracy += item->accuracy;
 					arrParty.at(i)->dodge += item->esquiva;
 					arrParty.at(i)->speed += item->speed;
 					arrParty.at(i)->res += item->resistencia;
@@ -209,7 +209,7 @@ void ItemManager::UseItem(ItemNode* item)
 					arrParty.at(i)->attack -= item->attack;
 					arrParty.at(i)->critDamage -= item->critDamage;
 					arrParty.at(i)->critRate -= item->critProbability;
-					arrParty.at(i)->precision -= item->precision;
+					arrParty.at(i)->accuracy -= item->accuracy;
 					arrParty.at(i)->dodge -= item->esquiva;
 					arrParty.at(i)->speed -= item->speed;
 					arrParty.at(i)->res -= item->resistencia;
@@ -268,7 +268,7 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 			node->attack = pugiNode.attribute("attack").as_int();
 			node->critProbability = pugiNode.attribute("critProbability").as_int();
 			node->critDamage = pugiNode.attribute("critDamage").as_int();
-			node->precision = pugiNode.attribute("precision").as_int();
+			node->accuracy = pugiNode.attribute("accuracy").as_int();
 			node->armor = pugiNode.attribute("armor").as_int();
 			node->esquiva = pugiNode.attribute("esquiva").as_int();
 			node->resistencia = pugiNode.attribute("resistencia").as_int();

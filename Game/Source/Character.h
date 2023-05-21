@@ -23,7 +23,7 @@ enum class EffectType
 	ATTACK,
 	CRIT_RATE,
 	CRIT_DMG,
-	PRECISION,
+	ACCURACY,
 	ARMOR,
 	DODGE,
 	RES,
@@ -138,7 +138,7 @@ public:
 	int attack; // 200 mas menos es la base
 	int critRate; // Base 10, es un porcentaje
 	int critDamage; // Base 120, , luego se ha de dividir entre 100 a lo 120= x1,2
-	int precision; // La base es 100%, es un porcentaje que se enfrenta vs la resistencia y precision
+	int accuracy; // La base es 100%, es un porcentaje que se enfrenta vs la resistencia y accuracy
 	int armor; // MAXIMO ABSOLUTO 200, mas menos full items en tanque 120
 	int dodge; // Probabilidad de no recibir nada de daño, base es 0%
 	int res; // Probabilidad de no recibir un efecto de estado, base 10%

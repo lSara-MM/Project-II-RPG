@@ -1,5 +1,5 @@
 // ----------------------------------------------------
-// Slow timer with microsecond precision
+// Slow timer with microsecond accuracy
 // ----------------------------------------------------
 
 #include "PerfTimer.h"
