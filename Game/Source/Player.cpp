@@ -310,36 +310,37 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		}
 		break;
 	case ColliderType::PORTAL:
+		int fadeTime = 45;
 		switch (physB->id)
 		{
 		case 0:
 			if (app->hTerrors->active == true)
 			{
 				app->entityManager->tpID = 0;
-				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
+				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, fadeTime);
 			}
 			if (app->scene->active == true)
 			{
 				app->map->mapPendingtoDelete = true;
-				app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 90);
+				app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, fadeTime);
 			}
 			if (app->practiceTent->active == true)
 			{
 				app->entityManager->tpID = 1;
-				app->fade->FadingToBlack((Module*)app->practiceTent, (Module*)app->scene, 90);
+				app->fade->FadingToBlack((Module*)app->practiceTent, (Module*)app->scene, fadeTime);
 			}
 			if (app->circus->active == true)
 			{
 				app->questManager->SaveState();
 				app->entityManager->tpID = 21;
-				app->fade->FadingToBlack((Module*)app->circus, (Module*)app->scene, 90);
+				app->fade->FadingToBlack((Module*)app->circus, (Module*)app->scene, fadeTime);
 			}
 			break;
 		case 1:
-			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, 90);
+			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, fadeTime);
 			break;
 		case 2:
-			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, 90);
+			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->practiceTent, fadeTime);
 			break;
 		}
 		break;

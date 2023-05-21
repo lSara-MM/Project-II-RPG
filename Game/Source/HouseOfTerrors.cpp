@@ -166,7 +166,7 @@ bool HouseOfTerrors::Update(float dt)
 
 	if (!app->input->godMode_B)
 	{
-		if (steps_I > 450)
+		if (steps_I > 450 + rand() % (551 - 450))
 		{
 			LOG("Combat");
 			//app->SaveGameRequest();

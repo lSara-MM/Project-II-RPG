@@ -71,13 +71,13 @@ bool Npc::Start() {
 
 	texture = app->tex->Load(texturePath);
 	currentAnimation = &idleAnim;
-	
-	pbody = app->physics->CreateRectangle(position.x + width / 2, position.y + height / 2, width, height, bodyType::STATIC);
+	float offset = 1.5f;//con el offset dividido entre 2 no queda bien el collider
+	pbody = app->physics->CreateRectangle(position.x + width / offset, position.y + height / offset, width, height, bodyType::STATIC);
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
 	flipType = SDL_FLIP_NONE;
 
-	pSensor = app->physics->CreateRectangleSensor(position.x + width / 2, position.y + height / 2, width * 2, height * 2, bodyType::STATIC, app->scene->npcSetID++);
+	pSensor = app->physics->CreateRectangleSensor(position.x + width / offset, position.y + height / offset, width * 2, height * 2, bodyType::STATIC, app->scene->npcSetID++);
 	pSensor->body->SetFixedRotation(true);
 	pSensor->ctype = ColliderType::NPC;
 	pSensor->listener = this;

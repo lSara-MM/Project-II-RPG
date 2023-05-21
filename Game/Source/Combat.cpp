@@ -328,9 +328,9 @@ bool Combat::PostUpdate()
 
 	//if (exit_B) return false;	
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
-	
+	//if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	//	ret = false;
+	//
 	app->guiManager->Draw();
 
 	for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)

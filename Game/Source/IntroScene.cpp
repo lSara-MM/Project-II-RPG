@@ -286,8 +286,8 @@ bool IntroScene::PostUpdate()
 		app->entityManager->tpID = 21;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+	//if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	//	ret = false;
 
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		LOG("general %d, %d music, %d fx", pSettings->pAudio->general->volume100, pSettings->pAudio->music->volume100,pSettings->pAudio->fx->volume100);
