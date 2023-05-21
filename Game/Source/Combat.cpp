@@ -318,6 +318,8 @@ bool Combat::Update(float dt)
 		app->render->TextDraw("Press 3 next turn", 10, 100, 12, Font::UI, { 255, 255, 255 });
 		app->render->TextDraw("Press 4 enemies button handle", 10, 120, 12, Font::UI, { 255, 255, 255 });
 		app->render->TextDraw("Press 5 allies button handle", 10, 140, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press 6 fully heal party", 1100, 20, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press 7 become inmortal", 1100, 40, 12, Font::UI, { 255, 255, 255 });
 	}
 	
 	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
@@ -510,6 +512,14 @@ void Combat::Debug()
 			LOG("Button handle");
 
 			HandleCharaButtons(&vecAllies, 1, 2);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN) {
+			LOG("Button handle");
+
+			for (int i = 0; i < vecAllies.size(); i++)
+			{
+				vecAllies.at(i)->ModifyHP(99999);
+			}
 		}
 	}
 }
