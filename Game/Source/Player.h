@@ -60,6 +60,7 @@ public:
 	Animation deathAnim;
 	Animation attackAnim;
 
+	//Bloquear teclas para evitar movimiento (si true se pueden mover)
 	bool keyLockUp = false;
 	bool keyLockDown = false;
 	bool keyLockLeft = false;

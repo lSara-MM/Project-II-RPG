@@ -123,6 +123,10 @@ bool Player::Start()
 	lockMovement = false;
 	pauseEnabled_B = true;
 
+	//Setear camara al player al crearlo cada vez
+	app->render->camera.y = -position.y + 360 - height;
+	app->render->camera.x = -position.x + 640 - width;
+
 	return true;
 }
 
@@ -148,8 +152,38 @@ bool Player::Update(float dt)
 
 	if (pbody != nullptr)
 	{
-		app->render->camera.y = -position.y + 360 - height;
-		app->render->camera.x = -position.x + 640 - width;
+		if (app->scene->active==true) //Como tiene una forma tan rara la escena normal hay que hacerle una camara especial
+		{
+			if (position.y<2151) //Zona de arriba "pasillo" hacia la tienda
+			{
+				
+
+				//Desplazar camara con suavidad (estaria bien un speed up en funcion distancia)
+				if (app->render->camera.x > -3450 + 635 - width) { app->render->camera.x -= 4; }
+				if (app->render->camera.x < -3450 + 645 - width) { app->render->camera.x += 4; }
+				app->render->camera.y = -position.y + 360 - height;
+			}
+			else
+			{
+			//Setear camara al player (con suavidad)
+			if (app->render->camera.x > -position.x + 635 - width) { app->render->camera.x -= 4; }
+			if (app->render->camera.x < -position.x + 645 - width) { app->render->camera.x += 4; }
+			if (app->render->camera.y > -position.y + 355 - height) { app->render->camera.y -= 4; }
+			if (app->render->camera.y < -position.y + 365 - height) { app->render->camera.y += 4; }
+			/*app->render->camera.y = -position.y + 360 - height;
+			app->render->camera.x = -position.x + 640 - width;*/
+			}
+		}
+		else
+		{
+			//Setear camara al player
+			app->render->camera.y = -position.y + 360 - height;
+			app->render->camera.x = -position.x + 640 - width;
+		}
+		
+		
+
+
 
 		vel = b2Vec2(vel.x * dtP, vel.y * dtP);
 		//Set the velocity of the pbody of the player
@@ -388,8 +422,13 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 
 void Player::Controller(float dt)
 {
-	if (app->input->godMode_B) 
+
+	//Velocidad movimiento camara
+	float speed = 0.2 * dt;
+
+	if (app->input->godMode_B) //Movimiento libre de GOD MODE
 	{
+
 		if (!keyLockDown && !keyLockLeft && !keyLockRigth)
 		{
 			if (PadLock == false && keyLockUp)
@@ -535,7 +574,7 @@ void Player::Controller(float dt)
 			}
 		}
 	}
-	else
+	else //Movimiento normal
 	{
 		if (!keyLockDown && !keyLockLeft && !keyLockRigth)
 		{
@@ -558,12 +597,14 @@ void Player::Controller(float dt)
 					app->audio->PlayFx(walk_grass, 0);
 				}
 
-				app->render->camera.y += 125 * dtP;
+				app->render->camera.y += 125 * dtP; //MoverCamara
 				keyLockUp = true;
 				currentAnimation = &upAnim;
 				vel.y = -125 * 2;
 				vel.x = 0;
 				app->hTerrors->steps_I++;
+
+				
 			}
 		}
 		if (!keyLockUp && !keyLockLeft && !keyLockRigth)
@@ -587,12 +628,14 @@ void Player::Controller(float dt)
 					app->audio->PlayFx(walk_grass, 0);
 				}
 
-				app->render->camera.y += -125 * dtP;
+				app->render->camera.y += -125 * dtP; //Mover camara
 				keyLockDown = true;
 				currentAnimation = &downAnim;
 				vel.y = 125 * 2;
 				vel.x = 0;
 				app->hTerrors->steps_I++;
+
+				
 			}
 		}
 		if (!keyLockDown && !keyLockUp && !keyLockRigth)
@@ -622,21 +665,29 @@ void Player::Controller(float dt)
 				vel.x = -125 * 2;
 				vel.y = 0;
 				app->hTerrors->steps_I++;
+
+				//Mover camara
+				app->render->camera.x += ceil(speed);
 			}
 		}
-		if (!keyLockDown && !keyLockLeft && !keyLockUp)
+
+		//Movimiento derecha
+		if (!keyLockDown && !keyLockLeft && !keyLockUp) //Mirar que no haya otra tecla pulsada
 		{
-			if (PadLock == false && keyLockRigth)
+			if (PadLock == false && keyLockRigth) //Mirar que esa tecla se puede mover
 			{
+				//Tecla pulsada primera vez
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_UP || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP ||
 					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_UP || app->input->controller.j1_x == 0)
 				{
+
 					PadLock = true;
 					keyLockRigth = false;
 					currentAnimation = &idleRigthAnim;
 					app->hTerrors->steps_I++;
 				}
 			}
+			//Mantenerla pulsada (moverse)
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT ||
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_REPEAT || app->input->controller.j1_x > 0)
 			{
@@ -651,9 +702,13 @@ void Player::Controller(float dt)
 				vel.x = 125 * 2;
 				vel.y = 0;
 				app->hTerrors->steps_I++;
+
+				//Mover camara
+				app->render->camera.x -= ceil(speed);
 			}
 		}
 
+		//Shift acelerar la velocidad
 		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_REPEAT) {
 			vel.x = vel.x * 2;
 			vel.y = vel.y * 2;
