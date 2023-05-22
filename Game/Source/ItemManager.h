@@ -60,11 +60,7 @@ public:
 
 	bool CleanUp()
 	{
-		if (button != nullptr)
-		{
-			delete(button);
-			button = nullptr;
-		}
+		app->guiManager->DestroyGuiControl(button);
 
 		return true;
 	}
