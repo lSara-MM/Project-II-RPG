@@ -54,7 +54,7 @@ bool QuestManager::Start() {
 
 	bool ret = true;
 
-	initQuest();
+	InitQuest();
 
 	quest1->title = "Find The Fire Guy";
 	quest2->title = "Drive the Oracle crazy";
@@ -269,7 +269,7 @@ List<Quest*> QuestManager::GetQuestByType(QuestType type)
 	return result;
 }
 
-bool QuestManager::initQuest() 
+bool QuestManager::InitQuest() 
 {
 	quest1 = (Quest*)app->questManager->CreateQuest(QuestType::INTERACT);
 	quest1->parameters = questNode.child("Quest1");

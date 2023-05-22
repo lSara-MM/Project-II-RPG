@@ -381,9 +381,14 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 			i->data->isForward_B = false;
 
 		}
-		app->combat->firstCombat_B = false;
 
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+		app->questManager->active = true;
+		app->questManager->Start();
+
+		app->combat->firstCombat_B = false;
+		app->input->coso = true;
+		app->LoadGameRequest();
+		//app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		continueGame_B = true;
 		break;
 	case 3:

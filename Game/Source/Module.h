@@ -98,8 +98,8 @@ public:
 	{
 		if (active)
 		{
-			active = false;
 			CleanUp();
+			active = false;
 		}
 	}
 

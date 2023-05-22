@@ -36,7 +36,7 @@ public:
 	//Get A list with the type of characters you want to have
 	List<Quest*> GetQuestByType(QuestType type);
 
-	bool initQuest();
+	bool InitQuest();
 
 	bool SaveState();
 	bool LoadState();

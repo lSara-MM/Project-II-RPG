@@ -98,11 +98,6 @@ bool PracticeTent::Start()
 	InitEntities();
 	app->entityManager->Enable();
 
-	if (app->input->coso)
-	{
-		app->LoadGameRequest();
-	}
-
 	//GUARRADA SUPER TEMPORAL
 	app->itemManager->comb = 1;
 
@@ -229,6 +224,8 @@ bool PracticeTent::PostUpdate()
 bool PracticeTent::CleanUp()
 {
 	LOG("Freeing scene");
+
+	app->SaveToFile();
 
 	if (dummy != nullptr) 
 	{

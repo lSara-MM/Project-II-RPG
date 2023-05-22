@@ -100,7 +100,7 @@ bool Scene::Start()
 
 	if (app->iScene->continueGame_B || app->input->coso)
 	{
-		app->LoadGameRequest();
+		//app->LoadGameRequest();
 		app->iScene->continueGame_B = false;
 	}
 
@@ -219,6 +219,8 @@ bool Scene::PostUpdate()
 bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
+
+	app->SaveToFile();
 
 	app->entityManager->Disable();
 	app->inventory->Disable();

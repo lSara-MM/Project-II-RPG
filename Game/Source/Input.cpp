@@ -67,6 +67,7 @@ bool Input::Start()
 	getInput_B = false;
 
 	backSpaceMax = false;
+	coso = false;
 
 	SDL_StopTextInput();
 	return true;
@@ -272,8 +273,8 @@ bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 			temp.erase(temp.length() - 1);
 			backSpaceMax = false;
 		}
-		// Remove a character from the end
 
+		// Remove a character from the end
 		if(temp.length() > 0)
 		{
 			temp.erase(temp.length() - 1);

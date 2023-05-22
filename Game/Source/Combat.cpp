@@ -452,6 +452,9 @@ bool Combat::CleanUp()
 	//Unload inventory
 	app->inventory->Disable();
 
+
+	app->input->coso = true;
+
 	return true;
 }
 

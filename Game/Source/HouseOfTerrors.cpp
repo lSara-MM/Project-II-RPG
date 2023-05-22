@@ -96,11 +96,6 @@ bool HouseOfTerrors::Start()
 		combatEnd = false;
 	}
 
-	if (app->input->coso)
-	{
-		app->LoadGameRequest();
-	}	
-
 
 	//GUARRADA SUPER TEMPORAL
 	app->itemManager->comb = 2;
@@ -230,6 +225,8 @@ bool HouseOfTerrors::PostUpdate()
 bool HouseOfTerrors::CleanUp()
 {
 	LOG("Freeing scene");
+
+	app->SaveToFile();
 
 	app->entityManager->Disable();
 	app->inventory->Disable();

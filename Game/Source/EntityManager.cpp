@@ -166,27 +166,25 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 	app->input->sceneNameSaved = data.child("player").attribute("name").as_string();
 	app->input->posX = data.child("player").attribute("x").as_int();
 	app->input->posY = data.child("player").attribute("y").as_int();
-	
-	app->input->coso = true;
 
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->scene->name.GetString()) == 0)
 	{
-
+		app->fade->FadingToBlack(app->iScene, (Module*)app->scene, 0);
 	}
 
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->circus->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->scene, (Module*)app->circus, 0);
+		app->fade->FadingToBlack(app->iScene, (Module*)app->circus, 0);
 	}
 
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->hTerrors->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->scene, (Module*)app->hTerrors, 0);
+		app->fade->FadingToBlack(app->iScene, (Module*)app->hTerrors, 0);
 	}
 
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->practiceTent->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->scene, (Module*)app->practiceTent, 0);
+		app->fade->FadingToBlack(app->iScene, (Module*)app->practiceTent, 0);
 	}
 
 	return true;
@@ -236,7 +234,7 @@ bool EntityManager::SaveState(pugi::xml_node& data)
  
 	app->combat->SaveCombat();
 	app->itemManager->SaveItemState();
-	app->questManager->SaveState();
+	//app->questManager->SaveState();
 
 	return true;
 }
