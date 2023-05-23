@@ -204,6 +204,12 @@ bool Player::Update(float dt)
 		}
 		else
 		{
+			int hMap = app->map->mapData.height * app->map->mapData.tileHeight;
+			int wMap = app->map->mapData.width * app->map->mapData.tileWidth;
+			if (position.x< wMap)
+			{
+
+			}
 			//Setear camara al player
 			app->render->camera.y = -position.y + 360 - height;
 			app->render->camera.x = -position.x + 640 - width;
