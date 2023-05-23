@@ -154,24 +154,33 @@ bool Player::Update(float dt)
 	{
 		if (app->scene->active==true) //Como tiene una forma tan rara la escena normal hay que hacerle una camara especial
 		{
-			if (position.y<2151) //Zona de arriba "pasillo" hacia la tienda
+			if (position.y<1760) //Zona de arriba "pasillo" hacia la tienda
 			{
-				
-
-				//Desplazar camara con suavidad (estaria bien un speed up en funcion distancia)
+				//Desplazar camara con suavidad (estaria bien un speed up en funcion distancia) hacia el centro
 				if (app->render->camera.x > -3450 + 635 - width) { app->render->camera.x -= 4; }
 				if (app->render->camera.x < -3450 + 645 - width) { app->render->camera.x += 4; }
 				app->render->camera.y = -position.y + 360 - height;
 			}
 			else
 			{
-			//Setear camara al player (con suavidad)
-			if (app->render->camera.x > -position.x + 635 - width) { app->render->camera.x -= 4; }
-			if (app->render->camera.x < -position.x + 645 - width) { app->render->camera.x += 4; }
-			if (app->render->camera.y > -position.y + 355 - height) { app->render->camera.y -= 4; }
-			if (app->render->camera.y < -position.y + 365 - height) { app->render->camera.y += 4; }
-			/*app->render->camera.y = -position.y + 360 - height;
-			app->render->camera.x = -position.x + 640 - width;*/
+				//Control de X del mapa
+				if (position.x > 3500) //Borde Derecho del mapa
+				{
+					//Llevar la camara a la izquerda para alejarla del lado
+					if (app->render->camera.x < -3725 + 635 - width) { app->render->camera.x += 8; }
+					/*app->render->camera.y = -position.y + 360 - height;*/
+				}
+				else
+				{
+					//Setear camara al player (con suavidad)
+					if (app->render->camera.x > -position.x + 635 - width) { app->render->camera.x += vel.x * dtP; } //X va al reves de Y 
+					if (app->render->camera.x < -position.x + 645 - width) { app->render->camera.x -= vel.x * dtP; }
+				}
+			
+				if (app->render->camera.y > -position.y + 355 - height) { app->render->camera.y -= vel.y * dtP; }
+				if (app->render->camera.y < -position.y + 365 - height) { app->render->camera.y += vel.y * dtP; }
+				/*app->render->camera.y = -position.y + 360 - height;
+				app->render->camera.x = -position.x + 640 - width;*/
 			}
 		}
 		else
@@ -597,7 +606,7 @@ void Player::Controller(float dt)
 					app->audio->PlayFx(walk_grass, 0);
 				}
 
-				app->render->camera.y += 125 * dtP; //MoverCamara
+				//app->render->camera.y += 125 * dtP; //MoverCamara
 				keyLockUp = true;
 				currentAnimation = &upAnim;
 				vel.y = -125 * 2;
@@ -628,7 +637,7 @@ void Player::Controller(float dt)
 					app->audio->PlayFx(walk_grass, 0);
 				}
 
-				app->render->camera.y += -125 * dtP; //Mover camara
+				//app->render->camera.y += -125 * dtP; //Mover camara
 				keyLockDown = true;
 				currentAnimation = &downAnim;
 				vel.y = 125 * 2;
@@ -659,7 +668,7 @@ void Player::Controller(float dt)
 					app->audio->PlayFx(walk_grass, 0);
 				}
 
-				app->render->camera.x += 125 * dtP;
+				//app->render->camera.x += 125 * dtP;
 				keyLockLeft = true;
 				currentAnimation = &leftAnim;
 				vel.x = -125 * 2;
@@ -696,7 +705,7 @@ void Player::Controller(float dt)
 					app->audio->PlayFx(walk_grass, 0);
 				}
 
-				app->render->camera.x += -125 * dtP;
+				//app->render->camera.x += -125 * dtP;
 				keyLockRigth = true;
 				currentAnimation = &rigthAnim;
 				vel.x = 125 * 2;
