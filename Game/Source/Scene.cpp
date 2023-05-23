@@ -473,15 +473,6 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 803:
-		LOG("Controls settings click");
-		pSettings->pControl->control_B = true;
-
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pGraphics->CloseGraphics();
-		pSettings->pAudio->CloseAudioSettings();
-		break;
-
-	case 804:
 		LOG("Graphics settings click");
 		pSettings->pGraphics->graphics_B = true;
 
@@ -490,7 +481,9 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		pSettings->pAudio->CloseAudioSettings();
 		break;
 
-	case 805:
+
+	case 804:
+
 		LOG("Audio settings click");
 		pSettings->pAudio->audio_B = true;
 
@@ -499,7 +492,15 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		pSettings->pGraphics->CloseGraphics();
 		break;
 
+	case 805:
 
+		LOG("Credits settings click");
+		pSettings->pControl->control_B = true;
+
+		pSettings->pGame->CloseGameSettings();
+		pSettings->pGraphics->CloseGraphics();
+		pSettings->pAudio->CloseAudioSettings();
+		break;
 		// Game settings
 	case 806:
 		LOG("Button Language click");
