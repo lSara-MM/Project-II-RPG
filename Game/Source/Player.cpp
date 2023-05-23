@@ -173,12 +173,21 @@ bool Player::Update(float dt)
 				else
 				{
 					//Setear camara al player (con suavidad)
-					if (app->render->camera.x > -position.x + 635 - width) { app->render->camera.x += vel.x * dtP; } //X va al reves de Y 
-					if (app->render->camera.x < -position.x + 645 - width) { app->render->camera.x -= vel.x * dtP; }
+					if (app->render->camera.x > -position.x + 635 - width) { app->render->camera.x -= 20; }  
+					if (app->render->camera.x < -position.x + 645 - width) { app->render->camera.x += 20; }
 				}
-			
-				if (app->render->camera.y > -position.y + 355 - height) { app->render->camera.y -= vel.y * dtP; }
-				if (app->render->camera.y < -position.y + 365 - height) { app->render->camera.y += vel.y * dtP; }
+
+				//Control de Y del mapa
+				if (position.y<2190)
+				{
+					if (app->render->camera.y < -2150 + 365 - height) { app->render->camera.y += 8; }
+				}
+				else
+				{
+					if (app->render->camera.y > -position.y + 355 - height) { app->render->camera.y -= 20; }
+					if (app->render->camera.y < -position.y + 365 - height) { app->render->camera.y += 20; }
+				}
+				
 				/*app->render->camera.y = -position.y + 360 - height;
 				app->render->camera.x = -position.x + 640 - width;*/
 			}
