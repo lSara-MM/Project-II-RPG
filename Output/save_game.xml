@@ -19,7 +19,7 @@
 	<PuzzleManager />
 	<questmanager />
 	<entitymanager>
-		<player name="scene" x="-611" y="-2465" />
+		<player name="PracticeTent" x="121" y="315" />
 	</entitymanager>
 	<itemmanager />
 	<dialogue />
@@ -28,6 +28,6 @@
 	<Inventory />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-1993" y="2792" />
+		<camera x="499" y="18" />
 	</renderer>
 </save_state>

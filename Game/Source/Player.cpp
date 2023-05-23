@@ -164,28 +164,38 @@ bool Player::Update(float dt)
 			else
 			{
 				//Control de X del mapa
-				if (position.x > 3500) //Borde Derecho del mapa
+				if (position.x > 3600) //Borde Derecho del mapa
 				{
 					//Llevar la camara a la izquerda para alejarla del lado
-					if (app->render->camera.x < -3725 + 635 - width) { app->render->camera.x += 8; }
+					app->render->camera.x = -3725 + 635 - width;
 					/*app->render->camera.y = -position.y + 360 - height;*/
+				}
+				else if(position.x<2100)
+				{
+					app->render->camera.x = -2100 + 635 - width;
 				}
 				else
 				{
 					//Setear camara al player (con suavidad)
-					if (app->render->camera.x > -position.x + 635 - width) { app->render->camera.x -= 20; }  
-					if (app->render->camera.x < -position.x + 645 - width) { app->render->camera.x += 20; }
+					app->render->camera.x = -position.x + 640 - width;
+					/*if (app->render->camera.x > -position.x + 635 - width) { app->render->camera.x -= 20; }  
+					if (app->render->camera.x < -position.x + 645 - width) { app->render->camera.x += 20; }*/
 				}
 
 				//Control de Y del mapa
-				if (position.y<2190)
+				if (position.y<2190 && position.y > 1660) //Borde arriba (zona vacia por el pasillo a la carpa)
 				{
-					if (app->render->camera.y < -2150 + 365 - height) { app->render->camera.y += 8; }
+					app->render->camera.y = -2070 + 365 - height;
+				}
+				else if(position.y>4240) //Borde de abajo (dungeon horrores)
+				{
+					app->render->camera.y = -4250 + 365 - height;
 				}
 				else
 				{
-					if (app->render->camera.y > -position.y + 355 - height) { app->render->camera.y -= 20; }
-					if (app->render->camera.y < -position.y + 365 - height) { app->render->camera.y += 20; }
+					app->render->camera.y = -position.y + 360 - height;
+					//if (app->render->camera.y > -position.y + 355 - height) { app->render->camera.y -= 20; }
+					//if (app->render->camera.y < -position.y + 365 - height) { app->render->camera.y += 20; }
 				}
 				
 				/*app->render->camera.y = -position.y + 360 - height;
