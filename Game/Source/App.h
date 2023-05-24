@@ -22,6 +22,7 @@ class Audio;
 
 class EntityManager;
 class ItemManager;
+class LootManager;
 class Combat;
 class DialogueSystem;
 class GuiManager;
@@ -115,6 +116,7 @@ public:
 	
 	EntityManager* entityManager;
 	ItemManager* itemManager;
+	LootManager* lootManager;
 	Combat* combat;
 	DialogueSystem* dialogueSystem;
 	GuiManager* guiManager;

@@ -20,6 +20,7 @@
 
 #include "EntityManager.h"
 #include "ItemManager.h"
+#include "LootManager.h"
 #include "FadeToBlack.h"
 #include "Combat.h"
 #include "DialogueSystem.h"
@@ -50,6 +51,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics();
 	map = new Map();
 	pathfinding = new PathFinding();
+
+	lootManager = new LootManager();
 
 	entityManager = new EntityManager();
 	itemManager = new ItemManager();
@@ -93,6 +96,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(puzzleManager);
 	AddModule(questManager);
+	AddModule(lootManager);
 	AddModule(entityManager);
 	AddModule(itemManager);
 	AddModule(dialogueSystem);
@@ -503,4 +507,5 @@ void App::DisableAtStart()
 	//initiAllResourcesFromZip->active = true;
 	//assetsManager->active = true;
 	inventory->active = false;
+	lootManager->active = false;
 }
