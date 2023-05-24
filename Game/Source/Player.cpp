@@ -102,6 +102,8 @@ bool Player::Awake() {
 
 bool Player::Start() 
 {
+	OpenMap = false;
+
 	texture = app->tex->Load(texturePath);
 	textureE = app->tex->Load("Assets/GUI/UI_E.png");
 
@@ -132,6 +134,30 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) 
+	{
+		MiniMap();
+	}
+
+	if (OpenMap) 
+	{
+		if (app->scene->active) 
+		{
+			//app->render->DrawTexture();
+		}	
+		if (app->hTerrors->active) 
+		{
+			//app->render->DrawTexture();
+		}	
+		if (app->practiceTent->active) 
+		{
+			//app->render->DrawTexture();
+		}		
+		if (app->circus->active) 
+		{
+			//app->render->DrawTexture();
+		}
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 	{
@@ -766,4 +792,13 @@ void Player::Controller(float dt)
 	}
 	
 	PadLock = false;
+}
+
+void Player::MiniMap() 
+{
+	OpenMap = !OpenMap;
+	lockMovement = !lockMovement;
+
+	posMiniPlayer.x = position.x / 5 + posMiniMap.x;
+	posMiniPlayer.y = position.y / 5 + posMiniMap.y;
 }

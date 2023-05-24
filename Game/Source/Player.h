@@ -38,6 +38,8 @@ public:
 
 	void Controller(float dt);
 
+	void MiniMap();
+
 public:
 
 	// The pointer to the current player animation
@@ -66,6 +68,7 @@ public:
 	bool keyLockLeft = false;
 	bool keyLockRigth = false;
 	bool lockMovement = false;
+	bool OpenMap = false;
 
 	float dtP;
 	float grav;
@@ -75,6 +78,8 @@ public:
 	PhysBody* pbody;
 
 	iPoint position;
+	iPoint posMiniPlayer;
+	iPoint posMiniMap;
 
 	bool PadLock;
 	bool pauseEnabled_B = true;
