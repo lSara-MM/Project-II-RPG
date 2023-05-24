@@ -19,7 +19,7 @@
 	<PuzzleManager />
 	<questmanager />
 	<entitymanager>
-		<player name="scene" x="3417" y="1058" />
+		<player name="HouseOfTerrors" x="1797" y="1224" />
 	</entitymanager>
 	<itemmanager />
 	<dialogue />
@@ -28,6 +28,6 @@
 	<Inventory />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2825" y="-725" />
+		<camera x="-1177" y="-891" />
 	</renderer>
 </save_state>

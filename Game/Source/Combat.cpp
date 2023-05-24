@@ -713,21 +713,6 @@ bool Combat::NextTurn()
 	}
 	listInitiative.At(charaInTurn)->data->onTurn = true;
 
-	/*listInitiative.At(charaInTurn++)->data->onTurn = false;
-
-	if (listInitiative.Count() == charaInTurn) { charaInTurn = 0; }
-
-	if (listInitiative.At(charaInTurn)->data->currentHp > 0)
-	{
-		listInitiative.At(charaInTurn)->data->onTurn = true;
-
-		listInitiative.At(charaInTurn)->data->ModifyHP(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CURRENT_HP));
-	}
-	else if (charaInTurn<listInitiative.Count() && vecEnemies.size()==0)
-	{
-		listInitiative.At(charaInTurn + 1)->data->onTurn = true;
-	}*/
-
 	if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ENEMY)
 	{
 		listButtons.end->prev->data->state = GuiControlState::DISABLED;	// change position
@@ -993,21 +978,21 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 	{
 		string maxHP_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->maxHp);
 		const char* c_hp = maxHP_C.c_str();
-		string attack_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->attack);
+		string attack_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::ATTACK));
 		const char* c_attack = attack_C.c_str();
-		string critR_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->critRate);
+		string critR_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::CRIT_RATE));
 		const char* c_critR = critR_C.c_str();
-		string critD_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->critDamage);
+		string critD_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::CRIT_DMG));
 		const char* c_critD = critD_C.c_str();
-		string accuracy_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->accuracy);
+		string accuracy_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::ACCURACY));
 		const char* c_accuracy = accuracy_C.c_str();
 		string position_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->positionCombat_I);
 		const char* c_position = position_C.c_str();
-		string armor_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->armor);
+		string armor_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::ARMOR));
 		const char* c_armor = armor_C.c_str();
-		string dodge_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->dodge);
+		string dodge_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::DODGE));
 		const char* c_dodge = dodge_C.c_str();
-		string resist_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->res);
+		string resist_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::RES));
 		const char* c_resist = resist_C.c_str();
 		string speed_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->speed);
 		const char* c_speed = speed_C.c_str();

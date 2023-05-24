@@ -507,21 +507,24 @@ bool Character::CalculateRandomProbability(int bonus_I, int against_I)
 //Provisional full
 int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 {
+	StatusEffect* statusEffect = new StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status);
 	if (skill->multiplierDmg >= 0) //Curacion o buffo, no hace falta calcular esquiva ni nada 
 	{
 		app->audio->PlayFx(healfx);
-		return(caster->maxHp / 5 * skill->multiplierDmg);
+		
 		if (skill->positiveEffect) //Efecto de estado positivo
 		{
-			defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
+			
+			defender->listStatusEffects.Add(statusEffect);
 		}
 		else
 		{
 			if(CalculateRandomProbability(skill->bonusAccuracy + caster->GetStat(EffectType::ACCURACY), defender->GetStat(EffectType::RES)))
 			{
-				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
+				defender->listStatusEffects.Add(statusEffect);
 			}
 		}
+		return(caster->maxHp / 5 * skill->multiplierDmg);
 	}
 	else //Es un ataque 
 	{
@@ -541,13 +544,13 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 
 			if (skill->positiveEffect) //Efecto de estado positivo
 			{
-				defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
+				defender->listStatusEffects.Add(statusEffect);
 			}
 			else
 			{
 				if (CalculateRandomProbability(skill->bonusAccuracy + caster->GetStat(EffectType::ACCURACY), defender->GetStat(EffectType::RES)))
 				{
-					defender->listStatusEffects.Add(&StatusEffect::StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status));
+					defender->listStatusEffects.Add(statusEffect);
 				}
 			}
 
