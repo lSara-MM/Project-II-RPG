@@ -37,8 +37,8 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 
-	bool LoadItemState(pugi::xml_node& xml_trees);
-	bool SaveItemState();
+	bool LoadLootState(pugi::xml_node& xml_trees);
+	bool SaveLootState();
 
 private:
 
