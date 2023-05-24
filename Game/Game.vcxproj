@@ -105,6 +105,7 @@
     <ClCompile Include="Source\DialogueTree.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\InitiAllResourcesFromZip.cpp" />
+    <ClCompile Include="Source\LootManager.cpp" />
     <ClCompile Include="Source\QuestManager.cpp" />
     <ClCompile Include="Source\Tweening.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Source\Inventory.h" />
     <ClInclude Include="Source\ItemManager.h" />
     <ClInclude Include="Source\LogoScene.h" />
+    <ClInclude Include="Source\LootManager.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\NPC.h" />
     <ClInclude Include="Source\Pathfinding.h" />

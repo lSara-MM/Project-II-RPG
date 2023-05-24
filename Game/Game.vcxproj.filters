@@ -121,6 +121,7 @@
     <ClCompile Include="Source\InitiAllResourcesFromZip.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Source\LootManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -282,6 +283,7 @@
     <ClInclude Include="Source\Tweening.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Source\LootManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">

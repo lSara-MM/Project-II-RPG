@@ -18,31 +18,42 @@
 #include <vector>
 using namespace std;
 
+
+enum class ChestTypes
+{
+	RARE,
+	COMON,
+	EMPTY,
+	COMBAT,
+};
+
 class Chest
 {
-public:
-	Chest() {};
-	~Chest() {};
+	public:
+		Chest() {};
+		~Chest() {};
+	private:
+		ChestTypes type;
 };
 
 class LootManager : public Module
 {
-public:
-	LootManager();
-	~LootManager();
+	public:
+		LootManager();
+		~LootManager();
 
-	// Called before render is available
-	bool Awake(pugi::xml_node& config);
-	bool Start();
-	bool Update(float dt);
-	bool CleanUp();
+		// Called before render is available
+		bool Awake(pugi::xml_node& config);
+		bool Start();
+		bool Update(float dt);
+		bool CleanUp();
 
-	bool LoadLootState(pugi::xml_node& xml_trees);
-	bool SaveLootState();
+		bool LoadLootState(pugi::xml_node& xml_trees);
+		bool SaveLootState();
 
-private:
+	private:
 
-	pugi::xml_node& saveLoot;
+		//pugi::xml_node& saveLoot;
 };
 
 #endif // __LOOTMANAGER_H__

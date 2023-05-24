@@ -19,6 +19,7 @@ bool LootManager::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Items");
 	bool ret = true;
+	//saveLoot = config;
 
 	//texturePath = config.attribute("inventorypath").as_string();
 
@@ -38,6 +39,18 @@ bool LootManager::Update(float dt)
 }
 
 bool ItemManager::CleanUp()
+{
+
+	return true;
+}
+
+bool LoadLootState(pugi::xml_node& xml_trees)
+{
+
+	return true;
+}
+
+bool SaveLootState()
 {
 
 	return true;
