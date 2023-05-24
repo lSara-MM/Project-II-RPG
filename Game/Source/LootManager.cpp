@@ -38,7 +38,7 @@ bool LootManager::Update(float dt)
 	return true;
 }
 
-bool ItemManager::CleanUp()
+bool LootManager::CleanUp()
 {
 
 	return true;
