@@ -153,6 +153,22 @@ class Chest
 		Animation openAnim;
 		Animation iddleAnim;
 
+		//Loot Table
+		vector <ItemNode*> loot;
+
+};
+
+class LootTable
+{
+	public:
+		LootTable();
+		~LootTable();
+
+	private:
+
+		//Loot Table
+		vector <ItemNode*> items;
+
 };
 
 class LootManager : public Module
