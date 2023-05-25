@@ -164,11 +164,15 @@ class LootTable
 		LootTable();
 		~LootTable();
 
+		bool Start()
+		{
+			itemLoot->nodeList.size();
+		}
+
 	private:
 
-		//Loot Table
-		vector <ItemNode*> items;
-
+		ItemManager* itemLoot = new ItemManager;
+		int 
 };
 
 class LootManager : public Module
