@@ -81,6 +81,19 @@ bool Player::Awake() {
 
 	texturePath = parameters.attribute("texturepath").as_string();
 
+	texturePathMiniMap = parameters.attribute("MiniMap").as_string();
+
+	posMiniMap.x = parameters.attribute("xMap").as_int();
+	posMiniMap.y = parameters.attribute("yMap").as_int();
+
+	widthMap = parameters.attribute("widthMap").as_int();
+	heightMap = parameters.attribute("heightMap").as_int();
+	
+	texturePathDotPlayer = parameters.attribute("PlayerMiniMap").as_string();
+
+	widthDotPlayer = parameters.attribute("widthDot").as_int();
+	heightDotPlayer = parameters.attribute("heightDot").as_int();
+
 	grass_path = "Assets/Audio/Fx/Pasos_Hierba.wav";
 	walk_grass = app->audio->LoadFx(grass_path);
 
@@ -104,7 +117,10 @@ bool Player::Start()
 {
 	OpenMap = false;
 
+	miniMap = app->tex->Load(texturePathMiniMap);
+	dotPlayer = app->tex->Load(texturePathDotPlayer);
 	texture = app->tex->Load(texturePath);
+
 	textureE = app->tex->Load("Assets/GUI/UI_E.png");
 
 	currentAnimation = &currentAnim;
@@ -134,6 +150,12 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
+	posMiniMap.x =  -app->render->camera.x + app->render->camera.w / 2 - widthMap / 2;
+	posMiniMap.y = -app->render->camera.y + app->render->camera.h / 2 - heightMap / 2;
+
+	posMiniPlayer.x = posMiniMap.x + position.x / 10;
+	posMiniPlayer.y = posMiniMap.y + position.y / 10;
+
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) 
 	{
 		MiniMap();
@@ -143,7 +165,8 @@ bool Player::Update(float dt)
 	{
 		if (app->scene->active) 
 		{
-			//app->render->DrawTexture();
+			app->render->DrawTexture(miniMap, posMiniMap.x , posMiniMap.y);
+			app->render->DrawTexture(dotPlayer, posMiniPlayer.x, posMiniPlayer.y);
 		}	
 		if (app->hTerrors->active) 
 		{
@@ -341,9 +364,12 @@ bool Player::CleanUp()
 {
 	if(texture != nullptr)
 		app->tex->UnLoad(texture);
+	
+	if(miniMap != nullptr)
+		app->tex->UnLoad(miniMap);
 
-	if(textureE != nullptr)
-		app->tex->UnLoad(textureE);
+	if(dotPlayer != nullptr)
+		app->tex->UnLoad(dotPlayer);
 
 	if (pbody != nullptr)
 	{
@@ -526,17 +552,17 @@ void Player::Controller(float dt)
 
 				keyLockUp = true;
 				currentAnimation = &upAnim;
-				vel.y = -125 * 6;
+				vel.y = -125 * 8;
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || 
 					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_REPEAT || app->input->controller.j1_x > 0)
 				{
-					vel.x = 125 * 6;
+					vel.x = 125 * 8;
 				}
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT ||
 					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_REPEAT || app->input->controller.j1_x < 0)
 				{
-					vel.x = -125 * 6;
+					vel.x = -125 * 8;
 				}
 			}
 		}
@@ -562,17 +588,17 @@ void Player::Controller(float dt)
 
 				keyLockDown = true;
 				currentAnimation = &downAnim;
-				vel.y = 125 * 6;
+				vel.y = 125 * 8;
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT ||
 					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_REPEAT || app->input->controller.j1_x > 0)
 				{
-					vel.x = 125 * 6;
+					vel.x = 125 * 8;
 				}
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT ||
 					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_REPEAT || app->input->controller.j1_x < 0)
 				{
-					vel.x = -125 * 6;
+					vel.x = -125 * 8;
 				}
 			}
 		}
@@ -598,17 +624,17 @@ void Player::Controller(float dt)
 
 				keyLockLeft = true;
 				currentAnimation = &leftAnim;
-				vel.x = -125 * 6;
+				vel.x = -125 * 8;
 
 				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT ||
 					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_REPEAT || app->input->controller.j1_y > 0)
 				{
-					vel.y = 125 * 6;
+					vel.y = 125 * 8;
 				}
 				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT ||
 					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_REPEAT || app->input->controller.j1_y < 0)
 				{
-					vel.y = -125 * 6;
+					vel.y = -125 * 8;
 				}
 			}
 		}
@@ -634,17 +660,17 @@ void Player::Controller(float dt)
 
 				keyLockRigth = true;
 				currentAnimation = &rigthAnim;
-				vel.x = 125 * 6;
+				vel.x = 125 * 8;
 
 				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || 
 					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_REPEAT || app->input->controller.j1_y > 0)
 				{
-					vel.y = 125 * 6;
+					vel.y = 125 * 8;
 				}
 				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || 
 					app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_REPEAT || app->input->controller.j1_y < 0)
 				{
-					vel.y = -125 * 6;
+					vel.y = -125 * 8;
 				}
 			}
 		}
@@ -675,7 +701,7 @@ void Player::Controller(float dt)
 				//app->render->camera.y += 125 * dtP; //MoverCamara
 				keyLockUp = true;
 				currentAnimation = &upAnim;
-				vel.y = -125 * 2;
+				vel.y = -125 * 4;
 				vel.x = 0;
 				app->hTerrors->steps_I++;
 
@@ -706,7 +732,7 @@ void Player::Controller(float dt)
 				//app->render->camera.y += -125 * dtP; //Mover camara
 				keyLockDown = true;
 				currentAnimation = &downAnim;
-				vel.y = 125 * 2;
+				vel.y = 125 * 4;
 				vel.x = 0;
 				app->hTerrors->steps_I++;
 
@@ -737,7 +763,7 @@ void Player::Controller(float dt)
 				//app->render->camera.x += 125 * dtP;
 				keyLockLeft = true;
 				currentAnimation = &leftAnim;
-				vel.x = -125 * 2;
+				vel.x = -125 * 4;
 				vel.y = 0;
 				app->hTerrors->steps_I++;
 
@@ -774,7 +800,7 @@ void Player::Controller(float dt)
 				//app->render->camera.x += -125 * dtP;
 				keyLockRigth = true;
 				currentAnimation = &rigthAnim;
-				vel.x = 125 * 2;
+				vel.x = 125 * 4;
 				vel.y = 0;
 				app->hTerrors->steps_I++;
 
@@ -783,11 +809,13 @@ void Player::Controller(float dt)
 			}
 		}
 
+		currentAnim.speed = currentAnim.speed * 3;
+
 		//Shift acelerar la velocidad
 		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_REPEAT) {
-			vel.x = vel.x * 2;
-			vel.y = vel.y * 2;
-			currentAnim.speed = currentAnim.speed * 3;
+			vel.x = vel.x * 1.5;
+			vel.y = vel.y * 1.5;
+			currentAnim.speed = currentAnim.speed * 6;
 		}
 	}
 	
