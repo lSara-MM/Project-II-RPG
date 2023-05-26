@@ -74,6 +74,12 @@ public:
 	float grav;
 	b2Vec2 vel = { 0, 0 };
 
+	int widthMap = 0;
+	int heightMap = 0;
+	
+	int widthDotPlayer = 0;
+	int heightDotPlayer = 0;
+
 	SDL_RendererFlip flipType;
 	PhysBody* pbody;
 
@@ -89,7 +95,13 @@ public:
 private:
 
 	SDL_Texture* texture;
-	const char* texturePath;
+	const char* texturePath;	
+	
+	SDL_Texture* miniMap;
+	const char* texturePathMiniMap;
+	
+	SDL_Texture* dotPlayer;
+	const char* texturePathDotPlayer;
 
 	const char* grass_path;
 	uint walk_grass;

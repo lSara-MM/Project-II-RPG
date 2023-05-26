@@ -172,7 +172,6 @@ class LootTable
 	private:
 
 		ItemManager* itemLoot = new ItemManager;
-		int 
 };
 
 class LootManager : public Module
