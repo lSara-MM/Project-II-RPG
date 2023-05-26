@@ -810,6 +810,7 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 {
 	app->guiManager->DestroyGuiControl(chara->button);
+	//listButtons.Del(chara->button); //TODO Borrar de la lista de buttons de combat
 	chara->CleanUp();
 
 	// Delete from its type vector
