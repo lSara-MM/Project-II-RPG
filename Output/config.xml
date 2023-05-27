@@ -121,14 +121,14 @@
     <lose texturepath="Assets/Textures/failedLetra.png" musicl="Assets/Audio/Music/mus_loose_scene.ogg"/>
   </SceneWin_Lose>
   <PuzzleManager>
-    <FireGuy texturepathFireGuy="Assets/Textures/fueguito_chibi.png" width="40" height="40" x="544" y="224"/>
-    <Door texturepathDoor="Assets/Textures/Spritesheet_puzzles.png" widthVertical="16" heightVertical="64" widthHoritzontal="64" heightHoritzontal="16" x="384" y="1536" x1="448" y1="1152" x2="448" y2="384"/>
-    <DoorEscape texturepathDoorEscape="Assets/Textures/Spritesheet_puzzles.png" width="16" height="64" x="192" y="1408"/>
-    <Palanca texturepathPalanca="Assets/Textures/Spritesheet_puzzles.png" Xpalancas="960" Ypalancas="2140" widthPalanca="32" heightPalanca="32"/>
+    <FireGuy texturepathFireGuy="Assets/Textures/fueguito_chibi.png" width="40" height="40" x="1504" y="224"/>
+    <Door texturepathDoor="Assets/Textures/Spritesheet_puzzles.png" widthVertical="16" heightVertical="64" widthHoritzontal="16" heightHoritzontal="64" x="1152" y="1408" x1="448" y1="1152" x2="1408" y2="384"/>
+    <DoorEscape texturepathDoorEscape="Assets/Textures/Spritesheet_puzzles.png" width="16" height="64" x="896" y="1408"/>
+    <Palanca texturepathPalanca="Assets/Textures/Spritesheet_puzzles.png" Xpalancas="1905" Ypalancas="2156" widthPalanca="32" heightPalanca="32"/>
     <PalancaSens texturepathSensor="Assets/Textures/Spritesheet_puzzles.png"  widthPalancaSens="64" heightPalancaSens="64"/>
     <Boss texturepathBoss="Assets/Textures/EnemyBossSpecter.png" texturepathBossDeath="Assets/Textures/boss_sprite.png" x="384" y="1408" width="96" height="96"/>
-    <Loset texturepathLoset="Assets/Textures/Spritesheet_puzzles.png" x="320"  y="1088"  width="64" height="64"/>
-    <Notas texturepathNotas="Assets/Textures/Spritesheet_puzzles.png" x1="704" y1="832" x2="1216" y2="1344" x3="1792" y3="2240" widthNotas="50" heightNotas="50"/>
+    <Loset texturepathLoset="Assets/Textures/Spritesheet_puzzles.png" x="1280"  y="1024"  width="64" height="64"/> 
+    <Notas texturepathNotas="Assets/Textures/Spritesheet_puzzles.png" x1="1664" y1="832" x2="2176" y2="1344" x3="2240" y3="2176" widthNotas="50" heightNotas="50"/>
 	</PuzzleManager>
  
 	
