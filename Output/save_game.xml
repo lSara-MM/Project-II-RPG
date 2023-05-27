@@ -18,8 +18,9 @@
 	<map />
 	<PuzzleManager />
 	<questmanager />
+	<lootManager />
 	<entitymanager>
-		<player name="HouseOfTerrors" x="1797" y="1224" />
+		<player name="PracticeTent" x="572" y="315" />
 	</entitymanager>
 	<itemmanager />
 	<dialogue />
@@ -28,6 +29,6 @@
 	<Inventory />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-1177" y="-891" />
+		<camera x="0" y="0" />
 	</renderer>
 </save_state>

@@ -186,12 +186,12 @@ bool Player::Update(float dt)
 				if (position.x > 3600) //Borde Derecho del mapa
 				{
 					//Llevar la camara a la izquerda para alejarla del lado
-					app->render->camera.x = -3725 + 635 - width;
+					app->render->camera.x = -3875 + 635 - width;
 					/*app->render->camera.y = -position.y + 360 - height;*/
 				}
-				else if(position.x<2100)
+				else if(position.x<2100) //Borde izquierdo mapa
 				{
-					app->render->camera.x = -2100 + 635 - width;
+					app->render->camera.x = -2000 + 635 - width;
 				}
 				else
 				{
@@ -202,7 +202,7 @@ bool Player::Update(float dt)
 				}
 
 				//Control de Y del mapa
-				if (position.y<2190 && position.y > 1660) //Borde arriba (zona vacia por el pasillo a la carpa)
+				if (position.y<2190 && position.y > 1760) //Borde arriba (zona vacia por el pasillo a la carpa)
 				{
 					app->render->camera.y = -2070 + 365 - height;
 				}
@@ -220,6 +220,11 @@ bool Player::Update(float dt)
 				/*app->render->camera.y = -position.y + 360 - height;
 				app->render->camera.x = -position.x + 640 - width;*/
 			}
+		}
+		else if(app->practiceTent->active==true) //La tienda es tan pequeña que necesita de 
+		{
+			app->render->camera.x = 0;
+			app->render->camera.y = 0;
 		}
 		else
 		{
