@@ -173,7 +173,7 @@ bool Player::Update(float dt)
 	{
 		if (app->scene->active==true) //Como tiene una forma tan rara la escena normal hay que hacerle una camara especial
 		{
-			if (position.y<1760) //Zona de arriba "pasillo" hacia la tienda
+			if (position.y<1800) //Zona de arriba "pasillo" hacia la tienda
 			{
 				//Desplazar camara con suavidad (estaria bien un speed up en funcion distancia) hacia el centro
 				if (app->render->camera.x > -3450 + 635 - width) { app->render->camera.x -= 4; }
@@ -183,28 +183,32 @@ bool Player::Update(float dt)
 			else
 			{
 				//Control de X del mapa
-				if (position.x > 3600) //Borde Derecho del mapa
+				if (position.x > 3875) //Borde Derecho del mapa
 				{
 					//Llevar la camara a la izquerda para alejarla del lado
 					app->render->camera.x = -3875 + 635 - width;
 					/*app->render->camera.y = -position.y + 360 - height;*/
 				}
-				else if(position.x<2100) //Borde izquierdo mapa
+				else if(position.x<2000) //Borde izquierdo mapa
 				{
 					app->render->camera.x = -2000 + 635 - width;
 				}
 				else
 				{
 					//Setear camara al player (con suavidad)
-					app->render->camera.x = -position.x + 640 - width;
-					/*if (app->render->camera.x > -position.x + 635 - width) { app->render->camera.x -= 20; }  
-					if (app->render->camera.x < -position.x + 645 - width) { app->render->camera.x += 20; }*/
+					
+					if (app->render->camera.x > -position.x + 650 - width) { app->render->camera.x -= 8; }  
+					if (app->render->camera.x < -position.x + 630 - width) { app->render->camera.x += 8; }
+					else { app->render->camera.x = -position.x + 640 - width; }
 				}
 
 				//Control de Y del mapa
-				if (position.y<2190 && position.y > 1760) //Borde arriba (zona vacia por el pasillo a la carpa)
+				if (position.y<2070 && position.y > 1760) //Borde arriba (zona vacia por el pasillo a la carpa)
 				{
-					app->render->camera.y = -2070 + 365 - height;
+					//Setear poco a poco
+					if (app->render->camera.y > -2000 + 365 - width) { app->render->camera.y -= 4; }
+					
+					else { app->render->camera.y = -2070 + 365 - height; }
 				}
 				else if(position.y>4240) //Borde de abajo (dungeon horrores)
 				{
@@ -212,9 +216,10 @@ bool Player::Update(float dt)
 				}
 				else
 				{
-					app->render->camera.y = -position.y + 360 - height;
-					//if (app->render->camera.y > -position.y + 355 - height) { app->render->camera.y -= 20; }
-					//if (app->render->camera.y < -position.y + 365 - height) { app->render->camera.y += 20; }
+					
+					if (app->render->camera.y > -position.y + 385 - height) { app->render->camera.y -= 15; }
+					else if (app->render->camera.y < -position.y + 335 - height) { app->render->camera.y += 15; }
+					else { app->render->camera.y = -position.y + 360 - height; }
 				}
 				
 				/*app->render->camera.y = -position.y + 360 - height;
