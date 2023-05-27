@@ -352,4 +352,5 @@ type 2
 	<item id="108" quantity="0" name="Pearl" type="3" kind="1" x="7" y="15" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
 		  texturepath="Assets/Textures/itemTextures.png">
 	</item>
+	
 </items>
