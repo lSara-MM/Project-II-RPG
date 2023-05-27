@@ -50,21 +50,6 @@ bool ItemManager::Start()
 
 bool ItemManager::Update(float dt)
 {
-	//Add items HardCode
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	{
-		pugi::xml_node pugiNode = items.first_child();
-		AddQuantity(pugiNode, "potion");
-		AddQuantity(pugiNode, "granade");
-		AddQuantity(pugiNode, "legging");
-		AddQuantity(pugiNode, "ring");
-		AddQuantity(pugiNode, "ring_2");
-		AddQuantity(pugiNode, "chest");
-		AddQuantity(pugiNode, "chest_2");
-		AddQuantity(pugiNode, "pendant");
-		AddQuantity(pugiNode, "shoe");
-		AddQuantity(pugiNode, "hat");
-	}
 	return true;
 }
 
@@ -196,11 +181,11 @@ void ItemManager::UseItem(ItemNode* item)
 					arrParty.at(i)->armor += item->armor;
 					arrParty.at(i)->attack += item->attack;
 					arrParty.at(i)->critDamage += item->critDamage;
-					arrParty.at(i)->critRate += item->critProbability;
+					arrParty.at(i)->critRate += item->critRate;
 					arrParty.at(i)->accuracy += item->accuracy;
-					arrParty.at(i)->dodge += item->esquiva;
+					arrParty.at(i)->dodge += item->dodge;
 					arrParty.at(i)->speed += item->speed;
-					arrParty.at(i)->res += item->resistencia;
+					arrParty.at(i)->res += item->res;
 				}
 				else if (item->type == 2 && item->equiped == false)
 				{
@@ -208,11 +193,11 @@ void ItemManager::UseItem(ItemNode* item)
 					arrParty.at(i)->armor -= item->armor;
 					arrParty.at(i)->attack -= item->attack;
 					arrParty.at(i)->critDamage -= item->critDamage;
-					arrParty.at(i)->critRate -= item->critProbability;
+					arrParty.at(i)->critRate -= item->critRate;
 					arrParty.at(i)->accuracy -= item->accuracy;
-					arrParty.at(i)->dodge -= item->esquiva;
+					arrParty.at(i)->dodge -= item->dodge;
 					arrParty.at(i)->speed -= item->speed;
-					arrParty.at(i)->res -= item->resistencia;
+					arrParty.at(i)->res -= item->res;
 
 					if (item->space > 0)
 					{
@@ -253,28 +238,31 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 	{
 		ItemNode* node = new ItemNode;
 
+		node->ID = pugiNode.attribute("id").as_int();
 		node->quantity = pugiNode.attribute("quantity").as_int();
+		node->position.x = pugiNode.attribute("x").as_int();
+		node->position.y = pugiNode.attribute("y").as_int();
 		node->type = pugiNode.attribute("type").as_int();
 		node->name = pugiNode.attribute("name").as_string();
 		node->kind = pugiNode.attribute("kind").as_int();
+
 		if (node->kind == 5 || node->kind == 6)
 		{
 			node->space = pugiNode.attribute("space").as_int();
 		}
+
 		node->hp = pugiNode.attribute("hp").as_int();
-		if (node->type == 2)
-		{
-			node->maxhp = pugiNode.attribute("maxhp").as_int();
-			node->attack = pugiNode.attribute("attack").as_int();
-			node->critProbability = pugiNode.attribute("critProbability").as_int();
-			node->critDamage = pugiNode.attribute("critDamage").as_int();
-			node->accuracy = pugiNode.attribute("accuracy").as_int();
-			node->armor = pugiNode.attribute("armor").as_int();
-			node->esquiva = pugiNode.attribute("esquiva").as_int();
-			node->resistencia = pugiNode.attribute("resistencia").as_int();
-			node->speed = pugiNode.attribute("speed").as_int();
-			node->equiped = pugiNode.attribute("equiped").as_bool();
-		}
+		node->maxhp = pugiNode.attribute("maxhp").as_int();
+		node->attack = pugiNode.attribute("attack").as_int();
+		node->critRate = pugiNode.attribute("critRate").as_int();
+		node->critDamage = pugiNode.attribute("critDamage").as_int();
+		node->accuracy = pugiNode.attribute("accuracy").as_int();
+		node->armor = pugiNode.attribute("armor").as_int();
+		node->dodge = pugiNode.attribute("dodge").as_int();
+		node->res = pugiNode.attribute("res").as_int();
+		node->speed = pugiNode.attribute("speed").as_int();
+		node->equiped = pugiNode.attribute("equiped").as_bool();
+	
 		node->path = pugiNode.attribute("texturepath").as_string();
 		node->max = pugiNode.attribute("max").as_int();
 
@@ -283,12 +271,13 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 	LoadItemState(xml_trees);
 }
 
+
 void ItemManager::LoadQuantity(int x, int y, int i)
 {
+	SDL_Rect seccion = { 64 * nodeList[i]->position.x, 64 * nodeList[i]->position.y, 64, 64 };
+
 	if (nodeList[i]->quantity > 0)
 	{
-		nodeList[i]->ID = i;
-
 		itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
 
 		if (app->combat->active)
@@ -298,7 +287,7 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 			{
 				LoadButtons(x, y, i);
 
-				app->render->DrawTexture(itemsTexture, (720 + 42 * x) - app->render->camera.x, y - app->render->camera.y);
+				app->render->DrawTexture(itemsTexture, (720 + 42 * x) - app->render->camera.x, y - app->render->camera.y, &seccion);
 
 				string c = to_string(nodeList[i]->quantity);
 				app->render->TextDraw(c.c_str(), (720 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
@@ -316,7 +305,7 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 
 			if (nodeList[i]->equiped == false)
 			{
-				app->render->DrawTexture(itemsTexture, (680 + 42 * x) - app->render->camera.x, y - app->render->camera.y);
+				app->render->DrawTexture(itemsTexture, (680 + 42 * x) - app->render->camera.x, y - app->render->camera.y, &seccion);
 
 				string c = to_string(nodeList[i]->quantity);
 				app->render->TextDraw(c.c_str(), (680 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
@@ -326,35 +315,35 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 				switch (nodeList[i]->kind)
 				{
 				case 1:
-					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 295 - app->render->camera.y);
+					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 295 - app->render->camera.y, &seccion);
 					break;
 				case 2:
-					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 245 - app->render->camera.y);
+					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 245 - app->render->camera.y, &seccion);
 					break;
 				case 3:
-					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 345 - app->render->camera.y);
+					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 345 - app->render->camera.y, &seccion);
 					break;
 				case 4:
-					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 195 - app->render->camera.y);
+					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 195 - app->render->camera.y, &seccion);
 					break;
 				case 5:
 					if (nodeList[i]->space == 1)
 					{
-						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 185 - app->render->camera.y);
+						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 185 - app->render->camera.y, &seccion);
 					}
 					else
 					{
-						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 235 - app->render->camera.y);
+						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 235 - app->render->camera.y, &seccion);
 					}
 					break;
 				case 6:
 					if (nodeList[i]->space == 1)
 					{
-						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 300 - app->render->camera.y);
+						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
 					}
 					else
 					{
-						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 348 - app->render->camera.y);
+						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 348 - app->render->camera.y, &seccion);
 					}
 				}
 			}

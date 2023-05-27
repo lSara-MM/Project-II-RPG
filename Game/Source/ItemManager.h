@@ -34,21 +34,22 @@ public:
 	SString name;
 	SString path;
 
+	iPoint position;
 	int quantity = 0;
 	int type = 0;
 	int kind = 0;
 	int hp = 0;
 	int maxhp = 0;
 	int attack = 0;
-	int critProbability = 0;
+	int critRate = 0;
 	int critDamage = 0;
 	int accuracy = 0;
 	int armor = 0;
-	int esquiva = 0;
-	int resistencia = 0;
+	int dodge = 0;
+	int res = 0;
 	int speed = 0;
-	bool equiped = false;
 	int max = 0;
+	int price = 0;
 
 	int whom = 0;
 
@@ -56,12 +57,15 @@ public:
 
 	int ID = 0;
 
+	bool equiped = false;
+	bool craft = false;
+
 	GuiButton* button;
 
 	bool CleanUp()
 	{
 		app->guiManager->DestroyGuiControl(button);
-
+		button = nullptr;
 		return true;
 	}
 };
