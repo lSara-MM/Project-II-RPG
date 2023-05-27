@@ -507,5 +507,6 @@ void App::DisableAtStart()
 	//initiAllResourcesFromZip->active = true;
 	//assetsManager->active = true;
 	inventory->active = false;
+	itemManager->active = false;
 	lootManager->active = false;
 }
