@@ -66,8 +66,8 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 	posDoor1.x = config.child("Door").attribute("x").as_int();
 	posDoor1.y = config.child("Door").attribute("y").as_int();
 
-	posDoor2.x = config.child("Door").attribute("x1").as_int();
-	posDoor2.y = config.child("Door").attribute("y1").as_int();
+	/*posDoor2.x = config.child("Door").attribute("x1").as_int();
+	posDoor2.y = config.child("Door").attribute("y1").as_int();*/
 	
 	posDoor3.x = config.child("Door").attribute("x2").as_int();
 	posDoor3.y = config.child("Door").attribute("y2").as_int();
@@ -174,11 +174,11 @@ bool PuzzleManager::Start()
 	{
 		door = app->tex->Load(texturepathDoor);
 
-		Door1 = app->physics->CreateRectangle(posDoor1.x, posDoor1.y - heightHoritzontal / 2, widthHoritzontal * 2, heightHoritzontal, bodyType::STATIC);
+		Door1 = app->physics->CreateRectangle(posDoor1.x, posDoor1.y - heightHoritzontal / 2, widthHoritzontal, heightHoritzontal, bodyType::STATIC);
 		Door1->body->SetFixedRotation(true);
 
-		Door2 = app->physics->CreateRectangle(posDoor2.x - widthHoritzontal / 2, posDoor2.y - heightHoritzontal / 2, widthHoritzontal, heightHoritzontal, bodyType::STATIC);
-		Door2->body->SetFixedRotation(true);
+		/*Door2 = app->physics->CreateRectangle(posDoor2.x - widthHoritzontal / 2, posDoor2.y - heightHoritzontal / 2, widthHoritzontal, heightHoritzontal, bodyType::STATIC);
+		Door2->body->SetFixedRotation(true);*/
 
 		PalancaSensor = app->physics->CreateRectangleSensor(posPalancas.x - widthPalancaSens / 2, posPalancas.y - heightPalancaSens / 2, widthPalancaSens, heightPalancaSens, bodyType::STATIC);
 		PalancaSensor->body->SetFixedRotation(true);
@@ -268,7 +268,7 @@ bool PuzzleManager::PreUpdate()
 
 bool PuzzleManager::Update(float dt)
 {
-	app->render->DrawTexture(loset, posLoset.x - widthLoset + 16, posLoset.y - heightLoset + 16, &los);
+	
 
 	if (!palancas)
 	{
@@ -283,10 +283,12 @@ bool PuzzleManager::Update(float dt)
 	if (!rescue)
 	{
 		Rescue();
+		app->render->DrawTexture(loset, posLoset.x - widthLoset + 16, posLoset.y - heightLoset + 16, &los);
 	}
 	else 
 	{
 		app->render->DrawTexture(bossDeath, posLoset.x - widthBoss + 25, posLoset.y - heightBoss + 22, &bosDeath);
+		app->render->DrawTexture(loset, posLoset.x - widthLoset + 16, posLoset.y - heightLoset + 16, &los);
 	}
 
 	if (!teamMate) 
@@ -378,7 +380,8 @@ bool PuzzleManager::Update(float dt)
 
 	if (bossDeath)
 	{
-		app->render->DrawTexture(app->hTerrors->DarkestDungeon, app->hTerrors->player->position.x - app->win->GetWidth() / 2, app->hTerrors->player->position.y - app->win->GetHeight() / 2);
+		//app->render->DrawTexture(app->hTerrors->DarkestDungeon, app->hTerrors->player->position.x - app->win->GetWidth() / 2, app->hTerrors->player->position.y - app->win->GetHeight() / 2);
+		app->render->DrawTexture(app->hTerrors->DarkestDungeon, -app->render->camera.x - app->render->camera.w / 2 + app->win->GetWidth() / 2, -app->render->camera.y + app->render->camera.h / 2 - app->win->GetHeight() / 2);
 	}
 	
 
@@ -407,9 +410,6 @@ bool PuzzleManager::CleanUp()
 	{
 		if (Door1 != nullptr)
 			Door1->body->GetWorld()->DestroyBody(Door1->body);
-
-		if (Door2 != nullptr)
-			Door2->body->GetWorld()->DestroyBody(Door2->body);
 
 		if (PalancaSensor != nullptr)
 			PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
@@ -486,9 +486,6 @@ bool PuzzleManager::CleanUp()
 	delete Door1;
 	Door1 = nullptr;
 
-	delete Door2;
-	Door2 = nullptr;
-
 	delete Door3;
 	Door3 = nullptr;
 
@@ -526,11 +523,11 @@ bool PuzzleManager::CleanUp()
 
 bool PuzzleManager::Palancas() 
 {
-	SDL_Rect dor = { 1, 1, 64, 14 };
+	SDL_Rect dor = { 66, 1, 14, 64 };
 
-	app->render->DrawTexture(door, posDoor1.x - widthHoritzontal, posDoor1.y - heightHoritzontal / 2, &dor);
-	app->render->DrawTexture(door, posDoor1.x, posDoor1.y - heightHoritzontal / 2, &dor);
-	app->render->DrawTexture(door, posDoor2.x - widthHoritzontal, posDoor2.y - heightHoritzontal / 2, &dor);
+	app->render->DrawTexture(door, posDoor1.x - widthHoritzontal / 2, posDoor1.y - heightHoritzontal, &dor);
+	//app->render->DrawTexture(door, posDoor1.x, posDoor1.y - heightHoritzontal / 2, &dor);
+	//app->render->DrawTexture(door, posDoor2.x - widthHoritzontal, posDoor2.y - heightHoritzontal / 2, &dor);
 
 	if (palancasActive)
 	{

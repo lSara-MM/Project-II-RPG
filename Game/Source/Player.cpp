@@ -150,6 +150,7 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
+	/*MiniMapa*/
 	posMiniMap.x =  -app->render->camera.x + app->render->camera.w / 2 - widthMap / 2;
 	posMiniMap.y = -app->render->camera.y + app->render->camera.h / 2 - heightMap / 2;
 
@@ -163,24 +164,29 @@ bool Player::Update(float dt)
 
 	if (OpenMap) 
 	{
+		app->render->DrawTexture(miniMap, posMiniMap.x, posMiniMap.y);
+
 		if (app->scene->active) 
 		{
-			app->render->DrawTexture(miniMap, posMiniMap.x , posMiniMap.y);
+			//2659 4907
 			app->render->DrawTexture(dotPlayer, posMiniPlayer.x, posMiniPlayer.y);
 		}	
 		if (app->hTerrors->active) 
 		{
-			//app->render->DrawTexture();
+			app->render->DrawTexture(dotPlayer, posMiniMap.x + 2659 / 10, posMiniMap.y + 4907 / 10);
 		}	
 		if (app->practiceTent->active) 
 		{
-			//app->render->DrawTexture();
+			//4360 4385
+			app->render->DrawTexture(dotPlayer, posMiniMap.x + 4360 / 10, posMiniMap.y + 3385 / 10);
 		}		
 		if (app->circus->active) 
 		{
-			//app->render->DrawTexture();
+			//3899 1027
+			app->render->DrawTexture(dotPlayer, posMiniMap.x + 3899 / 10, posMiniMap.y + 1007 / 10);
 		}
 	}
+	/*MiniMapa*/
 
 	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 	{
