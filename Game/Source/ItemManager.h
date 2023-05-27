@@ -86,7 +86,6 @@ public:
 	void AddQuantity(pugi::xml_node& xml_trees, const char* name);
 
 	void LoadNodes(pugi::xml_node& xml_trees, ItemNode* item);
-	void ItemManager::LoadQuantityList();
 	void LoadQuantity(int x, int y, int i);
 	void LoadButtons(int x, int y, int ID);
 	void MinusQuantity(const char* name);
@@ -109,7 +108,6 @@ public:
 	const char* texturePath;
 
 	vector <ItemNode*> nodeList;
-	vector <ItemNode*> itemsQuantity;
 
 	array<Character*, 4> arrParty;
 	vector<Character*> vecPC;

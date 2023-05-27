@@ -25,7 +25,7 @@ type 2
 
 <items>
 
-	<item id="0" quantity="3" name="C_wood" type="2" kind="5" space="0" x="0" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="0" quantity="0" name="C_wood" type="2" kind="5" space="0" x="0" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
 		  texturepath="Assets/Textures/itemTextures.png">
 	</item>
 	<item id="1" quantity="0" name="C_copper" type="2" kind="5" space="0" x="0" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
