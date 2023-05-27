@@ -308,6 +308,7 @@ bool PuzzleManager::Update(float dt)
 			vector<int> id = { 100 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
 			app->dialogueSystem->PerformDialogue(id);
 			app->hTerrors->player->lockMovement = true;
+			app->hTerrors->player->currentAnimation = &app->hTerrors->player->currentAnim;
 			esc1 = false;
 			id.clear();
 		}
@@ -325,6 +326,7 @@ bool PuzzleManager::Update(float dt)
 			vector<int> id = { 101 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
 			app->dialogueSystem->PerformDialogue(id);
 			app->hTerrors->player->lockMovement = true;
+			app->hTerrors->player->currentAnimation = &app->hTerrors->player->currentAnim;
 			esc2 = false;
 			id.clear();
 		}
@@ -342,6 +344,7 @@ bool PuzzleManager::Update(float dt)
 			vector<int> id = { 102 }; // ID DEL DIALOGUES.XML DIALOGUE_TREE
 			app->dialogueSystem->PerformDialogue(id);
 			app->hTerrors->player->lockMovement = true;
+			app->hTerrors->player->currentAnimation = &app->hTerrors->player->currentAnim;
 			esc3 = false;
 			id.clear();
 		}

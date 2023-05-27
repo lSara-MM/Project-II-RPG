@@ -150,43 +150,7 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
-	/*MiniMapa*/
-	posMiniMap.x =  -app->render->camera.x + app->render->camera.w / 2 - widthMap / 2;
-	posMiniMap.y = -app->render->camera.y + app->render->camera.h / 2 - heightMap / 2;
-
-	posMiniPlayer.x = posMiniMap.x + position.x / 10;
-	posMiniPlayer.y = posMiniMap.y + position.y / 10;
-
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) 
-	{
-		MiniMap();
-	}
-
-	if (OpenMap) 
-	{
-		app->render->DrawTexture(miniMap, posMiniMap.x, posMiniMap.y);
-
-		if (app->scene->active) 
-		{
-			//2659 4907
-			app->render->DrawTexture(dotPlayer, posMiniPlayer.x, posMiniPlayer.y);
-		}	
-		if (app->hTerrors->active) 
-		{
-			app->render->DrawTexture(dotPlayer, posMiniMap.x + 2659 / 10, posMiniMap.y + 4907 / 10);
-		}	
-		if (app->practiceTent->active) 
-		{
-			//4360 4385
-			app->render->DrawTexture(dotPlayer, posMiniMap.x + 4360 / 10, posMiniMap.y + 3385 / 10);
-		}		
-		if (app->circus->active) 
-		{
-			//3899 1027
-			app->render->DrawTexture(dotPlayer, posMiniMap.x + 3899 / 10, posMiniMap.y + 1007 / 10);
-		}
-	}
-	/*MiniMapa*/
+	
 
 	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 	{
@@ -301,6 +265,44 @@ bool Player::Update(float dt)
 
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		app->render->DrawTexture(texture, position.x - width * 2, position.y - height * 2, &rect, 1.0f, NULL, NULL, NULL, flipType);
+
+		/*MiniMapa*/
+		posMiniMap.x = -app->render->camera.x + app->render->camera.w / 2 - widthMap / 2;
+		posMiniMap.y = -app->render->camera.y + app->render->camera.h / 2 - heightMap / 2;
+
+		posMiniPlayer.x = posMiniMap.x + position.x / 10;
+		posMiniPlayer.y = posMiniMap.y + position.y / 10;
+
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		{
+			MiniMap();
+		}
+
+		if (OpenMap)
+		{
+			app->render->DrawTexture(miniMap, posMiniMap.x, posMiniMap.y);
+
+			if (app->scene->active)
+			{
+				//2659 4907
+				app->render->DrawTexture(dotPlayer, posMiniPlayer.x - 23, posMiniPlayer.y - 30);
+			}
+			if (app->hTerrors->active)
+			{
+				app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10, posMiniMap.y + 4507 / 10);
+			}
+			if (app->practiceTent->active)
+			{
+				//4360 4385
+				app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10, posMiniMap.y + 3585 / 10);
+			}
+			if (app->circus->active)
+			{
+				//3899 1027
+				app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10, posMiniMap.y + 350 / 10);
+			}
+		}
+		/*MiniMapa*/
 
 		if (npcInteract)
 		{

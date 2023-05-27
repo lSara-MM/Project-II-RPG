@@ -43,7 +43,7 @@
 					audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"
 					grassStep="Assets/Audio/Fx/Pasos_Hierba.wav"
 					enterZone="Assets/Audio/Fx/entrar_sala.wav"
-          MiniMap="Assets/Maps/SizeMiniMap_Handler.jpg" xMap="0" yMap="0" widthMap="499" heightMap="505"
+          MiniMap="Assets/Maps/Mapa.png" xMap="0" yMap="0" widthMap="499" heightMap="505"
 				  PlayerMiniMap="Assets/Maps/PlayerMiniMap_Handler.png" widthDot="50" heightDot="50"/>
 
 
