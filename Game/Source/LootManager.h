@@ -268,7 +268,7 @@ public:
 	{
 		for (int i = 0; i < lootTableID.size(); i++)
 		{
-			app->render->TextDraw(lootTableID[i].name.GetString(), 500, 250 + (35 * i), 30, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(lootTableID[i].name.GetString(), 400, 200 + (35 * i), 30, Font::TEXT, { 255, 255, 255 });
 		}
 	}
 
