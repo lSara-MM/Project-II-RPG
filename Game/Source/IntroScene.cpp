@@ -122,7 +122,7 @@ bool IntroScene::Update(float dt)
 	float point = animationBackground.GetPoint();
 	int offset = -1300;
 
-	app->render->DrawTexture(texture, offset + point * (0 - offset), 0);
+	app->render->DrawTexture(texture, offset + point * (0 - offset)-app->render->camera.x, 0-app->render->camera.y);
 
 	point = animationTitle.GetPoint();
 	
