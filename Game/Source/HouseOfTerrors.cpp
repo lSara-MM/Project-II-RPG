@@ -131,12 +131,12 @@ bool HouseOfTerrors::Update(float dt)
 	{
 		if (app->inventory->active)
 		{
-			//player->lockMovement = false;
+			player->lockMovement = false;
 			app->inventory->Disable();
 		}
 		else 
 		{
-			//player->lockMovement = true;
+			player->lockMovement = true;
 			app->inventory->Enable();
 		}
 	}

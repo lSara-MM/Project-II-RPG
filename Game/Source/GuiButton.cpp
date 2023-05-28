@@ -114,12 +114,8 @@ bool GuiButton::Update(float dt)
 			
 			GuiControlState previousState = state;
 
-			int mouseX_End = mouseX+20; int mouseY_End = mouseY+27;//final cursor, más sensible
-			//int boundsX_End = bounds.w + 20; int boundsY_End = bounds.h + 27;igual hace falta, incrementa area focused, ahora no va bien al darse varios botones a la vez
-
-			if ((mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
-				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h)||(mouseX_End >= bounds.x && mouseX_End <= bounds.x + bounds.w &&
-					mouseY_End >= bounds.y && mouseY_End <= bounds.y + bounds.h)) {
+			if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
+				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
 
 				state = GuiControlState::FOCUSED;
 				NotifyObserverOfHover();

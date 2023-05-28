@@ -319,7 +319,7 @@ void Scene::Debug()
 		LOG("PAUSE");
 	}
 
-	if (pause_B == true && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_DOWN))//POSAR CONTROL NORMAL
+	if (pause_B == true && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_DOWN))
 	{
 		if (settings_B == true)
 		{
