@@ -113,8 +113,10 @@ public:
 	bool UseSkill(Skill* skill);
 	bool UseSkill(Skill* skill, Character* target);
 
-	//
+	//StatusEffecrs
 	int GetStat(EffectType statType);
+	float GetStatModifier(EffectType statType);
+	bool ReduceCountStatusEffects();
 
 public:
 	bool isCombatant;

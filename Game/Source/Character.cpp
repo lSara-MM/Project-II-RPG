@@ -821,7 +821,7 @@ int Character::GetStat(EffectType statType)
 			{
 				output = output + i->data->intensity;
 			}
-			i->data->turnsLeft--;
+			//i->data->turnsLeft--; Se gestionara aparte
 		}
 
 		return (base * output / 100);
@@ -858,11 +858,55 @@ int Character::GetStat(EffectType statType)
 		{
 			output = output + i->data->intensity;
 		}
-		if (i->data->type != EffectType::CURRENT_HP)
+		//Esto no tiene mucho sentido
+		/*if (i->data->type != EffectType::CURRENT_HP)
 		{
 			i->data->turnsLeft--;
-		}		
+		}*/		
 	}
 
 	return base * ((100 + output) / 100);
+}
+
+float Character::GetStatModifier(EffectType statType)
+{
+	float output = 0;
+
+	for (ListItem<StatusEffect*>* i = listStatusEffects.start; i != nullptr; i = i->next)
+	{
+		if (i->data->type == statType)
+		{
+			output = output + i->data->intensity;
+		}
+		/*if (i->data->type != EffectType::CURRENT_HP)
+		{
+			i->data->turnsLeft--;
+		}*/
+	}
+
+	return ((100 + output) / 100);
+}
+
+bool Character::ReduceCountStatusEffects()
+{
+	List<int> toDelete;
+
+	for (int i = 0; i < listStatusEffects.Count(); i++)
+	{
+		listStatusEffects.At(i)->data->turnsLeft--;
+		if (listStatusEffects.At(i)->data->turnsLeft<=0)
+		{
+			toDelete.Add(i); //Guarda la posicon en la lista
+		}
+	}
+
+	//Borar efectos de estado, se hace al reves para que la lista no haga saltos raros
+	for (int j = toDelete.Count()-1; j >= 0; j--)
+	{
+		listStatusEffects.Del(listStatusEffects.At(toDelete.At(j)->data));
+	}
+	
+	toDelete.Clear();
+
+	return true;
 }
