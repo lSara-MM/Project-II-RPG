@@ -153,7 +153,7 @@ bool IntroScene::Update(float dt)
 		listButtons.start->next->data->state = GuiControlState::DISABLED;
 	}
 
-	app->input->HandleGamepadMouse(mouseX_intro, mouseY_intro, app->input->mouseSpeed_I, dt);
+	app->input->HandleGamepadMouse(mouseX_intro, mouseY_intro, app->input->mouseSpeed_F, dt);
 
 	//Lo dejo comentado por si lo recupero en algun momento
 	

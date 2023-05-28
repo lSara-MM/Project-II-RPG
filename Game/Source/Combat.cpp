@@ -324,7 +324,7 @@ bool Combat::Update(float dt)
 		app->render->TextDraw("Press 7 become inmortal", 1100, 40, 12, Font::UI, { 255, 255, 255 });
 	}
 	
-	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, app->input->mouseSpeed_I, dt);
+	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, app->input->mouseSpeed_F, dt);
 
 	return true;
 }
@@ -727,6 +727,7 @@ bool Combat::NextTurn()
 	}
 	listInitiative.At(charaInTurn)->data->onTurn = true;
 
+	//Control botones
 	if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ENEMY)
 	{
 		listButtons.end->prev->data->state = GuiControlState::DISABLED;	// change position
@@ -738,6 +739,11 @@ bool Combat::NextTurn()
 		listButtons.end->prev->data->state = GuiControlState::NORMAL;
 		listButtons.end->data->state = GuiControlState::NORMAL;
 	}
+
+	//Status effects
+	int DoT = listInitiative.At(charaInTurn)->data->GetStat(EffectType::CURRENT_HP);
+	listInitiative.At(charaInTurn)->data->ModifyHP(DoT);
+	listInitiative.At(charaInTurn)->data->ReduceCountStatusEffects();
 
 	LOG("%s turn - num %d", listInitiative.At(charaInTurn)->data->name.GetString(), charaInTurn);
 

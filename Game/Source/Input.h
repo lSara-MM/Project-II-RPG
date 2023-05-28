@@ -140,7 +140,7 @@ public:
 	GameController controller;
 	
 	//bool gamepadGUI_B = false;
-	int mouseSpeed_I;
+	float mouseSpeed_F;
 
 	// TO DO guarradas 
 	int posX, posY;
