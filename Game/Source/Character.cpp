@@ -539,7 +539,8 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			damage = skill->multiplierDmg * caster->GetStat(EffectType::ATTACK);
 			if (CalculateRandomProbability(skill->bonusCritRate + caster->GetStat(EffectType::CRIT_RATE))) //Si true hay critico
 			{
-				damage *= (100 + (skill->bonusCritDamage + caster->GetStat(EffectType::CRIT_DMG))) / 100;
+				//El daño critico es mas potente
+				damage *= ( 100 + 2*(skill->bonusCritDamage + caster->GetStat(EffectType::CRIT_DMG)) ) / 100;
 			}
 
 			if (skill->positiveEffect) //Efecto de estado positivo
@@ -555,8 +556,9 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			}
 
 			// Calcular reduccion de la defensa
-			float armorRelevance = (defender->GetStat(EffectType::ARMOR) / abs(damage + 1)) + 1;
-			damage += ((defender->GetStat(EffectType::ARMOR) / 2) * armorRelevance); //Esta con mas ya que damage es negativo
+			float armorRelevance = (10*defender->GetStat(EffectType::ARMOR) / abs(damage + 1)) + 1;
+			damage += ((defender->GetStat(EffectType::ARMOR) ) * armorRelevance); //Esta con mas ya que damage es negativo
+			if (damage > 0) { damage = 0; }
 
 			app->audio->PlayFx(hitfx);
 			return damage;
