@@ -25,22 +25,22 @@ type 2
 
 <items>
 
-	<item id="0" quantity="1" name="C_wood" type="2" kind="5" space="0" x="0" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="0" quantity="0" name="C_wood" type="2" kind="5" space="0" x="0" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
 		  texturepath="Assets/Textures/itemTextures.png">
 	</item>
-	<item id="1" quantity="2" name="C_copper" type="2" kind="5" space="0" x="0" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="1" quantity="0" name="C_copper" type="2" kind="5" space="0" x="0" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
 		  texturepath="Assets/Textures/itemTextures.png">
 	</item>
-	<item id="2" quantity="2" name="C_iron" type="2" kind="5" space="0" x="0" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="2" quantity="0" name="C_iron" type="2" kind="5" space="0" x="0" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
 		  texturepath="Assets/Textures/itemTextures.png">
 	</item>
-	<item id="3" quantity="2" name="C_steel" type="2" kind="5" space="0" x="0" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="3" quantity="0" name="C_steel" type="2" kind="5" space="0" x="0" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
 		  texturepath="Assets/Textures/itemTextures.png">
 	</item>
-	<item id="4" quantity="2" name="C_titanium" type="2" kind="5" space="0" x="0" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="4" quantity="0" name="C_titanium" type="2" kind="5" space="0" x="0" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
 		  texturepath="Assets/Textures/itemTextures.png">
 	</item>
-	<item id="5" quantity="1" name="Head" type="2" kind="1" space="0" x="0" y="5" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="5" quantity="0" name="Head" type="2" kind="1" space="0" x="0" y="5" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
 		  texturepath="Assets/Textures/itemTextures.png">
 	</item>
 	<item id="6" quantity="0" name="R_wood" type="2" kind="6" space="0" x="1" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 

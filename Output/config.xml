@@ -29,10 +29,40 @@
 
 	<lootManager>
 		<chest
-			x="2500" y="1167" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="0" used="false"
+			x="1472" y="2048" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="0" used="false"
 			/>
 		<chest
-			x="38" y="20" type="0" dungeon="0" texturepath="Assets/Textures/chests.png" id="1" used="false"
+			x="1216" y="632" type="0" dungeon="0" texturepath="Assets/Textures/chests.png" id="1" used="false"
+			/>
+		<chest
+			x="192" y="1344" type="0" dungeon="0" texturepath="Assets/Textures/chests.png" id="2" used="false"
+			/>
+		<chest
+			x="2688" y="1792" type="0" dungeon="0" texturepath="Assets/Textures/chests.png" id="3" used="false"
+			/>
+		<chest
+			x="1216" y="1984" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="4" used="false"
+			/>
+		<chest
+			x="1728" y="1344" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="5" used="false"
+			/>
+		<chest
+			x="64" y="2176" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="6" used="false"
+			/>
+		<chest
+			x="1472" y="448" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="7" used="false"
+			/>
+		<chest
+			x="2752" y="576" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="8" used="false"
+			/>
+		<chest
+			x="2752" y="1472" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="9" used="false"
+			/>
+		<chest
+			x="1664" y="896" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="10" used="false"
+			/>
+		<chest
+			x="2240" y="64" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="11" used="false"
 			/>
 	</lootManager>
 	

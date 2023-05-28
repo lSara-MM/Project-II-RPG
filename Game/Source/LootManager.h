@@ -38,8 +38,8 @@ enum class ChestDungeon
 class ItemLoot
 {
 public:
-	ItemLoot();
-	~ItemLoot();
+	ItemLoot() {};
+	~ItemLoot() {};
 
 public:
 
@@ -56,12 +56,12 @@ public:
 		type = type_;
 		dungeon = dungeon_;
 	};
-	~LootTable();
+	~LootTable() {};
+
+	bool Awake(pugi::xml_node& config);
 
 	bool Start()
 	{
-		ItemLoot* itemLoot = new ItemLoot;
-
 		switch (type)
 		{
 		case ChestTypes::COMON:
@@ -192,7 +192,7 @@ public:
 
 				break;
 			}
-			break;
+		break;
 
 		case ChestTypes::RARE:
 
@@ -248,30 +248,42 @@ public:
 				}
 				break;
 			}
-			break;
-
-			break;
+		break;
 		}
+
+		return true;
 	}
+
+	bool Update(float dt);
 
 	void GiveLoot()
 	{
 		for (int i = 0; i < lootTableID.size(); i++)
 		{
 			app->itemManager->AddQuantity(lootTableID[i].ID, lootTableID[i].quantity);
-			app->render->TextDraw(lootTableID[i].name.GetString(), 400, 250 + (20 * i), 10, Font::TEXT, { 255, 255, 255 });
+		}
+	}
+
+	void PrintLoot()
+	{
+		for (int i = 0; i < lootTableID.size(); i++)
+		{
+			app->render->TextDraw(lootTableID[i].name.GetString(), 800, 250 + (35 * i), 30, Font::TEXT, { 255, 255, 255 });
 		}
 	}
 
 	bool CleanUp()
 	{
 		lootTableID.clear();
+
+		return true;
 	}
 
-private:
+public:
 
 	vector <ItemLoot> lootTableID;
 	int random; //offset + (rand() % range);
+	ItemLoot* itemLoot = new ItemLoot;
 
 	ChestTypes type; ChestDungeon dungeon;
 };
@@ -281,7 +293,7 @@ class Chest
 	public:
 		Chest(int x_, int y_, ChestTypes type_, ChestDungeon dungeon_, SString texturePath_, int Id)
 		{
-			x_ = x; y_ = y;
+			x = x_; y = y_;
 
 			path = texturePath_;
 
@@ -294,11 +306,12 @@ class Chest
 		bool Start()
 		{
 			texture = app->tex->Load(path.GetString());
-			hitbox = app->physics->CreateRectangle(x, y, 64, 50, bodyType::STATIC);
-			sensor = app->physics->CreateRectangleSensor((x-10), (y-10), 74, 64, bodyType::DYNAMIC, ID);
+			hitbox = app->physics->CreateRectangle(x + 32, y + 32, 64, 50, bodyType::STATIC);
+			sensor = app->physics->CreateRectangleSensor((x + 32), (y + 32), 80, 80, bodyType::STATIC, ID);
 			sensor->ctype = ColliderType::LOOT;
 
 			lootTable = new LootTable(type, dungeon);
+			lootTable->Start();
 
 			if (type == ChestTypes::RARE)
 			{
@@ -331,8 +344,8 @@ class Chest
 			openAnim.loop = false;
 			openAnim.speed = 0.1f;
 
-			openAnim.loop = true;
-			openAnim.speed = 0.1f;
+			iddleAnim.loop = true;
+			iddleAnim.speed = 0.1f;
 
 			currentAnimation = &iddleAnim;
 
@@ -353,8 +366,20 @@ class Chest
 
 			if (currentAnimation == &openAnim && currentAnimation->HasFinished())
 			{
+				if (hitbox != nullptr && sensor != nullptr)
+				{
+					b2Vec2 position(0, 0);
+					hitbox->body->SetTransform(position, 0);
+					sensor->body->SetTransform(position, 0);
+				}
+
 				CleanUp();
 			}
+			if (currentAnimation == &openAnim && !currentAnimation->HasFinished())
+			{
+				lootTable->PrintLoot();
+			}
+
 			return true;
 		}
 
@@ -369,13 +394,16 @@ class Chest
 			if (hitbox != nullptr)
 			{
 				hitbox->body->GetWorld()->DestroyBody(hitbox->body);
+				hitbox = nullptr;
 			}
 			if (sensor != nullptr)
 			{
 				sensor->body->GetWorld()->DestroyBody(sensor->body);
+				sensor = nullptr;
 			}
 
 			app->tex->UnLoad(texture);
+
 			return true;
 		}
 
@@ -384,6 +412,8 @@ class Chest
 		int x, y;
 
 		int ID;
+
+		bool used = false;
 
 		ChestTypes type;
 		ChestDungeon dungeon;

@@ -438,11 +438,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 
 		for (int i=0; i < app->lootManager->chests.size(); i++)
 		{
-			if (app->lootManager->chests[i]->sensor->id == physB->id)
+			if (app->lootManager->chests[i]->sensor != nullptr)
 			{
-				Chest_ID = i;
-				Chest_contact = true;
-				break;
+				if (app->lootManager->chests[i]->sensor->id == physB->id)
+				{
+					Chest_ID = i;
+					Chest_contact = true;
+					break;
+				}
 			}
 		}
 		break;
