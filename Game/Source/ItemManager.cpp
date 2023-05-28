@@ -100,11 +100,11 @@ int ItemManager::LoadItems()
 	return 1;
 }
 
-void ItemManager::AddQuantity(pugi::xml_node& xml_trees, const char* name)
+void ItemManager::AddQuantity(int id, int quantity)
 {
 	for (size_t i = 0; i < nodeList.size(); i++)
 	{
-		if (nodeList[i]->name == name)
+		if (nodeList[i]->ID == id)
 		{
 			if (nodeList[i]->max > nodeList[i]->quantity)
 			{
@@ -114,7 +114,7 @@ void ItemManager::AddQuantity(pugi::xml_node& xml_trees, const char* name)
 	}
 }
 
-void ItemManager::MinusQuantity(const char* name)
+void ItemManager::MinusQuantity(int id)
 {
 	if (app->combat->active)
 	{
@@ -122,7 +122,7 @@ void ItemManager::MinusQuantity(const char* name)
 		{
 			for (size_t i = 0; i < nodeList.size(); i++)
 			{
-				if (nodeList[i]->name == name && nodeList[i]->quantity > 0)
+				if (nodeList[i]->ID == id && nodeList[i]->quantity > 0)
 				{
 					if (nodeList[i]->type != 2)
 					{
@@ -141,7 +141,7 @@ void ItemManager::MinusQuantity(const char* name)
 	{
 		for (size_t i = 0; i < nodeList.size(); i++)
 		{
-			if (nodeList[i]->name == name && nodeList[i]->quantity > 0)
+			if (nodeList[i]->ID == id && nodeList[i]->quantity > 0)
 			{
 				if (nodeList[i]->type != 2)
 				{
@@ -438,7 +438,7 @@ bool ItemManager::SaveItemState()
 	pugi::xml_node item;
 
 	// save items
-	for (size_t i = 0; i < nodeList.size(); i++)
+	for (int i = 0; i < nodeList.size(); i++)
 	{
 		item = items.append_child("item");
 		item.append_attribute("name") = nodeList[i]->name.GetString();

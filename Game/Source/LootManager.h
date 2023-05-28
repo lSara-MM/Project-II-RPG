@@ -11,6 +11,8 @@
 #include "GuiButton.h"
 #include "GuiManager.h"
 #include "ItemManager.h"
+#include "HouseOfTerrors.h"
+#include "HouseOfTerrors.h"
 #include "Player.h"
 #include "Character.h"
 #include "Combat.h"
@@ -33,93 +35,335 @@ enum class ChestDungeon
 	BEASTS,
 };
 
+class ItemLoot
+{
+public:
+	ItemLoot();
+	~ItemLoot();
+
+public:
+
+	int ID;
+	int quantity;
+	SString name;
+};
+
+class LootTable
+{
+public:
+	LootTable(ChestTypes type_, ChestDungeon dungeon_)
+	{
+		type = type_;
+		dungeon = dungeon_;
+	};
+	~LootTable();
+
+	bool Start()
+	{
+		ItemLoot* itemLoot = new ItemLoot;
+
+		switch (type)
+		{
+		case ChestTypes::COMON:
+
+			switch (dungeon)
+			{
+			case ChestDungeon::TERRORS:
+				random = -1 + rand() % 5;
+				switch (random)
+				{
+				case 0:
+					itemLoot->ID = 93;
+					itemLoot->quantity = 4;
+					itemLoot->name = "Wood";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 94;
+					itemLoot->quantity = 1;
+					itemLoot->name = "Copper";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 98;
+					itemLoot->quantity = 4;
+					itemLoot->name = "Straw";
+
+					lootTableID.push_back(*itemLoot);
+
+					break;
+				case 1:
+					itemLoot->ID = 85;
+					itemLoot->quantity = 1;
+					itemLoot->name = "Iron";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 94;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Copper";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 100;
+					itemLoot->quantity = 3;
+					itemLoot->name = "Leather";
+
+					lootTableID.push_back(*itemLoot);
+
+					break;
+				case 2:
+
+					itemLoot->ID = 101;
+					itemLoot->quantity = 1;
+					itemLoot->name = "Onyx";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 100;
+					itemLoot->quantity = 5;
+					itemLoot->name = "Leather";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 98;
+					itemLoot->quantity = 3;
+					itemLoot->name = "Straw";
+
+					lootTableID.push_back(*itemLoot);
+
+					break;
+				case 3:
+					itemLoot->ID = 101;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Onyx";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 102;
+					itemLoot->quantity = 3;
+					itemLoot->name = "Amber";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 99;
+					itemLoot->quantity = 5;
+					itemLoot->name = "Rope";
+
+					lootTableID.push_back(*itemLoot);
+
+					break;
+				case 4:
+					itemLoot->ID = 102;
+					itemLoot->quantity = 1;
+					itemLoot->name = "Amber";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 85;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Iron";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 99;
+					itemLoot->quantity = 4;
+					itemLoot->name = "Rope";
+
+					lootTableID.push_back(*itemLoot);
+
+					break;
+				}
+
+				break;
+			case ChestDungeon::BEASTS:
+				random = -1 + rand() % 4;
+				switch (random)
+				{
+				case 0:
+					break;
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				}
+
+				break;
+			}
+			break;
+
+		case ChestTypes::RARE:
+
+			switch (dungeon)
+			{
+			case ChestDungeon::TERRORS:
+
+				itemLoot->ID = 108;
+				itemLoot->quantity = 1;
+				itemLoot->name = "Pearl";
+
+				lootTableID.push_back(*itemLoot);
+
+				itemLoot->ID = 106;
+				itemLoot->quantity = 1;
+				itemLoot->name = "Amethyst";
+
+				lootTableID.push_back(*itemLoot);
+
+				itemLoot->ID = 102;
+				itemLoot->quantity = 2;
+				itemLoot->name = "Amber";
+
+				lootTableID.push_back(*itemLoot);
+
+				itemLoot->ID = 101;
+				itemLoot->quantity = 2;
+				itemLoot->name = "Onyx";
+
+				lootTableID.push_back(*itemLoot);
+
+				itemLoot->ID = 95;
+				itemLoot->quantity = 3;
+				itemLoot->name = "Iron";
+
+				lootTableID.push_back(*itemLoot);
+
+				itemLoot->ID = 94;
+				itemLoot->quantity = 5;
+				itemLoot->name = "Copper";
+
+				lootTableID.push_back(*itemLoot);
+
+				break;
+			case ChestDungeon::BEASTS:
+				random = -1 + rand() % 2;
+				switch (random)
+				{
+				case 0:
+					break;
+				case 1:
+					break;
+				}
+				break;
+			}
+			break;
+
+			break;
+		}
+	}
+
+	void GiveLoot()
+	{
+		for (int i = 0; i < lootTableID.size(); i++)
+		{
+			app->itemManager->AddQuantity(lootTableID[i].ID, lootTableID[i].quantity);
+			app->render->TextDraw(lootTableID[i].name.GetString(), 400, 250 + (20 * i), 10, Font::TEXT, { 255, 255, 255 });
+		}
+	}
+
+	bool CleanUp()
+	{
+		lootTableID.clear();
+	}
+
+private:
+
+	vector <ItemLoot> lootTableID;
+	int random; //offset + (rand() % range);
+
+	ChestTypes type; ChestDungeon dungeon;
+};
+
 class Chest
 {
 	public:
-		Chest(int x_, int y_, int type_, int dungeon_, SString texturePath_)
+		Chest(int x_, int y_, ChestTypes type_, ChestDungeon dungeon_, SString texturePath_, int Id)
 		{
 			x_ = x; y_ = y;
 
-			switch (type_)
-			{
-			case 0:
-				type = ChestTypes::RARE;
-				break;
-			case 1:
-				type = ChestTypes::COMON;
-				break;
-			case 2:
-				type = ChestTypes::EMPTY;
-				break;
-			case 3:
-				type = ChestTypes::COMBAT;
-				break;
-			}
+			path = texturePath_;
 
-			switch (dungeon_)
-			{
-			case 0:
-				dungeon = ChestDungeon::TERRORS;
-				break;
-			case 1:
-				dungeon = ChestDungeon::BEASTS;
-				break;
-			}
+			type = type_;
+			dungeon = dungeon_;
 
-			texture = app->tex->Load(texturePath_.GetString());
-
+			ID = Id;
 		};
 		~Chest() {};
 		bool Start()
 		{
-			hitbox = app->physics->CreateRectangle(x - app->render->camera.x, y - app->render->camera.x, 64, 64, bodyType::STATIC);
-			sensor = app->physics->CreateRectangleSensor((x-10) - app->render->camera.x, (y-10) - app->render->camera.x, 74, 74, bodyType::STATIC);
+			texture = app->tex->Load(path.GetString());
+			hitbox = app->physics->CreateRectangle(x, y, 64, 50, bodyType::STATIC);
+			sensor = app->physics->CreateRectangleSensor((x-10), (y-10), 74, 64, bodyType::DYNAMIC, ID);
+			sensor->ctype = ColliderType::LOOT;
 
-			switch (type)
+			lootTable = new LootTable(type, dungeon);
+
+			if (type == ChestTypes::RARE)
 			{
-			case ChestTypes::RARE:
+				//Animations
+				iddleAnim.PushBack({ 1, 10, 62, 55 });
 
-				switch (dungeon)
-				{
-				case ChestDungeon::TERRORS:
-
-					break;
-				case ChestDungeon::BEASTS:
-
-					break;
-				}
-
-				break;
-
-			case ChestTypes::COMON:
-
-				switch (dungeon)
-				{
-				case ChestDungeon::TERRORS:
-
-					break;
-				case ChestDungeon::BEASTS:
-
-					break;
-				}
-
-				break;
-
-			case ChestTypes::EMPTY:
-
-				break;
-
-			case ChestTypes::COMBAT:
-
-				break;
+				openAnim.PushBack({ 1, 10, 62, 55 });
+				openAnim.PushBack({ 0, 84, 65, 44 });
+				openAnim.PushBack({ 3, 128, 55, 62 });
+				openAnim.PushBack({ 3, 128, 55, 62 });
+				openAnim.PushBack({ 3, 128, 55, 62 });
+				openAnim.PushBack({ 0, 19, 63, 66 });
+				openAnim.PushBack({ 0, 19, 63, 66 });
+				openAnim.PushBack({ 0, 19, 63, 66 });
 			}
+			else
+			{
+				//Animations
+				iddleAnim.PushBack({ 193, 268, 61, 52 });
+
+				openAnim.PushBack({ 193, 268, 61, 52 });
+				openAnim.PushBack({ 191, 341, 66, 42 });
+				openAnim.PushBack({ 197, 383, 51, 65 }); 
+				openAnim.PushBack({ 197, 383, 51, 65 }); 
+				openAnim.PushBack({ 194, 449, 60, 63 });
+				openAnim.PushBack({ 194, 449, 60, 63 });
+				openAnim.PushBack({ 194, 449, 60, 63 });
+			}
+
+			openAnim.loop = false;
+			openAnim.speed = 0.1f;
+
+			openAnim.loop = true;
+			openAnim.speed = 0.1f;
+
+			currentAnimation = &iddleAnim;
 
 			return true;
 		}
 		bool Update(float dt)
 		{
+			if (dungeon == ChestDungeon::TERRORS && app->hTerrors->active==true)
+			{
+
+				currentAnimation->Update();
+
+				SDL_Rect rect = currentAnimation->GetCurrentFrame();
+				app->render->DrawTexture(texture, x, y, &rect);
+
+			}
+			//TODO beasts dungeon
+
+			if (currentAnimation == &openAnim && currentAnimation->HasFinished())
+			{
+				CleanUp();
+			}
 			return true;
 		}
+
+		void UseChest()
+		{
+			lootTable->GiveLoot();
+			currentAnimation = &openAnim;
+		}
+
 		bool CleanUp()
 		{
 			if (hitbox != nullptr)
@@ -135,14 +379,17 @@ class Chest
 			return true;
 		}
 
-	private:
+	public:
 
 		int x, y;
+
+		int ID;
 
 		ChestTypes type;
 		ChestDungeon dungeon;
 
 		SDL_Texture* texture;
+		SString path;
 
 		PhysBody* hitbox;
 		PhysBody* sensor;
@@ -153,25 +400,8 @@ class Chest
 		Animation openAnim;
 		Animation iddleAnim;
 
-		//Loot Table
-		vector <ItemNode*> loot;
+		LootTable* lootTable;
 
-};
-
-class LootTable
-{
-	public:
-		LootTable();
-		~LootTable();
-
-		bool Start()
-		{
-			itemLoot->nodeList.size();
-		}
-
-	private:
-
-		ItemManager* itemLoot = new ItemManager;
 };
 
 class LootManager : public Module
@@ -189,8 +419,8 @@ class LootManager : public Module
 		bool LoadLootState(pugi::xml_node& xml_trees);
 		bool SaveLootState();
 
-	private:
-
+	public:
+		vector <Chest*> chests;
 };
 
 #endif // __LOOTMANAGER_H__

@@ -121,6 +121,11 @@ private:
 	
 	int width, height;
 	SDL_Texture* textureE;
+
+
+	// Open Chest
+	bool Chest_contact = false;
+	int Chest_ID = 0;
 };
 
 #endif // __PLAYER_H__

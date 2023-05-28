@@ -14,6 +14,7 @@
 #include"Circus.h"
 #include"PuzzleManager.h"
 #include"QuestManager.h"
+#include"LootManager.h"
 
 #include "FadeToBlack.h"
 #include "EntityManager.h"
@@ -150,8 +151,6 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
-	
-
 	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 	{
 		app->map->mapPendingtoDelete = true;		
@@ -258,10 +257,6 @@ bool Player::Update(float dt)
 			}
 			
 		}
-		
-		
-
-
 
 		vel = b2Vec2(vel.x * dtP, vel.y * dtP);
 		//Set the velocity of the pbody of the player
@@ -369,6 +364,24 @@ bool Player::Update(float dt)
 			}
 		}
 
+		if (Chest_contact)
+		{
+			app->render->DrawTexture(textureE, app->lootManager->chests[Chest_ID]->x + 40, app->lootManager->chests[Chest_ID]->y - 20);
+
+			if (interactionTest == false)
+			{
+				app->audio->PlayFx(interactionfx);
+				interactionTest = true;
+			}
+
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_Y) == BUTTON_DOWN)
+			{
+				Chest_contact = false;
+				interactionTest = false;
+				app->lootManager->chests[Chest_ID]->UseChest();
+			}
+		}
+
 		if (!lockMovement)
 		{
 			Controller(dtP);
@@ -419,6 +432,19 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		}
 
 		npcInteract = true;
+		break;
+	case ColliderType::LOOT:
+		LOG("NPC Interact");
+
+		for (int i=0; i < app->lootManager->chests.size(); i++)
+		{
+			if (app->lootManager->chests[i]->sensor->id == physB->id)
+			{
+				Chest_ID = i;
+				Chest_contact = true;
+				break;
+			}
+		}
 		break;
 
 	case ColliderType::DUMMY:
@@ -508,6 +534,10 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 		npcInteract = false;
 		interactionTest = false;
 		break; 
+	case ColliderType::LOOT:
+		Chest_contact = false;
+		interactionTest = false;
+		break;
 	case ColliderType::DUMMY:
 		app->practiceTent->DummySensor = false;
 		break;
