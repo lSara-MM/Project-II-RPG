@@ -324,7 +324,7 @@ bool Combat::Update(float dt)
 		app->render->TextDraw("Press 7 become inmortal", 1100, 40, 12, Font::UI, { 255, 255, 255 });
 	}
 	
-	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, app->input->mouseSpeed_I, dt);
+	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, app->input->mouseSpeed_F, dt);
 
 	return true;
 }

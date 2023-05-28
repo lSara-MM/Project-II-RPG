@@ -164,7 +164,7 @@ bool PracticeTent::Update(float dt)
 
 	app->input->GetMousePosition(mouseX_pos, mouseY_pos);
 
-	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_pos, mouseY_pos, app->input->mouseSpeed_I, dt); }
+	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_pos, mouseY_pos, app->input->mouseSpeed_F, dt); }
 
 	return true;
 }

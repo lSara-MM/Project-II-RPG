@@ -135,12 +135,12 @@ bool Scene::Update(float dt)
 	{
 		if (app->inventory->active)
 		{
-			//player->lockMovement = false;
+			player->lockMovement = false;
 			app->inventory->Disable();
 		}
 		else 
 		{
-			//player->lockMovement = true;
+			player->lockMovement = true;
 			app->inventory->Enable();
 		}
 	}
@@ -155,7 +155,7 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) 
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 30);
 
-	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_scene, mouseY_scene, app->input->mouseSpeed_I, dt); }
+	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_scene, mouseY_scene, app->input->mouseSpeed_F, dt); }
 
 	return true;
 }
