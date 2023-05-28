@@ -169,22 +169,22 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->scene->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->iScene, (Module*)app->scene, 0);
+		app->fade->FadingToBlack(app->iScene, (Module*)app->scene, 90);
 	}
 
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->circus->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->iScene, (Module*)app->circus, 0);
+		app->fade->FadingToBlack(app->iScene, (Module*)app->circus, 90);
 	}
 
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->hTerrors->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->iScene, (Module*)app->hTerrors, 0);
+		app->fade->FadingToBlack(app->iScene, (Module*)app->hTerrors, 90);
 	}
 
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->practiceTent->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->iScene, (Module*)app->practiceTent, 0);
+		app->fade->FadingToBlack(app->iScene, (Module*)app->practiceTent, 90);
 	}
 
 	return true;

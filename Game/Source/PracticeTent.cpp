@@ -206,12 +206,13 @@ bool PracticeTent::PostUpdate()
 	if (pause_B || player->lockMovement) {
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 		{
-			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_pos, mouseY_pos);
+			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_pos - app->render->camera.x, mouseY_pos - app->render->camera.y);
 		}
 
 		else
 		{
-			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_pos, mouseY_pos);
+			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_pos - app->render->camera.x, mouseY_pos - app->render->camera.y);
+
 		}
 	}
 

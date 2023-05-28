@@ -145,6 +145,7 @@ bool Scene::Update(float dt)
 
 	app->input->GetMousePosition(mouseX_scene, mouseY_scene);
 
+
 	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
 	app->entityManager->AddEntity(entidad2);*/
 	
@@ -152,7 +153,7 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) 
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 30);
 
-	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_scene, mouseY_scene, mouseSpeed, dt); }
+	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_scene, mouseY_scene, app->input->mouseSpeed_I, dt); }
 
 	return true;
 }
@@ -201,12 +202,13 @@ bool Scene::PostUpdate()
 	if (pause_B || player->lockMovement) {
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 		{
-			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_scene, mouseY_scene);
+			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_scene - app->render->camera.x, mouseY_scene - app->render->camera.y);
 		}
 
 		else
 		{
-			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_scene, mouseY_scene);
+			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_scene - app->render->camera.x, mouseY_scene - app->render->camera.y);
+
 		}
 	}
 
