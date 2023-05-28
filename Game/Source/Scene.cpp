@@ -11,6 +11,7 @@
 #include "IntroScene.h"
 #include "PuzzleManager.h"
 #include "QuestManager.h"
+#include "LootManager.h"
 #include "Combat.h"
 
 #include "EntityManager.h"
@@ -63,6 +64,7 @@ bool Scene::Start()
 	app->physics->collisions = false;
 	app->questManager->Enable();
 	app->itemManager->Enable();
+	app->lootManager->Enable();
 
 	if (app->puzzleManager->active == true) {
 		app->puzzleManager->CleanUp();

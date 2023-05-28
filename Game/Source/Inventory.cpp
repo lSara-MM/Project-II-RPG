@@ -202,16 +202,16 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 														{
 															if (app->itemManager->nodeList[j]->space == 1)
 															{
-																app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->name.GetString());
+																app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->ID);
 																app->itemManager->nodeList[i]->space = 1;
-																app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
+																app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->ID);
 																break;
 															}
 															else
 															{
-																app->itemManager->MinusQuantity(app->itemManager->nodeList[p]->name.GetString());
+																app->itemManager->MinusQuantity(app->itemManager->nodeList[p]->ID);
 																app->itemManager->nodeList[i]->space = 1;
-																app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
+																app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->ID);
 																break;
 															}
 														}
@@ -226,7 +226,7 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 									//Si es armadura
 									if (app->itemManager->nodeList[i]->whom == app->itemManager->nodeList[j]->whom)
 									{
-										app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->name.GetString());
+										app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->ID);
 									}
 								}
 							}
@@ -238,7 +238,7 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			{
 				app->itemManager->nodeList[i]->space = 1;
 			}
-			app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->name.GetString());
+			app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->ID);
 		}
 	}
 	switch (control->id)

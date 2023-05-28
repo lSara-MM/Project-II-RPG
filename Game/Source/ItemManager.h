@@ -83,12 +83,12 @@ public:
 	bool CleanUp();
 
 	int LoadItems();
-	void AddQuantity(pugi::xml_node& xml_trees, const char* name);
+	void AddQuantity(int id, int quantity);
 
 	void LoadNodes(pugi::xml_node& xml_trees, ItemNode* item);
 	void LoadQuantity(int x, int y, int i);
 	void LoadButtons(int x, int y, int ID);
-	void MinusQuantity(const char* name);
+	void MinusQuantity(int id);
 
 	void UseItem(ItemNode* item);
 

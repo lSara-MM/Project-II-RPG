@@ -27,6 +27,15 @@
 	<fadeToBlack>
 	</fadeToBlack>
 
+	<lootManager>
+		<chest
+			x="2500" y="1167" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="0" used="false"
+			/>
+		<chest
+			x="38" y="20" type="0" dungeon="0" texturepath="Assets/Textures/chests.png" id="1" used="false"
+			/>
+	</lootManager>
+	
 	<entitymanager>
 		<player x="3000" y="1000" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
 					texturepath="Assets/Textures/CH_Protagonist_Sprites2.png"
