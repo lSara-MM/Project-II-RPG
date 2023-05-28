@@ -727,6 +727,7 @@ bool Combat::NextTurn()
 	}
 	listInitiative.At(charaInTurn)->data->onTurn = true;
 
+	//Control botones
 	if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ENEMY)
 	{
 		listButtons.end->prev->data->state = GuiControlState::DISABLED;	// change position
@@ -738,6 +739,11 @@ bool Combat::NextTurn()
 		listButtons.end->prev->data->state = GuiControlState::NORMAL;
 		listButtons.end->data->state = GuiControlState::NORMAL;
 	}
+
+	//Status effects
+	int DoT = listInitiative.At(charaInTurn)->data->GetStat(EffectType::CURRENT_HP);
+	listInitiative.At(charaInTurn)->data->ModifyHP(DoT);
+	listInitiative.At(charaInTurn)->data->ReduceCountStatusEffects();
 
 	LOG("%s turn - num %d", listInitiative.At(charaInTurn)->data->name.GetString(), charaInTurn);
 
