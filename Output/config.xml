@@ -89,7 +89,7 @@
     <!--Combat Characters -->
 
 		<CombatCharacter name ="" id="0"
-        maxHp="1150" currentHp="1150" attack="190" armor="12" critRate="20" critDamage="25" accuracy="15" res="10" dodge="10" speed="8"
+        maxHp="1200" currentHp="1200" attack="200" armor="15" critRate="30" critDamage="25" accuracy="0" res="0" dodge="15" speed="75"
         type="0" class="0" skill1ID="1" skill2ID="2" skill3ID="3" skill4ID="4"
                
         width="0" heigth="0"
@@ -98,7 +98,7 @@
 		sectionX="12" sectionY="22"/>
 		
 		<CombatCharacter name ="Nikita" id="1"
-        maxHp="1000" currentHp="1000" attack="200" armor="8" critRate="10" critDamage="20" accuracy="15" res="15" dodge="15" speed="7"
+        maxHp="1000" currentHp="1000" attack="200" armor="5" critRate="10" critDamage="20" accuracy="10" res="10" dodge="20" speed="80"
         type="0" class="7" skill1ID="5" skill2ID="6" skill3ID="7" skill4ID="8"
                
         width="0" heigth="0"
@@ -107,7 +107,7 @@
 		sectionX="19" sectionY="20"/>
 
 		<CombatCharacter name ="Igor and Ivan" id="2"
-        maxHp="1500" currentHp="1500" attack="120" armor="5" critRate="5" critDamage="20" accuracy="10" res="20" dodge="5" speed="3"
+        maxHp="1500" currentHp="1500" attack="160" armor="10" critRate="15" critDamage="15" accuracy="0" res="20" dodge="10" speed="40"
         type="0" class="6" skill1ID="9" skill2ID="10" skill3ID="11" skill4ID="12"
                
         width="0" heigth="0"
@@ -116,7 +116,7 @@
 		sectionX="15" sectionY="42"/>
 
 		<CombatCharacter name ="Yuroslava" id="3"
-        maxHp="850" currentHp="850" attack="230" armor="8" critRate="10" critDamage="20" accuracy="25" res="5" dodge="10" speed="5"
+        maxHp="900" currentHp="900" attack="185" armor="10" critRate="20" critDamage="20" accuracy="15" res="-10" dodge="10" speed="35"
         type="0" class="5" skill1ID="13" skill2ID="14" skill3ID="15" skill4ID="16"
                
         width="0" heigth="0"
