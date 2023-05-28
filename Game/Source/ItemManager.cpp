@@ -24,6 +24,8 @@ bool ItemManager::Awake(pugi::xml_node& config)
 
 	texturePath = config.attribute("inventorypath").as_string();
 
+	itemPath = config.attribute("itempath").as_string();
+
 	return ret;
 }
 
@@ -39,11 +41,8 @@ bool ItemManager::Start()
 	SetParty();
 
 	LoadItems();
-
-	for (size_t i = 0; i < nodeList.size(); i++)
-	{
-		nodeList[i]->Start();
-	}
+	
+	itemsTexture = app->tex->Load(itemPath.GetString());
 
 	return true;
 }
@@ -72,6 +71,9 @@ bool ItemManager::CleanUp()
 		//delete arrParty.at(i);
 		arrParty.at(i) = nullptr;
 	}
+
+	app->tex->UnLoad(itemsTexture);
+	itemsTexture = NULL;
 
 	return true;
 }
@@ -102,13 +104,16 @@ int ItemManager::LoadItems()
 
 void ItemManager::AddQuantity(int id, int quantity)
 {
-	for (size_t i = 0; i < nodeList.size(); i++)
+	for (int q = 0; q < quantity; q++)
 	{
-		if (nodeList[i]->ID == id)
+		for (size_t i = 0; i < nodeList.size(); i++)
 		{
-			if (nodeList[i]->max > nodeList[i]->quantity)
+			if (nodeList[i]->ID == id)
 			{
-				nodeList[i]->quantity++;
+				if (nodeList[i]->max > nodeList[i]->quantity)
+				{
+					nodeList[i]->quantity++;
+				}
 			}
 		}
 	}
@@ -263,7 +268,6 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 		node->speed = pugiNode.attribute("speed").as_int();
 		node->equiped = pugiNode.attribute("equiped").as_bool();
 	
-		node->path = pugiNode.attribute("texturepath").as_string();
 		node->max = pugiNode.attribute("max").as_int();
 
 		nodeList.push_back(node);
@@ -278,8 +282,6 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 
 	if (nodeList[i]->quantity > 0)
 	{
-		itemsTexture = app->tex->Load(nodeList[i]->path.GetString());
-
 		if (app->combat->active)
 		{
 
@@ -348,9 +350,6 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 				}
 			}
 		}
-
-		app->tex->UnLoad(itemsTexture);
-		itemsTexture = NULL;
 	}
 }
 

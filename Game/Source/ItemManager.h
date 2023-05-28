@@ -32,7 +32,6 @@ public:
 
 public:
 	SString name;
-	SString path;
 
 	iPoint position;
 	int quantity = 0;
@@ -105,6 +104,8 @@ public:
 
 	SDL_Texture* itemsTexture;
 
+	SString itemPath;
+
 	const char* texturePath;
 
 	vector <ItemNode*> nodeList;
@@ -129,7 +130,6 @@ public:
 	int resistencia= 0;
 	int speed= 0;
 	
-
 	// TO DO GUARRADA SUPER TEMPORAL
 	int comb = 0;
 };

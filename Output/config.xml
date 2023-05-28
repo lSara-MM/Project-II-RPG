@@ -171,7 +171,9 @@
 	</PuzzleManager>
  
 	
-	<itemmanager inventorypath="Assets/Textures/Inventory.png"/>
+	<itemmanager inventorypath="Assets/Textures/Inventory.png"
+				 itempath="Assets/Textures/itemTextures.png"
+				 />
 
 	<map>
 		<mapfolder path="Assets/Maps/"/>
