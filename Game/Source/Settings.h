@@ -209,11 +209,11 @@ public:
 
 		//hacer array de buttons con estos textos queda feo, lo hago hardcode
 
-		/*int x = 580; int y = 250; int offset = 50;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 720, y, 0, 0}, ButtonType::SETTINGS_TEXT, "Game by Pikum Studios: ", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		int x = 580; int y = 250; int offset = 50;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 720, y, 0, 0}, ButtonType::SETTINGS_TEXT, "Game by Pikum Studios\n Sara Martinez Mauri\n Jose Antonio Tur Izquierdo\n Sonia Cristina Ojeda Lanz\n Alberto Hidalgo Garcia\n Pau Garriga Brotons", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
 		button->state = GuiControlState::DISABLED;
 		listControlButtons.Add(button);
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y+offset, 0, 0 }, ButtonType::SETTINGS_TEXT, "Sara Martinez Mauri", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		/*button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, {x, y + offset, 0, 0}, ButtonType::SETTINGS_TEXT, "Sara Martinez Mauri", 16, Font::UI, {0,0,0,0}, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
 		button->state = GuiControlState::DISABLED;
 		listControlButtons.Add(button);
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y+offset * 2, 0, 0 }, ButtonType::SETTINGS_TEXT, "Jose Antonio Tur Izquierdo", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
@@ -671,7 +671,7 @@ public:
 
 		if (pControl->control_B) { 
 			pControl->OpenControlSettings();
-			animationControl.Foward();
+			/*animationControl.Foward();
 			animationControl.Step(speedAnimNotButton, false);
 			float point2 = animationControl.GetPoint();
 
@@ -692,7 +692,7 @@ public:
 			app->render->TextDraw("Andreu Nosas Soler", x, int(offsetAnimation + point2 * ((y + offset) - offsetAnimation)), 16);
 			app->render->TextDraw("Andreu Miro Sabate", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
 			app->render->TextDraw("Eric Segovia Baena", x, int(offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation)), 16);
-			app->render->TextDraw("Guillem Pol Aixut Anderiz", x, int(offsetAnimation + point2 * ((y + offset * 4) - offsetAnimation)), 16);
+			app->render->TextDraw("Guillem Pol Aixut Anderiz", x, int(offsetAnimation + point2 * ((y + offset * 4) - offsetAnimation)), 16);*/
 		}
 		if (pGraphics->graphics_B) { 
 			pGraphics->OpenGraphics();
