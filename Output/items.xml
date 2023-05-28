@@ -286,7 +286,7 @@ type 2
 	<item id="86" quantity="0" name="Max_Potion" type="1" kind="1" x="6" y="1" hp="9999" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" 
 		  >
 	</item>
-	<item id="87" quantity="0" name="Max_Res" type="1" kind="1" x="6" y="2" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="300" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" 
+	<item id="87" quantity="0" name="Max_Armor" type="1" kind="1" x="6" y="2" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="300" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" 
 		  >
 	</item>
 	<item id="88" quantity="0" name="Attack_Potion" type="1" kind="1" x="6" y="3" hp="0" maxHp="0" attack="200" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" 
