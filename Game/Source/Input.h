@@ -139,13 +139,15 @@ public:
 	SDL_GameController* sdl_controller;
 	GameController controller;
 	
-	bool gamepadGUI_B = false;
-
+	//bool gamepadGUI_B = false;
+	int mouseSpeed_I;
 
 	// TO DO guarradas 
 	int posX, posY;
 	string sceneNameSaved;
 	bool coso;
+	SDL_Texture* cursorIdleTex;
+	SDL_Texture* cursorPressedTex;
 
 private:
 	bool windowEvents[WE_COUNT];

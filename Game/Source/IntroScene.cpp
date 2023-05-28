@@ -41,7 +41,7 @@ bool IntroScene::Awake(pugi::xml_node& config)
 	// iterate all objects in the IntroScene
 	// Check https://pugixml.org/docs/quickstart.html#access
 	music_intro = config.attribute("audioIntroPath").as_string();
-	mouse_Speed = config.attribute("mouseSpeed").as_float();
+	//mouse_Speed = config.attribute("mouseSpeed").as_float();
 	texturePath = config.attribute("background").as_string();
 
 	//Save boton continue
@@ -103,7 +103,7 @@ bool IntroScene::PreUpdate()
 bool IntroScene::Update(float dt)
 {
 	app->input->GetMousePosition(mouseX_intro, mouseY_intro);
-
+	
 	if (transition_B)
 	{
 		animationTitle.Backward();
@@ -143,7 +143,7 @@ bool IntroScene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
 
-	if (previousGame_B && !pSettings->settings_B && !app->input->gamepadGUI_B)//gamepadGUI_B regula si se usa mando o no para gestionar gui
+	if (previousGame_B && !pSettings->settings_B)//gamepadGUI_B regula si se usa mando o no para gestionar gui
 	{
 		listButtons.start->next->data->state = GuiControlState::NORMAL;
 		LOG("Continue");
@@ -153,80 +153,80 @@ bool IntroScene::Update(float dt)
 		listButtons.start->next->data->state = GuiControlState::DISABLED;
 	}
 
-	app->input->HandleGamepadMouse(mouseX_intro, mouseY_intro, mouse_Speed, dt);
+	app->input->HandleGamepadMouse(mouseX_intro, mouseY_intro, app->input->mouseSpeed_I, dt);
 
+	//Lo dejo comentado por si lo recupero en algun momento
+	
+	////GAMEPAD UI FUNCIONES, BOOL CANVIA AL USAR MANDO O RATON
+	//if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
+	//	|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
+	//{
+	//	app->input->gamepadGUI_B = true;
 
+	//}
+	//else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
+	//{
+	//	app->input->gamepadGUI_B = false;
+	//}
 
-	//GAMEPAD UI FUNCIONES, BOOL CANVIA AL USAR MANDO O RATON
-	if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
-		|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
-	{
-		app->input->gamepadGUI_B = true;
+	//	
+	//if (pSettings->settings_B == false )
+	//{
+	//	for (int i = 0; i < 5; i++)//hardcoded a diferencia de los otros settings al tener el continue desactivado
+	//	{
+	//		if (listButtons.At(i)->data->id == 801) {
 
-	}
-	else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
-	{
-		app->input->gamepadGUI_B = false;
-	}
+	//			listButtons.At(i)->data->state = GuiControlState::NONE;	
+	//			listButtons.At(i - 4)->data->state = GuiControlState::FOCUSED;//fix later
 
-		
-	if (pSettings->settings_B == false )
-	{
-		for (int i = 0; i < 5; i++)//hardcoded a diferencia de los otros settings al tener el continue desactivado
-		{
-			if (listButtons.At(i)->data->id == 801) {
+	//		}
 
-				listButtons.At(i)->data->state = GuiControlState::NONE;	
-				listButtons.At(i - 4)->data->state = GuiControlState::FOCUSED;//fix later
+	//		else if (listButtons.At(i)->data->state == GuiControlState::FOCUSED)
+	//		{
+	//			if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN)
+	//			{
+	//				if (listButtons.At(i)->next->data->id == 801)//listButtons.At(i)->next == NULL
+	//				{
+	//					listButtons.At(i)->data->state = GuiControlState::NORMAL;
+	//					listButtons.start->data->state = GuiControlState::FOCUSED;
+	//				}
 
-			}
+	//				else if (listButtons.At(i)->next->data->state == GuiControlState::DISABLED)
+	//				{
+	//					listButtons.At(i)->data->state = GuiControlState::NORMAL;
+	//					listButtons.At(i + 2)->data->state = GuiControlState::FOCUSED;
+	//				}
 
-			else if (listButtons.At(i)->data->state == GuiControlState::FOCUSED)
-			{
-				if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN)
-				{
-					if (listButtons.At(i)->next->data->id == 801)//listButtons.At(i)->next == NULL
-					{
-						listButtons.At(i)->data->state = GuiControlState::NORMAL;
-						listButtons.start->data->state = GuiControlState::FOCUSED;
-					}
+	//				else
+	//				{
+	//					listButtons.At(i)->data->state = GuiControlState::NORMAL;
+	//					listButtons.At(i)->next->data->state = GuiControlState::FOCUSED;
+	//				}
+	//			}
+	//			else if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN)
+	//			{
+	//				if (listButtons.At(i)->prev == NULL)
+	//				{
+	//					listButtons.At(i)->data->state = GuiControlState::NORMAL;
+	//					listButtons.At(3)->data->state = GuiControlState::FOCUSED;//listButtons.end->data->state = GuiControlState::FOCUSED;
+	//				}
+	//				else if (listButtons.At(i)->prev->data->state == GuiControlState::DISABLED)
+	//				{
+	//					listButtons.At(i)->data->state = GuiControlState::NORMAL;
+	//					listButtons.At(i - 2)->data->state = GuiControlState::FOCUSED;
+	//				}
+	//				else
+	//				{
+	//					listButtons.At(i)->data->state = GuiControlState::NORMAL;
+	//					listButtons.At(i)->prev->data->state = GuiControlState::FOCUSED;
+	//				}
+	//			}
+	//			break;
+	//		}
 
-					else if (listButtons.At(i)->next->data->state == GuiControlState::DISABLED)
-					{
-						listButtons.At(i)->data->state = GuiControlState::NORMAL;
-						listButtons.At(i + 2)->data->state = GuiControlState::FOCUSED;
-					}
+	//	}
 
-					else
-					{
-						listButtons.At(i)->data->state = GuiControlState::NORMAL;
-						listButtons.At(i)->next->data->state = GuiControlState::FOCUSED;
-					}
-				}
-				else if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN)
-				{
-					if (listButtons.At(i)->prev == NULL)
-					{
-						listButtons.At(i)->data->state = GuiControlState::NORMAL;
-						listButtons.At(3)->data->state = GuiControlState::FOCUSED;//listButtons.end->data->state = GuiControlState::FOCUSED;
-					}
-					else if (listButtons.At(i)->prev->data->state == GuiControlState::DISABLED)
-					{
-						listButtons.At(i)->data->state = GuiControlState::NORMAL;
-						listButtons.At(i - 2)->data->state = GuiControlState::FOCUSED;
-					}
-					else
-					{
-						listButtons.At(i)->data->state = GuiControlState::NORMAL;
-						listButtons.At(i)->prev->data->state = GuiControlState::FOCUSED;
-					}
-				}
-				break;
-			}
-
-		}
-
-	}
+	//}
 
 	return true;
 }
@@ -300,6 +300,17 @@ bool IntroScene::PostUpdate()
 	}
 
 	app->guiManager->Draw();
+
+
+	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
+	{
+		app->render->DrawTexture(app->input->cursorPressedTex, mouseX_intro, mouseY_intro);
+	}
+
+	else
+	{
+		app->render->DrawTexture(app->input->cursorIdleTex, mouseX_intro, mouseY_intro);
+	}
 
 	return ret;
 }

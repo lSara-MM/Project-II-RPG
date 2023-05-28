@@ -20,7 +20,7 @@
 	<questmanager />
 	<lootManager />
 	<entitymanager>
-		<player name="PracticeTent" x="572" y="315" />
+		<player name="scene" x="3509" y="2579" />
 	</entitymanager>
 	<itemmanager />
 	<dialogue />
@@ -29,6 +29,6 @@
 	<Inventory />
 	<fadeToBlack />
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="-2889" y="-2246" />
 	</renderer>
 </save_state>

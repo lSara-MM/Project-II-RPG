@@ -46,7 +46,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	pause_music = config.attribute("pause").as_string();
 	mute_B = false;
 
-	mouseSpeed = config.attribute("mouseSpeed").as_float();
+	//mouseSpeed = config.attribute("mouseSpeed").as_float();
 	enemyRange_I = config.attribute("enemyRange").as_int();
 
 	sceneNode = config;
@@ -197,6 +197,18 @@ bool Scene::PostUpdate()
 	}
 
 	app->guiManager->Draw();
+
+	if (pause_B || player->lockMovement) {
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
+		{
+			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_scene, mouseY_scene);
+		}
+
+		else
+		{
+			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_scene, mouseY_scene);
+		}
+	}
 
 	return ret;
 }

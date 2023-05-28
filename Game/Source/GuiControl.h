@@ -58,7 +58,7 @@ enum class ButtonType
 	INV_NEXT_PAGE,
 	INV_PAGES,
 	SWAP_SKILL,
-
+	SETTINGS_TEXT,//para animacion texto en settings
 	//For combat
 	COMBAT_TARGET,
 	SKILL_1,

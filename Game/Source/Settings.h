@@ -125,18 +125,18 @@ public:
 				i->data->state = GuiControlState::NORMAL;
 			}
 		}
-		if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
-			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
-		{
-			app->input->gamepadGUI_B = true;
+		//if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
+		//	|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
+		//{
+		//	app->input->gamepadGUI_B = true;
 
-		}
-		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
-		{
-			app->input->gamepadGUI_B = false;
-		}
+		//}
+		//else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
+		//{
+		//	app->input->gamepadGUI_B = false;
+		//}
 
-		HandleGampeadGUI(&listGameButtons);
+		//HandleGampeadGUI(&listGameButtons);
 
 		return true;
 	}
@@ -196,16 +196,58 @@ public:
 
 		GuiButton* button;
 
-		//// buttons
-		//int x = 630; int y = 0;
-		//for (int i = 0; buttons[i] != "\n"; i++)
-		//{
-		//	if (i == 5) { x = 900; y = 0; }
+		// buttons
+	/*	int x = 630; int y = 0;
+		for (int i = 0; buttons[i] != "\n"; i++)
+		{
+			if (i == 5) { x = 900; y = 0; }
 
-		//	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { x, 280 + 77 * y++, 34, 34 }, ButtonType::CONTROL_SETTINGS, buttons[i], 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
-		//	button->state = GuiControlState::NONE;
-		//	listControlButtons.Add(button);
-		//}
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { x, 280 + 77 * y++, 34, 34 }, ButtonType::CONTROL_SETTINGS, buttons[i], 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+			button->state = GuiControlState::NONE;
+			listControlButtons.Add(button);
+		}*/
+
+		//hacer array de buttons con estos textos queda feo, lo hago hardcode
+
+		/*int x = 580; int y = 250; int offset = 50;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 720, y, 0, 0}, ButtonType::SETTINGS_TEXT, "Game by Pikum Studios: ", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::DISABLED;
+		listControlButtons.Add(button);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y+offset, 0, 0 }, ButtonType::SETTINGS_TEXT, "Sara Martinez Mauri", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::DISABLED;
+		listControlButtons.Add(button);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y+offset * 2, 0, 0 }, ButtonType::SETTINGS_TEXT, "Jose Antonio Tur Izquierdo", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::DISABLED;
+		listControlButtons.Add(button);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 3, 0, 0 }, ButtonType::SETTINGS_TEXT, "Sonia Cristina Ojeda Lanz", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::DISABLED;
+		listControlButtons.Add(button);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 4, 0, 0 }, ButtonType::SETTINGS_TEXT, "Alberto Hidalgo Garcia", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::DISABLED;
+		listControlButtons.Add(button);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 5, 0, 0 }, ButtonType::SETTINGS_TEXT, "Pau Garriga Brotons", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::DISABLED;
+		listControlButtons.Add(button);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 718, y + offset * 6, 0, 0 }, ButtonType::SETTINGS_TEXT, "This project is licensed under an unmodified MIT license", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::DISABLED;
+		listControlButtons.Add(button);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 7, 0, 0 }, ButtonType::SETTINGS_TEXT, "Copyright(c) 2020 Ray", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::DISABLED;
+		listControlButtons.Add(button);
+		x = 850;
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset, 0, 0 }, ButtonType::SETTINGS_TEXT, "Andreu Nosas Soler", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::DISABLED;
+		listControlButtons.Add(button);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 2, 0, 0 }, ButtonType::SETTINGS_TEXT, "Andreu Miro Sabate", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::DISABLED;
+		listControlButtons.Add(button);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 3, 0, 0 }, ButtonType::SETTINGS_TEXT, "Eric Segovia Baena", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::DISABLED;
+		listControlButtons.Add(button);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 4, 0, 0 }, ButtonType::SETTINGS_TEXT, "Guillem Pol Aixut Anderiz", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
+		button->state = GuiControlState::DISABLED;
+		listControlButtons.Add(button);*/
+
 	}
 
 	bool OpenControlSettings()
@@ -229,12 +271,12 @@ public:
 			for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
 			{
 				i->data->isForward_B = true;
-				i->data->state = GuiControlState::NORMAL;
+				//i->data->state = GuiControlState::NORMAL;
 			}
 	
 			open_control_B = true;
 		}
-		if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
+	/*	if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
 			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
 		{
 			app->input->gamepadGUI_B = true;
@@ -243,9 +285,9 @@ public:
 		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
 		{
 			app->input->gamepadGUI_B = false;
-		}
+		}*/
 
-		HandleGampeadGUI(&listControlButtons);
+		//HandleGampeadGUI(&listControlButtons);
 
 		return true;
 	}
@@ -280,7 +322,7 @@ public:
 public:
 
 	// buttons
-	int GUI_id = 810;
+	int GUI_id = 900;//no quiero que se interactue con ellos, pongo valor random
 	List<GuiButton*> listControlButtons;
 
 	const char* buttons[21] = {"W", "A", "D", "S", "E", "I", "R", "J", "M", "Esc", "\n"};
@@ -372,7 +414,7 @@ public:
 				open_graphics_B = true;
 			}
 
-			if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
+		/*	if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
 				|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
 			{
 				app->input->gamepadGUI_B = true;
@@ -381,9 +423,9 @@ public:
 			else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
 			{
 				app->input->gamepadGUI_B = false;
-			}
+			}*/
 
-			HandleGampeadGUI(&listGraphicsButtons);
+			//HandleGampeadGUI(&listGraphicsButtons);
 
 			return true;
 		}
@@ -636,7 +678,7 @@ public:
 			int x = 530; int y = 250; int offset = 50;
 
 			app->render->TextDraw("Game by Pikum Studios: ", 655, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
-			
+
 			app->render->TextDraw("Sara Martinez Mauri", x, int(offsetAnimation + point2 * ((y + offset) - offsetAnimation)), 16);
 			app->render->TextDraw("Jose Antonio Tur Izquierdo", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
 			app->render->TextDraw("Sonia Cristina Ojeda Lanz", x, int(offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation)), 16);
@@ -651,8 +693,6 @@ public:
 			app->render->TextDraw("Andreu Miro Sabate", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
 			app->render->TextDraw("Eric Segovia Baena", x, int(offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation)), 16);
 			app->render->TextDraw("Guillem Pol Aixut Anderiz", x, int(offsetAnimation + point2 * ((y + offset * 4) - offsetAnimation)), 16);
-		
-
 		}
 		if (pGraphics->graphics_B) { 
 			pGraphics->OpenGraphics();
@@ -689,7 +729,7 @@ public:
 			open_settings_B = true;
 		}
 
-		if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
+	/*	if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
 			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
 		{
 			app->input->gamepadGUI_B = true;
@@ -698,9 +738,9 @@ public:
 		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
 		{
 			app->input->gamepadGUI_B = false;
-		}
+		}*/
 
-		HandleGampeadGUI(&listSettingsButtons);
+		//HandleGampeadGUI(&listSettingsButtons);
 
 		return true;
 	}
@@ -856,7 +896,7 @@ public:
 			open_pause_B = true;
 		}
 
-		if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
+	/*	if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
 			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
 		{
 			app->input->gamepadGUI_B = true;
@@ -865,9 +905,9 @@ public:
 		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
 		{
 			app->input->gamepadGUI_B = false;
-		}
+		}*/
 
-		HandleGampeadGUI(&listPauseButtons);
+		//HandleGampeadGUI(&listPauseButtons);
 
 		return true;
 	}

@@ -43,7 +43,7 @@ bool Circus::Awake(pugi::xml_node& config)
 	mute_B = false;
 	circusMusPath = config.attribute("musicCircus").as_string();
 	pause_music = config.attribute("pause").as_string();
-	mouseSpeed = config.attribute("mouseSpeed").as_float();
+	//mouseSpeed = config.attribute("mouseSpeed").as_float();
 	sceneNode = config;
 
 	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
@@ -117,7 +117,7 @@ bool Circus::Update(float dt)
 	//Load Debug keys
 	Debug();
 
-	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_pos, mouseY_pos, mouseSpeed, dt); }
+	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_pos, mouseY_pos, app->input->mouseSpeed_I, dt); }
 
 	return true;
 }
@@ -180,6 +180,18 @@ bool Circus::CleanUp()
 
 	app->guiManager->CleanUp();
 	app->map->CleanUp();
+
+	if (pause_B || player->lockMovement) {
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
+		{
+			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_pos, mouseY_pos);
+		}
+
+		else
+		{
+			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_pos, mouseY_pos);
+		}
+	}
 
 	return true;
 }

@@ -51,7 +51,7 @@ bool PracticeTent::Awake(pugi::xml_node& config)
 	posDummy.y = config.attribute("yCollider").as_int();
 
 	mute_B = false;
-	mouseSpeed = config.attribute("mouseSpeed").as_float();
+	//mouseSpeed = config.attribute("mouseSpeed").as_float();
 	sceneNode = config;
 
 	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
@@ -164,7 +164,7 @@ bool PracticeTent::Update(float dt)
 
 	app->input->GetMousePosition(mouseX_pos, mouseY_pos);
 
-	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_pos, mouseY_pos, mouseSpeed, dt); }
+	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_pos, mouseY_pos, app->input->mouseSpeed_I, dt); }
 
 	return true;
 }
@@ -202,6 +202,18 @@ bool PracticeTent::PostUpdate()
 	}
 
 	app->guiManager->Draw();
+
+	if (pause_B || player->lockMovement) {
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
+		{
+			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_pos, mouseY_pos);
+		}
+
+		else
+		{
+			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_pos, mouseY_pos);
+		}
+	}
 
 	return ret;
 }

@@ -106,16 +106,20 @@ bool GuiButton::Update(float dt)
 {
 	if (state != GuiControlState::DISABLED)
 	{
-		if (!app->input->gamepadGUI_B)
-		{
+		/*if (!app->input->gamepadGUI_B)
+		{*/
 			app->input->GetMousePosition(mouseX, mouseY);
 			//LOG("Mouse x: %d Mouse y: %d", mouseX, mouseY);
 			//LOG("bounds.x: %d bounds.h: %d", bounds.x, bounds.y);
-
+			
 			GuiControlState previousState = state;
 
-			if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
-				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
+			int mouseX_End = mouseX+20; int mouseY_End = mouseY+27;//final cursor, más sensible
+			//int boundsX_End = bounds.w + 20; int boundsY_End = bounds.h + 27;igual hace falta, incrementa area focused, ahora no va bien al darse varios botones a la vez
+
+			if ((mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
+				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h)||(mouseX_End >= bounds.x && mouseX_End <= bounds.x + bounds.w &&
+					mouseY_End >= bounds.y && mouseY_End <= bounds.y + bounds.h)) {
 
 				state = GuiControlState::FOCUSED;
 				NotifyObserverOfHover();
@@ -149,7 +153,7 @@ bool GuiButton::Update(float dt)
 				(isSelected) ? state = GuiControlState::SELECTED : state = GuiControlState::NORMAL;
 				hoverTest = false;
 			}
-		}
+		/*}
 		else
 		{
 			if (state == GuiControlState::FOCUSED)
@@ -170,7 +174,7 @@ bool GuiButton::Update(float dt)
 				NotifyObserverOfClick();
 				state = GuiControlState::FOCUSED;
 			}
-		}
+		}*/
 		
 	}
 

@@ -50,7 +50,7 @@ bool Combat::Awake(pugi::xml_node& config)
 	texturePathTurnsBar = config.attribute("turnBarTexture").as_string();
 	PathlastSelectedSkill = config.attribute("lastSkillTexture").as_string();
 
-	mouse_Speed = config.attribute("mouseSpeed").as_float();
+	//mouse_Speed = config.attribute("mouseSpeed").as_float();
 
 	combatNode = config;
 
@@ -156,6 +156,8 @@ bool Combat::PreUpdate()
 bool Combat::Update(float dt)
 {
 	Debug();
+
+	app->input->GetMousePosition(mouseX_combat, mouseY_combat);
 
 	app->render->DrawTexture(textureBackground, 0, 0);
 
@@ -322,7 +324,7 @@ bool Combat::Update(float dt)
 		app->render->TextDraw("Press 7 become inmortal", 1100, 40, 12, Font::UI, { 255, 255, 255 });
 	}
 	
-	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, mouse_Speed, dt);
+	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, app->input->mouseSpeed_I, dt);
 
 	return true;
 }
@@ -381,6 +383,18 @@ bool Combat::PostUpdate()
 			break;
 		}
 	}
+
+	
+	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
+	{
+		app->render->DrawTexture(app->input->cursorPressedTex, mouseX_combat, mouseY_combat);
+	}
+
+	else
+	{
+		app->render->DrawTexture(app->input->cursorIdleTex, mouseX_combat, mouseY_combat);
+	}
+	
 
 	return ret;
 }
