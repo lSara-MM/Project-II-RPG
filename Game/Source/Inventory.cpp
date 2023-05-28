@@ -172,11 +172,10 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		if (app->itemManager->nodeList[i]->ID == control->id)
 		{
-			if (app->itemManager->nodeList[i]->type == 3) break;
+			if (app->itemManager->nodeList[i]->type == 3 && app->itemManager->nodeList[i]->type == 1) break;
 
 			app->itemManager->nodeList[i]->whom = app->itemManager->invPos;
 
-			if (app->itemManager->nodeList[i]->type == 1 && app->itemManager->nodeList[i]->kind == 2) break;
 			for (size_t j = 0; j < app->itemManager->nodeList.size(); j++)
 			{
 				if (app->itemManager->nodeList[j]->type == app->itemManager->nodeList[i]->type)
