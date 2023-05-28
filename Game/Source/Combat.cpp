@@ -473,7 +473,7 @@ bool Combat::CleanUp()
 }
 
 void Combat::Debug()
-{
+{	
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)
 	{
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
@@ -746,7 +746,6 @@ bool Combat::NextTurn()
 	listInitiative.At(charaInTurn)->data->ReduceCountStatusEffects();
 
 	LOG("%s turn - num %d", listInitiative.At(charaInTurn)->data->name.GetString(), charaInTurn);
-
 	return true;
 }
 
@@ -829,19 +828,13 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 
 void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 {
-	app->guiManager->DestroyGuiControl(chara->button);
-	//listButtons.Del(chara->button); //TODO Borrar de la lista de buttons de combat
-	chara->CleanUp();
+	listButtons.Del(listButtons.At(listButtons.Find(chara->button)));
 
 	// Delete from its type vector
 	arr->erase(arr->begin() + chara->positionCombat_I);
-	
-	// Delete & free memory (should work?)
 
 	// Delete from initiative list
 	int del = listInitiative.Find(chara);
-	delete listInitiative.At(del)->data;
-	listInitiative.At(del)->data = nullptr;
 	listInitiative.Del(listInitiative.At(del));
 
 	// Delete from entity manager list
@@ -850,14 +843,15 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 	if (arr->empty())
 	{
 		(chara->charaType == CharacterType::ALLY) ? app->sceneWin_Lose->win = false : app->sceneWin_Lose->win = true;
-		// TO TEST: VA TO LENTO EL FADE, SE QUEDA COMO UN MONTON DE RATO EN EL COMBATE PARALIZADO Y LUEGO SE RALENTIZA TODO? LA ANIMACION DEL 
-		// FONDO DE LOSE VA LENTO PERO EL DE WIN NO a veces XD?
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);
 	}
 	else
 	{
 		UpdatePositions(arr, chara->positionCombat_I);
 	}
+
+	delete chara;
+	chara = nullptr;
 }
 
 void Combat::UpdatePositions(vector<Character*>* arr, int pos)
@@ -1262,19 +1256,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			app->render->TextDraw(effecto_C.GetString(), 480, 550, 18);
 			
 			//Description
-			/*vector<SString> texts;
-			int max_chars_line = 40;
-			app->render->SplitText(skillPoint->description.GetString(), &texts, 15, max_chars_line);
-
-			size_t lines = texts.size();
-			for (size_t i = 0; i < lines; i++)
-			{
-				app->render->TextDraw(texts.at(i).GetString(), 55, 620 + 20 * i, 20 - lines * 1.5);
-			}
-			texts.clear();
-			texts.shrink_to_fit();*/
-
-			app->render->TextDraw(skillPoint->description.GetString(), 55, 620, 15);
+			app->render->RenderTrimmedText(55, 620, 5, skillPoint->description.GetString(), &auxTexts, 15, 90);
 		}
 	}
 

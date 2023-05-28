@@ -6,6 +6,7 @@
 #include "Point.h"
 #include "SString.h"
 #include <vector>
+#include <array>
 
 #include "SDL/include/SDL.h"
 #include "SDL_ttf/include/SDL_ttf.h"
@@ -56,7 +57,7 @@ public:
 	bool TextDraw(const char* text, int x, int y, int size, Font font = Font::UI, SDL_Color color = { 0, 0, 0 });
 	// Text to split, vector to store trimmed text, fontsize, max characters in line
 	void SplitText(SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_);
-
+	void RenderTrimmedText(int x, int y, int offset, SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_, float fontOffset = 0);
 
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);
@@ -82,6 +83,8 @@ public:
 
 private:
 	Uint32 flags = SDL_RENDERER_ACCELERATED;
+
+	array <char, 6> arr = {' ', '.', ',', '?', '!', '\n'};
 };
 
 #endif // __RENDER_H__

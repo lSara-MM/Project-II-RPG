@@ -391,7 +391,7 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::SWAP_SKILL:
 				break;
 			case ButtonType::COMBAT_TARGET:
-				render->DrawTexture(buttonTex, bounds.x, bounds.y+bounds.h+7, &rect);
+				render->DrawTexture(buttonTex, bounds.x, bounds.y + bounds.h + 7, &rect);
 				break;
 			case ButtonType::SKILL_1:
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
@@ -677,27 +677,15 @@ bool GuiButton::Draw(Render* render)
 			offsetX = fontSize / 2;
 
 			x = offsetX;
-			y = offsetX / 2;
-
-			// TO TEST
-			vector<SString> texts;
 			int max_chars_line = fontSize * 2;
-			app->render->SplitText(text, &texts, fontSize, max_chars_line);
 
-			size_t lines = texts.size();
-			for (size_t i = 0; i < lines; i++)
-			{
-				app->render->TextDraw(texts.at(i).GetString(), bounds.x + x, bounds.y + y + (fontSize + 3) * i, fontSize - lines * 1.5);
-			}
-			texts.clear();
-			texts.shrink_to_fit();
+			app->render->RenderTrimmedText(bounds.x + offsetX, bounds.y + offsetX / 2, 2, text, &texts, fontSize, max_chars_line, 1.5f);
 		}
 		else
 		{
 			app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
 		}
 	}
-
 	return false;
 }
 

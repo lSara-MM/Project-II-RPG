@@ -63,7 +63,7 @@
 		    <choice id="1" option="Talk me about this place." nextNode="2" eventReturn="0"/>
 		    <choice id="2" option="Talk me about The Showman." nextNode="3" eventReturn="0"/>
 		    <choice id="3" option="There are oracles everywhere. What is the deal with that?" nextNode="6" eventReturn="0"/>
-		    <choice id="4" option="Show me where can I train my abilities." nextNode="8" eventReturn="0"/>
+		    <choice id="4" option="Is there somewhere to train my abilities?" nextNode="8" eventReturn="0"/>
 		    <choice id="5" option="Bye" nextNode="-1" eventReturn="0"/>
 	    </node>
 
@@ -85,7 +85,7 @@
 
 	    <node id="4" name="NIKITA" text="That's so exciting! There are attractions of all kinds. A house of terror that becomes the house of mirrors, a carousel, a Ferris wheel, the circus where the Showman lives and much more. You will surely have a great time. You will see! You will see! You will see!">
 		    <choice id="0" option="Sure" nextNode="0" eventReturn="0"/>
-		    <choice id="1" option="Yeah well... I can't wait to see that..." nextNode="-1" eventReturn="0"/>
+		    <choice id="1" option="Yeah well... I can't wait to see that..." nextNode="0" eventReturn="0"/>
 	    </node>
 
 	    <node id="5" name="NIKITA" text="Well, maybe they do. Just in case, go practicing your powers.">

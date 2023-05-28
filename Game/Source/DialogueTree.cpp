@@ -44,7 +44,7 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 	size_t lines = activeNode->texts.size();
 	for (size_t i = 0; i < lines; i++)
 	{
-		app->render->TextDraw(activeNode->texts[i].GetString(), pos.x + 100, pos.y + 50 + (FONT_SIZE + 10) * i, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw(activeNode->texts.at(i).GetString(), pos.x + 100, pos.y + 50 + (FONT_SIZE + 10) * i, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
 	}
 
 	EventReturn(mod, pos);
@@ -63,7 +63,7 @@ bool DialogueTree::UpdateNodes(Module* mod, iPoint pos)
 
 	for (int i = 0; i < activeNode->choicesList.size(); i++)
 	{
-		const char* ch_option = activeNode->choicesList[i]->text.GetString();	// SString to const char*	
+		const char* ch_option = activeNode->choicesList.at(i)->text.GetString();	// SString to const char*	
 		int w = FONT_SIZE * 20;
 		int h = FONT_SIZE * 2.5;
 		SDL_Rect bounds = { app->win->GetWidth() - w, pos.y - (h + FONT_SIZE) * (i + 1), w, h};
