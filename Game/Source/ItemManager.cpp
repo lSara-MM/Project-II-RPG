@@ -153,6 +153,10 @@ void ItemManager::MinusQuantity(ItemNode* item)
 			{
 				item->equiped = !item->equiped;
 			}
+			else if (item->type == 4)
+			{
+				item->quantity--;
+			}
 			UseItem(item);
 		}
 	}
@@ -219,7 +223,7 @@ void ItemManager::UseItem(ItemNode* item)
 		}
 	}
 
-	if (item->quantity < 0)
+	if (item->quantity <= 0)
 	{
 		item->CleanUp();
 	}

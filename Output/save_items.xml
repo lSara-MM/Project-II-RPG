@@ -88,7 +88,7 @@
 		<item name="S_titanium_steel" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Potion" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Max_Potion" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="Max_Res" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="Max_Armor" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Attack_Potion" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Crit_Prob_Potion" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Crit_Dmg_Potion" quantity="0" equiped="false" space="0" whom="0" />
