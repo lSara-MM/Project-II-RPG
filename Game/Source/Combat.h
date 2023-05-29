@@ -90,6 +90,7 @@ public:
 
 	// buttons
 	List<GuiButton*> listButtons;
+
 private:
 
 	bool isMoving;
@@ -99,6 +100,8 @@ private:
 	float mouse_Speed;
 
 	pugi::xml_node combatNode;
+
+	vector<SString> auxTexts;
 
 	//Fondo
 	const char* texturePathBackground;

@@ -454,8 +454,7 @@ bool Character::CleanUp()
 	if(texture != nullptr)
 		app->tex->UnLoad(texture);
 
-	delete button;
-	button = nullptr;
+	app->guiManager->DestroyGuiControl(button);
 	
 	return true;
 }

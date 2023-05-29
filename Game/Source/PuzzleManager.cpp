@@ -631,6 +631,8 @@ bool PuzzleManager::Rescue()
 				bossInvent = true;
 				app->audio->PlayFx(confirmInteractfx);
 
+				app->itemManager->AddQuantity(5, 1);
+
 				if (Boss->body != nullptr)
 					Boss->body->GetWorld()->DestroyBody(Boss->body);
 
@@ -649,6 +651,14 @@ bool PuzzleManager::Rescue()
 
 				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 				{
+					for (int i=0; i< app->itemManager->nodeList.size(); i++)
+					{
+						if (app->itemManager->nodeList[i]->ID == 5)
+						{
+							app->itemManager->MinusQuantity(app->itemManager->nodeList[i]);
+						}
+					}
+
 					if (door != nullptr)
 						app->tex->UnLoad(door);
 

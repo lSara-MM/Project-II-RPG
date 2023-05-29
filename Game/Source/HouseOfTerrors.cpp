@@ -21,6 +21,7 @@
 #include "Map.h"
 #include "Pathfinding.h"
 #include "ItemManager.h"
+#include "LootManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -67,6 +68,8 @@ bool HouseOfTerrors::Start()
 	app->physics->collisions = false;
 	//Load Map
 	app->map->Load(1);
+
+	app->lootManager->Start();
 
 	DarkestDungeon = app->tex->Load(texturePathDarkestDungeon);
 

@@ -42,6 +42,8 @@ private:
 
 	float point;
 	int offset;
+
+	vector<SString> texts;
 };
 
 #endif // __GUIBUTTON_H__

@@ -315,9 +315,15 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 {
 	string line = text_.GetString();
 
+	for (int i = 0; i < pTexts->size(); i++)
+	{
+		pTexts->at(i).Clear();
+	}
+
 	if (text_.Length() > max_chars_line_)
 	{
 		int a, b, startIndex = 0;
+		int n = line.length() / max_chars_line_;
 		for (int j = 0; j <= line.length() / max_chars_line_; j++)	// <= -> in case of decimal, get the round up number 
 		{
 			a = max_chars_line_ + startIndex;
@@ -326,30 +332,20 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 				a = line.size() - startIndex;
 			}
 
-			b = line.find_first_of(" ", a);	// find first " " (space) from last trimmed to the end. 
-
-			if (b == -1)
+			if (a > 0)
 			{
-				b = line.find_first_of(".", a);
-				
-				if (b == -1)
+				int i = 0;
+				do
 				{
-					b = line.find_first_of("?", a);
-					
-					if (b == -1)
-					{
-						b = line.find_first_of(")", a);
-					}
-				}
+					b = line.find_first_of(arr.at(i++), a);
+				} while (b == -1 && a < line.length());
+
+				// If we reached the end of the word or the end of the input.
+				string temp;
+				temp.append(line, startIndex, ++b - startIndex);	// string text to append, int index start, int size of text to append
+				pTexts->push_back(temp.c_str());
+				startIndex = b;
 			}
-
-			b++;
-
-			// If we reached the end of the word or the end of the input.
-			string temp;
-			temp.append(line, startIndex, b - startIndex);	// string text to append, int index start, int size of text to append
-			pTexts->push_back(temp.c_str());
-			startIndex = b;
 		}
 	}
 	else
@@ -358,7 +354,27 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 	}
 }
 
+void Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_, float fontOffset)
+{
+	SplitText(text, pTexts, fontSize_, max_chars_line_);
 
+	int lines = pTexts->size();
+	if (fontOffset > 0) { fontSize_ = fontSize_ - lines * fontOffset; }
+
+
+	for (int i = 0; i < lines; i++)
+	{
+		TextDraw(pTexts->at(i).GetString(), x, y + (fontSize_ + offset) * i, fontSize_);
+	}
+
+	for (int i = 0; i < pTexts->size(); i++)
+	{
+		pTexts->at(i).Clear();
+	}
+
+	pTexts->clear();
+	pTexts->shrink_to_fit();
+}
 
 bool Render::VSyncOn()
 {
