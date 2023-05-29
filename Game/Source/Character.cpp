@@ -519,7 +519,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		}
 		else
 		{
-			if(CalculateRandomProbability(skill->bonusAccuracy + caster->GetStat(EffectType::ACCURACY), defender->GetStat(EffectType::RES)))
+			if(CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY)*(skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 			{
 				defender->listStatusEffects.Add(statusEffect);
 			}
@@ -528,7 +528,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 	}
 	else //Es un ataque 
 	{
-		if (!CalculateRandomProbability(skill->bonusAccuracy + caster->GetStat(EffectType::ACCURACY), defender->GetStat(EffectType::DODGE)))
+		if (!CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::DODGE)))
 		{
 			//Enemigo esquiva
 			return 0;
@@ -537,10 +537,10 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		{
 			int damage;
 			damage = skill->multiplierDmg * caster->GetStat(EffectType::ATTACK);
-			if (CalculateRandomProbability(skill->bonusCritRate + caster->GetStat(EffectType::CRIT_RATE))) //Si true hay critico
+			if (CalculateRandomProbability(caster->GetStatModifier(EffectType::CRIT_RATE) * (skill->bonusCritRate + caster->critRate))) //Si true hay critico
 			{
 				//El daño critico es mas potente
-				damage *= ( 100 + 2*(skill->bonusCritDamage + caster->GetStat(EffectType::CRIT_DMG)) ) / 100;
+				damage *= ( 100 + 2*(caster->GetStatModifier(EffectType::CRIT_DMG) * (skill->bonusCritDamage + caster->critDamage)) ) / 100;
 			}
 
 			if (skill->positiveEffect) //Efecto de estado positivo
@@ -549,7 +549,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			}
 			else
 			{
-				if (CalculateRandomProbability(skill->bonusAccuracy + caster->GetStat(EffectType::ACCURACY), defender->GetStat(EffectType::RES)))
+				if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 				{
 					defender->listStatusEffects.Add(statusEffect);
 				}
