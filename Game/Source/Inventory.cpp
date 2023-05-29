@@ -69,19 +69,37 @@ bool Inventory::Update(float dt)
 		y = 148;
 	}
 
-	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
 	{
 		if (cap == x)
 		{
 			y += 42;
 			x = 0;
 		}
-		app->itemManager->LoadQuantity(x, y, i);
-		if (app->itemManager->nodeList[i]->equiped == false)
+		app->itemManager->LoadQuantity(x, y, app->itemManager->armorItems[i]);
+		if (app->itemManager->armorItems[i]->equiped == false)
 		{
-			if (app->itemManager->nodeList[i]->quantity > 0)
+			x++;
+		}
+	}
+	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+	{
+		if (app->itemManager->nodeList[i]->type != 2)
+		{
+			if (cap == x)
 			{
-				x++;
+				y += 42;
+				x = 0;
+			}
+
+			app->itemManager->LoadQuantity(x, y, app->itemManager->nodeList[i]);
+
+			if (app->itemManager->nodeList[i]->equiped == false)
+			{
+				if (app->itemManager->nodeList[i]->quantity > 0)
+				{
+					x++;
+				}
 			}
 		}
 	}
@@ -155,6 +173,13 @@ bool Inventory::CleanUp()
 			app->itemManager->nodeList[i]->CleanUp();
 		}
 	}
+	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+	{
+		if (app->itemManager->armorItems[i]->button != nullptr && app->itemManager->armorItems[i]->quantity > 0)
+		{
+			app->itemManager->armorItems[i]->CleanUp();
+		}
+	}
 
 	for (int i = 0; i <= 3; i++)
 	{
@@ -174,45 +199,52 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 		{
 			if (app->itemManager->nodeList[i]->type == 3 && app->itemManager->nodeList[i]->type == 1) break;
 
-			app->itemManager->nodeList[i]->whom = app->itemManager->invPos;
+			app->itemManager->MinusQuantity(app->itemManager->nodeList[i]);
+		}
+	}
+	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+	{
+		if (app->itemManager->armorItems[i]->ID == control->id)
+		{
+			app->itemManager->armorItems[i]->whom = app->itemManager->invPos;
 
-			for (size_t j = 0; j < app->itemManager->nodeList.size(); j++)
+			for (size_t j = 0; j < app->itemManager->armorItems.size(); j++)
 			{
-				if (app->itemManager->nodeList[j]->type == app->itemManager->nodeList[i]->type)
+				if (app->itemManager->armorItems[j]->type == app->itemManager->armorItems[i]->type)
 				{
-					if (app->itemManager->nodeList[j]->kind == app->itemManager->nodeList[i]->kind)
+					if (app->itemManager->armorItems[j]->kind == app->itemManager->armorItems[i]->kind)
 					{
-						if (app->itemManager->nodeList[j]->equiped)
+						if (app->itemManager->armorItems[j]->equiped)
 						{
-							if (j!=i)
+							if (j != i)
 							{
-								if (app->itemManager->nodeList[j]->kind == 5 || app->itemManager->nodeList[j]->kind == 6)
+								if (app->itemManager->armorItems[j]->kind == 5 || app->itemManager->armorItems[j]->kind == 6)
 								{
-									if (app->itemManager->nodeList[i]->whom == app->itemManager->nodeList[j]->whom)
+									if (app->itemManager->armorItems[i]->whom == app->itemManager->armorItems[j]->whom)
 									{
-										app->itemManager->nodeList[i]->space = 2;
-										for (size_t p = 0; p < app->itemManager->nodeList.size(); p++)
+										app->itemManager->armorItems[i]->space = 2;
+										for (size_t p = 0; p < app->itemManager->armorItems.size(); p++)
 										{
-											if (app->itemManager->nodeList[i]->whom == app->itemManager->nodeList[p]->whom && app->itemManager->nodeList[j]->whom == app->itemManager->nodeList[p]->whom)
+											if (app->itemManager->armorItems[i]->whom == app->itemManager->armorItems[p]->whom && app->itemManager->armorItems[j]->whom == app->itemManager->armorItems[p]->whom)
 											{
-												if (app->itemManager->nodeList[p]->space > 0)
+												if (app->itemManager->armorItems[p]->space > 0)
 												{
-													if (app->itemManager->nodeList[j]->kind == app->itemManager->nodeList[p]->kind)
+													if (app->itemManager->armorItems[j]->kind == app->itemManager->armorItems[p]->kind)
 													{
 														if (p != j && p != i)
 														{
-															if (app->itemManager->nodeList[j]->space == 1)
+															if (app->itemManager->armorItems[j]->space == 1)
 															{
-																app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->ID);
-																app->itemManager->nodeList[i]->space = 1;
-																app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->ID);
+																app->itemManager->MinusQuantity(app->itemManager->armorItems[j]);
+																app->itemManager->armorItems[i]->space = 1;
+																app->itemManager->MinusQuantity(app->itemManager->armorItems[i]);
 																break;
 															}
 															else
 															{
-																app->itemManager->MinusQuantity(app->itemManager->nodeList[p]->ID);
-																app->itemManager->nodeList[i]->space = 1;
-																app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->ID);
+																app->itemManager->MinusQuantity(app->itemManager->armorItems[p]);
+																app->itemManager->armorItems[i]->space = 1;
+																app->itemManager->MinusQuantity(app->itemManager->armorItems[i]);
 																break;
 															}
 														}
@@ -225,9 +257,9 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 								else
 								{
 									//Si es armadura
-									if (app->itemManager->nodeList[i]->whom == app->itemManager->nodeList[j]->whom)
+									if (app->itemManager->armorItems[i]->whom == app->itemManager->armorItems[j]->whom)
 									{
-										app->itemManager->MinusQuantity(app->itemManager->nodeList[j]->ID);
+										app->itemManager->MinusQuantity(app->itemManager->armorItems[j]);
 									}
 								}
 							}
@@ -235,11 +267,11 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 					}
 				}
 			}
-			if ((app->itemManager->nodeList[i]->kind == 5 || app->itemManager->nodeList[i]->kind == 6) && app->itemManager->nodeList[i]->space == 0)
+			if ((app->itemManager->armorItems[i]->kind == 5 || app->itemManager->armorItems[i]->kind == 6) && app->itemManager->armorItems[i]->space == 0)
 			{
-				app->itemManager->nodeList[i]->space = 1;
+				app->itemManager->armorItems[i]->space = 1;
 			}
-			app->itemManager->MinusQuantity(app->itemManager->nodeList[i]->ID);
+			app->itemManager->MinusQuantity(app->itemManager->armorItems[i]);
 		}
 	}
 	switch (control->id)

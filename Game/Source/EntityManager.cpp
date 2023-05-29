@@ -233,7 +233,7 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 	//app->scene->isCharacterLoaded_B = false;
  
 	app->combat->SaveCombat();
-	app->itemManager->SaveItemState();
+	//app->itemManager->SaveItemState();
 	//app->questManager->SaveState();
 
 	return true;

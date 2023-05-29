@@ -58,13 +58,21 @@ bool ItemManager::CleanUp()
 
 	for (size_t i = 0; i < nodeList.size(); i++)
 	{
-		if (nodeList[i]->quantity > 0 && nodeList[i]->quantity > 0)
+		if (nodeList[i]->quantity > 0 && nodeList[i]->button != nullptr)
 		{
 			nodeList[i]->CleanUp();
 		}
 	}
+	for (size_t i = 0; i < armorItems.size(); i++)
+	{
+		if (armorItems[i]->quantity > 0 && armorItems[i]->button != nullptr)
+		{
+			armorItems[i]->CleanUp();
+		}
+	}
 
 	nodeList.clear();
+	armorItems.clear();
 
 	for (int i = 0; i < arrParty.size(); i++)
 	{
@@ -119,45 +127,33 @@ void ItemManager::AddQuantity(int id, int quantity)
 	}
 }
 
-void ItemManager::MinusQuantity(int id)
+void ItemManager::MinusQuantity(ItemNode* item)
 {
 	if (app->combat->active)
 	{
 		if (app->combat->listInitiative[app->combat->charaInTurn]->charaType == CharacterType::ALLY)
 		{
-			for (size_t i = 0; i < nodeList.size(); i++)
+
+			if (item->quantity > 0)
 			{
-				if (nodeList[i]->ID == id && nodeList[i]->quantity > 0)
+				if (item->type == 1)
 				{
-					if (nodeList[i]->type != 2)
-					{
-						nodeList[i]->quantity--;
-					}
-					else
-					{
-						nodeList[i]->equiped = !nodeList[i]->equiped;
-					}
-					UseItem(nodeList[i]);
+					item->quantity--;
 				}
+				UseItem(item);
 			}
+			
 		}
 	}
 	else
 	{
-		for (size_t i = 0; i < nodeList.size(); i++)
+		if (item->quantity > 0)
 		{
-			if (nodeList[i]->ID == id && nodeList[i]->quantity > 0)
+			if (item->type == 2)
 			{
-				if (nodeList[i]->type != 2)
-				{
-					nodeList[i]->quantity--;
-				}
-				else
-				{
-					nodeList[i]->equiped = !nodeList[i]->equiped;
-				}
-				UseItem(nodeList[i]);
+				item->equiped = !item->equiped;
 			}
+			UseItem(item);
 		}
 	}
 }
@@ -207,14 +203,6 @@ void ItemManager::UseItem(ItemNode* item)
 					if (item->space > 0)
 					{
 						item->space = 0;
-					}
-				}
-
-				if (item->type == 1)
-				{
-					if (item->kind == 1)
-					{
-						arrParty.at(i)->currentHp += item->hp;
 					}
 				}
 
@@ -272,49 +260,100 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 
 		nodeList.push_back(node);
 	}
+	LoadArmorItmes();
 	LoadItemState(xml_trees);
 }
 
-
-void ItemManager::LoadQuantity(int x, int y, int i)
+void ItemManager::LoadArmorItmes()
 {
-	SDL_Rect seccion = { 64 * nodeList[i]->position.x, 64 * nodeList[i]->position.y, 64, 64 };
+	armorItems.clear();
 
-	if (nodeList[i]->quantity > 0)
+	for (int i = 0; i < nodeList.size(); i++)
+	{
+		if (nodeList[i]->type == 2)
+		{
+			for(int j=0; j<nodeList[i]->quantity; j++)
+			{ 
+				ItemNode* node = new ItemNode;
+				node->ID = nodeList[i]->ID;
+				node->quantity = nodeList[i]->quantity;
+				node->position.x = nodeList[i]->position.x;
+				node->position.y = nodeList[i]->position.y;
+				node->type = nodeList[i]->type;
+				node->name = nodeList[i]->name;
+				node->kind = nodeList[i]->kind;
+
+				if (node->kind == 5 || node->kind == 6)
+				{
+					node->space = nodeList[i]->space;
+				}
+
+				node->hp = nodeList[i]->hp;
+				node->maxhp = nodeList[i]->maxhp;
+				node->attack = nodeList[i]->attack;
+				node->critRate = nodeList[i]->critRate;
+				node->critDamage = nodeList[i]->critDamage;
+				node->accuracy = nodeList[i]->accuracy;
+				node->armor = nodeList[i]->armor;
+				node->dodge = nodeList[i]->dodge;
+				node->res = nodeList[i]->res;
+				node->speed = nodeList[i]->speed;
+				node->equiped = nodeList[i]->equiped;
+
+				node->max = nodeList[i]->max;
+
+				armorItems.push_back(node);
+			}
+		}
+	}
+	for (int i = 0; i < armorItems.size(); i++)
+	{
+		armorItems[i]->ID = 200 + i;
+	}
+}
+
+void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
+{
+	SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
+
+	if (item->quantity > 0)
 	{
 		if (app->combat->active)
 		{
 
-			if (nodeList[i]->type == 1)
+			if (item->type == 1)
 			{
-				LoadButtons(x, y, i);
+				LoadButtons(x, y, item);
 
 				app->render->DrawTexture(itemsTexture, (720 + 42 * x) - app->render->camera.x, y - app->render->camera.y, &seccion);
 
-				string c = to_string(nodeList[i]->quantity);
+				string c = to_string(item->quantity);
 				app->render->TextDraw(c.c_str(), (720 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
 
 			}
 		}
 		else
 		{
-			if (nodeList[i]->equiped && nodeList[i]->whom != invPos)
+			if (item->equiped && item->whom != invPos)
 			{
-				nodeList[i]->CleanUp();
+				item->CleanUp();
 			}
 
-			LoadButtons(x, y, i);
+			LoadButtons(x, y, item);
 
-			if (nodeList[i]->equiped == false)
+			if (item->equiped == false)
 			{
 				app->render->DrawTexture(itemsTexture, (680 + 42 * x) - app->render->camera.x, y - app->render->camera.y, &seccion);
 
-				string c = to_string(nodeList[i]->quantity);
-				app->render->TextDraw(c.c_str(), (680 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
+				if (item->type != 2)
+				{
+					string c = to_string(item->quantity);
+					app->render->TextDraw(c.c_str(), (680 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
+				}
 			}
-			else if (nodeList[i]->equiped && nodeList[i]->whom == invPos)
+			else if (item->equiped && item->whom == invPos)
 			{
-				switch (nodeList[i]->kind)
+				switch (item->kind)
 				{
 				case 1:
 					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 295 - app->render->camera.y, &seccion);
@@ -329,7 +368,7 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 195 - app->render->camera.y, &seccion);
 					break;
 				case 5:
-					if (nodeList[i]->space == 1)
+					if (item->space == 1)
 					{
 						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 185 - app->render->camera.y, &seccion);
 					}
@@ -339,7 +378,7 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 					}
 					break;
 				case 6:
-					if (nodeList[i]->space == 1)
+					if (item->space == 1)
 					{
 						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
 					}
@@ -353,7 +392,7 @@ void ItemManager::LoadQuantity(int x, int y, int i)
 	}
 }
 
-void ItemManager::LoadButtons(int x, int y, int ID)
+void ItemManager::LoadButtons(int x, int y, ItemNode* item)
 {
 
 	SDL_Rect buttonBounds;
@@ -363,25 +402,25 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 	{
 		buttonBounds = { (720 + 42 * x), y, 40, 40 };
 
-		if (nodeList[ID]->button != nullptr)
+		if (item->button != nullptr)
 		{}else
 		{ 
-			nodeList[ID]->Start();
+			item->Start();
 		}
 	}
 	else
 	{
-		if (nodeList[ID]->button != nullptr || (nodeList[ID]->equiped && nodeList[ID]->whom != invPos))
+		if (item->button != nullptr || (item->equiped && item->whom != invPos))
 		{
 		}
 		else
 		{
-			nodeList[ID]->Start();
+			item->Start();
 		}
 
-		if (nodeList[ID]->equiped)
+		if (item->equiped)
 		{
-			switch (nodeList[ID]->kind)
+			switch (item->kind)
 			{
 			case 1:
 				buttonBounds = { (218 + 52), 295, 32, 32 };
@@ -396,7 +435,7 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 				buttonBounds = { (218 + 52), 195, 32, 32 };
 				break;
 			case 5:
-				if (nodeList[ID]->space == 1)
+				if (item->space == 1)
 				{
 					buttonBounds = { (510 + 52), 185, 32, 32 };
 				}
@@ -406,7 +445,7 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 				}
 				break;
 			case 6:
-				if (nodeList[ID]->space == 1)
+				if (item->space == 1)
 				{
 					buttonBounds = { (510 + 52), 300, 32, 32 };
 				}
@@ -419,10 +458,10 @@ void ItemManager::LoadButtons(int x, int y, int ID)
 		}
 	}
 
-	if (nodeList[ID]->button != nullptr)
+	if (item->button != nullptr)
 	{
-		nodeList[ID]->button->bounds = buttonBounds;
-		nodeList[ID]->button->id = nodeList[ID]->ID;
+		item->button->bounds = buttonBounds;
+		item->button->id = item->ID;
 	}
 }
 
@@ -435,6 +474,7 @@ bool ItemManager::SaveItemState()
 
 	pugi::xml_node items = node.append_child("items");
 	pugi::xml_node item;
+	pugi::xml_node armor;
 
 	// save items
 	for (int i = 0; i < nodeList.size(); i++)
@@ -445,6 +485,17 @@ bool ItemManager::SaveItemState()
 		item.append_attribute("equiped") = nodeList[i]->equiped;
 		item.append_attribute("space") = nodeList[i]->space;
 		item.append_attribute("whom") = nodeList[i]->whom;
+	}
+
+	// save items
+	for (int i = 0; i < armorItems.size(); i++)
+	{
+		armor = items.append_child("armor");
+		armor.append_attribute("name") = armorItems[i]->name.GetString();
+		armor.append_attribute("quantity") = armorItems[i]->quantity;
+		armor.append_attribute("equiped") = armorItems[i]->equiped;
+		armor.append_attribute("space") = armorItems[i]->space;
+		armor.append_attribute("whom") = armorItems[i]->whom;
 	}
 
 	ret = saveDoc->save_file("save_items.xml");
@@ -471,6 +522,25 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 				nodeList[i]->space = pugiNode.attribute("space").as_bool();
 				nodeList[i]->whom = pugiNode.attribute("whom").as_bool();
 				if (nodeList[i]->equiped)
+				{
+					UseItem(nodeList[i]);
+				}
+			}
+		}
+	}
+
+	//Load items
+	for (pugi::xml_node pugiNode = items.first_child().first_child().first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("armor"))
+	{
+		for (size_t i = 0; i < armorItems.size(); i++)
+		{
+			if (strcmp(pugiNode.attribute("name").as_string(), armorItems[i]->name.GetString()) == 0)
+			{
+				armorItems[i]->quantity = pugiNode.attribute("quantity").as_int();
+				armorItems[i]->equiped = pugiNode.attribute("equiped").as_bool();
+				armorItems[i]->space = pugiNode.attribute("space").as_bool();
+				armorItems[i]->whom = pugiNode.attribute("whom").as_bool();
+				if (armorItems[i]->equiped)
 				{
 					UseItem(nodeList[i]);
 				}

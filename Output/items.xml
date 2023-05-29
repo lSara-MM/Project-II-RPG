@@ -25,331 +25,331 @@ type 2
 
 <items>
 
-	<item id="0" quantity="0" name="C_wood" type="2" kind="5" space="0" x="0" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="0" quantity="0" name="C_wood" type="2" kind="5" space="0" x="0" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="1" quantity="0" name="C_copper" type="2" kind="5" space="0" x="0" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="1" quantity="0" name="C_copper" type="2" kind="5" space="0" x="0" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="2" quantity="0" name="C_iron" type="2" kind="5" space="0" x="0" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="2" quantity="0" name="C_iron" type="2" kind="5" space="0" x="0" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="3" quantity="0" name="C_steel" type="2" kind="5" space="0" x="0" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="3" quantity="0" name="C_steel" type="2" kind="5" space="0" x="0" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="4" quantity="0" name="C_titanium" type="2" kind="5" space="0" x="0" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="4" quantity="0" name="C_titanium" type="2" kind="5" space="0" x="0" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="5" quantity="0" name="Head" type="2" kind="1" space="0" x="0" y="5" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="5" quantity="0" name="Head" type="2" kind="1" space="0" x="0" y="5" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="6" quantity="0" name="R_wood" type="2" kind="6" space="0" x="1" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="6" quantity="0" name="R_wood" type="2" kind="6" space="0" x="1" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="7" quantity="0" name="R_copper" type="2" kind="6" space="0" x="1" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="7" quantity="0" name="R_copper" type="2" kind="6" space="0" x="1" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="8" quantity="0" name="R_iron" type="2" kind="6" space="0" x="1" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="8" quantity="0" name="R_iron" type="2" kind="6" space="0" x="1" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="9" quantity="0" name="R_steel" type="2" kind="6" space="0" x="1" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="9" quantity="0" name="R_steel" type="2" kind="6" space="0" x="1" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="10" quantity="0" name="R_titanium" type="2" kind="6" space="0" x="1" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="10" quantity="0" name="R_titanium" type="2" kind="6" space="0" x="1" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="11" quantity="0" name="H_straw" type="2" kind="4" x="2" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="11" quantity="0" name="H_straw" type="2" kind="4" x="2" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="12" quantity="0" name="H_leather" type="2" kind="4" x="2" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="12" quantity="0" name="H_leather" type="2" kind="4" x="2" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="13" quantity="0" name="H_leather_copper" type="2" kind="4" x="2" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="13" quantity="0" name="H_leather_copper" type="2" kind="4" x="2" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="14" quantity="0" name="H_leather_iron" type="2" kind="4" x="2" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="14" quantity="0" name="H_leather_iron" type="2" kind="4" x="2" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="15" quantity="0" name="H_leather_steel" type="2" kind="4" x="2" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="15" quantity="0" name="H_leather_steel" type="2" kind="4" x="2" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="16" quantity="0" name="H_leather_titanium" type="2" kind="4" x="2" y="5" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="16" quantity="0" name="H_leather_titanium" type="2" kind="4" x="2" y="5" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="17" quantity="0" name="H_copper_copper" type="2" kind="4" x="2" y="6" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="17" quantity="0" name="H_copper_copper" type="2" kind="4" x="2" y="6" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="18" quantity="0" name="H_copper_iron" type="2" kind="4" x="2" y="7" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="18" quantity="0" name="H_copper_iron" type="2" kind="4" x="2" y="7" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="19" quantity="0" name="H_copper_steel" type="2" kind="4" x="2" y="8" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="19" quantity="0" name="H_copper_steel" type="2" kind="4" x="2" y="8" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="20" quantity="0" name="H_copper_titanium" type="2" kind="4" x="2" y="9" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="20" quantity="0" name="H_copper_titanium" type="2" kind="4" x="2" y="9" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="21" quantity="0" name="H_iron_iron" type="2" kind="4" x="2" y="10" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="21" quantity="0" name="H_iron_iron" type="2" kind="4" x="2" y="10" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="22" quantity="0" name="H_iron_iron" type="2" kind="4" x="2" y="11" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="22" quantity="0" name="H_iron_iron" type="2" kind="4" x="2" y="11" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="23" quantity="0" name="H_iron_steel" type="2" kind="4" x="2" y="12" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="23" quantity="0" name="H_iron_steel" type="2" kind="4" x="2" y="12" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="24" quantity="0" name="H_iron_titanium" type="2" kind="4" x="2" y="13" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="24" quantity="0" name="H_iron_titanium" type="2" kind="4" x="2" y="13" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="25" quantity="0" name="H_steel_steel" type="2" kind="4" x="2" y="14" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="25" quantity="0" name="H_steel_steel" type="2" kind="4" x="2" y="14" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="26" quantity="0" name="H_steel_steel" type="2" kind="4" x="2" y="15" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="26" quantity="0" name="H_steel_steel" type="2" kind="4" x="2" y="15" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="27" quantity="0" name="H_titanium_steel" type="2" kind="4" x="2" y="16" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="27" quantity="0" name="H_titanium_steel" type="2" kind="4" x="2" y="16" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="28" quantity="0" name="H_titanium_titanium" type="2" kind="4" x="2" y="17" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="28" quantity="0" name="H_titanium_titanium" type="2" kind="4" x="2" y="17" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="29" quantity="0" name="CP_leather" type="2" kind="2" x="3" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="29" quantity="0" name="CP_leather" type="2" kind="2" x="3" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="30" quantity="0" name="CP_leather_copper" type="2" kind="2" x="3" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="30" quantity="0" name="CP_leather_copper" type="2" kind="2" x="3" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="31" quantity="0" name="CP_leather_iron" type="2" kind="2" x="3" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="31" quantity="0" name="CP_leather_iron" type="2" kind="2" x="3" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="32" quantity="0" name="CP_leather_steel" type="2" kind="2" x="3" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="32" quantity="0" name="CP_leather_steel" type="2" kind="2" x="3" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="33" quantity="0" name="CP_leather_titanium" type="2" kind="2" x="3" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="33" quantity="0" name="CP_leather_titanium" type="2" kind="2" x="3" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="34" quantity="0" name="CP_wood" type="2" kind="2" x="3" y="5" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="34" quantity="0" name="CP_wood" type="2" kind="2" x="3" y="5" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="35" quantity="0" name="CP_wood_copper" type="2" kind="2" x="3" y="6" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="35" quantity="0" name="CP_wood_copper" type="2" kind="2" x="3" y="6" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>	
-	<item id="36" quantity="0" name="CP_wood_iron" type="2" kind="2" x="3" y="7" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="36" quantity="0" name="CP_wood_iron" type="2" kind="2" x="3" y="7" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="37" quantity="0" name="CP_wood_steel" type="2" kind="2" x="3" y="8" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="37" quantity="0" name="CP_wood_steel" type="2" kind="2" x="3" y="8" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="38" quantity="0" name="CP_wood_titanium" type="2" kind="2" x="3" y="9" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="38" quantity="0" name="CP_wood_titanium" type="2" kind="2" x="3" y="9" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="39" quantity="0" name="CP_wood_straw" type="2" kind="2" x="3" y="10" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="39" quantity="0" name="CP_wood_straw" type="2" kind="2" x="3" y="10" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="40" quantity="0" name="CP_copper_copper" type="2" kind="2" x="3" y="11" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="40" quantity="0" name="CP_copper_copper" type="2" kind="2" x="3" y="11" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="41" quantity="0" name="CP_copper_iron" type="2" kind="2" x="3" y="12" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="41" quantity="0" name="CP_copper_iron" type="2" kind="2" x="3" y="12" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="42" quantity="0" name="CP_copper_steel" type="2" kind="2" x="3" y="13" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="42" quantity="0" name="CP_copper_steel" type="2" kind="2" x="3" y="13" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="43" quantity="0" name="CP_copper_titanium" type="2" kind="2" x="3" y="14" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="43" quantity="0" name="CP_copper_titanium" type="2" kind="2" x="3" y="14" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="44" quantity="0" name="CP_copper_titanium" type="2" kind="2" x="3" y="15" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="44" quantity="0" name="CP_copper_titanium" type="2" kind="2" x="3" y="15" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="45" quantity="0" name="CP_iron_iron" type="2" kind="2" x="3" y="16" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="45" quantity="0" name="CP_iron_iron" type="2" kind="2" x="3" y="16" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="46" quantity="0" name="CP_iron_steel" type="2" kind="2" x="3" y="17" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="46" quantity="0" name="CP_iron_steel" type="2" kind="2" x="3" y="17" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="47" quantity="0" name="CP_iron_titanium" type="2" kind="2" x="3" y="18" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="47" quantity="0" name="CP_iron_titanium" type="2" kind="2" x="3" y="18" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="48" quantity="0" name="CP_steel_steel" type="2" kind="2" x="3" y="19" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="48" quantity="0" name="CP_steel_steel" type="2" kind="2" x="3" y="19" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="49" quantity="0" name="CP_titanium_titanium" type="2" kind="2" x="3" y="20" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="49" quantity="0" name="CP_titanium_titanium" type="2" kind="2" x="3" y="20" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="50" quantity="0" name="CP_titanium_steel" type="2" kind="2" x="3" y="21" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="50" quantity="0" name="CP_titanium_steel" type="2" kind="2" x="3" y="21" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="51" quantity="0" name="L_leather" type="2" kind="1" x="4" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="51" quantity="0" name="L_leather" type="2" kind="1" x="4" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="52" quantity="0" name="L_leather_copper" type="2" kind="1" x="4" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="52" quantity="0" name="L_leather_copper" type="2" kind="1" x="4" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="53" quantity="0" name="L_leather_iron" type="2" kind="1" x="4" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="53" quantity="0" name="L_leather_iron" type="2" kind="1" x="4" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="54" quantity="0" name="L_leather_steel" type="2" kind="1" x="4" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="54" quantity="0" name="L_leather_steel" type="2" kind="1" x="4" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="55" quantity="0" name="L_leather_titanium" type="2" kind="1" x="4" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="55" quantity="0" name="L_leather_titanium" type="2" kind="1" x="4" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="56" quantity="0" name="L_straw_copper" type="2" kind="1" x="4" y="5" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="56" quantity="0" name="L_straw_copper" type="2" kind="1" x="4" y="5" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="57" quantity="0" name="L_straw_iron" type="2" kind="1" x="4" y="6" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="57" quantity="0" name="L_straw_iron" type="2" kind="1" x="4" y="6" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="58" quantity="0" name="L_straw_steel" type="2" kind="1" x="4" y="7" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="58" quantity="0" name="L_straw_steel" type="2" kind="1" x="4" y="7" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="59" quantity="0" name="L_straw_titanium" type="2" kind="1" x="4" y="8" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="59" quantity="0" name="L_straw_titanium" type="2" kind="1" x="4" y="8" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="60" quantity="0" name="L_copper_copper" type="2" kind="1" x="4" y="9" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="60" quantity="0" name="L_copper_copper" type="2" kind="1" x="4" y="9" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="61" quantity="0" name="L_copper_iron" type="2" kind="1" x="4" y="10" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="61" quantity="0" name="L_copper_iron" type="2" kind="1" x="4" y="10" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="62" quantity="0" name="L_copper_steel" type="2" kind="1" x="4" y="11" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="62" quantity="0" name="L_copper_steel" type="2" kind="1" x="4" y="11" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="63" quantity="0" name="L_copper_titanium" type="2" kind="1" x="4" y="12" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="63" quantity="0" name="L_copper_titanium" type="2" kind="1" x="4" y="12" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="64" quantity="0" name="L_iron_iron" type="2" kind="1" x="4" y="13" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="64" quantity="0" name="L_iron_iron" type="2" kind="1" x="4" y="13" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="65" quantity="0" name="L_iron_steel" type="2" kind="1" x="4" y="14" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="65" quantity="0" name="L_iron_steel" type="2" kind="1" x="4" y="14" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="66" quantity="0" name="L_iron_titanium" type="2" kind="1" x="4" y="15" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="66" quantity="0" name="L_iron_titanium" type="2" kind="1" x="4" y="15" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="67" quantity="0" name="L_steel_steel" type="2" kind="1" x="4" y="16" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="67" quantity="0" name="L_steel_steel" type="2" kind="1" x="4" y="16" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="68" quantity="0" name="L_titanium_titanium" type="2" kind="1" x="4" y="17" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="68" quantity="0" name="L_titanium_titanium" type="2" kind="1" x="4" y="17" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="69" quantity="0" name="L_titanium_steel" type="2" kind="1" x="4" y="18" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="69" quantity="0" name="L_titanium_steel" type="2" kind="1" x="4" y="18" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="70" quantity="0" name="S_leather" type="2" kind="3" x="5" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="70" quantity="0" name="S_leather" type="2" kind="3" x="5" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="71" quantity="0" name="S_leather_copper" type="2" kind="3" x="5" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="71" quantity="0" name="S_leather_copper" type="2" kind="3" x="5" y="1" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="72" quantity="0" name="S_leather_iron" type="2" kind="3" x="5" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="72" quantity="0" name="S_leather_iron" type="2" kind="3" x="5" y="2" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="73" quantity="0" name="S_leather_steel" type="2" kind="3" x="5" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="73" quantity="0" name="S_leather_steel" type="2" kind="3" x="5" y="3" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="74" quantity="0" name="S_leather_titanium" type="2" kind="3" x="5" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="74" quantity="0" name="S_leather_titanium" type="2" kind="3" x="5" y="4" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="75" quantity="0" name="S_copper_copper" type="2" kind="3" x="5" y="5" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="75" quantity="0" name="S_copper_copper" type="2" kind="3" x="5" y="5" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="76" quantity="0" name="S_copper_iron" type="2" kind="3" x="5" y="6" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="76" quantity="0" name="S_copper_iron" type="2" kind="3" x="5" y="6" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="77" quantity="0" name="S_copper_steel" type="2" kind="3" x="5" y="7" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="77" quantity="0" name="S_copper_steel" type="2" kind="3" x="5" y="7" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="78" quantity="0" name="S_copper_titanium" type="2" kind="3" x="5" y="8" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="78" quantity="0" name="S_copper_titanium" type="2" kind="3" x="5" y="8" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="79" quantity="0" name="S_iron_iron" type="2" kind="3" x="5" y="9" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="79" quantity="0" name="S_iron_iron" type="2" kind="3" x="5" y="9" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="80" quantity="0" name="S_iron_steel" type="2" kind="3" x="5" y="10" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="80" quantity="0" name="S_iron_steel" type="2" kind="3" x="5" y="10" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="81" quantity="0" name="S_iron_titanium" type="2" kind="3" x="5" y="11" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="81" quantity="0" name="S_iron_titanium" type="2" kind="3" x="5" y="11" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="82" quantity="0" name="S_steel_steel" type="2" kind="3" x="5" y="12" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="82" quantity="0" name="S_steel_steel" type="2" kind="3" x="5" y="12" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="83" quantity="0" name="S_titanium_titanium" type="2" kind="3" x="5" y="13" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="83" quantity="0" name="S_titanium_titanium" type="2" kind="3" x="5" y="13" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="84" quantity="0" name="S_titanium_steel" type="2" kind="3" x="5" y="14" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" 
+	<item id="84" quantity="0" name="S_titanium_steel" type="2" kind="3" x="5" y="14" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="85" quantity="0" name="Potion" type="1" kind="1" x="6" y="0" hp="100" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" 
+	<item id="85" quantity="0" name="Potion" type="1" kind="1" x="6" y="0" hp="100" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="86" quantity="0" name="Max_Potion" type="1" kind="1" x="6" y="1" hp="9999" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" 
+	<item id="86" quantity="0" name="Max_Potion" type="1" kind="1" x="6" y="1" hp="9999" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="87" quantity="0" name="Max_Armor" type="1" kind="1" x="6" y="2" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="300" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" 
+	<item id="87" quantity="0" name="Max_Armor" type="1" kind="1" x="6" y="2" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="300" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="88" quantity="0" name="Attack_Potion" type="1" kind="1" x="6" y="3" hp="0" maxHp="0" attack="200" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" 
+	<item id="88" quantity="0" name="Attack_Potion" type="1" kind="1" x="6" y="3" hp="0" maxHp="0" attack="200" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="89" quantity="0" name="Crit_Prob_Potion" type="1" kind="1" x="6" y="4" hp="0" maxHp="0" attack="0" armor="0" critRate="100" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" 
+	<item id="89" quantity="0" name="Crit_Prob_Potion" type="1" kind="1" x="6" y="4" hp="0" maxHp="0" attack="0" armor="0" critRate="100" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="90" quantity="0" name="Crit_Dmg_Potion" type="1" kind="1" x="6" y="5" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="500" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" 
+	<item id="90" quantity="0" name="Crit_Dmg_Potion" type="1" kind="1" x="6" y="5" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="500" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="91" quantity="0" name="Accuracy_Potion" type="1" kind="1" x="6" y="6" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="100" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" 
+	<item id="91" quantity="0" name="Accuracy_Potion" type="1" kind="1" x="6" y="6" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="100" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="92" quantity="0" name="Dodge_Potion" type="1" kind="1" x="6" y="7" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="100" speed="0" equiped="false" craft="false" price="10" max="100" 
+	<item id="92" quantity="0" name="Dodge_Potion" type="1" kind="1" x="6" y="7" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="100" speed="0" equiped="false" craft="false" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="93" quantity="0" name="Wood" type="3" kind="1" x="7" y="0" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="93" quantity="0" name="Wood" type="3" kind="1" x="7" y="0" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="94" quantity="0" name="Copper" type="3" kind="1" x="7" y="1" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="94" quantity="0" name="Copper" type="3" kind="1" x="7" y="1" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="95" quantity="0" name="Iron" type="3" kind="1" x="7" y="2" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="95" quantity="0" name="Iron" type="3" kind="1" x="7" y="2" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="96" quantity="0" name="Steel" type="3" kind="1" x="7" y="3" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="96" quantity="0" name="Steel" type="3" kind="1" x="7" y="3" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="97" quantity="0" name="Titanium" type="3" kind="1" x="7" y="4" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="97" quantity="0" name="Titanium" type="3" kind="1" x="7" y="4" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="98" quantity="0" name="Straw" type="3" kind="1" x="7" y="5" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="98" quantity="0" name="Straw" type="3" kind="1" x="7" y="5" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="99" quantity="0" name="Rope" type="3" kind="1" x="7" y="6" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="99" quantity="0" name="Rope" type="3" kind="1" x="7" y="6" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="100" quantity="0" name="Leather" type="3" kind="1" x="7" y="7" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="100" quantity="0" name="Leather" type="3" kind="1" x="7" y="7" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="101" quantity="0" name="Onyx" type="3" kind="1" x="7" y="8" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="101" quantity="0" name="Onyx" type="3" kind="1" x="7" y="8" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="102" quantity="0" name="Amber" type="3" kind="1" x="7" y="9" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="102" quantity="0" name="Amber" type="3" kind="1" x="7" y="9" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="103" quantity="0" name="Emerald" type="3" kind="1" x="7" y="10" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="103" quantity="0" name="Emerald" type="3" kind="1" x="7" y="10" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="104" quantity="0" name="Diamond" type="3" kind="1" x="7" y="11" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="104" quantity="0" name="Diamond" type="3" kind="1" x="7" y="11" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="105" quantity="0" name="Jade" type="3" kind="1" x="7" y="12" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="105" quantity="0" name="Jade" type="3" kind="1" x="7" y="12" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="106" quantity="0" name="Amethyst" type="3" kind="1" x="7" y="13" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="106" quantity="0" name="Amethyst" type="3" kind="1" x="7" y="13" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="107" quantity="0" name="Coral" type="3" kind="1" x="7" y="14" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="107" quantity="0" name="Coral" type="3" kind="1" x="7" y="14" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
-	<item id="108" quantity="0" name="Pearl" type="3" kind="1" x="7" y="15" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" 
+	<item id="108" quantity="0" name="Pearl" type="3" kind="1" x="7" y="15" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="10" max="100" whom="0" 
 		  >
 	</item>
 	
