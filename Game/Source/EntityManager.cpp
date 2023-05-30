@@ -16,6 +16,7 @@
 #include "ItemManager.h"
 #include "PuzzleManager.h"
 #include "QuestManager.h"
+#include "LootManager.h"
 #include "FadeToBlack.h"
 
 #include "Defs.h"
@@ -231,8 +232,8 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 	}
 
 	//app->scene->isCharacterLoaded_B = false;
- 
 	app->combat->SaveCombat();
+
 	//app->itemManager->SaveItemState();
 	//app->questManager->SaveState();
 

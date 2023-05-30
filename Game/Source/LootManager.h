@@ -69,7 +69,7 @@ public:
 			switch (dungeon)
 			{
 			case ChestDungeon::TERRORS:
-				random = -1 + rand() % 5;
+				random = rand() % 5;
 				switch (random)
 				{
 				case 0:
@@ -177,7 +177,7 @@ public:
 
 				break;
 			case ChestDungeon::BEASTS:
-				random = -1 + rand() % 4;
+				random = rand() % 4;
 				switch (random)
 				{
 				case 0:
@@ -238,7 +238,7 @@ public:
 
 				break;
 			case ChestDungeon::BEASTS:
-				random = -1 + rand() % 2;
+				random = rand() % 2;
 				switch (random)
 				{
 				case 0:
@@ -305,6 +305,8 @@ class Chest
 		~Chest() {};
 		bool Start()
 		{
+			CleanUp();
+
 			texture = app->tex->Load(path.GetString());
 			hitbox = app->physics->CreateRectangle(x + 32, y + 32, 64, 50, bodyType::STATIC);
 			sensor = app->physics->CreateRectangleSensor((x + 32), (y + 32), 80, 80, bodyType::STATIC, ID);
@@ -366,13 +368,7 @@ class Chest
 
 			if (currentAnimation == &openAnim && currentAnimation->HasFinished())
 			{
-				if (hitbox != nullptr && sensor != nullptr)
-				{
-					b2Vec2 position(0, 0);
-					hitbox->body->SetTransform(position, 0);
-					sensor->body->SetTransform(position, 0);
-				}
-
+				used = true;
 				CleanUp();
 			}
 			if (currentAnimation == &openAnim && !currentAnimation->HasFinished())
@@ -402,7 +398,10 @@ class Chest
 				sensor = nullptr;
 			}
 
-			app->tex->UnLoad(texture);
+			if (used)
+			{
+				app->tex->UnLoad(texture);
+			}
 
 			return true;
 		}
@@ -444,10 +443,10 @@ class LootManager : public Module
 		bool Awake(pugi::xml_node& config);
 		bool Start();
 		bool Update(float dt);
-		bool CleanUp();
+		bool CleanUpDos();
 
-		bool LoadLootState(pugi::xml_node& xml_trees);
-		bool SaveLootState();
+		bool LoadState();
+		bool SaveState(pugi::xml_node& data);
 
 	public:
 		vector <Chest*> chests;

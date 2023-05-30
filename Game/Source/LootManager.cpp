@@ -20,6 +20,8 @@ bool LootManager::Awake(pugi::xml_node& config)
 	LOG("Loading Items");
 	bool ret = true;
 
+	pugi::xml_node& data = config;
+
 	for (pugi::xml_node pugiNode = config.child("chest"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("chest"))
 	{
 		if (pugiNode.attribute("used").as_bool() == false)
@@ -28,7 +30,9 @@ bool LootManager::Awake(pugi::xml_node& config)
 			chests.push_back(chest);
 		}
 	}
-	
+
+	LoadState();
+
 	return ret;
 }
 
@@ -36,7 +40,10 @@ bool LootManager::Start()
 {
 	for (int i=0; i<chests.size(); i++)
 	{
-		chests[i]->Start();
+		if (chests[i]->used == false)
+		{
+			chests[i]->Start();
+		}
 	}
 	return true;
 }
@@ -45,20 +52,62 @@ bool LootManager::Update(float dt)
 {
 	for (int i = 0; i < chests.size(); i++)
 	{
-		chests[i]->Update(dt);
+		if (chests[i]->used == false)
+		{
+			chests[i]->Update(dt);
+		}
 	}
 	return true;
 }
 
-bool LootManager::CleanUp()
+bool LootManager::CleanUpDos()
 {
 	chests.clear();
 
 	return true;
 }
 
-bool LootManager::SaveLootState()
+bool LootManager::SaveState(pugi::xml_node& data)
 {
+	if (chests.size() > 0)
+	{
+		pugi::xml_node chest;
+
+		// save items
+		for (int i = 0; i < chests.size(); i++)
+		{
+			chest = data.append_child("chest");
+			chest.append_attribute("used") = chests[i]->used;
+		}
+	}
+
+	return true;
+}
+
+bool LootManager::LoadState()
+{
+	bool ret = true;
+
+	pugi::xml_document gameStateFile;
+	pugi::xml_parse_result result = gameStateFile.load_file("save_game.xml");
+
+	if (result == NULL)
+	{
+		LOG("Could not load xml file savegame.xml. pugi error: %s", result.description());
+		ret = false;
+	}
+	else
+	{
+		pugi::xml_node xml_trees = gameStateFile.first_child().child("lootManager");
+
+		int i = 0;
+		for (pugi::xml_node pugiNode = xml_trees.first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("chest"))
+		{
+			chests[i]->used = pugiNode.attribute("used").as_bool();
+			i++;
+		}
+	}
+
 
 	return true;
 }
