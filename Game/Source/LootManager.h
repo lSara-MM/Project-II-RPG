@@ -269,8 +269,7 @@ public:
 			app->SaveGameRequest();
 
 			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 5);
-			app->puzzleManager->CleanUp();
-			app->puzzleManager->active = false;
+			app->puzzleManager->Disable();
 			app->hTerrors->steps_I = 0;
 		}
 
@@ -380,6 +379,7 @@ class Chest
 
 			if (currentAnimation == &openAnim && currentAnimation->HasFinished())
 			{
+				used = true;
 				CleanUp();
 			}
 			if (currentAnimation == &openAnim && !currentAnimation->HasFinished())
@@ -392,7 +392,10 @@ class Chest
 
 		void UseChest()
 		{
-			used = true;
+			if (type == ChestTypes::COMBAT)
+			{
+				used = true;
+			}
 			lootTable->GiveLoot();
 			currentAnimation = &openAnim;
 		}

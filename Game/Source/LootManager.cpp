@@ -38,13 +38,14 @@ bool LootManager::Awake(pugi::xml_node& config)
 
 bool LootManager::Start()
 {
-	for (int i=0; i<chests.size(); i++)
+	for (int i = 0; i < chests.size(); i++)
 	{
 		if (chests[i]->used == false)
 		{
 			chests[i]->Start();
 		}
 	}
+
 	return true;
 }
 

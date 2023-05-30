@@ -264,6 +264,7 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 
 		nodeList.push_back(node);
 	}
+
 	LoadArmorItmes();
 	LoadItemState(xml_trees);
 }
@@ -479,6 +480,9 @@ bool ItemManager::SaveItemState()
 	pugi::xml_node items = node.append_child("items");
 	pugi::xml_node item;
 	pugi::xml_node armor;
+	pugi::xml_node coins = items.append_child("coins");
+
+	coins.append_attribute("coin") = coins;
 
 	// save items
 	for (int i = 0; i < nodeList.size(); i++)
@@ -551,6 +555,10 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 			}
 		}
 	}
+
+	pugi::xml_node pugiNode = items.first_child().first_child().child("coins");
+
+	coins = pugiNode.attribute("coin").as_int();
 
 	return ret;
 }

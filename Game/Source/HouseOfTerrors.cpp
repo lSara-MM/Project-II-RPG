@@ -66,10 +66,11 @@ bool HouseOfTerrors::Start()
 {
 	app->input->godMode_B = false;
 	app->physics->collisions = false;
-	//Load Map
-	app->map->Load(1);
 
 	app->lootManager->Start();
+
+	//Load Map
+	app->map->Load(1);
 
 	DarkestDungeon = app->tex->Load(texturePathDarkestDungeon);
 
@@ -232,7 +233,10 @@ bool HouseOfTerrors::CleanUp()
 	app->entityManager->Disable();
 	app->inventory->Disable();
 
-	app->inventory->Disable();
+	for (int i = 0; i < app->lootManager->chests.size(); i++)
+	{
+		app->lootManager->chests[i]->CleanUp();
+	}
 
 	delete player;
 	player = nullptr;

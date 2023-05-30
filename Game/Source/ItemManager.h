@@ -132,6 +132,8 @@ public:
 	int esquiva= 0;
 	int resistencia= 0;
 	int speed= 0;
+
+	int coins = 0;
 	
 	// TO DO GUARRADA SUPER TEMPORAL
 	int comb = 0;
