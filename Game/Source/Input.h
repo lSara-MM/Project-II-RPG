@@ -148,6 +148,7 @@ public:
 	bool coso;
 	SDL_Texture* cursorIdleTex;
 	SDL_Texture* cursorPressedTex;
+	bool stepSound_B = false;//controlar se escuche pasos personaje
 
 private:
 	bool windowEvents[WE_COUNT];

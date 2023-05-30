@@ -681,8 +681,13 @@ bool GuiButton::Draw(Render* render)
 
 			app->render->RenderTrimmedText(bounds.x + offsetX, bounds.y + offsetX / 2, 2, text, &texts, fontSize, max_chars_line, 1.5f);
 		}
+
 		else
 		{
+			if (buttonType==ButtonType::SETTINGS_TEXT)//no hace falta centre el texto en este caso
+			{
+				x = 0; y = 0;
+			}
 			app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
 		}
 	}

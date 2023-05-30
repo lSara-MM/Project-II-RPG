@@ -43,6 +43,11 @@ bool Inventory::Start()
 		}
 	}
 
+	//animation inventory
+	inventoryAnimation.Set();
+	inventoryAnimation.AddTween(100, 100, BOUNCE_IN_OUT);
+	inventoryTransition_B = true;
+
 	return true;
 }
 
@@ -54,6 +59,19 @@ bool Inventory::PreUpdate()
 
 bool Inventory::Update(float dt)
 {
+	if (inventoryTransition_B)
+	{
+		inventoryAnimation.Backward();
+	}
+	else
+	{
+		inventoryAnimation.Foward();
+	}
+	inventoryAnimation.Step(1, false);
+
+	float point = inventoryAnimation.GetPoint();
+	int offset = -1300;
+
 	bool ret = true;
 
 	int x = 0;

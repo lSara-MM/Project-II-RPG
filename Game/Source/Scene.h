@@ -64,6 +64,7 @@ public:
 	int currentHP_Protagonist = 0;
 	bool isCharacterLoaded_B = true;
 
+	bool restartPauseMenu_B = false;//acabar dialogue hace nuke toda ui, hacer restart con esto (no voy a cambiar nada de dialogue al ir bien)
 private:
 
 	int mouseX_scene, mouseY_scene;

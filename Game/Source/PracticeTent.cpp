@@ -128,7 +128,7 @@ bool PracticeTent::Update(float dt)
 	{
 		app->render->DrawTexture(textureE, posDummy.x - widthDummy / 2 + 20, posDummy.y + 50);
 
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_Y) == BUTTON_DOWN)
 		{
 			LOG("Combat");
 			app->combat->PreLoadCombat(name);
@@ -148,7 +148,7 @@ bool PracticeTent::Update(float dt)
 	Debug();
 
 	//Inventory
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_Y) == ButtonState::BUTTON_DOWN)
 	{
 		if (app->inventory->active)
 		{

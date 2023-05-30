@@ -300,7 +300,7 @@ bool PuzzleManager::Update(float dt)
 	{
 		app->render->DrawTexture(textureE, posNotas1.x - 32, posNotas1.y - 80);
 
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
 			//Abrir UI nota 1
 			app->audio->PlayFx(confirmInteractfx);
@@ -318,7 +318,7 @@ bool PuzzleManager::Update(float dt)
 	{
 		app->render->DrawTexture(textureE, posNotas2.x - 32, posNotas2.y - 80);
 
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
 			//Abrir UI nota 2
 			app->audio->PlayFx(confirmInteractfx);
@@ -336,7 +336,7 @@ bool PuzzleManager::Update(float dt)
 	{
 		app->render->DrawTexture(textureE, posNotas3.x - 32, posNotas3.y - 80);
 
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
 			//Abrir UI nota 3
 			app->audio->PlayFx(confirmInteractfx);
@@ -536,7 +536,7 @@ bool PuzzleManager::Palancas()
 	{
 		app->render->DrawTexture(textureE, posPalancas.x - 30, posPalancas.y - 10);
 
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
 			if (Door1 != nullptr)
 				Door1->body->GetWorld()->DestroyBody(Door1->body);
@@ -576,7 +576,7 @@ bool PuzzleManager::Escape()
 	{
 		app->render->DrawTexture(textureE, posDoorEscape.x + 20, posDoorEscape.y + 10);
 
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
 			app->hTerrors->player->lockMovement = true;
 			app->input->ActiveGetInput(numCode);
@@ -626,7 +626,7 @@ bool PuzzleManager::Rescue()
 		{
 			app->render->DrawTexture(textureE, posBoss.x - 64, posBoss.y - 145);
 
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 			{
 				bossInvent = true;
 				app->audio->PlayFx(confirmInteractfx);
@@ -649,7 +649,7 @@ bool PuzzleManager::Rescue()
 			{
 				app->render->DrawTexture(textureE, posLoset.x - 64, posLoset.y - 120);
 
-				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 				{
 					for (int i=0; i< app->itemManager->nodeList.size(); i++)
 					{
@@ -692,7 +692,7 @@ bool PuzzleManager::Rescue()
 		{
 			app->render->DrawTexture(textureE, posBoss.x, posBoss.y - 145);
 			//pasar a house of terrors
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 			{
 				LOG("Combat");
 				app->SaveGameRequest();
@@ -718,7 +718,7 @@ bool PuzzleManager::TeamMate()
 	{
 		app->render->DrawTexture(textureE, posFireGuy.x - 32, posFireGuy.y + 30);
 
-		if(app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if(app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
 			if (fireGuy != nullptr)
 				app->tex->UnLoad(fireGuy);

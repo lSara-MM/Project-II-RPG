@@ -37,6 +37,9 @@ public:
 	int y;
 
 	GuiButton* selectCharacter[4];
+
+	Tween inventoryAnimation;//animacion inventario
+	bool inventoryTransition_B;//controlar animacion inventario
 };
 
 #endif // __ITEMMANAGER_H__

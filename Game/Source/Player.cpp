@@ -66,6 +66,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	leftAnim.speed = 0.1f;
 
 	active = true;
+
 }
 
 Player::~Player() {
@@ -111,6 +112,10 @@ bool Player::Awake() {
 	confirmPath = "Assets/Audio/Fx/confirm_interaction.wav";
 	confirmInteractfx = app->audio->LoadFx(confirmPath);
 
+	//animation minimap
+	mapAnimation.Set();
+	mapAnimation.AddTween(100, 100, BOUNCE_IN_OUT);
+
 	return true;
 }
 
@@ -145,6 +150,8 @@ bool Player::Start()
 	//Setear camara al player al crearlo cada vez
 	app->render->camera.y = -position.y + 360 - height;
 	app->render->camera.x = -position.x + 640 - width;
+
+	transitionMap_B = true;
 
 	return true;
 }
@@ -278,35 +285,47 @@ bool Player::Update(float dt)
 		posMiniPlayer.x = posMiniMap.x + position.x / 10;
 		posMiniPlayer.y = posMiniMap.y + position.y / 10;
 
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_X) == ButtonState::BUTTON_DOWN)
 		{
 			MiniMap();
 		}
 
-		if (OpenMap)
-		{
-			app->render->DrawTexture(miniMap, posMiniMap.x, posMiniMap.y);
+		/*if (OpenMap)
+		{*/
+			if (transitionMap_B)
+			{
+				mapAnimation.Backward();
+			}
+			else
+			{
+				mapAnimation.Foward();
+			}
+			mapAnimation.Step(1, false);
+
+			float point = mapAnimation.GetPoint();
+			int offset = -1300;
+			app->render->DrawTexture(miniMap, posMiniMap.x, offset + point * (posMiniMap.y - offset));
 
 			if (app->scene->active)
 			{
 				//2659 4907
-				app->render->DrawTexture(dotPlayer, posMiniPlayer.x - 23, posMiniPlayer.y - 30);
+				app->render->DrawTexture(dotPlayer, posMiniPlayer.x - 23, offset + point * (posMiniPlayer.y - 30 - offset));
 			}
 			if (app->hTerrors->active)
 			{
-				app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10, posMiniMap.y + 4507 / 10);
+				app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10, offset + point * (posMiniMap.y + 4507 / 10 - offset));
 			}
 			if (app->practiceTent->active)
 			{
 				//4360 4385
-				app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10, posMiniMap.y + 3585 / 10);
+				app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10, offset + point * (posMiniMap.y + 3585 / 10 - offset));
 			}
 			if (app->circus->active)
 			{
 				//3899 1027
-				app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10, posMiniMap.y + 350 / 10);
+				app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10, offset + point * (posMiniMap.y + 350 / 10 - offset));
 			}
-		}
+		//}
 		/*MiniMapa*/
 
 		if (npcInteract)
@@ -321,7 +340,7 @@ bool Player::Update(float dt)
 
 			if (!lockMovement)
 			{
-				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_Y) == BUTTON_DOWN)
+				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 				{
 					app->audio->PlayFx(confirmInteractfx);
 					app->dialogueSystem->hasEnded = false;
@@ -360,6 +379,7 @@ bool Player::Update(float dt)
 			{
 				lockMovement = false; 
 				pauseEnabled_B = true;
+				app->scene->restartPauseMenu_B = true;
 				app->dialogueSystem->Disable();
 			}
 		}
@@ -374,7 +394,7 @@ bool Player::Update(float dt)
 				interactionTest = true;
 			}
 
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_Y) == BUTTON_DOWN)
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 			{
 				Chest_contact = false;
 				interactionTest = false;
@@ -596,7 +616,7 @@ void Player::Controller(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || 
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_REPEAT || app->input->controller.j1_y < 0)
 			{
-				if (!app->scene->pause_B)
+				if (!app->input->stepSound_B)
 				{
 					app->audio->PlayFx(walk_grass, 0);
 				}
@@ -632,7 +652,7 @@ void Player::Controller(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || 
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_REPEAT || app->input->controller.j1_y > 0)
 			{
-				if (!app->scene->pause_B)
+				if (!app->input->stepSound_B)
 				{
 					app->audio->PlayFx(walk_grass, 0);
 				}
@@ -668,7 +688,7 @@ void Player::Controller(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || 
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_REPEAT || app->input->controller.j1_x < 0)
 			{
-				if (!app->scene->pause_B)
+				if (!app->input->stepSound_B)
 				{
 					app->audio->PlayFx(walk_grass, 0);
 				}
@@ -704,7 +724,7 @@ void Player::Controller(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT ||
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_REPEAT || app->input->controller.j1_x > 0)
 			{
-				if (!app->scene->pause_B)
+				if (!app->input->stepSound_B)
 				{
 					app->audio->PlayFx(walk_grass, 0);
 				}
@@ -744,7 +764,7 @@ void Player::Controller(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT ||
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_REPEAT || app->input->controller.j1_y < 0)
 			{
-				if (!app->scene->pause_B)
+				if (!app->input->stepSound_B)
 				{
 					app->audio->PlayFx(walk_grass, 0);
 				}
@@ -775,7 +795,7 @@ void Player::Controller(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT ||
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_REPEAT || app->input->controller.j1_y > 0)
 			{
-				if (!app->scene->pause_B)
+				if (!app->input->stepSound_B)
 				{
 					app->audio->PlayFx(walk_grass, 0);
 				}
@@ -806,7 +826,7 @@ void Player::Controller(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT ||
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == BUTTON_REPEAT || app->input->controller.j1_x < 0)
 			{
-				if (!app->scene->pause_B)
+				if (!app->input->stepSound_B)
 				{
 					app->audio->PlayFx(walk_grass, 0);
 				}
@@ -843,7 +863,7 @@ void Player::Controller(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT ||
 				app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == BUTTON_REPEAT || app->input->controller.j1_x > 0)
 			{
-				if (!app->scene->pause_B)
+				if (!app->input->stepSound_B)
 				{
 					app->audio->PlayFx(walk_grass, 0);
 				}
@@ -877,7 +897,7 @@ void Player::MiniMap()
 {
 	OpenMap = !OpenMap;
 	lockMovement = !lockMovement;
-
+	transitionMap_B = !transitionMap_B;
 	posMiniPlayer.x = position.x / 5 + posMiniMap.x;
 	posMiniPlayer.y = position.y / 5 + posMiniMap.y;
 }

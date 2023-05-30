@@ -109,6 +109,18 @@ public:
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 521, 133, 33 }, ButtonType::IN_SETTINGS, "Exit", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
+
+
+		////Texto
+		//int x = 556; int y = 290; int offset = 77;
+		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 955, mod, { x, y, 1, 1 }, ButtonType::SETTINGS_TEXT, "Language", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		//button->state = GuiControlState::NONE;
+		//listGameButtons.Add(button);
+
+		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 956, mod, { x, y+offset, 1, 1 }, ButtonType::SETTINGS_TEXT, "Text Speed", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		//button->state = GuiControlState::NONE;
+		//listGameButtons.Add(button);
+
 	}
 
 	bool OpenGameSettings()
@@ -161,6 +173,7 @@ public:
 		{
 			delete i->data;
 			i->data = nullptr;
+			app->guiManager->DestroyGuiControl(i->data);
 		}
 
 		listGameButtons.Clear();
@@ -207,46 +220,7 @@ public:
 			listControlButtons.Add(button);
 		}*/
 
-		//hacer array de buttons con estos textos queda feo, lo hago hardcode
 
-		int x = 580; int y = 250; int offset = 50;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 720, y, 0, 0}, ButtonType::SETTINGS_TEXT, "Game by Pikum Studios\n Sara Martinez Mauri\n Jose Antonio Tur Izquierdo\n Sonia Cristina Ojeda Lanz\n Alberto Hidalgo Garcia\n Pau Garriga Brotons", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
-		button->state = GuiControlState::DISABLED;
-		listControlButtons.Add(button);
-		/*button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, {x, y + offset, 0, 0}, ButtonType::SETTINGS_TEXT, "Sara Martinez Mauri", 16, Font::UI, {0,0,0,0}, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
-		button->state = GuiControlState::DISABLED;
-		listControlButtons.Add(button);
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y+offset * 2, 0, 0 }, ButtonType::SETTINGS_TEXT, "Jose Antonio Tur Izquierdo", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
-		button->state = GuiControlState::DISABLED;
-		listControlButtons.Add(button);
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 3, 0, 0 }, ButtonType::SETTINGS_TEXT, "Sonia Cristina Ojeda Lanz", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
-		button->state = GuiControlState::DISABLED;
-		listControlButtons.Add(button);
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 4, 0, 0 }, ButtonType::SETTINGS_TEXT, "Alberto Hidalgo Garcia", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
-		button->state = GuiControlState::DISABLED;
-		listControlButtons.Add(button);
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 5, 0, 0 }, ButtonType::SETTINGS_TEXT, "Pau Garriga Brotons", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
-		button->state = GuiControlState::DISABLED;
-		listControlButtons.Add(button);
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 718, y + offset * 6, 0, 0 }, ButtonType::SETTINGS_TEXT, "This project is licensed under an unmodified MIT license", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
-		button->state = GuiControlState::DISABLED;
-		listControlButtons.Add(button);
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 7, 0, 0 }, ButtonType::SETTINGS_TEXT, "Copyright(c) 2020 Ray", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
-		button->state = GuiControlState::DISABLED;
-		listControlButtons.Add(button);
-		x = 850;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset, 0, 0 }, ButtonType::SETTINGS_TEXT, "Andreu Nosas Soler", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
-		button->state = GuiControlState::DISABLED;
-		listControlButtons.Add(button);
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 2, 0, 0 }, ButtonType::SETTINGS_TEXT, "Andreu Miro Sabate", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
-		button->state = GuiControlState::DISABLED;
-		listControlButtons.Add(button);
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 3, 0, 0 }, ButtonType::SETTINGS_TEXT, "Eric Segovia Baena", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
-		button->state = GuiControlState::DISABLED;
-		listControlButtons.Add(button);
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { x, y + offset * 4, 0, 0 }, ButtonType::SETTINGS_TEXT, "Guillem Pol Aixut Anderiz", 16, Font::UI, { 0,0,0,0 }, 5, Easings::BOUNCE_IN, AnimationAxis::RIGHT_X);
-		button->state = GuiControlState::DISABLED;
-		listControlButtons.Add(button);*/
 
 	}
 
@@ -312,6 +286,7 @@ public:
 		{
 			delete i->data;
 			i->data = nullptr;
+			app->guiManager->DestroyGuiControl(i->data);
 		}
 
 		listControlButtons.Clear();
@@ -367,6 +342,26 @@ public:
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::IN_SETTINGS, "Max fps", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGraphicsButtons.Add(button);
+
+
+		////Texto
+		//int x = 556; int y = 290; int offset = 77;
+		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 956, mod, { x, y, 1, 1 }, ButtonType::SETTINGS_TEXT, "Windows Size", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
+		//button->state = GuiControlState::NONE;
+		//listGraphicsButtons.Add(button);
+
+		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 957, mod, { x, y + offset, 1, 1 }, ButtonType::SETTINGS_TEXT, "Fullscreen", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
+		//button->state = GuiControlState::NONE;
+		//listGraphicsButtons.Add(button);
+
+		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 958, mod, { x, y + offset*2, 1, 1 }, ButtonType::SETTINGS_TEXT, "Vsync", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
+		//button->state = GuiControlState::NONE;
+		//listGraphicsButtons.Add(button);
+
+		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 959, mod, { x, y + offset*3, 1, 1 }, ButtonType::SETTINGS_TEXT, "Max fps", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
+		//button->state = GuiControlState::NONE;
+		//listGraphicsButtons.Add(button);
+
 	}
 
 	bool OpenGraphics()
@@ -457,12 +452,14 @@ public:
 		{
 			delete i->data;
 			i->data = nullptr;
+			app->guiManager->DestroyGuiControl(i->data);
 		}
 
 		for (ListItem<GuiCheckBox*>* i = listGraphicsCheckbox.start; i != nullptr; i = i->next)
 		{
 			delete i->data;
 			i->data = nullptr;
+			app->guiManager->DestroyGuiControl(i->data);
 		}
 
 		listGraphicsButtons.Clear();
@@ -514,6 +511,22 @@ public:
 		sliderBar->state = GuiControlState::NONE;
 		fx = sliderBar;
 		listSliderBars.Add(sliderBar);
+
+
+		////Texto
+		//int x = 556; int y = 290; int offset = 77;
+		//GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 959, mod, { x, y, 1, 1 }, ButtonType::SETTINGS_TEXT, "General volume", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		//button->state = GuiControlState::NONE;
+		//listTextAudio.Add(button);
+
+		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 960, mod, { x, y + offset, 1, 1 }, ButtonType::SETTINGS_TEXT, "Music volume", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		//button->state = GuiControlState::NONE;
+		//listTextAudio.Add(button);
+
+		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 961, mod, { x, y + offset * 2, 1, 1 }, ButtonType::SETTINGS_TEXT, "Fx volume", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		//button->state = GuiControlState::NONE;
+		//listTextAudio.Add(button);
+
 	}
 
 	bool OpenAudioSettings()
@@ -532,6 +545,12 @@ public:
 				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
 			}
+
+			/*for (ListItem<GuiButton*>* i = listTextAudio.start; i != nullptr; i = i->next)
+			{
+				i->data->isForward_B = true;
+				i->data->state = GuiControlState::NORMAL;
+			}*/
 
 			general->sliderBounds.x = general->bounds.x + app->audio->volume_general * general->bounds.w / SDL_MIX_MAXVOLUME;
 			general->volume100 = app->audio->volume_general;
@@ -563,19 +582,30 @@ public:
 			i->data->isForward_B = false;
 			//i->data->state = GuiControlState::NONE;
 		}
-
+		//for (ListItem<GuiButton*>* i = listTextAudio.start; i != nullptr; i = i->next)
+		//{
+		//	i->data->isForward_B = false;
+		//	//i->data->state = GuiControlState::NONE;
+		//}
 		return true;
 	}
 
 	bool CleanUp()
 	{
-		/*for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
+		for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
 		{
-			delete i->data;
-			i->data = nullptr;
-		}*/
-		
+		/*	delete i->data;
+			i->data = nullptr;*/
+			app->guiManager->DestroyGuiControl(i->data);
+		}
+		//for (ListItem<GuiButton*>* i = listTextAudio.start; i != nullptr; i = i->next)
+		//{
+		//	/*	delete i->data;
+		//	i->data = nullptr;*/
+		//	app->guiManager->DestroyGuiControl(i->data);
+		//}
 		listSliderBars.Clear();
+		//listTextAudio.Clear();
 
 		return true;
 	}
@@ -585,6 +615,7 @@ public:
 	// GUI
 	int GUI_id = 832;
 	List<GuiSliderBar*> listSliderBars;
+	//List<GuiButton*> listTextAudio;
 
 	GuiSliderBar* general, * music, * fx;
 
@@ -663,15 +694,15 @@ public:
 			animationGame.Foward();
 			animationGame.Step(speedAnimNotButton, false);
 			float point2 = animationGame.GetPoint();
-			
+
 			int x = 556; int y = 290; int offset = 77;
 			app->render->TextDraw("Language", x, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
 			app->render->TextDraw("Text Speed", x, int(offsetAnimation + point2 * (y + offset - offsetAnimation)), 16);
 		}
 
-		if (pControl->control_B) { 
+		if (pControl->control_B) { //se queda aqui el texto, hacerlo botones el juego no aguanta
 			pControl->OpenControlSettings();
-			/*animationControl.Foward();
+			animationControl.Foward();
 			animationControl.Step(speedAnimNotButton, false);
 			float point2 = animationControl.GetPoint();
 
@@ -692,8 +723,9 @@ public:
 			app->render->TextDraw("Andreu Nosas Soler", x, int(offsetAnimation + point2 * ((y + offset) - offsetAnimation)), 16);
 			app->render->TextDraw("Andreu Miro Sabate", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
 			app->render->TextDraw("Eric Segovia Baena", x, int(offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation)), 16);
-			app->render->TextDraw("Guillem Pol Aixut Anderiz", x, int(offsetAnimation + point2 * ((y + offset * 4) - offsetAnimation)), 16);*/
+			app->render->TextDraw("Guillem Pol Aixut Anderiz", x, int(offsetAnimation + point2 * ((y + offset * 4) - offsetAnimation)), 16);
 		}
+
 		if (pGraphics->graphics_B) { 
 			pGraphics->OpenGraphics();
 			animationGraphics.Foward();
@@ -705,6 +737,7 @@ public:
 			app->render->TextDraw("Fullscreen", x, int(offsetAnimation + point2 * ((y + offset) - offsetAnimation)), 16);
 			app->render->TextDraw("Vsync", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
 			app->render->TextDraw("Max fps", x, int(offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation)), 16);
+
 		}
 		if (pAudio->audio_B) { 
 			pAudio->OpenAudioSettings();
@@ -851,7 +884,7 @@ public:
 		open_pause_B = false;
 
 		// close
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 1200, 57, 57, 57 }, ButtonType::CLOSE);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 1200, 57, 57, 57 }, ButtonType::CLOSE,"", 20, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::DOWN_Y);
 		button->state = GuiControlState::NONE;
 		listPauseButtons.Add(button);
 
@@ -892,7 +925,7 @@ public:
 				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
 			}
-
+			app->input->stepSound_B = true;
 			open_pause_B = true;
 		}
 
@@ -933,10 +966,11 @@ public:
 		
 		pause_B = false;
 		open_pause_B = false;
+		app->input->stepSound_B = false;
 		for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-			i->data->state = GuiControlState::NONE;
+			//i->data->state = GuiControlState::NONE;
 		}
 
 		return true;
@@ -946,6 +980,14 @@ public:
 	{
 		ClosePause();
 		//app->tex->UnLoad(PauseTexture);
+
+		for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->isForward_B = false;
+			i->data->state = GuiControlState::NONE;
+			app->guiManager->DestroyGuiControl(i->data);
+		}
+
 		listPauseButtons.Clear();
 		
 		return true;

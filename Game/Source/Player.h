@@ -122,7 +122,9 @@ private:
 	int width, height;
 	SDL_Texture* textureE;
 
-
+	Tween mapAnimation;//animacion minimapa
+	bool transitionMap_B;//controlar animacion minimapa
+	
 	// Open Chest
 	bool Chest_contact = false;
 	int Chest_ID = 0;
