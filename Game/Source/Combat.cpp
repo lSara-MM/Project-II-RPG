@@ -909,6 +909,38 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 	if (arr->empty())
 	{
 		(chara->charaType == CharacterType::ALLY) ? app->sceneWin_Lose->win = false : app->sceneWin_Lose->win = true;
+
+		if (app->sceneWin_Lose->win)
+		{
+			int coins = rand() % 21;
+
+			app->itemManager->coins += coins;
+
+			int loot = rand() % 101;
+
+			if (loot >= 50)
+			{
+				app->itemManager->AddQuantity(94, 1);
+				app->itemManager->AddQuantity(93, 2);
+				app->itemManager->AddQuantity(99, 2);
+				app->itemManager->AddQuantity(99, 2);
+				app->itemManager->AddQuantity(100, 2);
+			}
+			else if (loot >= 70)
+			{
+				app->itemManager->AddQuantity(93, 2);
+				app->itemManager->AddQuantity(99, 2);
+				app->itemManager->AddQuantity(99, 2);
+				app->itemManager->AddQuantity(100, 2);
+			}
+			else if (loot >= 80)
+			{
+				app->itemManager->AddQuantity(93, 2);
+				app->itemManager->AddQuantity(100, 2);
+			}
+
+		}
+
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);
 	}
 	else
