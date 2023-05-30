@@ -276,7 +276,7 @@ enum class CharacterClass
 		
 		sectionX="35" sectionY="36"/>
 
-		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="180" armor="0" critRate="5" critDamage="15" accuracy="0" res="0" dodge="20" speed="55"
+		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="180" armor="0" critRate="5" critDamage="15" accuracy="0" res="0" dodge="15" speed="55"
         type="1" class="0" skill1ID="25" skill2ID="26" skill3ID="27" skill4ID="28"
                
         width="0" heigth="0"
@@ -292,7 +292,7 @@ enum class CharacterClass
 		
 		sectionX="26" sectionY="30"/>
 
-		<enemy name ="The Specter" id="20" maxHp="3000" currentHp="3000" attack="220" armor="50" critRate="0" critDamage="0" accuracy="20" res="35" dodge="0" speed="65"
+		<enemy name ="The Specter" id="20" maxHp="3000" currentHp="3000" attack="220" armor="40" critRate="0" critDamage="0" accuracy="20" res="15" dodge="0" speed="65"
         type="1" class="4" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
                
         width="0" heigth="0"

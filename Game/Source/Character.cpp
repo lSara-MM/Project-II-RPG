@@ -557,7 +557,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			// Calcular reduccion de la defensa
 			float armorRelevance = (10*defender->GetStat(EffectType::ARMOR) / abs(damage + 1)) + 1;
 			damage += ((defender->GetStat(EffectType::ARMOR) ) * armorRelevance); //Esta con mas ya que damage es negativo
-			if (damage > 0) { damage = 0; }
+			if (damage > 0) { damage = -1; }
 
 			app->audio->PlayFx(hitfx);
 			return damage;
@@ -798,7 +798,9 @@ bool Character::UseSkill(Skill* skill, Character* target)
 	}
 
 	if (skill->movementCaster != 0)
-	app->combat->MoveCharacter(&app->combat->vecEnemies, target, skill->movementTarget);
+	{
+		app->combat->MoveCharacter(&app->combat->vecAllies, target, skill->movementTarget);
+	}
 
 	return true;
 }

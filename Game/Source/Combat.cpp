@@ -1335,14 +1335,14 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			else 
 			{ 
 				app->render->TextDraw("Damage:", 260, 537, 18);
-				DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK)));
+				DMG_C = to_string((int)(abs(skillPoint->multiplierDmg) * listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK)));
 				const char* ch_DMG = DMG_C.c_str();
 				app->render->TextDraw(ch_DMG, 335, 537, 18);
 
 				//Stats ataques
 				Pre_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::ACCURACY)*(skillPoint->bonusAccuracy + listInitiative.At(charaInTurn)->data->accuracy));
 				CrRate_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_RATE)*(skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->critRate));
-				CrDMG_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_DMG)*(skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->critDamage));
+				CrDMG_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_DMG)*(skillPoint->bonusCritDamage + listInitiative.At(charaInTurn)->data->critDamage));
 				
 				//Printar stats
 				app->render->TextDraw("Accuracy.", 260, 560, 15);
