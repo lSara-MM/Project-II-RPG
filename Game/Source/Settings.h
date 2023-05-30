@@ -527,6 +527,7 @@ public:
 		//button->state = GuiControlState::NONE;
 		//listTextAudio.Add(button);
 
+
 	}
 
 	bool OpenAudioSettings()
