@@ -670,7 +670,6 @@ bool Combat::StartCombat()
 	return true;
 }
 
-
 bool Combat::OrderBySpeed()
 {
 	for (int i = 0; i < vecAllies.size(); i++)
@@ -948,13 +947,13 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	//
 	if (lastPressedAbility_I != -1 && !isMoving && listInitiative.At(charaInTurn)->data->charaType==CharacterType::ALLY)
 	{
-		if (vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->autoTarget == true)
+		if (listInitiative.At(charaInTurn)->data->listSkills.At(lastPressedAbility_I)->data->autoTarget == true)
 		{
 			HandleCharaButtons(&vecAllies, vecAllies.at(posInVec)->positionCombat_I, vecAllies.at(posInVec)->positionCombat_I);
 		}
 		else
 		{
-			if (vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->targetFriend == true)
+			if (listInitiative.At(charaInTurn)->data->listSkills.At(lastPressedAbility_I)->data->targetFriend == true)
 			{
 				HandleCharaButtons(&vecAllies, posStart, posEnd);
 			}

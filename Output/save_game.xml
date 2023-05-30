@@ -16,11 +16,11 @@
 	<PracticeTent />
 	<combat />
 	<map />
+	<lootManager />
 	<PuzzleManager />
 	<questmanager />
-	<lootManager />
 	<entitymanager>
-		<player name="scene" x="3509" y="2579" />
+		<player name="scene" x="3417" y="1058" />
 	</entitymanager>
 	<itemmanager />
 	<dialogue />
@@ -29,6 +29,6 @@
 	<Inventory />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2889" y="-2246" />
+		<camera x="-2825" y="-725" />
 	</renderer>
 </save_state>
