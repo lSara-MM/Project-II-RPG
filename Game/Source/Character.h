@@ -153,10 +153,10 @@ public:
 	CharacterClass charaClass;
 
 	////Skills Descriptions
-	//SString skills_C[4]; //Hay que describirlas aqui para poder llamarlo desde el combat
 	List<Skill*> listSkills;
 	List<StatusEffect*> listStatusEffects;
-
+	List<int> listSkillsHistory; //Aqui guardamos un historial de que skills se ha usado.
+	
 	GuiButton* button;
 
 	// Texture position
@@ -170,7 +170,7 @@ public:
 	const char* texturePath;
 	
 private:
-	List<int> listSkillsHistory; //Aqui guardamos un historial de que skills se ha usado.
+	
 
 	int width, height;
 
