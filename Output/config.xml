@@ -64,6 +64,9 @@
 		<chest
 			x="2240" y="64" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="11" used="false"
 			/>
+		<chest
+			x="2624" y="2176" type="3" dungeon="0" texturepath="Assets/Textures/chests.png" id="12" used="false"
+			/>
 	</lootManager>
 	
 	<entitymanager>

@@ -11,6 +11,8 @@
 #include "GuiButton.h"
 #include "GuiManager.h"
 #include "ItemManager.h"
+#include "PuzzleManager.h"
+#include "FadeToBlack.h"
 #include "HouseOfTerrors.h"
 #include "HouseOfTerrors.h"
 #include "Player.h"
@@ -258,6 +260,20 @@ public:
 
 	void GiveLoot()
 	{
+		if (type == ChestTypes::COMBAT)
+		{
+			LOG("Combat");
+			app->audio->PlayFx(app->hTerrors->combatfx);
+			app->combat->PreLoadCombat(app->hTerrors->name);
+
+			app->SaveGameRequest();
+
+			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 5);
+			app->puzzleManager->CleanUp();
+			app->puzzleManager->active = false;
+			app->hTerrors->steps_I = 0;
+		}
+
 		for (int i = 0; i < lootTableID.size(); i++)
 		{
 			app->itemManager->AddQuantity(lootTableID[i].ID, lootTableID[i].quantity);
@@ -305,8 +321,6 @@ class Chest
 		~Chest() {};
 		bool Start()
 		{
-			CleanUp();
-
 			texture = app->tex->Load(path.GetString());
 			hitbox = app->physics->CreateRectangle(x + 32, y + 32, 64, 50, bodyType::STATIC);
 			sensor = app->physics->CreateRectangleSensor((x + 32), (y + 32), 80, 80, bodyType::STATIC, ID);
@@ -357,18 +371,15 @@ class Chest
 		{
 			if (dungeon == ChestDungeon::TERRORS && app->hTerrors->active==true)
 			{
-
 				currentAnimation->Update();
 
 				SDL_Rect rect = currentAnimation->GetCurrentFrame();
 				app->render->DrawTexture(texture, x, y, &rect);
-
 			}
 			//TODO beasts dungeon
 
 			if (currentAnimation == &openAnim && currentAnimation->HasFinished())
 			{
-				used = true;
 				CleanUp();
 			}
 			if (currentAnimation == &openAnim && !currentAnimation->HasFinished())
@@ -381,6 +392,7 @@ class Chest
 
 		void UseChest()
 		{
+			used = true;
 			lootTable->GiveLoot();
 			currentAnimation = &openAnim;
 		}

@@ -454,7 +454,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		npcInteract = true;
 		break;
 	case ColliderType::LOOT:
-		LOG("NPC Interact");
+		LOG("LOOT Interact");
 
 		for (int i=0; i < app->lootManager->chests.size(); i++)
 		{

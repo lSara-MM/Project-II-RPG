@@ -57,6 +57,7 @@ bool LootManager::Update(float dt)
 			chests[i]->Update(dt);
 		}
 	}
+
 	return true;
 }
 
@@ -69,16 +70,13 @@ bool LootManager::CleanUpDos()
 
 bool LootManager::SaveState(pugi::xml_node& data)
 {
-	if (chests.size() > 0)
-	{
-		pugi::xml_node chest;
+	pugi::xml_node chest;
 
-		// save items
-		for (int i = 0; i < chests.size(); i++)
-		{
-			chest = data.append_child("chest");
-			chest.append_attribute("used") = chests[i]->used;
-		}
+	// save items
+	for (int i = 0; i < chests.size(); i++)
+	{
+		chest = data.append_child("chest");
+		chest.append_attribute("used") = chests[i]->used;
 	}
 
 	return true;
