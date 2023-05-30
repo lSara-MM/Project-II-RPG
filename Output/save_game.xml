@@ -16,11 +16,25 @@
 	<PracticeTent />
 	<combat />
 	<map />
-	<lootManager />
+	<lootManager>
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+	</lootManager>
 	<PuzzleManager />
 	<questmanager />
 	<entitymanager>
-		<player name="scene" x="3417" y="1058" />
+		<player name="scene" x="3726" y="1075" />
 	</entitymanager>
 	<itemmanager />
 	<dialogue />
@@ -29,6 +43,6 @@
 	<Inventory />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2825" y="-725" />
+		<camera x="-2834" y="-742" />
 	</renderer>
 </save_state>

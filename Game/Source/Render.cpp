@@ -5,9 +5,6 @@
 #include "Defs.h"
 #include "Log.h"
 
-#include "SString.h"
-#include <vector>
-
 //#define VSYNC true
 
 Render::Render() : Module()
@@ -288,6 +285,9 @@ bool Render::TextDraw(const char* text, int x, int y, int size, Font font, SDL_C
 	{
 		LOG("Cannot open font. SDL_Surface* error: %s", SDL_GetError());
 		ret = false;
+
+		ttf_texture = nullptr;
+		TTF_CloseFont(ttf_font);
 	}
 	else
 	{
@@ -319,6 +319,8 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 	{
 		pTexts->at(i).Clear();
 	}
+	pTexts->clear();
+	pTexts->shrink_to_fit();
 
 	if (text_.Length() > max_chars_line_)
 	{
@@ -338,7 +340,7 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 				do
 				{
 					b = line.find_first_of(arr.at(i++), a);
-				} while (b == -1 && a < line.length());
+				} while (b == -1 && a < line.length() && i < arr.size());
 
 				// If we reached the end of the word or the end of the input.
 				string temp;
@@ -354,26 +356,70 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 	}
 }
 
-void Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_, float fontOffset)
+void Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_, float fontOffset, Font font, float dt_wait, SDL_Color color)
 {
 	SplitText(text, pTexts, fontSize_, max_chars_line_);
 
 	int lines = pTexts->size();
 	if (fontOffset > 0) { fontSize_ = fontSize_ - lines * fontOffset; }
 
-
-	for (int i = 0; i < lines; i++)
+	if (dt_wait == 0)
 	{
-		TextDraw(pTexts->at(i).GetString(), x, y + (fontSize_ + offset) * i, fontSize_);
+		for (int i = 0; i < lines; i++)
+		{
+			TextDraw(pTexts->at(i).GetString(), x, y + (fontSize_ + offset) * i, fontSize_, font, color);
+		}
+
+		for (int i = 0; i < pTexts->size(); i++)
+		{
+			pTexts->at(i).Clear();
+		}
+
+		pTexts->clear();
+		pTexts->shrink_to_fit();
+	}
+	else
+	{
+		LOG("waitToRender %f", waitToRender.ReadMSec());
+		if (waitToRender.ReadMSec() > dt_wait)
+		{
+			int chars = 0;
+
+			for (int i = 0; i < pTexts->size(); i++)
+			{
+				chars += pTexts->at(i).Length();
+			}
+
+			if (temp.size() < chars)
+			{
+				string aux_str(text.GetString(), 0, charInNum++);
+				SString aux(aux_str.c_str());
+				SString b = aux;
+
+				SplitText(aux, &temp, fontSize_, max_chars_line_);
+			}
+			waitToRender.Start();
+		}
+
+		for (int j = 0; j < temp.size(); j++)
+		{
+			TextDraw(temp.at(j).GetString(), x, y + (fontSize_ + offset) * j, fontSize_, font, color);
+		}
+	}
+}
+
+void Render::ResetDtText()
+{
+	app->render->waitToRender.Start();
+	app->render->charInNum = 1;
+
+	for (int i = 0; i < temp.size(); i++)
+	{
+		temp.at(i).Clear();
 	}
 
-	for (int i = 0; i < pTexts->size(); i++)
-	{
-		pTexts->at(i).Clear();
-	}
-
-	pTexts->clear();
-	pTexts->shrink_to_fit();
+	temp.clear();
+	temp.shrink_to_fit();
 }
 
 bool Render::VSyncOn()

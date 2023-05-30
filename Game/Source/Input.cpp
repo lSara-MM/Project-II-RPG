@@ -71,7 +71,7 @@ bool Input::Start()
 
 	mouseSpeed_F = 0.4f;
 
-	SDL_ShowCursor(false);
+	SDL_ShowCursor(true);	// To Do: to change to false? 
 
 	SDL_StopTextInput();
 
@@ -328,9 +328,11 @@ void Input::RenderTempText(SString temp, const char* subs, iPoint pos, int fonts
 void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt)
 {
 	int speed_X = 0; int speed_Y = 0;
+	
+	// TO DO: uncomment the if
 
-	if (!godMode_B)
-	{
+	//if (!godMode_B)
+	//{
 		if (app->input->controller.j1_x > 0)
 		{
 			speed_X = mouseSpeed * dt;
@@ -386,8 +388,7 @@ void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float d
 			}
 		}
 
-		SDL_WarpMouseInWindow(app->win->window, mouseX + speed_X, mouseY + speed_Y);
-	}
-	
+		//SDL_WarpMouseInWindow(app->win->window, mouseX + speed_X, mouseY + speed_Y);
+	//}
 }
 

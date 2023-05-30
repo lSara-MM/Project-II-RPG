@@ -37,15 +37,19 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 
 	if (!activeNode->trimmed)
 	{
-		app->render->SplitText(activeNode->text, &activeNode->texts, FONT_SIZE, max_chars_line);
+		app->render->ResetDtText();
 		activeNode->trimmed = true;
 	}
 
-	size_t lines = activeNode->texts.size();
+	float dt_wait = 25.0f;
+	//RenderTrimmedText(int x, int y, int offset, SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_, float fontOffset, Font font, int dtNext, SDL_Color color)
+	app->render->RenderTrimmedText(pos.x + 100, pos.y + 50, 10, activeNode->text, &activeNode->texts, FONT_SIZE, max_chars_line, 0, Font::TEXT, dt_wait, { 255, 255, 255 });
+
+	/*size_t lines = activeNode->texts.size();
 	for (size_t i = 0; i < lines; i++)
 	{
 		app->render->TextDraw(activeNode->texts.at(i).GetString(), pos.x + 100, pos.y + 50 + (FONT_SIZE + 10) * i, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
-	}
+	}*/
 
 	EventReturn(mod, pos);
 
