@@ -630,7 +630,9 @@ public:
 
 	Settings(Module* mod)
 	{
-		settingsTexture = app->tex->Load(settingsPath);
+		cintaTexture = app->tex->Load(cintaPath);
+		cartelTexture = app->tex->Load(cartelPath);
+		sombraTexture = app->tex->Load(sombraPath);
 
 		// settings buttons
 		settings_B = false;
@@ -675,19 +677,12 @@ public:
 		float point = animationMenu.GetPoint();
 		int offsetAnimation = -750;
 		//formula int(offsetAnimation + point * (0 - offsetAnimation))
+	
+		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, int(offsetAnimation + point * (85 - app->render->camera.y - offsetAnimation)));
+		app->render->DrawTexture(cartelTexture, 274 - app->render->camera.x, int(offsetAnimation + point * (210 - app->render->camera.y - offsetAnimation)));
+		app->render->DrawTexture(sombraTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (0 - app->render->camera.y - offsetAnimation)));
 
-		SDL_Rect rect = { 0, 0, 90, 93 };
-
-		app->render->DrawRectangle({ 290 - app->render->camera.x, int(offsetAnimation + point * (203 - app->render->camera.y - offsetAnimation)), 730, 463 }, 163, 163, 163, 200, true);
-		
-		app->render->DrawTexture(settingsTexture, 450 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
-		rect = { 91, 0, 249, 93 };
-		app->render->DrawTexture(settingsTexture, 540 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
-		rect = { 341, 0, 90, 93 };
-		app->render->DrawTexture(settingsTexture, 789 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
-
-		//app->render->DrawLine(490 - app->render->camera.x, int(offsetAnimation + point * (250 - app->render->camera.y - offsetAnimation)), 490 - app->render->camera.x, 600 - app->render->camera.y , 0, 0, 0);
-		app->render->TextDraw("Settings", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Settings", 565, int(offsetAnimation + point * (107 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
 
 
 		if (pGame->game_B) { 
@@ -788,18 +783,9 @@ public:
 		int offsetAnimation = -750;
 		//formula int(offsetAnimation + point * (0 - offsetAnimation))
 
-		SDL_Rect rect = { 0, 0, 90, 93 };
+		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, int(offsetAnimation + point * (85 - app->render->camera.y - offsetAnimation)));
 
-		app->render->DrawRectangle({ 290 - app->render->camera.x, int(offsetAnimation + point * (203 - app->render->camera.y - offsetAnimation)), 730, 463 }, 163, 163, 163, 200, true);
-
-		app->render->DrawTexture(settingsTexture, 450 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
-		rect = { 91, 0, 249, 93 };
-		app->render->DrawTexture(settingsTexture, 540 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
-		rect = { 341, 0, 90, 93 };
-		app->render->DrawTexture(settingsTexture, 789 - app->render->camera.x, int(offsetAnimation + point * (100 - app->render->camera.y - offsetAnimation)), &rect);
-
-		//app->render->DrawLine(490 - app->render->camera.x, int(offsetAnimation + point * (250 - app->render->camera.y - offsetAnimation)), 490 - app->render->camera.x, 600 - app->render->camera.y, 0, 0, 0);
-		app->render->TextDraw("Settings", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Settings", 570, int(offsetAnimation + point * (120 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
 
 		settings_B = false;
 		open_settings_B = false;
@@ -820,7 +806,7 @@ public:
 
 	bool CleanUp()
 	{
-		app->tex->UnLoad(settingsTexture);
+		app->tex->UnLoad(cintaTexture);
 
 		listSettingsButtons.Clear();
 		settings_B = false;
@@ -853,12 +839,16 @@ public:
 	List<GuiButton*> listSettingsButtons;
 	const char* buttons[5] = { "Game", "Graphics", "Audio", "Credits", "\n" };
 
-	SDL_Texture* settingsTexture;
-	const char* settingsPath = "Assets/GUI/UI_Marker_L.png";
+	SDL_Texture* cintaTexture;
+	const char* cintaPath = "Assets/GUI/CintaTitulo_Settings.png";
+	SDL_Texture* cartelTexture;
+	const char* cartelPath = "Assets/GUI/Cartel_Settings.png";
+	SDL_Texture* sombraTexture;
+	const char* sombraPath = "Assets/GUI/sombra_Settings-Pause.png";
+
 	bool settings_B;
 	bool open_settings_B;
 
-	
 	GameSettings* pGame;
 	ControlSettings* pControl;
 	GraphicsSettings* pGraphics;
@@ -878,7 +868,8 @@ public:
 
 	Pause(Module* mod)
 	{
-		//PauseTexture = app->tex->Load(PausePath);
+		cartelpauseTexture = app->tex->Load(cartelpausePath);
+		fondoTexture = app->tex->Load(fondoPath);
 
 		// Pause buttons
 		pause_B = false;
@@ -891,7 +882,7 @@ public:
 
 		for (int i = 0; buttons[i] != "\n"; i++)
 		{
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 50, 300 + 77 * i, 155, 52 }, ButtonType::EXTRA_LARGE, buttons[i], 20, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
+			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 50, 280 + 77 * i, 155, 52 }, ButtonType::EXTRA_LARGE, buttons[i], 20, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
 			button->state = GuiControlState::NONE;
 			listPauseButtons.Add(button);
 		}
@@ -916,8 +907,9 @@ public:
 
 		app->audio->lowerBgMusic();
 
-		app->render->DrawRectangle({ 0 - app->render->camera.x,int(offsetAnimation + point * (0 - app->render->camera.y-offsetAnimation)), app->win->GetWidth(), app->win->GetHeight()}, 64, 58, 57);
-		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
+		app->render->DrawTexture(fondoTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (0 - app->render->camera.y - offsetAnimation)));
+		app->render->DrawTexture(cartelpauseTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (250 - app->render->camera.y - offsetAnimation)));
+
 		app->render->TextDraw("Pause", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI);
 		if (!open_pause_B)
 		{
@@ -959,12 +951,11 @@ public:
 		//SDL_Rect rect = { 0, 0, 226, 261 };
 
 		app->audio->lowerBgMusic();
+		app->render->DrawTexture(fondoTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (0 - app->render->camera.y - offsetAnimation)));
+		app->render->DrawTexture(cartelpauseTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (250 - app->render->camera.y - offsetAnimation)));
 
-		app->render->DrawRectangle({ 0 - app->render->camera.x,int(offsetAnimation + point * (0 - app->render->camera.y - offsetAnimation)), app->win->GetWidth(), app->win->GetHeight() }, 64, 58, 57);
-		//if (!app->render->DrawTexture(PauseTexture, 150, 70, &rect)) { app->render->TextDraw("Pause", 210, 90, 21, { 107, 0, 110 }); }
 		app->render->TextDraw("Pause", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI);
 
-		
 		pause_B = false;
 		open_pause_B = false;
 		app->input->stepSound_B = false;
@@ -1001,8 +992,13 @@ public:
 	List<GuiButton*> listPauseButtons;
 	const char* buttons[5] = { "Resume", "Return to Title", "Settings", "Exit", "\n" };
 
-	SDL_Texture* PauseTexture;
-	const char* PausePath;
+
+	SDL_Texture* fondoTexture;
+	const char* fondoPath = "Assets/GUI/fondo_Pause.png";
+	SDL_Texture* cartelpauseTexture;
+	const char* cartelpausePath = "Assets/GUI/CartelMarron_Pause.png";
+
+
 	bool pause_B;
 	bool open_pause_B;
 
