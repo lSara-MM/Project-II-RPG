@@ -70,7 +70,7 @@ public:
 	}
 
 	int speedAnimButton = 3;//velocidad animacion botones
-	int speedAnimNotButton = 3;//velocidad animacion cosas no botones
+	int speedAnimNotButton = 1;//velocidad animacion cosas no botones
 
 };
 
@@ -632,7 +632,8 @@ public:
 	{
 		cintaTexture = app->tex->Load(cintaPath);
 		cartelTexture = app->tex->Load(cartelPath);
-		sombraTexture = app->tex->Load(sombraPath);
+		sombraDchTexture = app->tex->Load(sombraDchPath);
+		sombraIzqTexture = app->tex->Load(sombraIzqPath);
 
 		// settings buttons
 		settings_B = false;
@@ -657,7 +658,7 @@ public:
 		pAudio = new AudioSettings(mod);
 
 		animationMenu.Set();
-		animationMenu.AddTween(100, 80, BACK_OUT);
+		animationMenu.AddTween(100, 80, BACK_IN_OUT);
 		animationAudio.Set();
 		animationAudio.AddTween(100, 80, BACK_OUT);
 		animationControl.Set();
@@ -680,7 +681,10 @@ public:
 	
 		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, int(offsetAnimation + point * (85 - app->render->camera.y - offsetAnimation)));
 		app->render->DrawTexture(cartelTexture, 274 - app->render->camera.x, int(offsetAnimation + point * (210 - app->render->camera.y - offsetAnimation)));
-		app->render->DrawTexture(sombraTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (0 - app->render->camera.y - offsetAnimation)));
+		int offsetAnimationDch = -1300;
+		int offsetAnimationIzq = 1300;
+		app->render->DrawTexture(sombraIzqTexture, int(offsetAnimationIzq + point * (0 - app->render->camera.x - offsetAnimationIzq)),0 - app->render->camera.y);
+		app->render->DrawTexture(sombraDchTexture, int(offsetAnimationDch + point * (0 - app->render->camera.x - offsetAnimationDch)), 0 - app->render->camera.y);
 
 		app->render->TextDraw("Settings", 565, int(offsetAnimation + point * (107 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
 
@@ -786,6 +790,10 @@ public:
 		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, int(offsetAnimation + point * (85 - app->render->camera.y - offsetAnimation)));
 
 		app->render->TextDraw("Settings", 570, int(offsetAnimation + point * (120 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
+		int offsetAnimationDch = 1300;
+		int offsetAnimationIzq = -1300;
+		app->render->DrawTexture(sombraIzqTexture, int(offsetAnimationIzq + point * (0 - app->render->camera.x - offsetAnimationIzq)), 0 - app->render->camera.y);
+		app->render->DrawTexture(sombraDchTexture, int(offsetAnimationDch + point * (0 - app->render->camera.x - offsetAnimationDch)), 0 - app->render->camera.y);
 
 		settings_B = false;
 		open_settings_B = false;
@@ -843,8 +851,10 @@ public:
 	const char* cintaPath = "Assets/GUI/CintaTitulo_Settings.png";
 	SDL_Texture* cartelTexture;
 	const char* cartelPath = "Assets/GUI/Cartel_Settings.png";
-	SDL_Texture* sombraTexture;
-	const char* sombraPath = "Assets/GUI/sombra_Settings-Pause.png";
+	SDL_Texture* sombraDchTexture;
+	const char* sombraDchPath = "Assets/GUI/sombraDerecha.png";
+	SDL_Texture* sombraIzqTexture;
+	const char* sombraIzqPath = "Assets/GUI/sombraIzquierda.png";
 
 	bool settings_B;
 	bool open_settings_B;
