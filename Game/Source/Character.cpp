@@ -227,7 +227,7 @@ bool Character::Update(float dt)
 						case CharacterClass::MELEE_DPS:
 						{
 							int probSkill;
-							if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Alto de vida
+							if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //No puede hacer ataques principales
 							{
 								//usar skill 2 (avance)
 								UseSkill(listSkills.At(2)->data);
@@ -237,25 +237,25 @@ bool Character::Update(float dt)
 							}
 							else
 							{
-								if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se usa
+								if (listSkillsHistory.end->data == 2)//Si se uso el turno pasado no se usa
 								{
 									probSkill = 0;
 								}
-								else //Si no se uso pues casi siempre la usa
+								else //Si no se uso pues si puede que use el buff
 								{
-									probSkill = 25;
+									probSkill = 30;
 								}
 								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
 								{
 									//usar skill 1 (buff ofensivo)
 									UseSkill(listSkills.At(1)->data);
 
-									listSkillsHistory.Add(1);
+									listSkillsHistory.Add(2);
 									break;
 								}
 								else
 								{
-									if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se usa
+									if (listSkillsHistory.end->data == 2)//Si last skill buffo hace cleave
 									{
 										probSkill = 75;
 									}
@@ -269,7 +269,7 @@ bool Character::Update(float dt)
 									//usar skill 3 (atk area)
 									UseSkill(listSkills.At(3)->data);
 
-									listSkillsHistory.Add(3);
+									listSkillsHistory.Add(4);
 									break;
 								}
 								else
@@ -277,7 +277,7 @@ bool Character::Update(float dt)
 									//usar skill 0 (atk basico)
 									UseSkill(listSkills.At(0)->data);
 
-									listSkillsHistory.Add(0);
+									listSkillsHistory.Add(1);
 									break;
 								}
 							}
