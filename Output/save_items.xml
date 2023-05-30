@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <save_state>
 	<items>
+		<coins coin="true" />
 		<item name="C_wood" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="C_copper" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="C_iron" quantity="0" equiped="false" space="0" whom="0" />
