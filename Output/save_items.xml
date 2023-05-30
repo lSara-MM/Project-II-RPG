@@ -94,21 +94,21 @@
 		<item name="Crit_Dmg_Potion" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Accuracy_Potion" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Dodge_Potion" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="Wood" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="Copper" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="Iron" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="Wood" quantity="12" equiped="false" space="0" whom="0" />
+		<item name="Copper" quantity="8" equiped="false" space="0" whom="0" />
+		<item name="Iron" quantity="3" equiped="false" space="0" whom="0" />
 		<item name="Steel" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Titanium" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="Straw" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="Rope" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="Straw" quantity="12" equiped="false" space="0" whom="0" />
+		<item name="Rope" quantity="14" equiped="false" space="0" whom="0" />
 		<item name="Leather" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="Onyx" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="Amber" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="Onyx" quantity="6" equiped="false" space="0" whom="0" />
+		<item name="Amber" quantity="9" equiped="false" space="0" whom="0" />
 		<item name="Emerald" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Diamond" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Jade" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="Amethyst" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="Amethyst" quantity="1" equiped="false" space="0" whom="0" />
 		<item name="Coral" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="Pearl" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="Pearl" quantity="1" equiped="false" space="0" whom="0" />
 	</items>
 </save_state>
