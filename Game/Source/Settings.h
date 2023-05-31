@@ -2,6 +2,7 @@
 #define __SETTINGS_H__
 
 #include "App.h"
+#include "DialogueSystem.h"
 #include "GuiManager.h"
 
 #include "GuiButton.h"
@@ -13,7 +14,6 @@
 #include "Render.h"
 #include "Window.h"
 
-#include "DialogueSystem.h"
 
 #include "Log.h"
 #include "Point.h"
@@ -76,7 +76,6 @@ public:
 
 };
 
-class DialogueSystem;
 
 class GameSettings : public HandleSettings
 {
@@ -123,7 +122,6 @@ public:
 		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 956, mod, { x, y+offset, 1, 1 }, ButtonType::SETTINGS_TEXT, "Text Speed", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		//button->state = GuiControlState::NONE;
 		//listGameButtons.Add(button);
-
 	}
 
 	bool OpenGameSettings()
@@ -139,10 +137,10 @@ public:
 				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
 
-				if (i->data->id == 807)	// Change TextSpeed button
-				{
-					//i->data->text = app->dialogueSystem->GetTextSpeedSString();
-				}
+				//if (i->data->id == 807)	// Change TextSpeed button
+				//{
+				//	i->data->text = app->dialogueSystem->GetTextSpeedSString();
+				//}
 			}
 		}
 		//if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
@@ -935,7 +933,7 @@ public:
 		app->render->DrawTexture(fondoTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (0  - offsetAnimation))- app->render->camera.y);
 		app->render->DrawTexture(cartelpauseTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (250 - offsetAnimation))- app->render->camera.y );
 
-		app->render->TextDraw("Pause", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI);
+		app->render->TextDraw("Pause", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
 		if (!open_pause_B)
 		{
 			for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
@@ -979,7 +977,7 @@ public:
 		app->render->DrawTexture(fondoTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (0  - offsetAnimation))- app->render->camera.y);
 		app->render->DrawTexture(cartelpauseTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (250  - offsetAnimation))- app->render->camera.y);
 
-		app->render->TextDraw("Pause", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI);
+		app->render->TextDraw("Pause", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI, {255, 255, 255});
 
 		pause_B = false;
 		open_pause_B = false;
@@ -1029,7 +1027,6 @@ public:
 
 	Settings* pSettings;
 	Tween pauseAnimation;
-
 };
 
 

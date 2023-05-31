@@ -195,7 +195,19 @@ bool PracticeTent::PostUpdate()
 	{
 		pPause->ClosePause();
 	}
-	if (settings_B) { pSettings->OpenSettings(); }
+	if (settings_B) 
+	{
+		pSettings->OpenSettings(); 
+		
+		// TO DO: cambiar aixo, nose perque pero no deixa fer aixo des del settings
+		for (ListItem<GuiButton*>* i = pSettings->pGame->listGameButtons.start; i != nullptr; i = i->next)
+		{
+			if (i->data->id == 807)	// Change TextSpeed button
+			{
+				i->data->text = app->dialogueSystem->GetTextSpeedSString();
+			}
+		}
+	}
 	else
 	{
 		pSettings->CloseSettings();
@@ -208,11 +220,9 @@ bool PracticeTent::PostUpdate()
 		{
 			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_pos - app->render->camera.x, mouseY_pos - app->render->camera.y);
 		}
-
 		else
 		{
 			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_pos - app->render->camera.x, mouseY_pos - app->render->camera.y);
-
 		}
 	}
 

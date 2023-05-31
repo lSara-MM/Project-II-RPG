@@ -36,10 +36,10 @@ DialogueTree::DialogueTree(bool a)
 		dtWait = 50.0f;
 		break;
 	case TextSpeed::MEDIUM:
-		dtWait = 20.0f;
+		dtWait = 15.0f;
 		break;
 	case TextSpeed::FAST:
-		dtWait = 3.0f;
+		dtWait = 0.05f;
 		break;
 	default:
 		dtWait = 20.0f;

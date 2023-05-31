@@ -227,8 +227,19 @@ bool IntroScene::PostUpdate()
 		pSettings->settings_B = false;
 	}
 
-	if (pSettings->settings_B) { pSettings->OpenSettings(); }
+	if (pSettings->settings_B) 
+	{
+		pSettings->OpenSettings();
 
+		// TO DO: cambiar aixo, nose perque pero no deixa fer aixo des del settings
+		for (ListItem<GuiButton*>* i = pSettings->pGame->listGameButtons.start; i != nullptr; i = i->next)
+		{
+			if (i->data->id == 807)	// Change TextSpeed button
+			{
+				i->data->text = app->dialogueSystem->GetTextSpeedSString();
+			}
+		}
+	}
 	else if (!pSettings->settings_B)
 	{
 		pSettings->CloseSettings();
