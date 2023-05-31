@@ -87,8 +87,6 @@ bool DialogueSystem::CleanUp()
 		activeTree = nullptr;
 	}
 
-	hasEnded = false;
-
 	app->tex->UnLoad(textBox_tex);
 	app->guiManager->CleanUp();
 
