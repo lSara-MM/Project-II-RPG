@@ -688,16 +688,15 @@ public:
 		int offsetAnimation = -750;
 		//formula int(offsetAnimation + point * (0 - offsetAnimation))
 	
-		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, int(offsetAnimation + point * (85 - app->render->camera.y - offsetAnimation)));
-		app->render->DrawTexture(cartelTexture, 274 - app->render->camera.x, int(offsetAnimation + point * (210 - app->render->camera.y - offsetAnimation)));
+		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, int(offsetAnimation + point * (85  - offsetAnimation)) - app->render->camera.y);
+		app->render->DrawTexture(cartelTexture, 274 - app->render->camera.x, int(offsetAnimation + point * (210 - offsetAnimation)) - app->render->camera.y);
 		app->render->TextDraw("Settings", 565, int(offsetAnimation + point * (107 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
 
 		float point69 = animationShadow.GetPoint();
 		int offsetAnimationDch = 1300;
 		int offsetAnimationIzq = -1300;
-		app->render->DrawTexture(sombraIzqTexture, int(offsetAnimationIzq + point69 * (0 - app->render->camera.x - offsetAnimationIzq)),0 - app->render->camera.y);
-		app->render->DrawTexture(sombraDchTexture, int(offsetAnimationDch + point69 * (0 - app->render->camera.x - offsetAnimationDch)), 0 - app->render->camera.y);
-
+		app->render->DrawTexture(sombraDchTexture, int(offsetAnimationDch + point69 * (0 - offsetAnimationDch)) - app->render->camera.x, 0 - app->render->camera.y);
+		app->render->DrawTexture(sombraIzqTexture, int(offsetAnimationIzq + point69 * (0 - offsetAnimationIzq)) - app->render->camera.x, 0 - app->render->camera.y);
 
 
 		if (pGame->game_B) { 
@@ -800,15 +799,15 @@ public:
 		int offsetAnimation = -750;
 		//formula int(offsetAnimation + point * (0 - offsetAnimation))
 
-		app->render->DrawTexture(cartelTexture, 274 - app->render->camera.x, int(offsetAnimation + point * (210 - app->render->camera.y - offsetAnimation)));
-		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, int(offsetAnimation + point * (85 - app->render->camera.y - offsetAnimation)));
+		app->render->DrawTexture(cartelTexture, 274 - app->render->camera.x, int(offsetAnimation + point * (210 - offsetAnimation)) - app->render->camera.y);
+		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, int(offsetAnimation + point * (85  - offsetAnimation))- app->render->camera.y);
 
 		app->render->TextDraw("Settings", 565, int(offsetAnimation + point * (107 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
 		int offsetAnimationDch = 1300;
 		int offsetAnimationIzq = -1300;
 		float point69 = animationShadow.GetPoint();
-		app->render->DrawTexture(sombraIzqTexture, int(offsetAnimationIzq + point69 * (0 - app->render->camera.x - offsetAnimationIzq)), 0 - app->render->camera.y);
-		app->render->DrawTexture(sombraDchTexture, int(offsetAnimationDch + point69 * (0 - app->render->camera.x - offsetAnimationDch)), 0 - app->render->camera.y);
+		app->render->DrawTexture(sombraDchTexture, int(offsetAnimationDch + point69 * (0 - offsetAnimationDch)) - app->render->camera.x, 0 - app->render->camera.y);
+		app->render->DrawTexture(sombraIzqTexture, int(offsetAnimationIzq + point69 * (0 - offsetAnimationIzq)) - app->render->camera.x, 0 - app->render->camera.y);
 
 		settings_B = false;
 		open_settings_B = false;
@@ -933,8 +932,8 @@ public:
 
 		app->audio->lowerBgMusic();
 
-		app->render->DrawTexture(fondoTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (0 - app->render->camera.y - offsetAnimation)));
-		app->render->DrawTexture(cartelpauseTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (250 - app->render->camera.y - offsetAnimation)));
+		app->render->DrawTexture(fondoTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (0  - offsetAnimation))- app->render->camera.y);
+		app->render->DrawTexture(cartelpauseTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (250 - offsetAnimation))- app->render->camera.y );
 
 		app->render->TextDraw("Pause", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI);
 		if (!open_pause_B)
@@ -977,8 +976,8 @@ public:
 		//SDL_Rect rect = { 0, 0, 226, 261 };
 
 		app->audio->lowerBgMusic();
-		app->render->DrawTexture(fondoTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (0 - app->render->camera.y - offsetAnimation)));
-		app->render->DrawTexture(cartelpauseTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (250 - app->render->camera.y - offsetAnimation)));
+		app->render->DrawTexture(fondoTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (0  - offsetAnimation))- app->render->camera.y);
+		app->render->DrawTexture(cartelpauseTexture, 0 - app->render->camera.x, int(offsetAnimation + point * (250  - offsetAnimation))- app->render->camera.y);
 
 		app->render->TextDraw("Pause", 600, int(offsetAnimation + point * (121 - offsetAnimation)), 40, Font::UI);
 
