@@ -68,7 +68,6 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 	} 
 	else
 	{
-		activeTree->activeNode = nullptr;
 		hasEnded = true;
 		CleanUp();
 	}
@@ -82,10 +81,13 @@ bool DialogueSystem::CleanUp()
 {
 	if (activeTree != nullptr)
 	{
+		activeTree->activeNode = nullptr;
 		activeTree->nodeList.clear();
 		delete activeTree;
 		activeTree = nullptr;
 	}
+
+	hasEnded = false;
 
 	app->tex->UnLoad(textBox_tex);
 	app->guiManager->CleanUp();
