@@ -141,7 +141,7 @@ public:
 
 				if (i->data->id == 807)	// Change TextSpeed button
 				{
-					i->data->text = app->dialogueSystem->GetTextSpeedSString();
+					//i->data->text = app->dialogueSystem->GetTextSpeedSString();
 				}
 			}
 		}
