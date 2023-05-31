@@ -122,6 +122,7 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="Source\LootManager.cpp" />
+    <ClCompile Include="Source\Store.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -284,6 +285,7 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\LootManager.h" />
+    <ClInclude Include="Source\Store.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">

@@ -66,11 +66,6 @@ bool Scene::Start()
 	app->itemManager->Enable();
 	app->lootManager->Enable();
 
-	for (int i = 0; i < app->lootManager->chests.size(); i++)
-	{
-		app->lootManager->chests[i]->CleanUp();
-	}
-
 	if (app->puzzleManager->active == true) {
 		app->puzzleManager->CleanUp();
 	}
@@ -114,6 +109,15 @@ bool Scene::Start()
 
 	//GUARRADA SUPER TEMPORAL
 	app->itemManager->comb = 0;
+
+	//CleanUp chests
+	for (int i = 0; i < app->lootManager->chests.size(); i++)
+	{
+		if (app->lootManager->chests[i]->used == false)
+		{
+			app->lootManager->chests[i]->CleanUp();
+		}
+	}
 
 	return true;
 }
@@ -509,7 +513,6 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 
 
 	case 804:
-
 		LOG("Audio settings click");
 		pSettings->pAudio->audio_B = true;
 
@@ -519,7 +522,6 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 805:
-
 		LOG("Credits settings click");
 		pSettings->pControl->control_B = true;
 
@@ -527,6 +529,8 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		pSettings->pGraphics->CloseGraphics();
 		pSettings->pAudio->CloseAudioSettings();
 		break;
+
+
 		// Game settings
 	case 806:
 		LOG("Button Language click");
@@ -535,7 +539,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 807:
 		LOG("Button Text Speed click");
-
+		control->text = app->dialogueSystem->ChangeTextSpeed();
 		break;
 	case 808:
 		LOG("Button Return to Title click");

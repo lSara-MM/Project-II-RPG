@@ -107,6 +107,7 @@
     <ClCompile Include="Source\InitiAllResourcesFromZip.cpp" />
     <ClCompile Include="Source\LootManager.cpp" />
     <ClCompile Include="Source\QuestManager.cpp" />
+    <ClCompile Include="Source\Store.cpp" />
     <ClCompile Include="Source\Tweening.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\GuiButton.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Source\SceneWin_Lose.h" />
     <ClInclude Include="Source\Settings.h" />
     <ClInclude Include="Source\Skills.h" />
+    <ClInclude Include="Source\Store.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\Tweening.h" />

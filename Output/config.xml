@@ -155,7 +155,7 @@
 	<npc name="ORACULO" dialogueID="2"
 		x="2595" y="4438" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
-	<npc name="MERCANTE" dialogueID="3" dialogueID="4" dialogueID="5"
+	<npc name="MERCANTE" dialogueID="3"
 		x="3538" y="2542" width="64" height="64" texturepath="Assets/Textures/gemelos_chibi.png"/>
 </scene>
   <SceneWin_Lose>
@@ -189,6 +189,7 @@
 	
 	<itemmanager inventorypath="Assets/Textures/Inventory.png"
 				 itempath="Assets/Textures/itemTextures.png"
+				 storepath="Assets/GUI/storeUI.png"
 				 />
 
 	<map>

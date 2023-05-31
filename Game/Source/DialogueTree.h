@@ -4,6 +4,7 @@
 #include "GuiManager.h"
 #include "Module.h"
 #include "GuiButton.h"
+#include "Store.h"
 
 #include "List.h"
 #include "Log.h"
@@ -17,9 +18,10 @@
 #define DIALOGUE_SAVE 3
 #define DIALOGUE_IF 4
 #define DIALOGUE_QUEST 5
+#define DIALOGUE_STORE 6
+#define DIALOGUE_FORGE 7
 
 using namespace std;
-
 
 class DialogueChoice
 {
@@ -73,15 +75,16 @@ public:
 	bool active = false;
 	vector <DialogueNode*> nodeList;
 
-
 	DialogueNode* activeNode;
+	bool updateOptions;
 
+private:
 	List <GuiButton*> listDialogueButtons;
 	int GUI_id = 0;
 
-	bool updateOptions;
 	int max_chars_line;
-	bool condiciondia = 0;
+
+	float dtWait;
 };
 
 #endif //__DIALOGTREE_H__

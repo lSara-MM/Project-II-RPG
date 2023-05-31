@@ -481,7 +481,6 @@ bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 
 
 	case 804:
-
 		LOG("Audio settings click");
 		pSettings->pAudio->audio_B = true;
 
@@ -491,7 +490,6 @@ bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 805:
-
 		LOG("Credits settings click");
 		pSettings->pControl->control_B = true;
 
@@ -499,6 +497,8 @@ bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 		pSettings->pGraphics->CloseGraphics();
 		pSettings->pAudio->CloseAudioSettings();
 		break;
+		
+		
 		// Game settings
 	case 806:
 		LOG("Button Language click");
@@ -507,8 +507,9 @@ bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 807:
 		LOG("Button Text Speed click");
-
+		control->text = app->dialogueSystem->ChangeTextSpeed();
 		break;
+
 	case 808:
 		LOG("Button Return to Title click");
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);

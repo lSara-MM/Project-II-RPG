@@ -27,6 +27,7 @@ class Combat;
 class DialogueSystem;
 class GuiManager;
 class Inventory;
+class Store;
 
 class Map;
 class PathFinding;
@@ -121,6 +122,7 @@ public:
 	DialogueSystem* dialogueSystem;
 	GuiManager* guiManager;
 	Inventory* inventory;
+	Store* store;
 	
 	Map* map;
 	PathFinding* pathfinding;

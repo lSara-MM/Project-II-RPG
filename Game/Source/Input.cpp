@@ -71,7 +71,7 @@ bool Input::Start()
 
 	mouseSpeed_F = 0.4f;
 
-	SDL_ShowCursor(true);	// To Do: to change to false? 
+	SDL_ShowCursor(false);
 
 	SDL_StopTextInput();
 

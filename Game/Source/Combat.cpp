@@ -916,7 +916,7 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 
 			app->itemManager->coins += coins;
 
-			int loot = rand() % 101;
+			/*int loot = rand() % 101;
 
 			if (loot >= 50)
 			{
@@ -937,7 +937,7 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 			{
 				app->itemManager->AddQuantity(93, 2);
 				app->itemManager->AddQuantity(100, 2);
-			}
+			}*/
 
 		}
 
@@ -1025,8 +1025,16 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 			//Evitar petar boton amarillo
 			if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ALLY)
 			{
-			posStart = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
-			posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetEnd_I;
+				posStart = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->posToTargetStart_I;
+				if (vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->targetFriend) //Target aliado
+				{
+					posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->RangeCanTarget(vecAllies); //Aqui hay poner un get range
+				}
+				else //Target enemigo
+				{
+					posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->RangeCanTarget(vecEnemies); //Aqui hay poner un get range
+				}
+			
 			}
 		}
 	}
@@ -1079,10 +1087,12 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 	SDL_Rect rect = { 0,0,588,179 };
 	SDL_Rect rect2 = { 0,0,588,90 };
 
-	//Printar recuadro info
+	//Printar recuadro info para la info de las skills
 	switch (listInitiative.At(charaInTurn)->data->id)
 	{
 	case 0:
+		rect.y = 0;
+		rect2.y = 0;
 		app->render->DrawTexture(skillTex, 36, 527, &rect);
 		app->render->DrawTexture(profileTex, 38, 407, &rect2);
 		break;
@@ -1115,204 +1125,210 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 	int fontSize = 25;
 	int posY = 535;//y botones
 
-	if (control->id <= 4)
+	if (control->id <= 4) //Aliados (0-3, 4 de buffer/seguro)
 	{
-		string maxHP_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->maxHp);
-		const char* c_hp = maxHP_C.c_str();
-		string attack_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::ATTACK));
-		const char* c_attack = attack_C.c_str();
-		string critR_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::CRIT_RATE));
-		const char* c_critR = critR_C.c_str();
-		string critD_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::CRIT_DMG));
-		const char* c_critD = critD_C.c_str();
-		string accuracy_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::ACCURACY));
-		const char* c_accuracy = accuracy_C.c_str();
-		string position_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->positionCombat_I);
-		const char* c_position = position_C.c_str();
-		string armor_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::ARMOR));
-		const char* c_armor = armor_C.c_str();
-		string dodge_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::DODGE));
-		const char* c_dodge = dodge_C.c_str();
-		string resist_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::RES));
-		const char* c_resist = resist_C.c_str();
-		string speed_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->speed);
-		const char* c_speed = speed_C.c_str();
-
-		switch (control->id)
+		if ((SearchInVec(vecAllies, control->id))==-1) //Seguro para que no pete
 		{
-		case 0:
-			rect.y = 0;
-			rect2.y = 0;
-			app->render->DrawTexture(skillTex, 36, 527, &rect);
-			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			return false;
+		}
+		else
+		{
+			string maxHP_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->maxHp);
+			const char* c_hp = maxHP_C.c_str();
+			string attack_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::ATTACK));
+			const char* c_attack = attack_C.c_str();
+			string critR_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::CRIT_RATE));
+			const char* c_critR = critR_C.c_str();
+			string critD_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::CRIT_DMG));
+			const char* c_critD = critD_C.c_str();
+			string accuracy_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::ACCURACY));
+			const char* c_accuracy = accuracy_C.c_str();
+			string position_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->positionCombat_I);
+			const char* c_position = position_C.c_str();
+			string armor_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::ARMOR));
+			const char* c_armor = armor_C.c_str();
+			string dodge_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::DODGE));
+			const char* c_dodge = dodge_C.c_str();
+			string resist_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::RES));
+			const char* c_resist = resist_C.c_str();
+			string speed_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->speed);
+			const char* c_speed = speed_C.c_str();
 
-			app->render->TextDraw("MaxHP", xText1, posY, fontSize);
-			app->render->TextDraw(c_hp, xNumber1, posY, fontSize);
+			switch (control->id)
+			{
+			case 0:
+				rect.y = 0;
+				rect2.y = 0;
+				app->render->DrawTexture(skillTex, 36, 527, &rect);
+				app->render->DrawTexture(profileTex, 38, 407, &rect2);
 
-			app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize);
-			app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize);
+				app->render->TextDraw("MaxHP", xText1, posY, fontSize);
+				app->render->TextDraw(c_hp, xNumber1, posY, fontSize);
 
-			app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize);
-			app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize);
+				app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize);
+				app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize);
 
-			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize);
-			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize);
+				app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize);
+				app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize);
 
-			app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize);
-			app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize);
+				app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize);
+				app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize);
 
-			app->render->TextDraw("Position", xText2, posY, fontSize);
-			app->render->TextDraw(c_position, xNumber2, posY, fontSize);
+				app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize);
+				app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize);
 
-			app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize);
-			app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize);
+				app->render->TextDraw("Position", xText2, posY, fontSize);
+				app->render->TextDraw(c_position, xNumber2, posY, fontSize);
 
-			app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize);
-			app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize);
+				app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize);
+				app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize);
 
-			app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize);
-			app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize);
+				app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize);
+				app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize);
 
-			app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize);
-			app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize);
+				app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize);
+				app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize);
 
-			break;
-		case 1:
-			rect.y = 179;
-			rect2.y = 90;
-			app->render->DrawTexture(skillTex, 36, 527, &rect);
-			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+				app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize);
+				app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize);
 
-			app->render->TextDraw("MaxHP", xText1, posY, fontSize);
-			app->render->TextDraw(c_hp, xNumber1, posY, fontSize);
+				break;
+			case 1:
+				rect.y = 179;
+				rect2.y = 90;
+				app->render->DrawTexture(skillTex, 36, 527, &rect);
+				app->render->DrawTexture(profileTex, 38, 407, &rect2);
 
-			app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize);
-			app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize);
+				app->render->TextDraw("MaxHP", xText1, posY, fontSize);
+				app->render->TextDraw(c_hp, xNumber1, posY, fontSize);
 
-			app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize);
-			app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize);
+				app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize);
+				app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize);
 
-			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize);
-			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize);
+				app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize);
+				app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize);
 
-			app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize);
-			app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize);
+				app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize);
+				app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize);
 
-			app->render->TextDraw("Position", xText2, posY, fontSize);
-			app->render->TextDraw(c_position, xNumber2, posY, fontSize);
+				app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize);
+				app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize);
 
-			app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize);
-			app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize);
+				app->render->TextDraw("Position", xText2, posY, fontSize);
+				app->render->TextDraw(c_position, xNumber2, posY, fontSize);
 
-			app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize);
-			app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize);
+				app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize);
+				app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize);
 
-			app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize);
-			app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize);
+				app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize);
+				app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize);
 
-			app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize);
-			app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize);
-			break;
-		case 2:
-			rect.y = 179 * 2;
-			rect2.y = 90 * 2;
-			app->render->DrawTexture(skillTex, 36, 527, &rect);
-			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+				app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize);
+				app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize);
 
-			app->render->TextDraw("MaxHP", xText1, posY, fontSize);
-			app->render->TextDraw(c_hp, xNumber1, posY, fontSize);
+				app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize);
+				app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize);
+				break;
+			case 2:
+				rect.y = 179 * 2;
+				rect2.y = 90 * 2;
+				app->render->DrawTexture(skillTex, 36, 527, &rect);
+				app->render->DrawTexture(profileTex, 38, 407, &rect2);
 
-			app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize);
-			app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize);
+				app->render->TextDraw("MaxHP", xText1, posY, fontSize);
+				app->render->TextDraw(c_hp, xNumber1, posY, fontSize);
 
-			app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize);
-			app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize);
+				app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize);
+				app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize);
 
-			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize);
-			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize);
+				app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize);
+				app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize);
 
-			app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize);
-			app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize);
+				app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize);
+				app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize);
 
-			app->render->TextDraw("Position", xText2, posY, fontSize);
-			app->render->TextDraw(c_position, xNumber2, posY, fontSize);
+				app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize);
+				app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize);
 
-			app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize);
-			app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize);
+				app->render->TextDraw("Position", xText2, posY, fontSize);
+				app->render->TextDraw(c_position, xNumber2, posY, fontSize);
 
-			app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize);
-			app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize);
+				app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize);
+				app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize);
 
-			app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize);
-			app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize);
+				app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize);
+				app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize);
 
-			app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize);
-			app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize);
-			break;
-		case 3:
-			rect.y = 179 * 3;
-			rect2.y = 90 * 3;
-			app->render->DrawTexture(skillTex, 36, 527, &rect);
-			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+				app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize);
+				app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize);
 
-			app->render->TextDraw("MaxHP", xText1, posY, fontSize);
-			app->render->TextDraw(c_hp, xNumber1, posY, fontSize);
+				app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize);
+				app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize);
+				break;
+			case 3:
+				rect.y = 179 * 3;
+				rect2.y = 90 * 3;
+				app->render->DrawTexture(skillTex, 36, 527, &rect);
+				app->render->DrawTexture(profileTex, 38, 407, &rect2);
 
-			app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize);
-			app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize);
+				app->render->TextDraw("MaxHP", xText1, posY, fontSize);
+				app->render->TextDraw(c_hp, xNumber1, posY, fontSize);
 
-			app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize);
-			app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize);
+				app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize);
+				app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize);
 
-			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize);
-			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize);
+				app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize);
+				app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize);
 
-			app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize);
-			app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize);
+				app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize);
+				app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize);
 
-			app->render->TextDraw("Position", xText2, posY, fontSize);
-			app->render->TextDraw(c_position, xNumber2, posY, fontSize);
+				app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize);
+				app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize);
 
-			app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize);
-			app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize);
+				app->render->TextDraw("Position", xText2, posY, fontSize);
+				app->render->TextDraw(c_position, xNumber2, posY, fontSize);
 
-			app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize);
-			app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize);
+				app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize);
+				app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize);
 
-			app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize);
-			app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize);
+				app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize);
+				app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize);
 
-			app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize);
-			app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize);
-			break;
-		default:
-			break;
+				app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize);
+				app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize);
+
+				app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize);
+				app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	
 	if (control->id >= 5 && control->id < 10)
 	{
-		int num = SearchInVec(vecEnemies, control->id);
-		if (num>-1 && control->id >= 5 && control->id < 10) //Seguro para que no pete
+		if (SearchInVec(vecEnemies, control->id)==-1) //Seguro para que no pete
 		{
-			Character* enemy = vecEnemies.at(SearchInVec(vecEnemies, control->id));
-			for (int i = 0; i < enemy->listSkills.Count(); i++)
-			{
-				if (enemy->listSkillsHistory.Find(i+1) == -1)
-				{
-					app->render->TextDraw("???", 70, 540 + 15 * i, 12);
-				}
-				else
-				{
-					SString ability;
-					ability += enemy->listSkills.At(i)->data->name;
-					ability += ": ";
-					ability += enemy->listSkills.At(i)->data->description.GetString();
-					app->render->TextDraw(ability.GetString(), 70, 540 + 15 * i, 12);
-				}
-			}
+			return false;
 		}
-		
+		Character* enemy = vecEnemies.at(SearchInVec(vecEnemies, control->id));
+		for (int i = 0; i < enemy->listSkills.Count(); i++)
+		{
+			if (enemy->listSkillsHistory.Find(i+1) == -1)
+			{
+				app->render->TextDraw("???", 70, 540 + 15 * i, 12);
+			}
+			else
+			{
+				SString ability;
+				ability += enemy->listSkills.At(i)->data->name;
+				ability += ": ";
+				ability += enemy->listSkills.At(i)->data->description.GetString();
+				app->render->TextDraw(ability.GetString(), 70, 540 + 15 * i, 12);
+			}
+		}	
 	}
 
 	if (control->id >= 10 && control->id < 14)

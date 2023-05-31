@@ -13,6 +13,8 @@
 #include "Render.h"
 #include "Window.h"
 
+#include "DialogueSystem.h"
+
 #include "Log.h"
 #include "Point.h"
 #include "SString.h"
@@ -70,10 +72,11 @@ public:
 	}
 
 	int speedAnimButton = 3;//velocidad animacion botones
-	int speedAnimNotButton = 1;//velocidad animacion cosas no botones
+	int speedAnimNotButton = 3;//velocidad animacion cosas no botones
 
 };
 
+class DialogueSystem;
 
 class GameSettings : public HandleSettings
 {
@@ -88,25 +91,25 @@ public:
 		open_game_B = false;
 
 		// Language
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 290, 133, 33 }, ButtonType::IN_SETTINGS, "English", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN,AnimationAxis::RIGHT_X);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 788, 290, 133, 33 }, ButtonType::IN_SETTINGS, "English", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN,AnimationAxis::RIGHT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
 		// Text Speed
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 858, 367, 133, 33 }, ButtonType::IN_SETTINGS, "Medium", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN,AnimationAxis::RIGHT_X);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 788, 367, 133, 33 }, ButtonType::IN_SETTINGS, "Medium", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN,AnimationAxis::RIGHT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
 		// Return to Title
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 444, 133, 33 }, ButtonType::IN_SETTINGS, "Return to Title", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 486, 444, 133, 33 }, ButtonType::IN_SETTINGS, "Return to Title", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
 		// Exit
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 556, 521, 133, 33 }, ButtonType::IN_SETTINGS, "Exit", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 486, 521, 133, 33 }, ButtonType::IN_SETTINGS, "Exit", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGameButtons.Add(button);
 
@@ -135,6 +138,11 @@ public:
 			{
 				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
+
+				if (i->data->id == 807)	// Change TextSpeed button
+				{
+					//i->data->text = app->dialogueSystem->GetTextSpeedSString();
+				}
 			}
 		}
 		//if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
@@ -219,9 +227,6 @@ public:
 			button->state = GuiControlState::NONE;
 			listControlButtons.Add(button);
 		}*/
-
-
-
 	}
 
 	bool OpenControlSettings()
@@ -321,25 +326,25 @@ public:
 		open_graphics_B = false;
 
 		// Window Size
-		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 280, 133, 33 }, ButtonType::IN_SETTINGS, "Window Size", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 801, 320, 133, 33 }, ButtonType::IN_SETTINGS, "Window Size", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGraphicsButtons.Add(button);
 
 		// Fullscreen	
 		GUI_id++;
-		GuiCheckBox* checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 871, 357, 46, 46 },ButtonType::NONE, "", 12, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
+		GuiCheckBox* checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 801, 397, 46, 46 },ButtonType::NONE, "", 12, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
 		button->state = GuiControlState::NONE;
 		listGraphicsCheckbox.Add(checkbox);
 
 		// Vsync
 		GUI_id++;
-		checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 871, 434, 46, 46 },ButtonType::NONE, "", 12, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
+		checkbox = (GuiCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, GUI_id, mod, { 801, 474, 46, 46 },ButtonType::NONE, "", 12, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
 		checkbox->state = GuiControlState::NONE;
 		listGraphicsCheckbox.Add(checkbox);
 
 		// Max fps
 		GUI_id++;
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 871, 511, 133, 33 }, ButtonType::IN_SETTINGS, "Max fps", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 801, 551, 133, 33 }, ButtonType::IN_SETTINGS, "Max fps", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
 		listGraphicsButtons.Add(button);
 
@@ -493,21 +498,21 @@ public:
 
 		//animacion sliders en eje x no va bien
 		// General volume
-		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 298, 219, 39 }, ButtonType::NONE, "general", 10, Font::UI, { 310, 298, 28, 39 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::UP_Y);
+		GuiSliderBar* sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 693, 358, 219, 39 }, ButtonType::NONE, "general", 10, Font::UI, { 310, 358, 28, 39 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::UP_Y);
 		sliderBar->state = GuiControlState::NONE;
 		general = sliderBar;
 		listSliderBars.Add(sliderBar);
 		
 		// music
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 375, 219, 39 }, ButtonType::NONE, "music", 10, Font::UI, { 310, 375, 28, 39 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::UP_Y);
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 693, 435, 219, 39 }, ButtonType::NONE, "music", 10, Font::UI, { 310, 435, 28, 39 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::UP_Y);
 		sliderBar->state = GuiControlState::NONE;
 		music = sliderBar;
 		listSliderBars.Add(sliderBar);
 
 		// fx
 		GUI_id++;
-		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 743, 452, 219, 39 }, ButtonType::NONE, "fx", 10, Font::UI, { 310, 452, 28, 39 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::UP_Y);
+		sliderBar = (GuiSliderBar*)app->guiManager->CreateGuiControl(GuiControlType::SLIDERBAR, GUI_id, mod, { 693, 512, 219, 39 }, ButtonType::NONE, "fx", 10, Font::UI, { 310, 512, 28, 39 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::UP_Y);
 		sliderBar->state = GuiControlState::NONE;
 		fx = sliderBar;
 		listSliderBars.Add(sliderBar);
@@ -660,13 +665,15 @@ public:
 		animationMenu.Set();
 		animationMenu.AddTween(100, 80, BACK_IN_OUT);
 		animationAudio.Set();
-		animationAudio.AddTween(100, 80, BACK_OUT);
+		animationAudio.AddTween(100, 100, CIRCULAR_OUT);
 		animationControl.Set();
-		animationControl.AddTween(100, 80, BACK_OUT);
+		animationControl.AddTween(100, 100, CIRCULAR_OUT);
 		animationGame.Set();
-		animationGame.AddTween(100, 80, BACK_OUT);
+		animationGame.AddTween(100, 100, CIRCULAR_OUT);
 		animationGraphics.Set();
-		animationGraphics.AddTween(100, 80, BACK_OUT);
+		animationGraphics.AddTween(100, 100, CIRCULAR_OUT);
+		animationShadow.Set();
+		animationShadow.AddTween(100, 80, EXPONENTIAL_IN);
 	}
 
 
@@ -675,18 +682,22 @@ public:
 		//animaciones cosas menu
 		animationMenu.Foward();
 		animationMenu.Step(speedAnimNotButton, false);
+		animationShadow.Foward();
+		animationShadow.Step(speedAnimNotButton, false);
 		float point = animationMenu.GetPoint();
 		int offsetAnimation = -750;
 		//formula int(offsetAnimation + point * (0 - offsetAnimation))
 	
 		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, int(offsetAnimation + point * (85 - app->render->camera.y - offsetAnimation)));
 		app->render->DrawTexture(cartelTexture, 274 - app->render->camera.x, int(offsetAnimation + point * (210 - app->render->camera.y - offsetAnimation)));
-		int offsetAnimationDch = -1300;
-		int offsetAnimationIzq = 1300;
-		app->render->DrawTexture(sombraIzqTexture, int(offsetAnimationIzq + point * (0 - app->render->camera.x - offsetAnimationIzq)),0 - app->render->camera.y);
-		app->render->DrawTexture(sombraDchTexture, int(offsetAnimationDch + point * (0 - app->render->camera.x - offsetAnimationDch)), 0 - app->render->camera.y);
-
 		app->render->TextDraw("Settings", 565, int(offsetAnimation + point * (107 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
+
+		float point69 = animationShadow.GetPoint();
+		int offsetAnimationDch = 1300;
+		int offsetAnimationIzq = -1300;
+		app->render->DrawTexture(sombraIzqTexture, int(offsetAnimationIzq + point69 * (0 - app->render->camera.x - offsetAnimationIzq)),0 - app->render->camera.y);
+		app->render->DrawTexture(sombraDchTexture, int(offsetAnimationDch + point69 * (0 - app->render->camera.x - offsetAnimationDch)), 0 - app->render->camera.y);
+
 
 
 		if (pGame->game_B) { 
@@ -695,7 +706,7 @@ public:
 			animationGame.Step(speedAnimNotButton, false);
 			float point2 = animationGame.GetPoint();
 
-			int x = 556; int y = 290; int offset = 77;
+			int x = 506; int y = 290+10; int offset = 77;
 			app->render->TextDraw("Language", x, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
 			app->render->TextDraw("Text Speed", x, int(offsetAnimation + point2 * (y + offset - offsetAnimation)), 16);
 		}
@@ -703,12 +714,12 @@ public:
 		if (pControl->control_B) { //se queda aqui el texto, hacerlo botones el juego no aguanta
 			pControl->OpenControlSettings();
 			animationControl.Foward();
-			animationControl.Step(speedAnimNotButton, false);
+			animationControl.Step(5, false);
 			float point2 = animationControl.GetPoint();
 
-			int x = 530; int y = 250; int offset = 50;
+			int x = 480; int y = 250; int offset = 50;
 
-			app->render->TextDraw("Game by Pikum Studios: ", 655, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
+			app->render->TextDraw("Game by Pikum Studios: ", 605, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
 
 			app->render->TextDraw("Sara Martinez Mauri", x, int(offsetAnimation + point2 * ((y + offset) - offsetAnimation)), 16);
 			app->render->TextDraw("Jose Antonio Tur Izquierdo", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
@@ -719,7 +730,7 @@ public:
 			app->render->TextDraw("This project is licensed under an unmodified MIT license", x, int(offsetAnimation + point2 * ((y + offset * 6) - offsetAnimation)), 16);
 			app->render->TextDraw("Copyright(c) 2020 Ray", x, int(offsetAnimation + point2 * ((y + offset * 7) - offsetAnimation)), 16);
 
-			x = 800;
+			x = 750;
 			app->render->TextDraw("Andreu Nosas Soler", x, int(offsetAnimation + point2 * ((y + offset) - offsetAnimation)), 16);
 			app->render->TextDraw("Andreu Miro Sabate", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
 			app->render->TextDraw("Eric Segovia Baena", x, int(offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation)), 16);
@@ -732,7 +743,7 @@ public:
 			animationGraphics.Step(speedAnimNotButton, false);
 			float point2 = animationGraphics.GetPoint();
 
-			int x = 556; int y = 290; int offset = 77;
+			int x = 506; int y = 320; int offset = 77;
 			app->render->TextDraw("Windows Size", x, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
 			app->render->TextDraw("Fullscreen", x, int(offsetAnimation + point2 * ((y + offset) - offsetAnimation)), 16);
 			app->render->TextDraw("Vsync", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
@@ -744,7 +755,7 @@ public:
 			animationAudio.Foward();
 			animationAudio.Step(speedAnimNotButton, false);
 			float point2 = animationAudio.GetPoint();
-			int x = 556; int y = 290; int offset = 77;
+			int x = 506; int y = 340; int offset = 77;
 			app->render->TextDraw("General volume", x, int(offsetAnimation + point2 * (y - offsetAnimation)), 16);
 			app->render->TextDraw("Music volume", x, int(offsetAnimation + point2 * ((y + offset) - offsetAnimation)), 16);
 			app->render->TextDraw("Fx volume", x, int(offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation)), 16);
@@ -783,17 +794,21 @@ public:
 		//animaciones cosas menu
 		animationMenu.Backward();
 		animationMenu.Step(speedAnimNotButton, false);
+		animationShadow.Backward();
+		animationShadow.Step(speedAnimNotButton, false);
 		float point = animationMenu.GetPoint();
 		int offsetAnimation = -750;
 		//formula int(offsetAnimation + point * (0 - offsetAnimation))
 
+		app->render->DrawTexture(cartelTexture, 274 - app->render->camera.x, int(offsetAnimation + point * (210 - app->render->camera.y - offsetAnimation)));
 		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, int(offsetAnimation + point * (85 - app->render->camera.y - offsetAnimation)));
 
-		app->render->TextDraw("Settings", 570, int(offsetAnimation + point * (120 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Settings", 565, int(offsetAnimation + point * (107 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
 		int offsetAnimationDch = 1300;
 		int offsetAnimationIzq = -1300;
-		app->render->DrawTexture(sombraIzqTexture, int(offsetAnimationIzq + point * (0 - app->render->camera.x - offsetAnimationIzq)), 0 - app->render->camera.y);
-		app->render->DrawTexture(sombraDchTexture, int(offsetAnimationDch + point * (0 - app->render->camera.x - offsetAnimationDch)), 0 - app->render->camera.y);
+		float point69 = animationShadow.GetPoint();
+		app->render->DrawTexture(sombraIzqTexture, int(offsetAnimationIzq + point69 * (0 - app->render->camera.x - offsetAnimationIzq)), 0 - app->render->camera.y);
+		app->render->DrawTexture(sombraDchTexture, int(offsetAnimationDch + point69 * (0 - app->render->camera.x - offsetAnimationDch)), 0 - app->render->camera.y);
 
 		settings_B = false;
 		open_settings_B = false;
@@ -869,6 +884,7 @@ public:
 	Tween animationAudio;
 	Tween animationGame;
 	Tween animationMenu;
+	Tween animationShadow;
 };
 
 

@@ -230,7 +230,7 @@ bool Character::Update(float dt)
 							if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //No puede hacer ataques principales
 							{
 								//usar skill 2 (avance)
-								UseSkill(listSkills.At(2)->data);
+								UseSkill(listSkills.At(1)->data);
 
 								listSkillsHistory.Add(2);
 								break;
@@ -248,14 +248,14 @@ bool Character::Update(float dt)
 								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
 								{
 									//usar skill 1 (buff ofensivo)
-									UseSkill(listSkills.At(1)->data);
+									UseSkill(listSkills.At(2)->data);
 
-									listSkillsHistory.Add(2);
+									listSkillsHistory.Add(3);
 									break;
 								}
 								else
 								{
-									if (listSkillsHistory.end->data == 2)//Si last skill buffo hace cleave
+									if (listSkillsHistory.end->data == 3)//Si last skill buffo hace cleave
 									{
 										probSkill = 75;
 									}
@@ -639,11 +639,23 @@ bool Character::UseSkill(Skill* skill)
 
 			if (skill->areaSkill)
 			{
-				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+				if (skill->targetFriend)
 				{
+					for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+					{
+						//Atacar a todos
+						if (!app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill))) { break; }
+					}
+				}
+				else
+				{
+					for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+					{
 					//Atacar a todos
 					if (!app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill))) { break; }
+					}
 				}
+				
 			}
 			else
 			{
@@ -798,10 +810,10 @@ bool Character::UseSkill(Skill* skill, Character* target)
 			app->combat->MoveCharacter(&app->combat->vecEnemies, target, skill->movementTarget);
 		}
 	}
-
+	//Si la skill mueve moverte
 	if (skill->movementCaster != 0)
 	{
-		app->combat->MoveCharacter(&app->combat->vecAllies, target, skill->movementTarget);
+		app->combat->MoveCharacter(&app->combat->vecAllies, this, skill->movementCaster);
 	}
 
 	return true;
