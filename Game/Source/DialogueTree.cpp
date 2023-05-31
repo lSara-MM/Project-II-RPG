@@ -25,7 +25,7 @@ DialogueTree::DialogueTree(bool a)
 	updateOptions = false;
 	active = a;
 
-	switch (app->dialogueSystem->textSpeed)
+	switch (app->dialogueSystem->GetTextSpeed())
 	{
 	case TextSpeed::SLOW:
 		dtWait = 50.0f;

@@ -23,15 +23,6 @@
 
 using namespace std;
 
-class DialogueSystem;
-
-enum class TextSpeed
-{
-	SLOW,
-	MEDIUM,
-	FAST
-};
-
 class DialogueChoice
 {
 public:

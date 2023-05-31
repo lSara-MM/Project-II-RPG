@@ -197,7 +197,12 @@ SString DialogueSystem::ChangeTextSpeed()
 	return "Medium";
 }
 
-SString DialogueSystem::GetTextSpeed()
+TextSpeed DialogueSystem::GetTextSpeed()
+{
+	return textSpeed;
+}
+
+SString DialogueSystem::GetTextSpeedSString()
 {
 	switch (textSpeed)
 	{

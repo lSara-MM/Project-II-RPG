@@ -76,6 +76,7 @@ public:
 
 };
 
+class DialogueSystem;
 
 class GameSettings : public HandleSettings
 {
@@ -140,7 +141,7 @@ public:
 
 				if (i->data->id == 807)	// Change TextSpeed button
 				{
-					i->data->text = app->dialogueSystem->GetTextSpeed();
+					i->data->text = app->dialogueSystem->GetTextSpeedSString();
 				}
 			}
 		}

@@ -9,6 +9,16 @@
 #include "Module.h"
 #include "GuiButton.h"
 
+class DialogueTree;
+class DialogueNode;
+class DialogueChoice;
+
+enum class TextSpeed
+{
+	SLOW,
+	MEDIUM,
+	FAST
+};
 
 class DialogueSystem : public Module
 {
@@ -30,12 +40,11 @@ public:
 	void LoadChoices(pugi::xml_node& xml_node, DialogueNode* node);
 
 	SString ChangeTextSpeed();
-	SString GetTextSpeed();
+	TextSpeed GetTextSpeed();
+	SString GetTextSpeedSString();
 
 	bool LoadDialogueState();
 	bool SaveDialogueState();
-
-	friend DialogueTree;
 
 public:
 
