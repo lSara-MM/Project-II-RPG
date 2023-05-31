@@ -24,6 +24,7 @@ DialogueTree::DialogueTree(bool a)
 {
 	updateOptions = false;
 	active = a;
+	notifyEnd = false;
 
 	switch (app->dialogueSystem->GetTextSpeed())
 	{
@@ -69,7 +70,7 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 		updateOptions = UpdateNodes(mod, pos);
 	}
 
-	return true;
+	return notifyEnd;
 }
 
 bool DialogueTree::UpdateNodes(Module* mod, iPoint pos)
@@ -98,7 +99,7 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 	
 	for (int i = 0; i < activeNode->choicesList.size(); i++)
 	{
-		switch (activeNode->choicesList[i]->eventReturn)
+		switch (activeNode->choicesList.at(i)->eventReturn)
 		{
 		case DIALOGUE_INPUT:
 
@@ -157,8 +158,9 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 
 			break;
 		case DIALOGUE_STORE:
-			//app->dialogueSystem->CleanUp();
 			app->store->Enable();
+			notifyEnd = true;
+			return true;
 			break;
 		default:
 			return false;

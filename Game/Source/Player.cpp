@@ -511,6 +511,75 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			break;
 		}
 		break;
+	case ColliderType::KEY:
+		app->puzzleManager->keySens = true;	
+	case ColliderType::KEYDOOR:
+		switch (physB->id)
+		{
+			case 1:
+				app->puzzleManager->DoorContact1 = true;
+				break;
+			case 2:
+				app->puzzleManager->DoorContact2 = true;
+				break;
+		}
+		break;
+	case ColliderType::BARRICADE:
+		switch (physB->id)
+		{
+		case 1:
+			app->puzzleManager->BarricadeContact1 = true;
+			break;
+		case 2:
+			app->puzzleManager->BarricadeContact2 = true;
+			break;
+		case 3:
+			app->puzzleManager->BarricadeContact3 = true;
+			break;
+		case 4:
+			app->puzzleManager->BarricadeContact4 = true;
+			break;
+		}
+		break;
+	case ColliderType::BOMB:
+		switch (physB->id)
+		{
+			case 1:
+				app->puzzleManager->BombContact1 = true;
+				break;
+			case 2:
+				app->puzzleManager->BombContact2 = true;
+				break;
+		}
+		break;
+	case ColliderType::RELIC:
+		switch (physB->id)
+		{
+		case 1:
+			app->puzzleManager->RelicContact1 = true;
+			break;
+		case 2:
+			app->puzzleManager->RelicContact2 = true;
+			break;
+		case 3:
+			app->puzzleManager->RelicContact3 = true;
+			break;
+		}
+		break;
+	case ColliderType::RELICOLUMN:
+		switch (physB->id)
+		{
+		case 1:
+			app->puzzleManager->RelicColumnContact1 = true;
+			break;
+		case 2:
+			app->puzzleManager->RelicColumnContact1 = true;
+			break;
+		case 3:
+			app->puzzleManager->RelicColumnContact1 = true;
+			break;
+		}
+		break;
 	case ColliderType::PORTAL:
 		int fadeTime = 45;
 		switch (physB->id)
@@ -578,6 +647,75 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 		break;
 	case ColliderType::FIREGUY:
 		app->puzzleManager->saveFireGuy = false;
+		break;
+	case ColliderType::KEY:
+		app->puzzleManager->keySens = false;
+	case ColliderType::KEYDOOR:
+		switch (physB->id)
+		{
+		case 1:
+			app->puzzleManager->DoorContact1 = false;
+			break;
+		case 2:
+			app->puzzleManager->DoorContact2 = false;
+			break;
+		}
+		break;
+	case ColliderType::BARRICADE:
+		switch (physB->id)
+		{
+		case 1:
+			app->puzzleManager->BarricadeContact1 = false;
+			break;
+		case 2:
+			app->puzzleManager->BarricadeContact2 = false;
+			break;
+		case 3:
+			app->puzzleManager->BarricadeContact3 = false;
+			break;
+		case 4:
+			app->puzzleManager->BarricadeContact4 = false;
+			break;
+		}
+		break;
+	case ColliderType::BOMB:
+		switch (physB->id)
+		{
+		case 1:
+			app->puzzleManager->BombContact1 = false;
+			break;
+		case 2:
+			app->puzzleManager->BombContact2 = false;
+			break;
+		}
+		break;
+	case ColliderType::RELIC:
+		switch (physB->id)
+		{
+		case 1:
+			app->puzzleManager->RelicContact1 = false;
+			break;
+		case 2:
+			app->puzzleManager->RelicContact2 = false;
+			break;
+		case 3:
+			app->puzzleManager->RelicContact3 = false;
+			break;
+		}
+		break;
+	case ColliderType::RELICOLUMN:
+		switch (physB->id)
+		{
+		case 1:
+			app->puzzleManager->RelicColumnContact1 = false;
+			break;
+		case 2:
+			app->puzzleManager->RelicColumnContact1 = false;
+			break;
+		case 3:
+			app->puzzleManager->RelicColumnContact1 = false;
+			break;
+		}
 		break;
 	case ColliderType::PORTAL:
 		app->audio->PlayFx(enterZone, 0);

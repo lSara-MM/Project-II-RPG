@@ -40,8 +40,15 @@ bool DialogueSystem::Update(float dt)
 		iPoint pos = { 0, (app->win->GetHeight() - 245) };
 		app->render->DrawTexture(textBox_tex, pos.x - app->render->camera.x, pos.y - app->render->camera.y);
 
-		activeTree->UpdateTree(dt, app->dialogueSystem, pos);
-		app->guiManager->Draw();
+		if (!activeTree->UpdateTree(dt, app->dialogueSystem, pos))
+		{
+			app->guiManager->Draw();
+		}
+		else
+		{
+			CleanUp();
+		}
+		
 	}
 
 	return true;

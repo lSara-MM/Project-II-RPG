@@ -388,18 +388,32 @@ bool PuzzleManager::Dun2Start()
 	chickenBoom = false;
 	relics = false;
 
-	DoorContact = false;
+	DoorContact1 = false;
+	DoorContact2 = false;
 	keyInvent = false;
-	BarricadeContact = false;
-	BombContact = false;
+	keySens = false;
+	BarricadeContact1 = false;
+	BarricadeContact2 = false;
+	BarricadeContact3 = false;
+	BarricadeContact4 = false;
+	BombContact1 = false;
+	BombContact2 = false;
 	BombCarryOn = false;
 
-	RelicContact = false;
+	RelicContact1 = false;
+	RelicContact2 = false;
+	RelicContact3 = false;
 	Relic1Invent = false;
 	Relic2Invent = false;
 	Relic3Invent = false;
-	RelicColumnContact = false;
+	RelicColumnContact1 = false;
+	RelicColumnContact2 = false;
+	RelicColumnContact3 = false;
 	DoorBoss = false;
+
+	DoorsOpened = 0;
+	RelicsCompleted = 0;
+	BarricadesExplote = 0;
 
 	app->questManager->LoadState();
 
@@ -652,6 +666,26 @@ bool PuzzleManager::Dun1Update()
 
 bool PuzzleManager::Dun2Update() 
 {
+	if(!keyDoors)
+	{
+		KeyDoorsPuz();
+	}
+
+	if(!chickenBoom)
+	{
+		ChickenBoomPuz();
+	}
+
+	if (!relics)
+	{
+		RelicsPuz();
+	}
+
+	app->render->DrawTexture(GeneralTextureDungeon2, posChicken1.x, posChicken1.y, &Chick);
+	app->render->DrawTexture(GeneralTextureDungeon2, posChicken2.x, posChicken2.y, &Chick);
+	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn1.x, posRelicColumn1.y, &Col1);
+	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn2.x, posRelicColumn2.y, &Col2);
+	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn3.x, posRelicColumn3.y, &Col3);
 
 	return true;
 }
@@ -1126,5 +1160,99 @@ bool PuzzleManager::TeamMate()
 			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
 		}
 	}
+	return true;
+}
+
+bool PuzzleManager::KeyDoorsPuz()
+{
+	if (keySens) 
+	{
+		app->render->DrawTexture(textureE, posKey.x - 32, posKey.y - 80);
+
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+		{
+			if (keySensor != nullptr)
+				keySensor->body->GetWorld()->DestroyBody(keySensor->body);
+
+			delete keySensor;
+			keySensor = nullptr;
+
+			keyInvent = true;
+			keySens = false;
+		}
+	}
+
+	if (keyInvent) 
+	{
+		if(DoorContact1)
+		{
+			app->render->DrawTexture(textureE, posDoor1.x - 32, posDoor1.y - 80);
+
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+			{
+				if (DoorKey1 != nullptr)
+					DoorKey1->body->GetWorld()->DestroyBody(DoorKey1->body);
+
+				delete DoorKey1;
+				DoorKey1 = nullptr;
+
+				DoorsOpened += 1;
+				DoorContact1 = false;
+			}
+		}
+
+		if (DoorContact2)
+		{
+			app->render->DrawTexture(textureE, posDoor2.x - 32, posDoor2.y - 80);
+
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+			{
+				if (DoorKey2 != nullptr)
+					DoorKey2->body->GetWorld()->DestroyBody(DoorKey2->body);
+
+				delete DoorKey2;
+				DoorKey2 = nullptr;
+
+				DoorsOpened += 1;
+				DoorContact2 = false;
+			}
+		}
+	}
+	else
+	{
+		app->render->DrawTexture(GeneralTextureDungeon2, posKey.x, posKey.y, &Ky);
+	}
+
+	if (DoorKey1 != nullptr)
+		app->render->DrawTexture(GeneralTextureDungeon2, posDoor1.x, posDoor1.y, &KeyD1);
+	
+	if (DoorKey2 != nullptr)
+		app->render->DrawTexture(GeneralTextureDungeon2, posDoor2.x, posDoor2.y, &KeyD2);
+
+	if (DoorsOpened >= 2)
+	{
+		keyDoors = true;
+
+		keySens = false;
+		keyInvent = false;
+		DoorsOpened = 0;
+
+		app->questManager->SaveState();
+	}
+
+	return true;
+}
+
+bool PuzzleManager::ChickenBoomPuz()
+{
+
+
+	return true;
+}
+
+bool PuzzleManager::RelicsPuz()
+{
+	
+
 	return true;
 }

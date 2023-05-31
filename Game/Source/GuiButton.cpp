@@ -674,12 +674,12 @@ bool GuiButton::Draw(Render* render)
 		}			
 		else if (buttonType == ButtonType::DIALOGUE)
 		{
-			offsetX = fontSize * 2;
+			offsetX = fontSize * 1.5f;
 
 			int offsetY = fontSize / 2;
 			int max_chars_line = fontSize * 2;
 
-			app->render->RenderTrimmedText(bounds.x + offsetX, bounds.y + offsetY, 2, text, &texts, fontSize, max_chars_line, 1.5f);
+			app->render->RenderTrimmedText(bounds.x + offsetX, bounds.y + offsetY, 2, text, &texts, fontSize, max_chars_line, 2.5f);
 		}
 
 		else

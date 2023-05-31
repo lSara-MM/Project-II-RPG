@@ -63,6 +63,10 @@ public:
 
 	bool TeamMate();
 
+	bool KeyDoorsPuz();
+	bool ChickenBoomPuz();
+	bool RelicsPuz();
+
 public:
 
 	pugi::xml_node sceneNode;
@@ -226,18 +230,28 @@ public:
 
 	bool saveFireGuy;
 
-	bool DoorContact;
+	bool DoorContact1;
+	bool DoorContact2;
 	bool keyInvent;
+	bool keySens;
 
-	bool BarricadeContact;
-	bool BombContact;
+	bool BarricadeContact1;
+	bool BarricadeContact2;
+	bool BarricadeContact3;
+	bool BarricadeContact4;
+	bool BombContact1;
+	bool BombContact2;
 	bool BombCarryOn;
 
-	bool RelicContact;
+	bool RelicContact1;
+	bool RelicContact2;
+	bool RelicContact3;
 	bool Relic1Invent;
 	bool Relic2Invent;
 	bool Relic3Invent;
-	bool RelicColumnContact;
+	bool RelicColumnContact1;
+	bool RelicColumnContact2;
+	bool RelicColumnContact3;
 	bool DoorBoss;
 
 	//Variables para meter codigos
