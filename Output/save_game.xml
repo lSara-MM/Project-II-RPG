@@ -34,15 +34,16 @@
 	<PuzzleManager />
 	<questmanager />
 	<entitymanager>
-		<player name="scene" x="3726" y="1075" />
+		<player name="scene" x="2617" y="4406" />
 	</entitymanager>
 	<itemmanager />
 	<dialogue />
 	<guiManager />
 	<SceneWin_Lose />
 	<Inventory />
+	<store />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2834" y="-742" />
+		<camera x="-1997" y="-3912" />
 	</renderer>
 </save_state>

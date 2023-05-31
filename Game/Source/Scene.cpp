@@ -539,7 +539,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 807:
 		LOG("Button Text Speed click");
-
+		control->text = app->dialogueSystem->ChangeTextSpeed();
 		break;
 	case 808:
 		LOG("Button Return to Title click");

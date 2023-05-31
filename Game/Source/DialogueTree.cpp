@@ -1,4 +1,6 @@
 #include "DialogueTree.h"
+#include "DialogueSystem.h"
+
 #include "QuestManager.h"
 #include "PuzzleManager.h"
 
@@ -22,6 +24,22 @@ DialogueTree::DialogueTree(bool a)
 {
 	updateOptions = false;
 	active = a;
+
+	switch (app->dialogueSystem->textSpeed)
+	{
+	case TextSpeed::SLOW:
+		dtWait = 50.0f;
+		break;
+	case TextSpeed::MEDIUM:
+		dtWait = 25.0f;
+		break;
+	case TextSpeed::FAST:
+		dtWait = 5.0f;
+		break;
+	default:
+		dtWait = 25.0f;
+		break;
+	}
 }
 
 bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
@@ -41,15 +59,8 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 		activeNode->trimmed = true;
 	}
 
-	float dt_wait = 25.0f;
-	//RenderTrimmedText(int x, int y, int offset, SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_, float fontOffset, Font font, int dtNext, SDL_Color color)
-	app->render->RenderTrimmedText(pos.x + 100, pos.y + 50, 10, activeNode->text, &activeNode->texts, FONT_SIZE, max_chars_line, 0, Font::TEXT, dt_wait, { 255, 255, 255 });
-
-	/*size_t lines = activeNode->texts.size();
-	for (size_t i = 0; i < lines; i++)
-	{
-		app->render->TextDraw(activeNode->texts.at(i).GetString(), pos.x + 100, pos.y + 50 + (FONT_SIZE + 10) * i, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
-	}*/
+	LOG("Text Speed %f", dtWait);
+	app->render->RenderTrimmedText(pos.x + 100, pos.y + 50, 10, activeNode->text, &activeNode->texts, FONT_SIZE, max_chars_line, 0, Font::TEXT, dtWait, { 255, 255, 255 });
 
 	EventReturn(mod, pos);
 

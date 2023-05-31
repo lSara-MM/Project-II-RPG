@@ -219,9 +219,6 @@ public:
 			button->state = GuiControlState::NONE;
 			listControlButtons.Add(button);
 		}*/
-
-
-
 	}
 
 	bool OpenControlSettings()
