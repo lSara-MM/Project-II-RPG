@@ -379,7 +379,6 @@ bool Player::Update(float dt)
 			{
 				lockMovement = false; 
 				pauseEnabled_B = true;
-				app->scene->restartPauseMenu_B = true;
 				app->dialogueSystem->Disable();
 			}
 		}

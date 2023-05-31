@@ -306,17 +306,6 @@ void Scene::Debug()
 
 		pause_B = true;	
 
-		if (restartPauseMenu_B)
-		{
-			pPause->CleanUp(); 
-			pSettings->CleanUp();
-
-			pSettings = new Settings(this);
-			pPause = new Pause(this);
-			pPause->pSettings = pSettings;
-			restartPauseMenu_B = false;
-		}
-	
 		if (pause_B)
 		{
 	/*		pPause = new Pause(this);
