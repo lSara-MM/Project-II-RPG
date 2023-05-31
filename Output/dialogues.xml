@@ -160,7 +160,7 @@
 	<dialogueTree ID="3">
 
 		<node id="0" name="Igor and Ivan" text="Hello mate. How can we help you? ">
-			<choice id="0" option="What do you sell?" nextNode="-1" eventReturn="6"/>
+			<choice id="0" option="What do you sell?" nextNode="10" eventReturn="0"/>
 			<choice id="1" option="Tell me about the House Of Terrors." nextNode="1" eventReturn="0"/>
 			<choice id="2" option="Farewell." nextNode="-1" eventReturn="0"/>
 		</node>
@@ -199,6 +199,10 @@
 
 		<node id="9" name="Igor and Ivan" text="Save our friend and we will reward you.">
 			<choice id="0" option="Accept." nextNode="-1" eventReturn="5"/>
+		</node>
+
+		<node id="10" name="Igor and Ivan" text=".">
+			<choice id="0" option="Store." nextNode="-1" eventReturn="6"/>
 		</node>
 
 		<node id="-1" name="Igor and Ivan" text ="End of conversation -F1- to talk again"></node>
