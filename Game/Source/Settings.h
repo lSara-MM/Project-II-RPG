@@ -13,6 +13,8 @@
 #include "Render.h"
 #include "Window.h"
 
+#include "DialogueSystem.h"
+
 #include "Log.h"
 #include "Point.h"
 #include "SString.h"
@@ -135,6 +137,11 @@ public:
 			{
 				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
+
+				if (i->data->id == 807)	// Change TextSpeed button
+				{
+					i->data->text = app->dialogueSystem->GetTextSpeed();
+				}
 			}
 		}
 		//if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN

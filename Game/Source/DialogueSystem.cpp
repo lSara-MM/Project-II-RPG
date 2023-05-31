@@ -9,6 +9,7 @@
 DialogueSystem::DialogueSystem() : Module()
 {
 	name.Create("dialogue");
+	textSpeed = TextSpeed::MEDIUM;
 }
 
 DialogueSystem::~DialogueSystem()
@@ -190,6 +191,28 @@ SString DialogueSystem::ChangeTextSpeed()
 	default:
 		break;
 	}
+
+	return "Medium";
+}
+
+SString DialogueSystem::GetTextSpeed()
+{
+	switch (textSpeed)
+	{
+	case TextSpeed::SLOW:
+		return "Slow";
+		break;
+	case TextSpeed::MEDIUM:
+		return "Medium";
+		break;
+	case TextSpeed::FAST:
+		return "Fast";
+		break;
+	default:
+		break;
+	}
+
+	return "Medium";
 }
 
 bool DialogueSystem::LoadDialogueState()

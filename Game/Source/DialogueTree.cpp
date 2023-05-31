@@ -31,13 +31,13 @@ DialogueTree::DialogueTree(bool a)
 		dtWait = 50.0f;
 		break;
 	case TextSpeed::MEDIUM:
-		dtWait = 25.0f;
+		dtWait = 20.0f;
 		break;
 	case TextSpeed::FAST:
-		dtWait = 5.0f;
+		dtWait = 3.0f;
 		break;
 	default:
-		dtWait = 25.0f;
+		dtWait = 20.0f;
 		break;
 	}
 }
