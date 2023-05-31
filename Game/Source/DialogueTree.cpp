@@ -145,6 +145,9 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 			}
 
 			break;
+		case DIALOGUE_STORE:
+			app->store->Enable();
+			break;
 		default:
 			return false;
 			break;

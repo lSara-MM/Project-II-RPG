@@ -39,7 +39,8 @@ public:
 	unsigned cap;
 	int y;
 
-	GuiButton* selectCharacter[4];
+	GuiButton* buyButton;
+	GuiButton* closeStore;
 
 	Tween inventoryAnimation;//animacion inventario
 	bool inventoryTransition_B;//controlar animacion inventario
