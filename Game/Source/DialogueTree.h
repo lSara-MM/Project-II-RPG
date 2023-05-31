@@ -23,6 +23,14 @@
 
 using namespace std;
 
+class DialogueSystem;
+
+enum class TextSpeed
+{
+	SLOW,
+	MEDIUM,
+	FAST
+};
 
 class DialogueChoice
 {
@@ -76,15 +84,16 @@ public:
 	bool active = false;
 	vector <DialogueNode*> nodeList;
 
-
 	DialogueNode* activeNode;
+	bool updateOptions;
 
+private:
 	List <GuiButton*> listDialogueButtons;
 	int GUI_id = 0;
 
-	bool updateOptions;
 	int max_chars_line;
-	bool condiciondia = 0;
+
+	float dtWait;
 };
 
 #endif //__DIALOGTREE_H__

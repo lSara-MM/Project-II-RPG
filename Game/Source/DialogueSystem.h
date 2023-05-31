@@ -29,6 +29,9 @@ public:
 	DialogueNode* LoadNodes(pugi::xml_node& xml_trees, DialogueTree* tree);
 	void LoadChoices(pugi::xml_node& xml_node, DialogueNode* node);
 
+	SString ChangeTextSpeed();
+	SString GetTextSpeed();
+
 	bool LoadDialogueState();
 	bool SaveDialogueState();
 
@@ -45,8 +48,10 @@ public:
 
 	SDL_Texture* textBox_tex;
 	const char* textBox_path;
+
 private:
 	pugi::xml_document dialogues;
+	TextSpeed textSpeed;
 };
 
 #endif // __DIALOGSYSTEM_H__

@@ -9,6 +9,7 @@
 DialogueSystem::DialogueSystem() : Module()
 {
 	name.Create("dialogue");
+	textSpeed = TextSpeed::MEDIUM;
 }
 
 DialogueSystem::~DialogueSystem()
@@ -50,6 +51,7 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Event by %d ", control->id);
 
+	activeTree->activeNode->trimmed = false;
 	playerInput = activeTree->activeNode->choicesList[control->id];
 
 	if (playerInput->eventReturn == DIALOGUE_SAVE)
@@ -168,6 +170,49 @@ void DialogueSystem::LoadChoices(pugi::xml_node& xml_node, DialogueNode* node)
 
 		node->choicesList.push_back(option);
 	}
+}
+
+SString DialogueSystem::ChangeTextSpeed()
+{
+	switch (textSpeed)
+	{
+	case TextSpeed::SLOW:
+		textSpeed = TextSpeed::MEDIUM;
+		return "Medium";
+		break;
+	case TextSpeed::MEDIUM:
+		textSpeed = TextSpeed::FAST;
+		return "Fast";
+		break;
+	case TextSpeed::FAST:
+		textSpeed = TextSpeed::SLOW;
+		return "Slow";
+		break;
+	default:
+		break;
+	}
+
+	return "Medium";
+}
+
+SString DialogueSystem::GetTextSpeed()
+{
+	switch (textSpeed)
+	{
+	case TextSpeed::SLOW:
+		return "Slow";
+		break;
+	case TextSpeed::MEDIUM:
+		return "Medium";
+		break;
+	case TextSpeed::FAST:
+		return "Fast";
+		break;
+	default:
+		break;
+	}
+
+	return "Medium";
 }
 
 bool DialogueSystem::LoadDialogueState()
