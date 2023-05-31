@@ -67,10 +67,16 @@ public:
 
 	pugi::xml_node sceneNode;
 
+	//Contadores para puzzles
 	int keyPalancas;
 	int keyEscape;
 	int keyRescue;
 
+	int BarricadesExplote;
+	int RelicsCompleted;
+	int DoorsOpened;
+
+	//Tamaños de width para objetos
 	int widthVertical;
 	int widthHoritzontal;
 	int widthPalanca;
@@ -81,6 +87,16 @@ public:
 	int widthLoset;
 	int widthFireGuy;
 
+	int widthDoorKeys;
+	int widthKey;
+	int widthChicken;
+	int widthBomb;
+	int widthBarricade1;
+	int widthBarricade2;
+	int widthRelic;
+	int widthRelicColumn;
+
+	//Tamaños de height para objetos
 	int heightVertical;
 	int heightHoritzontal;
 	int heightPalanca;
@@ -91,6 +107,16 @@ public:
 	int heightLoset;
 	int heightFireGuy;
 
+	int heightDoorKeys;
+	int heightKey;
+	int heightChicken;
+	int heightBomb;
+	int heightBarricade1;
+	int heightBarricade2;
+	int heightRelic;
+	int heightRelicColumn;
+
+	//Posiciones de objetos
 	iPoint posDoor1;
 	iPoint posDoor2;
 	iPoint posDoor3;
@@ -103,6 +129,27 @@ public:
 	iPoint posLoset;
 	iPoint posFireGuy;
 
+	iPoint posDoorkey1;
+	iPoint posDoorkey2;
+	iPoint posDoorBoss;
+	iPoint posKey;
+	iPoint posChicken1;
+	iPoint posChicken2;
+	iPoint posBomb1;
+	iPoint posBomb2;
+	iPoint posBarricade1;
+	iPoint posBarricade2;
+	iPoint posBarricade3;
+	iPoint posBarricade4;
+	iPoint posBarricade5;
+	iPoint posRelic1;
+	iPoint posRelic2;
+	iPoint posRelic3;
+	iPoint posRelicColumn1;
+	iPoint posRelicColumn2;
+	iPoint posRelicColumn3;
+
+	//Texturas para objetos
 	SDL_Texture* door;
 	SDL_Texture* palanca;
 	SDL_Texture* notas;
@@ -112,7 +159,10 @@ public:
 	SDL_Texture* loset;
 	SDL_Texture* fireGuy;
 	SDL_Texture* textureE;
+	
+	SDL_Texture* GeneralTextureDungeon2;
 
+	//Colliders para objetos
 	PhysBody* Door1;
 	PhysBody* Door2;
 	PhysBody* Door3;
@@ -127,10 +177,37 @@ public:
 	PhysBody* Loset;
 	PhysBody* FireGuy;
 
+	PhysBody* DoorKey1;
+	PhysBody* DoorKey2;
+	PhysBody* DoorBossP;
+	PhysBody* keySensor;
+
+	PhysBody* Chicken1;
+	PhysBody* Chicken2;
+	PhysBody* Bomb1;
+	PhysBody* Bomb2;
+	PhysBody* Barricade1;
+	PhysBody* Barricade2;
+	PhysBody* Barricade3;
+	PhysBody* Barricade4;
+	PhysBody* Barricade5;
+
+	PhysBody* relic1;
+	PhysBody* relic2;
+	PhysBody* relic3;
+	PhysBody* relicColumn1;
+	PhysBody* relicColumn2;
+	PhysBody* relicColumn3;
+
+	//Bools para ver si se han completado puzzles o trozos de ellos
 	bool palancas;
 	bool escape;
 	bool rescue;
 	bool teamMate;
+
+	bool keyDoors;
+	bool chickenBoom;
+	bool relics;
 
 	bool esc1;
 	bool esc2;
@@ -149,15 +226,45 @@ public:
 
 	bool saveFireGuy;
 
+	bool DoorContact;
+	bool keyInvent;
+
+	bool BarricadeContact;
+	bool BombContact;
+	bool BombCarryOn;
+
+	bool RelicContact;
+	bool Relic1Invent;
+	bool Relic2Invent;
+	bool Relic3Invent;
+	bool RelicColumnContact;
+	bool DoorBoss;
+
+	//Variables para meter codigos
 	string code;
 	string codeToCompare;
 	string realCode;
 
 	PlayerInput* numCode;
 
+	//Coordenadas para situar texturas
 	SDL_Rect los;
-
 	SDL_Rect bosDeath;
+
+	SDL_Rect KeyD1;
+	SDL_Rect KeyD2;
+	SDL_Rect BossD;
+	SDL_Rect Ky;
+	SDL_Rect Chick;
+	SDL_Rect Bmb;
+	SDL_Rect Barr1;
+	SDL_Rect Barr2;
+	SDL_Rect Rel1;
+	SDL_Rect Rel2;
+	SDL_Rect Rel3;
+	SDL_Rect Col1;
+	SDL_Rect Col2;
+	SDL_Rect Col3;
 
 private:
 
@@ -169,6 +276,8 @@ private:
 	const char* texturepathBossDeath;
 	const char* texturepathLoset;
 	const char* texturepathFireGuy;
+
+	const char* texturepathPuzzleDungeon2;
 
 	//fx
 	const char* palancaPath;

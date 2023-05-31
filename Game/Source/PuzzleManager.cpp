@@ -181,6 +181,70 @@ bool PuzzleManager::Dun1Awake(pugi::xml_node& config)
 	return true;
 }
 
+bool PuzzleManager::Dun2Awake(pugi::xml_node& config) 
+{
+	texturepathPuzzleDungeon2 = config.child("GeneralTexture").attribute("texturepath").as_string();
+
+	widthDoorKeys = config.child("Door").attribute("width").as_int();
+	widthKey = config.child("Key").attribute("width").as_int();
+	widthChicken = config.child("Chicken").attribute("width").as_int();
+	widthBomb = config.child("Bomb").attribute("width").as_int();
+	widthBarricade1 = config.child("Barricade").attribute("width").as_int();
+	widthBarricade2 = config.child("Barricade").attribute("width1").as_int();
+	widthRelic = config.child("Relics").attribute("width").as_int();
+	widthRelicColumn = config.child("RelicsColumns").attribute("width").as_int();	
+	
+	heightDoorKeys = config.child("Door").attribute("height").as_int();
+	heightKey = config.child("Key").attribute("height").as_int();
+	heightChicken = config.child("Chicken").attribute("height").as_int();
+	heightBomb = config.child("Bomb").attribute("height").as_int();
+	heightBarricade1 = config.child("Barricade").attribute("height").as_int();
+	heightBarricade2 = config.child("Barricade").attribute("height1").as_int();
+	heightRelic = config.child("Relics").attribute("height").as_int();
+	heightRelicColumn = config.child("RelicsColumns").attribute("height").as_int();
+
+	 posDoorkey1.x = config.child("Door").attribute("x").as_int();
+	 posDoorkey1.y = config.child("Door").attribute("y").as_int();
+	 posDoorkey2.x = config.child("Door").attribute("x1").as_int();
+	 posDoorkey2.y = config.child("Door").attribute("y1").as_int();
+	 posDoorBoss.x = config.child("Door").attribute("x2").as_int();
+	 posDoorBoss.y = config.child("Door").attribute("y2").as_int();
+	 posKey.x = config.child("Key").attribute("x").as_int();
+	 posKey.y = config.child("Key").attribute("y").as_int();
+	 posChicken1.x = config.child("Chicken").attribute("x").as_int();
+	 posChicken1.y = config.child("Chicken").attribute("y").as_int();
+	 posChicken2.x = config.child("Chicken").attribute("x1").as_int();
+	 posChicken2.y = config.child("Chicken").attribute("y1").as_int();
+	 posBomb1.x = config.child("Bomb").attribute("x").as_int();
+	 posBomb1.y = config.child("Bomb").attribute("y").as_int();
+	 posBomb2.x = config.child("Bomb").attribute("x1").as_int();
+	 posBomb2.y = config.child("Bomb").attribute("y1").as_int();
+	 posBarricade1.x = config.child("Barricade").attribute("x").as_int();
+	 posBarricade1.y = config.child("Barricade").attribute("y").as_int();
+	 posBarricade2.x = config.child("Barricade").attribute("x1").as_int();
+	 posBarricade2.y = config.child("Barricade").attribute("y1").as_int();
+	 posBarricade3.x = config.child("Barricade").attribute("x2").as_int();
+	 posBarricade3.y = config.child("Barricade").attribute("y2").as_int();
+	 posBarricade4.x = config.child("Barricade").attribute("x3").as_int();
+	 posBarricade4.y = config.child("Barricade").attribute("y3").as_int();
+	 posBarricade5.x = config.child("Barricade").attribute("x4").as_int();
+	 posBarricade5.y = config.child("Barricade").attribute("y4").as_int();
+	 posRelic1.x = config.child("Relics").attribute("x").as_int();
+	 posRelic1.y = config.child("Relics").attribute("y").as_int();
+	 posRelic2.x = config.child("Relics").attribute("x1").as_int();
+	 posRelic2.y = config.child("Relics").attribute("y1").as_int();
+	 posRelic3.x = config.child("Relics").attribute("x2").as_int();
+	 posRelic3.y = config.child("Relics").attribute("y2").as_int();
+	 posRelicColumn1.x = config.child("RelicsColumns").attribute("x").as_int();
+	 posRelicColumn1.y = config.child("RelicsColumns").attribute("y").as_int();
+	 posRelicColumn2.x = config.child("RelicsColumns").attribute("x1").as_int();
+	 posRelicColumn2.y = config.child("RelicsColumns").attribute("y1").as_int();
+	 posRelicColumn3.x = config.child("RelicsColumns").attribute("x2").as_int();
+	 posRelicColumn3.y = config.child("RelicsColumns").attribute("y2").as_int();
+
+	return true;
+}
+
 bool PuzzleManager::Dun1Start() 
 {
 	palancas = false;
@@ -315,6 +379,149 @@ bool PuzzleManager::Dun1Start()
 	return true;
 }
 
+bool PuzzleManager::Dun2Start()
+{
+	GeneralTextureDungeon2 = app->tex->Load(texturepathPuzzleDungeon2);
+	textureE = app->tex->Load("Assets/GUI/UI_E.png");
+
+	keyDoors = false;
+	chickenBoom = false;
+	relics = false;
+
+	DoorContact = false;
+	keyInvent = false;
+	BarricadeContact = false;
+	BombContact = false;
+	BombCarryOn = false;
+
+	RelicContact = false;
+	Relic1Invent = false;
+	Relic2Invent = false;
+	Relic3Invent = false;
+	RelicColumnContact = false;
+	DoorBoss = false;
+
+	app->questManager->LoadState();
+
+	//SDL_Rect 
+	/* KeyD1
+	 KeyD2
+	 BossD
+	 Ky
+	 Chick
+	 Bmb
+	 Barr1
+	 Barr2
+	 Rel1
+	 Rel2
+	 Rel3
+	 Col1
+	 Col2
+	 Col3*/
+
+	if(!keyDoors)
+	{
+		DoorKey1 = app->physics->CreateRectangle(posDoorkey1.x - widthDoorKeys / 2, posDoorkey1.y - heightDoorKeys / 2, widthDoorKeys, heightDoorKeys, bodyType::STATIC);
+		DoorKey1->body->SetFixedRotation(true);
+		DoorKey1->ctype = ColliderType::KEYDOOR;
+		DoorKey1->id = 1;
+
+		DoorKey2 = app->physics->CreateRectangle(posDoorkey2.x - heightDoorKeys / 2, posDoorkey2.y - widthDoorKeys / 2, heightDoorKeys, widthDoorKeys, bodyType::STATIC);
+		DoorKey2->body->SetFixedRotation(true);
+		DoorKey2->ctype = ColliderType::KEYDOOR;
+		DoorKey2->id = 2;
+
+		keySensor = app->physics->CreateRectangleSensor(posKey.x - widthKey / 2, posKey.y - heightKey / 2, widthKey, heightKey, bodyType::STATIC);
+		keySensor->body->SetFixedRotation(true);
+		keySensor->ctype = ColliderType::KEY;
+	}
+
+	if (!chickenBoom) 
+	{
+		Bomb1 = app->physics->CreateRectangleSensor(posBomb1.x - widthBomb / 2, posBomb1.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
+		Bomb1->body->SetFixedRotation(true);
+		Bomb1->ctype = ColliderType::BOMB;
+		Bomb1->id = 1;
+
+		Bomb2 = app->physics->CreateRectangleSensor(posBomb2.x - widthBomb / 2, posBomb2.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
+		Bomb2->body->SetFixedRotation(true);
+		Bomb2->ctype = ColliderType::BOMB;
+		Bomb2->id = 2;
+
+		//Barricada corta
+		Barricade1 = app->physics->CreateRectangle(posBarricade1.x - widthBarricade1 / 2, posBarricade1.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
+		Barricade1->body->SetFixedRotation(true);
+		Barricade1->ctype = ColliderType::BARRICADE;
+		Barricade1->id = 1;
+
+		Barricade2 = app->physics->CreateRectangle(posBarricade2.x - widthBarricade1 / 2, posBarricade2.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
+		Barricade2->body->SetFixedRotation(true);
+		Barricade2->ctype = ColliderType::BARRICADE;
+		Barricade2->id = 2;
+
+		Barricade3 = app->physics->CreateRectangle(posBarricade3.x - widthBarricade1 / 2, posBarricade3.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
+		Barricade3->body->SetFixedRotation(true);
+		Barricade3->ctype = ColliderType::BARRICADE;
+		Barricade3->id = 3;
+
+		//Barricada larga
+		Barricade4 = app->physics->CreateRectangle(posBarricade4.x - widthBarricade2 / 2, posBarricade4.y - heightBarricade2 / 2, widthBarricade2, heightBarricade2, bodyType::STATIC);
+		Barricade4->body->SetFixedRotation(true);
+		Barricade4->ctype = ColliderType::BARRICADE;
+		Barricade4->id = 4;
+
+		Barricade5 = app->physics->CreateRectangle(posBarricade5.x - widthBarricade2 / 2, posBarricade5.y - heightBarricade2 / 2, widthBarricade2, heightBarricade2, bodyType::STATIC);
+		Barricade5->body->SetFixedRotation(true);
+		Barricade5->ctype = ColliderType::BARRICADE;
+		Barricade5->id = 5;
+	}
+
+	if (!relics) 
+	{
+		DoorBossP = app->physics->CreateRectangle(posDoorBoss.x - heightDoorKeys / 2, posDoorBoss.y - widthDoorKeys / 2, heightDoorKeys, widthDoorKeys, bodyType::STATIC);
+		DoorBossP->body->SetFixedRotation(true);
+
+		relic1 = app->physics->CreateRectangleSensor(posRelic1.x - widthRelic / 2, posRelic1.y - heightRelic / 2, widthRelic, heightRelic, bodyType::STATIC);
+		relic1->body->SetFixedRotation(true);
+		relic1->ctype = ColliderType::RELIC;
+		relic1->id = 1;
+
+		relic2 = app->physics->CreateRectangleSensor(posRelic2.x - widthRelic / 2, posRelic2.y - heightRelic / 2, widthRelic, heightRelic, bodyType::STATIC);
+		relic2->body->SetFixedRotation(true);
+		relic2->ctype = ColliderType::RELIC;
+		relic2->id = 2;
+
+		relic3 = app->physics->CreateRectangleSensor(posRelic3.x - widthRelic / 2, posRelic3.y - heightRelic / 2, widthRelic, heightRelic, bodyType::STATIC);
+		relic3->body->SetFixedRotation(true);
+		relic3->ctype = ColliderType::RELIC;
+		relic3->id = 3;
+	}
+
+	//Colliders que siempre deben estar aunque se les complete el puzzle
+	Chicken1 = app->physics->CreateRectangle(posChicken1.x - widthChicken / 2, posChicken1.y - heightChicken / 2, widthChicken, heightChicken, bodyType::STATIC);
+	Chicken1->body->SetFixedRotation(true);
+
+	Chicken2 = app->physics->CreateRectangle(posChicken2.x - widthChicken / 2, posChicken2.y - heightChicken / 2, widthChicken, heightChicken, bodyType::STATIC);
+	Chicken2->body->SetFixedRotation(true);
+
+	relicColumn1 = app->physics->CreateRectangle(posRelicColumn1.x - widthRelicColumn / 2, posRelicColumn1.y - heightRelicColumn / 2, widthRelicColumn, heightRelicColumn, bodyType::STATIC);
+	relicColumn1->body->SetFixedRotation(true);
+	relicColumn1->ctype = ColliderType::RELICOLUMN;
+	relicColumn1->id = 1;
+
+	relicColumn2 = app->physics->CreateRectangle(posRelicColumn2.x - widthRelicColumn / 2, posRelicColumn2.y - heightRelicColumn / 2, widthRelicColumn, heightRelicColumn, bodyType::STATIC);
+	relicColumn2->body->SetFixedRotation(true);
+	relicColumn2->ctype = ColliderType::RELICOLUMN;
+	relicColumn2->id = 2;
+
+	relicColumn3 = app->physics->CreateRectangle(posRelicColumn3.x - widthRelicColumn / 2, posRelicColumn3.y - heightRelicColumn / 2, widthRelicColumn, heightRelicColumn, bodyType::STATIC);
+	relicColumn3->body->SetFixedRotation(true);
+	relicColumn3->ctype = ColliderType::RELICOLUMN;
+	relicColumn3->id = 3;
+
+	return true;
+}
+
 bool PuzzleManager::Dun1Update()
 {
 	if (!palancas)
@@ -443,6 +650,12 @@ bool PuzzleManager::Dun1Update()
 	return true;
 }
 
+bool PuzzleManager::Dun2Update() 
+{
+
+	return true;
+}
+
 bool PuzzleManager::Dun1CleanUp() 
 {
 	if (!palancas)
@@ -556,6 +769,140 @@ bool PuzzleManager::Dun1CleanUp()
 	Loset = nullptr;
 
 	RELEASE(numCode);
+
+	return true;
+}
+
+bool PuzzleManager::Dun2CleanUp()
+{
+	if (!keyDoors) 
+	{
+		if (DoorKey1 != nullptr)
+			DoorKey1->body->GetWorld()->DestroyBody(DoorKey1->body);
+		
+		if (DoorKey2 != nullptr)
+			DoorKey2->body->GetWorld()->DestroyBody(DoorKey2->body);		
+		
+		if (keySensor != nullptr)
+			keySensor->body->GetWorld()->DestroyBody(keySensor->body);
+	}
+
+	delete DoorKey1;
+	DoorKey1 = nullptr;
+	
+	delete DoorKey2;
+	DoorKey2 = nullptr;
+	
+	delete keySensor;
+	keySensor = nullptr;
+
+	if (!chickenBoom)
+	{
+		if (Bomb1 != nullptr)
+			Bomb1->body->GetWorld()->DestroyBody(Bomb1->body);
+		
+		if (Bomb2 != nullptr)
+			Bomb2->body->GetWorld()->DestroyBody(Bomb2->body);
+		
+		if (Barricade1 != nullptr)
+			Barricade1->body->GetWorld()->DestroyBody(Barricade1->body);	
+		
+		if (Barricade2 != nullptr)
+			Barricade2->body->GetWorld()->DestroyBody(Barricade2->body);
+		
+		if (Barricade3 != nullptr)
+			Barricade3->body->GetWorld()->DestroyBody(Barricade3->body);
+		
+		if (Barricade4 != nullptr)
+			Barricade4->body->GetWorld()->DestroyBody(Barricade4->body);	
+		
+		if (Barricade5 != nullptr)
+			Barricade5->body->GetWorld()->DestroyBody(Barricade5->body);
+	}
+
+	delete Bomb1;
+	Bomb1 = nullptr;	
+	
+	delete Bomb2;
+	Bomb2 = nullptr;	
+	
+	delete Barricade1;
+	Barricade1 = nullptr;	
+	
+	delete Barricade2;
+	Barricade2 = nullptr;
+	
+	delete Barricade3;
+	Barricade3 = nullptr;
+	
+	delete Barricade4;
+	Barricade4 = nullptr;
+	
+	delete Barricade5;
+	Barricade5 = nullptr;
+
+	if (!relics) 
+	{
+		if (DoorBossP != nullptr)
+			DoorBossP->body->GetWorld()->DestroyBody(DoorBossP->body);
+		
+		if (relic1 != nullptr)
+			relic1->body->GetWorld()->DestroyBody(relic1->body);
+		
+		if (relic2 != nullptr)
+			relic2->body->GetWorld()->DestroyBody(relic2->body);	
+		
+		if (relic3 != nullptr)
+			relic3->body->GetWorld()->DestroyBody(relic3->body);
+	}
+
+	delete DoorBossP;
+	DoorBossP = nullptr;	
+	
+	delete relic1;
+	relic1 = nullptr;	
+	
+	delete relic2;
+	relic2 = nullptr;	
+	
+	delete relic3;
+	relic3 = nullptr;
+
+	if (GeneralTextureDungeon2 != nullptr)
+		app->tex->UnLoad(GeneralTextureDungeon2);	
+	
+	if (textureE != nullptr)
+		app->tex->UnLoad(textureE);
+
+	if (Chicken1 != nullptr)
+		Chicken1->body->GetWorld()->DestroyBody(Chicken1->body);	
+	
+	if (Chicken2 != nullptr)
+		Chicken2->body->GetWorld()->DestroyBody(Chicken2->body);
+
+	if (relicColumn1 != nullptr)
+		relicColumn1->body->GetWorld()->DestroyBody(relicColumn1->body);
+
+	if (relicColumn2 != nullptr)
+		relicColumn2->body->GetWorld()->DestroyBody(relicColumn2->body);
+
+	if (relicColumn3 != nullptr)
+		relicColumn3->body->GetWorld()->DestroyBody(relicColumn3->body);
+
+	delete Chicken1;
+	Chicken1 = nullptr;	
+	
+	delete Chicken2;
+	Chicken2 = nullptr;
+
+	delete relicColumn1;
+	relicColumn1 = nullptr;	
+	
+	delete relicColumn2;
+	relicColumn2 = nullptr;
+
+	delete relicColumn3;
+	relicColumn3 = nullptr;
 
 	return true;
 }
