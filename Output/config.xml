@@ -176,6 +176,7 @@
 	
 	<itemmanager inventorypath="Assets/Textures/Inventory.png"
 				 itempath="Assets/Textures/itemTextures.png"
+				 storepath="Assets/GUI/storeUI.png"
 				 />
 
 	<map>

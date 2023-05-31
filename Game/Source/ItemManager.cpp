@@ -23,6 +23,7 @@ bool ItemManager::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	texturePath = config.attribute("inventorypath").as_string();
+	textureStorePath = config.attribute("storepath").as_string();
 
 	itemPath = config.attribute("itempath").as_string();
 
@@ -112,17 +113,46 @@ int ItemManager::LoadItems()
 
 void ItemManager::AddQuantity(int id, int quantity)
 {
-	for (int q = 0; q < quantity; q++)
+
+	for (size_t i = 0; i < nodeList.size(); i++)
 	{
-		for (size_t i = 0; i < nodeList.size(); i++)
+		if (nodeList[i]->ID == id)
 		{
-			if (nodeList[i]->ID == id)
+			for (int q = 0; q < quantity; q++)
 			{
 				if (nodeList[i]->max > nodeList[i]->quantity)
 				{
 					nodeList[i]->quantity++;
 				}
 			}
+		}
+	}
+}
+
+void ItemManager::BuyItem(int ID, int quantity)
+{
+	AddQuantity(ID, quantity);
+
+	for (int i = 0; i < nodeList.size(); i++)
+	{
+		if(nodeList[i]->ID == ID)
+		{ 
+			coins += nodeList[i]->price* quantity;
+		}
+	}
+}
+
+void ItemManager::SellItem(int ID, int quantity)
+{
+	for (int i = 0; i < nodeList.size(); i++)
+	{
+		if (nodeList[i]->ID == ID)
+		{
+			for (int q=0; q<quantity; q++)
+			{
+				MinusQuantity(nodeList[i]);
+			}
+			coins -= nodeList[i]->price * quantity;
 		}
 	}
 }

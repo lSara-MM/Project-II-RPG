@@ -88,6 +88,8 @@ public:
 	void LoadQuantity(int x, int y, ItemNode* item);
 	void LoadButtons(int x, int y, ItemNode* item);
 	void MinusQuantity(ItemNode* item);
+	void SellItem(int ID, int quantity);
+	void BuyItem(int ID, int quantity);
 
 	void LoadArmorItmes();
 
@@ -109,6 +111,7 @@ public:
 	SString itemPath;
 
 	const char* texturePath;
+	const char* textureStorePath;
 
 	vector <ItemNode*> nodeList;
 	vector <ItemNode*> armorItems;

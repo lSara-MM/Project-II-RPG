@@ -910,7 +910,7 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 	{
 		(chara->charaType == CharacterType::ALLY) ? app->sceneWin_Lose->win = false : app->sceneWin_Lose->win = true;
 
-		if (app->sceneWin_Lose->win)
+		/*if (app->sceneWin_Lose->win)
 		{
 			int coins = rand() % 21;
 
@@ -939,7 +939,7 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 				app->itemManager->AddQuantity(100, 2);
 			}
 
-		}
+		}*/
 
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);
 	}
