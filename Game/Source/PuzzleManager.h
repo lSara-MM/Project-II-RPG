@@ -252,7 +252,6 @@ public:
 	bool RelicColumnContact1;
 	bool RelicColumnContact2;
 	bool RelicColumnContact3;
-	bool DoorBoss;
 
 	//Variables para meter codigos
 	string code;

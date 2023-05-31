@@ -409,7 +409,6 @@ bool PuzzleManager::Dun2Start()
 	RelicColumnContact1 = false;
 	RelicColumnContact2 = false;
 	RelicColumnContact3 = false;
-	DoorBoss = false;
 
 	DoorsOpened = 0;
 	RelicsCompleted = 0;
@@ -1247,12 +1246,149 @@ bool PuzzleManager::ChickenBoomPuz()
 {
 
 
+	app->render->DrawTexture(GeneralTextureDungeon2, posChicken1.x, posChicken1.y, &Chick);
+	app->render->DrawTexture(GeneralTextureDungeon2, posChicken2.x, posChicken2.y, &Chick);
+
 	return true;
 }
 
 bool PuzzleManager::RelicsPuz()
 {
+	if (RelicContact1) 
+	{
+		app->render->DrawTexture(textureE, posRelic1.x - 32, posRelic1.y - 80);
+
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+		{
+			if (relic1 != nullptr)
+				relic1->body->GetWorld()->DestroyBody(relic1->body);
+
+			delete relic1;
+			relic1 = nullptr;
+
+			Relic1Invent = true;
+			RelicContact1 = false;
+		}
+	}
+
+	if (RelicContact2) 
+	{
+		app->render->DrawTexture(textureE, posRelic2.x - 32, posRelic2.y - 80);
+
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+		{
+			if (relic2 != nullptr)
+				relic2->body->GetWorld()->DestroyBody(relic2->body);
+
+			delete relic2;
+			relic2 = nullptr;
+
+			Relic2Invent = true;
+			RelicContact2 = false;
+		}
+	}
 	
+	if (RelicContact3) 
+	{
+		app->render->DrawTexture(textureE, posRelic3.x - 32, posRelic3.y - 80);
+
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+		{
+			if (relic3 != nullptr)
+				relic3->body->GetWorld()->DestroyBody(relic3->body);
+
+			delete relic3;
+			relic3 = nullptr;
+
+			Relic3Invent = true;
+			RelicContact3 = false;
+		}
+	}
+
+	if (Relic1Invent) 
+	{
+		if (RelicColumnContact1) 
+		{
+			app->render->DrawTexture(textureE, posRelicColumn1.x - 32, posRelicColumn1.y - 80);
+
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+			{
+				//Cambiar textura
+				//Col1 = { , , , };
+
+				RelicsCompleted += 1;
+				RelicColumnContact1 = false;
+				Relic1Invent = false;
+			}
+		}
+	}
+	else 
+	{
+		app->render->DrawTexture(GeneralTextureDungeon2, posRelic1.x, posRelic1.y, &Rel1);
+	}
+	
+	if (Relic2Invent) 
+	{
+		if (RelicColumnContact2)
+		{
+			app->render->DrawTexture(textureE, posRelicColumn2.x - 32, posRelicColumn2.y - 80);
+
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+			{
+				//Cambiar textura
+				//Col2 = { , , , };
+
+				RelicsCompleted += 1;
+				RelicColumnContact2 = false;
+				Relic2Invent = false;
+			}
+		}
+	}
+	else 
+	{
+		app->render->DrawTexture(GeneralTextureDungeon2, posRelic2.x, posRelic2.y, &Rel2);
+	}	
+	
+	if (Relic3Invent) 
+	{
+		if (RelicColumnContact3)
+		{
+			app->render->DrawTexture(textureE, posRelicColumn3.x - 32, posRelicColumn3.y - 80);
+
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+			{
+				//Cambiar textura
+				//Col3 = { , , , };
+
+				RelicsCompleted += 1;
+				RelicColumnContact3 = false;
+				Relic3Invent = false;
+			}
+		}
+	}
+	else 
+	{
+		app->render->DrawTexture(GeneralTextureDungeon2, posRelic3.x, posRelic3.y, &Rel3);
+	}
+
+	if (RelicsCompleted >= 3) 
+	{
+		relics = true;
+
+		RelicsCompleted = 0;
+
+		if (DoorBossP != nullptr)
+			DoorBossP->body->GetWorld()->DestroyBody(DoorBossP->body);
+
+		delete DoorBossP;
+		DoorBossP = nullptr;
+
+		app->questManager->SaveState();
+	}
+	else 
+	{
+		app->render->DrawTexture(GeneralTextureDungeon2, posDoorBoss.x, posDoorBoss.y, &BossD);
+	}
 
 	return true;
 }
