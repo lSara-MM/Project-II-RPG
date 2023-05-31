@@ -45,6 +45,60 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 	LOG("Loading PuzzleManager");
 	bool ret = true;
 
+	if (app->hTerrors->active) 
+	{
+		Dun1Awake(config);
+	}
+	
+	return ret;
+}
+
+bool PuzzleManager::Start()
+{
+	if (app->hTerrors->active) 
+	{
+		Dun1Start();
+	}
+	
+	return true;
+}
+
+bool PuzzleManager::PreUpdate()
+{
+	return true;
+}
+
+bool PuzzleManager::Update(float dt)
+{
+	if(app->hTerrors->active)
+	{
+		Dun1Update();
+	}
+
+	return true;
+}
+
+bool PuzzleManager::PostUpdate()
+{
+
+	return true;
+}
+
+// Called before quitting
+bool PuzzleManager::CleanUp()
+{
+	LOG("Freeing scene");
+
+	if(app->hTerrors->active)
+	{
+		Dun1CleanUp();
+	}
+
+	return true;
+}
+
+bool PuzzleManager::Dun1Awake(pugi::xml_node& config)
+{
 	texturepathDoor = config.child("Door").attribute("texturepathDoor").as_string();
 	texturepathPalanca = config.child("Palanca").attribute("texturepathPalanca").as_string();
 	texturepathNotas = config.child("Notas").attribute("texturepathNotas").as_string();
@@ -55,11 +109,11 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 	texturepathFireGuy = config.child("FireGuy").attribute("texturepathFireGuy").as_string();
 
 	posNotas1.x = config.child("Notas").attribute("x1").as_int();
-	posNotas1.y = config.child("Notas").attribute("y1").as_int();	
-	
+	posNotas1.y = config.child("Notas").attribute("y1").as_int();
+
 	posNotas2.x = config.child("Notas").attribute("x2").as_int();
-	posNotas2.y = config.child("Notas").attribute("y2").as_int();	
-	
+	posNotas2.y = config.child("Notas").attribute("y2").as_int();
+
 	posNotas3.x = config.child("Notas").attribute("x3").as_int();
 	posNotas3.y = config.child("Notas").attribute("y3").as_int();
 
@@ -68,22 +122,22 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 
 	/*posDoor2.x = config.child("Door").attribute("x1").as_int();
 	posDoor2.y = config.child("Door").attribute("y1").as_int();*/
-	
+
 	posDoor3.x = config.child("Door").attribute("x2").as_int();
 	posDoor3.y = config.child("Door").attribute("y2").as_int();
-	
+
 	posBoss.x = config.child("Boss").attribute("x").as_int();
-	posBoss.y = config.child("Boss").attribute("y").as_int();	
-	
+	posBoss.y = config.child("Boss").attribute("y").as_int();
+
 	posLoset.x = config.child("Loset").attribute("x").as_int();
 	posLoset.y = config.child("Loset").attribute("y").as_int();
-	
+
 	posFireGuy.x = config.child("FireGuy").attribute("x").as_int();
 	posFireGuy.y = config.child("FireGuy").attribute("y").as_int();
 
 	widthVertical = config.child("Door").attribute("widthVertical").as_int();
 	heightVertical = config.child("Door").attribute("heightVertical").as_int();
-	
+
 	widthHoritzontal = config.child("Door").attribute("widthHoritzontal").as_int();
 	heightHoritzontal = config.child("Door").attribute("heightHoritzontal").as_int();
 
@@ -95,10 +149,10 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 
 	widthPalancaSens = config.child("PalancaSens").attribute("widthPalancaSens").as_int();
 	heightPalancaSens = config.child("PalancaSens").attribute("heightPalancaSens").as_int();
-		
+
 	widthNotas = config.child("Notas").attribute("widthNotas").as_int();
 	heightNotas = config.child("Notas").attribute("heightNotas").as_int();
-	
+
 	widthFireGuy = config.child("FireGuy").attribute("width").as_int();
 	heightFireGuy = config.child("FireGuy").attribute("height").as_int();
 
@@ -107,11 +161,11 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 
 	widthDoorEscape = config.child("DoorEscape").attribute("width").as_int();
 	heightDoorEscape = config.child("DoorEscape").attribute("height").as_int();
-	
+
 	widthBoss = config.child("Boss").attribute("width").as_int();
 	heightBoss = config.child("Boss").attribute("height").as_int();
-	
-	widthLoset= config.child("Boss").attribute("width").as_int();
+
+	widthLoset = config.child("Boss").attribute("width").as_int();
 	heightLoset = config.child("Boss").attribute("height").as_int();
 
 	//fx
@@ -123,11 +177,11 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 
 	solvedpath = "Assets/Audio/Fx/puzzle_solved.wav";
 	solvedfx = app->audio->LoadFx(solvedpath);
-	
-	return ret;
+
+	return true;
 }
 
-bool PuzzleManager::Start()
+bool PuzzleManager::Dun1Start() 
 {
 	palancas = false;
 	escape = false;
@@ -170,7 +224,7 @@ bool PuzzleManager::Start()
 	app->questManager->active = true;
 	app->questManager->LoadState();
 
-	if (palancas == false) 
+	if (palancas == false)
 	{
 		door = app->tex->Load(texturepathDoor);
 
@@ -185,12 +239,12 @@ bool PuzzleManager::Start()
 		PalancaSensor->ctype = ColliderType::PALANCA;
 	}
 
-	if (rescue == false) 
+	if (rescue == false)
 	{
 		boss = app->tex->Load(texturepathBoss);
 
 		door = app->tex->Load(texturepathDoor);
-		
+
 		Boss = app->physics->CreateRectangleSensor(posBoss.x - widthBoss / 2, posBoss.y - heightBoss / 2, widthBoss, heightBoss, bodyType::STATIC);
 		Boss->body->SetFixedRotation(true);
 		Boss->ctype = ColliderType::BOSSDEAD;
@@ -219,7 +273,7 @@ bool PuzzleManager::Start()
 		DoorEscapeSensor->ctype = ColliderType::DOORCODE;
 	}
 
-	if (teamMate == false) 
+	if (teamMate == false)
 	{
 		fireGuy = app->tex->Load(texturepathFireGuy);
 
@@ -261,15 +315,8 @@ bool PuzzleManager::Start()
 	return true;
 }
 
-bool PuzzleManager::PreUpdate()
+bool PuzzleManager::Dun1Update()
 {
-	return true;
-}
-
-bool PuzzleManager::Update(float dt)
-{
-	
-
 	if (!palancas)
 	{
 		Palancas();
@@ -285,13 +332,13 @@ bool PuzzleManager::Update(float dt)
 		Rescue();
 		app->render->DrawTexture(loset, posLoset.x - widthLoset + 16, posLoset.y - heightLoset + 16, &los);
 	}
-	else 
+	else
 	{
 		app->render->DrawTexture(bossDeath, posLoset.x - widthBoss + 25, posLoset.y - heightBoss + 22, &bosDeath);
 		app->render->DrawTexture(loset, posLoset.x - widthLoset + 16, posLoset.y - heightLoset + 16, &los);
 	}
 
-	if (!teamMate) 
+	if (!teamMate)
 	{
 		TeamMate();
 	}
@@ -357,7 +404,7 @@ bool PuzzleManager::Update(float dt)
 		app->dialogueSystem->hasEnded = false;
 	}
 
-	if(app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 	{
 		bossIsDead = !bossIsDead;
 	}
@@ -386,8 +433,6 @@ bool PuzzleManager::Update(float dt)
 		//app->render->DrawTexture(app->hTerrors->DarkestDungeon, app->hTerrors->player->position.x - app->win->GetWidth() / 2, app->hTerrors->player->position.y - app->win->GetHeight() / 2);
 		app->render->DrawTexture(app->hTerrors->DarkestDungeon, -app->render->camera.x - app->render->camera.w / 2 + app->win->GetWidth() / 2, -app->render->camera.y + app->render->camera.h / 2 - app->win->GetHeight() / 2);
 	}
-	
-
 
 	if (app->input->getInput_B)
 	{
@@ -398,18 +443,9 @@ bool PuzzleManager::Update(float dt)
 	return true;
 }
 
-bool PuzzleManager::PostUpdate()
+bool PuzzleManager::Dun1CleanUp() 
 {
-
-	return true;
-}
-
-// Called before quitting
-bool PuzzleManager::CleanUp()
-{
-	LOG("Freeing scene");
-
-	if (!palancas) 
+	if (!palancas)
 	{
 		if (Door1 != nullptr)
 			Door1->body->GetWorld()->DestroyBody(Door1->body);
@@ -418,7 +454,7 @@ bool PuzzleManager::CleanUp()
 			PalancaSensor->body->GetWorld()->DestroyBody(PalancaSensor->body);
 	}
 
-	if (!escape) 
+	if (!escape)
 	{
 
 		if (doorEscape != nullptr)
@@ -428,7 +464,7 @@ bool PuzzleManager::CleanUp()
 			DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
 	}
 
-	if (!rescue) 
+	if (!rescue)
 	{
 		if (boss != nullptr)
 			app->tex->UnLoad(boss);
@@ -443,7 +479,7 @@ bool PuzzleManager::CleanUp()
 			Loset->body->GetWorld()->DestroyBody(Loset->body);
 	}
 
-	if (!teamMate) 
+	if (!teamMate)
 	{
 		if (fireGuy != nullptr)
 			app->tex->UnLoad(fireGuy);
@@ -465,10 +501,10 @@ bool PuzzleManager::CleanUp()
 	if (loset != nullptr)
 		app->tex->UnLoad(loset);
 
-	if(door != nullptr)
+	if (door != nullptr)
 		app->tex->UnLoad(door);
-	
-	if(textureE != nullptr)
+
+	if (textureE != nullptr)
 		app->tex->UnLoad(textureE);
 
 	if (bossDeath != nullptr)

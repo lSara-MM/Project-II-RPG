@@ -11,6 +11,7 @@
 #include "GuiButton.h"
 #include "GuiManager.h"
 #include "Inventory.h"
+#include "Store.h"
 #include "Player.h"
 #include "Character.h"
 #include "Combat.h"
@@ -59,7 +60,7 @@ public:
 	bool equiped = false;
 	bool craft = false;
 
-	GuiButton* button;
+	GuiButton* button = nullptr;
 
 	bool CleanUp()
 	{
@@ -88,6 +89,8 @@ public:
 	void LoadQuantity(int x, int y, ItemNode* item);
 	void LoadButtons(int x, int y, ItemNode* item);
 	void MinusQuantity(ItemNode* item);
+	void SellItem(int ID, int quantity);
+	void BuyItem(int ID, int quantity);
 
 	void LoadArmorItmes();
 
@@ -109,6 +112,7 @@ public:
 	SString itemPath;
 
 	const char* texturePath;
+	const char* textureStorePath;
 
 	vector <ItemNode*> nodeList;
 	vector <ItemNode*> armorItems;

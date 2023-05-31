@@ -916,7 +916,7 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 
 			app->itemManager->coins += coins;
 
-			int loot = rand() % 101;
+			/*int loot = rand() % 101;
 
 			if (loot >= 50)
 			{
@@ -937,7 +937,7 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 			{
 				app->itemManager->AddQuantity(93, 2);
 				app->itemManager->AddQuantity(100, 2);
-			}
+			}*/
 
 		}
 
