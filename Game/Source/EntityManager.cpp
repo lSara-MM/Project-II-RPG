@@ -168,6 +168,16 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 	app->input->posX = data.child("player").attribute("x").as_int();
 	app->input->posY = data.child("player").attribute("y").as_int();
 
+	//app->itemManager->ClearParty();
+	app->itemManager->PartyToNull();
+	app->itemManager->LoadAllPC();
+
+	for (pugi::xml_attribute attr = data.child("party").attribute("id"); attr; attr = attr.next_attribute())
+	{
+		int id = data.child("party").attribute("id").as_int();
+		app->itemManager->AddCharaToParty(id);
+	}
+
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->scene->name.GetString()) == 0)
 	{
 		app->fade->FadingToBlack(app->iScene, (Module*)app->scene, 90);
@@ -195,33 +205,31 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 bool EntityManager::SaveState(pugi::xml_node& data)
 {
 	pugi::xml_node player = data.append_child("player");
+	pugi::xml_node party = data.append_child("party");
 
+	Player* pPlayer = nullptr;
 	if (app->scene->active)
 	{
 		player.append_attribute("name") = app->scene->name.GetString();
-		player.append_attribute("x") = app->scene->player->position.x;
-		player.append_attribute("y") = app->scene->player->position.y;
+		pPlayer = app->scene->player;
 	}
 	
 	if (app->hTerrors->active)
 	{
 		player.append_attribute("name") = app->hTerrors->name.GetString();
-		player.append_attribute("x") = app->hTerrors->player->position.x;
-		player.append_attribute("y") = app->hTerrors->player->position.y;
+		pPlayer = app->hTerrors->player;
 	}	
 
 	if (app->practiceTent->active)
 	{
 		player.append_attribute("name") = app->practiceTent->name.GetString();
-		player.append_attribute("x") = app->practiceTent->player->position.x;
-		player.append_attribute("y") = app->practiceTent->player->position.y;
+		pPlayer = app->practiceTent->player;
 	}	
 	
 	if (app->circus->active)
 	{
 		player.append_attribute("name") = app->circus->name.GetString();
-		player.append_attribute("x") = app->circus->player->position.x;
-		player.append_attribute("y") = app->circus->player->position.y;
+		pPlayer = app->circus->player;
 	}
 
 	if (!app->iScene->previousGame_B)
@@ -231,12 +239,27 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 		app->iScene->SaveState(app->iScene->IntroSaveNode);
 	}
 
+	player.append_attribute("x") = pPlayer->position.x;
+	player.append_attribute("y") = pPlayer->position.y;
+
+	int i;
+	
+	for (i = 0; i < app->itemManager->arrParty.size(); i++)
+	{
+		if (app->itemManager->arrParty.at(i) != nullptr)
+		{
+			party.append_attribute("id") = app->itemManager->arrParty.at(i)->id;
+		}
+		else
+		{
+			break;
+		}
+	}
+	party.append_attribute("partySize") = i;
+	pPlayer = nullptr;
+
 	//app->scene->isCharacterLoaded_B = false;
 	app->combat->SaveCombat();
-
-	//app->itemManager->SaveItemState();
-	//app->questManager->SaveState();
-
 	return true;
 }
 

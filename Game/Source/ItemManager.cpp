@@ -32,14 +32,13 @@ bool ItemManager::Awake(pugi::xml_node& config)
 
 bool ItemManager::Start()
 {
-	// Load playable characters and party
-	for (int i = 0; i < arrParty.size(); i++)
+	if (!app->input->coso)
 	{
-		arrParty.at(i) = nullptr;
+		// Load playable characters and party
+		PartyToNull();
+		LoadAllPC();
+		SetParty();
 	}
-
-	LoadAllPC();
-	SetParty();
 
 	LoadItems();
 	
@@ -75,10 +74,11 @@ bool ItemManager::CleanUp()
 	nodeList.clear();
 	armorItems.clear();
 
-	for (int i = 0; i < arrParty.size(); i++)
+	ClearParty();
+	for (int i = 0; i < vecPC.size(); i++)
 	{
-		//delete arrParty.at(i);
-		arrParty.at(i) = nullptr;
+		//delete vecPC.at(i);
+		vecPC.at(i) = nullptr;
 	}
 
 	app->tex->UnLoad(itemsTexture);
@@ -200,7 +200,6 @@ void ItemManager::UseItem(ItemNode* item)
 		{
 			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(item->hp);
 		}
-
 	}
 	else
 	{
@@ -363,7 +362,6 @@ void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
 
 				string c = to_string(item->quantity);
 				app->render->TextDraw(c.c_str(), (720 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
-
 			}
 		}
 		else
@@ -428,7 +426,6 @@ void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
 
 void ItemManager::LoadButtons(int x, int y, ItemNode* item)
 {
-
 	SDL_Rect buttonBounds;
 	buttonBounds = { (680 + 42 * x), y, 40, 40 };
 
@@ -593,6 +590,7 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 }
 
 
+// Party
 void ItemManager::AddCharaToParty(SString chara)
 {
 	for (int i = 0; i < vecPC.size(); i++)
@@ -612,7 +610,25 @@ void ItemManager::AddCharaToParty(SString chara)
 	}
 }
 
-// Party
+void ItemManager::AddCharaToParty(int id)
+{
+	for (int i = 0; i < vecPC.size(); i++)
+	{
+		if (vecPC.at(i)->id == id)
+		{
+			for (int i = 0; i < arrParty.size(); i++)
+			{
+				if (arrParty.at(i) == nullptr)
+				{
+					arrParty.at(i) = vecPC.at(i);
+					arrParty.at(i)->positionCombat_I = i;
+					break;
+				}
+			}
+		}
+	}
+}
+
 void ItemManager::LoadAllPC()
 {
 	for (pugi::xml_node itemNode = app->entityManager->entityNode.child("CombatCharacter"); itemNode; itemNode = itemNode.next_sibling("CombatCharacter"))
@@ -640,5 +656,36 @@ void ItemManager::SetParty()
 		//if (i == arrParty.size()) break;
 		arrParty.at(i) = vecPC.at(i);
 		arrParty.at(i)->positionCombat_I = i;
+	}
+}
+
+void ItemManager::ClearParty()
+{
+	for (int i = 0; i < arrParty.size(); i++)
+	{
+		if (arrParty.at(i) != nullptr)
+		{
+			arrParty.at(i)->CleanUp();
+			arrParty.at(i) = nullptr;
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+
+void ItemManager::PartyToNull()
+{
+	for (int i = 0; i < arrParty.size(); i++)
+	{
+		if (arrParty.at(i) != nullptr)
+		{
+			arrParty.at(i) = nullptr;
+		}
+		else
+		{
+			break;
+		}
 	}
 }

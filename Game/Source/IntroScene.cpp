@@ -323,7 +323,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 			for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 			{
 				i->data->isForward_B = false;
-				
 			}
 
 			app->combat->firstCombat_B = true;
@@ -336,11 +335,9 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-
 		}
 
-		app->questManager->active = true;
-		app->questManager->Start();
+		app->questManager->Enable();
 
 		app->combat->firstCombat_B = false;
 		app->input->coso = true;

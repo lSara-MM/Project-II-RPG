@@ -100,8 +100,11 @@ public:
 	bool SaveItemState();
 
 	void AddCharaToParty(SString chara);
+	void AddCharaToParty(int id);
 	void LoadAllPC();
 	void SetParty();
+	void ClearParty();
+	void PartyToNull();
 
 public:
 
@@ -128,17 +131,17 @@ private:
 public:
 	//print stats
 	int maxhp = 0;
-	int attack= 0;
-	int critProbability= 0;
-	int critDamage= 0;
-	int accuracy= 0;
-	int armor= 0;
-	int esquiva= 0;
-	int resistencia= 0;
-	int speed= 0;
+	int attack = 0;
+	int critProbability = 0;
+	int critDamage = 0;
+	int accuracy = 0;
+	int armor = 0;
+	int esquiva = 0;
+	int resistencia = 0;
+	int speed = 0;
 
 	int coins = 0;
-	
+
 	// TO DO GUARRADA SUPER TEMPORAL
 	int comb = 0;
 };
