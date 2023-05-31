@@ -296,7 +296,7 @@ bool Character::Update(float dt)
 							int probSkill;
 							if (currentHp >= maxHp / 2) //Alto de vida
 							{
-								if (listSkillsHistory.end->data == 2)//Si se uso el turno pasado no se usa
+								if (listSkillsHistory.end->data == 3)//Si se uso el turno pasado no se usa
 								{
 									probSkill = 10;
 								}
@@ -309,7 +309,7 @@ bool Character::Update(float dt)
 									//usar skill 2 (tanqueo high HP)
 									UseSkill(listSkills.At(2)->data);
 
-									listSkillsHistory.Add(2);
+									listSkillsHistory.Add(3);
 									break;
 								}
 								else
@@ -319,20 +319,20 @@ bool Character::Update(float dt)
 							}
 							else //Bajo de vida
 							{
-								if (listSkillsHistory.end->data == 1)//Si se uso el turno pasado no se repite casi
+								if (listSkillsHistory.end->data == 2)//Si se uso el turno pasado no se repite casi
 								{
-									probSkill = 15;
+									probSkill = 0;
 								}
 								else //Si no se uso pues casi siempre la usa
 								{
-									probSkill = 80;
+									probSkill = 70;
 								}
 								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
 								{
-									//usar skill 1
+									//usar skill 1 (tanqueo low HP)
 									UseSkill(listSkills.At(1)->data);
 
-									listSkillsHistory.Add(1);
+									listSkillsHistory.Add(2);
 									break;
 								}
 								{
@@ -344,7 +344,7 @@ bool Character::Update(float dt)
 								//usar skill 3 (daño + debuff)
 								UseSkill(listSkills.At(3)->data);
 
-								listSkillsHistory.Add(3);
+								listSkillsHistory.Add(4);
 								break;
 							}
 							else
@@ -352,7 +352,7 @@ bool Character::Update(float dt)
 								//usar skill 0 (daño solo) (es la skill mas debil)
 								UseSkill(listSkills.At(0)->data);
 
-								listSkillsHistory.Add(0);
+								listSkillsHistory.Add(1);
 								break;
 							}
 						}
@@ -363,30 +363,32 @@ bool Character::Update(float dt)
 
 							int probSkill;
 							if (positionCombat_I > 0) //Posicion comoda
-							{
-								if (listSkillsHistory.end->data == 1 || listSkillsHistory.end->data == 0)//Si ataque last turn poco probable usar attack
+							{	
+								//Si ataque last turn poco probable usar attack
+								if (listSkillsHistory.end->data == 2 || listSkillsHistory.end->data == 1)
 								{
 									probSkill = 10;
 								}
-								else //Si no se uso pues casi siempre la usa
+								else //Si no se uso pues mas probable que la use
 								{
-									probSkill = 75;
+									probSkill = 65;
 								}
+								//Usar un attack
 								if (CalculateRandomProbability(probSkill) && listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque
 								{
 									//usar skill 0 (atk)
 									UseSkill(listSkills.At(0)->data);
 
-									listSkillsHistory.Add(0);
+									listSkillsHistory.Add(1);
 									break;
 								}
 								else
 								{
-									if (listSkillsHistory.end->data == 2)//Usar buffo area
+									if (listSkillsHistory.end->data == 3)//Usar debuffo area
 									{
 										probSkill = 25;
 									}
-									else //Usar buffo unitario
+									else //Usar debuffo area
 									{
 										probSkill = 75;
 									}
@@ -395,15 +397,15 @@ bool Character::Update(float dt)
 										//usar skill 2 (area debuff)
 										UseSkill(listSkills.At(2)->data);
 
-										listSkillsHistory.Add(2);
+										listSkillsHistory.Add(3);
 										break;
 									}
-									else if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Debuff unitario
+									else if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Debuff unitario
 									{
-										//usar skill 2 (area debuff)
+										//usar skill 3 (unitary debuff)
 										UseSkill(listSkills.At(3)->data);
 
-										listSkillsHistory.Add(3);
+										listSkillsHistory.Add(4);
 										break;
 									}
 								}
@@ -415,7 +417,7 @@ bool Character::Update(float dt)
 									//usar skill 1 (debil de huida)
 									UseSkill(listSkills.At(1)->data);
 
-									listSkillsHistory.Add(1);
+									listSkillsHistory.Add(2);
 									break;
 								}
 							}

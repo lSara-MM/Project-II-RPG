@@ -78,7 +78,7 @@ STATUS ID
 	   statusID="4" positive="false" duration="2" intensity="-25"
 	/>
 
-	<skill name="Free Trial" id="10" description="A taste of the new miracoulous potion, which heals a great amount of health to the frontline"
+	<skill name="Free Trial" id="10" description="A taste of the new miracoulous potion which heals a great amount of health to the frontline"
 		   type="1" movementCaster="0"  movementTarget="0"
 	   multiplierDmg="1.4" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="1" friendlyFire="true" areaSkill="false" autoTarget="false"
@@ -139,16 +139,16 @@ STATUS ID
 
 	<skill name="Close doors" id="22" description="A defensive desesperated move to heal and endure"
 		   type="1" movementCaster="0"  movementTarget="0"
-	   multiplierDmg="1.2" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="1.0" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
 		   statusID="5" positive="true" duration="1" intensity="40"
 	/>
 
 	<skill name="Maquination" id="23" description="Increases highly its precision"
 		   type="3" movementCaster="-1"  movementTarget="0"
-	   multiplierDmg="0.6" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="0.4" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
-		   statusID="4" positive="false" duration="2" intensity="60"
+		   statusID="4" positive="false" duration="3" intensity="60"
 	/>
 
 	<skill name="Clothe attack" id="24" description="A strike using cloth that blinds its target"

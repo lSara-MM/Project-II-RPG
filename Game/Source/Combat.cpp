@@ -1292,22 +1292,27 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 	
 	if (control->id >= 5 && control->id < 10)
 	{
-		Character* enemy = vecEnemies.at(SearchInVec(vecEnemies, control->id));
-		for (int i = 0; i < enemy->listSkills.Count(); i++)
+		int num = SearchInVec(vecEnemies, control->id);
+		if (num>-1 && control->id >= 5 && control->id < 10) //Seguro para que no pete
 		{
-			if (enemy->listSkillsHistory.Find(i+1) == -1)
+			Character* enemy = vecEnemies.at(SearchInVec(vecEnemies, control->id));
+			for (int i = 0; i < enemy->listSkills.Count(); i++)
 			{
-				app->render->TextDraw("???", 70, 540 + 15 * i, 12);
-			}
-			else
-			{
-				SString ability;
-				ability += enemy->listSkills.At(i)->data->name;
-				ability += ": ";
-				ability += enemy->listSkills.At(i)->data->description.GetString();
-				app->render->TextDraw(ability.GetString(), 70, 540 + 15 * i, 12);
+				if (enemy->listSkillsHistory.Find(i+1) == -1)
+				{
+					app->render->TextDraw("???", 70, 540 + 15 * i, 12);
+				}
+				else
+				{
+					SString ability;
+					ability += enemy->listSkills.At(i)->data->name;
+					ability += ": ";
+					ability += enemy->listSkills.At(i)->data->description.GetString();
+					app->render->TextDraw(ability.GetString(), 70, 540 + 15 * i, 12);
+				}
 			}
 		}
+		
 	}
 
 	if (control->id >= 10 && control->id < 14)
