@@ -85,6 +85,7 @@ private:
 	int max_chars_line;
 
 	float dtWait;
+	bool notifyEnd;
 };
 
 #endif //__DIALOGTREE_H__

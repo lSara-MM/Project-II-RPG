@@ -34,7 +34,7 @@
 	<PuzzleManager />
 	<questmanager />
 	<entitymanager>
-		<player name="scene" x="3492" y="1357" />
+		<player name="scene" x="3509" y="2582" />
 	</entitymanager>
 	<itemmanager />
 	<dialogue />
@@ -44,6 +44,6 @@
 	<store />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2832" y="-1024" />
+		<camera x="-2889" y="-2249" />
 	</renderer>
 </save_state>

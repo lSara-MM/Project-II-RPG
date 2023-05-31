@@ -13,9 +13,13 @@ using namespace std;
 
 void DialogueNode::CleanUp()
 {
-	for (int j = 0; j < choicesList.size(); j++) { delete choicesList[j]; }
+	for (int j = 0; j < choicesList.size(); j++)
+	{
+		delete choicesList.at(j);
+		choicesList.at(j) = nullptr;
+	}
+
 	choicesList.clear();
-	
 	texts.clear();
 }
 
@@ -24,6 +28,7 @@ DialogueTree::DialogueTree(bool a)
 {
 	updateOptions = false;
 	active = a;
+	notifyEnd = false;
 
 	switch (app->dialogueSystem->GetTextSpeed())
 	{
@@ -69,11 +74,17 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 		updateOptions = UpdateNodes(mod, pos);
 	}
 
-	return true;
+	return notifyEnd;
 }
 
 bool DialogueTree::UpdateNodes(Module* mod, iPoint pos)
 {
+	while( listDialogueButtons.Count() > 0)
+	{
+		app->guiManager->DestroyGuiControl(listDialogueButtons.At(0)->data);
+		listDialogueButtons.Del(listDialogueButtons.At(0));
+	}
+
 	GuiButton* button;
 
 	for (int i = 0; i < activeNode->choicesList.size(); i++)
@@ -98,7 +109,7 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 	
 	for (int i = 0; i < activeNode->choicesList.size(); i++)
 	{
-		switch (activeNode->choicesList[i]->eventReturn)
+		switch (activeNode->choicesList.at(i)->eventReturn)
 		{
 		case DIALOGUE_INPUT:
 
@@ -157,8 +168,9 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 
 			break;
 		case DIALOGUE_STORE:
-			//app->dialogueSystem->CleanUp();
 			app->store->Enable();
+			notifyEnd = true;
+			return true;
 			break;
 		default:
 			return false;
@@ -173,11 +185,15 @@ void DialogueTree::CleanUp()
 {
 	for (int j = 0; j < nodeList.size(); j++)
 	{
-		nodeList[j]->CleanUp();
-		delete nodeList[j];
+		nodeList.at(j)->CleanUp();
+		delete nodeList.at(j);
+	}
+
+	for (int i = 0; i < listDialogueButtons.Count(); i++)
+	{
+		app->guiManager->DestroyGuiControl(listDialogueButtons.At(i)->data);
 	}
 	
-	nodeList.clear();
-
+	nodeList.clear();	
 	listDialogueButtons.Clear();
 }
