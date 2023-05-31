@@ -31,21 +31,29 @@ public:
 
 	// Called before render is available
 	bool Awake(pugi::xml_node& config);
+	bool Dun1Awake(pugi::xml_node& config);
+	bool Dun2Awake(pugi::xml_node& config);
 
 	// Called before the first frame
 	bool Start();
+	bool Dun1Start();
+	bool Dun2Start();
 
 	// Called before all Updates
 	bool PreUpdate();
 
 	// Called each loop iteration
 	bool Update(float dt);
+	bool Dun1Update();
+	bool Dun2Update();
 
 	// Called before all Updates
 	bool PostUpdate();
 
 	// Called before quitting
 	bool CleanUp();
+	bool Dun1CleanUp();
+	bool Dun2CleanUp();
 
 	bool Palancas();
 
