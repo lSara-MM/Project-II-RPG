@@ -48,7 +48,6 @@ bool DialogueSystem::Update(float dt)
 		{
 			CleanUp();
 		}
-		
 	}
 
 	return true;
@@ -79,7 +78,7 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 		CleanUp();
 	}
 	
-	app->guiManager->CleanUp();
+	//app->guiManager->CleanUp();
 
 	return true;
 }
@@ -88,6 +87,7 @@ bool DialogueSystem::CleanUp()
 {
 	if (activeTree != nullptr)
 	{
+		activeTree->CleanUp();
 		activeTree->activeNode = nullptr;
 		activeTree->nodeList.clear();
 		delete activeTree;
@@ -95,7 +95,7 @@ bool DialogueSystem::CleanUp()
 	}
 
 	app->tex->UnLoad(textBox_tex);
-	app->guiManager->CleanUp();
+	//app->guiManager->CleanUp();
 
 	return true;
 }

@@ -13,9 +13,13 @@ using namespace std;
 
 void DialogueNode::CleanUp()
 {
-	for (int j = 0; j < choicesList.size(); j++) { delete choicesList[j]; }
+	for (int j = 0; j < choicesList.size(); j++)
+	{
+		delete choicesList.at(j);
+		choicesList.at(j) = nullptr;
+	}
+
 	choicesList.clear();
-	
 	texts.clear();
 }
 
@@ -75,6 +79,12 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 
 bool DialogueTree::UpdateNodes(Module* mod, iPoint pos)
 {
+	while( listDialogueButtons.Count() > 0)
+	{
+		app->guiManager->DestroyGuiControl(listDialogueButtons.At(0)->data);
+		listDialogueButtons.Del(listDialogueButtons.At(0));
+	}
+
 	GuiButton* button;
 
 	for (int i = 0; i < activeNode->choicesList.size(); i++)
@@ -175,11 +185,15 @@ void DialogueTree::CleanUp()
 {
 	for (int j = 0; j < nodeList.size(); j++)
 	{
-		nodeList[j]->CleanUp();
-		delete nodeList[j];
+		nodeList.at(j)->CleanUp();
+		delete nodeList.at(j);
+	}
+
+	for (int i = 0; i < listDialogueButtons.Count(); i++)
+	{
+		app->guiManager->DestroyGuiControl(listDialogueButtons.At(i)->data);
 	}
 	
-	nodeList.clear();
-
+	nodeList.clear();	
 	listDialogueButtons.Clear();
 }
