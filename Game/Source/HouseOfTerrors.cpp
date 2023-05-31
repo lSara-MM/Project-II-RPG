@@ -233,9 +233,13 @@ bool HouseOfTerrors::CleanUp()
 	app->entityManager->Disable();
 	app->inventory->Disable();
 
+	//CleanUp chests
 	for (int i = 0; i < app->lootManager->chests.size(); i++)
 	{
-		app->lootManager->chests[i]->CleanUp();
+		if (app->lootManager->chests[i]->used == false)
+		{
+			app->lootManager->chests[i]->CleanUp();
+		}
 	}
 
 	delete player;

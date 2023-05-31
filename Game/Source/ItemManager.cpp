@@ -113,7 +113,6 @@ int ItemManager::LoadItems()
 
 void ItemManager::AddQuantity(int id, int quantity)
 {
-
 	for (size_t i = 0; i < nodeList.size(); i++)
 	{
 		if (nodeList[i]->ID == id)
@@ -137,7 +136,7 @@ void ItemManager::BuyItem(int ID, int quantity)
 	{
 		if(nodeList[i]->ID == ID)
 		{ 
-			coins += nodeList[i]->price* quantity;
+			coins -= nodeList[i]->price* quantity;
 		}
 	}
 }
@@ -148,11 +147,11 @@ void ItemManager::SellItem(int ID, int quantity)
 	{
 		if (nodeList[i]->ID == ID)
 		{
-			for (int q=0; q<quantity; q++)
+			for (int q = 0; q < quantity; q++)
 			{
 				MinusQuantity(nodeList[i]);
 			}
-			coins -= nodeList[i]->price * quantity;
+			coins += nodeList[i]->price * quantity;
 		}
 	}
 }
@@ -183,7 +182,7 @@ void ItemManager::MinusQuantity(ItemNode* item)
 			{
 				item->equiped = !item->equiped;
 			}
-			else if (item->type == 4)
+			else if (item->type == 4 || (item->type == 3 && app->store->active))
 			{
 				item->quantity--;
 			}

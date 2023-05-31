@@ -66,11 +66,6 @@ bool Scene::Start()
 	app->itemManager->Enable();
 	app->lootManager->Enable();
 
-	for (int i = 0; i < app->lootManager->chests.size(); i++)
-	{
-		app->lootManager->chests[i]->CleanUp();
-	}
-
 	if (app->puzzleManager->active == true) {
 		app->puzzleManager->CleanUp();
 	}
@@ -114,6 +109,15 @@ bool Scene::Start()
 
 	//GUARRADA SUPER TEMPORAL
 	app->itemManager->comb = 0;
+
+	//CleanUp chests
+	for (int i = 0; i < app->lootManager->chests.size(); i++)
+	{
+		if (app->lootManager->chests[i]->used == false)
+		{
+			app->lootManager->chests[i]->CleanUp();
+		}
+	}
 
 	return true;
 }
