@@ -538,6 +538,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		case 4:
 			app->puzzleManager->BarricadeContact4 = true;
 			break;
+		case 5:
+			app->puzzleManager->BarricadeContact5 = true;
+			break;
 		}
 		break;
 	case ColliderType::BOMB:
@@ -674,6 +677,9 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 			break;
 		case 4:
 			app->puzzleManager->BarricadeContact4 = false;
+			break;
+		case 5:
+			app->puzzleManager->BarricadeContact5 = false;
 			break;
 		}
 		break;

@@ -239,9 +239,18 @@ public:
 	bool BarricadeContact2;
 	bool BarricadeContact3;
 	bool BarricadeContact4;
+	bool BarricadeContact5;
+	bool BarricadeExplote1;
+	bool BarricadeExplote2;
+	bool BarricadeExplote3;
+	bool BarricadeExplote4;
+	bool BarricadeExplote5;
 	bool BombContact1;
 	bool BombContact2;
-	bool BombCarryOn;
+	bool BombCarryOn1;
+	bool BombCarryOn2;
+	bool BombPlant1;
+	bool BombPlant2;
 
 	bool RelicContact1;
 	bool RelicContact2;
@@ -259,6 +268,10 @@ public:
 	string realCode;
 
 	PlayerInput* numCode;
+
+	//Timer para que la bomba explote
+	float TimerForBomb; //Bomb carry on
+	float TimerForExplote; //Bomb explote in barricade
 
 	//Coordenadas para situar texturas
 	SDL_Rect los;

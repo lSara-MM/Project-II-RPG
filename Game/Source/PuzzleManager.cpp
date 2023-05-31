@@ -396,9 +396,18 @@ bool PuzzleManager::Dun2Start()
 	BarricadeContact2 = false;
 	BarricadeContact3 = false;
 	BarricadeContact4 = false;
+	BarricadeContact5 = false;
+	BarricadeExplote1 = false;
+	BarricadeExplote2 = false;
+	BarricadeExplote3 = false;
+	BarricadeExplote4 = false;
+	BarricadeExplote5 = false;
 	BombContact1 = false;
 	BombContact2 = false;
-	BombCarryOn = false;
+	BombCarryOn1 = false;
+	BombCarryOn2 = false;
+	BombPlant1 = false;
+	BombPlant2 = false;
 
 	RelicContact1 = false;
 	RelicContact2 = false;
@@ -413,6 +422,9 @@ bool PuzzleManager::Dun2Start()
 	DoorsOpened = 0;
 	RelicsCompleted = 0;
 	BarricadesExplote = 0;
+
+	TimerForBomb = 0;
+	TimerForExplote = 0;
 
 	app->questManager->LoadState();
 
@@ -685,6 +697,16 @@ bool PuzzleManager::Dun2Update()
 	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn1.x, posRelicColumn1.y, &Col1);
 	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn2.x, posRelicColumn2.y, &Col2);
 	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn3.x, posRelicColumn3.y, &Col3);
+
+	if (BombCarryOn1 || BombCarryOn2) 
+	{
+		TimerForBomb++;
+	}
+	
+	if (BombPlant1 || BombPlant2)
+	{
+		TimerForExplote++;
+	}
 
 	return true;
 }
@@ -1244,10 +1266,372 @@ bool PuzzleManager::KeyDoorsPuz()
 
 bool PuzzleManager::ChickenBoomPuz()
 {
+	if (BombContact1) 
+	{
+		app->render->DrawTexture(textureE, posBomb1.x - 32, posBomb1.y - 80);
 
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+		{
+			BombCarryOn1 = true;
 
-	app->render->DrawTexture(GeneralTextureDungeon2, posChicken1.x, posChicken1.y, &Chick);
-	app->render->DrawTexture(GeneralTextureDungeon2, posChicken2.x, posChicken2.y, &Chick);
+			if (Bomb1 != nullptr)
+				Bomb1->body->GetWorld()->DestroyBody(Bomb1->body);
+
+			delete Bomb1;
+			Bomb1 = nullptr;
+
+			BombContact1 = false;
+		}
+	}
+
+	if (BombCarryOn1)
+	{
+		/*posBomb1.x = app-> ? ? ? ->player->position.x;
+		posBomb1.y = app-> ? ? ? ->player->position.y;*/
+
+		if (TimerForBomb >= 500) 
+		{
+			BombCarryOn1 = false;
+
+			posBomb1.x = posChicken1.x + 20;
+			posBomb1.y = posChicken1.y;
+
+			Bomb1 = app->physics->CreateRectangleSensor(posBomb1.x - widthBomb / 2, posBomb1.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
+			Bomb1->body->SetFixedRotation(true);
+			Bomb1->ctype = ColliderType::BOMB;
+			Bomb1->id = 1;
+
+			TimerForBomb = 0;
+		}
+
+		if(BarricadeContact1 || BarricadeContact2 || BarricadeContact3 || BarricadeContact4 || BarricadeContact5)
+		{
+			if(BarricadeContact1)
+			{
+				app->render->DrawTexture(textureE, posBarricade1.x - 32, posBarricade1.y - 80);
+			}
+			if(BarricadeContact2)
+			{
+				app->render->DrawTexture(textureE, posBarricade2.x - 32, posBarricade2.y - 80);
+			}	
+			if(BarricadeContact3)
+			{
+				app->render->DrawTexture(textureE, posBarricade3.x - 32, posBarricade3.y - 80);
+			}	
+			if(BarricadeContact4)
+			{
+				app->render->DrawTexture(textureE, posBarricade4.x - 32, posBarricade4.y - 80);
+			}
+			if(BarricadeContact5)
+			{
+				app->render->DrawTexture(textureE, posBarricade5.x - 32, posBarricade5.y - 80);
+			}
+
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+			{
+
+				if (BarricadeContact1) 
+				{
+					BarricadeExplote1 = true;
+				}
+				if (BarricadeContact2) 
+				{
+					BarricadeExplote2 = true;
+				}
+				if (BarricadeContact3) 
+				{
+					BarricadeExplote3 = true;
+				}
+				if (BarricadeContact4) 
+				{
+					BarricadeExplote4 = true;
+				}
+				if (BarricadeContact5) 
+				{
+					BarricadeExplote5 = true;
+				}
+
+				BombPlant1 = true;
+
+				BombCarryOn1 = false;
+
+				TimerForBomb = 0;
+			}
+		}
+	}
+
+	if (BombPlant1) 
+	{
+		if(TimerForExplote >= 100)
+		{
+			posBomb1.x = posChicken1.x + 20;
+			posBomb1.y = posChicken1.y;
+
+			Bomb1 = app->physics->CreateRectangleSensor(posBomb1.x - widthBomb / 2, posBomb1.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
+			Bomb1->body->SetFixedRotation(true);
+			Bomb1->ctype = ColliderType::BOMB;
+			Bomb1->id = 1;
+
+			if (BarricadeExplote1) 
+			{
+				if (Barricade1 != nullptr)
+					Barricade1->body->GetWorld()->DestroyBody(Barricade1->body);
+
+				delete Barricade1;
+				Barricade1 = nullptr;
+
+				BarricadesExplote += 1;
+
+				BarricadeExplote1 = false;
+			}
+			if (BarricadeExplote2) 
+			{
+				if (Barricade2 != nullptr)
+					Barricade2->body->GetWorld()->DestroyBody(Barricade2->body);
+
+				delete Barricade2;
+				Barricade2 = nullptr;
+
+				BarricadesExplote += 1;
+
+				BarricadeExplote2 = false;
+			}
+			if (BarricadeExplote3) 
+			{
+				if (Barricade3 != nullptr)
+					Barricade3->body->GetWorld()->DestroyBody(Barricade3->body);
+
+				delete Barricade3;
+				Barricade3 = nullptr;
+
+				BarricadesExplote += 1;
+
+				BarricadeExplote3 = false;
+			}
+			if (BarricadeExplote4) 
+			{
+				if (Barricade4 != nullptr)
+					Barricade4->body->GetWorld()->DestroyBody(Barricade4->body);
+
+				delete Barricade4;
+				Barricade4 = nullptr;
+
+				BarricadesExplote += 1;
+			
+				BarricadeExplote4 = false;
+			}
+			if (BarricadeExplote5) 
+			{
+				if (Barricade5 != nullptr)
+					Barricade5->body->GetWorld()->DestroyBody(Barricade5->body);
+
+				delete Barricade5;
+				Barricade5 = nullptr;
+
+				BarricadesExplote += 1;
+
+				BarricadeExplote5 = false;
+			}
+
+			TimerForExplote = 0;
+		}
+	}
+
+	if (BombContact2)
+	{
+		app->render->DrawTexture(textureE, posBomb2.x - 32, posBomb2.y - 80);
+
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+		{
+			BombCarryOn2 = true;
+
+			if (Bomb2 != nullptr)
+				Bomb2->body->GetWorld()->DestroyBody(Bomb2->body);
+
+			delete Bomb2;
+			Bomb2 = nullptr;
+
+			BombContact2 = false;
+		}
+	}
+
+	if (BombCarryOn2)
+	{
+		/*posBomb1.x = app-> ? ? ? ->player->position.x;
+		posBomb1.y = app-> ? ? ? ->player->position.y;*/
+
+		if (TimerForBomb >= 500)
+		{
+			BombCarryOn2 = false;
+
+			posBomb2.x = posChicken2.x + 20;
+			posBomb2.y = posChicken2.y;
+
+			Bomb2 = app->physics->CreateRectangleSensor(posBomb2.x - widthBomb / 2, posBomb2.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
+			Bomb2->body->SetFixedRotation(true);
+			Bomb2->ctype = ColliderType::BOMB;
+			Bomb2->id = 1;
+
+			TimerForBomb = 0;
+		}
+
+		if (BarricadeContact1 || BarricadeContact2 || BarricadeContact3 || BarricadeContact4 || BarricadeContact5)
+		{
+			if (BarricadeContact1)
+			{
+				app->render->DrawTexture(textureE, posBarricade1.x - 32, posBarricade1.y - 80);
+			}
+			if (BarricadeContact2)
+			{
+				app->render->DrawTexture(textureE, posBarricade2.x - 32, posBarricade2.y - 80);
+			}
+			if (BarricadeContact3)
+			{
+				app->render->DrawTexture(textureE, posBarricade3.x - 32, posBarricade3.y - 80);
+			}
+			if (BarricadeContact4)
+			{
+				app->render->DrawTexture(textureE, posBarricade4.x - 32, posBarricade4.y - 80);
+			}
+			if (BarricadeContact5)
+			{
+				app->render->DrawTexture(textureE, posBarricade5.x - 32, posBarricade5.y - 80);
+			}
+
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+			{
+
+				if (BarricadeContact1)
+				{
+					BarricadeExplote1 = true;
+				}
+				if (BarricadeContact2)
+				{
+					BarricadeExplote2 = true;
+				}
+				if (BarricadeContact3)
+				{
+					BarricadeExplote3 = true;
+				}
+				if (BarricadeContact4)
+				{
+					BarricadeExplote4 = true;
+				}
+				if (BarricadeContact5)
+				{
+					BarricadeExplote5 = true;
+				}
+
+				BombPlant2 = true;
+
+				BombCarryOn2 = false;
+
+				TimerForBomb = 0;
+			}
+		}
+	}
+
+	if (BombPlant2)
+	{
+		if (TimerForExplote >= 100)
+		{
+			posBomb2.x = posChicken2.x + 20;
+			posBomb2.y = posChicken2.y;
+
+			Bomb2 = app->physics->CreateRectangleSensor(posBomb2.x - widthBomb / 2, posBomb2.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
+			Bomb2->body->SetFixedRotation(true);
+			Bomb2->ctype = ColliderType::BOMB;
+			Bomb2->id = 1;
+
+			if (BarricadeExplote1)
+			{
+				if (Barricade1 != nullptr)
+					Barricade1->body->GetWorld()->DestroyBody(Barricade1->body);
+
+				delete Barricade1;
+				Barricade1 = nullptr;
+
+				BarricadesExplote += 1;
+
+				BarricadeExplote1 = false;
+			}
+			if (BarricadeExplote2)
+			{
+				if (Barricade2 != nullptr)
+					Barricade2->body->GetWorld()->DestroyBody(Barricade2->body);
+
+				delete Barricade2;
+				Barricade2 = nullptr;
+
+				BarricadesExplote += 1;
+
+				BarricadeExplote2 = false;
+			}
+			if (BarricadeExplote3)
+			{
+				if (Barricade3 != nullptr)
+					Barricade3->body->GetWorld()->DestroyBody(Barricade3->body);
+
+				delete Barricade3;
+				Barricade3 = nullptr;
+
+				BarricadesExplote += 1;
+
+				BarricadeExplote3 = false;
+			}
+			if (BarricadeExplote4)
+			{
+				if (Barricade4 != nullptr)
+					Barricade4->body->GetWorld()->DestroyBody(Barricade4->body);
+
+				delete Barricade4;
+				Barricade4 = nullptr;
+
+				BarricadesExplote += 1;
+
+				BarricadeExplote4 = false;
+			}
+			if (BarricadeExplote5)
+			{
+				if (Barricade5 != nullptr)
+					Barricade5->body->GetWorld()->DestroyBody(Barricade5->body);
+
+				delete Barricade5;
+				Barricade5 = nullptr;
+
+				BarricadesExplote += 1;
+
+				BarricadeExplote5 = false;
+			}
+		}
+	}
+
+	if (Barricade1 != nullptr)
+		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade1.x, posBarricade1.y, &Barr1);
+	
+	if (Barricade2 != nullptr)
+		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade2.x, posBarricade2.y, &Barr1);
+	
+	if (Barricade3 != nullptr)
+		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade3.x, posBarricade3.y, &Barr1);
+	
+	if (Barricade4 != nullptr)
+		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade4.x, posBarricade4.y, &Barr2);	
+	
+	if (Barricade5 != nullptr)
+		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade5.x, posBarricade5.y, &Barr2);
+
+	app->render->DrawTexture(GeneralTextureDungeon2, posBomb1.x, posBomb1.y, &Bmb);
+	app->render->DrawTexture(GeneralTextureDungeon2, posBomb2.x, posBomb2.y, &Bmb);
+
+	if(BarricadesExplote >= 5)
+	{
+		chickenBoom = true;
+
+		BarricadesExplote = 0;
+
+		app->questManager->SaveState();
+	}
 
 	return true;
 }
