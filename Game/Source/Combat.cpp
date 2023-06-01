@@ -703,7 +703,7 @@ bool Combat::InitAllies(array<Character*, 4> party)
 	//delete &chara;
 	//chara = nullptr;
 
-	/*for (int i = 0; i < party.size(); i++)
+	for (int i = 0; i < party.size(); i++)
 	{
 		if (party.at(i) == nullptr) { break; }
 
@@ -711,7 +711,7 @@ bool Combat::InitAllies(array<Character*, 4> party)
 		party.at(i)->positionCombat_I = i;
 		vecAllies.push_back(party.at(i));
 		vecAllies.at(i)->Start();
-	}*/
+	}
 
 	return true;
 }
@@ -1030,7 +1030,6 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 				{
 					posEnd = vecAllies.at(posInVec)->listSkills.At(lastPressedAbility_I)->data->RangeCanTarget(vecEnemies); //Aqui hay poner un get range
 				}
-			
 			}
 		}
 	}
@@ -1259,7 +1258,6 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				numeros = to_string(abs(cha->listStatusEffects.At(i)->data->intensity));
 				app->render->TextDraw(numeros.c_str(), 335, 555 + i * 18, 15);
 			}
-			
 		}
 	}
 	
@@ -1583,7 +1581,6 @@ bool Combat::RestartCombatData()
 		LOG("Could not load xml file config.xml. pugi error: %s", result.description());
 		ret = false;
 	}
-
 	else
 	{
 		pugi::xml_document* saveDoc = new pugi::xml_document();

@@ -129,9 +129,7 @@ public:
 	vector<Character*> vecPC;
 
 	int invPos = 0;
-
-private:
-	pugi::xml_document items;
+	bool loadParty_B;
 
 public:
 	//print stats
@@ -149,6 +147,9 @@ public:
 
 	// TO DO GUARRADA SUPER TEMPORAL
 	int comb = 0;
+
+private:
+	pugi::xml_document items;
 };
 
 #endif // __ITEMMANAGER_H__

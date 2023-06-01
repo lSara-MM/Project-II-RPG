@@ -73,7 +73,7 @@ private:
 	Tween animationBackground;
 	bool transition_B;
 
-	bool introDone;
+	bool introDone = false;
 	bool exit_B;
 };
 

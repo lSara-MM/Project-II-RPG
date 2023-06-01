@@ -12,6 +12,7 @@
 ItemManager::ItemManager() : Module()
 {
 	name.Create("itemmanager");
+	loadParty_B = false;
 }
 
 ItemManager::~ItemManager()
@@ -38,7 +39,7 @@ bool ItemManager::Start()
 	PartyToNull();
 	LoadAllPC();
 
-	if (!app->input->coso && !app->iScene->previousGame_B)
+	if (!loadParty_B)
 	{		
 		SetParty();
 	}
@@ -748,10 +749,6 @@ void ItemManager::PartyToNull()
 		if (arrParty.at(i) != nullptr)
 		{
 			arrParty.at(i) = nullptr;
-		}
-		else
-		{
-			break;
 		}
 	}
 }

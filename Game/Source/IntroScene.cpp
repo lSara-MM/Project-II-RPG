@@ -16,6 +16,7 @@
 #include "Log.h"
 
 #include "EntityManager.h"
+#include "ItemManager.h"
 #include "QuestManager.h"
 #include "PuzzleManager.h"
 #include "Combat.h"
@@ -87,9 +88,11 @@ bool IntroScene::Start()
 	listButtons.Add(pSettings->listSettingsButtons.start->data);
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
-	introDone = false;
+	app->input->playerName->input_entered = false;
 	transition_B = false;
 	exit_B = false;
+
+	app->itemManager->loadParty_B = false;
 
 	return true;
 }
@@ -136,6 +139,8 @@ bool IntroScene::Update(float dt)
 		{
 			i->data->isForward_B = false;
 		}
+
+		app->input->coso = false;
 		app->combat->firstCombat_B = false;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 	}
@@ -272,7 +277,6 @@ bool IntroScene::PostUpdate()
 	{
 		app->render->DrawTexture(app->input->cursorPressedTex, mouseX_intro, mouseY_intro);
 	}
-
 	else
 	{
 		app->render->DrawTexture(app->input->cursorIdleTex, mouseX_intro, mouseY_intro);
@@ -360,6 +364,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 
 		app->questManager->Enable();
 
+		app->itemManager->loadParty_B = true;
 		app->combat->firstCombat_B = false;
 		app->input->coso = true;
 		app->LoadGameRequest();
