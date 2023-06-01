@@ -658,8 +658,7 @@ bool Character::UseSkill(Skill* skill)
 					//Atacar a todos
 					if (!app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill))) { break; }
 					}
-				}
-				
+				}		
 			}
 			else
 			{
