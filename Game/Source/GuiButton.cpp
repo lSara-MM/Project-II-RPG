@@ -193,7 +193,7 @@ bool GuiButton::Update(float dt)
 
 bool GuiButton::Draw(Render* render)
 {
-	if (buttonType!=ButtonType::SMALL)
+	if (buttonType != ButtonType::ITEM)
 	{
 		switch (axisType)
 		{

@@ -26,7 +26,7 @@ public:
 
 	bool Start() 
 	{
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->inventory, { 0, 0, 0, 0 }, ButtonType::SMALL); 
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->inventory, { 0, 0, 0, 0 }, ButtonType::ITEM); 
 		return true; 
 	}
 
