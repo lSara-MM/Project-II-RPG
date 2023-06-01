@@ -82,14 +82,7 @@ bool ItemManager::CleanUp()
 	nodeList.clear();
 	armorItems.clear();
 
-	//ClearParty();
-	//for (int i = 0; i < vecPC.size(); i++)
-	//{
-	//	//delete vecPC.at(i);
-	//	vecPC.at(i) = nullptr;
-	//}
-
-
+	PartyToNull();
 	vecPC.clear();
 	vecPC.shrink_to_fit();
 

@@ -699,20 +699,6 @@ bool Combat::InitAllies(array<Character*, 4> party)
 		//RELEASE(party.at(i));
 	}
 
-
-	//delete &chara;
-	//chara = nullptr;
-
-	for (int i = 0; i < party.size(); i++)
-	{
-		if (party.at(i) == nullptr) { break; }
-
-		party.at(i)->isCombatant = true;
-		party.at(i)->positionCombat_I = i;
-		vecAllies.push_back(party.at(i));
-		vecAllies.at(i)->Start();
-	}
-
 	return true;
 }
 
