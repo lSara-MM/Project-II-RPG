@@ -67,7 +67,9 @@ bool HouseOfTerrors::Start()
 	app->input->godMode_B = false;
 	app->physics->collisions = false;
 
+	app->itemManager->Enable();
 	app->lootManager->Start();
+
 
 	//Load Map
 	app->map->Load(1);
@@ -242,6 +244,7 @@ bool HouseOfTerrors::CleanUp()
 
 	app->SaveToFile();
 
+	app->itemManager->Disable();
 	app->entityManager->Disable();
 	app->inventory->Disable();
 

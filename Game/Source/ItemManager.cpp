@@ -74,12 +74,12 @@ bool ItemManager::CleanUp()
 	nodeList.clear();
 	armorItems.clear();
 
-	ClearParty();
-	for (int i = 0; i < vecPC.size(); i++)
-	{
-		//delete vecPC.at(i);
-		vecPC.at(i) = nullptr;
-	}
+	//ClearParty();
+	//for (int i = 0; i < vecPC.size(); i++)
+	//{
+	//	//delete vecPC.at(i);
+	//	vecPC.at(i) = nullptr;
+	//}
 
 	app->tex->UnLoad(itemsTexture);
 	itemsTexture = NULL;

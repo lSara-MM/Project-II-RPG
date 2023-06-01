@@ -237,7 +237,9 @@ bool Scene::CleanUp()
 	app->SaveToFile();
 
 	app->entityManager->Disable();
+	app->itemManager->Disable();
 	app->inventory->Disable();
+
 	
 	delete player;
 	player = nullptr;

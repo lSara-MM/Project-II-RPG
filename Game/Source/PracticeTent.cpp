@@ -94,6 +94,7 @@ bool PracticeTent::Start()
 	pause_B = false;
 	settings_B = false;
 
+	app->itemManager->Enable();
 
 	InitEntities();
 	app->entityManager->Enable();
@@ -257,6 +258,7 @@ bool PracticeTent::CleanUp()
 
 	DummySensor = false;
 
+	app->itemManager->Disable();
 	app->entityManager->Disable();
 	app->inventory->Disable();
 
