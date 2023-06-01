@@ -413,10 +413,7 @@ class Chest
 				sensor = nullptr;
 			}
 
-			if (used)
-			{
-				app->tex->UnLoad(texture);
-			}
+			app->tex->UnLoad(texture);
 
 			return true;
 		}
