@@ -59,29 +59,6 @@ bool Inventory::PreUpdate()
 
 bool Inventory::Update(float dt)
 {
-	if (inventoryTransition_B)
-	{
-		inventoryAnimation.Backward();
-	}
-	else
-	{
-		inventoryAnimation.Foward();
-	}
-	inventoryAnimation.Step(2, false);
-
-	float point = inventoryAnimation.GetPoint();
-	int offset = -1300;
-
-	if (app->combat->active)
-	{
-		y = 460;
-	}
-	else
-	{
-		app->render->DrawTexture(inventoryIMG, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
-
-		y = 148;
-	}
 
 	bool ret = true;
 
@@ -127,11 +104,27 @@ bool Inventory::PostUpdate()
 		}
 	}
 
-	if (app->combat->active)
+	if (inventoryTransition_B)
 	{
+		inventoryAnimation.Backward();
 	}
 	else
 	{
+		inventoryAnimation.Foward();
+	}
+	inventoryAnimation.Step(2, false);
+
+	float point = inventoryAnimation.GetPoint();
+	int offset = -1300;
+
+	if (app->combat->active)
+	{
+		y = 460;
+	}
+	else
+	{
+		app->render->DrawTexture(inventoryIMG, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
+
 		//Print Character
 		if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
 		{
@@ -141,6 +134,14 @@ bool Inventory::PostUpdate()
 			playerTexture = NULL;
 		}
 
+		y = 148;
+	}
+
+	if (app->combat->active)
+	{
+	}
+	else
+	{
 		string cn = to_string(app->itemManager->coins);
 		app->render->TextDraw(cn.c_str(), 980, 110, 20, Font::TEXT, { 0, 0, 0 });
 

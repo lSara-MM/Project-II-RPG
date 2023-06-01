@@ -33,18 +33,19 @@
 	</lootManager>
 	<PuzzleManager />
 	<questmanager />
+	<CutScene />
 	<entitymanager>
-		<player name="scene" x="3417" y="1058" />
-		<party id="0" id="1" id="2" />
+		<player name="scene" x="3500" y="2539" />
+		<party />
 	</entitymanager>
 	<dialogue />
+	<Inventory />
 	<guiManager />
 	<itemmanager />
 	<SceneWin_Lose />
-	<Inventory />
 	<store />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2825" y="-725" />
+		<camera x="-2880" y="-2206" />
 	</renderer>
 </save_state>
