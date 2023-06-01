@@ -27,9 +27,6 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 
-	void LoadStoreItems();
-	void LoadStoreButtons();
-
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 public:

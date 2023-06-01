@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<save_state>
-	<puzzle palancas="false" escape="false" rescue="false" teamMate="true" keyPalancas="0" keyEscape="0" keyRescue="0" bossIsDead="true" bossInvent="false" BarricadeExplote="0" RelicsCompleted="0" DoorsOpened="0" keyDoors="false" DoorKey1Opened="false" DoorKey2Opened="false" chickenBoom="false" relics="false" keyInvent="false" BarricadeExplote1="false" BarricadeExplote2="false" BarricadeExplote3="false" BarricadeExplote4="false" BarricadeExplote5="false" Relic1Invent="false" Relic2Invent="false" Relic3Invent="false" RelicInColumn1="false" RelicInColumn2="false" RelicInColumn3="false" />
-	<quests quest1="true" quest2="false" quest3="false" quest1_Complete="true" quest2_Complete="false" quest3_Complete="false" />
-</save_state>

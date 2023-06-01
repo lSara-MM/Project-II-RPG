@@ -89,6 +89,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(lScene);
 	AddModule(iScene);
+	AddModule(itemManager);
 	AddModule(scene);
 	AddModule(circus);
 	AddModule(hTerrors);
@@ -100,7 +101,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(puzzleManager);
 	AddModule(questManager);
 	AddModule(entityManager);
-	AddModule(itemManager);
 	AddModule(dialogueSystem);
 	AddModule(guiManager);
 	AddModule(sceneWin_Lose);
