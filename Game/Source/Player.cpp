@@ -161,6 +161,9 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 	{
 		app->map->mapPendingtoDelete = true;		
+		OpenMap = false;
+		lockMovement = false;
+		transitionMap_B = false;
 		app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 0);
 	}
 
@@ -306,25 +309,26 @@ bool Player::Update(float dt)
 			int offset = -1300;
 			app->render->DrawTexture(miniMap, posMiniMap.x, offset + point * (posMiniMap.y - offset));
 
-			if (app->scene->active)
-			{
-				//2659 4907
-				app->render->DrawTexture(dotPlayer, posMiniPlayer.x - 23, offset + point * (posMiniPlayer.y - 30 - offset));
-			}
-			if (app->hTerrors->active)
-			{
-				app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10, offset + point * (posMiniMap.y + 4507 / 10 - offset));
-			}
-			if (app->practiceTent->active)
-			{
-				//4360 4385
-				app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10, offset + point * (posMiniMap.y + 3585 / 10 - offset));
-			}
-			if (app->circus->active)
-			{
-				//3899 1027
-				app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10, offset + point * (posMiniMap.y + 350 / 10 - offset));
-			}
+				if (app->scene->active)
+				{
+					//2659 4907
+					app->render->DrawTexture(dotPlayer, posMiniPlayer.x - 23, offset + point * (posMiniPlayer.y - 30 - offset));
+				}
+				if (app->hTerrors->active)
+				{
+					app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10, offset + point * (posMiniMap.y + 4507 / 10 - offset));
+				}
+				if (app->practiceTent->active)
+				{
+					//4360 4385
+					app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10, offset + point * (posMiniMap.y + 3585 / 10 - offset));
+				}
+				if (app->circus->active)
+				{
+					//3899 1027
+					app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10, offset + point * (posMiniMap.y + 350 / 10 - offset));
+				}
+			
 		//}
 		/*MiniMapa*/
 
@@ -428,7 +432,6 @@ bool Player::CleanUp()
 
 	return true;
 }
-
 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) 
 {
@@ -1041,6 +1044,4 @@ void Player::MiniMap()
 	OpenMap = !OpenMap;
 	lockMovement = !lockMovement;
 	transitionMap_B = !transitionMap_B;
-	posMiniPlayer.x = position.x / 5 + posMiniMap.x;
-	posMiniPlayer.y = position.y / 5 + posMiniMap.y;
 }

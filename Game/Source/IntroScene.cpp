@@ -193,6 +193,27 @@ bool IntroScene::PostUpdate()
 		app->puzzleManager->rescue = false;
 		app->puzzleManager->teamMate = false;
 		app->puzzleManager->bossIsDead = false;
+		
+		app->puzzleManager->BarricadesExplote = 0;
+		app->puzzleManager->RelicsCompleted = 0;
+		app->puzzleManager->DoorsOpened = 0;
+		app->puzzleManager->keyDoors = false;
+		app->puzzleManager->DoorKey1Opened = false;
+		app->puzzleManager->DoorKey2Opened = false;
+		app->puzzleManager->chickenBoom = false;
+		app->puzzleManager->relics = false;
+		app->puzzleManager->keyInvent = false;
+		app->puzzleManager->BarricadeExplote1 = false;
+		app->puzzleManager->BarricadeExplote2 = false;
+		app->puzzleManager->BarricadeExplote3 = false;
+		app->puzzleManager->BarricadeExplote4 = false;
+		app->puzzleManager->BarricadeExplote5 = false;
+		app->puzzleManager->Relic1Invent = false;
+		app->puzzleManager->Relic2Invent = false;
+		app->puzzleManager->Relic3Invent = false;
+		app->puzzleManager->RelicInColumn1 = false;
+		app->puzzleManager->RelicInColumn2 = false;
+		app->puzzleManager->RelicInColumn3 = false;
 
 		app->questManager->SaveState();
 

@@ -309,6 +309,26 @@ bool QuestManager::LoadState() {
 		app->puzzleManager->keyPalancas = gameStateFile.child("save_state").child("puzzle").attribute("keyPalancas").as_int();
 		app->puzzleManager->keyEscape = gameStateFile.child("save_state").child("puzzle").attribute("keyEscape").as_int();
 		app->puzzleManager->keyRescue = gameStateFile.child("save_state").child("puzzle").attribute("keyRescue").as_int();
+		app->puzzleManager->BarricadesExplote = gameStateFile.child("save_state").child("puzzle").attribute("BarricadesExplote").as_int();
+		app->puzzleManager->RelicsCompleted = gameStateFile.child("save_state").child("puzzle").attribute("RelicsCompleted").as_int();
+		app->puzzleManager->DoorsOpened = gameStateFile.child("save_state").child("puzzle").attribute("DoorsOpened").as_int();
+		app->puzzleManager->keyDoors = gameStateFile.child("save_state").child("puzzle").attribute("keyDoors").as_bool();
+		app->puzzleManager->DoorKey1Opened = gameStateFile.child("save_state").child("puzzle").attribute("DoorKey1Opened").as_bool();
+		app->puzzleManager->DoorKey2Opened = gameStateFile.child("save_state").child("puzzle").attribute("DoorKey2Opened").as_bool();
+		app->puzzleManager->chickenBoom = gameStateFile.child("save_state").child("puzzle").attribute("chickenBoom").as_bool();
+		app->puzzleManager->relics = gameStateFile.child("save_state").child("puzzle").attribute("relics").as_bool();
+		app->puzzleManager->keyInvent = gameStateFile.child("save_state").child("puzzle").attribute("keyInvent").as_bool();
+		app->puzzleManager->BarricadeExplote1 = gameStateFile.child("save_state").child("puzzle").attribute("BarricadeExplote1").as_bool();
+		app->puzzleManager->BarricadeExplote2 = gameStateFile.child("save_state").child("puzzle").attribute("BarricadeExplote2").as_bool();
+		app->puzzleManager->BarricadeExplote3 = gameStateFile.child("save_state").child("puzzle").attribute("BarricadeExplote3").as_bool();
+		app->puzzleManager->BarricadeExplote4 = gameStateFile.child("save_state").child("puzzle").attribute("BarricadeExplote4").as_bool();
+		app->puzzleManager->BarricadeExplote5 = gameStateFile.child("save_state").child("puzzle").attribute("BarricadeExplote5").as_bool();
+		app->puzzleManager->Relic1Invent = gameStateFile.child("save_state").child("puzzle").attribute("Relic1Invent").as_bool();
+		app->puzzleManager->Relic2Invent = gameStateFile.child("save_state").child("puzzle").attribute("Relic2Invent").as_bool();
+		app->puzzleManager->Relic3Invent = gameStateFile.child("save_state").child("puzzle").attribute("Relic3Invent").as_bool();
+		app->puzzleManager->RelicInColumn1 = gameStateFile.child("save_state").child("puzzle").attribute("RelicInColumn1").as_bool();
+		app->puzzleManager->RelicInColumn2 = gameStateFile.child("save_state").child("puzzle").attribute("RelicInColumn2").as_bool();
+		app->puzzleManager->RelicInColumn3 = gameStateFile.child("save_state").child("puzzle").attribute("RelicInColumn3").as_bool();
 
 		quest1->active = gameStateFile.child("save_state").child("quests").attribute("quest1").as_bool();
 		quest2->active = gameStateFile.child("save_state").child("quests").attribute("quest2").as_bool();
@@ -340,6 +360,27 @@ bool QuestManager::SaveState()
 	puzzle.append_attribute("keyRescue") = app->puzzleManager->keyRescue;
 	puzzle.append_attribute("bossIsDead") = app->puzzleManager->bossIsDead;
 	puzzle.append_attribute("bossInvent") = app->puzzleManager->bossInvent;
+
+	puzzle.append_attribute("BarricadeExplote") = app->puzzleManager->BarricadesExplote;
+	puzzle.append_attribute("RelicsCompleted") = app->puzzleManager->RelicsCompleted;
+	puzzle.append_attribute("DoorsOpened") = app->puzzleManager->DoorsOpened;
+	puzzle.append_attribute("keyDoors") = app->puzzleManager->keyDoors;
+	puzzle.append_attribute("DoorKey1Opened") = app->puzzleManager->DoorKey1Opened;
+	puzzle.append_attribute("DoorKey2Opened") = app->puzzleManager->DoorKey2Opened;
+	puzzle.append_attribute("chickenBoom") = app->puzzleManager->chickenBoom;
+	puzzle.append_attribute("relics") = app->puzzleManager->relics;
+	puzzle.append_attribute("keyInvent") = app->puzzleManager->keyInvent;
+	puzzle.append_attribute("BarricadeExplote1") = app->puzzleManager->BarricadeExplote1;
+	puzzle.append_attribute("BarricadeExplote2") = app->puzzleManager->BarricadeExplote2;
+	puzzle.append_attribute("BarricadeExplote3") = app->puzzleManager->BarricadeExplote3;
+	puzzle.append_attribute("BarricadeExplote4") = app->puzzleManager->BarricadeExplote4;
+	puzzle.append_attribute("BarricadeExplote5") = app->puzzleManager->BarricadeExplote5;
+	puzzle.append_attribute("Relic1Invent") = app->puzzleManager->Relic1Invent;
+	puzzle.append_attribute("Relic2Invent") = app->puzzleManager->Relic2Invent;
+	puzzle.append_attribute("Relic3Invent") = app->puzzleManager->Relic3Invent;
+	puzzle.append_attribute("RelicInColumn1") = app->puzzleManager->RelicInColumn1;
+	puzzle.append_attribute("RelicInColumn2") = app->puzzleManager->RelicInColumn2;
+	puzzle.append_attribute("RelicInColumn3") = app->puzzleManager->RelicInColumn3;
 
 	quests.append_attribute("quest1") = quest1->active;
 	quests.append_attribute("quest2") = quest2->active;

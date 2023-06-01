@@ -390,6 +390,8 @@ bool PuzzleManager::Dun2Start()
 
 	DoorContact1 = false;
 	DoorContact2 = false;
+	DoorKey1Opened = false;
+	DoorKey2Opened = false;
 	keyInvent = false;
 	keySens = false;
 	BarricadeContact1 = false;
@@ -418,6 +420,9 @@ bool PuzzleManager::Dun2Start()
 	RelicColumnContact1 = false;
 	RelicColumnContact2 = false;
 	RelicColumnContact3 = false;
+	RelicInColumn1 = false;
+	RelicInColumn2 = false;
+	RelicInColumn3 = false;
 
 	DoorsOpened = 0;
 	RelicsCompleted = 0;
@@ -446,19 +451,25 @@ bool PuzzleManager::Dun2Start()
 
 	if(!keyDoors)
 	{
-		DoorKey1 = app->physics->CreateRectangle(posDoorkey1.x - widthDoorKeys / 2, posDoorkey1.y - heightDoorKeys / 2, widthDoorKeys, heightDoorKeys, bodyType::STATIC);
-		DoorKey1->body->SetFixedRotation(true);
-		DoorKey1->ctype = ColliderType::KEYDOOR;
-		DoorKey1->id = 1;
+		if(!DoorKey1Opened)
+		{
+			DoorKey1 = app->physics->CreateRectangle(posDoorkey1.x - widthDoorKeys / 2, posDoorkey1.y - heightDoorKeys / 2, widthDoorKeys, heightDoorKeys, bodyType::STATIC);
+			DoorKey1->body->SetFixedRotation(true);
+			DoorKey1->ctype = ColliderType::KEYDOOR;
+			DoorKey1->id = 1;
+		}
 
-		DoorKey2 = app->physics->CreateRectangle(posDoorkey2.x - heightDoorKeys / 2, posDoorkey2.y - widthDoorKeys / 2, heightDoorKeys, widthDoorKeys, bodyType::STATIC);
-		DoorKey2->body->SetFixedRotation(true);
-		DoorKey2->ctype = ColliderType::KEYDOOR;
-		DoorKey2->id = 2;
+		if (!DoorKey2Opened)
+		{
+			DoorKey2 = app->physics->CreateRectangle(posDoorkey2.x - heightDoorKeys / 2, posDoorkey2.y - widthDoorKeys / 2, heightDoorKeys, widthDoorKeys, bodyType::STATIC);
+			DoorKey2->body->SetFixedRotation(true);
+			DoorKey2->ctype = ColliderType::KEYDOOR;
+			DoorKey2->id = 2;
 
-		keySensor = app->physics->CreateRectangleSensor(posKey.x - widthKey / 2, posKey.y - heightKey / 2, widthKey, heightKey, bodyType::STATIC);
-		keySensor->body->SetFixedRotation(true);
-		keySensor->ctype = ColliderType::KEY;
+			keySensor = app->physics->CreateRectangleSensor(posKey.x - widthKey / 2, posKey.y - heightKey / 2, widthKey, heightKey, bodyType::STATIC);
+			keySensor->body->SetFixedRotation(true);
+			keySensor->ctype = ColliderType::KEY;
+		}
 	}
 
 	if (!chickenBoom) 
@@ -694,6 +705,20 @@ bool PuzzleManager::Dun2Update()
 
 	app->render->DrawTexture(GeneralTextureDungeon2, posChicken1.x, posChicken1.y, &Chick);
 	app->render->DrawTexture(GeneralTextureDungeon2, posChicken2.x, posChicken2.y, &Chick);
+
+	if(RelicInColumn1)
+	{
+		//Col1 = {};
+	}
+	if(RelicInColumn2)
+	{
+		//Col2 = {};
+	}
+	if(RelicInColumn3)
+	{
+		//Col3 = {};
+	}
+
 	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn1.x, posRelicColumn1.y, &Col1);
 	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn2.x, posRelicColumn2.y, &Col2);
 	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn3.x, posRelicColumn3.y, &Col3);
@@ -1200,6 +1225,8 @@ bool PuzzleManager::KeyDoorsPuz()
 
 			keyInvent = true;
 			keySens = false;
+
+			app->questManager->SaveState();
 		}
 	}
 
@@ -1219,6 +1246,9 @@ bool PuzzleManager::KeyDoorsPuz()
 
 				DoorsOpened += 1;
 				DoorContact1 = false;
+				DoorKey1Opened = true;
+
+				app->questManager->SaveState();
 			}
 		}
 
@@ -1236,6 +1266,9 @@ bool PuzzleManager::KeyDoorsPuz()
 
 				DoorsOpened += 1;
 				DoorContact2 = false;
+				DoorKey2Opened = true;
+
+				app->questManager->SaveState();
 			}
 		}
 	}
@@ -1381,8 +1414,6 @@ bool PuzzleManager::ChickenBoomPuz()
 				Barricade1 = nullptr;
 
 				BarricadesExplote += 1;
-
-				BarricadeExplote1 = false;
 			}
 			if (BarricadeExplote2) 
 			{
@@ -1393,8 +1424,6 @@ bool PuzzleManager::ChickenBoomPuz()
 				Barricade2 = nullptr;
 
 				BarricadesExplote += 1;
-
-				BarricadeExplote2 = false;
 			}
 			if (BarricadeExplote3) 
 			{
@@ -1405,8 +1434,6 @@ bool PuzzleManager::ChickenBoomPuz()
 				Barricade3 = nullptr;
 
 				BarricadesExplote += 1;
-
-				BarricadeExplote3 = false;
 			}
 			if (BarricadeExplote4) 
 			{
@@ -1417,8 +1444,6 @@ bool PuzzleManager::ChickenBoomPuz()
 				Barricade4 = nullptr;
 
 				BarricadesExplote += 1;
-			
-				BarricadeExplote4 = false;
 			}
 			if (BarricadeExplote5) 
 			{
@@ -1429,11 +1454,12 @@ bool PuzzleManager::ChickenBoomPuz()
 				Barricade5 = nullptr;
 
 				BarricadesExplote += 1;
-
-				BarricadeExplote5 = false;
 			}
 
 			TimerForExplote = 0;
+			BombPlant1 = false;
+
+			app->questManager->SaveState();
 		}
 	}
 
@@ -1552,8 +1578,6 @@ bool PuzzleManager::ChickenBoomPuz()
 				Barricade1 = nullptr;
 
 				BarricadesExplote += 1;
-
-				BarricadeExplote1 = false;
 			}
 			if (BarricadeExplote2)
 			{
@@ -1564,8 +1588,6 @@ bool PuzzleManager::ChickenBoomPuz()
 				Barricade2 = nullptr;
 
 				BarricadesExplote += 1;
-
-				BarricadeExplote2 = false;
 			}
 			if (BarricadeExplote3)
 			{
@@ -1576,8 +1598,6 @@ bool PuzzleManager::ChickenBoomPuz()
 				Barricade3 = nullptr;
 
 				BarricadesExplote += 1;
-
-				BarricadeExplote3 = false;
 			}
 			if (BarricadeExplote4)
 			{
@@ -1588,8 +1608,6 @@ bool PuzzleManager::ChickenBoomPuz()
 				Barricade4 = nullptr;
 
 				BarricadesExplote += 1;
-
-				BarricadeExplote4 = false;
 			}
 			if (BarricadeExplote5)
 			{
@@ -1600,9 +1618,12 @@ bool PuzzleManager::ChickenBoomPuz()
 				Barricade5 = nullptr;
 
 				BarricadesExplote += 1;
-
-				BarricadeExplote5 = false;
 			}
+
+			TimerForExplote = 0;
+			BombPlant2 = false;
+
+			app->questManager->SaveState();
 		}
 	}
 
@@ -1652,6 +1673,8 @@ bool PuzzleManager::RelicsPuz()
 
 			Relic1Invent = true;
 			RelicContact1 = false;
+
+			app->questManager->SaveState();
 		}
 	}
 
@@ -1669,6 +1692,8 @@ bool PuzzleManager::RelicsPuz()
 
 			Relic2Invent = true;
 			RelicContact2 = false;
+
+			app->questManager->SaveState();
 		}
 	}
 	
@@ -1686,6 +1711,8 @@ bool PuzzleManager::RelicsPuz()
 
 			Relic3Invent = true;
 			RelicContact3 = false;
+
+			app->questManager->SaveState();
 		}
 	}
 
@@ -1703,6 +1730,9 @@ bool PuzzleManager::RelicsPuz()
 				RelicsCompleted += 1;
 				RelicColumnContact1 = false;
 				Relic1Invent = false;
+				RelicInColumn1 = true;
+
+				app->questManager->SaveState();
 			}
 		}
 	}
@@ -1725,6 +1755,9 @@ bool PuzzleManager::RelicsPuz()
 				RelicsCompleted += 1;
 				RelicColumnContact2 = false;
 				Relic2Invent = false;
+				RelicInColumn2 = true;
+
+				app->questManager->SaveState();
 			}
 		}
 	}
@@ -1747,6 +1780,9 @@ bool PuzzleManager::RelicsPuz()
 				RelicsCompleted += 1;
 				RelicColumnContact3 = false;
 				Relic3Invent = false;
+				RelicInColumn3 = true;
+
+				app->questManager->SaveState();
 			}
 		}
 	}

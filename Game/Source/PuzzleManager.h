@@ -232,6 +232,8 @@ public:
 
 	bool DoorContact1;
 	bool DoorContact2;
+	bool DoorKey1Opened;
+	bool DoorKey2Opened;
 	bool keyInvent;
 	bool keySens;
 
@@ -260,7 +262,10 @@ public:
 	bool Relic3Invent;
 	bool RelicColumnContact1;
 	bool RelicColumnContact2;
-	bool RelicColumnContact3;
+	bool RelicColumnContact3;	
+	bool RelicInColumn1;
+	bool RelicInColumn2;
+	bool RelicInColumn3;
 
 	//Variables para meter codigos
 	string code;
