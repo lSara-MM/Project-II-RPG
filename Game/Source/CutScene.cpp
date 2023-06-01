@@ -48,6 +48,10 @@ bool CutScene::Start()
 
 	RestartTimer();
 
+	ImgToPrint = nullptr;
+
+	OnceFade = true;
+
 	FirstImg = app->tex->Load(pathFirstImg);
 	SecondtImg = app->tex->Load(pathSecondImg);
 	ThirdImg = app->tex->Load(pathThirdImg);
@@ -70,6 +74,7 @@ bool CutScene::Update(float dt)
 	if(app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		passImg++;
+		OnceFade = true;
 		RestartTimer();
 	}
 
@@ -84,32 +89,62 @@ bool CutScene::Update(float dt)
 
 	if (passImg == 0) 
 	{
-		app->render->DrawTexture(FirstImg, 0, 0);
+		if (OnceFade) 
+		{
+			app->fade->FadingToBlackImages(ImgToPrint, FirstImg, 40);
+			OnceFade = false;
+		}
 	}
 	if (passImg == 1) 
 	{
-		app->render->DrawTexture(SecondtImg, 0, 0);
+		if (OnceFade)
+		{
+			app->fade->FadingToBlackImages(ImgToPrint, SecondtImg, 40);
+			OnceFade = false;
+		}
 	}	
 	if (passImg == 2) 
 	{
-		app->render->DrawTexture(ThirdImg, 0, 0);
+		if (OnceFade)
+		{
+			app->fade->FadingToBlackImages(ImgToPrint, ThirdImg, 40);
+			OnceFade = false;
+		}
 	}	
 	if (passImg == 3) 
 	{
-		app->render->DrawTexture(FourthImg, 0, 0);
+		if (OnceFade)
+		{
+			app->fade->FadingToBlackImages(ImgToPrint, FourthImg, 40);
+			OnceFade = false;
+		}
 	}	
 	if (passImg == 4) 
 	{
-		app->render->DrawTexture(FifthImg, 0, 0);
+		if (OnceFade)
+		{
+			app->fade->FadingToBlackImages(ImgToPrint, FifthImg, 40);
+			OnceFade = false;
+		}
 	}	
 	if (passImg == 5) 
 	{
-		app->render->DrawTexture(SixImg, 0, 0);
+		if (OnceFade)
+		{
+			app->fade->FadingToBlackImages(ImgToPrint, SixImg, 40);
+			OnceFade = false;
+		}
 	}
 	if (passImg >= 6) 
 	{
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+		if (OnceFade)
+		{
+			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+			OnceFade = false;
+		}
 	}
+
+	app->render->DrawTexture(ImgToPrint, 0, 0);
 
 	mTicks = SDL_GetTicks() - mStartTicks;
 	DeltaTime = mTicks * 0.001f;

@@ -41,11 +41,15 @@ public:
 
 	int passImg;
 
+	bool OnceFade;
+
 	uint32 mTicks;
 	uint32 mStartTicks;
 	uint32 DeltaTime;
 
 private:
+	SDL_Texture* ImgToPrint;
+
 	SDL_Texture* FirstImg;
 	const char* pathFirstImg;	
 	

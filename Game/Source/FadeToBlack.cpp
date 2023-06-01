@@ -31,6 +31,9 @@ bool FadeToBlack::Start()
 {
 	LOG("Preparing Fade Screen");
 
+	modulesOnOff = false;
+	ImagesOnOff = false;
+
 	// Enable blending mode for transparency
 	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 	return true;
@@ -46,11 +49,24 @@ bool FadeToBlack::Update(float dt)
 		++frameCount;
 		if (frameCount >= maxFadeFrames)
 		{
-		
-			moduleToDisable->Disable();
-			moduleToEnable->Enable();
+			if(modulesOnOff)
+			{
+				moduleToDisable->Disable();
+				moduleToEnable->Enable();
 
-			currentStep = Fade_Step::FROM_BLACK;
+				modulesOnOff = false;
+
+				currentStep = Fade_Step::FROM_BLACK;
+			}
+
+			if(ImagesOnOff)
+			{
+				ImageToPass = ImageToEnter;
+
+				ImagesOnOff = false;
+
+				currentStep = Fade_Step::FROM_BLACK;
+			}
 		}
 	}
 	else
@@ -93,6 +109,31 @@ bool FadeToBlack::FadingToBlack(Module* moduleToDisable, Module* moduleToEnable,
 	
 		this->moduleToDisable = moduleToDisable;
 		this->moduleToEnable = moduleToEnable;
+
+		modulesOnOff = true;
+
+		ret = true;
+	}
+
+	return ret;
+}
+
+bool FadeToBlack::FadingToBlackImages(SDL_Texture* ImageToPass, SDL_Texture* ImageToEnter, float frames)
+{
+	bool ret = false;
+
+	// If we are already in a fade process, ignore this call
+	if (currentStep == Fade_Step::NONE)
+	{
+		currentStep = Fade_Step::TO_BLACK;
+		frameCount = 0;
+		maxFadeFrames = frames;
+
+
+		this->ImageToPass = ImageToPass;
+		this->ImageToEnter = ImageToEnter;
+
+		ImagesOnOff = true;
 
 		ret = true;
 	}
