@@ -18,13 +18,14 @@ class Inventory : public Module
 public:
 
 	// Constructors & Destructors
-	Inventory(unsigned cap = 8);
+	Inventory(unsigned cap = 5);
 	~Inventory();
 
 	// Main module steps
 	bool Start();
 	bool PreUpdate();
 	bool Update(float dt);
+	bool PostUpdate();
 	bool CleanUp();
 
 	bool OnGuiMouseClickEvent(GuiControl* control);

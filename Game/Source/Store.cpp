@@ -34,8 +34,8 @@ bool Store::Start()
 
 	//animation inventory
 	inventoryAnimation.Set();
-	inventoryAnimation.AddTween(100, 100, BOUNCE_IN_OUT);
-	inventoryTransition_B = true;
+	inventoryAnimation.AddTween(100, 120, BOUNCE_OUT);
+	inventoryTransition_B = false;
 
 	return true;
 }
@@ -56,13 +56,13 @@ bool Store::Update(float dt)
 	{
 		inventoryAnimation.Foward();
 	}
-	inventoryAnimation.Step(1, false);
+	inventoryAnimation.Step(2, false);
 
 	float point = inventoryAnimation.GetPoint();
-	int offset = -1300;
+	int offset = -750;
 
-	app->render->DrawTexture(potion, 80 - app->render->camera.x, 50 - app->render->camera.y);
-	app->render->DrawTexture(inventory, 700 - app->render->camera.x, 80 - app->render->camera.y);
+	app->render->DrawTexture(potion, 80 - app->render->camera.x, offset + point * (50 - offset) - app->render->camera.y);
+	app->render->DrawTexture(inventory, 700 - app->render->camera.x, offset + point * (80 - offset) - app->render->camera.y);
 
 	bool ret = true;
 

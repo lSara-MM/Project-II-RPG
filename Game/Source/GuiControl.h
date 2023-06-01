@@ -68,6 +68,8 @@ enum class ButtonType
 	CHANGE_POSITION,
 	SKIPPY,
 	ITEM,
+	BUYITEM,
+	SELLITEM,
 };
 
 enum class AnimationAxis
