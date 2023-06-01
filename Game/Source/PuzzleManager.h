@@ -67,6 +67,8 @@ public:
 	bool ChickenBoomPuz();
 	bool RelicsPuz();
 
+	void RestartTimer();
+
 public:
 
 	pugi::xml_node sceneNode;
@@ -274,10 +276,6 @@ public:
 
 	PlayerInput* numCode;
 
-	//Timer para que la bomba explote
-	float TimerForBomb; //Bomb carry on
-	float TimerForExplote; //Bomb explote in barricade
-
 	//Coordenadas para situar texturas
 	SDL_Rect los;
 	SDL_Rect bosDeath;
@@ -296,6 +294,10 @@ public:
 	SDL_Rect Col1;
 	SDL_Rect Col2;
 	SDL_Rect Col3;
+
+	uint32 mTicks;
+	uint32 mStartTicks;
+	uint32 DeltaTime;
 
 private:
 

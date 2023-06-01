@@ -14,6 +14,7 @@
 #include "SceneWin_Lose.h"
 #include "PuzzleManager.h"
 #include "QuestManager.h"
+#include "CutScene.h"
 
 #include "InitiAllResourcesFromZip.h"
 #include "AssetsManager.h"
@@ -73,6 +74,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneWin_Lose = new SceneWin_Lose();
 	puzzleManager = new PuzzleManager();
 	questManager = new QuestManager();
+	cutScene = new CutScene();
 
 	/*initiAllResourcesFromZip = new InitAllResourcesFromZip();
 	assetsManager = new AssetsManager();*/
@@ -99,6 +101,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(lootManager);
 	AddModule(puzzleManager);
 	AddModule(questManager);
+	AddModule(cutScene);
 	AddModule(entityManager);
 	AddModule(dialogueSystem);
 	AddModule(guiManager);
@@ -506,6 +509,7 @@ void App::DisableAtStart()
 	sceneWin_Lose->active = false;
 	puzzleManager->active = false;
 	questManager->active = false;
+	cutScene->active = false;
 	//Este debe estar siempre activo para poder cargar correctamente los path en el momento que se necesiten
 	//initiAllResourcesFromZip->active = true;
 	//assetsManager->active = true;

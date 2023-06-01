@@ -101,6 +101,7 @@
     <ClCompile Include="Source\Combat.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Source\CutScene.cpp" />
     <ClCompile Include="Source\DialogueSystem.cpp" />
     <ClCompile Include="Source\DialogueTree.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="Source\Combat.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Source\CutScene.h" />
     <ClInclude Include="Source\DialogueSystem.h" />
     <ClInclude Include="Source\DialogueTree.h" />
     <ClInclude Include="Source\Entity.h" />

@@ -428,8 +428,7 @@ bool PuzzleManager::Dun2Start()
 	RelicsCompleted = 0;
 	BarricadesExplote = 0;
 
-	TimerForBomb = 0;
-	TimerForExplote = 0;
+	RestartTimer();
 
 	app->questManager->LoadState();
 
@@ -722,15 +721,11 @@ bool PuzzleManager::Dun2Update()
 	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn1.x, posRelicColumn1.y, &Col1);
 	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn2.x, posRelicColumn2.y, &Col2);
 	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn3.x, posRelicColumn3.y, &Col3);
-
-	if (BombCarryOn1 || BombCarryOn2) 
-	{
-		TimerForBomb++;
-	}
 	
-	if (BombPlant1 || BombPlant2)
+	if (BombPlant1 || BombPlant2 || BombCarryOn1 || BombCarryOn2)
 	{
-		TimerForExplote++;
+		mTicks = SDL_GetTicks() - mStartTicks;
+		DeltaTime = mTicks * 0.001f;
 	}
 
 	return true;
@@ -1321,7 +1316,7 @@ bool PuzzleManager::ChickenBoomPuz()
 		/*posBomb1.x = app-> ? ? ? ->player->position.x;
 		posBomb1.y = app-> ? ? ? ->player->position.y;*/
 
-		if (TimerForBomb >= 500) 
+		if (DeltaTime >= 5)
 		{
 			BombCarryOn1 = false;
 
@@ -1333,7 +1328,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			Bomb1->ctype = ColliderType::BOMB;
 			Bomb1->id = 1;
 
-			TimerForBomb = 0;
+			RestartTimer();
 		}
 
 		if(BarricadeContact1 || BarricadeContact2 || BarricadeContact3 || BarricadeContact4 || BarricadeContact5)
@@ -1387,14 +1382,14 @@ bool PuzzleManager::ChickenBoomPuz()
 
 				BombCarryOn1 = false;
 
-				TimerForBomb = 0;
+				RestartTimer();
 			}
 		}
 	}
 
 	if (BombPlant1) 
 	{
-		if(TimerForExplote >= 100)
+		if(DeltaTime >= 2)
 		{
 			posBomb1.x = posChicken1.x + 20;
 			posBomb1.y = posChicken1.y;
@@ -1455,7 +1450,7 @@ bool PuzzleManager::ChickenBoomPuz()
 				BarricadesExplote += 1;
 			}
 
-			TimerForExplote = 0;
+			RestartTimer();
 			BombPlant1 = false;
 
 			app->questManager->SaveState();
@@ -1485,7 +1480,7 @@ bool PuzzleManager::ChickenBoomPuz()
 		/*posBomb1.x = app-> ? ? ? ->player->position.x;
 		posBomb1.y = app-> ? ? ? ->player->position.y;*/
 
-		if (TimerForBomb >= 500)
+		if (DeltaTime >= 5)
 		{
 			BombCarryOn2 = false;
 
@@ -1497,7 +1492,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			Bomb2->ctype = ColliderType::BOMB;
 			Bomb2->id = 1;
 
-			TimerForBomb = 0;
+			RestartTimer();
 		}
 
 		if (BarricadeContact1 || BarricadeContact2 || BarricadeContact3 || BarricadeContact4 || BarricadeContact5)
@@ -1551,14 +1546,14 @@ bool PuzzleManager::ChickenBoomPuz()
 
 				BombCarryOn2 = false;
 
-				TimerForBomb = 0;
+				RestartTimer();
 			}
 		}
 	}
 
 	if (BombPlant2)
 	{
-		if (TimerForExplote >= 100)
+		if (DeltaTime >= 2)
 		{
 			posBomb2.x = posChicken2.x + 20;
 			posBomb2.y = posChicken2.y;
@@ -1619,7 +1614,7 @@ bool PuzzleManager::ChickenBoomPuz()
 				BarricadesExplote += 1;
 			}
 
-			TimerForExplote = 0;
+			RestartTimer();
 			BombPlant2 = false;
 
 			app->questManager->SaveState();
@@ -1810,4 +1805,11 @@ bool PuzzleManager::RelicsPuz()
 	}
 
 	return true;
+}
+
+void PuzzleManager::RestartTimer()
+{
+	mStartTicks = SDL_GetTicks();
+	mTicks = 0;
+	DeltaTime = 0.0f;
 }

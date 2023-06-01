@@ -187,7 +187,7 @@ bool IntroScene::PostUpdate()
 
 		app->input->coso = false;
 		app->combat->firstCombat_B = true;
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
+		app->fade->FadingToBlack(this, (Module*)app->cutScene, 90); 
 		introDone = true;
 
 		//Quests y puzzles reinicio

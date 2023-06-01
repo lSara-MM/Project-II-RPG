@@ -123,6 +123,7 @@
     </ClCompile>
     <ClCompile Include="Source\LootManager.cpp" />
     <ClCompile Include="Source\Store.cpp" />
+    <ClCompile Include="Source\CutScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -286,6 +287,7 @@
     </ClInclude>
     <ClInclude Include="Source\LootManager.h" />
     <ClInclude Include="Source\Store.h" />
+    <ClInclude Include="Source\CutScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">

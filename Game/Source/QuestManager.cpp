@@ -56,7 +56,7 @@ bool QuestManager::Start() {
 
 	InitQuest();
 
-	quest1->title = "Find The Fire Guy";
+	quest1->title = "Find The Fire lady";
 	quest2->title = "Drive the Oracle crazy";
 	quest3->title = "Train is life, train is love";
 

@@ -43,6 +43,7 @@ class FadeToBlack;
 class SceneWin_Lose;
 class PuzzleManager;
 class QuestManager;
+class CutScene;
 
 //class InitAllResourcesFromZip;
 //class AssetsManager;
@@ -138,6 +139,7 @@ public:
 	SceneWin_Lose* sceneWin_Lose;
 	PuzzleManager* puzzleManager;
 	QuestManager* questManager;
+	CutScene* cutScene;
 	
 	/*InitAllResourcesFromZip* initiAllResourcesFromZip;
 	AssetsManager* assetsManager;*/
