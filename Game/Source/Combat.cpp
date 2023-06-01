@@ -1167,6 +1167,14 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			//Printar status effects
 			Character* cha = vecAllies.at((SearchInVec(vecAllies, control->id)));
 			SString effectToPrint;
+
+			//Efecto
+			app->render->TextDraw("Effect", 75, 530, 20);
+			//Turnos
+			app->render->TextDraw("Duration", 190, 530, 20);
+			//% intensidad
+			app->render->TextDraw("% intensity", 300, 530, 20);
+
 			for (size_t i = 0; i < cha->listStatusEffects.Count(); i++)
 			{
 				switch (cha->listStatusEffects.At(i)->data->type)
@@ -1257,14 +1265,11 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 					break;
 				}
 				//Efecto
-				app->render->TextDraw("Effect", 75, 530, 20);
 				app->render->TextDraw(effectToPrint.GetString(),75,555+i*18,15);
 				string numeros = to_string(cha->listStatusEffects.At(i)->data->turnsLeft);
 				//Turnos
-				app->render->TextDraw("Duration", 190, 530, 20);
 				app->render->TextDraw(numeros.c_str(), 220, 555 + i * 18, 15);
 				//% intensidad
-				app->render->TextDraw("% intensity", 300, 530, 20);
 				numeros = to_string(abs(cha->listStatusEffects.At(i)->data->intensity));
 				app->render->TextDraw(numeros.c_str(), 335, 555 + i * 18, 15);
 			}
@@ -1387,16 +1392,16 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 					break;
 				}
 				//Efecto
-				app->render->TextDraw("Effect", 75, 580, 20);
-				app->render->TextDraw(effectToPrint.GetString(), 75, 600 + i * 18, 15);
+				app->render->TextDraw("Effect", 75, 615, 16);
+				app->render->TextDraw(effectToPrint.GetString(), 75, 635 + i * 15, 12);
 				string numeros = to_string(cha->listStatusEffects.At(i)->data->turnsLeft);
 				//Turnos
-				app->render->TextDraw("Duration", 190, 580, 20);
-				app->render->TextDraw(numeros.c_str(), 220, 600 + i * 18, 15);
+				app->render->TextDraw("Duration", 190, 615, 16);
+				app->render->TextDraw(numeros.c_str(), 220, 635 + i * 15, 12);
 				//% intensidad
-				app->render->TextDraw("% intensity", 300, 580, 20);
+				app->render->TextDraw("% intensity", 300, 615, 16);
 				numeros = to_string(abs(cha->listStatusEffects.At(i)->data->intensity));
-				app->render->TextDraw(numeros.c_str(), 335, 600 + i * 18, 15);
+				app->render->TextDraw(numeros.c_str(), 335, 635 + i * 15, 12);
 			}
 		}	
 	}
