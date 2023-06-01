@@ -102,8 +102,8 @@ public:
 	void AddCharaToParty(SString chara);
 	void AddCharaToParty(int id);
 	void LoadAllPC();
+	bool LoadParty();
 	void SetParty();
-	void ClearParty();
 	void PartyToNull();
 
 public:

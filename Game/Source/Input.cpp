@@ -67,7 +67,7 @@ bool Input::Start()
 	getInput_B = false;
 
 	backSpaceMax = false;
-	coso = false;
+	coso = true;
 
 	mouseSpeed_F = 0.4f;
 

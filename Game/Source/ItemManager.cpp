@@ -4,6 +4,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Window.h"
+#include "IntroScene.h"
 
 #include "EntityManager.h"
 
@@ -33,12 +34,17 @@ bool ItemManager::Awake(pugi::xml_node& config)
 
 bool ItemManager::Start()
 {
-	if (!app->input->coso)
-	{
-		// Load playable characters and party
-		PartyToNull();
-		LoadAllPC();
+	// Load playable characters and party
+	PartyToNull();
+	LoadAllPC();
+
+	if (!app->input->coso && !app->iScene->previousGame_B)
+	{		
 		SetParty();
+	}
+	else
+	{
+		LoadParty();
 	}
 
 	LoadItems();
@@ -81,6 +87,10 @@ bool ItemManager::CleanUp()
 	//	//delete vecPC.at(i);
 	//	vecPC.at(i) = nullptr;
 	//}
+
+
+	vecPC.clear();
+	vecPC.shrink_to_fit();
 
 	app->tex->UnLoad(itemsTexture);
 	itemsTexture = NULL;
@@ -644,7 +654,32 @@ void ItemManager::LoadAllPC()
 
 		chara->charaType = CharacterType::ALLY;
 		vecPC.push_back(chara);
+		chara = nullptr;
 	}
+}
+
+bool ItemManager::LoadParty()
+{
+	pugi::xml_document gameStateFile;
+	pugi::xml_parse_result result = gameStateFile.load_file("save_game.xml");
+
+	if (result == NULL)
+	{
+		LOG("Could not load xml file savegame.xml. pugi error: %s", result.description());
+		return false;
+	}
+	else
+	{
+		pugi::xml_node& data = gameStateFile.child("save_state").child(app->entityManager->name.GetString());
+		
+		for (pugi::xml_attribute attr = data.child("party").attribute("id"); attr; attr = attr.next_attribute())
+		{
+			int id = data.child("party").attribute("id").as_int();
+			app->itemManager->AddCharaToParty(id);
+		}
+	}
+
+	return true;
 }
 
 void ItemManager::SetParty()
@@ -657,22 +692,6 @@ void ItemManager::SetParty()
 		//if (i == arrParty.size()) break;
 		arrParty.at(i) = vecPC.at(i);
 		arrParty.at(i)->positionCombat_I = i;
-	}
-}
-
-void ItemManager::ClearParty()
-{
-	for (int i = 0; i < arrParty.size(); i++)
-	{
-		if (arrParty.at(i) != nullptr)
-		{
-			arrParty.at(i)->CleanUp();
-			arrParty.at(i) = nullptr;
-		}
-		else
-		{
-			break;
-		}
 	}
 }
 

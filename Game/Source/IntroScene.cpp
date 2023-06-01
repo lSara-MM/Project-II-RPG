@@ -87,6 +87,7 @@ bool IntroScene::Start()
 	listButtons.Add(pSettings->listSettingsButtons.start->data);
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
+	introDone = false;
 	transition_B = false;
 	exit_B = false;
 
@@ -177,9 +178,9 @@ bool IntroScene::PostUpdate()
 		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-
 		}
 
+		app->input->coso = false;
 		app->combat->firstCombat_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90); 
 		introDone = true;
@@ -344,6 +345,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 				i->data->isForward_B = false;
 			}
 
+			app->input->coso = false;
 			app->combat->firstCombat_B = true;
 			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		}
@@ -361,7 +363,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		app->combat->firstCombat_B = false;
 		app->input->coso = true;
 		app->LoadGameRequest();
-		//app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		continueGame_B = true;
 		break;
 	case 3:

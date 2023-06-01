@@ -109,18 +109,17 @@ bool HouseOfTerrors::Start()
 	//enter combat
 	steps_I = 0;
 
+	// If se ha guardado anteriormente, teleport el player donde estaba en el guardado
+	if (app->input->coso)
+	{
+		player->pbody->body->SetTransform({ PIXEL_TO_METERS(app->input->posX),PIXEL_TO_METERS(app->input->posY) }, 0);
+	}
+
 	return true;
 }
 
 bool HouseOfTerrors::PreUpdate()
 {
-	// If se ha guardado anteriormente, teleport el player donde estaba en el guardado
-	if (app->input->coso)
-	{
-		player->pbody->body->SetTransform({ PIXEL_TO_METERS(app->input->posX),PIXEL_TO_METERS(app->input->posY) }, 0);
-		app->input->coso = false;
-	}
-
 	return true;
 }
 

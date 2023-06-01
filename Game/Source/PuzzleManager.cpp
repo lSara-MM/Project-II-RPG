@@ -1199,7 +1199,6 @@ bool PuzzleManager::TeamMate()
 			app->questManager->quest1->active = true;
 			app->questManager->quest1->complete = true;
 
-			app->combat->SaveCombat();
 			app->questManager->SaveState();
 
 			app->entityManager->tpID = 0;
