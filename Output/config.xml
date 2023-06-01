@@ -209,7 +209,7 @@
 	</map>
 
 <combat music ="Assets/Audio/Music/mus_combat.ogg"
-bgTexture="Assets/Textures/combat_background_placeholder.png" targetTexture="Assets/GUI/UI_button_charactherSelection.png" turnBarTexture="Assets/GUI/UI_battle_turnsBar.png" lastSkillTexture ="Assets/GUI/Atack Selected.png">
+bgTexture="Assets/GUI/UIArt/backgroundDungeon1.png" targetTexture="Assets/GUI/UI_button_charactherSelection.png" turnBarTexture="Assets/GUI/UI_battle_turnsBar.png" lastSkillTexture ="Assets/GUI/Atack Selected.png">
 
 <!--
 enum class CharacterClass
