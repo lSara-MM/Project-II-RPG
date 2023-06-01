@@ -236,7 +236,10 @@ bool Scene::CleanUp()
 	app->SaveToFile();
 
 	app->entityManager->Disable();
-	app->itemManager->Disable();
+	if (app->itemManager->active)
+	{
+		app->itemManager->Disable();
+	}
 	app->inventory->Disable();
 
 	

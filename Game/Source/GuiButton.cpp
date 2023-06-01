@@ -387,6 +387,9 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::INVENTORY:
 				break;
+			case ButtonType::ITEM:
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y);
+				break;
 			case ButtonType::INV_NEXT_PAGE:
 				break;
 			case ButtonType::INV_PAGES:
@@ -464,6 +467,9 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::INVENTORY:
+				break;
+			case ButtonType::ITEM:
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y);
 				break;
 			case ButtonType::INV_NEXT_PAGE:
 				break;
@@ -545,6 +551,9 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::INVENTORY:
+				break;
+			case ButtonType::ITEM:
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y);
 				break;
 			case ButtonType::INV_NEXT_PAGE:
 				break;

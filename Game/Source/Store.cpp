@@ -64,12 +64,18 @@ bool Store::Update(float dt)
 	app->render->DrawTexture(potion, 80 - app->render->camera.x, 50 - app->render->camera.y);
 	app->render->DrawTexture(inventory, 700 - app->render->camera.x, 80 - app->render->camera.y);
 
-	//Load all items
+	bool ret = true;
 
+	return ret;
+}
+
+bool Store::PostUpdate()
+{
+	//Load all items
 	int x = 0;
 	int y = 0;
 	for (int i = 0; i < app->itemManager->nodeList.size(); i++)
-	{ 
+	{
 		if (app->itemManager->nodeList[i]->type == 3 && app->itemManager->nodeList[i]->quantity > 0)
 		{
 			if (x >= 5)
@@ -98,9 +104,7 @@ bool Store::Update(float dt)
 		}
 	}
 
-	bool ret = true;
-
-	return ret;
+	return true;
 }
 
 // Called before quitting

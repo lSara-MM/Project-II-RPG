@@ -89,7 +89,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(lScene);
 	AddModule(iScene);
-	AddModule(itemManager);
 	AddModule(scene);
 	AddModule(circus);
 	AddModule(hTerrors);
@@ -103,13 +102,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entityManager);
 	AddModule(dialogueSystem);
 	AddModule(guiManager);
+	AddModule(itemManager);
 	AddModule(sceneWin_Lose);
 	
 	//AddModule(initiAllResourcesFromZip);
 	//AddModule(assetsManager);
 	AddModule(inventory);
 	AddModule(store);
-
 
 	AddModule(fade);
 
@@ -392,6 +391,7 @@ bool App::CleanUp()
 		if (item->data->active == true)
 		{
 			ret = item->data->CleanUp();
+			item->data->active = false;
 		}
 		item = item->prev;
 	}

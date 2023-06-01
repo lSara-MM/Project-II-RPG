@@ -439,17 +439,19 @@ void ItemManager::LoadSellItems(int x, int y, ItemNode* item)
 {
 	SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
 
+	LoadStoreButtons(x, y, item);
+
 	app->render->DrawTexture(itemsTexture, (600 + (69 * x)) - app->render->camera.x, 100 + y - app->render->camera.y, &seccion);
 
-	LoadStoreButtons(x, y, item);
 }
 void ItemManager::LoadStoreItems(int x, int y, ItemNode* item)
 {
 	SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
 
+	LoadStoreButtons(x, y, item);
+
 	app->render->DrawTexture(itemsTexture, (200 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
 
-	LoadStoreButtons(x, y, item);
 }
 void ItemManager::LoadStoreButtons(int x, int y, ItemNode* item)
 {
