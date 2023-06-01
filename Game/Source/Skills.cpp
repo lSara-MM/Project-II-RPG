@@ -73,6 +73,7 @@ int Skill::RandomTarget(int posInicial, int posFinal, vector<Character*> arr, Ta
 {
 	int pos= posInicial;
 	int width = posFinal - posInicial + 1;
+	int StatTracker = 99999;
 	switch (method)
 	{
 	case TargetingMethod::RANDOM:
@@ -84,7 +85,6 @@ int Skill::RandomTarget(int posInicial, int posFinal, vector<Character*> arr, Ta
 		break;
 
 	case TargetingMethod::LOWER_HP:
-		int StatTracker = 99999;
 		for (int i = posInicial; i <= posFinal; i++)
 		{
 			if (arr.at(i)->currentHp<=StatTracker)
@@ -96,7 +96,6 @@ int Skill::RandomTarget(int posInicial, int posFinal, vector<Character*> arr, Ta
 
 		break;
 	case TargetingMethod::LOWER_ARMOR:
-		int StatTracker = 99999;
 		for (int i = posInicial; i <= posFinal; i++)
 		{
 			if (arr.at(i)->GetStat(EffectType::ARMOR) <= StatTracker)
@@ -107,7 +106,6 @@ int Skill::RandomTarget(int posInicial, int posFinal, vector<Character*> arr, Ta
 		}
 		break;
 	case TargetingMethod::LOWER_DODGE:
-		int StatTracker = 99999;
 		for (int i = posInicial; i <= posFinal; i++)
 		{
 			if (arr.at(i)->GetStat(EffectType::ARMOR) <= StatTracker)
