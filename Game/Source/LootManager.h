@@ -15,6 +15,7 @@
 #include "FadeToBlack.h"
 #include "HouseOfTerrors.h"
 #include "HouseOfTerrors.h"
+#include "BeastTent.h"
 #include "Player.h"
 #include "Character.h"
 #include "Combat.h"

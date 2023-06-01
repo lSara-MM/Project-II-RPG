@@ -21,6 +21,7 @@
 #include "Pathfinding.h"
 #include "Inventory.h"
 #include "HouseOfTerrors.h"
+#include "BeastTent.h"
 
 #include "Defs.h"
 #include "Log.h"

@@ -9,6 +9,7 @@
 #include "Scene.h"
 #include "IntroScene.h"
 #include "HouseOfTerrors.h"
+#include "BeastTent.h"
 #include "PracticeTent.h"
 #include "Circus.h"
 #include "Combat.h"

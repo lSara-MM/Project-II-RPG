@@ -35,8 +35,8 @@
 	<questmanager />
 	<CutScene />
 	<entitymanager>
-		<player name="scene" x="3500" y="2539" />
-		<party />
+		<player name="HouseOfTerrors" x="2169" y="1067" />
+		<party id="0" id="1" id="2" />
 	</entitymanager>
 	<dialogue />
 	<Inventory />
@@ -46,6 +46,6 @@
 	<store />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2880" y="-2206" />
+		<camera x="-1555" y="-734" />
 	</renderer>
 </save_state>
