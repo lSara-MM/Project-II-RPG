@@ -189,7 +189,8 @@
 	
 	<itemmanager inventorypath="Assets/Textures/Inventory.png"
 				 itempath="Assets/Textures/itemTextures.png"
-				 storepath="Assets/GUI/storeUI.png"
+				 potionstorepath="Assets/GUI/PocionesVenta.png"
+				 inventorystorepath="Assets/GUI/InventarioVenta.png"
 				 />
 
 	<map>

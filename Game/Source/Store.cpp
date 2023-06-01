@@ -22,14 +22,15 @@ Store::~Store()
 
 bool Store::Start()
 {
-	inventoryIMG = app->tex->Load(app->itemManager->textureStorePath);
+	inventory = app->tex->Load(app->itemManager->textureInventoryPath);
+	potion = app->tex->Load(app->itemManager->texturePotionsPath);
 
 	SDL_Rect buttonBounds;
 	buttonBounds = { 275, 545, 180, 80 };
 	buyButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1500, this, buttonBounds, ButtonType::SMALL);
 
 	buttonBounds = { 1150, 50, 60, 60 };
-	closeStore = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::SMALL);
+	closeStore = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::CLOSE);
 
 	//animation inventory
 	inventoryAnimation.Set();
@@ -60,7 +61,8 @@ bool Store::Update(float dt)
 	float point = inventoryAnimation.GetPoint();
 	int offset = -1300;
 
-	app->render->DrawTexture(inventoryIMG, 0 - app->render->camera.x, 0 - app->render->camera.y);
+	app->render->DrawTexture(potion, 80 - app->render->camera.x, 50 - app->render->camera.y);
+	app->render->DrawTexture(inventory, 700 - app->render->camera.x, 80 - app->render->camera.y);
 
 	bool ret = true;
 
@@ -81,13 +83,20 @@ bool Store::CleanUp()
 	app->guiManager->DestroyGuiControl(buyButton);
 	app->guiManager->DestroyGuiControl(closeStore);
 
-	app->tex->UnLoad(inventoryIMG);
+	app->tex->UnLoad(inventory);
+	app->tex->UnLoad(potion);
 
 	return true;
 }
 
 bool Store::OnGuiMouseClickEvent(GuiControl* control)
 {
-
+	switch (control->id)
+	{
+	case 1501:
+		this->Disable();
+		app->scene->player->lockMovement = false;
+		break;
+	}
 	return true;
 }
