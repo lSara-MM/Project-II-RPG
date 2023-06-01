@@ -214,7 +214,7 @@ bool Scene::PostUpdate()
 
 	app->guiManager->Draw();
 
-	if (pause_B || player->lockMovement) {
+	if ((pause_B || player->lockMovement) && !app->store->active) {
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 		{
 			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_scene - app->render->camera.x, mouseY_scene - app->render->camera.y);
