@@ -1133,28 +1133,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 		}
 		else
 		{
-			string maxHP_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->maxHp);
-			const char* c_hp = maxHP_C.c_str();
-			string attack_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::ATTACK));
-			const char* c_attack = attack_C.c_str();
-			string critR_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::CRIT_RATE));
-			const char* c_critR = critR_C.c_str();
-			string critD_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::CRIT_DMG));
-			const char* c_critD = critD_C.c_str();
-			string accuracy_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::ACCURACY));
-			const char* c_accuracy = accuracy_C.c_str();
-			string position_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->positionCombat_I);
-			const char* c_position = position_C.c_str();
-			string armor_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::ARMOR));
-			const char* c_armor = armor_C.c_str();
-			string dodge_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::DODGE));
-			const char* c_dodge = dodge_C.c_str();
-			string resist_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->GetStat(EffectType::RES));
-			const char* c_resist = resist_C.c_str();
-			string speed_C = std::to_string(vecAllies.at(SearchInVec(vecAllies, control->id))->speed);
-			const char* c_speed = speed_C.c_str();
-
-			switch (control->id)
+			switch (control->id) //Printar cuadro del personaje correcto 
 			{
 			case 0:
 				rect.y = 0;
@@ -1162,148 +1141,134 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				app->render->DrawTexture(skillTex, 36, 527, &rect);
 				app->render->DrawTexture(profileTex, 38, 407, &rect2);
 
-				app->render->TextDraw("MaxHP", xText1, posY, fontSize);
-				app->render->TextDraw(c_hp, xNumber1, posY, fontSize);
-
-				app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize);
-				app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize);
-
-				app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize);
-				app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize);
-
-				app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize);
-				app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize);
-
-				app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize);
-				app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize);
-
-				app->render->TextDraw("Position", xText2, posY, fontSize);
-				app->render->TextDraw(c_position, xNumber2, posY, fontSize);
-
-				app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize);
-				app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize);
-
-				app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize);
-				app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize);
-
-				app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize);
-				app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize);
-
-				app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize);
-				app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize);
-
 				break;
 			case 1:
 				rect.y = 179;
 				rect2.y = 90;
 				app->render->DrawTexture(skillTex, 36, 527, &rect);
 				app->render->DrawTexture(profileTex, 38, 407, &rect2);
-
-				app->render->TextDraw("MaxHP", xText1, posY, fontSize);
-				app->render->TextDraw(c_hp, xNumber1, posY, fontSize);
-
-				app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize);
-				app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize);
-
-				app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize);
-				app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize);
-
-				app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize);
-				app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize);
-
-				app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize);
-				app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize);
-
-				app->render->TextDraw("Position", xText2, posY, fontSize);
-				app->render->TextDraw(c_position, xNumber2, posY, fontSize);
-
-				app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize);
-				app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize);
-
-				app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize);
-				app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize);
-
-				app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize);
-				app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize);
-
-				app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize);
-				app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize);
 				break;
 			case 2:
 				rect.y = 179 * 2;
 				rect2.y = 90 * 2;
 				app->render->DrawTexture(skillTex, 36, 527, &rect);
 				app->render->DrawTexture(profileTex, 38, 407, &rect2);
-
-				app->render->TextDraw("MaxHP", xText1, posY, fontSize);
-				app->render->TextDraw(c_hp, xNumber1, posY, fontSize);
-
-				app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize);
-				app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize);
-
-				app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize);
-				app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize);
-
-				app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize);
-				app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize);
-
-				app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize);
-				app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize);
-
-				app->render->TextDraw("Position", xText2, posY, fontSize);
-				app->render->TextDraw(c_position, xNumber2, posY, fontSize);
-
-				app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize);
-				app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize);
-
-				app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize);
-				app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize);
-
-				app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize);
-				app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize);
-
-				app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize);
-				app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize);
 				break;
 			case 3:
 				rect.y = 179 * 3;
 				rect2.y = 90 * 3;
 				app->render->DrawTexture(skillTex, 36, 527, &rect);
 				app->render->DrawTexture(profileTex, 38, 407, &rect2);
-
-				app->render->TextDraw("MaxHP", xText1, posY, fontSize);
-				app->render->TextDraw(c_hp, xNumber1, posY, fontSize);
-
-				app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize);
-				app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize);
-
-				app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize);
-				app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize);
-
-				app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize);
-				app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize);
-
-				app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize);
-				app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize);
-
-				app->render->TextDraw("Position", xText2, posY, fontSize);
-				app->render->TextDraw(c_position, xNumber2, posY, fontSize);
-
-				app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize);
-				app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize);
-
-				app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize);
-				app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize);
-
-				app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize);
-				app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize);
-
-				app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize);
-				app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize);
 				break;
 			default:
 				break;
 			}
+
+			//Printar status effects
+			Character* cha = vecAllies.at((SearchInVec(vecAllies, control->id)));
+			SString effectToPrint;
+			for (size_t i = 0; i < cha->listStatusEffects.Count(); i++)
+			{
+				switch (cha->listStatusEffects.At(i)->data->type)
+				{
+				case EffectType::NONE:
+					break;
+				case EffectType::CURRENT_HP:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Regeneration";
+					}
+					else
+					{
+						effectToPrint = "Burn";
+					}
+					break;
+				case EffectType::ATTACK:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Attack Up";
+					}
+					else
+					{
+						effectToPrint = "Attack Down";
+					}
+					break;
+				case EffectType::CRIT_RATE:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Crit Rate Up";
+					}
+					else
+					{
+						effectToPrint = "Crit Rate Down";
+					}
+					break;
+				case EffectType::CRIT_DMG:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Crit Damage Up";
+					}
+					else
+					{
+						effectToPrint = "Crit Damage Down";
+					}
+					break;
+				case EffectType::ACCURACY:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Accuracy Up";
+					}
+					else
+					{
+						effectToPrint = "Accuracy Down";
+					}
+					break;
+				case EffectType::ARMOR:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Armor Up";
+					}
+					else
+					{
+						effectToPrint = "Armor Down";
+					}
+					break;
+				case EffectType::DODGE:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Dodge Up";
+					}
+					else
+					{
+						effectToPrint = "Dodge Down";
+					}
+					break;
+				case EffectType::RES:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Resistance Up";
+					}
+					else
+					{
+						effectToPrint = "Resistance Down";
+					}
+					break;
+				default:
+					break;
+				}
+				//Efecto
+				app->render->TextDraw("Effect", 75, 530, 20);
+				app->render->TextDraw(effectToPrint.GetString(),75,555+i*18,15);
+				string numeros = to_string(cha->listStatusEffects.At(i)->data->turnsLeft);
+				//Turnos
+				app->render->TextDraw("Duration", 190, 530, 20);
+				app->render->TextDraw(numeros.c_str(), 220, 555 + i * 18, 15);
+				//% intensidad
+				app->render->TextDraw("% intensity", 300, 530, 20);
+				numeros = to_string(abs(cha->listStatusEffects.At(i)->data->intensity));
+				app->render->TextDraw(numeros.c_str(), 335, 555 + i * 18, 15);
+			}
+			
 		}
 	}
 	
@@ -1327,6 +1292,111 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				ability += ": ";
 				ability += enemy->listSkills.At(i)->data->description.GetString();
 				app->render->TextDraw(ability.GetString(), 70, 540 + 15 * i, 12);
+			}
+
+			//Printar status effects
+			Character* cha = vecEnemies.at((SearchInVec(vecEnemies, control->id)));
+			SString effectToPrint;
+			for (size_t i = 0; i < cha->listStatusEffects.Count(); i++)
+			{
+				switch (cha->listStatusEffects.At(i)->data->type)
+				{
+				case EffectType::NONE:
+					break;
+				case EffectType::CURRENT_HP:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Regeneration";
+					}
+					else
+					{
+						effectToPrint = "Burn";
+					}
+					break;
+				case EffectType::ATTACK:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Attack Up";
+					}
+					else
+					{
+						effectToPrint = "Attack Down";
+					}
+					break;
+				case EffectType::CRIT_RATE:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Crit Rate Up";
+					}
+					else
+					{
+						effectToPrint = "Crit Rate Down";
+					}
+					break;
+				case EffectType::CRIT_DMG:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Crit Damage Up";
+					}
+					else
+					{
+						effectToPrint = "Crit Damage Down";
+					}
+					break;
+				case EffectType::ACCURACY:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Accuracy Up";
+					}
+					else
+					{
+						effectToPrint = "Accuracy Down";
+					}
+					break;
+				case EffectType::ARMOR:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Armor Up";
+					}
+					else
+					{
+						effectToPrint = "Armor Down";
+					}
+					break;
+				case EffectType::DODGE:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Dodge Up";
+					}
+					else
+					{
+						effectToPrint = "Dodge Down";
+					}
+					break;
+				case EffectType::RES:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Resistance Up";
+					}
+					else
+					{
+						effectToPrint = "Resistance Down";
+					}
+					break;
+				default:
+					break;
+				}
+				//Efecto
+				app->render->TextDraw("Effect", 75, 580, 20);
+				app->render->TextDraw(effectToPrint.GetString(), 75, 600 + i * 18, 15);
+				string numeros = to_string(cha->listStatusEffects.At(i)->data->turnsLeft);
+				//Turnos
+				app->render->TextDraw("Duration", 190, 580, 20);
+				app->render->TextDraw(numeros.c_str(), 220, 600 + i * 18, 15);
+				//% intensidad
+				app->render->TextDraw("% intensity", 300, 580, 20);
+				numeros = to_string(abs(cha->listStatusEffects.At(i)->data->intensity));
+				app->render->TextDraw(numeros.c_str(), 335, 600 + i * 18, 15);
 			}
 		}	
 	}
