@@ -93,6 +93,7 @@ bool IntroScene::Start()
 	exit_B = false;
 
 	app->itemManager->loadParty_B = false;
+	introDone = false;
 
 	return true;
 }

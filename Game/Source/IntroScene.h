@@ -59,6 +59,7 @@ public:
 	float mouse_Speed;
 
 	Settings* pSettings;
+	bool introDone = false;
 
 private:
 	const char* music_intro;
@@ -73,7 +74,6 @@ private:
 	Tween animationBackground;
 	bool transition_B;
 
-	bool introDone = false;
 	bool exit_B;
 };
 
