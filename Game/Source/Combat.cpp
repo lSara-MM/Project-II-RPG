@@ -77,8 +77,8 @@ bool Combat::Start()
 	textureTargetButton = app->tex->Load(texturePathTargetButton);
 	textureTurnsBar = app->tex->Load(texturePathTurnsBar);
 
-	profileTex = app->tex->Load("Assets/Textures/CombatUISuperiorPart.png");
-	skillTex = app->tex->Load("Assets/Textures/CombatUIHabInfoPart.png");
+	profileTex = app->tex->Load("Assets/GUI/UIArt/characterProfile_sprites.png");
+	bookTex = app->tex->Load("Assets/GUI/UIArt/libro_Combate.png");
 
 	textureLastSelectedSkill = app->tex->Load(PathlastSelectedSkill);
 
@@ -160,6 +160,7 @@ bool Combat::Update(float dt)
 	app->input->GetMousePosition(mouseX_combat, mouseY_combat);
 
 	app->render->DrawTexture(textureBackground, 0, 0);
+	app->render->DrawTexture(bookTex, 0, 366);
 
 	// Printar Barra Turnos (UI WORK)
 	int j = charaInTurn;
@@ -181,8 +182,8 @@ bool Combat::Update(float dt)
 	}
 
 	//GUI chara in turn
-	SDL_Rect rect = { 0, 0, 588, 179 };
-	SDL_Rect rect2 = { 0, 0, 588, 90 };
+	SDL_Rect rect = { 0, 0, 585, 321 };
+
 	
 	if (listInitiative.Count() > charaInTurn)
 	{
@@ -190,26 +191,23 @@ bool Combat::Update(float dt)
 		switch (listInitiative.At(charaInTurn)->data->id)
 		{
 		case 0:
-			app->render->DrawTexture(skillTex, 36, 527, &rect);
-			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			app->render->DrawTexture(profileTex, 39, 385, &rect);
+	
 			break;
 		case 1:
-			rect.y = 179;
-			rect2.y = 90;
-			app->render->DrawTexture(skillTex, 36, 527, &rect);
-			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			rect.y = 321;
+			
+			app->render->DrawTexture(profileTex, 39, 385, &rect);
+		
 			break;
 		case 2:
-			rect.y = 179 * 2;
-			rect2.y = 90 * 2;
-			app->render->DrawTexture(skillTex, 36, 527, &rect);
-			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			rect.y = 321 * 2;
+			app->render->DrawTexture(profileTex, 39, 385, &rect);
 			break;
 		case 3:
-			rect.y = 179 * 3;
-			rect2.y = 90 * 3;
-			app->render->DrawTexture(skillTex, 36, 527, &rect);
-			app->render->DrawTexture(profileTex, 38, 407, &rect2);
+			rect.y = 321 * 3;
+			app->render->DrawTexture(profileTex, 39, 385, &rect);
+	
 			break;
 		default:
 			break;
@@ -497,8 +495,6 @@ bool Combat::CleanUp()
 		SaveCombat();
 	}
 
-	if (skillTex != nullptr)
-		app->tex->UnLoad(skillTex);
 	if (profileTex != nullptr)
 		app->tex->UnLoad(profileTex);
 	
@@ -1087,32 +1083,27 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 	SDL_Rect rect = { 0,0,588,179 };
 	SDL_Rect rect2 = { 0,0,588,90 };
 
-	//Printar recuadro info para la info de las skills
+	//Printar recuadro info
 	switch (listInitiative.At(charaInTurn)->data->id)
 	{
 	case 0:
-		rect.y = 0;
-		rect2.y = 0;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
+		app->render->DrawTexture(profileTex, 39, 385, &rect);
+
 		break;
 	case 1:
-		rect.y = 179;
-		rect2.y = 90;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
+		rect.y = 321;
+
+		app->render->DrawTexture(profileTex, 36, 385, &rect);
+
 		break;
 	case 2:
-		rect.y = 179 * 2;
-		rect2.y = 90 * 2;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
+		rect.y = 321 * 2;
+		app->render->DrawTexture(profileTex, 36, 385, &rect);
 		break;
 	case 3:
-		rect.y = 179 * 3;
-		rect2.y = 90 * 3;
-		app->render->DrawTexture(skillTex, 36, 527, &rect);
-		app->render->DrawTexture(profileTex, 38, 407, &rect2);
+		rect.y = 321 * 3;
+		app->render->DrawTexture(profileTex, 36, 385, &rect);
+
 		break;
 	default:
 		break;
@@ -1133,32 +1124,27 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 		}
 		else
 		{
-			switch (control->id) //Printar cuadro del personaje correcto 
+			//Printar recuadro info
+			switch (listInitiative.At(charaInTurn)->data->id)
 			{
 			case 0:
-				rect.y = 0;
-				rect2.y = 0;
-				app->render->DrawTexture(skillTex, 36, 527, &rect);
-				app->render->DrawTexture(profileTex, 38, 407, &rect2);
+				app->render->DrawTexture(profileTex, 39, 385, &rect);
 
 				break;
 			case 1:
-				rect.y = 179;
-				rect2.y = 90;
-				app->render->DrawTexture(skillTex, 36, 527, &rect);
-				app->render->DrawTexture(profileTex, 38, 407, &rect2);
+				rect.y = 321;
+
+				app->render->DrawTexture(profileTex, 36, 385, &rect);
+
 				break;
 			case 2:
-				rect.y = 179 * 2;
-				rect2.y = 90 * 2;
-				app->render->DrawTexture(skillTex, 36, 527, &rect);
-				app->render->DrawTexture(profileTex, 38, 407, &rect2);
+				rect.y = 321 * 2;
+				app->render->DrawTexture(profileTex, 36, 385, &rect);
 				break;
 			case 3:
-				rect.y = 179 * 3;
-				rect2.y = 90 * 3;
-				app->render->DrawTexture(skillTex, 36, 527, &rect);
-				app->render->DrawTexture(profileTex, 38, 407, &rect2);
+				rect.y = 321 * 3;
+				app->render->DrawTexture(profileTex, 36, 385, &rect);
+
 				break;
 			default:
 				break;

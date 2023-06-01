@@ -117,7 +117,7 @@ private:
 	SDL_Texture* textureLastSelectedSkill;
 
 	SDL_Texture* profileTex;//ui profile character
-	SDL_Texture* skillTex;//ui skill character
+	SDL_Texture* bookTex;//book combat
 	
 
 	bool exit_B;
