@@ -86,6 +86,12 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	case ButtonType::ITEM:
 		buttonTex = app->tex->Load("Assets/GUI/cuadroPociones.png");
 		break;
+	case ButtonType::BUYITEM:
+		buttonTex = app->tex->Load("Assets/GUI/cuadroPociones.png");
+		break;
+	case ButtonType::SELLITEM:
+		buttonTex = app->tex->Load("Assets/GUI/cuadroPociones.png");
+		break;
 	default:
 		break;
 	}
@@ -390,6 +396,12 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::ITEM:
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y);
 				break;
+			case ButtonType::BUYITEM:
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y);
+				break;
+			case ButtonType::SELLITEM:
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y);
+				break;
 			case ButtonType::INV_NEXT_PAGE:
 				break;
 			case ButtonType::INV_PAGES:
@@ -469,6 +481,12 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::INVENTORY:
 				break;
 			case ButtonType::ITEM:
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y);
+				break;
+			case ButtonType::BUYITEM:
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y);
+				break;
+			case ButtonType::SELLITEM:
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y);
 				break;
 			case ButtonType::INV_NEXT_PAGE:
@@ -553,6 +571,12 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::INVENTORY:
 				break;
 			case ButtonType::ITEM:
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y);
+				break;
+			case ButtonType::BUYITEM:
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y);
+				break;
+			case ButtonType::SELLITEM:
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y);
 				break;
 			case ButtonType::INV_NEXT_PAGE:
