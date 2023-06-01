@@ -215,8 +215,6 @@ bool IntroScene::PostUpdate()
 		app->puzzleManager->RelicInColumn2 = false;
 		app->puzzleManager->RelicInColumn3 = false;
 
-		app->questManager->SaveState();
-
 		if (app->questManager->active)
 		{
 			app->questManager->quest1->active = false;
