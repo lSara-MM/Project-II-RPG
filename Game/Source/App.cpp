@@ -100,16 +100,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(puzzleManager);
 	AddModule(questManager);
 	AddModule(entityManager);
-	AddModule(itemManager);
 	AddModule(dialogueSystem);
 	AddModule(guiManager);
+	AddModule(itemManager);
 	AddModule(sceneWin_Lose);
 	
 	//AddModule(initiAllResourcesFromZip);
 	//AddModule(assetsManager);
 	AddModule(inventory);
 	AddModule(store);
-
 
 	AddModule(fade);
 
@@ -392,6 +391,7 @@ bool App::CleanUp()
 		if (item->data->active == true)
 		{
 			ret = item->data->CleanUp();
+			item->data->active = false;
 		}
 		item = item->prev;
 	}

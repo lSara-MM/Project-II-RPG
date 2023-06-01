@@ -88,6 +88,7 @@ bool LogoScene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		app->combat->firstCombat_B = false;
+		app->input->coso = false;
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 	}
 		

@@ -10,6 +10,7 @@
 	<introScene>
 		<previousGame state_B="true" />
 	</introScene>
+	<itemmanager />
 	<scene />
 	<Circus />
 	<HouseOfTerrors />
@@ -34,10 +35,9 @@
 	<PuzzleManager />
 	<questmanager />
 	<entitymanager>
-		<player name="scene" x="2345" y="4403" />
-		<party id="0" id="1" id="2" id="3" />
+		<player name="scene" x="-10" y="-13" />
+		<party />
 	</entitymanager>
-	<itemmanager />
 	<dialogue />
 	<guiManager />
 	<SceneWin_Lose />
@@ -45,6 +45,6 @@
 	<store />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-1725" y="-3912" />
+		<camera x="-2825" y="346" />
 	</renderer>
 </save_state>

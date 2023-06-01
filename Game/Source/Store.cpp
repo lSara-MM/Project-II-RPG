@@ -69,12 +69,52 @@ bool Store::Update(float dt)
 	return ret;
 }
 
+bool Store::PostUpdate()
+{
+	//Load all items
+	int x = 0;
+	int y = 0;
+	for (int i = 0; i < app->itemManager->nodeList.size(); i++)
+	{
+		if (app->itemManager->nodeList[i]->type == 3 && app->itemManager->nodeList[i]->quantity > 0)
+		{
+			if (x >= 5)
+			{
+				y += 69;
+				x = 0;
+			}
+			app->itemManager->LoadSellItems(x, y, app->itemManager->nodeList[i]);
+			x++;
+		}
+	}
+
+	x = 0;
+	y = 0;
+	for (int i = 0; i < app->itemManager->nodeList.size(); i++)
+	{
+		if (app->itemManager->nodeList[i]->type == 1)
+		{
+			if (x >= 3)
+			{
+				y += 69;
+				x = 0;
+			}
+			app->itemManager->LoadStoreItems(x, y, app->itemManager->nodeList[i]);
+			x++;
+		}
+	}
+
+	return true;
+}
+
 // Called before quitting
 bool Store::CleanUp()
 {
+	app->itemManager->SaveItemState();
+
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 	{
-		if (app->itemManager->nodeList[i]->button != nullptr && app->itemManager->nodeList[i]->quantity > 0)
+		if (app->itemManager->nodeList[i]->button != nullptr)
 		{
 			app->itemManager->nodeList[i]->CleanUp();
 		}

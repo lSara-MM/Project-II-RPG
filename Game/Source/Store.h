@@ -25,10 +25,8 @@ public:
 	bool Start();
 	bool PreUpdate();
 	bool Update(float dt);
+	bool PostUpdate();
 	bool CleanUp();
-
-	void LoadStoreItems();
-	void LoadStoreButtons();
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
