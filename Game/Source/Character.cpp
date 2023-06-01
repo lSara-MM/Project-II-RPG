@@ -203,6 +203,10 @@ bool Character::Update(float dt)
 					{
 						UseSkill(listSkills.At(app->combat->lastPressedAbility_I)->data, app->combat->targeted_Character);
 						app->combat->targeted_Character = nullptr;
+						listSkillsHistory.Add(app->combat->lastPressedAbility_I);
+
+						//AQUI IRIAN POSIBLES PASIVAS EN UN SWITCH
+
 						onTurn = false;
 						app->combat->NextTurn();
 					}
@@ -224,9 +228,10 @@ bool Character::Update(float dt)
 				{
 					switch (charaClass) //La idea es que cada classe tenga un comportamiento generico
 					{
+						int probSkill;
 						case CharacterClass::MELEE_DPS:
 						{
-							int probSkill;
+							
 							if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //No puede hacer ataques principales
 							{
 								//usar skill 2 (avance)
@@ -293,7 +298,6 @@ bool Character::Update(float dt)
 							break;
 						case CharacterClass::TANK:
 						{
-							int probSkill;
 							if (currentHp >= maxHp / 2) //Alto de vida
 							{
 								if (listSkillsHistory.end->data == 3)//Si se uso el turno pasado no se usa
@@ -361,7 +365,6 @@ bool Character::Update(float dt)
 							break;
 						case CharacterClass::DEBUFFER:
 
-							int probSkill;
 							if (positionCombat_I > 0) //Posicion comoda
 							{	
 								//Si ataque last turn poco probable usar attack
@@ -428,6 +431,154 @@ bool Character::Update(float dt)
 							break;
 						case CharacterClass::BOSS:
 
+							//Si es el primer turno usar el opening
+							if (listSkillsHistory.end->data==0)
+							{
+								if (listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+								{
+									//usar Opener
+									UseSkill(listSkills.At(1)->data);
+
+									listSkillsHistory.Add(2);
+									break;
+								}
+								else //Si no pudiese usar la skill por cualquier motivo
+								{
+									//usar Skill Ataque basico
+									UseSkill(listSkills.At(0)->data);
+
+									listSkillsHistory.Add(1);
+									break;
+								}
+							}
+							else //No turno 1
+							{
+								if (currentHp >= (maxHp / 2)) //Mas de la mitad de la vida (no rage)
+								{
+									if (listSkillsHistory.end->data == 4)//Si uso la habilidad 4(3) no la puede usar de nuevo
+									{
+										probSkill = 0;
+									}
+									else
+									{
+										probSkill = 75;
+									}
+
+									//Usar habilidad 3 (golpe potente)
+									if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//usar skill 3 (attack poderoso)
+										UseSkill(listSkills.At(3)->data);
+
+										listSkillsHistory.Add(4);
+										break;
+									}
+									else
+									{
+										if (listSkillsHistory.end->prev->data == 2) //Usado opener hace poco
+										{
+											if (listSkillsHistory.end->data == 2) { probSkill = 0; }//Usado turno pasado
+											else { probSkill = 10; }
+										}
+										else
+										{
+											probSkill = 60;
+										}
+
+										//Usar skill 2 (1) opener
+										if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+										{
+											//usar Opener
+											UseSkill(listSkills.At(1)->data);
+
+											listSkillsHistory.Add(2);
+											break;
+										}
+										else //Usar default
+										{
+											//usar Skill Ataque basico
+											UseSkill(listSkills.At(0)->data);
+
+											listSkillsHistory.Add(1);
+											break;
+										}
+									}
+
+								}
+								else// Vida baja (rage mode)
+								{
+									if (listSkillsHistory.end->prev->data == 2) //Usado rage skill hace poco
+									{
+										if (listSkillsHistory.end->data == 2) { probSkill = 0; }//Usado turno pasado
+										else { probSkill = 15; }
+									}
+									else
+									{
+										probSkill = 85;
+									}
+
+									//Usar habilidad 3(2) (RageSkill)
+									if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//usar skill 3 (attack poderoso)
+										UseSkill(listSkills.At(2)->data);
+
+										listSkillsHistory.Add(3);
+										break;
+									}
+									else
+									{
+										if (listSkillsHistory.end->data == 4)//Si no se uso la habilidad 4(3) la usa
+										{
+											probSkill = 20;
+										}
+										else
+										{
+											probSkill = 100;
+										}
+
+										//Usar habilidad 3 (golpe potente)
+										if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+										{
+											//usar skill 3 (attack poderoso)
+											UseSkill(listSkills.At(3)->data);
+
+											listSkillsHistory.Add(4);
+											break;
+										}
+										else
+										{
+											if (listSkillsHistory.end->data == 2) //Usado opener antes
+											{
+												probSkill = 0;
+											}
+											else
+											{
+												probSkill = 40;
+											}
+
+											//Usar skill 2 (1) opener
+											if (listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+											{
+												//usar Opener
+												UseSkill(listSkills.At(1)->data);
+
+												listSkillsHistory.Add(2);
+												break;
+											}
+											else //Usar default
+											{
+												//usar Skill Ataque basico
+												UseSkill(listSkills.At(0)->data);
+
+												listSkillsHistory.Add(1);
+												break;
+											}
+										}
+
+									}
+								}
+							}
 							break;
 						case CharacterClass::NO_CLASS:
 							break;
@@ -518,14 +669,31 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		
 		if (skill->positiveEffect) //Efecto de estado positivo
 		{
-			
 			defender->listStatusEffects.Add(statusEffect);
+			//Movimiento
+			if (defender->charaType==CharacterType::ALLY)
+			{
+				if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecAllies, this, skill->movementTarget); }
+			}
+			else
+			{
+				if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementTarget); }
+			}
 		}
 		else
 		{
 			if(CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY)*(skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 			{
 				defender->listStatusEffects.Add(statusEffect);
+				//Movimiento
+				if (defender->charaType == CharacterType::ALLY)
+				{
+					if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecAllies, this, skill->movementTarget); }
+				}
+				else
+				{
+					if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementTarget); }
+				}
 			}
 		}
 		return(caster->maxHp / 5 * skill->multiplierDmg);
@@ -550,12 +718,30 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			if (skill->positiveEffect) //Efecto de estado positivo
 			{
 				defender->listStatusEffects.Add(statusEffect);
+				//Movimiento
+				if (defender->charaType == CharacterType::ALLY)
+				{
+					if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecAllies, this, skill->movementTarget); }
+				}
+				else
+				{
+					if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementTarget); }
+				}
 			}
 			else
 			{
 				if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 				{
 					defender->listStatusEffects.Add(statusEffect);
+					//Movimiento
+					if (defender->charaType == CharacterType::ALLY)
+					{
+						if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecAllies, this, skill->movementTarget); }
+					}
+					else
+					{
+						if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementTarget); }
+					}
 				}
 			}
 
@@ -623,7 +809,6 @@ bool Character::UseSkill(Skill* skill)
 	{
 		ModifyHP(ApplySkill(this, this, skill)); //Lanzarsela a si mismo
 		app->audio->PlayFx(healfx);
-		if (skill->movementCaster != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster); }
 		return true;
 	}
 
@@ -701,7 +886,7 @@ bool Character::UseSkill(Skill* skill)
 		switch (charaType)
 		{
 		int endRange;
-		case CharacterType::ALLY:
+		case CharacterType::ALLY: //Esto es un tanto inutil, quiza lo acabe borrando
 
 			endRange = skill->RangeCanTarget(app->combat->vecEnemies);
 			if (endRange == -1)
@@ -740,16 +925,7 @@ bool Character::UseSkill(Skill* skill)
 			{
 				for (int i = skill->posToTargetStart_I; i <= endRange; i++)
 				{
-					//Atacar a todos
-					//if (i < app->combat->vecAllies.size())
-					{
-						if (!app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill))) {break; }
-						
-					}
-					if (CalculateRandomProbability(skill->bonusAccuracy + this->accuracy, app->combat->vecAllies.at(i)->res))
-					{
-
-					}
+					if (!app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill))) {break; }
 				}
 				app->audio->PlayFx(hitfx);
 			}
@@ -758,12 +934,6 @@ bool Character::UseSkill(Skill* skill)
 				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies, skill->methodTarget);
 				app->audio->PlayFx(hitfx);
 				if (!app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill))) { break; }
-				
-				if (CalculateRandomProbability(skill->bonusAccuracy + this->accuracy, app->combat->vecAllies.at(objective)->res)) 
-				{
-					if (skill->movementTarget != 0)
-					app->combat->MoveCharacter(&app->combat->vecAllies, app->combat->vecAllies.at(objective), skill->movementTarget);
-				}
 				app->audio->PlayFx(hitfx);
 			}
 			break;
@@ -773,6 +943,9 @@ bool Character::UseSkill(Skill* skill)
 			break;
 		}
 	}
+
+	//Movimiento del lanzador, el movimiento del objetivo se hace en el apply skill
+	if (skill->movementCaster != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster); }
 	
 	return true;
 }
@@ -807,11 +980,6 @@ bool Character::UseSkill(Skill* skill, Character* target)
 	else
 	{
 		target->ModifyHP(ApplySkill(this, target, skill));
-		if (CalculateRandomProbability(skill->bonusAccuracy + this->accuracy, target->res))
-		{
-			if (skill->movementTarget != 0)
-			app->combat->MoveCharacter(&app->combat->vecEnemies, target, skill->movementTarget);
-		}
 	}
 	//Si la skill mueve moverte
 	if (skill->movementCaster != 0)

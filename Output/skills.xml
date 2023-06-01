@@ -238,15 +238,15 @@ TargetingMethod //Como se ataca
 	
 	<skill name="Terrorize" id="34" description="Menacing vibe that moves the frontline."
 		   type="2" movementCaster="0"  movementTarget="2" targetMethod="0"
-	   multiplierDmg="-1.1" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
-		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="true" autoTarget="false"
+	   multiplierDmg="-1.3" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   statusID="6" positive="false" duration="4" intensity="-90"
 	/>
 	<skill name="Intangibility" id="35" description="A defensive buff that makes the specter nearly invincible."
 		   type="3" movementCaster="0"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="1.3" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="0.3" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
-		   statusID="5" positive="true" duration="2" intensity="120"
+		   statusID="5" positive="true" duration="2" intensity="130"
 	/>
 
 	<skill name="Nigthmarish strike" id="36" description="A strike to the backline with high damage but low accuracy."
