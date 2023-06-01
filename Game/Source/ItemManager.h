@@ -115,7 +115,8 @@ public:
 	SString itemPath;
 
 	const char* texturePath;
-	const char* textureStorePath;
+	const char* textureInventoryPath;
+	const char* texturePotionsPath;
 
 	vector <ItemNode*> nodeList;
 	vector <ItemNode*> armorItems;

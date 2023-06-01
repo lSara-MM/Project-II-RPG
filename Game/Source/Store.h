@@ -34,7 +34,8 @@ public:
 
 public:
 
-	SDL_Texture* inventoryIMG;
+	SDL_Texture* inventory;
+	SDL_Texture* potion;
 
 	unsigned cap;
 	int y;

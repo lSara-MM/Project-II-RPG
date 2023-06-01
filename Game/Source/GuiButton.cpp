@@ -83,6 +83,9 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	case ButtonType::SKIPPY:
 		buttonTex = app->tex->Load("Assets/GUI/spritesheetSkip.png");
 		break;
+	case ButtonType::ITEM:
+		buttonTex = app->tex->Load("Assets/GUI/cuadroPociones.png");
+		break;
 	default:
 		break;
 	}

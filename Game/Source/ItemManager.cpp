@@ -23,7 +23,8 @@ bool ItemManager::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	texturePath = config.attribute("inventorypath").as_string();
-	textureStorePath = config.attribute("storepath").as_string();
+	textureInventoryPath = config.attribute("inventorystorepath").as_string();
+	texturePotionsPath = config.attribute("potionstorepath").as_string();
 
 	itemPath = config.attribute("itempath").as_string();
 
