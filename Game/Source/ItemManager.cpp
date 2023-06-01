@@ -363,10 +363,10 @@ void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
 			{
 				LoadButtons(x, y, item);
 
-				app->render->DrawTexture(itemsTexture, (720 + 42 * x) - app->render->camera.x, y - app->render->camera.y, &seccion);
+				app->render->DrawTexture(itemsTexture, (720 + 70 * x) - app->render->camera.x, y - app->render->camera.y, &seccion);
 
 				string c = to_string(item->quantity);
-				app->render->TextDraw(c.c_str(), (720 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(c.c_str(), (720 + 80 * x), y + 30, 20, Font::TEXT, { 0, 0, 0 });
 			}
 		}
 		else
@@ -380,12 +380,12 @@ void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
 
 			if (item->equiped == false)
 			{
-				app->render->DrawTexture(itemsTexture, (680 + 42 * x) - app->render->camera.x, y - app->render->camera.y, &seccion);
+				app->render->DrawTexture(itemsTexture, (680 + 70 * x) - app->render->camera.x, y - app->render->camera.y, &seccion);
 
 				if (item->type != 2)
 				{
 					string c = to_string(item->quantity);
-					app->render->TextDraw(c.c_str(), (680 + 42 * x), y + 16, 20, Font::TEXT, { 0, 0, 0 });
+					app->render->TextDraw(c.c_str(), (720 + 70 * x), y + 30, 20, Font::TEXT, { 0, 0, 0 });
 				}
 			}
 			else if (item->equiped && item->whom == invPos)
@@ -435,7 +435,7 @@ void ItemManager::LoadSellItems(int x, int y, ItemNode* item)
 
 	LoadStoreButtons(x, y, item);
 
-	app->render->DrawTexture(itemsTexture, (600 + (69 * x)) - app->render->camera.x, 100 + y - app->render->camera.y, &seccion);
+	app->render->DrawTexture(itemsTexture, (800 + (69 * x)) - app->render->camera.x, 180 + y - app->render->camera.y, &seccion);
 
 }
 void ItemManager::LoadStoreItems(int x, int y, ItemNode* item)
@@ -478,11 +478,11 @@ void ItemManager::LoadStoreButtons(int x, int y, ItemNode* item)
 void ItemManager::LoadButtons(int x, int y, ItemNode* item)
 {
 	SDL_Rect buttonBounds;
-	buttonBounds = { (680 + 42 * x), y, 40, 40 };
+	buttonBounds = { (680 + 70 * x), y, 64, 64 };
 
 	if (app->combat->active)
 	{
-		buttonBounds = { (720 + 42 * x), y, 40, 40 };
+		buttonBounds = { (720 + 70 * x), y, 64, 64 };
 
 		if (item->button != nullptr)
 		{}else

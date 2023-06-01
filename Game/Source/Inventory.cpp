@@ -72,10 +72,6 @@ bool Inventory::Update(float dt)
 	float point = inventoryAnimation.GetPoint();
 	int offset = -1300;
 
-	bool ret = true;
-
-	int x = 0;
-
 	if (app->combat->active)
 	{
 		y = 460;
@@ -86,6 +82,15 @@ bool Inventory::Update(float dt)
 
 		y = 148;
 	}
+
+	bool ret = true;
+
+	return ret;
+}
+
+bool Inventory::PostUpdate()
+{
+	int x = 0;
 
 	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
 	{
@@ -180,7 +185,7 @@ bool Inventory::Update(float dt)
 		}
 	}
 
-	return ret;
+	return true;
 }
 
 // Called before quitting
