@@ -64,9 +64,10 @@ public:
 	int currentHP_Protagonist = 0;
 	bool isCharacterLoaded_B = true;
 
+	int mouseX_scene, mouseY_scene;//coordenadas mouse para controlar mando/printar mouse (lo podria poner en input, pereza ahora)
+
 private:
 
-	int mouseX_scene, mouseY_scene;
 	float mouseSpeed;
 	const char* lobby_music;
 
