@@ -59,7 +59,28 @@ bool Inventory::PreUpdate()
 
 bool Inventory::Update(float dt)
 {
+	float point = inventoryAnimation.GetPoint();
+	int offset = -1300;
 
+	if (app->combat->active)
+	{
+		y = 460;
+	}
+	else
+	{
+		app->render->DrawTexture(inventoryIMG, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
+
+		//Print Character
+		if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
+		{
+			SDL_Texture* playerTexture = app->tex->Load(app->itemManager->arrParty.at(app->itemManager->invPos)->texturePath);
+			app->render->DrawTexture(playerTexture, offset + point * (370 - offset) - app->render->camera.x, 180 - app->render->camera.y);
+			app->tex->UnLoad(playerTexture);
+			playerTexture = NULL;
+		}
+
+		y = 148;
+	}
 	bool ret = true;
 
 	return ret;
@@ -116,26 +137,6 @@ bool Inventory::PostUpdate()
 
 	float point = inventoryAnimation.GetPoint();
 	int offset = -1300;
-
-	if (app->combat->active)
-	{
-		y = 460;
-	}
-	else
-	{
-		app->render->DrawTexture(inventoryIMG, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
-
-		//Print Character
-		if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
-		{
-			SDL_Texture* playerTexture = app->tex->Load(app->itemManager->arrParty.at(app->itemManager->invPos)->texturePath);
-			app->render->DrawTexture(playerTexture, offset + point * (370 - offset) - app->render->camera.x, 180 - app->render->camera.y);
-			app->tex->UnLoad(playerTexture);
-			playerTexture = NULL;
-		}
-
-		y = 148;
-	}
 
 	if (app->combat->active)
 	{
