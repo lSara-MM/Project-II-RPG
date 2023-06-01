@@ -11,7 +11,6 @@
 #include "GuiButton.h"
 #include "GuiManager.h"
 #include "Inventory.h"
-#include "Store.h"
 #include "Player.h"
 #include "Character.h"
 #include "Combat.h"
@@ -105,6 +104,11 @@ public:
 	bool LoadParty();
 	void SetParty();
 	void PartyToNull();
+
+	//Store
+	void LoadSellItems(int x, int y, ItemNode* item);
+	void LoadStoreItems(int x, int y, ItemNode* item);
+	void LoadStoreButtons(int x, int y, ItemNode* item);
 
 public:
 
