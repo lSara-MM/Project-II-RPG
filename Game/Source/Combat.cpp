@@ -259,7 +259,7 @@ bool Combat::Update(float dt)
 			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
 			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
 
-			app->render->TextDraw("accuracy", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			app->render->TextDraw("Accuracy", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
 			app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
 
 			app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
@@ -529,6 +529,7 @@ bool Combat::CleanUp()
 
 	//Unload inventory
 	app->inventory->Disable();
+	app->itemManager->Disable();
 
 
 	app->input->coso = true;
@@ -699,25 +700,12 @@ bool Combat::InitAllies(array<Character*, 4> party)
 		//RELEASE(party.at(i));
 	}
 
-
-	//delete &chara;
-	//chara = nullptr;
-
-	for (int i = 0; i < party.size(); i++)
-	{
-		if (party.at(i) == nullptr) { break; }
-
-		party.at(i)->isCombatant = true;
-		party.at(i)->positionCombat_I = i;
-		vecAllies.push_back(party.at(i));
-		vecAllies.at(i)->Start();
-	}
-
 	return true;
 }
 
 bool Combat::StartCombat()
 {
+	app->itemManager->Enable();
 	InitAllies(app->itemManager->arrParty);
 	InitEnemies(arrSetEnemies);
 	
@@ -1483,7 +1471,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			app->render->TextDraw(effecto_C.GetString(), 480, 550, 18);
 			
 			//Description
-			app->render->RenderTrimmedText(55, 620, 5, skillPoint->description.GetString(), &auxTexts, 15, 90);
+			app->render->RenderTrimmedText(55, 620, 5, skillPoint->description.GetString(), &auxTexts, 15, 75);
 		}
 	}
 
