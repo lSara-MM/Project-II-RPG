@@ -80,7 +80,7 @@ enum class CharacterClass
 	HEALER,
 	BUFFER,
 	DEBUFFER,
-
+	BOSS,
 
 	NO_CLASS
 };

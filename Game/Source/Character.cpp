@@ -426,6 +426,9 @@ bool Character::Update(float dt)
 							break;
 						case CharacterClass::DOT:
 							break;
+						case CharacterClass::BOSS:
+
+							break;
 						case CharacterClass::NO_CLASS:
 							break;
 						default:
@@ -602,9 +605,10 @@ void Character::LoadSkill(int arr[4])
 				bool friendlyFire = aux.attribute("friendlyFire").as_bool();
 				bool area = aux.attribute("areaSkill").as_bool();
 				bool autoTarget = aux.attribute("autoTarget").as_bool();
+				TargetingMethod method = (TargetingMethod)aux.attribute("targetMethod").as_int();
 
 				listSkills.Add(new Skill(nombre, descripcion,
-					posInicialUso, posFinallUso, posInicialTarget, posFinalTarget,
+					posInicialUso, posFinallUso, posInicialTarget, posFinalTarget, method,
 					movUsuario, movTarget, friendlyFire, area, autoTarget, 
 					mult, accuracy, probCrit, dmgCrit, statusID,positiveEffect,duration,intensity));
 			}
@@ -659,7 +663,7 @@ bool Character::UseSkill(Skill* skill)
 			}
 			else
 			{
-				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies.size());
+				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies);
 				if (!app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill))) { break; }
 			}
 			app->audio->PlayFx(healfx);
@@ -682,7 +686,7 @@ bool Character::UseSkill(Skill* skill)
 			}
 			else
 			{
-				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecEnemies.size());
+				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecEnemies);
 				app->combat->vecEnemies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(objective), skill));
 			}
 			app->audio->PlayFx(healfx);
@@ -717,7 +721,7 @@ bool Character::UseSkill(Skill* skill)
 			}
 			else
 			{
-				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies.size());
+				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies);
 				app->combat->vecEnemies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(objective), skill));
 				app->audio->PlayFx(hitfx);
 			}
@@ -752,7 +756,7 @@ bool Character::UseSkill(Skill* skill)
 			}
 			else
 			{
-				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies.size());
+				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies);
 				app->audio->PlayFx(hitfx);
 				if (!app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill))) { break; }
 				

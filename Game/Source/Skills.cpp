@@ -18,7 +18,7 @@ Skill::~Skill()
 {
 }
 
-Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I, int movementCaster, int movementTarget,bool friendlyFire, bool areaSkill, bool autoTarget, float multiplierDmg, int bonusAccuracy, int bonusCritRate, int bonusCritDamage, int status, bool positiveEffect,int duration, int intensity)
+Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I, TargetingMethod method, int movementCaster, int movementTarget,bool friendlyFire, bool areaSkill, bool autoTarget, float multiplierDmg, int bonusAccuracy, int bonusCritRate, int bonusCritDamage, int status, bool positiveEffect,int duration, int intensity)
 {
 	//Info
 	this->name = name;
@@ -48,6 +48,7 @@ Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUs
 	this->targetFriend = friendlyFire;
 	this->areaSkill = areaSkill;
 	this->autoTarget = autoTarget;
+	this->methodTarget = method;
 }
 
 bool Skill::PosCanBeUsed(int positionCharacter)
@@ -68,7 +69,7 @@ int Skill::RangeCanTarget(vector<Character*> vec)
 	
 }
 
-int Skill::RandomTarget(int posInicial, int posFinal, int vecSize, TargetingMethod method)
+int Skill::RandomTarget(int posInicial, int posFinal, vector<Character*> arr, TargetingMethod method)
 {
 	int pos= posInicial;
 	int width = posFinal - posInicial + 1;
@@ -78,11 +79,16 @@ int Skill::RandomTarget(int posInicial, int posFinal, int vecSize, TargetingMeth
 		do 
 		{
 			pos = rand() % width + posInicial;
-		} while (pos >= vecSize);
+		} while (pos >= arr.size());
 
 		break;
 
 	case TargetingMethod::LOWER_HP:
+
+		break;
+	case TargetingMethod::LOWER_ARMOR:
+		break;
+	case TargetingMethod::LOWER_DODGE:
 		break;
 
 	default:
