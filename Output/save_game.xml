@@ -34,8 +34,8 @@
 	<PuzzleManager />
 	<questmanager />
 	<entitymanager>
-		<player name="scene" x="8355518" y="8355346" />
-		<party id="0" id="1" id="2" partySize="3" />
+		<player name="scene" x="2345" y="4403" />
+		<party id="0" id="1" id="2" id="3" />
 	</entitymanager>
 	<itemmanager />
 	<dialogue />
@@ -45,6 +45,6 @@
 	<store />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-3260" y="-3912" />
+		<camera x="-1725" y="-3912" />
 	</renderer>
 </save_state>
