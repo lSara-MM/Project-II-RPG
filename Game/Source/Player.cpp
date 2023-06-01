@@ -10,6 +10,7 @@
 
 #include "Scene.h"
 #include "HouseOfTerrors.h"
+#include "BeastTent.h"
 #include "PracticeTent.h"
 #include"Circus.h"
 #include"PuzzleManager.h"

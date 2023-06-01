@@ -7,6 +7,7 @@
 
 #include "IntroScene.h"
 #include "HouseOfTerrors.h"
+#include "BeastTent.h"
 #include "PracticeTent.h"
 #include "Circus.h"
 #include "LogoScene.h"

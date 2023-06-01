@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "SDL\include\SDL_rect.h"
 
+struct SDL_Texture;
+
 class FadeToBlack : public Module
 {
 public:
@@ -31,6 +33,8 @@ public:
 	// After the first step, the modules should be switched
 	bool FadingToBlack(Module* toDisable, Module* toEnable, float frames = 60);
 
+	bool FadingToBlackImages(SDL_Texture* ImageToPass, SDL_Texture* ImageToEnter, float frames = 60);
+
 private:
 
 	enum Fade_Step
@@ -39,6 +43,9 @@ private:
 		TO_BLACK,
 		FROM_BLACK
 	} currentStep = Fade_Step::NONE;
+
+	bool modulesOnOff;
+	bool ImagesOnOff;
 
 	// A frame count system to handle the fade time and ratio
 	Uint32 frameCount = 0;
@@ -49,7 +56,10 @@ private:
 
 	// The modules that should be switched after the first step
 	Module* moduleToEnable = nullptr;
-	Module* moduleToDisable = nullptr;
+	Module* moduleToDisable = nullptr;	
+	
+	SDL_Texture* ImageToPass = nullptr;
+	SDL_Texture* ImageToEnter = nullptr;
 
 	pugi::xml_node configNode;
 };

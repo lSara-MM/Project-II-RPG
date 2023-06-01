@@ -13,6 +13,7 @@
 #include "Combat.h"
 #include "Scene.h"
 #include "HouseOfTerrors.h"
+#include "BeastTent.h"
 
 #include "FadeToBlack.h"
 #include "GuiManager.h"
