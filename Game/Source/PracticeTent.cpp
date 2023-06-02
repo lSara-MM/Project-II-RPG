@@ -130,7 +130,7 @@ bool PracticeTent::Update(float dt)
 	{
 		app->render->DrawTexture(textureE, posDummy.x - widthDummy / 2 + 20, posDummy.y + 50);
 
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_Y) == BUTTON_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
 			LOG("Combat");
 			app->combat->PreLoadCombat(name);

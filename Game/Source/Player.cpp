@@ -164,7 +164,7 @@ bool Player::Update(float dt)
 		app->map->mapPendingtoDelete = true;		
 		OpenMap = false;
 		lockMovement = false;
-		transitionMap_B = false;
+		//transitionMap_B = false;
 		app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 0);
 	}
 

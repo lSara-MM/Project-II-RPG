@@ -329,66 +329,62 @@ void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float d
 {
 	int speed_X = 0; int speed_Y = 0;
 	
-	// TO DO: uncomment the if
+	if (app->input->controller.j1_x > 0)
+	{
+		speed_X = mouseSpeed * dt;
 
-	//if (!godMode_B)
-	//{
+		if (app->input->controller.j1_y > 0)
+		{
+			speed_Y = mouseSpeed * dt;
+		}
+		if (app->input->controller.j1_y < 0)
+		{
+			speed_Y = -mouseSpeed * dt;
+		}
+	}
+
+	else if (app->input->controller.j1_x < 0)
+	{
+		speed_X = -mouseSpeed * dt;
+
+		if (app->input->controller.j1_y > 0)
+		{
+			speed_Y = mouseSpeed * dt;
+		}
+		if (app->input->controller.j1_y < 0)
+		{
+			speed_Y = -mouseSpeed * dt;
+		}
+	}
+
+	else if (app->input->controller.j1_y > 0)
+	{
+		speed_Y = mouseSpeed * dt;
+
 		if (app->input->controller.j1_x > 0)
 		{
 			speed_X = mouseSpeed * dt;
-
-			if (app->input->controller.j1_y > 0)
-			{
-				speed_Y = mouseSpeed * dt;
-			}
-			if (app->input->controller.j1_y < 0)
-			{
-				speed_Y = -mouseSpeed * dt;
-			}
 		}
-
-		else if (app->input->controller.j1_x < 0)
+		if (app->input->controller.j1_x < 0)
 		{
 			speed_X = -mouseSpeed * dt;
-
-			if (app->input->controller.j1_y > 0)
-			{
-				speed_Y = mouseSpeed * dt;
-			}
-			if (app->input->controller.j1_y < 0)
-			{
-				speed_Y = -mouseSpeed * dt;
-			}
 		}
+	}
 
-		else if (app->input->controller.j1_y > 0)
+	else if (app->input->controller.j1_y < 0)
+	{
+		speed_Y = -mouseSpeed * dt;
+		if (app->input->controller.j1_x > 0)
 		{
-			speed_Y = mouseSpeed * dt;
-
-			if (app->input->controller.j1_x > 0)
-			{
-				speed_X = mouseSpeed * dt;
-			}
-			if (app->input->controller.j1_x < 0)
-			{
-				speed_X = -mouseSpeed * dt;
-			}
+			speed_X = mouseSpeed * dt;
 		}
-
-		else if (app->input->controller.j1_y < 0)
+		if (app->input->controller.j1_x < 0)
 		{
-			speed_Y = -mouseSpeed * dt;
-			if (app->input->controller.j1_x > 0)
-			{
-				speed_X = mouseSpeed * dt;
-			}
-			if (app->input->controller.j1_x < 0)
-			{
-				speed_X = -mouseSpeed * dt;
-			}
+			speed_X = -mouseSpeed * dt;
 		}
+	}
 
-		//SDL_WarpMouseInWindow(app->win->window, mouseX + speed_X, mouseY + speed_Y);
-	//}
+	//SDL_WarpMouseInWindow(NULL, mouseX + speed_X, mouseY + speed_Y);
+	
 }
 

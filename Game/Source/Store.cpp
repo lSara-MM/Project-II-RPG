@@ -27,20 +27,20 @@ bool Store::Start()
 
 	SDL_Rect buttonBounds;
 	buttonBounds = { 290, 545, 180, 69 };
-	buyButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1500, this, buttonBounds, ButtonType::BUYITEM, "0", 30);
+	buyButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1500, this, buttonBounds, ButtonType::BUYITEM, "0", 30, Font::UI, { 0,0,0,0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
 
 	buttonBounds = { 1150, 50, 60, 60 };
-	closeStore = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::CLOSE);
+	closeStore = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::CLOSE, "", 12, Font::UI, { 0,0,0,0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
 
 	buttonBounds = { 240, 535, 40, 20 };
-	Add = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1502, this, buttonBounds, ButtonType::ADD);
+	Add = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1502, this, buttonBounds, ButtonType::ADD,"", 12, Font::UI, { 0,0,0,0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
 
 	buttonBounds = { 240, 600, 40, 20 };
-	Minus = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1503, this, buttonBounds, ButtonType::MINUS);
+	Minus = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1503, this, buttonBounds, ButtonType::MINUS,"", 12, Font::UI, { 0,0,0,0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);//añadido animacion quede igual menu
 
 	//animation inventory
 	inventoryAnimation.Set();
-	inventoryAnimation.AddTween(100, 120, BOUNCE_OUT);
+	inventoryAnimation.AddTween(100, 80, BOUNCE_OUT);
 	inventoryTransition_B = false;
 
 	return true;
@@ -133,6 +133,12 @@ bool Store::PostUpdate()
 
 	string h = to_string(SellQuantity);
 	app->render->TextDraw(h.c_str(), 250, 550, 40, Font::TEXT, { 255, 255, 255 });
+
+	if ( app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == ButtonState::BUTTON_DOWN)//con mando es bastante molesto tener que ir con el mouse al boton de cerrar
+	{
+		this->Disable();
+		app->scene->player->lockMovement = false;
+	}
 
 	return true;
 }
