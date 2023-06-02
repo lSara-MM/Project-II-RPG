@@ -35,7 +35,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* ob
 	case GuiControlType::TOGGLE:
 		break;
 	case GuiControlType::CHECKBOX:
-		guiControl = (GuiControl*) new GuiCheckBox(id, bounds,speed,eType, axisType);
+		guiControl = (GuiControl*) new GuiCheckBox(id, bounds, speed, eType, axisType);
 		break;
 	case GuiControlType::SLIDER:
 		break;

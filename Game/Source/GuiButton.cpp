@@ -8,6 +8,7 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	this->text = text;
 	this->fontSize = fontSize;
 	this->font = font;
+	color = { 0, 0, 0 };
 	
 	this->step = speed;//velocidad actualiza animacion
 
@@ -718,24 +719,24 @@ bool GuiButton::Draw(Render* render)
 			{
 			case GuiControlState::DISABLED:
 			{
-				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 50,50,50 });
+				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 50, 50, 50 });
 			} break;
 
 			case GuiControlState::NORMAL:
 			{
-				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 163,163,163 });
+				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 163, 163, 163 });
 
 			} break;
 
 			case GuiControlState::FOCUSED:
 			{
-				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 249,224,58 });
+				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 249, 224, 58 });
 
 			} break;
 
 			case GuiControlState::PRESSED:
 			{
-				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 180,34,42 });
+				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 180, 34, 42 });
 
 			} break;
 
@@ -755,14 +756,13 @@ bool GuiButton::Draw(Render* render)
 
 			app->render->RenderTrimmedText(bounds.x + offsetX, bounds.y + offsetY, 2, text, &texts, fontSize, max_chars_line, 2.5f);
 		}
-
 		else
 		{
-			if (buttonType==ButtonType::SETTINGS_TEXT)//no hace falta centre el texto en este caso
+			if (buttonType == ButtonType::SETTINGS_TEXT)//no hace falta centre el texto en este caso
 			{
 				x = 0; y = 0;
 			}
-			app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font);
+			app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, color);
 		}
 	}
 	return false;

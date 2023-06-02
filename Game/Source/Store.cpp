@@ -27,16 +27,16 @@ bool Store::Start()
 
 	SDL_Rect buttonBounds;
 	buttonBounds = { 290, 545, 180, 69 };
-	buyButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1500, this, buttonBounds, ButtonType::BUYITEM, "0", 30, Font::UI, { 0,0,0,0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
+	buyButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1500, this, buttonBounds, ButtonType::BUYITEM, "0", 30, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
 
 	buttonBounds = { 1150, 50, 60, 60 };
-	closeStore = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::CLOSE, "", 12, Font::UI, { 0,0,0,0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
+	closeStore = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::CLOSE, "", 12, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
 
 	buttonBounds = { 240, 535, 40, 20 };
-	Add = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1502, this, buttonBounds, ButtonType::ADD,"", 12, Font::UI, { 0,0,0,0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
+	Add = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1502, this, buttonBounds, ButtonType::ADD,"", 12, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
 
 	buttonBounds = { 240, 600, 40, 20 };
-	Minus = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1503, this, buttonBounds, ButtonType::MINUS,"", 12, Font::UI, { 0,0,0,0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);//añadido animacion quede igual menu
+	Minus = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1503, this, buttonBounds, ButtonType::MINUS,"", 12, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);//añadido animacion quede igual menu
 
 	//animation inventory
 	inventoryAnimation.Set();
@@ -130,6 +130,8 @@ bool Store::PostUpdate()
 
 	string c = to_string(CurrentPrice);
 	buyButton->text = c.c_str();
+	if (app->itemManager->coins < CurrentPrice) { buyButton->color = { 230, 33, 33 }; }
+	else { buyButton->color = { 0, 0, 0 }; }
 
 	string h = to_string(SellQuantity);
 	app->render->TextDraw(h.c_str(), 250, 550, 40, Font::TEXT, { 255, 255, 255 });
