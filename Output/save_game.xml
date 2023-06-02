@@ -13,6 +13,7 @@
 	<scene />
 	<Circus />
 	<HouseOfTerrors />
+	<HouseOfTerrors />
 	<PracticeTent />
 	<combat />
 	<map />
@@ -35,7 +36,7 @@
 	<questmanager />
 	<CutScene />
 	<entitymanager>
-		<player name="scene" x="3417" y="1058" />
+		<player name="scene" x="1554" y="3023" />
 		<party id="0" id="1" id="2" />
 	</entitymanager>
 	<dialogue />
@@ -46,6 +47,6 @@
 	<store />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2825" y="-725" />
+		<camera x="-1385" y="-2690" />
 	</renderer>
 </save_state>

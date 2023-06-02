@@ -207,14 +207,14 @@
 		<mapdungeonfolder path="Assets/Maps/"/>
 		<mapdungeonfile path="Assets/Maps/mapDungeon.tmx"/>
 
-		<mapdungeon2folder path="Assets/Maps/"/>
-		<mapdungeon2file path="Assets/Maps/mapDungeon2.tmx"/>
-
 		<mappracticefolder path="Assets/Maps/"/>
 		<mappracticefile path="Assets/Maps/mapPractice.tmx"/>		
 
 		<mapcircusfolder path="Assets/Maps/"/>
 		<mapcircusfile path="Assets/Maps/mapCircus.tmx"/>
+
+		<mapdungeon2folder path="Assets/Maps/"/>
+		<mapdungeon2file path="Assets/Maps/mapDungeon2.tmx"/>
 	
 	</map>
 

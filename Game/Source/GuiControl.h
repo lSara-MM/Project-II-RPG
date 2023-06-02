@@ -70,6 +70,8 @@ enum class ButtonType
 	ITEM,
 	BUYITEM,
 	SELLITEM,
+	ADD,
+	MINUS,
 };
 
 enum class AnimationAxis

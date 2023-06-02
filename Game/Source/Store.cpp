@@ -26,19 +26,17 @@ bool Store::Start()
 	potion = app->tex->Load(app->itemManager->texturePotionsPath);
 
 	SDL_Rect buttonBounds;
-	buttonBounds = { 275, 555, 180, 69 };
+	buttonBounds = { 290, 545, 180, 69 };
 	buyButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1500, this, buttonBounds, ButtonType::BUYITEM, "0", 30);
 
 	buttonBounds = { 1150, 50, 60, 60 };
 	closeStore = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::CLOSE);
 
-	buttonBounds = { 225, 545, 40, 20 };
-	Add = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1502, this, buttonBounds, ButtonType::SMALL);
-	Add->text = "Add";
+	buttonBounds = { 240, 535, 40, 20 };
+	Add = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1502, this, buttonBounds, ButtonType::ADD);
 
-	buttonBounds = { 225, 585, 40, 20 };
-	Minus = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1503, this, buttonBounds, ButtonType::SMALL);
-	Minus->text = "Minus";
+	buttonBounds = { 240, 600, 40, 20 };
+	Minus = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1503, this, buttonBounds, ButtonType::MINUS);
 
 	//animation inventory
 	inventoryAnimation.Set();
@@ -133,6 +131,9 @@ bool Store::PostUpdate()
 	string c = to_string(CurrentPrice);
 	buyButton->text = c.c_str();
 
+	string h = to_string(SellQuantity);
+	app->render->TextDraw(h.c_str(), 250, 550, 40, Font::TEXT, { 255, 255, 255 });
+
 	return true;
 }
 
@@ -219,10 +220,12 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 			{
 				for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 				{
-					if (app->itemManager->nodeList[i]->toSell)
+					if (app->itemManager->nodeList[i]->toSell && app->itemManager->nodeList[i]->quantity + SellQuantity <= app->itemManager->nodeList[i]->max)
 					{
 						app->itemManager->AddQuantity(i, SellQuantity);
 						app->itemManager->coins -= CurrentPrice;
+						SellQuantity = 0;
+						app->itemManager->nodeList[i]->toSell = false;
 					}
 				}
 			}
@@ -238,6 +241,8 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 						app->itemManager->MinusQuantity(app->itemManager->nodeList[i]);
 					}
 					app->itemManager->coins += CurrentPrice;
+					SellQuantity = 0;
+					app->itemManager->nodeList[i]->toSell = false;
 				}
 			}
 		}

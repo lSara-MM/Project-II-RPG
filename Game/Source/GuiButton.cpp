@@ -92,6 +92,12 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	case ButtonType::SELLITEM:
 		buttonTex = app->tex->Load("Assets/GUI/Botton_Buy_Sell_MouseOn.png");
 		break;
+	case ButtonType::ADD:
+		buttonTex = app->tex->Load("Assets/GUI/Botton_Buy_Sell_MouseOn.png");
+		break;
+	case ButtonType::MINUS:
+		buttonTex = app->tex->Load("Assets/GUI/Botton_Buy_Sell_MouseOn.png");
+		break;
 	default:
 		break;
 	}
@@ -406,6 +412,14 @@ bool GuiButton::Draw(Render* render)
 				rect = { 0, 0, 175, 69 };
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
+			case ButtonType::ADD:
+				rect = { 0, 69, 44, 25 };
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				break;
+			case ButtonType::MINUS:
+				rect = { 132, 69, 44, 25 };
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				break;
 			case ButtonType::INV_NEXT_PAGE:
 				break;
 			case ButtonType::INV_PAGES:
@@ -493,6 +507,14 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::SELLITEM:
 				rect = { 175, 0, 174, 69 };
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				break;
+			case ButtonType::ADD:
+				rect = { 44, 69, 44, 25 };
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				break;
+			case ButtonType::MINUS:
+				rect = { 176, 69, 44, 25 };
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::INV_NEXT_PAGE:
@@ -585,6 +607,14 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::SELLITEM:
 				rect = { 350, 0, 175, 69 };
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				break;
+			case ButtonType::ADD:
+				rect = { 88, 69, 44, 25 };
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				break;
+			case ButtonType::MINUS:
+				rect = { 220, 69, 44, 25 };
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::INV_NEXT_PAGE:

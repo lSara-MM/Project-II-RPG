@@ -69,6 +69,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	iScene = new IntroScene();
 	scene = new Scene();
 	hTerrors = new HouseOfTerrors();
+	BeastT = new BeastTent();
 	practiceTent = new PracticeTent();
 	circus = new Circus();
 	fade = new FadeToBlack();
@@ -95,6 +96,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(circus);
 	AddModule(hTerrors);
+	AddModule(BeastT);
 	AddModule(practiceTent);
 	AddModule(combat);
 
@@ -502,6 +504,7 @@ void App::DisableAtStart()
 	iScene->active = false;
 	scene->active = false;
 	hTerrors->active = false;
+	BeastT->active = false;
 	circus->active = false;
 	practiceTent->active = false;
 	entityManager->active = false;
