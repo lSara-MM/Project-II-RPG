@@ -343,8 +343,6 @@ bool Player::Update(float dt)
 				interactionTest = true;
 			}
 
-			app->inventory->Disable();
-
 			if (!lockMovement)
 			{
 				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
