@@ -671,7 +671,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		{
 			defender->listStatusEffects.Add(statusEffect);
 			//Movimiento
-			app->combat->MoveCharacter(this, skill->movementTarget);
+			app->combat->MoveCharacter(defender, skill->movementTarget);
 		}
 		else
 		{
@@ -679,7 +679,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			{
 				defender->listStatusEffects.Add(statusEffect);
 				//Movimiento
-				app->combat->MoveCharacter(this, skill->movementTarget);
+				app->combat->MoveCharacter(defender, skill->movementTarget);
 			}
 		}
 		return(caster->maxHp / 5 * skill->multiplierDmg);
@@ -705,14 +705,14 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			{
 				defender->listStatusEffects.Add(statusEffect);
 				//Movimiento
-				app->combat->MoveCharacter(this, skill->movementTarget);
+				app->combat->MoveCharacter(defender, skill->movementTarget);
 			}
 			else
 			{
 				if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 				{
 					//Movimiento
-					app->combat->MoveCharacter(this, skill->movementTarget);
+					app->combat->MoveCharacter(defender, skill->movementTarget);
 					defender->listStatusEffects.Add(statusEffect);
 				}
 			}
