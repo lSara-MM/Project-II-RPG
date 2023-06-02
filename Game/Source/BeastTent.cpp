@@ -43,7 +43,7 @@ bool BeastTent::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	musHauntedPath = config.attribute("musicD1").as_string();
+	musBeastPath = config.attribute("musicD1").as_string();
 	pause_music = config.attribute("pause").as_string();
 	mute_B = false;
 
@@ -51,7 +51,7 @@ bool BeastTent::Awake(pugi::xml_node& config)
 
 	//mouseSpeed = config.attribute("mouseSpeed").as_float();
 
-	texturePathDarkestDungeon = config.attribute("texturePathDark").as_string();
+	texturePathBeastDungeon = config.attribute("texturePathDark").as_string();
 
 	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
 	pausefx = app->audio->LoadFx(fxpausepath);
@@ -74,10 +74,10 @@ bool BeastTent::Start()
 	//Load Map
 	app->map->Load(1);
 
-	DarkestDungeon = app->tex->Load(texturePathDarkestDungeon);
+	BeastDungeon = app->tex->Load(texturePathBeastDungeon);
 
 	//Music
-	app->audio->PlayMusic(musHauntedPath, 1.0f);
+	app->audio->PlayMusic(musBeastPath, 1.0f);
 
 	exit_B = false;
 
@@ -268,9 +268,9 @@ bool BeastTent::CleanUp()
 		pPause->CleanUp();
 	}
 
-	if (DarkestDungeon != nullptr) 
+	if (BeastDungeon != nullptr)
 	{
-		app->tex->UnLoad(DarkestDungeon);
+		app->tex->UnLoad(BeastDungeon);
 	}
 
 	app->guiManager->CleanUp();
@@ -362,7 +362,7 @@ void BeastTent::Debug()
 		else
 		{
 			pause_B = false;
-			app->audio->PlayMusic(musHauntedPath);
+			app->audio->PlayMusic(musBeastPath);
 			if (pause_B)
 			{
 			/*	pPause = new Pause(this);*/
@@ -426,14 +426,14 @@ bool BeastTent::OnGuiMouseClickEvent(GuiControl* control)
 	case 701:
 		LOG("Button Close pause click");
 		pause_B = false;
-		app->audio->PlayMusic(musHauntedPath);
+		app->audio->PlayMusic(musBeastPath);
 		//pPause->CleanUp();
 		break;
 
 	case 702:
 		LOG("Button Resume click");
 		pause_B = false;
-		app->audio->PlayMusic(musHauntedPath);
+		app->audio->PlayMusic(musBeastPath);
 		//pPause->CleanUp();
 		break;
 
