@@ -153,10 +153,12 @@ bool GuiButton::Update(float dt)
 					}
 				}
 			}
-			else
+			else if (hoverTest)
 			{
 				(isSelected) ? state = GuiControlState::SELECTED : state = GuiControlState::NORMAL;
 				hoverTest = false;
+
+				NotifyObserverOutHover();
 			}
 		/*}
 		else

@@ -65,6 +65,8 @@ public:
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
 	bool OnGuiMouseHoverEvent(GuiControl* control);
+	bool OnGuiMouseOutHoverEvent(GuiControl* control);
+
 	int SearchInSkills(vector<Character*> arr, Character* chara);
 	int SearchInVec(vector<Character*> arr, int id);
 
@@ -72,6 +74,7 @@ public:
 	bool SaveCombat(); //guardar stats playable characters en xml combat
 	bool LoadCombat(); //cargar stats playable characters desde xml combat
 	bool RestartCombatData(); //al empezar partida nueva, poner stats xml combat igual a xml config
+
 public:
 	//Player* player;
 	bool frcap;
@@ -92,7 +95,6 @@ public:
 	List<GuiButton*> listButtons;
 
 private:
-
 	bool isMoving;
 
 	//
@@ -101,6 +103,7 @@ private:
 
 	pugi::xml_node combatNode;
 
+	// Auxiliar vector for texts
 	vector<SString> auxTexts;
 
 	//Fondo
@@ -119,11 +122,11 @@ private:
 	SDL_Texture* profileTex;//ui profile character
 	SDL_Texture* bookTex;//book combat
 	
-
+	bool isHovering; 
 	bool exit_B;
 
 	SString sceneFromName;
-	vector<int> arrSetEnemies;
+	vector<int> vecSetEnemies;
 
 	//music combat
 	const char* musCombat;
