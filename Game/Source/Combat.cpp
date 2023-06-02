@@ -865,8 +865,14 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 	int newPos;
 	newPos = chara->positionCombat_I + movement_I;
 	//Si se pasa ponerlo en el limite
-	if (newPos <= 0) { newPos = 0; }
-	if (newPos > arr->size()) { newPos = arr->size()-1; }
+	if (newPos <= 0)
+	{ 
+		newPos = 0;
+	}
+	if (newPos > arr->size())
+	{ 
+		newPos = arr->size()-1;
+	}
 
 	//Evitar que se pase de posicion.
 	if (arr->size() > newPos)
