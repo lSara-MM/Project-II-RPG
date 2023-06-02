@@ -124,6 +124,7 @@
     <ClCompile Include="Source\LootManager.cpp" />
     <ClCompile Include="Source\Store.cpp" />
     <ClCompile Include="Source\CutScene.cpp" />
+    <ClCompile Include="Source\BeastTent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -288,6 +289,7 @@
     <ClInclude Include="Source\LootManager.h" />
     <ClInclude Include="Source\Store.h" />
     <ClInclude Include="Source\CutScene.h" />
+    <ClInclude Include="Source\BeastTent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
