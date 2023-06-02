@@ -129,6 +129,11 @@ public:
 		observer->OnGuiMouseHoverEvent(this);
 	}
 
+	void NotifyObserverOutHover()
+	{
+		observer->OnGuiMouseOutHoverEvent(this);
+	}
+
 public:
 
 	uint32 id;

@@ -464,9 +464,11 @@ void ItemManager::LoadStoreItems(int x, int y, ItemNode* item)
 
 		app->render->DrawTexture(itemsTexture, (200 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
 		string c = to_string(item->price);
+
 		app->render->TextDraw(c.c_str(), (200 + (69 * x)), y + 240, 20, Font::TEXT, { 0, 0, 0 });
 	}
 }
+
 void ItemManager::ItemToSell(ItemNode* item)
 {
 	SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
@@ -481,6 +483,7 @@ void ItemManager::ItemToSell(ItemNode* item)
 	int x = (720 - offsetX) / 2;
 	app->render->TextDraw(item->name.GetString(), x, 500, 30, Font::TEXT, { 255, 255, 255 });
 }
+
 void ItemManager::LoadStoreButtons(int x, int y, ItemNode* item)
 {
 	SDL_Rect buttonBounds;

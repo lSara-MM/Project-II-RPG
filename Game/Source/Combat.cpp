@@ -123,7 +123,6 @@ bool Combat::Start()
 	// Skip button
 	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, this, { 542, 100, 129, 43}, ButtonType::SKIPPY, "", 12, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN);
 	listButtons.Add(button);
-
 	button = nullptr;
 
 	//Quest Manager desactivate
@@ -135,6 +134,10 @@ bool Combat::Start()
 
 	//Load inventory
 	app->inventory->Enable();
+
+
+	isHovering = false;
+	exit_B = false;
 
 	return true;
 }
@@ -185,7 +188,6 @@ bool Combat::Update(float dt)
 	//GUI chara in turn
 	SDL_Rect rect = { 0, 0, 585, 321 };
 
-	
 	if (listInitiative.Count() > charaInTurn)
 	{
 		//Printar recuadro info
@@ -196,8 +198,7 @@ bool Combat::Update(float dt)
 	
 			break;
 		case 1:
-			rect.y = 321;
-			
+			rect.y = 321;			
 			app->render->DrawTexture(profileTex, 39, 385, &rect);
 		
 			break;
@@ -213,165 +214,166 @@ bool Combat::Update(float dt)
 		default:
 			break;
 		}
-
-		if (lastPressedAbility_I ==-1 && listInitiative.At(charaInTurn)->data->charaType==CharacterType::ALLY)
+		
+		if (!isHovering)
 		{
-			listInitiative.At(charaInTurn);
-
-			int xText1 = 60;//origen texto stat izq
-			int xNumber1 = 200;//origen numeor stat izq
-			int xText2 = 400;//origen numeor stat dch
-			int xNumber2 = 546;//origen numeor stat dch
-			int offsetY = 35;//offset distancia entre linias
-			int fontSize = 25;
-			int posY = 535;//y botones
-
-			string maxHP_C = std::to_string(listInitiative.At(charaInTurn)->data->maxHp);
-			const char* c_hp = maxHP_C.c_str();
-			string attack_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK));
-			const char* c_attack = attack_C.c_str();
-			string critR_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CRIT_RATE));
-			const char* c_critR = critR_C.c_str();
-			string critD_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CRIT_DMG));
-			const char* c_critD = critD_C.c_str();
-			string accuracy_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::ACCURACY));
-			const char* c_accuracy = accuracy_C.c_str();
-			string position_C = std::to_string(listInitiative.At(charaInTurn)->data->positionCombat_I);
-			const char* c_position = position_C.c_str();
-			string armor_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::ARMOR));
-			const char* c_armor = armor_C.c_str();
-			string dodge_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::DODGE));
-			const char* c_dodge = dodge_C.c_str();
-			string resist_C = std::to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::RES));
-			const char* c_resist = resist_C.c_str();
-			string speed_C = std::to_string(listInitiative.At(charaInTurn)->data->speed);
-			const char* c_speed = speed_C.c_str();
-
-
-			app->render->TextDraw("MaxHP", xText1, posY, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_hp, xNumber1, posY, fontSize, Font::UI, { 0, 0, 0 });
-
-			app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
-
-			app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
-
-			app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
-
-			app->render->TextDraw("Accuracy", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-
-			app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
-
-			app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
-
-			app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
-
-			app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
-
-			app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-			app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
-		}
-		else
-		{
-			if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ALLY)
+			if (lastPressedAbility_I == -1 && listInitiative.At(charaInTurn)->data->charaType == CharacterType::ALLY)
 			{
-				Skill* skillPoint = listInitiative.At(charaInTurn)->data->listSkills.At(lastPressedAbility_I)->data;
-				//Name
-				app->render->TextDraw(skillPoint->name.GetString(), 48, 545, 25);
+				int xText1 = 75;//origen texto stat izq
+				int xNumber1 = 215;//origen numeor stat izq
+				int xText2 = 400;//origen numeor stat dch
+				int xNumber2 = 546;//origen numeor stat dch
+				int offsetY = 35;//offset distancia entre linias
+				int fontSize = 24;
+				int posY = 535;//y botones
 
-				//Stats to get
-				string DMG_C;
-				string Pre_C;
-				string CrRate_C;
-				string CrDMG_C;
+				string maxHP_C = to_string(listInitiative.At(charaInTurn)->data->maxHp);
+				const char* c_hp = maxHP_C.c_str();
+				string attack_C = to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK));
+				const char* c_attack = attack_C.c_str();
+				string critR_C = to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CRIT_RATE));
+				const char* c_critR = critR_C.c_str();
+				string critD_C = to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::CRIT_DMG));
+				const char* c_critD = critD_C.c_str();
+				string accuracy_C = to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::ACCURACY));
+				const char* c_accuracy = accuracy_C.c_str();
+				string position_C = to_string(listInitiative.At(charaInTurn)->data->positionCombat_I);
+				const char* c_position = position_C.c_str();
+				string armor_C = to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::ARMOR));
+				const char* c_armor = armor_C.c_str();
+				string dodge_C = to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::DODGE));
+				const char* c_dodge = dodge_C.c_str();
+				string resist_C = to_string(listInitiative.At(charaInTurn)->data->GetStat(EffectType::RES));
+				const char* c_resist = resist_C.c_str();
+				string speed_C = to_string(listInitiative.At(charaInTurn)->data->speed);
+				const char* c_speed = speed_C.c_str();
 
-				//Damage or Heal
-				if (skillPoint->multiplierDmg > 0) //Heal
+
+				app->render->TextDraw("MaxHP", xText1, posY, fontSize, Font::UI, { 0, 0, 0 });
+				app->render->TextDraw(c_hp, xNumber1, posY, fontSize, Font::UI, { 0, 0, 0 });
+
+				app->render->TextDraw("Attack", xText1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+				app->render->TextDraw(c_attack, xNumber1, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+
+				app->render->TextDraw("Crit. Rate", xText1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+				app->render->TextDraw(c_critR, xNumber1, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+
+				app->render->TextDraw("Crit. Dmg", xText1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+				app->render->TextDraw(c_critD, xNumber1, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+
+				app->render->TextDraw("Accuracy", xText1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+				app->render->TextDraw(c_accuracy, xNumber1, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+
+				app->render->TextDraw("Position", xText2, posY, fontSize, Font::UI, { 0, 0, 0 });
+				app->render->TextDraw(c_position, xNumber2, posY, fontSize, Font::UI, { 0, 0, 0 });
+
+				app->render->TextDraw("Armor", xText2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+				app->render->TextDraw(c_armor, xNumber2, posY + offsetY * 1, fontSize, Font::UI, { 0, 0, 0 });
+
+				app->render->TextDraw("Dodge", xText2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+				app->render->TextDraw(c_dodge, xNumber2, posY + offsetY * 2, fontSize, Font::UI, { 0, 0, 0 });
+
+				app->render->TextDraw("Res", xText2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+				app->render->TextDraw(c_resist, xNumber2, posY + offsetY * 3, fontSize, Font::UI, { 0, 0, 0 });
+
+				app->render->TextDraw("Speed", xText2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+				app->render->TextDraw(c_speed, xNumber2, posY + offsetY * 4, fontSize, Font::UI, { 0, 0, 0 });
+			}
+			else
+			{
+				if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ALLY)
 				{
-					app->render->TextDraw("Healing:", 260, 550, 18);
-					DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->maxHp / 5));
-					const char* ch_DMG = DMG_C.c_str();
-					app->render->TextDraw(ch_DMG, 335, 550, 18);
+					Skill* skillPoint = listInitiative.At(charaInTurn)->data->listSkills.At(lastPressedAbility_I)->data;
+					//Name
+					app->render->TextDraw(skillPoint->name.GetString(), 48, 545, 25);
+
+					//Stats to get
+					string DMG_C;
+					string Pre_C;
+					string CrRate_C;
+					string CrDMG_C;
+
+					//Damage or Heal
+					if (skillPoint->multiplierDmg > 0) //Heal
+					{
+						app->render->TextDraw("Healing:", 260, 550, 18);
+						DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->maxHp / 5));
+						const char* ch_DMG = DMG_C.c_str();
+						app->render->TextDraw(ch_DMG, 335, 550, 18);
+					}
+					else
+					{
+						app->render->TextDraw("Damage:", 260, 537, 18);
+						DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK)));
+						const char* ch_DMG = DMG_C.c_str();
+						app->render->TextDraw(ch_DMG, 335, 537, 18);
+
+						//Stats ataques
+						Pre_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::ACCURACY) * (skillPoint->bonusAccuracy + listInitiative.At(charaInTurn)->data->accuracy));
+						CrRate_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_RATE) * (skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->critRate));
+						CrDMG_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_DMG) * (skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->critDamage));
+
+						//Printar stats
+						app->render->TextDraw("Accuracy.", 260, 560, 15);
+						const char* ch_Pre = Pre_C.c_str();
+						app->render->TextDraw(ch_Pre, 330, 560, 15);
+
+						app->render->TextDraw("Cr.Rate.", 260, 575, 15);
+						const char* ch_CrRate = CrRate_C.c_str();
+						app->render->TextDraw(ch_CrRate, 330, 575, 15);
+
+						app->render->TextDraw("Cr.Dmg.", 260, 590, 15);
+						const char* ch_CrDMG = CrDMG_C.c_str();
+						app->render->TextDraw(ch_CrDMG, 330, 590, 15);
+					}
+
+					//Efect
+					SString effecto_C;
+					switch ((EffectType)skillPoint->status)
+					{
+					case EffectType::NONE:
+						effecto_C = "None";
+						break;
+					case EffectType::CURRENT_HP:
+						if (skillPoint->positiveEffect) { effecto_C = "Regeneration"; }
+						else { effecto_C = "Burn"; }
+						break;
+					case EffectType::ATTACK:
+						if (skillPoint->positiveEffect) { effecto_C = "Buff ATK"; }
+						else { effecto_C = "Debuff ATK"; }
+						break;
+					case EffectType::CRIT_RATE:
+						if (skillPoint->positiveEffect) { effecto_C = "Buff Crit Rate"; }
+						else { effecto_C = "Debuff Crit Rate"; }
+						break;
+					case EffectType::CRIT_DMG:
+						if (skillPoint->positiveEffect) { effecto_C = "BuffCritDMG"; }
+						else { effecto_C = "Debuff Crit DMG"; }
+						break;
+					case EffectType::ACCURACY:
+						if (skillPoint->positiveEffect) { effecto_C = "Buff accuracy"; }
+						else { effecto_C = "Debuff accuracy"; }
+						break;
+					case EffectType::ARMOR:
+						if (skillPoint->positiveEffect) { effecto_C = "Buff Armor"; }
+						else { effecto_C = "Debuff Armor"; }
+						break;
+					case EffectType::DODGE:
+						if (skillPoint->positiveEffect) { effecto_C = "Buff Dodge"; }
+						else { effecto_C = "Debuff Dodge"; }
+						break;
+					case EffectType::RES:
+						if (skillPoint->positiveEffect) { effecto_C = "Buff Resistance"; }
+						else { effecto_C = "Debuff Resistance"; }
+						break;
+					default:
+						break;
+					}
+					app->render->TextDraw(effecto_C.GetString(), 480, 550, 18);
+
+					//Description
+					app->render->RenderTrimmedText(55, 620, 5, skillPoint->description.GetString(), &auxTexts, 15, 90);
 				}
-				else
-				{
-					app->render->TextDraw("Damage:", 260, 537, 18);
-					DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK)));
-					const char* ch_DMG = DMG_C.c_str();
-					app->render->TextDraw(ch_DMG, 335, 537, 18);
-
-					//Stats ataques
-					Pre_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::ACCURACY) * (skillPoint->bonusAccuracy + listInitiative.At(charaInTurn)->data->accuracy));
-					CrRate_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_RATE) * (skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->critRate));
-					CrDMG_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_DMG) * (skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->critDamage));
-
-					//Printar stats
-					app->render->TextDraw("Accuracy.", 260, 560, 15);
-					const char* ch_Pre = Pre_C.c_str();
-					app->render->TextDraw(ch_Pre, 330, 560, 15);
-
-					app->render->TextDraw("Cr.Rate.", 260, 575, 15);
-					const char* ch_CrRate = CrRate_C.c_str();
-					app->render->TextDraw(ch_CrRate, 330, 575, 15);
-
-					app->render->TextDraw("Cr.Dmg.", 260, 590, 15);
-					const char* ch_CrDMG = CrDMG_C.c_str();
-					app->render->TextDraw(ch_CrDMG, 330, 590, 15);
-				}
-
-				//Efect
-				SString effecto_C;
-				switch ((EffectType)skillPoint->status)
-				{
-				case EffectType::NONE:
-					effecto_C = "None";
-					break;
-				case EffectType::CURRENT_HP:
-					if (skillPoint->positiveEffect) { effecto_C = "Regeneration"; }
-					else { effecto_C = "Burn"; }
-					break;
-				case EffectType::ATTACK:
-					if (skillPoint->positiveEffect) { effecto_C = "Buff ATK"; }
-					else { effecto_C = "Debuff ATK"; }
-					break;
-				case EffectType::CRIT_RATE:
-					if (skillPoint->positiveEffect) { effecto_C = "Buff Crit Rate"; }
-					else { effecto_C = "Debuff Crit Rate"; }
-					break;
-				case EffectType::CRIT_DMG:
-					if (skillPoint->positiveEffect) { effecto_C = "BuffCritDMG"; }
-					else { effecto_C = "Debuff Crit DMG"; }
-					break;
-				case EffectType::ACCURACY:
-					if (skillPoint->positiveEffect) { effecto_C = "Buff accuracy"; }
-					else { effecto_C = "Debuff accuracy"; }
-					break;
-				case EffectType::ARMOR:
-					if (skillPoint->positiveEffect) { effecto_C = "Buff Armor"; }
-					else { effecto_C = "Debuff Armor"; }
-					break;
-				case EffectType::DODGE:
-					if (skillPoint->positiveEffect) { effecto_C = "Buff Dodge"; }
-					else { effecto_C = "Debuff Dodge"; }
-					break;
-				case EffectType::RES:
-					if (skillPoint->positiveEffect) { effecto_C = "Buff Resistance"; }
-					else { effecto_C = "Debuff Resistance"; }
-					break;
-				default:
-					break;
-				}
-				app->render->TextDraw(effecto_C.GetString(), 480, 550, 18);
-
-				//Description
-				app->render->RenderTrimmedText(55, 620, 5, skillPoint->description.GetString(), &auxTexts, 15, 90);
 			}
 		}
 	}
@@ -398,8 +400,8 @@ bool Combat::Update(float dt)
 bool Combat::PostUpdate()
 {
 	bool ret = true;
-
-	//if (exit_B) return false;	
+	
+	if (exit_B) return false;	
 
 	//if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	//	ret = false;
@@ -456,12 +458,10 @@ bool Combat::PostUpdate()
 	{
 		app->render->DrawTexture(app->input->cursorPressedTex, mouseX_combat, mouseY_combat);
 	}
-
 	else
 	{
 		app->render->DrawTexture(app->input->cursorIdleTex, mouseX_combat, mouseY_combat);
 	}
-	
 
 	return ret;
 }
@@ -480,8 +480,6 @@ bool Combat::CleanUp()
 
 		for (int i = 0; i < vecAllies.size(); i++)
 		{
-			// TO DO: WHEN A CHARA HAS HP = 0, IT SHOULD DIE
-
 			// If es el mismo chara, cambiale el hp, sino se queda igual por lo que el chara muerto revive a 5 hp
 			if (strcmp(app->itemManager->arrParty.at(i)->name.GetString(), vecAllies.at(i)->name.GetString()) == 0)
 			{
@@ -504,17 +502,19 @@ bool Combat::CleanUp()
 
 	//pSettings->CleanUp();
 
+	// Clean entities vector
 	vecAllies.clear();
 	vecAllies.shrink_to_fit();
 	vecEnemies.clear();
 	vecEnemies.shrink_to_fit();
-	arrSetEnemies.clear();
-	arrSetEnemies.shrink_to_fit();
 
 	app->entityManager->entities.Clear();
 	app->entityManager->Disable();
 
+	// Clean up other lists
 	listInitiative.Clear();
+	auxTexts.clear();
+	auxTexts.shrink_to_fit();
 
 	//Reactivar physics
 	app->physics->Enable();
@@ -617,18 +617,19 @@ bool Combat::PreLoadCombat(SString n, int boss)
 
 	if (boss != -1)
 	{
-		arrSetEnemies.push_back(boss);
+		vecSetEnemies.push_back(boss);
 	}
 	else
 	{
 		for (int i = 0; i < randSize; i++)
 		{
 			randId = rand() % 3;
-			arrSetEnemies.push_back(randId);
+			vecSetEnemies.push_back(randId);
 		}
 	}
 
 	sceneFromName = n;
+
 	return true;
 }
 
@@ -662,6 +663,9 @@ bool Combat::InitEnemies(vector<int> arr)
 			}
 		}
 	}
+
+	vecSetEnemies.clear();
+	vecSetEnemies.shrink_to_fit();
 
 	return true;
 }
@@ -708,7 +712,7 @@ bool Combat::StartCombat()
 {
 	app->itemManager->Enable();
 	InitAllies(app->itemManager->arrParty);
-	InitEnemies(arrSetEnemies);
+	InitEnemies(vecSetEnemies);
 	
 	for (int i = 0; i < vecEnemies.size(); i++) 
 	{ vecEnemies.at(i)->button->id = 5 + i; }
@@ -766,14 +770,13 @@ bool Combat::NextTurn()
 
 	//TO TEST, new method ERIC
 	//Quit turn previous chara 
-	if (charaInTurn>= listInitiative.Count())
+	if (charaInTurn >= listInitiative.Count())
 	{
 		charaInTurn = listInitiative.Count() - 1;
 	}
-	listInitiative.At(charaInTurn)->data->onTurn = false;
+	listInitiative.At(charaInTurn++)->data->onTurn = false;
 	
 	//Change turn
-	charaInTurn++;
 	if (charaInTurn >= listInitiative.Count())
 	{
 		charaInTurn = 0;
@@ -1029,6 +1032,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		listInitiative.At(charaInTurn)->data->button->state = GuiControlState::SELECTED;
 		isMoving = true;
 	}
+	// skip turn
 	else if (control->id == 15)
 	{
 		HandleCharaButtons(&vecAllies, 0, vecAllies.size());
@@ -1067,77 +1071,31 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 
 bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 {
+	isHovering = true;
+
 	//GUI character
-	SDL_Rect rect = { 0,0,588,179 };
-	SDL_Rect rect2 = { 0,0,588,90 };
+	SDL_Rect rect = { 0, 0, 588, 179 };
+	SDL_Rect rect2 = { 0, 0, 588, 90 };
 
 	//Printar recuadro info
-	switch (listInitiative.At(charaInTurn)->data->id)
-	{
-	case 0:
-		app->render->DrawTexture(profileTex, 39, 385, &rect);
-
-		break;
-	case 1:
-		rect.y = 321;
-
-		app->render->DrawTexture(profileTex, 36, 385, &rect);
-
-		break;
-	case 2:
-		rect.y = 321 * 2;
-		app->render->DrawTexture(profileTex, 36, 385, &rect);
-		break;
-	case 3:
-		rect.y = 321 * 3;
-		app->render->DrawTexture(profileTex, 36, 385, &rect);
-
-		break;
-	default:
-		break;
-	}
-	int xText1 = 60;//origen texto stat izq
-	int xNumber1 = 200;//origen numeor stat izq
+	int xText1 = 75;//origen texto stat izq
+	int xNumber1 = 215;//origen numeor stat izq
 	int xText2 = 400;//origen numeor stat dch
 	int xNumber2 = 546;//origen numeor stat dch
-	int offsetY = 35;//offset distancia entre linias
-	int fontSize = 25;
+	int offsetY = 4;//offset distancia entre linias
+	int fontSizeSkills = 17;
+	int fontSizeEnemies = 14;
 	int posY = 535;//y botones
 
+	// target allies
 	if (control->id <= 4) //Aliados (0-3, 4 de buffer/seguro)
 	{
-		if ((SearchInVec(vecAllies, control->id))==-1) //Seguro para que no pete
+		if ((SearchInVec(vecAllies, control->id)) == -1) //Seguro para que no pete
 		{
 			return false;
 		}
 		else
 		{
-			//Printar recuadro info
-			switch (listInitiative.At(charaInTurn)->data->id)
-			{
-			case 0:
-				app->render->DrawTexture(profileTex, 39, 385, &rect);
-
-				break;
-			case 1:
-				rect.y = 321;
-
-				app->render->DrawTexture(profileTex, 36, 385, &rect);
-
-				break;
-			case 2:
-				rect.y = 321 * 2;
-				app->render->DrawTexture(profileTex, 36, 385, &rect);
-				break;
-			case 3:
-				rect.y = 321 * 3;
-				app->render->DrawTexture(profileTex, 36, 385, &rect);
-
-				break;
-			default:
-				break;
-			}
-
 			//Printar status effects
 			Character* cha = vecAllies.at((SearchInVec(vecAllies, control->id)));
 			SString effectToPrint;
@@ -1239,29 +1197,33 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 					break;
 				}
 				//Efecto
-				app->render->TextDraw(effectToPrint.GetString(),75,555+i*18,15);
+				app->render->TextDraw(effectToPrint.GetString(), 75, 555 + (fontSizeSkills + offsetY) * i, fontSizeSkills);
 				string numeros = to_string(cha->listStatusEffects.At(i)->data->turnsLeft);
 				//Turnos
-				app->render->TextDraw(numeros.c_str(), 220, 555 + i * 18, 15);
+				app->render->TextDraw(numeros.c_str(), 220, 555 + (fontSizeSkills + offsetY) * i, fontSizeSkills);
 				//% intensidad
 				numeros = to_string(abs(cha->listStatusEffects.At(i)->data->intensity));
-				app->render->TextDraw(numeros.c_str(), 335, 555 + i * 18, 15);
+				app->render->TextDraw(numeros.c_str(), 335, 555 + (fontSizeSkills + offsetY) * i, fontSizeSkills);
 			}
+
+			cha = nullptr;
 		}
 	}
-	
-	if (control->id >= 5 && control->id < 10)
+	// target enemies
+	else if (control->id >= 5 && control->id < 10)
 	{
-		if (SearchInVec(vecEnemies, control->id)==-1) //Seguro para que no pete
+		if (SearchInVec(vecEnemies, control->id) == -1) //Seguro para que no pete
 		{
 			return false;
 		}
+
 		Character* enemy = vecEnemies.at(SearchInVec(vecEnemies, control->id));
+
 		for (int i = 0; i < enemy->listSkills.Count(); i++)
 		{
-			if (enemy->listSkillsHistory.Find(i+1) == -1)
+			if (enemy->listSkillsHistory.Find(i + 1) == -1)
 			{
-				app->render->TextDraw("???", 70, 540 + 15 * i, 12);
+				app->render->TextDraw("???", xText1, 540 + (fontSizeEnemies + offsetY) * i, fontSizeEnemies);
 			}
 			else
 			{
@@ -1269,12 +1231,13 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				ability += enemy->listSkills.At(i)->data->name;
 				ability += ": ";
 				ability += enemy->listSkills.At(i)->data->description.GetString();
-				app->render->TextDraw(ability.GetString(), 70, 540 + 15 * i, 12);
+				app->render->TextDraw(ability.GetString(), xText1, 540 + (fontSizeEnemies + offsetY) * i, fontSizeEnemies);
 			}
 
 			//Printar status effects
 			Character* cha = vecEnemies.at((SearchInVec(vecEnemies, control->id)));
 			SString effectToPrint;
+
 			for (size_t i = 0; i < cha->listStatusEffects.Count(); i++)
 			{
 				switch (cha->listStatusEffects.At(i)->data->type)
@@ -1365,27 +1328,31 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 					break;
 				}
 				//Efecto
-				app->render->TextDraw("Effect", 75, 615, 16);
-				app->render->TextDraw(effectToPrint.GetString(), 75, 635 + i * 15, 12);
+				app->render->TextDraw("Effect", xText1, 615, 16);
+				app->render->TextDraw(effectToPrint.GetString(), xText1, 635 + (fontSizeEnemies + offsetY) * i, fontSizeEnemies);
 				string numeros = to_string(cha->listStatusEffects.At(i)->data->turnsLeft);
 				//Turnos
 				app->render->TextDraw("Duration", 190, 615, 16);
-				app->render->TextDraw(numeros.c_str(), 220, 635 + i * 15, 12);
+				app->render->TextDraw(numeros.c_str(), 220, 635 + (fontSizeEnemies + offsetY) * i, fontSizeEnemies);
 				//% intensidad
 				app->render->TextDraw("% intensity", 300, 615, 16);
 				numeros = to_string(abs(cha->listStatusEffects.At(i)->data->intensity));
-				app->render->TextDraw(numeros.c_str(), 335, 635 + i * 15, 12);
+				app->render->TextDraw(numeros.c_str(), 335, 635 + (fontSizeEnemies + offsetY) * i, fontSizeEnemies);
 			}
-		}	
-	}
 
-	if (control->id >= 10 && control->id < 14)
+			cha = nullptr;
+		}
+
+		enemy = nullptr;
+	}
+	// skills buttons
+	else if (control->id >= 10 && control->id < 14)
 	{
 		if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ALLY)
 		{
 			Skill* skillPoint = listInitiative.At(charaInTurn)->data->listSkills.At(control->id - 10)->data;
 			//Name
-			app->render->TextDraw(skillPoint->name.GetString(), 48, 545, 25);
+			app->render->TextDraw(skillPoint->name.GetString(), xText1, 545, 24);
 
 			//Stats to get
 			string DMG_C;
@@ -1393,38 +1360,39 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			string CrRate_C;
 			string CrDMG_C;
 
+			int midX = 280;
 			//Damage or Heal
 			if (skillPoint->multiplierDmg > 0) //Heal
 			{
-				app->render->TextDraw("Healing:", 260, 550, 18);
+				app->render->TextDraw("Healing:", midX, 550, 18);
 				DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->maxHp / 5));
 				const char* ch_DMG = DMG_C.c_str();
-				app->render->TextDraw(ch_DMG, 335, 550, 18);
+				app->render->TextDraw(ch_DMG, 355, 550, 18);
 			}
-			else 
-			{ 
-				app->render->TextDraw("Damage:", 260, 537, 18);
+			else
+			{
+				app->render->TextDraw("Damage:", midX, 537, 18);
 				DMG_C = to_string((int)(abs(skillPoint->multiplierDmg) * listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK)));
 				const char* ch_DMG = DMG_C.c_str();
-				app->render->TextDraw(ch_DMG, 335, 537, 18);
+				app->render->TextDraw(ch_DMG, 355, 537, 18);
 
 				//Stats ataques
-				Pre_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::ACCURACY)*(skillPoint->bonusAccuracy + listInitiative.At(charaInTurn)->data->accuracy));
-				CrRate_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_RATE)*(skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->critRate));
-				CrDMG_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_DMG)*(skillPoint->bonusCritDamage + listInitiative.At(charaInTurn)->data->critDamage));
-				
+				Pre_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::ACCURACY) * (skillPoint->bonusAccuracy + listInitiative.At(charaInTurn)->data->accuracy));
+				CrRate_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_RATE) * (skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->critRate));
+				CrDMG_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_DMG) * (skillPoint->bonusCritDamage + listInitiative.At(charaInTurn)->data->critDamage));
+
 				//Printar stats
-				app->render->TextDraw("Accuracy.", 260, 560, 15);
+				app->render->TextDraw("Accuracy.", midX, 560, 15);
 				const char* ch_Pre = Pre_C.c_str();
-				app->render->TextDraw(ch_Pre, 330, 560, 15);
+				app->render->TextDraw(ch_Pre, 350, 560, 15);
 
-				app->render->TextDraw("Cr.Rate.", 260, 575, 15);
+				app->render->TextDraw("Cr.Rate.", midX, 575, 15);
 				const char* ch_CrRate = CrRate_C.c_str();
-				app->render->TextDraw(ch_CrRate, 330, 575, 15);
+				app->render->TextDraw(ch_CrRate, 350, 575, 15);
 
-				app->render->TextDraw("Cr.Dmg.", 260, 590, 15);
+				app->render->TextDraw("Cr.Dmg.", midX, 590, 15);
 				const char* ch_CrDMG = CrDMG_C.c_str();
-				app->render->TextDraw(ch_CrDMG, 330, 590, 15);
+				app->render->TextDraw(ch_CrDMG, 350, 590, 15);
 			}
 
 			//Efect
@@ -1470,12 +1438,30 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				break;
 			}
 			app->render->TextDraw(effecto_C.GetString(), 480, 550, 18);
-			
+
 			//Description
-			app->render->RenderTrimmedText(55, 620, 5, skillPoint->description.GetString(), &auxTexts, 15, 75);
+			app->render->RenderTrimmedText(xText1, 620, 5, skillPoint->description.GetString(), &auxTexts, fontSizeSkills, 60);
 		}
 	}
+	// move character
+	else if (control->id == 14)
+	{
+		app->render->TextDraw("Formation B!", xText1, 545, 24);
+		app->render->TextDraw("With a twirling pirouette, swap your position with a team member.", xText1, 620, fontSizeSkills);
+	}
+	// skip turn
+	else if (control->id == 15)
+	{
+		app->render->TextDraw("Mime's Silence", xText1, 545, 24);
+		app->render->TextDraw("Embrace silence and skip your turn.", xText1, 620, fontSizeSkills);
+	}
 
+	return false;
+}
+
+bool Combat::OnGuiMouseOutHoverEvent(GuiControl* control)
+{
+	isHovering = false;
 	return false;
 }
 

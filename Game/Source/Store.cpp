@@ -26,8 +26,8 @@ bool Store::Start()
 	potion = app->tex->Load(app->itemManager->texturePotionsPath);
 
 	SDL_Rect buttonBounds;
-	buttonBounds = { 275, 545, 180, 80 };
-	buyButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1500, this, buttonBounds, ButtonType::BUYITEM);
+	buttonBounds = { 275, 555, 180, 69 };
+	buyButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1500, this, buttonBounds, ButtonType::BUYITEM, "0", 30);
 
 	buttonBounds = { 1150, 50, 60, 60 };
 	closeStore = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::CLOSE);
@@ -132,7 +132,6 @@ bool Store::PostUpdate()
 
 	string c = to_string(CurrentPrice);
 	buyButton->text = c.c_str();
-	buyButton->fontSize = 30;
 
 	return true;
 }
