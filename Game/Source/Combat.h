@@ -74,8 +74,7 @@ public:
 
 
 	//
-	void RenderSkillDescription();
-	
+	void RenderSkillDescription(int controlID);	
 
 	// Save/Load
 	bool SaveCombat(); //guardar stats playable characters en xml combat
@@ -112,6 +111,8 @@ private:
 
 	// Auxiliar vector for texts
 	vector<SString> auxTexts;
+	int fontSizeSkills;
+	int xText1;
 
 	//Fondo
 	const char* texturePathBackground;
