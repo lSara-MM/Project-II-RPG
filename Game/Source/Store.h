@@ -40,6 +40,8 @@ public:
 
 	GuiButton* buyButton;
 	GuiButton* closeStore;
+	GuiButton* Add;
+	GuiButton* Minus;
 
 	Tween inventoryAnimation;//animacion inventario
 	bool inventoryTransition_B;//controlar animacion inventario

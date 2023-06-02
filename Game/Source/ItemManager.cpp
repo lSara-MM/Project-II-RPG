@@ -133,34 +133,6 @@ void ItemManager::AddQuantity(int id, int quantity)
 	}
 }
 
-void ItemManager::BuyItem(int ID, int quantity)
-{
-	AddQuantity(ID, quantity);
-
-	for (int i = 0; i < nodeList.size(); i++)
-	{
-		if(nodeList[i]->ID == ID)
-		{ 
-			coins -= nodeList[i]->price* quantity;
-		}
-	}
-}
-
-void ItemManager::SellItem(int ID, int quantity)
-{
-	for (int i = 0; i < nodeList.size(); i++)
-	{
-		if (nodeList[i]->ID == ID)
-		{
-			for (int q = 0; q < quantity; q++)
-			{
-				MinusQuantity(nodeList[i]);
-			}
-			coins += nodeList[i]->price * quantity;
-		}
-	}
-}
-
 void ItemManager::MinusQuantity(ItemNode* item)
 {
 	if (app->combat->active)
@@ -439,6 +411,8 @@ void ItemManager::LoadSellItems(int x, int y, ItemNode* item)
 		LoadStoreButtons(x, y, item);
 
 		app->render->DrawTexture(itemsTexture, (800 + (69 * x)) - app->render->camera.x, 180 + y - app->render->camera.y, &seccion);
+		string c = to_string(item->price);
+		app->render->TextDraw(c.c_str(), 800 + (69 * x), y + 220, 20, Font::TEXT, { 0, 0, 0 });
 	}
 
 }
@@ -451,8 +425,9 @@ void ItemManager::LoadStoreItems(int x, int y, ItemNode* item)
 		LoadStoreButtons(x, y, item);
 
 		app->render->DrawTexture(itemsTexture, (200 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
+		string c = to_string(item->price);
+		app->render->TextDraw(c.c_str(), (200 + (69 * x)), y + 240, 20, Font::TEXT, { 0, 0, 0 });
 	}
-
 }
 void ItemManager::ItemToSell(ItemNode* item)
 {
@@ -461,6 +436,12 @@ void ItemManager::ItemToSell(ItemNode* item)
 	LoadStoreButtons(0, 350, item);
 
 	app->render->DrawTexture(itemsTexture, 160 - app->render->camera.x, 200 + 350 - app->render->camera.y, &seccion);
+
+	//Print Name
+	int offsetX = item->name.GetCapacity() * 30 / 2;
+
+	int x = (720 - offsetX) / 2;
+	app->render->TextDraw(item->name.GetString(), x, 500, 30, Font::TEXT, { 255, 255, 255 });
 }
 void ItemManager::LoadStoreButtons(int x, int y, ItemNode* item)
 {
