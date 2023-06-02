@@ -35,7 +35,7 @@
 	<questmanager />
 	<CutScene />
 	<entitymanager>
-		<player name="scene" x="3417" y="1058" />
+		<player name="scene" x="1567" y="3030" />
 		<party id="0" id="1" id="2" />
 	</entitymanager>
 	<dialogue />
@@ -46,6 +46,6 @@
 	<store />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2825" y="-725" />
+		<camera x="-1385" y="-2697" />
 	</renderer>
 </save_state>

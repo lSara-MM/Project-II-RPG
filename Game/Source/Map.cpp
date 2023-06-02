@@ -365,6 +365,9 @@ bool Map::Load(int ID)
     case 3:
        result = mapFileXML.load_file(mapPracticeFileName.GetString());
         break;
+    case 4:
+        result = mapFileXML.load_file(mapDungeon2FileName.GetString());
+        break;
     }
     
 
@@ -465,6 +468,9 @@ bool Map::LoadMap(pugi::xml_node mapFile, int ID)
         case 3:
             backGround = app->tex->Load(mapPracticeBackground);
             break;
+        case 4:
+            backGround = app->tex->Load(mapDungeon2Background);
+            break;
         }
         
         portalID = 0;
@@ -561,6 +567,27 @@ bool Map::LoadTileSet(pugi::xml_node mapFile, int ID){
 
 
             SString tmp("%s%s", mapPracticeFolder.GetString(), tileset.child("image").attribute("source").as_string());
+            set->texture = app->tex->Load(tmp.GetString());
+
+            mapData.tilesets.Add(set);
+        }
+        break;
+    case 4:
+        for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+        {
+            TileSet* set = new TileSet();
+
+            set->name = tileset.attribute("name").as_string();
+            set->firstgid = tileset.attribute("firstgid").as_int();
+            set->margin = tileset.attribute("margin").as_int();
+            set->spacing = tileset.attribute("spacing").as_int();
+            set->tileWidth = tileset.attribute("tilewidth").as_int();
+            set->tileHeight = tileset.attribute("tileheight").as_int();
+            set->columns = tileset.attribute("columns").as_int();
+            set->tilecount = tileset.attribute("tilecount").as_int();
+
+
+            SString tmp("%s%s", mapDungeon2Folder.GetString(), tileset.child("image").attribute("source").as_string());
             set->texture = app->tex->Load(tmp.GetString());
 
             mapData.tilesets.Add(set);

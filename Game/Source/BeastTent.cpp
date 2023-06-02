@@ -72,7 +72,7 @@ bool BeastTent::Start()
 
 
 	//Load Map
-	app->map->Load(1);
+	app->map->Load(4);
 
 	BeastDungeon = app->tex->Load(texturePathBeastDungeon);
 
