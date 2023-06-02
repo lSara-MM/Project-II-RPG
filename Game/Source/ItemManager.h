@@ -58,6 +58,7 @@ public:
 
 	bool equiped = false;
 	bool craft = false;
+	bool toSell = false;
 
 	GuiButton* button = nullptr;
 
@@ -90,6 +91,7 @@ public:
 	void MinusQuantity(ItemNode* item);
 	void SellItem(int ID, int quantity);
 	void BuyItem(int ID, int quantity);
+	void ItemToSell(ItemNode* item);
 
 	void LoadArmorItmes();
 

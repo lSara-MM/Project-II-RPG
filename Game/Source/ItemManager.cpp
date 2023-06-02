@@ -292,6 +292,7 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 		node->res = pugiNode.attribute("res").as_int();
 		node->speed = pugiNode.attribute("speed").as_int();
 		node->equiped = pugiNode.attribute("equiped").as_bool();
+		node->price = pugiNode.attribute("price").as_int();
 	
 		node->max = pugiNode.attribute("max").as_int();
 
@@ -431,21 +432,35 @@ void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
 
 void ItemManager::LoadSellItems(int x, int y, ItemNode* item)
 {
-	SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
+	if (item->toSell == false)
+	{
+		SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
 
-	LoadStoreButtons(x, y, item);
+		LoadStoreButtons(x, y, item);
 
-	app->render->DrawTexture(itemsTexture, (800 + (69 * x)) - app->render->camera.x, 180 + y - app->render->camera.y, &seccion);
+		app->render->DrawTexture(itemsTexture, (800 + (69 * x)) - app->render->camera.x, 180 + y - app->render->camera.y, &seccion);
+	}
 
 }
 void ItemManager::LoadStoreItems(int x, int y, ItemNode* item)
 {
+	if (item->toSell == false)
+	{
+		SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
+
+		LoadStoreButtons(x, y, item);
+
+		app->render->DrawTexture(itemsTexture, (200 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
+	}
+
+}
+void ItemManager::ItemToSell(ItemNode* item)
+{
 	SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
 
-	LoadStoreButtons(x, y, item);
+	LoadStoreButtons(0, 350, item);
 
-	app->render->DrawTexture(itemsTexture, (200 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
-
+	app->render->DrawTexture(itemsTexture, 160 - app->render->camera.x, 200 + 350 - app->render->camera.y, &seccion);
 }
 void ItemManager::LoadStoreButtons(int x, int y, ItemNode* item)
 {
@@ -457,6 +472,11 @@ void ItemManager::LoadStoreButtons(int x, int y, ItemNode* item)
 	else
 	{
 		buttonBounds = { (800 + (69 * x)), 180 + y, 64, 64 };
+	}
+
+	if (item->toSell)
+	{
+		buttonBounds = { 160, 200 + y, 64, 64 };
 	}
 
 	if (item->button != nullptr)

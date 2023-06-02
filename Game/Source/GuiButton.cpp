@@ -87,10 +87,10 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 		buttonTex = app->tex->Load("Assets/GUI/cuadroPociones.png");
 		break;
 	case ButtonType::BUYITEM:
-		buttonTex = app->tex->Load("Assets/GUI/cuadroPociones.png");
+		buttonTex = app->tex->Load("Assets/GUI/Botton_Buy_Sell_MouseOn.png");
 		break;
 	case ButtonType::SELLITEM:
-		buttonTex = app->tex->Load("Assets/GUI/cuadroPociones.png");
+		buttonTex = app->tex->Load("Assets/GUI/Botton_Buy_Sell_MouseOn.png");
 		break;
 	default:
 		break;

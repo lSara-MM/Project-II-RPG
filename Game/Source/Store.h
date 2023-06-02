@@ -43,6 +43,12 @@ public:
 
 	Tween inventoryAnimation;//animacion inventario
 	bool inventoryTransition_B;//controlar animacion inventario
+
+private:
+
+	int SellQuantity = 0;
+	int CurrentPrice = 0;
+
 };
 
 #endif // __STORE_H__

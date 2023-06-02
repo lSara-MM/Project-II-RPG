@@ -27,7 +27,7 @@ bool Store::Start()
 
 	SDL_Rect buttonBounds;
 	buttonBounds = { 275, 545, 180, 80 };
-	buyButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1500, this, buttonBounds, ButtonType::SMALL);
+	buyButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1500, this, buttonBounds, ButtonType::BUYITEM);
 
 	buttonBounds = { 1150, 50, 60, 60 };
 	closeStore = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::CLOSE);
@@ -104,6 +104,14 @@ bool Store::PostUpdate()
 		}
 	}
 
+	for (int i = 0; i < app->itemManager->nodeList.size(); i++)
+	{
+		if ((app->itemManager->nodeList[i]->toSell && app->itemManager->nodeList[i]->type == 3 && app->itemManager->nodeList[i]->quantity > 0) || (app->itemManager->nodeList[i]->toSell && app->itemManager->nodeList[i]->type == 1))
+		{
+			app->itemManager->ItemToSell(app->itemManager->nodeList[i]);
+		}
+	}
+
 	//arreglo cuestionable pero bueno, it works 
 	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 	{
@@ -126,6 +134,7 @@ bool Store::CleanUp()
 	{
 		if (app->itemManager->nodeList[i]->button != nullptr)
 		{
+			app->itemManager->nodeList[i]->toSell = false;
 			app->itemManager->nodeList[i]->CleanUp();
 		}
 	}
@@ -141,11 +150,84 @@ bool Store::CleanUp()
 
 bool Store::OnGuiMouseClickEvent(GuiControl* control)
 {
+	if (control->id != 1500 || control->id != 1501)
+	{
+		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+		{
+			if (app->itemManager->nodeList[i]->ID == control->id)
+			{
+				if (app->itemManager->nodeList[i]->toSell == false)
+				{
+					for (size_t j = 0; j < app->itemManager->nodeList.size(); j++)
+					{
+						if (j != i)
+						{
+							if (app->itemManager->nodeList[j]->toSell)
+							{
+								app->itemManager->nodeList[j]->toSell = false;
+								SellQuantity = 0;
+							}
+						}
+					}
+					app->itemManager->nodeList[i]->toSell = true;
+					SellQuantity++;
+
+					if (app->itemManager->nodeList[i]->type == 1)
+					{
+						buyButton->buttonType = ButtonType::BUYITEM;
+					}
+					else
+					{
+						buyButton->buttonType = ButtonType::SELLITEM;
+					}
+				}
+				else
+				{
+					app->itemManager->nodeList[i]->toSell = false;
+					SellQuantity = 0;
+				}
+
+				CurrentPrice = app->itemManager->nodeList[i]->price * SellQuantity;
+			}
+		}
+	}
+
 	switch (control->id)
 	{
 	case 1501:
 		this->Disable();
 		app->scene->player->lockMovement = false;
+		break;
+
+	case 1500:
+		if (buyButton->buttonType == ButtonType::BUYITEM)
+		{
+			if (app->itemManager->coins >= CurrentPrice)
+			{
+				for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+				{
+					if (app->itemManager->nodeList[i]->toSell)
+					{
+						app->itemManager->AddQuantity(i, SellQuantity);
+						app->itemManager->coins -= CurrentPrice;
+					}
+				}
+			}
+		}
+		else
+		{
+			for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+			{
+				if (app->itemManager->nodeList[i]->toSell)
+				{
+					for (int j = 0; j < CurrentPrice; j++)
+					{
+						app->itemManager->MinusQuantity(app->itemManager->nodeList[i]);
+					}
+					app->itemManager->coins += CurrentPrice;
+				}
+			}
+		}
 		break;
 	}
 	return true;
