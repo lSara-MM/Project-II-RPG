@@ -289,6 +289,88 @@ bool Character::Update(float dt)
 						case CharacterClass::RANGED_DPS:
 							break;
 						case CharacterClass::ASSASSIN:
+
+							//Si se uso la preparacion usar si se puede la skill de asesinato, sino pues basic attack
+							if (listSkillsHistory.end->data==2)
+							{
+								if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+								{
+									//usar skill 3 (asesinato)
+									UseSkill(listSkills.At(3)->data);
+
+									listSkillsHistory.Add(4);
+									break;
+								}
+								else
+								{
+									if (listSkills.At(0)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//usar skill 0 (basic attack)
+										UseSkill(listSkills.At(0)->data);
+
+										listSkillsHistory.Add(1);
+										break;
+									}
+								}
+							}
+							else //No kill mode
+							{
+								//Usar preparation
+								if (listSkillsHistory.end->data == 2 || listSkillsHistory.end->prev->data == 2)
+								{
+									probSkill = 0;
+								}
+								else
+								{
+									if (listSkillsHistory.end->data == 3)
+									{
+										probSkill = 90;
+									}
+									else
+									{
+										probSkill = 40;
+									}
+								}
+								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I)) //Preparar asesinato
+								{
+									//usar skill 1 (preparacion asesinato)
+									UseSkill(listSkills.At(1)->data);
+
+									listSkillsHistory.Add(2);
+									break;
+								}
+								else //Usar ataque basico o debuffo
+								{
+									//Probabilidad usar debuff
+									if (listSkillsHistory.end->data==0) //Si uso el ataque basico
+									{
+										probSkill = 80;
+									}
+									else
+									{
+										probSkill = 40;
+									}
+									if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//usar skill 2 (debuff)
+										UseSkill(listSkills.At(2)->data);
+
+										listSkillsHistory.Add(3);
+										break;
+									}
+									else
+									{
+										if (CalculateRandomProbability(probSkill) && listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Preparar asesinato
+										{
+											//usar skill 0 (ataque basico)
+											UseSkill(listSkills.At(0)->data);
+
+											listSkillsHistory.Add(1);
+											break;
+										}
+									}
+								}
+							}
 							break;
 						case CharacterClass::AOE_DPS:
 							break;
