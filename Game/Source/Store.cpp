@@ -32,6 +32,14 @@ bool Store::Start()
 	buttonBounds = { 1150, 50, 60, 60 };
 	closeStore = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::CLOSE);
 
+	buttonBounds = { 225, 545, 40, 20 };
+	Add = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1502, this, buttonBounds, ButtonType::SMALL);
+	Add->text = "Add";
+
+	buttonBounds = { 225, 585, 40, 20 };
+	Minus = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1503, this, buttonBounds, ButtonType::SMALL);
+	Minus->text = "Minus";
+
 	//animation inventory
 	inventoryAnimation.Set();
 	inventoryAnimation.AddTween(100, 120, BOUNCE_OUT);
@@ -122,6 +130,10 @@ bool Store::PostUpdate()
 		app->render->DrawTexture(app->input->cursorIdleTex, app->scene->mouseX_scene - app->render->camera.x, app->scene->mouseY_scene - app->render->camera.y);
 	}
 
+	string c = to_string(CurrentPrice);
+	buyButton->text = c.c_str();
+	buyButton->fontSize = 30;
+
 	return true;
 }
 
@@ -141,6 +153,8 @@ bool Store::CleanUp()
 
 	app->guiManager->DestroyGuiControl(buyButton);
 	app->guiManager->DestroyGuiControl(closeStore);
+	app->guiManager->DestroyGuiControl(Add);
+	app->guiManager->DestroyGuiControl(Minus);
 
 	app->tex->UnLoad(inventory);
 	app->tex->UnLoad(potion);
@@ -229,6 +243,58 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 			}
 		}
 		break;
+
+	case 1502:
+		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+		{
+			if (app->itemManager->nodeList[i]->toSell)
+			{
+				if (app->itemManager->nodeList[i]->type == 1)
+				{
+					if (app->itemManager->nodeList[i]->max > SellQuantity)
+					{
+						SellQuantity++;
+						CurrentPrice = app->itemManager->nodeList[i]->price * SellQuantity;
+					}
+				}
+				else
+				{
+					if (app->itemManager->nodeList[i]->quantity < SellQuantity)
+					{
+						SellQuantity++;
+						CurrentPrice = app->itemManager->nodeList[i]->price * SellQuantity;
+					}
+				}
+			}
+		}
+		break;
+	case 1503:
+		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+		{
+			if (app->itemManager->nodeList[i]->toSell)
+			{
+				if (app->itemManager->nodeList[i]->type == 1)
+				{
+						SellQuantity--;
+						if (SellQuantity <= 0)
+						{
+							app->itemManager->nodeList[i]->toSell = false;
+						}
+						CurrentPrice = app->itemManager->nodeList[i]->price * SellQuantity;
+				}
+				else
+				{
+					SellQuantity++;
+					if (SellQuantity <= 0)
+					{
+						app->itemManager->nodeList[i]->toSell = false;
+					}
+					CurrentPrice = app->itemManager->nodeList[i]->price * SellQuantity;
+				}
+			}
+		}
+		break;
 	}
+
 	return true;
 }
