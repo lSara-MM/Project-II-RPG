@@ -37,6 +37,7 @@ class LogoScene;
 class IntroScene;
 class Scene;
 class HouseOfTerrors;
+class BeastTent;
 class PracticeTent;
 class Circus;
 class FadeToBlack;
@@ -133,6 +134,7 @@ public:
 	IntroScene* iScene;
 	Scene* scene;
 	HouseOfTerrors* hTerrors;
+	BeastTent* BeastT;
 	PracticeTent* practiceTent;
 	Circus* circus;
 	FadeToBlack* fade;
