@@ -46,7 +46,7 @@ bool DialogueSystem::Update(float dt)
 		}
 		else
 		{
-			CleanUp();
+			Disable();
 		}
 	}
 

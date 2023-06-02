@@ -741,7 +741,6 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 
 void Player::Controller(float dt)
 {
-
 	//Velocidad movimiento camara
 	float speed = 0.2 * dt;
 
