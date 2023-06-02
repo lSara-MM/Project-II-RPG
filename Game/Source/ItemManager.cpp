@@ -170,12 +170,50 @@ void ItemManager::MinusQuantity(ItemNode* item)
 
 void ItemManager::UseItem(ItemNode* item)
 {
+	StatusEffect* statusEffect;
+
 	if (app->combat->active)
 	{
-
-		if (item->kind != 2)
+		for (size_t i = 0; i < arrParty.size(); i++)
 		{
-			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(item->hp);
+			if (arrParty.at(i) != nullptr && item->whom == i)
+			{
+				switch (item->ID)
+				{
+				case 85:
+					statusEffect = new StatusEffect(item->hp, 1, true, EffectType::CURRENT_HP);
+					arrParty.at(i)->listStatusEffects.Add(statusEffect);
+					break;
+				case 86:
+					statusEffect = new StatusEffect(item->hp, 1, true, EffectType::CURRENT_HP);
+					arrParty.at(i)->listStatusEffects.Add(statusEffect);
+					break;
+				case 87:
+					statusEffect = new StatusEffect(item->armor, 3, true, EffectType::ARMOR);
+					arrParty.at(i)->listStatusEffects.Add(statusEffect);
+					break;
+				case 88:
+					statusEffect = new StatusEffect(item->attack, 3, true, EffectType::ATTACK);
+					arrParty.at(i)->listStatusEffects.Add(statusEffect);
+					break;
+				case 89:
+					statusEffect = new StatusEffect(item->critRate, 2, true, EffectType::CRIT_RATE);
+					arrParty.at(i)->listStatusEffects.Add(statusEffect);
+					break;
+				case 90:
+					statusEffect = new StatusEffect(item->critDamage, 2, true, EffectType::CRIT_DMG);
+					arrParty.at(i)->listStatusEffects.Add(statusEffect);
+					break;
+				case 91:
+					statusEffect = new StatusEffect(item->accuracy, 2, true, EffectType::ACCURACY);
+					arrParty.at(i)->listStatusEffects.Add(statusEffect);
+					break;
+				case 92:
+					statusEffect = new StatusEffect(item->dodge, 3, true, EffectType::DODGE);
+					arrParty.at(i)->listStatusEffects.Add(statusEffect);
+					break;
+				}
+			}
 		}
 	}
 	else
