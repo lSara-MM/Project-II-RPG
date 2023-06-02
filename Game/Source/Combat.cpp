@@ -193,32 +193,11 @@ bool Combat::Update(float dt)
 	if (listInitiative.Count() > charaInTurn)
 	{
 		//GUI chara in turn
-		SDL_Rect rect = { 0, 0, 585, 321 };
+		SDL_Rect rect = { 0, 0, 585, 132 };
 
 		//Printar recuadro info
-		switch (listInitiative.At(charaInTurn)->data->id)
-		{
-		case 0:
-			app->render->DrawTexture(profileTex, 39, 385, &rect);
-
-			break;
-		case 1:
-			rect.y = 321;
-			app->render->DrawTexture(profileTex, 39, 385, &rect);
-
-			break;
-		case 2:
-			rect.y = 321 * 2;
-			app->render->DrawTexture(profileTex, 39, 385, &rect);
-			break;
-		case 3:
-			rect.y = 321 * 3;
-			app->render->DrawTexture(profileTex, 39, 385, &rect);
-
-			break;
-		default:
-			break;
-		}
+		rect.y = 321 * listInitiative.At(charaInTurn)->data->id;
+		app->render->DrawTexture(profileTex, 39, 385, &rect);
 
 		RenderGuiChara(listInitiative.At(charaInTurn)->data->id);
 
@@ -1320,32 +1299,26 @@ bool Combat::OnGuiMouseOutHoverEvent(GuiControl* control)
 void Combat::RenderGuiChara(int charaID)
 {
 	//GUI chara in turn
-	SDL_Rect rect = { 0, 0, 585, 321 };
+	SDL_Rect rect = { 0, 132, 585, 189 };
+	//rect.y = 132 + charaID * 189;
 
 	//Printar recuadro info
 	switch (charaID)
 	{
-	case 0:
-		app->render->DrawTexture(profileTex, 39, 385, &rect);
-
-		break;
 	case 1:
-		rect.y = 321;
-		app->render->DrawTexture(profileTex, 39, 385, &rect);
-
+		rect.y = 453;
 		break;
 	case 2:
-		rect.y = 321 * 2;
-		app->render->DrawTexture(profileTex, 39, 385, &rect);
+		rect.y = 774;
 		break;
 	case 3:
-		rect.y = 321 * 3;
-		app->render->DrawTexture(profileTex, 39, 385, &rect);
-
+		rect.y = 1095;
 		break;
 	default:
 		break;
 	}
+
+	app->render->DrawTexture(profileTex, 39, 385 + 132, &rect);
 }
 
 void Combat::RenderSkillDescription(int controlID)
