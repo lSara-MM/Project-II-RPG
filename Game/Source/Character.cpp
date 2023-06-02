@@ -717,7 +717,6 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 
 			if (skill->positiveEffect) //Efecto de estado positivo
 			{
-				defender->listStatusEffects.Add(statusEffect);
 				//Movimiento
 				if (defender->charaType == CharacterType::ALLY)
 				{
@@ -727,21 +726,22 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				{
 					if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementTarget); }
 				}
+				defender->listStatusEffects.Add(statusEffect);
 			}
 			else
 			{
 				if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 				{
-					defender->listStatusEffects.Add(statusEffect);
 					//Movimiento
 					if (defender->charaType == CharacterType::ALLY)
 					{
 						if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecAllies, this, skill->movementTarget); }
 					}
-					else
+					else if (defender->charaType == CharacterType::ENEMY)
 					{
 						if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementTarget); }
 					}
+					defender->listStatusEffects.Add(statusEffect);
 				}
 			}
 
