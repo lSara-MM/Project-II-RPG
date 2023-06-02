@@ -44,6 +44,10 @@ bool Map::Awake(pugi::xml_node& config)
     mapPracticeFolder = config.child("mappracticefolder").attribute("path").as_string();
     mapPracticeBackground = config.child("mappracticebackground").attribute("path").as_string();
 
+    mapDungeon2FileName = config.child("mapdungeon2file").attribute("path").as_string();
+    mapDungeon2Folder = config.child("mapdungeon2folder").attribute("path").as_string();
+    mapDungeon2Background = config.child("mapdungeon2background").attribute("path").as_string();
+
     return ret;
 }
 
