@@ -132,7 +132,8 @@ bool BeastTent::Update(float dt)
 	Debug();
 
 	//Inventory
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_Y) == ButtonState::BUTTON_DOWN)
+	if ((app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_Y) == ButtonState::BUTTON_DOWN)
+		&& !app->store->active && !app->dialogueSystem->active)
 	{
 		if (app->inventory->active)
 		{

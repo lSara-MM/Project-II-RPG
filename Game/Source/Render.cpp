@@ -324,29 +324,32 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 
 	if (text_.Length() > max_chars_line_)
 	{
-		int a, b, startIndex = 0;
+		int a = 0, b, startIndex = 0;
 		int n = line.length() / max_chars_line_;
 		for (int j = 0; j <= line.length() / max_chars_line_; j++)	// <= -> in case of decimal, get the round up number 
 		{
-			a = max_chars_line_ + startIndex;
-			if (a > line.size())
+			if (a != line.length())
 			{
-				a = line.size() - startIndex;
-			}
-
-			if (a > 0)
-			{
-				int i = 0;
-				do
+				a = max_chars_line_ + startIndex;
+				if (a > line.size())
 				{
-					b = line.find_first_of(arr.at(i++), a);
-				} while (b == -1 && a < line.length() && i < arr.size());
+					a = line.size() - startIndex;
+				}
 
-				// If we reached the end of the word or the end of the input.
-				string temp;
-				temp.append(line, startIndex, ++b - startIndex);	// string text to append, int index start, int size of text to append
-				pTexts->push_back(temp.c_str());
-				startIndex = b;
+				if (a > 0)
+				{
+					int i = 0;
+					do
+					{
+						b = line.find_first_of(arr.at(i++), a);
+					} while (b == -1 && a < line.length() && i < arr.size());
+
+					// If we reached the end of the word or the end of the input.
+					string temp;
+					temp.append(line, startIndex, ++b - startIndex);	// string text to append, int index start, int size of text to append
+					pTexts->push_back(temp.c_str());
+					startIndex = b;
+				}
 			}
 		}
 	}

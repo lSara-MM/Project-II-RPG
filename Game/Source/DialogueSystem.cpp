@@ -46,6 +46,7 @@ bool DialogueSystem::Update(float dt)
 		}
 		else
 		{
+			hasEnded = true;
 			Disable();
 		}
 	}
