@@ -230,8 +230,7 @@ bool Character::Update(float dt)
 					{
 						int probSkill;
 						case CharacterClass::MELEE_DPS:
-						{
-							
+												
 							if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //No puede hacer ataques principales
 							{
 								//usar skill 2 (avance)
@@ -286,7 +285,6 @@ bool Character::Update(float dt)
 									break;
 								}
 							}
-						}
 						break;
 						case CharacterClass::RANGED_DPS:
 							break;
@@ -461,7 +459,15 @@ bool Character::Update(float dt)
 									}
 									else
 									{
-										probSkill = 75;
+										if (listSkillsHistory.end->data == 2)//Si uso la habilidad 2(1) opener pues usar el tocho
+										{
+											probSkill = 100;
+										}
+										else
+										{
+											probSkill = 65;
+										}
+										
 									}
 
 									//Usar habilidad 3 (golpe potente)
