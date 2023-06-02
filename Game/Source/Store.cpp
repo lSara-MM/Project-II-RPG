@@ -219,10 +219,12 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 			{
 				for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 				{
-					if (app->itemManager->nodeList[i]->toSell)
+					if (app->itemManager->nodeList[i]->toSell && app->itemManager->nodeList[i]->quantity + SellQuantity <= app->itemManager->nodeList[i]->max)
 					{
 						app->itemManager->AddQuantity(i, SellQuantity);
 						app->itemManager->coins -= CurrentPrice;
+						SellQuantity = 0;
+						app->itemManager->nodeList[i]->toSell = false;
 					}
 				}
 			}
@@ -238,6 +240,8 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 						app->itemManager->MinusQuantity(app->itemManager->nodeList[i]);
 					}
 					app->itemManager->coins += CurrentPrice;
+					SellQuantity = 0;
+					app->itemManager->nodeList[i]->toSell = false;
 				}
 			}
 		}

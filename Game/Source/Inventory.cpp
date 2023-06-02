@@ -94,7 +94,7 @@ bool Inventory::PostUpdate()
 	{
 		if (cap == x)
 		{
-			y += 42;
+			y += 70;
 			x = 0;
 		}
 		app->itemManager->LoadQuantity(x, y, app->itemManager->armorItems[i]);
@@ -109,7 +109,7 @@ bool Inventory::PostUpdate()
 		{
 			if (cap == x)
 			{
-				y += 42;
+				y += 70;
 				x = 0;
 			}
 

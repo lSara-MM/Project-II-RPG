@@ -181,12 +181,10 @@ void ItemManager::UseItem(ItemNode* item)
 				switch (item->ID)
 				{
 				case 85:
-					statusEffect = new StatusEffect(item->hp, 1, true, EffectType::CURRENT_HP);
-					arrParty.at(i)->listStatusEffects.Add(statusEffect);
+					app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(arrParty.at(i)->maxHp*item->hp);
 					break;
 				case 86:
-					statusEffect = new StatusEffect(item->hp, 1, true, EffectType::CURRENT_HP);
-					arrParty.at(i)->listStatusEffects.Add(statusEffect);
+					app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(arrParty.at(i)->maxHp * item->hp);
 					break;
 				case 87:
 					statusEffect = new StatusEffect(item->armor, 3, true, EffectType::ARMOR);
@@ -599,9 +597,9 @@ bool ItemManager::SaveItemState()
 	pugi::xml_node items = node.append_child("items");
 	pugi::xml_node item;
 	pugi::xml_node armor;
-	pugi::xml_node coins = items.append_child("coins");
+	pugi::xml_node coins_ = items.append_child("coins");
 
-	coins.append_attribute("coin") = coins;
+	coins_.append_attribute("coin") = coins;
 
 	// save items
 	for (int i = 0; i < nodeList.size(); i++)
