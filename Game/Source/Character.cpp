@@ -549,7 +549,6 @@ bool Character::Update(float dt)
 										{
 											probSkill = 65;
 										}
-										
 									}
 
 									//Usar habilidad 3 (golpe potente)
@@ -591,7 +590,6 @@ bool Character::Update(float dt)
 											break;
 										}
 									}
-
 								}
 								else// Vida baja (rage mode)
 								{
@@ -663,7 +661,6 @@ bool Character::Update(float dt)
 												break;
 											}
 										}
-
 									}
 								}
 							}

@@ -1190,7 +1190,7 @@ bool PuzzleManager::TeamMate()
 
 			teamMate = true;
 			
-			app->itemManager->AddCharaToParty("Yuroslava");
+			app->itemManager->AddCharaToParty(3);
 
 			app->questManager->quest1->active = true;
 			app->questManager->quest1->complete = true;

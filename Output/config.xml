@@ -29,44 +29,32 @@
 
 	<lootManager>
 		<chest
-			x="1472" y="2048" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="0" used="false"
-			/>
+			x="1472" y="2048" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="0" used="false"/>
 		<chest
-			x="1216" y="632" type="0" dungeon="0" texturepath="Assets/Textures/chests.png" id="1" used="false"
-			/>
+			x="1216" y="632" type="0" dungeon="0" texturepath="Assets/Textures/chests.png" id="1" used="false"/>
 		<chest
 			x="192" y="1344" type="0" dungeon="0" texturepath="Assets/Textures/chests.png" id="2" used="false"
 			/>
 		<chest
-			x="2688" y="1792" type="0" dungeon="0" texturepath="Assets/Textures/chests.png" id="3" used="false"
-			/>
+			x="2688" y="1792" type="0" dungeon="0" texturepath="Assets/Textures/chests.png" id="3" used="false"/>
 		<chest
-			x="1216" y="1984" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="4" used="false"
-			/>
+			x="1216" y="1984" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="4" used="false"/>
 		<chest
-			x="1728" y="1344" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="5" used="false"
-			/>
+			x="1728" y="1344" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="5" used="false"/>
 		<chest
-			x="64" y="2176" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="6" used="false"
-			/>
+			x="64" y="2176" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="6" used="false"/>
 		<chest
-			x="1472" y="448" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="7" used="false"
-			/>
+			x="1472" y="448" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="7" used="false"/>
 		<chest
-			x="2752" y="576" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="8" used="false"
-			/>
+			x="2752" y="576" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="8" used="false"/>
 		<chest
-			x="2752" y="1472" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="9" used="false"
-			/>
+			x="2752" y="1472" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="9" used="false"/>
 		<chest
-			x="1664" y="896" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="10" used="false"
-			/>
+			x="1664" y="896" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="10" used="false"/>
 		<chest
-			x="2240" y="64" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="11" used="false"
-			/>
+			x="2240" y="64" type="1" dungeon="0" texturepath="Assets/Textures/chests.png" id="11" used="false"/>
 		<chest
-			x="2624" y="2176" type="3" dungeon="0" texturepath="Assets/Textures/chests.png" id="12" used="false"
-			/>
+			x="2624" y="2176" type="3" dungeon="0" texturepath="Assets/Textures/chests.png" id="12" used="false"/>
 	</lootManager>
 	
 	<entitymanager>
@@ -155,20 +143,25 @@
 	   coinspath="Assets/Maps/coin.png" heartspath="Assets/Maps/heart.png"
 		settingsPath ="Assets/Textures/setting_menu.png">		
 
-	<!--NPCs-->
-	<npc name="GUIA" dialogueID="1"
-		x="3710" y="985" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
+		<!--NPCs-->
+		<npc name="Nikita" dialogueID="1"
+			x="3710" y="985" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
 
-	<npc name="ORACULO" dialogueID="2"
-		x="2595" y="4438" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
+		<npc name="ORACULO" dialogueID="2"
+			x="2595" y="4438" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
-	<npc name="MERCANTE" dialogueID="3"
-		x="3538" y="2542" width="64" height="64" texturepath="Assets/Textures/gemelos_chibi.png"/>
-</scene>
+		<npc name="Igor and Ivan" dialogueID="3"
+			x="3538" y="2542" width="64" height="64" texturepath="Assets/Textures/gemelos_chibi.png"/>
+
+		<npc name="Yuroslava" dialogueID="0"
+			x="4010" y="3070" width="64" height="64" texturepath="Assets/Textures/fueguito_chibi.png"/>
+	</scene>
+
   <SceneWin_Lose>
     <win texturepath="Assets/Textures/winLetra.png" musicw="Assets/Audio/Music/mus_ending.ogg"/>
     <lose texturepath="Assets/Textures/failedLetra.png" musicl="Assets/Audio/Music/mus_loose_scene.ogg"/>
   </SceneWin_Lose>
+
   <PuzzleManager>
     <!--Dungeon1-->
     <FireGuy texturepathFireGuy="Assets/Textures/fueguito_chibi.png" width="40" height="40" x="1504" y="224"/>
@@ -197,8 +190,7 @@
 	<itemmanager inventorypath="Assets/Textures/Inventory.png"
 				 itempath="Assets/Textures/itemTextures.png"
 				 potionstorepath="Assets/GUI/PocionesVenta.png"
-				 inventorystorepath="Assets/GUI/InventarioVenta.png"
-				 />
+				 inventorystorepath="Assets/GUI/InventarioVenta.png"/>
 
 	<map>
 		<mapfolder path="Assets/Maps/"/>
