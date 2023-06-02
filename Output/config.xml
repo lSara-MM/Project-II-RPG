@@ -205,8 +205,11 @@
 		<mapfile path="Assets/Maps/map1.tmx"/>		
 		
 		<mapdungeonfolder path="Assets/Maps/"/>
-		<mapdungeonfile path="Assets/Maps/mapDungeon.tmx"/>		
-		
+		<mapdungeonfile path="Assets/Maps/mapDungeon.tmx"/>
+
+		<mapdungeon2folder path="Assets/Maps/"/>
+		<mapdungeon2file path="Assets/Maps/mapDungeon2.tmx"/>
+
 		<mappracticefolder path="Assets/Maps/"/>
 		<mappracticefile path="Assets/Maps/mapPractice.tmx"/>		
 

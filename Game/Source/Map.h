@@ -176,6 +176,10 @@ private:
 	SString mapPracticeFileName;
 	SString mapPracticeFolder;
 	const char* mapPracticeBackground;
+	//Dungeon2
+	SString mapDungeon2FileName;
+	SString mapDungeon2Folder;
+	const char* mapDungeon2Background;
 
 	SDL_Texture* backGround;
     bool mapLoaded;
