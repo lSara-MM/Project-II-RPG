@@ -424,9 +424,8 @@ public:
 			}*/
 
 			//HandleGampeadGUI(&listGraphicsButtons);
-
-			return true;
 		}
+		return true;
 	}
 
 	bool CloseGraphics()

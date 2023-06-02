@@ -139,6 +139,12 @@ bool Combat::Start()
 	//Load inventory
 	app->inventory->Enable();
 
+	//animation combat
+	animationCombat.Set();
+	animationCombat.AddTween(100, 80, BACK_OUT);
+	transitionCombat_B = false;
+	point = 0.0f;
+	offsetAni = 750;
 
 	isHovering = false;
 	exit_B = false;
@@ -167,8 +173,20 @@ bool Combat::Update(float dt)
 
 	app->input->GetMousePosition(mouseX_combat, mouseY_combat);
 
+	if (transitionCombat_B)
+	{
+		animationCombat.Backward();
+	}
+	else
+	{
+		animationCombat.Foward();
+	}
+
+	animationCombat.Step(2, false);
+
+	point = animationCombat.GetPoint();
 	app->render->DrawTexture(textureBackground, 0, 0);
-	app->render->DrawTexture(bookTex, 0, 366);
+	app->render->DrawTexture(bookTex, 0, offsetAni + point * (366 - offsetAni));
 
 	// Printar Barra Turnos (UI WORK)
 	int j = charaInTurn;
@@ -189,7 +207,6 @@ bool Combat::Update(float dt)
 		j++;
 	}
 
-	
 	if (listInitiative.Count() > charaInTurn)
 	{
 		//GUI chara in turn
@@ -197,7 +214,7 @@ bool Combat::Update(float dt)
 
 		//Printar recuadro info
 		rect.y = 321 * listInitiative.At(charaInTurn)->data->id;
-		app->render->DrawTexture(profileTex, 39, 385, &rect);
+		app->render->DrawTexture(profileTex, 39, offsetAni + point * (385 - offsetAni), &rect);
 
 		RenderGuiChara(listInitiative.At(charaInTurn)->data->id);
 
@@ -1318,7 +1335,7 @@ void Combat::RenderGuiChara(int charaID)
 		break;
 	}
 
-	app->render->DrawTexture(profileTex, 39, 385 + 132, &rect);
+	app->render->DrawTexture(profileTex, 39, offsetAni + point * (385 + 132 - offsetAni), &rect);
 }
 
 void Combat::RenderSkillDescription(int controlID)

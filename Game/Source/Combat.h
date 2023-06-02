@@ -143,6 +143,12 @@ private:
 	//fx
 	const char* swapPath;
 	uint swapPositionfx;
+
+	//animation combat UI
+	Tween animationCombat;
+	bool transitionCombat_B;
+	float point;
+	int offsetAni;
 };
 
 #endif // __COMBAT_H__

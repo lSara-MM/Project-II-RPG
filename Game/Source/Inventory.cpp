@@ -144,7 +144,7 @@ bool Inventory::PostUpdate()
 	else
 	{
 		string cn = to_string(app->itemManager->coins);
-		app->render->TextDraw(cn.c_str(), 980, 110, 20, Font::TEXT, { 0, 0, 0 });
+		app->render->TextDraw(cn.c_str(), offset + point * (980 - offset), 110, 20, Font::TEXT, { 0, 0, 0 });
 
 		//LOAD STATS
 		if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
