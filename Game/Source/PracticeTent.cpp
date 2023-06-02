@@ -106,6 +106,7 @@ bool PracticeTent::Start()
 	if (app->input->coso)
 	{
 		player->pbody->body->SetTransform({ PIXEL_TO_METERS(app->input->posX),PIXEL_TO_METERS(app->input->posY) }, 0);
+		app->input->coso = false;
 	}
 
 	return true;

@@ -82,7 +82,7 @@ bool CutScene::Update(float dt)
 	{
 		app->render->TextDraw("PRESS SPACE", app->win->GetWidth() / 2, app->win->GetHeight() / 2, 50, Font::UI, { 181, 33, 33 });
 	}
-	if(DeltaTime >= 2)
+	if (DeltaTime >= 2)
 	{
 		RestartTimer();
 	}

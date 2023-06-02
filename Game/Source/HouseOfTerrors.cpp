@@ -98,7 +98,7 @@ bool HouseOfTerrors::Start()
 
 	if (combatEnd)
 	{
-		app->LoadGameRequest();
+		app->LoadFromFile();
 		combatEnd = false;
 	}
 
@@ -113,6 +113,7 @@ bool HouseOfTerrors::Start()
 	if (app->input->coso)
 	{
 		player->pbody->body->SetTransform({ PIXEL_TO_METERS(app->input->posX),PIXEL_TO_METERS(app->input->posY) }, 0);
+		app->input->coso = false;
 	}
 
 	return true;
@@ -158,8 +159,6 @@ bool HouseOfTerrors::Update(float dt)
 			//app->SaveGameRequest();
 			app->audio->PlayFx(combatfx);
 			app->combat->PreLoadCombat(name);
-
-			app->SaveGameRequest();
 
 			app->fade->FadingToBlack(this, (Module*)app->combat, 5);			
 			app->puzzleManager->CleanUp();
@@ -230,7 +229,6 @@ bool HouseOfTerrors::PostUpdate()
 		else
 		{
 			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_pos - app->render->camera.x, mouseY_pos - app->render->camera.y);
-
 		}
 	}
 	return ret;
