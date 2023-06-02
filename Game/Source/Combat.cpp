@@ -858,12 +858,13 @@ bool Combat::HandleSkillsButtons(Character* chara)
 }
 
 // Combat mechanics
-void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int movement_I)
+void Combat::MoveCharacter(Character* chara, int movement_I)
 {
-	//swap(arr.at(currentPosition_I), arr.at(newPosition_I));
+	vector<Character*>* arr;
+	if (chara->charaType == CharacterType::ALLY) { arr = &vecAllies; }
+	else { arr = &vecEnemies; }
 	
-	int newPos;
-	newPos = chara->positionCombat_I + movement_I;
+	int newPos = chara->positionCombat_I + movement_I;
 	//Si se pasa ponerlo en el limite
 	if (newPos <= 0)
 	{ 
@@ -884,6 +885,8 @@ void Combat::MoveCharacter(vector<Character*>* arr, Character* chara, int moveme
 		UpdatePositions(arr);
 		app->audio->PlayFx(swapPositionfx);
 	}
+
+	arr = nullptr;
 }
 
 void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
@@ -932,7 +935,6 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 				app->itemManager->AddQuantity(93, 2);
 				app->itemManager->AddQuantity(100, 2);
 			}*/
-
 		}
 
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);
@@ -949,7 +951,7 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 void Combat::UpdatePositions(vector<Character*>* arr, int pos)
 {
 	// Update combat and buttons position
-	for (int i = pos; i < arr->size(); i++)
+	for (int i = 0; i < arr->size(); i++)
 	{
 		arr->at(i)->positionCombat_I = i;
 
@@ -989,7 +991,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		if (isMoving)
 		{
 			int a = targeted_Character->positionCombat_I - listInitiative.At(charaInTurn)->data->positionCombat_I;
-			MoveCharacter(&vecAllies, listInitiative.At(charaInTurn)->data, a);
+			MoveCharacter(listInitiative.At(charaInTurn)->data, a);
 
 			isMoving = false;
 			NextTurn();
@@ -1046,7 +1048,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	//
-	if (lastPressedAbility_I != -1 && !isMoving && listInitiative.At(charaInTurn)->data->charaType==CharacterType::ALLY)
+	if (lastPressedAbility_I != -1 && !isMoving && listInitiative.At(charaInTurn)->data->charaType == CharacterType::ALLY)
 	{
 		if (listInitiative.At(charaInTurn)->data->listSkills.At(lastPressedAbility_I)->data->autoTarget == true)
 		{

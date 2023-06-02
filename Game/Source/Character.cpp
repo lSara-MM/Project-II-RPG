@@ -671,14 +671,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		{
 			defender->listStatusEffects.Add(statusEffect);
 			//Movimiento
-			if (defender->charaType==CharacterType::ALLY)
-			{
-				if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecAllies, this, skill->movementTarget); }
-			}
-			else
-			{
-				if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementTarget); }
-			}
+			app->combat->MoveCharacter(this, skill->movementTarget);
 		}
 		else
 		{
@@ -686,14 +679,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			{
 				defender->listStatusEffects.Add(statusEffect);
 				//Movimiento
-				if (defender->charaType == CharacterType::ALLY)
-				{
-					if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecAllies, this, skill->movementTarget); }
-				}
-				else
-				{
-					if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementTarget); }
-				}
+				app->combat->MoveCharacter(this, skill->movementTarget);
 			}
 		}
 		return(caster->maxHp / 5 * skill->multiplierDmg);
@@ -717,37 +703,23 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 
 			if (skill->positiveEffect) //Efecto de estado positivo
 			{
-				//Movimiento
-				if (defender->charaType == CharacterType::ALLY)
-				{
-					if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecAllies, this, skill->movementTarget); }
-				}
-				else
-				{
-					if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementTarget); }
-				}
 				defender->listStatusEffects.Add(statusEffect);
+				//Movimiento
+				app->combat->MoveCharacter(this, skill->movementTarget);
 			}
 			else
 			{
 				if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 				{
 					//Movimiento
-					if (defender->charaType == CharacterType::ALLY)
-					{
-						if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecAllies, this, skill->movementTarget); }
-					}
-					else if (defender->charaType == CharacterType::ENEMY)
-					{
-						if (skill->movementTarget != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementTarget); }
-					}
+					app->combat->MoveCharacter(this, skill->movementTarget);
 					defender->listStatusEffects.Add(statusEffect);
 				}
 			}
 
 			// Calcular reduccion de la defensa
-			float armorRelevance = (10*defender->GetStat(EffectType::ARMOR) / abs(damage + 1)) + 1;
-			damage += ((defender->GetStat(EffectType::ARMOR) ) * armorRelevance); //Esta con mas ya que damage es negativo
+			float armorRelevance = (10 * defender->GetStat(EffectType::ARMOR) / abs(damage + 1)) + 1;
+			damage += ((defender->GetStat(EffectType::ARMOR)) * armorRelevance); //Esta con mas ya que damage es negativo
 			if (damage > 0) { damage = -1; }
 
 			app->audio->PlayFx(hitfx);
@@ -945,7 +917,7 @@ bool Character::UseSkill(Skill* skill)
 	}
 
 	//Movimiento del lanzador, el movimiento del objetivo se hace en el apply skill
-	if (skill->movementCaster != 0) { app->combat->MoveCharacter(&app->combat->vecEnemies, this, skill->movementCaster); }
+	if (skill->movementCaster != 0) { app->combat->MoveCharacter(this, skill->movementCaster); }
 	
 	return true;
 }
@@ -984,7 +956,8 @@ bool Character::UseSkill(Skill* skill, Character* target)
 	//Si la skill mueve moverte
 	if (skill->movementCaster != 0)
 	{
-		app->combat->MoveCharacter(&app->combat->vecAllies, this, skill->movementCaster);
+		//Movimiento
+		app->combat->MoveCharacter(this, skill->movementCaster);
 	}
 
 	return true;

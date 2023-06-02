@@ -58,8 +58,10 @@ public:
 	void HandleCharaButtons(vector<Character*>* arr, int pos1 = -1, int pos2 = -1);	// If -1, disable all
 	bool HandleSkillsButtons(Character* chara);
 
-	void MoveCharacter(vector<Character*>* arr, Character* chara, int newPosition_I);
+	void MoveCharacter(Character* chara, int newPosition_I);
 	void RemoveCharacter(vector<Character*>* arr, Character* chara);
+	// Take array and change position in combat (positionCombat_I) and texture position to 
+	// its position in the array
 	void UpdatePositions(vector<Character*>* arr, int pos = 0);
 
 	// Settings
@@ -69,6 +71,11 @@ public:
 
 	int SearchInSkills(vector<Character*> arr, Character* chara);
 	int SearchInVec(vector<Character*> arr, int id);
+
+
+	//
+	void RenderSkillDescription();
+	
 
 	// Save/Load
 	bool SaveCombat(); //guardar stats playable characters en xml combat
