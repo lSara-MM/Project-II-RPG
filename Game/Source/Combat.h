@@ -64,16 +64,17 @@ public:
 	// its position in the array
 	void UpdatePositions(vector<Character*>* arr, int pos = 0);
 
+	// Getters
+	int SearchInSkills(vector<Character*> arr, Character* chara);
+	int SearchInVec(vector<Character*> arr, int id);
+
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
 	bool OnGuiMouseHoverEvent(GuiControl* control);
 	bool OnGuiMouseOutHoverEvent(GuiControl* control);
 
-	int SearchInSkills(vector<Character*> arr, Character* chara);
-	int SearchInVec(vector<Character*> arr, int id);
-
-
-	//
+	// Render GUI
+	void RenderGuiChara(int charaID);
 	void RenderSkillDescription(int controlID);	
 
 	// Save/Load

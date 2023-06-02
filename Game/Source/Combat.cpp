@@ -189,22 +189,23 @@ bool Combat::Update(float dt)
 		j++;
 	}
 
-	//GUI chara in turn
-	SDL_Rect rect = { 0, 0, 585, 321 };
-
+	
 	if (listInitiative.Count() > charaInTurn)
 	{
+		//GUI chara in turn
+		SDL_Rect rect = { 0, 0, 585, 321 };
+
 		//Printar recuadro info
 		switch (listInitiative.At(charaInTurn)->data->id)
 		{
 		case 0:
 			app->render->DrawTexture(profileTex, 39, 385, &rect);
-	
+
 			break;
 		case 1:
-			rect.y = 321;			
+			rect.y = 321;
 			app->render->DrawTexture(profileTex, 39, 385, &rect);
-		
+
 			break;
 		case 2:
 			rect.y = 321 * 2;
@@ -213,12 +214,14 @@ bool Combat::Update(float dt)
 		case 3:
 			rect.y = 321 * 3;
 			app->render->DrawTexture(profileTex, 39, 385, &rect);
-	
+
 			break;
 		default:
 			break;
 		}
-		
+
+		RenderGuiChara(listInitiative.At(charaInTurn)->data->id);
+
 		if (!isHovering && listInitiative.At(charaInTurn)->data->charaType == CharacterType::ALLY)
 		{
 			if (lastPressedAbility_I == -1)
@@ -881,6 +884,28 @@ void Combat::UpdatePositions(vector<Character*>* arr, int pos)
 	}
 }
 
+// Getters
+int Combat::SearchInSkills(vector<Character*> arr, Character* chara)
+{
+	for (int i = 0; i < arr.size(); i++)
+	{
+		if (arr.at(i) == chara) { return i; }
+	}
+
+	return -1;
+}
+
+// Busqueda mediante ID para onGuiClickEvent
+int Combat::SearchInVec(vector<Character*> arr, int id)
+{
+	for (int i = 0; i < arr.size(); i++)
+	{
+		if (arr.at(i)->button->id == id) { return i; }
+	}
+
+	return -1;
+}
+
 // Settings / GUI Controls
 bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 {
@@ -1014,6 +1039,8 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 		}
 		else
 		{
+			RenderGuiChara(vecAllies.at((SearchInVec(vecAllies, control->id)))->id);
+
 			//Printar status effects
 			Character* cha = vecAllies.at((SearchInVec(vecAllies, control->id)));
 			SString effectToPrint;
@@ -1290,25 +1317,35 @@ bool Combat::OnGuiMouseOutHoverEvent(GuiControl* control)
 	return false;
 }
 
-int Combat::SearchInSkills(vector<Character*> arr, Character* chara)
+void Combat::RenderGuiChara(int charaID)
 {
-	for (int i = 0; i < arr.size(); i++)
+	//GUI chara in turn
+	SDL_Rect rect = { 0, 0, 585, 321 };
+
+	//Printar recuadro info
+	switch (charaID)
 	{
-		if (arr.at(i) == chara) { return i; }
+	case 0:
+		app->render->DrawTexture(profileTex, 39, 385, &rect);
+
+		break;
+	case 1:
+		rect.y = 321;
+		app->render->DrawTexture(profileTex, 39, 385, &rect);
+
+		break;
+	case 2:
+		rect.y = 321 * 2;
+		app->render->DrawTexture(profileTex, 39, 385, &rect);
+		break;
+	case 3:
+		rect.y = 321 * 3;
+		app->render->DrawTexture(profileTex, 39, 385, &rect);
+
+		break;
+	default:
+		break;
 	}
-
-	return -1;
-}
-
-// Busqueda mediante ID para onGuiClickEvent
-int Combat::SearchInVec(vector<Character*> arr, int id)
-{
-	for (int i = 0; i < arr.size(); i++)
-	{
-		if (arr.at(i)->button->id == id) { return i; }
-	}
-
-	return -1;
 }
 
 void Combat::RenderSkillDescription(int controlID)
