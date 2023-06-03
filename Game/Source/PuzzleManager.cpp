@@ -474,7 +474,7 @@ bool PuzzleManager::Dun2Start()
 
 		if (!DoorKey2Opened)
 		{
-			DoorKey2 = app->physics->CreateRectangle(posDoorkey2.x - heightDoorKeys / 2, posDoorkey2.y - widthDoorKeys / 2, heightDoorKeys, widthDoorKeys * 2, bodyType::STATIC);
+			DoorKey2 = app->physics->CreateRectangle(posDoorkey2.x - heightDoorKeys / 2 + 32, posDoorkey2.y - widthDoorKeys / 2 + 32, heightDoorKeys - 48, widthDoorKeys * 2, bodyType::STATIC);
 			DoorKey2->body->SetFixedRotation(true);
 			DoorKey2->ctype = ColliderType::KEYDOOR;
 			DoorKey2->id = 2;
@@ -514,12 +514,12 @@ bool PuzzleManager::Dun2Start()
 		Barricade3->id = 3;
 
 		//Barricada larga
-		Barricade4 = app->physics->CreateRectangle(posBarricade4.x - widthBarricade2 / 2, posBarricade4.y - heightBarricade2 / 2, widthBarricade2, heightBarricade2, bodyType::STATIC);
+		Barricade4 = app->physics->CreateRectangle(posBarricade4.x, posBarricade4.y, widthBarricade2, heightBarricade2, bodyType::STATIC);
 		Barricade4->body->SetFixedRotation(true);
 		Barricade4->ctype = ColliderType::BARRICADE;
 		Barricade4->id = 4;
 
-		Barricade5 = app->physics->CreateRectangle(posBarricade5.x - widthBarricade2 / 2, posBarricade5.y - heightBarricade2 / 2, widthBarricade2, heightBarricade2, bodyType::STATIC);
+		Barricade5 = app->physics->CreateRectangle(posBarricade5.x - widthBarricade1 / 2, posBarricade5.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
 		Barricade5->body->SetFixedRotation(true);
 		Barricade5->ctype = ColliderType::BARRICADE;
 		Barricade5->id = 5;
@@ -527,7 +527,7 @@ bool PuzzleManager::Dun2Start()
 
 	if (!relics) 
 	{
-		DoorBossP = app->physics->CreateRectangle(posDoorBoss.x - heightDoorKeys / 2, posDoorBoss.y - widthDoorKeys / 2, heightDoorKeys, widthDoorKeys * 2, bodyType::STATIC);
+		DoorBossP = app->physics->CreateRectangle(posDoorBoss.x - heightDoorKeys / 2 - 32, posDoorBoss.y - widthDoorKeys / 2 + 32, heightDoorKeys - 48, widthDoorKeys * 2, bodyType::STATIC);
 		DoorBossP->body->SetFixedRotation(true);
 
 		relic1 = app->physics->CreateRectangleSensor(posRelic1.x - widthRelic / 2, posRelic1.y - heightRelic / 2, widthRelic, heightRelic, bodyType::STATIC);
@@ -716,22 +716,22 @@ bool PuzzleManager::Dun2Update()
 		RelicsPuz();
 	}
 
-	app->render->DrawTexture(GeneralTextureDungeon2, posChicken1.x, posChicken1.y, &Chick);
-	app->render->DrawTexture(GeneralTextureDungeon2, posChicken2.x, posChicken2.y, &Chick);
+	app->render->DrawTexture(GeneralTextureDungeon2, posChicken1.x - widthChicken, posChicken1.y - heightChicken, &Chick);
+	app->render->DrawTexture(GeneralTextureDungeon2, posChicken2.x - widthChicken, posChicken2.y - heightChicken, &Chick);
 
 	if (RelicInColumn1)
 	{
-		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn1.x, posRelicColumn1.y, &Rel1);
+		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn1.x - widthRelicColumn, posRelicColumn1.y - heightRelicColumn, &Rel1);
 	}
 
 	if (RelicInColumn2)
 	{
-		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn2.x, posRelicColumn2.y, &Rel2);
+		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn2.x - widthRelicColumn, posRelicColumn2.y - heightRelicColumn, &Rel2);
 	}
 
 	if (RelicInColumn3)
 	{
-		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn3.x, posRelicColumn3.y, &Rel3);
+		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn3.x - widthRelicColumn, posRelicColumn3.y - heightRelicColumn, &Rel3);
 	}
 
 	if (BombPlant1 || BombPlant2 || BombCarryOn1 || BombCarryOn2)
@@ -1280,14 +1280,14 @@ bool PuzzleManager::KeyDoorsPuz()
 	}
 	else
 	{
-		app->render->DrawTexture(GeneralTextureDungeon2, posKey.x, posKey.y, &Ky);
+		app->render->DrawTexture(GeneralTextureDungeon2, posKey.x - widthKey, posKey.y - heightKey, &Ky);
 	}
 
 	if (DoorKey1 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posDoorkey1.x, posDoorkey1.y, &KeyD1);
+		app->render->DrawTexture(GeneralTextureDungeon2, posDoorkey1.x - widthDoorKeys, posDoorkey1.y - heightDoorKeys, &KeyD1);
 	
 	if (DoorKey2 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posDoorkey2.x, posDoorkey2.y, &KeyD2);
+		app->render->DrawTexture(GeneralTextureDungeon2, posDoorkey2.x - widthDoorKeys + 32, posDoorkey2.y - heightDoorKeys - 64, &KeyD2);
 
 	if (DoorsOpened >= 2)
 	{
@@ -1329,8 +1329,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombCarryOn1)
 	{
-		posBomb1.x = app->BeastT->player->position.x;
-		posBomb1.y = app->BeastT->player->position.y;
+		posBomb1.x = app->BeastT->player->position.x + 10;
+		posBomb1.y = app->BeastT->player->position.y + 25;
 
 		if (DeltaTime >= 5)
 		{
@@ -1489,8 +1489,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombCarryOn2)
 	{
-		posBomb2.x = app->BeastT->player->position.x;
-		posBomb2.y = app->BeastT->player->position.y;
+		posBomb2.x = app->BeastT->player->position.x + 10;
+		posBomb2.y = app->BeastT->player->position.y + 25;
 
 		if (DeltaTime >= 5)
 		{
@@ -1627,19 +1627,19 @@ bool PuzzleManager::ChickenBoomPuz()
 	}
 
 	if (Barricade1 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade1.x, posBarricade1.y, &Barr1);
+		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade1.x - widthBarricade1, posBarricade1.y - heightBarricade1, &Barr1);
 	
 	if (Barricade2 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade2.x, posBarricade2.y, &Barr1);
+		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade2.x - widthBarricade1, posBarricade2.y - heightBarricade1, &Barr1);
 	
 	if (Barricade3 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade3.x, posBarricade3.y, &Barr1);
+		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade3.x - widthBarricade1, posBarricade3.y - heightBarricade1, &Barr1);
 	
 	if (Barricade4 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade4.x, posBarricade4.y, &Barr2);	
+		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade4.x - widthBarricade2 / 2, posBarricade4.y - heightBarricade2 / 2, &Barr2);
 	
 	if (Barricade5 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade5.x, posBarricade5.y, &Barr2);
+		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade5.x - widthBarricade1, posBarricade5.y - heightBarricade1, &Barr1);
 
 	if(!BombCarryOn1 && !BombPlant1)
 	{
@@ -1652,8 +1652,8 @@ bool PuzzleManager::ChickenBoomPuz()
 		posBomb2.y = posChicken2.y;
 	}
 
-	app->render->DrawTexture(GeneralTextureDungeon2, posBomb1.x, posBomb1.y, &Bmb);
-	app->render->DrawTexture(GeneralTextureDungeon2, posBomb2.x, posBomb2.y, &Bmb);
+	app->render->DrawTexture(GeneralTextureDungeon2, posBomb1.x - widthBomb, posBomb1.y - heightBomb, &Bmb);
+	app->render->DrawTexture(GeneralTextureDungeon2, posBomb2.x - widthBomb, posBomb2.y - heightBomb, &Bmb);
 
 	if(BarricadesExplote >= 5)
 	{
@@ -1760,7 +1760,8 @@ bool PuzzleManager::RelicsPuz()
 	}
 	else 
 	{
-		app->render->DrawTexture(GeneralTextureDungeon2, posRelic1.x, posRelic1.y, &Rel1);
+		if (relic1 != nullptr)
+			app->render->DrawTexture(GeneralTextureDungeon2, posRelic1.x - widthRelic, posRelic1.y - heightRelic, &Rel1);
 	}
 
 	if (Relic2Invent) 
@@ -1785,7 +1786,8 @@ bool PuzzleManager::RelicsPuz()
 	}
 	else 
 	{
-		app->render->DrawTexture(GeneralTextureDungeon2, posRelic2.x, posRelic2.y, &Rel2);
+		if (relic2 != nullptr)
+			app->render->DrawTexture(GeneralTextureDungeon2, posRelic2.x - widthRelic, posRelic2.y - heightRelic, &Rel2);
 	}	
 
 	if (Relic3Invent) 
@@ -1810,7 +1812,8 @@ bool PuzzleManager::RelicsPuz()
 	}
 	else 
 	{
-		app->render->DrawTexture(GeneralTextureDungeon2, posRelic3.x, posRelic3.y, &Rel3);
+		if(relic3 != nullptr)
+			app->render->DrawTexture(GeneralTextureDungeon2, posRelic3.x - widthRelic, posRelic3.y - heightRelic, &Rel3);
 	}
 
 	if (RelicsCompleted >= 3) 
@@ -1829,7 +1832,7 @@ bool PuzzleManager::RelicsPuz()
 	}
 	else 
 	{
-		app->render->DrawTexture(GeneralTextureDungeon2, posDoorBoss.x, posDoorBoss.y, &BossD);
+		app->render->DrawTexture(GeneralTextureDungeon2, posDoorBoss.x - 101, posDoorBoss.y - 64 * 2, &BossD);
 	}
 
 	return true;
