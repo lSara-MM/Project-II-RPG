@@ -129,7 +129,7 @@
 		
 		<CombatCharacter name ="Nikita" id="1"
         maxHp="1000" currentHp="1000" attack="200" armor="5" critRate="10" critDamage="20" accuracy="10" res="10" dodge="20" speed="80"
-        type="0" class="7" skill1ID="5" skill2ID="6" skill3ID="7" skill4ID="8"
+        type="0" class="6" skill1ID="5" skill2ID="6" skill3ID="7" skill4ID="8"
                
         width="0" heigth="0"
 		texturePath="Assets/Textures/AllyBard.png"
@@ -138,7 +138,7 @@
 
 		<CombatCharacter name ="Igor and Ivan" id="2"
         maxHp="1500" currentHp="1500" attack="160" armor="10" critRate="15" critDamage="15" accuracy="0" res="20" dodge="10" speed="40"
-        type="0" class="6" skill1ID="9" skill2ID="10" skill3ID="11" skill4ID="12"
+        type="0" class="5" skill1ID="9" skill2ID="10" skill3ID="11" skill4ID="12"
                
         width="0" heigth="0"
 		texturePath="Assets/Textures/AllyHealer.png"
@@ -147,7 +147,7 @@
 
 		<CombatCharacter name ="Yuroslava" id="3"
         maxHp="900" currentHp="900" attack="185" armor="10" critRate="20" critDamage="20" accuracy="15" res="-10" dodge="10" speed="35"
-        type="0" class="5" skill1ID="13" skill2ID="14" skill3ID="15" skill4ID="16"
+        type="0" class="3" skill1ID="13" skill2ID="14" skill3ID="15" skill4ID="16"
                
         width="0" heigth="0"
 		texturePath="Assets/Textures/AllyDOTS.png"
@@ -354,7 +354,7 @@ enum class CharacterClass
 		sectionX="16" sectionY="26"/>
 
 		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="170" armor="10" critRate="0" critDamage="0" accuracy="30" res="40" dodge="10" speed="60"
-        type="1" class="8" skill1ID="29" skill2ID="30" skill3ID="31" skill4ID="32"
+        type="1" class="7" skill1ID="29" skill2ID="30" skill3ID="31" skill4ID="32"
                
         width="0" heigth="0"
         texturePath ="Assets/Textures/EnemyPossessedPainting.png"
@@ -362,7 +362,7 @@ enum class CharacterClass
 		sectionX="26" sectionY="30"/>
 
 		<enemy name ="The Specter" id="20" maxHp="3000" currentHp="3000" attack="220" armor="40" critRate="0" critDamage="0" accuracy="20" res="15" dodge="0" speed="65"
-        type="1" class="9" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
+        type="1" class="8" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
                
         width="0" heigth="0"
         texturePath ="Assets/Textures/EnemyBossSpecter.png"

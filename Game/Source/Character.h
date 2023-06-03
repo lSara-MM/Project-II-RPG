@@ -76,7 +76,6 @@ enum class CharacterClass
 	ASSASSIN,
 	AOE_DPS,
 	TANK,
-	DOT,
 	HEALER,
 	BUFFER,
 	DEBUFFER,

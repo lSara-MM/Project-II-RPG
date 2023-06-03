@@ -287,6 +287,65 @@ bool Character::Update(float dt)
 							}
 						break;
 						case CharacterClass::RANGED_DPS:
+
+							//Si esta en mala posicion aka no poder usar 0 y 3 pues usar reposicion 
+							if (!listSkills.At(3)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(0)->data->PosCanBeUsed(positionCombat_I))
+							{
+								if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+								{
+									//usar skill 2(1) (buff+reposition)
+									UseSkill(listSkills.At(1)->data);
+
+									listSkillsHistory.Add(2);
+									break;
+								}
+							}
+							else
+							{
+								if (listSkillsHistory.end->data != 1) //Solo si no se a movido, usado antes o usado el ataque tocho
+								{
+									probSkill = 0;
+								}
+								else
+								{
+									probSkill = 80;
+								}
+								//Usar gimick/cosa potente
+								if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I)) 
+								{
+									//usar skill 3(2) (gimmick / debuffo)
+									UseSkill(listSkills.At(2)->data);
+
+									listSkillsHistory.Add(3);
+								}
+								else
+								{
+									if (listSkillsHistory.end->data == 3) //Usar ataque tocho que tiene targeting
+									{
+										probSkill = 75;
+									}
+									else
+									{
+										probSkill = 15;
+									}
+									//Usar ataque targeteado
+									if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//usar skill 4(3) (ataque tocho targeted)
+										UseSkill(listSkills.At(3)->data);
+
+										listSkillsHistory.Add(4);
+									}
+									else //Ataque basico, no hace falta if, si no podia usarla hubiera usado el movimiento
+									{
+										//usar skill 1(0) (ataque basico)
+										UseSkill(listSkills.At(0)->data);
+
+										listSkillsHistory.Add(1);
+									}
+								}
+
+							}
 							break;
 						case CharacterClass::ASSASSIN:
 
@@ -504,10 +563,6 @@ bool Character::Update(float dt)
 									break;
 								}
 							}
-							break;
-
-							break;
-						case CharacterClass::DOT:
 							break;
 						case CharacterClass::BOSS:
 
