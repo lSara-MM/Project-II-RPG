@@ -233,7 +233,7 @@ bool Character::Update(float dt)
 												
 							if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //No puede hacer ataques principales
 							{
-								//usar skill 2 (avance)
+								//usar skill 2(1) (avance)
 								UseSkill(listSkills.At(1)->data);
 
 								listSkillsHistory.Add(2);
@@ -249,9 +249,9 @@ bool Character::Update(float dt)
 								{
 									probSkill = 30;
 								}
-								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+								if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
 								{
-									//usar skill 1 (buff ofensivo)
+									//usar skill 3(2) (buff ofensivo)
 									UseSkill(listSkills.At(2)->data);
 
 									listSkillsHistory.Add(3);
@@ -270,7 +270,7 @@ bool Character::Update(float dt)
 								}
 								if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
 								{
-									//usar skill 3 (atk area)
+									//usar skill 4(3) (atk area)
 									UseSkill(listSkills.At(3)->data);
 
 									listSkillsHistory.Add(4);
@@ -278,7 +278,7 @@ bool Character::Update(float dt)
 								}
 								else
 								{
-									//usar skill 0 (atk basico)
+									//usar skill 1(0) (atk basico)
 									UseSkill(listSkills.At(0)->data);
 
 									listSkillsHistory.Add(1);
@@ -354,7 +354,7 @@ bool Character::Update(float dt)
 							{
 								if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
 								{
-									//usar skill 3 (asesinato)
+									//usar skill 4(3) (asesinato)
 									UseSkill(listSkills.At(3)->data);
 
 									listSkillsHistory.Add(4);
@@ -364,7 +364,7 @@ bool Character::Update(float dt)
 								{
 									if (listSkills.At(0)->data->PosCanBeUsed(positionCombat_I))
 									{
-										//usar skill 0 (basic attack)
+										//usar skill 1(0) (basic attack)
 										UseSkill(listSkills.At(0)->data);
 
 										listSkillsHistory.Add(1);
@@ -392,7 +392,7 @@ bool Character::Update(float dt)
 								}
 								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I)) //Preparar asesinato
 								{
-									//usar skill 1 (preparacion asesinato)
+									//usar skill 2(1) (preparacion asesinato)
 									UseSkill(listSkills.At(1)->data);
 
 									listSkillsHistory.Add(2);
@@ -411,7 +411,7 @@ bool Character::Update(float dt)
 									}
 									if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
 									{
-										//usar skill 2 (debuff)
+										//usar skill 3(2) (debuff)
 										UseSkill(listSkills.At(2)->data);
 
 										listSkillsHistory.Add(3);
@@ -592,7 +592,7 @@ bool Character::Update(float dt)
 								}
 								if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
 								{
-									//usar skill 2 (tanqueo high HP)
+									//usar skill 3(2) (tanqueo high HP)
 									UseSkill(listSkills.At(2)->data);
 
 									listSkillsHistory.Add(3);
@@ -615,7 +615,7 @@ bool Character::Update(float dt)
 								}
 								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
 								{
-									//usar skill 1 (tanqueo low HP)
+									//usar skill 2(1) (tanqueo low HP)
 									UseSkill(listSkills.At(1)->data);
 
 									listSkillsHistory.Add(2);
@@ -627,7 +627,7 @@ bool Character::Update(float dt)
 							}
 							if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))//Ataques
 							{
-								//usar skill 3 (daño + debuff)
+								//usar skill 4(3) (daño + debuff)
 								UseSkill(listSkills.At(3)->data);
 
 								listSkillsHistory.Add(4);
@@ -635,7 +635,7 @@ bool Character::Update(float dt)
 							}
 							else
 							{
-								//usar skill 0 (daño solo) (es la skill mas debil)
+								//usar skill 1(0) (daño solo) (es la skill mas debil)
 								UseSkill(listSkills.At(0)->data);
 
 								listSkillsHistory.Add(1);
@@ -644,6 +644,67 @@ bool Character::Update(float dt)
 						}
 						break;
 						case CharacterClass::BUFFER:
+
+							if (positionCombat_I > 0) //Posicion comoda
+							{
+								//Si ataque last turn poco probable usar attack
+								if (listSkillsHistory.end->data == 2 || listSkillsHistory.end->data == 1)
+								{
+									probSkill = 10;
+								}
+								else //Si no se uso pues mas probable que la use
+								{
+									probSkill = 55;
+								}
+								//Usar un attack
+								if (CalculateRandomProbability(probSkill) && listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque
+								{
+									//usar skill 1(0) (atk)
+									UseSkill(listSkills.At(0)->data);
+
+									listSkillsHistory.Add(1);
+									break;
+								}
+								else
+								{
+									//Depende de lo dañada que este la party pues buff defensivo o ofensivo
+									int maxHPTeam=0;
+									int actualHPTeam=0;
+									for (int i = 0; i < app->combat->vecEnemies.size(); i++)
+									{
+										maxHPTeam += app->combat->vecEnemies.at(i)->maxHp;
+										actualHPTeam += app->combat->vecEnemies.at(i)->currentHp;
+									}
+									probSkill = (actualHPTeam / maxHPTeam) * 100;
+									if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I)) //Usar debuff area
+									{
+										//usar skill 3(2) (BUFF ATK)
+										UseSkill(listSkills.At(2)->data);
+
+										listSkillsHistory.Add(3);
+										break;
+									}
+									else if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Debuff unitario
+									{
+										//usar skill 4(3) (BUFF DEFENSE)
+										UseSkill(listSkills.At(3)->data);
+
+										listSkillsHistory.Add(4);
+										break;
+									}
+								}
+							}
+							else //Posicion jodido
+							{
+								if (listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+								{
+									//usar skill 2(1) (debil de huida)
+									UseSkill(listSkills.At(1)->data);
+
+									listSkillsHistory.Add(2);
+									break;
+								}
+							}
 							break;
 						case CharacterClass::DEBUFFER:
 
@@ -661,7 +722,7 @@ bool Character::Update(float dt)
 								//Usar un attack
 								if (CalculateRandomProbability(probSkill) && listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque
 								{
-									//usar skill 0 (atk)
+									//usar skill 1(0) (atk)
 									UseSkill(listSkills.At(0)->data);
 
 									listSkillsHistory.Add(1);
@@ -679,7 +740,7 @@ bool Character::Update(float dt)
 									}
 									if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I)) //Usar debuff area
 									{
-										//usar skill 2 (area debuff)
+										//usar skill 3(2) (area debuff)
 										UseSkill(listSkills.At(2)->data);
 
 										listSkillsHistory.Add(3);
@@ -687,7 +748,7 @@ bool Character::Update(float dt)
 									}
 									else if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Debuff unitario
 									{
-										//usar skill 3 (unitary debuff)
+										//usar skill 4(3) (unitary debuff)
 										UseSkill(listSkills.At(3)->data);
 
 										listSkillsHistory.Add(4);
