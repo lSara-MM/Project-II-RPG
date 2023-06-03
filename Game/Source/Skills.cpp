@@ -76,7 +76,7 @@ int Skill::RandomTarget(int posInicial, int posFinal, vector<Character*> arr, Ta
 	int StatTracker = 99999;
 	switch (method)
 	{
-	case TargetingMethod::RANDOM:
+	case TargetingMethod::RANDOM: //Si hay mecanica de taunt pues aqui ponerla
 		do 
 		{
 			pos = rand() % width + posInicial;
@@ -108,10 +108,21 @@ int Skill::RandomTarget(int posInicial, int posFinal, vector<Character*> arr, Ta
 	case TargetingMethod::LOWER_DODGE:
 		for (int i = posInicial; i <= posFinal; i++)
 		{
-			if (arr.at(i)->GetStat(EffectType::ARMOR) <= StatTracker)
+			if (arr.at(i)->GetStat(EffectType::DODGE) <= StatTracker)
 			{
 				pos = i;
 				StatTracker = arr.at(i)->GetStat(EffectType::DODGE);
+			}
+		}
+		break;
+	
+	case TargetingMethod::LOWER_RESISTANCE:
+		for (int i = posInicial; i <= posFinal; i++)
+		{
+			if (arr.at(i)->GetStat(EffectType::RES) <= StatTracker)
+			{
+				pos = i;
+				StatTracker = arr.at(i)->GetStat(EffectType::RES);
 			}
 		}
 		break;

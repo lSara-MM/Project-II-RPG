@@ -30,7 +30,8 @@ enum class TargetingMethod //Como se ataca
 	RANDOM=0,
 	LOWER_HP,
 	LOWER_ARMOR,
-	LOWER_DODGE
+	LOWER_DODGE,
+	LOWER_RESISTANCE
 };
 // prueba
 class Skill

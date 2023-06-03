@@ -263,11 +263,11 @@ enum class CharacterClass
 	ASSASSIN,
 	AOE_DPS,
 	TANK,
-	DOT,
 	HEALER,
 	BUFFER,
 	DEBUFFER,
 	
+	BOSS,
 
 	NO_CLASS
 };
@@ -282,7 +282,7 @@ enum class CharacterClass
 		
 		sectionX="35" sectionY="36"/>
 		
-		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="180" armor="0" critRate="5" critDamage="15" accuracy="0" res="0" dodge="20" speed="55"
+		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="180" armor="0" critRate="5" critDamage="15" accuracy="0" res="0" dodge="10" speed="55"
         type="1" class="0" skill1ID="25" skill2ID="26" skill3ID="27" skill4ID="28"
                
         width="0" heigth="0"  
@@ -380,7 +380,7 @@ enum class CharacterClass
 		
 		sectionX="35" sectionY="36"/>
 
-		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="180" armor="0" critRate="5" critDamage="15" accuracy="0" res="0" dodge="15" speed="55"
+		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="180" armor="0" critRate="5" critDamage="15" accuracy="0" res="0" dodge="10" speed="55"
         type="1" class="0" skill1ID="25" skill2ID="26" skill3ID="27" skill4ID="28"
                
         width="0" heigth="0"
