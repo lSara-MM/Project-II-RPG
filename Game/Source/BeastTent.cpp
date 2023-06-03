@@ -64,8 +64,9 @@ bool BeastTent::Awake(pugi::xml_node& config)
 
 bool BeastTent::Start()
 {
-	app->input->godMode_B = false;
+	
 	app->physics->collisions = false;
+	app->input->godMode_B = false;
 
 	app->itemManager->Enable();
 	app->lootManager->Start();
@@ -87,8 +88,9 @@ bool BeastTent::Start()
 	pSettings = new Settings(this);
 	pPause = new Pause(this);
 	pPause->pSettings = pSettings;
-	pause_B = false;
+	
 	settings_B = false;
+	pause_B = false;
 
 
 	InitEntities();
