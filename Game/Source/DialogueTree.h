@@ -4,6 +4,7 @@
 #include "GuiManager.h"
 #include "Module.h"
 #include "GuiButton.h"
+#include "Combat.h"
 #include "Store.h"
 
 #include "List.h"
@@ -20,6 +21,7 @@
 #define DIALOGUE_QUEST 5
 #define DIALOGUE_STORE 6
 #define DIALOGUE_FORGE 7
+#define DIALOGUE_HEAL 8
 
 using namespace std;
 

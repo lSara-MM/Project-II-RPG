@@ -172,6 +172,13 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 			notifyEnd = true;
 			return true;
 			break;
+		case DIALOGUE_HEAL:
+			for (int i = 0; i < app->combat->vecAllies.size(); i++)
+			{
+				app->combat->vecAllies.at(i)->ModifyHP(99999);
+			}
+			return true;
+			break;
 		default:
 			return false;
 			break;

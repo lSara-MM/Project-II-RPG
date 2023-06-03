@@ -162,7 +162,8 @@
 		<node id="0" name="Igor and Ivan" text="Hello mate. How can we help you? ">
 			<choice id="0" option="What do you sell?" nextNode="10" eventReturn="0"/>
 			<choice id="1" option="Tell me about the House Of Terrors." nextNode="1" eventReturn="0"/>
-			<choice id="2" option="Farewell." nextNode="-1" eventReturn="0"/>
+			<choice id="2" option="Please heal the team, we are in trouble" nextNode="11" eventReturn="0"/>
+			<choice id="3" option="Farewell." nextNode="-1" eventReturn="0"/>
 		</node>
 		
 		<node id="1" name="Igor" text="I do not want to talk about that place.">
@@ -203,6 +204,10 @@
 
 		<node id="10" name="Igor and Ivan" text=".">
 			<choice id="0" option="Store." nextNode="-1" eventReturn="6"/>
+		</node>
+
+		<node id="11" name="Igor and Ivan" text="Here you have. Go smash them all! ">
+			<choice id="0" option="Thanks you both. " nextNode="0" eventReturn="8"/>
 		</node>
 
 		<node id="-1" name="Igor and Ivan" text ="End of conversation -F1- to talk again"></node>
