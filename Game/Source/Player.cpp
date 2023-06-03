@@ -167,6 +167,15 @@ bool Player::Update(float dt)
 		//transitionMap_B = false;
 		app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, 0);
 	}
+	
+	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	{
+		app->map->mapPendingtoDelete = true;		
+		OpenMap = false;
+		lockMovement = false;
+		//transitionMap_B = false;
+		app->fade->FadingToBlack((Module*)app->scene, (Module*)app->BeastT, 0);
+	}
 
 	/*Hasta aqu� PuzzleManager*/
 

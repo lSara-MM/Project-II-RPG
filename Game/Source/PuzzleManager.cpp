@@ -50,6 +50,11 @@ bool PuzzleManager::Awake(pugi::xml_node& config)
 	{
 		Dun1Awake(config);
 	}
+
+	if (app->BeastT->active)
+	{
+		Dun2Awake(config);
+	}
 	
 	return ret;
 }
@@ -59,6 +64,11 @@ bool PuzzleManager::Start()
 	if (app->hTerrors->active) 
 	{
 		Dun1Start();
+	}
+
+	if (app->BeastT->active)
+	{
+		Dun2Start();
 	}
 	
 	return true;
@@ -74,6 +84,11 @@ bool PuzzleManager::Update(float dt)
 	if(app->hTerrors->active)
 	{
 		Dun1Update();
+	}
+
+	if(app->BeastT->active)
+	{
+		Dun2Update();
 	}
 
 	return true;
@@ -93,6 +108,11 @@ bool PuzzleManager::CleanUp()
 	if(app->hTerrors->active)
 	{
 		Dun1CleanUp();
+	}
+	
+	if(app->BeastT->active)
+	{
+		Dun2CleanUp();
 	}
 
 	return true;
