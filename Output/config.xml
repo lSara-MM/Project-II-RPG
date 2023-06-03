@@ -126,13 +126,14 @@
 	<introScene background="Assets/Textures/intro_bg.png" audioIntroPath ="Assets/Audio/Music/Intro_mus.ogg"
 				settingsPath="Assets/Textures/setting_menu.png"/>
 
-  <CutScene firstImage="Assets/Textures/"
-            secondImage ="Assets/Textures/"
-				    thirdImage="Assets/Textures/"
-            fourthImage="Assets/Textures/"
-            fifthImage="Assets/Textures/"
-            sixImage="Assets/Textures/"/>
-
+  <CutScene>
+    <Img texturepath="Assets/Textures/"/>
+    <Img texturepath="Assets/Textures/"/>
+    <Img texturepath="Assets/Textures/"/>
+    <Img texturepath="Assets/Textures/"/>
+    <Img texturepath="Assets/Textures/"/>
+    <Img texturepath="Assets/Textures/"/>
+  </CutScene>
 	<HouseOfTerrors texturePathDark="Assets/Textures/OscuridadDungeon.png" musicD1="Assets/Audio/Music/Haunted_House.ogg" pause="Assets/Audio/Music/mus_pause.ogg"/>
 	<Circus musicCircus="Assets/Audio/Music/CircusTent_mus.ogg" pause="Assets/Audio/Music/mus_pause.ogg"/>
 	<PracticeTent musTent="Assets/Audio/Music/sala_Entrenamiento.ogg" pause="Assets/Audio/Music/mus_pause.ogg" texturepathDummy="Assets/Textures/dummy_mapa.png" xCollider="576" yCollider="256" widthCollider="67" heightCollider="73" mouseSpeed ="0.5"/>

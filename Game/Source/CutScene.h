@@ -41,32 +41,19 @@ public:
 
 	int passImg;
 
-	bool OnceFade;
-
 	uint32 mTicks;
 	uint32 mStartTicks;
 	uint32 DeltaTime;
 
+
+	List<SDL_Texture*> ImgToPrint;
+
+	List<const char*> NextImg;
+
+	pugi::xml_node pugiNode;
+
 private:
-	SDL_Texture* ImgToPrint;
 
-	SDL_Texture* FirstImg;
-	const char* pathFirstImg;	
-	
-	SDL_Texture* SecondtImg;
-	const char* pathSecondImg;	
-	
-	SDL_Texture* ThirdImg;
-	const char* pathThirdImg;
-
-	SDL_Texture* FourthImg;
-	const char* pathFourthImg;	
-	
-	SDL_Texture* FifthImg;
-	const char* pathFifthImg;	
-	
-	SDL_Texture* SixImg;
-	const char* pathSixImg;
 };
 
 #endif
