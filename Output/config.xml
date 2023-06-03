@@ -215,7 +215,7 @@
 
     <!--Dungeon 2-->
     <GeneralTexture texturepath="Assets/Maps/Objetos_puzzle_dungeon2.png"/>
-    <Key width="64" height="64" x="320" y="960"/>
+    <Key width="64" height="64" x="384" y="1280"/>
     <DoorDun2 width="64" height="64" x="1792" y="2112" x1="1344" y1="2368" xBoss="832" yBoss="1792"/>
     
     <Chicken width="64" height="64" x="1408" y="320" x1="512" y1="448"/>
