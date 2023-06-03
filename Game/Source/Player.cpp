@@ -560,10 +560,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		switch (physB->id)
 		{
 			case 1:
-				app->puzzleManager->BombContact1 = true;
+				if(!app->puzzleManager->BombCarryOn1)
+					app->puzzleManager->BombContact1 = true;
 				break;
 			case 2:
-				app->puzzleManager->BombContact2 = true;
+				if (!app->puzzleManager->BombCarryOn2)
+					app->puzzleManager->BombContact2 = true;
 				break;
 		}
 		break;
@@ -588,10 +590,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			app->puzzleManager->RelicColumnContact1 = true;
 			break;
 		case 2:
-			app->puzzleManager->RelicColumnContact1 = true;
+			app->puzzleManager->RelicColumnContact2 = true;
 			break;
 		case 3:
-			app->puzzleManager->RelicColumnContact1 = true;
+			app->puzzleManager->RelicColumnContact3 = true;
 			break;
 		}
 		break;
@@ -708,10 +710,12 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 		switch (physB->id)
 		{
 		case 1:
-			app->puzzleManager->BombContact1 = false;
+			if(!app->puzzleManager->BombCarryOn1)
+				app->puzzleManager->BombContact1 = false;
 			break;
 		case 2:
-			app->puzzleManager->BombContact2 = false;
+			if (!app->puzzleManager->BombCarryOn2)
+				app->puzzleManager->BombContact2 = false;
 			break;
 		}
 		break;
@@ -736,10 +740,10 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 			app->puzzleManager->RelicColumnContact1 = false;
 			break;
 		case 2:
-			app->puzzleManager->RelicColumnContact1 = false;
+			app->puzzleManager->RelicColumnContact2 = false;
 			break;
 		case 3:
-			app->puzzleManager->RelicColumnContact1 = false;
+			app->puzzleManager->RelicColumnContact3 = false;
 			break;
 		}
 		break;

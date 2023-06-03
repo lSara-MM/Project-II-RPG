@@ -273,6 +273,8 @@ bool HouseOfTerrors::CleanUp()
 	}
 
 	app->guiManager->CleanUp();
+	app->puzzleManager->Dun1CleanUp();
+	app->puzzleManager->Disable();
 	app->map->CleanUp();
 
 	return true;

@@ -206,7 +206,7 @@ bool PuzzleManager::Dun2Awake(pugi::xml_node& config)
 {
 	texturepathPuzzleDungeon2 = config.child("GeneralTexture").attribute("texturepath").as_string();
 
-	widthDoorKeys = config.child("Door").attribute("width").as_int();
+	widthDoorKeys = config.child("DoorDun2").attribute("width").as_int();
 	widthKey = config.child("Key").attribute("width").as_int();
 	widthChicken = config.child("Chicken").attribute("width").as_int();
 	widthBomb = config.child("Bomb").attribute("width").as_int();
@@ -215,7 +215,7 @@ bool PuzzleManager::Dun2Awake(pugi::xml_node& config)
 	widthRelic = config.child("Relics").attribute("width").as_int();
 	widthRelicColumn = config.child("RelicsColumns").attribute("width").as_int();	
 	
-	heightDoorKeys = config.child("Door").attribute("height").as_int();
+	heightDoorKeys = config.child("DoorDun2").attribute("height").as_int();
 	heightKey = config.child("Key").attribute("height").as_int();
 	heightChicken = config.child("Chicken").attribute("height").as_int();
 	heightBomb = config.child("Bomb").attribute("height").as_int();
@@ -224,12 +224,12 @@ bool PuzzleManager::Dun2Awake(pugi::xml_node& config)
 	heightRelic = config.child("Relics").attribute("height").as_int();
 	heightRelicColumn = config.child("RelicsColumns").attribute("height").as_int();
 
-	 posDoorkey1.x = config.child("Door").attribute("x").as_int();
-	 posDoorkey1.y = config.child("Door").attribute("y").as_int();
-	 posDoorkey2.x = config.child("Door").attribute("x1").as_int();
-	 posDoorkey2.y = config.child("Door").attribute("y1").as_int();
-	 posDoorBoss.x = config.child("Door").attribute("x2").as_int();
-	 posDoorBoss.y = config.child("Door").attribute("y2").as_int();
+	 posDoorkey1.x = config.child("DoorDun2").attribute("x").as_int();
+	 posDoorkey1.y = config.child("DoorDun2").attribute("y").as_int();
+	 posDoorkey2.x = config.child("DoorDun2").attribute("x1").as_int();
+	 posDoorkey2.y = config.child("DoorDun2").attribute("y1").as_int();
+	 posDoorBoss.x = config.child("DoorDun2").attribute("xBoss").as_int();
+	 posDoorBoss.y = config.child("DoorDun2").attribute("yBoss").as_int();
 	 posKey.x = config.child("Key").attribute("x").as_int();
 	 posKey.y = config.child("Key").attribute("y").as_int();
 	 posChicken1.x = config.child("Chicken").attribute("x").as_int();
@@ -315,9 +315,6 @@ bool PuzzleManager::Dun1Start()
 
 		Door1 = app->physics->CreateRectangle(posDoor1.x, posDoor1.y - heightHoritzontal / 2, widthHoritzontal, heightHoritzontal, bodyType::STATIC);
 		Door1->body->SetFixedRotation(true);
-
-		/*Door2 = app->physics->CreateRectangle(posDoor2.x - widthHoritzontal / 2, posDoor2.y - heightHoritzontal / 2, widthHoritzontal, heightHoritzontal, bodyType::STATIC);
-		Door2->body->SetFixedRotation(true);*/
 
 		PalancaSensor = app->physics->CreateRectangleSensor(posPalancas.x - widthPalancaSens / 2, posPalancas.y - heightPalancaSens / 2, widthPalancaSens, heightPalancaSens, bodyType::STATIC);
 		PalancaSensor->body->SetFixedRotation(true);
@@ -453,6 +450,21 @@ bool PuzzleManager::Dun2Start()
 
 	app->questManager->LoadState();
 
+	KeyD1 = { 0, 0, 64, 64};
+	KeyD2 = { 0, 0, 64, 64 };
+	BossD = { 0, 0, 64, 64 };
+	Ky = { 0, 0, 64, 64 };
+	Chick = { 0, 0, 64, 64 };
+	Bmb = { 0, 0, 64, 64 };
+	Barr1 = { 0, 0, 64, 64 };
+	Barr2 = { 0, 0, 64, 64 };
+	Rel1 = { 0, 0, 64, 64 };
+	Rel2 = { 0, 0, 64, 64 };
+	Rel3 = { 0, 0, 64, 64 };
+	Col1 = { 0, 0, 64, 64 };
+	Col2 = { 0, 0, 64, 64 };
+	Col3 = { 0, 0, 64, 64 };
+	
 	//SDL_Rect 
 	/* KeyD1
 	 KeyD2
@@ -481,7 +493,7 @@ bool PuzzleManager::Dun2Start()
 
 		if (!DoorKey2Opened)
 		{
-			DoorKey2 = app->physics->CreateRectangle(posDoorkey2.x - heightDoorKeys / 2, posDoorkey2.y - widthDoorKeys / 2, heightDoorKeys, widthDoorKeys, bodyType::STATIC);
+			DoorKey2 = app->physics->CreateRectangle(posDoorkey2.x - heightDoorKeys / 2, posDoorkey2.y - widthDoorKeys / 2, heightDoorKeys, widthDoorKeys * 2, bodyType::STATIC);
 			DoorKey2->body->SetFixedRotation(true);
 			DoorKey2->ctype = ColliderType::KEYDOOR;
 			DoorKey2->id = 2;
@@ -534,7 +546,7 @@ bool PuzzleManager::Dun2Start()
 
 	if (!relics) 
 	{
-		DoorBossP = app->physics->CreateRectangle(posDoorBoss.x - heightDoorKeys / 2, posDoorBoss.y - widthDoorKeys / 2, heightDoorKeys, widthDoorKeys, bodyType::STATIC);
+		DoorBossP = app->physics->CreateRectangle(posDoorBoss.x - heightDoorKeys / 2, posDoorBoss.y - widthDoorKeys / 2, heightDoorKeys, widthDoorKeys * 2, bodyType::STATIC);
 		DoorBossP->body->SetFixedRotation(true);
 
 		relic1 = app->physics->CreateRectangleSensor(posRelic1.x - widthRelic / 2, posRelic1.y - heightRelic / 2, widthRelic, heightRelic, bodyType::STATIC);
@@ -726,17 +738,19 @@ bool PuzzleManager::Dun2Update()
 	app->render->DrawTexture(GeneralTextureDungeon2, posChicken1.x, posChicken1.y, &Chick);
 	app->render->DrawTexture(GeneralTextureDungeon2, posChicken2.x, posChicken2.y, &Chick);
 
-	if(RelicInColumn1)
+	if (RelicInColumn1)
 	{
-		//Col1 = {};
+		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn1.x, posRelicColumn1.y, &Rel1);
 	}
-	if(RelicInColumn2)
+
+	if (RelicInColumn2)
 	{
-		//Col2 = {};
+		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn2.x, posRelicColumn2.y, &Rel2);
 	}
-	if(RelicInColumn3)
+
+	if (RelicInColumn3)
 	{
-		//Col3 = {};
+		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn3.x, posRelicColumn3.y, &Rel3);
 	}
 
 	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn1.x, posRelicColumn1.y, &Col1);
@@ -1249,7 +1263,7 @@ bool PuzzleManager::KeyDoorsPuz()
 	{
 		if(DoorContact1)
 		{
-			app->render->DrawTexture(textureE, posDoor1.x - 32, posDoor1.y - 80);
+			app->render->DrawTexture(textureE, posDoorkey1.x - 32, posDoorkey1.y - 80);
 
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 			{
@@ -1269,7 +1283,7 @@ bool PuzzleManager::KeyDoorsPuz()
 
 		if (DoorContact2)
 		{
-			app->render->DrawTexture(textureE, posDoor2.x - 32, posDoor2.y - 80);
+			app->render->DrawTexture(textureE, posDoorkey2.x - 32, posDoorkey2.y - 80);
 
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 			{
@@ -1293,10 +1307,10 @@ bool PuzzleManager::KeyDoorsPuz()
 	}
 
 	if (DoorKey1 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posDoor1.x, posDoor1.y, &KeyD1);
+		app->render->DrawTexture(GeneralTextureDungeon2, posDoorkey1.x, posDoorkey1.y, &KeyD1);
 	
 	if (DoorKey2 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posDoor2.x, posDoor2.y, &KeyD2);
+		app->render->DrawTexture(GeneralTextureDungeon2, posDoorkey2.x, posDoorkey2.y, &KeyD2);
 
 	if (DoorsOpened >= 2)
 	{
@@ -1316,32 +1330,35 @@ bool PuzzleManager::ChickenBoomPuz()
 {
 	if (BombContact1) 
 	{
-		app->render->DrawTexture(textureE, posBomb1.x - 32, posBomb1.y - 80);
-
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+		if (!BombCarryOn2)
 		{
-			BombCarryOn1 = true;
+			app->render->DrawTexture(textureE, posBomb1.x - 32, posBomb1.y - 80);
 
-			if (Bomb1 != nullptr)
-				Bomb1->body->GetWorld()->DestroyBody(Bomb1->body);
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+			{
+				BombCarryOn1 = true;
 
-			delete Bomb1;
-			Bomb1 = nullptr;
+				if (Bomb1 != nullptr)
+					Bomb1->body->GetWorld()->DestroyBody(Bomb1->body);
 
-			BombContact1 = false;
+				delete Bomb1;
+				Bomb1 = nullptr;
+
+				BombContact1 = false;
+			}
 		}
 	}
 
 	if (BombCarryOn1)
 	{
-		/*posBomb1.x = app-> ? ? ? ->player->position.x;
-		posBomb1.y = app-> ? ? ? ->player->position.y;*/
+		posBomb1.x = app->BeastT->player->position.x;
+		posBomb1.y = app->BeastT->player->position.y;
 
 		if (DeltaTime >= 5)
 		{
 			BombCarryOn1 = false;
 
-			posBomb1.x = posChicken1.x + 20;
+			posBomb1.x = posChicken1.x + 64;
 			posBomb1.y = posChicken1.y;
 
 			Bomb1 = app->physics->CreateRectangleSensor(posBomb1.x - widthBomb / 2, posBomb1.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
@@ -1412,13 +1429,8 @@ bool PuzzleManager::ChickenBoomPuz()
 	{
 		if(DeltaTime >= 2)
 		{
-			posBomb1.x = posChicken1.x + 20;
+			posBomb1.x = posChicken1.x + 64;
 			posBomb1.y = posChicken1.y;
-
-			Bomb1 = app->physics->CreateRectangleSensor(posBomb1.x - widthBomb / 2, posBomb1.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
-			Bomb1->body->SetFixedRotation(true);
-			Bomb1->ctype = ColliderType::BOMB;
-			Bomb1->id = 1;
 
 			if (BarricadeExplote1) 
 			{
@@ -1427,8 +1439,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 				delete Barricade1;
 				Barricade1 = nullptr;
-
-				BarricadesExplote += 1;
 			}
 			if (BarricadeExplote2) 
 			{
@@ -1437,8 +1447,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 				delete Barricade2;
 				Barricade2 = nullptr;
-
-				BarricadesExplote += 1;
 			}
 			if (BarricadeExplote3) 
 			{
@@ -1447,8 +1455,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 				delete Barricade3;
 				Barricade3 = nullptr;
-
-				BarricadesExplote += 1;
 			}
 			if (BarricadeExplote4) 
 			{
@@ -1457,8 +1463,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 				delete Barricade4;
 				Barricade4 = nullptr;
-
-				BarricadesExplote += 1;
 			}
 			if (BarricadeExplote5) 
 			{
@@ -1467,12 +1471,17 @@ bool PuzzleManager::ChickenBoomPuz()
 
 				delete Barricade5;
 				Barricade5 = nullptr;
-
-				BarricadesExplote += 1;
 			}
 
 			RestartTimer();
 			BombPlant1 = false;
+
+			Bomb1 = app->physics->CreateRectangleSensor(posBomb1.x - widthBomb / 2, posBomb1.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
+			Bomb1->body->SetFixedRotation(true);
+			Bomb1->ctype = ColliderType::BOMB;
+			Bomb1->id = 1;
+
+			BarricadesExplote += 1;
 
 			app->questManager->SaveState();
 		}
@@ -1480,38 +1489,42 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombContact2)
 	{
-		app->render->DrawTexture(textureE, posBomb2.x - 32, posBomb2.y - 80);
-
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+		if (!BombCarryOn1)
 		{
-			BombCarryOn2 = true;
+			app->render->DrawTexture(textureE, posBomb2.x - 32, posBomb2.y - 80);
 
-			if (Bomb2 != nullptr)
-				Bomb2->body->GetWorld()->DestroyBody(Bomb2->body);
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+			{
+				BombCarryOn2 = true;
 
-			delete Bomb2;
-			Bomb2 = nullptr;
+				if (Bomb2 != nullptr)
+					Bomb2->body->GetWorld()->DestroyBody(Bomb2->body);
 
-			BombContact2 = false;
+				delete Bomb2;
+				Bomb2 = nullptr;
+
+				BombContact2 = false;
+			}
 		}
 	}
 
 	if (BombCarryOn2)
 	{
-		/*posBomb1.x = app-> ? ? ? ->player->position.x;
-		posBomb1.y = app-> ? ? ? ->player->position.y;*/
+		posBomb1.x = app->BeastT->player->position.x;
+		posBomb1.y = app->BeastT->player->position.y;
 
 		if (DeltaTime >= 5)
 		{
 			BombCarryOn2 = false;
 
-			posBomb2.x = posChicken2.x + 20;
+
+			posBomb2.x = posChicken2.x + 64;
 			posBomb2.y = posChicken2.y;
 
 			Bomb2 = app->physics->CreateRectangleSensor(posBomb2.x - widthBomb / 2, posBomb2.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
 			Bomb2->body->SetFixedRotation(true);
 			Bomb2->ctype = ColliderType::BOMB;
-			Bomb2->id = 1;
+			Bomb2->id = 2;
 
 			RestartTimer();
 		}
@@ -1576,13 +1589,8 @@ bool PuzzleManager::ChickenBoomPuz()
 	{
 		if (DeltaTime >= 2)
 		{
-			posBomb2.x = posChicken2.x + 20;
+			posBomb2.x = posChicken2.x + 64;
 			posBomb2.y = posChicken2.y;
-
-			Bomb2 = app->physics->CreateRectangleSensor(posBomb2.x - widthBomb / 2, posBomb2.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
-			Bomb2->body->SetFixedRotation(true);
-			Bomb2->ctype = ColliderType::BOMB;
-			Bomb2->id = 1;
 
 			if (BarricadeExplote1)
 			{
@@ -1591,8 +1599,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 				delete Barricade1;
 				Barricade1 = nullptr;
-
-				BarricadesExplote += 1;
 			}
 			if (BarricadeExplote2)
 			{
@@ -1601,8 +1607,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 				delete Barricade2;
 				Barricade2 = nullptr;
-
-				BarricadesExplote += 1;
 			}
 			if (BarricadeExplote3)
 			{
@@ -1611,8 +1615,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 				delete Barricade3;
 				Barricade3 = nullptr;
-
-				BarricadesExplote += 1;
 			}
 			if (BarricadeExplote4)
 			{
@@ -1621,8 +1623,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 				delete Barricade4;
 				Barricade4 = nullptr;
-
-				BarricadesExplote += 1;
 			}
 			if (BarricadeExplote5)
 			{
@@ -1631,12 +1631,17 @@ bool PuzzleManager::ChickenBoomPuz()
 
 				delete Barricade5;
 				Barricade5 = nullptr;
-
-				BarricadesExplote += 1;
 			}
 
 			RestartTimer();
 			BombPlant2 = false;
+
+			Bomb2 = app->physics->CreateRectangleSensor(posBomb2.x - widthBomb / 2, posBomb2.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
+			Bomb2->body->SetFixedRotation(true);
+			Bomb2->ctype = ColliderType::BOMB;
+			Bomb2->id = 2;
+
+			BarricadesExplote += 1;
 
 			app->questManager->SaveState();
 		}
@@ -1666,6 +1671,18 @@ bool PuzzleManager::ChickenBoomPuz()
 
 		BarricadesExplote = 0;
 
+		if (Bomb1!= nullptr)
+			Bomb1->body->GetWorld()->DestroyBody(Bomb1->body);
+
+		delete Bomb1;
+		Bomb1 = nullptr;
+
+		if (Bomb2 != nullptr)
+			Bomb2->body->GetWorld()->DestroyBody(Bomb2->body);
+
+		delete Bomb2;
+		Bomb2 = nullptr;
+
 		app->questManager->SaveState();
 	}
 
@@ -1676,7 +1693,7 @@ bool PuzzleManager::RelicsPuz()
 {
 	if (RelicContact1) 
 	{
-		app->render->DrawTexture(textureE, posRelic1.x - 32, posRelic1.y - 80);
+		app->render->DrawTexture(textureE, posRelicColumn1.x - 32, posRelicColumn1.y - 80);
 
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
@@ -1695,7 +1712,7 @@ bool PuzzleManager::RelicsPuz()
 
 	if (RelicContact2) 
 	{
-		app->render->DrawTexture(textureE, posRelic2.x - 32, posRelic2.y - 80);
+		app->render->DrawTexture(textureE, posRelicColumn2.x - 32, posRelicColumn2.y - 80);
 
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
@@ -1714,7 +1731,7 @@ bool PuzzleManager::RelicsPuz()
 	
 	if (RelicContact3) 
 	{
-		app->render->DrawTexture(textureE, posRelic3.x - 32, posRelic3.y - 80);
+		app->render->DrawTexture(textureE, posRelicColumn3.x - 32, posRelicColumn3.y - 80);
 
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
@@ -1755,7 +1772,7 @@ bool PuzzleManager::RelicsPuz()
 	{
 		app->render->DrawTexture(GeneralTextureDungeon2, posRelic1.x, posRelic1.y, &Rel1);
 	}
-	
+
 	if (Relic2Invent) 
 	{
 		if (RelicColumnContact2)
@@ -1780,7 +1797,7 @@ bool PuzzleManager::RelicsPuz()
 	{
 		app->render->DrawTexture(GeneralTextureDungeon2, posRelic2.x, posRelic2.y, &Rel2);
 	}	
-	
+
 	if (Relic3Invent) 
 	{
 		if (RelicColumnContact3)
