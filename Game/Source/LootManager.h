@@ -184,12 +184,88 @@ public:
 				switch (random)
 				{
 				case 0:
+					itemLoot->ID = 107;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Coral";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 102;
+					itemLoot->quantity = 1;
+					itemLoot->name = "Amber";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 101;
+					itemLoot->quantity = 1;
+					itemLoot->name = "Onyx";
+
+					lootTableID.push_back(*itemLoot);
 					break;
 				case 1:
+					itemLoot->ID = 97;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Steel";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 95;
+					itemLoot->quantity = 3;
+					itemLoot->name = "Iron";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 99;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Rope";
+
+					lootTableID.push_back(*itemLoot);
 					break;
 				case 2:
+					itemLoot->ID = 93;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Wood";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 95;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Iron";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 98;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Rope";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 101;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Onyx";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 102;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Amber";
+
+					lootTableID.push_back(*itemLoot);
+
 					break;
 				case 3:
+					itemLoot->ID = 107;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Coral";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 96;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Steel";
+
+					lootTableID.push_back(*itemLoot);
+
 					break;
 				}
 
@@ -245,8 +321,44 @@ public:
 				switch (random)
 				{
 				case 0:
+					itemLoot->ID = 105;
+					itemLoot->quantity = 1;
+					itemLoot->name = "Jade";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 104;
+					itemLoot->quantity = 1;
+					itemLoot->name = "Diamond";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 103;
+					itemLoot->quantity = 1;
+					itemLoot->name = "Emerald";
+
+					lootTableID.push_back(*itemLoot);
+
 					break;
 				case 1:
+					itemLoot->ID = 97;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Titanium";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 108;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Pearl";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 106;
+					itemLoot->quantity = 2;
+					itemLoot->name = "Amethyst";
+
+					lootTableID.push_back(*itemLoot);
+
 					break;
 				}
 				break;
@@ -375,8 +487,13 @@ class Chest
 
 				SDL_Rect rect = currentAnimation->GetCurrentFrame();
 				app->render->DrawTexture(texture, x, y, &rect);
+			}else if (dungeon == ChestDungeon::BEASTS && app->BeastT->active == true)
+			{
+				currentAnimation->Update();
+
+				SDL_Rect rect = currentAnimation->GetCurrentFrame();
+				app->render->DrawTexture(texture, x, y, &rect);
 			}
-			//TODO beasts dungeon
 
 			if (currentAnimation == &openAnim && currentAnimation->HasFinished())
 			{
