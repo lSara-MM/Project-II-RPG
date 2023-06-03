@@ -381,7 +381,14 @@ public:
 
 			app->SaveGameRequest();
 
-			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 5);
+			if (dungeon == ChestDungeon::TERRORS)
+			{
+				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 5);
+			}
+			else
+			{
+				app->fade->FadingToBlack((Module*)app->BeastT, (Module*)app->combat, 5);
+			}
 			app->puzzleManager->Disable();
 			app->hTerrors->steps_I = 0;
 		}
