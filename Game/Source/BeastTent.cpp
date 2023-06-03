@@ -32,7 +32,7 @@ using namespace std;
 
 BeastTent::BeastTent() : Module()
 {
-	name.Create("HouseOfTerrors");
+	name.Create("BeastTent");
 }
 
 BeastTent::~BeastTent()
