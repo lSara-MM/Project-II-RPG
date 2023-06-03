@@ -125,6 +125,7 @@
     <ClCompile Include="Source\Store.cpp" />
     <ClCompile Include="Source\CutScene.cpp" />
     <ClCompile Include="Source\BeastTent.cpp" />
+    <ClCompile Include="Source\Forge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -290,6 +291,7 @@
     <ClInclude Include="Source\Store.h" />
     <ClInclude Include="Source\CutScene.h" />
     <ClInclude Include="Source\BeastTent.h" />
+    <ClInclude Include="Source\Forge.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
