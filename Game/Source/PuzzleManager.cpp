@@ -450,36 +450,17 @@ bool PuzzleManager::Dun2Start()
 
 	app->questManager->LoadState();
 
-	KeyD1 = { 0, 0, 64, 64};
-	KeyD2 = { 0, 0, 64, 64 };
-	BossD = { 0, 0, 64, 64 };
-	Ky = { 0, 0, 64, 64 };
-	Chick = { 0, 0, 64, 64 };
+	KeyD1 = { 64, 128, 64, 64};
+	KeyD2 = { 384, 0, 64, 256 };
+	BossD = { 320, 0, 64, 256 };
+	Ky = { 256, 128, 64, 64 };
+	Chick = { 64, 64, 64, 64 };
 	Bmb = { 0, 64, 64, 64 };
 	Barr1 = { 0, 0, 64, 64 };
-	Barr2 = { 0, 0, 64, 64 };
-	Rel1 = { 0, 0, 64, 64 };
-	Rel2 = { 0, 0, 64, 64 };
-	Rel3 = { 0, 0, 64, 64 };
-	Col1 = { 0, 0, 64, 64 };
-	Col2 = { 0, 0, 64, 64 };
-	Col3 = { 0, 0, 64, 64 };
-	
-	//SDL_Rect 
-	/* KeyD1
-	 KeyD2
-	 BossD
-	 Ky
-	 Chick
-	 Bmb
-	 Barr1
-	 Barr2
-	 Rel1
-	 Rel2
-	 Rel3
-	 Col1
-	 Col2
-	 Col3*/
+	Barr2 = { 128, 64, 128, 128 };
+	Rel1 = { 256, 64, 64, 64 };
+	Rel3 = { 0, 128, 64, 64 };
+	Rel2 = { 256, 0, 64, 64 };
 
 	if(!keyDoors)
 	{
@@ -753,10 +734,6 @@ bool PuzzleManager::Dun2Update()
 		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn3.x, posRelicColumn3.y, &Rel3);
 	}
 
-	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn1.x, posRelicColumn1.y, &Col1);
-	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn2.x, posRelicColumn2.y, &Col2);
-	app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn3.x, posRelicColumn3.y, &Col3);
-	
 	if (BombPlant1 || BombPlant2 || BombCarryOn1 || BombCarryOn2)
 	{
 		mTicks = SDL_GetTicks() - mStartTicks;
@@ -1337,6 +1314,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 			{
 				BombCarryOn1 = true;
+				RestartTimer();
 
 				if (Bomb1 != nullptr)
 					Bomb1->body->GetWorld()->DestroyBody(Bomb1->body);
@@ -1496,6 +1474,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 			{
 				BombCarryOn2 = true;
+				RestartTimer();
 
 				if (Bomb2 != nullptr)
 					Bomb2->body->GetWorld()->DestroyBody(Bomb2->body);
@@ -1510,8 +1489,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombCarryOn2)
 	{
-		posBomb1.x = app->BeastT->player->position.x;
-		posBomb1.y = app->BeastT->player->position.y;
+		posBomb2.x = app->BeastT->player->position.x;
+		posBomb2.y = app->BeastT->player->position.y;
 
 		if (DeltaTime >= 5)
 		{
@@ -1661,6 +1640,17 @@ bool PuzzleManager::ChickenBoomPuz()
 	
 	if (Barricade5 != nullptr)
 		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade5.x, posBarricade5.y, &Barr2);
+
+	if(!BombCarryOn1 && !BombPlant1)
+	{
+		posBomb1.x = posChicken1.x + 64;
+		posBomb1.y = posChicken1.y;
+	}	
+	if(!BombCarryOn2 && !BombPlant2)
+	{
+		posBomb2.x = posChicken2.x + 64;
+		posBomb2.y = posChicken2.y;
+	}
 
 	app->render->DrawTexture(GeneralTextureDungeon2, posBomb1.x, posBomb1.y, &Bmb);
 	app->render->DrawTexture(GeneralTextureDungeon2, posBomb2.x, posBomb2.y, &Bmb);

@@ -291,9 +291,6 @@ public:
 	SDL_Rect Rel1;
 	SDL_Rect Rel2;
 	SDL_Rect Rel3;
-	SDL_Rect Col1;
-	SDL_Rect Col2;
-	SDL_Rect Col3;
 
 	uint32 mTicks;
 	uint32 mStartTicks;
