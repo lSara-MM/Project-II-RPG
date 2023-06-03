@@ -28,28 +28,18 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
+	void IsForge(int ID0, int ID1);
+
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 public:
-
-	SDL_Texture* inventory;
-	SDL_Texture* potion;
-
 	unsigned cap;
 	int y;
 
-	GuiButton* buyButton;
-	GuiButton* closeStore;
-	GuiButton* Add;
-	GuiButton* Minus;
-
-	Tween inventoryAnimation;//animacion inventario
-	bool inventoryTransition_B;//controlar animacion inventario
+	GuiButton* forgeButton;
+	GuiButton* exitButton;
 
 private:
-
-	int SellQuantity = 0;
-	int CurrentPrice = 0;
 
 };
 
