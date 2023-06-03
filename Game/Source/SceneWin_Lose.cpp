@@ -95,7 +95,7 @@ bool SceneWin_Lose::Update(float dt)
 			app->questManager->SaveState();
 		}
 	}
-	if (!win)
+	else
 	{
 		app->audio->PlayMusic(looseMusicPath);
 		app->render->DrawTexture(Lose, 0, offset + point * (0 - offset));

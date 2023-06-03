@@ -572,18 +572,13 @@ bool Combat::InitEnemies(vector<int> arr)
 				// if list enemies full, stop checking pugi
 				if (vecEnemies.size() == arr.size()) 
 				{
-					//PRUEBA
 					vecSetEnemies.clear();
 					vecSetEnemies.shrink_to_fit();
-					//PRUEBA
 					return true;
 				}
 			}
 		}
 	}
-
-	vecSetEnemies.clear();
-	vecSetEnemies.shrink_to_fit();
 
 	return true;
 }
