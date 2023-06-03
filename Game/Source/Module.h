@@ -60,7 +60,7 @@ public:
 	}
 
 	//virtual methods to LoadState / SaveState
-	virtual bool LoadState(pugi::xml_node&)
+	virtual bool LoadState(pugi::xml_node&, Module* module = nullptr)
 	{
 		return true;
 	}

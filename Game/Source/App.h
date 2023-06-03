@@ -28,6 +28,7 @@ class DialogueSystem;
 class GuiManager;
 class Inventory;
 class Store;
+class Forge;
 
 class Map;
 class PathFinding;
@@ -81,7 +82,7 @@ public:
 
 	void LoadGameRequest();
 	void SaveGameRequest() ;
-	bool LoadFromFile();
+	bool LoadFromFile(Module* module = nullptr);
 	bool SaveToFile() ;
 
 private:
@@ -125,6 +126,7 @@ public:
 	GuiManager* guiManager;
 	Inventory* inventory;
 	Store* store;
+	Forge* forge;
 	
 	Map* map;
 	PathFinding* pathfinding;

@@ -306,7 +306,7 @@ bool IntroScene::CleanUp()
 	return true;
 }
 
-bool IntroScene::LoadState(pugi::xml_node& data)
+bool IntroScene::LoadState(pugi::xml_node& data, Module* module)
 {
 	previousGame_B = data.child("previousGame").attribute("state_B").as_bool();
 
@@ -368,7 +368,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		app->itemManager->loadParty_B = true;
 		app->combat->firstCombat_B = false;
 		app->input->coso = true;
-		app->LoadGameRequest();
+		app->LoadFromFile(this);
 		continueGame_B = true;
 		break;
 	case 3:

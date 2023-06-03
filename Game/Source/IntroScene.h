@@ -44,7 +44,7 @@ public:
 	bool OnGuiMouseHoverEvent(GuiControl* control);
 
 	//Load / Save methods
-	bool LoadState(pugi::xml_node&);
+	bool LoadState(pugi::xml_node&, Module* module = nullptr);
 	bool SaveState(pugi::xml_node&);
 
 public:

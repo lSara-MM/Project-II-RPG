@@ -113,7 +113,9 @@ bool SceneWin_Lose::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 	{
-		switch (app->itemManager->comb)
+		app->LoadFromFile(this);
+
+		/*switch (app->itemManager->comb)
 		{
 		case 0:
 			app->fade->FadingToBlack(this, (Module*)app->scene, 5);
@@ -124,7 +126,7 @@ bool SceneWin_Lose::Update(float dt)
 		case 2:
 			app->fade->FadingToBlack(this, (Module*)app->hTerrors, 5);
 			break;
-		}
+		}*/
 	}
 
 	return true;

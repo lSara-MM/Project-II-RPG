@@ -12,7 +12,9 @@
 #include "BeastTent.h"
 #include "PracticeTent.h"
 #include "Circus.h"
+#include "SceneWin_Lose.h"
 #include "Combat.h"
+
 
 #include "ItemManager.h"
 #include "PuzzleManager.h"
@@ -163,35 +165,40 @@ bool EntityManager::Update(float dt)
 	return ret;
 }
 
-bool EntityManager::LoadState(pugi::xml_node& data)
+bool EntityManager::LoadState(pugi::xml_node& data, Module* module_)
 {
 	app->input->sceneNameSaved = data.child("player").attribute("name").as_string();
 	app->input->posX = data.child("player").attribute("x").as_int();
 	app->input->posY = data.child("player").attribute("y").as_int();
 
+	// TO DO: delete if win/lose scene runs well
+	int fadeTime = 0;
+	if (strcmp(app->input->sceneNameSaved.c_str(), app->sceneWin_Lose->name.GetString()) == 0) { fadeTime = 5; }
+
+
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->scene->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->iScene, (Module*)app->scene, 90);
+		app->fade->FadingToBlack(module_, (Module*)app->scene, fadeTime);
 	}
 
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->circus->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->iScene, (Module*)app->circus, 90);
+		app->fade->FadingToBlack(module_, (Module*)app->circus, fadeTime);
 	}
 
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->practiceTent->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->iScene, (Module*)app->practiceTent, 90);
+		app->fade->FadingToBlack(module_, (Module*)app->practiceTent, fadeTime);
 	}
 
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->hTerrors->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->iScene, (Module*)app->hTerrors, 90);
+		app->fade->FadingToBlack(module_, (Module*)app->hTerrors, fadeTime);
 	}
 
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->BeastT->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->iScene, (Module*)app->BeastT, 90);
+		app->fade->FadingToBlack(module_, (Module*)app->BeastT, fadeTime);
 	}
 
 	return true;

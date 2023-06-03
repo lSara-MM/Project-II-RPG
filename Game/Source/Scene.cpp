@@ -95,9 +95,6 @@ bool Scene::Start()
 	settings_B = false;
 
 	InitEntities();
-
-	player->lockMovement = false;
-
 	app->entityManager->Enable();
 
 
