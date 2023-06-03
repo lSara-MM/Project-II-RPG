@@ -110,14 +110,14 @@ bool Scene::Start()
 	//GUARRADA SUPER TEMPORAL
 	app->itemManager->comb = 0;
 
-	//CleanUp chests
-	for (int i = 0; i < app->lootManager->chests.size(); i++)
-	{
-		if (app->lootManager->chests[i]->used == false)
-		{
-			app->lootManager->chests[i]->CleanUp();
-		}
-	}
+	////CleanUp chests
+	//for (int i = 0; i < app->lootManager->chests.size(); i++)
+	//{
+	//	if (app->lootManager->chests[i]->used == false)
+	//	{
+	//		app->lootManager->chests[i]->CleanUp();
+	//	}
+	//}
 
 	// If se ha guardado anteriormente, teleport el player donde estaba en el guardado
 	if (app->input->coso)

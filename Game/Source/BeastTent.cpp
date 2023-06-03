@@ -104,7 +104,6 @@ bool BeastTent::Start()
 		combatEnd = false;
 	}
 
-
 	//GUARRADA SUPER TEMPORAL
 	app->itemManager->comb = 2;
 

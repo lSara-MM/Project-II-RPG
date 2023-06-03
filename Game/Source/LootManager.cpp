@@ -56,6 +56,11 @@ bool LootManager::Update(float dt)
 		if (chests[i]->used == false)
 		{
 			chests[i]->Update(dt);
+
+			if ((chests[i]->dungeon == ChestDungeon::BEASTS && app->BeastT->active == false) || (chests[i]->dungeon == ChestDungeon::TERRORS && app->hTerrors->active == false))
+			{
+				chests[i]->CleanUp();
+			}
 		}
 	}
 
