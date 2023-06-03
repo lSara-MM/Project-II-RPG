@@ -106,6 +106,7 @@ bool Store::PostUpdate()
 				x = 0;
 			}
 			app->itemManager->LoadStoreItems(x, y, app->itemManager->nodeList[i]);
+
 			x++;
 		}
 	}
@@ -130,11 +131,18 @@ bool Store::PostUpdate()
 
 	string c = to_string(CurrentPrice);
 	buyButton->text = c.c_str();
-	if (app->itemManager->coins < CurrentPrice) { buyButton->color = { 230, 33, 33 }; }
+	if (app->itemManager->coins < CurrentPrice && buyButton->buttonType == ButtonType::BUYITEM) { buyButton->color = { 230, 33, 33 }; }
+	else if (buyButton->buttonType == ButtonType::SELLITEM) { buyButton->color = { 100, 250, 90 }; }
 	else { buyButton->color = { 0, 0, 0 }; }
 
 	string h = to_string(SellQuantity);
 	app->render->TextDraw(h.c_str(), 250, 550, 40, Font::TEXT, { 255, 255, 255 });
+
+	app->render->DrawTexture(app->itemManager->coinTexture, 1150 - app->render->camera.x, 180 - app->render->camera.y);
+
+	string cn = to_string(app->itemManager->coins);
+	app->render->TextDraw(cn.c_str(), 1125, 180, 25, Font::TEXT, { 255, 255, 255 });
+
 
 	if ( app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == ButtonState::BUTTON_DOWN)//con mando es bastante molesto tener que ir con el mouse al boton de cerrar
 	{
@@ -163,6 +171,9 @@ bool Store::CleanUp()
 	app->guiManager->DestroyGuiControl(closeStore);
 	app->guiManager->DestroyGuiControl(Add);
 	app->guiManager->DestroyGuiControl(Minus);
+
+	CurrentPrice = 0;
+	SellQuantity = 0;
 
 	app->tex->UnLoad(inventory);
 	app->tex->UnLoad(potion);
@@ -296,7 +307,7 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 				}
 				else
 				{
-					SellQuantity++;
+					SellQuantity--;
 					if (SellQuantity <= 0)
 					{
 						app->itemManager->nodeList[i]->toSell = false;

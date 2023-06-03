@@ -115,12 +115,16 @@ public:
 	ItemNode* tree = new ItemNode;
 
 	SDL_Texture* itemsTexture;
+	SDL_Texture* coinTexture;
+	SDL_Texture* SmallcoinTexture;
 
 	SString itemPath;
 
 	const char* texturePath;
 	const char* textureInventoryPath;
 	const char* texturePotionsPath;
+	const char* coinPath;
+	const char* smallcoinPath;
 
 	vector <ItemNode*> nodeList;
 	vector <ItemNode*> armorItems;

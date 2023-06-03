@@ -27,6 +27,8 @@ bool ItemManager::Awake(pugi::xml_node& config)
 	texturePath = config.attribute("inventorypath").as_string();
 	textureInventoryPath = config.attribute("inventorystorepath").as_string();
 	texturePotionsPath = config.attribute("potionstorepath").as_string();
+	coinPath = config.attribute("coinpath").as_string();
+	smallcoinPath = config.attribute("smallcoinpath").as_string();
 
 	itemPath = config.attribute("itempath").as_string();
 
@@ -51,6 +53,8 @@ bool ItemManager::Start()
 	LoadItems();
 	
 	itemsTexture = app->tex->Load(itemPath.GetString());
+	coinTexture = app->tex->Load(coinPath);
+	SmallcoinTexture = app->tex->Load(smallcoinPath);
 
 	return true;
 }
@@ -87,7 +91,13 @@ bool ItemManager::CleanUp()
 	vecPC.shrink_to_fit();
 
 	app->tex->UnLoad(itemsTexture);
-	itemsTexture = NULL;
+	itemsTexture = NULL;	
+	
+	app->tex->UnLoad(coinTexture);
+	coinTexture = NULL;	
+	
+	app->tex->UnLoad(SmallcoinTexture);
+	SmallcoinTexture = NULL;
 
 	return true;
 }
@@ -446,9 +456,10 @@ void ItemManager::LoadSellItems(int x, int y, ItemNode* item)
 
 		LoadStoreButtons(x, y, item);
 
-		app->render->DrawTexture(itemsTexture, (800 + (69 * x)) - app->render->camera.x, 180 + y - app->render->camera.y, &seccion);
+		app->render->DrawTexture(itemsTexture, (800 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
 		string c = to_string(item->price);
-		app->render->TextDraw(c.c_str(), 800 + (69 * x), y + 220, 20, Font::TEXT, { 0, 0, 0 });
+		app->render->DrawTexture(app->itemManager->SmallcoinTexture, 800 + (69 * x) + 45 - app->render->camera.x, y + 250 - app->render->camera.y);
+		app->render->TextDraw(c.c_str(), 800 + (69 * x), y + 240, 20, Font::TEXT, { 0, 0, 0 });
 	}
 
 }
@@ -462,7 +473,7 @@ void ItemManager::LoadStoreItems(int x, int y, ItemNode* item)
 
 		app->render->DrawTexture(itemsTexture, (200 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
 		string c = to_string(item->price);
-
+		app->render->DrawTexture(app->itemManager->SmallcoinTexture, 200 + (69 * x) + 45 - app->render->camera.x, y + 250 - app->render->camera.y);
 		app->render->TextDraw(c.c_str(), (200 + (69 * x)), y + 240, 20, Font::TEXT, { 0, 0, 0 });
 	}
 }
@@ -491,7 +502,7 @@ void ItemManager::LoadStoreButtons(int x, int y, ItemNode* item)
 	}
 	else
 	{
-		buttonBounds = { (800 + (69 * x)), 180 + y, 64, 64 };
+		buttonBounds = { (800 + (69 * x)), 200 + y, 64, 64 };
 	}
 
 	if (item->toSell)
