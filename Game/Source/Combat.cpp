@@ -87,7 +87,6 @@ bool Combat::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-
 	app->physics->Disable();
 	app->entityManager->active = true;
 
@@ -571,7 +570,14 @@ bool Combat::InitEnemies(vector<int> arr)
 				}
 
 				// if list enemies full, stop checking pugi
-				if (vecEnemies.size() == arr.size())	return true;
+				if (vecEnemies.size() == arr.size()) 
+				{
+					//PRUEBA
+					vecSetEnemies.clear();
+					vecSetEnemies.shrink_to_fit();
+					//PRUEBA
+					return true;
+				}
 			}
 		}
 	}
