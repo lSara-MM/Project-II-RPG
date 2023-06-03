@@ -421,7 +421,7 @@ bool Character::Update(float dt)
 									{
 										if (CalculateRandomProbability(probSkill) && listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Preparar asesinato
 										{
-											//usar skill 0 (ataque basico)
+											//usar skill 1(0) (ataque basico)
 											UseSkill(listSkills.At(0)->data);
 
 											listSkillsHistory.Add(1);
@@ -432,6 +432,75 @@ bool Character::Update(float dt)
 							}
 							break;
 						case CharacterClass::AOE_DPS:
+
+							//Si uso el ataque tocho pues necesita descansar un turno
+							if (listSkillsHistory.end->data==4)
+							{
+								listSkillsHistory.Add(0);
+							}
+							else
+							{
+								//Posicion jodida
+								if (listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
+								{
+									//usar skill 3(2) (ataque debil por no posicionado)
+									UseSkill(listSkills.At(2)->data);
+
+									listSkillsHistory.Add(3);
+									break;
+								}
+								else // Posicion habilitada para funcionar
+								{
+									probSkill = 65;
+									for (int i = listSkillsHistory.Count() - 1; i > 0; i--)
+									{
+										if (listSkillsHistory.At(i)->data == 2)
+										{
+											//Por cada vez que se uso seguidamente la skill 2(1) menos probable usarla de nuevo
+											probSkill -= 35;
+										}
+										else
+										{
+											break;
+										}
+									}
+									if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I)) //Preparar asesinato
+									{
+										//usar skill 2(1) (cargar)
+										UseSkill(listSkills.At(1)->data);
+
+										listSkillsHistory.Add(2);
+										break;
+									}
+									else
+									{
+										if (listSkillsHistory.end->data == 2)
+										{
+											probSkill = 85;
+										}
+										else
+										{
+											probSkill = 30;
+										}
+										if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque en area tocho
+										{
+											//usar skill 2(1) (cargar)
+											UseSkill(listSkills.At(1)->data);
+
+											listSkillsHistory.Add(2);
+											break;
+										}
+										else if( listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque basico
+										{
+											//usar skill 1(0) (basic attack)
+											UseSkill(listSkills.At(0)->data);
+
+											listSkillsHistory.Add(1);
+											break;
+										}
+									}
+								}
+							}
 							break;
 						case CharacterClass::HEALER:
 							//Mirar si hay alguien esta  muy herido
