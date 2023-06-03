@@ -381,13 +381,13 @@ bool Character::Update(float dt)
 								}
 								else
 								{
-									if (listSkillsHistory.end->data == 3)
+									if (listSkillsHistory.end->data == 3) //Si uso debuffo pues prepara asesinato
 									{
-										probSkill = 90;
+										probSkill = 120;
 									}
 									else
 									{
-										probSkill = 40;
+										probSkill = 50;
 									}
 								}
 								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I)) //Preparar asesinato
@@ -401,7 +401,7 @@ bool Character::Update(float dt)
 								else //Usar ataque basico o debuffo
 								{
 									//Probabilidad usar debuff
-									if (listSkillsHistory.end->data==0) //Si uso el ataque basico
+									if (listSkillsHistory.end->data==1) //Si uso el ataque basico
 									{
 										probSkill = 80;
 									}
@@ -434,6 +434,80 @@ bool Character::Update(float dt)
 						case CharacterClass::AOE_DPS:
 							break;
 						case CharacterClass::HEALER:
+							//Mirar si hay alguien esta  muy herido
+							probSkill = 0;
+							for (int i = 0; i < app->combat->vecEnemies.size(); i++)
+							{
+								if (app->combat->vecEnemies.at(i)->currentHp == app->combat->vecEnemies.at(i)->maxHp / 4) //Muy mal de vida
+								{
+									probSkill = 100; //Si un aliado esta muy herido es "garantizado" que intente usar la cura unitaria
+								}
+								else if (app->combat->vecEnemies.at(i)->currentHp == app->combat->vecEnemies.at(i)->maxHp / 2 && probSkill==0) //Algo mal de vida
+								{
+									probSkill = 40;
+								}
+							}
+							//Usar cura unitaria (en el aliado mas herido), no la puede usar dos veces seguidas
+							if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I) && listSkillsHistory.end->data != 2)
+							{
+								//Usar cura unitaria 2(1)
+								UseSkill(listSkills.At(1)->data);
+
+								listSkillsHistory.Add(2);
+							}
+							else
+							{
+								//Probabilidad usar heal area
+								if (listSkillsHistory.end->data == 2) //Uso cura unitaria turno anterior
+								{
+									// 0, 12, 25
+									probSkill /= 4;
+								}
+								else
+								{
+									//10, 30 0 60
+									probSkill /= 2; 
+									probSkill += 10;
+								}
+								if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+								{
+									//Usar cura en area 4(3)
+									UseSkill(listSkills.At(3)->data);
+
+									listSkillsHistory.Add(4);
+								}
+								else
+								{
+									if (listSkillsHistory.end->data==3)
+									{
+										probSkill = 0;
+									}
+									else if(listSkillsHistory.end->prev->data == 3)
+									{
+										probSkill = 20;
+									}
+									else
+									{
+										probSkill = 45;
+									}
+									if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//Usar gimmick propia 3(2)
+										UseSkill(listSkills.At(2)->data);
+
+										listSkillsHistory.Add(3);
+									}
+									else if ( listSkills.At(0)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//Usar basic attack 1(0)
+										UseSkill(listSkills.At(0)->data);
+
+										listSkillsHistory.Add(1);
+									}
+								}
+
+							}
+
 							break;
 						case CharacterClass::TANK:
 						{
