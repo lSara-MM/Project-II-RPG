@@ -59,6 +59,16 @@ bool Inventory::PreUpdate()
 
 bool Inventory::Update(float dt)
 {
+	if (inventoryTransition_B)
+	{
+		inventoryAnimation.Backward();
+	}
+	else
+	{
+		inventoryAnimation.Foward();
+	}
+	inventoryAnimation.Step(2, false);
+
 	float point = inventoryAnimation.GetPoint();
 	int offset = -1300;
 
@@ -68,6 +78,8 @@ bool Inventory::Update(float dt)
 	}
 	else
 	{
+		y = 148;
+
 		app->render->DrawTexture(inventoryIMG, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
 
 		//Print Character
@@ -78,8 +90,6 @@ bool Inventory::Update(float dt)
 			app->tex->UnLoad(playerTexture);
 			playerTexture = NULL;
 		}
-
-		y = 148;
 	}
 	bool ret = true;
 
@@ -124,16 +134,6 @@ bool Inventory::PostUpdate()
 			}
 		}
 	}
-
-	if (inventoryTransition_B)
-	{
-		inventoryAnimation.Backward();
-	}
-	else
-	{
-		inventoryAnimation.Foward();
-	}
-	inventoryAnimation.Step(2, false);
 
 	float point = inventoryAnimation.GetPoint();
 	int offset = -1300;
