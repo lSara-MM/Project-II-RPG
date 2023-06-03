@@ -28,6 +28,7 @@ class DialogueSystem;
 class GuiManager;
 class Inventory;
 class Store;
+class Forge;
 
 class Map;
 class PathFinding;
@@ -125,6 +126,7 @@ public:
 	GuiManager* guiManager;
 	Inventory* inventory;
 	Store* store;
+	Forge* forge;
 	
 	Map* map;
 	PathFinding* pathfinding;

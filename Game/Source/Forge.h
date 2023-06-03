@@ -1,5 +1,5 @@
-#ifndef __STORE_H__
-#define __STORE_H__
+#ifndef __FORGE_H__
+#define __FORGE_H__
 
 #include "Module.h"
 #include "Entity.h"
@@ -13,13 +13,13 @@
 using namespace std;
 
 // Module --------------------------------------
-class Store : public Module
+class Forge : public Module
 {
 public:
 
 	// Constructors & Destructors
-	Store(unsigned cap = 5);
-	~Store();
+	Forge(unsigned cap = 8);
+	~Forge();
 
 	// Main module steps
 	bool Start();
@@ -53,4 +53,4 @@ private:
 
 };
 
-#endif // __STORE_H__
+#endif // __FORGE_H__

@@ -29,6 +29,7 @@
 #include "GuiManager.h"
 #include "Inventory.h"
 #include "Store.h"
+#include "Forge.h"
 #include "Map.h"
 #include "Pathfinding.h"
 #include "Physics.h"
@@ -64,6 +65,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	guiManager = new GuiManager();
 	inventory = new Inventory();
 	store = new Store();
+	forge = new Forge();
 	
 	lScene = new LogoScene();
 	iScene = new IntroScene();
@@ -115,6 +117,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//AddModule(initiAllResourcesFromZip);
 	//AddModule(assetsManager);
 	AddModule(store);
+	AddModule(forge);
 
 	AddModule(fade);
 
@@ -520,4 +523,5 @@ void App::DisableAtStart()
 	store->active = false;
 	itemManager->active = false;
 	lootManager->active = false;
+	forge->active = false;
 }
