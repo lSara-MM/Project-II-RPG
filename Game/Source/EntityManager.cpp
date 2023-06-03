@@ -179,14 +179,19 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 		app->fade->FadingToBlack(app->iScene, (Module*)app->circus, 90);
 	}
 
+	if (strcmp(app->input->sceneNameSaved.c_str(), app->practiceTent->name.GetString()) == 0)
+	{
+		app->fade->FadingToBlack(app->iScene, (Module*)app->practiceTent, 90);
+	}
+
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->hTerrors->name.GetString()) == 0)
 	{
 		app->fade->FadingToBlack(app->iScene, (Module*)app->hTerrors, 90);
 	}
 
-	if (strcmp(app->input->sceneNameSaved.c_str(), app->practiceTent->name.GetString()) == 0)
+	if (strcmp(app->input->sceneNameSaved.c_str(), app->BeastT->name.GetString()) == 0)
 	{
-		app->fade->FadingToBlack(app->iScene, (Module*)app->practiceTent, 90);
+		app->fade->FadingToBlack(app->iScene, (Module*)app->BeastT, 90);
 	}
 
 	return true;
@@ -205,11 +210,11 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 		pPlayer = app->scene->player;
 	}
 	
-	if (app->hTerrors->active)
+	if (app->circus->active)
 	{
-		player.append_attribute("name") = app->hTerrors->name.GetString();
-		pPlayer = app->hTerrors->player;
-	}	
+		player.append_attribute("name") = app->circus->name.GetString();
+		pPlayer = app->circus->player;
+	}
 
 	if (app->practiceTent->active)
 	{
@@ -217,11 +222,18 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 		pPlayer = app->practiceTent->player;
 	}	
 	
-	if (app->circus->active)
+	if (app->hTerrors->active)
 	{
-		player.append_attribute("name") = app->circus->name.GetString();
-		pPlayer = app->circus->player;
+		player.append_attribute("name") = app->hTerrors->name.GetString();
+		pPlayer = app->hTerrors->player;
 	}
+
+	if (app->BeastT->active)
+	{
+		player.append_attribute("name") = app->BeastT->name.GetString();
+		pPlayer = app->BeastT->player;
+	}
+
 
 	if (!app->iScene->previousGame_B)
 	{
