@@ -81,7 +81,7 @@ public:
 
 	void LoadGameRequest();
 	void SaveGameRequest() ;
-	bool LoadFromFile();
+	bool LoadFromFile(Module* module = nullptr);
 	bool SaveToFile() ;
 
 private:

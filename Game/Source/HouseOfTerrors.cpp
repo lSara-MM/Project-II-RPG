@@ -96,11 +96,11 @@ bool HouseOfTerrors::Start()
 
 	app->puzzleManager->Enable();
 
-	if (combatEnd)
-	{
-		app->LoadFromFile();
-		combatEnd = false;
-	}
+	//if (combatEnd)
+	//{
+	//	app->LoadFromFile(this);
+	//	combatEnd = false;
+	//}
 
 
 	//GUARRADA SUPER TEMPORAL
@@ -226,7 +226,6 @@ bool HouseOfTerrors::PostUpdate()
 		{
 			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_pos - app->render->camera.x, mouseY_pos - app->render->camera.y);
 		}
-
 		else
 		{
 			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_pos - app->render->camera.x, mouseY_pos - app->render->camera.y);

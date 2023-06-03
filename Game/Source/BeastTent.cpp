@@ -63,8 +63,7 @@ bool BeastTent::Awake(pugi::xml_node& config)
 }
 
 bool BeastTent::Start()
-{
-	
+{	
 	app->physics->collisions = false;
 	app->input->godMode_B = false;
 
@@ -98,11 +97,11 @@ bool BeastTent::Start()
 
 	app->puzzleManager->Enable();
 
-	if (combatEnd)
+	/*if (combatEnd)
 	{
-		app->LoadGameRequest();
+		app->LoadFromFile(this);
 		combatEnd = false;
-	}
+	}*/
 
 	//GUARRADA SUPER TEMPORAL
 	app->itemManager->comb = 2;
@@ -114,6 +113,7 @@ bool BeastTent::Start()
 	if (app->input->coso)
 	{
 		player->pbody->body->SetTransform({ PIXEL_TO_METERS(app->input->posX),PIXEL_TO_METERS(app->input->posY) }, 0);
+		app->input->coso = false;
 	}
 
 	return true;
@@ -228,11 +228,9 @@ bool BeastTent::PostUpdate()
 		{
 			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_pos - app->render->camera.x, mouseY_pos - app->render->camera.y);
 		}
-
 		else
 		{
 			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_pos - app->render->camera.x, mouseY_pos - app->render->camera.y);
-
 		}
 	}
 	return ret;
@@ -379,7 +377,6 @@ void BeastTent::Debug()
 			{
 				/*pPause->CleanUp();*/
 			}
-
 		}
 
 		LOG("PAUSE");

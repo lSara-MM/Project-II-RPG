@@ -67,7 +67,7 @@ public:
 	void SetBackgroundColor(SDL_Color color);
 
 	//Load / Save methods
-	bool LoadState(pugi::xml_node&);
+	bool LoadState(pugi::xml_node&, Module* module = nullptr);
 	bool SaveState(pugi::xml_node&);
 
 	bool VSyncOn();

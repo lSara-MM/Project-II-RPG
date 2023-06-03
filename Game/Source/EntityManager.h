@@ -33,7 +33,7 @@ public:
 
 	void AddEntity(Entity* entity);
 
-	bool LoadState(pugi::xml_node&);
+	bool LoadState(pugi::xml_node&, Module* module = nullptr);
 	bool SaveState(pugi::xml_node&);
 
 	//Get A list with the type of characters you want to have

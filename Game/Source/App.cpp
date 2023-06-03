@@ -446,8 +446,7 @@ void App::SaveGameRequest()
 	saveGameRequested = true;
 }
 
-
-bool App::LoadFromFile()
+bool App::LoadFromFile(Module* module)
 {
 	bool ret = true;
 
@@ -466,7 +465,7 @@ bool App::LoadFromFile()
 
 		while (item != NULL && ret == true)
 		{
-			ret = item->data->LoadState(gameStateFile.child("save_state").child(item->data->name.GetString()));
+			ret = item->data->LoadState(gameStateFile.child("save_state").child(item->data->name.GetString()), module);
 			item = item->next;
 		}
 	}
