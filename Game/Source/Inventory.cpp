@@ -247,11 +247,11 @@ bool Inventory::PostUpdate()
 	//arreglo cuestionable pero bueno, it works 
 	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 	{
-		app->render->DrawTexture(app->input->cursorPressedTex, app->scene->mouseX_scene - app->render->camera.x, app->scene->mouseY_scene - app->render->camera.y);
+		app->render->DrawTexture(app->input->cursorPressedTex, app->input->mouseX - app->render->camera.x, app->input->mouseY - app->render->camera.y);
 	}
 	else
 	{
-		app->render->DrawTexture(app->input->cursorIdleTex, app->scene->mouseX_scene - app->render->camera.x, app->scene->mouseY_scene - app->render->camera.y);
+		app->render->DrawTexture(app->input->cursorIdleTex, app->input->mouseX - app->render->camera.x, app->input->mouseY - app->render->camera.y);
 	}
 
 	return true;

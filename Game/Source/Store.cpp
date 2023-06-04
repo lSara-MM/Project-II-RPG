@@ -120,7 +120,7 @@ bool Store::PostUpdate()
 				y += 69;
 				x = 0;
 			}
-			if (posYstoreAnimation==50)//se printa cuando animacion acaba, queda raro otherwise
+			if (posYstoreAnimation == 50)//se printa cuando animacion acaba, queda raro otherwise
 			{
 				app->itemManager->LoadStoreItems(x, y, app->itemManager->nodeList[i]);
 			}
@@ -132,7 +132,7 @@ bool Store::PostUpdate()
 	{
 		if ((app->itemManager->nodeList[i]->toSell && app->itemManager->nodeList[i]->type == 3 && app->itemManager->nodeList[i]->quantity > 0) || (app->itemManager->nodeList[i]->toSell && app->itemManager->nodeList[i]->type == 1))
 		{
-			if (posYstoreAnimation==50)
+			if (posYstoreAnimation == 50)
 			{
 				app->itemManager->ItemToSell(app->itemManager->nodeList[i]);
 			}
@@ -157,8 +157,7 @@ bool Store::PostUpdate()
 
 	if (storeTransition_B)
 	{
-		storeAnimation.Backward();
-		
+		storeAnimation.Backward();	
 	}
 	else
 	{

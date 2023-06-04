@@ -104,7 +104,6 @@ public:
 	bool LoadItemState(pugi::xml_node& xml_trees);
 	bool SaveItemState();
 
-	void AddCharaToParty(SString chara);
 	void AddCharaToParty(int id);
 	void LoadAllPC();
 	bool LoadParty();
