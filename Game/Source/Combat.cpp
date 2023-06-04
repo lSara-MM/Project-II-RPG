@@ -695,12 +695,13 @@ bool Combat::NextTurn()
 	// Disable all buttons
 	HandleCharaButtons(&app->combat->vecEnemies);
 
-	//TO TEST, new method ERIC
+	
 	//Quit turn previous chara 
 	if (charaInTurn >= listInitiative.Count())
 	{
 		charaInTurn = listInitiative.Count() - 1;
 	}
+	listInitiative.At(charaInTurn)->data->ReduceCountStatusEffects(); //Se borra al final de su turno para que puedas aplicarlo
 	listInitiative.At(charaInTurn++)->data->onTurn = false;
 	
 	//Change turn
@@ -723,10 +724,32 @@ bool Combat::NextTurn()
 		listButtons.end->data->state = GuiControlState::NORMAL;
 	}
 
-	//Status effects
+	//Status effects aplication (start of turn)
 	int DoT = listInitiative.At(charaInTurn)->data->GetStat(EffectType::CURRENT_HP);
 	listInitiative.At(charaInTurn)->data->ModifyHP(DoT);
-	listInitiative.At(charaInTurn)->data->ReduceCountStatusEffects();
+	//Eliminar efectos de estado si necesario (bless)
+	/*for (int i = 0; i < listInitiative.Count(); i++)
+	{
+		if(listInitiative.At(charaInTurn)->data->GetStat(EffectType::BLESS)==1)
+		{
+			for (int i = 0; i < listInitiative.At(charaInTurn)->data->listStatusEffects.Count(); i++)
+			{
+				if (!listInitiative.At(charaInTurn)->data->listStatusEffects.At(i)->data->isPositive) 
+				{ listInitiative.At(charaInTurn)->data->listStatusEffects.Del(listInitiative.At(charaInTurn)->data->listStatusEffects.At(i)); }
+			}
+		}
+		else if (listInitiative.At(charaInTurn)->data->GetStat(EffectType::BLESS) == -1)
+		{
+			for (int i = 0; i < listInitiative.At(charaInTurn)->data->listStatusEffects.Count(); i++)
+			{
+				if (listInitiative.At(charaInTurn)->data->listStatusEffects.At(i)->data->isPositive)
+				{
+					listInitiative.At(charaInTurn)->data->listStatusEffects.Del(listInitiative.At(charaInTurn)->data->listStatusEffects.At(i));
+				}
+			}
+		}
+	}*/
+	
 
 	LOG("%s turn - num %d", listInitiative.At(charaInTurn)->data->name.GetString(), charaInTurn);
 	return true;
