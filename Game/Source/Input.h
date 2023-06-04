@@ -149,6 +149,8 @@ public:
 	SDL_Texture* cursorIdleTex;
 	SDL_Texture* cursorPressedTex;
 	bool stepSound_B = false;//controlar se escuche pasos personaje
+	int mouseX;
+	int mouseY;
 
 private:
 	bool windowEvents[WE_COUNT];
@@ -160,8 +162,6 @@ private:
 
 	int	mouseMotionX;
 	int mouseMotionY;
-	int mouseX;
-	int mouseY;
 
 	// Handle input
 	PlayerInput* playerInput_S;
