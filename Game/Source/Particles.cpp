@@ -1,5 +1,6 @@
 #include "App.h"
 #include "Particles.h"
+#include "Render.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -63,12 +64,13 @@ void Particle::update()
     ++age;
 }
 
-void Particle::render()
+void Particle::render(int x, int y, int r, int age)
 {
-    // Render the particle using your draw function (e.g., drawCircle or drawQuad)
+    // Render the particle using our draw function (e.g., drawCircle or drawQuad)
     // with the current position (x, y), size (PARTICLE_SIZE), and color (r, g, b).
     // The fading effect can be achieved by adjusting the alpha value based on the age and FADE_DELAY.
     int alpha = 255 - (age * 255) / FADE_DELAY;
+    app->render->DrawCircle(1, 1, 1, 255, 255, 255);
     // drawCircle(x, y, PARTICLE_SIZE, r, g, b, alpha);
     // or
     // drawQuad(x, y, PARTICLE_SIZE, PARTICLE_SIZE, r, g, b, alpha);
