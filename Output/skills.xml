@@ -34,24 +34,28 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.5" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="10"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="2" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 	<skill name="Evasion" id="2" description="A defensive guard to recover HP that increases dodge by 40 for 2 turns."
 		   type="1" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="0.7" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
 		   firstStatusID="6" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="40"
+ 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 	<skill name="Vorpal Lunge" id="3" description="Inaccurate dash attack to the weak points that moves forward the character to reposition." 
 		   type="0" movementCaster="-2"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="-0.8" bonusAccuracy="75" bonusCritRate="0" bonusCritDamage="50"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 	<skill name="Magical Sweep" id="4" description="A magical fire sweep attack with low critical chance and low accuracy that hit 2 enemies and may set them on fire 1 turn."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="-1.0" bonusAccuracy="85" bonusCritRate="-10" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="true" autoTarget="false"
 	   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="1" firstStatusIntesity="-10"
+		secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 
 	<!--Skills Bard-->
@@ -60,24 +64,28 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.0" bonusAccuracy="90" bonusCritRate="30" bonusCritDamage="70"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 	<skill name="Upbeating Words" id="6" description="A funny jest that inspires the whole team, healing them and increasing their crit chance 3 turns by 40." 
 		   type="3" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="0.7" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
 		   firstStatusID="2" firstStatusPositive="true" firstStatusDuration="3" firstStatusIntesity="40"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 	<skill name="I trust you!" id="7" description="Words of support intertwined with cautious undertones. Heals an ally and increse their defense 1 turn by 75 while moves you backwards." 
 		   type="3" movementCaster="1"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="1.2" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="2" friendlyFire="true" areaSkill="false" autoTarget="false"
 	   firstStatusID="5" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="75"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 	<skill name="Humiliation" id="8" description="A cruel mockery that taunts the enemy making them approach and lower their defense 4 turns by 25." 
 		   type="2" movementCaster="0"  movementTarget="-2" targetMethod="0"
 	   multiplierDmg="-0.5" bonusAccuracy="115" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   firstStatusID="5" firstStatusPositive="false" firstStatusDuration="4" firstStatusIntesity="-25"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<!--Skills Healer-->
@@ -86,6 +94,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-0.9" bonusAccuracy="110" bonusCritRate="0" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-25"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="Free Trial" id="10" description="A taste of the new miraculous potion which heals a great amount of health to the frontline."
@@ -93,6 +102,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="1.4" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="1" friendlyFire="true" areaSkill="false" autoTarget="false"
 	   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="I have somethig" id="11" description="A lesser heal that can be used anywhere and gives regeneration for 2 turns."
@@ -100,6 +110,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="0.8" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
 	   firstStatusID="0" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="12"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="Healing for sale" id="12" description="An offer for everyone, heal all party members!"
@@ -107,6 +118,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="0.7" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
 	   firstStatusID="-1" firstStatusPositive="true" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<!--Skills FireMage-->
@@ -115,6 +127,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.1" bonusAccuracy="110" bonusCritRate="0" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-15"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="MORE FIRE" id="14" description="Inflict self-harm and embrace madness to amplify your attack by 55 for 5 turns!"
@@ -122,6 +135,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.2" bonusAccuracy="400" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="1" friendlyFire="true" areaSkill="false" autoTarget="true"
 	   firstStatusID="1" firstStatusPositive="true" firstStatusDuration="5" firstStatusIntesity="55"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="Seas of Fire" id="15" description="A wave of fire with low accuracy that damages all enemies and can inflict burns for 2 turns."
@@ -129,13 +143,15 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-0.9" bonusAccuracy="70" bonusCritRate="0" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 	   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-10"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="Oil Spit" id="16" description="An oil spray that damages lightly all enemies but reduces resistance by 40 for 5 turns."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="-0.4" bonusAccuracy="130" bonusCritRate="-10" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
-	   firstStatusID="7" firstStatusPositive="false" firstStatusDuration="5" firstStatusIntesity="-40"
+		   firstStatusID="7" firstStatusPositive="false" firstStatusDuration="5" firstStatusIntesity="-40"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		  
 	/>
 
 	<!--Skills armario-->
@@ -145,6 +161,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.3" bonusAccuracy="100" bonusCritRate="0" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="Close doors" id="22" description="A defensive, desperate move to heal and endure."
@@ -152,6 +169,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="1.0" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
 		   firstStatusID="5" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="40"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="Maquination" id="23" description="Significant accuracy boost."
@@ -159,6 +177,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="0.4" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
 		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="60"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="Cloth attack" id="24" description="A strike using cloth that blinds its target."
@@ -166,6 +185,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-0.8" bonusAccuracy="70" bonusCritRate="-10" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-25"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<!--Skills Puppet-->
@@ -175,12 +195,14 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.4" bonusAccuracy="95" bonusCritRate="50" bonusCritDamage="10"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="2" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 	<skill name="Go to the party" id="26" description="A dashing attack forward to reposition."
 			   type="0" movementCaster="-2"  movementTarget="0" targetMethod="0"
 		   multiplierDmg="-1.1" bonusAccuracy="90" bonusCritRate="0" bonusCritDamage="10"
 			   posToUseStart="3" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="0" friendlyFire="false" areaSkill="false" autoTarget="false"
 			   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 		/>
 	
 	<skill name="Carving Claws" id="27" description="An offensive buff that increses the power of its critical hits."
@@ -188,6 +210,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="0.5" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
 		   firstStatusID="3" firstStatusPositive="true" firstStatusDuration="3" firstStatusIntesity="75"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 	
 	<skill name="Claw Cleave" id="28" description="A strike in a huge area."
@@ -195,6 +218,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-0.9" bonusAccuracy="80" bonusCritRate="60" bonusCritDamage="25"
 		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="2" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<!--Skills Cuadro-->
@@ -204,6 +228,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-0.9" bonusAccuracy="90" bonusCritRate="20" bonusCritDamage="20"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="Coward Stab" id="30" description="A desperate and punny attack."
@@ -211,6 +236,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.2" bonusAccuracy="80" bonusCritRate="5" bonusCritDamage="80"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="Blinding Paint" id="31" description="A blinding wave of ghost paint."
@@ -218,6 +244,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-0.3" bonusAccuracy="120" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-40"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="Curse of pain " id="32" description="A high accuracy curse that greatly lowers defense."
@@ -225,6 +252,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-0.4" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="2" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="5" firstStatusPositive="false" firstStatusDuration="4" firstStatusIntesity="-70"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 	
 	<!--Skills Boss-->
@@ -234,6 +262,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.3" bonusAccuracy="110" bonusCritRate="20" bonusCritDamage="20"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-30"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 		   />
 	
 	<skill name="Terrorize" id="34" description="Menacing vibe that moves the frontline."
@@ -241,12 +270,14 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.3" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="6" firstStatusPositive="false" firstStatusDuration="4" firstStatusIntesity="-90"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 	<skill name="Intangibility" id="35" description="A defensive buff that makes the specter nearly invincible."
 		   type="3" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="0.3" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
 		   firstStatusID="5" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="130"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 
 	<skill name="Nigthmarish strike" id="36" description="A strike to the backline with high damage but low accuracy."
@@ -254,6 +285,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-2.2" bonusAccuracy="70" bonusCritRate="20" bonusCritDamage="30"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="2" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 
 	<!--Skills CabraLobo-->
@@ -263,19 +295,23 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.2" bonusAccuracy="90" bonusCritRate="20" bonusCritDamage="20"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="2" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="5" firstStatusPositive="false" firstStatusDuration="4" firstStatusIntesity="-20"
-		   />
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
+		  />
 
 	<skill name="Predator Run Up" id="38" description="A great critical damage buff that moves to the backline."
 		   type="2" movementCaster="3"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="0" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="true"
 		   firstStatusID="3" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="100"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"  
 	/>
+	
 	<skill name="Distracting Bleating" id="39" description="A distracting cry that lowers dodge."
 		   type="3" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="0" bonusAccuracy="120" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="6" firstStatusPositive="true" firstStatusDuration="3" firstStatusIntesity="-50"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 
 	<!--La idea seria que pudiera stunear-->
@@ -283,7 +319,8 @@ TargetingMethod //Como se ataca
 		   type="0" movementCaster="-3"  movementTarget="-1" targetMethod="1"
 	   multiplierDmg="-1.6" bonusAccuracy="90" bonusCritRate="120" bonusCritDamage="40"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
-		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0" 
+		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 
 	<!--Skills Enjambre Abejas-->
@@ -293,6 +330,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.1" bonusAccuracy="100" bonusCritRate="0" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="0" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="1" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-25"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 		   />
 
 	<skill name="Royal Honey" id="42" description="A powerful heal."
@@ -300,12 +338,14 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="1.5" bonusAccuracy="200" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
 		   firstStatusID="-1" firstStatusPositive="true" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 	<skill name="Go For The Eyes" id="43" description="A distracting swarm that reduces precision."
 		   type="3" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="0" bonusAccuracy="80" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="4" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="-80"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="Swarm Fortification" id="44" description="A heal of the whole team that increases defense."
@@ -313,6 +353,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="0.5" bonusAccuracy="200" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
 		   firstStatusID="5" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="30"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<!--Skills Anguila-->
@@ -322,6 +363,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.0" bonusAccuracy="85" bonusCritRate="20" bonusCritDamage="20"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 		   />
 
 	<skill name="Slide Back" id="46" description="A withdrawal to the backiline that also increases highly dodge."
@@ -329,6 +371,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="0" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="true"
 		   firstStatusID="6" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="100"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 	<!-- Estaria guay si tambein quitara buffos-->
 	<skill name="Abysal Gaze" id="47" description="A paralyzing gaze that reduces resistance."
@@ -336,6 +379,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="0" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="7" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-40"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 
 	<skill name="Electrostatic discharge" id="48" description="A powerful discharge that causes a powerful burn on the target."
@@ -343,6 +387,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="-1.5" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-35"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 	
 </skills>
