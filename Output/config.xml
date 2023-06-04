@@ -227,7 +227,13 @@
   </PuzzleManager>
  
 	
-	<itemmanager inventorypath="Assets/Textures/Inventory.png"
+	<itemmanager inventorypath="Assets/GUI/UIArt/InventarioPestañas.png"
+				 partypath="Assets/GUI/UIArt/PartyPestañitas.png"
+				 charLockedpath="Assets/GUI/UIArt/cartaCandado.png"
+				 protapath="Assets/GUI/UIArt/cartaProta.png"
+				 compapath="Assets/GUI/UIArt/cartaCompa.png"
+				 twinspath="Assets/GUI/UIArt/cartaGemelos.png"
+				 firepath="Assets/GUI/UIArt/CartaFueguito.png"
 				 itempath="Assets/Textures/itemTextures.png"
 				 coinpath="Assets/Textures/moneda.png"
 				 smallcoinpath="Assets/Textures/Smallmoneda.png"

@@ -34,10 +34,10 @@ public:
 	uint fxHover;
 	bool hoverTest;
 	bool isSelected;
+	int step;//velocidad animacion
 
 private:
 	Tween animationButton;
-	int step;
 	AnimationAxis axisType;
 
 	float point;

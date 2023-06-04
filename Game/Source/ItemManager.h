@@ -128,6 +128,12 @@ public:
 
 	const char* texturePath;
 	const char* textureInventoryPath;
+	const char* partyPath;
+	const char* charLockedPath;
+	const char* protaPath;
+	const char* compaPath;
+	const char* twinsPath;
+	const char* firePath;
 	const char* texturePotionsPath;
 	const char* coinPath;
 	const char* smallcoinPath;

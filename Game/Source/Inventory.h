@@ -35,7 +35,14 @@ public:
 public:
 
 	SDL_Texture* inventoryIMG;
-
+	SDL_Texture* partyIMG;
+	SDL_Texture* charlockedIMG;
+	SDL_Texture* protaIMG;
+	SDL_Texture* compaIMG;
+	SDL_Texture* twinsIMG;
+	SDL_Texture* fireIMG;
+	GuiButton* buttonInventory;
+	GuiButton* buttonParty;
 	unsigned cap;
 	int y;
 
@@ -44,6 +51,7 @@ public:
 	Tween inventoryAnimation;//animacion inventario
 	bool inventoryTransition_B;//controlar animacion inventario
 	int posXinventoryAnimation;//prueba para hacer animacion salida inventario.
+	bool partyWindow_B;//qué party se muestra
 };
 
 #endif // __ITEMMANAGER_H__

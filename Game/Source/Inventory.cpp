@@ -23,7 +23,18 @@ Inventory::~Inventory()
 bool Inventory::Start()
 {
 	inventoryIMG = app->tex->Load(app->itemManager->texturePath);
-
+	partyIMG = app->tex->Load(app->itemManager->partyPath);
+	charlockedIMG = app->tex->Load(app->itemManager->charLockedPath);
+	protaIMG = app->tex->Load(app->itemManager->protaPath);
+	compaIMG = app->tex->Load(app->itemManager->compaPath);
+	twinsIMG = app->tex->Load(app->itemManager->twinsPath);
+	fireIMG = app->tex->Load(app->itemManager->firePath);
+	partyWindow_B = false;
+	buttonInventory = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1004, this, { 734, 20, 114, 60 }, ButtonType::SMALL);
+	buttonInventory->step = 20;//vaya mas rapido
+	buttonInventory->state = GuiControlState::NONE;
+	buttonParty = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1005, this, { 890, 20, 114, 60 }, ButtonType::SMALL);
+	buttonParty->step = 20;
 	if (app->combat->active)
 	{
 		for (int i = 0; i <= 3; i++)
@@ -31,6 +42,7 @@ bool Inventory::Start()
 			SDL_Rect buttonBounds;
 			buttonBounds = { 0, 0, 0, 0 };
 			selectCharacter[i] = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1000 + i, this, buttonBounds, ButtonType::SMALL);
+			selectCharacter[i]->step = 20;
 		}
 	}
 	else
@@ -40,6 +52,7 @@ bool Inventory::Start()
 			SDL_Rect buttonBounds;
 			buttonBounds = { (362 + 34 * i), 407, 25, 25 };
 			selectCharacter[i] = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1000 + i, this, buttonBounds, ButtonType::SMALL);
+			selectCharacter[i]->step = 20;
 		}
 	}
 
@@ -93,16 +106,25 @@ bool Inventory::Update(float dt)
 	{
 		y = 148;
 
-		app->render->DrawTexture(inventoryIMG, posXinventoryAnimation - app->render->camera.x, 0 - app->render->camera.y);
-
-		//Print Character
-		if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
+		if (!partyWindow_B)
 		{
-			SDL_Texture* playerTexture = app->tex->Load(app->itemManager->arrParty.at(app->itemManager->invPos)->texturePath);
-			app->render->DrawTexture(playerTexture, offset + point * (370 - offset) - app->render->camera.x, 180 - app->render->camera.y);
-			app->tex->UnLoad(playerTexture);
-			playerTexture = NULL;
+			app->render->DrawTexture(inventoryIMG, posXinventoryAnimation - app->render->camera.x, 0 - app->render->camera.y);
+			//Print Character
+			if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
+			{
+				SDL_Texture* playerTexture = app->tex->Load(app->itemManager->arrParty.at(app->itemManager->invPos)->texturePath);
+				app->render->DrawTexture(playerTexture, offset + point * (370 - offset) - app->render->camera.x, 180 - app->render->camera.y);
+				app->tex->UnLoad(playerTexture);
+				playerTexture = NULL;
+			}
 		}
+
+		else
+		{
+			app->render->DrawTexture(partyIMG, posXinventoryAnimation - app->render->camera.x, 0 - app->render->camera.y);
+		}
+
+		
 	}
 	bool ret = true;
 
@@ -113,96 +135,123 @@ bool Inventory::PostUpdate()
 {
 	int x = 0;
 
-	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+	float point = inventoryAnimation.GetPoint();
+	int offset = -1300;
+
+	if (!partyWindow_B)
 	{
-		if (cap == x)
-		{
-			y += 70;
-			x = 0;
-		}
-		if (posXinventoryAnimation==0)
-		{
-			app->itemManager->LoadQuantity(x, y, app->itemManager->armorItems[i]);
-		}
-		if (app->itemManager->armorItems[i]->equiped == false)
-		{
-			x++;
-		}
-	}
-	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
-	{
-		if (app->itemManager->nodeList[i]->type != 2)
+		for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
 		{
 			if (cap == x)
 			{
 				y += 70;
 				x = 0;
 			}
-			if (posXinventoryAnimation==0)//printar items cuando acabe animacion
+			if (posXinventoryAnimation == 0)
 			{
-				app->itemManager->LoadQuantity(x, y, app->itemManager->nodeList[i]);
-
+				app->itemManager->LoadQuantity(x, y, app->itemManager->armorItems[i]);
 			}
-			if (app->itemManager->nodeList[i]->equiped == false)
+			if (app->itemManager->armorItems[i]->equiped == false)
 			{
-				if (app->itemManager->nodeList[i]->quantity > 0)
-				{
-					x++;
-				}
+				x++;
 			}
 		}
+		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+		{
+			if (app->itemManager->nodeList[i]->type != 2)
+			{
+				if (cap == x)
+				{
+					y += 70;
+					x = 0;
+				}
+				if (posXinventoryAnimation == 0)//printar items cuando acabe animacion
+				{
+					app->itemManager->LoadQuantity(x, y, app->itemManager->nodeList[i]);
+
+				}
+				if (app->itemManager->nodeList[i]->equiped == false)
+				{
+					if (app->itemManager->nodeList[i]->quantity > 0)
+					{
+						x++;
+					}
+				}
+			}
+
+			
+		}
+		if (app->combat->active)
+		{
+		}
+		else
+		{
+			string cn = to_string(app->itemManager->coins);
+			app->render->TextDraw(cn.c_str(), offset + point * (980 - offset), 110, 20, Font::TEXT, { 0, 0, 0 });
+			//LOAD STATS
+			if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
+			{
+				app->itemManager->maxhp = app->itemManager->arrParty.at(app->itemManager->invPos)->maxHp;
+				app->itemManager->armor = app->itemManager->arrParty.at(app->itemManager->invPos)->armor;
+				app->itemManager->attack = app->itemManager->arrParty.at(app->itemManager->invPos)->attack;
+				app->itemManager->critDamage = app->itemManager->arrParty.at(app->itemManager->invPos)->critDamage;
+				app->itemManager->critProbability = app->itemManager->arrParty.at(app->itemManager->invPos)->critRate;
+				app->itemManager->accuracy = app->itemManager->arrParty.at(app->itemManager->invPos)->accuracy;
+				app->itemManager->esquiva = app->itemManager->arrParty.at(app->itemManager->invPos)->dodge;
+				app->itemManager->speed = app->itemManager->arrParty.at(app->itemManager->invPos)->speed;
+				app->itemManager->resistencia = app->itemManager->arrParty.at(app->itemManager->invPos)->res;
+
+				//Print Name
+				int offsetX = app->itemManager->arrParty.at(app->itemManager->invPos)->name.Length() * 30 / 2;
+
+				int x = (860 - offsetX) / 2;
+				app->render->TextDraw((app->itemManager->arrParty.at(app->itemManager->invPos)->name.GetString()), offset + point * (x - offset), 100, 30, Font::TEXT, { 0, 0, 0 });
+
+				//print stats
+				string h = to_string(app->itemManager->maxhp);
+				app->render->TextDraw(h.c_str(), offset + point * (330 - offset), 465, 15, Font::TEXT, { 0, 0, 0 });
+				string at = to_string(app->itemManager->attack);
+				app->render->TextDraw(at.c_str(), offset + point * (330 - offset), 490, 15, Font::TEXT, { 0, 0, 0 });
+				string cP = to_string(app->itemManager->critProbability);
+				app->render->TextDraw(cP.c_str(), offset + point * (330 - offset), 515, 15, Font::TEXT, { 0, 0, 0 });
+				string cD = to_string(app->itemManager->critDamage);
+				app->render->TextDraw(cD.c_str(), offset + point * (330 - offset), 540, 15, Font::TEXT, { 0, 0, 0 });
+				string p = to_string(app->itemManager->accuracy);
+				app->render->TextDraw(p.c_str(), offset + point * (330 - offset), 565, 15, Font::TEXT, { 0, 0, 0 });
+				string ar = to_string(app->itemManager->armor);
+				app->render->TextDraw(ar.c_str(), offset + point * (520 - offset), 490, 15, Font::TEXT, { 0, 0, 0 });
+				string e = to_string(app->itemManager->esquiva);
+				app->render->TextDraw(e.c_str(), offset + point * (520 - offset), 515, 15, Font::TEXT, { 0, 0, 0 });
+				string r = to_string(app->itemManager->resistencia);
+				app->render->TextDraw(r.c_str(), offset + point * (520 - offset), 540, 15, Font::TEXT, { 0, 0, 0 });
+				string s = to_string(app->itemManager->speed);
+				app->render->TextDraw(s.c_str(), offset + point * (520 - offset), 565, 15, Font::TEXT, { 0, 0, 0 });
+			}
+		}
+
+	}
+	
+	else if (partyWindow_B)
+	{
+		app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+		app->render->DrawTexture(compaIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+		app->render->DrawTexture(twinsIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+		app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+
 	}
 
-	float point = inventoryAnimation.GetPoint();
-	int offset = -1300;
-
-	if (app->combat->active)
+	//arreglo cuestionable pero bueno, it works 
+	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 	{
+		app->render->DrawTexture(app->input->cursorPressedTex, app->scene->mouseX_scene - app->render->camera.x, app->scene->mouseY_scene - app->render->camera.y);
 	}
 	else
 	{
-		string cn = to_string(app->itemManager->coins);
-		app->render->TextDraw(cn.c_str(), offset + point * (980 - offset), 110, 20, Font::TEXT, { 0, 0, 0 });
-
-		//LOAD STATS
-		if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
-		{
-			app->itemManager->maxhp = app->itemManager->arrParty.at(app->itemManager->invPos)->maxHp;
-			app->itemManager->armor = app->itemManager->arrParty.at(app->itemManager->invPos)->armor;
-			app->itemManager->attack = app->itemManager->arrParty.at(app->itemManager->invPos)->attack;
-			app->itemManager->critDamage = app->itemManager->arrParty.at(app->itemManager->invPos)->critDamage;
-			app->itemManager->critProbability = app->itemManager->arrParty.at(app->itemManager->invPos)->critRate;
-			app->itemManager->accuracy = app->itemManager->arrParty.at(app->itemManager->invPos)->accuracy;
-			app->itemManager->esquiva = app->itemManager->arrParty.at(app->itemManager->invPos)->dodge;
-			app->itemManager->speed = app->itemManager->arrParty.at(app->itemManager->invPos)->speed;
-			app->itemManager->resistencia = app->itemManager->arrParty.at(app->itemManager->invPos)->res;
-
-			//Print Name
-			int offsetX = app->itemManager->arrParty.at(app->itemManager->invPos)->name.Length() * 30 / 2;
-
-			int x = (860 - offsetX) / 2;
-			app->render->TextDraw((app->itemManager->arrParty.at(app->itemManager->invPos)->name.GetString()), offset + point * (x - offset), 100, 30, Font::TEXT, { 0, 0, 0 });
-
-			//print stats
-			string h = to_string(app->itemManager->maxhp);
-			app->render->TextDraw(h.c_str(), offset + point * (330 - offset), 465, 15, Font::TEXT, { 0, 0, 0 });
-			string at = to_string(app->itemManager->attack);
-			app->render->TextDraw(at.c_str(), offset + point * (330 - offset), 490, 15, Font::TEXT, { 0, 0, 0 });
-			string cP = to_string(app->itemManager->critProbability);
-			app->render->TextDraw(cP.c_str(), offset + point * (330 - offset), 515, 15, Font::TEXT, { 0, 0, 0 });
-			string cD = to_string(app->itemManager->critDamage);
-			app->render->TextDraw(cD.c_str(), offset + point * (330 - offset), 540, 15, Font::TEXT, { 0, 0, 0 });
-			string p = to_string(app->itemManager->accuracy);
-			app->render->TextDraw(p.c_str(), offset + point * (330 - offset), 565, 15, Font::TEXT, { 0, 0, 0 });
-			string ar = to_string(app->itemManager->armor);
-			app->render->TextDraw(ar.c_str(), offset + point * (520 - offset), 490, 15, Font::TEXT, { 0, 0, 0 });
-			string e = to_string(app->itemManager->esquiva);
-			app->render->TextDraw(e.c_str(), offset + point * (520 - offset), 515, 15, Font::TEXT, { 0, 0, 0 });
-			string r = to_string(app->itemManager->resistencia);
-			app->render->TextDraw(r.c_str(), offset + point * (520 - offset), 540, 15, Font::TEXT, { 0, 0, 0 });
-			string s = to_string(app->itemManager->speed);
-			app->render->TextDraw(s.c_str(), offset + point * (520 - offset), 565, 15, Font::TEXT, { 0, 0, 0 });
-		}
+		app->render->DrawTexture(app->input->cursorIdleTex, app->scene->mouseX_scene - app->render->camera.x, app->scene->mouseY_scene - app->render->camera.y);
 	}
 
 	return true;
@@ -230,8 +279,15 @@ bool Inventory::CleanUp()
 	{
 		app->guiManager->DestroyGuiControl(selectCharacter[i]);
 	}
-
+	app->guiManager->DestroyGuiControl(buttonInventory);
+	app->guiManager->DestroyGuiControl(buttonParty);
 	app->tex->UnLoad(inventoryIMG);
+	app->tex->UnLoad(partyIMG);
+	app->tex->UnLoad(charlockedIMG);
+	app->tex->UnLoad(protaIMG);
+	app->tex->UnLoad(compaIMG);
+	app->tex->UnLoad(twinsIMG);
+	app->tex->UnLoad(fireIMG);
 
 	return true;
 }
@@ -384,6 +440,24 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			if (app->itemManager->arrParty.at(3) != nullptr)
 			{
 				app->itemManager->invPos = 3;
+			}
+			break;
+		case 1004:
+			partyWindow_B = false;
+			buttonInventory->state = GuiControlState::NONE;
+			buttonParty->state = GuiControlState::NORMAL;
+			for (int i = 0; i <= 3; i++)
+			{
+				selectCharacter[i]->state = GuiControlState::NORMAL;
+			}
+			break;
+		case 1005:
+			partyWindow_B = true;
+			buttonInventory->state = GuiControlState::NORMAL;
+			buttonParty->state = GuiControlState::NONE;
+			for (int i = 0; i <= 3; i++)
+			{
+				selectCharacter[i]->state = GuiControlState::NONE;
 			}
 			break;
 	}

@@ -163,15 +163,13 @@ bool BeastTent::Update(float dt)
 			app->audio->PlayFx(combatfx);
 			app->combat->PreLoadCombat(name);
 
-			app->SaveGameRequest();
-
-			app->fade->FadingToBlack(this, (Module*)app->combat, 5);			
+			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
 			app->puzzleManager->CleanUp();
 			app->puzzleManager->active = false;
 			steps_I = 0;
 		}
 	}
-	else 
+	else
 	{
 		steps_I = 0;
 	}

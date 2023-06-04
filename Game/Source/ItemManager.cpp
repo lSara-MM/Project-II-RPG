@@ -29,6 +29,13 @@ bool ItemManager::Awake(pugi::xml_node& config)
 	texturePotionsPath = config.attribute("potionstorepath").as_string();
 	coinPath = config.attribute("coinpath").as_string();
 	smallcoinPath = config.attribute("smallcoinpath").as_string();
+	partyPath = config.attribute("partypath").as_string();
+	charLockedPath = config.attribute("charLockedpath").as_string();
+	protaPath = config.attribute("protapath").as_string();
+	compaPath = config.attribute("compapath").as_string();
+	twinsPath = config.attribute("twinspath").as_string();
+	firePath = config.attribute("firepath").as_string();
+
 
 	itemPath = config.attribute("itempath").as_string();
 
