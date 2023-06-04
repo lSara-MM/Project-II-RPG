@@ -1056,7 +1056,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			//% intensidad
 			app->render->TextDraw("% intensity", 300, 530, 20);
 
-			for (size_t i = 0; i < cha->listStatusEffects.Count(); i++)
+			for (size_t i = 0; i < cha->listStatusEffects.Count() && i<7; i++)
 			{
 				switch (cha->listStatusEffects.At(i)->data->type)
 				{
@@ -1142,6 +1142,26 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 						effectToPrint = "Resistance Down";
 					}
 					break;
+				case EffectType::TAUNT:
+					{
+						effectToPrint = "Provocation";
+					}
+					break;
+				case EffectType::STUN:
+					{
+						effectToPrint = "Stunned!";
+					}
+					break;
+				case EffectType::BLESS:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Blessed";
+					}
+					else
+					{
+						effectToPrint = "Cursed";
+					}
+				break;
 				default:
 					break;
 				}

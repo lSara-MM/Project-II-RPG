@@ -29,7 +29,7 @@ enum class EffectType
 	RES,
 	TAUNT,
 	STUN,
-	BLESS //Inmunidad a effecto positivo o negativo.
+	BLESS //Inmunidad a effecto positivo o negativo.(1 negativos, 0 todos, -1 negativos)
 };
 
 struct StatusEffect

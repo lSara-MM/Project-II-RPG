@@ -185,40 +185,10 @@ bool Character::Update(float dt)
 			/*app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
 			app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);*/
 			app->render->DrawTexture(textureOnturn, position.x, position.y, &rect);
-			//testing
-			string time;
-			const char* tempus;
-
-			switch (charaType)
+			
+			//Si stunned pues no hace nada 
+			if (GetStat(EffectType::STUN)==1)
 			{
-			case CharacterType::ALLY:
-
-				app->combat->HandleSkillsButtons(this);
-
-				//Check hay una habilidad seleccionada
-				if (app->combat->lastPressedAbility_I != -1)
-				{
-					//Check que hay un target 
-					if (app->combat->targeted_Character != nullptr)
-					{
-						UseSkill(listSkills.At(app->combat->lastPressedAbility_I)->data, app->combat->targeted_Character);
-						app->combat->targeted_Character = nullptr;
-						listSkillsHistory.Add(app->combat->lastPressedAbility_I);
-
-						//AQUI IRIAN POSIBLES PASIVAS EN UN SWITCH
-
-						onTurn = false;
-						app->combat->NextTurn();
-					}
-				}
-
-				break;
-			case CharacterType::ENEMY:
-
-				if (listSkillsHistory.start == nullptr)
-				{
-					listSkillsHistory.Add(0); //Si esta vacia ponerle algo para que no pete
-				}
 				if (!delayOn)
 				{
 					turnDelay.Start();
@@ -226,192 +196,74 @@ bool Character::Update(float dt)
 				}
 				if ((turnDelay.ReadMSec() > 1200 && delayOn) || app->input->godMode_B)
 				{
-					switch (charaClass) //La idea es que cada classe tenga un comportamiento generico
+					app->combat->NextTurn();
+				}
+			}
+			else
+			{			
+				switch (charaType)
+				{
+				case CharacterType::ALLY:
+
+					app->combat->HandleSkillsButtons(this);
+
+					//Check hay una habilidad seleccionada
+					if (app->combat->lastPressedAbility_I != -1)
 					{
-						int probSkill;
-						case CharacterClass::MELEE_DPS:
+						//Check que hay un target 
+						if (app->combat->targeted_Character != nullptr)
+						{
+							UseSkill(listSkills.At(app->combat->lastPressedAbility_I)->data, app->combat->targeted_Character);
+							app->combat->targeted_Character = nullptr;
+							listSkillsHistory.Add(app->combat->lastPressedAbility_I);
+
+							//AQUI IRIAN POSIBLES PASIVAS EN UN SWITCH
+
+							onTurn = false;
+							app->combat->NextTurn();
+						}
+					}
+
+					break;
+				case CharacterType::ENEMY:
+
+					if (listSkillsHistory.start == nullptr)
+					{
+						listSkillsHistory.Add(0); //Si esta vacia ponerle algo para que no pete
+					}
+					if (!delayOn)
+					{
+						turnDelay.Start();
+						delayOn = true;
+					}
+					if ((turnDelay.ReadMSec() > 1200 && delayOn) || app->input->godMode_B)
+					{
+						switch (charaClass) //La idea es que cada classe tenga un comportamiento generico
+						{
+							int probSkill;
+							case CharacterClass::MELEE_DPS:
 												
-							if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //No puede hacer ataques principales
-							{
-								//usar skill 2(1) (avance)
-								UseSkill(listSkills.At(1)->data);
-
-								listSkillsHistory.Add(2);
-								break;
-							}
-							else
-							{
-								if (listSkillsHistory.end->data == 2)//Si se uso el turno pasado no se usa
+								if (!listSkills.At(0)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //No puede hacer ataques principales
 								{
-									probSkill = 0;
-								}
-								else //Si no se uso pues si puede que use el buff
-								{
-									probSkill = 30;
-								}
-								if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
-								{
-									//usar skill 3(2) (buff ofensivo)
-									UseSkill(listSkills.At(2)->data);
-
-									listSkillsHistory.Add(3);
-									break;
-								}
-								else
-								{
-									if (listSkillsHistory.end->data == 3)//Si last skill buffo hace cleave
-									{
-										probSkill = 75;
-									}
-									else
-									{
-										probSkill = 25;
-									}
-								}
-								if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
-								{
-									//usar skill 4(3) (atk area)
-									UseSkill(listSkills.At(3)->data);
-
-									listSkillsHistory.Add(4);
-									break;
-								}
-								else
-								{
-									//usar skill 1(0) (atk basico)
-									UseSkill(listSkills.At(0)->data);
-
-									listSkillsHistory.Add(1);
-									break;
-								}
-							}
-						break;
-						case CharacterClass::RANGED_DPS:
-
-							//Si esta en mala posicion aka no poder usar 0 y 3 pues usar reposicion 
-							if (!listSkills.At(3)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(0)->data->PosCanBeUsed(positionCombat_I))
-							{
-								if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
-								{
-									//usar skill 2(1) (buff+reposition)
+									//usar skill 2(1) (avance)
 									UseSkill(listSkills.At(1)->data);
 
 									listSkillsHistory.Add(2);
 									break;
 								}
-							}
-							else
-							{
-								if (listSkillsHistory.end->data != 1) //Solo si no se a movido, usado antes o usado el ataque tocho
-								{
-									probSkill = 0;
-								}
 								else
 								{
-									probSkill = 80;
-								}
-								//Usar gimick/cosa potente
-								if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I)) 
-								{
-									//usar skill 3(2) (gimmick / debuffo)
-									UseSkill(listSkills.At(2)->data);
-
-									listSkillsHistory.Add(3);
-								}
-								else
-								{
-									if (listSkillsHistory.end->data == 3) //Usar ataque tocho que tiene targeting
+									if (listSkillsHistory.end->data == 2)//Si se uso el turno pasado no se usa
 									{
-										probSkill = 75;
+										probSkill = 0;
 									}
-									else
+									else //Si no se uso pues si puede que use el buff
 									{
-										probSkill = 15;
-									}
-									//Usar ataque targeteado
-									if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
-									{
-										//usar skill 4(3) (ataque tocho targeted)
-										UseSkill(listSkills.At(3)->data);
-
-										listSkillsHistory.Add(4);
-									}
-									else //Ataque basico, no hace falta if, si no podia usarla hubiera usado el movimiento
-									{
-										//usar skill 1(0) (ataque basico)
-										UseSkill(listSkills.At(0)->data);
-
-										listSkillsHistory.Add(1);
-									}
-								}
-
-							}
-							break;
-						case CharacterClass::ASSASSIN:
-
-							//Si se uso la preparacion usar si se puede la skill de asesinato, sino pues basic attack
-							if (listSkillsHistory.end->data==2)
-							{
-								if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
-								{
-									//usar skill 4(3) (asesinato)
-									UseSkill(listSkills.At(3)->data);
-
-									listSkillsHistory.Add(4);
-									break;
-								}
-								else
-								{
-									if (listSkills.At(0)->data->PosCanBeUsed(positionCombat_I))
-									{
-										//usar skill 1(0) (basic attack)
-										UseSkill(listSkills.At(0)->data);
-
-										listSkillsHistory.Add(1);
-										break;
-									}
-								}
-							}
-							else //No kill mode
-							{
-								//Usar preparation
-								if (listSkillsHistory.end->data == 2 || listSkillsHistory.end->prev->data == 2)
-								{
-									probSkill = 0;
-								}
-								else
-								{
-									if (listSkillsHistory.end->data == 3) //Si uso debuffo pues prepara asesinato
-									{
-										probSkill = 120;
-									}
-									else
-									{
-										probSkill = 50;
-									}
-								}
-								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I)) //Preparar asesinato
-								{
-									//usar skill 2(1) (preparacion asesinato)
-									UseSkill(listSkills.At(1)->data);
-
-									listSkillsHistory.Add(2);
-									break;
-								}
-								else //Usar ataque basico o debuffo
-								{
-									//Probabilidad usar debuff
-									if (listSkillsHistory.end->data==1) //Si uso el ataque basico
-									{
-										probSkill = 80;
-									}
-									else
-									{
-										probSkill = 40;
+										probSkill = 30;
 									}
 									if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
 									{
-										//usar skill 3(2) (debuff)
+										//usar skill 3(2) (buff ofensivo)
 										UseSkill(listSkills.At(2)->data);
 
 										listSkillsHistory.Add(3);
@@ -419,78 +271,110 @@ bool Character::Update(float dt)
 									}
 									else
 									{
-										if (CalculateRandomProbability(probSkill) && listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Preparar asesinato
+										if (listSkillsHistory.end->data == 3)//Si last skill buffo hace cleave
 										{
-											//usar skill 1(0) (ataque basico)
-											UseSkill(listSkills.At(0)->data);
-
-											listSkillsHistory.Add(1);
-											break;
-										}
-									}
-								}
-							}
-							break;
-						case CharacterClass::AOE_DPS:
-
-							//Si uso el ataque tocho pues necesita descansar un turno
-							if (listSkillsHistory.end->data==4)
-							{
-								listSkillsHistory.Add(0);
-							}
-							else
-							{
-								//Posicion jodida
-								if (listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
-								{
-									//usar skill 3(2) (ataque debil por no posicionado)
-									UseSkill(listSkills.At(2)->data);
-
-									listSkillsHistory.Add(3);
-									break;
-								}
-								else // Posicion habilitada para funcionar
-								{
-									probSkill = 65;
-									for (int i = listSkillsHistory.Count() - 1; i > 0; i--)
-									{
-										if (listSkillsHistory.At(i)->data == 2)
-										{
-											//Por cada vez que se uso seguidamente la skill 2(1) menos probable usarla de nuevo
-											probSkill -= 35;
+											probSkill = 75;
 										}
 										else
 										{
-											break;
+											probSkill = 25;
 										}
 									}
-									if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I)) //Preparar asesinato
+									if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
 									{
-										//usar skill 2(1) (cargar)
+										//usar skill 4(3) (atk area)
+										UseSkill(listSkills.At(3)->data);
+
+										listSkillsHistory.Add(4);
+										break;
+									}
+									else
+									{
+										//usar skill 1(0) (atk basico)
+										UseSkill(listSkills.At(0)->data);
+
+										listSkillsHistory.Add(1);
+										break;
+									}
+								}
+							break;
+							case CharacterClass::RANGED_DPS:
+
+								//Si esta en mala posicion aka no poder usar 0 y 3 pues usar reposicion 
+								if (!listSkills.At(3)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(0)->data->PosCanBeUsed(positionCombat_I))
+								{
+									if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//usar skill 2(1) (buff+reposition)
 										UseSkill(listSkills.At(1)->data);
 
 										listSkillsHistory.Add(2);
 										break;
 									}
+								}
+								else
+								{
+									if (listSkillsHistory.end->data != 1) //Solo si no se a movido, usado antes o usado el ataque tocho
+									{
+										probSkill = 0;
+									}
 									else
 									{
-										if (listSkillsHistory.end->data == 2)
+										probSkill = 80;
+									}
+									//Usar gimick/cosa potente
+									if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I)) 
+									{
+										//usar skill 3(2) (gimmick / debuffo)
+										UseSkill(listSkills.At(2)->data);
+
+										listSkillsHistory.Add(3);
+									}
+									else
+									{
+										if (listSkillsHistory.end->data == 3) //Usar ataque tocho que tiene targeting
 										{
-											probSkill = 85;
+											probSkill = 75;
 										}
 										else
 										{
-											probSkill = 30;
+											probSkill = 15;
 										}
-										if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque en area tocho
+										//Usar ataque targeteado
+										if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
 										{
-											//usar skill 2(1) (cargar)
-											UseSkill(listSkills.At(1)->data);
+											//usar skill 4(3) (ataque tocho targeted)
+											UseSkill(listSkills.At(3)->data);
 
-											listSkillsHistory.Add(2);
-											break;
+											listSkillsHistory.Add(4);
 										}
-										else if( listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque basico
+										else //Ataque basico, no hace falta if, si no podia usarla hubiera usado el movimiento
+										{
+											//usar skill 1(0) (ataque basico)
+											UseSkill(listSkills.At(0)->data);
+
+											listSkillsHistory.Add(1);
+										}
+									}
+
+								}
+								break;
+							case CharacterClass::ASSASSIN:
+
+								//Si se uso la preparacion usar si se puede la skill de asesinato, sino pues basic attack
+								if (listSkillsHistory.end->data==2)
+								{
+									if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//usar skill 4(3) (asesinato)
+										UseSkill(listSkills.At(3)->data);
+
+										listSkillsHistory.Add(4);
+										break;
+									}
+									else
+									{
+										if (listSkills.At(0)->data->PosCanBeUsed(positionCombat_I))
 										{
 											//usar skill 1(0) (basic attack)
 											UseSkill(listSkills.At(0)->data);
@@ -500,372 +384,227 @@ bool Character::Update(float dt)
 										}
 									}
 								}
-							}
-							break;
-						case CharacterClass::HEALER:
-							//Mirar si hay alguien esta  muy herido
-							probSkill = 0;
-							for (int i = 0; i < app->combat->vecEnemies.size(); i++)
-							{
-								if (app->combat->vecEnemies.at(i)->currentHp == app->combat->vecEnemies.at(i)->maxHp / 4) //Muy mal de vida
+								else //No kill mode
 								{
-									probSkill = 100; //Si un aliado esta muy herido es "garantizado" que intente usar la cura unitaria
-								}
-								else if (app->combat->vecEnemies.at(i)->currentHp == app->combat->vecEnemies.at(i)->maxHp / 2 && probSkill==0) //Algo mal de vida
-								{
-									probSkill = 40;
-								}
-							}
-							//Usar cura unitaria (en el aliado mas herido), no la puede usar dos veces seguidas
-							if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I) && listSkillsHistory.end->data != 2)
-							{
-								//Usar cura unitaria 2(1)
-								UseSkill(listSkills.At(1)->data);
-
-								listSkillsHistory.Add(2);
-							}
-							else
-							{
-								//Probabilidad usar heal area
-								if (listSkillsHistory.end->data == 2) //Uso cura unitaria turno anterior
-								{
-									// 0, 12, 25
-									probSkill /= 4;
-								}
-								else
-								{
-									//10, 30 0 60
-									probSkill /= 2; 
-									probSkill += 10;
-								}
-								if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
-								{
-									//Usar cura en area 4(3)
-									UseSkill(listSkills.At(3)->data);
-
-									listSkillsHistory.Add(4);
-								}
-								else
-								{
-									if (listSkillsHistory.end->data==3)
-									{
-										probSkill = 0;
-									}
-									else if(listSkillsHistory.end->prev->data == 3)
-									{
-										probSkill = 20;
-									}
-									else
-									{
-										probSkill = 45;
-									}
-									if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
-									{
-										//Usar gimmick propia 3(2)
-										UseSkill(listSkills.At(2)->data);
-
-										listSkillsHistory.Add(3);
-									}
-									else if ( listSkills.At(0)->data->PosCanBeUsed(positionCombat_I))
-									{
-										//Usar basic attack 1(0)
-										UseSkill(listSkills.At(0)->data);
-
-										listSkillsHistory.Add(1);
-									}
-								}
-
-							}
-
-							break;
-						case CharacterClass::TANK:
-						{
-							if (currentHp >= maxHp / 2) //Alto de vida
-							{
-								if (listSkillsHistory.end->data == 3)//Si se uso el turno pasado no se usa
-								{
-									probSkill = 10;
-								}
-								else //Si no se uso pues casi siempre la usa
-								{
-									probSkill = 60;
-								}
-								if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
-								{
-									//usar skill 3(2) (tanqueo high HP)
-									UseSkill(listSkills.At(2)->data);
-
-									listSkillsHistory.Add(3);
-									break;
-								}
-								else
-								{
-									probSkill = 75;
-								}
-							}
-							else //Bajo de vida
-							{
-								if (listSkillsHistory.end->data == 2)//Si se uso el turno pasado no se repite casi
-								{
-									probSkill = 0;
-								}
-								else //Si no se uso pues casi siempre la usa
-								{
-									probSkill = 70;
-								}
-								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
-								{
-									//usar skill 2(1) (tanqueo low HP)
-									UseSkill(listSkills.At(1)->data);
-
-									listSkillsHistory.Add(2);
-									break;
-								}
-								{
-									probSkill = 25;
-								}
-							}
-							if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))//Ataques
-							{
-								//usar skill 4(3) (daño + debuff)
-								UseSkill(listSkills.At(3)->data);
-
-								listSkillsHistory.Add(4);
-								break;
-							}
-							else
-							{
-								//usar skill 1(0) (daño solo) (es la skill mas debil)
-								UseSkill(listSkills.At(0)->data);
-
-								listSkillsHistory.Add(1);
-								break;
-							}
-						}
-						break;
-						case CharacterClass::BUFFER:
-
-							if (positionCombat_I > 0) //Posicion comoda
-							{
-								//Si ataque last turn poco probable usar attack
-								if (listSkillsHistory.end->data == 2 || listSkillsHistory.end->data == 1)
-								{
-									probSkill = 10;
-								}
-								else //Si no se uso pues mas probable que la use
-								{
-									probSkill = 55;
-								}
-								//Usar un attack
-								if (CalculateRandomProbability(probSkill) && listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque
-								{
-									//usar skill 1(0) (atk)
-									UseSkill(listSkills.At(0)->data);
-
-									listSkillsHistory.Add(1);
-									break;
-								}
-								else
-								{
-									//Depende de lo dañada que este la party pues buff defensivo o ofensivo
-									int maxHPTeam=0;
-									int actualHPTeam=0;
-									for (int i = 0; i < app->combat->vecEnemies.size(); i++)
-									{
-										maxHPTeam += app->combat->vecEnemies.at(i)->maxHp;
-										actualHPTeam += app->combat->vecEnemies.at(i)->currentHp;
-									}
-									probSkill = (actualHPTeam / maxHPTeam) * 100;
-									if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I)) //Usar debuff area
-									{
-										//usar skill 3(2) (BUFF ATK)
-										UseSkill(listSkills.At(2)->data);
-
-										listSkillsHistory.Add(3);
-										break;
-									}
-									else if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Debuff unitario
-									{
-										//usar skill 4(3) (BUFF DEFENSE)
-										UseSkill(listSkills.At(3)->data);
-
-										listSkillsHistory.Add(4);
-										break;
-									}
-								}
-							}
-							else //Posicion jodido
-							{
-								if (listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
-								{
-									//usar skill 2(1) (debil de huida)
-									UseSkill(listSkills.At(1)->data);
-
-									listSkillsHistory.Add(2);
-									break;
-								}
-							}
-							break;
-						case CharacterClass::DEBUFFER:
-
-							if (positionCombat_I > 0) //Posicion comoda
-							{	
-								//Si ataque last turn poco probable usar attack
-								if (listSkillsHistory.end->data == 2 || listSkillsHistory.end->data == 1)
-								{
-									probSkill = 10;
-								}
-								else //Si no se uso pues mas probable que la use
-								{
-									probSkill = 65;
-								}
-								//Usar un attack
-								if (CalculateRandomProbability(probSkill) && listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque
-								{
-									//usar skill 1(0) (atk)
-									UseSkill(listSkills.At(0)->data);
-
-									listSkillsHistory.Add(1);
-									break;
-								}
-								else
-								{
-									if (listSkillsHistory.end->data == 3)//Usar debuffo area
-									{
-										probSkill = 25;
-									}
-									else //Usar debuffo area
-									{
-										probSkill = 75;
-									}
-									if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I)) //Usar debuff area
-									{
-										//usar skill 3(2) (area debuff)
-										UseSkill(listSkills.At(2)->data);
-
-										listSkillsHistory.Add(3);
-										break;
-									}
-									else if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Debuff unitario
-									{
-										//usar skill 4(3) (unitary debuff)
-										UseSkill(listSkills.At(3)->data);
-
-										listSkillsHistory.Add(4);
-										break;
-									}
-								}
-							}
-							else //Posicion jodido
-							{
-								if ( listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
-								{
-									//usar skill 1 (debil de huida)
-									UseSkill(listSkills.At(1)->data);
-
-									listSkillsHistory.Add(2);
-									break;
-								}
-							}
-							break;
-						case CharacterClass::BOSS:
-
-							//Si es el primer turno usar el opening
-							if (listSkillsHistory.end->data==0)
-							{
-								if (listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
-								{
-									//usar Opener
-									UseSkill(listSkills.At(1)->data);
-
-									listSkillsHistory.Add(2);
-									break;
-								}
-								else //Si no pudiese usar la skill por cualquier motivo
-								{
-									//usar Skill Ataque basico
-									UseSkill(listSkills.At(0)->data);
-
-									listSkillsHistory.Add(1);
-									break;
-								}
-							}
-							else //No turno 1
-							{
-								if (currentHp >= (maxHp / 2)) //Mas de la mitad de la vida (no rage)
-								{
-									if (listSkillsHistory.end->data == 4)//Si uso la habilidad 4(3) no la puede usar de nuevo
+									//Usar preparation
+									if (listSkillsHistory.end->data == 2 || listSkillsHistory.end->prev->data == 2)
 									{
 										probSkill = 0;
 									}
 									else
 									{
-										if (listSkillsHistory.end->data == 2)//Si uso la habilidad 2(1) opener pues usar el tocho
+										if (listSkillsHistory.end->data == 3) //Si uso debuffo pues prepara asesinato
 										{
-											probSkill = 100;
+											probSkill = 120;
 										}
 										else
 										{
-											probSkill = 65;
+											probSkill = 50;
 										}
 									}
-
-									//Usar habilidad 3 (golpe potente)
-									if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+									if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I)) //Preparar asesinato
 									{
-										//usar skill 3 (attack poderoso)
-										UseSkill(listSkills.At(3)->data);
+										//usar skill 2(1) (preparacion asesinato)
+										UseSkill(listSkills.At(1)->data);
 
-										listSkillsHistory.Add(4);
+										listSkillsHistory.Add(2);
 										break;
 									}
-									else
+									else //Usar ataque basico o debuffo
 									{
-										if (listSkillsHistory.end->prev->data == 2) //Usado opener hace poco
+										//Probabilidad usar debuff
+										if (listSkillsHistory.end->data==1) //Si uso el ataque basico
 										{
-											if (listSkillsHistory.end->data == 2) { probSkill = 0; }//Usado turno pasado
-											else { probSkill = 10; }
+											probSkill = 80;
 										}
 										else
 										{
-											probSkill = 60;
+											probSkill = 40;
 										}
-
-										//Usar skill 2 (1) opener
-										if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+										if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
 										{
-											//usar Opener
+											//usar skill 3(2) (debuff)
+											UseSkill(listSkills.At(2)->data);
+
+											listSkillsHistory.Add(3);
+											break;
+										}
+										else
+										{
+											if (CalculateRandomProbability(probSkill) && listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Preparar asesinato
+											{
+												//usar skill 1(0) (ataque basico)
+												UseSkill(listSkills.At(0)->data);
+
+												listSkillsHistory.Add(1);
+												break;
+											}
+										}
+									}
+								}
+								break;
+							case CharacterClass::AOE_DPS:
+
+								//Si uso el ataque tocho pues necesita descansar un turno
+								if (listSkillsHistory.end->data==4)
+								{
+									listSkillsHistory.Add(0);
+								}
+								else
+								{
+									//Posicion jodida
+									if (listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//usar skill 3(2) (ataque debil por no posicionado)
+										UseSkill(listSkills.At(2)->data);
+
+										listSkillsHistory.Add(3);
+										break;
+									}
+									else // Posicion habilitada para funcionar
+									{
+										probSkill = 65;
+										for (int i = listSkillsHistory.Count() - 1; i > 0; i--)
+										{
+											if (listSkillsHistory.At(i)->data == 2)
+											{
+												//Por cada vez que se uso seguidamente la skill 2(1) menos probable usarla de nuevo
+												probSkill -= 35;
+											}
+											else
+											{
+												break;
+											}
+										}
+										if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I)) //Preparar asesinato
+										{
+											//usar skill 2(1) (cargar)
 											UseSkill(listSkills.At(1)->data);
 
 											listSkillsHistory.Add(2);
 											break;
 										}
-										else //Usar default
+										else
 										{
-											//usar Skill Ataque basico
-											UseSkill(listSkills.At(0)->data);
+											if (listSkillsHistory.end->data == 2)
+											{
+												probSkill = 85;
+											}
+											else
+											{
+												probSkill = 30;
+											}
+											if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque en area tocho
+											{
+												//usar skill 2(1) (cargar)
+												UseSkill(listSkills.At(1)->data);
 
-											listSkillsHistory.Add(1);
-											break;
+												listSkillsHistory.Add(2);
+												break;
+											}
+											else if( listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque basico
+											{
+												//usar skill 1(0) (basic attack)
+												UseSkill(listSkills.At(0)->data);
+
+												listSkillsHistory.Add(1);
+												break;
+											}
 										}
 									}
 								}
-								else// Vida baja (rage mode)
+								break;
+							case CharacterClass::HEALER:
+								//Mirar si hay alguien esta  muy herido
+								probSkill = 0;
+								for (int i = 0; i < app->combat->vecEnemies.size(); i++)
 								{
-									if (listSkillsHistory.end->prev->data == 2) //Usado rage skill hace poco
+									if (app->combat->vecEnemies.at(i)->currentHp == app->combat->vecEnemies.at(i)->maxHp / 4) //Muy mal de vida
 									{
-										if (listSkillsHistory.end->data == 2) { probSkill = 0; }//Usado turno pasado
-										else { probSkill = 15; }
+										probSkill = 100; //Si un aliado esta muy herido es "garantizado" que intente usar la cura unitaria
+									}
+									else if (app->combat->vecEnemies.at(i)->currentHp == app->combat->vecEnemies.at(i)->maxHp / 2 && probSkill==0) //Algo mal de vida
+									{
+										probSkill = 40;
+									}
+								}
+								//Usar cura unitaria (en el aliado mas herido), no la puede usar dos veces seguidas
+								if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I) && listSkillsHistory.end->data != 2)
+								{
+									//Usar cura unitaria 2(1)
+									UseSkill(listSkills.At(1)->data);
+
+									listSkillsHistory.Add(2);
+								}
+								else
+								{
+									//Probabilidad usar heal area
+									if (listSkillsHistory.end->data == 2) //Uso cura unitaria turno anterior
+									{
+										// 0, 12, 25
+										probSkill /= 4;
 									}
 									else
 									{
-										probSkill = 85;
+										//10, 30 0 60
+										probSkill /= 2; 
+										probSkill += 10;
+									}
+									if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//Usar cura en area 4(3)
+										UseSkill(listSkills.At(3)->data);
+
+										listSkillsHistory.Add(4);
+									}
+									else
+									{
+										if (listSkillsHistory.end->data==3)
+										{
+											probSkill = 0;
+										}
+										else if(listSkillsHistory.end->prev->data == 3)
+										{
+											probSkill = 20;
+										}
+										else
+										{
+											probSkill = 45;
+										}
+										if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
+										{
+											//Usar gimmick propia 3(2)
+											UseSkill(listSkills.At(2)->data);
+
+											listSkillsHistory.Add(3);
+										}
+										else if ( listSkills.At(0)->data->PosCanBeUsed(positionCombat_I))
+										{
+											//Usar basic attack 1(0)
+											UseSkill(listSkills.At(0)->data);
+
+											listSkillsHistory.Add(1);
+										}
 									}
 
-									//Usar habilidad 3(2) (RageSkill)
+								}
+
+								break;
+							case CharacterClass::TANK:
+							{
+								if (currentHp >= maxHp / 2) //Alto de vida
+								{
+									if (listSkillsHistory.end->data == 3)//Si se uso el turno pasado no se usa
+									{
+										probSkill = 10;
+									}
+									else //Si no se uso pues casi siempre la usa
+									{
+										probSkill = 60;
+									}
 									if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
 									{
-										//usar skill 3 (attack poderoso)
+										//usar skill 3(2) (tanqueo high HP)
 										UseSkill(listSkills.At(2)->data);
 
 										listSkillsHistory.Add(3);
@@ -873,13 +612,214 @@ bool Character::Update(float dt)
 									}
 									else
 									{
-										if (listSkillsHistory.end->data == 4)//Si no se uso la habilidad 4(3) la usa
+										probSkill = 75;
+									}
+								}
+								else //Bajo de vida
+								{
+									if (listSkillsHistory.end->data == 2)//Si se uso el turno pasado no se repite casi
+									{
+										probSkill = 0;
+									}
+									else //Si no se uso pues casi siempre la usa
+									{
+										probSkill = 70;
+									}
+									if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//usar skill 2(1) (tanqueo low HP)
+										UseSkill(listSkills.At(1)->data);
+
+										listSkillsHistory.Add(2);
+										break;
+									}
+									{
+										probSkill = 25;
+									}
+								}
+								if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))//Ataques
+								{
+									//usar skill 4(3) (daño + debuff)
+									UseSkill(listSkills.At(3)->data);
+
+									listSkillsHistory.Add(4);
+									break;
+								}
+								else
+								{
+									//usar skill 1(0) (daño solo) (es la skill mas debil)
+									UseSkill(listSkills.At(0)->data);
+
+									listSkillsHistory.Add(1);
+									break;
+								}
+							}
+							break;
+							case CharacterClass::BUFFER:
+
+								if (positionCombat_I > 0) //Posicion comoda
+								{
+									//Si ataque last turn poco probable usar attack
+									if (listSkillsHistory.end->data == 2 || listSkillsHistory.end->data == 1)
+									{
+										probSkill = 10;
+									}
+									else //Si no se uso pues mas probable que la use
+									{
+										probSkill = 55;
+									}
+									//Usar un attack
+									if (CalculateRandomProbability(probSkill) && listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque
+									{
+										//usar skill 1(0) (atk)
+										UseSkill(listSkills.At(0)->data);
+
+										listSkillsHistory.Add(1);
+										break;
+									}
+									else
+									{
+										//Depende de lo dañada que este la party pues buff defensivo o ofensivo
+										int maxHPTeam=0;
+										int actualHPTeam=0;
+										for (int i = 0; i < app->combat->vecEnemies.size(); i++)
 										{
-											probSkill = 20;
+											maxHPTeam += app->combat->vecEnemies.at(i)->maxHp;
+											actualHPTeam += app->combat->vecEnemies.at(i)->currentHp;
+										}
+										probSkill = (actualHPTeam / maxHPTeam) * 100;
+										if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I)) //Usar debuff area
+										{
+											//usar skill 3(2) (BUFF ATK)
+											UseSkill(listSkills.At(2)->data);
+
+											listSkillsHistory.Add(3);
+											break;
+										}
+										else if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Debuff unitario
+										{
+											//usar skill 4(3) (BUFF DEFENSE)
+											UseSkill(listSkills.At(3)->data);
+
+											listSkillsHistory.Add(4);
+											break;
+										}
+									}
+								}
+								else //Posicion jodido
+								{
+									if (listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//usar skill 2(1) (debil de huida)
+										UseSkill(listSkills.At(1)->data);
+
+										listSkillsHistory.Add(2);
+										break;
+									}
+								}
+								break;
+							case CharacterClass::DEBUFFER:
+
+								if (positionCombat_I > 0) //Posicion comoda
+								{	
+									//Si ataque last turn poco probable usar attack
+									if (listSkillsHistory.end->data == 2 || listSkillsHistory.end->data == 1)
+									{
+										probSkill = 10;
+									}
+									else //Si no se uso pues mas probable que la use
+									{
+										probSkill = 65;
+									}
+									//Usar un attack
+									if (CalculateRandomProbability(probSkill) && listSkills.At(0)->data->PosCanBeUsed(positionCombat_I)) //Usar ataque
+									{
+										//usar skill 1(0) (atk)
+										UseSkill(listSkills.At(0)->data);
+
+										listSkillsHistory.Add(1);
+										break;
+									}
+									else
+									{
+										if (listSkillsHistory.end->data == 3)//Usar debuffo area
+										{
+											probSkill = 25;
+										}
+										else //Usar debuffo area
+										{
+											probSkill = 75;
+										}
+										if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I)) //Usar debuff area
+										{
+											//usar skill 3(2) (area debuff)
+											UseSkill(listSkills.At(2)->data);
+
+											listSkillsHistory.Add(3);
+											break;
+										}
+										else if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I)) //Debuff unitario
+										{
+											//usar skill 4(3) (unitary debuff)
+											UseSkill(listSkills.At(3)->data);
+
+											listSkillsHistory.Add(4);
+											break;
+										}
+									}
+								}
+								else //Posicion jodido
+								{
+									if ( listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//usar skill 1 (debil de huida)
+										UseSkill(listSkills.At(1)->data);
+
+										listSkillsHistory.Add(2);
+										break;
+									}
+								}
+								break;
+							case CharacterClass::BOSS:
+
+								//Si es el primer turno usar el opening
+								if (listSkillsHistory.end->data==0)
+								{
+									if (listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+									{
+										//usar Opener
+										UseSkill(listSkills.At(1)->data);
+
+										listSkillsHistory.Add(2);
+										break;
+									}
+									else //Si no pudiese usar la skill por cualquier motivo
+									{
+										//usar Skill Ataque basico
+										UseSkill(listSkills.At(0)->data);
+
+										listSkillsHistory.Add(1);
+										break;
+									}
+								}
+								else //No turno 1
+								{
+									if (currentHp >= (maxHp / 2)) //Mas de la mitad de la vida (no rage)
+									{
+										if (listSkillsHistory.end->data == 4)//Si uso la habilidad 4(3) no la puede usar de nuevo
+										{
+											probSkill = 0;
 										}
 										else
 										{
-											probSkill = 100;
+											if (listSkillsHistory.end->data == 2)//Si uso la habilidad 2(1) opener pues usar el tocho
+											{
+												probSkill = 100;
+											}
+											else
+											{
+												probSkill = 65;
+											}
 										}
 
 										//Usar habilidad 3 (golpe potente)
@@ -893,17 +833,18 @@ bool Character::Update(float dt)
 										}
 										else
 										{
-											if (listSkillsHistory.end->data == 2) //Usado opener antes
+											if (listSkillsHistory.end->prev->data == 2) //Usado opener hace poco
 											{
-												probSkill = 0;
+												if (listSkillsHistory.end->data == 2) { probSkill = 0; }//Usado turno pasado
+												else { probSkill = 10; }
 											}
 											else
 											{
-												probSkill = 40;
+												probSkill = 60;
 											}
 
 											//Usar skill 2 (1) opener
-											if (listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+											if (CalculateRandomProbability(probSkill) && listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
 											{
 												//usar Opener
 												UseSkill(listSkills.At(1)->data);
@@ -921,24 +862,96 @@ bool Character::Update(float dt)
 											}
 										}
 									}
+									else// Vida baja (rage mode)
+									{
+										if (listSkillsHistory.end->prev->data == 2) //Usado rage skill hace poco
+										{
+											if (listSkillsHistory.end->data == 2) { probSkill = 0; }//Usado turno pasado
+											else { probSkill = 15; }
+										}
+										else
+										{
+											probSkill = 85;
+										}
+
+										//Usar habilidad 3(2) (RageSkill)
+										if (CalculateRandomProbability(probSkill) && listSkills.At(2)->data->PosCanBeUsed(positionCombat_I))
+										{
+											//usar skill 3 (attack poderoso)
+											UseSkill(listSkills.At(2)->data);
+
+											listSkillsHistory.Add(3);
+											break;
+										}
+										else
+										{
+											if (listSkillsHistory.end->data == 4)//Si no se uso la habilidad 4(3) la usa
+											{
+												probSkill = 20;
+											}
+											else
+											{
+												probSkill = 100;
+											}
+
+											//Usar habilidad 3 (golpe potente)
+											if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+											{
+												//usar skill 3 (attack poderoso)
+												UseSkill(listSkills.At(3)->data);
+
+												listSkillsHistory.Add(4);
+												break;
+											}
+											else
+											{
+												if (listSkillsHistory.end->data == 2) //Usado opener antes
+												{
+													probSkill = 0;
+												}
+												else
+												{
+													probSkill = 40;
+												}
+
+												//Usar skill 2 (1) opener
+												if (listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
+												{
+													//usar Opener
+													UseSkill(listSkills.At(1)->data);
+
+													listSkillsHistory.Add(2);
+													break;
+												}
+												else //Usar default
+												{
+													//usar Skill Ataque basico
+													UseSkill(listSkills.At(0)->data);
+
+													listSkillsHistory.Add(1);
+													break;
+												}
+											}
+										}
+									}
 								}
-							}
-							break;
-						case CharacterClass::NO_CLASS:
-							break;
-						default:
-							break;
+								break;
+							case CharacterClass::NO_CLASS:
+								break;
+							default:
+								break;
+						}
+				
+						app->combat->NextTurn();
+						delayOn = false;
 					}
 
-					app->combat->NextTurn();
-					delayOn = false;
+					break;
+				case CharacterType::NONE:
+					break;
+				default:
+					break;
 				}
-
-				break;
-			case CharacterType::NONE:
-				break;
-			default:
-				break;
 			}
 		}
 	}
@@ -1014,8 +1027,10 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		
 		//Primer efecto de estado
 		if (skill->firstPositiveEffect) //Efecto de estado positivo
-		{
-			defender->listStatusEffects.Add(statusEffect1);
+		{	
+			//Blees -1 pues no lo hace
+			if (defender->GetStat(EffectType::BLESS)!=-1 || skill->firstPositiveEffect!=-1) {defender->listStatusEffects.Add(statusEffect1);}
+			
 			//Movimiento
 			app->combat->MoveCharacter(defender, skill->movementTarget);
 		}
@@ -1023,7 +1038,8 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		{
 			if(CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY)*(skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 			{
-				defender->listStatusEffects.Add(statusEffect1);
+				if (defender->GetStat(EffectType::BLESS) != 1 || skill->firstPositiveEffect != -1){defender->listStatusEffects.Add(statusEffect1);}
+				
 				//Movimiento
 				app->combat->MoveCharacter(defender, skill->movementTarget);
 			}
@@ -1031,13 +1047,13 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		//Segundo efecto de estado
 		if (skill->secondPositiveEffect) //Efecto de estado positivo
 		{
-			defender->listStatusEffects.Add(statusEffect2);
+			if (defender->GetStat(EffectType::BLESS) != -1 || skill->secondPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect2); }
 		}
 		else
 		{
 			if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 			{
-				defender->listStatusEffects.Add(statusEffect2);
+				if (defender->GetStat(EffectType::BLESS) != 1 || skill->secondPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect2); }
 			}
 		}
 		return(caster->maxHp / 5 * skill->multiplierDmg);
@@ -1062,7 +1078,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			//Primer efecto estado 
 			if (skill->firstPositiveEffect) //Efecto de estado positivo
 			{
-				defender->listStatusEffects.Add(statusEffect1);
+				if (defender->GetStat(EffectType::BLESS) != -1 || skill->firstPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect1); }
 				//Movimiento
 				app->combat->MoveCharacter(defender, skill->movementTarget);
 			}
@@ -1071,21 +1087,21 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 				{
 					//Movimiento
-					app->combat->MoveCharacter(defender, skill->movementTarget);
-					defender->listStatusEffects.Add(statusEffect1);
+					app->combat->MoveCharacter(defender, skill->movementTarget || skill->firstPositiveEffect != -1);
+					if (defender->GetStat(EffectType::BLESS) != 1) { defender->listStatusEffects.Add(statusEffect1); }
 				}
 			}
 
 			//Segundo efecto estado 
 			if (skill->firstPositiveEffect) //Efecto de estado positivo
 			{
-				defender->listStatusEffects.Add(statusEffect2);
+				if (defender->GetStat(EffectType::BLESS) != -1 || skill->secondPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect2); }
 			}
 			else
 			{
 				if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 				{
-					defender->listStatusEffects.Add(statusEffect2);
+					if (defender->GetStat(EffectType::BLESS) != -1 || skill->secondPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect2); }
 				}
 			}
 
@@ -1398,6 +1414,27 @@ int Character::GetStat(EffectType statType)
 			if (i->data->type == statType)
 			{
 				base = 1; //Semi bool, si tiene taunt pues 1, sino sera 0
+			}
+		}
+
+		return base;
+	case EffectType::STUN:
+		base = 0;
+		for (ListItem<StatusEffect*>* i = listStatusEffects.start; i != nullptr; i = i->next)
+		{
+			if (i->data->type == statType)
+			{
+				base = 1; //Semi bool, si tiene taunt pues 1, sino sera 0
+			}
+		}
+
+		return base;
+	case EffectType::BLESS:
+		for (ListItem<StatusEffect*>* i = listStatusEffects.start; i != nullptr; i = i->next)
+		{
+			if (i->data->type == statType)
+			{
+				base = i->data->intensity; //Consegir el tipo de bless (1:Block Negative,0?,-1:Block Positive)
 			}
 		}
 

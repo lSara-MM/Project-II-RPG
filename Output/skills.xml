@@ -14,7 +14,10 @@ STATUS ID
 	ACCURACY=4,
 	ARMOR=5,
 	DODGE=6,
-	RES=7, 
+	RES=7,
+	TAUNT=8
+	STUN=9
+	BLESS=10
 -->
 
 <!--
@@ -105,12 +108,12 @@ TargetingMethod //Como se ataca
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
-	<skill name="I have somethig" id="11" description="A lesser heal that can be used anywhere and gives regeneration for 2 turns."
+	<skill name="I have somethig" id="11" description="A lesser heal that can be used anywhere and gives regeneration for 2 turns and eliminate debuffs."
 		   type="3" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="0.8" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
 	   firstStatusID="0" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="12"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
+		   secondStatusID="10" secondStatusPositive="true" secondStatusDuration="1" secondStatusIntesity="1"		   
 	/>
 
 	<skill name="Healing for sale" id="12" description="An offer for everyone, heal all party members!"
@@ -130,12 +133,12 @@ TargetingMethod //Como se ataca
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
-	<skill name="MORE FIRE" id="14" description="Inflict self-harm and embrace madness to amplify your attack by 55 for 5 turns!"
+	<skill name="MORE FIRE" id="14" description="Inflict self-harm and embrace madness to amplify your attack by 60 for 5 turns!"
 		   type="3" movementCaster="1"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="-1.2" bonusAccuracy="400" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="1" friendlyFire="true" areaSkill="false" autoTarget="true"
-	   firstStatusID="1" firstStatusPositive="true" firstStatusDuration="5" firstStatusIntesity="55"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
+	   firstStatusID="1" firstStatusPositive="true" firstStatusDuration="5" firstStatusIntesity="60"
+		   secondStatusID="0" secondStatusPositive="false" secondStatusDuration="5" secondStatusIntesity="-5"		   
 	/>
 
 	<skill name="Seas of Fire" id="15" description="A wave of fire with low accuracy that damages all enemies and can inflict burns for 2 turns."
@@ -146,12 +149,12 @@ TargetingMethod //Como se ataca
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
-	<skill name="Oil Spit" id="16" description="An oil spray that damages lightly all enemies but reduces resistance by 40 for 5 turns."
+	<skill name="Oil Spit" id="16" description="An oil spray that damages lightly all enemies but reduces resistance and dodge by 40 for 4 turns."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="-0.4" bonusAccuracy="130" bonusCritRate="-10" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
-		   firstStatusID="7" firstStatusPositive="false" firstStatusDuration="5" firstStatusIntesity="-40"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		  
+		   firstStatusID="7" firstStatusPositive="false" firstStatusDuration="4" firstStatusIntesity="-40"
+		   secondStatusID="6" secondStatusPositive="false" secondStatusDuration="4" secondStatusIntesity="-40"		  
 	/>
 
 	<!--Skills armario-->
@@ -247,12 +250,12 @@ TargetingMethod //Como se ataca
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
-	<skill name="Curse of pain " id="32" description="A high accuracy curse that greatly lowers defense."
+	<skill name="Curse of pain " id="32" description="A high accuracy curse that greatly lowers defense and dodge."
 		   type="2" movementCaster="0"  movementTarget="0" targetMethod="3"
 	   multiplierDmg="-0.4" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="2" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="5" firstStatusPositive="false" firstStatusDuration="4" firstStatusIntesity="-70"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
+		   secondStatusID="6" secondStatusPositive="false" secondStatusDuration="4" secondStatusIntesity="-70"		   
 	/>
 	
 	<!--Skills Boss-->
@@ -261,7 +264,7 @@ TargetingMethod //Como se ataca
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="-1.3" bonusAccuracy="110" bonusCritRate="20" bonusCritDamage="20"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
-		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-30"
+		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-40"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 		   />
 	
@@ -274,17 +277,17 @@ TargetingMethod //Como se ataca
 	/>
 	<skill name="Intangibility" id="35" description="A defensive buff that makes the specter nearly invincible."
 		   type="3" movementCaster="0"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="0.3" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="0.2" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
 		   firstStatusID="5" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="130"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+		   secondStatusID="10" secondStatusPositive="true" secondStatusDuration="2" secondStatusIntesity="1"
 	/>
 
-	<skill name="Nigthmarish strike" id="36" description="A strike to the backline with high damage but low accuracy."
+	<skill name="Nigthmarish strike" id="36" description="A strike to the backline with high damage but low accuracy that can stun."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="2"
-	   multiplierDmg="-2.2" bonusAccuracy="70" bonusCritRate="20" bonusCritDamage="30"
+	   multiplierDmg="-2.2" bonusAccuracy="80" bonusCritRate="20" bonusCritDamage="30"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="2" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
-		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   firstStatusID="9" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="1"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 
@@ -314,12 +317,11 @@ TargetingMethod //Como se ataca
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 
-	<!--La idea seria que pudiera stunear-->
 	<skill name="Ramming Pounce" id="40" description="A powerful strike that always strikes critically."
 		   type="0" movementCaster="-3"  movementTarget="-1" targetMethod="1"
 	   multiplierDmg="-1.6" bonusAccuracy="90" bonusCritRate="120" bonusCritDamage="40"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
-		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   firstStatusID="9" firstStatusPositive="false" firstStatusDuration="1" firstStatusIntesity="1"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 
@@ -344,7 +346,7 @@ TargetingMethod //Como se ataca
 		   type="3" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="0" bonusAccuracy="80" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
-		   firstStatusID="4" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="-80"
+		   firstStatusID="4" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="-80"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
@@ -366,12 +368,12 @@ TargetingMethod //Como se ataca
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 		   />
 
-	<skill name="Slide Back" id="46" description="A withdrawal to the backiline that also increases highly dodge."
+	<skill name="Slide Back" id="46" description="A withdrawal to the backiline that also increases highly dodge and resistance."
 		   type="2" movementCaster="1"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="0" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="true"
 		   firstStatusID="6" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="100"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+		   secondStatusID="7" secondStatusPositive="false" secondStatusDuration="2" secondStatusIntesity="50"
 	/>
 	<!-- Estaria guay si tambein quitara buffos-->
 	<skill name="Abysal Gaze" id="47" description="A paralyzing gaze that reduces resistance."
@@ -379,7 +381,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="0" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="7" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-40"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+		   secondStatusID="10" secondStatusPositive="false" secondStatusDuration="1" secondStatusIntesity="-1"
 	/>
 
 	<skill name="Electrostatic discharge" id="48" description="A powerful discharge that causes a powerful burn on the target."
