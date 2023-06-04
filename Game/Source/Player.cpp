@@ -113,6 +113,10 @@ bool Player::Awake() {
 	confirmPath = "Assets/Audio/Fx/confirm_interaction.wav";
 	confirmInteractfx = app->audio->LoadFx(confirmPath);
 
+	//fx confirm interaction
+	chestFxPath = "Assets/Audio/Fx/new_item.wav";
+	chestfx = app->audio->LoadFx(chestFxPath);
+
 	//animation minimap
 	mapAnimation.Set();
 	mapAnimation.AddTween(100, 100, BOUNCE_IN_OUT);
@@ -415,6 +419,7 @@ bool Player::Update(float dt)
 				Chest_contact = false;
 				interactionTest = false;
 				app->lootManager->chests[Chest_ID]->UseChest();
+				app->audio->PlayFx(chestfx);
 			}
 		}
 
