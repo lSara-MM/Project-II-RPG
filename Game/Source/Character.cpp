@@ -1006,14 +1006,16 @@ bool Character::CalculateRandomProbability(int bonus_I, int against_I)
 //Provisional full
 int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 {
-	StatusEffect* statusEffect = new StatusEffect(skill->intensity, skill->duration, skill->positiveEffect, (EffectType)skill->status);
+	StatusEffect* statusEffect1 = new StatusEffect(skill->firstIntensity, skill->firstDuration, skill->firstPositiveEffect, (EffectType)skill->firstStatus);
+	StatusEffect* statusEffect2 = new StatusEffect(skill->secondIntensity, skill->secondDuration, skill->secondPositiveEffect, (EffectType)skill->secondStatus);
 	if (skill->multiplierDmg >= 0) //Curacion o buffo, no hace falta calcular esquiva ni nada 
 	{
 		app->audio->PlayFx(healfx);
 		
-		if (skill->positiveEffect) //Efecto de estado positivo
+		//Primer efecto de estado
+		if (skill->firstPositiveEffect) //Efecto de estado positivo
 		{
-			defender->listStatusEffects.Add(statusEffect);
+			defender->listStatusEffects.Add(statusEffect1);
 			//Movimiento
 			app->combat->MoveCharacter(defender, skill->movementTarget);
 		}
@@ -1021,9 +1023,21 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		{
 			if(CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY)*(skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 			{
-				defender->listStatusEffects.Add(statusEffect);
+				defender->listStatusEffects.Add(statusEffect1);
 				//Movimiento
 				app->combat->MoveCharacter(defender, skill->movementTarget);
+			}
+		}
+		//Segundo efecto de estado
+		if (skill->secondPositiveEffect) //Efecto de estado positivo
+		{
+			defender->listStatusEffects.Add(statusEffect2);
+		}
+		else
+		{
+			if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
+			{
+				defender->listStatusEffects.Add(statusEffect2);
 			}
 		}
 		return(caster->maxHp / 5 * skill->multiplierDmg);
@@ -1045,9 +1059,10 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				damage *= ( 100 + 2*(caster->GetStatModifier(EffectType::CRIT_DMG) * (skill->bonusCritDamage + caster->critDamage)) ) / 100;
 			}
 
-			if (skill->positiveEffect) //Efecto de estado positivo
+			//Primer efecto estado 
+			if (skill->firstPositiveEffect) //Efecto de estado positivo
 			{
-				defender->listStatusEffects.Add(statusEffect);
+				defender->listStatusEffects.Add(statusEffect1);
 				//Movimiento
 				app->combat->MoveCharacter(defender, skill->movementTarget);
 			}
@@ -1057,7 +1072,20 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				{
 					//Movimiento
 					app->combat->MoveCharacter(defender, skill->movementTarget);
-					defender->listStatusEffects.Add(statusEffect);
+					defender->listStatusEffects.Add(statusEffect1);
+				}
+			}
+
+			//Segundo efecto estado 
+			if (skill->firstPositiveEffect) //Efecto de estado positivo
+			{
+				defender->listStatusEffects.Add(statusEffect2);
+			}
+			else
+			{
+				if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
+				{
+					defender->listStatusEffects.Add(statusEffect2);
 				}
 			}
 
@@ -1087,21 +1115,32 @@ void Character::LoadSkill(int arr[4])
 				SString descripcion = aux.attribute("description").as_string();
 				SkillType tipo = (SkillType)aux.attribute("name").as_int();
 				
+				//Stats
 				float mult = aux.attribute("multiplierDmg").as_float();
 				int dmgCrit = aux.attribute("bonusCritDamage").as_int();
 				int probCrit = aux.attribute("bonusCritRate").as_int();
 				int accuracy = aux.attribute("bonusAccuracy").as_int();
-				int movTarget = aux.attribute("movementTarget").as_int();
+				
 
+				//Status Effect 1
 				int firstStatusID = aux.attribute("firstStatusID").as_int();
 				bool firstPositiveEffect_B = aux.attribute("firstStatusPositive").as_bool();
 				int firstDurationEffect_I = aux.attribute("firstStatusDuration").as_int();
 				int firstIntensityEffect_I = aux.attribute("firstStatusIntesity").as_int();
 
+				//Status Effect 1
+				int secondtStatusID = aux.attribute("secondStatusID").as_int();
+				bool secondPositiveEffect_B = aux.attribute("secondStatusPositive").as_bool();
+				int secondDurationEffect_I = aux.attribute("secondStatusDuration").as_int();
+				int secondIntensityEffect_I = aux.attribute("secondStatusIntesity").as_int();
+
+				//Caster
 				int movUsuario = aux.attribute("movementCaster").as_int();
 				int posInicialUso = aux.attribute("posToUseStart").as_int();
 				int posFinallUso = aux.attribute("posToUseEnd").as_int();
-				
+
+				//Targeet
+				int movTarget = aux.attribute("movementTarget").as_int();
 				int posInicialTarget = aux.attribute("posToTargetStart").as_int();
 				int posFinalTarget = aux.attribute("posToTargetEnd").as_int();
 				bool friendlyFire = aux.attribute("friendlyFire").as_bool();
@@ -1112,7 +1151,8 @@ void Character::LoadSkill(int arr[4])
 				listSkills.Add(new Skill(nombre, descripcion,
 					posInicialUso, posFinallUso, posInicialTarget, posFinalTarget, method,
 					movUsuario, movTarget, friendlyFire, area, autoTarget, 
-					mult, accuracy, probCrit, dmgCrit, firstStatusID,firstPositiveEffect_B,firstDurationEffect_I,firstIntensityEffect_I));
+					mult, accuracy, probCrit, dmgCrit, firstStatusID,firstPositiveEffect_B,firstDurationEffect_I,firstIntensityEffect_I,
+					secondtStatusID, secondPositiveEffect_B, secondDurationEffect_I, secondIntensityEffect_I));
 			}
 		}
 	}
@@ -1351,6 +1391,17 @@ int Character::GetStat(EffectType statType)
 	case EffectType::RES:
 		base = res;
 		break;
+	case EffectType::TAUNT:
+		base = 0;
+		for (ListItem<StatusEffect*>* i = listStatusEffects.start; i != nullptr; i = i->next)
+		{
+			if (i->data->type == statType)
+			{
+				base = 1; //Semi bool, si tiene taunt pues 1, sino sera 0
+			}
+		}
+
+		return base;
 	default:
 		break;
 	}

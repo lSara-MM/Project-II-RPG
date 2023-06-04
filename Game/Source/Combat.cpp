@@ -1394,41 +1394,41 @@ void Combat::RenderSkillDescription(int controlID)
 
 		//Efect
 		SString effecto_C;
-		switch ((EffectType)skillPoint->status)
+		switch ((EffectType)skillPoint->firstStatus)
 		{
 		case EffectType::NONE:
 			effecto_C = "None";
 			break;
 		case EffectType::CURRENT_HP:
-			if (skillPoint->positiveEffect) { effecto_C = "Regeneration"; }
+			if (skillPoint->firstPositiveEffect) { effecto_C = "Regeneration"; }
 			else { effecto_C = "Burn"; }
 			break;
 		case EffectType::ATTACK:
-			if (skillPoint->positiveEffect) { effecto_C = "Buff ATK"; }
+			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff ATK"; }
 			else { effecto_C = "Debuff ATK"; }
 			break;
 		case EffectType::CRIT_RATE:
-			if (skillPoint->positiveEffect) { effecto_C = "Buff Crit Rate"; }
+			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Crit Rate"; }
 			else { effecto_C = "Debuff Crit Rate"; }
 			break;
 		case EffectType::CRIT_DMG:
-			if (skillPoint->positiveEffect) { effecto_C = "BuffCritDMG"; }
+			if (skillPoint->firstPositiveEffect) { effecto_C = "BuffCritDMG"; }
 			else { effecto_C = "Debuff Crit DMG"; }
 			break;
 		case EffectType::ACCURACY:
-			if (skillPoint->positiveEffect) { effecto_C = "Buff accuracy"; }
+			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff accuracy"; }
 			else { effecto_C = "Debuff accuracy"; }
 			break;
 		case EffectType::ARMOR:
-			if (skillPoint->positiveEffect) { effecto_C = "Buff Armor"; }
+			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Armor"; }
 			else { effecto_C = "Debuff Armor"; }
 			break;
 		case EffectType::DODGE:
-			if (skillPoint->positiveEffect) { effecto_C = "Buff Dodge"; }
+			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Dodge"; }
 			else { effecto_C = "Debuff Dodge"; }
 			break;
 		case EffectType::RES:
-			if (skillPoint->positiveEffect) { effecto_C = "Buff Resistance"; }
+			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Resistance"; }
 			else { effecto_C = "Debuff Resistance"; }
 			break;
 		default:

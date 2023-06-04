@@ -44,7 +44,8 @@ public:
 		int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I, TargetingMethod method,
 		int movementCaster,	int movementTarget,bool targetFriend, bool areaSkill, bool autoTarget,
 		float multiplierDmg,int bonusAccuracy,	int bonusCritRate,int bonusCritDamage, 
-		int status,bool positiveEffect,int duration,int intensity);
+		int firstStatus,bool firstPositiveEffect,int firstDuration,int firstIntensity,
+		int secondStatus, bool secondPositiveEffect, int secondDuration, int secondIntensity);
 
 	bool PosCanBeUsed(int positionCharacter);
 
@@ -72,11 +73,17 @@ public:
 	int bonusCritDamage;
 	//Variable de que tipo de stat usan para el escaldo?
 
-	//Status Effects
-	int status;
-	bool positiveEffect;
-	int duration;
-	int intensity;
+	//Status Effects 1
+	int firstStatus;
+	bool firstPositiveEffect;
+	int firstDuration;
+	int firstIntensity;
+
+	//Status Effects 2
+	int secondStatus;
+	bool secondPositiveEffect;
+	int secondDuration;
+	int secondIntensity;
 
 	//Posicion para hacer la skill (min 0 max 3)
 	int posToUseStart_I; //Posicion mas baja donde puedes usar el ataque
