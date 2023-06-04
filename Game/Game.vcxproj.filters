@@ -126,6 +126,7 @@
     <ClCompile Include="Source\CutScene.cpp" />
     <ClCompile Include="Source\BeastTent.cpp" />
     <ClCompile Include="Source\Forge.cpp" />
+    <ClCompile Include="Source\Particles.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -292,6 +293,7 @@
     <ClInclude Include="Source\CutScene.h" />
     <ClInclude Include="Source\BeastTent.h" />
     <ClInclude Include="Source\Forge.h" />
+    <ClInclude Include="Source\Particles.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">

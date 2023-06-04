@@ -33,6 +33,7 @@
 #include "Map.h"
 #include "Pathfinding.h"
 #include "Physics.h"
+#include "Particles.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -79,6 +80,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	puzzleManager = new PuzzleManager();
 	questManager = new QuestManager();
 	cutScene = new CutScene();
+	particles = new Particles();
 
 	/*initiAllResourcesFromZip = new InitAllResourcesFromZip();
 	assetsManager = new AssetsManager();*/
@@ -107,6 +109,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(puzzleManager);
 	AddModule(questManager);
 	AddModule(cutScene);
+	AddModule(particles);
 	AddModule(entityManager);
 	AddModule(dialogueSystem);
 	AddModule(inventory);

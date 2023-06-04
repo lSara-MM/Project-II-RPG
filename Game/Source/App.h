@@ -46,6 +46,7 @@ class SceneWin_Lose;
 class PuzzleManager;
 class QuestManager;
 class CutScene;
+class Particles;
 
 //class InitAllResourcesFromZip;
 //class AssetsManager;
@@ -144,6 +145,7 @@ public:
 	PuzzleManager* puzzleManager;
 	QuestManager* questManager;
 	CutScene* cutScene;
+	Particles* particles;
 	
 	/*InitAllResourcesFromZip* initiAllResourcesFromZip;
 	AssetsManager* assetsManager;*/
