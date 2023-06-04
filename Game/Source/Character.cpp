@@ -1093,10 +1093,10 @@ void Character::LoadSkill(int arr[4])
 				int accuracy = aux.attribute("bonusAccuracy").as_int();
 				int movTarget = aux.attribute("movementTarget").as_int();
 
-				int statusID = aux.attribute("statusID").as_int();
-				bool positiveEffect = aux.attribute("positive").as_bool();
-				int duration = aux.attribute("duration").as_int();
-				int intensity = aux.attribute("intensity").as_int();
+				int firstStatusID = aux.attribute("firstStatusID").as_int();
+				bool firstPositiveEffect_B = aux.attribute("firstStatusPositive").as_bool();
+				int firstDurationEffect_I = aux.attribute("firstStatusDuration").as_int();
+				int firstIntensityEffect_I = aux.attribute("firstStatusIntesity").as_int();
 
 				int movUsuario = aux.attribute("movementCaster").as_int();
 				int posInicialUso = aux.attribute("posToUseStart").as_int();
@@ -1112,7 +1112,7 @@ void Character::LoadSkill(int arr[4])
 				listSkills.Add(new Skill(nombre, descripcion,
 					posInicialUso, posFinallUso, posInicialTarget, posFinalTarget, method,
 					movUsuario, movTarget, friendlyFire, area, autoTarget, 
-					mult, accuracy, probCrit, dmgCrit, statusID,positiveEffect,duration,intensity));
+					mult, accuracy, probCrit, dmgCrit, firstStatusID,firstPositiveEffect_B,firstDurationEffect_I,firstIntensityEffect_I));
 			}
 		}
 	}
