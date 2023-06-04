@@ -4541,7 +4541,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="4" name="Colliders" width="34" height="44">
+ <layer id="4" name="Colliders" width="34" height="44" visible="0">
   <properties>
    <property name="Draw" type="bool" value="false"/>
    <property name="Navigation" type="bool" value="false"/>
