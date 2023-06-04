@@ -1405,6 +1405,36 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombPlant1) 
 	{
+		if (BarricadeExplote1)
+		{
+			posBomb1.x = posBarricade1.x + widthBarricade1 / 5;
+			posBomb1.y = posBarricade1.y - heightBarricade1 / 2;
+		}
+
+		if (BarricadeExplote2)
+		{
+			posBomb1.x = posBarricade2.x + widthBarricade1 / 5;
+			posBomb1.y = posBarricade2.y - heightBarricade1 / 2;
+		}
+
+		if (BarricadeExplote3)
+		{
+			posBomb1.x = posBarricade3.x + widthBarricade1 / 5;
+			posBomb1.y = posBarricade3.y - heightBarricade1 / 2;
+		}
+
+		if (BarricadeExplote4)
+		{
+			posBomb1.x = posBarricade4.x - widthBarricade2 / 5;
+			posBomb1.y = posBarricade4.y + heightBarricade2 / 2;
+		}
+
+		if (BarricadeExplote5)
+		{
+			posBomb1.x = posBarricade5.x + widthBarricade1 / 5;
+			posBomb1.y = posBarricade5.y - heightBarricade1 / 2;
+		}
+
 		if(DeltaTime >= 2)
 		{
 			posBomb1.x = posChicken1.x + 64;
@@ -1566,6 +1596,36 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombPlant2)
 	{
+		if (BarricadeExplote1)
+		{
+			posBomb2.x = posBarricade1.x + widthBarricade1 / 5;
+			posBomb2.y = posBarricade1.y - heightBarricade1 / 2;
+		}
+
+		if (BarricadeExplote2)
+		{
+			posBomb2.x = posBarricade2.x + widthBarricade1 / 5;
+			posBomb2.y = posBarricade2.y - heightBarricade1 / 2;
+		}		
+		
+		if (BarricadeExplote3)
+		{
+			posBomb2.x = posBarricade3.x + widthBarricade1 / 5;
+			posBomb2.y = posBarricade3.y - heightBarricade1 / 2;
+		}		
+		
+		if (BarricadeExplote4)
+		{
+			posBomb2.x = posBarricade4.x - widthBarricade2 / 5;
+			posBomb2.y = posBarricade4.y + heightBarricade1 / 2;
+		}
+
+		if (BarricadeExplote5)
+		{
+			posBomb2.x = posBarricade5.x + widthBarricade1 / 5;
+			posBomb2.y = posBarricade5.y - heightBarricade1 / 2;
+		}
+
 		if (DeltaTime >= 2)
 		{
 			posBomb2.x = posChicken2.x + 64;
@@ -1683,7 +1743,7 @@ bool PuzzleManager::RelicsPuz()
 {
 	if (RelicContact1) 
 	{
-		app->render->DrawTexture(textureE, posRelicColumn1.x - 32, posRelicColumn1.y - 80);
+		app->render->DrawTexture(textureE, posRelic1.x - 32, posRelic1.y - 80);
 
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
@@ -1702,7 +1762,7 @@ bool PuzzleManager::RelicsPuz()
 
 	if (RelicContact2) 
 	{
-		app->render->DrawTexture(textureE, posRelicColumn2.x - 32, posRelicColumn2.y - 80);
+		app->render->DrawTexture(textureE, posRelic2.x - 32, posRelic2.y - 80);
 
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
@@ -1721,7 +1781,7 @@ bool PuzzleManager::RelicsPuz()
 	
 	if (RelicContact3) 
 	{
-		app->render->DrawTexture(textureE, posRelicColumn3.x - 32, posRelicColumn3.y - 80);
+		app->render->DrawTexture(textureE, posRelic3.x - 32, posRelic3.y - 80);
 
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
