@@ -47,6 +47,7 @@ bool Inventory::Start()
 	inventoryAnimation.Set();
 	inventoryAnimation.AddTween(100, 120, BACK_OUT);
 	inventoryTransition_B = false;
+	posXinventoryAnimation = 0;
 
 	return true;
 }
@@ -62,6 +63,17 @@ bool Inventory::Update(float dt)
 	if (inventoryTransition_B)
 	{
 		inventoryAnimation.Backward();
+		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)//poner invisibles los botones creados
+		{
+			if (app->itemManager->nodeList[i]->button != nullptr)
+			{
+				app->itemManager->nodeList[i]->button->state = GuiControlState::NONE;
+			}
+		}
+		if (posXinventoryAnimation == -1300)
+		{
+			this->Disable();
+		}
 	}
 	else
 	{
@@ -71,6 +83,7 @@ bool Inventory::Update(float dt)
 
 	float point = inventoryAnimation.GetPoint();
 	int offset = -1300;
+	posXinventoryAnimation = offset + point * (0 - offset);
 
 	if (app->combat->active)
 	{
@@ -80,7 +93,7 @@ bool Inventory::Update(float dt)
 	{
 		y = 148;
 
-		app->render->DrawTexture(inventoryIMG, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
+		app->render->DrawTexture(inventoryIMG, posXinventoryAnimation - app->render->camera.x, 0 - app->render->camera.y);
 
 		//Print Character
 		if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
@@ -107,7 +120,10 @@ bool Inventory::PostUpdate()
 			y += 70;
 			x = 0;
 		}
-		app->itemManager->LoadQuantity(x, y, app->itemManager->armorItems[i]);
+		if (posXinventoryAnimation==0)
+		{
+			app->itemManager->LoadQuantity(x, y, app->itemManager->armorItems[i]);
+		}
 		if (app->itemManager->armorItems[i]->equiped == false)
 		{
 			x++;
@@ -122,9 +138,11 @@ bool Inventory::PostUpdate()
 				y += 70;
 				x = 0;
 			}
+			if (posXinventoryAnimation==0)//printar items cuando acabe animacion
+			{
+				app->itemManager->LoadQuantity(x, y, app->itemManager->nodeList[i]);
 
-			app->itemManager->LoadQuantity(x, y, app->itemManager->nodeList[i]);
-
+			}
 			if (app->itemManager->nodeList[i]->equiped == false)
 			{
 				if (app->itemManager->nodeList[i]->quantity > 0)

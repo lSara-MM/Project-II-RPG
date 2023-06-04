@@ -73,7 +73,7 @@ bool CutScene::Update(float dt)
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 	}
 
-	if(app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if(app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 	{
 		passImg++;
 

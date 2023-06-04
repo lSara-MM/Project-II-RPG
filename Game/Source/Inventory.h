@@ -41,6 +41,7 @@ public:
 
 	Tween inventoryAnimation;//animacion inventario
 	bool inventoryTransition_B;//controlar animacion inventario
+	int posXinventoryAnimation;//prueba para hacer animacion salida inventario.
 };
 
 #endif // __ITEMMANAGER_H__

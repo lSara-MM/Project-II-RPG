@@ -43,8 +43,9 @@ public:
 	GuiButton* Add;
 	GuiButton* Minus;
 
-	Tween inventoryAnimation;//animacion inventario
-	bool inventoryTransition_B;//controlar animacion inventario
+	Tween storeAnimation;//animacion tienda
+	bool storeTransition_B;//controlar animacion tienda
+	int posYstoreAnimation;//hacer animacion salida tienda
 
 private:
 
