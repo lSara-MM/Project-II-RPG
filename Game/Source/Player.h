@@ -118,6 +118,10 @@ private:
 	// interact fx
 	const char* confirmPath;
 	uint confirmInteractfx;
+
+	// abrir c fx
+	const char* chestFxPath;
+	uint chestfx;
 	
 	int width, height;
 	SDL_Texture* textureE;
