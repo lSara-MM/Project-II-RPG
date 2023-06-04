@@ -27,6 +27,9 @@ enum class EffectType
 	ARMOR,
 	DODGE,
 	RES,
+	TAUNT,
+	STUN,
+	BLESS //Inmunidad a effecto positivo o negativo.
 };
 
 struct StatusEffect

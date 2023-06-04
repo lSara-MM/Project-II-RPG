@@ -18,24 +18,30 @@ Skill::~Skill()
 {
 }
 
-Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I, TargetingMethod method, int movementCaster, int movementTarget,bool friendlyFire, bool areaSkill, bool autoTarget, float multiplierDmg, int bonusAccuracy, int bonusCritRate, int bonusCritDamage, int status, bool positiveEffect,int duration, int intensity)
+Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I, TargetingMethod method, int movementCaster, int movementTarget_,bool friendlyFire, bool areaSkill, bool autoTarget, float multiplierDmg_, int bonusAccuracy_, int bonusCritRate_, int bonusCritDamage_, int firstStatus, bool firstPositiveEffect,int firstDuration, int firstIntensity, int secondStatus, bool secondPositiveEffect, int secondDuration, int secondIntensity)
 {
 	//Info
 	this->name = name;
 	this->description = description;
 
 	//Stats
-	this->multiplierDmg = multiplierDmg;
-	this->bonusCritDamage = bonusCritDamage;
-	this->bonusCritRate = bonusCritRate;
-	this->bonusAccuracy = bonusAccuracy;
-	this->movementTarget = movementTarget;
+	this->multiplierDmg = multiplierDmg_;
+	this->bonusCritDamage = bonusCritDamage_;
+	this->bonusCritRate = bonusCritRate_;
+	this->bonusAccuracy = bonusAccuracy_;
+	this->movementTarget = movementTarget_;
 
-	//Status Effects
-	this->status = status;
-	this->positiveEffect = positiveEffect;
-	this->duration = duration;
-	this->intensity = intensity;
+	//Status Effects 1
+	this->firstStatus = firstStatus;
+	this->firstPositiveEffect = firstPositiveEffect;
+	this->firstDuration = firstDuration;
+	this->firstIntensity = firstIntensity;
+
+	//Status Effects 2
+	this->secondStatus = secondStatus;
+	this->secondPositiveEffect = secondPositiveEffect;
+	this->secondDuration = secondDuration;
+	this->secondIntensity = secondIntensity;
 
 	//Movement & position
 	this->movementCaster = movementCaster;
@@ -74,6 +80,17 @@ int Skill::RandomTarget(int posInicial, int posFinal, vector<Character*> arr, Ta
 	int pos= posInicial;
 	int width = posFinal - posInicial + 1;
 	int StatTracker = 99999;
+
+	//Mirar si hay algun taunt
+	for (int i = posInicial; i <= posFinal; i++)
+	{
+		if (arr.at(i)->GetStat(EffectType::TAUNT)!=0)
+		{
+			pos = i;
+			return pos; //Si hay taunt pues targetea al taunt si esta en la posibilidad
+		}
+	}
+
 	switch (method)
 	{
 	case TargetingMethod::RANDOM: //Si hay mecanica de taunt pues aqui ponerla
