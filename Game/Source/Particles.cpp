@@ -64,7 +64,7 @@ void Particle::update()
     ++age;
 }
 
-void Particle::render(int x, int y, int r, int age)
+void Particle::render()
 {
     // Render the particle using our draw function (e.g., drawCircle or drawQuad)
     // with the current position (x, y), size (PARTICLE_SIZE), and color (r, g, b).

@@ -113,14 +113,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entityManager);
 	AddModule(dialogueSystem);
 	AddModule(inventory);
+	AddModule(store);
+	AddModule(forge);
 	AddModule(guiManager);
 	AddModule(itemManager);
 	AddModule(sceneWin_Lose);
 	
 	//AddModule(initiAllResourcesFromZip);
 	//AddModule(assetsManager);
-	AddModule(store);
-	AddModule(forge);
 
 	AddModule(fade);
 

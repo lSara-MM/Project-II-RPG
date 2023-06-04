@@ -70,6 +70,7 @@ public:
 	{
 		app->guiManager->DestroyGuiControl(button);
 		button = nullptr;
+		printStats = false;
 		return true;
 	}
 };

@@ -79,60 +79,110 @@ bool ItemManager::PostUpdate()
 			}
 			else if (app->combat->active == false)
 			{
-				x = (680 + 70 * app->itemManager->nodeList[i]->x) + 70;
-				y = app->itemManager->nodeList[i]->y - 32;
-			}
-			else if (app->store->active)
-			{
-				if (app->itemManager->nodeList[i]->type == 1)
+				if (app->store->active)
 				{
-					x = 64 * app->itemManager->nodeList[i]->x + 70;
-					y = 64 * app->itemManager->nodeList[i]->y - 32;
+					if (app->itemManager->nodeList[i]->type == 1)
+					{
+						x = 200 + (64 * app->itemManager->nodeList[i]->x) + 70;
+						y = 200 + app->itemManager->nodeList[i]->y - 32;
+					}
+					else if (app->itemManager->nodeList[i]->toSell)
+					{
+
+					}
+					else
+					{
+						x = 800 + (64 * app->itemManager->nodeList[i]->x) + 70;
+						y = 200 + app->itemManager->nodeList[i]->y - 32;
+					}
 				}
 				else
 				{
-					x = 64 * app->itemManager->nodeList[i]->x + 70;
-					y = 64 * app->itemManager->nodeList[i]->y - 32;
+					x = (680 + 70 * app->itemManager->nodeList[i]->x) + 70;
+					y = app->itemManager->nodeList[i]->y - 32;
 				}
+			}
+			else
+			{
 			}
 
 			app->render->DrawRectangle({x - app->render->camera.x, y - app->render->camera.y, 80, 150}, 0,0,0, 180);
 
 			//print stats
 			app->render->TextDraw(app->itemManager->nodeList[i]->name.GetString(), x + 5, y + 5, 12, Font::TEXT, { 255, 255, 255 });
-			string h = to_string(app->itemManager->nodeList[i]->maxhp);
-			app->render->TextDraw("MAXHP: ", x + 5, y + 25, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(h.c_str(), x + 45, y + 25, 10, Font::TEXT, { 255, 255, 255 });
+			string h = to_string(app->itemManager->nodeList[i]->hp);
+			app->render->TextDraw("HP: ", x + 5, y + 25, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(h.c_str(), x + 60, y + 25, 10, Font::TEXT, { 255, 255, 255 });
+			string mh = to_string(app->itemManager->nodeList[i]->maxhp);
+			app->render->TextDraw("MAXHP: ", x + 5, y + 37, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(mh.c_str(), x + 60, y + 37, 10, Font::TEXT, { 255, 255, 255 });
 			string at = to_string(app->itemManager->nodeList[i]->attack);
-			app->render->TextDraw("ATTK: ", x + 5, y + 37, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(at.c_str(), x + 45, y + 37, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw("ATTK: ", x + 5, y + 49, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(at.c_str(), x + 60, y + 49, 10, Font::TEXT, { 255, 255, 255 });
 			string cP = to_string(app->itemManager->nodeList[i]->critRate);
-			app->render->TextDraw("CRIT_RATE: ", x + 5, y + 49, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(cP.c_str(), x + 45, y + 49, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw("CRIT_RATE: ", x + 5, y + 61, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(cP.c_str(), x + 70, y + 61, 10, Font::TEXT, { 255, 255, 255 });
 			string cD = to_string(app->itemManager->nodeList[i]->critDamage);
-			app->render->TextDraw("CRIT_DMG: ", x + 5, y + 61, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(cD.c_str(), x + 45, y + 61, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw("CRIT_DMG: ", x + 5, y + 73, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(cD.c_str(), x + 70, y + 73, 10, Font::TEXT, { 255, 255, 255 });
 			string p = to_string(app->itemManager->nodeList[i]->accuracy);
-			app->render->TextDraw("ACCURACY: ", x + 5, y + 73, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(p.c_str(), x + 45, y + 73, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw("ACCURACY: ", x + 5, y + 85, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(p.c_str(), x + 70, y + 85, 10, Font::TEXT, { 255, 255, 255 });
 			string ar = to_string(app->itemManager->nodeList[i]->armor);
-			app->render->TextDraw("ARMOR: ", x + 5, y + 85, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(ar.c_str(), x + 45, y + 85, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw("ARMOR: ", x + 5, y + 97, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(ar.c_str(), x + 60, y + 97, 10, Font::TEXT, { 255, 255, 255 });
 			string e = to_string(app->itemManager->nodeList[i]->dodge);
-			app->render->TextDraw("DODGE: ", x + 5, y + 97, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(e.c_str(), x + 45, y + 97, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw("DODGE: ", x + 5, y + 109, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(e.c_str(), x + 60, y + 109, 10, Font::TEXT, { 255, 255, 255 });
 			string r = to_string(app->itemManager->nodeList[i]->res);
-			app->render->TextDraw("RES: ", x + 5, y + 109, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(r.c_str(), x + 45, y + 109, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw("RES: ", x + 5, y + 121, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(r.c_str(), x + 60, y + 121, 10, Font::TEXT, { 255, 255, 255 });
 			string s = to_string(app->itemManager->nodeList[i]->speed);
-			app->render->TextDraw("SPEED: ", x + 5, y + 121, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(s.c_str(), x + 45, y + 121, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw("SPEED: ", x + 5, y + 132, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(s.c_str(), x + 60, y + 132, 10, Font::TEXT, { 255, 255, 255 });
 		}
 	}
 	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
 	{
-		if (app->itemManager->armorItems[i]->printStats)
+		if (app->itemManager->armorItems[i]->printStats && app->itemManager->armorItems[i]->equiped == false)
 		{
+			if (app->combat->active == false)
+			{
+				x = (680 + 70 * app->itemManager->armorItems[i]->x) + 70;
+				y = app->itemManager->armorItems[i]->y - 32;
+			}
+
+			app->render->DrawRectangle({ x - app->render->camera.x, y - app->render->camera.y, 80, 150 }, 0, 0, 0, 180);
+
+			//print stats
+			app->render->TextDraw(app->itemManager->armorItems[i]->name.GetString(), x + 5, y + 5, 12, Font::TEXT, { 255, 255, 255 });
+			string h = to_string(app->itemManager->armorItems[i]->maxhp);
+			app->render->TextDraw("MAXHP: ", x + 5, y + 25, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(h.c_str(), x + 45, y + 25, 10, Font::TEXT, { 255, 255, 255 });
+			string at = to_string(app->itemManager->armorItems[i]->attack);
+			app->render->TextDraw("ATTK: ", x + 5, y + 37, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(at.c_str(), x + 45, y + 37, 10, Font::TEXT, { 255, 255, 255 });
+			string cP = to_string(app->itemManager->armorItems[i]->critRate);
+			app->render->TextDraw("CRIT_RATE: ", x + 5, y + 49, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(cP.c_str(), x + 45, y + 49, 10, Font::TEXT, { 255, 255, 255 });
+			string cD = to_string(app->itemManager->armorItems[i]->critDamage);
+			app->render->TextDraw("CRIT_DMG: ", x + 5, y + 61, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(cD.c_str(), x + 45, y + 61, 10, Font::TEXT, { 255, 255, 255 });
+			string p = to_string(app->itemManager->armorItems[i]->accuracy);
+			app->render->TextDraw("ACCURACY: ", x + 5, y + 73, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(p.c_str(), x + 45, y + 73, 10, Font::TEXT, { 255, 255, 255 });
+			string ar = to_string(app->itemManager->armorItems[i]->armor);
+			app->render->TextDraw("ARMOR: ", x + 5, y + 85, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(ar.c_str(), x + 45, y + 85, 10, Font::TEXT, { 255, 255, 255 });
+			string e = to_string(app->itemManager->armorItems[i]->dodge);
+			app->render->TextDraw("DODGE: ", x + 5, y + 97, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(e.c_str(), x + 45, y + 97, 10, Font::TEXT, { 255, 255, 255 });
+			string r = to_string(app->itemManager->armorItems[i]->res);
+			app->render->TextDraw("RES: ", x + 5, y + 109, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(r.c_str(), x + 45, y + 109, 10, Font::TEXT, { 255, 255, 255 });
+			string s = to_string(app->itemManager->armorItems[i]->speed);
+			app->render->TextDraw("SPEED: ", x + 5, y + 121, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(s.c_str(), x + 45, y + 121, 10, Font::TEXT, { 255, 255, 255 });
 		}
 	}
 

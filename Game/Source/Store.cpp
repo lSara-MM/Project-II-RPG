@@ -215,6 +215,33 @@ bool Store::CleanUp()
 	return true;
 }
 
+bool Store::OnGuiMouseHoverEvent(GuiControl* control)
+{
+	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+	{
+		if (app->itemManager->nodeList[i]->button != nullptr && app->itemManager->nodeList[i]->button->id == control->id)
+		{
+			app->itemManager->nodeList[i]->printStats = true;
+		}
+	}
+
+	return true;
+}
+
+bool Store::OnGuiMouseOutHoverEvent(GuiControl* control)
+{
+
+	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+	{
+		if (app->itemManager->nodeList[i]->button != nullptr && app->itemManager->nodeList[i]->button->id == control->id)
+		{
+			app->itemManager->nodeList[i]->printStats = false;
+		}
+	}
+
+	return true;
+}
+
 bool Store::OnGuiMouseClickEvent(GuiControl* control)
 {
 	if (control->id != 1500 || control->id != 1501)
