@@ -144,7 +144,9 @@ bool Scene::Update(float dt)
 		if (app->inventory->active)
 		{
 			player->lockMovement = false;
-			app->inventory->Disable();
+			app->inventory->inventoryTransition_B = true;
+			//app->inventory->Disable();
+			
 		}
 		else 
 		{

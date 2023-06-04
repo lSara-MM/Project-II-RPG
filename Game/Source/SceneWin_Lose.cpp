@@ -46,7 +46,7 @@ bool SceneWin_Lose::Awake(pugi::xml_node& config)
 	winMusicPath = config.child("win").attribute("musicw").as_string();
 
 	backgroundAnimation.Set();
-	backgroundAnimation.AddTween(100, 120, BOUNCE_IN_OUT);
+	backgroundAnimation.AddTween(100, 120, BOUNCE_OUT);
 
 	return ret;
 }
@@ -60,6 +60,17 @@ bool SceneWin_Lose::Start()
 
 	app->questManager->active = false;
 
+	if (win)
+	{
+		app->audio->PlayMusic("Assets/Audio/Music/Intro_mus.ogg", 1.0f);
+	
+	}
+
+	else
+	{
+		app->audio->PlayMusic("Assets/Audio/Music/CircusTent_mus.ogg", 1.0f);
+	}
+
 	return true;
 }
 
@@ -70,7 +81,7 @@ bool SceneWin_Lose::PreUpdate()
 
 bool SceneWin_Lose::Update(float dt)
 {
-	app->audio->PlayMusic(winMusicPath);
+	//app->audio->PlayMusic(winMusicPath);
 	if (transition_B)
 	{
 		backgroundAnimation.Backward();
@@ -87,7 +98,7 @@ bool SceneWin_Lose::Update(float dt)
 
 	if (win)
 	{
-		app->audio->PlayMusic(winMusicPath);
+		//app->audio->PlayMusic(winMusicPath);
 		app->render->DrawTexture(Win, 0, offset + point * (0 - offset));
 		if (app->puzzleManager->fightBoss)
 		{
@@ -97,7 +108,7 @@ bool SceneWin_Lose::Update(float dt)
 	}
 	else
 	{
-		app->audio->PlayMusic(looseMusicPath);
+		//app->audio->PlayMusic(looseMusicPath);
 		app->render->DrawTexture(Lose, 0, offset + point * (0 - offset));
 		if (app->puzzleManager->fightBoss)
 		{

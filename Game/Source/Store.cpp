@@ -39,9 +39,10 @@ bool Store::Start()
 	Minus = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1503, this, buttonBounds, ButtonType::MINUS,"", 12, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);//añadido animacion quede igual menu
 
 	//animation inventory
-	inventoryAnimation.Set();
-	inventoryAnimation.AddTween(100, 80, BOUNCE_OUT);
-	inventoryTransition_B = false;
+	storeAnimation.Set();
+	storeAnimation.AddTween(100, 80, BOUNCE_OUT);
+	storeTransition_B = false;
+	posYstoreAnimation = 0;
 
 	return true;
 }
@@ -54,20 +55,31 @@ bool Store::PreUpdate()
 
 bool Store::Update(float dt)
 {
-	if (inventoryTransition_B)
+	if (storeTransition_B)
 	{
-		inventoryAnimation.Backward();
+		storeAnimation.Backward();
+		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)//poner invisibles los botones creados
+		{
+			if (app->itemManager->nodeList[i]->button != nullptr)
+			{
+				app->itemManager->nodeList[i]->button->state = GuiControlState::NONE;
+			}
+		}
+		if (posYstoreAnimation == -750)
+		{
+			this->Disable();
+		}
 	}
 	else
 	{
-		inventoryAnimation.Foward();
+		storeAnimation.Foward();
 	}
-	inventoryAnimation.Step(2, false);
+	storeAnimation.Step(1, false);
 
-	float point = inventoryAnimation.GetPoint();
+	float point = storeAnimation.GetPoint();
 	int offset = -750;
-
-	app->render->DrawTexture(potion, 80 - app->render->camera.x, offset + point * (50 - offset) - app->render->camera.y);
+	posYstoreAnimation = offset + point * (50 - offset);
+	app->render->DrawTexture(potion, 80 - app->render->camera.x,posYstoreAnimation - app->render->camera.y);
 	app->render->DrawTexture(inventory, 700 - app->render->camera.x, offset + point * (80 - offset) - app->render->camera.y);
 
 	bool ret = true;
@@ -89,7 +101,10 @@ bool Store::PostUpdate()
 				y += 69;
 				x = 0;
 			}
-			app->itemManager->LoadSellItems(x, y, app->itemManager->nodeList[i]);
+			if (posYstoreAnimation == 50)
+			{
+				app->itemManager->LoadSellItems(x, y, app->itemManager->nodeList[i]);
+			}
 			x++;
 		}
 	}
@@ -105,8 +120,10 @@ bool Store::PostUpdate()
 				y += 69;
 				x = 0;
 			}
-			app->itemManager->LoadStoreItems(x, y, app->itemManager->nodeList[i]);
-
+			if (posYstoreAnimation==50)//se printa cuando animacion acaba, queda raro otherwise
+			{
+				app->itemManager->LoadStoreItems(x, y, app->itemManager->nodeList[i]);
+			}
 			x++;
 		}
 	}
@@ -115,7 +132,10 @@ bool Store::PostUpdate()
 	{
 		if ((app->itemManager->nodeList[i]->toSell && app->itemManager->nodeList[i]->type == 3 && app->itemManager->nodeList[i]->quantity > 0) || (app->itemManager->nodeList[i]->toSell && app->itemManager->nodeList[i]->type == 1))
 		{
-			app->itemManager->ItemToSell(app->itemManager->nodeList[i]);
+			if (posYstoreAnimation==50)
+			{
+				app->itemManager->ItemToSell(app->itemManager->nodeList[i]);
+			}
 		}
 	}
 
@@ -135,13 +155,27 @@ bool Store::PostUpdate()
 	else if (buyButton->buttonType == ButtonType::SELLITEM) { buyButton->color = { 100, 250, 90 }; }
 	else { buyButton->color = { 0, 0, 0 }; }
 
-	string h = to_string(SellQuantity);
-	app->render->TextDraw(h.c_str(), 250, 550, 40, Font::TEXT, { 255, 255, 255 });
+	if (storeTransition_B)
+	{
+		storeAnimation.Backward();
+		
+	}
+	else
+	{
+		storeAnimation.Foward();
+	}
+	storeAnimation.Step(1, false);
 
-	app->render->DrawTexture(app->itemManager->coinTexture, 1150 - app->render->camera.x, 180 - app->render->camera.y);
+	float point = storeAnimation.GetPoint();
+	int offset = -750;
+
+	string h = to_string(SellQuantity);
+	app->render->TextDraw(h.c_str(), 250, offset + point * (550 - offset), 40, Font::TEXT, { 255, 255, 255 });
+
+	app->render->DrawTexture(app->itemManager->coinTexture, 1150 - app->render->camera.x, offset + point * (180 - offset) - app->render->camera.y);
 
 	string cn = to_string(app->itemManager->coins);
-	app->render->TextDraw(cn.c_str(), 1125, 180, 25, Font::TEXT, { 255, 255, 255 });
+	app->render->TextDraw(cn.c_str(), 1125, offset + point * (180 - offset), 25, Font::TEXT, { 255, 255, 255 });
 
 
 	if ( app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == ButtonState::BUTTON_DOWN)//con mando es bastante molesto tener que ir con el mouse al boton de cerrar
@@ -228,7 +262,12 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 	switch (control->id)
 	{
 	case 1501:
-		this->Disable();
+		//this->Disable();
+		storeTransition_B = true;
+		buyButton->isForward_B = false;
+		closeStore->isForward_B = false;
+		Add->isForward_B = false;
+		Minus->isForward_B = false;
 		app->scene->player->lockMovement = false;
 		break;
 

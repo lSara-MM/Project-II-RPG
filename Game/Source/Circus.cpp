@@ -110,7 +110,7 @@ bool Circus::Update(float dt)
 		{
 			player->lockMovement = false;
 			app->inventory->inventoryTransition_B = true;
-			app->inventory->Disable();
+			//app->inventory->Disable();
 	
 		}
 		else 
