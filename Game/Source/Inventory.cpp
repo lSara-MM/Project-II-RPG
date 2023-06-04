@@ -236,6 +236,47 @@ bool Inventory::CleanUp()
 	return true;
 }
 
+bool Inventory::OnGuiMouseHoverEvent(GuiControl* control)
+{
+	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+	{
+		if (app->itemManager->nodeList[i]->button != nullptr && app->itemManager->nodeList[i]->button->id == control->id)
+		{
+			app->itemManager->nodeList[i]->printStats = true;
+		}
+	}
+	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+	{
+		if (app->itemManager->armorItems[i]->button != nullptr && app->itemManager->armorItems[i]->button->id == control->id)
+		{
+			app->itemManager->armorItems[i]->printStats = true;
+		}
+	}
+
+	return true;
+}
+
+bool Inventory::OnGuiMouseOutHoverEvent(GuiControl* control)
+{
+
+	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+	{
+		if (app->itemManager->nodeList[i]->button != nullptr && app->itemManager->nodeList[i]->button->id == control->id)
+		{
+			app->itemManager->nodeList[i]->printStats = false;
+		}
+	}
+	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+	{
+		if (app->itemManager->armorItems[i]->button != nullptr && app->itemManager->armorItems[i]->button->id == control->id)
+		{
+			app->itemManager->armorItems[i]->printStats = false;
+		}
+	}
+
+	return true;
+}
+
 bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 {
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)

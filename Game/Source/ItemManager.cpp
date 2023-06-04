@@ -64,6 +64,81 @@ bool ItemManager::Update(float dt)
 	return true;
 }
 
+bool ItemManager::PostUpdate()
+{
+	int x, y = 0;
+
+	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+	{
+		if (app->itemManager->nodeList[i]->printStats)
+		{
+			if (app->combat->active)
+			{
+				x = (720 + 70 * app->itemManager->nodeList[i]->x) + 70;
+				y = app->itemManager->nodeList[i]->y - 32;
+			}
+			else if (app->combat->active == false)
+			{
+				x = (680 + 70 * app->itemManager->nodeList[i]->x) + 70;
+				y = app->itemManager->nodeList[i]->y - 32;
+			}
+			else if (app->store->active)
+			{
+				if (app->itemManager->nodeList[i]->type == 1)
+				{
+					x = 64 * app->itemManager->nodeList[i]->x + 70;
+					y = 64 * app->itemManager->nodeList[i]->y - 32;
+				}
+				else
+				{
+					x = 64 * app->itemManager->nodeList[i]->x + 70;
+					y = 64 * app->itemManager->nodeList[i]->y - 32;
+				}
+			}
+
+			app->render->DrawRectangle({x - app->render->camera.x, y - app->render->camera.y, 80, 150}, 0,0,0, 180);
+
+			//print stats
+			app->render->TextDraw(app->itemManager->nodeList[i]->name.GetString(), x + 5, y + 5, 12, Font::TEXT, { 255, 255, 255 });
+			string h = to_string(app->itemManager->nodeList[i]->maxhp);
+			app->render->TextDraw("MAXHP: ", x + 5, y + 25, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(h.c_str(), x + 45, y + 25, 10, Font::TEXT, { 255, 255, 255 });
+			string at = to_string(app->itemManager->nodeList[i]->attack);
+			app->render->TextDraw("ATTK: ", x + 5, y + 37, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(at.c_str(), x + 45, y + 37, 10, Font::TEXT, { 255, 255, 255 });
+			string cP = to_string(app->itemManager->nodeList[i]->critRate);
+			app->render->TextDraw("CRIT_RATE: ", x + 5, y + 49, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(cP.c_str(), x + 45, y + 49, 10, Font::TEXT, { 255, 255, 255 });
+			string cD = to_string(app->itemManager->nodeList[i]->critDamage);
+			app->render->TextDraw("CRIT_DMG: ", x + 5, y + 61, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(cD.c_str(), x + 45, y + 61, 10, Font::TEXT, { 255, 255, 255 });
+			string p = to_string(app->itemManager->nodeList[i]->accuracy);
+			app->render->TextDraw("ACCURACY: ", x + 5, y + 73, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(p.c_str(), x + 45, y + 73, 10, Font::TEXT, { 255, 255, 255 });
+			string ar = to_string(app->itemManager->nodeList[i]->armor);
+			app->render->TextDraw("ARMOR: ", x + 5, y + 85, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(ar.c_str(), x + 45, y + 85, 10, Font::TEXT, { 255, 255, 255 });
+			string e = to_string(app->itemManager->nodeList[i]->dodge);
+			app->render->TextDraw("DODGE: ", x + 5, y + 97, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(e.c_str(), x + 45, y + 97, 10, Font::TEXT, { 255, 255, 255 });
+			string r = to_string(app->itemManager->nodeList[i]->res);
+			app->render->TextDraw("RES: ", x + 5, y + 109, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(r.c_str(), x + 45, y + 109, 10, Font::TEXT, { 255, 255, 255 });
+			string s = to_string(app->itemManager->nodeList[i]->speed);
+			app->render->TextDraw("SPEED: ", x + 5, y + 121, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(s.c_str(), x + 45, y + 121, 10, Font::TEXT, { 255, 255, 255 });
+		}
+	}
+	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+	{
+		if (app->itemManager->armorItems[i]->printStats)
+		{
+		}
+	}
+
+	return true;
+}
+
 bool ItemManager::CleanUp()
 {
 	SaveItemState();
@@ -382,6 +457,9 @@ void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
 			{
 				LoadButtons(x, y, item);
 
+				item->x = x;
+				item->y = y;
+
 				app->render->DrawTexture(itemsTexture, (720 + 70 * x) - app->render->camera.x, y - app->render->camera.y, &seccion);
 
 				string c = to_string(item->quantity);
@@ -396,6 +474,9 @@ void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
 			}
 
 			LoadButtons(x, y, item);
+
+			item->x = x;
+			item->y = y;
 
 			if (item->equiped == false)
 			{
@@ -456,6 +537,9 @@ void ItemManager::LoadSellItems(int x, int y, ItemNode* item)
 
 		LoadStoreButtons(x, y, item);
 
+		item->x = x;
+		item->y = y;
+
 		app->render->DrawTexture(itemsTexture, (800 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
 		string c = to_string(item->price);
 		app->render->DrawTexture(app->itemManager->SmallcoinTexture, 800 + (69 * x) + 45 - app->render->camera.x, y + 250 - app->render->camera.y);
@@ -470,6 +554,9 @@ void ItemManager::LoadStoreItems(int x, int y, ItemNode* item)
 		SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
 
 		LoadStoreButtons(x, y, item);
+
+		item->x = x;
+		item->y = y;
 
 		app->render->DrawTexture(itemsTexture, (200 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
 		string c = to_string(item->price);

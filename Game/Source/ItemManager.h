@@ -53,12 +53,16 @@ public:
 	int whom = 0;
 
 	int space = 0;
+	int x = 0;
+	int y = 0;
 
 	int ID = 0;
 
 	bool equiped = false;
 	bool craft = false;
 	bool toSell = false;
+
+	bool printStats = false;
 
 	GuiButton* button = nullptr;
 
@@ -80,6 +84,7 @@ public:
 	bool Awake(pugi::xml_node& config);
 	bool Start();
 	bool Update(float dt);
+	bool PostUpdate();
 	bool CleanUp();
 
 	int LoadItems();
