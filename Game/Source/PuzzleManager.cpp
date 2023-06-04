@@ -422,6 +422,11 @@ bool PuzzleManager::Dun2Start()
 	BarricadeExplote3 = false;
 	BarricadeExplote4 = false;
 	BarricadeExplote5 = false;
+	BarricadeHasExploted1 = false;
+	BarricadeHasExploted2 = false;
+	BarricadeHasExploted3 = false;
+	BarricadeHasExploted4 = false;
+	BarricadeHasExploted5 = false;
 	BombContact1 = false;
 	BombContact2 = false;
 	BombCarryOn1 = false;
@@ -498,31 +503,72 @@ bool PuzzleManager::Dun2Start()
 		Bomb2->id = 2;
 
 		//Barricada corta
-		Barricade1 = app->physics->CreateRectangle(posBarricade1.x - widthBarricade1 / 2, posBarricade1.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
-		Barricade1->body->SetFixedRotation(true);
-		Barricade1->ctype = ColliderType::BARRICADE;
-		Barricade1->id = 1;
 
-		Barricade2 = app->physics->CreateRectangle(posBarricade2.x - widthBarricade1 / 2, posBarricade2.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
-		Barricade2->body->SetFixedRotation(true);
-		Barricade2->ctype = ColliderType::BARRICADE;
-		Barricade2->id = 2;
+		if (!BarricadeHasExploted1)
+		{
+			Barricade1 = app->physics->CreateRectangle(posBarricade1.x - widthBarricade1 / 2, posBarricade1.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
+			Barricade1->body->SetFixedRotation(true);
+			Barricade1->ctype = ColliderType::BARRICADE;
+			Barricade1->id = 1;
+		}
 
-		Barricade3 = app->physics->CreateRectangle(posBarricade3.x - widthBarricade1 / 2, posBarricade3.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
-		Barricade3->body->SetFixedRotation(true);
-		Barricade3->ctype = ColliderType::BARRICADE;
-		Barricade3->id = 3;
+		if (!BarricadeHasExploted2)
+		{
+			Barricade2 = app->physics->CreateRectangle(posBarricade2.x - widthBarricade1 / 2, posBarricade2.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
+			Barricade2->body->SetFixedRotation(true);
+			Barricade2->ctype = ColliderType::BARRICADE;
+			Barricade2->id = 2;
+		}
+
+		if (!BarricadeHasExploted3)
+		{
+			Barricade3 = app->physics->CreateRectangle(posBarricade3.x - widthBarricade1 / 2, posBarricade3.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
+			Barricade3->body->SetFixedRotation(true);
+			Barricade3->ctype = ColliderType::BARRICADE;
+			Barricade3->id = 3;
+		}
 
 		//Barricada larga
-		Barricade4 = app->physics->CreateRectangle(posBarricade4.x, posBarricade4.y, widthBarricade2, heightBarricade2, bodyType::STATIC);
-		Barricade4->body->SetFixedRotation(true);
-		Barricade4->ctype = ColliderType::BARRICADE;
-		Barricade4->id = 4;
+		if (!BarricadeHasExploted4)
+		{
+			Barricade4 = app->physics->CreateRectangle(posBarricade4.x, posBarricade4.y, widthBarricade2, heightBarricade2, bodyType::STATIC);
+			Barricade4->body->SetFixedRotation(true);
+			Barricade4->ctype = ColliderType::BARRICADE;
+			Barricade4->id = 4;
+		}
 
-		Barricade5 = app->physics->CreateRectangle(posBarricade5.x - widthBarricade1 / 2, posBarricade5.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
-		Barricade5->body->SetFixedRotation(true);
-		Barricade5->ctype = ColliderType::BARRICADE;
-		Barricade5->id = 5;
+		if (!BarricadeHasExploted5)
+		{
+			Barricade5 = app->physics->CreateRectangle(posBarricade5.x - widthBarricade1 / 2, posBarricade5.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
+			Barricade5->body->SetFixedRotation(true);
+			Barricade5->ctype = ColliderType::BARRICADE;
+			Barricade5->id = 5;
+		}
+
+		if (BarricadeHasExploted1)
+		{
+			BarricadesExplote += 1;
+		}
+
+		if (BarricadeHasExploted2)
+		{
+			BarricadesExplote += 1;
+		}
+
+		if (BarricadeHasExploted3)
+		{
+			BarricadesExplote += 1;
+		}
+
+		if (BarricadeHasExploted4)
+		{
+			BarricadesExplote += 1;
+		}
+
+		if (BarricadeHasExploted5)
+		{
+			BarricadesExplote += 1;
+		}
 	}
 
 	if (!relics) 
@@ -1442,6 +1488,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 			if (BarricadeExplote1) 
 			{
+				BarricadeHasExploted1 = true;
+
 				if (Barricade1 != nullptr)
 					Barricade1->body->GetWorld()->DestroyBody(Barricade1->body);
 
@@ -1450,6 +1498,8 @@ bool PuzzleManager::ChickenBoomPuz()
 			}
 			if (BarricadeExplote2) 
 			{
+				BarricadeHasExploted2 = true;
+
 				if (Barricade2 != nullptr)
 					Barricade2->body->GetWorld()->DestroyBody(Barricade2->body);
 
@@ -1458,6 +1508,8 @@ bool PuzzleManager::ChickenBoomPuz()
 			}
 			if (BarricadeExplote3) 
 			{
+				BarricadeHasExploted3 = true;
+
 				if (Barricade3 != nullptr)
 					Barricade3->body->GetWorld()->DestroyBody(Barricade3->body);
 
@@ -1466,6 +1518,8 @@ bool PuzzleManager::ChickenBoomPuz()
 			}
 			if (BarricadeExplote4) 
 			{
+				BarricadeHasExploted4 = true;
+
 				if (Barricade4 != nullptr)
 					Barricade4->body->GetWorld()->DestroyBody(Barricade4->body);
 
@@ -1474,6 +1528,8 @@ bool PuzzleManager::ChickenBoomPuz()
 			}
 			if (BarricadeExplote5) 
 			{
+				BarricadeHasExploted5 = true;
+
 				if (Barricade5 != nullptr)
 					Barricade5->body->GetWorld()->DestroyBody(Barricade5->body);
 
@@ -1633,6 +1689,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 			if (BarricadeExplote1)
 			{
+				BarricadeHasExploted1 = true;
+
 				if (Barricade1 != nullptr)
 					Barricade1->body->GetWorld()->DestroyBody(Barricade1->body);
 
@@ -1641,6 +1699,8 @@ bool PuzzleManager::ChickenBoomPuz()
 			}
 			if (BarricadeExplote2)
 			{
+				BarricadeHasExploted2 = true;
+
 				if (Barricade2 != nullptr)
 					Barricade2->body->GetWorld()->DestroyBody(Barricade2->body);
 
@@ -1649,6 +1709,8 @@ bool PuzzleManager::ChickenBoomPuz()
 			}
 			if (BarricadeExplote3)
 			{
+				BarricadeHasExploted3 = true;
+
 				if (Barricade3 != nullptr)
 					Barricade3->body->GetWorld()->DestroyBody(Barricade3->body);
 
@@ -1657,6 +1719,8 @@ bool PuzzleManager::ChickenBoomPuz()
 			}
 			if (BarricadeExplote4)
 			{
+				BarricadeHasExploted4 = true;
+
 				if (Barricade4 != nullptr)
 					Barricade4->body->GetWorld()->DestroyBody(Barricade4->body);
 
@@ -1665,6 +1729,8 @@ bool PuzzleManager::ChickenBoomPuz()
 			}
 			if (BarricadeExplote5)
 			{
+				BarricadeHasExploted5 = true;
+
 				if (Barricade5 != nullptr)
 					Barricade5->body->GetWorld()->DestroyBody(Barricade5->body);
 
@@ -1686,20 +1752,36 @@ bool PuzzleManager::ChickenBoomPuz()
 		}
 	}
 
-	if (Barricade1 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade1.x - widthBarricade1, posBarricade1.y - heightBarricade1, &Barr1);
-	
-	if (Barricade2 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade2.x - widthBarricade1, posBarricade2.y - heightBarricade1, &Barr1);
-	
-	if (Barricade3 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade3.x - widthBarricade1, posBarricade3.y - heightBarricade1, &Barr1);
-	
-	if (Barricade4 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade4.x - widthBarricade2 / 2, posBarricade4.y - heightBarricade2 / 2, &Barr2);
-	
-	if (Barricade5 != nullptr)
-		app->render->DrawTexture(GeneralTextureDungeon2, posBarricade5.x - widthBarricade1, posBarricade5.y - heightBarricade1, &Barr1);
+	if (!BarricadeHasExploted1)
+	{
+		if (Barricade1 != nullptr)
+			app->render->DrawTexture(GeneralTextureDungeon2, posBarricade1.x - widthBarricade1, posBarricade1.y - heightBarricade1, &Barr1);
+	}
+
+	if (!BarricadeHasExploted2)
+	{
+		if (Barricade2 != nullptr)
+			app->render->DrawTexture(GeneralTextureDungeon2, posBarricade2.x - widthBarricade1, posBarricade2.y - heightBarricade1, &Barr1);
+	}
+
+	if (!BarricadeHasExploted3)
+	{
+		if (Barricade3 != nullptr)
+			app->render->DrawTexture(GeneralTextureDungeon2, posBarricade3.x - widthBarricade1, posBarricade3.y - heightBarricade1, &Barr1);
+	}
+
+
+	if (!BarricadeHasExploted4)
+	{
+		if (Barricade4 != nullptr)
+			app->render->DrawTexture(GeneralTextureDungeon2, posBarricade4.x - widthBarricade2 / 2, posBarricade4.y - heightBarricade2 / 2, &Barr2);
+	}
+
+	if (!BarricadeHasExploted5)
+	{
+		if (Barricade5 != nullptr)
+			app->render->DrawTexture(GeneralTextureDungeon2, posBarricade5.x - widthBarricade1, posBarricade5.y - heightBarricade1, &Barr1);
+	}
 
 	if(!BombCarryOn1 && !BombPlant1)
 	{
