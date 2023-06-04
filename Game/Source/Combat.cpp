@@ -93,12 +93,6 @@ bool Combat::Start()
 	app->physics->Disable();
 	app->entityManager->active = true;
 
-	//Load, modificar currentHP, hacer luego de cargar allies
-	if (!firstCombat_B)
-	{
-		LoadCombat();
-	}
-
 	StartCombat();
 	
 
@@ -156,7 +150,7 @@ bool Combat::Start()
 
 bool Combat::PreUpdate()
 {
-	//TODO : Guarrada maxima
+	//TO DO : Guarrada maxima
 	if (charaInTurn >= listInitiative.Count()) 
 	{
 		charaInTurn = listInitiative.Count() - 1;
@@ -389,7 +383,17 @@ bool Combat::CleanUp()
 		{
 			firstCombat_B = false;
 		}
+	}
 
+	if (vecAllies.empty())
+	{
+		for (int i = 0; app->itemManager->arrParty.at(i) != nullptr; i++)
+		{
+			app->itemManager->arrParty.at(i)->currentHp = 5;
+		}
+	}
+	else
+	{
 		for (int i = 0; i < vecAllies.size(); i++)
 		{
 			// If es el mismo chara, cambiale el hp, sino se queda igual por lo que el chara muerto revive a 5 hp
@@ -402,9 +406,10 @@ bool Combat::CleanUp()
 				app->itemManager->arrParty.at(i)->currentHp = 5;
 			}
 		}
-
-		SaveCombat();
 	}
+	
+
+	SaveCombat();
 
 	if (profileTex != nullptr)
 		app->tex->UnLoad(profileTex);
@@ -592,6 +597,12 @@ bool Combat::InitAllies(array<Character*, 4> party)
 {
 	int cPos = 0;
 
+	//Load, modificar currentHP, hacer luego de cargar allies
+	if (!firstCombat_B)
+	{
+		LoadCombat();
+	}
+
 	// TO TEST
 	Character* chara;
 	for (int i = 0; i < party.size(); i++)
@@ -619,8 +630,6 @@ bool Combat::InitAllies(array<Character*, 4> party)
 		vecAllies.at(i)->dodge = app->itemManager->arrParty.at(i)->dodge;
 		vecAllies.at(i)->res = app->itemManager->arrParty.at(i)->res;
 		vecAllies.at(i)->speed = app->itemManager->arrParty.at(i)->speed;
-
-		//RELEASE(party.at(i));
 	}
 
 	return true;
@@ -1485,11 +1494,6 @@ bool Combat::LoadCombat()
 
 		for (pugi::xml_node itemNode = node.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter"))
 		{
-			if (i >= app->itemManager->vecPC.size())
-			{
-				break;
-			}
-
 			app->itemManager->arrParty.at(i)->name = itemNode.attribute("name").as_string();
 			app->itemManager->arrParty.at(i)->currentHp = itemNode.attribute("currentHp").as_int();
 

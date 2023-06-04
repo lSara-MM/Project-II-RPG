@@ -266,7 +266,6 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 	app->itemManager->loadParty_B = true;
 
 	//app->scene->isCharacterLoaded_B = false;
-	app->combat->SaveCombat();
 	return true;
 }
 

@@ -109,11 +109,9 @@ bool ItemManager::PostUpdate()
 					y = app->itemManager->nodeList[i]->y - 32;
 				}
 			}
-			else
-			{
-			}
 
-			app->render->DrawRectangle({x - app->render->camera.x, y - app->render->camera.y, 80, 150}, 0,0,0, 180);
+			int w = app->itemManager->nodeList[i]->name.Length() * 3 + 80;
+			app->render->DrawRectangle({x - app->render->camera.x, y - app->render->camera.y, w, 150}, 0, 0, 0, 180);
 
 			//print stats
 			app->render->TextDraw(app->itemManager->nodeList[i]->name.GetString(), x + 5, y + 5, 12, Font::TEXT, { 255, 255, 255 });
@@ -149,6 +147,7 @@ bool ItemManager::PostUpdate()
 			app->render->TextDraw(s.c_str(), x + 60, y + 132, 10, Font::TEXT, { 255, 255, 255 });
 		}
 	}
+
 	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
 	{
 		if (app->itemManager->armorItems[i]->printStats && app->itemManager->armorItems[i]->equiped == false)
@@ -159,7 +158,8 @@ bool ItemManager::PostUpdate()
 				y = app->itemManager->armorItems[i]->y - 32;
 			}
 
-			app->render->DrawRectangle({ x - app->render->camera.x, y - app->render->camera.y, 80, 150 }, 0, 0, 0, 180);
+			int w = app->itemManager->nodeList[i]->name.Length() * 3 + 80;
+			app->render->DrawRectangle({ x - app->render->camera.x, y - app->render->camera.y,  w, 150 }, 0, 0, 0, 180);
 
 			//print stats
 			app->render->TextDraw(app->itemManager->armorItems[i]->name.GetString(), x + 5, y + 5, 12, Font::TEXT, { 255, 255, 255 });
@@ -289,8 +289,7 @@ void ItemManager::MinusQuantity(ItemNode* item)
 					item->quantity--;
 				}
 				UseItem(item);
-			}
-			
+			}			
 		}
 	}
 	else
@@ -837,25 +836,6 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 
 
 // Party
-void ItemManager::AddCharaToParty(SString chara)
-{
-	for (int i = 0; i < vecPC.size(); i++)
-	{
-		if (strcmp(vecPC.at(i)->name.GetString(), chara.GetString()) == 0)
-		{
-			for (int i = 0; i < arrParty.size(); i++)
-			{
-				if (arrParty.at(i) == nullptr)
-				{
-					arrParty.at(i) = vecPC.at(i);
-					arrParty.at(i)->positionCombat_I = i;
-					break;
-				}
-			}
-		}
-	}
-}
-
 void ItemManager::AddCharaToParty(int id)
 {
 	for (int i = 0; i < vecPC.size(); i++)
@@ -913,6 +893,8 @@ bool ItemManager::LoadParty()
 			app->itemManager->AddCharaToParty(id);
 		}
 	}
+
+	app->combat->LoadCombat();
 
 	return true;
 }
