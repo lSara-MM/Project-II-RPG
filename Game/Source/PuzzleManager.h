@@ -249,6 +249,11 @@ public:
 	bool BarricadeExplote3;
 	bool BarricadeExplote4;
 	bool BarricadeExplote5;
+	bool BarricadeHasExploted1;
+	bool BarricadeHasExploted2;
+	bool BarricadeHasExploted3;
+	bool BarricadeHasExploted4;
+	bool BarricadeHasExploted5;
 	bool BombContact1;
 	bool BombContact2;
 	bool BombCarryOn1;
