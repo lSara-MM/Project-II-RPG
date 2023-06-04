@@ -448,8 +448,8 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 		nodeList.push_back(node);
 	}
 
+	LoadItemState();
 	LoadArmorItmes();
-	LoadItemState(xml_trees);
 }
 
 void ItemManager::LoadArmorItmes()
@@ -471,11 +471,6 @@ void ItemManager::LoadArmorItmes()
 				node->name = nodeList[i]->name;
 				node->kind = nodeList[i]->kind;
 
-				if (node->kind == 5 || node->kind == 6)
-				{
-					node->space = nodeList[i]->space;
-				}
-
 				node->hp = nodeList[i]->hp;
 				node->maxhp = nodeList[i]->maxhp;
 				node->attack = nodeList[i]->attack;
@@ -486,7 +481,6 @@ void ItemManager::LoadArmorItmes()
 				node->dodge = nodeList[i]->dodge;
 				node->res = nodeList[i]->res;
 				node->speed = nodeList[i]->speed;
-				node->equiped = nodeList[i]->equiped;
 
 				node->max = nodeList[i]->max;
 
@@ -498,6 +492,7 @@ void ItemManager::LoadArmorItmes()
 	{
 		armorItems[i]->ID = 200 + i;
 	}
+	LoadArmorState();
 }
 
 void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
@@ -549,35 +544,35 @@ void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
 				switch (item->kind)
 				{
 				case 1:
-					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 295 - app->render->camera.y, &seccion);
+					app->render->DrawTexture(itemsTexture, (185 + 70) - app->render->camera.x, 295 - app->render->camera.y, &seccion);
 					break;
 				case 2:
-					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 245 - app->render->camera.y, &seccion);
+					app->render->DrawTexture(itemsTexture, (185 + 70) - app->render->camera.x, 220 - app->render->camera.y, &seccion);
 					break;
 				case 3:
-					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 345 - app->render->camera.y, &seccion);
+					app->render->DrawTexture(itemsTexture, (185 + 70) - app->render->camera.x, 370 - app->render->camera.y, &seccion);
 					break;
 				case 4:
-					app->render->DrawTexture(itemsTexture, (218 + 52) - app->render->camera.x, 195 - app->render->camera.y, &seccion);
+					app->render->DrawTexture(itemsTexture, (185 + 70) - app->render->camera.x, 145 - app->render->camera.y, &seccion);
 					break;
 				case 5:
 					if (item->space == 1)
 					{
-						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 185 - app->render->camera.y, &seccion);
+						app->render->DrawTexture(itemsTexture, (465 + 70) - app->render->camera.x, 145 - app->render->camera.y, &seccion);
 					}
 					else
 					{
-						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 235 - app->render->camera.y, &seccion);
+						app->render->DrawTexture(itemsTexture, (465 + 70) - app->render->camera.x, 220 - app->render->camera.y, &seccion);
 					}
 					break;
 				case 6:
 					if (item->space == 1)
 					{
-						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
+						app->render->DrawTexture(itemsTexture, (465 + 70) - app->render->camera.x, 295 - app->render->camera.y, &seccion);
 					}
 					else
 					{
-						app->render->DrawTexture(itemsTexture, (510 + 52) - app->render->camera.x, 348 - app->render->camera.y, &seccion);
+						app->render->DrawTexture(itemsTexture, (465 + 70) - app->render->camera.x, 370 - app->render->camera.y, &seccion);
 					}
 				}
 			}
@@ -672,7 +667,7 @@ void ItemManager::LoadStoreButtons(int x, int y, ItemNode* item)
 void ItemManager::LoadButtons(int x, int y, ItemNode* item)
 {
 	SDL_Rect buttonBounds;
-	buttonBounds = { (680 + 70 * x), y, 64, 64 };
+	buttonBounds = { (680 + 71 * x), y, 64, 64 };
 
 	if (app->combat->active)
 	{
@@ -699,35 +694,35 @@ void ItemManager::LoadButtons(int x, int y, ItemNode* item)
 			switch (item->kind)
 			{
 			case 1:
-				buttonBounds = { (218 + 52), 295, 32, 32 };
+				buttonBounds = { (185 + 70), 295, 64, 64 };
 				break;
 			case 2:
-				buttonBounds = { (218 + 52), 245, 32, 32 };
+				buttonBounds = { (185 + 70), 220, 64, 64 };
 				break;
 			case 3:
-				buttonBounds = { (218 + 52), 345, 32, 32 };
+				buttonBounds = { (185 + 70), 370, 64, 64 };
 				break;
 			case 4:
-				buttonBounds = { (218 + 52), 195, 32, 32 };
+				buttonBounds = { (185 + 70), 145, 64, 64 };
 				break;
 			case 5:
 				if (item->space == 1)
 				{
-					buttonBounds = { (510 + 52), 185, 32, 32 };
+					buttonBounds = { (465 + 70), 145, 64, 64 };
 				}
 				else
 				{
-					buttonBounds = { (510 + 52), 235, 32, 32 };
+					buttonBounds = { (465 + 70), 220, 64, 64 };
 				}
 				break;
 			case 6:
 				if (item->space == 1)
 				{
-					buttonBounds = { (510 + 52), 300, 32, 32 };
+					buttonBounds = { (465 + 70), 295, 64, 64 };
 				}
 				else
 				{
-					buttonBounds = { (510 + 52), 348, 32, 32 };
+					buttonBounds = { (465 + 70), 370, 64, 64 };
 				}
 				break;
 			}
@@ -771,6 +766,7 @@ bool ItemManager::SaveItemState()
 	{
 		armor = items.append_child("armor");
 		armor.append_attribute("name") = armorItems[i]->name.GetString();
+		armor.append_attribute("id") = armorItems[i]->ID;
 		armor.append_attribute("quantity") = armorItems[i]->quantity;
 		armor.append_attribute("equiped") = armorItems[i]->equiped;
 		armor.append_attribute("space") = armorItems[i]->space;
@@ -782,7 +778,7 @@ bool ItemManager::SaveItemState()
 	return ret;
 }
 
-bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
+bool ItemManager::LoadItemState()
 {
 	bool ret = true;
 
@@ -797,32 +793,6 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 			if (strcmp(pugiNode.attribute("name").as_string(), nodeList[i]->name.GetString()) == 0)
 			{
 				nodeList[i]->quantity = pugiNode.attribute("quantity").as_int();
-				nodeList[i]->equiped = pugiNode.attribute("equiped").as_bool();
-				nodeList[i]->space = pugiNode.attribute("space").as_bool();
-				nodeList[i]->whom = pugiNode.attribute("whom").as_bool();
-				if (nodeList[i]->equiped)
-				{
-					UseItem(nodeList[i]);
-				}
-			}
-		}
-	}
-
-	//Load items
-	for (pugi::xml_node pugiNode = items.first_child().first_child().first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("armor"))
-	{
-		for (size_t i = 0; i < armorItems.size(); i++)
-		{
-			if (strcmp(pugiNode.attribute("name").as_string(), armorItems[i]->name.GetString()) == 0)
-			{
-				armorItems[i]->quantity = pugiNode.attribute("quantity").as_int();
-				armorItems[i]->equiped = pugiNode.attribute("equiped").as_bool();
-				armorItems[i]->space = pugiNode.attribute("space").as_bool();
-				armorItems[i]->whom = pugiNode.attribute("whom").as_bool();
-				if (armorItems[i]->equiped)
-				{
-					UseItem(nodeList[i]);
-				}
 			}
 		}
 	}
@@ -832,6 +802,27 @@ bool ItemManager::LoadItemState(pugi::xml_node& xml_trees)
 	coins = pugiNode.attribute("coin").as_int();
 
 	return ret;
+}
+
+bool ItemManager::LoadArmorState()
+{
+	//Load items
+	for (pugi::xml_node pugiNode = items.first_child().first_child().child("armor"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("armor"))
+	{
+		for (size_t i = 0; i < armorItems.size(); i++)
+		{
+			if (strcmp(pugiNode.attribute("name").as_string(), armorItems[i]->name.GetString()) == 0 && pugiNode.attribute("id").as_int() == armorItems[i]->ID)
+			{
+				armorItems[i]->equiped = pugiNode.attribute("equiped").as_bool();
+				armorItems[i]->space = pugiNode.attribute("space").as_int();
+				armorItems[i]->whom = pugiNode.attribute("whom").as_int();
+
+				UseItem(armorItems[i]);
+			}
+		}
+	}
+
+	return true;
 }
 
 
