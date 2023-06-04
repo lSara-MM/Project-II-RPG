@@ -172,6 +172,11 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 			notifyEnd = true;
 			return true;
 			break;
+		case DIALOGUE_FORGE:
+			app->forge->Enable();
+			notifyEnd = true;
+			return true;
+			break;
 		case DIALOGUE_HEAL:
 			for (int i = 0; i < app->combat->vecAllies.size(); i++)
 			{

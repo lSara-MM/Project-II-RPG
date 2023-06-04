@@ -6,6 +6,7 @@
 #include "GuiButton.h"
 #include "Combat.h"
 #include "Store.h"
+#include "Forge.h"
 
 #include "List.h"
 #include "Log.h"

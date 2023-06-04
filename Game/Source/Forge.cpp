@@ -22,6 +22,9 @@ Forge::~Forge()
 
 bool Forge::Start()
 {
+	SDL_Rect buttonBounds;
+	buttonBounds = { 1150, 50, 60, 60 };
+	exitButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::CLOSE, "", 12, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
 
 	return true;
 }
@@ -49,12 +52,18 @@ bool Forge::PostUpdate()
 // Called before quitting
 bool Forge::CleanUp()
 {
-
+	app->guiManager->DestroyGuiControl(exitButton);
 	return true;
 }
 
 bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 {
+	switch (control->id)
+	{
 
+	case 1501:
+		this->Disable();
+		break;
+	}
 	return true;
 }

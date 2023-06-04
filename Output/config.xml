@@ -193,7 +193,7 @@
 		<npc name="Igor and Ivan" dialogueID="3"
 			x="3538" y="2542" width="64" height="64" texturepath="Assets/Textures/gemelos_chibi.png"/>
 
-		<npc name="Yuroslava" dialogueID="0"
+		<npc name="Yuroslava" dialogueID="4"
 			x="4010" y="3070" width="64" height="64" texturepath="Assets/Textures/fueguito_chibi.png"/>
 	</scene>
 
