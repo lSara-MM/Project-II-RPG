@@ -376,23 +376,23 @@ enum class CharacterClass
         type="1" class="2" skill1ID="37" skill2ID="38" skill3ID="39" skill4ID="40"
                
         width="0" heigth="0"
-		texturePath="Assets/Textures/EnemyBewitchedWardrobe.png"
+		texturePath="Assets/Textures/EnemyWolfLamb.png"
 		
 		sectionX="35" sectionY="36"/>
 
-		<enemy name ="Cursed Puppet" id="1" maxHp="600" currentHp="600" attack="180" armor="0" critRate="5" critDamage="15" accuracy="0" res="0" dodge="10" speed="55"
-        type="1" class="0" skill1ID="25" skill2ID="26" skill3ID="27" skill4ID="28"
+		<enemy name ="Surgeon Wasps Nest" id="1" maxHp="1400" currentHp="1400" attack="150" armor="0" critRate="0" critDamage="15" accuracy="0" res="40" dodge="0" speed="25"
+        type="1" class="5" skill1ID="41" skill2ID="42" skill3ID="43" skill4ID="44"
                
         width="0" heigth="0"
-        texturePath ="Assets/Textures/EnemyCursedPuppet.png"
+        texturePath ="Assets/Textures/EnemyBeeNest.png"
 		
 		sectionX="16" sectionY="26"/>
 
-		<enemy name ="Possessed Painting" id="2" maxHp="850" currentHp="850" attack="170" armor="10" critRate="0" critDamage="0" accuracy="30" res="40" dodge="10" speed="60"
-        type="1" class="8" skill1ID="29" skill2ID="30" skill3ID="31" skill4ID="32"
+		<enemy name ="Psyonic Eel" id="2" maxHp="750" currentHp="750" attack="190" armor="10" critRate="0" critDamage="0" accuracy="30" res="40" dodge="10" speed="60"
+        type="1" class="1" skill1ID="45" skill2ID="46" skill3ID="47" skill4ID="48"
                
         width="0" heigth="0"
-        texturePath ="Assets/Textures/EnemyPossessedPainting.png"
+        texturePath ="Assets/Textures/EnemyEel.png"
 		
 		sectionX="26" sectionY="30"/>
 
