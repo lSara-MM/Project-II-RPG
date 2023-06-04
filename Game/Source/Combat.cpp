@@ -357,7 +357,7 @@ bool Combat::PostUpdate()
 
 		case ButtonType::COMBAT_TARGET:
 			
-			rect = { 0,0,i->data->bounds.w,i->data->bounds.w };
+			rect = { 0, 0, i->data->bounds.w, i->data->bounds.w };
 
 			app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x, i->data->bounds.y, &rect);
 			break;
@@ -582,6 +582,9 @@ bool Combat::InitEnemies(vector<int> arr)
 			}
 		}
 	}
+
+	vecSetEnemies.clear();
+	vecSetEnemies.shrink_to_fit();
 
 	return true;
 }
