@@ -115,15 +115,6 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::COMBAT_CHARA:
 		entity = new Character();
 		break;
-
-		// To test. Guarrada to fea
-	case EntityType::MENU_CHARA:
-		entity = new Character();
-
-		// no entra xd
-		entity->type == EntityType::MENU_CHARA;
-		break;
-
 	default: break;
 	}
 

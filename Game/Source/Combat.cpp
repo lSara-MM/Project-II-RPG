@@ -94,7 +94,6 @@ bool Combat::Start()
 	app->entityManager->active = true;
 
 	StartCombat();
-	
 
 	// Skill button
 	GuiButton* button;	int j = 10;
@@ -126,7 +125,6 @@ bool Combat::Start()
 
 
 	//Quest Manager desactivate
-
 	if (app->questManager->active)
 	{
 		app->questManager->active = false;
@@ -593,16 +591,11 @@ bool Combat::InitEnemies(vector<int> arr)
 
 bool Combat::InitAllies(array<Character*, 4> party)
 {
-	int cPos = 0;
+	//int cPos = 0;
 
-	//Load, modificar currentHP, hacer luego de cargar allies
-	if (!firstCombat_B)
-	{
-		LoadCombat();
-	}
+	 LoadCombat(&vecAllies);
 
-	// TO TEST
-	Character* chara;
+	/*Character* chara;
 	for (int i = 0; i < party.size(); i++)
 	{
 		if (party.at(i) == nullptr) { return true; }
@@ -617,7 +610,6 @@ bool Combat::InitAllies(array<Character*, 4> party)
 
 		vecAllies.push_back(chara);
 
-		// TO DO, guarrada provisional
 		vecAllies.at(i)->maxHp = app->itemManager->arrParty.at(i)->maxHp;
 		vecAllies.at(i)->currentHp = app->itemManager->arrParty.at(i)->currentHp;
 		vecAllies.at(i)->attack = app->itemManager->arrParty.at(i)->attack;
@@ -628,7 +620,7 @@ bool Combat::InitAllies(array<Character*, 4> party)
 		vecAllies.at(i)->dodge = app->itemManager->arrParty.at(i)->dodge;
 		vecAllies.at(i)->res = app->itemManager->arrParty.at(i)->res;
 		vecAllies.at(i)->speed = app->itemManager->arrParty.at(i)->speed;
-	}
+	}*/
 
 	return true;
 }
@@ -1506,8 +1498,19 @@ bool Combat::SaveCombat()
 		if (app->itemManager->arrParty.at(i) != nullptr)
 		{
 			pugi::xml_node character = node.append_child("CombatCharacter");
+
 			character.append_attribute("name") = app->itemManager->arrParty.at(i)->name.GetString();
+
+			character.append_attribute("maxHp") = app->itemManager->arrParty.at(i)->maxHp;
 			character.append_attribute("currentHp") = app->itemManager->arrParty.at(i)->currentHp;
+			character.append_attribute("attack") = app->itemManager->arrParty.at(i)->attack;
+			character.append_attribute("critRate") = app->itemManager->arrParty.at(i)->critRate;
+			character.append_attribute("critDamage") = app->itemManager->arrParty.at(i)->critDamage;
+			character.append_attribute("accuracy") = app->itemManager->arrParty.at(i)->accuracy;
+			character.append_attribute("armor") = app->itemManager->arrParty.at(i)->armor;
+			character.append_attribute("dodge") = app->itemManager->arrParty.at(i)->dodge;
+			character.append_attribute("res") = app->itemManager->arrParty.at(i)->res;
+			character.append_attribute("speed") = app->itemManager->arrParty.at(i)->speed;
 		}
 	}
 
@@ -1516,30 +1519,51 @@ bool Combat::SaveCombat()
 	return ret;
 }
 
-bool Combat::LoadCombat()
+bool Combat::LoadCombat(vector<Character*>* vec)
 {
 	pugi::xml_document gameStateFile;
 	pugi::xml_parse_result result = gameStateFile.load_file("save_combat.xml");
 	pugi::xml_node node = gameStateFile.child("save_stats");
-
-	bool ret = true;
-
+	
+	bool ret = false;
 	if (result == NULL)
 	{
 		LOG("Could not load xml file save_combat.xml. pugi error: %s", result.description());
-		ret = false;
 	}
 	else
 	{
 		int i = 0;
+		pugi::xml_node item = app->entityManager->entityNode.child("CombatCharacter");
 
 		for (pugi::xml_node itemNode = node.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter"))
 		{
-			app->itemManager->arrParty.at(i)->name = itemNode.attribute("name").as_string();
-			app->itemManager->arrParty.at(i)->currentHp = itemNode.attribute("currentHp").as_int();
+			Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
+			chara->parameters = item;
+			chara->Awake();
+			
+			chara->name = itemNode.attribute("name").as_string();
 
+			chara->maxHp = itemNode.attribute("maxHp").as_int();
+			chara->currentHp = itemNode.attribute("currentHp").as_int();
+			chara->attack = itemNode.attribute("attack").as_int();
+			chara->critRate = itemNode.attribute("critRate").as_int();
+			chara->critDamage = itemNode.attribute("critDamage").as_int();
+			chara->accuracy = itemNode.attribute("accuracy").as_int();
+			chara->armor = itemNode.attribute("armor").as_int();
+			chara->dodge = itemNode.attribute("dodge").as_int();
+			chara->res = itemNode.attribute("res").as_int();
+			chara->speed = itemNode.attribute("speed").as_int();
+
+			chara->positionCombat_I = i;
+			chara->Start();
+			chara->button->id = i;
+
+			vec->push_back(chara);
+			item = item.next_sibling("CombatCharacter");
 			i++;
 		}
+
+		ret = true;
 	}
 
 	return ret;

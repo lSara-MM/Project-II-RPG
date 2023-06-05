@@ -17,7 +17,6 @@
 #include "Log.h"
 #include "Point.h"
 
-// TO TEST
 #include "SceneWin_Lose.h"
 
 Character::Character() : Entity(EntityType::COMBAT_CHARA)
@@ -108,7 +107,7 @@ bool Character::Start()
 
 	SDL_Rect buttonBounds;
 
-	if (isCombatant && !app->sceneWin_Lose->active) // TO TEST: win/lose active if necessary
+	if (isCombatant && !app->sceneWin_Lose->active)
 	{
 		if (charaType == CharacterType::ALLY)
 		{
@@ -130,7 +129,6 @@ bool Character::Start()
 	}
 	else
 	{
-		// TO TEST
 		buttonBounds = { 700 + 126 * positionCombat_I, 200, 125, 180 };
 		position = { 700 + 126 * positionCombat_I, 200 };
 

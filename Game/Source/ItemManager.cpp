@@ -208,6 +208,7 @@ bool ItemManager::PostUpdate()
 bool ItemManager::CleanUp()
 {
 	SaveItemState();
+	app->combat->SaveCombat();
 
 	for (size_t i = 0; i < nodeList.size(); i++)
 	{
@@ -902,7 +903,7 @@ void ItemManager::LoadAllPC()
 {
 	for (pugi::xml_node itemNode = app->entityManager->entityNode.child("CombatCharacter"); itemNode; itemNode = itemNode.next_sibling("CombatCharacter"))
 	{
-		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::MENU_CHARA);
+		Character* chara = (Character*)app->entityManager->CreateEntity(EntityType::COMBAT_CHARA);
 		chara->parameters = itemNode;
 
 		chara->Awake();
@@ -930,14 +931,20 @@ bool ItemManager::LoadParty()
 	{
 		pugi::xml_node& data = gameStateFile.child("save_state").child(app->entityManager->name.GetString());
 		
+		int i = 0;
+		vector<Character*> ret;
+		app->combat->LoadCombat(&ret);
+
 		for (pugi::xml_attribute attr = data.child("party").attribute("id"); attr; attr = attr.next_attribute())
 		{
-			int id = data.child("party").attribute("id").as_int();
-			app->itemManager->AddCharaToParty(id);
+			if (ret.empty())
+			{
+				int id = data.child("party").attribute("id").as_int();
+				app->itemManager->AddCharaToParty(id);
+			}
+			else { app->itemManager->arrParty.at(i) = ret.at(i); }
 		}
 	}
-
-	app->combat->LoadCombat();
 
 	return true;
 }
