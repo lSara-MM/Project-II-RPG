@@ -567,10 +567,6 @@ bool Character::Update(float dt)
 										{
 											probSkill = 0;
 										}
-										else if(listSkillsHistory.end->prev->data == 3)
-										{
-											probSkill = 20;
-										}
 										else
 										{
 											probSkill = 45;

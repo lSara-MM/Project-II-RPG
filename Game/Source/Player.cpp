@@ -163,7 +163,7 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
-	if (app->input->godMode_B) 
+	if (app->input->godMode_B)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 		{
@@ -195,16 +195,19 @@ bool Player::Update(float dt)
 		dtP = dt / 1000;
 	}
 
+	//Camera movement
 	if (pbody != nullptr)
 	{
-		if (app->scene->active==true) //Como tiene una forma tan rara la escena normal hay que hacerle una camara especial
+		if (app->scene->active == true) //Como tiene una forma tan rara la escena normal hay que hacerle una camara especial
 		{
-			if (position.y<1800) //Zona de arriba "pasillo" hacia la tienda
+			if (position.y < 1800) //Zona de arriba "pasillo" hacia la tienda
 			{
 				//Desplazar camara con suavidad (estaria bien un speed up en funcion distancia) hacia el centro
-				if (app->render->camera.x > -3450 + 635 - width) { app->render->camera.x -= 4; }
-				if (app->render->camera.x < -3450 + 645 - width) { app->render->camera.x += 4; }
-				app->render->camera.y = -position.y + 360 - height;
+				if (app->render->camera.x > -3450 + 625 - width) { app->render->camera.x -= 2; }
+				if (app->render->camera.x < -3450 + 655 - width) { app->render->camera.x += 2; }
+				//app->render->camera.x = -3450 + 640 - width;
+				if (app->render->camera.y > -position.y + 345 - height) { app->render->camera.y -= 12; }
+				if (app->render->camera.y < -position.y + 375 - height) { app->render->camera.y += 12; }
 			}
 			else
 			{
@@ -215,44 +218,46 @@ bool Player::Update(float dt)
 					app->render->camera.x = -3875 + 635 - width;
 					/*app->render->camera.y = -position.y + 360 - height;*/
 				}
-				else if(position.x<2000) //Borde izquierdo mapa
+				else if (position.x < 2000) //Borde izquierdo mapa
 				{
 					app->render->camera.x = -2000 + 635 - width;
 				}
 				else
 				{
 					//Setear camara al player (con suavidad)
-					
-					if (app->render->camera.x > -position.x + 650 - width) { app->render->camera.x -= 8; }  
+
+					if (app->render->camera.x > -position.x + 650 - width) { app->render->camera.x -= 8; }
 					if (app->render->camera.x < -position.x + 630 - width) { app->render->camera.x += 8; }
 					else { app->render->camera.x = -position.x + 640 - width; }
 				}
 
 				//Control de Y del mapa
-				if (position.y<2070 && position.y > 1760) //Borde arriba (zona vacia por el pasillo a la carpa)
+				if (position.y < 2070 && position.y > 1400) //Borde arriba (zona vacia por el pasillo a la carpa)
 				{
 					//Setear poco a poco
-					if (app->render->camera.y > -2000 + 365 - width) { app->render->camera.y -= 4; }
-					
-					else { app->render->camera.y = -2070 + 365 - height; }
+					if (app->render->camera.y > -position.y + 350 - height)
+					{ app->render->camera.y -= 4; }
+					else if (app->render->camera.y < -position.y + 370 - height)
+					{ app->render->camera.y += 4; }
+					else { app->render->camera.y = -position.y + 365 - height; }
 				}
-				else if(position.y>4240) //Borde de abajo (dungeon horrores)
+				else if (position.y > 4240) //Borde de abajo (dungeon horrores)
 				{
 					app->render->camera.y = -4250 + 365 - height;
 				}
 				else
 				{
-					
+
 					if (app->render->camera.y > -position.y + 385 - height) { app->render->camera.y -= 15; }
 					else if (app->render->camera.y < -position.y + 335 - height) { app->render->camera.y += 15; }
 					else { app->render->camera.y = -position.y + 360 - height; }
 				}
-				
+
 				/*app->render->camera.y = -position.y + 360 - height;
 				app->render->camera.x = -position.x + 640 - width;*/
 			}
 		}
-		else if(app->practiceTent->active==true) //La tienda es tan pequeña que necesita de 
+		else if (app->practiceTent->active == true) //La tienda es tan pequeña que necesita de 
 		{
 			app->render->camera.x = 0;
 			app->render->camera.y = 0;
@@ -266,7 +271,7 @@ bool Player::Update(float dt)
 			//Bloquear camara en bordes
 			int hMap = app->map->mapData.height * app->map->mapData.tileHeight;
 			int wMap = app->map->mapData.width * app->map->mapData.tileWidth;
-			if (position.x< 640)
+			if (position.x < 640)
 			{
 				app->render->camera.x = 0;
 			}
@@ -274,16 +279,17 @@ bool Player::Update(float dt)
 			{
 				app->render->camera.y = 0;
 			}
-			if (position.x > wMap-640)
+			if (position.x > wMap - 640)
 			{
 				app->render->camera.x = -(wMap - app->render->camera.w);
 			}
-			if (position.y > hMap-360)
+			if (position.y > hMap - 360)
 			{
-				app->render->camera.y = -(hMap-app->render->camera.h);
+				app->render->camera.y = -(hMap - app->render->camera.h);
 			}
-			
 		}
+	}
+
 
 		vel = b2Vec2(vel.x * dtP, vel.y * dtP);
 		//Set the velocity of the pbody of the player
@@ -369,7 +375,7 @@ bool Player::Update(float dt)
 					pauseEnabled_B = false;
 					app->dialogueSystem->Enable();
 					app->dialogueSystem->PerformDialogue(npcTalkingTo->dialoguesID);
-;					
+					
 					if (keyLockUp)
 					{
 						keyLockUp = false;
@@ -430,8 +436,8 @@ bool Player::Update(float dt)
 		}
 
 		return true;
-	}
 }
+
 
 bool Player::CleanUp()
 {
