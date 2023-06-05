@@ -61,6 +61,48 @@ bool Inventory::Start()
 			selectCharacter[i]->step = 20;
 		}
 	}
+	int x = 0;
+	y = 155;
+	//Set items pages
+	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+	{
+		if (capx == x)
+		{
+			y += 75;
+			x = 0;
+			if (y/75 > capy + 1)
+			{
+				y = 155;
+				page++;
+			}
+		}
+		if (app->itemManager->armorItems[i]->equiped == false)
+		{
+			x++;
+		}
+		app->itemManager->armorItems[i]->page = page;
+	}
+	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+	{
+		if (app->itemManager->nodeList[i]->type != 2)
+		{
+			if (capx == x)
+			{
+				y += 70;
+				x = 0;
+				if (y/75 > capy + 1)
+				{
+					y = 155;
+					page++;
+				}
+			}
+			if (app->itemManager->nodeList[i]->quantity > 0)
+			{
+				x++;
+			}
+			app->itemManager->nodeList[i]->page = page;
+		}
+	}
 
 	//animation inventory
 	inventoryAnimation.Set();
@@ -157,40 +199,54 @@ bool Inventory::PostUpdate()
 
 		for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
 		{
-			if (capx == x)
+			if (app->itemManager->armorItems[i]->page == app->itemManager->page || app->itemManager->armorItems[i]->equiped)
 			{
-				y += 75;
-				x = 0;
+				if (capx == x)
+				{
+					y += 75;
+					x = 0;
+				}
+				if (posXinventoryAnimation == 0)
+				{
+					app->itemManager->LoadQuantity(x, y, app->itemManager->armorItems[i]);
+				}
+				if (app->itemManager->armorItems[i]->equiped == false)
+				{
+					x++;
+				}
 			}
-			if (posXinventoryAnimation == 0 )
+			else
 			{
-				app->itemManager->LoadQuantity(x, y, app->itemManager->armorItems[i]);
-			}
-			if (app->itemManager->armorItems[i]->equiped == false)
-			{
-				x++;
+				app->itemManager->armorItems[i]->CleanUp();
 			}
 		}
 		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 		{
-			if (app->itemManager->nodeList[i]->type != 2)
+			if (app->itemManager->nodeList[i]->type != 2 && app->itemManager->nodeList[i]->quantity > 0)
 			{
-				if (capx == x)
+				if (app->itemManager->armorItems[i]->page == app->itemManager->page)
 				{
-					y += 70;
-					x = 0;
-				}
-				if (posXinventoryAnimation == 0)//printar items cuando acabe animacion
-				{
-					app->itemManager->LoadQuantity(x, y, app->itemManager->nodeList[i]);
-
-				}
-				if (app->itemManager->nodeList[i]->equiped == false)
-				{
-					if (app->itemManager->nodeList[i]->quantity > 0)
+					if (capx == x)
 					{
-						x++;
+						y += 70;
+						x = 0;
 					}
+					if (posXinventoryAnimation == 0)//printar items cuando acabe animacion
+					{
+						app->itemManager->LoadQuantity(x, y, app->itemManager->nodeList[i]);
+
+					}
+					if (app->itemManager->nodeList[i]->equiped == false)
+					{
+						if (app->itemManager->nodeList[i]->quantity > 0)
+						{
+							x++;
+						}
+					}
+				}
+				else
+				{
+					app->itemManager->nodeList[i]->CleanUp();
 				}
 			}
 		}
@@ -303,6 +359,8 @@ bool Inventory::CleanUp()
 	app->tex->UnLoad(twinsIMG);
 	app->tex->UnLoad(fireIMG);
 
+	page = 0;
+
 	return true;
 }
 
@@ -353,7 +411,7 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		if (app->itemManager->nodeList[i]->ID == control->id)
 		{
-			if (app->itemManager->nodeList[i]->type == 3 && app->itemManager->nodeList[i]->type == 1) break;
+			if (app->itemManager->nodeList[i]->type == 3 || app->itemManager->nodeList[i]->type == 1) break;
 
 			app->itemManager->MinusQuantity(app->itemManager->nodeList[i]);
 		}

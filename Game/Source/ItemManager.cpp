@@ -240,6 +240,8 @@ bool ItemManager::CleanUp()
 	app->tex->UnLoad(SmallcoinTexture);
 	SmallcoinTexture = NULL;
 
+	page = 0;
+
 	return true;
 }
 
@@ -399,6 +401,7 @@ void ItemManager::UseItem(ItemNode* item)
 					{
 						item->space = 0;
 					}
+					item->page = app->inventory->page + 1;
 				}
 
 			}
@@ -858,13 +861,15 @@ bool ItemManager::LoadArmorState()
 	{
 		for (size_t i = 0; i < armorItems.size(); i++)
 		{
-			if (strcmp(pugiNode.attribute("name").as_string(), armorItems[i]->name.GetString()) == 0 && pugiNode.attribute("id").as_int() == armorItems[i]->ID)
+			if (pugiNode.attribute("id").as_int() == armorItems[i]->ID)
 			{
 				armorItems[i]->equiped = pugiNode.attribute("equiped").as_bool();
 				armorItems[i]->space = pugiNode.attribute("space").as_int();
 				armorItems[i]->whom = pugiNode.attribute("whom").as_int();
-
-				UseItem(armorItems[i]);
+				if (armorItems[i]->equiped)
+				{
+					UseItem(armorItems[i]);
+				}
 			}
 		}
 	}
