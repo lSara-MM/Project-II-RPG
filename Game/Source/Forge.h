@@ -18,7 +18,7 @@ class Forge : public Module
 public:
 
 	// Constructors & Destructors
-	Forge(unsigned cap = 8);
+	Forge(unsigned cap = 5);
 	~Forge();
 
 	// Main module steps
@@ -28,8 +28,10 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
-	void IsForge(int ID0, int ID1);
+	bool IsForge(int ID0, int ID1, bool armor);
 
+	bool OnGuiMouseHoverEvent(GuiControl* control);
+	bool OnGuiMouseOutHoverEvent(GuiControl* control);
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 public:
@@ -38,6 +40,14 @@ public:
 
 	GuiButton* forgeButton;
 	GuiButton* exitButton;
+
+	SDL_Texture* forgeTexture;
+	SDL_Texture* forgeInventoryTexture;
+
+
+	Tween forgeAnimation;//animacion tienda
+	bool forgeTransition_B;//controlar animacion tienda
+	int posYforgeAnimation;//hacer animacion salida tienda
 
 private:
 

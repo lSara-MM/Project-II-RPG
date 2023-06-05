@@ -238,7 +238,8 @@
 				 coinpath="Assets/Textures/moneda.png"
 				 smallcoinpath="Assets/Textures/Smallmoneda.png"
 				 potionstorepath="Assets/GUI/PocionesVenta.png"
-				 inventorystorepath="Assets/GUI/InventarioVenta.png"/>
+				 inventorystorepath="Assets/GUI/InventarioVenta.png"
+				 forgepath="Assets/GUI/UI_Forge.png"/>
 
 	<map>
 		<mapfolder path="Assets/Maps/"/>

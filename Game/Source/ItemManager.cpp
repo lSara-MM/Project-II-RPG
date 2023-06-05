@@ -35,6 +35,7 @@ bool ItemManager::Awake(pugi::xml_node& config)
 	compaPath = config.attribute("compapath").as_string();
 	twinsPath = config.attribute("twinspath").as_string();
 	firePath = config.attribute("firepath").as_string();
+	forgePath = config.attribute("forgepath").as_string();
 
 
 	itemPath = config.attribute("itempath").as_string();
@@ -86,7 +87,7 @@ bool ItemManager::PostUpdate()
 			}
 			else if (app->combat->active == false)
 			{
-				if (app->store->active)
+				if (app->store->active || app->forge->active)
 				{
 					if (app->itemManager->nodeList[i]->type == 1)
 					{
@@ -154,42 +155,50 @@ bool ItemManager::PostUpdate()
 		{
 			if (app->combat->active == false)
 			{
-				x = (680 + 70 * app->itemManager->armorItems[i]->x) + 70;
-				y = app->itemManager->armorItems[i]->y - 32;
+				if (app->forge->active)
+				{
+					x = 800 + (64 * app->itemManager->armorItems[i]->x) + 70;
+					y = 200 + app->itemManager->armorItems[i]->y - 32;
+				}
+				else
+				{
+					x = (680 + 70 * app->itemManager->armorItems[i]->x) + 70;
+					y = app->itemManager->armorItems[i]->y - 32;
+				}
 			}
 
-			int w = app->itemManager->nodeList[i]->name.Length() * 3 + 80;
+			int w = app->itemManager->armorItems[i]->name.GetCapacity() * 3 + 80;
 			app->render->DrawRectangle({ x - app->render->camera.x, y - app->render->camera.y,  w, 150 }, 0, 0, 0, 180);
 
 			//print stats
 			app->render->TextDraw(app->itemManager->armorItems[i]->name.GetString(), x + 5, y + 5, 12, Font::TEXT, { 255, 255, 255 });
 			string h = to_string(app->itemManager->armorItems[i]->maxhp);
 			app->render->TextDraw("MAXHP: ", x + 5, y + 25, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(h.c_str(), x + 45, y + 25, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(h.c_str(), x + 60, y + 25, 10, Font::TEXT, { 255, 255, 255 });
 			string at = to_string(app->itemManager->armorItems[i]->attack);
 			app->render->TextDraw("ATTK: ", x + 5, y + 37, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(at.c_str(), x + 45, y + 37, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(at.c_str(), x + 60, y + 37, 10, Font::TEXT, { 255, 255, 255 });
 			string cP = to_string(app->itemManager->armorItems[i]->critRate);
 			app->render->TextDraw("CRIT_RATE: ", x + 5, y + 49, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(cP.c_str(), x + 45, y + 49, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(cP.c_str(), x + 70, y + 49, 10, Font::TEXT, { 255, 255, 255 });
 			string cD = to_string(app->itemManager->armorItems[i]->critDamage);
 			app->render->TextDraw("CRIT_DMG: ", x + 5, y + 61, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(cD.c_str(), x + 45, y + 61, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(cD.c_str(), x + 70, y + 61, 10, Font::TEXT, { 255, 255, 255 });
 			string p = to_string(app->itemManager->armorItems[i]->accuracy);
 			app->render->TextDraw("ACCURACY: ", x + 5, y + 73, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(p.c_str(), x + 45, y + 73, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(p.c_str(), x + 70, y + 73, 10, Font::TEXT, { 255, 255, 255 });
 			string ar = to_string(app->itemManager->armorItems[i]->armor);
 			app->render->TextDraw("ARMOR: ", x + 5, y + 85, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(ar.c_str(), x + 45, y + 85, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(ar.c_str(), x + 60, y + 85, 10, Font::TEXT, { 255, 255, 255 });
 			string e = to_string(app->itemManager->armorItems[i]->dodge);
 			app->render->TextDraw("DODGE: ", x + 5, y + 97, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(e.c_str(), x + 45, y + 97, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(e.c_str(), x + 60, y + 97, 10, Font::TEXT, { 255, 255, 255 });
 			string r = to_string(app->itemManager->armorItems[i]->res);
 			app->render->TextDraw("RES: ", x + 5, y + 109, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(r.c_str(), x + 45, y + 109, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(r.c_str(), x + 60, y + 109, 10, Font::TEXT, { 255, 255, 255 });
 			string s = to_string(app->itemManager->armorItems[i]->speed);
 			app->render->TextDraw("SPEED: ", x + 5, y + 121, 10, Font::TEXT, { 255, 255, 255 });
-			app->render->TextDraw(s.c_str(), x + 45, y + 121, 10, Font::TEXT, { 255, 255, 255 });
+			app->render->TextDraw(s.c_str(), x + 60, y + 121, 10, Font::TEXT, { 255, 255, 255 });
 		}
 	}
 
@@ -629,6 +638,44 @@ void ItemManager::ItemToSell(ItemNode* item)
 
 	int x = (720 - offsetX) / 2;
 	app->render->TextDraw(item->name.GetString(), x, 500, 30, Font::TEXT, { 255, 255, 255 });
+}
+
+void ItemManager::LoadForgeItems(int x, int y, ItemNode* item)
+{
+	if (item->toSell == false)
+	{
+		SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
+
+		LoadForgeButtons(x, y, item);
+
+		item->x = x;
+		item->y = y;
+
+		app->render->DrawTexture(itemsTexture, (800 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
+	}
+
+}
+
+void ItemManager::LoadForgeButtons(int x, int y, ItemNode* item)
+{
+	SDL_Rect buttonBounds;
+
+	buttonBounds = { (800 + (69 * x)), 200 + y, 64, 64 };
+
+	if (item->button != nullptr)
+	{
+	}
+	else
+	{
+		item->Start();
+	}
+
+	if (item->button != nullptr)
+	{
+		item->button->bounds = buttonBounds;
+		item->button->id = item->ID;
+		item->button->observer = app->forge;
+	}
 }
 
 void ItemManager::LoadStoreButtons(int x, int y, ItemNode* item)

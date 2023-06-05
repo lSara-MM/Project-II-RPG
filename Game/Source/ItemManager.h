@@ -60,6 +60,7 @@ public:
 
 	bool equiped = false;
 	bool craft = false;
+	bool forge = false;
 	bool toSell = false;
 
 	int page = 0;
@@ -118,6 +119,13 @@ public:
 	void LoadStoreItems(int x, int y, ItemNode* item);
 	void LoadStoreButtons(int x, int y, ItemNode* item);
 
+	//Forge
+	void LoadForgeItems(int x, int y, ItemNode* item);
+	void LoadForgeButtons(int x, int y, ItemNode* item);
+	void LoadCraftItems(int ID0, int ID1);
+	void LoadCraftButtons(int x, int y, ItemNode* item);
+	void SetItemToForge(ItemNode* item);
+
 public:
 
 	ItemNode* tree = new ItemNode;
@@ -130,6 +138,7 @@ public:
 
 	const char* texturePath;
 	const char* textureInventoryPath;
+	const char* forgePath;
 	const char* partyPath;
 	const char* charLockedPath;
 	const char* protaPath;
