@@ -73,8 +73,6 @@ public:
 	bool DummySensor;
 
 private:
-	int mouseX_pos, mouseY_pos;
-	float mouseSpeed;
 	//Music path
 	const char* practisePath;
 

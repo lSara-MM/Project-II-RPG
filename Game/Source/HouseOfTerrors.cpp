@@ -148,10 +148,24 @@ bool HouseOfTerrors::Update(float dt)
 			app->inventory->Enable();
 		}
 	}
+	if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)//digan boton mando
+		&& !app->store->active && !app->dialogueSystem->active)
+	{
+		if (app->inventory->active)
+		{
+			player->lockMovement = false;
+			app->inventory->inventoryTransition_B = true;
+			//app->inventory->Disable();
 
-	app->input->GetMousePosition(mouseX_pos, mouseY_pos);
-
-	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_pos, mouseY_pos, app->input->mouseSpeed_F, dt); }
+		}
+		else
+		{
+			player->lockMovement = true;
+			app->inventory->Enable();
+			app->inventory->partyWindow_B = true;
+		}
+	}
+	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt); }
 
 	if (!app->input->godMode_B)
 	{
@@ -225,11 +239,11 @@ bool HouseOfTerrors::PostUpdate()
 	if (pause_B || player->lockMovement) {
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 		{
-			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_pos - app->render->camera.x, mouseY_pos - app->render->camera.y);
+			app->render->DrawTexture(app->input->cursorPressedTex, app->input->mouseX - app->render->camera.x, app->input->mouseY - app->render->camera.y);
 		}
 		else
 		{
-			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_pos - app->render->camera.x, mouseY_pos - app->render->camera.y);
+			app->render->DrawTexture(app->input->cursorIdleTex, app->input->mouseX - app->render->camera.x, app->input->mouseY - app->render->camera.y);
 		}
 	}
 	return ret;

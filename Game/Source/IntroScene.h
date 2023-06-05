@@ -55,9 +55,6 @@ public:
 	bool previousGame_B = false;
 	bool continueGame_B = false;
 
-	int mouseX_intro, mouseY_intro;
-	float mouse_Speed;
-
 	Settings* pSettings;
 	bool introDone = false;
 

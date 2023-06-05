@@ -106,9 +106,7 @@ bool IntroScene::PreUpdate()
 
 // Called each loop iteration
 bool IntroScene::Update(float dt)
-{
-	app->input->GetMousePosition(mouseX_intro, mouseY_intro);
-	
+{	
 	if (transition_B)
 	{
 		animationTitle.Backward();
@@ -160,7 +158,7 @@ bool IntroScene::Update(float dt)
 		listButtons.start->next->data->state = GuiControlState::DISABLED;
 	}
 
-	app->input->HandleGamepadMouse(mouseX_intro, mouseY_intro, app->input->mouseSpeed_F, dt);
+	app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt);
 
 	return true;
 }
@@ -276,11 +274,11 @@ bool IntroScene::PostUpdate()
 
 	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 	{
-		app->render->DrawTexture(app->input->cursorPressedTex, mouseX_intro, mouseY_intro);
+		app->render->DrawTexture(app->input->cursorPressedTex, app->input->mouseX, app->input->mouseY);
 	}
 	else
 	{
-		app->render->DrawTexture(app->input->cursorIdleTex, mouseX_intro, mouseY_intro);
+		app->render->DrawTexture(app->input->cursorIdleTex, app->input->mouseX, app->input->mouseY);
 	}
 
 	return ret;

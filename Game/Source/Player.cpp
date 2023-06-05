@@ -396,12 +396,13 @@ bool Player::Update(float dt)
 				}
 			}
 
-			if (app->dialogueSystem->hasEnded) 
+			if (app->dialogueSystem->hasEnded && !app->store->active) 
 			{
 				lockMovement = false; 
 				pauseEnabled_B = true;
 				app->dialogueSystem->Disable();
 			}
+
 		}
 
 		if (Chest_contact)
@@ -950,7 +951,7 @@ void Player::Controller(float dt)
 				vel.y = -125 * 4;
 				vel.x = 0;
 				app->hTerrors->steps_I++;
-
+				app->BeastT->steps_I++;
 				
 			}
 		}
@@ -965,6 +966,7 @@ void Player::Controller(float dt)
 					keyLockDown = false;
 					currentAnimation = &idleDownAnim;
 					app->hTerrors->steps_I++;
+					app->BeastT->steps_I++;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT ||
@@ -981,8 +983,7 @@ void Player::Controller(float dt)
 				vel.y = 125 * 4;
 				vel.x = 0;
 				app->hTerrors->steps_I++;
-
-				
+				app->BeastT->steps_I++;
 			}
 		}
 		if (!keyLockDown && !keyLockUp && !keyLockRigth)
@@ -996,6 +997,7 @@ void Player::Controller(float dt)
 					keyLockLeft = false;
 					currentAnimation = &idleLeftAnim;
 					app->hTerrors->steps_I++;
+					app->BeastT->steps_I++;
 				}
 			}
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT ||
@@ -1012,7 +1014,7 @@ void Player::Controller(float dt)
 				vel.x = -125 * 4;
 				vel.y = 0;
 				app->hTerrors->steps_I++;
-
+				app->BeastT->steps_I++;
 				//Mover camara
 				app->render->camera.x += ceil(speed);
 			}
@@ -1032,6 +1034,7 @@ void Player::Controller(float dt)
 					keyLockRigth = false;
 					currentAnimation = &idleRigthAnim;
 					app->hTerrors->steps_I++;
+					app->BeastT->steps_I++;
 				}
 			}
 			//Mantenerla pulsada (moverse)
@@ -1049,7 +1052,7 @@ void Player::Controller(float dt)
 				vel.x = 125 * 4;
 				vel.y = 0;
 				app->hTerrors->steps_I++;
-
+				app->BeastT->steps_I++;
 				//Mover camara
 				app->render->camera.x -= ceil(speed);
 			}

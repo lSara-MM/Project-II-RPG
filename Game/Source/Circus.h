@@ -60,8 +60,6 @@ public:
 	pugi::xml_node sceneNode;
 
 private:
-	int mouseX_pos, mouseY_pos;
-	float mouseSpeed;
 	//Music path
 	const char* circusMusPath;
 

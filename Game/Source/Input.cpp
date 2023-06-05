@@ -384,7 +384,7 @@ void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float d
 		}
 	}
 
-	//SDL_WarpMouseInWindow(NULL, mouseX + speed_X, mouseY + speed_Y);
+	SDL_WarpMouseInWindow(NULL, mouseX + speed_X, mouseY + speed_Y);
 	
 }
 

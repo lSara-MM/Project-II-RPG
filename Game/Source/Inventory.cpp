@@ -56,7 +56,7 @@ bool Inventory::Start()
 		for (int i = 0; i <= 3; i++)
 		{
 			SDL_Rect buttonBounds;
-			buttonBounds = { (362 + 34 * i), 407, 25, 25 };
+			buttonBounds = { (357 + 38 * i), 406, 28, 28 };
 			selectCharacter[i] = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1000 + i, this, buttonBounds, ButtonType::SMALL);
 			selectCharacter[i]->step = 20;
 		}
@@ -82,11 +82,19 @@ bool Inventory::Update(float dt)
 	if (inventoryTransition_B)
 	{
 		inventoryAnimation.Backward();
-		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)//poner invisibles los botones creados
+	
+		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 		{
-			if (app->itemManager->nodeList[i]->button != nullptr)
+			if (app->itemManager->nodeList[i]->button != nullptr && app->itemManager->nodeList[i]->quantity > 0)//poner invisibles los botones creados
 			{
 				app->itemManager->nodeList[i]->button->state = GuiControlState::NONE;
+			}
+		}
+		for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+		{
+			if (app->itemManager->armorItems[i]->button != nullptr && app->itemManager->armorItems[i]->quantity > 0)
+			{
+				app->itemManager->armorItems[i]->button->state = GuiControlState::NONE;
 			}
 		}
 		if (posXinventoryAnimation == -1300)
@@ -285,6 +293,8 @@ bool Inventory::CleanUp()
 	}
 	app->guiManager->DestroyGuiControl(buttonInventory);
 	app->guiManager->DestroyGuiControl(buttonParty);
+	app->guiManager->DestroyGuiControl(PrevPage);
+	app->guiManager->DestroyGuiControl(NextPage);
 	app->tex->UnLoad(inventoryIMG);
 	app->tex->UnLoad(partyIMG);
 	app->tex->UnLoad(charlockedIMG);
@@ -454,11 +464,15 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			{
 				selectCharacter[i]->state = GuiControlState::NORMAL;
 			}
+			PrevPage->state = GuiControlState::NORMAL;
+			NextPage->state = GuiControlState::NORMAL;
 			break;
 		case 1005:
 			partyWindow_B = true;
 			buttonInventory->state = GuiControlState::NORMAL;
 			buttonParty->state = GuiControlState::NONE;
+			PrevPage->state = GuiControlState::NONE;
+			NextPage->state = GuiControlState::NONE;
 			for (int i = 0; i <= 3; i++)
 			{
 				selectCharacter[i]->state = GuiControlState::NONE;
