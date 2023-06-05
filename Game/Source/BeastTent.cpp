@@ -273,7 +273,6 @@ bool BeastTent::CleanUp()
 		app->tex->UnLoad(BeastDungeon);
 	}
 
-	app->puzzleManager->Dun2CleanUp();
 	app->puzzleManager->Disable();
 
 	app->guiManager->CleanUp();

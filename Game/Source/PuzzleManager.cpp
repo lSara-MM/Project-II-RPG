@@ -1378,7 +1378,7 @@ bool PuzzleManager::ChickenBoomPuz()
 		posBomb1.x = app->BeastT->player->position.x + 10;
 		posBomb1.y = app->BeastT->player->position.y + 25;
 
-		if (DeltaTime >= 5)
+		if (DeltaTime >= 8)
 		{
 			BombCarryOn1 = false;
 
@@ -1453,32 +1453,32 @@ bool PuzzleManager::ChickenBoomPuz()
 	{
 		if (BarricadeExplote1)
 		{
-			posBomb1.x = posBarricade1.x + widthBarricade1 / 5;
-			posBomb1.y = posBarricade1.y - heightBarricade1 / 2;
+			posBomb1.x = posBarricade1.x + widthBarricade1 / 6 - 10;
+			posBomb1.y = posBarricade1.y - heightBarricade1 / 2 - 10;
 		}
 
 		if (BarricadeExplote2)
 		{
-			posBomb1.x = posBarricade2.x + widthBarricade1 / 5;
-			posBomb1.y = posBarricade2.y - heightBarricade1 / 2;
+			posBomb1.x = posBarricade2.x + widthBarricade1 / 6 - 10;
+			posBomb1.y = posBarricade2.y - heightBarricade1 / 2 - 10;
 		}
 
 		if (BarricadeExplote3)
 		{
-			posBomb1.x = posBarricade3.x + widthBarricade1 / 5;
-			posBomb1.y = posBarricade3.y - heightBarricade1 / 2;
+			posBomb1.x = posBarricade3.x + widthBarricade1 / 6 - 10;
+			posBomb1.y = posBarricade3.y - heightBarricade1 / 2 - 10;
 		}
 
 		if (BarricadeExplote4)
 		{
-			posBomb1.x = posBarricade4.x - widthBarricade2 / 5;
-			posBomb1.y = posBarricade4.y + heightBarricade2 / 2;
+			posBomb1.x = posBarricade4.x + widthBarricade2 / 4;
+			posBomb1.y = posBarricade4.y + heightBarricade2 - 20;
 		}
 
 		if (BarricadeExplote5)
 		{
-			posBomb1.x = posBarricade5.x + widthBarricade1 / 5;
-			posBomb1.y = posBarricade5.y - heightBarricade1 / 2;
+			posBomb1.x = posBarricade5.x + widthBarricade1 / 6 - 10;
+			posBomb1.y = posBarricade5.y - heightBarricade1 / 2 - 10;
 		}
 
 		if(DeltaTime >= 2)
@@ -1489,6 +1489,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			if (BarricadeExplote1) 
 			{
 				BarricadeHasExploted1 = true;
+				BarricadeExplote1 = false;
 
 				if (Barricade1 != nullptr)
 					Barricade1->body->GetWorld()->DestroyBody(Barricade1->body);
@@ -1499,6 +1500,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			if (BarricadeExplote2) 
 			{
 				BarricadeHasExploted2 = true;
+				BarricadeExplote2 = false;
 
 				if (Barricade2 != nullptr)
 					Barricade2->body->GetWorld()->DestroyBody(Barricade2->body);
@@ -1509,6 +1511,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			if (BarricadeExplote3) 
 			{
 				BarricadeHasExploted3 = true;
+				BarricadeExplote3 = false;
 
 				if (Barricade3 != nullptr)
 					Barricade3->body->GetWorld()->DestroyBody(Barricade3->body);
@@ -1519,6 +1522,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			if (BarricadeExplote4) 
 			{
 				BarricadeHasExploted4 = true;
+				BarricadeExplote4 = false;
 
 				if (Barricade4 != nullptr)
 					Barricade4->body->GetWorld()->DestroyBody(Barricade4->body);
@@ -1529,6 +1533,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			if (BarricadeExplote5) 
 			{
 				BarricadeHasExploted5 = true;
+				BarricadeExplote5 = false;
 
 				if (Barricade5 != nullptr)
 					Barricade5->body->GetWorld()->DestroyBody(Barricade5->body);
@@ -1578,7 +1583,7 @@ bool PuzzleManager::ChickenBoomPuz()
 		posBomb2.x = app->BeastT->player->position.x + 10;
 		posBomb2.y = app->BeastT->player->position.y + 25;
 
-		if (DeltaTime >= 5)
+		if (DeltaTime >= 8)
 		{
 			BombCarryOn2 = false;
 
@@ -1654,32 +1659,32 @@ bool PuzzleManager::ChickenBoomPuz()
 	{
 		if (BarricadeExplote1)
 		{
-			posBomb2.x = posBarricade1.x + widthBarricade1 / 5;
-			posBomb2.y = posBarricade1.y - heightBarricade1 / 2;
+			posBomb2.x = posBarricade1.x + widthBarricade1 / 6 - 10;
+			posBomb2.y = posBarricade1.y - heightBarricade1 / 2 - 10;
 		}
 
 		if (BarricadeExplote2)
 		{
-			posBomb2.x = posBarricade2.x + widthBarricade1 / 5;
-			posBomb2.y = posBarricade2.y - heightBarricade1 / 2;
+			posBomb2.x = posBarricade2.x + widthBarricade1 / 6 - 10;
+			posBomb2.y = posBarricade2.y - heightBarricade1 / 2 - 10;
 		}		
 		
 		if (BarricadeExplote3)
 		{
-			posBomb2.x = posBarricade3.x + widthBarricade1 / 5;
-			posBomb2.y = posBarricade3.y - heightBarricade1 / 2;
+			posBomb2.x = posBarricade3.x + widthBarricade1 / 6 - 10;
+			posBomb2.y = posBarricade3.y - heightBarricade1 / 2 - 10;
 		}		
 		
 		if (BarricadeExplote4)
 		{
-			posBomb2.x = posBarricade4.x - widthBarricade2 / 5;
-			posBomb2.y = posBarricade4.y + heightBarricade1 / 2;
+			posBomb2.x = posBarricade4.x + widthBarricade2 / 4;
+			posBomb2.y = posBarricade4.y + heightBarricade2 - 20;
 		}
 
 		if (BarricadeExplote5)
 		{
-			posBomb2.x = posBarricade5.x + widthBarricade1 / 5;
-			posBomb2.y = posBarricade5.y - heightBarricade1 / 2;
+			posBomb2.x = posBarricade5.x + widthBarricade1 / 6 - 10;
+			posBomb2.y = posBarricade5.y - heightBarricade1 / 2 - 10;
 		}
 
 		if (DeltaTime >= 2)
@@ -1690,6 +1695,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			if (BarricadeExplote1)
 			{
 				BarricadeHasExploted1 = true;
+				BarricadeExplote1 = false;
 
 				if (Barricade1 != nullptr)
 					Barricade1->body->GetWorld()->DestroyBody(Barricade1->body);
@@ -1700,6 +1706,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			if (BarricadeExplote2)
 			{
 				BarricadeHasExploted2 = true;
+				BarricadeExplote2 = false;
 
 				if (Barricade2 != nullptr)
 					Barricade2->body->GetWorld()->DestroyBody(Barricade2->body);
@@ -1710,6 +1717,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			if (BarricadeExplote3)
 			{
 				BarricadeHasExploted3 = true;
+				BarricadeExplote3 = false;
 
 				if (Barricade3 != nullptr)
 					Barricade3->body->GetWorld()->DestroyBody(Barricade3->body);
@@ -1720,6 +1728,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			if (BarricadeExplote4)
 			{
 				BarricadeHasExploted4 = true;
+				BarricadeExplote4 = false;
 
 				if (Barricade4 != nullptr)
 					Barricade4->body->GetWorld()->DestroyBody(Barricade4->body);
@@ -1730,6 +1739,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			if (BarricadeExplote5)
 			{
 				BarricadeHasExploted5 = true;
+				BarricadeExplote5 = false;
 
 				if (Barricade5 != nullptr)
 					Barricade5->body->GetWorld()->DestroyBody(Barricade5->body);
