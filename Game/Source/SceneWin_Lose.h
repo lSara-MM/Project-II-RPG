@@ -72,6 +72,9 @@ private:
 	const char* winMusicPath;
 	const char* looseMusicPath;
 
+	const char* confirmPath;
+	uint confirmInteractfx;
+
 	bool exit_B;
 };
 
