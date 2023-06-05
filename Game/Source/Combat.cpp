@@ -526,7 +526,7 @@ bool Combat::PreLoadCombat(SString n, int boss)
 {
 	srand(time(NULL));
 
-	int randSize = rand() % 3 + 2;
+	int randSize = (rand() % 2 + 1) + (rand() % 2 + 1); //25% 2, 50% 3 25% 4
 	int randId;
 
 	if (boss != -1)
