@@ -68,12 +68,13 @@ bool SceneWin_Lose::Start()
 		//app->audio->PlayMusic(winMusicPath, 1.0f);
 	
 	}
-
 	else
 	{
 		app->audio->PlayMusic(looseMusicPath, 1.0f);
 	}
-
+	//provisional
+	continueButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1100, this, {260, 220, 153, 50 }, ButtonType::IN_SETTINGS, "Continue", 1, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
+	returnButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1101, this, {884, 220, 153, 50 }, ButtonType::IN_SETTINGS, "Return to title", 1, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
 	return true;
 }
 
@@ -103,6 +104,7 @@ bool SceneWin_Lose::Update(float dt)
 	{
 		//app->audio->PlayMusic(winMusicPath);
 		app->render->DrawTexture(Win, 0, offset + point * (0 - offset));
+		app->render->TextDraw("VICTORY", 280, offset + point * (40 - offset), 150, Font::TITLE, { 255,255,255 });
 		if (app->puzzleManager->fightBoss)
 		{
 			app->puzzleManager->bossIsDead = true;
@@ -143,13 +145,24 @@ bool SceneWin_Lose::Update(float dt)
 		}*/
 	}
 
+	app->guiManager->Draw();
+	app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt);
+
+	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
+	{
+		app->render->DrawTexture(app->input->cursorPressedTex, app->input->mouseX - app->render->camera.x, app->input->mouseY - app->render->camera.y);
+	}
+	else
+	{
+		app->render->DrawTexture(app->input->cursorIdleTex, app->input->mouseX - app->render->camera.x, app->input->mouseY - app->render->camera.y);
+	}
+
 	return true;
 }
 
 bool SceneWin_Lose::PostUpdate()
 {
 	bool ret = true;
-	app->render->TextDraw("Press Enter to continue", 1000, 670, 20, Font::UI, { 255, 255, 255 });
 
 	return ret;
 }
@@ -158,10 +171,10 @@ bool SceneWin_Lose::PostUpdate()
 bool SceneWin_Lose::CleanUp()
 {
 	LOG("Freeing scene");
-
 	app->tex->UnLoad(Win);
 	app->tex->UnLoad(Lose);
-
+	app->guiManager->DestroyGuiControl(continueButton);
+	app->guiManager->DestroyGuiControl(returnButton);
 	app->questManager->active = true;
 
 	return true;
@@ -192,7 +205,7 @@ void SceneWin_Lose::Debug()
 	// Show Gui 
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
 
-		//app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
+		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
 	}
 
 	// Show collisions
@@ -223,4 +236,22 @@ void SceneWin_Lose::Debug()
 	}
 
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
+}
+
+bool SceneWin_Lose::OnGuiMouseClickEvent(GuiControl* control)
+{
+	switch (control->id)
+	{
+	case 1100:
+		LOG("Button Continue click");
+		app->audio->PlayFx(confirmInteractfx);
+		app->LoadFromFile(this);
+		break;
+	case 1101:
+		LOG("Button Return to Title click");
+		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
+		break;
+	}
+
+	return true;
 }

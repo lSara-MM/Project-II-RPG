@@ -198,7 +198,7 @@
 	</scene>
 
   <SceneWin_Lose>
-    <win texturepath="Assets/Textures/winLetra.png" musicw="Assets/Audio/Music/mus_ending.ogg"/>
+    <win texturepath="Assets/Textures/win.png" musicw="Assets/Audio/Music/mus_ending.ogg"/>
     <lose texturepath="Assets/Textures/failedLetra.png" musicl="Assets/Audio/Music/mus_loose_scene.ogg"/>
   </SceneWin_Lose>
 

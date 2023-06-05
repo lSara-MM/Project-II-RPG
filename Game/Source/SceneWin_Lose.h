@@ -44,6 +44,8 @@ public:
 
 	void Debug();
 
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
 public:
 
 	pugi::xml_node sceneNode;
@@ -58,8 +60,9 @@ public:
 
 private:
 
-	int mouseX_scene, mouseY_scene;
-	float mouseSpeed;
+	GuiButton* continueButton;
+	GuiButton* returnButton;
+
 	const char* lobby_music;
 
 	const char* texturepathWin;
