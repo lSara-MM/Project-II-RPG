@@ -70,7 +70,6 @@ public:
 	uint combatfx;
 
 private:
-	int mouseX_pos, mouseY_pos;
 	//Music path
 	const char* musBeastPath;
 
@@ -81,9 +80,6 @@ private:
 	// Settings
 	Settings* pSettings;
 	Pause* pPause;
-
-	float mouseSpeed;
-
 	const char* fxpausepath;
 	uint pausefx;
 

@@ -70,7 +70,6 @@ public:
 	uint combatfx;
 
 private:
-	int mouseX_pos, mouseY_pos;
 	//Music path
 	const char* musHauntedPath;
 

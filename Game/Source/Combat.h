@@ -104,10 +104,6 @@ public:
 private:
 	bool isMoving;
 
-	//
-	int mouseX_combat, mouseY_combat;
-	float mouse_Speed;
-
 	pugi::xml_node combatNode;
 
 	// Auxiliar vector for texts

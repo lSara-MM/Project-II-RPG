@@ -167,8 +167,6 @@ bool Combat::Update(float dt)
 {
 	Debug();
 
-	app->input->GetMousePosition(mouseX_combat, mouseY_combat);
-
 	if (transitionCombat_B)
 	{
 		animationCombat.Backward();
@@ -299,7 +297,7 @@ bool Combat::Update(float dt)
 		app->render->TextDraw("Press 7 become inmortal", 1100, 40, 12, Font::UI, { 255, 255, 255 });
 	}
 	
-	app->input->HandleGamepadMouse(mouseX_combat, mouseY_combat, app->input->mouseSpeed_F, dt);
+	app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt);
 
 	return true;
 }

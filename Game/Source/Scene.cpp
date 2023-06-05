@@ -155,17 +155,34 @@ bool Scene::Update(float dt)
 		}
 	}
 
-	app->input->GetMousePosition(mouseX_scene, mouseY_scene);
+	if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN )//digan boton mando
+		&& !app->store->active && !app->dialogueSystem->active)
+	{
+		if (app->inventory->active)
+		{
+			player->lockMovement = false;
+			app->inventory->inventoryTransition_B = true;
+			//app->inventory->Disable();
 
+		}
+		else
+		{
+			player->lockMovement = true;
+			app->inventory->Enable();
+			app->inventory->partyWindow_B = true;
+		}
+	}
 
-	/*Entity* entidad2 = app->entityManager->CreateEntity(EntityType::ENEMY_TANK_HOUSE);
-	app->entityManager->AddEntity(entidad2);*/
-	
+	if (app->store->active)
+	{
+		player->lockMovement = true;
+
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) 
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 30);
 
-	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(mouseX_scene, mouseY_scene, app->input->mouseSpeed_F, dt); }
+	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt); }
 
 	return true;
 }
@@ -219,11 +236,11 @@ bool Scene::PostUpdate()
 	if ((pause_B || player->lockMovement) && !app->store->active) {
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 		{
-			app->render->DrawTexture(app->input->cursorPressedTex, mouseX_scene - app->render->camera.x, mouseY_scene - app->render->camera.y);
+			app->render->DrawTexture(app->input->cursorPressedTex, app->input->mouseX - app->render->camera.x, app->input->mouseY - app->render->camera.y);
 		}
 		else
 		{
-			app->render->DrawTexture(app->input->cursorIdleTex, mouseX_scene - app->render->camera.x, mouseY_scene - app->render->camera.y);
+			app->render->DrawTexture(app->input->cursorIdleTex, app->input->mouseX - app->render->camera.x, app->input->mouseY - app->render->camera.y);
 		}
 	}
 
