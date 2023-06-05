@@ -7,10 +7,11 @@
 #include "Player.h"
 #include "ItemManager.h"
 
-Inventory::Inventory(unsigned cap) : Module()
+Inventory::Inventory(unsigned capx, unsigned capy) : Module()
 {
 	name.Create("Inventory");
-	this->cap = cap;
+	this->capx = capx;
+	this->capy = capy;
 	y = 0;
 }
 
@@ -35,6 +36,11 @@ bool Inventory::Start()
 	buttonInventory->state = GuiControlState::NONE;
 	buttonParty = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1005, this, { 890, 20, 114, 60 }, ButtonType::SMALL);
 	buttonParty->step = 20;
+	PrevPage = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1007, this, { 920, 100, 50, 40 }, ButtonType::SMALL);
+	PrevPage->step = 20;
+	NextPage = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1006, this, { 980, 100, 50, 40 }, ButtonType::SMALL);
+	NextPage->step = 20;
+
 	if (app->combat->active)
 	{
 		for (int i = 0; i <= 3; i++)
@@ -104,7 +110,7 @@ bool Inventory::Update(float dt)
 	}
 	else
 	{
-		y = 148;
+		y = 155;
 
 		if (!partyWindow_B)
 		{
@@ -140,14 +146,15 @@ bool Inventory::PostUpdate()
 
 	if (!partyWindow_B)
 	{
+
 		for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
 		{
-			if (cap == x)
+			if (capx == x)
 			{
-				y += 70;
+				y += 75;
 				x = 0;
 			}
-			if (posXinventoryAnimation == 0)
+			if (posXinventoryAnimation == 0 )
 			{
 				app->itemManager->LoadQuantity(x, y, app->itemManager->armorItems[i]);
 			}
@@ -160,7 +167,7 @@ bool Inventory::PostUpdate()
 		{
 			if (app->itemManager->nodeList[i]->type != 2)
 			{
-				if (cap == x)
+				if (capx == x)
 				{
 					y += 70;
 					x = 0;
@@ -178,16 +185,13 @@ bool Inventory::PostUpdate()
 					}
 				}
 			}
-
-			
 		}
+			
 		if (app->combat->active)
 		{
 		}
 		else
 		{
-			string cn = to_string(app->itemManager->coins);
-			app->render->TextDraw(cn.c_str(), offset + point * (980 - offset), 110, 20, Font::TEXT, { 0, 0, 0 });
 			//LOAD STATS
 			if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
 			{
@@ -458,6 +462,29 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			for (int i = 0; i <= 3; i++)
 			{
 				selectCharacter[i]->state = GuiControlState::NONE;
+			}
+			for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+			{
+				if (app->itemManager->nodeList[i]->button != nullptr && app->itemManager->nodeList[i]->quantity > 0)
+				{
+					app->itemManager->nodeList[i]->CleanUp();
+				}
+			}
+			for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+			{
+				if (app->itemManager->armorItems[i]->button != nullptr && app->itemManager->armorItems[i]->quantity > 0)
+				{
+					app->itemManager->armorItems[i]->CleanUp();
+				}
+			}
+			break;
+		case 1006:
+			app->itemManager->page++;
+			break;
+		case 1007:
+			if (app->itemManager->page > 0)
+			{
+				app->itemManager->page--;
 			}
 			break;
 	}

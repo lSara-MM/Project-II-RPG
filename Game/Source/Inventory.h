@@ -18,7 +18,7 @@ class Inventory : public Module
 public:
 
 	// Constructors & Destructors
-	Inventory(unsigned cap = 5);
+	Inventory(unsigned capx = 5, unsigned capy = 6);
 	~Inventory();
 
 	// Main module steps
@@ -43,7 +43,11 @@ public:
 	SDL_Texture* fireIMG;
 	GuiButton* buttonInventory;
 	GuiButton* buttonParty;
-	unsigned cap;
+	GuiButton* PrevPage;
+	GuiButton* NextPage;
+	unsigned capx;
+	unsigned capy;
+	int page = 0;
 	int y;
 
 	GuiButton* selectCharacter[4];

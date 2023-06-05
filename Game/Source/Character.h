@@ -186,6 +186,12 @@ private:
 	const char* hitPath;
 	uint hitfx;
 
+	const char* buffPath;
+	uint bufffx;
+
+	const char* debuffPath;
+	uint debufffx;
+
 	//textura supersaiyan
 	SDL_Texture* textureOnturn;
 

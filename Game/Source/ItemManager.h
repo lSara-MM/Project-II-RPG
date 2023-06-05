@@ -62,6 +62,8 @@ public:
 	bool craft = false;
 	bool toSell = false;
 
+	int page = 0;
+
 	bool printStats = false;
 
 	GuiButton* button = nullptr;
@@ -101,7 +103,8 @@ public:
 
 	void UseItem(ItemNode* item);
 
-	bool LoadItemState(pugi::xml_node& xml_trees);
+	bool LoadItemState();
+	bool LoadArmorState();
 	bool SaveItemState();
 
 	void AddCharaToParty(int id);
@@ -162,6 +165,8 @@ public:
 
 	// TO DO GUARRADA SUPER TEMPORAL
 	int comb = 0;
+
+	int page = 0;
 
 private:
 	pugi::xml_document items;

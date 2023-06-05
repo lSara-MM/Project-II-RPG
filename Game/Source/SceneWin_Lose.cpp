@@ -45,6 +45,9 @@ bool SceneWin_Lose::Awake(pugi::xml_node& config)
 	looseMusicPath = config.child("lose").attribute("musicl").as_string();
 	winMusicPath = config.child("win").attribute("musicw").as_string();
 
+	confirmPath = "Assets/Audio/Fx/confirm_interaction.wav";
+	confirmInteractfx = app->audio->LoadFx(confirmPath);
+
 	backgroundAnimation.Set();
 	backgroundAnimation.AddTween(100, 120, BOUNCE_OUT);
 
@@ -62,13 +65,13 @@ bool SceneWin_Lose::Start()
 
 	if (win)
 	{
-		app->audio->PlayMusic("Assets/Audio/Music/Intro_mus.ogg", 1.0f);
+		//app->audio->PlayMusic(winMusicPath, 1.0f);
 	
 	}
 
 	else
 	{
-		app->audio->PlayMusic("Assets/Audio/Music/CircusTent_mus.ogg", 1.0f);
+		app->audio->PlayMusic(looseMusicPath, 1.0f);
 	}
 
 	return true;
@@ -124,8 +127,8 @@ bool SceneWin_Lose::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 	{
+		app->audio->PlayFx(confirmInteractfx);
 		app->LoadFromFile(this);
-
 		/*switch (app->itemManager->comb)
 		{
 		case 0:

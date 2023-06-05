@@ -84,6 +84,12 @@ bool Character::Awake()
 	hitPath = "Assets/Audio/Fx/hit.wav";
 	hitfx = app->audio->LoadFx(hitPath);
 
+	buffPath = "Assets/Audio/Fx/buff.wav";
+	bufffx = app->audio->LoadFx(buffPath);
+
+	debuffPath = "Assets/Audio/Fx/debuff.wav";
+	debufffx = app->audio->LoadFx(debuffPath);
+
 	id = parameters.attribute("id").as_int();
 
 	textureOnturn = app->tex->Load("Assets/GUI/humoTurnos.png");
@@ -1030,7 +1036,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		{	
 			//Blees -1 pues no lo hace
 			if (defender->GetStat(EffectType::BLESS)!=-1 || skill->firstPositiveEffect!=-1) {defender->listStatusEffects.Add(statusEffect1);}
-			
+			app->audio->PlayFx(bufffx);
 			//Movimiento
 			app->combat->MoveCharacter(defender, skill->movementTarget);
 		}
@@ -1039,15 +1045,16 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			if(CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY)*(skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 			{
 				if (defender->GetStat(EffectType::BLESS) != 1 || skill->firstPositiveEffect != -1){defender->listStatusEffects.Add(statusEffect1);}
-				
 				//Movimiento
 				app->combat->MoveCharacter(defender, skill->movementTarget);
 			}
+			app->audio->PlayFx(debufffx);
 		}
 		//Segundo efecto de estado
 		if (skill->secondPositiveEffect) //Efecto de estado positivo
 		{
 			if (defender->GetStat(EffectType::BLESS) != -1 || skill->secondPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect2); }
+			app->audio->PlayFx(bufffx);
 		}
 		else
 		{
@@ -1080,6 +1087,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			{
 				if (defender->GetStat(EffectType::BLESS) != -1 || skill->firstPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect1); }
 				//Movimiento
+				app->audio->PlayFx(bufffx);
 				app->combat->MoveCharacter(defender, skill->movementTarget);
 			}
 			else
@@ -1090,6 +1098,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 					app->combat->MoveCharacter(defender, skill->movementTarget || skill->firstPositiveEffect != -1);
 					if (defender->GetStat(EffectType::BLESS) != 1) { defender->listStatusEffects.Add(statusEffect1); }
 				}
+				app->audio->PlayFx(debufffx);
 			}
 
 			//Segundo efecto estado 
