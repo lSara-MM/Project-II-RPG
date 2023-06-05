@@ -26,6 +26,9 @@ bool Forge::Start()
 	buttonBounds = { 1150, 50, 60, 60 };
 	exitButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::CLOSE, "", 12, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
 
+	buttonBounds = { 240, 540, 200, 80 };
+	forgeButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1502, this, buttonBounds, ButtonType::SMALL, "", 12, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
+
 	forgeTexture = app->tex->Load(app->itemManager->forgePath);
 	forgeInventoryTexture = app->tex->Load(app->itemManager->textureInventoryPath);
 
@@ -123,7 +126,7 @@ bool Forge::PostUpdate()
 				{
 					if (IsForge(app->itemManager->nodeList[j]->ID, app->itemManager->nodeList[i]->ID, false))
 					{
-
+						app->itemManager->LoadCraftItems(app->itemManager->nodeList[j]->ID, app->itemManager->nodeList[i]->ID, false);
 					}
 				}
 			}
@@ -131,11 +134,24 @@ bool Forge::PostUpdate()
 			{
 				if (app->itemManager->armorItems[j]->craft)
 				{
-					if (IsForge(app->itemManager->nodeList[j]->ID, app->itemManager->armorItems[i]->ID, true))
+					if (IsForge(app->itemManager->nodeList[i]->ID, app->itemManager->armorItems[j]->ID, true))
 					{
-
+						app->itemManager->LoadCraftItems(app->itemManager->nodeList[i]->ID, app->itemManager->armorItems[j]->ID, true);
 					}
 				}
+			}
+		}
+		else
+		{
+			if (app->itemManager->nodeList[i]->canCraft)
+			{
+				app->itemManager->nodeList[i]->CleanUp();
+				app->itemManager->nodeList[i]->canCraft = false;
+			}
+			if (app->itemManager->nodeList[i]->forge)
+			{
+				app->itemManager->nodeList[i]->CleanUp();
+				app->itemManager->nodeList[i]->forge = false;
 			}
 		}
 	}
@@ -158,19 +174,13 @@ bool Forge::CleanUp()
 {
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 	{
-		if (app->itemManager->nodeList[i]->button != nullptr)
-		{
-			app->itemManager->nodeList[i]->craft = false;
-			app->itemManager->nodeList[i]->CleanUp();
-		}
+		app->itemManager->nodeList[i]->craft = false;
+		app->itemManager->nodeList[i]->CleanUp();
 	}
 	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
 	{
-		if (app->itemManager->armorItems[i]->button != nullptr)
-		{
-			app->itemManager->armorItems[i]->craft = false;
-			app->itemManager->armorItems[i]->CleanUp();
-		}
+		app->itemManager->armorItems[i]->craft = false;
+		app->itemManager->armorItems[i]->CleanUp();
 	}
 
 	app->guiManager->DestroyGuiControl(exitButton);
@@ -184,8 +194,56 @@ bool Forge::CleanUp()
 
 bool Forge::IsForge(int ID0, int ID1, bool armor)
 {
-	bool ret = true;
+	bool ret=false;
 
+	const char* file = "forge.xml";
+	crafts.load_file(file);
+
+	if (armor)
+	{
+		switch (ID0)
+		{
+		case 101:
+			ret = true;
+			break;
+		case 102:
+			ret = true;
+			break;
+		case 103:
+			ret = true;
+			break;
+		case 104:
+			ret = true;
+			break;
+		case 105:
+			ret = true;
+			break;
+		case 106:
+			ret = true;
+			break;
+		case 107:
+			ret = true;
+			break;
+		case 108:
+			ret = true;
+			break;
+		}
+	}
+	else
+	{
+		//Load items
+		for (pugi::xml_node pugiNode = crafts.first_child().first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("craft"))
+		{
+			for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+			{
+				if (ID0 == pugiNode.attribute("item1").as_int() && ID1 == pugiNode.attribute("item2").as_int() || ID0 == pugiNode.attribute("item2").as_int() && ID1 == pugiNode.attribute("item1").as_int())
+				{
+					ret = true;
+				}
+			}
+		}
+	}
+	//pugiNode.attribute("name").as_string()
 	return ret;
 }
 
@@ -195,14 +253,20 @@ bool Forge::OnGuiMouseHoverEvent(GuiControl* control)
 	{
 		if (app->itemManager->nodeList[i]->button != nullptr && app->itemManager->nodeList[i]->button->id == control->id)
 		{
-			app->itemManager->nodeList[i]->printStats = true;
+			if (app->itemManager->nodeList[i]->craft == false)
+			{
+				app->itemManager->nodeList[i]->printStats = true;
+			}
 		}
 	}
 	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
 	{
 		if (app->itemManager->armorItems[i]->button != nullptr && app->itemManager->armorItems[i]->button->id == control->id)
 		{
-			app->itemManager->armorItems[i]->printStats = true;
+			if (app->itemManager->armorItems[i]->craft == false)
+			{
+				app->itemManager->armorItems[i]->printStats = true;
+			}
 		}
 	}
 
@@ -211,7 +275,6 @@ bool Forge::OnGuiMouseHoverEvent(GuiControl* control)
 
 bool Forge::OnGuiMouseOutHoverEvent(GuiControl* control)
 {
-
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 	{
 		if (app->itemManager->nodeList[i]->button != nullptr && app->itemManager->nodeList[i]->button->id == control->id)
@@ -232,11 +295,123 @@ bool Forge::OnGuiMouseOutHoverEvent(GuiControl* control)
 
 bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 {
+
+		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+		{
+			if (app->itemManager->nodeList[i]->ID == control->id)
+			{
+				app->itemManager->nodeList[i]->craft = !app->itemManager->nodeList[i]->craft;
+				if (app->itemManager->nodeList[i]->craft && forgePos == 0)
+				{
+					app->itemManager->nodeList[i]->forgePos = 1;
+					forgePos = 1;
+				}
+				else if (app->itemManager->nodeList[i]->craft && forgePos == 1)
+				{
+					app->itemManager->nodeList[i]->forgePos = 2;
+					forgePos = 2;
+				}
+				//else if (forgePos == 2 && app->itemManager->nodeList[i]->forgePos==0)
+				//{
+				//	app->itemManager->nodeList[i]->craft = false;
+				//}
+				else if (app->itemManager->nodeList[i]->craft == false)
+				{
+					if (app->itemManager->nodeList[i]->forgePos == 1)
+					{
+						app->itemManager->nodeList[i]->forgePos == 0;
+						forgePos = 0;
+					}
+					else
+					{
+						app->itemManager->nodeList[i]->forgePos == 0;
+						forgePos = 1;
+					}
+				}
+			}
+		}
+	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+	{
+		if (app->itemManager->armorItems[i]->ID == control->id)
+		{
+			app->itemManager->armorItems[i]->craft = !app->itemManager->armorItems[i]->craft;
+			if (app->itemManager->armorItems[i]->craft && forgePos == 0)
+			{
+				app->itemManager->armorItems[i]->forgePos = 1;
+				forgePos = 1;
+			}
+			else if (app->itemManager->armorItems[i]->craft && forgePos == 1)
+			{
+				app->itemManager->armorItems[i]->forgePos = 2;
+				forgePos = 2;
+			}
+			//else if (forgePos == 2 && app->itemManager->armorItems[i]->forgePos == 0)
+			//{
+			//	app->itemManager->armorItems[i]->craft = false;
+			//}
+			else if (app->itemManager->armorItems[i]->craft == false)
+			{
+				if (app->itemManager->armorItems[i]->forgePos == 1)
+				{
+					app->itemManager->armorItems[i]->forgePos == 0;
+					forgePos = 0;
+				}
+				else
+				{
+					app->itemManager->armorItems[i]->forgePos == 0;
+					forgePos = 1;
+				}
+			}
+		}
+	}
+
+	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+	{
+		if (app->itemManager->nodeList[i]->canCraft && app->itemManager->nodeList[i]->ID == control->id)
+		{
+			app->itemManager->nodeList[i]->forge = !app->itemManager->nodeList[i]->forge;
+		}
+	}
+
 	switch (control->id)
 	{
 
 	case 1501:
 		this->Disable();
+		break;
+	case 1502:
+		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+		{
+			if (app->itemManager->nodeList[i]->forge)
+			{
+				app->itemManager->nodeList[i]->forge = false;
+				app->itemManager->nodeList[i]->canCraft = false;
+				app->itemManager->AddQuantity(i, 1);
+				app->itemManager->nodeList[i]->CleanUp();
+				for (size_t j = 0; j < app->itemManager->nodeList.size(); j++)
+				{
+					if (app->itemManager->nodeList[j]->craft)
+					{
+						app->itemManager->nodeList[j]->craft = false;
+						app->itemManager->MinusQuantity(app->itemManager->nodeList[j]);
+					}
+					if (app->itemManager->nodeList[j]->canCraft)
+					{
+						app->itemManager->nodeList[j]->canCraft = false;
+						app->itemManager->nodeList[j]->CleanUp();
+					}
+				}
+				for (size_t j = 0; j < app->itemManager->armorItems.size(); j++)
+				{
+					if (app->itemManager->armorItems[j]->craft)
+					{
+						app->itemManager->armorItems[j]->craft = false;
+						app->itemManager->MinusQuantity(app->itemManager->armorItems[j]);
+					}
+				}
+			}
+		}
+		forgePos = 0;
 		break;
 	}
 	return true;

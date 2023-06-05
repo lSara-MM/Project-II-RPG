@@ -99,8 +99,8 @@ bool Inventory::Start()
 			if (app->itemManager->nodeList[i]->quantity > 0)
 			{
 				x++;
+				app->itemManager->nodeList[i]->page = page;
 			}
-			app->itemManager->nodeList[i]->page = page;
 		}
 	}
 
@@ -196,35 +196,12 @@ bool Inventory::PostUpdate()
 
 	if (!partyWindow_B)
 	{
-
-		for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+			
+		if (app->combat->active)
 		{
-			if (app->itemManager->armorItems[i]->page == app->itemManager->page || app->itemManager->armorItems[i]->equiped)
+			for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 			{
-				if (capx == x)
-				{
-					y += 75;
-					x = 0;
-				}
-				if (posXinventoryAnimation == 0)
-				{
-					app->itemManager->LoadQuantity(x, y, app->itemManager->armorItems[i]);
-				}
-				if (app->itemManager->armorItems[i]->equiped == false)
-				{
-					x++;
-				}
-			}
-			else
-			{
-				app->itemManager->armorItems[i]->CleanUp();
-			}
-		}
-		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
-		{
-			if (app->itemManager->nodeList[i]->type != 2 && app->itemManager->nodeList[i]->quantity > 0)
-			{
-				if (app->itemManager->armorItems[i]->page == app->itemManager->page)
+				if (app->itemManager->nodeList[i]->type != 2)
 				{
 					if (capx == x)
 					{
@@ -236,26 +213,65 @@ bool Inventory::PostUpdate()
 						app->itemManager->LoadQuantity(x, y, app->itemManager->nodeList[i]);
 
 					}
-					if (app->itemManager->nodeList[i]->equiped == false)
+					if (app->itemManager->nodeList[i]->quantity > 0)
 					{
-						if (app->itemManager->nodeList[i]->quantity > 0)
-						{
-							x++;
-						}
+						x++;
+					}
+				}
+			}
+		}
+		else
+		{
+			for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+			{
+				if (app->itemManager->armorItems[i]->page == app->itemManager->page || app->itemManager->armorItems[i]->equiped)
+				{
+					if (capx == x)
+					{
+						y += 75;
+						x = 0;
+					}
+					if (posXinventoryAnimation == 0)
+					{
+						app->itemManager->LoadQuantity(x, y, app->itemManager->armorItems[i]);
+					}
+					if (app->itemManager->armorItems[i]->equiped == false)
+					{
+						x++;
 					}
 				}
 				else
 				{
-					app->itemManager->nodeList[i]->CleanUp();
+					app->itemManager->armorItems[i]->CleanUp();
 				}
 			}
-		}
-			
-		if (app->combat->active)
-		{
-		}
-		else
-		{
+			for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+			{
+				if (app->itemManager->nodeList[i]->type != 2 && app->itemManager->nodeList[i]->quantity > 0)
+				{
+					if (app->itemManager->nodeList[i]->page == app->itemManager->page)
+					{
+						if (capx == x)
+						{
+							y += 70;
+							x = 0;
+						}
+						if (posXinventoryAnimation == 0)//printar items cuando acabe animacion
+						{
+							app->itemManager->LoadQuantity(x, y, app->itemManager->nodeList[i]);
+
+						}
+						if (app->itemManager->nodeList[i]->equiped == false)
+						{
+							x++;
+						}
+					}
+					else
+					{
+						app->itemManager->nodeList[i]->CleanUp();
+					}
+				}
+			}
 			//LOAD STATS
 			if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
 			{

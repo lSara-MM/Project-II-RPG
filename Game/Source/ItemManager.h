@@ -59,9 +59,17 @@ public:
 	int ID = 0;
 
 	bool equiped = false;
+	//If it is an item to forge is true
 	bool craft = false;
+	//If it is ready to confirm forge it is true
 	bool forge = false;
+	//It is a crafteable item
+	bool canCraft = false;
+
 	bool toSell = false;
+
+	//Forge position
+	int forgePos = 0;
 
 	int page = 0;
 
@@ -120,11 +128,14 @@ public:
 	void LoadStoreButtons(int x, int y, ItemNode* item);
 
 	//Forge
+	//Load All Your Items
 	void LoadForgeItems(int x, int y, ItemNode* item);
 	void LoadForgeButtons(int x, int y, ItemNode* item);
-	void LoadCraftItems(int ID0, int ID1);
-	void LoadCraftButtons(int x, int y, ItemNode* item);
-	void SetItemToForge(ItemNode* item);
+	//Load All The Possible Crafts
+	void LoadCraftItems(int ID0, int ID1, bool armor);
+	void LoadCraftButtons(int x, ItemNode* item);
+	//Improve a piece of armor
+	void ArmorForge(ItemNode* item);
 
 public:
 

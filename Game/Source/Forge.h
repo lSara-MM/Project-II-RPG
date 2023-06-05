@@ -37,6 +37,7 @@ public:
 public:
 	unsigned cap;
 	int y;
+	int forgePos = 0;
 
 	GuiButton* forgeButton;
 	GuiButton* exitButton;
@@ -49,7 +50,8 @@ public:
 	bool forgeTransition_B;//controlar animacion tienda
 	int posYforgeAnimation;//hacer animacion salida tienda
 
-private:
+public:
+	pugi::xml_document crafts;
 
 };
 

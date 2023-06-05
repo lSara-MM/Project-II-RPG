@@ -340,7 +340,7 @@ type 2
 	<item id="104" quantity="0" name="Diamond" type="3" kind="1" x="7" y="11" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="600" max="100" whom="0" 
 		  >
 	</item>
-	<item id="105" quantity="0" name="Jade" type="3" kind="1" x="7" y="12" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="350" max="100" whom="0" 
+	<item id="105" quantity="0" name="Jade" type="3" kind="1" x="7" y="12" hp="0" maxHp="0" attack="999" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="350" max="100" whom="0" 
 		  >
 	</item>
 	<item id="106" quantity="0" name="Amethyst" type="3" kind="1" x="7" y="13" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="250" max="100" whom="0" 

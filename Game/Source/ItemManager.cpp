@@ -106,9 +106,15 @@ bool ItemManager::PostUpdate()
 				}
 				else
 				{
-					x = (680 + 70 * app->itemManager->nodeList[i]->x) + 70;
+					x = (170 + 85 * app->itemManager->nodeList[i]->x) + 70;
 					y = app->itemManager->nodeList[i]->y - 32;
 				}
+			}
+
+			if (app->itemManager->nodeList[i]->canCraft)
+			{
+				x = (170 + 80 * app->itemManager->nodeList[i]->x) + 70;
+				y = 300 - 32;
 			}
 
 			int w = app->itemManager->nodeList[i]->name.Length() * 3 + 80;
@@ -285,6 +291,7 @@ void ItemManager::AddQuantity(int id, int quantity)
 			}
 		}
 	}
+	LoadArmorItmes();
 }
 
 void ItemManager::MinusQuantity(ItemNode* item)
@@ -306,17 +313,34 @@ void ItemManager::MinusQuantity(ItemNode* item)
 	}
 	else
 	{
-		if (item->quantity > 0)
+		if (app->forge->active)
 		{
-			if (item->type == 2)
+			if (item->quantity > 0)
 			{
-				item->equiped = !item->equiped;
+				if (item->type == 2)
+				{
+					ArmorForge(item);
+				}
+				else if (item->type == 3)
+				{
+					item->quantity--;
+				}
 			}
-			else if (item->type == 4 || (item->type == 3 && app->store->active))
+		}
+		else
+		{
+			if (item->quantity > 0)
 			{
-				item->quantity--;
+				if (item->type == 2)
+				{
+					item->equiped = !item->equiped;
+				}
+				else if (item->type == 4 || (item->type == 3 && app->store->active))
+				{
+					item->quantity--;
+				}
+				UseItem(item);
 			}
-			UseItem(item);
 		}
 	}
 }
@@ -465,15 +489,47 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 	LoadArmorItmes();
 }
 
+void ItemManager::ArmorForge(ItemNode* item)
+{
+	int ID = 0;
+	for (int i = 0; i < armorItems.size(); i++)
+	{
+		if (strcmp(armorItems[i]->name.GetString(), item->name.GetString()) == 0)
+		{
+			ID = i;
+		}
+	}
+	for (int i = 0; i < nodeList.size(); i++)
+	{
+		if (nodeList[i]->craft)
+		{
+			armorItems[ID]->hp += nodeList[i]->hp;
+			armorItems[ID]->maxhp += nodeList[i]->maxhp;
+			armorItems[ID]->attack += nodeList[i]->attack;
+			armorItems[ID]->critRate += nodeList[i]->critRate;
+			armorItems[ID]->critDamage += nodeList[i]->critDamage;
+			armorItems[ID]->accuracy += nodeList[i]->accuracy;
+			armorItems[ID]->armor += nodeList[i]->armor;
+			armorItems[ID]->dodge += nodeList[i]->dodge;
+			armorItems[ID]->res += nodeList[i]->res;
+			armorItems[ID]->speed += nodeList[i]->speed;
+		}
+	}
+}
+
 void ItemManager::LoadArmorItmes()
 {
+	for (int i = 0; i < armorItems.size(); i++)
+	{
+		armorItems[i]->CleanUp();
+	}
 	armorItems.clear();
 
 	for (int i = 0; i < nodeList.size(); i++)
 	{
 		if (nodeList[i]->type == 2)
 		{
-			for(int j=0; j<nodeList[i]->quantity; j++)
+			for(int j = 0; j < nodeList[i]->quantity; j++)
 			{ 
 				ItemNode* node = new ItemNode;
 				node->ID = nodeList[i]->ID;
@@ -646,7 +702,7 @@ void ItemManager::ItemToSell(ItemNode* item)
 
 void ItemManager::LoadForgeItems(int x, int y, ItemNode* item)
 {
-	if (item->toSell == false)
+	if (item->craft == false)
 	{
 		SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
 
@@ -657,14 +713,150 @@ void ItemManager::LoadForgeItems(int x, int y, ItemNode* item)
 
 		app->render->DrawTexture(itemsTexture, (800 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
 	}
+	else
+	{
+		SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
 
+		LoadForgeButtons(x, y, item);
+		
+		if (item->forgePos == 1)
+		{
+			app->render->DrawTexture(itemsTexture, (380) - app->render->camera.x, 220 - app->render->camera.y, &seccion);
+		}
+		else
+		{
+			app->render->DrawTexture(itemsTexture, (230) - app->render->camera.x, 220 - app->render->camera.y, &seccion);
+		}
+	}
+
+}
+
+void ItemManager::LoadCraftItems(int ID0, int ID1, bool armor)
+{
+	int x = 0;
+	
+	if (armor)
+	{
+		int ID = 0;
+		for (size_t i = 0; i < armorItems.size(); i++)
+		{
+			if (armorItems[i]->ID == ID1)
+			{
+				ID = i;
+			}
+		}
+		for (size_t i = 0; i < nodeList.size(); i++)
+		{
+			if (strcmp(nodeList[i]->name.GetString(), armorItems[ID]->name.GetString()) == 0)
+			{
+				SDL_Rect seccion = { 64 * nodeList[i]->position.x, 64 * nodeList[i]->position.y, 64, 64 };
+
+				LoadCraftButtons(x, nodeList[i]);
+
+				nodeList[i]->x = x;
+
+				nodeList[i]->canCraft = true;
+
+				if (nodeList[i]->forge)
+				{
+					app->render->DrawTexture(itemsTexture, 180 - app->render->camera.x, 400 - app->render->camera.y, &seccion);
+				}
+				else
+				{
+					app->render->DrawTexture(itemsTexture, (170 + (85 * x)) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
+				}
+			}
+		}
+	}
+	else
+	{
+		for (pugi::xml_node pugiNode = app->forge->crafts.first_child().first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("craft"))
+		{
+			for (size_t i = 0; i < nodeList.size(); i++)
+			{
+				if (nodeList[i]->quantity > 0)
+				{
+					if (ID0 == pugiNode.attribute("item1").as_int() && ID1 == pugiNode.attribute("item2").as_int() || ID0 == pugiNode.attribute("item2").as_int() && ID1 == pugiNode.attribute("item1").as_int())
+					{
+						for (pugi::xml_attribute attribute = pugiNode.first_attribute(); attribute != NULL; attribute = attribute.next_attribute())
+						{
+							if (strcmp(attribute.name(), "id") == 0)
+							{
+								SDL_Rect seccion = { 64 * nodeList[attribute.as_int()]->position.x, 64 * nodeList[attribute.as_int()]->position.y, 64, 64 };
+
+								LoadCraftButtons(x, nodeList[attribute.as_int()]);
+
+								nodeList[attribute.as_int()]->x = x;
+
+								nodeList[attribute.as_int()]->canCraft = true;
+
+								if (nodeList[attribute.as_int()]->forge)
+								{
+									app->render->DrawTexture(itemsTexture, 180 - app->render->camera.x, 400 - app->render->camera.y, &seccion);
+								}
+								else
+								{
+									app->render->DrawTexture(itemsTexture, (170 + (85 * x)) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
+								}
+								x++;
+							}
+						}
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+void ItemManager::LoadCraftButtons(int x, ItemNode* item)
+{
+	SDL_Rect buttonBounds;
+
+	if (item->forge == false)
+	{
+		buttonBounds = { (170 + (85 * x)), 300 , 64, 64 };
+	}
+	else
+	{
+		buttonBounds = { 180 , 400 , 64, 64 };
+	}
+
+	if (item->button != nullptr)
+	{
+	}
+	else
+	{
+		item->Start();
+	}
+
+	if (item->button != nullptr)
+	{
+		item->button->bounds = buttonBounds;
+		item->button->id = item->ID;
+		item->button->observer = app->forge;
+	}
 }
 
 void ItemManager::LoadForgeButtons(int x, int y, ItemNode* item)
 {
 	SDL_Rect buttonBounds;
 
-	buttonBounds = { (800 + (69 * x)), 200 + y, 64, 64 };
+	if (item->craft == false)
+	{
+		buttonBounds = { (800 + (69 * x)), 200 + y, 64, 64 };
+	}
+	else
+	{
+		if (item->forgePos == 1)
+		{
+			buttonBounds = { (380), 220, 64, 64 };
+		}
+		else
+		{
+			buttonBounds = { (230), 220, 64, 64 };
+
+		}
+	}
 
 	if (item->button != nullptr)
 	{
@@ -822,6 +1014,17 @@ bool ItemManager::SaveItemState()
 		armor.append_attribute("equiped") = armorItems[i]->equiped;
 		armor.append_attribute("space") = armorItems[i]->space;
 		armor.append_attribute("whom") = armorItems[i]->whom;
+
+		armor.append_attribute("hp") = armorItems[i]->hp;
+		armor.append_attribute("maxhp") = armorItems[i]->maxhp;
+		armor.append_attribute("attack") = armorItems[i]->attack;
+		armor.append_attribute("critRate") = armorItems[i]->critRate;
+		armor.append_attribute("critDamage") = armorItems[i]->critDamage;
+		armor.append_attribute("accuracy") = armorItems[i]->accuracy;
+		armor.append_attribute("armor") = armorItems[i]->armor;
+		armor.append_attribute("dodge") = armorItems[i]->dodge;
+		armor.append_attribute("res") = armorItems[i]->res;
+		armor.append_attribute("speed") = armorItems[i]->speed;
 	}
 
 	ret = saveDoc->save_file("save_items.xml");
@@ -867,6 +1070,17 @@ bool ItemManager::LoadArmorState()
 				armorItems[i]->equiped = pugiNode.attribute("equiped").as_bool();
 				armorItems[i]->space = pugiNode.attribute("space").as_int();
 				armorItems[i]->whom = pugiNode.attribute("whom").as_int();
+				armorItems[i]->hp = pugiNode.attribute("hp").as_int();
+				armorItems[i]->maxhp = pugiNode.attribute("maxhp").as_int();
+				armorItems[i]->attack = pugiNode.attribute("attack").as_int();
+				armorItems[i]->critRate = pugiNode.attribute("critRate").as_int();
+				armorItems[i]->critDamage = pugiNode.attribute("critDamage").as_int();
+				armorItems[i]->accuracy = pugiNode.attribute("accuracy").as_int();
+				armorItems[i]->armor = pugiNode.attribute("armor").as_int();
+				armorItems[i]->dodge = pugiNode.attribute("dodge").as_int();
+				armorItems[i]->res = pugiNode.attribute("res").as_int();
+				armorItems[i]->speed = pugiNode.attribute("speed").as_int();
+
 				if (armorItems[i]->equiped)
 				{
 					UseItem(armorItems[i]);
