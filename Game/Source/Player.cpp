@@ -634,7 +634,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 			}
 			if (app->BeastT->active == true)
 			{
-				app->entityManager->tpID = 0;
+				app->entityManager->tpID = 22;
 				app->fade->FadingToBlack((Module*)app->BeastT, (Module*)app->scene, fadeTime);
 			}
 			break;

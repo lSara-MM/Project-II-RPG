@@ -66,12 +66,16 @@ void Particle::update()
 
 void Particle::render()
 {
+}
+
+void Particle::render()
+{
     // Render the particle using our draw function (e.g., drawCircle or drawQuad)
     // with the current position (x, y), size (PARTICLE_SIZE), and color (r, g, b).
     // The fading effect can be achieved by adjusting the alpha value based on the age and FADE_DELAY.
     int alpha = 255 - (age * 255) / FADE_DELAY;
-    app->render->DrawCircle(1, 1, 1, 255, 255, 255);
-    // drawCircle(x, y, PARTICLE_SIZE, r, g, b, alpha);
+    /*app->render->DrawCircle(x, y1, r1, 255, 255, 255);*/
+    app->render->DrawCircle(x, y, PARTICLE_SIZE, r, g, b, alpha);
     // or
     // drawQuad(x, y, PARTICLE_SIZE, PARTICLE_SIZE, r, g, b, alpha);
 }
