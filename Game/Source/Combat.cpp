@@ -810,7 +810,7 @@ void Combat::MoveCharacter(Character* chara, int movement_I)
 	{ 
 		newPos = 0;
 	}
-	if (newPos > arr->size())
+	if (newPos >= arr->size())
 	{ 
 		newPos = arr->size()-1;
 	}

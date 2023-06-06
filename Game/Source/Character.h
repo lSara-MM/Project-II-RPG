@@ -74,7 +74,7 @@ enum class CharacterType
 
 enum class CharacterClass
 {
-	MELEE_DPS,
+	MELEE_DPS=0,
 	RANGED_DPS,
 	ASSASSIN,
 	AOE_DPS,

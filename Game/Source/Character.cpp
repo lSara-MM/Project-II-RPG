@@ -307,7 +307,7 @@ bool Character::Update(float dt)
 								//Si esta en mala posicion aka no poder usar 0 y 3 pues usar reposicion 
 								if (!listSkills.At(3)->data->PosCanBeUsed(positionCombat_I) && !listSkills.At(0)->data->PosCanBeUsed(positionCombat_I))
 								{
-									if (listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))
+									if (listSkills.At(1)->data->PosCanBeUsed(positionCombat_I))
 									{
 										//usar skill 2(1) (buff+reposition)
 										UseSkill(listSkills.At(1)->data);
@@ -395,13 +395,6 @@ bool Character::Update(float dt)
 									{
 										probSkill = 0;
 
-									}
-									else if (listSkillsHistory.Count()>=2)
-									{
-										if (listSkillsHistory.end->prev->data == 2)
-										{
-											probSkill = 0;
-										}
 									}
 									else
 									{
@@ -531,11 +524,11 @@ bool Character::Update(float dt)
 								probSkill = 0;
 								for (int i = 0; i < app->combat->vecEnemies.size(); i++)
 								{
-									if (app->combat->vecEnemies.at(i)->currentHp == app->combat->vecEnemies.at(i)->maxHp / 4) //Muy mal de vida
+									if (app->combat->vecEnemies.at(i)->currentHp <= app->combat->vecEnemies.at(i)->maxHp / 4) //Muy mal de vida
 									{
 										probSkill = 100; //Si un aliado esta muy herido es "garantizado" que intente usar la cura unitaria
 									}
-									else if (app->combat->vecEnemies.at(i)->currentHp == app->combat->vecEnemies.at(i)->maxHp / 2 && probSkill==0) //Algo mal de vida
+									else if (app->combat->vecEnemies.at(i)->currentHp <= app->combat->vecEnemies.at(i)->maxHp / 2 && probSkill==0) //Algo mal de vida
 									{
 										probSkill = 40;
 									}

@@ -60,7 +60,7 @@ Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUs
 bool Skill::PosCanBeUsed(int positionCharacter)
 {
 	//True si dentro del rango, false si no
-	return (positionCharacter >= posToTargetStart_I && positionCharacter <= posToTargetEnd_I);
+	return (positionCharacter >= posToUseStart_I && positionCharacter <= posToUseEnd_I);
 }
 
 //Retorna ultima posicion usable
