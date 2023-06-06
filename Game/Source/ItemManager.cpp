@@ -234,7 +234,17 @@ bool ItemManager::CleanUp()
 	nodeList.clear();
 	armorItems.clear();
 
+	// party
 	PartyToNull();
+
+	for (int i = 0; i < vecPC.size(); i++)
+	{
+		if (vecPC.at(i) != nullptr)
+		{
+			app->entityManager->DestroyEntity(vecPC.at(i));
+			vecPC.at(i) = nullptr;
+		}
+	}
 	vecPC.clear();
 	vecPC.shrink_to_fit();
 

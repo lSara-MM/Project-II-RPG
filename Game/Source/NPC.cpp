@@ -35,7 +35,7 @@ Npc::Npc() : Entity(EntityType::NPC)
 }
 
 Npc::~Npc() {
-
+	CleanUp();
 }
 
 bool Npc::Awake() {
@@ -118,6 +118,8 @@ bool Npc::CleanUp()
 	if(pSensor != nullptr)
 		pSensor->body->GetWorld()->DestroyBody(pSensor->body);
 	
+	dialoguesID.clear();
+	dialoguesID.shrink_to_fit();
 	return true;
 }
 

@@ -72,7 +72,7 @@ bool Combat::Start()
 	//LoadCombat();
 
 	//Music combat
-	app->audio->PlayMusic(musCombat, 1.0);
+	app->audio->PlayMusic(musCombat, 1.0f);
 
 	//Cargar texturas
 	textureBackground = app->tex->Load(texturePathBackground);
@@ -370,6 +370,7 @@ bool Combat::PostUpdate()
 // Called before quitting
 bool Combat::CleanUp()
 {
+	app->itemManager->Disable();
 	app->itemManager->Enable();
 
 	LOG("Freeing scene");
@@ -592,7 +593,7 @@ bool Combat::InitEnemies(vector<int> arr)
 
 bool Combat::InitAllies(array<Character*, 4> party)
 {
-	 LoadCombat();
+	LoadCombat();
 
 	Character* chara;
 	for (int i = 0; i < party.size(); i++)

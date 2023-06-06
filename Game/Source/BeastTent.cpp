@@ -259,8 +259,10 @@ bool BeastTent::CleanUp()
 	app->SaveToFile();
 
 	app->itemManager->Disable();
-	app->entityManager->Disable();
 	app->inventory->Disable();
+
+	app->entityManager->Disable();
+	player = nullptr;
 
 	//CleanUp chests
 	for (int i = 0; i < app->lootManager->chests.size(); i++)
@@ -270,9 +272,6 @@ bool BeastTent::CleanUp()
 			app->lootManager->chests[i]->CleanUp();
 		}
 	}
-
-	delete player;
-	player = nullptr;
 
 	if (pSettings != nullptr)
 	{
@@ -346,7 +345,7 @@ void BeastTent::Debug()
 	{
 		pause_B = true;
 		app->audio->PlayFx(pausefx);
-		app->audio->PlayMusic(pause_music);
+		app->audio->PlayMusic(pause_music, 1.0f);
 		if (pause_B)
 		{
 			/*pPause = new Pause(this);
@@ -379,7 +378,7 @@ void BeastTent::Debug()
 		else
 		{
 			pause_B = false;
-			app->audio->PlayMusic(musBeastPath);
+			app->audio->PlayMusic(musBeastPath, 1.0f);
 			if (pause_B)
 			{
 			/*	pPause = new Pause(this);*/
@@ -442,14 +441,14 @@ bool BeastTent::OnGuiMouseClickEvent(GuiControl* control)
 	case 701:
 		LOG("Button Close pause click");
 		pause_B = false;
-		app->audio->PlayMusic(musBeastPath);
+		app->audio->PlayMusic(musBeastPath, 1.0f);
 		//pPause->CleanUp();
 		break;
 
 	case 702:
 		LOG("Button Resume click");
 		pause_B = false;
-		app->audio->PlayMusic(musBeastPath);
+		app->audio->PlayMusic(musBeastPath, 1.0f);
 		//pPause->CleanUp();
 		break;
 

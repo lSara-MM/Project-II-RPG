@@ -236,9 +236,13 @@ bool Player::Update(float dt)
 				{
 					//Setear poco a poco
 					if (app->render->camera.y > -position.y + 350 - height)
-					{ app->render->camera.y -= 4; }
+					{
+						app->render->camera.y -= 4;
+					}
 					else if (app->render->camera.y < -position.y + 370 - height)
-					{ app->render->camera.y += 4; }
+					{
+						app->render->camera.y += 4;
+					}
 					else { app->render->camera.y = -position.y + 365 - height; }
 				}
 				else if (position.y > 4240) //Borde de abajo (dungeon horrores)
@@ -291,151 +295,150 @@ bool Player::Update(float dt)
 	}
 
 
-		vel = b2Vec2(vel.x * dtP, vel.y * dtP);
-		//Set the velocity of the pbody of the player
-		pbody->body->SetLinearVelocity(vel);
+	vel = b2Vec2(vel.x * dtP, vel.y * dtP);
+	//Set the velocity of the pbody of the player
+	pbody->body->SetLinearVelocity(vel);
 
-		//Update player position in pixels
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2;
+	//Update player position in pixels
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2;
 
-		currentAnimation->Update();
+	currentAnimation->Update();
 
-		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		app->render->DrawTexture(texture, position.x - width * 2, position.y - height * 2, &rect, 1.0f, NULL, NULL, NULL, flipType);
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	app->render->DrawTexture(texture, position.x - width * 2, position.y - height * 2, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
-		/*MiniMapa*/
-		posMiniMap.x = -app->render->camera.x + app->render->camera.w / 2 - widthMap / 2;
-		posMiniMap.y = -app->render->camera.y + app->render->camera.h / 2 - heightMap / 2;
+	/*MiniMapa*/
+	posMiniMap.x = -app->render->camera.x + app->render->camera.w / 2 - widthMap / 2;
+	posMiniMap.y = -app->render->camera.y + app->render->camera.h / 2 - heightMap / 2;
 
-		posMiniPlayer.x = posMiniMap.x + position.x / 10;
-		posMiniPlayer.y = posMiniMap.y + position.y / 10;
+	posMiniPlayer.x = posMiniMap.x + position.x / 10;
+	posMiniPlayer.y = posMiniMap.y + position.y / 10;
 
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_X) == ButtonState::BUTTON_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_X) == ButtonState::BUTTON_DOWN)
+	{
+		MiniMap();
+	}
+
+	/*if (OpenMap)
+	{*/
+	if (transitionMap_B)
+	{
+		mapAnimation.Backward();
+	}
+	else
+	{
+		mapAnimation.Foward();
+	}
+	mapAnimation.Step(1, false);
+
+	float point = mapAnimation.GetPoint();
+	int offset = -1300;
+	app->render->DrawTexture(miniMap, posMiniMap.x, offset + point * (posMiniMap.y - offset));
+
+	if (app->scene->active)
+	{
+		//2659 4907
+		app->render->DrawTexture(dotPlayer, posMiniPlayer.x - 23, offset + point * (posMiniPlayer.y - 30 - offset));
+	}
+	if (app->hTerrors->active)
+	{
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10, offset + point * (posMiniMap.y + 4507 / 10 - offset));
+	}
+	if (app->practiceTent->active)
+	{
+		//4360 4385
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10, offset + point * (posMiniMap.y + 3585 / 10 - offset));
+	}
+	if (app->circus->active)
+	{
+		//3899 1027
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10, offset + point * (posMiniMap.y + 350 / 10 - offset));
+	}
+
+	//}
+	/*MiniMapa*/
+
+	if (npcInteract)
+	{
+		app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
+
+		if (interactionTest == false)
 		{
-			MiniMap();
-		}
-
-		/*if (OpenMap)
-		{*/
-			if (transitionMap_B)
-			{
-				mapAnimation.Backward();
-			}
-			else
-			{
-				mapAnimation.Foward();
-			}
-			mapAnimation.Step(1, false);
-
-			float point = mapAnimation.GetPoint();
-			int offset = -1300;
-			app->render->DrawTexture(miniMap, posMiniMap.x, offset + point * (posMiniMap.y - offset));
-
-				if (app->scene->active)
-				{
-					//2659 4907
-					app->render->DrawTexture(dotPlayer, posMiniPlayer.x - 23, offset + point * (posMiniPlayer.y - 30 - offset));
-				}
-				if (app->hTerrors->active)
-				{
-					app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10, offset + point * (posMiniMap.y + 4507 / 10 - offset));
-				}
-				if (app->practiceTent->active)
-				{
-					//4360 4385
-					app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10, offset + point * (posMiniMap.y + 3585 / 10 - offset));
-				}
-				if (app->circus->active)
-				{
-					//3899 1027
-					app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10, offset + point * (posMiniMap.y + 350 / 10 - offset));
-				}
-			
-		//}
-		/*MiniMapa*/
-
-		if (npcInteract)
-		{
-			app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
-
-			if (interactionTest == false)
-			{
-				app->audio->PlayFx(interactionfx);
-				interactionTest = true;
-			}
-
-			if (!lockMovement)
-			{
-				if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
-				{
-					app->audio->PlayFx(confirmInteractfx);
-					app->dialogueSystem->hasEnded = false;
-					lockMovement = true;
-					pauseEnabled_B = false;
-					app->dialogueSystem->Enable();
-					app->dialogueSystem->PerformDialogue(npcTalkingTo->dialoguesID);
-					
-					if (keyLockUp)
-					{
-						keyLockUp = false;
-						currentAnimation = &idleUpAnim;
-					}
-
-					if (keyLockDown)
-					{
-						keyLockDown = false;
-						currentAnimation = &idleDownAnim;
-					}
-
-					if (keyLockLeft)
-					{
-						keyLockLeft = false;
-						currentAnimation = &idleLeftAnim;
-					}
-
-					if (keyLockRigth)
-					{
-						keyLockRigth = false;
-						currentAnimation = &idleRigthAnim;
-					}
-				}
-			}
-
-			if (app->dialogueSystem->hasEnded && !app->store->active) 
-			{
-				lockMovement = false; 
-				pauseEnabled_B = true;
-				app->dialogueSystem->Disable();
-			}
-
-		}
-
-		if (Chest_contact)
-		{
-			app->render->DrawTexture(textureE, app->lootManager->chests[Chest_ID]->x + 40, app->lootManager->chests[Chest_ID]->y - 20);
-
-			if (interactionTest == false)
-			{
-				app->audio->PlayFx(interactionfx);
-				interactionTest = true;
-			}
-
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
-			{
-				Chest_contact = false;
-				interactionTest = false;
-				app->lootManager->chests[Chest_ID]->UseChest();
-				app->audio->PlayFx(chestfx);
-			}
+			app->audio->PlayFx(interactionfx);
+			interactionTest = true;
 		}
 
 		if (!lockMovement)
 		{
-			Controller(dtP);
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+			{
+				app->audio->PlayFx(confirmInteractfx);
+				app->dialogueSystem->hasEnded = false;
+				lockMovement = true;
+				pauseEnabled_B = false;
+				app->dialogueSystem->Enable();
+				app->dialogueSystem->PerformDialogue(npcTalkingTo->dialoguesID);
+
+				if (keyLockUp)
+				{
+					keyLockUp = false;
+					currentAnimation = &idleUpAnim;
+				}
+
+				if (keyLockDown)
+				{
+					keyLockDown = false;
+					currentAnimation = &idleDownAnim;
+				}
+
+				if (keyLockLeft)
+				{
+					keyLockLeft = false;
+					currentAnimation = &idleLeftAnim;
+				}
+
+				if (keyLockRigth)
+				{
+					keyLockRigth = false;
+					currentAnimation = &idleRigthAnim;
+				}
+			}
 		}
 
-		return true;
+		if (app->dialogueSystem->hasEnded && !app->store->active)
+		{
+			lockMovement = false;
+			pauseEnabled_B = true;
+			app->dialogueSystem->Disable();
+		}
+	}
+
+	if (Chest_contact)
+	{
+		app->render->DrawTexture(textureE, app->lootManager->chests[Chest_ID]->x + 40, app->lootManager->chests[Chest_ID]->y - 20);
+
+		if (interactionTest == false)
+		{
+			app->audio->PlayFx(interactionfx);
+			interactionTest = true;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+		{
+			Chest_contact = false;
+			interactionTest = false;
+			app->lootManager->chests[Chest_ID]->UseChest();
+			app->audio->PlayFx(chestfx);
+		}
+	}
+
+	if (!lockMovement)
+	{
+		Controller(dtP);
+	}
+
+	return true;
 }
 
 
@@ -782,7 +785,6 @@ void Player::Controller(float dt)
 
 	if (app->input->godMode_B) //Movimiento libre de GOD MODE
 	{
-
 		if (!keyLockDown && !keyLockLeft && !keyLockRigth)
 		{
 			if (PadLock == false && keyLockUp)

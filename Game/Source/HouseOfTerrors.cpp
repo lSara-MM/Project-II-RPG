@@ -258,8 +258,11 @@ bool HouseOfTerrors::CleanUp()
 	app->SaveToFile();
 
 	app->itemManager->Disable();
-	app->entityManager->Disable();
 	app->inventory->Disable();
+
+	player = nullptr;
+	app->entityManager->Disable();
+
 
 	//CleanUp chests
 	for (int i = 0; i < app->lootManager->chests.size(); i++)
@@ -269,9 +272,6 @@ bool HouseOfTerrors::CleanUp()
 			app->lootManager->chests[i]->CleanUp();
 		}
 	}
-
-	delete player;
-	player = nullptr;
 
 	if (pSettings != nullptr)
 	{
@@ -345,7 +345,7 @@ void HouseOfTerrors::Debug()
 	{
 		pause_B = true;
 		app->audio->PlayFx(pausefx);
-		app->audio->PlayMusic(pause_music);
+		app->audio->PlayMusic(pause_music, 1.0f);
 		if (pause_B)
 		{
 			/*pPause = new Pause(this);
@@ -378,7 +378,7 @@ void HouseOfTerrors::Debug()
 		else
 		{
 			pause_B = false;
-			app->audio->PlayMusic(musHauntedPath);
+			app->audio->PlayMusic(musHauntedPath, 1.0f);
 			if (pause_B)
 			{
 			/*	pPause = new Pause(this);*/
@@ -442,14 +442,14 @@ bool HouseOfTerrors::OnGuiMouseClickEvent(GuiControl* control)
 	case 701:
 		LOG("Button Close pause click");
 		pause_B = false;
-		app->audio->PlayMusic(musHauntedPath);
+		app->audio->PlayMusic(musHauntedPath, 1.0f);
 		//pPause->CleanUp();
 		break;
 
 	case 702:
 		LOG("Button Resume click");
 		pause_B = false;
-		app->audio->PlayMusic(musHauntedPath);
+		app->audio->PlayMusic(musHauntedPath, 1.0f);
 		//pPause->CleanUp();
 		break;
 
