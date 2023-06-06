@@ -277,10 +277,9 @@ bool PracticeTent::CleanUp()
 	DummySensor = false;
 
 	app->itemManager->Disable();
-	app->entityManager->Disable();
 	app->inventory->Disable();
 
-	delete player;
+	app->entityManager->Disable();
 	player = nullptr;
 
 	if (pSettings != nullptr)

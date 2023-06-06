@@ -254,18 +254,15 @@ bool Scene::CleanUp()
 
 	app->SaveToFile();
 
-	app->entityManager->Disable();
 	if (app->itemManager->active)
 	{
 		app->itemManager->Disable();
 	}
 	app->inventory->Disable();
 
-	
-	delete player;
 	player = nullptr;
-
 	listNpc.Clear();
+	app->entityManager->Disable();
 
 	if (pSettings != nullptr)
 	{
