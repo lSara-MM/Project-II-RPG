@@ -391,9 +391,17 @@ bool Character::Update(float dt)
 								else //No kill mode
 								{
 									//Usar preparation
-									if (listSkillsHistory.end->data == 2 || listSkillsHistory.end->prev->data == 2)
+									if (listSkillsHistory.end->data == 2 )
 									{
 										probSkill = 0;
+
+									}
+									else if (listSkillsHistory.Count()>=2)
+									{
+										if (listSkillsHistory.end->prev->data == 2)
+										{
+											probSkill = 0;
+										}
 									}
 									else
 									{
@@ -1184,6 +1192,7 @@ bool Character::UseSkill(Skill* skill)
 	{
 		ModifyHP(ApplySkill(this, this, skill)); //Lanzarsela a si mismo
 		app->audio->PlayFx(healfx);
+		app->combat->MoveCharacter(this,skill->movementCaster);
 		return true;
 	}
 

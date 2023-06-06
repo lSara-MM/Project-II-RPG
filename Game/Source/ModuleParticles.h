@@ -56,50 +56,50 @@ public:
 	Particle explosionG;
 
 	//Template particle for a laser
-	Particle laser;
+	//Particle laser;
 
-	//Template particles for a normal bullet
-	Particle bulletN;
-	Particle bulletNE;
-	Particle bulletE;
-	Particle bulletSE;
-	Particle bulletS;
-	Particle bulletSW;
-	Particle bulletW;
-	Particle bulletNW;
+	////Template particles for a normal bullet
+	//Particle bulletN;
+	//Particle bulletNE;
+	//Particle bulletE;
+	//Particle bulletSE;
+	//Particle bulletS;
+	//Particle bulletSW;
+	//Particle bulletW;
+	//Particle bulletNW;
 
-	Particle TbulletN;
-	Particle TbulletNE;
-	Particle TbulletE;
-	Particle TbulletSE;
-	Particle TbulletS;
-	Particle TbulletSW;
-	Particle TbulletW;
-	Particle TbulletNW;
+	//Particle TbulletN;
+	//Particle TbulletNE;
+	//Particle TbulletE;
+	//Particle TbulletSE;
+	//Particle TbulletS;
+	//Particle TbulletSW;
+	//Particle TbulletW;
+	//Particle TbulletNW;
 
-	Particle enemyBullet;
-	Particle enemyBulletL;
-	Particle enemyBulletR;
+	//Particle enemyBullet;
+	//Particle enemyBulletL;
+	//Particle enemyBulletR;
 
-	Particle deathAnim;
-	Particle rescuedAnim;
-	Particle deathredAnim;
-	Particle deathgreenAnim;
+	//Particle deathAnim;
+	//Particle rescuedAnim;
+	//Particle deathredAnim;
+	//Particle deathgreenAnim;
 
-	Particle BulletBoss;
-	Particle BulletBossR;
-	Particle BulletBossL;
+	//Particle BulletBoss;
+	//Particle BulletBossR;
+	//Particle BulletBossL;
 
-	Particle granadeN;
-	Particle granadeNE;
-	Particle granadeE;
-	Particle granadeSE;
-	Particle granadeS;
-	Particle granadeSW;
-	Particle granadeW;
-	Particle granadeNW;
+	//Particle granadeN;
+	//Particle granadeNE;
+	//Particle granadeE;
+	//Particle granadeSE;
+	//Particle granadeS;
+	//Particle granadeSW;
+	//Particle granadeW;
+	//Particle granadeNW;
 
-	Particle playerdies;
+	//Particle playerdies;
 
 
 private:
