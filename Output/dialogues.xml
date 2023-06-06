@@ -116,8 +116,8 @@
 		<node id="0" name="ORACLE" text="If there is something you want to know, toss a coin to see what's wrong.">
 			<choice id="0" option="Toss a coin." nextNode="1" eventReturn="0"/>
 			<choice id="1" option="Why should I pay you?" nextNode="2" eventReturn="0"/>
-			<choice id="2" option="You ain't for help, right" nextNode="3" eventReturn="0"/>
-			<choice id="2" option="Bye" nextNode="-1" eventReturn="0"/>
+			<choice id="2" option="You ain't for help, right? " nextNode="3" eventReturn="0"/>
+			<choice id="3" option="Don't want anything from you." nextNode="-1" eventReturn="0"/>
 		</node>
 
 		<node id="1" name="ORACLE" text="Another stupid boy to make me rich. I got a lot of knowledge from the dungeon you are about to go. Toss another coin if that is what you want.">
@@ -135,12 +135,12 @@
 			<choice id="1" option="You can mess with me, but you're just junk to me." nextNode="6" eventReturn="3"/>
 		</node>
 
-		<node id="4" name="ORACLE" text="I can't believe my eyes, you just paid, silly-billy. I got no more to say, this place is more than closed, you can go in without fear. You will find an empty House of Terrors. But if you want to toss one more coin...">
+		<node id="4" name="ORACLE" text="I can't believe my eyes, you just paid, silly-billy. This is the worldwide famous House Of Terrors. I know just what you want, get information or reduce everything to ashes, you will never get it, this House Of Terror is not for everyone. If you want to toss one more coin...">
 			<choice id="0" option="Toss a coin." nextNode="5" eventReturn="0"/>
 			<choice id="1" option="I'll pay no more..." nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="5" name="ORACLE" text="HAHAHAHA! You're truly an idiot, aren't you? I have never met anyone more useless in my life and I have worked with people who have been decapitated. But seriously, you thought I was going to tell you something else. HAHAHAHA!">
+		<node id="5" name="ORACLE" text="You really think you'll make it huh. I have never seen anyone so foolish and useless in my entire life. Well... now that you've paid, I'll tell you one more thing, the house of terror is guarded by a ghostly entity that controls the lights, it doesn't speak so you won't be able to get much spark out of it. Now go and die, don't waste my time.">
 			<choice id="0" option="Say nothing" nextNode="-1" eventReturn="0"/>
 		</node>
 
@@ -156,6 +156,42 @@
 		
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
+
+	<dialogueTree ID="4">
+
+		<node id="0" name="ORACLE" text="If there is something you want to know, toss a coin to see what's wrong.">
+			<choice id="0" option="Toss a coin." nextNode="1" eventReturn="0"/>
+			<choice id="1" option="I feel we had this conversation already. " nextNode="2" eventReturn="0"/>
+			<choice id="2" option="Don't want anything from you." nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="1" name="ORACLE" text="Another stupid boy to make me rich. I got a lot of knowledge from the dungeon you are about to go. Toss another coin if that is what you want.">
+			<choice id="0" option="Toss another coin." nextNode="3"  eventReturn="0"/>
+			<choice id="1" option="Yeah, we definitely had..." nextNode="-1"  eventReturn="0"/>
+		</node>
+
+		<node id="2" name="ORACLE" text="Don't tell me! Well brat... then you know you have to pay. Toss a coin to know what I know. ">
+			<choice id="0" option="Toss a coin" nextNode="3" eventReturn="0"/>
+			<choice id="1" option="Another time will be." nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="3" name="ORACLE" text="You must know, little vermin, that the animals in the Baest Tent have no compassion, they will kill you so quickly that you won't even have time to cry. Except the chickens, they may help you... If you get to them. Toss a coin to know even more.">
+			<choice id="0" option="Pay" nextNode="4" eventReturn="0"/>
+			<choice id="1" option="No thanks, that was enough." nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="4" name="ORACLE" text="By golly, a rich brat is going to pass me his fortune. Well, I have bad news, they won't let me tell you anything else. Looks like you've surprised someone... Though not for long, you'll surely serve as food for the beasts inside.">
+			<choice id="0" option="Who am I impressing?" nextNode="5" eventReturn="0"/>
+			<choice id="1" option="Thanks for nothing junk..." nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="5" name="ORACLE" text="I'll say no more. They are waiting for you.">
+			<choice id="0" option="Say nothing" nextNode="-1" eventReturn="0"/>
+		</node>
+		
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+
 
 	<dialogueTree ID="3">
 
