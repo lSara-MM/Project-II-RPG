@@ -86,7 +86,7 @@ TargetingMethod //Como se ataca
 	<skill name="Humiliation" id="8" description="A cruel mockery that taunts the enemy making them approach and lower their defense 4 turns by 25." 
 		   type="2" movementCaster="0"  movementTarget="-2" targetMethod="0"
 	   multiplierDmg="-0.5" bonusAccuracy="115" bonusCritRate="-200" bonusCritDamage="0"
-		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   firstStatusID="5" firstStatusPositive="false" firstStatusDuration="4" firstStatusIntesity="-25"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>

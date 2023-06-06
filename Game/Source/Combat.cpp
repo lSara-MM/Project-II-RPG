@@ -1433,7 +1433,7 @@ void Combat::RenderSkillDescription(int controlID)
 			app->render->TextDraw(ch_CrDMG, 350, 590, 15);
 		}
 
-		//Efect
+		//Efect 1
 		SString effecto_C;
 		switch ((EffectType)skillPoint->firstStatus)
 		{
@@ -1477,8 +1477,98 @@ void Combat::RenderSkillDescription(int controlID)
 		}
 		app->render->TextDraw(effecto_C.GetString(), 480, 550, 18);
 
+		//Efect 2
+		switch ((EffectType)skillPoint->secondStatus)
+		{
+		case EffectType::NONE:
+			effecto_C = "None";
+			break;
+		case EffectType::CURRENT_HP:
+			if (skillPoint->secondPositiveEffect) { effecto_C = "Regeneration"; }
+			else { effecto_C = "Burn"; }
+			break;
+		case EffectType::ATTACK:
+			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff ATK"; }
+			else { effecto_C = "Debuff ATK"; }
+			break;
+		case EffectType::CRIT_RATE:
+			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Crit Rate"; }
+			else { effecto_C = "Debuff Crit Rate"; }
+			break;
+		case EffectType::CRIT_DMG:
+			if (skillPoint->secondPositiveEffect) { effecto_C = "BuffCritDMG"; }
+			else { effecto_C = "Debuff Crit DMG"; }
+			break;
+		case EffectType::ACCURACY:
+			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff accuracy"; }
+			else { effecto_C = "Debuff accuracy"; }
+			break;
+		case EffectType::ARMOR:
+			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Armor"; }
+			else { effecto_C = "Debuff Armor"; }
+			break;
+		case EffectType::DODGE:
+			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Dodge"; }
+			else { effecto_C = "Debuff Dodge"; }
+			break;
+		case EffectType::RES:
+			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Resistance"; }
+			else { effecto_C = "Debuff Resistance"; }
+			break;
+		default:
+			break;
+		}
+		app->render->TextDraw(effecto_C.GetString(), 480, 570, 18);
+
 		//Description
 		app->render->RenderTrimmedText(xText1, 620, 5, skillPoint->description.GetString(), &auxTexts, fontSizeSkills, 60);
+
+		//Positions Skills
+		Character* charaPoint = listInitiative.At(charaInTurn)->data;
+		app->render->TextDraw("Position", 80, 575, 12);
+		for (int i = 0; i < 4; i++)
+		{
+			if (skillPoint->posToUseEnd_I >= i && i >= skillPoint->posToUseStart_I)
+			{
+				app->render->DrawRectangle({ 140 + (3-i) * 15,580,10,10 }, 0, 0, 220);
+			}
+			else
+			{
+				app->render->DrawRectangle({ 140 + (3-i) * 15,580,10,10 }, 80, 80, 80);
+			}
+		}
+		
+		//Target skills
+		int r = 0;
+		int g = 0;
+		int multI;
+		int minus;
+		if (skillPoint->targetFriend)
+		{
+			g = 220;
+			r = 0;
+			minus = 3;
+			multI = 1;
+		}
+		else
+		{
+			g = 0;
+			r = 220;
+			minus = 0;
+			multI = -1;
+		}
+		for (int i = 0; i < 4; i++)
+		{
+			if (skillPoint->posToTargetEnd_I >= i && i >= skillPoint->posToTargetStart_I)
+			{
+				app->render->DrawRectangle({ 140 + (minus - i*multI) * 15,595,10,10 }, r, g, 0);
+			}
+			else
+			{
+				app->render->DrawRectangle({ 140 + (minus - i* multI) * 15,595,10,10 }, 60, 60, 60);
+			}
+		}
+		app->render->TextDraw("Target", 80, 590, 12);
 	}
 }
 
