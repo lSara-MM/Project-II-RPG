@@ -802,12 +802,14 @@ bool PuzzleManager::Dun1CleanUp()
 
 	if (!escape)
 	{
-
 		if (doorEscape != nullptr)
 			app->tex->UnLoad(doorEscape);
 
 		if (DoorEscape != nullptr)
-			DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
+			DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);	
+		
+		if (DoorEscapeSensor != nullptr)
+			DoorEscapeSensor->body->GetWorld()->DestroyBody(DoorEscapeSensor->body);
 	}
 
 	if (!rescue)

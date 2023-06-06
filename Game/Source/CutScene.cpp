@@ -83,17 +83,17 @@ bool CutScene::Update(float dt)
 		RestartTimer();
 	}
 
-	if (DeltaTime >= 1) 
+	if (ImgToPrint.At(passImg) != NULL)
+		app->render->DrawTexture(ImgToPrint.At(passImg)->data, 0, 0);
+
+	if (DeltaTime >= 1)
 	{
-		app->render->TextDraw("PRESS SPACE", app->win->GetWidth() / 2, app->win->GetHeight() / 2, 50, Font::UI, { 181, 33, 33 });
+		app->render->TextDraw("PRESS SPACE", app->win->GetWidth() / 2 - 200, app->win->GetHeight() - 100, 50, Font::UI, { 255, 255, 255 });
 	}
 	if (DeltaTime >= 2)
 	{
 		RestartTimer();
 	}
-
-	if (ImgToPrint.At(passImg) != NULL)
-		app->render->DrawTexture(ImgToPrint.At(passImg)->data, 0, 0);
 
 	mTicks = SDL_GetTicks() - mStartTicks;
 	DeltaTime = mTicks * 0.001f;

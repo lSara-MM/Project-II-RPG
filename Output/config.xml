@@ -165,12 +165,12 @@
 				settingsPath="Assets/Textures/setting_menu.png"/>
 
   <CutScene>
-    <Img texturepath="Assets/Textures/"/>
-    <Img texturepath="Assets/Textures/"/>
-    <Img texturepath="Assets/Textures/"/>
-    <Img texturepath="Assets/Textures/"/>
-    <Img texturepath="Assets/Textures/"/>
-    <Img texturepath="Assets/Textures/"/>
+    <Img texturepath="Assets/Textures/cinematica_circo.png"/>
+    <Img texturepath="Assets/Textures/cinematica_circo.png"/>
+    <Img texturepath="Assets/Textures/cinematica_circo.png"/>
+    <Img texturepath="Assets/Textures/cinematica_circo.png"/>
+    <Img texturepath="Assets/Textures/cinematica_circo.png"/>
+    <Img texturepath="Assets/Textures/cinematica_circo.png"/>
   </CutScene>
 	<HouseOfTerrors texturePathDark="Assets/Textures/OscuridadDungeon.png" musicD1="Assets/Audio/Music/Haunted_House.ogg" pause="Assets/Audio/Music/mus_pause.ogg"/>
 	<Circus musicCircus="Assets/Audio/Music/CircusTent_mus.ogg" pause="Assets/Audio/Music/mus_pause.ogg"/>
