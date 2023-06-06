@@ -7,6 +7,9 @@
 #include "Player.h"
 #include "ItemManager.h"
 
+#define MIN_CHARAS_PARTY 3
+
+
 Inventory::Inventory(unsigned capx, unsigned capy) : Module()
 {
 	name.Create("Inventory");
@@ -63,51 +66,8 @@ bool Inventory::Start()
 		}
 	}
 
-
-	// Party buttons
-	//// first page
-	GuiButton* temp;
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1010, this, { 272, 97, 142, 258 }, ButtonType::SMALL);
-	temp->state = GuiControlState::NONE;
-	listPartyButtons.Add(temp);
-
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1011, this, { 449, 97, 142, 258 }, ButtonType::SMALL);
-	temp->state = GuiControlState::NONE;
-	listPartyButtons.Add(temp);
-
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1012, this, { 272, 354, 142, 258 }, ButtonType::SMALL);
-	temp->state = GuiControlState::NONE;
-	listPartyButtons.Add(temp);
-
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1013, this, { 449, 354, 142, 258 }, ButtonType::SMALL);
-	temp->state = GuiControlState::NONE;
-	listPartyButtons.Add(temp);
-
-	//// second page
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1014, this, { 695, 95, 142, 258 }, ButtonType::SMALL);
-	temp->state = GuiControlState::NONE;
-	listPartyButtons.Add(temp);
-
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1015, this, { 860, 95, 142, 258 }, ButtonType::SMALL);
-	temp->state = GuiControlState::NONE;
-	listPartyButtons.Add(temp);
-
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1016, this, { 695, 351, 142, 258 }, ButtonType::SMALL);
-	temp->state = GuiControlState::NONE;
-	listPartyButtons.Add(temp);
-
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1017, this, { 860, 351, 142, 258 }, ButtonType::SMALL);
-	temp->state = GuiControlState::NONE;
-	listPartyButtons.Add(temp);
-	
-	lastPressed = -1;
-
-	// TO DO. move to "when party open" once
-	for (ListItem<GuiButton*>* i = listPartyButtons.start; i != nullptr; i = i->next)
-	{
-		i->data->state = GuiControlState::NORMAL;
-	}
-
+	// Init Party stuff
+	InitArr();
 
 	int x = 0;
 	y = 155;
@@ -196,6 +156,7 @@ bool Inventory::Update(float dt)
 	{
 		inventoryAnimation.Foward();
 	}
+
 	inventoryAnimation.Step(2, false);
 
 	float point = inventoryAnimation.GetPoint();
@@ -210,6 +171,15 @@ bool Inventory::Update(float dt)
 	{
 		y = 155;
 
+		if (buttonsChangeStat)
+		{
+			for (ListItem<GuiButton*>* i = listPartyButtons.start; i != nullptr; i = i->next)
+			{
+				i->data->state = GuiControlState::NORMAL;
+			}
+			buttonsChangeStat = false;
+		}
+
 		if (!partyWindow_B)
 		{
 			app->render->DrawTexture(inventoryIMG, posXinventoryAnimation - app->render->camera.x, 0 - app->render->camera.y);
@@ -222,17 +192,13 @@ bool Inventory::Update(float dt)
 				playerTexture = NULL;
 			}
 		}
-
 		else
 		{
 			app->render->DrawTexture(partyIMG, posXinventoryAnimation - app->render->camera.x, 0 - app->render->camera.y);
-		}
-
-		
+		}	
 	}
-	bool ret = true;
-
-	return ret;
+	
+	return true;
 }
 
 bool Inventory::PostUpdate()
@@ -246,12 +212,15 @@ bool Inventory::PostUpdate()
 	{
 		buttonInventory->state = GuiControlState::NONE;
 		buttonParty->state = GuiControlState::NORMAL;
+		
 		for (int i = 0; i <= 3; i++)
 		{
 			selectCharacter[i]->state = GuiControlState::NORMAL;
 		}
+		
 		PrevPage->state = GuiControlState::NORMAL;
 		NextPage->state = GuiControlState::NORMAL;
+		
 		if (app->combat->active)
 		{
 			for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
@@ -300,6 +269,7 @@ bool Inventory::PostUpdate()
 					app->itemManager->armorItems[i]->CleanUp();
 				}
 			}
+
 			for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 			{
 				if (app->itemManager->nodeList[i]->type != 2 && app->itemManager->nodeList[i]->quantity > 0)
@@ -327,6 +297,7 @@ bool Inventory::PostUpdate()
 					}
 				}
 			}
+
 			//LOAD STATS
 			if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
 			{
@@ -369,7 +340,6 @@ bool Inventory::PostUpdate()
 		}
 
 	}
-	
 	else if (partyWindow_B)
 	{
 		buttonInventory->state = GuiControlState::NORMAL;
@@ -387,93 +357,12 @@ bool Inventory::PostUpdate()
 		app->render->DrawTexture(compaIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
 		app->render->DrawTexture(twinsIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
 		app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);*/
-		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+		/*app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
 		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
 		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);*/
 
-		// up left
-		switch (app->itemManager->arrParty.at(0)->id)
-		{
-		case 0:
-			app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
-			break;
-		case 1:
-			app->render->DrawTexture(compaIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
-			break;
-		case 2:
-			app->render->DrawTexture(twinsIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
-			break;
-		case 3:
-			app->render->DrawTexture(fireIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
-			break;
-		default:
-			app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
-			break;
-		}
-		
-		// up right
-		switch (app->itemManager->arrParty.at(1)->id)
-		{
-		case 0:
-			app->render->DrawTexture(protaIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
-			break;
-		case 1:
-			app->render->DrawTexture(compaIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
-			break;
-		case 2:
-			app->render->DrawTexture(twinsIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
-			break;
-		case 3:
-			app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
-			break;
-		default:
-			app->render->DrawTexture(protaIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
-			break;
-		}
-		
-		// down left
-		switch (app->itemManager->arrParty.at(2)->id)
-		{
-		case 0:
-			app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-			break;
-		case 1:
-			app->render->DrawTexture(compaIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-			break;
-		case 2:
-			app->render->DrawTexture(twinsIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-			break;
-		case 3:
-			app->render->DrawTexture(fireIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-			break;
-		default:
-			app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-			break;
-		}
-		
-		if (app->itemManager->arrParty.at(3) != nullptr)
-		{
-			// down right
-			switch (app->itemManager->arrParty.at(3)->id)
-			{
-			case 0:
-				app->render->DrawTexture(protaIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-				break;
-			case 1:
-				app->render->DrawTexture(compaIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-				break;
-			case 2:
-				app->render->DrawTexture(twinsIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-				break;
-			case 3:
-				app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-				break;
-			default:
-				app->render->DrawTexture(protaIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-				break;
-			}
-		}
+		DrawParty(point, offset);
 	}
 
 	//arreglo cuestionable pero bueno, it works 
@@ -511,6 +400,7 @@ bool Inventory::CleanUp()
 	{
 		app->guiManager->DestroyGuiControl(selectCharacter[i]);
 	}
+
 	app->guiManager->DestroyGuiControl(buttonInventory);
 	app->guiManager->DestroyGuiControl(buttonParty);
 	app->guiManager->DestroyGuiControl(PrevPage);
@@ -524,6 +414,16 @@ bool Inventory::CleanUp()
 	app->tex->UnLoad(fireIMG);
 
 	page = 0;
+
+	// party
+	for (int i = 0; i < arrCharas.size(); i++) { arrCharas.at(i) = nullptr; }
+	
+	for (ListItem<GuiButton*>* i = listPartyButtons.start; i != nullptr; i = i->next)
+	{
+		app->guiManager->DestroyGuiControl(i->data);
+	}
+	
+	listPartyButtons.Clear();
 
 	return true;
 }
@@ -778,14 +678,29 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 	}
 
+	// Party buttons
 	if (control->id >= 1010 && control->id <= 1017)
 	{
+		int k = 0;
+		for (k; k < app->itemManager->arrParty.size(); k++)
+		{
+			if (app->itemManager->arrParty.at(k) == nullptr) { break; }
+		}
+
 		if (lastPressed == -1)
 		{
+			int j = 0;
 			for (ListItem<GuiButton*>* i = listPartyButtons.start; i != nullptr; i = i->next)
 			{
-				//
+				i->data->state = GuiControlState::NORMAL;
+
+				if (k <= MIN_CHARAS_PARTY && i->data->id - 1010 > 3 && arrCharas.at(j) == nullptr)
+				{
+					i->data->state = GuiControlState::DISABLED;
+				}
+				j++;
 			}
+
 			listPartyButtons.At(control->id - 1010)->data->state = GuiControlState::SELECTED;
 			lastPressed = control->id - 1010;
 		}
@@ -796,10 +711,9 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 		else
 		{
 			// Change party
-			app->itemManager->ChangeParty(lastPressed, control->id - 1010);
+			ChangeArrParty(lastPressed, control->id - 1010);
 			lastPressed = -1;
 		}
-		
 	}
 
 	/*if (chara->listSkills.At(i)->data->posToUseStart_I <= chara->positionCombat_I && chara->positionCombat_I <= chara->listSkills.At(i)->data->posToUseEnd_I && chara->charaType == CharacterType::ALLY)
@@ -813,4 +727,304 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 		listButtons.At(offset + i)->data->isSelected = true;
 	}*/
 	return true;
+}
+
+void Inventory::ChangeArrParty(int prevId, int newId)
+{
+	swap(arrCharas.at(prevId), arrCharas.at(newId));
+
+	if (arrCharas.at(newId) != nullptr)
+	{
+		// if newId out of range, chara out of party -> set positionCombat -1
+		if (newId > 3) { arrCharas.at(newId)->positionCombat_I = -1; }
+		else { arrCharas.at(newId)->positionCombat_I = newId; }
+	}
+
+	// if prevId out of range, chara out of party -> set positionCombat -1
+	if (arrCharas.at(prevId) != nullptr)
+	{
+		if (prevId > 3) { arrCharas.at(prevId)->positionCombat_I = -1; }
+		else { arrCharas.at(prevId)->positionCombat_I = prevId; }
+	}
+
+	for (int i = 0; i < app->itemManager->arrParty.size() - 1; i++)
+	{
+		if (arrCharas.at(i) == nullptr && arrCharas.at(i + 1) != nullptr)
+		{
+			swap(arrCharas.at(i), arrCharas.at(i + 1));
+			arrCharas.at(i)->positionCombat_I = i;
+		}
+	}
+
+	// Set 
+	for (int i = 0; i < app->itemManager->arrParty.size(); i++)
+	{
+		app->itemManager->arrParty.at(i) = arrCharas.at(i);
+	}
+}
+
+void Inventory::InitArr()
+{
+	// init array
+	for (int i = 0; i < arrCharas.size(); i++)
+	{
+		arrCharas.at(i) = nullptr;
+		if (i < 4) { arrCharas.at(i) = app->itemManager->arrParty.at(i); }
+		else { if (i < app->itemManager->vecPC.size()) { arrCharas.at(i) = app->itemManager->vecPC.at(i); } }		
+	}
+
+	// Party buttons
+	//// first page
+	GuiButton* temp;
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1010, this, { 272, 97, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1011, this, { 449, 97, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1012, this, { 272, 354, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1013, this, { 449, 354, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	//// second page
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1014, this, { 695, 95, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1015, this, { 860, 95, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1016, this, { 695, 351, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1017, this, { 860, 351, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+	buttonsChangeStat = false;
+
+	lastPressed = -1;
+}
+
+void Inventory::DrawParty(float point, int offset)
+{
+	// up left
+	switch (arrCharas.at(0)->id)
+	{
+	case 0:
+		app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+		break;
+	case 1:
+		app->render->DrawTexture(compaIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+		break;
+	case 2:
+		app->render->DrawTexture(twinsIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+		break;
+	case 3:
+		app->render->DrawTexture(fireIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+		break;
+	}
+
+	// up right
+	switch (arrCharas.at(1)->id)
+	{
+	case 0:
+		app->render->DrawTexture(protaIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+		break;
+	case 1:
+		app->render->DrawTexture(compaIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+		break;
+	case 2:
+		app->render->DrawTexture(twinsIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+		break;
+	case 3:
+		app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+		break;
+	}
+
+	// down left
+	switch (arrCharas.at(2)->id)
+	{
+	case 0:
+		app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+		break;
+	case 1:
+		app->render->DrawTexture(compaIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+		break;
+	case 2:
+		app->render->DrawTexture(twinsIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+		break;
+	case 3:
+		app->render->DrawTexture(fireIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+		break;
+	}
+
+	// down right
+	if (arrCharas.at(3) != nullptr)
+	{
+		if (arrCharas.at(3)->positionCombat_I > -1)
+		{
+			//app->render->DrawTexture(charlockedIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+		}
+		else
+		{
+			switch (arrCharas.at(3)->id)
+			{
+			case 0:
+				app->render->DrawTexture(protaIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+				break;
+			case 1:
+				app->render->DrawTexture(compaIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+				break;
+			case 2:
+				app->render->DrawTexture(twinsIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+				break;
+			case 3:
+				app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+				break;
+			}
+		}		
+	}
+
+	// next page
+	if (arrCharas.size() < 5)
+	{
+		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+	}
+	else
+	{
+		// up left
+		if (arrCharas.at(4) != nullptr)
+		{
+			if (arrCharas.at(4)->positionCombat_I > -1)
+			{
+				app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+			}
+			else
+			{
+				switch (arrCharas.at(4)->id)
+				{
+				case 0:
+					app->render->DrawTexture(protaIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+					break;
+				case 1:
+					app->render->DrawTexture(compaIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+					break;
+				case 2:
+					app->render->DrawTexture(twinsIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+					break;
+				case 3:
+					app->render->DrawTexture(fireIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+					break;
+				}
+			}			
+		}
+		else
+		{
+			app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+		}
+
+		// up right
+		if (arrCharas.at(5) != nullptr)
+		{
+			if (arrCharas.at(5)->positionCombat_I > -1)
+			{
+				app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+			}
+			else
+			{
+				switch (arrCharas.at(5)->id)
+				{
+				case 0:
+					app->render->DrawTexture(protaIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+					break;
+				case 1:
+					app->render->DrawTexture(compaIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+					break;
+				case 2:
+					app->render->DrawTexture(twinsIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+					break;
+				case 3:
+					app->render->DrawTexture(fireIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+					break;
+				}
+			}			
+		}
+		else
+		{
+			app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+		}
+
+		// down left
+		if (arrCharas.at(6) != nullptr)
+		{
+			if (arrCharas.at(6)->positionCombat_I > -1)
+			{
+				app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+			}
+			else
+			{
+				switch (arrCharas.at(6)->id)
+				{
+				case 0:
+					app->render->DrawTexture(protaIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+					break;
+				case 1:
+					app->render->DrawTexture(compaIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+					break;
+				case 2:
+					app->render->DrawTexture(twinsIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+					break;
+				case 3:
+					app->render->DrawTexture(fireIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+					break;
+				}
+			}
+		}
+		else
+		{
+			app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+		}
+
+		// down right
+		if (arrCharas.at(7) != nullptr)
+		{
+			if (arrCharas.at(7)->positionCombat_I > -1)
+			{
+				app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+			}
+			else
+			{
+				switch (arrCharas.at(7)->id)
+				{
+				case 0:
+					app->render->DrawTexture(protaIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+					break;
+				case 1:
+					app->render->DrawTexture(compaIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+					break;
+				case 2:
+					app->render->DrawTexture(twinsIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+					break;
+				case 3:
+					app->render->DrawTexture(fireIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+					break;
+				}
+			}
+		}
+		else
+		{
+			app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+		}
+	}
 }

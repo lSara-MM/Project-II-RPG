@@ -34,6 +34,11 @@ public:
 	bool OnGuiMouseOutHoverEvent(GuiControl* control);
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	// Party
+	void InitArr();
+	void DrawParty(float point, int offset);
+	void ChangeArrParty(int prevId, int newId);
+
 public:
 
 	SDL_Texture* inventoryIMG;
@@ -52,6 +57,8 @@ public:
 	// Party buttons
 	List<GuiButton*> listPartyButtons;
 	int lastPressed;
+	array<Character*, 8> arrCharas;
+	bool buttonsChangeStat;
 
 	unsigned capx;
 	unsigned capy;

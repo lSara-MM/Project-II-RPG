@@ -370,6 +370,8 @@ bool Combat::PostUpdate()
 // Called before quitting
 bool Combat::CleanUp()
 {
+	app->itemManager->Enable();
+
 	LOG("Freeing scene");
 	//Save al terminar
 	if (app->sceneWin_Lose->win == true)

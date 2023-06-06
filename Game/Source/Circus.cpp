@@ -133,6 +133,7 @@ bool Circus::Update(float dt)
 			player->lockMovement = true;
 			app->inventory->Enable();
 			app->inventory->partyWindow_B = true;
+			app->inventory->buttonsChangeStat = true;
 		}
 	}
 	//Load Debug keys
