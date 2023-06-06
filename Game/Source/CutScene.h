@@ -41,6 +41,8 @@ public:
 
 	int passImg;
 
+	bool printText;
+
 	uint32 mTicks;
 	uint32 mStartTicks;
 	uint32 DeltaTime;
@@ -49,6 +51,8 @@ public:
 	List<SDL_Texture*> ImgToPrint;
 
 	List<const char*> NextImg;
+
+	List<const char*> NextText;
 
 	pugi::xml_node pugiNode;
 

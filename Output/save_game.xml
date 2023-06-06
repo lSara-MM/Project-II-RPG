@@ -31,22 +31,43 @@
 		<chest used="false" />
 		<chest used="false" />
 		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
+		<chest used="false" />
 	</lootManager>
 	<PuzzleManager />
 	<questmanager />
 	<CutScene />
+	<Particles />
 	<entitymanager>
 		<player name="scene" x="3417" y="1058" />
 		<party id="0" id="1" id="2" />
 	</entitymanager>
 	<dialogue />
 	<Inventory />
+	<store />
+	<forge />
 	<guiManager />
 	<itemmanager />
 	<SceneWin_Lose />
-	<store />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2825" y="-725" />
+		<camera x="-2817" y="-728" />
 	</renderer>
 </save_state>

@@ -72,7 +72,7 @@ bool Combat::Start()
 	//LoadCombat();
 
 	//Music combat
-	app->audio->PlayMusic(musCombat, 1.0);
+	app->audio->PlayMusic(musCombat, 1.0f);
 
 	//Cargar texturas
 	textureBackground = app->tex->Load(texturePathBackground);

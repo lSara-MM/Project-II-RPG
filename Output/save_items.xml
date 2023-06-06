@@ -111,13 +111,13 @@
 		<item name="Amethyst" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Coral" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Pearl" quantity="0" equiped="false" space="0" whom="0" />
-		<armor name="C_wood" id="200" quantity="2" equiped="false" space="0" whom="0" />
-		<armor name="C_wood" id="201" quantity="2" equiped="false" space="0" whom="0" />
-		<armor name="R_wood" id="202" quantity="2" equiped="false" space="0" whom="0" />
-		<armor name="R_wood" id="203" quantity="2" equiped="false" space="0" whom="0" />
-		<armor name="H_leather_titanium" id="204" quantity="1" equiped="false" space="0" whom="0" />
-		<armor name="CP_leather_copper" id="205" quantity="1" equiped="false" space="0" whom="0" />
-		<armor name="L_leather" id="206" quantity="1" equiped="false" space="0" whom="0" />
-		<armor name="S_copper_copper" id="207" quantity="1" equiped="false" space="0" whom="0" />
+		<armor name="C_wood" id="200" quantity="2" equiped="false" space="0" whom="0" hp="0" maxhp="0" attack="0" critRate="0" critDamage="0" accuracy="0" armor="0" dodge="0" res="0" speed="0" />
+		<armor name="C_wood" id="201" quantity="2" equiped="false" space="0" whom="0" hp="0" maxhp="0" attack="0" critRate="0" critDamage="0" accuracy="0" armor="0" dodge="0" res="0" speed="0" />
+		<armor name="R_wood" id="202" quantity="2" equiped="false" space="0" whom="0" hp="0" maxhp="0" attack="0" critRate="0" critDamage="0" accuracy="0" armor="0" dodge="0" res="0" speed="0" />
+		<armor name="R_wood" id="203" quantity="2" equiped="false" space="0" whom="0" hp="0" maxhp="0" attack="0" critRate="0" critDamage="0" accuracy="0" armor="0" dodge="0" res="0" speed="0" />
+		<armor name="H_leather_titanium" id="204" quantity="1" equiped="false" space="0" whom="0" hp="0" maxhp="0" attack="0" critRate="0" critDamage="0" accuracy="0" armor="0" dodge="0" res="0" speed="0" />
+		<armor name="CP_leather_copper" id="205" quantity="1" equiped="false" space="0" whom="0" hp="0" maxhp="0" attack="0" critRate="0" critDamage="0" accuracy="0" armor="0" dodge="0" res="0" speed="0" />
+		<armor name="L_leather" id="206" quantity="1" equiped="false" space="0" whom="0" hp="0" maxhp="0" attack="0" critRate="0" critDamage="0" accuracy="0" armor="0" dodge="0" res="0" speed="0" />
+		<armor name="S_copper_copper" id="207" quantity="1" equiped="false" space="0" whom="0" hp="0" maxhp="0" attack="0" critRate="0" critDamage="0" accuracy="0" armor="0" dodge="0" res="0" speed="0" />
 	</items>
 </save_state>

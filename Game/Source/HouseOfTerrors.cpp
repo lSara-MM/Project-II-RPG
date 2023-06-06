@@ -344,7 +344,7 @@ void HouseOfTerrors::Debug()
 	{
 		pause_B = true;
 		app->audio->PlayFx(pausefx);
-		app->audio->PlayMusic(pause_music);
+		app->audio->PlayMusic(pause_music, 1.0f);
 		if (pause_B)
 		{
 			/*pPause = new Pause(this);
@@ -377,7 +377,7 @@ void HouseOfTerrors::Debug()
 		else
 		{
 			pause_B = false;
-			app->audio->PlayMusic(musHauntedPath);
+			app->audio->PlayMusic(musHauntedPath, 1.0f);
 			if (pause_B)
 			{
 			/*	pPause = new Pause(this);*/
@@ -441,14 +441,14 @@ bool HouseOfTerrors::OnGuiMouseClickEvent(GuiControl* control)
 	case 701:
 		LOG("Button Close pause click");
 		pause_B = false;
-		app->audio->PlayMusic(musHauntedPath);
+		app->audio->PlayMusic(musHauntedPath, 1.0f);
 		//pPause->CleanUp();
 		break;
 
 	case 702:
 		LOG("Button Resume click");
 		pause_B = false;
-		app->audio->PlayMusic(musHauntedPath);
+		app->audio->PlayMusic(musHauntedPath, 1.0f);
 		//pPause->CleanUp();
 		break;
 
