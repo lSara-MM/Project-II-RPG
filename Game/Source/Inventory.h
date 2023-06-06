@@ -43,10 +43,16 @@ public:
 	SDL_Texture* compaIMG;
 	SDL_Texture* twinsIMG;
 	SDL_Texture* fireIMG;
+
 	GuiButton* buttonInventory;
 	GuiButton* buttonParty;
 	GuiButton* PrevPage;
 	GuiButton* NextPage;
+
+	// Party buttons
+	List<GuiButton*> listPartyButtons;
+	int lastPressed;
+
 	unsigned capx;
 	unsigned capy;
 	int page = 0;

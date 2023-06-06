@@ -116,7 +116,9 @@ public:
 	bool LoadArmorState();
 	bool SaveItemState();
 
+	// Party
 	void AddCharaToParty(int id);
+	void ChangeParty(int prevId, int newId);
 	void LoadAllPC();
 	bool LoadParty();
 	void SetParty();

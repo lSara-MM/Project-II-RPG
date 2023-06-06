@@ -92,6 +92,9 @@ bool Combat::Start()
 	app->physics->Disable();
 	app->entityManager->active = true;
 
+	//Load inventory
+	app->inventory->Enable();
+
 	StartCombat();
 
 	// Skill button
@@ -128,10 +131,6 @@ bool Combat::Start()
 	{
 		app->questManager->active = false;
 	}
-
-	//Load inventory
-	app->inventory->Enable();
-	app->itemManager->Enable();
 
 	//animation combat
 	animationCombat.Set();
@@ -591,8 +590,6 @@ bool Combat::InitEnemies(vector<int> arr)
 
 bool Combat::InitAllies(array<Character*, 4> party)
 {
-	int cPos = 0;
-
 	 LoadCombat();
 
 	Character* chara;
@@ -603,23 +600,23 @@ bool Combat::InitAllies(array<Character*, 4> party)
 		chara->parameters = party.at(i)->parameters;
 		chara->Awake();
 
-		chara->positionCombat_I = cPos++;
+		chara->positionCombat_I = app->itemManager->arrParty.at(i)->positionCombat_I;
 
 		chara->Start();
 		chara->button->id = i;
 
-		vecAllies.push_back(chara);
+		chara->maxHp = app->itemManager->arrParty.at(i)->maxHp;
+		chara->currentHp = app->itemManager->arrParty.at(i)->currentHp;
+		chara->attack = app->itemManager->arrParty.at(i)->attack;
+		chara->critRate = app->itemManager->arrParty.at(i)->critRate;
+		chara->critDamage = app->itemManager->arrParty.at(i)->critDamage;
+		chara->accuracy = app->itemManager->arrParty.at(i)->accuracy;
+		chara->armor = app->itemManager->arrParty.at(i)->armor;
+		chara->dodge = app->itemManager->arrParty.at(i)->dodge;
+		chara->res = app->itemManager->arrParty.at(i)->res;
+		chara->speed = app->itemManager->arrParty.at(i)->speed;
 
-		vecAllies.at(i)->maxHp = app->itemManager->arrParty.at(i)->maxHp;
-		vecAllies.at(i)->currentHp = app->itemManager->arrParty.at(i)->currentHp;
-		vecAllies.at(i)->attack = app->itemManager->arrParty.at(i)->attack;
-		vecAllies.at(i)->critRate = app->itemManager->arrParty.at(i)->critRate;
-		vecAllies.at(i)->critDamage = app->itemManager->arrParty.at(i)->critDamage;
-		vecAllies.at(i)->accuracy = app->itemManager->arrParty.at(i)->accuracy;
-		vecAllies.at(i)->armor = app->itemManager->arrParty.at(i)->armor;
-		vecAllies.at(i)->dodge = app->itemManager->arrParty.at(i)->dodge;
-		vecAllies.at(i)->res = app->itemManager->arrParty.at(i)->res;
-		vecAllies.at(i)->speed = app->itemManager->arrParty.at(i)->speed;
+		vecAllies.push_back(chara);
 	}
 
 	return true;
@@ -782,7 +779,7 @@ bool Combat::HandleSkillsButtons(Character* chara)
 
 	for (int i = 0; i < chara->listSkills.Count(); i++)
 	{
-		if (chara->listSkills.At(i)->data->posToUseStart_I<= chara->positionCombat_I && chara->positionCombat_I <= chara->listSkills.At(i)->data->posToUseEnd_I && chara->charaType==CharacterType::ALLY)
+		if (chara->listSkills.At(i)->data->posToUseStart_I <= chara->positionCombat_I && chara->positionCombat_I <= chara->listSkills.At(i)->data->posToUseEnd_I && chara->charaType == CharacterType::ALLY)
 		{
 			listButtons.At(offset + i)->data->state = GuiControlState::NORMAL;
 			listButtons.At(offset + i)->data->isSelected = false;
@@ -1501,9 +1498,12 @@ bool Combat::SaveCombat()
 
 			character.append_attribute("name") = app->itemManager->arrParty.at(i)->name.GetString();
 
-			//character.append_attribute("maxHp") = app->itemManager->arrParty.at(i)->maxHp;
 			character.append_attribute("currentHp") = app->itemManager->arrParty.at(i)->currentHp;
-			/*character.append_attribute("attack") = app->itemManager->arrParty.at(i)->attack;
+			character.append_attribute("positionCombat") = app->itemManager->arrParty.at(i)->positionCombat_I;
+
+			/*character.append_attribute("maxHp") = app->itemManager->arrParty.at(i)->maxHp;
+			character.append_attribute("currentHp") = app->itemManager->arrParty.at(i)->currentHp;
+			character.append_attribute("attack") = app->itemManager->arrParty.at(i)->attack;
 			character.append_attribute("critRate") = app->itemManager->arrParty.at(i)->critRate;
 			character.append_attribute("critDamage") = app->itemManager->arrParty.at(i)->critDamage;
 			character.append_attribute("accuracy") = app->itemManager->arrParty.at(i)->accuracy;
@@ -1540,6 +1540,7 @@ bool Combat::LoadCombat()
 		{
 			app->itemManager->arrParty.at(i)->name = itemNode.attribute("name").as_string();
 			app->itemManager->arrParty.at(i)->currentHp = itemNode.attribute("currentHp").as_int();
+			app->itemManager->arrParty.at(i)->positionCombat_I = itemNode.attribute("positionCombat").as_int();
 
 			i++;
 		}
@@ -1570,6 +1571,7 @@ bool Combat::RestartCombatData()
 
 			pugi::xml_node character = nodeCombat.append_child("CombatCharacter");
 			character.append_attribute("currentHp") = itemNode.attribute("currentHp").as_int();
+			character.append_attribute("positionCombat") = itemNode.attribute("positionCombat").as_int();
 		}
 
 		ret = saveDoc->save_file("save_combat.xml");

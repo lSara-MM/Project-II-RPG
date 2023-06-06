@@ -31,6 +31,7 @@ bool Inventory::Start()
 	twinsIMG = app->tex->Load(app->itemManager->twinsPath);
 	fireIMG = app->tex->Load(app->itemManager->firePath);
 	partyWindow_B = false;
+	
 	buttonInventory = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1004, this, { 734, 20, 114, 60 }, ButtonType::SMALL);
 	buttonInventory->step = 20;//vaya mas rapido
 	buttonInventory->state = GuiControlState::NONE;
@@ -61,6 +62,53 @@ bool Inventory::Start()
 			selectCharacter[i]->step = 20;
 		}
 	}
+
+
+	// Party buttons
+	//// first page
+	GuiButton* temp;
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1010, this, { 272, 97, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1011, this, { 449, 97, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1012, this, { 272, 354, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1013, this, { 449, 354, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	//// second page
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1014, this, { 695, 95, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1015, this, { 860, 95, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1016, this, { 695, 351, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1017, this, { 860, 351, 142, 258 }, ButtonType::SMALL);
+	temp->state = GuiControlState::NONE;
+	listPartyButtons.Add(temp);
+	
+	lastPressed = -1;
+
+	// TO DO. move to "when party open" once
+	for (ListItem<GuiButton*>* i = listPartyButtons.start; i != nullptr; i = i->next)
+	{
+		i->data->state = GuiControlState::NORMAL;
+	}
+
+
 	int x = 0;
 	y = 155;
 	//Set items pages
@@ -196,7 +244,14 @@ bool Inventory::PostUpdate()
 
 	if (!partyWindow_B)
 	{
-			
+		buttonInventory->state = GuiControlState::NONE;
+		buttonParty->state = GuiControlState::NORMAL;
+		for (int i = 0; i <= 3; i++)
+		{
+			selectCharacter[i]->state = GuiControlState::NORMAL;
+		}
+		PrevPage->state = GuiControlState::NORMAL;
+		NextPage->state = GuiControlState::NORMAL;
 		if (app->combat->active)
 		{
 			for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
@@ -275,7 +330,7 @@ bool Inventory::PostUpdate()
 			//LOAD STATS
 			if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
 			{
-				app->itemManager->maxhp = app->itemManager->arrParty.at(app->itemManager->invPos)->maxHp;
+				app->itemManager->maxhp = app->itemManager->arrParty.at(app->itemManager->invPos)->currentHp;
 				app->itemManager->armor = app->itemManager->arrParty.at(app->itemManager->invPos)->armor;
 				app->itemManager->attack = app->itemManager->arrParty.at(app->itemManager->invPos)->attack;
 				app->itemManager->critDamage = app->itemManager->arrParty.at(app->itemManager->invPos)->critDamage;
@@ -317,15 +372,108 @@ bool Inventory::PostUpdate()
 	
 	else if (partyWindow_B)
 	{
-		app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+		buttonInventory->state = GuiControlState::NORMAL;
+		buttonParty->state = GuiControlState::NONE;
+		PrevPage->state = GuiControlState::NONE;
+		NextPage->state = GuiControlState::NONE;
+
+		for (int i = 0; i <= 3; i++)
+		{
+			selectCharacter[i]->state = GuiControlState::NONE;
+		}
+
+		// TO DO: delete comented when everything works
+		/*app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
 		app->render->DrawTexture(compaIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
 		app->render->DrawTexture(twinsIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-		app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+		app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);*/
 		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
 		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
 		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
 		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
 
+		// up left
+		switch (app->itemManager->arrParty.at(0)->id)
+		{
+		case 0:
+			app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+			break;
+		case 1:
+			app->render->DrawTexture(compaIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+			break;
+		case 2:
+			app->render->DrawTexture(twinsIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+			break;
+		case 3:
+			app->render->DrawTexture(fireIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+			break;
+		default:
+			app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+			break;
+		}
+		
+		// up right
+		switch (app->itemManager->arrParty.at(1)->id)
+		{
+		case 0:
+			app->render->DrawTexture(protaIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+			break;
+		case 1:
+			app->render->DrawTexture(compaIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+			break;
+		case 2:
+			app->render->DrawTexture(twinsIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+			break;
+		case 3:
+			app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+			break;
+		default:
+			app->render->DrawTexture(protaIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
+			break;
+		}
+		
+		// down left
+		switch (app->itemManager->arrParty.at(2)->id)
+		{
+		case 0:
+			app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+			break;
+		case 1:
+			app->render->DrawTexture(compaIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+			break;
+		case 2:
+			app->render->DrawTexture(twinsIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+			break;
+		case 3:
+			app->render->DrawTexture(fireIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+			break;
+		default:
+			app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+			break;
+		}
+		
+		if (app->itemManager->arrParty.at(3) != nullptr)
+		{
+			// down right
+			switch (app->itemManager->arrParty.at(3)->id)
+			{
+			case 0:
+				app->render->DrawTexture(protaIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+				break;
+			case 1:
+				app->render->DrawTexture(compaIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+				break;
+			case 2:
+				app->render->DrawTexture(twinsIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+				break;
+			case 3:
+				app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+				break;
+			default:
+				app->render->DrawTexture(protaIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+				break;
+			}
+		}
 	}
 
 	//arreglo cuestionable pero bueno, it works 
@@ -556,6 +704,7 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			app->itemManager->MinusQuantity(app->itemManager->armorItems[i]);
 		}
 	}
+	
 	switch (control->id)
 	{
 		case 1000:
@@ -629,5 +778,39 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 	}
 
+	if (control->id >= 1010 && control->id <= 1017)
+	{
+		if (lastPressed == -1)
+		{
+			for (ListItem<GuiButton*>* i = listPartyButtons.start; i != nullptr; i = i->next)
+			{
+				//
+			}
+			listPartyButtons.At(control->id - 1010)->data->state = GuiControlState::SELECTED;
+			lastPressed = control->id - 1010;
+		}
+		else if (lastPressed == control->id - 1010)
+		{
+			lastPressed = -1;
+		}
+		else
+		{
+			// Change party
+			app->itemManager->ChangeParty(lastPressed, control->id - 1010);
+			lastPressed = -1;
+		}
+		
+	}
+
+	/*if (chara->listSkills.At(i)->data->posToUseStart_I <= chara->positionCombat_I && chara->positionCombat_I <= chara->listSkills.At(i)->data->posToUseEnd_I && chara->charaType == CharacterType::ALLY)
+	{
+		listButtons.At(offset + i)->data->state = GuiControlState::NORMAL;
+		listButtons.At(offset + i)->data->isSelected = false;
+	}
+	else
+	{
+		listButtons.At(offset + i)->data->state = GuiControlState::SELECTED;
+		listButtons.At(offset + i)->data->isSelected = true;
+	}*/
 	return true;
 }

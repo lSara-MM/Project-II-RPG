@@ -1101,17 +1101,29 @@ void ItemManager::AddCharaToParty(int id)
 	{
 		if (vecPC.at(i)->id == id)
 		{
-			for (int i = 0; i < arrParty.size(); i++)
+			for (int j = 0; i < arrParty.size(); j++)
 			{
-				if (arrParty.at(i) == nullptr)
+				if (arrParty.at(j) == nullptr)
 				{
-					arrParty.at(i) = vecPC.at(i);
-					arrParty.at(i)->positionCombat_I = i;
+					arrParty.at(j) = vecPC.at(i);
+					arrParty.at(j)->positionCombat_I = j;
 					break;
 				}
 			}
 		}
 	}
+}
+
+void ItemManager::ChangeParty(int prevId, int newId)
+{
+	arrParty.at(prevId)->positionCombat_I = newId;
+	arrParty.at(newId)->positionCombat_I = prevId;
+
+	Character* temp = arrParty.at(prevId);
+	arrParty.at(prevId) = arrParty.at(newId);
+	arrParty.at(newId) = temp;
+
+	temp = nullptr;
 }
 
 void ItemManager::LoadAllPC()
@@ -1123,6 +1135,7 @@ void ItemManager::LoadAllPC()
 
 		chara->Awake();
 		chara->isCombatant = false;
+		chara->positionCombat_I = -1;
 
 		chara->Start();
 
@@ -1144,27 +1157,11 @@ bool ItemManager::LoadParty()
 	}
 	else
 	{
-		/*pugi::xml_node& data = gameStateFile.child("save_state").child(app->entityManager->name.GetString());
-		
-		int i = 0;
-		vector<Character*> ret;
-		app->combat->LoadCombat(&ret);
-
-		for (pugi::xml_attribute attr = data.child("party").attribute("id"); attr; attr = attr.next_attribute())
-		{
-			if (ret.empty())
-			{
-				int id = data.child("party").attribute("id").as_int();
-				app->itemManager->AddCharaToParty(id);
-			}
-			else { app->itemManager->arrParty.at(i) = ret.at(i); }
-		}*/
-
 		pugi::xml_node& data = gameStateFile.child("save_state").child(app->entityManager->name.GetString());
 
 		for (pugi::xml_attribute attr = data.child("party").attribute("id"); attr; attr = attr.next_attribute())
 		{
-			int id = data.child("party").attribute("id").as_int();
+			int id = attr.as_int();
 			app->itemManager->AddCharaToParty(id);
 		}
 	}

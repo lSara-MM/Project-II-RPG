@@ -117,7 +117,6 @@
 
 
     <!--Combat Characters -->
-
 		<CombatCharacter name ="" id="0"
         maxHp="1200" currentHp="1200" attack="200" armor="15" critRate="30" critDamage="25" accuracy="0" res="0" dodge="15" speed="75"
         type="0" class="0" skill1ID="1" skill2ID="2" skill3ID="3" skill4ID="4"
