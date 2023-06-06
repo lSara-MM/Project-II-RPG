@@ -180,6 +180,7 @@ bool PracticeTent::Update(float dt)
 			player->lockMovement = true;
 			app->inventory->Enable();
 			app->inventory->partyWindow_B = true;
+			app->inventory->buttonsChangeStat = true;
 		}
 	}
 	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt); }
@@ -276,10 +277,9 @@ bool PracticeTent::CleanUp()
 	DummySensor = false;
 
 	app->itemManager->Disable();
-	app->entityManager->Disable();
 	app->inventory->Disable();
 
-	delete player;
+	app->entityManager->Disable();
 	player = nullptr;
 
 	if (pSettings != nullptr)

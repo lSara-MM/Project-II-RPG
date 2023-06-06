@@ -16,6 +16,7 @@
 #include "PuzzleManager.h"
 #include "QuestManager.h"
 #include "CutScene.h"
+#include "ModuleParticles.h"
 
 #include "InitiAllResourcesFromZip.h"
 #include "AssetsManager.h"
@@ -33,7 +34,7 @@
 #include "Map.h"
 #include "Pathfinding.h"
 #include "Physics.h"
-#include "Particles.h"
+
 
 #include "Defs.h"
 #include "Log.h"
@@ -80,7 +81,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	puzzleManager = new PuzzleManager();
 	questManager = new QuestManager();
 	cutScene = new CutScene();
-	particles = new Particles();
+	moduleparticles = new ModuleParticles();
 
 	/*initiAllResourcesFromZip = new InitAllResourcesFromZip();
 	assetsManager = new AssetsManager();*/
@@ -109,7 +110,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(puzzleManager);
 	AddModule(questManager);
 	AddModule(cutScene);
-	AddModule(particles);
+	AddModule(moduleparticles);
 	AddModule(entityManager);
 	AddModule(dialogueSystem);
 	AddModule(inventory);
@@ -527,4 +528,5 @@ void App::DisableAtStart()
 	itemManager->active = false;
 	lootManager->active = false;
 	forge->active = false;
+	moduleparticles->active = false;
 }

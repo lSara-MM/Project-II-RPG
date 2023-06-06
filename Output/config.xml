@@ -198,7 +198,7 @@
 			x="2595" y="4438" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
 		<npc name="ORACULO" dialogueID="4"
-			x="1600" y="2880" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
+			x="1640" y="2910" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
 		<npc name="Igor and Ivan" dialogueID="3"
 			x="3538" y="2542" width="64" height="64" texturepath="Assets/Textures/gemelos_chibi.png"/>
@@ -342,15 +342,15 @@ enum class CharacterClass
         width="0" heigth="0"
 		texturePath="Assets/Textures/dummy_combate.png"
 		
-		sectionX="35" sectionY="36"/>
+		sectionX="26" sectionY="62"/>
 
-		<enemy name ="Dummy" id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" accuracy="10" res="20" dodge="5" speed="5"
+		<enemy name ="Dummy Dummy" id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" accuracy="10" res="20" dodge="5" speed="5"
         type="1" class="0" skill1ID="25" skill2ID="26" skill3ID="27" skill4ID="28"
                
         width="0" heigth="0"
         texturePath ="Assets/Textures/dummy_combate.png"
 		
-		sectionX="16" sectionY="26"/>
+		sectionX="26" sectionY="62"/>
 	</scenes>
 	<scenes name="HouseOfTerrors" numEnemies="3">
 		<enemy name ="Bewitched Wardrobe" id="0"
@@ -389,7 +389,7 @@ enum class CharacterClass
 	
 	<scenes name="BeastTent" numEnemies="3">
 		<enemy name ="Fur Abobination" id="0"
-        maxHp="900" currentHp="900" attack="180" armor="15" critRate="10" critDamage="30" accuracy="0" res="10" dodge="5" speed="90"
+        maxHp="1100" currentHp="1100" attack="200" armor="20" critRate="10" critDamage="30" accuracy="10" res="20" dodge="15" speed="100"
         type="1" class="2" skill1ID="37" skill2ID="38" skill3ID="39" skill4ID="40"
                
         width="0" heigth="0"
@@ -397,7 +397,7 @@ enum class CharacterClass
 		
 		sectionX="35" sectionY="36"/>
 
-		<enemy name ="Surgeon Wasps Nest" id="1" maxHp="1500" currentHp="1500" attack="150" armor="0" critRate="0" critDamage="0" accuracy="0" res="50" dodge="0" speed="25"
+		<enemy name ="Surgeon Wasps Nest" id="1" maxHp="1800" currentHp="1800" attack="180" armor="0" critRate="0" critDamage="0" accuracy="0" res="80" dodge="0" speed="25"
         type="1" class="5" skill1ID="41" skill2ID="42" skill3ID="43" skill4ID="44"
                
         width="0" heigth="0"
@@ -405,7 +405,7 @@ enum class CharacterClass
 		
 		sectionX="16" sectionY="26"/>
 
-		<enemy name ="Psyonic Eel" id="2" maxHp="750" currentHp="750" attack="190" armor="10" critRate="25" critDamage="15" accuracy="30" res="20" dodge="10" speed="65"
+		<enemy name ="Psyonic Eel" id="2" maxHp="900" currentHp="900" attack="240" armor="10" critRate="25" critDamage="15" accuracy="50" res="20" dodge="25" speed="75"
         type="1" class="1" skill1ID="45" skill2ID="46" skill3ID="47" skill4ID="48"
                
         width="0" heigth="0"
@@ -413,7 +413,7 @@ enum class CharacterClass
 		
 		sectionX="26" sectionY="30"/>
 
-		<enemy name ="The Specter" id="20" maxHp="3000" currentHp="3000" attack="220" armor="40" critRate="0" critDamage="0" accuracy="20" res="15" dodge="0" speed="65"
+		<enemy name ="The Beast Tamer" id="20" maxHp="3600" currentHp="3600" attack="270" armor="30" critRate="0" critDamage="0" accuracy="20" res="15" dodge="30" speed="120"
         type="1" class="9" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
                
         width="0" heigth="0"

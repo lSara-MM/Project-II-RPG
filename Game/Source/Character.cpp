@@ -391,9 +391,17 @@ bool Character::Update(float dt)
 								else //No kill mode
 								{
 									//Usar preparation
-									if (listSkillsHistory.end->data == 2 || listSkillsHistory.end->prev->data == 2)
+									if (listSkillsHistory.end->data == 2 )
 									{
 										probSkill = 0;
+
+									}
+									else if (listSkillsHistory.Count()>=2)
+									{
+										if (listSkillsHistory.end->prev->data == 2)
+										{
+											probSkill = 0;
+										}
 									}
 									else
 									{
@@ -1032,7 +1040,10 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			if (defender->GetStat(EffectType::BLESS)!=-1 || skill->firstPositiveEffect!=-1) {defender->listStatusEffects.Add(statusEffect1);}
 			app->audio->PlayFx(bufffx);
 			//Movimiento
-			app->combat->MoveCharacter(defender, skill->movementTarget);
+			if (skill->movementTarget != 0)
+			{
+				app->combat->MoveCharacter(defender, skill->movementTarget);
+			}
 		}
 		else
 		{
@@ -1040,7 +1051,11 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			{
 				if (defender->GetStat(EffectType::BLESS) != 1 || skill->firstPositiveEffect != -1){defender->listStatusEffects.Add(statusEffect1);}
 				//Movimiento
-				app->combat->MoveCharacter(defender, skill->movementTarget);
+				if (skill->movementTarget != 0)
+				{
+					app->combat->MoveCharacter(defender, skill->movementTarget);
+				}
+				
 			}
 			app->audio->PlayFx(debufffx);
 		}
@@ -1082,15 +1097,23 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				if (defender->GetStat(EffectType::BLESS) != -1 || skill->firstPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect1); }
 				//Movimiento
 				app->audio->PlayFx(bufffx);
-				app->combat->MoveCharacter(defender, skill->movementTarget);
+				if (skill->movementTarget != 0)
+				{
+					app->combat->MoveCharacter(defender, skill->movementTarget);
+				}
+				
 			}
 			else
 			{
 				if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 				{
 					//Movimiento
-					app->combat->MoveCharacter(defender, skill->movementTarget || skill->firstPositiveEffect != -1);
-					if (defender->GetStat(EffectType::BLESS) != 1) { defender->listStatusEffects.Add(statusEffect1); }
+					if (skill->movementTarget != 0)
+					{
+						app->combat->MoveCharacter(defender, skill->movementTarget );
+					}
+					
+					if (defender->GetStat(EffectType::BLESS) != 1 || skill->firstPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect1); }
 				}
 				app->audio->PlayFx(debufffx);
 			}
@@ -1184,6 +1207,7 @@ bool Character::UseSkill(Skill* skill)
 	{
 		ModifyHP(ApplySkill(this, this, skill)); //Lanzarsela a si mismo
 		app->audio->PlayFx(healfx);
+		app->combat->MoveCharacter(this,skill->movementCaster);
 		return true;
 	}
 
@@ -1320,7 +1344,10 @@ bool Character::UseSkill(Skill* skill)
 	}
 
 	//Movimiento del lanzador, el movimiento del objetivo se hace en el apply skill
-	if (skill->movementCaster != 0) { app->combat->MoveCharacter(this, skill->movementCaster); }
+	if (skill->movementCaster != 0) 
+	{ 
+		app->combat->MoveCharacter(this, skill->movementCaster); 
+	}
 	
 	return true;
 }

@@ -164,6 +164,7 @@ bool BeastTent::Update(float dt)
 			player->lockMovement = true;
 			app->inventory->Enable();
 			app->inventory->partyWindow_B = true;
+			app->inventory->buttonsChangeStat = true;
 		}
 	}
 	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt); }
@@ -258,8 +259,10 @@ bool BeastTent::CleanUp()
 	app->SaveToFile();
 
 	app->itemManager->Disable();
-	app->entityManager->Disable();
 	app->inventory->Disable();
+
+	app->entityManager->Disable();
+	player = nullptr;
 
 	//CleanUp chests
 	for (int i = 0; i < app->lootManager->chests.size(); i++)
@@ -269,9 +272,6 @@ bool BeastTent::CleanUp()
 			app->lootManager->chests[i]->CleanUp();
 		}
 	}
-
-	delete player;
-	player = nullptr;
 
 	if (pSettings != nullptr)
 	{

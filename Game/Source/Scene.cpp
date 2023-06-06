@@ -159,13 +159,13 @@ bool Scene::Update(float dt)
 			player->lockMovement = false;
 			app->inventory->inventoryTransition_B = true;
 			//app->inventory->Disable();
-
 		}
 		else
 		{
 			player->lockMovement = true;
 			app->inventory->Enable();
 			app->inventory->partyWindow_B = true;
+			app->inventory->buttonsChangeStat = true;
 		}
 	}
 
@@ -250,18 +250,15 @@ bool Scene::CleanUp()
 
 	app->SaveToFile();
 
-	app->entityManager->Disable();
 	if (app->itemManager->active)
 	{
 		app->itemManager->Disable();
 	}
 	app->inventory->Disable();
 
-	
-	delete player;
 	player = nullptr;
-
 	listNpc.Clear();
+	app->entityManager->Disable();
 
 	if (pSettings != nullptr)
 	{

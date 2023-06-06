@@ -127,6 +127,8 @@
     <ClCompile Include="Source\BeastTent.cpp" />
     <ClCompile Include="Source\Forge.cpp" />
     <ClCompile Include="Source\Particles.cpp" />
+    <ClCompile Include="Source\ModuleParticles.cpp" />
+    <ClCompile Include="Source\Particle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -294,6 +296,8 @@
     <ClInclude Include="Source\BeastTent.h" />
     <ClInclude Include="Source\Forge.h" />
     <ClInclude Include="Source\Particles.h" />
+    <ClInclude Include="Source\ModuleParticles.h" />
+    <ClInclude Include="Source\Particle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
