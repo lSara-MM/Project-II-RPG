@@ -1143,7 +1143,7 @@ bool ItemManager::LoadParty()
 	}
 	else
 	{
-		pugi::xml_node& data = gameStateFile.child("save_state").child(app->entityManager->name.GetString());
+		/*pugi::xml_node& data = gameStateFile.child("save_state").child(app->entityManager->name.GetString());
 		
 		int i = 0;
 		vector<Character*> ret;
@@ -1157,8 +1157,18 @@ bool ItemManager::LoadParty()
 				app->itemManager->AddCharaToParty(id);
 			}
 			else { app->itemManager->arrParty.at(i) = ret.at(i); }
+		}*/
+
+		pugi::xml_node& data = gameStateFile.child("save_state").child(app->entityManager->name.GetString());
+
+		for (pugi::xml_attribute attr = data.child("party").attribute("id"); attr; attr = attr.next_attribute())
+		{
+			int id = data.child("party").attribute("id").as_int();
+			app->itemManager->AddCharaToParty(id);
 		}
 	}
+
+	app->combat->LoadCombat();
 
 	return true;
 }

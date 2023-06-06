@@ -79,6 +79,7 @@ public:
 
 	// Save/Load
 	bool SaveCombat(); //guardar stats playable characters en xml combat
+	bool LoadCombat(); //cargar stats playable characters desde xml combat
 	bool LoadCombat(vector<Character*>* vec); //cargar stats playable characters desde xml combat
 	bool RestartCombatData(); //al empezar partida nueva, poner stats xml combat igual a xml config
 

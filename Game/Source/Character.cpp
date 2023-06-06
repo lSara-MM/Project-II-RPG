@@ -148,7 +148,7 @@ bool Character::Start()
 
 bool Character::Update(float dt)
 {
-	if (isCombatant)
+	if (isCombatant && app->combat->active)
 	{
 		if (currentHp <= 0)
 		{
