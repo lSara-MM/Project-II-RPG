@@ -107,14 +107,22 @@ bool CutScene::Update(float dt)
 
 	if (DeltaTime >= 1)
 	{
-		printText = true;
-		app->render->TextDraw("PRESS SPACE", app->win->GetWidth() - 200, app->win->GetHeight() - 50, 10, Font::UI, { 255, 255, 255 });
+		if (passImg <= ImgToPrint.Count() - 1)
+		{
+			printText = true;
+			app->render->TextDraw("PRESS SPACE", app->win->GetWidth() - 200, app->win->GetHeight() - 50, 10, Font::UI, { 255, 255, 255 });
+		}
 	}
 
 	if (printText)
 	{
+
 		if (passImg <= ImgToPrint.Count() - 1)
-			app->render->TextDraw(NextText.At(passImg)->next->data, 20, app->win->GetHeight() - 100, 15, Font::UI, { 255, 255, 255 });
+		{
+			text = NextText.At(passImg)->next->data.c_str();
+			app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 25, 100, 2.5f, Font::TEXT, 0, { 255, 255, 255 });
+			//app->render->TextDraw(NextText.At(passImg)->next->data, 20, app->win->GetHeight() - 100, 15, Font::UI, { 255, 255, 255 });
+		}
 	}
 
 	if (DeltaTime >= 2)
