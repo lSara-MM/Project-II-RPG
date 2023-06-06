@@ -28,6 +28,8 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
+	void ReOrderInventory();
+
 	bool OnGuiMouseHoverEvent(GuiControl* control);
 	bool OnGuiMouseOutHoverEvent(GuiControl* control);
 	bool OnGuiMouseClickEvent(GuiControl* control);

@@ -380,6 +380,58 @@ bool Inventory::CleanUp()
 	return true;
 }
 
+void Inventory::ReOrderInventory()
+{
+	if (app->combat->active)
+	{
+	}
+	else
+	{
+		int x = 0;
+		y = 155;
+		//Set items pages
+		for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+		{
+			if (capx == x)
+			{
+				y += 75;
+				x = 0;
+				if (y / 75 > capy + 1)
+				{
+					y = 155;
+					page++;
+				}
+			}
+			if (app->itemManager->armorItems[i]->equiped == false)
+			{
+				x++;
+			}
+			app->itemManager->armorItems[i]->page = page;
+		}
+		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+		{
+			if (app->itemManager->nodeList[i]->type != 2)
+			{
+				if (capx == x)
+				{
+					y += 70;
+					x = 0;
+					if (y / 75 > capy + 1)
+					{
+						y = 155;
+						page++;
+					}
+				}
+				if (app->itemManager->nodeList[i]->quantity > 0)
+				{
+					x++;
+					app->itemManager->nodeList[i]->page = page;
+				}
+			}
+		}
+	}
+}
+
 bool Inventory::OnGuiMouseHoverEvent(GuiControl* control)
 {
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)

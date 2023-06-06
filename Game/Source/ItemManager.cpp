@@ -426,7 +426,6 @@ void ItemManager::UseItem(ItemNode* item)
 					{
 						item->space = 0;
 					}
-					item->page = app->inventory->page + 1;
 				}
 
 			}
@@ -446,6 +445,8 @@ void ItemManager::UseItem(ItemNode* item)
 	{
 		item->CleanUp();
 	}
+
+	app->inventory->ReOrderInventory();
 }
 
 void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
