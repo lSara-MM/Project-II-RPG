@@ -66,13 +66,9 @@ bool Scene::Start()
 	app->itemManager->Enable();
 	app->lootManager->Enable();
 
-	if (app->puzzleManager->active == true) {
-		app->puzzleManager->CleanUp();
-	}
-
 	app->puzzleManager->active = false;
 
-	app->audio->PlayMusic(lobby_music, 1.0);
+	app->audio->PlayMusic(lobby_music, 1.0f);
 
 	if (app->input->playerName->input.empty())
 	{
@@ -329,7 +325,7 @@ void Scene::Debug()
 	if (pause_B == false && player->pauseEnabled_B && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
 	{
 		app->audio->PlayFx(pausefx);
-		app->audio->PlayMusic(pause_music);
+		app->audio->PlayMusic(pause_music, 1.0f);
 
 		//inventory off
 		app->inventory->Disable();
@@ -367,7 +363,7 @@ void Scene::Debug()
 		else 
 		{
 			pause_B = false;
-			app->audio->PlayMusic(lobby_music);
+			app->audio->PlayMusic(lobby_music, 1.0f);
 			if (pause_B)
 			{
 				/*pPause = new Pause(this);*/
@@ -474,7 +470,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button Close pause click");
 		pause_B = false;
 		player->lockMovement = false;
-		app->audio->PlayMusic(lobby_music);
+		app->audio->PlayMusic(lobby_music, 1.0f);
 		//pPause->CleanUp();
 		break;
 		
@@ -482,12 +478,13 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button Resume click");
 		pause_B = false;
 		player->lockMovement = false;
-		app->audio->PlayMusic(lobby_music);
+		app->audio->PlayMusic(lobby_music, 1.0f);
 		//pPause->CleanUp();
 		break;
 		
 	case 703: 
 		LOG("Button Return to title click");
+		pause_B = false;
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);		
 		break;
 		

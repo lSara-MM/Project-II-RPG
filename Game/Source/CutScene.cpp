@@ -40,6 +40,15 @@ bool CutScene::Awake(pugi::xml_node& config)
 		pugiNode = pugiNode.next_sibling("Img");
 	}
 
+	pugiNode = config.first_child();
+	
+	for (int i = 0; pugiNode != NULL; i++)
+	{
+		NextText.Add(pugiNode.attribute("textpath").as_string());
+
+		pugiNode = pugiNode.next_sibling("Text");
+	}
+
 	return ret;
 }
 
@@ -47,6 +56,7 @@ bool CutScene::Awake(pugi::xml_node& config)
 bool CutScene::Start()
 {
 	passImg = 0;
+	printText = false;
 
 	RestartTimer();
 
@@ -54,6 +64,8 @@ bool CutScene::Start()
 	{
 		ImgToPrint.Add(app->tex->Load(NextImg.At(i)->data));
 	}
+
+	app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, ImgToPrint.At(passImg)->data, 40);
 
 	return true;
 }
@@ -67,29 +79,52 @@ bool CutScene::PreUpdate()
 // Called each loop iteration
 bool CutScene::Update(float dt)
 {
-
-	if (passImg >= ImgToPrint.Count() - 1)
-	{
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
-	}
-
 	if(app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 	{
-		passImg++;
+		printText = false;
 
-		if(ImgToPrint.At(passImg + 1) != NULL)
+		if(passImg < ImgToPrint.Count() - 1)
+		{
 			app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, ImgToPrint.At(passImg + 1)->data, 40);
+		}
+		else 
+		{
+			app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, nullptr, 40);
+		}
+
+		passImg += 1;
 
 		RestartTimer();
 	}
 
-	if (ImgToPrint.At(passImg) != NULL)
+	if (passImg >= ImgToPrint.Count())
+	{
+		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+	}
+
+	if (passImg <= ImgToPrint.Count() - 1)
 		app->render->DrawTexture(ImgToPrint.At(passImg)->data, 0, 0);
 
 	if (DeltaTime >= 1)
 	{
-		app->render->TextDraw("PRESS SPACE", app->win->GetWidth() / 2 - 200, app->win->GetHeight() - 100, 50, Font::UI, { 255, 255, 255 });
+		if (passImg <= ImgToPrint.Count() - 1)
+		{
+			printText = true;
+			app->render->TextDraw("PRESS SPACE", app->win->GetWidth() - 200, app->win->GetHeight() - 50, 10, Font::UI, { 255, 255, 255 });
+		}
 	}
+
+	if (printText)
+	{
+
+		if (passImg <= ImgToPrint.Count() - 1)
+		{
+			text = NextText.At(passImg)->next->data.c_str();
+			app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 25, 100, 2.5f, Font::TEXT, 0, { 255, 255, 255 });
+			//app->render->TextDraw(NextText.At(passImg)->next->data, 20, app->win->GetHeight() - 100, 15, Font::UI, { 255, 255, 255 });
+		}
+	}
+
 	if (DeltaTime >= 2)
 	{
 		RestartTimer();

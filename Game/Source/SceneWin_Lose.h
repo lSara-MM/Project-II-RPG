@@ -70,6 +70,7 @@ private:
 
 	bool transition_B;
 	Tween backgroundAnimation;
+	int posYani_I;
 
 	//Music
 	const char* winMusicPath;

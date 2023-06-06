@@ -767,6 +767,7 @@ void ItemManager::LoadCraftItems(int ID0, int ID1, bool armor)
 				nodeList[i]->x = x;
 
 				nodeList[i]->canCraft = true;
+				nodeList[i]->craft = true;
 
 				if (nodeList[i]->forge)
 				{
@@ -800,6 +801,7 @@ void ItemManager::LoadCraftItems(int ID0, int ID1, bool armor)
 								nodeList[attribute.as_int()]->x = x;
 
 								nodeList[attribute.as_int()]->canCraft = true;
+								nodeList[attribute.as_int()]->craft = true;
 
 								if (nodeList[attribute.as_int()]->forge)
 								{

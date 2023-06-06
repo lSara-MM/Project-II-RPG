@@ -314,6 +314,13 @@ private:
 
 	const char* texturepathPuzzleDungeon2;
 
+	//win dungeon
+	const char* texturepathWintext;
+	SDL_Texture* winText;
+	Tween winAnimation;
+	int posYanimation_I;
+	bool completeDungeon_B;//no se si hay bool que controle que se ha terminado la dungeon, lo pongo para iniciar animacion pantalla vicotria
+
 	//fx
 	const char* palancaPath;
 	uint palancafx;

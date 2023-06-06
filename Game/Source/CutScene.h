@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Player.h"
 #include "Tweening.h"
+#include <vector>
+
+using namespace std;
 
 
 struct SDL_Texture;
@@ -41,14 +44,21 @@ public:
 
 	int passImg;
 
+	bool printText;
+
 	uint32 mTicks;
 	uint32 mStartTicks;
 	uint32 DeltaTime;
 
+	SString text;
+	vector<SString> texts;
+	string textToSString;
 
 	List<SDL_Texture*> ImgToPrint;
 
 	List<const char*> NextImg;
+
+	List<string> NextText;
 
 	pugi::xml_node pugiNode;
 

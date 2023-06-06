@@ -38,6 +38,7 @@ public:
 	unsigned cap;
 	int y;
 	int forgePos = 0;
+	bool toDelete = false;
 
 	GuiButton* forgeButton;
 	GuiButton* exitButton;
