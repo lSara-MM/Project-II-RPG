@@ -277,7 +277,7 @@ void Circus::Debug()
 	if (pause_B == false && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START)==BUTTON_DOWN))
 	{
 		pause_B = true;
-		app->audio->PlayMusic(pause_music);
+		app->audio->PlayMusic(pause_music, 1.0f);
 		app->audio->PlayFx(pausefx);
 		if (pause_B)
 		{
@@ -311,7 +311,7 @@ void Circus::Debug()
 		else
 		{
 			pause_B = false;
-			app->audio->PlayMusic(circusMusPath);
+			app->audio->PlayMusic(circusMusPath, 1.0f);
 			if (pause_B)
 			{
 				/*pPause = new Pause(this);
@@ -375,14 +375,14 @@ bool Circus::OnGuiMouseClickEvent(GuiControl* control)
 	case 701:
 		LOG("Button Close pause click");
 		pause_B = false;
-		app->audio->PlayMusic(circusMusPath);
+		app->audio->PlayMusic(circusMusPath, 1.0f);
 		/*pPause->CleanUp();*/
 		break;
 
 	case 702:
 		LOG("Button Resume click");
 		pause_B = false;
-		app->audio->PlayMusic(circusMusPath);
+		app->audio->PlayMusic(circusMusPath, 1.0f);
 		/*pPause->CleanUp();*/
 		break;
 

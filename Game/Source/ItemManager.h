@@ -173,6 +173,7 @@ public:
 
 public:
 	//print stats
+	int hp = 0;
 	int maxhp = 0;
 	int attack = 0;
 	int critProbability = 0;

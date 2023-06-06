@@ -171,6 +171,14 @@
     <Img texturepath="Assets/Textures/cinematica_circo.png"/>
     <Img texturepath="Assets/Textures/cinematica_circo.png"/>
     <Img texturepath="Assets/Textures/cinematica_circo.png"/>
+    <Img texturepath="Assets/Textures/cinematica_circo.png"/>
+    <Text textpath="The postwar period has left Moscow destroyed, not just the streets, people have lost their trust and kindness."/>
+    <Text textpath="This disaster left an impossible dream: I want to be a magician. I always wanted, now I need to."/>
+    <Text textpath="It seemed impossible, but I couldn't help but trust. Then it came. A circus came to Moscow to shed its light on a devastated city, to restore hope."/>
+    <Text textpath="-The best in the world- they proclaim. I did not hesitate, it was my moment, probably my last chance. I had to show my skills."/>
+    <Text textpath="There he was, the Showman, willing to listen to my offer and see what I was capable of."/>
+    <Text textpath="I impressed him, I'm convinced. He wanted to hire me immediately. -You have a lot of potential boy- He took a piece of paper out of nowhere. I have impressed another magician."/>
+    <Text textpath="Happiness flooded me, and there is only one step left. I have to sign."/>
   </CutScene>
 	<HouseOfTerrors texturePathDark="Assets/Textures/OscuridadDungeon.png" musicD1="Assets/Audio/Music/Haunted_House.ogg" pause="Assets/Audio/Music/mus_pause.ogg"/>
 	<Circus musicCircus="Assets/Audio/Music/CircusTent_mus.ogg" pause="Assets/Audio/Music/mus_pause.ogg"/>
@@ -189,8 +197,8 @@
 		<npc name="ORACULO" dialogueID="2"
 			x="2595" y="4438" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
-		<npc name="ORACULO" dialogueID="4"
-			x="1664" y="2880" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
+		<npc name="ORACULO" dialogueID="5"
+			x="1640" y="2910" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
 		<npc name="Igor and Ivan" dialogueID="3"
 			x="3538" y="2542" width="64" height="64" texturepath="Assets/Textures/gemelos_chibi.png"/>
@@ -335,15 +343,15 @@ enum class CharacterClass
         width="0" heigth="0"
 		texturePath="Assets/Textures/dummy_combate.png"
 		
-		sectionX="35" sectionY="36"/>
+		sectionX="26" sectionY="62"/>
 
-		<enemy name ="Dummy" id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" accuracy="10" res="20" dodge="5" speed="5"
+		<enemy name ="Dummy Dummy" id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" accuracy="10" res="20" dodge="5" speed="5"
         type="1" class="0" skill1ID="25" skill2ID="26" skill3ID="27" skill4ID="28"
                
         width="0" heigth="0"
         texturePath ="Assets/Textures/dummy_combate.png"
 		
-		sectionX="16" sectionY="26"/>
+		sectionX="26" sectionY="62"/>
 	</scenes>
 	<scenes name="HouseOfTerrors" numEnemies="3">
 		<enemy name ="Bewitched Wardrobe" id="0"
