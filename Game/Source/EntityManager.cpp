@@ -163,7 +163,7 @@ bool EntityManager::LoadState(pugi::xml_node& data, Module* module_)
 	app->input->posY = data.child("player").attribute("y").as_int();
 
 	// TO DO: delete if win/lose scene runs well
-	int fadeTime = 0;
+	int fadeTime = 90;
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->sceneWin_Lose->name.GetString()) == 0) { fadeTime = 5; }
 
 

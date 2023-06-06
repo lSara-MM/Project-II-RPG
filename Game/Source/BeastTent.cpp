@@ -456,6 +456,7 @@ bool BeastTent::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button Return to title click");
 		app->puzzleManager->CleanUp();
 		app->puzzleManager->active = false;
+		pause_B = false;
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
 		break;
 
