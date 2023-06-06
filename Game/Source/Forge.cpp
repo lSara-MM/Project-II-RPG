@@ -189,6 +189,8 @@ bool Forge::CleanUp()
 	app->tex->UnLoad(forgeInventoryTexture);
 	app->tex->UnLoad(forgeTexture);
 
+	forgePos = 0;
+
 	return true;
 }
 
@@ -298,35 +300,45 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 
 		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 		{
-			if (app->itemManager->nodeList[i]->ID == control->id)
+			if (app->itemManager->nodeList[i]->ID == control->id && app->itemManager->nodeList[i]->type != 2)
 			{
-				app->itemManager->nodeList[i]->craft = !app->itemManager->nodeList[i]->craft;
+				app->itemManager->nodeList[i]->craft = true;
+
+				if (app->itemManager->nodeList[i]->craft && forgePos == 2 && app->itemManager->nodeList[i]->forgePos == 0)
+				{
+					app->itemManager->nodeList[i]->craft = false;
+					break;
+				}
+
+				if (app->itemManager->nodeList[i]->craft && forgePos != 0 && app->itemManager->nodeList[i]->forgePos != 0)
+				{
+					if (forgePos == 1 && app->itemManager->nodeList[i]->forgePos == 1)
+					{
+						app->itemManager->nodeList[i]->forgePos == 0;
+						forgePos = 0;
+						app->itemManager->nodeList[i]->craft = false;
+						break;
+					}
+					else if (forgePos == 2 && app->itemManager->nodeList[i]->forgePos == 2)
+					{
+						app->itemManager->nodeList[i]->forgePos == 0;
+						forgePos = 1;
+						app->itemManager->nodeList[i]->craft = false;
+						break;
+					}
+				}
+
 				if (app->itemManager->nodeList[i]->craft && forgePos == 0)
 				{
 					app->itemManager->nodeList[i]->forgePos = 1;
 					forgePos = 1;
+					break;
 				}
 				else if (app->itemManager->nodeList[i]->craft && forgePos == 1)
 				{
 					app->itemManager->nodeList[i]->forgePos = 2;
 					forgePos = 2;
-				}
-				//else if (forgePos == 2 && app->itemManager->nodeList[i]->forgePos==0)
-				//{
-				//	app->itemManager->nodeList[i]->craft = false;
-				//}
-				else if (app->itemManager->nodeList[i]->craft == false)
-				{
-					if (app->itemManager->nodeList[i]->forgePos == 1)
-					{
-						app->itemManager->nodeList[i]->forgePos == 0;
-						forgePos = 0;
-					}
-					else
-					{
-						app->itemManager->nodeList[i]->forgePos == 0;
-						forgePos = 1;
-					}
+					break;
 				}
 			}
 		}
@@ -334,34 +346,45 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		if (app->itemManager->armorItems[i]->ID == control->id)
 		{
-			app->itemManager->armorItems[i]->craft = !app->itemManager->armorItems[i]->craft;
+			app->itemManager->armorItems[i]->craft = true;
+
+			if (app->itemManager->armorItems[i]->craft && forgePos == 2 && app->itemManager->armorItems[i]->forgePos == 0)
+			{
+				app->itemManager->armorItems[i]->craft = false;
+				break;
+			}
+
+			if (app->itemManager->armorItems[i]->craft && forgePos != 0 && app->itemManager->armorItems[i]->forgePos != 0)
+			{
+				if (forgePos == 1 && app->itemManager->armorItems[i]->forgePos == 1)
+				{
+					app->itemManager->armorItems[i]->forgePos == 0;
+					forgePos = 0;
+					app->itemManager->armorItems[i]->craft = false;
+					break;
+				}
+				else if (forgePos == 2 && app->itemManager->armorItems[i]->forgePos == 2)
+				{
+					app->itemManager->armorItems[i]->forgePos == 0;
+					forgePos = 1;
+					app->itemManager->armorItems[i]->craft = false;
+					break;
+				}
+			}
+
 			if (app->itemManager->armorItems[i]->craft && forgePos == 0)
 			{
 				app->itemManager->armorItems[i]->forgePos = 1;
 				forgePos = 1;
+				break;
 			}
 			else if (app->itemManager->armorItems[i]->craft && forgePos == 1)
 			{
 				app->itemManager->armorItems[i]->forgePos = 2;
 				forgePos = 2;
+				break;
 			}
-			//else if (forgePos == 2 && app->itemManager->armorItems[i]->forgePos == 0)
-			//{
-			//	app->itemManager->armorItems[i]->craft = false;
-			//}
-			else if (app->itemManager->armorItems[i]->craft == false)
-			{
-				if (app->itemManager->armorItems[i]->forgePos == 1)
-				{
-					app->itemManager->armorItems[i]->forgePos == 0;
-					forgePos = 0;
-				}
-				else
-				{
-					app->itemManager->armorItems[i]->forgePos == 0;
-					forgePos = 1;
-				}
-			}
+
 		}
 	}
 
