@@ -189,7 +189,7 @@
 		<npc name="ORACULO" dialogueID="2"
 			x="2595" y="4438" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
-		<npc name="ORACULO" dialogueID="4"
+		<npc name="ORACULO" dialogueID="5"
 			x="1664" y="2880" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
 		<npc name="Igor and Ivan" dialogueID="3"

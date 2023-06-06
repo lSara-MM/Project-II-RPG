@@ -534,6 +534,7 @@ class Chest
 			}
 			if (sensor != nullptr)
 			{
+				sensor->id = -1;
 				sensor->body->GetWorld()->DestroyBody(sensor->body);
 				sensor = nullptr;
 			}

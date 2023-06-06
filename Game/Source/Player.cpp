@@ -483,7 +483,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 	case ColliderType::LOOT:
 		LOG("LOOT Interact");
 
-		for (int i=0; i < app->lootManager->chests.size(); i++)
+		for (int i = 0; i < app->lootManager->chests.size(); i++)
 		{
 			if (app->lootManager->chests[i]->sensor != nullptr)
 			{

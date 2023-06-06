@@ -157,42 +157,6 @@
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 
-	<dialogueTree ID="4">
-
-		<node id="0" name="ORACLE" text="If there is something you want to know, toss a coin to see what's wrong.">
-			<choice id="0" option="Toss a coin." nextNode="1" eventReturn="0"/>
-			<choice id="1" option="I feel we had this conversation already. " nextNode="2" eventReturn="0"/>
-			<choice id="2" option="Don't want anything from you." nextNode="-1" eventReturn="0"/>
-		</node>
-
-		<node id="1" name="ORACLE" text="Another stupid boy to make me rich. I got a lot of knowledge from the dungeon you are about to go. Toss another coin if that is what you want.">
-			<choice id="0" option="Toss another coin." nextNode="3"  eventReturn="0"/>
-			<choice id="1" option="Yeah, we definitely had..." nextNode="-1"  eventReturn="0"/>
-		</node>
-
-		<node id="2" name="ORACLE" text="Don't tell me! Well brat... then you know you have to pay. Toss a coin to know what I know. ">
-			<choice id="0" option="Toss a coin" nextNode="3" eventReturn="0"/>
-			<choice id="1" option="Another time will be." nextNode="-1" eventReturn="0"/>
-		</node>
-
-		<node id="3" name="ORACLE" text="You must know, little vermin, that the animals in the Baest Tent have no compassion, they will kill you so quickly that you won't even have time to cry. Except the chickens, they may help you... If you get to them. Toss a coin to know even more.">
-			<choice id="0" option="Pay" nextNode="4" eventReturn="0"/>
-			<choice id="1" option="No thanks, that was enough." nextNode="-1" eventReturn="0"/>
-		</node>
-
-		<node id="4" name="ORACLE" text="By golly, a rich brat is going to pass me his fortune. Well, I have bad news, they won't let me tell you anything else. Looks like you've surprised someone... Though not for long, you'll surely serve as food for the beasts inside.">
-			<choice id="0" option="Who am I impressing?" nextNode="5" eventReturn="0"/>
-			<choice id="1" option="Thanks for nothing junk..." nextNode="-1" eventReturn="0"/>
-		</node>
-
-		<node id="5" name="ORACLE" text="I'll say no more. They are waiting for you.">
-			<choice id="0" option="Say nothing" nextNode="-1" eventReturn="0"/>
-		</node>
-		
-		<node id="-1" text ="End of conversation -F1- to talk again"></node>
-	</dialogueTree>
-
-
 	<dialogueTree ID="3">
 
 		<node id="0" name="IGOR AND IVAN" text="Hello mate. How can we help you? ">
@@ -270,8 +234,43 @@
 
       <node id="-1" text ="End of conversation -F1- to talk again"></node>
   </dialogueTree>
-  
-  <dialogueTree ID="101">
+
+	<dialogueTree ID="5">
+
+		<node id="0" name="ORACLE" text="If there is something you want to know, toss a coin to see what's wrong.">
+			<choice id="0" option="Toss a coin." nextNode="1" eventReturn="0"/>
+			<choice id="1" option="I feel we had this conversation already. " nextNode="2" eventReturn="0"/>
+			<choice id="2" option="Don't want anything from you." nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="1" name="ORACLE" text="Another stupid boy to make me rich. I got a lot of knowledge from the dungeon you are about to go. Toss another coin if that is what you want.">
+			<choice id="0" option="Toss another coin." nextNode="3"  eventReturn="0"/>
+			<choice id="1" option="Yeah, we definitely had..." nextNode="-1"  eventReturn="0"/>
+		</node>
+
+		<node id="2" name="ORACLE" text="Don't tell me! Well brat... then you know you have to pay. Toss a coin to know what I know. ">
+			<choice id="0" option="Toss a coin" nextNode="3" eventReturn="0"/>
+			<choice id="1" option="Another time will be." nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="3" name="ORACLE" text="You must know, little vermin, that the animals in the Baest Tent have no compassion, they will kill you so quickly that you won't even have time to cry. Except the chickens, they may help you... If you get to them. Toss a coin to know even more.">
+			<choice id="0" option="Pay" nextNode="4" eventReturn="0"/>
+			<choice id="1" option="No thanks, that was enough." nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="4" name="ORACLE" text="By golly, a rich brat is going to pass me his fortune. Well, I have bad news, they won't let me tell you anything else. Looks like you've surprised someone... Though not for long, you'll surely serve as food for the beasts inside.">
+			<choice id="0" option="Who am I impressing?" nextNode="5" eventReturn="0"/>
+			<choice id="1" option="Thanks for nothing junk..." nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="5" name="ORACLE" text="I'll say no more. They are waiting for you.">
+			<choice id="0" option="Say nothing" nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+
+	<dialogueTree ID="101">
 
         <node id="0" name="NOTE 2" text="In the mirror it is found, count the knives to get the second number of the sequences">
           <choice id="0" option="Close." nextNode="-1" eventReturn="0"/>
