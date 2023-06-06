@@ -128,6 +128,7 @@ bool PuzzleManager::Dun1Awake(pugi::xml_node& config)
 	texturepathBoss = config.child("Boss").attribute("texturepathBoss").as_string();
 	texturepathLoset = config.child("Loset").attribute("texturepathLoset").as_string();
 	texturepathFireGuy = config.child("FireGuy").attribute("texturepathFireGuy").as_string();
+	texturepathWintext = config.child("WinDungeon").attribute("texturepathWin").as_string();
 
 	posNotas1.x = config.child("Notas").attribute("x1").as_int();
 	posNotas1.y = config.child("Notas").attribute("y1").as_int();
@@ -394,6 +395,12 @@ bool PuzzleManager::Dun1Start()
 
 	bosDeath = { 3, 1, 47, 53 };
 
+	//animation win
+	winAnimation.Set();
+	winAnimation.AddTween(100, 120, BOUNCE_OUT);
+	winText = app->tex->Load(texturepathWintext);
+	posYanimation_I = 0;
+	completeDungeon_B = false;
 	return true;
 }
 
@@ -742,6 +749,21 @@ bool PuzzleManager::Dun1Update()
 		app->input->RenderTempText("Code:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
 	}
 
+	if (completeDungeon_B)
+	{
+		winAnimation.Step(1, false);
+		float point = winAnimation.GetPoint();
+		int offset = -750;
+		posYanimation_I = offset + point * (0 - offset);
+		app->render->DrawTexture(winText, 0 - app->render->camera.x, offset + point * (0 - offset) - app->render->camera.y);
+		if (posYanimation_I == 0)//cuando animacion termina, hace el fade2black
+		{
+			teamMate = true;
+			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
+
+		}
+	}
+
 	return true;
 }
 
@@ -839,6 +861,7 @@ bool PuzzleManager::Dun1CleanUp()
 		FireGuy = nullptr;
 	}
 	app->tex->UnLoad(fireGuy);//no entiendo nada, lo pongo aqui
+	app->tex->UnLoad(winText);
 
 	if (palanca != nullptr)
 		app->tex->UnLoad(palanca);
@@ -1257,8 +1280,11 @@ bool PuzzleManager::TeamMate()
 			app->questManager->SaveState();
 
 			app->entityManager->tpID = 0;
-			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
+			//app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
+
+			completeDungeon_B = true;
 		}
+	
 	}
 	return true;
 }

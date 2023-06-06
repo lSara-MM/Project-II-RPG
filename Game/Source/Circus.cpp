@@ -388,6 +388,7 @@ bool Circus::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 703:
 		LOG("Button Return to title click");
+		pause_B = false;
 		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
 		break;
 

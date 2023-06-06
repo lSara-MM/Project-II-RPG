@@ -197,7 +197,7 @@
 		<npc name="ORACULO" dialogueID="2"
 			x="2595" y="4438" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
-		<npc name="ORACULO" dialogueID="4"
+		<npc name="ORACULO" dialogueID="5"
 			x="1640" y="2910" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
 		<npc name="Igor and Ivan" dialogueID="3"
@@ -222,6 +222,7 @@
     <Boss texturepathBoss="Assets/Textures/EnemyBossSpecter.png" texturepathBossDeath="Assets/Textures/boss_sprite.png" x="384" y="1408" width="96" height="96"/>
     <Loset texturepathLoset="Assets/Textures/Spritesheet_puzzles.png" x="1280"  y="1024"  width="64" height="64"/> 
     <Notas texturepathNotas="Assets/Textures/Spritesheet_puzzles.png" x1="1664" y1="832" x2="2176" y2="1344" x3="2240" y3="2176" widthNotas="50" heightNotas="50"/>
+	<WinDungeon texturepathWin="Assets/Textures/winLetra.png"/>
 
     <!--Dungeon 2-->
     <GeneralTexture texturepath="Assets/Maps/Objetos_puzzle_dungeon2.png"/>

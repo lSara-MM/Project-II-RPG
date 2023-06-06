@@ -69,45 +69,48 @@ bool Inventory::Start()
 	// Init Party stuff
 	InitArr();
 
-	int x = 0;
-	y = 155;
-	//Set items pages
-	for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
+	if (app->combat->active == false)
 	{
-		if (capx == x)
-		{
-			y += 75;
-			x = 0;
-			if (y/75 > capy + 1)
-			{
-				y = 155;
-				page++;
-			}
-		}
-		if (app->itemManager->armorItems[i]->equiped == false)
-		{
-			x++;
-		}
-		app->itemManager->armorItems[i]->page = page;
-	}
-	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
-	{
-		if (app->itemManager->nodeList[i]->type != 2)
+		int x = 0;
+		y = 155;
+		//Set items pages
+		for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)
 		{
 			if (capx == x)
 			{
-				y += 70;
+				y += 75;
 				x = 0;
-				if (y/75 > capy + 1)
+				if (y / 75 > capy + 1)
 				{
 					y = 155;
 					page++;
 				}
 			}
-			if (app->itemManager->nodeList[i]->quantity > 0)
+			if (app->itemManager->armorItems[i]->equiped == false)
 			{
 				x++;
-				app->itemManager->nodeList[i]->page = page;
+			}
+			app->itemManager->armorItems[i]->page = page;
+		}
+		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
+		{
+			if (app->itemManager->nodeList[i]->type != 2)
+			{
+				if (capx == x)
+				{
+					y += 70;
+					x = 0;
+					if (y / 75 > capy + 1)
+					{
+						y = 155;
+						page++;
+					}
+				}
+				if (app->itemManager->nodeList[i]->quantity > 0)
+				{
+					x++;
+					app->itemManager->nodeList[i]->page = page;
+				}
 			}
 		}
 	}
@@ -223,6 +226,11 @@ bool Inventory::PostUpdate()
 		
 		if (app->combat->active)
 		{
+			buttonInventory->state = GuiControlState::NORMAL;
+			buttonParty->state = GuiControlState::NONE;
+			PrevPage->state = GuiControlState::NONE;
+			NextPage->state = GuiControlState::NONE;
+
 			for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 			{
 				if (app->itemManager->nodeList[i]->type != 2)
@@ -301,6 +309,7 @@ bool Inventory::PostUpdate()
 			//LOAD STATS
 			if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
 			{
+				app->itemManager->hp = app->itemManager->arrParty.at(app->itemManager->invPos)->currentHp;
 				app->itemManager->maxhp = app->itemManager->arrParty.at(app->itemManager->invPos)->currentHp;
 				app->itemManager->armor = app->itemManager->arrParty.at(app->itemManager->invPos)->armor;
 				app->itemManager->attack = app->itemManager->arrParty.at(app->itemManager->invPos)->attack;
@@ -318,24 +327,36 @@ bool Inventory::PostUpdate()
 				app->render->TextDraw((app->itemManager->arrParty.at(app->itemManager->invPos)->name.GetString()), offset + point * (x - offset), 100, 30, Font::TEXT, { 0, 0, 0 });
 
 				//print stats
-				string h = to_string(app->itemManager->maxhp);
-				app->render->TextDraw(h.c_str(), offset + point * (330 - offset), 465, 15, Font::TEXT, { 0, 0, 0 });
+				string h = to_string(app->itemManager->hp);
+				app->render->TextDraw("HP: ", offset + point * (270 - offset), 465, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(h.c_str(), offset + point * (300 - offset), 465, 15, Font::TEXT, { 0, 0, 0 });
+				string hm = to_string(app->itemManager->maxhp);
+				app->render->TextDraw("MAX HP: ", offset + point * (270 - offset), 490, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(hm.c_str(), offset + point * (350 - offset), 490, 15, Font::TEXT, { 0, 0, 0 });
 				string at = to_string(app->itemManager->attack);
-				app->render->TextDraw(at.c_str(), offset + point * (330 - offset), 490, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw("ATTK: ", offset + point * (270 - offset), 515, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(at.c_str(), offset + point * (320 - offset), 515, 15, Font::TEXT, { 0, 0, 0 });
 				string cP = to_string(app->itemManager->critProbability);
-				app->render->TextDraw(cP.c_str(), offset + point * (330 - offset), 515, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw("CRIT RATE: ", offset + point * (270 - offset), 540, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(cP.c_str(), offset + point * (360 - offset), 540, 15, Font::TEXT, { 0, 0, 0 });
 				string cD = to_string(app->itemManager->critDamage);
-				app->render->TextDraw(cD.c_str(), offset + point * (330 - offset), 540, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw("CRIT DMG: ", offset + point * (270 - offset), 565, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(cD.c_str(), offset + point * (360 - offset), 565, 15, Font::TEXT, { 0, 0, 0 });
 				string p = to_string(app->itemManager->accuracy);
-				app->render->TextDraw(p.c_str(), offset + point * (330 - offset), 565, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw("ACCURACY: ", offset + point * (430 - offset), 465, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(p.c_str(), offset + point * (530 - offset), 465, 15, Font::TEXT, { 0, 0, 0 });
 				string ar = to_string(app->itemManager->armor);
-				app->render->TextDraw(ar.c_str(), offset + point * (520 - offset), 490, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw("ARMOR: ", offset + point * (430 - offset), 490, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(ar.c_str(), offset + point * (510 - offset), 490, 15, Font::TEXT, { 0, 0, 0 });
 				string e = to_string(app->itemManager->esquiva);
-				app->render->TextDraw(e.c_str(), offset + point * (520 - offset), 515, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw("DODGE: ", offset + point * (430 - offset), 515, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(e.c_str(), offset + point * (510 - offset), 515, 15, Font::TEXT, { 0, 0, 0 });
 				string r = to_string(app->itemManager->resistencia);
-				app->render->TextDraw(r.c_str(), offset + point * (520 - offset), 540, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw("RES: ", offset + point * (430 - offset), 540, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(r.c_str(), offset + point * (500 - offset), 540, 15, Font::TEXT, { 0, 0, 0 });
 				string s = to_string(app->itemManager->speed);
-				app->render->TextDraw(s.c_str(), offset + point * (520 - offset), 565, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw("SPEED: ", offset + point * (430 - offset), 565, 15, Font::TEXT, { 0, 0, 0 });
+				app->render->TextDraw(s.c_str(), offset + point * (510 - offset), 565, 15, Font::TEXT, { 0, 0, 0 });
 			}
 		}
 
