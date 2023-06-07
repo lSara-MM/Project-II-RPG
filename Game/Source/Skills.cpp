@@ -80,6 +80,7 @@ int Skill::RandomTarget(int posInicial, int posFinal, vector<Character*> arr, Ta
 	int pos= posInicial;
 	int width = posFinal - posInicial + 1;
 	int StatTracker = 99999;
+	if (posInicial > posFinal) { posInicial = posFinal; } //Evitar petadas porque targetea fuera
 
 	//Mirar si hay algun taunt
 	for (int i = posInicial; i <= posFinal; i++)
