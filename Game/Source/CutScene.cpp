@@ -58,6 +58,7 @@ bool CutScene::Start()
 {
 	passImg = 0;
 	printText = false;
+	StopCutScene = false;
 
 	RestartTimer();
 
@@ -80,45 +81,59 @@ bool CutScene::PreUpdate()
 // Called each loop iteration
 bool CutScene::Update(float dt)
 {
-	if(app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
+	//Este bloque de if's hace que se pasen las imagenes y el texto
+	if (!StopCutScene)
 	{
-		printText = false;
-
-		if(passImg < ImgToPrint.Count() - 1)
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
-			app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, ImgToPrint.At(passImg + 1)->data, 40);
-		}
-		else 
-		{
-			app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, nullptr, 40);
-		}
+			printText = false;
 
-		passImg += 1;
+			if (passImg < ImgToPrint.Count() - 1)
+			{
+				app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, ImgToPrint.At(passImg + 1)->data, 40);
+			
+}
+			else
+			{
+				//Esto era para intentar que la ultima imagen desaparezca con un fadetoBlack, pero no funciona por algun motivo
+				app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, nullptr, 40);
+			}
 
-		app->render->ResetDtText();
-		RestartTimer();
+			passImg += 1;
+			StopCutScene = true;
+
+			app->render->ResetDtText();
+			RestartTimer();
+		}
 	}
 
 	if (passImg >= ImgToPrint.Count())
 	{
+		//Sara:Aquí te bloqueo para que señor pugi no pueda pasar con Espacio mas imagenes y pete xd
+		StopCutScene = true;
+
+		//Sara: Aquí es que ha llegado al final de todas las imagenes y textos
 		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 	}
 
+	//Esto renderiza la imagen que ahora está en pantalla
 	if (passImg <= ImgToPrint.Count() - 1)
 		app->render->DrawTexture(ImgToPrint.At(passImg)->data, 0, 0);
 
+	//Esto renderiza y permite que puedas volver a dar al espacio apareciendo el texto Press Space cada segundo
 	if (DeltaTime >= 1)
 	{
 		if (passImg <= ImgToPrint.Count() - 1)
 		{
 			printText = true;
+			StopCutScene = false;
 			app->render->TextDraw("PRESS SPACE", app->win->GetWidth() - 200, app->win->GetHeight() - 50, 10, Font::UI, { 255, 255, 255 });
 		}
 	}
 
+	//Aquí se printa el texto
 	if (printText)
 	{
-
 		if (passImg <= ImgToPrint.Count() - 1)
 		{
 			text = NextText.At(passImg)->next->data.c_str();
@@ -129,11 +144,13 @@ bool CutScene::Update(float dt)
 		}
 	}
 
+	//Esto resetea el timer a 0 provocando que el texto aparezca y desaparezca
 	if (DeltaTime >= 2)
 	{
 		RestartTimer();
 	}
 
+	//Variables que necesita el timer
 	mTicks = SDL_GetTicks() - mStartTicks;
 	DeltaTime = mTicks * 0.001f;
 
