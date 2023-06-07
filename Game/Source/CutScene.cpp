@@ -70,6 +70,8 @@ bool CutScene::Start()
 
 	app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, ImgToPrint.At(passImg)->data, 40);
 
+	currentTexture = ImgToPrint.At(passImg)->data;
+
 	return true;
 }
 
@@ -91,13 +93,12 @@ bool CutScene::Update(float dt)
 
 			if (passImg < ImgToPrint.Count() - 1)
 			{
-				app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, ImgToPrint.At(passImg + 1)->data, 40);
-			
-}
+				app->fade->FadingToBlackImages(currentTexture, ImgToPrint.At(passImg + 1)->data, 90);
+			}
 			else
 			{
 				//Esto era para intentar que la ultima imagen desaparezca con un fadetoBlack, pero no funciona por algun motivo
-				app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, nullptr, 40);
+				app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, nullptr, 90);
 			}
 
 			passImg += 1;
@@ -110,7 +111,7 @@ bool CutScene::Update(float dt)
 
 	//Esto renderiza la imagen que ahora está en pantalla
 	if (passImg <= ImgToPrint.Count() - 1)
-		app->render->DrawTexture(ImgToPrint.At(passImg)->data, 0, 0);
+		app->render->DrawTexture(currentTexture, 0, 0);
 
 	//Esto renderiza y permite que puedas volver a dar al espacio apareciendo el texto Press Space cada segundo
 	if (DeltaTime >= 1)

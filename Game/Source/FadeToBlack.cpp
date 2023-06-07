@@ -3,6 +3,7 @@
 #include "App.h"
 #include "Window.h"
 #include "Render.h"
+#include "CutScene.h"
 
 #include "SDL/include/SDL_render.h"
 #include "Log.h"
@@ -61,7 +62,9 @@ bool FadeToBlack::Update(float dt)
 
 			if(ImagesOnOff)
 			{
-				ImageToPass = ImageToEnter;
+				//Si se quiere añadir otra script que necesite pasar entre dos imagenes debe ponerse aquí
+				if(app->cutScene->active)
+					app->cutScene->currentTexture = ImageToEnter;
 
 				ImagesOnOff = false;
 

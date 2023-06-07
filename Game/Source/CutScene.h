@@ -42,6 +42,8 @@ public:
 
 public:
 
+	SDL_Texture* currentTexture;
+
 private:
 	int passImg;
 
