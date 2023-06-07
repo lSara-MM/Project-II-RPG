@@ -143,6 +143,12 @@ int Skill::RandomTarget(int posInicial, int posFinal, vector<Character*> arr, Ta
 			}
 		}
 		break;
+	case TargetingMethod::FRONTLINE:
+		pos = posInicial;
+		break;
+	case TargetingMethod::BACKLINE:
+		pos = posFinal;
+		break;
 
 	default:
 		break;

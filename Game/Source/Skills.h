@@ -31,7 +31,10 @@ enum class TargetingMethod //Como se ataca
 	LOWER_HP,
 	LOWER_ARMOR,
 	LOWER_DODGE,
-	LOWER_RESISTANCE
+	LOWER_RESISTANCE,
+	FRONTLINE,
+	BACKLINE,
+	
 };
 // prueba
 class Skill

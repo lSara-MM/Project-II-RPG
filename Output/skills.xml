@@ -375,7 +375,6 @@ TargetingMethod //Como se ataca
 		   firstStatusID="6" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="100"
 		   secondStatusID="7" secondStatusPositive="false" secondStatusDuration="2" secondStatusIntesity="50"
 	/>
-	<!-- Estaria guay si tambein quitara buffos-->
 	<skill name="Abysal Gaze" id="47" description="A paralyzing gaze that reduces resistance."
 		   type="3" movementCaster="0"  movementTarget="0" targetMethod="3"
 	   multiplierDmg="0" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
@@ -391,5 +390,72 @@ TargetingMethod //Como se ataca
 		   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-35"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
+
+	<!--Skills Anguila-->
+
+	<skill name="Fangs Shrapnel" id="45" description="An unaccurate attack that damages two allies."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="-1.0" bonusAccuracy="85" bonusCritRate="20" bonusCritDamage="20"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+		   />
+
+	<skill name="Slide Back" id="46" description="A withdrawal to the backiline that also increases highly dodge and resistance."
+		   type="2" movementCaster="1"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="0" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="true"
+		   firstStatusID="6" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="100"
+		   secondStatusID="7" secondStatusPositive="false" secondStatusDuration="2" secondStatusIntesity="50"
+	/>
+	<skill name="Abysal Gaze" id="47" description="A paralyzing gaze that reduces resistance."
+		   type="3" movementCaster="0"  movementTarget="0" targetMethod="3"
+	   multiplierDmg="0" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
+		   firstStatusID="7" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-40"
+		   secondStatusID="10" secondStatusPositive="false" secondStatusDuration="1" secondStatusIntesity="-1"
+	/>
+
+	<skill name="Electrostatic discharge" id="48" description="A powerful discharge that causes a powerful burn on the target."
+		   type="0" movementCaster="0"  movementTarget="-1" targetMethod="4"
+	   multiplierDmg="-1.5" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-35"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<!--Skills Fire Tamer-->
+
+	<skill name="Whip Slash" id="49" description="A reaping atack with the whip that damages all and set on fire eternally."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="-0.8" bonusAccuracy="75" bonusCritRate="40" bonusCritDamage="30"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
+		   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="7" firstStatusIntesity="5"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+		   />
+
+	<skill name="Come here" id="50" description="An attack against the backline that pull to the front and stuns."
+		   type="2" movementCaster="1"  movementTarget="0" targetMethod="6"
+	   multiplierDmg="-1.8" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="9" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="1"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+	<skill name="Fire Punishment" id="51" description="A wave of fire that apply various burns."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="-1.2" bonusAccuracy="70" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
+		   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-20"
+		   secondStatusID="0" secondStatusPositive="false" secondStatusDuration="3" secondStatusIntesity="-10"
+	/>
+
+	<skill name="Set ablaze" id="52" description="A permanent accurcy and attack buff."
+		   type="0" movementCaster="0"  movementTarget="-1" targetMethod="4"
+	   multiplierDmg="0.5" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="true"
+		   firstStatusID="4" firstStatusPositive="true" firstStatusDuration="20" firstStatusIntesity="25"
+		   secondStatusID="1" secondStatusPositive="true" secondStatusDuration="20" secondStatusIntesity="10"
+	/>
+
 	
 </skills>
