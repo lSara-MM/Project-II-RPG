@@ -187,7 +187,7 @@ TargetingMethod //Como se ataca
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="-0.8" bonusAccuracy="70" bonusCritRate="-10" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="true" autoTarget="false"
-		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-25"
+		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-20"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
@@ -346,7 +346,7 @@ TargetingMethod //Como se ataca
 		   type="3" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="0" bonusAccuracy="80" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
-		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="1" firstStatusIntesity="-80"
+		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="1" firstStatusIntesity="-60"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
