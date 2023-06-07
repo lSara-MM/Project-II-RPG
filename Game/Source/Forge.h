@@ -39,6 +39,7 @@ public:
 	int y;
 	int forgePos = 0;
 	bool toDelete = false;
+	bool IsArmor = false;
 
 	GuiButton* forgeButton;
 	GuiButton* exitButton;

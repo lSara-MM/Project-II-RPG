@@ -136,6 +136,7 @@ bool Forge::PostUpdate()
 				{
 					if (IsForge(app->itemManager->nodeList[i]->ID, app->itemManager->armorItems[j]->ID, true))
 					{
+						IsArmor = true;
 						app->itemManager->LoadCraftItems(app->itemManager->nodeList[i]->ID, app->itemManager->armorItems[j]->ID, true);
 					}
 				}
@@ -419,7 +420,14 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 			{
 				app->itemManager->nodeList[i]->forge = false;
 				app->itemManager->nodeList[i]->canCraft = false;
-				app->itemManager->AddQuantity(i, 1);
+				if (IsArmor == false)
+				{
+					app->itemManager->AddQuantity(i, 1);
+				}
+				else
+				{
+					IsArmor = false;
+				}
 				app->itemManager->nodeList[i]->CleanUp();
 				for (size_t j = 0; j < app->itemManager->nodeList.size(); j++)
 				{
