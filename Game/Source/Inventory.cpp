@@ -540,7 +540,7 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		if (app->itemManager->nodeList[i]->ID == control->id)
 		{
-			if (app->itemManager->nodeList[i]->type == 3 || app->itemManager->nodeList[i]->type == 1) break;
+			if (app->itemManager->nodeList[i]->type == 3 || app->itemManager->nodeList[i]->type == 1 && app->combat->active == false) break;
 
 			app->itemManager->MinusQuantity(app->itemManager->nodeList[i]);
 		}
