@@ -106,7 +106,7 @@ bool ItemManager::PostUpdate()
 				}
 				else
 				{
-					x = (170 + 85 * app->itemManager->nodeList[i]->x) + 70;
+					x = (680 + 70 * app->itemManager->nodeList[i]->x) + 70;
 					y = app->itemManager->nodeList[i]->y - 32;
 				}
 			}
@@ -498,6 +498,7 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 
 	LoadItemState();
 	LoadArmorItmes();
+	LoadArmorState();
 }
 
 void ItemManager::ArmorForge(ItemNode* item)
@@ -572,7 +573,6 @@ void ItemManager::LoadArmorItmes()
 	{
 		armorItems[i]->ID = 200 + i;
 	}
-	LoadArmorState();
 }
 
 void ItemManager::LoadQuantity(int x, int y, ItemNode* item)

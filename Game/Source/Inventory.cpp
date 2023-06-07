@@ -52,7 +52,6 @@ bool Inventory::Start()
 			SDL_Rect buttonBounds;
 			buttonBounds = { 0, 0, 0, 0 };
 			selectCharacter[i] = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1000 + i, this, buttonBounds, ButtonType::SMALL);
-			selectCharacter[i]->step = 20;
 		}
 	}
 	else
@@ -226,7 +225,7 @@ bool Inventory::PostUpdate()
 		
 		if (app->combat->active)
 		{
-			buttonInventory->state = GuiControlState::NORMAL;
+			buttonInventory->state = GuiControlState::NONE;
 			buttonParty->state = GuiControlState::NONE;
 			PrevPage->state = GuiControlState::NONE;
 			NextPage->state = GuiControlState::NONE;
