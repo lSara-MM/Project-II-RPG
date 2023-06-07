@@ -246,7 +246,7 @@
 				<choice id="1" option="Another time will be." nextNode="-1" eventReturn="0"/>
 			</node>
 
-			<node id="3" name="ORACLE" text="You must know, little vermin, that the animals in the Baest Tent have no compassion, they will kill you so quickly that you won't even have time to cry. Except the chickens, they may help you... If you get to them. Toss a coin to know even more.">
+			<node id="3" name="ORACLE" text="You must know, little vermin, that the animals in the Beast Tent have no compassion, they will kill you so quickly that you won't even have time to cry. Except the chickens, they may help you... If you get to them. Toss a coin to know even more.">
 				<choice id="0" option="Pay" nextNode="4" eventReturn="0"/>
 				<choice id="1" option="No thanks, that was enough." nextNode="-1" eventReturn="0"/>
 			</node>
