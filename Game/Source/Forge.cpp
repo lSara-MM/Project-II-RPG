@@ -428,12 +428,9 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 					{
 						app->itemManager->nodeList[j]->craft = false;
 						app->itemManager->MinusQuantity(app->itemManager->nodeList[j]);
-					}
-					if (app->itemManager->nodeList[j]->canCraft)
-					{
-						app->itemManager->nodeList[j]->canCraft = false;
 						app->itemManager->nodeList[j]->CleanUp();
 					}
+
 				}
 				for (size_t j = 0; j < app->itemManager->armorItems.size(); j++)
 				{
@@ -441,6 +438,7 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 					{
 						app->itemManager->armorItems[j]->craft = false;
 						app->itemManager->MinusQuantity(app->itemManager->armorItems[j]);
+						app->itemManager->nodeList[j]->CleanUp();
 					}
 				}
 			}
