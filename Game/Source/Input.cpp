@@ -331,60 +331,73 @@ void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float d
 	
 	if (app->input->controller.j1_x > 0)
 	{
-		speed_X = mouseSpeed * dt;
+		mouseX += mouseSpeed * dt;
 
 		if (app->input->controller.j1_y > 0)
 		{
-			speed_Y = mouseSpeed * dt;
+			mouseY += mouseSpeed * dt;
 		}
 		if (app->input->controller.j1_y < 0)
 		{
-			speed_Y = -mouseSpeed * dt;
+			mouseY -= mouseSpeed * dt;
 		}
 	}
 
 	else if (app->input->controller.j1_x < 0)
 	{
-		speed_X = -mouseSpeed * dt;
+		mouseX -= mouseSpeed * dt;
 
 		if (app->input->controller.j1_y > 0)
 		{
-			speed_Y = mouseSpeed * dt;
+			mouseY += mouseSpeed * dt;
 		}
 		if (app->input->controller.j1_y < 0)
 		{
-			speed_Y = -mouseSpeed * dt;
+			mouseY -= mouseSpeed * dt;
 		}
 	}
 
 	else if (app->input->controller.j1_y > 0)
 	{
-		speed_Y = mouseSpeed * dt;
+		mouseY += mouseSpeed * dt;
 
 		if (app->input->controller.j1_x > 0)
 		{
-			speed_X = mouseSpeed * dt;
+			mouseX += mouseSpeed * dt;
 		}
 		if (app->input->controller.j1_x < 0)
 		{
-			speed_X = -mouseSpeed * dt;
+			mouseX -= mouseSpeed * dt;
 		}
 	}
 
 	else if (app->input->controller.j1_y < 0)
 	{
-		speed_Y = -mouseSpeed * dt;
+		mouseY -= mouseSpeed * dt;
+
 		if (app->input->controller.j1_x > 0)
 		{
-			speed_X = mouseSpeed * dt;
+			mouseX += mouseSpeed * dt;
 		}
 		if (app->input->controller.j1_x < 0)
 		{
-			speed_X = -mouseSpeed * dt;
+			mouseX -= mouseSpeed * dt;
 		}
 	}
 
-	SDL_WarpMouseInWindow(NULL, mouseX + speed_X, mouseY + speed_Y);
+	//SDL_WarpMouseInWindow(NULL, mouseX, mouseY);
 	
+}
+
+void Input::RenderMouse()
+{
+	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
+	{
+		app->render->DrawTexture(app->input->cursorPressedTex, app->input->mouseX - app->render->camera.x, app->input->mouseY - app->render->camera.y);
+	}
+	else
+	{
+		app->render->DrawTexture(app->input->cursorIdleTex, app->input->mouseX - app->render->camera.x, app->input->mouseY - app->render->camera.y);
+	}
 }
 

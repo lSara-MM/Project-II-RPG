@@ -42,6 +42,7 @@ public:
 
 public:
 
+private:
 	int passImg;
 
 	bool printText;
@@ -60,11 +61,6 @@ public:
 	List<const char*> NextImg;
 
 	List<string> NextText;
-
-	pugi::xml_node pugiNode;
-
-private:
-
 };
 
 #endif
