@@ -93,7 +93,6 @@ bool IntroScene::Start()
 	exit_B = false;
 
 	app->itemManager->loadParty_B = false;
-	introDone = false;
 
 	return true;
 }
@@ -170,73 +169,6 @@ bool IntroScene::PostUpdate()
 
 	if (exit_B) return false;
 
-	if (app->input->getInput_B) 
-	{
-		iPoint pos = { app->win->GetWidth() / 4, 650 };
-		app->input->RenderTempText("Sign:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
-	}
-
-	if (app->input->playerName->input_entered && !introDone)
-	{
-		transition_B = true;
-		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
-		{
-			i->data->isForward_B = false;
-		}
-
-		app->input->coso = false;
-		app->combat->firstCombat_B = true;
-		app->fade->FadingToBlack(this, (Module*)app->cutScene, 90); 
-		introDone = true;
-
-		//Quests y puzzles reinicio
-		app->questManager->active = true;
-		app->questManager->Start();
-
-		app->puzzleManager->palancas = false;
-		app->puzzleManager->escape = false;
-		app->puzzleManager->rescue = false;
-		app->puzzleManager->teamMate = false;
-		app->puzzleManager->bossIsDead = false;
-		
-		app->puzzleManager->BarricadesExplote = 0;
-		app->puzzleManager->RelicsCompleted = 0;
-		app->puzzleManager->DoorsOpened = 0;
-		app->puzzleManager->keyDoors = false;
-		app->puzzleManager->DoorKey1Opened = false;
-		app->puzzleManager->DoorKey2Opened = false;
-		app->puzzleManager->chickenBoom = false;
-		app->puzzleManager->relics = false;
-		app->puzzleManager->keyInvent = false;
-		app->puzzleManager->BarricadeExplote1 = false;
-		app->puzzleManager->BarricadeExplote2 = false;
-		app->puzzleManager->BarricadeExplote3 = false;
-		app->puzzleManager->BarricadeExplote4 = false;
-		app->puzzleManager->BarricadeExplote5 = false;
-		app->puzzleManager->Relic1Invent = false;
-		app->puzzleManager->Relic2Invent = false;
-		app->puzzleManager->Relic3Invent = false;
-		app->puzzleManager->RelicInColumn1 = false;
-		app->puzzleManager->RelicInColumn2 = false;
-		app->puzzleManager->RelicInColumn3 = false;
-
-		if (app->questManager->active)
-		{
-			app->questManager->quest1->active = false;
-			app->questManager->quest2->active = false;
-			app->questManager->quest3->active = false;
-
-			app->questManager->quest1->complete = false;
-			app->questManager->quest2->complete = false;
-			app->questManager->quest3->complete = false;
-		}
-
-		app->questManager->SaveState();
-
-		//Fuerza que el jugador en una nueva partida aparezca al inicio
-		app->entityManager->tpID = 21;
-	}
-
 	//if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	//	ret = false;
 
@@ -270,7 +202,6 @@ bool IntroScene::PostUpdate()
 	}
 
 	app->guiManager->Draw();
-
 	app->input->RenderMouse();
 
 	return ret;
@@ -289,8 +220,6 @@ bool IntroScene::CleanUp()
 
 	delete pSettings;
 	pSettings = nullptr;
-
-	app->entityManager->Disable();
 
 	app->guiManager->CleanUp();
 	return true;
@@ -328,22 +257,17 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	{
 	case 1:
 		LOG("Button start click");
-		if (!app->input->playerName->input_entered)
+		transition_B = true;
+		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 		{
-			app->input->ActiveGetInput(app->input->playerName);
+			i->data->isForward_B = false;
 		}
-		else
-		{
-			transition_B = true;
-			for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
-			{
-				i->data->isForward_B = false;
-			}
 
-			app->input->coso = false;
-			app->combat->firstCombat_B = true;
-			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
-		}
+		app->input->coso = false;
+		app->combat->firstCombat_B = true;
+		app->entityManager->tpID = 21;
+
+		app->fade->FadingToBlack(this, (Module*)app->cutScene, 90);
 		break;
 	case 2:
 		LOG("Button continue click");
