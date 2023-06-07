@@ -112,6 +112,5 @@ bool LootManager::LoadState()
 		}
 	}
 
-
 	return true;
 }

@@ -302,7 +302,6 @@ void ItemManager::AddQuantity(int id, int quantity)
 			}
 		}
 	}
-	LoadArmorItmes();
 }
 
 void ItemManager::MinusQuantity(ItemNode* item)
