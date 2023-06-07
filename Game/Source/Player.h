@@ -92,10 +92,11 @@ public:
 	Npc* npcTalkingTo;
 	bool npcInteract;
 
-private:
-
 	SDL_Texture* texture;
-	const char* texturePath;	
+	const char* texturePath;
+
+
+private:
 	
 	SDL_Texture* miniMap;
 	const char* texturePathMiniMap;

@@ -713,14 +713,17 @@ bool PuzzleManager::Dun1Update()
 		app->dialogueSystem->hasEnded = false;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	if (app->input->godMode_B)
 	{
-		bossIsDead = !bossIsDead;
-	}
+		if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+		{
+			bossIsDead = !bossIsDead;
+		}
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
-	{
-		saveFireGuy = true;
+		if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+		{
+			saveFireGuy = true;
+		}
 	}
 
 	SDL_Rect palan = { 361, 75, 29, 46 };
@@ -1134,9 +1137,15 @@ bool PuzzleManager::Escape()
 
 			if (DoorEscape != nullptr)
 				DoorEscape->body->GetWorld()->DestroyBody(DoorEscape->body);
+			
+			if (DoorEscapeSensor != nullptr)
+				DoorEscapeSensor->body->GetWorld()->DestroyBody(DoorEscapeSensor->body);
 
 			delete DoorEscape;
 			DoorEscape = nullptr;
+			
+			delete DoorEscapeSensor;
+			DoorEscapeSensor = nullptr;
 
 			codeActive = false;
 			escape = true;
@@ -1276,6 +1285,8 @@ bool PuzzleManager::TeamMate()
 
 			app->questManager->quest1->active = true;
 			app->questManager->quest1->complete = true;
+
+			app->tex->UnLoad(app->hTerrors->player->texture);
 
 			app->questManager->SaveState();
 
