@@ -167,35 +167,35 @@
 		</node>
 		
 		<node id="1" name="IGOR" text="I do not want to talk about that place.">
-			<choice id="0" option="..." nextNode="3" eventReturn="0"/>
+			<choice id="0" option="..." nextNode="2" eventReturn="0"/>
 		</node>
 
 		<node id="2" name="IVAN" text="I will. That is an awful place. Scary. Creepy. Terrifying.">
-			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
+			<choice id="0" option="..." nextNode="3" eventReturn="0"/>
 		</node>
 
 		<node id="3" name="IGOR" text="You idiot. He already knows that. The House Of Terrors is a jail.">
-			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
+			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
 		</node>
 
 		<node id="4" name="IVAN" text="Yes! A jail. They kept our friend locked. He is still there actually.">
-			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
+			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
 		</node>
 
 		<node id="5" name="IGOR" text="You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
-			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
+			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
 		</node>
 
 		<node id="6" name="IVAN" text="Save our friend! He is a nice smith, and a fighter.">
-			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
+			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
 		</node>
 
 		<node id="7" name="IGOR" text="The best I would say. I'm sure it will help you if you save him.">
-			<choice id="0" option="..." nextNode="9" eventReturn="0"/>
+			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
 		</node>
 
 		<node id="8" name="IVAN" text="And maybe we give you some thanks.">
-			<choice id="0" option="..." nextNode="10" eventReturn="0"/>
+			<choice id="0" option="..." nextNode="9" eventReturn="0"/>
 		</node>
 
 		<node id="9" name="IGOR AND IVAN" text="Save our friend and we will reward you.">
