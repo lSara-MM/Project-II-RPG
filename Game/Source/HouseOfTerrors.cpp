@@ -171,14 +171,14 @@ bool HouseOfTerrors::Update(float dt)
 
 	if (!app->input->godMode_B)
 	{
-		if (steps_I > 450 + rand() % (551 - 450))
+		if (steps_I > 650 + rand() % (751 - 650))
 		{
 			LOG("Combat");
 			//app->SaveGameRequest();
 			app->audio->PlayFx(combatfx);
 			app->combat->PreLoadCombat(name);
 
-			app->fade->FadingToBlack(this, (Module*)app->combat, 5);			
+			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
 			app->puzzleManager->CleanUp();
 			app->puzzleManager->active = false;
 			steps_I = 0;
