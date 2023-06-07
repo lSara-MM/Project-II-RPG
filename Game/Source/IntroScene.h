@@ -56,7 +56,6 @@ public:
 	bool continueGame_B = false;
 
 	Settings* pSettings;
-	bool introDone = false;
 
 private:
 	const char* music_intro;
