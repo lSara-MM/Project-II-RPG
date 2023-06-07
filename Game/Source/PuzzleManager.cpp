@@ -716,12 +716,12 @@ bool PuzzleManager::Dun1Update()
 
 	if (app->input->godMode_B)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 		{
 			bossIsDead = !bossIsDead;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		{
 			saveFireGuy = true;
 		}
