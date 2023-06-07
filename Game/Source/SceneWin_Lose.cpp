@@ -125,7 +125,7 @@ bool SceneWin_Lose::Update(float dt)
 	if (win)
 	{
 		app->render->DrawTexture(Win, 0, offset + point * (0 - offset));
-		app->render->TextDraw("VICTORY", 280, offset + point * (40 - offset), 150, Font::TITLE, { 255,255,255 });
+		app->render->TextDraw("VICTORY", 280, offset + point * (40 - offset), 150, Font::TEXT, { 255,255,255 });
 		if (app->puzzleManager->fightBoss)
 		{
 			app->puzzleManager->bossIsDead = true;

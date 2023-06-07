@@ -309,7 +309,7 @@ bool Inventory::PostUpdate()
 			if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
 			{
 				app->itemManager->hp = app->itemManager->arrParty.at(app->itemManager->invPos)->currentHp;
-				app->itemManager->maxhp = app->itemManager->arrParty.at(app->itemManager->invPos)->currentHp;
+				app->itemManager->maxhp = app->itemManager->arrParty.at(app->itemManager->invPos)->maxHp;
 				app->itemManager->armor = app->itemManager->arrParty.at(app->itemManager->invPos)->armor;
 				app->itemManager->attack = app->itemManager->arrParty.at(app->itemManager->invPos)->attack;
 				app->itemManager->critDamage = app->itemManager->arrParty.at(app->itemManager->invPos)->critDamage;

@@ -172,7 +172,7 @@ bool BeastTent::Update(float dt)
 
 	if (!app->input->godMode_B)
 	{
-		if (steps_I > 450 + rand() % (551 - 450))
+		if (steps_I > 650 + rand() % (751 - 650))
 		{
 			LOG("Combat");
 			//app->SaveGameRequest();
