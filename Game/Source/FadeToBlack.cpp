@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Render.h"
 #include "CutScene.h"
+#include "PuzzleManager.h"
 
 #include "SDL/include/SDL_render.h"
 #include "Log.h"
@@ -65,6 +66,9 @@ bool FadeToBlack::Update(float dt)
 				//Si se quiere añadir otra script que necesite pasar entre dos imagenes debe ponerse aquí
 				if(app->cutScene->active)
 					app->cutScene->currentTexture = ImageToEnter;
+
+				if (app->puzzleManager->active)
+					app->puzzleManager->currentDark = ImageToEnter;
 
 				ImagesOnOff = false;
 
