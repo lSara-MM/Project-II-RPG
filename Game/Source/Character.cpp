@@ -1030,7 +1030,8 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		if (skill->firstPositiveEffect) //Efecto de estado positivo
 		{	
 			//Blees -1 pues no lo hace
-			if (defender->GetStat(EffectType::BLESS)!=-1 || skill->firstPositiveEffect!=-1) {defender->listStatusEffects.Add(statusEffect1);}
+			if (defender->GetStat(EffectType::BLESS)!=-1 || skill->firstStatus !=-1)
+			{defender->listStatusEffects.Add(statusEffect1);}
 			app->audio->PlayFx(bufffx);
 			//Movimiento
 			if (skill->movementTarget != 0)
@@ -1042,7 +1043,8 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		{
 			if(CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY)*(skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 			{
-				if (defender->GetStat(EffectType::BLESS) != 1 || skill->firstPositiveEffect != -1){defender->listStatusEffects.Add(statusEffect1);}
+				if (defender->GetStat(EffectType::BLESS) != 1 || skill->firstStatus != -1)
+				{defender->listStatusEffects.Add(statusEffect1);}
 				//Movimiento
 				if (skill->movementTarget != 0)
 				{
@@ -1055,14 +1057,16 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		//Segundo efecto de estado
 		if (skill->secondPositiveEffect) //Efecto de estado positivo
 		{
-			if (defender->GetStat(EffectType::BLESS) != -1 || skill->secondPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect2); }
+			if (defender->GetStat(EffectType::BLESS) != -1 || skill->secondStatus != -1)
+			{ defender->listStatusEffects.Add(statusEffect2); }
 			app->audio->PlayFx(bufffx);
 		}
 		else
 		{
 			if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 			{
-				if (defender->GetStat(EffectType::BLESS) != 1 || skill->secondPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect2); }
+				if (defender->GetStat(EffectType::BLESS) != 1 || skill->secondStatus != -1) 
+				{ defender->listStatusEffects.Add(statusEffect2); }
 			}
 		}
 		return(caster->maxHp / 5 * skill->multiplierDmg);
@@ -1087,7 +1091,8 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			//Primer efecto estado 
 			if (skill->firstPositiveEffect) //Efecto de estado positivo
 			{
-				if (defender->GetStat(EffectType::BLESS) != -1 || skill->firstPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect1); }
+				if (defender->GetStat(EffectType::BLESS) != -1 || skill->firstStatus != -1) 
+				{ defender->listStatusEffects.Add(statusEffect1); }
 				//Movimiento
 				app->audio->PlayFx(bufffx);
 				if (skill->movementTarget != 0)
@@ -1106,7 +1111,8 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 						app->combat->MoveCharacter(defender, skill->movementTarget );
 					}
 					
-					if (defender->GetStat(EffectType::BLESS) != 1 || skill->firstPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect1); }
+					if (defender->GetStat(EffectType::BLESS) != 1 || skill->firstStatus != -1) 
+					{ defender->listStatusEffects.Add(statusEffect1); }
 				}
 				app->audio->PlayFx(debufffx);
 			}
@@ -1114,13 +1120,15 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			//Segundo efecto estado 
 			if (skill->firstPositiveEffect) //Efecto de estado positivo
 			{
-				if (defender->GetStat(EffectType::BLESS) != -1 || skill->secondPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect2); }
+				if (defender->GetStat(EffectType::BLESS) != -1 || skill->secondStatus != -1) 
+				{ defender->listStatusEffects.Add(statusEffect2); }
 			}
 			else
 			{
 				if (CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::RES)))
 				{
-					if (defender->GetStat(EffectType::BLESS) != -1 || skill->secondPositiveEffect != -1) { defender->listStatusEffects.Add(statusEffect2); }
+					if (defender->GetStat(EffectType::BLESS) != -1 || skill->secondStatus != -1) 
+					{ defender->listStatusEffects.Add(statusEffect2); }
 				}
 			}
 
