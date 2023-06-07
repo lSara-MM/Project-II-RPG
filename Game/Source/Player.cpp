@@ -491,7 +491,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 
 		for (int i = 0; i < app->lootManager->chests.size(); i++)
 		{
-			if (app->lootManager->chests[i]->sensor != nullptr)
+			if ((app->lootManager->chests[i]->sensor != nullptr && app->BeastT->active && app->lootManager->chests[i]->dungeon == ChestDungeon::BEASTS && app->lootManager->chests[i]->used == false) || (app->lootManager->chests[i]->sensor != nullptr && app->hTerrors->active && app->lootManager->chests[i]->dungeon == ChestDungeon::TERRORS && app->lootManager->chests[i]->used == false))
 			{
 				if (app->lootManager->chests[i]->sensor->id == physB->id)
 				{
