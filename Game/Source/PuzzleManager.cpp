@@ -644,8 +644,8 @@ bool PuzzleManager::Dun1Update()
 	}
 	else
 	{
-		app->render->DrawTexture(bossDeath, posLoset.x - widthBoss + 25, posLoset.y - heightBoss + 22, &bosDeath);
 		app->render->DrawTexture(loset, posLoset.x - widthLoset + 16, posLoset.y - heightLoset + 16, &los);
+		app->render->DrawTexture(bossDeath, posLoset.x - widthBoss + 25, posLoset.y - heightBoss + 22, &bosDeath);
 	}
 
 	if (!teamMate)
@@ -716,12 +716,12 @@ bool PuzzleManager::Dun1Update()
 
 	if (app->input->godMode_B)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 		{
 			bossIsDead = !bossIsDead;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		{
 			saveFireGuy = true;
 		}
@@ -752,7 +752,8 @@ bool PuzzleManager::Dun1Update()
 			app->fade->FadingToBlackImages(currentDark, nullptr, 90);
 	}
 
-	app->render->DrawTexture(currentDark, -app->render->camera.x - app->render->camera.w / 2 + app->win->GetWidth() / 2, -app->render->camera.y + app->render->camera.h / 2 - app->win->GetHeight() / 2);
+	if (currentDark != nullptr)
+		app->render->DrawTexture(currentDark, -app->render->camera.x - app->render->camera.w / 2 + app->win->GetWidth() / 2, -app->render->camera.y + app->render->camera.h / 2 - app->win->GetHeight() / 2);
 
 
 	if (app->input->getInput_B)
@@ -1426,7 +1427,7 @@ bool PuzzleManager::ChickenBoomPuz()
 		posBomb1.x = app->BeastT->player->position.x + 10;
 		posBomb1.y = app->BeastT->player->position.y + 25;
 
-		if (DeltaTime >= 8)
+		if (DeltaTime >= 6)
 		{
 			BombCarryOn1 = false;
 
@@ -1631,7 +1632,7 @@ bool PuzzleManager::ChickenBoomPuz()
 		posBomb2.x = app->BeastT->player->position.x + 10;
 		posBomb2.y = app->BeastT->player->position.y + 25;
 
-		if (DeltaTime >= 8)
+		if (DeltaTime >= 6)
 		{
 			BombCarryOn2 = false;
 
