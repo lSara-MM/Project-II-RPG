@@ -249,8 +249,6 @@ bool BeastTent::CleanUp()
 {
 	LOG("Freeing scene");
 
-	app->SaveToFile();
-
 	app->itemManager->Disable();
 	app->inventory->Disable();
 

@@ -245,8 +245,6 @@ bool PracticeTent::CleanUp()
 {
 	LOG("Freeing scene");
 
-	app->SaveToFile();
-
 	if (dummy != nullptr) 
 	{
 		app->tex->UnLoad(dummy);

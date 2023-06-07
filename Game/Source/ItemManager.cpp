@@ -213,6 +213,7 @@ bool ItemManager::PostUpdate()
 
 bool ItemManager::CleanUp()
 {
+	app->SaveToFile();
 	SaveItemState();
 	app->combat->SaveCombat();
 

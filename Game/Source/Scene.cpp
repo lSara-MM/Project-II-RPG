@@ -239,8 +239,6 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	app->SaveToFile();
-
 	if (app->itemManager->active)
 	{
 		app->itemManager->Disable();

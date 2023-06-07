@@ -291,7 +291,6 @@ bool Combat::Update(float dt)
 		app->render->TextDraw("Press 4 enemies button handle", 10, 120, 12, Font::UI, { 255, 255, 255 });
 		app->render->TextDraw("Press 5 allies button handle", 10, 140, 12, Font::UI, { 255, 255, 255 });
 		app->render->TextDraw("Press 6 fully heal party", 1100, 20, 12, Font::UI, { 255, 255, 255 });
-		app->render->TextDraw("Press 7 become inmortal", 1100, 40, 12, Font::UI, { 255, 255, 255 });
 	}
 	
 	app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt);
