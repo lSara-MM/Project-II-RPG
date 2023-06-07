@@ -259,7 +259,7 @@ bool HouseOfTerrors::CleanUp()
 	//CleanUp chests
 	for (int i = 0; i < app->lootManager->chests.size(); i++)
 	{
-		if (app->lootManager->chests[i]->used == false)
+		if ((app->lootManager->chests[i]->used == false && app->BeastT->active && app->lootManager->chests[i]->dungeon == ChestDungeon::BEASTS) || (app->lootManager->chests[i]->used == false && app->hTerrors->active && app->lootManager->chests[i]->dungeon == ChestDungeon::TERRORS))
 		{
 			app->lootManager->chests[i]->CleanUp();
 		}

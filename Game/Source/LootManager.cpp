@@ -40,7 +40,7 @@ bool LootManager::Start()
 {
 	for (int i = 0; i < chests.size(); i++)
 	{
-		if (chests[i]->used == false)
+		if ((chests[i]->used == false && app->BeastT->active && chests[i]->dungeon == ChestDungeon::BEASTS) || (chests[i]->used == false && app->hTerrors->active && chests[i]->dungeon == ChestDungeon::TERRORS))
 		{
 			chests[i]->Start();
 		}
@@ -53,7 +53,7 @@ bool LootManager::Update(float dt)
 {
 	for (int i = 0; i < chests.size(); i++)
 	{
-		if (chests[i]->used == false)
+		if ((chests[i]->used == false && app->BeastT->active && chests[i]->dungeon == ChestDungeon::BEASTS) || (chests[i]->used == false && app->hTerrors->active && chests[i]->dungeon == ChestDungeon::TERRORS))
 		{
 			chests[i]->Update(dt);
 
