@@ -310,7 +310,6 @@ void ItemManager::MinusQuantity(ItemNode* item)
 	{
 		if (app->combat->listInitiative[app->combat->charaInTurn]->charaType == CharacterType::ALLY)
 		{
-
 			if (item->quantity > 0)
 			{
 				if (item->type == 1)

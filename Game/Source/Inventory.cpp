@@ -540,7 +540,7 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		if (app->itemManager->nodeList[i]->ID == control->id)
 		{
-			if (app->itemManager->nodeList[i]->type == 3 || app->itemManager->nodeList[i]->type == 1) break;
+			if (app->itemManager->nodeList[i]->type == 3 || app->itemManager->nodeList[i]->type == 1 && app->combat->active == false) break;
 
 			app->itemManager->MinusQuantity(app->itemManager->nodeList[i]);
 		}
@@ -645,6 +645,7 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			}
 			break;
 		case 1004:
+			buttonsChangeStat = false;
 			partyWindow_B = false;
 			buttonInventory->state = GuiControlState::NONE;
 			buttonParty->state = GuiControlState::NORMAL;
@@ -654,8 +655,15 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			}
 			PrevPage->state = GuiControlState::NORMAL;
 			NextPage->state = GuiControlState::NORMAL;
+
+			for (ListItem<GuiButton*>* i = listPartyButtons.start; i != nullptr; i = i->next)
+			{
+				i->data->state = GuiControlState::NONE;
+			}
+
 			break;
 		case 1005:
+			buttonsChangeStat = true;
 			partyWindow_B = true;
 			buttonInventory->state = GuiControlState::NORMAL;
 			buttonParty->state = GuiControlState::NONE;
