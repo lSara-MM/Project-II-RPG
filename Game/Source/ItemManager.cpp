@@ -775,7 +775,7 @@ void ItemManager::LoadCraftItems(int ID0, int ID1, bool armor)
 				}
 				else
 				{
-					app->render->DrawTexture(itemsTexture, (170 + (85 * x)) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
+					app->render->DrawTexture(itemsTexture, (135 + (85 * x)) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
 				}
 			}
 		}
@@ -809,7 +809,7 @@ void ItemManager::LoadCraftItems(int ID0, int ID1, bool armor)
 								}
 								else
 								{
-									app->render->DrawTexture(itemsTexture, (170 + (85 * x)) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
+									app->render->DrawTexture(itemsTexture, (135 + (85 * x)) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
 								}
 								x++;
 							}
@@ -827,7 +827,7 @@ void ItemManager::LoadCraftButtons(int x, ItemNode* item)
 
 	if (item->forge == false)
 	{
-		buttonBounds = { (170 + (85 * x)), 300 , 64, 64 };
+		buttonBounds = { (135 + (85 * x)), 300 , 64, 64 };
 	}
 	else
 	{
