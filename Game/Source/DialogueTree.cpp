@@ -30,21 +30,7 @@ DialogueTree::DialogueTree(bool a)
 	active = a;
 	notifyEnd = false;
 
-	switch (app->dialogueSystem->GetTextSpeed())
-	{
-	case TextSpeed::SLOW:
-		dtWait = 50.0f;
-		break;
-	case TextSpeed::MEDIUM:
-		dtWait = 15.0f;
-		break;
-	case TextSpeed::FAST:
-		dtWait = 0.05f;
-		break;
-	default:
-		dtWait = 20.0f;
-		break;
-	}
+	dtWait = app->dialogueSystem->GetTextSpeedFloat();
 }
 
 bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
@@ -65,7 +51,8 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 	}
 
 	LOG("Text Speed %f", dtWait);
-	app->render->RenderTrimmedText(pos.x + 100, pos.y + 50, 10, activeNode->text, &activeNode->texts, FONT_SIZE, max_chars_line, 0, Font::TEXT, dtWait, { 255, 255, 255 });
+	app->render->RenderTrimmedText(pos.x + 100, pos.y + 50, 10, activeNode->text, &activeNode->texts, FONT_SIZE, max_chars_line, 
+		{ 255, 255, 255 }, Font::TEXT, 0,  dtWait);
 
 	EventReturn(mod, pos);
 

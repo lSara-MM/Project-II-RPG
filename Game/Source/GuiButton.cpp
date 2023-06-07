@@ -754,7 +754,7 @@ bool GuiButton::Draw(Render* render)
 			int offsetY = fontSize / 2;
 			int max_chars_line = fontSize * 2;
 
-			app->render->RenderTrimmedText(bounds.x + offsetX, bounds.y + offsetY, 2, text, &texts, fontSize, max_chars_line, 2.5f);
+			app->render->RenderTrimmedText(bounds.x + offsetX, bounds.y + offsetY, 2, text, &texts, fontSize, max_chars_line, color, Font::UI, 2.5f);
 		}
 		else
 		{
