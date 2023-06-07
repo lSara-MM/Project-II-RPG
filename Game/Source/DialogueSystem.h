@@ -56,12 +56,15 @@ public:
 
 	bool hasEnded;
 
-	SDL_Texture* textBox_tex;
-	const char* textBox_path;
-
 private:
 	pugi::xml_document dialogues;
 	TextSpeed textSpeed;
+
+	SDL_Texture* textBox_tex;
+	const char* textBox_path;
+
+	SDL_Texture* nameBox_tex;
+	const char* nameBox_path;
 };
 
 #endif // __DIALOGSYSTEM_H__

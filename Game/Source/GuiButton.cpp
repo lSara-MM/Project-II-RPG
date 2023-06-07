@@ -239,7 +239,7 @@ bool GuiButton::Draw(Render* render)
 
 	SDL_Rect rect = { 0, 0, bounds.w, bounds.h };
 
-	if (buttonType == ButtonType::COMBAT_TARGET) { rect = { 0,0,120,12 }; } 
+	if (buttonType == ButtonType::COMBAT_TARGET) { rect = { 0, 0, 120, 12 }; } 
 	else if (buttonType == ButtonType::START) { rect = { 5, 5, 20, 26 }; }
 	else if (buttonType == ButtonType::DIALOGUE) { rect.x = 5; }
 

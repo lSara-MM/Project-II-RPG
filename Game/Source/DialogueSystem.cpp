@@ -21,6 +21,7 @@ bool DialogueSystem::Awake(pugi::xml_node& config)
 	LOG("Loading Dialogue System");
 	bool ret = true;
 	textBox_path = config.attribute("textBoxBg").as_string();
+	nameBox_path = config.attribute("nameBoxBg").as_string();
 
 	return ret;
 }
@@ -28,6 +29,7 @@ bool DialogueSystem::Awake(pugi::xml_node& config)
 bool DialogueSystem::Start()
 {
 	textBox_tex = app->tex->Load(textBox_path);
+	nameBox_tex = app->tex->Load(nameBox_path);
 	hasEnded = false;
 	return true;
 }
@@ -39,6 +41,9 @@ bool DialogueSystem::Update(float dt)
 		//Text box
 		iPoint pos = { 0, (app->win->GetHeight() - 245) };
 		app->render->DrawTexture(textBox_tex, pos.x - app->render->camera.x, pos.y - app->render->camera.y);
+
+		SDL_Rect rect = { 0, 60, 319, 50 };
+		app->render->DrawTexture(nameBox_tex, pos.x - app->render->camera.x + 10, pos.y - app->render->camera.y - 55, &rect);
 
 		if (!activeTree->UpdateTree(dt, app->dialogueSystem, pos))
 		{
