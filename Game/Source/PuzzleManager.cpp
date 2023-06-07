@@ -401,6 +401,7 @@ bool PuzzleManager::Dun1Start()
 	winText = app->tex->Load(texturepathWintext);
 	posYanimation_I = 0;
 	completeDungeon_B = false;
+
 	return true;
 }
 
@@ -742,9 +743,17 @@ bool PuzzleManager::Dun1Update()
 
 	if (!bossIsDead)
 	{
+		currentDark = app->hTerrors->DarkestDungeon;
 		//app->render->DrawTexture(app->hTerrors->DarkestDungeon, app->hTerrors->player->position.x - app->win->GetWidth() / 2, app->hTerrors->player->position.y - app->win->GetHeight() / 2);
-		app->render->DrawTexture(app->hTerrors->DarkestDungeon, -app->render->camera.x - app->render->camera.w / 2 + app->win->GetWidth() / 2, -app->render->camera.y + app->render->camera.h / 2 - app->win->GetHeight() / 2);
 	}
+	else
+	{
+		if(currentDark != nullptr)
+			app->fade->FadingToBlackImages(currentDark, nullptr, 90);
+	}
+
+	app->render->DrawTexture(currentDark, -app->render->camera.x - app->render->camera.w / 2 + app->win->GetWidth() / 2, -app->render->camera.y + app->render->camera.h / 2 - app->win->GetHeight() / 2);
+
 
 	if (app->input->getInput_B)
 	{

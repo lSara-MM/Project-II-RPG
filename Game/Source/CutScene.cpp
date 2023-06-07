@@ -187,11 +187,10 @@ bool CutScene::PostUpdate()
 {
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	{
-		passImg = ImgToPrint.Count() - 1;
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
-	}
+	//if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	//{
+	//	app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+	//}
 
 	return ret;
 }

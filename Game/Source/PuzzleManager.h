@@ -301,6 +301,8 @@ public:
 	uint32 mStartTicks;
 	uint32 DeltaTime;
 
+	SDL_Texture* currentDark;
+
 private:
 
 	const char* texturepathDoor;
