@@ -107,7 +107,7 @@ bool CutScene::Update(float dt)
 		}
 	}
 
-	if (passImg >= ImgToPrint.Count())
+	if (passImg >= ImgToPrint.Count() - 1)
 	{
 		//Sara:Aquí te bloqueo para que señor pugi no pueda pasar con Espacio mas imagenes y pete xd
 		StopCutScene = true;
@@ -126,8 +126,12 @@ bool CutScene::Update(float dt)
 		if (passImg <= ImgToPrint.Count() - 1)
 		{
 			printText = true;
-			StopCutScene = false;
-			app->render->TextDraw("PRESS SPACE", app->win->GetWidth() - 200, app->win->GetHeight() - 50, 10, Font::UI, { 255, 255, 255 });
+
+			if (passImg <= ImgToPrint.Count() - 2)
+			{
+				StopCutScene = false;
+				app->render->TextDraw("PRESS SPACE", app->win->GetWidth() - 200, app->win->GetHeight() - 50, 10, Font::UI, { 255, 255, 255 });
+			}
 		}
 	}
 

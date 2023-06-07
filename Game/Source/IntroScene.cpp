@@ -188,51 +188,7 @@ bool IntroScene::PostUpdate()
 		app->combat->firstCombat_B = true;
 		app->fade->FadingToBlack(this, (Module*)app->cutScene, 90); 
 		introDone = true;
-
-		//Quests y puzzles reinicio
-		app->questManager->active = true;
-		app->questManager->Start();
-
-		app->puzzleManager->palancas = false;
-		app->puzzleManager->escape = false;
-		app->puzzleManager->rescue = false;
-		app->puzzleManager->teamMate = false;
-		app->puzzleManager->bossIsDead = false;
 		
-		app->puzzleManager->BarricadesExplote = 0;
-		app->puzzleManager->RelicsCompleted = 0;
-		app->puzzleManager->DoorsOpened = 0;
-		app->puzzleManager->keyDoors = false;
-		app->puzzleManager->DoorKey1Opened = false;
-		app->puzzleManager->DoorKey2Opened = false;
-		app->puzzleManager->chickenBoom = false;
-		app->puzzleManager->relics = false;
-		app->puzzleManager->keyInvent = false;
-		app->puzzleManager->BarricadeExplote1 = false;
-		app->puzzleManager->BarricadeExplote2 = false;
-		app->puzzleManager->BarricadeExplote3 = false;
-		app->puzzleManager->BarricadeExplote4 = false;
-		app->puzzleManager->BarricadeExplote5 = false;
-		app->puzzleManager->Relic1Invent = false;
-		app->puzzleManager->Relic2Invent = false;
-		app->puzzleManager->Relic3Invent = false;
-		app->puzzleManager->RelicInColumn1 = false;
-		app->puzzleManager->RelicInColumn2 = false;
-		app->puzzleManager->RelicInColumn3 = false;
-
-		if (app->questManager->active)
-		{
-			app->questManager->quest1->active = false;
-			app->questManager->quest2->active = false;
-			app->questManager->quest3->active = false;
-
-			app->questManager->quest1->complete = false;
-			app->questManager->quest2->complete = false;
-			app->questManager->quest3->complete = false;
-		}
-
-		app->questManager->SaveState();
-
 		//Fuerza que el jugador en una nueva partida aparezca al inicio
 		app->entityManager->tpID = 21;
 	}
@@ -339,6 +295,10 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		if (!app->input->playerName->input_entered)
 		{
 			app->input->ActiveGetInput(app->input->playerName);
+
+			//Resetear Puzzles y Quests
+			app->questManager->Enable();
+			app->questManager->resetPuzzlesAndQuests();
 		}
 		else
 		{
