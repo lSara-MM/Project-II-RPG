@@ -393,3 +393,47 @@ bool QuestManager::SaveState()
 
 	return ret;
 }
+
+bool QuestManager::resetPuzzlesAndQuests() 
+{
+	//Quests y puzzles reinicio
+
+	app->puzzleManager->palancas = false;
+	app->puzzleManager->escape = false;
+	app->puzzleManager->rescue = false;
+	app->puzzleManager->teamMate = false;
+	app->puzzleManager->bossIsDead = false;
+
+	app->puzzleManager->BarricadesExplote = 0;
+	app->puzzleManager->RelicsCompleted = 0;
+	app->puzzleManager->DoorsOpened = 0;
+	app->puzzleManager->keyDoors = false;
+	app->puzzleManager->DoorKey1Opened = false;
+	app->puzzleManager->DoorKey2Opened = false;
+	app->puzzleManager->chickenBoom = false;
+	app->puzzleManager->relics = false;
+	app->puzzleManager->keyInvent = false;
+	app->puzzleManager->BarricadeExplote1 = false;
+	app->puzzleManager->BarricadeExplote2 = false;
+	app->puzzleManager->BarricadeExplote3 = false;
+	app->puzzleManager->BarricadeExplote4 = false;
+	app->puzzleManager->BarricadeExplote5 = false;
+	app->puzzleManager->Relic1Invent = false;
+	app->puzzleManager->Relic2Invent = false;
+	app->puzzleManager->Relic3Invent = false;
+	app->puzzleManager->RelicInColumn1 = false;
+	app->puzzleManager->RelicInColumn2 = false;
+	app->puzzleManager->RelicInColumn3 = false;
+
+	quest1->active = false;
+	quest2->active = false;
+	quest3->active = false;
+
+	quest1->complete = false;
+	quest2->complete = false;
+	quest3->complete = false;
+
+	SaveState();
+
+	return true;
+}

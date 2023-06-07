@@ -41,6 +41,8 @@ public:
 	bool SaveState();
 	bool LoadState();
 
+	bool resetPuzzlesAndQuests();
+
 public:
 
 	pugi::xml_node questNode;

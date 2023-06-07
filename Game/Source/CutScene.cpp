@@ -108,33 +108,6 @@ bool CutScene::Update(float dt)
 		}
 	}
 
-	if (passImg >= ImgToPrint.Count())
-	{
-		//Sara:Aquí te bloqueo para que señor pugi no pueda pasar con Espacio mas imagenes y pete xd
-		StopCutScene = true;
-
-		// enable text input
-		if (!app->input->playerName->input_entered)
-		{
-			app->input->ActiveGetInput(app->input->playerName);
-		}
-
-		// render input
-		if (app->input->getInput_B)
-		{
-			// TO DO adjust position when bg done
-			iPoint pos = { app->win->GetWidth() - 550, 600 };
-			app->input->RenderTempText("Sign:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
-		}
-
-		// if name entered, fade to black
-		if (app->input->playerName->input_entered)
-		{
-			//Sara: Aquí es que ha llegado al final de todas las imagenes y textos
-			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
-		}
-	}
-
 	//Esto renderiza la imagen que ahora está en pantalla
 	if (passImg <= ImgToPrint.Count() - 1)
 		app->render->DrawTexture(ImgToPrint.At(passImg)->data, 0, 0);
@@ -145,8 +118,12 @@ bool CutScene::Update(float dt)
 		if (passImg <= ImgToPrint.Count() - 1)
 		{
 			printText = true;
-			StopCutScene = false;
-			app->render->TextDraw("PRESS SPACE", app->win->GetWidth() - 200, app->win->GetHeight() - 50, 10, Font::UI, { 255, 255, 255 });
+
+			if (passImg <= ImgToPrint.Count() - 2)
+			{
+				StopCutScene = false;
+				app->render->TextDraw("PRESS SPACE", app->win->GetWidth() - 200, app->win->GetHeight() - 50, 10, Font::UI, { 255, 255, 255 });
+			}
 		}
 	}
 
@@ -162,6 +139,34 @@ bool CutScene::Update(float dt)
 			//app->render->TextDraw(NextText.At(passImg)->next->data, 20, app->win->GetHeight() - 100, 15, Font::UI, { 255, 255, 255 });
 		}
 	}
+
+	if (passImg >= ImgToPrint.Count() - 1)
+	{
+		//Sara:Aquí te bloqueo para que señor pugi no pueda pasar con Espacio mas imagenes y pete xd
+		StopCutScene = true;
+
+		// enable text input
+		if (!app->input->playerName->input_entered)
+		{
+			app->input->ActiveGetInput(app->input->playerName);
+		}
+
+		// render input
+		if (app->input->getInput_B)
+		{
+			// TO DO adjust position when bg done
+			iPoint pos = { app->win->GetWidth() - 330, 600 };
+			app->input->RenderTempText("Sign:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
+		}
+
+		// if name entered, fade to black
+		if (app->input->playerName->input_entered)
+		{
+			//Sara: Aquí es que ha llegado al final de todas las imagenes y textos
+			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+		}
+	}
+
 
 	//Esto resetea el timer a 0 provocando que el texto aparezca y desaparezca
 	if (DeltaTime >= 2)

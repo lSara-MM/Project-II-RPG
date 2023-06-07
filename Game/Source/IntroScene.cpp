@@ -260,6 +260,11 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		transition_B = true;
 		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 		{
+			app->input->ActiveGetInput(app->input->playerName);
+
+			//Resetear Puzzles y Quests
+			app->questManager->Enable();
+			app->questManager->resetPuzzlesAndQuests();
 			i->data->isForward_B = false;
 		}
 
