@@ -359,9 +359,11 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 	}
 }
 
-void Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_, 
+bool Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_, 
 	SDL_Color color, Font font, float fontOffset, float dt_wait)
 {
+	bool ret = true;
+
 	SplitText(text, pTexts, fontSize_, max_chars_line_);
 
 	int lines = pTexts->size();
@@ -381,10 +383,12 @@ void Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SS
 
 		pTexts->clear();
 		pTexts->shrink_to_fit();
+
+		return ret;
 	}
 	else
 	{
-		LOG("waitToRender %f", waitToRender.ReadMSec());
+		//LOG("waitToRender %f", waitToRender.ReadMSec());
 		if (waitToRender.ReadMSec() > dt_wait)
 		{
 			int chars = 0;
@@ -401,8 +405,10 @@ void Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SS
 				SString b = aux;
 
 				SplitText(aux, &temp, fontSize_, max_chars_line_);
+				ret = false;
 			}
-			waitToRender.Start();
+			else { ret = true; }
+			waitToRender.Start();			
 		}
 
 		for (int j = 0; j < temp.size(); j++)
@@ -410,6 +416,8 @@ void Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SS
 			TextDraw(temp.at(j).GetString(), x, y + (fontSize_ + offset) * j, fontSize_, font, color);
 		}
 	}
+
+	return ret;
 }
 
 void Render::ResetDtText()

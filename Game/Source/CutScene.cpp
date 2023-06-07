@@ -32,7 +32,7 @@ bool CutScene::Awake(pugi::xml_node& config)
 	LOG("Loading CutScene");
 	bool ret = true;
 
-	pugiNode = config.first_child();
+	pugi::xml_node pugiNode = config.first_child();
 
 	for (int i = 0; pugiNode != NULL; i++)
 	{
@@ -61,6 +61,7 @@ bool CutScene::Start()
 	StopCutScene = false;
 
 	RestartTimer();
+	app->render->ResetDtText();
 
 	for(int i = 0; i <= NextImg.Count() - 1; i++)
 	{
@@ -112,8 +113,26 @@ bool CutScene::Update(float dt)
 		//Sara:Aquí te bloqueo para que señor pugi no pueda pasar con Espacio mas imagenes y pete xd
 		StopCutScene = true;
 
-		//Sara: Aquí es que ha llegado al final de todas las imagenes y textos
-		app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+		// enable text input
+		if (!app->input->playerName->input_entered)
+		{
+			app->input->ActiveGetInput(app->input->playerName);
+		}
+
+		// render input
+		if (app->input->getInput_B)
+		{
+			// TO DO adjust position when bg done
+			iPoint pos = { app->win->GetWidth() - 550, 600 };
+			app->input->RenderTempText("Sign:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
+		}
+
+		// if name entered, fade to black
+		if (app->input->playerName->input_entered)
+		{
+			//Sara: Aquí es que ha llegado al final de todas las imagenes y textos
+			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+		}
 	}
 
 	//Esto renderiza la imagen que ahora está en pantalla
@@ -142,8 +161,8 @@ bool CutScene::Update(float dt)
 		{
 			text = NextText.At(passImg)->next->data.c_str();
 
-			app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 20, 100, 
-				{ 255, 255, 255 }, Font::TEXT, 0, 50.0f);
+			app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 20, 100,
+				{ 255, 255, 255 }, Font::TEXT, 0, 30.0f);
 			//app->render->TextDraw(NextText.At(passImg)->next->data, 20, app->win->GetHeight() - 100, 15, Font::UI, { 255, 255, 255 });
 		}
 	}
@@ -186,7 +205,7 @@ bool CutScene::CleanUp()
 	}
 
 	ImgToPrint.Clear();
-
+	app->input->temp = "";
 	return true;
 }
 

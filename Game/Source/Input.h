@@ -123,6 +123,8 @@ public:
 
 	void HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt);
 
+	void RenderMouse();
+
 public:
 
 	PlayerInput* playerName;

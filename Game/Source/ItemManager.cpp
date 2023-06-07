@@ -106,7 +106,7 @@ bool ItemManager::PostUpdate()
 				}
 				else
 				{
-					x = (170 + 85 * app->itemManager->nodeList[i]->x) + 70;
+					x = (680 + 70 * app->itemManager->nodeList[i]->x) + 70;
 					y = app->itemManager->nodeList[i]->y - 32;
 				}
 			}
@@ -498,6 +498,7 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 
 	LoadItemState();
 	LoadArmorItmes();
+	LoadArmorState();
 }
 
 void ItemManager::ArmorForge(ItemNode* item)
@@ -572,7 +573,6 @@ void ItemManager::LoadArmorItmes()
 	{
 		armorItems[i]->ID = 200 + i;
 	}
-	LoadArmorState();
 }
 
 void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
@@ -775,7 +775,7 @@ void ItemManager::LoadCraftItems(int ID0, int ID1, bool armor)
 				}
 				else
 				{
-					app->render->DrawTexture(itemsTexture, (170 + (85 * x)) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
+					app->render->DrawTexture(itemsTexture, (135 + (85 * x)) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
 				}
 			}
 		}
@@ -809,7 +809,7 @@ void ItemManager::LoadCraftItems(int ID0, int ID1, bool armor)
 								}
 								else
 								{
-									app->render->DrawTexture(itemsTexture, (170 + (85 * x)) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
+									app->render->DrawTexture(itemsTexture, (135 + (85 * x)) - app->render->camera.x, 300 - app->render->camera.y, &seccion);
 								}
 								x++;
 							}
@@ -827,7 +827,7 @@ void ItemManager::LoadCraftButtons(int x, ItemNode* item)
 
 	if (item->forge == false)
 	{
-		buttonBounds = { (170 + (85 * x)), 300 , 64, 64 };
+		buttonBounds = { (135 + (85 * x)), 300 , 64, 64 };
 	}
 	else
 	{
