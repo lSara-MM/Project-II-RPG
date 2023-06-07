@@ -95,6 +95,7 @@ bool PracticeTent::Start()
 	settings_B = false;
 
 	app->itemManager->Enable();
+	app->questManager->Enable();
 
 	InitEntities();
 	app->entityManager->Enable();

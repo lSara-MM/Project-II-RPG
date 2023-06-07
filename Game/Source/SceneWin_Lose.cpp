@@ -61,7 +61,7 @@ bool SceneWin_Lose::Start()
 
 	transition_B = false;//para animacion
 
-	app->questManager->active = false;
+	app->questManager->Disable();
 
 	if (win)
 	{

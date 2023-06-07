@@ -19,6 +19,7 @@
 #include "Map.h"
 #include "Pathfinding.h"
 #include "ItemManager.h"
+#include "QuestManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -78,6 +79,7 @@ bool Circus::Start()
 
 	InitEntities();
 	app->entityManager->Enable();
+	app->questManager->Enable();
 
 
 	// If se ha guardado anteriormente, teleport el player donde estaba en el guardado

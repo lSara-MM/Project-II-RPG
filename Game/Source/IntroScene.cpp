@@ -263,7 +263,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 			app->input->ActiveGetInput(app->input->playerName);
 
 			//Resetear Puzzles y Quests
-			app->questManager->Enable();
 			app->questManager->resetPuzzlesAndQuests();
 			i->data->isForward_B = false;
 		}

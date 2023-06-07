@@ -69,6 +69,7 @@ bool HouseOfTerrors::Start()
 
 	app->itemManager->Enable();
 	app->lootManager->Start();
+	app->questManager->Enable();
 
 
 	//Load Map
