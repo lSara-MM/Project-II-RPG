@@ -45,6 +45,7 @@ public:
 	int passImg;
 
 	bool printText;
+	bool StopCutScene;
 
 	uint32 mTicks;
 	uint32 mStartTicks;
