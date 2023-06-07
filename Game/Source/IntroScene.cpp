@@ -271,15 +271,7 @@ bool IntroScene::PostUpdate()
 
 	app->guiManager->Draw();
 
-
-	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
-	{
-		app->render->DrawTexture(app->input->cursorPressedTex, app->input->mouseX, app->input->mouseY);
-	}
-	else
-	{
-		app->render->DrawTexture(app->input->cursorIdleTex, app->input->mouseX, app->input->mouseY);
-	}
+	app->input->RenderMouse();
 
 	return ret;
 }
