@@ -1325,7 +1325,14 @@ bool Character::UseSkill(Skill* skill)
 			{
 				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies, skill->methodTarget);
 				app->audio->PlayFx(hitfx);
-				if (!app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill))) { break; }
+				if (app->combat->vecAllies.at(objective)!=nullptr) 
+				{
+					app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill));
+				}
+				else
+				{
+					break;
+				}
 				app->audio->PlayFx(hitfx);
 			}
 			break;
