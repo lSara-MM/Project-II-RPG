@@ -12,6 +12,7 @@
 
 #include "IntroScene.h"
 #include "Scene.h"
+
 #include "FadeToBlack.h"
 #include "Combat.h"
 
@@ -94,6 +95,7 @@ bool CutScene::Update(float dt)
 
 		passImg += 1;
 
+		app->render->ResetDtText();
 		RestartTimer();
 	}
 
@@ -120,7 +122,9 @@ bool CutScene::Update(float dt)
 		if (passImg <= ImgToPrint.Count() - 1)
 		{
 			text = NextText.At(passImg)->next->data.c_str();
-			app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 25, 100, 2.5f, Font::TEXT, 0, { 255, 255, 255 });
+
+			app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 20, 100, 
+				{ 255, 255, 255 }, Font::TEXT, 0, 50.0f);
 			//app->render->TextDraw(NextText.At(passImg)->next->data, 20, app->win->GetHeight() - 100, 15, Font::UI, { 255, 255, 255 });
 		}
 	}

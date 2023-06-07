@@ -208,6 +208,26 @@ TextSpeed DialogueSystem::GetTextSpeed()
 	return textSpeed;
 }
 
+float DialogueSystem::GetTextSpeedFloat()
+{
+	switch (GetTextSpeed())
+	{
+	case TextSpeed::SLOW:
+		return 50.0f;
+		break;
+	case TextSpeed::MEDIUM:
+		return 15.0f;
+		break;
+	case TextSpeed::FAST:
+		return 0.05f;
+		break;
+	default:
+		return 20.0f;
+		break;
+	}
+	return 0.0f;
+}
+
 SString DialogueSystem::GetTextSpeedSString()
 {
 	switch (textSpeed)

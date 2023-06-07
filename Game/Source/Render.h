@@ -59,8 +59,26 @@ public:
 	// Text to split, vector to store trimmed text, fontsize, max characters in line
 	void SplitText(SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_);
 	// Call draw text of a trimmed text
+	
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="x""y"> position x/y in screen </param>
+	/// <param name="offset"> offset between lines</param>
+	/// <param name="text"> text (SString) to trim and render </param>
+	/// <param name="pTexts"> vector of texts where to store trimmed text </param>
+	/// <param name="fontSize_"> font size</param>
+	/// <param name="max_chars_line_"> max characters in line </param>
+	/// 
+	/// <param name="color"> [optional] color to render </param>
+	/// <param name="font"> [] type of font </param>
+	/// <param name="fontOffset"> [optional] multiplier to set a smaller fontsize depending on lines </param>
+	/// <param name="dt_wait"> [optional] dt to wait between rendering characters </param>
 	void RenderTrimmedText(int x, int y, int offset, SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_, 
-		float fontOffset = 0, Font font = Font::UI, float dt_wait = 0, SDL_Color color = { 0, 0, 0 });
+		SDL_Color color = { 0, 0, 0 }, Font font = Font::UI, float fontOffset = 0, float dt_wait = 0);
+	
+	// Reset counter IF dt used in RenderTrimmedText().
+	// Use when whole text changes 
 	void ResetDtText();
 
 	// Set background color

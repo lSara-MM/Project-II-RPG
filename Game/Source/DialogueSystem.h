@@ -41,6 +41,7 @@ public:
 
 	SString ChangeTextSpeed();
 	TextSpeed GetTextSpeed();
+	float GetTextSpeedFloat();
 	SString GetTextSpeedSString();
 
 	bool LoadDialogueState();
