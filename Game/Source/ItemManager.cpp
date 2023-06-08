@@ -766,6 +766,11 @@ void ItemManager::LoadCraftItems(int ID0, int ID1, bool armor)
 				if (nodeList[i]->forge)
 				{
 					app->render->DrawTexture(itemsTexture, 180 - app->render->camera.x, 400 - app->render->camera.y, &seccion);
+					//Print Item Name
+					int offsetX = nodeList[i]->name.Length() * 30 / 2;
+
+					int x = (740 - offsetX) / 2;
+					app->render->TextDraw(nodeList[i]->name.GetString(), x, 410, 30, Font::TEXT, { 255, 255, 255 });
 				}
 				else
 				{
@@ -800,6 +805,11 @@ void ItemManager::LoadCraftItems(int ID0, int ID1, bool armor)
 								if (nodeList[attribute.as_int()]->forge)
 								{
 									app->render->DrawTexture(itemsTexture, 180 - app->render->camera.x, 400 - app->render->camera.y, &seccion);
+									//Print Item Name
+									int offsetX = nodeList[attribute.as_int()]->name.Length() * 30 / 2;
+
+									int x = (740 - offsetX) / 2;
+									app->render->TextDraw(nodeList[attribute.as_int()]->name.GetString(), x, 410, 30, Font::TEXT, { 255, 255, 255 });
 								}
 								else
 								{
