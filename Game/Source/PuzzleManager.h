@@ -224,7 +224,7 @@ public:
 
 	bool palancasActive;
 
-	bool bossActive;
+	bool bossSpectreActive_B;
 	bool bossInvent;
 	bool bossIsDead;
 	bool losetActive;
