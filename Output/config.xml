@@ -414,11 +414,19 @@ enum class CharacterClass
 		
 		sectionX="26" sectionY="30"/>
 
-		<enemy name ="The Beast Tamer" id="30" maxHp="4200" currentHp="4200" attack="270" armor="40" critRate="10" critDamage="30" accuracy="30" res="15" dodge="30" speed="120"
+		<enemy name ="The Beast Tamer" id="30" maxHp="3600" currentHp="3600" attack="270" armor="25" critRate="10" critDamage="30" accuracy="30" res="15" dodge="30" speed="120"
         type="1" class="8" skill1ID="49" skill2ID="50" skill3ID="51" skill4ID="52"
                
         width="0" heigth="0"
         texturePath ="Assets/Textures/EnemyBossSpecter.png"
+		
+		sectionX="23" sectionY="0"/>
+
+		<enemy name ="The Beast" id="40" maxHp="2400" currentHp="2000" attack="300" armor="40" critRate="30" critDamage="50" accuracy="30" res="10" dodge="0" speed="20"
+        type="1" class="8" skill1ID="53" skill2ID="54" skill3ID="55" skill4ID="56"
+               
+        width="0" heigth="0"
+        texturePath ="Assets/Textures/EnemyWolfLamb.png"
 		
 		sectionX="23" sectionY="0"/>
 

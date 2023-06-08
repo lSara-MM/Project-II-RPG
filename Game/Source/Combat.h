@@ -45,7 +45,7 @@ public:
 	void Debug();
 
 	// Init everything
-	bool PreLoadCombat(SString n, int boss = -1);
+	bool PreLoadCombat(SString n, int boss = -1, int boss2 = -1);
 	bool InitEnemies(vector<int> arr);
 	bool InitAllies(array<Character*, 4> party);
 

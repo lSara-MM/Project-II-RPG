@@ -76,12 +76,12 @@ TargetingMethod //Como se ataca
 		   firstStatusID="2" firstStatusPositive="true" firstStatusDuration="3" firstStatusIntesity="30"
 		   secondStatusID="1" secondStatusPositive="true" secondStatusDuration="3" secondStatusIntesity="30"
 	/>
-	<skill name="I trust you!" id="7" description="Words of support intertwined with cautious undertones. Heals an ally and increse their defense 1 turn by 75 and they precision 2 turns by 50 while moves you backwards." 
+	<skill name="I trust you!" id="7" description="Words of support intertwined with cautious undertones. Heals an ally and increse their defense 1 turn by 75 and marks them while moves you backwards." 
 		   type="3" movementCaster="0"  movementTarget="-1" targetMethod="0"
 	   multiplierDmg="1.1" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
-	   firstStatusID="5" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="75"
-		   secondStatusID="4" secondStatusPositive="true" secondStatusDuration="2" secondStatusIntesity="50"		   
+	   firstStatusID="5" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="110"
+		   secondStatusID="8" secondStatusPositive="true" secondStatusDuration="2" secondStatusIntesity="1"		   
 	/>
 	<skill name="Humiliation" id="8" description="A cruel mockery that taunts the enemy making them approach and lower their defense 4 turns by 25 and dodge 2 turns by 40." 
 		   type="2" movementCaster="0"  movementTarget="-2" targetMethod="0"
@@ -434,12 +434,12 @@ TargetingMethod //Como se ataca
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 		   />
 
-	<skill name="Come here" id="50" description="An attack against the backline that pull to the front and stuns."
-		   type="2" movementCaster="1"  movementTarget="0" targetMethod="6"
-	   multiplierDmg="-1.8" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
-		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
-		   firstStatusID="9" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="1"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	<skill name="Go and get him" id="50" description="A buff to the beast."
+		   type="2" movementCaster="1"  movementTarget="0" targetMethod="1"
+	   multiplierDmg="-0.5" bonusAccuracy="200" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="true" areaSkill="false" autoTarget="false"
+		   firstStatusID="1" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="80"
+		   secondStatusID="10" secondStatusPositive="true" secondStatusDuration="1" secondStatusIntesity="1"
 	/>
 	<skill name="Fire Punishment" id="51" description="A wave of fire that apply various burns."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
@@ -450,9 +450,9 @@ TargetingMethod //Como se ataca
 	/>
 
 	<skill name="Set ablaze" id="52" description="A permanent accurcy and attack buff."
-		   type="0" movementCaster="0"  movementTarget="-1" targetMethod="4"
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="4"
 	   multiplierDmg="0.5" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
-		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="true"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
 		   firstStatusID="4" firstStatusPositive="true" firstStatusDuration="20" firstStatusIntesity="-25"
 		   secondStatusID="1" secondStatusPositive="true" secondStatusDuration="20" secondStatusIntesity="-10"
 	/>

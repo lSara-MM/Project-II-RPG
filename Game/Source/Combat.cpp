@@ -523,13 +523,17 @@ void Combat::Debug()
 }
 
 // Start Combat
-bool Combat::PreLoadCombat(SString n, int boss)
+bool Combat::PreLoadCombat(SString n, int boss, int boss2)
 {
 	srand(time(NULL));
 
 	int randSize = (rand() % 2 + 1) + (rand() % 2 + 1); //25% 2, 50% 3 25% 4
 	int randId;
 
+	if (boss2 != -1)
+	{
+		vecSetEnemies.push_back(boss2);
+	}
 	if (boss != -1)
 	{
 		vecSetEnemies.push_back(boss);
@@ -538,7 +542,7 @@ bool Combat::PreLoadCombat(SString n, int boss)
 	{
 		for (int i = 0; i < randSize; i++)
 		{
-			randId = rand() % 3;
+			randId = rand() % 3; //Esto necesitaria ser generico depende del name
 			vecSetEnemies.push_back(randId);
 		}
 	}
