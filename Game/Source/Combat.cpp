@@ -1218,7 +1218,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 
 		Character* enemy = vecEnemies.at(SearchInVec(vecEnemies, control->id));
 
-		for (int i = 0; i < enemy->listSkills.Count(); i++)
+		for (int i = 0; i < enemy->listSkills.Count() && i<3; i++)
 		{
 			if (enemy->listSkillsHistory.Find(i + 1) == -1)
 			{
@@ -1321,6 +1321,26 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 					else
 					{
 						effectToPrint = "Resistance Down";
+					}
+					break;
+					case EffectType::TAUNT:
+					{
+						effectToPrint = "Provocation";
+					}
+					break;
+				case EffectType::STUN:
+					{
+						effectToPrint = "Stunned!";
+					}
+					break;
+				case EffectType::BLESS:
+					if (cha->listStatusEffects.At(i)->data->isPositive)
+					{
+						effectToPrint = "Blessed";
+					}
+					else
+					{
+						effectToPrint = "Cursed";
 					}
 					break;
 				default:
@@ -1484,6 +1504,16 @@ void Combat::RenderSkillDescription(int controlID)
 			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Resistance"; }
 			else { effecto_C = "Debuff Resistance"; }
 			break;
+		case EffectType::TAUNT:
+			effecto_C = "Taunt";
+			break;
+		case EffectType::STUN:
+			effecto_C = "Stun!";
+			break;
+		case EffectType::BLESS:
+			if (skillPoint->firstPositiveEffect) { effecto_C = "Bless"; }
+			else { effecto_C = "Curse"; }
+			break;
 		default:
 			break;
 		}
@@ -1526,6 +1556,16 @@ void Combat::RenderSkillDescription(int controlID)
 		case EffectType::RES:
 			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Resistance"; }
 			else { effecto_C = "Debuff Resistance"; }
+			break;
+		case EffectType::TAUNT:
+			effecto_C = "Taunt";
+			break;
+		case EffectType::STUN:
+			effecto_C = "Stun!";
+			break;
+		case EffectType::BLESS:
+			if (skillPoint->firstPositiveEffect) { effecto_C = "Bless"; }
+			else { effecto_C = "Curse"; }
 			break;
 		default:
 			break;
