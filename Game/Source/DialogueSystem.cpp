@@ -42,8 +42,8 @@ bool DialogueSystem::Update(float dt)
 		iPoint pos = { 0, (app->win->GetHeight() - 245) };
 		app->render->DrawTexture(textBox_tex, pos.x - app->render->camera.x, pos.y - app->render->camera.y);
 
-		SDL_Rect rect = { 0, 60, 319, 50 };
-		app->render->DrawTexture(nameBox_tex, pos.x - app->render->camera.x + 10, pos.y - app->render->camera.y - 55, &rect);
+		SDL_Rect rect = { 0, 203, 306, 61 };
+		app->render->DrawTexture(nameBox_tex, pos.x - app->render->camera.x + 16, pos.y - app->render->camera.y - 55, &rect);
 
 		if (!activeTree->UpdateTree(dt, app->dialogueSystem, pos))
 		{

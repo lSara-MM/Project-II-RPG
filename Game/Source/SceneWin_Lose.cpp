@@ -60,6 +60,7 @@ bool SceneWin_Lose::Start()
 	Lose = app->tex->Load(texturepathLose);
 
 	transition_B = false;//para animacion
+	returnTitle_B = false;
 
 	app->questManager->Disable();
 
@@ -72,11 +73,11 @@ bool SceneWin_Lose::Start()
 	{
 		app->audio->PlayMusic(looseMusicPath, 1.0f);
 	}
-	//provisional
+	
 	if (!win)
 	{
-		continueButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1100, this, { 160, 130, 153, 50 }, ButtonType::IN_SETTINGS, "Continue", 16, Font::UI, { 0, 0, 0, 0 }, 1, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
-		returnButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1101, this, { 967, 130, 153, 50 }, ButtonType::IN_SETTINGS, "Return to title", 16, Font::UI, { 0, 0, 0, 0 }, 1, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
+		continueButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1100, this, { 275, 280, 315, 50 }, ButtonType::EXTRA_LARGE, "Continue", 30, Font::UI, { 0, 0, 0, 0 }, 1, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
+		returnButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1101, this, { 700, 280, 315, 50 }, ButtonType::EXTRA_LARGE, "Return to title", 30, Font::UI, { 0, 0, 0, 0 }, 1, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
 	}
 	return true;
 }
@@ -96,9 +97,9 @@ bool SceneWin_Lose::Update(float dt)
 		{
 			if (!win)
 			{
-				if (continueButton->state == GuiControlState::DISABLED)
+				if (returnTitle_B)
 				{
-					app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
+					app->fade->FadingToBlack(this, (Module*)app->iScene, 5);
 				}
 				else
 				{
@@ -125,7 +126,7 @@ bool SceneWin_Lose::Update(float dt)
 	if (win)
 	{
 		app->render->DrawTexture(Win, 0, offset + point * (0 - offset));
-		app->render->TextDraw("VICTORY", 280, offset + point * (40 - offset), 150, Font::TEXT, { 255,255,255 });
+		app->render->TextDraw("VICTORY", 255, offset + point * (50 - offset), 175, Font::TEXT, { 255,255,255 });
 		if (app->puzzleManager->fightBoss)
 		{
 			app->puzzleManager->bossIsDead = true;
@@ -142,6 +143,8 @@ bool SceneWin_Lose::Update(float dt)
 	else
 	{
 		app->render->DrawTexture(Lose, 0, offset + point * (0 - offset));
+		app->render->TextDraw("You failed", 435, offset + point * (40 - offset), 75, Font::TEXT, { 255,255,255 });
+		app->render->TextDraw("get stronger and try again", 115, offset + point * (130 - offset), 75, Font::TEXT, { 255,255,255 });
 		if (app->puzzleManager->fightBoss)
 		{
 			app->puzzleManager->bossIsDead = false;
@@ -251,6 +254,7 @@ bool SceneWin_Lose::OnGuiMouseClickEvent(GuiControl* control)
 	case 1101:
 		LOG("Button Return to Title click");
 		transition_B = true;
+		returnTitle_B = true;
 		returnButton->isForward_B = false;
 		continueButton->state = GuiControlState::DISABLED;
 		break;

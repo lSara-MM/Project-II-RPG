@@ -28,7 +28,7 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	case ButtonType::NONE:
 		break;
 	case ButtonType::EXTRA_LARGE:
-		buttonTex = app->tex->Load("Assets/GUI/UIArt/Generic.png");
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/loseButton.png");
 		break;
 	case ButtonType::LARGE:
 		break;
@@ -38,18 +38,18 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 		buttonTex = app->tex->Load("Assets/GUI/UIArt/Start.png");
 		break;
 	case ButtonType::CLOSE:
-		buttonTex = app->tex->Load("Assets/GUI/UIArt/Close.png");
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/buttonsSettings.png");
 		break;
 	case ButtonType::MENU:
 		break;
 	case ButtonType::SETTINGS:
-		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonSettings.png");
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/buttonsSettings.png");
 		break;
 	case ButtonType::IN_SETTINGS:
-		buttonTex = app->tex->Load("Assets/GUI/UIArt/ButtonInSettings.png");
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/buttonsSettings.png");
 		break;
 	case ButtonType::DIALOGUE:
-		buttonTex = app->tex->Load("Assets/GUI/UIArt/Dialogue.png");
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/buttonDialogue.png");
 		break;
 	case ButtonType::CHECK:
 		break;
@@ -82,7 +82,7 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
 		break;
 	case ButtonType::SKIPPY:
-		buttonTex = app->tex->Load("Assets/GUI/spritesheetSkip.png");
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/buttonsCombat.png");
 		break;
 	case ButtonType::ITEM:
 		buttonTex = app->tex->Load("Assets/GUI/cuadroPociones.png");
@@ -241,7 +241,12 @@ bool GuiButton::Draw(Render* render)
 
 	if (buttonType == ButtonType::COMBAT_TARGET) { rect = { 0, 0, 120, 12 }; } 
 	else if (buttonType == ButtonType::START) { rect = { 5, 5, 20, 26 }; }
-	else if (buttonType == ButtonType::DIALOGUE) { rect.x = 5; }
+	else if (buttonType == ButtonType::SETTINGS) { rect = { 1, 1, 154, 66 }; }
+	else if (buttonType == ButtonType::IN_SETTINGS) { rect = { 230, 0 , 230, 94}; }
+	else if (buttonType == ButtonType::CLOSE) { rect = { 0, 200, 62, 63 }; }
+	else if (buttonType == ButtonType::SKIPPY) { rect = { 351, 1, 132, 44 }; }
+	else if (buttonType == ButtonType::DIALOGUE) { rect = { 0, 0, 343, 66 }; }
+	else if (buttonType == ButtonType::EXTRA_LARGE) { rect.x = 5, rect.y = 5; }
 
 	// TO DO, EN DIALOGO LOS BOTONES DEBERIAN TENER MENOS OFFSET, ES DECIR, SE DEBERIAN PRINTAR CON JUSTIFICADO A LA IZQUIERDA, NO EN MEDIO
 	// ADEMAS DE HACER LO DEL TRIM TEXT PARA QUE SI LA OPCION ES MAS LARGA SE PRINTE EN LINEAS DISTINTAS.
@@ -355,8 +360,6 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::SKIPPY:
-				rect.x = bounds.w * 2;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 
 			default:
@@ -380,7 +383,6 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x + bounds.w / 7, bounds.y + bounds.h / 2.7, &rect);
 				break;
 			case ButtonType::CLOSE:
-				rect.y = 3;
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::MENU:
@@ -389,10 +391,10 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::IN_SETTINGS:
-				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				rect.y = 191;
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x-42, bounds.y - app->render->camera.y-22, &rect);
 				break;
 			case ButtonType::DIALOGUE:
-				rect.y = 5;
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::CHECK:
@@ -462,7 +464,7 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::NONE:
 				break;
 			case ButtonType::EXTRA_LARGE:
-				rect.y = 53;
+				rect.y = 65;
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::LARGE:
@@ -474,21 +476,21 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x + bounds.w / 7, bounds.y + bounds.h / 2.7, &rect);
 				break;
 			case ButtonType::CLOSE:
-				rect.y = 66;
+				rect.x = 62;
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::MENU:
 				break;
 			case ButtonType::SETTINGS:
-				rect.y = 53;
+				rect.y = 67;
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::IN_SETTINGS:
-				rect.y = 53;
-				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				rect.y = 0;
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x - 42, bounds.y - app->render->camera.y - 22, &rect);
 				break;
 			case ButtonType::DIALOGUE:
-				rect.y = 65;
+				rect.y = 67;
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::CHECK:
@@ -549,7 +551,7 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::SKIPPY:
-				rect.x = bounds.w;
+				rect.y = 45;
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			default:
@@ -562,7 +564,7 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::NONE:
 				break;
 			case ButtonType::EXTRA_LARGE:
-				rect.y = 105;
+				rect.y = 125;
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::LARGE:
@@ -574,27 +576,27 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x + bounds.w / 7, bounds.y + bounds.h / 2.7, &rect);
 				break;
 			case ButtonType::CLOSE:
-				rect.y = 127;
+				rect.x = 124;
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::MENU:
 				break;
 			case ButtonType::SETTINGS:
-				rect.y = 105;
+				rect.y = 132;
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::IN_SETTINGS:
-				rect.y = 105;
-				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				rect.y = 96;
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x - 42, bounds.y - app->render->camera.y - 22, &rect);
 				break;
 			case ButtonType::DIALOGUE:
-				rect.y = 125;
+				rect.y = 134;
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::CHECK:
 				break;
 			case ButtonType::CONTROL_SETTINGS:
-				rect.y = 105;
+				rect.y += (2*bounds.h);
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::INVENTORY:
@@ -639,7 +641,7 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::CHANGE_POSITION:
 				break;
 			case ButtonType::SKIPPY:
-				rect.x = bounds.w * 2;
+				rect.y = 89;
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 			default:
 				break;
@@ -749,10 +751,10 @@ bool GuiButton::Draw(Render* render)
 		}			
 		else if (buttonType == ButtonType::DIALOGUE)
 		{
-			offsetX = fontSize * 1.5f;
+			offsetX = fontSize * 2.75f;
 
-			int offsetY = fontSize / 2;
-			int max_chars_line = fontSize * 2;
+			int offsetY = fontSize;
+			int max_chars_line = fontSize * 1.50f;
 
 			app->render->RenderTrimmedText(bounds.x + offsetX, bounds.y + offsetY, 2, text, &texts, fontSize, max_chars_line, color, Font::UI, 2.5f);
 		}

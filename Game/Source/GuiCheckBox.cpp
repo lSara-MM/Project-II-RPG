@@ -14,7 +14,7 @@ GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, int speed, Easings eType, A
 	boundsX_AUX = this->bounds.x;
 
 	isForward_B = true;
-	checkBoxTex = app->tex->Load("Assets/GUI/UIArt/Close.png");
+	checkBoxTex = app->tex->Load("Assets/GUI/UIArt/buttonsSettings.png");
 }
 
 GuiCheckBox::~GuiCheckBox()
@@ -152,7 +152,7 @@ bool GuiCheckBox::Draw(Render* render)
 
 		case GuiControlState::NORMAL:
 		{
-			rect = { 1, 3, 57, 57 };
+			rect = { 156, 1, 69, 64 };
 			render->DrawTexture(checkBoxTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 
 		} break;
@@ -169,7 +169,7 @@ bool GuiCheckBox::Draw(Render* render)
 
 		case GuiControlState::SELECTED:
 		{
-			rect = { 1, 127, 57, 57 };
+			rect = { 156, 67, 69, 64 };
 			render->DrawTexture(checkBoxTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 		} break;
 
