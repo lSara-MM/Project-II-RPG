@@ -218,11 +218,40 @@
 	<dialogueTree ID="4">
 
 		<node id="0" name="YUROSLAVA" text="Now I'm bound to you. How can I help?">
-			<choice id="0" option="I need to forge." nextNode="1" eventReturn="0"/>
+			<choice id="0" option="See you." nextNode="-1" eventReturn="0"/>
+			<choice id="1" option="I need to forge." nextNode="1" eventReturn="0"/>
+			<choice id="2" option="You seem quite melancholic." nextNode="2" eventReturn="0"/>
 		</node>
 
 		<node id="1" name="YUROSLAVA" text=".">
 			<choice id="0" option="Forge. " nextNode="-1" eventReturn="7"/>
+		</node>
+
+		<node id="2" name="YUROSLAVA" text="It's nothing, it's just that since they locked me up I haven't seen my little brother.">
+			<choice id="0" option="Why did they locked you? " nextNode="3" eventReturn="0"/>
+			<choice id="0" option="Who's your brother? " nextNode="6" eventReturn="0"/>
+		</node>
+
+		<node id="3" name="YUROSLAVA" text="They forced me to burn animals that do not mutate, and I refused. Thanks to you, now I can take revenge and help you take down the Beast Tent.">
+			<choice id="0" option="Do you know what can we find there? " nextNode="4" eventReturn="0"/>
+			<choice id="0" option="I see... " nextNode="0" eventReturn="0"/>
+		</node>
+
+		<node id="4" name="YUROSLAVA" text="Wolf-goats, wasps, strange sea creatures and worst of all, the tamer. With her fire whip… not even me could beat her. ">
+			<choice id="0" option="Doesn't seem much harder than the last one. " nextNode="5" eventReturn="0"/>
+			<choice id="0" option="We should get ready then. " nextNode="0" eventReturn="0"/>
+		</node>
+
+		<node id="5" name="YUROSLAVA" text="Do not rely, we have to be proactive if we want to get out of here. ">
+			<choice id="0" option="Yeah. You kinda right. " nextNode="0" eventReturn="0"/>
+		</node>
+
+		<node id="6" name="YUROSLAVA" text="My brother was a very naughty boy, after the death of our parents we were left alone and found this place. The Showman hired us without hesitation. He turned me into what you see and said I had a special spark. My brother, on the other hand, was turned into a little devil, after 5 years, he hasn't grown an inch. He gave him the gift of strength, he told him that a naughty boy has to be strong enough to survive and named him D'yavol. I can't even remember his name before that.">
+			<choice id="0" option="I'm sorry to hear that. I don't know, maybe one day he find him again. " nextNode="7" eventReturn="0"/>
+		</node>
+
+		<node id="7" name="YUROSLAVA" text="I wish. He is the strongest in the fair, he would help us a lot. I miss him. ">
+			<choice id="0" option="We are with you Yuroslava. " nextNode="0" eventReturn="0"/>
 		</node>
 
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
