@@ -280,7 +280,7 @@ bool PuzzleManager::Dun1Start()
 	esc3 = false;
 
 	codeActive = false;
-	bossActive = false;
+	bossSpectreActive_B = false;
 	bossIsDead = false;
 	losetActive = false;
 	bossInvent = false;
@@ -1182,7 +1182,7 @@ bool PuzzleManager::Rescue()
 			app->render->DrawTexture(bossDeath, posBoss.x - widthBoss, posBoss.y - heightBoss, &bosDeath);
 		}
 
-		if (bossActive)
+		if (bossSpectreActive_B)
 		{
 			app->render->DrawTexture(textureE, posBoss.x - 64, posBoss.y - 145);
 
@@ -1199,7 +1199,7 @@ bool PuzzleManager::Rescue()
 				delete Boss;
 				Boss = nullptr;
 
-				bossActive = false;
+				bossSpectreActive_B = false;
 			}
 		}
 
@@ -1248,7 +1248,7 @@ bool PuzzleManager::Rescue()
 		SDL_Rect bos = { 0, 0, 126, 178 };
 		app->render->DrawTexture(boss, posBoss.x - 126, posBoss.y - 178, &bos, 1.0f, NULL, NULL, NULL, SDL_FLIP_HORIZONTAL);
 
-		if (bossActive)
+		if (bossSpectreActive_B)
 		{
 			app->render->DrawTexture(textureE, posBoss.x, posBoss.y - 145);
 			//pasar a house of terrors

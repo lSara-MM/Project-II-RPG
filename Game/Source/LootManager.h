@@ -377,7 +377,19 @@ public:
 		{
 			LOG("Combat");
 			app->audio->PlayFx(app->hTerrors->combatfx);
-			app->combat->PreLoadCombat(app->hTerrors->name);
+			if(app->hTerrors->active)
+			{
+				app->combat->PreLoadCombat(app->hTerrors->name);
+			}
+			else if (app->BeastT->active)
+			{
+				app->combat->PreLoadCombat(app->BeastT->name);
+			}
+			else
+			{
+				app->combat->PreLoadCombat(app->scene->name);
+			}
+			
 
 			app->SaveGameRequest();
 

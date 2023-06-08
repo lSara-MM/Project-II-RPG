@@ -398,6 +398,8 @@ bool QuestManager::resetPuzzlesAndQuests()
 {
 	//Quests y puzzles reinicio
 
+	InitQuest();
+
 	app->puzzleManager->palancas = false;
 	app->puzzleManager->escape = false;
 	app->puzzleManager->rescue = false;

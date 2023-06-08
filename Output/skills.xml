@@ -429,8 +429,8 @@ TargetingMethod //Como se ataca
 	<skill name="Whip Slash" id="49" description="A reaping atack with the whip that damages all and set on fire eternally."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="-0.8" bonusAccuracy="75" bonusCritRate="40" bonusCritDamage="30"
-		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
-		   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="7" firstStatusIntesity="5"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
+		   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="7" firstStatusIntesity="-5"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 		   />
 
@@ -444,7 +444,7 @@ TargetingMethod //Como se ataca
 	<skill name="Fire Punishment" id="51" description="A wave of fire that apply various burns."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="-1.2" bonusAccuracy="70" bonusCritRate="-200" bonusCritDamage="0"
-		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-20"
 		   secondStatusID="0" secondStatusPositive="false" secondStatusDuration="3" secondStatusIntesity="-10"
 	/>
@@ -452,9 +452,9 @@ TargetingMethod //Como se ataca
 	<skill name="Set ablaze" id="52" description="A permanent accurcy and attack buff."
 		   type="0" movementCaster="0"  movementTarget="-1" targetMethod="4"
 	   multiplierDmg="0.5" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
-		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="true"
-		   firstStatusID="4" firstStatusPositive="true" firstStatusDuration="20" firstStatusIntesity="25"
-		   secondStatusID="1" secondStatusPositive="true" secondStatusDuration="20" secondStatusIntesity="10"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="true"
+		   firstStatusID="4" firstStatusPositive="true" firstStatusDuration="20" firstStatusIntesity="-25"
+		   secondStatusID="1" secondStatusPositive="true" secondStatusDuration="20" secondStatusIntesity="-10"
 	/>
 
 	

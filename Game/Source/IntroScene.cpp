@@ -140,6 +140,7 @@ bool IntroScene::Update(float dt)
 
 		app->input->coso = false;
 		app->combat->firstCombat_B = false;
+		app->questManager->resetPuzzlesAndQuests();
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 	}
 		
