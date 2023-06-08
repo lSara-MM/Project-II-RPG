@@ -428,9 +428,9 @@ TargetingMethod //Como se ataca
 
 	<skill name="Whip Slash" id="49" description="A reaping atack with the whip that damages all and set on fire eternally."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="-0.8" bonusAccuracy="75" bonusCritRate="40" bonusCritDamage="30"
+	   multiplierDmg="-1.5" bonusAccuracy="75" bonusCritRate="40" bonusCritDamage="30"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
-		   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="7" firstStatusIntesity="-5"
+		   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="12" firstStatusIntesity="-5"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 		   />
 
@@ -438,7 +438,7 @@ TargetingMethod //Como se ataca
 		   type="2" movementCaster="1"  movementTarget="0" targetMethod="1"
 	   multiplierDmg="-0.8" bonusAccuracy="200" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="true" areaSkill="false" autoTarget="false"
-		   firstStatusID="1" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="180"
+		   firstStatusID="4" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="180"
 		   secondStatusID="10" secondStatusPositive="true" secondStatusDuration="1" secondStatusIntesity="1"
 	/>
 	<skill name="Fire Punishment" id="51" description="A wave of fire that apply various burns."
@@ -461,16 +461,16 @@ TargetingMethod //Como se ataca
 
 	<skill name="Gore and dispatch" id="53" description="A reaping atack with the horns that reduces resistance."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="-1.3" bonusAccuracy="90" bonusCritRate="20" bonusCritDamage="20"
+	   multiplierDmg="-1.5" bonusAccuracy="90" bonusCritRate="20" bonusCritDamage="20"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="7" firstStatusPositive="false" firstStatusDuration="4" firstStatusIntesity="-25"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 		   />
 
 	<skill name="Frenzied Ram" id="54" description="A crazy attack that pushes and stuns if it hits."
-		   type="2" movementCaster="-3"  movementTarget="3" targetMethod="1"
-	   multiplierDmg="-0.5" bonusAccuracy="50" bonusCritRate="-200" bonusCritDamage="0"
-		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="true" areaSkill="false" autoTarget="false"
+		   type="2" movementCaster="-3"  movementTarget="3" targetMethod="5"
+	   multiplierDmg="-2.0" bonusAccuracy="50" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="9" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="1"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
@@ -479,7 +479,7 @@ TargetingMethod //Como se ataca
 	   multiplierDmg="0" bonusAccuracy="90" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="10" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-1"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+		   secondStatusID="0" secondStatusPositive="false" secondStatusDuration="5" secondStatusIntesity="10"
 	/>
 
 	<skill name="Bloodlust" id="56" description="A permanent resistance and crit chance buff."

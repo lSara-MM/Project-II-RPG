@@ -1218,7 +1218,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 
 		Character* enemy = vecEnemies.at(SearchInVec(vecEnemies, control->id));
 
-		for (int i = 0; i < enemy->listSkills.Count() && i<3; i++)
+		for (int i = 0; i < enemy->listSkills.Count(); i++)
 		{
 			if (enemy->listSkillsHistory.Find(i + 1) == -1)
 			{
@@ -1237,7 +1237,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			Character* cha = vecEnemies.at((SearchInVec(vecEnemies, control->id)));
 			SString effectToPrint;
 
-			for (size_t i = 0; i < cha->listStatusEffects.Count(); i++)
+			for (size_t i = 0; i < cha->listStatusEffects.Count() && i < 3; i++)
 			{
 				switch (cha->listStatusEffects.At(i)->data->type)
 				{
