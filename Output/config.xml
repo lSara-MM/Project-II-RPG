@@ -154,7 +154,7 @@
 		sectionX="38" sectionY="2"/>
 	</entitymanager>
 
-	<dialogue textBoxBg="Assets/GUI/UI_TextBox.png" nameBoxBg="Assets/GUI/UIArt/Dialogue.png">
+	<dialogue textBoxBg="Assets/GUI/UIArt/spriteDialogue.png" nameBoxBg="Assets/GUI/UIArt/buttonDialogue.png">
 	</dialogue>
 
 	<logoScene background="Assets/Maps/Logo_Pikum_re.png" collaborator="Assets/Maps/citm_logo.png" audioLogoPath ="Assets/Audio/Music/Logo_Intro.ogg"/>

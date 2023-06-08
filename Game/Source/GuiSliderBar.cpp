@@ -19,7 +19,7 @@ GuiSliderBar::GuiSliderBar(uint32 id, SDL_Rect bounds, SDL_Rect sliderBounds, in
 	animationButton.AddTween(100, 80, eType);
 
 	//SliderBarTex = app->tex->Load("Assets/GUI/UI_slider.png");
-	SliderBarTex = app->tex->Load("Assets/GUI/UI_slider2.png");
+	SliderBarTex = app->tex->Load("Assets/GUI/UIArt/buttonsSettings.png");
 
 	slidepath = "Assets/Audio/Fx/slider.wav";
 	slidefx = app->audio->LoadFx(slidepath);
@@ -127,9 +127,10 @@ bool GuiSliderBar::Draw(Render* render)
 	}
 
 
-	SDL_Rect button_rect = { 233, 0, 28, 39 };
+	SDL_Rect button_rect = { 4, 324, 36, 70 };
 	SDL_Rect slider_static_rect = { 0, 10, 233, 9 };
 	SDL_Rect slider_dynamic_rect = { 0, 0, sliderBounds.x - bounds.x + 14, 9 };
+	SDL_Rect slider_static = { 1, 298, 256, 16 };
 
 	if (app->guiManager->GUI_debug)
 	{
@@ -165,17 +166,18 @@ bool GuiSliderBar::Draw(Render* render)
 
 		} break;
 
+
 		case GuiControlState::SELECTED:
 			break;
-
 		default:
 			break;
 		}
 	}
 	else
 	{
-		render->DrawTexture(SliderBarTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y - 5, &slider_static_rect);
-		render->DrawTexture(SliderBarTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y - 5, &slider_dynamic_rect);
+		/*render->DrawTexture(SliderBarTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y - 5, &slider_static_rect);
+		render->DrawTexture(SliderBarTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y - 5, &slider_dynamic_rect);*/
+		render->DrawTexture(SliderBarTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y - 5, &slider_static);
 
 		// Draw the right SliderBar depending on state
 		switch (state)

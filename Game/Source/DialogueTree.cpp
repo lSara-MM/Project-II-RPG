@@ -37,7 +37,7 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 {
 	max_chars_line = FONT_SIZE * 5;
 
-	app->render->TextDraw(activeNode->name.GetString(), pos.x + 50, pos.y - FONT_SIZE * 2, FONT_SIZE, Font::TEXT, { 255, 255, 255 });
+	app->render->TextDraw(activeNode->name.GetString(), pos.x + 100, pos.y - FONT_SIZE * 2, 30, Font::TEXT, { 0, 0, 0 });
 	
 	if (!app->input->playerName->input.empty())
 	{
@@ -52,7 +52,7 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 
 	LOG("Text Speed %f", dtWait);
 	app->render->RenderTrimmedText(pos.x + 100, pos.y + 50, 10, activeNode->text, &activeNode->texts, FONT_SIZE, max_chars_line, 
-		{ 255, 255, 255 }, Font::TEXT, 0,  dtWait);
+		{ 0, 0, 0 }, Font::TEXT, 0,  dtWait);
 
 	EventReturn(mod, pos);
 

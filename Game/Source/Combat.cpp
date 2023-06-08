@@ -118,7 +118,7 @@ bool Combat::Start()
 
 
 	// Skip button
-	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, this, { 542, 100, 129, 43}, ButtonType::SKIPPY, "", 12, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, this, { 542, 100, 129, 43}, ButtonType::SKIPPY, "S K I P", 20, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN);
 	listButtons.Add(button);
 	button = nullptr;
 
