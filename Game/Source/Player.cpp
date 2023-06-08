@@ -510,7 +510,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		app->puzzleManager->palancasActive = true;
 		break;
 	case ColliderType::BOSSDEAD:
-		app->puzzleManager->bossActive = true;
+		app->puzzleManager->bossSpectreActive_B = true;
 		break;
 	case ColliderType::LOSET:
 		app->puzzleManager->losetActive = true;
@@ -683,7 +683,7 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 		app->puzzleManager->palancasActive = false;
 		break;
 	case ColliderType::BOSSDEAD:
-		app->puzzleManager->bossActive = false;
+		app->puzzleManager->bossSpectreActive_B = false;
 		break;
 	case ColliderType::LOSET:
 		app->puzzleManager->losetActive = false;
