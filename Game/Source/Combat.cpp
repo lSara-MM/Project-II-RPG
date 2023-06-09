@@ -382,30 +382,7 @@ bool Combat::CleanUp()
 		}
 	}
 
-	if (vecAllies.empty())
-	{
-		for (int i = 0; app->itemManager->arrParty.at(i) != nullptr; i++)
-		{
-			app->itemManager->arrParty.at(i)->currentHp = 5;
-		}
-	}
-	else
-	{
-		for (int i = 0; i < vecAllies.size(); i++)
-		{
-			// If es el mismo chara, cambiale el hp, sino se queda igual por lo que el chara muerto revive a 5 hp
-			if (strcmp(app->itemManager->arrParty.at(i)->name.GetString(), vecAllies.at(i)->name.GetString()) == 0)
-			{
-				app->itemManager->arrParty.at(i)->currentHp = vecAllies.at(i)->currentHp;
-			}
-			else
-			{
-				app->itemManager->arrParty.at(i)->currentHp = 5;
-			}
-		}
-	}
-	
-
+	HandleEndCombat();
 	SaveCombat();
 
 	if (profileTex != nullptr)
@@ -929,12 +906,22 @@ int Combat::SearchInSkills(vector<Character*> arr, Character* chara)
 	return -1;
 }
 
-// Busqueda mediante ID para onGuiClickEvent
-int Combat::SearchInVec(vector<Character*> arr, int id)
+int Combat::SearchInVecID(vector<Character*> arr, int CharaId)
 {
 	for (int i = 0; i < arr.size(); i++)
 	{
-		if (arr.at(i)->button->id == id) { return i; }
+		if (arr.at(i)->id == CharaId) { return i; }
+	}
+
+	return -1;
+}
+
+// Busqueda mediante ID para onGuiClickEvent
+int Combat::SearchInVec(vector<Character*> arr, int buttonId)
+{
+	for (int i = 0; i < arr.size(); i++)
+	{
+		if (arr.at(i)->button->id == buttonId) { return i; }
 	}
 
 	return -1;
@@ -1624,6 +1611,34 @@ void Combat::RenderSkillDescription(int controlID)
 	}
 }
 
+//
+void Combat::HandleEndCombat()
+{
+	if (vecAllies.empty())
+	{
+		for (int i = 0; app->itemManager->arrParty.at(i) != nullptr; i++)
+		{
+			app->itemManager->arrParty.at(i)->currentHp = 5;
+		}
+	}
+	else
+	{
+		for (int i = 0; i < app->itemManager->partySize; i++)
+		{
+			int posInVec = SearchInVecID(vecAllies, app->itemManager->arrParty.at(i)->id);
+			if (posInVec != -1)
+			{
+				app->itemManager->arrParty.at(i)->currentHp = vecAllies.at(posInVec)->currentHp;
+			}
+			else
+			{
+				app->itemManager->arrParty.at(i)->currentHp = 5;
+			}		
+		}
+	}
+}
+
+
 // Save/Load
 bool Combat::SaveCombat()
 {
@@ -1632,7 +1647,7 @@ bool Combat::SaveCombat()
 	pugi::xml_document* saveDoc = new pugi::xml_document();
 	pugi::xml_node node = saveDoc->append_child("save_stats");
 
-	for (int i = 0; i < app->itemManager->arrParty.size(); i++)
+	for (int i = 0; i < app->itemManager->partySize; i++)
 	{
 		if (app->itemManager->arrParty.at(i) != nullptr)
 		{

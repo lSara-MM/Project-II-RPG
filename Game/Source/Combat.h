@@ -66,7 +66,8 @@ public:
 
 	// Getters
 	int SearchInSkills(vector<Character*> arr, Character* chara);
-	int SearchInVec(vector<Character*> arr, int id);
+	int SearchInVecID(vector<Character*> arr, int CharaId);
+	int SearchInVec(vector<Character*> arr, int buttonId);
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
@@ -76,6 +77,9 @@ public:
 	// Render GUI
 	void RenderGuiChara(int charaID);
 	void RenderSkillDescription(int controlID);	
+
+	// Handle character's stats at the end of the combat
+	void HandleEndCombat();
 
 	// Save/Load
 	bool SaveCombat(); //guardar stats playable characters en xml combat

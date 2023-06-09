@@ -1176,10 +1176,12 @@ bool ItemManager::LoadParty()
 	{
 		pugi::xml_node& data = gameStateFile.child("save_state").child(app->entityManager->name.GetString());
 
+		int i = 0;
 		for (pugi::xml_attribute attr = data.child("party").attribute("id"); attr; attr = attr.next_attribute())
 		{
 			int id = attr.as_int();
 			app->itemManager->AddCharaToParty(id);
+			partySize = ++i;
 		}
 	}
 
@@ -1198,6 +1200,7 @@ void ItemManager::SetParty()
 		//if (i == arrParty.size()) break;
 		arrParty.at(i) = vecPC.at(i);
 		arrParty.at(i)->positionCombat_I = i;
+		partySize = i;
 	}
 }
 

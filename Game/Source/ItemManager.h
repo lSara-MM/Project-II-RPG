@@ -166,6 +166,7 @@ public:
 	vector <ItemNode*> armorItems;
 
 	array<Character*, 4> arrParty;
+	int partySize;
 	vector<Character*> vecPC;
 
 	int invPos = 0;
