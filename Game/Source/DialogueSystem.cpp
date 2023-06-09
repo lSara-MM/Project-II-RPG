@@ -43,7 +43,7 @@ bool DialogueSystem::Update(float dt)
 		app->render->DrawTexture(textBox_tex, pos.x - app->render->camera.x, pos.y - app->render->camera.y);
 
 		SDL_Rect rect = { 0, 203, 306, 61 };
-		app->render->DrawTexture(nameBox_tex, pos.x - app->render->camera.x + 16, pos.y - app->render->camera.y - 55, &rect);
+		app->render->DrawTexture(nameBox_tex, pos.x - app->render->camera.x + 16, pos.y - app->render->camera.y - 80, &rect);
 
 		if (!activeTree->UpdateTree(dt, app->dialogueSystem, pos))
 		{
