@@ -92,24 +92,28 @@ public:
 		// Language
 		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 750, 290, 133, 33 }, ButtonType::IN_SETTINGS, "English", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN,AnimationAxis::RIGHT_X);
 		button->state = GuiControlState::NONE;
+		button->color = { 255, 246, 240 };
 		listGameButtons.Add(button);
 
 		// Text Speed
 		GUI_id++;
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 750, 367, 133, 33 }, ButtonType::IN_SETTINGS, "Medium", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN,AnimationAxis::RIGHT_X);
 		button->state = GuiControlState::NONE;
+		button->color = { 255, 246, 240 };
 		listGameButtons.Add(button);
 
 		// Return to Title
 		GUI_id++;
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 486, 444, 133, 33 }, ButtonType::IN_SETTINGS, "Return to Title", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
+		button->color = { 255, 246, 240 };
 		listGameButtons.Add(button);
 
 		// Exit
 		GUI_id++;
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 486, 521, 133, 33 }, ButtonType::IN_SETTINGS, "Exit", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
+		button->color = { 255, 246, 240 };
 		listGameButtons.Add(button);
 
 
@@ -326,6 +330,7 @@ public:
 		// Window Size
 		GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 750, 320, 133, 33 }, ButtonType::IN_SETTINGS, "Window Size", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
+		button->color = { 255, 246, 240 };
 		listGraphicsButtons.Add(button);
 
 		// Fullscreen	
@@ -344,6 +349,7 @@ public:
 		GUI_id++;
 		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, GUI_id, mod, { 750, 551, 133, 33 }, ButtonType::IN_SETTINGS, "Max fps", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		button->state = GuiControlState::NONE;
+		button->color = { 255, 246, 240 };
 		listGraphicsButtons.Add(button);
 
 
@@ -651,6 +657,7 @@ public:
 		{
 			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { 290, 300 + 75 * i, 155, 67 }, ButtonType::SETTINGS, buttons[i], 30, Font::UI, { 0,0,0,0 }, speedAnimButton,Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
 			button->state = GuiControlState::NONE;
+			button->color = { 255, 246, 240 };
 			listSettingsButtons.Add(button);
 		}
 
@@ -687,7 +694,7 @@ public:
 	
 		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, offsetAnimation + point * (85  - offsetAnimation) - app->render->camera.y);
 		app->render->DrawTexture(cartelTexture, 274 - app->render->camera.x, offsetAnimation + point * (210 - offsetAnimation) - app->render->camera.y);
-		app->render->TextDraw("Settings", 565, int(offsetAnimation + point * (107 - offsetAnimation)), 40, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Settings", 565, int(offsetAnimation + point * (107 - offsetAnimation)), 40, Font::UI, { 255, 246, 240 });
 
 		float point69 = animationShadow.GetPoint();
 		int offsetAnimationDch = 1300;
@@ -703,8 +710,8 @@ public:
 			float point2 = animationGame.GetPoint();
 
 			int x = 506; int y = 290+10; int offset = 77;
-			app->render->TextDraw("Language", x, offsetAnimation + point2 * (y - offsetAnimation), 16);
-			app->render->TextDraw("Text Speed", x, offsetAnimation + point2 * (y + offset - offsetAnimation), 16);
+			app->render->TextDraw("Language", x, offsetAnimation + point2 * (y - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Text Speed", x, offsetAnimation + point2 * (y + offset - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
 		}
 
 		if (pControl->control_B) { //se queda aqui el texto, hacerlo botones el juego no aguanta
@@ -715,22 +722,22 @@ public:
 
 			int x = 480; int y = 250; int offset = 50;
 
-			app->render->TextDraw("Game by Pikum Studios: ", 605, (offsetAnimation + point2 * (y - offsetAnimation)), 16);
+			app->render->TextDraw("Game by Pikum Studios: ", 605, (offsetAnimation + point2 * (y - offsetAnimation)), 16, Font::TEXT, { 255, 246, 240 });
 
-			app->render->TextDraw("Sara Martinez Mauri", x, offsetAnimation + point2 * ((y + offset) - offsetAnimation), 16);
-			app->render->TextDraw("Jose Antonio Tur Izquierdo", x, offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation), 16);
-			app->render->TextDraw("Sonia Cristina Ojeda Lanz", x, offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation), 16);
-			app->render->TextDraw("Alberto Hidalgo Garcia", x, offsetAnimation + point2 * ((y + offset * 4) - offsetAnimation), 16);
-			app->render->TextDraw("Pau Garriga Brotons", x, offsetAnimation + point2 * ((y + offset * 5) - offsetAnimation), 16);
+			app->render->TextDraw("Sara Qiao Martinez Mauri", x, offsetAnimation + point2 * ((y + offset) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Jose Antonio Tur Izquierdo", x, offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Sonia Cristina Ojeda Lanz", x, offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Alberto Hidalgo Garcia", x, offsetAnimation + point2 * ((y + offset * 4) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Pau Garriga Brotons", x, offsetAnimation + point2 * ((y + offset * 5) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
 
-			app->render->TextDraw("This project is licensed under an unmodified MIT license", x, offsetAnimation + point2 * ((y + offset * 6) - offsetAnimation), 16);
-			app->render->TextDraw("Copyright(c) 2020 Ray", x, offsetAnimation + point2 * ((y + offset * 7) - offsetAnimation), 16);
+			app->render->TextDraw("This project is licensed under an unmodified MIT license", x, offsetAnimation + point2 * ((y + offset * 6) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Copyright(c) 2020 Ray", x, offsetAnimation + point2 * ((y + offset * 7) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
 
 			x = 750;
-			app->render->TextDraw("Andreu Nosas Soler", x, offsetAnimation + point2 * ((y + offset) - offsetAnimation), 16);
-			app->render->TextDraw("Andreu Miro Sabate", x, offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation), 16);
-			app->render->TextDraw("Eric Segovia Baena", x, offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation), 16);
-			app->render->TextDraw("Guillem Pol Aixut Anderiz", x, offsetAnimation + point2 * ((y + offset * 4) - offsetAnimation), 16);
+			app->render->TextDraw("Andreu Nosas Soler", x, offsetAnimation + point2 * ((y + offset) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Andreu Miro Sabate", x, offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Eric Segovia Baena", x, offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Guillem Pol Aixut Anderiz", x, offsetAnimation + point2 * ((y + offset * 4) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
 		}
 
 		if (pGraphics->graphics_B) { 
@@ -740,10 +747,10 @@ public:
 			float point2 = animationGraphics.GetPoint();
 
 			int x = 506; int y = 320; int offset = 77;
-			app->render->TextDraw("Windows Size", x, offsetAnimation + point2 * (y - offsetAnimation), 16);
-			app->render->TextDraw("Fullscreen", x, offsetAnimation + point2 * ((y + offset) - offsetAnimation), 16);
-			app->render->TextDraw("Vsync", x, offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation), 16);
-			app->render->TextDraw("Max fps", x, offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation), 16);
+			app->render->TextDraw("Windows Size", x, offsetAnimation + point2 * (y - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Fullscreen", x, offsetAnimation + point2 * ((y + offset) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Vsync", x, offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Max fps", x, offsetAnimation + point2 * ((y + offset * 3) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
 
 		}
 		if (pAudio->audio_B) { 
@@ -752,9 +759,9 @@ public:
 			animationAudio.Step(speedAnimNotButton, false);
 			float point2 = animationAudio.GetPoint();
 			int x = 506; int y = 340; int offset = 77;
-			app->render->TextDraw("General volume", x, offsetAnimation + point2 * (y - offsetAnimation), 16);
-			app->render->TextDraw("Music volume", x, offsetAnimation + point2 * ((y + offset) - offsetAnimation), 16);
-			app->render->TextDraw("Fx volume", x, offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation), 16);
+			app->render->TextDraw("General volume", x, offsetAnimation + point2 * (y - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Music volume", x, offsetAnimation + point2 * ((y + offset) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
+			app->render->TextDraw("Fx volume", x, offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
 		}
 
 
@@ -799,7 +806,7 @@ public:
 		app->render->DrawTexture(cartelTexture, 274 - app->render->camera.x, offsetAnimation + point * (210 - offsetAnimation) - app->render->camera.y);
 		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, offsetAnimation + point * (85  - offsetAnimation)- app->render->camera.y);
 
-		app->render->TextDraw("Settings", 565, offsetAnimation + point * (107 - offsetAnimation), 40, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Settings", 565, offsetAnimation + point * (107 - offsetAnimation), 40, Font::UI, { 255, 246, 240 });
 		int offsetAnimationDch = 1300;
 		int offsetAnimationIzq = -1300;
 		float point69 = animationShadow.GetPoint();
@@ -932,7 +939,7 @@ public:
 		app->render->DrawTexture(fondoTexture, 0 - app->render->camera.x, offsetAnimation + point * (0  - offsetAnimation)- app->render->camera.y);
 		app->render->DrawTexture(cartelpauseTexture, 0 - app->render->camera.x, offsetAnimation + point * (250 - offsetAnimation)- app->render->camera.y );
 
-		app->render->TextDraw("Pause", 600, offsetAnimation + point * (121 - offsetAnimation), 40, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Pause", 600, offsetAnimation + point * (121 - offsetAnimation), 40, Font::UI, { 255, 246, 240 });
 		if (!open_pause_B)
 		{
 			for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
