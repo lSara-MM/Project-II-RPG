@@ -853,6 +853,16 @@ bool PuzzleManager::Dun2Update()
 				//Eric: Aquí la transición a combate y el cleanUp de este puzzle
 				//Cuando mates al boss no te olvides de poner esta variable a true y hace un save: bossIsDeadDun2
 
+				LOG("Combat");
+				app->SaveGameRequest();
+				app->audio->PlayFx(app->hTerrors->combatfx);
+				app->combat->PreLoadCombat(app->BeastT->name, 40, 30); //Boss doble
+				fightBoss = true;
+				app->fade->FadingToBlack((Module*)app->BeastT, (Module*)app->combat, 5);
+				app->questManager->SaveState();
+				app->puzzleManager->Disable();
+				app->BeastT->steps_I = 0;
+
 				app->questManager->SaveState();
 			}
 		}

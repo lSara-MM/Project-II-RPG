@@ -187,12 +187,6 @@ bool HouseOfTerrors::Update(float dt)
 	else 
 	{
 		steps_I = 0;
-
-		if ((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN))
-		{
-			app->combat->PreLoadCombat(app->BeastT->name,40,30); //Boss doble
-			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 5);
-		}
 	}
 
 	return true;
