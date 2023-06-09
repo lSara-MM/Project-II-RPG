@@ -59,6 +59,7 @@ bool CutScene::Start()
 	passImg = 0;
 	printText = false;
 	StopCutScene = false;
+	textHasEnded = false;
 
 	RestartTimer();
 	app->render->ResetDtText();
@@ -71,6 +72,8 @@ bool CutScene::Start()
 	app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, ImgToPrint.At(passImg)->data, 40);
 
 	currentTexture = ImgToPrint.At(passImg)->data;
+
+	StopCutScene = true;
 
 	return true;
 }
@@ -89,7 +92,7 @@ bool CutScene::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
-			printText = false;
+  			printText = false;
 
 			if (passImg < ImgToPrint.Count() - 1)
 			{
@@ -120,7 +123,7 @@ bool CutScene::Update(float dt)
 		{
 			printText = true;
 
-			if (passImg <= ImgToPrint.Count() - 2)
+			if (passImg <= ImgToPrint.Count() - 2 && textHasEnded)
 			{
 				StopCutScene = false;
 				app->render->TextDraw("PRESS SPACE", app->win->GetWidth() - 200, app->win->GetHeight() - 50, 10, Font::UI, { 255, 255, 255 });
@@ -135,7 +138,7 @@ bool CutScene::Update(float dt)
 		{
 			text = NextText.At(passImg)->next->data.c_str();
 
-			app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 20, 100,
+			textHasEnded = app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 20, 100,
 				{ 255, 255, 255 }, Font::TEXT, 0, 30.0f);
 			//app->render->TextDraw(NextText.At(passImg)->next->data, 20, app->win->GetHeight() - 100, 15, Font::UI, { 255, 255, 255 });
 		}

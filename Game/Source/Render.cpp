@@ -362,7 +362,7 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 bool Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_, 
 	SDL_Color color, Font font, float fontOffset, float dt_wait)
 {
-	bool ret = true;
+	bool ret = false;
 
 	SplitText(text, pTexts, fontSize_, max_chars_line_);
 
@@ -384,7 +384,7 @@ bool Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SS
 		pTexts->clear();
 		pTexts->shrink_to_fit();
 
-		return ret;
+		return true;
 	}
 	else
 	{
