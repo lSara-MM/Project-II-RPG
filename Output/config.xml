@@ -426,7 +426,7 @@ enum class CharacterClass
         type="1" class="8" skill1ID="53" skill2ID="54" skill3ID="55" skill4ID="56"
                
         width="0" heigth="0"
-        texturePath ="Assets/Textures/EnemyWolfLamb.png"
+        texturePath ="Assets/Textures/EnemyBossGoat.png"
 		
 		sectionX="23" sectionY="0"/>
 
