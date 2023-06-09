@@ -304,12 +304,12 @@
 			<choice id="2" option="I'll go my way, dwarf." nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="1" name="OBSHCHIY" text="As? It's not possible! I am the one and only, the invincible, the immortal. I am General OBSHCHIY! I take care of the wildest attractions, I am the Showman's right hand. ">
+		<node id="1" name="OBSHCHIY" text="HOW? It's not possible! I am the one and only, the invincible, the immortal. I am General OBSHCHIY! I take care of the wildest attractions, I am the Showman's right hand. ">
 			<choice id="0" option="Then you must know how to get out of here." nextNode="2" eventReturn="0"/>
 		</node>
 
-		<node id="2" name="OBSHCHIY" text="HOW? It's not possible! I am the one and only, the invincible, the immortal. I am General OBSHCHIY! I take care of the wildest attractions, I am the Showman's right hand. ">
-			<choice id="0" option="Then you must know how to get out of here." nextNode="3" eventReturn="0"/>
+		<node id="2" name="OBSHCHIY" text="You fool... ">
+			<choice id="0" option="Just tell me. " nextNode="3" eventReturn="0"/>
 		</node>
 
 		<node id="3" name="OBSHCHIY" text="As I said before, you are a fool. You can not -get out of here-. You are bond to this place, your soul is now the Showman's. ">
