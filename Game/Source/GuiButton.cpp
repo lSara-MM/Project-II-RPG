@@ -1,7 +1,7 @@
 #include "GuiButton.h"
 #include "GuiManager.h"
 #include "IntroScene.h"
-
+#include "Combat.h"
 GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* text, int fontSize, Font font, int speed, Easings eType, AnimationAxis axisType) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
@@ -67,19 +67,19 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 		buttonTex = app->tex->Load("Assets/GUI/Target_To_Select.png");
 		break;
 	case ButtonType::SKILL_1:
-		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/buttonsCombat.png");
 		break;
 	case ButtonType::SKILL_2:
-		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/buttonsCombat.png");
 		break;
 	case ButtonType::SKILL_3:
-		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/buttonsCombat.png");
 		break;
 	case ButtonType::SKILL_4:
-		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/buttonsCombat.png");
 		break;
 	case ButtonType::CHANGE_POSITION:
-		buttonTex = app->tex->Load("Assets/GUI/spritesheetAbility.png");
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/buttonsCombat.png");
 		break;
 	case ButtonType::SKIPPY:
 		buttonTex = app->tex->Load("Assets/GUI/UIArt/buttonsCombat.png");
@@ -247,6 +247,12 @@ bool GuiButton::Draw(Render* render)
 	else if (buttonType == ButtonType::SKIPPY) { rect = { 351, 1, 132, 44 }; }
 	else if (buttonType == ButtonType::DIALOGUE) { rect = { 0, 0, 343, 66 }; }
 	else if (buttonType == ButtonType::EXTRA_LARGE) { rect.x = 5, rect.y = 5; }
+	else if (buttonType == ButtonType::SKILL_1) { rect = { 151, 201, 47, 47 }; }
+	else if (buttonType == ButtonType::SKILL_2) { rect = { 151, 251, 47, 47 }; }
+	else if (buttonType == ButtonType::SKILL_3) { rect = { 151, 0, 47, 47 }; }
+	else if (buttonType == ButtonType::SKILL_4) { rect = { 151, 0, 47, 47 }; }
+	else if (buttonType == ButtonType::CHANGE_POSITION) { rect = { 0, 0, 343, 66 }; }
+
 
 	// TO DO, EN DIALOGO LOS BOTONES DEBERIAN TENER MENOS OFFSET, ES DECIR, SE DEBERIAN PRINTAR CON JUSTIFICADO A LA IZQUIERDA, NO EN MEDIO
 	// ADEMAS DE HACER LO DEL TRIM TEXT PARA QUE SI LA OPCION ES MAS LARGA SE PRINTE EN LINEAS DISTINTAS.
@@ -433,11 +439,43 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x, bounds.y + bounds.h + 7, &rect);
 				break;
 			case ButtonType::SKILL_1:
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				switch (app->combat->listInitiative.At(app->combat->charaInTurn)->data->id)
+				{
+			
+				case 1:
+					rect.y = 1;
+					break;
+				case 2:
+					rect.x = 1;
+					rect.y = 201;
+					break;
+				case 3:
+					rect.x = 1;
+					rect.y = 1;
+					break;
+				default:
+					break;
+				}
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::SKILL_2:
-				rect.x = bounds.w*9;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				switch (app->combat->listInitiative.At(app->combat->charaInTurn)->data->id)
+				{
+				case 1:
+					rect.y = 51;
+					break;
+				case 2:
+					rect.x = 1;
+					rect.y = 251;
+					break;
+				case 3:
+					rect.x = 1;
+					rect.y = 51;
+					break;
+				default:
+					break;
+				}
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::SKILL_3:
 				rect.x = bounds.w * 12;
@@ -531,12 +569,50 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x, bounds.y + bounds.h + 7, &rect);
 				break;
 			case ButtonType::SKILL_1:
-				rect.x = 47;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				switch (app->combat->listInitiative.At(app->combat->charaInTurn)->data->id)
+				{
+				case 0:
+					rect.x = 201;
+					break;
+				case 1:
+					rect.x = 201;
+					rect.y = 1;
+					break;
+				case 2:
+					rect.x = 51;
+					rect.y = 201;
+					break;
+				case 3:
+					rect.x = 51;
+					rect.y = 1;
+					break;
+				default:
+					break;
+				}
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::SKILL_2:
-				rect.x = bounds.w * 10;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				switch (app->combat->listInitiative.At(app->combat->charaInTurn)->data->id)
+				{
+				case 0:
+					rect.x = 201;
+					break;
+				case 1:
+					rect.x = 201;
+					rect.y = 51;
+					break;
+				case 2:
+					rect.x = 51;
+					rect.y = 251;
+					break;
+				case 3:
+					rect.x = 51;
+					rect.y = 51;
+					break;
+				default:
+					break;
+				}
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::SKILL_3:
 				rect.x = bounds.w * 13;
@@ -631,8 +707,50 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x, bounds.y + bounds.h + 7, &rect);
 				break;
 			case ButtonType::SKILL_1:
+				switch (app->combat->listInitiative.At(app->combat->charaInTurn)->data->id)
+				{
+				case 0:
+					rect.x = 251;
+					break;
+				case 1:
+					rect.x = 251;
+					rect.y = 1;
+					break;
+				case 2:
+					rect.x = 101;
+					rect.y = 201;
+					break;
+				case 3:
+					rect.x = 101;
+					rect.y = 1;
+					break;
+				default:
+					break;
+				}
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::SKILL_2:
+				switch (app->combat->listInitiative.At(app->combat->charaInTurn)->data->id)
+				{
+				case 0:
+					rect.x = 251;
+					break;
+				case 1:
+					rect.x = 251;
+					rect.y = 51;
+					break;
+				case 2:
+					rect.x = 101;
+					rect.y = 251;
+					break;
+				case 3:
+					rect.x = 101;
+					rect.y = 51;
+					break;
+				default:
+					break;
+				}
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::SKILL_3:
 				break;
