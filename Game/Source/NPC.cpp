@@ -26,10 +26,13 @@ Npc::Npc() : Entity(EntityType::NPC)
 {
 	//name.Create("Npc");
 
-	idleAnim.PushBack({ 0, 0, 96, 96 });
-	idleAnim.PushBack({ 0, 0, 96, 96 });
+	idleAnim.PushBack({ 96, 0, 96, 96 });
+	idleAnim.PushBack({ 192, 0, 96, 96 });
+	idleAnim.PushBack({ 96, 0, 96, 96 });
+	idleAnim.PushBack({ 288, 0, 96, 96 });
 
-	idleAnim.speed = 0.1f;
+	idleAnim.speed = 0.05f;
+	idleAnim.loop = true;
 
 	active = true;
 }
@@ -42,18 +45,32 @@ bool Npc::Awake() {
 
 	name = parameters.attribute("name").as_string();
 
-	// Load dialogue IDs
-	for (pugi::xml_attribute attr = parameters.first_attribute(); attr; attr = attr.next_attribute())
-	{
-		if (strcmp(attr.name(), "dialogueID") == 0)
+	if (strcmp(name.GetString(), "PINKY") == 0) 
+	{ 
+		isAnimated = true;
+		pugi::xml_attribute from = parameters.first_attribute().next_attribute();
+		pugi::xml_attribute to = from.next_attribute();
+
+		for (int i = from.as_int(); i <= to.as_int(); i++)
 		{
-			dialoguesID.push_back(attr.as_int());
-		}
-		if (strcmp(attr.next_attribute().name(), "dialogueID") != 0)
-		{
-			break;
+			dialoguesID.push_back(i);
 		}
 	}
+	else
+	{
+		// Load dialogue IDs
+		for (pugi::xml_attribute attr = parameters.first_attribute(); attr; attr = attr.next_attribute())
+		{
+			if (strcmp(attr.name(), "dialogueID") == 0)
+			{
+				dialoguesID.push_back(attr.as_int());
+			}
+			if (strcmp(attr.next_attribute().name(), "dialogueID") != 0)
+			{
+				break;
+			}
+		}
+	}	
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -99,9 +116,14 @@ bool Npc::Update(float dt)
 		dtP = dt / 1000;
 	}
 
-	currentAnimation->Update();
+	SDL_Rect rect = { 0, 0, 96, 96 };
 
-	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	if (isAnimated)
+	{
+		currentAnimation->Update();
+		rect = currentAnimation->GetCurrentFrame();
+	}
+	
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
 	return true;
@@ -129,4 +151,9 @@ void Npc::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	}
+}
+
+void Npc::PinkyIsAngry()
+{
+	isAnimated = false;
 }

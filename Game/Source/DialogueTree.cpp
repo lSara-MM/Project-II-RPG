@@ -155,16 +155,19 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 			}
 
 			break;
+
 		case DIALOGUE_STORE:
 			app->store->Enable();
 			notifyEnd = true;
 			return true;
 			break;
+
 		case DIALOGUE_FORGE:
 			app->forge->Enable();
 			notifyEnd = true;
 			return true;
 			break;
+
 		case DIALOGUE_HEAL:
 			for (int i = 0; i < app->itemManager->arrParty.size(); i++)
 			{
@@ -174,6 +177,10 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 				}
 			}
 			return true;
+			break;
+
+		case DIALOGUE_DUCK_PUNISHER:
+			app->scene->listNpc.end->data->PinkyIsAngry();
 			break;
 		default:
 			return false;

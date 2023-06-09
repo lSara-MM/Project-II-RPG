@@ -245,7 +245,7 @@ bool GuiButton::Draw(Render* render)
 	else if (buttonType == ButtonType::IN_SETTINGS) { rect = { 230, 0 , 230, 94}; }
 	else if (buttonType == ButtonType::CLOSE) { rect = { 0, 200, 62, 63 }; }
 	else if (buttonType == ButtonType::SKIPPY) { rect = { 351, 1, 132, 44 }; }
-	else if (buttonType == ButtonType::DIALOGUE) { rect = { 0, 0, 343, 66 }; }
+	else if (buttonType == ButtonType::DIALOGUE) { rect = { 0, 0, 371, 65 }; }
 	else if (buttonType == ButtonType::EXTRA_LARGE) { rect.x = 5, rect.y = 5; }
 	else if (buttonType == ButtonType::SKILL_1) { rect = { 151, 201, 47, 47 }; }
 	else if (buttonType == ButtonType::SKILL_2) { rect = { 151, 251, 47, 47 }; }

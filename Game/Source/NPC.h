@@ -32,6 +32,8 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	void PinkyIsAngry();
+
 public:
 	iPoint position;
 	int width, height;
@@ -52,6 +54,7 @@ public:
 	PhysBody* pSensor;
 
 private:
+	bool isAnimated;
 
 	SDL_Texture* texture;
 	const char* texturePath;

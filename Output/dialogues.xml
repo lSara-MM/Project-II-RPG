@@ -63,15 +63,15 @@
     <dialogueTree ID="1">
 
 	    <node id="0" name="NIKITA" text="The fair is big %%x. Go around and discover the place, now everything will be closed, but surely there are people you can talk to. ">
-		    <choice id="0" option="Where should I go first? " nextNode="1" eventReturn="0"/>
+		    <choice id="0" option="Bye" nextNode="-1" eventReturn="0"/>
 		    <choice id="1" option="Talk me about this place. " nextNode="2" eventReturn="0"/>
 		    <choice id="2" option="Talk me about The Showman. " nextNode="3" eventReturn="0"/>
 		    <choice id="3" option="There are oracles everywhere. What is the deal with that? " nextNode="6" eventReturn="0"/>
-		    <choice id="4" option="Is there somewhere to train my abilities? " nextNode="8" eventReturn="0"/>
-		    <choice id="5" option="Bye" nextNode="-1" eventReturn="0"/>
+		    <choice id="4" option="Is there somewhere to train my abilities? " nextNode="8" eventReturn="0"/>    
+			<choice id="5" option="Where should I go first? " nextNode="1" eventReturn="0"/>
 	    </node>
 
-	    <node id="1" name="NIKITA" text="Enjoy this place, don't be so serious, nobody likes serious magicians. I recommend the house of terror, there is a very nice man at the door. ">
+	    <node id="1" name="NIKITA" text="Enjoy this place, don't be so serious, nobody likes serious magicians. I recommend the House of Terrors, there is a very nice man at the door. ">
 		    <choice id="0" option="Thanks. I guess. " nextNode="0"  eventReturn="0"/>
 		    <choice id="1" option="I will greet him from you. " nextNode="-1"  eventReturn="0"/>
 	    </node>
@@ -83,7 +83,7 @@
 	    </node>
 
 	    <node id="3" name="NIKITA" text="Ooh! The Showman. He is a sweetheart! Always thinking of others, specifically their souls Isn't that sweet? He's the one keeping this alive, and with magic. Never forget, he is a powerful man, you don't want to make enmity with him. Although as adorable as he is, I don't think you'll be able to anger him. ">
-		    <choice id="0" option="So he gave me my powers in exchange for my soul. He smell a rat. " nextNode="0" eventReturn="0"/>
+		    <choice id="0" option="So he gave me my powers in exchange for my soul. He smells a rat. " nextNode="0" eventReturn="0"/>
 		    <choice id="1" option="I bet I can anger him. " nextNode="-1" eventReturn="0"/>
 	    </node>
 
@@ -352,10 +352,21 @@
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 
+<!-- Pinky -->
 	<dialogueTree ID="7">
-		<node id="0" name="PINKY" text="El demonio tiene la cola muy larga. ">
-			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		<node id="0" name="PINKY" text="Hola! Te gustan mis pasos de baile? ">
+			<choice id="0" option="Bailas como un pato torpe. " nextNode="1" eventReturn="0"/>
+			<choice id="1" option="Me encanta! Tienes mucho ritmo.  " nextNode="2" eventReturn="0"/>
 		</node>
+
+		<node id="1" name="PINKY" text="Quieres ver mis punetazos a ver si te gustan mas? ">
+			<choice id="0" option="... " nextNode="-1" eventReturn="21"/>
+		</node>
+
+		<node id="2" name="PINKY" text="Gracias! Quieres unirte? :D ">
+			<choice id="0" option="Quizas luego. " nextNode="-1" eventReturn="0"/>
+		</node>
+
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 
@@ -381,18 +392,27 @@
 	</dialogueTree>
 	
 	<dialogueTree ID="11">
-		<node id="0" name="PINKY" text="¡Es que no me escuchan! ">
+		<node id="0" name="PINKY" text="¡Es que no me escuchais! >:( ">
 			<choice id="0" option="Yo te escucho. " nextNode="-1" eventReturn="0"/>
 		</node>
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 	
 	<dialogueTree ID="12">
-		<node id="0" name="PINKY" text="No estoy delirando ¡Hay un viejo en qatar! ">
+		<node id="0" name="PINKY" text="No estoy delirando ¡Hay un viejo en Qatar! ">
 			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
 		</node>
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
+
+	<dialogueTree ID="13">
+		<node id="0" name="PINKY" text="El demonio tiene la cola muy larga. ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+
+
 		<!-- Notes -->
   <dialogueTree ID="100">
 
