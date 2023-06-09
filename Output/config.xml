@@ -316,14 +316,6 @@ enum class CharacterClass
 		
 		sectionX="26" sectionY="30"/>
 
-		<enemy name ="The Specter" id="20" maxHp="2550" currentHp="2550" attack="220" armor="20" critRate="10" critDamage="25" accuracy="20" res="35" dodge="0" speed="6"
-        type="1" class="4" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
-               
-        width="0" heigth="0"
-        texturePath ="Assets/Textures/EnemyBossSpecter.png"
-		
-		sectionX="23" sectionY="0"/>
-
 		<enemy name ="Fur Abobination" id="3"
         maxHp="900" currentHp="900" attack="180" armor="15" critRate="20" critDamage="30" accuracy="0" res="10" dodge="5" speed="90"
         type="1" class="2" skill1ID="37" skill2ID="38" skill3ID="39" skill4ID="40"
