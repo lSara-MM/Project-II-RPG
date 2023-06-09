@@ -584,20 +584,29 @@ bool PuzzleManager::Dun2Start()
 		DoorBossP = app->physics->CreateRectangle(posDoorBoss.x - heightDoorKeys / 2 - 32, posDoorBoss.y - widthDoorKeys / 2 + 32, heightDoorKeys - 48, widthDoorKeys * 2, bodyType::STATIC);
 		DoorBossP->body->SetFixedRotation(true);
 
-		relic1 = app->physics->CreateRectangleSensor(posRelic1.x - widthRelic / 2, posRelic1.y - heightRelic / 2, widthRelic, heightRelic, bodyType::STATIC);
-		relic1->body->SetFixedRotation(true);
-		relic1->ctype = ColliderType::RELIC;
-		relic1->id = 1;
+		if (!Relic1Invent && !RelicInColumn1)
+		{
+			relic1 = app->physics->CreateRectangleSensor(posRelic1.x - widthRelic / 2, posRelic1.y - heightRelic / 2, widthRelic, heightRelic, bodyType::STATIC);
+			relic1->body->SetFixedRotation(true);
+			relic1->ctype = ColliderType::RELIC;
+			relic1->id = 1; 
+		}
 
-		relic2 = app->physics->CreateRectangleSensor(posRelic2.x - widthRelic / 2, posRelic2.y - heightRelic / 2, widthRelic, heightRelic, bodyType::STATIC);
-		relic2->body->SetFixedRotation(true);
-		relic2->ctype = ColliderType::RELIC;
-		relic2->id = 2;
+		if (!Relic2Invent && !RelicInColumn2)
+		{
+			relic2 = app->physics->CreateRectangleSensor(posRelic2.x - widthRelic / 2, posRelic2.y - heightRelic / 2, widthRelic, heightRelic, bodyType::STATIC);
+			relic2->body->SetFixedRotation(true);
+			relic2->ctype = ColliderType::RELIC;
+			relic2->id = 2;
+		}
 
-		relic3 = app->physics->CreateRectangleSensor(posRelic3.x - widthRelic / 2, posRelic3.y - heightRelic / 2, widthRelic, heightRelic, bodyType::STATIC);
-		relic3->body->SetFixedRotation(true);
-		relic3->ctype = ColliderType::RELIC;
-		relic3->id = 3;
+		if (!Relic3Invent && !RelicInColumn3)
+		{
+			relic3 = app->physics->CreateRectangleSensor(posRelic3.x - widthRelic / 2, posRelic3.y - heightRelic / 2, widthRelic, heightRelic, bodyType::STATIC);
+			relic3->body->SetFixedRotation(true);
+			relic3->ctype = ColliderType::RELIC;
+			relic3->id = 3;
+		}
 	}
 
 	//Colliders que siempre deben estar aunque se les complete el puzzle
