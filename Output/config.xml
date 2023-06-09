@@ -97,7 +97,7 @@
 	</lootManager>
 	
 	<entitymanager>
-		<player x="3000" y="1000" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
+		<player x="3450" y="1984" score="0" coins="0" lives="3" attackCooldown="175" playerForce="2100"
 					texturepath="Assets/Textures/CH_Protagonist_Sprites2.png"
 					velocity="400" width="20" height="27" FUYMGravity="250"
 					audiopathCoin="Assets/Audio/Fx/Coin.wav"
@@ -191,8 +191,8 @@
 		settingsPath ="Assets/Textures/setting_menu.png">		
 
 		<!--NPCs-->
-		<npc name="Nikita" dialogueID="1"
-			x="3710" y="985" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
+		<npc name="NIKITA" dialogueID="1"
+			x="4096" y="3456" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
 
 		<npc name="ORACULO" dialogueID="2"
 			x="2595" y="4438" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
@@ -200,11 +200,14 @@
 		<npc name="ORACULO" dialogueID="5"
 			x="1640" y="2910" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
-		<npc name="Igor and Ivan" dialogueID="3"
+		<npc name="IGOR AND IVAN" dialogueID="3"
 			x="3538" y="2542" width="64" height="64" texturepath="Assets/Textures/gemelos_chibi.png"/>
 
-		<npc name="Yuroslava" dialogueID="4"
+		<npc name="YUROSLAVA" dialogueID="4"
 			x="4010" y="3070" width="64" height="64" texturepath="Assets/Textures/fueguito_chibi.png"/>
+		
+		<npc name="OBSHCHIY" dialogueID="6"
+			x="2432" y="3392" width="64" height="64" texturepath="Assets/Textures/Lore_NPC.png"/>
 	</scene>
 
   <SceneWin_Lose>
@@ -317,14 +320,6 @@ enum class CharacterClass
         texturePath ="Assets/Textures/EnemyPossessedPainting.png"
 		
 		sectionX="26" sectionY="30"/>
-
-		<enemy name ="The Specter" id="20" maxHp="2550" currentHp="2550" attack="220" armor="20" critRate="10" critDamage="25" accuracy="20" res="35" dodge="0" speed="6"
-        type="1" class="4" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
-               
-        width="0" heigth="0"
-        texturePath ="Assets/Textures/EnemyBossSpecter.png"
-		
-		sectionX="23" sectionY="0"/>
 
 		<enemy name ="Fur Abobination" id="3"
         maxHp="900" currentHp="900" attack="180" armor="15" critRate="20" critDamage="30" accuracy="0" res="10" dodge="5" speed="90"
