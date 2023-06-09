@@ -365,34 +365,34 @@ void ItemManager::UseItem(ItemNode* item)
 		switch (item->ID)
 		{
 		case 85:
-			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(arrParty.at(app->combat->charaInTurn)->maxHp * (item->hp / 100));
+			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(app->combat->listInitiative[app->combat->charaInTurn]->maxHp / item->hp);
 			break;
 		case 86:
-			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(arrParty.at(app->combat->charaInTurn)->maxHp * (item->hp / 100));
+			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(app->combat->listInitiative[app->combat->charaInTurn]->maxHp / item->hp);
 			break;
 		case 87:
 			statusEffect = new StatusEffect(item->armor, 3, true, EffectType::ARMOR);
-			arrParty.at(app->combat->charaInTurn)->listStatusEffects.Add(statusEffect);
+			app->combat->listInitiative[app->combat->charaInTurn]->listStatusEffects.Add(statusEffect);
 			break;
 		case 88:
 			statusEffect = new StatusEffect(item->attack, 3, true, EffectType::ATTACK);
-			arrParty.at(app->combat->charaInTurn)->listStatusEffects.Add(statusEffect);
+			app->combat->listInitiative[app->combat->charaInTurn]->listStatusEffects.Add(statusEffect);
 			break;
 		case 89:
 			statusEffect = new StatusEffect(item->critRate, 2, true, EffectType::CRIT_RATE);
-			arrParty.at(app->combat->charaInTurn)->listStatusEffects.Add(statusEffect);
+			app->combat->listInitiative[app->combat->charaInTurn]->listStatusEffects.Add(statusEffect);
 			break;
 		case 90:
 			statusEffect = new StatusEffect(item->critDamage, 2, true, EffectType::CRIT_DMG);
-			arrParty.at(app->combat->charaInTurn)->listStatusEffects.Add(statusEffect);
+			app->combat->listInitiative[app->combat->charaInTurn]->listStatusEffects.Add(statusEffect);
 			break;
 		case 91:
 			statusEffect = new StatusEffect(item->accuracy, 2, true, EffectType::ACCURACY);
-			arrParty.at(app->combat->charaInTurn)->listStatusEffects.Add(statusEffect);
+			app->combat->listInitiative[app->combat->charaInTurn]->listStatusEffects.Add(statusEffect);
 			break;
 		case 92:
 			statusEffect = new StatusEffect(item->dodge, 3, true, EffectType::DODGE);
-			arrParty.at(app->combat->charaInTurn)->listStatusEffects.Add(statusEffect);
+			app->combat->listInitiative[app->combat->charaInTurn]->listStatusEffects.Add(statusEffect);
 			break;
 		}
 	}
