@@ -251,7 +251,7 @@
 		</node>
 		
 		<node id="7" name="YUROSLAVA" text="My brother, on the other hand, was turned into a little devil, after 5 years, he hasn't grown an inch. He gave him the gift of strength, he told him that a naughty boy has to be strong enough to survive and named him D'yavol. I can't even remember his name before that. ">
-			<choice id="0" option="I'm sorry to hear that. I don't know, maybe one day he find him again. " nextNode="8" eventReturn="0"/>
+			<choice id="0" option="I'm sorry to hear that. I don't know, maybe one day we find him again. " nextNode="8" eventReturn="0"/>
 		</node>
 
 		<node id="8" name="YUROSLAVA" text="I wish. He is the strongest in the fair, he would help us a lot. I miss him. ">
