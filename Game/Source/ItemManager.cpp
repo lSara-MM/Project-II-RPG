@@ -365,10 +365,10 @@ void ItemManager::UseItem(ItemNode* item)
 		switch (item->ID)
 		{
 		case 85:
-			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(arrParty.at(app->combat->charaInTurn)->maxHp*item->hp);
+			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(arrParty.at(app->combat->charaInTurn)->maxHp * (item->hp / 100));
 			break;
 		case 86:
-			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(arrParty.at(app->combat->charaInTurn)->maxHp * item->hp);
+			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(arrParty.at(app->combat->charaInTurn)->maxHp * (item->hp / 100));
 			break;
 		case 87:
 			statusEffect = new StatusEffect(item->armor, 3, true, EffectType::ARMOR);
@@ -446,12 +446,12 @@ void ItemManager::UseItem(ItemNode* item)
 		}
 	}
 
+	app->inventory->ReOrderInventory();
+
 	if (item->quantity <= 0)
 	{
 		item->CleanUp();
 	}
-
-	app->inventory->ReOrderInventory();
 }
 
 void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)

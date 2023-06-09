@@ -383,7 +383,6 @@ bool Combat::CleanUp()
 	}
 
 	HandleEndCombat();
-	SaveCombat();
 
 	if (profileTex != nullptr)
 		app->tex->UnLoad(profileTex);
@@ -1647,6 +1646,21 @@ void Combat::HandleEndCombat()
 			}		
 		}
 	}
+
+	array <int, 4> tempHp;
+	for (int i = 0; i < app->itemManager->partySize; i++)
+	{
+		tempHp.at(i) = app->itemManager->arrParty.at(i)->currentHp;
+	}
+
+	LoadCombat();
+
+	for (int i = 0; i < app->itemManager->partySize; i++)
+	{
+		app->itemManager->arrParty.at(i)->currentHp = tempHp.at(i);
+	}
+
+	SaveCombat();
 }
 
 
@@ -1669,7 +1683,7 @@ bool Combat::SaveCombat()
 			character.append_attribute("currentHp") = app->itemManager->arrParty.at(i)->currentHp;
 			character.append_attribute("positionCombat") = app->itemManager->arrParty.at(i)->positionCombat_I;
 
-			/*character.append_attribute("maxHp") = app->itemManager->arrParty.at(i)->maxHp;
+			character.append_attribute("maxHp") = app->itemManager->arrParty.at(i)->maxHp;
 			character.append_attribute("currentHp") = app->itemManager->arrParty.at(i)->currentHp;
 			character.append_attribute("attack") = app->itemManager->arrParty.at(i)->attack;
 			character.append_attribute("critRate") = app->itemManager->arrParty.at(i)->critRate;
@@ -1678,7 +1692,7 @@ bool Combat::SaveCombat()
 			character.append_attribute("armor") = app->itemManager->arrParty.at(i)->armor;
 			character.append_attribute("dodge") = app->itemManager->arrParty.at(i)->dodge;
 			character.append_attribute("res") = app->itemManager->arrParty.at(i)->res;
-			character.append_attribute("speed") = app->itemManager->arrParty.at(i)->speed;*/
+			character.append_attribute("speed") = app->itemManager->arrParty.at(i)->speed;
 		}
 	}
 
@@ -1707,8 +1721,19 @@ bool Combat::LoadCombat()
 		for (pugi::xml_node itemNode = node.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter"))
 		{
 			app->itemManager->arrParty.at(i)->name = itemNode.attribute("name").as_string();
+
 			app->itemManager->arrParty.at(i)->currentHp = itemNode.attribute("currentHp").as_int();
 			app->itemManager->arrParty.at(i)->positionCombat_I = itemNode.attribute("positionCombat").as_int();
+
+			app->itemManager->arrParty.at(i)->maxHp = itemNode.attribute("maxHp").as_int();
+			app->itemManager->arrParty.at(i)->attack = itemNode.attribute("attack").as_int();
+			app->itemManager->arrParty.at(i)->critRate = itemNode.attribute("critRate").as_int();
+			app->itemManager->arrParty.at(i)->critDamage = itemNode.attribute("critDamage").as_int();
+			app->itemManager->arrParty.at(i)->accuracy = itemNode.attribute("accuracy").as_int();
+			app->itemManager->arrParty.at(i)->armor = itemNode.attribute("armor").as_int();
+			app->itemManager->arrParty.at(i)->dodge = itemNode.attribute("dodge").as_int();
+			app->itemManager->arrParty.at(i)->res = itemNode.attribute("res").as_int();
+			app->itemManager->arrParty.at(i)->speed = itemNode.attribute("speed").as_int();
 
 			i++;
 		}

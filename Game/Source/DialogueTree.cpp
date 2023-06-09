@@ -3,6 +3,7 @@
 
 #include "QuestManager.h"
 #include "PuzzleManager.h"
+#include "itemManager.h"
 
 #include "Input.h"
 #include "Render.h"
@@ -165,9 +166,12 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 			return true;
 			break;
 		case DIALOGUE_HEAL:
-			for (int i = 0; i < app->combat->vecAllies.size(); i++)
+			for (int i = 0; i < app->itemManager->arrParty.size(); i++)
 			{
-				app->combat->vecAllies.at(i)->ModifyHP(99999);
+				if (app->itemManager->arrParty.at(i) != nullptr)
+				{
+					app->itemManager->arrParty.at(i)->ModifyHP(99999);
+				}
 			}
 			return true;
 			break;
