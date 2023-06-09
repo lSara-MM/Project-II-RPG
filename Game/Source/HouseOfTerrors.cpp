@@ -401,7 +401,7 @@ bool HouseOfTerrors::InitEntities()
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = app->entityManager->entityNode.child("player");
 	player->Awake();
-	player->position.x = 1817;
+	player->position.x = 2564;
 	player->position.y = 1250;
 
 	return true;
