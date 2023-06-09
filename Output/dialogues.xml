@@ -352,7 +352,48 @@
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 
-<!-- Notes -->
+	<dialogueTree ID="7">
+		<node id="0" name="PINKY" text="El demonio tiene la cola muy larga. ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+
+	<dialogueTree ID="8">
+		<node id="0" name="PINKY" text="No soy un furro, soy un DRAGON. ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+	
+	<dialogueTree ID="9">
+		<node id="0" name="PINKY" text="Cada tres ataques hace pum y explotan cosas. ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+	
+	<dialogueTree ID="10">
+		<node id="0" name="PINKY" text="¡MILAGRO! ">
+			<choice id="0" option="¡MILAGRO! " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+	
+	<dialogueTree ID="11">
+		<node id="0" name="PINKY" text="¡Es que no me escuchan! ">
+			<choice id="0" option="Yo te escucho. " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+	
+	<dialogueTree ID="12">
+		<node id="0" name="PINKY" text="No estoy delirando ¡Hay un viejo en qatar! ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+		<!-- Notes -->
   <dialogueTree ID="100">
 
       <node id="0" name="NOTE 1" text="Guess how many sleigh bells does the puppet have to know the first number of the sequences">
