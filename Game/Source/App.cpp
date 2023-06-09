@@ -106,12 +106,12 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(combat);
 
 	AddModule(map);
-	AddModule(lootManager);
+	AddModule(entityManager);
 	AddModule(puzzleManager);
 	AddModule(questManager);
+	AddModule(lootManager);
 	AddModule(cutScene);
 	AddModule(moduleparticles);
-	AddModule(entityManager);
 	AddModule(dialogueSystem);
 	AddModule(inventory);
 	AddModule(store);
