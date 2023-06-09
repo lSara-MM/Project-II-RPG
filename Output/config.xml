@@ -191,8 +191,8 @@
 		settingsPath ="Assets/Textures/setting_menu.png">		
 
 		<!--NPCs-->
-		<npc name="Nikita" dialogueID="1"
-			x="4288" y="3456" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
+		<npc name="NIKITA" dialogueID="1"
+			x="4096" y="3456" width="64" height="64" texturepath="Assets/Textures/compa_sprites.png"/>
 
 		<npc name="ORACULO" dialogueID="2"
 			x="2595" y="4438" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
@@ -200,10 +200,10 @@
 		<npc name="ORACULO" dialogueID="5"
 			x="1640" y="2910" width="64" height="64" texturepath="Assets/Textures/oraculo.png"/>
 
-		<npc name="Igor and Ivan" dialogueID="3"
+		<npc name="IGOR AND IVAN" dialogueID="3"
 			x="3538" y="2542" width="64" height="64" texturepath="Assets/Textures/gemelos_chibi.png"/>
 
-		<npc name="Yuroslava" dialogueID="4"
+		<npc name="YUROSLAVA" dialogueID="4"
 			x="4010" y="3070" width="64" height="64" texturepath="Assets/Textures/fueguito_chibi.png"/>
 		
 		<npc name="OBSHCHIY" dialogueID="6"
