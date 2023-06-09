@@ -246,7 +246,7 @@
 			<choice id="0" option="Yeah. You kinda right. " nextNode="0" eventReturn="0"/>
 		</node>
 
-		<node id="6" name="YUROSLAVA" text="My brother, on the other hand, was turned into a little devil, after 5 years, he hasn't grown an inch. He gave him the gift of strength, he told him that a naughty boy has to be strong enough to survive and named him D'yavol. I can't even remember his name before that.">
+		<node id="6" name="YUROSLAVA" text="My brother was a very naughty boy, after the death of our parents we were left alone and found this place. The Showman hired us without hesitation. He turned me into what you see and said I had a special spark.">
 			<choice id="0" option="And what happened to your bother? " nextNode="7" eventReturn="0"/>
 		</node>
 		

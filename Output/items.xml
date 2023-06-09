@@ -352,5 +352,14 @@ type 2
 	<item id="108" quantity="0" name="Pearl" type="3" kind="1" x="7" y="15" hp="0" maxHp="50" attack="0" armor="20" critRate="0" critDamage="0" accuracy="0" res="20" dodge="20" speed="0" equiped="false" craft="true" price="300" max="100" whom="0" 
 		  >
 	</item>
+	<item id="109" quantity="0" name="Puzzle_Horn" type="4" kind="1" space="0" x="0" y="6" hp="0" maxHp="616" attack="616" armor="616" critRate="616" critDamage="616" accuracy="616" res="616" dodge="616" speed="616" equiped="false" craft="false" price="10" max="4" whom="0"
+		  >
+	</item>
+	<item id="110" quantity="0" name="Puzzle_Water" type="4" kind="1" space="0" x="0" y="8" hp="0" maxHp="616" attack="616" armor="616" critRate="616" critDamage="616" accuracy="616" res="616" dodge="616" speed="616" equiped="false" craft="false" price="10" max="4" whom="0"
+		  >
+	</item>
+	<item id="111" quantity="0" name="Puzzle_Food" type="4" kind="1" space="0" x="0" y="7" hp="0" maxHp="616" attack="616" armor="616" critRate="616" critDamage="616" accuracy="616" res="616" dodge="616" speed="616" equiped="false" craft="false" price="10" max="4" whom="0"
+		  >
+	</item>
 	
 </items>

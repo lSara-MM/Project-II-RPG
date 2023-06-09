@@ -1896,6 +1896,7 @@ bool PuzzleManager::RelicsPuz()
 
 			Relic1Invent = true;
 			RelicContact1 = false;
+			app->itemManager->AddQuantity(110, 1);
 
 			app->questManager->SaveState();
 		}
@@ -1915,6 +1916,7 @@ bool PuzzleManager::RelicsPuz()
 
 			Relic2Invent = true;
 			RelicContact2 = false;
+			app->itemManager->AddQuantity(111, 1);
 
 			app->questManager->SaveState();
 		}
@@ -1934,6 +1936,7 @@ bool PuzzleManager::RelicsPuz()
 
 			Relic3Invent = true;
 			RelicContact3 = false;
+			app->itemManager->AddQuantity(109, 1);
 
 			app->questManager->SaveState();
 		}
@@ -1954,6 +1957,8 @@ bool PuzzleManager::RelicsPuz()
 				RelicColumnContact1 = false;
 				Relic1Invent = false;
 				RelicInColumn1 = true;
+				app->itemManager->MinusQuantity(app->itemManager->nodeList[110]);
+
 
 				app->questManager->SaveState();
 			}
@@ -1980,6 +1985,7 @@ bool PuzzleManager::RelicsPuz()
 				RelicColumnContact2 = false;
 				Relic2Invent = false;
 				RelicInColumn2 = true;
+				app->itemManager->MinusQuantity(app->itemManager->nodeList[111]);
 
 				app->questManager->SaveState();
 			}
@@ -2006,6 +2012,7 @@ bool PuzzleManager::RelicsPuz()
 				RelicColumnContact3 = false;
 				Relic3Invent = false;
 				RelicInColumn3 = true;
+				app->itemManager->MinusQuantity(app->itemManager->nodeList[109]);
 
 				app->questManager->SaveState();
 			}
