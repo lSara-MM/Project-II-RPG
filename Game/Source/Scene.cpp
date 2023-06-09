@@ -417,8 +417,8 @@ bool Scene::InitEntities()
 		player->position.y = 3869;
 		break;
 	case 21:
-		player->position.x = 3437;
-		player->position.y = 1085;
+		player->position.x = 3450;
+		player->position.y = 1984;
 		break;	
 	case 22:
 		player->position.x = 1728;
