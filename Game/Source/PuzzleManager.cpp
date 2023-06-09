@@ -206,6 +206,7 @@ bool PuzzleManager::Dun1Awake(pugi::xml_node& config)
 bool PuzzleManager::Dun2Awake(pugi::xml_node& config) 
 {
 	texturepathPuzzleDungeon2 = config.child("GeneralTexture").attribute("texturepath").as_string();
+	texturepathBossDun2 = config.child("BossDun2").attribute("texturepathBossDun2").as_string();
 
 	widthDoorKeys = config.child("DoorDun2").attribute("width").as_int();
 	widthKey = config.child("Key").attribute("width").as_int();
@@ -215,6 +216,7 @@ bool PuzzleManager::Dun2Awake(pugi::xml_node& config)
 	widthBarricade2 = config.child("Barricade").attribute("width1").as_int();
 	widthRelic = config.child("Relics").attribute("width").as_int();
 	widthRelicColumn = config.child("RelicsColumns").attribute("width").as_int();	
+	widthBoss2 = config.child("BossDun2").attribute("width").as_int();
 	
 	heightDoorKeys = config.child("DoorDun2").attribute("height").as_int();
 	heightKey = config.child("Key").attribute("height").as_int();
@@ -224,6 +226,7 @@ bool PuzzleManager::Dun2Awake(pugi::xml_node& config)
 	heightBarricade2 = config.child("Barricade").attribute("height1").as_int();
 	heightRelic = config.child("Relics").attribute("height").as_int();
 	heightRelicColumn = config.child("RelicsColumns").attribute("height").as_int();
+	heightBoss2 = config.child("BossDun2").attribute("height").as_int();
 
 	 posDoorkey1.x = config.child("DoorDun2").attribute("x").as_int();
 	 posDoorkey1.y = config.child("DoorDun2").attribute("y").as_int();
@@ -263,6 +266,8 @@ bool PuzzleManager::Dun2Awake(pugi::xml_node& config)
 	 posRelicColumn2.y = config.child("RelicsColumns").attribute("y1").as_int();
 	 posRelicColumn3.x = config.child("RelicsColumns").attribute("x2").as_int();
 	 posRelicColumn3.y = config.child("RelicsColumns").attribute("y2").as_int();
+	 posBoss2.x = config.child("BossDun2").attribute("x").as_int();
+	 posBoss2.y = config.child("BossDun2").attribute("y").as_int();
 
 	return true;
 }
@@ -328,9 +333,10 @@ bool PuzzleManager::Dun1Start()
 
 		door = app->tex->Load(texturepathDoor);
 
-		Boss = app->physics->CreateRectangleSensor(posBoss.x - widthBoss / 2, posBoss.y - heightBoss / 2, widthBoss, heightBoss, bodyType::STATIC);
+		Boss = app->physics->CreateRectangle(posBoss.x - widthBoss / 2, posBoss.y - heightBoss / 2, widthBoss, heightBoss, bodyType::STATIC);
 		Boss->body->SetFixedRotation(true);
 		Boss->ctype = ColliderType::BOSSDEAD;
+		Boss->id = 0;
 
 		Loset = app->physics->CreateRectangleSensor(posLoset.x - widthLoset / 2, posLoset.y - heightLoset / 2, widthLoset - 32, heightLoset - 32, bodyType::STATIC);
 		Loset->body->SetFixedRotation(true);
@@ -408,6 +414,7 @@ bool PuzzleManager::Dun1Start()
 bool PuzzleManager::Dun2Start()
 {
 	GeneralTextureDungeon2 = app->tex->Load(texturepathPuzzleDungeon2);
+	Boss2Texture = app->tex->Load(texturepathBossDun2);
 	textureE = app->tex->Load("Assets/GUI/UI_E.png");
 
 	keyDoors = false;
@@ -454,6 +461,9 @@ bool PuzzleManager::Dun2Start()
 	RelicInColumn1 = false;
 	RelicInColumn2 = false;
 	RelicInColumn3 = false;
+
+	bossIsDeadDun2 = false;
+	bossDun2Contact = false;
 
 	DoorsOpened = 0;
 	RelicsCompleted = 0;
@@ -607,6 +617,14 @@ bool PuzzleManager::Dun2Start()
 			relic3->ctype = ColliderType::RELIC;
 			relic3->id = 3;
 		}
+	}
+
+	if(!bossIsDeadDun2)
+	{
+		boss2 = app->physics->CreateRectangle(posBoss2.x - widthBoss2 / 2, posBoss2.y - heightBoss2 / 2, widthBoss2, heightBoss2, bodyType::STATIC);
+		boss2->body->SetFixedRotation(true);
+		boss2->ctype = ColliderType::BOSSDEAD;
+		boss2->id = 1;
 	}
 
 	//Colliders que siempre deben estar aunque se les complete el puzzle
@@ -822,6 +840,24 @@ bool PuzzleManager::Dun2Update()
 	if (RelicInColumn3)
 	{
 		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn3.x - widthRelicColumn, posRelicColumn3.y - heightRelicColumn, &Rel3);
+	}
+
+	if (!bossIsDeadDun2) 
+	{
+		if(bossDun2Contact)
+		{
+			app->render->DrawTexture(textureE, posBoss2.x - widthBoss2 - 20, posBoss2.y - heightBoss2);
+
+			if(app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			{
+				//Eric: Aquí la transición a combate y el cleanUp de este puzzle
+				//Cuando mates al boss no te olvides de poner esta variable a true y hace un save: bossIsDeadDun2
+
+				app->questManager->SaveState();
+			}
+		}
+
+		app->render->DrawTexture(Boss2Texture, posBoss2.x - widthBoss2, posBoss2.y - heightBoss2);
 	}
 
 	if (BombPlant1 || BombPlant2 || BombCarryOn1 || BombCarryOn2)
@@ -1054,6 +1090,9 @@ bool PuzzleManager::Dun2CleanUp()
 	if (textureE != nullptr)
 		app->tex->UnLoad(textureE);
 
+	if (Boss2Texture != nullptr)
+		app->tex->UnLoad(Boss2Texture);
+
 	if (Chicken1 != nullptr)
 		Chicken1->body->GetWorld()->DestroyBody(Chicken1->body);	
 	
@@ -1069,6 +1108,12 @@ bool PuzzleManager::Dun2CleanUp()
 	if (relicColumn3 != nullptr)
 		relicColumn3->body->GetWorld()->DestroyBody(relicColumn3->body);
 
+	if (boss2 != nullptr)
+		boss2->body->GetWorld()->DestroyBody(boss2->body);
+
+	delete boss2;
+	boss2 = nullptr;
+	
 	delete Chicken1;
 	Chicken1 = nullptr;	
 	
