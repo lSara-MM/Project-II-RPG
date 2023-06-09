@@ -354,6 +354,7 @@ enum class CharacterClass
 		
 		sectionX="26" sectionY="62"/>
 	</scenes>
+
 	<scenes name="HouseOfTerrors" numEnemies="3">
 		<enemy name ="Bewitched Wardrobe" id="0"
         maxHp="1100" currentHp="1100" attack="160" armor="35" critRate="15" critDamage="15" accuracy="0" res="20" dodge="5" speed="30"
@@ -397,7 +398,7 @@ enum class CharacterClass
         width="0" heigth="0"
 		texturePath="Assets/Textures/EnemyWolfLamb.png"
 		
-		sectionX="35" sectionY="36"/>
+		sectionX="11" sectionY="0"/>
 
 		<enemy name ="Surgeon Wasps Nest" id="1" maxHp="1800" currentHp="1800" attack="180" armor="0" critRate="0" critDamage="0" accuracy="0" res="80" dodge="0" speed="25"
         type="1" class="5" skill1ID="41" skill2ID="42" skill3ID="43" skill4ID="44"
@@ -405,7 +406,7 @@ enum class CharacterClass
         width="0" heigth="0"
         texturePath ="Assets/Textures/EnemyBeeNest.png"
 		
-		sectionX="16" sectionY="26"/>
+		sectionX="23" sectionY="65"/>
 
 		<enemy name ="Psyonic Eel" id="2" maxHp="900" currentHp="900" attack="240" armor="10" critRate="25" critDamage="15" accuracy="50" res="20" dodge="25" speed="75"
         type="1" class="1" skill1ID="45" skill2ID="46" skill3ID="47" skill4ID="48"
@@ -413,7 +414,7 @@ enum class CharacterClass
         width="0" heigth="0"
         texturePath ="Assets/Textures/EnemyEel.png"
 		
-		sectionX="26" sectionY="30"/>
+		sectionX="0" sectionY="26"/>
 
 		<enemy name ="The Beast Tamer" id="30" maxHp="3600" currentHp="3600" attack="270" armor="25" critRate="10" critDamage="30" accuracy="30" res="15" dodge="30" speed="120"
         type="1" class="8" skill1ID="49" skill2ID="50" skill3ID="51" skill4ID="52"
@@ -429,7 +430,7 @@ enum class CharacterClass
         width="0" heigth="0"
         texturePath ="Assets/Textures/EnemyBossGoat.png"
 		
-		sectionX="23" sectionY="0"/>
+		sectionX="11" sectionY="0"/>
 
 	</scenes>
 </combat>

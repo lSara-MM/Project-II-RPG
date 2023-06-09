@@ -156,4 +156,6 @@ void Npc::OnCollision(PhysBody* physA, PhysBody* physB) {
 void Npc::PinkyIsAngry()
 {
 	isAnimated = false;
+	dialoguesID.erase(dialoguesID.begin());
+	name = "ANGRY PINKY";
 }

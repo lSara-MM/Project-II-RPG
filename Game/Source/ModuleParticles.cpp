@@ -22,7 +22,7 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = app->tex->Load("Assets/Sprites/particles.png");
+	texture0 = app->tex->Load("Assets/Sprites/particles.png");
 	//// Explosion particle
 	//explosion.anim.PushBack({246, 87, 27, 28});
 	//explosion.anim.PushBack({276, 86, 31, 33});
@@ -440,9 +440,19 @@ bool ModuleParticles::PostUpdate()
 	{
 		Particle* particle = particles[i];
 
-		if (particle != nullptr && particle->isAlive)
+		if (particle != nullptr && particle->isAlive && Modulo == 0)
 		{
-			app->render->DrawTexture(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+			app->render->DrawTexture(texture0, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+		}
+
+		if (particle != nullptr && particle->isAlive && Modulo == 1)
+		{
+			app->render->DrawTexture(texture1, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+		}
+
+		if (particle != nullptr && particle->isAlive && Modulo == 2)
+		{
+			app->render->DrawTexture(texture2, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 	}
 
