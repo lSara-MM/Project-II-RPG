@@ -66,8 +66,7 @@ bool SceneWin_Lose::Start()
 
 	if (win)
 	{
-		//app->audio->PlayMusic(winMusicPath, 1.0f);
-	
+		//app->audio->PlayMusic(winMusicPath, 1.0f);	
 	}
 	else
 	{
@@ -93,7 +92,7 @@ bool SceneWin_Lose::Update(float dt)
 	if (transition_B)
 	{
 		backgroundAnimation.Backward();
-		if (posYani_I==-750)
+		if (posYani_I == -750)
 		{
 			if (!win)
 			{
@@ -109,8 +108,7 @@ bool SceneWin_Lose::Update(float dt)
 			else
 			{
 				app->LoadFromFile(this);
-			}
-			
+			}		
 		}
 	}
 	else

@@ -208,8 +208,10 @@ bool CutScene::CleanUp()
 		app->tex->UnLoad(ImgToPrint.At(i)->data);
 	}
 
+
 	ImgToPrint.Clear();
 	app->input->temp = "";
+	app->render->ResetDtText();
 	return true;
 }
 

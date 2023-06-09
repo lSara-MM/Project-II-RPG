@@ -388,28 +388,23 @@ bool Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SS
 	}
 	else
 	{
+		int chars = 0;
+		for (int i = 0; i < pTexts->size(); i++) { chars += pTexts->at(i).Length(); }
+
+		string aux_str(text.GetString(), 0, charInNum);
+		SString aux(aux_str.c_str());
+
 		//LOG("waitToRender %f", waitToRender.ReadMSec());
-		if (waitToRender.ReadMSec() > dt_wait)
+		if (waitToRender.ReadMSec() > dt_wait && aux.Length() < chars)
 		{
-			int chars = 0;
+			charInNum++;
+			SplitText(aux, &temp, fontSize_, max_chars_line_);
 
-			for (int i = 0; i < pTexts->size(); i++)
-			{
-				chars += pTexts->at(i).Length();
-			}
-
-			if (temp.size() < chars)
-			{
-				string aux_str(text.GetString(), 0, charInNum++);
-				SString aux(aux_str.c_str());
-				SString b = aux;
-
-				SplitText(aux, &temp, fontSize_, max_chars_line_);
-				ret = false;
-			}
-			else { ret = true; }
-			waitToRender.Start();			
+			waitToRender.Start();
 		}
+	
+		if (aux.Length() < chars) { ret = false; }
+		else { ret = true; }
 
 		for (int j = 0; j < temp.size(); j++)
 		{
