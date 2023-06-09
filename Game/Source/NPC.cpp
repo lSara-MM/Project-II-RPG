@@ -31,7 +31,7 @@ Npc::Npc() : Entity(EntityType::NPC)
 	idleAnim.PushBack({ 96, 0, 96, 96 });
 	idleAnim.PushBack({ 288, 0, 96, 96 });
 
-	idleAnim.speed = 0.05f;
+	idleAnim.speed = 0.07f;
 	idleAnim.loop = true;
 
 	active = true;
