@@ -406,7 +406,7 @@ enum class CharacterClass
         width="0" heigth="0"
         texturePath ="Assets/Textures/EnemyBeeNest.png"
 		
-		sectionX="27" sectionY="65"/>
+		sectionX="23" sectionY="65"/>
 
 		<enemy name ="Psyonic Eel" id="2" maxHp="900" currentHp="900" attack="240" armor="10" critRate="25" critDamage="15" accuracy="50" res="20" dodge="25" speed="75"
         type="1" class="1" skill1ID="45" skill2ID="46" skill3ID="47" skill4ID="48"

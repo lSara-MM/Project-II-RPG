@@ -506,17 +506,6 @@ bool Combat::PreLoadCombat(SString n, int boss, int boss2)
 	int randSize = (rand() % 2 + 1) + (rand() % 2 + 1); //25% 2, 50% 3 25% 4
 	int randId;
 
-	int numEnemies;
-	//Buscar cuantos enemigos tiene la zona
-	for (pugi::xml_node sceneNode = combatNode.child("scenes"); sceneNode; sceneNode = sceneNode.next_sibling("scenes"))
-	{
-		if (strcmp(sceneNode.attribute("name").as_string(), n.GetString()) == 0)
-		{
-			numEnemies = sceneNode.attribute("numEnemies").as_int();
-		}
-	}
-
-
 	if (boss2 != -1)
 	{
 		vecSetEnemies.push_back(boss2);
@@ -527,6 +516,16 @@ bool Combat::PreLoadCombat(SString n, int boss, int boss2)
 	}
 	else
 	{
+		int numEnemies;
+		//Buscar cuantos enemigos tiene la zona
+		for (pugi::xml_node sceneNode = combatNode.child("scenes"); sceneNode; sceneNode = sceneNode.next_sibling("scenes"))
+		{
+			if (strcmp(sceneNode.attribute("name").as_string(), n.GetString()) == 0)
+			{
+				numEnemies = sceneNode.attribute("numEnemies").as_int();
+			}
+		}
+
 		for (int i = 0; i < randSize; i++)
 		{
 			randId = rand() % numEnemies; //Esto necesitaria ser generico depende del name
