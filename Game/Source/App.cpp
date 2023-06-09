@@ -106,10 +106,12 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(combat);
 
 	AddModule(map);
+	AddModule(entityManager);
+	AddModule(puzzleManager);
+	AddModule(questManager);
 	AddModule(lootManager);
 	AddModule(cutScene);
 	AddModule(moduleparticles);
-	AddModule(entityManager);
 	AddModule(dialogueSystem);
 	AddModule(inventory);
 	AddModule(store);
@@ -117,8 +119,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(guiManager);
 	AddModule(itemManager);
 	AddModule(sceneWin_Lose);
-	AddModule(puzzleManager);
-	AddModule(questManager);
 	
 	//AddModule(initiAllResourcesFromZip);
 	//AddModule(assetsManager);
