@@ -26,8 +26,8 @@ bool Forge::Start()
 	buttonBounds = { 1150, 50, 60, 60 };
 	exitButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1501, this, buttonBounds, ButtonType::CLOSE, "", 12, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
 
-	buttonBounds = { 240, 540, 200, 80 };
-	forgeButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1502, this, buttonBounds, ButtonType::SMALL, "", 12, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
+	buttonBounds = { 250, 540, 170, 69 };
+	forgeButton = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1502, this, buttonBounds, ButtonType::BUYITEM, "FORGE", 20, Font::UI, { 0, 0, 0, 0 }, 2, Easings::BOUNCE_OUT, AnimationAxis::DOWN_Y);
 
 	forgeTexture = app->tex->Load(app->itemManager->forgePath);
 	forgeInventoryTexture = app->tex->Load(app->itemManager->textureInventoryPath);
