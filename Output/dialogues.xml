@@ -342,7 +342,7 @@
 		</node>
 
 		<node id="10" name="OBSHCHIY" text="How dwarf, Medved did you hear that? I think this little weirdo wants trouble. ">
-			<choice id="0" option="If fighting with you guarantees me freedom... " nextNode="11" eventReturn="0"/>
+			<choice id="0" option="If fighting against you guarantees me freedom... " nextNode="11" eventReturn="0"/>
 		</node>
 
 		<node id="11" name="OBSHCHIY" text="Oh no, we have a new comedian in the circus, how come they dressed a comedian so fancy? It's funny huh. Look kid, freedom is overrated, trust me, you don't want to leave this place. No matter how crazy people are, right Medved? ">
