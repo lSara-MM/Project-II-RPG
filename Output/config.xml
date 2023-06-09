@@ -238,6 +238,8 @@
     
     <Relics width="64" height="64" x="448" y="704" x1="1728" y1="256" x2="1856" y2="2624"/>
     <RelicsColumns width="64" height="64" x="384" y="1728" x1="640" y1="1856" x2="384" y2="1984"/>
+
+    <BossDun2 texturepathBossDun2="Assets/Textures/EnemyBossSpecter.png" width="128" height="192" x="1152" y="1856"/>
   </PuzzleManager>
  
 	
@@ -318,14 +320,6 @@ enum class CharacterClass
         texturePath ="Assets/Textures/EnemyPossessedPainting.png"
 		
 		sectionX="26" sectionY="30"/>
-
-		<enemy name ="The Specter" id="20" maxHp="2550" currentHp="2550" attack="220" armor="20" critRate="10" critDamage="25" accuracy="20" res="35" dodge="0" speed="6"
-        type="1" class="4" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
-               
-        width="0" heigth="0"
-        texturePath ="Assets/Textures/EnemyBossSpecter.png"
-		
-		sectionX="23" sectionY="0"/>
 
 		<enemy name ="Fur Abobination" id="3"
         maxHp="900" currentHp="900" attack="180" armor="15" critRate="20" critDamage="30" accuracy="0" res="10" dodge="5" speed="90"
@@ -429,7 +423,7 @@ enum class CharacterClass
         type="1" class="8" skill1ID="53" skill2ID="54" skill3ID="55" skill4ID="56"
                
         width="0" heigth="0"
-        texturePath ="Assets/Textures/EnemyWolfLamb.png"
+        texturePath ="Assets/Textures/EnemyBossGoat.png"
 		
 		sectionX="23" sectionY="0"/>
 

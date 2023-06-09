@@ -101,6 +101,7 @@ public:
 	int widthBarricade2;
 	int widthRelic;
 	int widthRelicColumn;
+	int widthBoss2;
 
 	//Tamaños de height para objetos
 	int heightVertical;
@@ -121,6 +122,7 @@ public:
 	int heightBarricade2;
 	int heightRelic;
 	int heightRelicColumn;
+	int heightBoss2;
 
 	//Posiciones de objetos
 	iPoint posDoor1;
@@ -154,6 +156,7 @@ public:
 	iPoint posRelicColumn1;
 	iPoint posRelicColumn2;
 	iPoint posRelicColumn3;
+	iPoint posBoss2;
 
 	//Texturas para objetos
 	SDL_Texture* door;
@@ -167,6 +170,7 @@ public:
 	SDL_Texture* textureE;
 	
 	SDL_Texture* GeneralTextureDungeon2;
+	SDL_Texture* Boss2Texture;
 
 	//Colliders para objetos
 	PhysBody* Door1;
@@ -205,6 +209,8 @@ public:
 	PhysBody* relicColumn2;
 	PhysBody* relicColumn3;
 
+	PhysBody* boss2;
+
 	//Bools para ver si se han completado puzzles o trozos de ellos
 	bool palancas;
 	bool escape;
@@ -227,6 +233,8 @@ public:
 	bool bossSpectreActive_B;
 	bool bossInvent;
 	bool bossIsDead;
+	bool bossIsDeadDun2;
+	bool bossDun2Contact;
 	bool losetActive;
 	bool fightBoss = false;
 
@@ -315,6 +323,7 @@ private:
 	const char* texturepathFireGuy;
 
 	const char* texturepathPuzzleDungeon2;
+	const char* texturepathBossDun2;
 
 	//win dungeon
 	const char* texturepathWintext;

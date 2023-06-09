@@ -453,8 +453,8 @@ TargetingMethod //Como se ataca
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="4"
 	   multiplierDmg="0.5" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
-		   firstStatusID="4" firstStatusPositive="true" firstStatusDuration="20" firstStatusIntesity="25"
-		   secondStatusID="1" secondStatusPositive="true" secondStatusDuration="20" secondStatusIntesity="30"
+		   firstStatusID="4" firstStatusPositive="true" firstStatusDuration="99" firstStatusIntesity="25"
+		   secondStatusID="1" secondStatusPositive="true" secondStatusDuration="99" secondStatusIntesity="30"
 	/>
 
 	<!--Skills Demon Beast-->
@@ -486,8 +486,8 @@ TargetingMethod //Como se ataca
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="4"
 	   multiplierDmg="0.5" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
-		   firstStatusID="7" firstStatusPositive="true" firstStatusDuration="20" firstStatusIntesity="25"
-		   secondStatusID="2" secondStatusPositive="true" secondStatusDuration="20" secondStatusIntesity="30"
+		   firstStatusID="7" firstStatusPositive="true" firstStatusDuration="99" firstStatusIntesity="25"
+		   secondStatusID="2" secondStatusPositive="true" secondStatusDuration="99" secondStatusIntesity="30"
 	/>
 
 	
