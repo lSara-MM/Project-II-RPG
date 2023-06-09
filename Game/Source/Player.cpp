@@ -510,7 +510,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 		app->puzzleManager->palancasActive = true;
 		break;
 	case ColliderType::BOSSDEAD:
-		app->puzzleManager->bossSpectreActive_B = true;
+		switch (physB->id) //Abrir Nota + sumar puntos a keyScape
+		{
+		case 0:
+			app->puzzleManager->bossSpectreActive_B = true;
+			break;
+		case 1:
+			app->puzzleManager->bossDun2Contact = true;
+			break;
+		}
 		break;
 	case ColliderType::LOSET:
 		app->puzzleManager->losetActive = true;
@@ -671,7 +679,7 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 	case ColliderType::NPC:
 		npcInteract = false;
 		interactionTest = false;
-		break; 
+		break;
 	case ColliderType::LOOT:
 		Chest_contact = false;
 		interactionTest = false;
@@ -683,7 +691,15 @@ void Player::EndContact(PhysBody* physA, PhysBody* physB)
 		app->puzzleManager->palancasActive = false;
 		break;
 	case ColliderType::BOSSDEAD:
-		app->puzzleManager->bossSpectreActive_B = false;
+		switch (physB->id)
+		{
+			case 0:
+				app->puzzleManager->bossSpectreActive_B = false;
+				break;
+			case 1:
+				app->puzzleManager->bossDun2Contact = false;
+				break;
+		}
 		break;
 	case ColliderType::LOSET:
 		app->puzzleManager->losetActive = false;
