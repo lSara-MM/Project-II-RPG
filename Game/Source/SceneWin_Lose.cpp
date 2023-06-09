@@ -49,7 +49,7 @@ bool SceneWin_Lose::Awake(pugi::xml_node& config)
 	confirmInteractfx = app->audio->LoadFx(confirmPath);
 
 	backgroundAnimation.Set();
-	backgroundAnimation.AddTween(100, 80, BOUNCE_OUT);
+	backgroundAnimation.AddTween(100, 80, BACK_OUT);
 	posYani_I = 0;
 	return ret;
 }
@@ -92,7 +92,7 @@ bool SceneWin_Lose::Update(float dt)
 	if (transition_B)
 	{
 		backgroundAnimation.Backward();
-		if (posYani_I == -750)
+		if (posYani_I == -1300)
 		{
 			if (!win)
 			{
@@ -118,12 +118,14 @@ bool SceneWin_Lose::Update(float dt)
 
 	backgroundAnimation.Step(1, false);
 	float point = backgroundAnimation.GetPoint();
-	int offset = -750;
+	int offset = -1300;
 	posYani_I = offset + point * (0 - offset);
 
 	if (win)
 	{
+		offset = 1300;
 		app->render->DrawTexture(Win, 0, offset + point * (0 - offset));
+		offset = -1300;
 		app->render->TextDraw("VICTORY", 255, offset + point * (50 - offset), 175, Font::TEXT, { 255,255,255 });
 		if (app->puzzleManager->fightBoss)
 		{
@@ -140,7 +142,8 @@ bool SceneWin_Lose::Update(float dt)
 	}
 	else
 	{
-		app->render->DrawTexture(Lose, 0, offset + point * (0 - offset));
+		offset = 750;
+		app->render->DrawTexture(Lose, offset + point * (0 - offset), 0);
 		app->render->TextDraw("You failed", 435, offset + point * (40 - offset), 75, Font::TEXT, { 255,255,255 });
 		app->render->TextDraw("get stronger and try again", 115, offset + point * (130 - offset), 75, Font::TEXT, { 255,255,255 });
 		if (app->puzzleManager->fightBoss)
