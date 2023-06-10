@@ -127,9 +127,14 @@ bool SceneWin_Lose::Update(float dt)
 		app->render->DrawTexture(Win, 0, offset + point * (0 - offset));
 		offset = -1300;
 		app->render->TextDraw("VICTORY", 255, offset + point * (50 - offset), 175, Font::TEXT, { 255,255,255 });
-		if (app->puzzleManager->fightBoss)
+		if (app->puzzleManager->fightBoss1)
 		{
 			app->puzzleManager->bossIsDead = true;
+			app->questManager->SaveState();
+		}
+		if (app->puzzleManager->fightBoss2)
+		{
+			app->puzzleManager->bossIsDeadDun2 = true;
 			app->questManager->SaveState();
 		}
 
@@ -147,9 +152,14 @@ bool SceneWin_Lose::Update(float dt)
 		app->render->TextDraw("You failed", 435, offset + point * (40 - offset), 75, Font::TEXT, { 255,255,255 });
 		app->render->TextDraw("get stronger and try again", 115, offset + point * (130 - offset), 75, Font::TEXT, { 255,255,255 });
 		
-		if (app->puzzleManager->fightBoss)
+		if (app->puzzleManager->fightBoss1)
 		{
 			app->puzzleManager->bossIsDead = false;
+			app->questManager->SaveState();
+		}
+		if (app->puzzleManager->fightBoss2)
+		{
+			app->puzzleManager->bossIsDeadDun2 = false;
 			app->questManager->SaveState();
 		}
 	}

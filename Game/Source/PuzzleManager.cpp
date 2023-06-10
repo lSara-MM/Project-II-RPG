@@ -279,7 +279,7 @@ bool PuzzleManager::Dun1Start()
 	rescue = false;
 	teamMate = false;
 
-	fightBoss = false;
+	fightBoss1 = false;
 
 	//Notas false
 	esc1 = false;
@@ -430,6 +430,8 @@ bool PuzzleManager::Dun2Start()
 	keyDoors = false;
 	chickenBoom = false;
 	relics = false;
+
+	fightBoss2 = false;
 
 	DoorContact1 = false;
 	DoorContact2 = false;
@@ -877,7 +879,7 @@ bool PuzzleManager::Dun2Update()
 				app->SaveGameRequest();
 				app->audio->PlayFx(app->hTerrors->combatfx);
 				app->combat->PreLoadCombat(app->BeastT->name, 40, 30); //Boss doble
-				fightBoss = true;
+				fightBoss2 = true;
 				app->fade->FadingToBlack((Module*)app->BeastT, (Module*)app->combat, 5);
 				app->questManager->SaveState();
 				app->puzzleManager->Disable();
@@ -1340,7 +1342,7 @@ bool PuzzleManager::Rescue()
 				app->SaveGameRequest();
 				app->audio->PlayFx(app->hTerrors->combatfx);
 				app->combat->PreLoadCombat(app->hTerrors->name, 20);
-				fightBoss = true; 
+				fightBoss1 = true; 
 				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 5);
 				app->questManager->SaveState();
 				app->puzzleManager->Disable();

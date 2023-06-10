@@ -452,7 +452,7 @@ TargetingMethod //Como se ataca
 	<skill name="Set ablaze" id="52" description="A permanent accurcy and attack buff."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="4"
 	   multiplierDmg="0.5" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
-		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
+		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
 		   firstStatusID="4" firstStatusPositive="true" firstStatusDuration="99" firstStatusIntesity="25"
 		   secondStatusID="1" secondStatusPositive="true" secondStatusDuration="99" secondStatusIntesity="30"
 	/>
@@ -485,7 +485,7 @@ TargetingMethod //Como se ataca
 	<skill name="Bloodlust" id="56" description="A permanent resistance and crit chance buff."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="4"
 	   multiplierDmg="0.5" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
-		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
+		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
 		   firstStatusID="7" firstStatusPositive="true" firstStatusDuration="99" firstStatusIntesity="25"
 		   secondStatusID="2" secondStatusPositive="true" secondStatusDuration="99" secondStatusIntesity="30"
 	/>

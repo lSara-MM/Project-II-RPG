@@ -236,7 +236,8 @@ public:
 	bool bossIsDeadDun2;
 	bool bossDun2Contact;
 	bool losetActive;
-	bool fightBoss;
+	bool fightBoss1;
+	bool fightBoss2;
 
 	bool saveFireGuy;
 
