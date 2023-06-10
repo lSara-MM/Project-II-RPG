@@ -118,26 +118,37 @@ bool FadeToBlack::PostUpdate()
 	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
 	SDL_RenderFillRect(app->render->renderer, &screenRect);
 
-	if (transition_B)
+	if (moduleToDisable->name != "logoScene")
 	{
-		backgroundAnimation.Backward();
+		if (transition_B)
+		{
+			backgroundAnimation.Backward();
+		}
+		else
+		{
+			backgroundAnimation.Foward();
+		}
+
+		backgroundAnimation.Step(1, false);
+		float point = backgroundAnimation.GetPoint();
+		int offset = -1300;
+
+		posYani_I = offset + point * (0 - offset);
+
+		offset = -1300;
+		app->render->DrawTexture(TransitionBG_Izq, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
+
+		offset = 1300;
+		app->render->DrawTexture(TransitionBG_Der, offset + point * (640 - offset) - app->render->camera.x, 0 - app->render->camera.y);
 	}
-	else
-	{
-		backgroundAnimation.Foward();
-	}
 
-	backgroundAnimation.Step(1, false);
-	float point = backgroundAnimation.GetPoint();
-	int offset = -1300;
+	return true;
+}
 
-	posYani_I = offset + point * (0 - offset);
-
-	offset = -1300;
-	app->render->DrawTexture(TransitionBG_Izq, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
-
-	offset = 1300;
-	app->render->DrawTexture(TransitionBG_Der, offset + point * (640 - offset) - app->render->camera.x, 0 - app->render->camera.y);
+bool  FadeToBlack::CleanUp()
+{
+	app->tex->UnLoad(TransitionBG_Izq);
+	app->tex->UnLoad(TransitionBG_Der);
 
 	return true;
 }
