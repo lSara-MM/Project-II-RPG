@@ -24,8 +24,8 @@
 		<fx volume="128"/>
 	</audio>
 
-	<fadeToBlack>
-	</fadeToBlack>
+	<fadeToBlack texturepathIZQ ="Assets/Textures/Transition_BG_Izq.png" texturepathDER ="Assets/Textures/Transition_BG_Der.png"/>
+
 
 	<lootManager>
 		<chest
