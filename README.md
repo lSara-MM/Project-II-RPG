@@ -28,7 +28,7 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Interact  -> E / Y button gamepad
 
-* Inventory -> I
+* Inventory and combat order -> I
 
 ### Menus
 
@@ -38,19 +38,17 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 ### Combat
 
-* Go to Play Scene -> F1
 
-* Insta win -> F3
 
-* Insta lose-> F4
+* Go to Play Scene -> F1 (only God Mode)
+
+* Insta win -> F3 (only God Mode)
+
+* Insta lose-> F4 (only God Mode)
 
 * Show GUI -> F7
 
-* God Mode -> F10
-
-* Swap position allies -> E
-
-* Swap position enemies -> S
+* God Mode -> F10 
 
 * Kill First Ally -> 1 (only God Mode)
 
@@ -61,6 +59,8 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 * Enemies button handle -> 4 (only God Mode)
 
 * Allies button handle -> 5 (only God Mode)
+
+* Fully heal party -> 6 (only God Mode)
 
 ### Debug
 
