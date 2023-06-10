@@ -164,10 +164,10 @@
 				settingsPath="Assets/Textures/setting_menu.png"/>
 
 	<CutScene>
+		<Img texturepath="Assets/Textures/cinematica_calle.png"/>
+		<Img texturepath="Assets/Textures/cinematica_prota.png"/>
 		<Img texturepath="Assets/Textures/cinematica_circo.png"/>
 		<Img texturepath="Assets/Textures/cinematica_villano.png"/>
-		<Img texturepath="Assets/Textures/cinematica_circo.png"/>
-		<Img texturepath="Assets/Textures/cinematica_circo.png"/>
 		<Img texturepath="Assets/Textures/cinematica_circo.png"/>
 		<Img texturepath="Assets/Textures/cinematica_circo.png"/>
 		<Img texturepath="Assets/Textures/cinematica_contrato.png"/>

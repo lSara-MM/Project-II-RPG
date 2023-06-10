@@ -21,6 +21,7 @@
 #include "ItemManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
+#include "ModuleParticles.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -66,6 +67,7 @@ bool Scene::Start()
 {
 	app->input->godMode_B = false;
 	app->physics->collisions = false;
+	app->moduleparticles->Enable();
 	app->questManager->Enable();
 	app->itemManager->Enable();
 	app->lootManager->Enable();
