@@ -296,6 +296,8 @@ bool PuzzleManager::Dun1Start()
 
 	palancasActive = false;
 
+	CurrentDarkFade = false;
+
 	realCode = "344";
 
 	Door1 = nullptr;
@@ -783,8 +785,18 @@ bool PuzzleManager::Dun1Update()
 	}
 	else
 	{
-		if(currentDark != nullptr)
-			app->fade->FadingToBlackImages(currentDark, nullptr, 90);
+		if (!CurrentDarkFade)
+		{
+			if (currentDark != nullptr)
+				app->fade->FadingToBlackImages(currentDark, nullptr, 90);
+
+			CurrentDarkFade = true;
+			app->questManager->SaveState();
+		}
+		else
+		{
+			currentDark = nullptr;
+		}
 	}
 
 	if (currentDark != nullptr)

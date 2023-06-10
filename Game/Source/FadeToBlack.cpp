@@ -68,7 +68,9 @@ bool FadeToBlack::Update(float dt)
 					app->cutScene->currentTexture = ImageToEnter;
 
 				if (app->puzzleManager->active)
+				{
 					app->puzzleManager->currentDark = ImageToEnter;
+				}
 
 				ImagesOnOff = false;
 

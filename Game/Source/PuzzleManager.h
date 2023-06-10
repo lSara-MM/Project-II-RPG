@@ -282,6 +282,8 @@ public:
 	bool RelicInColumn2;
 	bool RelicInColumn3;
 
+	bool CurrentDarkFade;
+
 	//Variables para meter codigos
 	string code;
 	string codeToCompare;
