@@ -85,6 +85,7 @@ bool Player::Awake() {
 	texturePath = parameters.attribute("texturepath").as_string();
 
 	texturePathMiniMap = parameters.attribute("MiniMap").as_string();
+	texturePathMiniMap2 = parameters.attribute("MiniMap2").as_string();
 
 	posMiniMap.x = parameters.attribute("xMap").as_int();
 	posMiniMap.y = parameters.attribute("yMap").as_int();
@@ -129,6 +130,7 @@ bool Player::Start()
 	OpenMap = false;
 
 	miniMap = app->tex->Load(texturePathMiniMap);
+	miniMap2 = app->tex->Load(texturePathMiniMap2);
 	dotPlayer = app->tex->Load(texturePathDotPlayer);
 	texture = app->tex->Load(texturePath);
 
@@ -386,11 +388,20 @@ bool Player::Update(float dt)
 	}
 
 	/*MiniMapa*/
-	posMiniMap.x = -app->render->camera.x + app->render->camera.w / 2 - widthMap / 2;
-	posMiniMap.y = -app->render->camera.y + app->render->camera.h / 2 - heightMap / 2;
+	posMiniMap.x = -app->render->camera.x + app->render->camera.w / 2 - widthMap / 2 - 50;
+	posMiniMap.y = -app->render->camera.y + app->render->camera.h / 2 - heightMap / 2 - 50;
 
-	posMiniPlayer.x = posMiniMap.x + position.x / 10;
-	posMiniPlayer.y = posMiniMap.y + position.y / 10;
+	posMiniPlayer.x = posMiniMap.x + position.x / 10 + 60;
+	posMiniPlayer.y = posMiniMap.y + position.y / 10 + 60;
+
+	if(app->puzzleManager->saveFireGuy)
+	{
+		currentMiniMap = miniMap2;
+	}
+	else
+	{
+		currentMiniMap = miniMap;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_X) == ButtonState::BUTTON_DOWN)
 	{
@@ -409,7 +420,7 @@ bool Player::Update(float dt)
 
 	float point = mapAnimation.GetPoint();
 	int offset = -1300;
-	app->render->DrawTexture(miniMap, posMiniMap.x, offset + point * (posMiniMap.y - offset));
+	app->render->DrawTexture(currentMiniMap, posMiniMap.x, offset + point * (posMiniMap.y - offset));
 
 	if (app->scene->active)
 	{
