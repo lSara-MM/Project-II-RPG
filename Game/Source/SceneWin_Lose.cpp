@@ -16,6 +16,8 @@
 #include "ItemManager.h"
 #include "QuestManager.h"
 #include "PuzzleManager.h"
+#include "HouseOfTerrors.h"
+#include "BeastTent.h"
 #include "Map.h"
 
 #include "Defs.h"
@@ -127,9 +129,18 @@ bool SceneWin_Lose::Update(float dt)
 		app->render->DrawTexture(Win, 0, offset + point * (0 - offset));
 		offset = -1300;
 		app->render->TextDraw("VICTORY", 255, offset + point * (50 - offset), 175, Font::TEXT, { 255,255,255 });
+
 		if (app->puzzleManager->fightBoss)
 		{
-			app->puzzleManager->bossIsDead = true;
+			if (app->hTerrors->active)
+			{
+				app->puzzleManager->bossIsDead = true;
+			}
+			if (app->BeastT->active)
+			{
+				app->puzzleManager->bossIsDeadDun2 = true;
+			}
+
 			app->questManager->SaveState();
 		}
 
