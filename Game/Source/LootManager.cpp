@@ -22,6 +22,8 @@ bool LootManager::Awake(pugi::xml_node& config)
 
 	pugi::xml_node& data = config;
 
+	chests.clear();
+
 	for (pugi::xml_node pugiNode = config.child("chest"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("chest"))
 	{
 		if (pugiNode.attribute("used").as_bool() == false)

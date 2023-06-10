@@ -166,6 +166,11 @@ private:
 	bool transitionCombat_B;
 	float point;
 	int offsetAni;
+	//animacion flee
+	Tween animationFlee;
+	bool transitionFlee_B;
+	int posxFlee_I;
+	float pointFlee;
 };
 
 #endif // __COMBAT_H__

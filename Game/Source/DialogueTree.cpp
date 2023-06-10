@@ -116,7 +116,7 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 
 			//temp = "Player's name:  %%";
 			//temp.Substitute("%", app->input->playerName.c_str());
-			//app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 100, fontSize, Font::TEXT, { 255, 255, 255 });
+			//app->render->TextDraw(temp.GetString(), app->win->GetWidth() / 3, 100, fontSize, Font::TEXT, { 255, 246, 240 });
 			break;
 
 		case DIALOGUE_SAVE:

@@ -153,6 +153,7 @@ public:
 	const char* textureInventoryPath;
 	const char* forgePath;
 	const char* partyPath;
+	const char* selectedPath;
 	const char* charLockedPath;
 	const char* protaPath;
 	const char* compaPath;

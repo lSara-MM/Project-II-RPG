@@ -122,7 +122,7 @@ bool Player::Awake() {
 
 	//animation minimap
 	mapAnimation.Set();
-	mapAnimation.AddTween(100, 100, BOUNCE_IN_OUT);
+	mapAnimation.AddTween(100, 80, CUBIC_OUT);
 
 	return true;
 }
@@ -428,7 +428,8 @@ bool Player::Update(float dt)
 		currentMiniMap = miniMap;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_X) == ButtonState::BUTTON_DOWN)
+	if ((app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_X) == ButtonState::BUTTON_DOWN)
+		&& !app->store->active && !app->dialogueSystem->active && !app->forge->active && !app->inventory->active && !app->scene->pause_B)
 	{
 		MiniMap();
 	}
@@ -441,10 +442,10 @@ bool Player::Update(float dt)
 	{
 		mapAnimation.Foward();
 	}
-	mapAnimation.Step(1, false);
+	mapAnimation.Step(2, false);
 
 	float point = mapAnimation.GetPoint();
-	int offset = -1300;
+	int offset = 1300-app->render->camera.y;
 	app->render->DrawTexture(currentMiniMap, posMiniMap.x, offset + point * (posMiniMap.y - offset));
 
 	if (app->scene->active)

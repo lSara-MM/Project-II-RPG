@@ -67,6 +67,7 @@ enum class ButtonType
 	SKILL_4,
 	CHANGE_POSITION,
 	SKIPPY,
+	PARTY,
 	ITEM,
 	BUYITEM,
 	SELLITEM,
@@ -80,6 +81,7 @@ enum class AnimationAxis
 	UP_Y,
 	LEFT_X,
 	RIGHT_X,
+	FLEE,
 };
 
 

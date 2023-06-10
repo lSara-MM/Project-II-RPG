@@ -43,6 +43,7 @@ public:
 
 	SDL_Texture* inventoryIMG;
 	SDL_Texture* partyIMG;
+	SDL_Texture* selectedIMG;
 	SDL_Texture* charlockedIMG;
 	SDL_Texture* protaIMG;
 	SDL_Texture* compaIMG;

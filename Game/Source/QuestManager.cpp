@@ -60,7 +60,7 @@ bool QuestManager::Start() {
 	quest2->title = "Drive the Oracle crazy";
 	quest3->title = "Train is life, train is love";
 
-	quest1->desc = "Save Fire Guy from the dungeon";
+	quest1->desc = "Save Fire Lady from the dungeon";
 	quest2->desc = "Talk to the Oracle and make him angry";
 	quest3->desc = "Practice into the Practice Tent";
 
@@ -178,7 +178,7 @@ bool QuestManager::Update(float dt)
 	if (quest1->active || quest2->active || quest3->active)
 	{
 		iPoint pos = { 10, 50 };
-		app->render->TextDraw("Quests:", pos.x, pos.y, 40, Font::TEXT, { 255, 255, 255 });
+		app->render->TextDraw("Quests:", pos.x, pos.y, 40, Font::TEXT, { 255, 246, 240 });
 	}
 
 	for (item = quests.start; item != NULL && ret == true; item = item->next)
