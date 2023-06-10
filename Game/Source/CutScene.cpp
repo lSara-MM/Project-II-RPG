@@ -135,8 +135,9 @@ bool CutScene::Update(float dt)
 		{
 			if (passImg <= NextText.Count() - 1)
 			{
+				SDL_Rect rect = { 0, app->win->GetHeight() - 120, app->win->GetWidth(), app->win->GetHeight() - 110 };
+				app->render->DrawRectangle(rect, 0, 0, 0, 100);
 				text = NextText.At(passImg)->next->data.c_str();
-
 				textHasEnded = app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 20, 100,
 					{ 255, 255, 255 }, Font::TEXT, 0, 30.0f);
 				//app->render->TextDraw(NextText.At(passImg)->next->data, 20, app->win->GetHeight() - 100, 15, Font::UI, { 255, 255, 255 });
