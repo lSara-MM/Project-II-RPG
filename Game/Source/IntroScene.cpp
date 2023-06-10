@@ -138,7 +138,6 @@ bool IntroScene::Update(float dt)
 		}
 
 		app->input->coso = false;
-		app->combat->firstCombat_B = false;
 		app->questManager->resetPuzzlesAndQuests();
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 	}
@@ -265,7 +264,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		}
 
 		app->input->coso = false;
-		app->combat->firstCombat_B = true;
 		app->entityManager->tpID = 21;
 
 		app->fade->FadingToBlack(this, (Module*)app->cutScene, 45);
@@ -279,7 +277,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		}
 
 		app->itemManager->loadParty_B = true;
-		app->combat->firstCombat_B = false;
 		app->input->coso = true;
 		app->LoadFromFile(this);
 		continueGame_B = true;

@@ -418,7 +418,7 @@ bool Player::Update(float dt)
 	posMiniPlayer.x = posMiniMap.x + position.x / 10 + 60;
 	posMiniPlayer.y = posMiniMap.y + position.y / 10 + 60;
 
-	if(app->puzzleManager->saveFireGuy)
+	if(app->puzzleManager->teamMate)
 	{
 		currentMiniMap = miniMap2;
 	}

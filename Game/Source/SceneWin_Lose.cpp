@@ -104,7 +104,8 @@ bool SceneWin_Lose::Update(float dt)
 				}
 				else
 				{
-					app->LoadFromFile(this);
+					app->entityManager->tpID = 21;
+					app->fade->FadingToBlack(this, (Module*)app->scene, 45);
 				}
 			}
 			else

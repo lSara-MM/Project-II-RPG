@@ -110,8 +110,6 @@ public:
 	Character* targeted_Character = nullptr; //Last button selected
 	int lastPressedAbility_I = -1;
 
-	bool firstCombat_B = false;//determinar si es la primera vez que se lucha en la partida, en true significa que no se ha luchado todavia
-
 	// buttons
 	List<GuiButton*> listButtons;
 
