@@ -454,22 +454,22 @@ bool Player::Update(float dt)
 	}
 	if (app->hTerrors->active)
 	{
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10, offset + point * (posMiniMap.y + 4507 / 10 - offset));
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10 + 60, offset + point * (posMiniMap.y + 4507 / 10 + 60  - offset));
 	}
 	if (app->practiceTent->active)
 	{
 		//4360 4385
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10, offset + point * (posMiniMap.y + 3585 / 10 - offset));
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10 + 60, offset + point * (posMiniMap.y + 3585 / 10 + 60 - offset));
 	}
 	if (app->circus->active)
 	{
 		//3899 1027
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10, offset + point * (posMiniMap.y + 350 / 10 - offset));
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10 + 60, offset + point * (posMiniMap.y + 350 / 10 + 60 - offset));
 	}
 	if (app->BeastT->active)
 	{
 		//3899 1027
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 1056 / 10, offset + point * (posMiniMap.y + 2978 / 10 - offset));
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 1056 / 10 + 60, offset + point * (posMiniMap.y + 2978 / 10 + 60 - offset));
 	}
 
 	//}
