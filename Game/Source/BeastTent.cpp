@@ -183,7 +183,7 @@ bool BeastTent::Update(float dt)
 			app->audio->PlayFx(combatfx);
 			app->combat->PreLoadCombat(name);
 
-			app->fade->FadingToBlack(this, (Module*)app->combat, 5); 
+			app->fade->FadingToBlack(this, (Module*)app->combat, 45); 
 			app->questManager->SaveState();
 			app->puzzleManager->CleanUp();
 			app->puzzleManager->active = false;
@@ -463,7 +463,7 @@ bool BeastTent::OnGuiMouseClickEvent(GuiControl* control)
 		app->puzzleManager->CleanUp();
 		app->puzzleManager->active = false;
 		pause_B = false;
-		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
+		app->fade->FadingToBlack(this, (Module*)app->iScene, 45);
 		break;
 
 	case 704:
@@ -546,7 +546,7 @@ bool BeastTent::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 808:
 		LOG("Button Return to Title click");
-		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
+		app->fade->FadingToBlack(this, (Module*)app->iScene, 45);
 		break;
 
 	case 809:

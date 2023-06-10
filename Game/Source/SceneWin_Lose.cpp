@@ -100,7 +100,7 @@ bool SceneWin_Lose::Update(float dt)
 			{
 				if (returnTitle_B)
 				{
-					app->fade->FadingToBlack(this, (Module*)app->iScene, 5);
+					app->fade->FadingToBlack(this, (Module*)app->iScene, 45);
 				}
 				else
 				{
