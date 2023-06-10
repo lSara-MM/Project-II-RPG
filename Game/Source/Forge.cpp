@@ -38,6 +38,9 @@ bool Forge::Start()
 	forgeTransition_B = false;
 	posYforgeAnimation = 0;
 
+	fxforgepath = "Assets/Audio/Fx/forgefx.wav";
+	forgefx = app->audio->LoadFx(fxforgepath);
+
 	return true;
 }
 
@@ -449,6 +452,7 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 				}
 			}
 		}
+		app->audio->PlayFx(forgefx);
 		forgePos = 0;
 		break;
 	}
