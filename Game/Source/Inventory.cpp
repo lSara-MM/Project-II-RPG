@@ -992,4 +992,10 @@ void Inventory::DrawParty(float point, int offset)
 	{
 		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
 	}
+
+	if (lastPressed != -1)
+	{
+		app->render->DrawTexture(selectedIMG, listPartyButtons.At(lastPressed)->data->bounds.x - app->render->camera.x, listPartyButtons.At(lastPressed)->data->bounds.y - app->render->camera.y);
+	}
+
 }
