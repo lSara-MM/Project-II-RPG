@@ -192,6 +192,9 @@ private:
 	const char* critPath;
 	uint critfx;
 
+	const char* dodgePath;
+	uint dodgefx;
+
 	//textura supersaiyan
 	SDL_Texture* textureOnturn;
 

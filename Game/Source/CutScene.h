@@ -71,6 +71,9 @@ private:
 
 	const char* pathfirma;
 	uint firmafx;
+
+	const char* fxtextpath;
+	uint textfx;
 };
 
 #endif

@@ -89,6 +89,9 @@ bool Character::Awake()
 	critPath = "Assets/Audio/Fx/critic_hit.wav";
 	critfx = app->audio->LoadFx(critPath);
 
+	dodgePath = "Assets/Audio/Fx/dodge.wav";
+	dodgefx = app->audio->LoadFx(dodgePath);
+
 	id = parameters.attribute("id").as_int();
 
 	textureOnturn = app->tex->Load("Assets/GUI/humoTurnos.png");
@@ -1067,6 +1070,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		if (!CalculateRandomProbability(caster->GetStatModifier(EffectType::ACCURACY) * (skill->bonusAccuracy + caster->accuracy), defender->GetStat(EffectType::DODGE)))
 		{
 			//Enemigo esquiva
+			app->audio->PlayFx(dodgefx);
 			return 0;
 		}
 		else
