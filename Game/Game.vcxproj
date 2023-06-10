@@ -98,7 +98,6 @@
     <ClCompile Include="Source\AssetsManager.cpp" />
     <ClCompile Include="Source\BeastTent.cpp" />
     <ClCompile Include="Source\Character.cpp" />
-    <ClCompile Include="Source\Circus.cpp" />
     <ClCompile Include="Source\Combat.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -148,7 +147,6 @@
     <ClInclude Include="Source\AssetsManager.h" />
     <ClInclude Include="Source\BeastTent.h" />
     <ClInclude Include="Source\Character.h" />
-    <ClInclude Include="Source\Circus.h" />
     <ClInclude Include="Source\Combat.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
