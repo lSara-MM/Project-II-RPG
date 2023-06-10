@@ -98,8 +98,13 @@ public:
 
 private:
 	
+	SDL_Texture* currentMiniMap;
+
 	SDL_Texture* miniMap;
 	const char* texturePathMiniMap;
+
+	SDL_Texture* miniMap2;
+	const char* texturePathMiniMap2;
 	
 	SDL_Texture* dotPlayer;
 	const char* texturePathDotPlayer;

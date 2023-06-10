@@ -111,7 +111,7 @@
 					audiopathPortal="Assets/Audio/Fx/sfx_portal.wav"
 					grassStep="Assets/Audio/Fx/Pasos_Hierba.wav"
 					enterZone="Assets/Audio/Fx/entrar_sala.wav"
-          MiniMap="Assets/Maps/Mini_Mapa.png" xMap="0" yMap="0" widthMap="499" heightMap="505"
+          MiniMap="Assets/Maps/Mini_Mapa.png" MiniMap2="Assets/Maps/Mini_Mapa_2.png" xMap="0" yMap="0" widthMap="499" heightMap="505"
 				  PlayerMiniMap="Assets/Maps/prota_MiniMapa.png" widthDot="50" heightDot="50"/>
 
 
