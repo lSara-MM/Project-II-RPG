@@ -29,6 +29,8 @@ public:
 	// Performs the render call of a black rectangle with transparency
 	bool PostUpdate() override;
 
+	bool CleanUp() override;
+
 	// Called from another module
 	// Starts the fade process which has two steps, fade_out and fade_in
 	// After the first step, the modules should be switched
