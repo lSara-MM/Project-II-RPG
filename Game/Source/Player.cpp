@@ -444,6 +444,8 @@ bool Player::Update(float dt)
 		Controller(dtP);
 	}
 
+	app->map->SpriteSortingTiled();
+
 	return true;
 }
 
