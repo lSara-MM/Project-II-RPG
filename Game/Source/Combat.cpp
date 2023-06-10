@@ -8,8 +8,8 @@
 #include "Textures.h"
 #include "Window.h"
 
-#include "Scene.h"
-#include "IntroScene.h"
+#include "BeastTent.h"
+#include "HouseOfTerrors.h"
 #include "SceneWin_Lose.h"
 #include "QuestManager.h"
 #include "ItemManager.h"
@@ -17,11 +17,7 @@
 #include "EntityManager.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
-#include "Map.h"
-#include "Pathfinding.h"
 #include "Inventory.h"
-#include "HouseOfTerrors.h"
-#include "BeastTent.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -36,6 +32,7 @@ using namespace std;
 Combat::Combat() : Module()
 {
 	name.Create("combat");
+	combatType = CombatType::ENEMIES;
 }
 
 Combat::~Combat()
@@ -43,7 +40,7 @@ Combat::~Combat()
 
 bool Combat::Awake(pugi::xml_node& config)
 {
-	LOG("Loading Scene");
+	LOG("Loading Combat Scene");
 	bool ret = true;
 	
 	texturePathBackground = config.attribute("bgTexture").as_string(); //FondoActual (habra que cambiarlo por los de la dungeon actual)
@@ -118,7 +115,7 @@ bool Combat::Start()
 
 
 	// Skip button
-	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, this, { 542, 100, 129, 43}, ButtonType::SKIPPY, "S K I P", 20, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, this, { 542, 100, 129, 43}, ButtonType::SKIPPY, "F l e e", 20, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN);
 	listButtons.Add(button);
 	button = nullptr;
 
@@ -147,7 +144,6 @@ bool Combat::Start()
 
 bool Combat::PreUpdate()
 {
-	//TO DO : Guarrada maxima
 	if (charaInTurn >= listInitiative.Count()) 
 	{
 		charaInTurn = listInitiative.Count() - 1;
@@ -498,11 +494,6 @@ void Combat::Debug()
 // Start Combat
 bool Combat::PreLoadCombat(SString n, int boss, int boss2)
 {
-	srand(time(NULL));
-
-	int randSize = (rand() % 2 + 1) + (rand() % 2 + 1); //25% 2, 50% 3 25% 4
-	int randId;
-
 	vecSetEnemies.clear();
 	vecSetEnemies.shrink_to_fit();
 
@@ -513,10 +504,19 @@ bool Combat::PreLoadCombat(SString n, int boss, int boss2)
 	if (boss != -1)
 	{
 		vecSetEnemies.push_back(boss);
+		combatType = CombatType::BOSS;
 	}
 	else
 	{
-		int numEnemies;
+		srand(time(NULL));
+
+		int randSize = (rand() % 2 + 1) + (rand() % 2 + 1); //25% 2, 50% 3 25% 4
+		int randId;
+		int numEnemies = 0;
+
+		if (strcmp("PracticeTent", n.GetString()) == 0) { combatType = CombatType::DUMMY; }
+		else { combatType = CombatType::ENEMIES; }
+
 		//Buscar cuantos enemigos tiene la zona
 		for (pugi::xml_node sceneNode = combatNode.child("scenes"); sceneNode; sceneNode = sceneNode.next_sibling("scenes"))
 		{
@@ -734,6 +734,38 @@ bool Combat::NextTurn()
 	return true;
 }
 
+bool Combat::Flee()
+{
+	bool ret = false;
+
+	srand(time(NULL));
+	int randSize = rand() % 10 + 1;
+	
+	switch (combatType)
+	{
+	case DUMMY:		
+		if (randSize < 9)
+		{
+			ret = true;
+		}
+		break;
+	case ENEMIES:
+		if (randSize < 5)
+		{
+			ret = true;
+		}
+		break;
+	case BOSS:
+		return false;
+		break;
+	default:
+		ret = false;
+		break;
+	}
+
+	return ret;
+}
+
 // Handle buttons
 void Combat::HandleCharaButtons(vector<Character*>* arr, int pos1, int pos2)
 {
@@ -772,7 +804,7 @@ bool Combat::HandleSkillsButtons(Character* chara)
 	for (int i = 0; i < chara->listSkills.Count(); i++)
 	{
 		//Seguro anti petadas
-		if ((offset+i)>=listButtons.Count())
+		if ((offset + i) >= listButtons.Count())
 		{
 			break;
 		}
@@ -1010,8 +1042,15 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	// skip turn
 	else if (control->id == 15)
 	{
-		HandleCharaButtons(&vecAllies, 0, vecAllies.size());
-		NextTurn();
+		if (Flee())
+		{
+			// TO DO: return to scene or what? 
+		}
+		else
+		{
+			HandleCharaButtons(&vecAllies, 0, vecAllies.size());
+			NextTurn();
+		}
 	}
 
 	//
@@ -1374,8 +1413,8 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 	// skip turn
 	else if (control->id == 15)
 	{
-		app->render->TextDraw("Mime's Silence", xText1, 545, 24);
-		app->render->TextDraw("Embrace silence and skip your turn.", xText1, 620, fontSizeSkills);
+		app->render->TextDraw("Don't fight it, it's coming for you!", xText1, 545, 24);
+		app->render->TextDraw("Just surrender 'cause you feel the feeling taking over.", xText1, 620, fontSizeSkills);
 	}
 
 	return false;

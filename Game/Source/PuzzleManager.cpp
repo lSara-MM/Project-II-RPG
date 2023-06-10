@@ -884,7 +884,7 @@ bool PuzzleManager::Dun2Update()
 				LOG("Combat");
 				app->SaveGameRequest();
 				app->audio->PlayFx(app->hTerrors->combatfx);
-				app->combat->PreLoadCombat(app->BeastT->name, 40, 30); //Boss doble
+				app->combat->PreLoadCombat(app->BeastT->name, 21, 20); //Boss doble
 				fightBoss2 = true;
 				app->fade->FadingToBlack((Module*)app->BeastT, (Module*)app->combat, 5);
 				app->questManager->SaveState();

@@ -15,6 +15,14 @@
 
 struct SDL_Texture;
 
+enum CombatType
+{
+	DUMMY = -1,
+	ENEMIES,
+	BOSS
+};
+
+
 class Combat : public Module
 {
 public:
@@ -53,6 +61,7 @@ public:
 	bool StartCombat();
 	bool OrderBySpeed();
 	bool NextTurn(); //Lo enviaran los characthers cuando finalicen su turno
+	bool Flee();
 
 	// Handle buttons
 	void HandleCharaButtons(vector<Character*>* arr, int pos1 = -1, int pos2 = -1);	// If -1, disable all
@@ -108,6 +117,7 @@ public:
 
 private:
 	bool isMoving;
+	CombatType combatType;
 
 	pugi::xml_node combatNode;
 

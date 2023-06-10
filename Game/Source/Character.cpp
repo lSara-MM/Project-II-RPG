@@ -180,14 +180,8 @@ bool Character::Update(float dt)
 
 		//Si es su turno pues hace cosas
 		if (onTurn)
-		{
-			// TO DO: change to texture 
-			//app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
-			//app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
-
+		{			
 			SDL_Rect rect = { 0, 0, 126, 178 };
-			/*app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);
-			app->render->DrawRectangle({ position.x + 10, position.y + 195, 106, 10 }, 255, 0, 0);*/
 			app->render->DrawTexture(textureOnturn, position.x, position.y, &rect);
 			
 			//Si stunned pues no hace nada 
