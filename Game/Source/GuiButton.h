@@ -33,6 +33,10 @@ public:
 
 	const char* fxHoverPath;
 	uint fxHover;
+
+	const char* fxclickPath;
+	uint fxclick;
+
 	bool hoverTest;
 	bool isSelected;
 	int step;//velocidad animacion

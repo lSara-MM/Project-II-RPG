@@ -55,6 +55,10 @@ bool Scene::Awake(pugi::xml_node& config)
 	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
 	pausefx = app->audio->LoadFx(fxpausepath);
 
+
+	fxinventorypath = "Assets/Audio/Fx/Open_inv.wav";
+	inventoryfx = app->audio->LoadFx(fxinventorypath);
+
 	return ret;
 }
 
@@ -142,12 +146,13 @@ bool Scene::Update(float dt)
 			player->lockMovement = false;
 			app->inventory->inventoryTransition_B = true;
 			//app->inventory->Disable();
-			
+			app->audio->PlayFx(inventoryfx);
 		}
 		else 
 		{
 			player->lockMovement = true;
 			app->inventory->Enable();
+			app->audio->PlayFx(inventoryfx);
 		}
 	}
 

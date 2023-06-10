@@ -418,7 +418,7 @@ enum class CharacterClass
 		
 		sectionX="0" sectionY="26"/>
 
-		<enemy name ="The Beast Tamer" id="30" maxHp="3600" currentHp="3600" attack="270" armor="25" critRate="10" critDamage="30" accuracy="30" res="15" dodge="30" speed="120"
+		<enemy name ="The Beast Tamer" id="30" maxHp="5700" currentHp="5700" attack="320" armor="35" critRate="10" critDamage="30" accuracy="30" res="15" dodge="40" speed="120"
         type="1" class="8" skill1ID="49" skill2ID="50" skill3ID="51" skill4ID="52"
                
         width="0" heigth="0"
@@ -426,11 +426,11 @@ enum class CharacterClass
 		
 		sectionX="23" sectionY="0"/>
 
-		<enemy name ="The Beast" id="40" maxHp="2400" currentHp="2000" attack="300" armor="40" critRate="30" critDamage="50" accuracy="30" res="10" dodge="0" speed="20"
+		<enemy name ="The Beast" id="40" maxHp="4300" currentHp="4000" attack="400" armor="55" critRate="30" critDamage="50" accuracy="30" res="10" dodge="0" speed="20"
         type="1" class="8" skill1ID="53" skill2ID="54" skill3ID="55" skill4ID="56"
                
         width="0" heigth="0"
-        texturePath ="Assets/Textures/EnemyBossGoat.png"
+        texturePath ="Assets/Textures/EnemyBossGoat2.png"
 		
 		sectionX="11" sectionY="0"/>
 

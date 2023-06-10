@@ -86,8 +86,8 @@ bool Character::Awake()
 	buffPath = "Assets/Audio/Fx/buff.wav";
 	bufffx = app->audio->LoadFx(buffPath);
 
-	debuffPath = "Assets/Audio/Fx/debuff.wav";
-	debufffx = app->audio->LoadFx(debuffPath);
+	critPath = "Assets/Audio/Fx/critic_hit.wav";
+	critfx = app->audio->LoadFx(critPath);
 
 	id = parameters.attribute("id").as_int();
 
@@ -1032,7 +1032,6 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			//Blees -1 pues no lo hace
 			if (defender->GetStat(EffectType::BLESS)!=-1 && skill->firstStatus !=-1)
 			{defender->listStatusEffects.Add(statusEffect1);}
-			app->audio->PlayFx(bufffx);
 			//Movimiento
 			if (skill->movementTarget != 0)
 			{
@@ -1052,14 +1051,12 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				}
 				
 			}
-			app->audio->PlayFx(debufffx);
 		}
 		//Segundo efecto de estado
 		if (skill->secondPositiveEffect) //Efecto de estado positivo
 		{
 			if (defender->GetStat(EffectType::BLESS) != -1 && skill->secondStatus != -1)
 			{ defender->listStatusEffects.Add(statusEffect2); }
-			app->audio->PlayFx(bufffx);
 		}
 		else
 		{
@@ -1086,6 +1083,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			{
 				//El daño critico es mas potente
 				damage *= ( 100 + 2*(caster->GetStatModifier(EffectType::CRIT_DMG) * (skill->bonusCritDamage + caster->critDamage)) ) / 100;
+				app->audio->PlayFx(critfx);
 			}
 
 			//Primer efecto estado 
@@ -1094,7 +1092,6 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				if (defender->GetStat(EffectType::BLESS) != -1 && skill->firstStatus != -1) 
 				{ defender->listStatusEffects.Add(statusEffect1); }
 				//Movimiento
-				app->audio->PlayFx(bufffx);
 				if (skill->movementTarget != 0)
 				{
 					app->combat->MoveCharacter(defender, skill->movementTarget);
@@ -1114,7 +1111,6 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 					if (defender->GetStat(EffectType::BLESS) != 1 && skill->firstStatus != -1)
 					{ defender->listStatusEffects.Add(statusEffect1); }
 				}
-				app->audio->PlayFx(debufffx);
 			}
 
 			//Segundo efecto estado 

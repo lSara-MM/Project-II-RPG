@@ -76,6 +76,8 @@ private:
 	const char* fxpausepath;
 	uint pausefx;
 
+	const char* fxinventorypath;
+	uint inventoryfx;
 
 	bool exit_B;
 	int enemyRange_I;

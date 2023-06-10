@@ -50,6 +50,12 @@ bool CutScene::Awake(pugi::xml_node& config)
 		pugiNode = pugiNode.next_sibling("Text");
 	}
 
+	pathcinematicpass = "Assets/Audio/Fx/entrar_sala.wav";
+	cinematicpassfx = app->audio->LoadFx(pathcinematicpass);
+
+	pathfirma = "Assets/Audio/Fx/firmafx.wav";
+	firmafx = app->audio->LoadFx(pathfirma);
+
 	return ret;
 }
 
@@ -95,6 +101,8 @@ bool CutScene::Update(float dt)
 		{
   			printText = false;
 
+			app->audio->PlayFx(cinematicpassfx);
+
 			if (passImg < ImgToPrint.Count() - 1)
 			{
 				app->fade->FadingToBlackImages(currentTexture, ImgToPrint.At(passImg + 1)->data, 90);
@@ -115,14 +123,14 @@ bool CutScene::Update(float dt)
 		}
 	}
 
-	//Esto renderiza la imagen que ahora está en pantalla
+	//Esto renderiza la imagen que ahora estï¿½ en pantalla
 	if (passImg <= ImgToPrint.Count() - 1)
 		app->render->DrawTexture(currentTexture, 0, 0);
 
 
 	if (TextTimerToPrint)
 	{
-		//Aquí se printa el texto
+		//Aquï¿½ se printa el texto
 		if (printText)
 		{
 			if (passImg <= NextText.Count() - 1)
@@ -155,7 +163,7 @@ bool CutScene::Update(float dt)
 	{
 		if (passImg >= ImgToPrint.Count() - 1)
 		{
-			//Sara:Aquí te bloqueo para que señor pugi no pueda pasar con Espacio mas imagenes y pete xd
+			//Sara:Aquï¿½ te bloqueo para que seï¿½or pugi no pueda pasar con Espacio mas imagenes y pete xd
 			StopCutScene = true;
 
 			// enable text input
@@ -172,12 +180,26 @@ bool CutScene::Update(float dt)
 				app->input->RenderTempText("%%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
 			}
 
-			// if name entered, fade to black
-			if (app->input->playerName->input_entered)
-			{
-				//Sara: Aquí es que ha llegado al final de todas las imagenes y textos
-				app->fade->FadingToBlack(this, (Module*)app->scene, 90);
-			}
+		// enable text input
+		if (!app->input->playerName->input_entered)
+		{
+			app->input->ActiveGetInput(app->input->playerName);
+		}
+
+		// render input
+		if (app->input->getInput_B)
+		{
+			// TO DO adjust position when bg done
+			iPoint pos = { app->win->GetWidth() - 330, 600 };
+			app->input->RenderTempText("%%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
+		}
+
+		// if name entered, fade to black
+		if (app->input->playerName->input_entered)
+		{
+			//Sara: Aquï¿½ es que ha llegado al final de todas las imagenes y textos
+			app->audio->PlayFx(firmafx);
+			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		}
 	}
 

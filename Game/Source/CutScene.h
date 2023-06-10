@@ -65,6 +65,12 @@ private:
 	List<const char*> NextImg;
 
 	List<string> NextText;
+
+	const char* pathcinematicpass;
+	uint cinematicpassfx;
+
+	const char* pathfirma;
+	uint firmafx;
 };
 
 #endif
