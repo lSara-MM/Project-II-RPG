@@ -68,7 +68,7 @@ bool Forge::Update(float dt)
 	{
 		forgeAnimation.Foward();
 	}
-	forgeAnimation.Step(1, false);
+	forgeAnimation.Step(2, false);
 
 	float point = forgeAnimation.GetPoint();
 	int offset = -750;
@@ -404,7 +404,9 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 	{
 
 	case 1501:
-		this->Disable();
+		forgeTransition_B = true;
+		exitButton->isForward_B = false;
+		forgeButton->isForward_B = false;
 		break;
 	case 1502:
 		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)

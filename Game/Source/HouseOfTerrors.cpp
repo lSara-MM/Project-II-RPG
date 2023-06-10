@@ -179,6 +179,7 @@ bool HouseOfTerrors::Update(float dt)
 			app->combat->PreLoadCombat(name);
 
 			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+			app->questManager->SaveState();
 			app->puzzleManager->CleanUp();
 			app->puzzleManager->active = false;
 			steps_I = 0;
@@ -384,6 +385,15 @@ void HouseOfTerrors::Debug()
 		}
 
 		LOG("PAUSE");
+	}
+
+	if (app->input->godMode_B)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
+			LOG("Combat");
+			app->combat->PreLoadCombat(name);
+			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+		}
 	}
 
 	// Mute / unmute

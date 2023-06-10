@@ -24,6 +24,8 @@
 #define DIALOGUE_FORGE 7
 #define DIALOGUE_HEAL 8
 
+#define DIALOGUE_DUCK_PUNISHER 21
+
 using namespace std;
 
 class DialogueChoice

@@ -172,7 +172,6 @@ bool Scene::Update(float dt)
 	if (app->store->active)
 	{
 		player->lockMovement = true;
-
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) 
@@ -377,10 +376,13 @@ void Scene::Debug()
 		LOG("MUTE");
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
-		LOG("Combat");
-		app->combat->PreLoadCombat(name);
-		app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+	if (app->input->godMode_B)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
+			LOG("Combat");
+			app->combat->PreLoadCombat(name);
+			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+		}
 	}
 	
 	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();

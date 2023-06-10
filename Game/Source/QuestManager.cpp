@@ -330,6 +330,7 @@ bool QuestManager::LoadState() {
 		app->puzzleManager->RelicInColumn2 = gameStateFile.child("save_state").child("puzzle").attribute("RelicInColumn2").as_bool();
 		app->puzzleManager->RelicInColumn3 = gameStateFile.child("save_state").child("puzzle").attribute("RelicInColumn3").as_bool();
 		app->puzzleManager->bossIsDeadDun2 = gameStateFile.child("save_state").child("puzzle").attribute("BossDun2").as_bool();
+		app->puzzleManager->CurrentDarkFade = gameStateFile.child("save_state").child("puzzle").attribute("CurrentDarkFade").as_bool();
 
 		quest1->active = gameStateFile.child("save_state").child("quests").attribute("quest1").as_bool();
 		quest2->active = gameStateFile.child("save_state").child("quests").attribute("quest2").as_bool();
@@ -383,6 +384,7 @@ bool QuestManager::SaveState()
 	puzzle.append_attribute("RelicInColumn2") = app->puzzleManager->RelicInColumn2;
 	puzzle.append_attribute("RelicInColumn3") = app->puzzleManager->RelicInColumn3;
 	puzzle.append_attribute("BossDun2") = app->puzzleManager->bossIsDeadDun2;
+	puzzle.append_attribute("CurrentDarkFade") = app->puzzleManager->CurrentDarkFade;
 
 	quests.append_attribute("quest1") = quest1->active;
 	quests.append_attribute("quest2") = quest2->active;
@@ -429,6 +431,7 @@ bool QuestManager::resetPuzzlesAndQuests()
 	app->puzzleManager->RelicInColumn2 = false;
 	app->puzzleManager->RelicInColumn3 = false;
 	app->puzzleManager->bossIsDeadDun2 = false;
+	app->puzzleManager->CurrentDarkFade = false;
 
 	quest1->active = false;
 	quest2->active = false;

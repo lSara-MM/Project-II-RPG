@@ -147,7 +147,7 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 
 	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
 	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s,  %d, %d", SDL_GetError(), x, y);
+		//LOG("Cannot blit to screen. SDL_RenderCopy error: %s,  %d, %d", SDL_GetError(), x, y);
 		ret = false;
 	}
 
@@ -362,7 +362,7 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 bool Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SString>* pTexts, int fontSize_, int max_chars_line_, 
 	SDL_Color color, Font font, float fontOffset, float dt_wait)
 {
-	bool ret = true;
+	bool ret = false;
 
 	SplitText(text, pTexts, fontSize_, max_chars_line_);
 
@@ -384,32 +384,27 @@ bool Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SS
 		pTexts->clear();
 		pTexts->shrink_to_fit();
 
-		return ret;
+		return true;
 	}
 	else
 	{
+		int chars = 0;
+		for (int i = 0; i < pTexts->size(); i++) { chars += pTexts->at(i).Length(); }
+
+		string aux_str(text.GetString(), 0, charInNum);
+		SString aux(aux_str.c_str());
+
 		//LOG("waitToRender %f", waitToRender.ReadMSec());
-		if (waitToRender.ReadMSec() > dt_wait)
+		if (waitToRender.ReadMSec() > dt_wait && aux.Length() < chars)
 		{
-			int chars = 0;
+			charInNum++;
+			SplitText(aux, &temp, fontSize_, max_chars_line_);
 
-			for (int i = 0; i < pTexts->size(); i++)
-			{
-				chars += pTexts->at(i).Length();
-			}
-
-			if (temp.size() < chars)
-			{
-				string aux_str(text.GetString(), 0, charInNum++);
-				SString aux(aux_str.c_str());
-				SString b = aux;
-
-				SplitText(aux, &temp, fontSize_, max_chars_line_);
-				ret = false;
-			}
-			else { ret = true; }
-			waitToRender.Start();			
+			waitToRender.Start();
 		}
+	
+		if (aux.Length() < chars) { ret = false; }
+		else { ret = true; }
 
 		for (int j = 0; j < temp.size(); j++)
 		{

@@ -49,6 +49,7 @@ private:
 
 	bool printText;
 	bool StopCutScene;
+	bool textHasEnded;
 
 	uint32 mTicks;
 	uint32 mStartTicks;

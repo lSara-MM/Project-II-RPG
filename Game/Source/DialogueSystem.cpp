@@ -218,10 +218,10 @@ float DialogueSystem::GetTextSpeedFloat()
 	switch (GetTextSpeed())
 	{
 	case TextSpeed::SLOW:
-		return 50.0f;
+		return 75.0f;
 		break;
 	case TextSpeed::MEDIUM:
-		return 15.0f;
+		return 45.0f;
 		break;
 	case TextSpeed::FAST:
 		return 0.05f;

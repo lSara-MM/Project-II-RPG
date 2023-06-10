@@ -62,52 +62,52 @@
 
     <dialogueTree ID="1">
 
-	    <node id="0" name="NIKITA" text="The fair is big %%x. Go around and discover the place, now everything will be closed, but surely there are people you can talk to.">
-		    <choice id="0" option="Where should I go first?" nextNode="1" eventReturn="0"/>
-		    <choice id="1" option="Talk me about this place." nextNode="2" eventReturn="0"/>
-		    <choice id="2" option="Talk me about The Showman." nextNode="3" eventReturn="0"/>
-		    <choice id="3" option="There are oracles everywhere. What is the deal with that?" nextNode="6" eventReturn="0"/>
-		    <choice id="4" option="Is there somewhere to train my abilities?" nextNode="8" eventReturn="0"/>
-		    <choice id="5" option="Bye" nextNode="-1" eventReturn="0"/>
+	    <node id="0" name="NIKITA" text="The fair is big %%x. Go around and discover the place, now everything will be closed, but surely there are people you can talk to. ">
+		    <choice id="0" option="Bye" nextNode="-1" eventReturn="0"/>
+		    <choice id="1" option="Talk me about this place. " nextNode="2" eventReturn="0"/>
+		    <choice id="2" option="Talk me about The Showman. " nextNode="3" eventReturn="0"/>
+		    <choice id="3" option="There are oracles everywhere. What is the deal with that? " nextNode="6" eventReturn="0"/>
+		    <choice id="4" option="Is there somewhere to train my abilities? " nextNode="8" eventReturn="0"/>    
+			<choice id="5" option="Where should I go first? " nextNode="1" eventReturn="0"/>
 	    </node>
 
-	    <node id="1" name="NIKITA" text="Enjoy this place, don't be so serious, nobody likes serious magicians. I recommend the house of terror, there is a very nice man at the door.">
-		    <choice id="0" option="Thanks. I guess." nextNode="0"  eventReturn="0"/>
-		    <choice id="1" option="I will greet him from you." nextNode="-1"  eventReturn="0"/>
+	    <node id="1" name="NIKITA" text="Enjoy this place, don't be so serious, nobody likes serious magicians. I recommend the House of Terrors, there is a very nice man at the door. ">
+		    <choice id="0" option="Thanks. I guess. " nextNode="0"  eventReturn="0"/>
+		    <choice id="1" option="I will greet him from you. " nextNode="-1"  eventReturn="0"/>
 	    </node>
 
-	    <node id="2" name="NIKITA" text="How this place. This is the best fair in the world. They all have unique powers to cheer people up, or smash the faces of little busybodies. They can be a bit aggressive, but they are nice, sometimes.">
-		    <choice id="0" option="I see..." nextNode="0" eventReturn="0"/>
-		    <choice id="1" option="And about the fair attractions." nextNode="4" eventReturn="0"/>
-		    <choice id="2" option="Busybodies... Like me you would say." nextNode="5" eventReturn="0"/>
+	    <node id="2" name="NIKITA" text="How this place. This is the best fair in the world. They all have unique powers to cheer people up, or smash the faces of little busybodies. They can be a bit aggressive, but they are nice, sometimes. ">
+		    <choice id="0" option="I see... " nextNode="0" eventReturn="0"/>
+		    <choice id="1" option="And about the fair attractions. " nextNode="4" eventReturn="0"/>
+		    <choice id="2" option="Busybodies... Like me you would say. " nextNode="5" eventReturn="0"/>
 	    </node>
 
-	    <node id="3" name="NIKITA" text="Ooh! The Showman. He is a sweetheart! Always thinking of others, specifically their souls Isn't that sweet? He's the one keeping this alive, and with magic. Never forget, he is a powerful man, you don't want to make enmity with him. Although as adorable as he is, I don't think you'll be able to anger him.">
-		    <choice id="0" option="So he gave me my powers in exchange for my soul. He smell a rat." nextNode="0" eventReturn="0"/>
-		    <choice id="1" option="I bet I can anger him." nextNode="-1" eventReturn="0"/>
+	    <node id="3" name="NIKITA" text="Ooh! The Showman. He is a sweetheart! Always thinking of others, specifically their souls Isn't that sweet? He's the one keeping this alive, and with magic. Never forget, he is a powerful man, you don't want to make enmity with him. Although as adorable as he is, I don't think you'll be able to anger him. ">
+		    <choice id="0" option="So he gave me my powers in exchange for my soul. He smells a rat. " nextNode="0" eventReturn="0"/>
+		    <choice id="1" option="I bet I can anger him. " nextNode="-1" eventReturn="0"/>
 	    </node>
 
-	    <node id="4" name="NIKITA" text="That's so exciting! There are attractions of all kinds. A house of terror that becomes the house of mirrors, a carousel, a Ferris wheel, the circus where the Showman lives and much more. You will surely have a great time. You will see! You will see! You will see!">
-		    <choice id="0" option="Sure" nextNode="0" eventReturn="0"/>
-		    <choice id="1" option="Yeah well... I can't wait to see that..." nextNode="0" eventReturn="0"/>
+	    <node id="4" name="NIKITA" text="That's so exciting! There are attractions of all kinds. A house of terror that becomes the house of mirrors, a carousel, a Ferris wheel, the circus where the Showman lives and much more. You will surely have a great time. You will see! You will see! You will see! ">
+		    <choice id="0" option="Sure. " nextNode="0" eventReturn="0"/>
+		    <choice id="1" option="Yeah well... I can't wait to see that... " nextNode="0" eventReturn="0"/>
 	    </node>
 
-	    <node id="5" name="NIKITA" text="Well, maybe they do. Just in case, go practicing your powers.">
-		    <choice id="0" option="Either way, I won't be surprised." nextNode="-1" eventReturn="0"/>
-		    <choice id="1" option="Let me ask something else." nextNode="0" eventReturn="0"/>
+	    <node id="5" name="NIKITA" text="Well, maybe they do. Just in case, go practicing your powers. ">
+		    <choice id="0" option="Either way, I won't be surprised. " nextNode="-1" eventReturn="0"/>
+		    <choice id="1" option="Let me ask something else. " nextNode="0" eventReturn="0"/>
 	    </node>
 
-		<node id="6" name="NIKITA" text="That is my favorite person, machine, thing... whatever. Look, you pay him and then he talks to you, isn't that awesome? I love it.">
-			<choice id="0" option="I really do not understand you." nextNode="7" eventReturn="0"/>
-			<choice id="1" option=" Sure." nextNode="7" eventReturn="0"/>
+		<node id="6" name="NIKITA" text="That is my favorite person, machine, thing... whatever. Look, you pay him and then he talks to you, isn't that awesome? I love it. ">
+			<choice id="0" option="I really do not understand you. " nextNode="7" eventReturn="0"/>
+			<choice id="1" option=" Sure. " nextNode="7" eventReturn="0"/>
 		</node>
 		
-		<node id="7" name="NIKITA" text="He has an irascible character, it is so fun to talk to him. He has these clever answers. I dare you to anger him, if you do so I will give you some rewards. I am sure you will like it.">
-			<choice id="0" option="Accept the challenge." nextNode="-1" eventReturn="5"/>
+		<node id="7" name="NIKITA" text="He has an irascible character, it is so fun to talk to him. He has these clever answers. I dare you to anger him, if you do so I will give you some rewards. I am sure you will like it. ">
+			<choice id="0" option="Accept the challenge. " nextNode="-1" eventReturn="5"/>
 		</node>
 		
 		<node id="8" name="NIKITA" text="Indeed! We have the training tent just next to the stores. Go there if you want to practice. ">
-			<choice id="0" option="Thanks, that was actually helpful." nextNode="-1" eventReturn="5"/>
+			<choice id="0" option="Thanks, that was actually helpful. " nextNode="-1" eventReturn="5"/>
 		</node>
 
 	    <node id="-1" text ="End of conversation -F1- to talk again"></node>
@@ -115,45 +115,45 @@
 
 	<dialogueTree ID="2">
 
-		<node id="0" name="ORACLE" text="If there is something you want to know, toss a coin to see what's wrong.">
-			<choice id="0" option="Toss a coin." nextNode="1" eventReturn="0"/>
-			<choice id="1" option="Why should I pay you?" nextNode="2" eventReturn="0"/>
+		<node id="0" name="ORACLE" text="If there is something you want to know, toss a coin to see what's wrong. ">
+			<choice id="0" option="Toss a coin. " nextNode="1" eventReturn="0"/>
+			<choice id="1" option="Why should I pay you? " nextNode="2" eventReturn="0"/>
 			<choice id="2" option="You ain't for help, right? " nextNode="3" eventReturn="0"/>
-			<choice id="3" option="Don't want anything from you." nextNode="-1" eventReturn="0"/>
+			<choice id="3" option="Don't want anything from you. " nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="1" name="ORACLE" text="Another stupid boy to make me rich. I got a lot of knowledge from the dungeon you are about to go. Toss another coin if that is what you want.">
-			<choice id="0" option="Toss another coin." nextNode="4"  eventReturn="0"/>
-			<choice id="1" option="You just colled me stupid. Fuck off." nextNode="-1"  eventReturn="0"/>
+		<node id="1" name="ORACLE" text="Another stupid boy to make me rich. I got a lot of knowledge from the dungeon you are about to go. Toss another coin if that is what you want. ">
+			<choice id="0" option="Toss another coin. " nextNode="4"  eventReturn="0"/>
+			<choice id="1" option="You just colled me stupid. Fuck off. " nextNode="-1"  eventReturn="0"/>
 		</node>
 
-		<node id="2" name="ORACLE" text="You should pay me just to be talking to you, idiot. I offer information from the future, maybe you are not even able to read my name. I can tell you what you will find when you enter here, or if you have a special question, I can answer it for a coin, always for a coin.">
-			<choice id="0" option="Pay" nextNode="1" eventReturn="0"/>
-			<choice id="1" option="Unbearable busybody." nextNode="-1" eventReturn="0"/>
+		<node id="2" name="ORACLE" text="You should pay me just to be talking to you, idiot. I offer information from the future, maybe you are not even able to read my name. I can tell you what you will find when you enter here, or if you have a special question, I can answer it for a coin, always for a coin. ">
+			<choice id="0" option="Pay. " nextNode="1" eventReturn="0"/>
+			<choice id="1" option="Unbearable busybody. " nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="3" name="ORACLE" text="How dare you. I am always helpful. Always! Now the fee goes up to two coins you cocky jerk.">
-			<choice id="0" option="Pay" nextNode="1" eventReturn="0"/>
-			<choice id="1" option="You can mess with me, but you're just junk to me." nextNode="6" eventReturn="3"/>
+		<node id="3" name="ORACLE" text="How dare you. I am always helpful. Always! Now the fee goes up to two coins you cocky jerk. ">
+			<choice id="0" option="Pay. " nextNode="1" eventReturn="0"/>
+			<choice id="1" option="You can mess with me, but you're just junk to me. " nextNode="6" eventReturn="3"/>
 		</node>
 
-		<node id="4" name="ORACLE" text="I can't believe my eyes, you just paid, silly-billy. This is the worldwide famous House Of Terrors. I know just what you want, get information or reduce everything to ashes, you will never get it, this House Of Terror is not for everyone. If you want to toss one more coin...">
-			<choice id="0" option="Toss a coin." nextNode="5" eventReturn="0"/>
-			<choice id="1" option="I'll pay no more..." nextNode="-1" eventReturn="0"/>
+		<node id="4" name="ORACLE" text="I can't believe my eyes, you just paid, silly-billy. This is the worldwide famous House Of Terrors. I know just what you want, get information or reduce everything to ashes, you will never get it, this House Of Terror is not for everyone. If you want to toss one more coin... ">
+			<choice id="0" option="Toss a coin. " nextNode="5" eventReturn="0"/>
+			<choice id="1" option="I'll pay no more... " nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="5" name="ORACLE" text="You really think you'll make it huh. I have never seen anyone so foolish and useless in my entire life. Well... now that you've paid, I'll tell you one more thing, the house of terror is guarded by a ghostly entity that controls the lights, it doesn't speak so you won't be able to get much spark out of it. Now go and die, don't waste my time.">
-			<choice id="0" option="Say nothing" nextNode="-1" eventReturn="0"/>
+		<node id="5" name="ORACLE" text="You really think you'll make it huh. I have never seen anyone so foolish and useless in my entire life. Well... now that you've paid, I'll tell you one more thing, the house of terror is guarded by a ghostly entity that controls the lights, it doesn't speak so you won't be able to get much spark out of it. Now go and die, don't waste my time. ">
+			<choice id="0" option="Say nothing. " nextNode="-1" eventReturn="0"/>
 		</node>
 
-		<node id="6" name="ORACLE" text="Junk?! I'm not junk, idiot. I offer information from the future, maybe you are not even able to read my name. I can tell you what you will find when you enter here, or if you have a special question, I can answer it for coins, always for coins. The fee goes up again for you.">
-			<choice id="0" option="Pay." nextNode="0" eventReturn="0"/>
-			<choice id="1" option="That acrobat was right, this is a lot of fun. See you jerk" nextNode="7" eventReturn="0"/>
-			<choice id="2" option="Get lost asshole." nextNode="-1" eventReturn="0"/>
+		<node id="6" name="ORACLE" text="Junk?! I'm not junk, idiot. I offer information from the future, maybe you are not even able to read my name. I can tell you what you will find when you enter here, or if you have a special question, I can answer it for coins, always for coins. The fee goes up again for you. ">
+			<choice id="0" option="Pay. " nextNode="0" eventReturn="0"/>
+			<choice id="1" option="That acrobat was right, this is a lot of fun. See you jerk. " nextNode="7" eventReturn="0"/>
+			<choice id="2" option="Get lost asshole. " nextNode="-1" eventReturn="0"/>
 		</node>
 		
-		<node id="7" name="ORACLE" text="I got a special mission for you bod, go fuck yourself.">
-			<choice id="0" option="..." nextNode="-1" eventReturn="5"/>
+		<node id="7" name="ORACLE" text="I got a special mission for you bod, go fuck yourself. ">
+			<choice id="0" option="... " nextNode="-1" eventReturn="5"/>
 		</node>
 		
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
@@ -162,45 +162,45 @@
 	<dialogueTree ID="3">
 
 		<node id="0" name="IGOR AND IVAN" text="Hello mate. How can we help you? ">
-			<choice id="0" option="What do you sell?" nextNode="10" eventReturn="0"/>
-			<choice id="1" option="Tell me about the House Of Terrors." nextNode="1" eventReturn="0"/>
-			<choice id="2" option="Please heal the team, we are in trouble" nextNode="11" eventReturn="0"/>
-			<choice id="3" option="Farewell." nextNode="-1" eventReturn="0"/>
+			<choice id="0" option="What do you sell? " nextNode="10" eventReturn="0"/>
+			<choice id="1" option="Tell me about the House Of Terrors. " nextNode="1" eventReturn="0"/>
+			<choice id="2" option="Please heal the team, we are in trouble. " nextNode="11" eventReturn="0"/>
+			<choice id="3" option="Farewell. " nextNode="-1" eventReturn="0"/>
 		</node>
 		
-		<node id="1" name="IGOR" text="I do not want to talk about that place.">
+		<node id="1" name="IGOR" text="I do not want to talk about that place. ">
 			<choice id="0" option="..." nextNode="2" eventReturn="0"/>
 		</node>
 
-		<node id="2" name="IVAN" text="I will. That is an awful place. Scary. Creepy. Terrifying.">
+		<node id="2" name="IVAN" text="I will. That is an awful place. Scary. Creepy. Terrifying. ">
 			<choice id="0" option="..." nextNode="3" eventReturn="0"/>
 		</node>
 
-		<node id="3" name="IGOR" text="You idiot. He already knows that. The House Of Terrors is a jail.">
+		<node id="3" name="IGOR" text="You idiot. He already knows that. The House Of Terrors is a jail. ">
 			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
 		</node>
 
-		<node id="4" name="IVAN" text="Yes! A jail. They kept our friend locked. He is still there actually.">
+		<node id="4" name="IVAN" text="Yes! A jail. They kept our friend locked. He is still there actually. ">
 			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
 		</node>
 
-		<node id="5" name="IGOR" text="You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first.">
+		<node id="5" name="IGOR" text="You want to get free, right? News travels fast around here. Well you will have to defeat The House Of Terrors first. ">
 			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
 		</node>
 
-		<node id="6" name="IVAN" text="Save our friend! He is a nice smith, and a fighter.">
+		<node id="6" name="IVAN" text="Save our friend! He is a nice smith, and a fighter. ">
 			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
 		</node>
 
-		<node id="7" name="IGOR" text="The best I would say. I'm sure it will help you if you save him.">
+		<node id="7" name="IGOR" text="The best I would say. I'm sure it will help you if you save him. ">
 			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
 		</node>
 
-		<node id="8" name="IVAN" text="And maybe we give you some thanks.">
+		<node id="8" name="IVAN" text="And maybe we give you some thanks. ">
 			<choice id="0" option="..." nextNode="9" eventReturn="0"/>
 		</node>
 
-		<node id="9" name="IGOR AND IVAN" text="Save our friend and we will reward you.">
+		<node id="9" name="IGOR AND IVAN" text="Save our friend and we will reward you. ">
 			<choice id="0" option="Accept." nextNode="-1" eventReturn="5"/>
 		</node>
 
@@ -217,7 +217,7 @@
 
 	<dialogueTree ID="4">
 
-		<node id="0" name="YUROSLAVA" text="Now I'm bound to you. How can I help?">
+		<node id="0" name="YUROSLAVA" text="Now I'm bound to you. How can I help? ">
 			<choice id="0" option="See you." nextNode="-1" eventReturn="0"/>
 			<choice id="1" option="I need to forge." nextNode="1" eventReturn="0"/>
 			<choice id="2" option="You seem quite melancholic." nextNode="2" eventReturn="0"/>
@@ -227,12 +227,12 @@
 			<choice id="0" option="Forge. " nextNode="-1" eventReturn="7"/>
 		</node>
 
-		<node id="2" name="YUROSLAVA" text="It's nothing, it's just that since they locked me up I haven't seen my little brother.">
+		<node id="2" name="YUROSLAVA" text="It's nothing, it's just that since they locked me up I haven't seen my little brother. ">
 			<choice id="0" option="Why did they locked you? " nextNode="3" eventReturn="0"/>
 			<choice id="0" option="Who's your brother? " nextNode="6" eventReturn="0"/>
 		</node>
 
-		<node id="3" name="YUROSLAVA" text="They forced me to burn animals that do not mutate, and I refused. Thanks to you, now I can take revenge and help you take down the Beast Tent.">
+		<node id="3" name="YUROSLAVA" text="They forced me to burn animals that do not mutate, and I refused. Thanks to you, now I can take revenge and help you take down the Beast Tent. ">
 			<choice id="0" option="Do you know what can we find there? " nextNode="4" eventReturn="0"/>
 			<choice id="0" option="I see... " nextNode="0" eventReturn="0"/>
 		</node>
@@ -246,12 +246,12 @@
 			<choice id="0" option="Yeah. You kinda right. " nextNode="0" eventReturn="0"/>
 		</node>
 
-		<node id="6" name="YUROSLAVA" text="My brother was a very naughty boy, after the death of our parents we were left alone and found this place. The Showman hired us without hesitation. He turned me into what you see and said I had a special spark.">
+		<node id="6" name="YUROSLAVA" text="My brother was a very naughty boy, after the death of our parents we were left alone and found this place. The Showman hired us without hesitation. He turned me into what you see and said I had a special spark. ">
 			<choice id="0" option="And what happened to your bother? " nextNode="7" eventReturn="0"/>
 		</node>
 		
-		<node id="7" name="YUROSLAVA" text="My brother, on the other hand, was turned into a little devil, after 5 years, he hasn't grown an inch. He gave him the gift of strength, he told him that a naughty boy has to be strong enough to survive and named him D'yavol. I can't even remember his name before that.">
-			<choice id="0" option="I'm sorry to hear that. I don't know, maybe one day he find him again. " nextNode="8" eventReturn="0"/>
+		<node id="7" name="YUROSLAVA" text="My brother, on the other hand, was turned into a little devil, after 5 years, he hasn't grown an inch. He gave him the gift of strength, he told him that a naughty boy has to be strong enough to survive and named him D'yavol. I can't even remember his name before that. ">
+			<choice id="0" option="I'm sorry to hear that. Who knows, maybe one day he find him again. " nextNode="8" eventReturn="0"/>
 		</node>
 
 		<node id="8" name="YUROSLAVA" text="I wish. He is the strongest in the fair, he would help us a lot. I miss him. ">
@@ -263,13 +263,13 @@
   
 	<dialogueTree ID="5">
 
-			<node id="0" name="ORACLE" text="If there is something you want to know, toss a coin to see what's wrong.">
+			<node id="0" name="ORACLE" text="If there is something you want to know, toss a coin to see what's wrong. ">
 				<choice id="0" option="Toss a coin." nextNode="1" eventReturn="0"/>
 				<choice id="1" option="I feel we had this conversation already. " nextNode="2" eventReturn="0"/>
 				<choice id="2" option="Don't want anything from you." nextNode="-1" eventReturn="0"/>
 			</node>
 
-			<node id="1" name="ORACLE" text="Another stupid boy to make me rich. I got a lot of knowledge from the dungeon you are about to go. Toss another coin if that is what you want.">
+			<node id="1" name="ORACLE" text="Another stupid boy to make me rich. I got a lot of knowledge from the dungeon you are about to go. Toss another coin if that is what you want. ">
 				<choice id="0" option="Toss another coin." nextNode="3"  eventReturn="0"/>
 				<choice id="1" option="Yeah, we definitely had..." nextNode="-1"  eventReturn="0"/>
 			</node>
@@ -279,25 +279,141 @@
 				<choice id="1" option="Another time will be." nextNode="-1" eventReturn="0"/>
 			</node>
 
-			<node id="3" name="ORACLE" text="You must know, little vermin, that the animals in the Beast Tent have no compassion, they will kill you so quickly that you won't even have time to cry. Except the chickens, they may help you... If you get to them. Toss a coin to know even more.">
+			<node id="3" name="ORACLE" text="You must know, little vermin, that the animals in the Beast Tent have no compassion, they will kill you so quickly that you won't even have time to cry. Except the chickens, they may help you... If you get to them. Toss a coin to know even more. ">
 				<choice id="0" option="Pay" nextNode="4" eventReturn="0"/>
 				<choice id="1" option="No thanks, that was enough." nextNode="-1" eventReturn="0"/>
 			</node>
 
-			<node id="4" name="ORACLE" text="By golly, a rich brat is going to pass me his fortune. Well, I have bad news, they won't let me tell you anything else. Looks like you've surprised someone... Though not for long, you'll surely serve as food for the beasts inside.">
+			<node id="4" name="ORACLE" text="By golly, a rich brat is going to pass me his fortune. Well, I have bad news, they won't let me tell you anything else. Looks like you've surprised someone... Though not for long, you'll surely serve as food for the beasts inside. ">
 				<choice id="0" option="Who am I impressing?" nextNode="5" eventReturn="0"/>
 				<choice id="1" option="Thanks for nothing junk..." nextNode="-1" eventReturn="0"/>
 			</node>
 
-			<node id="5" name="ORACLE" text="I'll say no more. They are waiting for you.">
-				<choice id="0" option="Say nothing" nextNode="-1" eventReturn="0"/>
+			<node id="5" name="ORACLE" text="I'll say no more. They are waiting for you. ">
+				<choice id="0" option="Say nothing. " nextNode="-1" eventReturn="0"/>
 			</node>
 
 			<node id="-1" text ="End of conversation -F1- to talk again"></node>
 		</dialogueTree>
 
+	<dialogueTree ID="6">
 
-<!-- Notes -->
+		<node id="0" name="OBSHCHIY" text="Insensate... ">
+			<choice id="0" option="And who are you exactly?" nextNode="1" eventReturn="0"/>
+			<choice id="1" option="And a dwarf riding a bear tells me..." nextNode="10" eventReturn="0"/>
+			<choice id="2" option="I'll go my way, dwarf." nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="1" name="OBSHCHIY" text="HOW? It's not possible! I am the one and only, the invincible, the immortal. I am General OBSHCHIY! I take care of the wildest attractions, I am the Showman's right hand. ">
+			<choice id="0" option="Then you must know how to get out of here." nextNode="2" eventReturn="0"/>
+		</node>
+
+		<node id="2" name="OBSHCHIY" text="You fool... ">
+			<choice id="0" option="Just tell me. " nextNode="3" eventReturn="0"/>
+		</node>
+
+		<node id="3" name="OBSHCHIY" text="As I said before, you are a fool. You can not -get out of here-. You are bond to this place, your soul is now the Showman's. ">
+			<choice id="0" option="Who the heck is he?" nextNode="4" eventReturn="0"/>
+		</node>
+
+		<node id="4" name="OBSHCHIY" text="He is the master. He is the most powerful devil on earth an beyond, and you made a trade with him without knowing. I can't believe my eyes... ">
+			<choice id="0" option="And what if I kill him? " nextNode="5" eventReturn="0"/>
+			<choice id="0" option="What does he earn from me? " nextNode="7" eventReturn="0"/>
+		</node>
+
+		<node id="5" name="OBSHCHIY" text="Kill him? HA! You're just a little boy wanting to be a magician, and you think you can kill the master? Fool. Fool. Fool. ">
+			<choice id="0" option="That does not answer my question... " nextNode="6" eventReturn="0"/>
+		</node>
+
+		<node id="6" name="OBSHCHIY" text="Bah. You are exhausting, did you know that? Well, I guess, on the off chance that you could kill him, yes, the contract you signed would be broken and you would be free or whatever you call your life before this. ">
+			<choice id="0" option="That is enough for me." nextNode="0" eventReturn="0"/>
+		</node>
+
+		<node id="7" name="OBSHCHIY" text="Well... I've never considered it. I guess he gets more power, or he just wants to surprise people with our amazing shows. Yes, I think it's more the second option. ">
+			<choice id="0" option="Shows to whom? I haven't seen anyone yet." nextNode="8" eventReturn="0"/>
+		</node>
+
+		<node id="8" name="OBSHCHIY" text="They'll be here soon, we've only been in town for a few hours. Who knows, this might be our lucky week and lots and lots of viewers will come. ">
+			<choice id="0" option="Some hours? You've been here for over a week. " nextNode="9" eventReturn="0"/>
+		</node>
+
+		<node id="9" name="OBSHCHIY" text="Well, that is something. Are you sure? Honestly, I don't remember the first day I got here. Anyone does. Some even goes mad, you will meet them, I'm sure. ">
+			<choice id="0" option="Yeah... that tells me a lot about you. " nextNode="0" eventReturn="0"/>
+		</node>
+
+		<node id="10" name="OBSHCHIY" text="How dwarf, Medved did you hear that? I think this little weirdo wants trouble. ">
+			<choice id="0" option="If fighting against you guarantees me freedom... " nextNode="11" eventReturn="0"/>
+		</node>
+
+		<node id="11" name="OBSHCHIY" text="Oh no, we have a new comedian in the circus, how come they dressed a comedian so fancy? It's funny huh. Look kid, freedom is overrated, trust me, you don't want to leave this place. No matter how crazy people are, right Medved? ">
+			<choice id="0" option="Whatever. Have fun with your Medved. " nextNode="-1" eventReturn="0"/>
+		</node>
+		
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+
+<!-- Pinky -->
+	<dialogueTree ID="7">
+		<node id="0" name="PINKY" text="Hola! Te gustan mis pasos de baile? ">
+			<choice id="0" option="Bailas como un pato torpe. " nextNode="1" eventReturn="0"/>
+			<choice id="1" option="Me encanta! Tienes mucho ritmo.  " nextNode="2" eventReturn="0"/>
+		</node>
+
+		<node id="1" name="PINKY" text="Quieres ver mis punetazos a ver si te gustan mas? ">
+			<choice id="0" option="... " nextNode="-1" eventReturn="21"/>
+		</node>
+
+		<node id="2" name="PINKY" text="Gracias! Quieres unirte? :D ">
+			<choice id="0" option="Quizas luego. " nextNode="-1" eventReturn="0"/>
+		</node>
+
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+
+	<dialogueTree ID="8">
+		<node id="0" name="PINKY" text="No soy un furro, soy un DRAGON. ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+	
+	<dialogueTree ID="9">
+		<node id="0" name="PINKY" text="Cada tres ataques hace pum y explotan cosas. ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+	
+	<dialogueTree ID="10">
+		<node id="0" name="PINKY" text="¡MILAGRO! ">
+			<choice id="0" option="¡MILAGRO! " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+	
+	<dialogueTree ID="11">
+		<node id="0" name="PINKY" text="¡Es que no me escuchais! >:( ">
+			<choice id="0" option="Yo te escucho. " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+	
+	<dialogueTree ID="12">
+		<node id="0" name="PINKY" text="No estoy delirando ¡Hay un viejo en Qatar! ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+
+	<dialogueTree ID="13">
+		<node id="0" name="PINKY" text="El demonio tiene la cola muy larga. ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+
+
+		<!-- Notes -->
   <dialogueTree ID="100">
 
       <node id="0" name="NOTE 1" text="Guess how many sleigh bells does the puppet have to know the first number of the sequences">

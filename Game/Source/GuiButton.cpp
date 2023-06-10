@@ -245,14 +245,9 @@ bool GuiButton::Draw(Render* render)
 	else if (buttonType == ButtonType::IN_SETTINGS) { rect = { 230, 0 , 230, 94}; }
 	else if (buttonType == ButtonType::CLOSE) { rect = { 0, 200, 62, 63 }; }
 	else if (buttonType == ButtonType::SKIPPY) { rect = { 351, 1, 132, 44 }; }
-	else if (buttonType == ButtonType::DIALOGUE) { rect = { 0, 0, 343, 66 }; }
+	else if (buttonType == ButtonType::DIALOGUE) { rect = { 0, 0, 371, 65 }; }
 	else if (buttonType == ButtonType::EXTRA_LARGE) { rect.x = 5, rect.y = 5; }
-	else if (buttonType == ButtonType::SKILL_1) { rect = { 151, 201, 47, 47 }; }
-	else if (buttonType == ButtonType::SKILL_2) { rect = { 151, 251, 47, 47 }; }
-	else if (buttonType == ButtonType::SKILL_3) { rect = { 151, 0, 47, 47 }; }
-	else if (buttonType == ButtonType::SKILL_4) { rect = { 151, 0, 47, 47 }; }
-	else if (buttonType == ButtonType::CHANGE_POSITION) { rect = { 0, 0, 343, 66 }; }
-
+	else if (buttonType == ButtonType::CHANGE_POSITION) { rect = { 301, 1, 47, 47 }; }
 
 	// TO DO, EN DIALOGO LOS BOTONES DEBERIAN TENER MENOS OFFSET, ES DECIR, SE DEBERIAN PRINTAR CON JUSTIFICADO A LA IZQUIERDA, NO EN MEDIO
 	// ADEMAS DE HACER LO DEL TRIM TEXT PARA QUE SI LA OPCION ES MAS LARGA SE PRINTE EN LINEAS DISTINTAS.
@@ -439,55 +434,19 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x, bounds.y + bounds.h + 7, &rect);
 				break;
 			case ButtonType::SKILL_1:
-				switch (app->combat->listInitiative.At(app->combat->charaInTurn)->data->id)
-				{
-			
-				case 1:
-					rect.y = 1;
-					break;
-				case 2:
-					rect.x = 1;
-					rect.y = 201;
-					break;
-				case 3:
-					rect.x = 1;
-					rect.y = 1;
-					break;
-				default:
-					break;
-				}
-				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 0);
 				break;
 			case ButtonType::SKILL_2:
-				switch (app->combat->listInitiative.At(app->combat->charaInTurn)->data->id)
-				{
-				case 1:
-					rect.y = 51;
-					break;
-				case 2:
-					rect.x = 1;
-					rect.y = 251;
-					break;
-				case 3:
-					rect.x = 1;
-					rect.y = 51;
-					break;
-				default:
-					break;
-				}
-				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 0);
 				break;
 			case ButtonType::SKILL_3:
-				rect.x = bounds.w * 12;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 0);
 				break;
 			case ButtonType::SKILL_4:
-				rect.x = bounds.w * 3;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 0);
 				break;
 			case ButtonType::CHANGE_POSITION:
-				rect.x = bounds.w * 6;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::SKIPPY:
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
@@ -569,62 +528,20 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x, bounds.y + bounds.h + 7, &rect);
 				break;
 			case ButtonType::SKILL_1:
-				switch (app->combat->listInitiative.At(app->combat->charaInTurn)->data->id)
-				{
-				case 0:
-					rect.x = 201;
-					break;
-				case 1:
-					rect.x = 201;
-					rect.y = 1;
-					break;
-				case 2:
-					rect.x = 51;
-					rect.y = 201;
-					break;
-				case 3:
-					rect.x = 51;
-					rect.y = 1;
-					break;
-				default:
-					break;
-				}
-				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 1);
 				break;
 			case ButtonType::SKILL_2:
-				switch (app->combat->listInitiative.At(app->combat->charaInTurn)->data->id)
-				{
-				case 0:
-					rect.x = 201;
-					break;
-				case 1:
-					rect.x = 201;
-					rect.y = 51;
-					break;
-				case 2:
-					rect.x = 51;
-					rect.y = 251;
-					break;
-				case 3:
-					rect.x = 51;
-					rect.y = 51;
-					break;
-				default:
-					break;
-				}
-				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 1);
 				break;
 			case ButtonType::SKILL_3:
-				rect.x = bounds.w * 13;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 1);
 				break;
 			case ButtonType::SKILL_4:
-				rect.x = bounds.w * 4;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 1);
 				break;
 			case ButtonType::CHANGE_POSITION:
-				rect.x = bounds.w * 7;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				rect.y = 51;
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::SKIPPY:
 				rect.y = 45;
@@ -707,56 +624,20 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x, bounds.y + bounds.h + 7, &rect);
 				break;
 			case ButtonType::SKILL_1:
-				switch (app->combat->listInitiative.At(app->combat->charaInTurn)->data->id)
-				{
-				case 0:
-					rect.x = 251;
-					break;
-				case 1:
-					rect.x = 251;
-					rect.y = 1;
-					break;
-				case 2:
-					rect.x = 101;
-					rect.y = 201;
-					break;
-				case 3:
-					rect.x = 101;
-					rect.y = 1;
-					break;
-				default:
-					break;
-				}
-				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 2);
 				break;
 			case ButtonType::SKILL_2:
-				switch (app->combat->listInitiative.At(app->combat->charaInTurn)->data->id)
-				{
-				case 0:
-					rect.x = 251;
-					break;
-				case 1:
-					rect.x = 251;
-					rect.y = 51;
-					break;
-				case 2:
-					rect.x = 101;
-					rect.y = 251;
-					break;
-				case 3:
-					rect.x = 101;
-					rect.y = 51;
-					break;
-				default:
-					break;
-				}
-				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 2);
 				break;
 			case ButtonType::SKILL_3:
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 2);
 				break;
 			case ButtonType::SKILL_4:
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 2);
 				break;
 			case ButtonType::CHANGE_POSITION:
+				rect.y = 101;
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::SKIPPY:
 				rect.y = 89;
@@ -802,30 +683,30 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::COMBAT_TARGET:
 				break;
-			case ButtonType::SKILL_1:
-				rect.x = bounds.w * 2;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-				break;
-			case ButtonType::SKILL_2:
-				rect.x = bounds.w * 11;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-				break;
-			case ButtonType::SKILL_3:
-				rect.x = bounds.w * 14;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-				break;
-			case ButtonType::SKILL_4:
-				rect.x = bounds.w * 5;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-				break;
-			case ButtonType::CHANGE_POSITION:
-				rect.x = bounds.w * 8;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-				break;
-			case ButtonType::SKIPPY:
-				rect.x = bounds.w * 2;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-				break;
+			//case ButtonType::SKILL_1:
+			//	rect.x = bounds.w * 2;
+			//	render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+			//	break;
+			//case ButtonType::SKILL_2:
+			//	rect.x = bounds.w * 11;
+			//	render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+			//	break;
+			//case ButtonType::SKILL_3:
+			//	rect.x = bounds.w * 14;
+			//	render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+			//	break;
+			//case ButtonType::SKILL_4:
+			//	rect.x = bounds.w * 5;
+			//	render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+			//	break;
+			//case ButtonType::CHANGE_POSITION:
+			//	rect.x = bounds.w * 8;
+			//	render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+			//	break;
+			//case ButtonType::SKIPPY:
+			//	rect.x = bounds.w * 2;
+			//	render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+			//	break;
 			default:
 				break;
 			}
@@ -876,6 +757,10 @@ bool GuiButton::Draw(Render* render)
 
 			app->render->RenderTrimmedText(bounds.x + offsetX, bounds.y + offsetY, 2, text, &texts, fontSize, max_chars_line, color, Font::UI, 2.5f);
 		}
+		else if (buttonType == ButtonType::SKIPPY && state == GuiControlState::DISABLED)
+		{
+			//no printar nada si disabled
+		}
 		else
 		{
 			if (buttonType == ButtonType::SETTINGS_TEXT)//no hace falta centre el texto en este caso
@@ -883,8 +768,38 @@ bool GuiButton::Draw(Render* render)
 				x = 0; y = 0;
 			}
 			app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, color);
+			
 		}
 	}
 	return false;
+}
+
+void GuiButton::DrawSkill(int charaId, int skillNumber, int state)
+{
+	SDL_Rect rect = { 151, 201, 47, 47 };
+
+	switch (charaId)
+	{
+	case 0:
+		rect.x += 50*state;
+		rect.y += 50*skillNumber;
+		break;
+	case 1:
+		rect.x += 50*state;
+		rect.y = 1+50*skillNumber;
+		break;
+	case 2:
+		rect.x = 1 + 50 * state;
+		rect.y +=  50 * skillNumber;
+		break;
+	case 3:
+		rect.x = 1 + 50 * state;
+		rect.y = 1 + 50 * skillNumber;
+		break;
+	default:
+		break;
+	}
+	app->render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+
 }
 

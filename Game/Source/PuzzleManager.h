@@ -236,7 +236,7 @@ public:
 	bool bossIsDeadDun2;
 	bool bossDun2Contact;
 	bool losetActive;
-	bool fightBoss = false;
+	bool fightBoss;
 
 	bool saveFireGuy;
 
@@ -281,6 +281,8 @@ public:
 	bool RelicInColumn1;
 	bool RelicInColumn2;
 	bool RelicInColumn3;
+
+	bool CurrentDarkFade;
 
 	//Variables para meter codigos
 	string code;
