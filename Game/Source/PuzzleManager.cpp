@@ -1524,10 +1524,10 @@ bool PuzzleManager::ChickenBoomPuz()
 		{
 			BombCarryOn1 = false;
 
+			app->moduleparticles->AddParticle(posBomb1.x - 32, posBomb1.y - 32, 40, 0);
+
 			posBomb1.x = posChicken1.x + 64;
 			posBomb1.y = posChicken1.y;
-
-			app->moduleparticles->AddParticle(posBomb1.x, posBomb1.y, 40, 1);
 
 			Bomb1 = app->physics->CreateRectangleSensor(posBomb1.x - widthBomb / 2, posBomb1.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
 			Bomb1->body->SetFixedRotation(true);
@@ -1627,6 +1627,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 		if(DeltaTime >= 2)
 		{
+			app->moduleparticles->AddParticle(posBomb1.x - 32, posBomb1.y - 32, 40, 0);
+
 			posBomb1.x = posChicken1.x + 64;
 			posBomb1.y = posChicken1.y;
 
@@ -1689,8 +1691,6 @@ bool PuzzleManager::ChickenBoomPuz()
 			RestartTimer();
 			BombPlant1 = false;
 
-			app->moduleparticles->AddParticle(posBomb1.x, posBomb1.y, 40, 1);
-
 			Bomb1 = app->physics->CreateRectangleSensor(posBomb1.x - widthBomb / 2, posBomb1.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
 			Bomb1->body->SetFixedRotation(true);
 			Bomb1->ctype = ColliderType::BOMB;
@@ -1733,11 +1733,10 @@ bool PuzzleManager::ChickenBoomPuz()
 		{
 			BombCarryOn2 = false;
 
+			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 0);
 
 			posBomb2.x = posChicken2.x + 64;
 			posBomb2.y = posChicken2.y;
-
-			app->moduleparticles->AddParticle(posBomb2.x, posBomb2.y, 40, 1);
 
 			Bomb2 = app->physics->CreateRectangleSensor(posBomb2.x - widthBomb / 2, posBomb2.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
 			Bomb2->body->SetFixedRotation(true);
@@ -1837,10 +1836,10 @@ bool PuzzleManager::ChickenBoomPuz()
 
 		if (DeltaTime >= 2)
 		{
+			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 0);
+
 			posBomb2.x = posChicken2.x + 64;
 			posBomb2.y = posChicken2.y;
-
-			app->moduleparticles->AddParticle(posBomb2.x, posBomb2.y, 40, 1);
 
 			if (BarricadeExplote1)
 			{

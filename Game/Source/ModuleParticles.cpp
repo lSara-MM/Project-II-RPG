@@ -43,7 +43,6 @@ bool ModuleParticles::Start()
 	//explosionG.anim.loop = false;
 	//explosionG.anim.speed = 0.3f;
 
-
 	return true;
 }
 
@@ -136,7 +135,7 @@ bool ModuleParticles::PostUpdate()
 	return true;
 }
 
-Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
+Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
 {
 	Particle* newParticle = nullptr;
 
@@ -157,7 +156,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
 			{
 				int radius = 40;
 				newParticle = new Particle;
-				newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
+				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
 				float angle = (2 * 3.14159 * i) / 50;
 				float particleX = x + radius * cos(angle);
 				float particleY = y + radius * sin(angle);
@@ -182,7 +181,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
 			{
 
 				newParticle = new Particle;
-				newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
+				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
 				float particleX = x + static_cast<float>(rand() % 10);
 				float particleY = y + static_cast<float>(rand() % 10);
 
@@ -209,7 +208,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
 			{
 
 				newParticle = new Particle;
-				newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
+				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
 				float particleX = x + static_cast<float>(rand() % 10);
 				float particleY = y;
 

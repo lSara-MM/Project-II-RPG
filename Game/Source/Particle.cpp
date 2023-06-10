@@ -36,7 +36,10 @@ bool Particle::Update(float dt)
 		if (lifetime > 0)
 		{
 			if (frameCount >= lifetime)
+			{
+				SetToDelete();
 				ret = false;
+			}
 		}
 		// Otherwise the particle is destroyed when the animation is finished
 		else if (anim.HasFinished())
