@@ -506,6 +506,9 @@ bool Combat::PreLoadCombat(SString n, int boss, int boss2)
 	int randSize = (rand() % 2 + 1) + (rand() % 2 + 1); //25% 2, 50% 3 25% 4
 	int randId;
 
+	vecSetEnemies.clear();
+	vecSetEnemies.shrink_to_fit();
+
 	if (boss2 != -1)
 	{
 		vecSetEnemies.push_back(boss2);
