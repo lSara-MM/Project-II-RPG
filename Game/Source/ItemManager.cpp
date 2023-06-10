@@ -79,7 +79,7 @@ bool ItemManager::PostUpdate()
 
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 	{
-		if (app->itemManager->nodeList[i]->printStats)
+		if (app->itemManager->nodeList[i]->printStats && app->itemManager->nodeList[i]->toSell == false)
 		{
 			if (app->combat->active)
 			{

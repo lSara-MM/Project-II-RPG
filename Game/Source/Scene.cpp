@@ -254,8 +254,8 @@ bool Scene::CleanUp()
 	app->inventory->Disable();
 
 	player = nullptr;
-	listNpc.Clear();
 	app->entityManager->Disable();
+	listNpc.Clear();
 
 	if (pSettings != nullptr)
 	{

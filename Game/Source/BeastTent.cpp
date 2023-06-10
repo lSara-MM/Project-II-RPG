@@ -68,7 +68,11 @@ bool BeastTent::Start()
 	app->input->godMode_B = false;
 
 	app->itemManager->Enable();
-	app->lootManager->Start();
+	if (app->lootManager->active)
+	{
+		app->lootManager->Start();
+	}
+	app->lootManager->Enable();
 	app->questManager->Enable();
 
 
@@ -279,6 +283,7 @@ bool BeastTent::CleanUp()
 		app->tex->UnLoad(BeastDungeon);
 	}
 
+	app->puzzleManager->Dun2CleanUp();
 	app->puzzleManager->Disable();
 
 	app->guiManager->CleanUp();

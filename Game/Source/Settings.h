@@ -834,6 +834,13 @@ public:
 	{
 		app->tex->UnLoad(cintaTexture);
 
+		ListItem<GuiButton*>* buttons;
+
+		for (buttons = listSettingsButtons.start; buttons != NULL; buttons = buttons->next)
+		{
+			app->guiManager->DestroyGuiControl(buttons->data);
+		}
+
 		listSettingsButtons.Clear();
 		settings_B = false;
 		
