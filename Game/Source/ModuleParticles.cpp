@@ -22,7 +22,9 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture0 = app->tex->Load("Assets/Sprites/particles.png");
+	texture0 = app->tex->Load("Assets/Textures/particle0.png");
+	texture1 = app->tex->Load("Assets/Textures/particle0.png");
+	texture2 = app->tex->Load("Assets/Textures/particle0.png");
 	//// Explosion particle
 	//explosion.anim.PushBack({246, 87, 27, 28});
 	//explosion.anim.PushBack({276, 86, 31, 33});
@@ -134,7 +136,7 @@ bool ModuleParticles::PostUpdate()
 	return true;
 }
 
-Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, uint delay)
+Particle* ModuleParticles::AddParticle(int x, int y, uint delay)
 {
 	Particle* newParticle = nullptr;
 
@@ -146,7 +148,7 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, u
 		if (particles[i] == nullptr)
 		{
 			int radius = 40;
-			newParticle = new Particle(particle);
+			newParticle = new Particle;
 			newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
 			float angle = (2 * 3.14159 * i) / 50;
 			float particleX = x + radius * cos(angle);
@@ -168,7 +170,7 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, u
 		if (particles[i] == nullptr)
 		{
 			
-			newParticle = new Particle(particle);
+			newParticle = new Particle;
 			newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
 			float particleX = x + static_cast<float>(rand() % 10);
 			float particleY = y + static_cast<float>(rand() % 10);
@@ -193,7 +195,7 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, u
 		if (particles[i] == nullptr)
 		{
 
-			newParticle = new Particle(particle);
+			newParticle = new Particle;
 			newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
 			float particleX = x + static_cast<float>(rand() % 10);
 			float particleY = y;

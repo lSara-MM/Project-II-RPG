@@ -16,6 +16,8 @@
 #include"PuzzleManager.h"
 #include"QuestManager.h"
 #include"LootManager.h"
+#include"ModuleParticles.h"
+#include"Particle.h"
 
 #include "FadeToBlack.h"
 #include "EntityManager.h"
@@ -1103,12 +1105,14 @@ void Player::Controller(float dt)
 
 		currentAnim.speed = currentAnim.speed * 3;
 
-		//Shift acelerar la velocidad
+		//V para crear particulas
 		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_REPEAT) {
-			vel.x = vel.x * 1.5;
-			vel.y = vel.y * 1.5;
-			currentAnim.speed = currentAnim.speed * 6;
+			app->moduleparticles->Modulo = 2;
+			app->moduleparticles->AddParticle(position.x, position.y, 40);
 		}
+	}
+	if (app->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN) {
+		
 	}
 	
 	PadLock = false;
