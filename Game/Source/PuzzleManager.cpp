@@ -269,6 +269,12 @@ bool PuzzleManager::Dun2Awake(pugi::xml_node& config)
 	 posBoss2.x = config.child("BossDun2").attribute("x").as_int();
 	 posBoss2.y = config.child("BossDun2").attribute("y").as_int();
 
+	 confirmPath = "Assets/Audio/Fx/confirm_interaction.wav";
+	 confirmInteractfx = app->audio->LoadFx(confirmPath);
+
+	 solvedpath = "Assets/Audio/Fx/puzzle_solved.wav";
+	 solvedfx = app->audio->LoadFx(solvedpath);
+
 	return true;
 }
 
@@ -1476,6 +1482,8 @@ bool PuzzleManager::KeyDoorsPuz()
 		keyInvent = false;
 		DoorsOpened = 0;
 
+		app->audio->PlayFx(solvedfx);
+
 		app->questManager->SaveState();
 	}
 
@@ -1958,6 +1966,8 @@ bool PuzzleManager::ChickenBoomPuz()
 		delete Bomb2;
 		Bomb2 = nullptr;
 
+		app->audio->PlayFx(solvedfx);
+
 		app->questManager->SaveState();
 	}
 
@@ -2119,6 +2129,8 @@ bool PuzzleManager::RelicsPuz()
 
 		delete DoorBossP;
 		DoorBossP = nullptr;
+
+		app->audio->PlayFx(solvedfx);
 
 		app->questManager->SaveState();
 	}

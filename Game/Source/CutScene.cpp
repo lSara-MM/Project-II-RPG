@@ -50,6 +50,12 @@ bool CutScene::Awake(pugi::xml_node& config)
 		pugiNode = pugiNode.next_sibling("Text");
 	}
 
+	pathcinematicpass = "Assets/Audio/Fx/entrar_sala.wav";
+	cinematicpassfx = app->audio->LoadFx(pathcinematicpass);
+
+	pathfirma = "Assets/Audio/Fx/firmafx.wav";
+	firmafx = app->audio->LoadFx(pathfirma);
+
 	return ret;
 }
 
@@ -93,6 +99,8 @@ bool CutScene::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
   			printText = false;
+
+			app->audio->PlayFx(cinematicpassfx);
 
 			if (passImg < ImgToPrint.Count() - 1)
 			{
@@ -167,6 +175,7 @@ bool CutScene::Update(float dt)
 		if (app->input->playerName->input_entered)
 		{
 			//Sara: Aquí es que ha llegado al final de todas las imagenes y textos
+			app->audio->PlayFx(firmafx);
 			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 		}
 	}
