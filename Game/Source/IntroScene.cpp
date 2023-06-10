@@ -268,7 +268,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		app->combat->firstCombat_B = true;
 		app->entityManager->tpID = 21;
 
-		app->fade->FadingToBlack(this, (Module*)app->cutScene, 90);
+		app->fade->FadingToBlack(this, (Module*)app->cutScene, 45);
 		break;
 	case 2:
 		LOG("Button continue click");

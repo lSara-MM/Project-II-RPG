@@ -135,7 +135,7 @@ bool PracticeTent::Update(float dt)
 		{
 			LOG("Combat");
 			app->combat->PreLoadCombat(name);
-			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+			app->fade->FadingToBlack(this, (Module*)app->combat, 45);
 
 			if (app->questManager->quest3->active)
 			{
@@ -456,7 +456,7 @@ bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 	case 703:
 		LOG("Button Return to title click");
 		pause_B = false;
-		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
+		app->fade->FadingToBlack(this, (Module*)app->iScene, 45);
 		break;
 
 	case 704:
@@ -540,7 +540,7 @@ bool PracticeTent::OnGuiMouseClickEvent(GuiControl* control)
 
 	case 808:
 		LOG("Button Return to Title click");
-		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
+		app->fade->FadingToBlack(this, (Module*)app->iScene, 45);
 		break;
 
 	case 809:

@@ -43,7 +43,6 @@ bool ModuleParticles::Start()
 	//explosionG.anim.loop = false;
 	//explosionG.anim.speed = 0.3f;
 
-
 	return true;
 }
 
@@ -136,7 +135,7 @@ bool ModuleParticles::PostUpdate()
 	return true;
 }
 
-Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
+Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
 {
 	Particle* newParticle = nullptr;
 
@@ -147,7 +146,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
 
 	Modulo = m;
 
-	if (Modulo == 0)
+	if (Modulo == 2)
 	{
 		//Create circle around position designated
 		for (uint i = 0; i < 50; ++i)
@@ -157,14 +156,14 @@ Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
 			{
 				int radius = 40;
 				newParticle = new Particle;
-				newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
+				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
 				float angle = (2 * 3.14159 * i) / 50;
 				float particleX = x + radius * cos(angle);
 				float particleY = y + radius * sin(angle);
 				newParticle->speed.x = 0;
 				newParticle->speed.y = 0;
-				newParticle->position.x = x;						// so when frameCount reaches 0 the particle will be activated
-				newParticle->position.y = y;
+				newParticle->position.x = particleX;						// so when frameCount reaches 0 the particle will be activated
+				newParticle->position.y = particleY;
 				newParticle->isAlive = true;
 
 				particles[i] = newParticle;
@@ -182,7 +181,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
 			{
 
 				newParticle = new Particle;
-				newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
+				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
 				float particleX = x + static_cast<float>(rand() % 10);
 				float particleY = y + static_cast<float>(rand() % 10);
 
@@ -199,7 +198,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
 		}
 	}
 
-	if (Modulo == 2)
+	if (Modulo == 0)
 	{
 		//Create particles like a curacion
 		for (uint i = 0; i < 100; ++i)
@@ -209,7 +208,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
 			{
 
 				newParticle = new Particle;
-				newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
+				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
 				float particleX = x + static_cast<float>(rand() % 10);
 				float particleY = y;
 

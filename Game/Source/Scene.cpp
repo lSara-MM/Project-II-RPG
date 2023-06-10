@@ -184,7 +184,7 @@ bool Scene::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) 
-		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 30);
+		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 45);
 
 	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt); }
 
@@ -401,9 +401,9 @@ bool Scene::InitEntities()
 {
 	for (pugi::xml_node itemNode = sceneNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
 	{
-		if (!app->puzzleManager->teamMate && strcmp(itemNode.attribute("name").as_string(), "Yuroslava") == 0)
+		if (!app->puzzleManager->teamMate && strcmp(itemNode.attribute("name").as_string(), "YUROSLAVA") == 0)
 		{
-			break;
+			itemNode = itemNode.next_sibling("npc");
 		}
 
 		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
@@ -485,7 +485,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	case 703: 
 		LOG("Button Return to title click");
 		pause_B = false;
-		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);		
+		app->fade->FadingToBlack(this, (Module*)app->iScene, 45);		
 		break;
 		
 	case 704: 
@@ -568,7 +568,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 808:
 		LOG("Button Return to Title click");
-		app->fade->FadingToBlack(this, (Module*)app->iScene, 90);
+		app->fade->FadingToBlack(this, (Module*)app->iScene, 45);
 		break;
 
 	case 809:

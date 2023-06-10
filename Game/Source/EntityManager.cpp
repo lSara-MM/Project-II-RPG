@@ -161,7 +161,7 @@ bool EntityManager::LoadState(pugi::xml_node& data, Module* module_)
 	app->input->posX = data.child("player").attribute("x").as_int();
 	app->input->posY = data.child("player").attribute("y").as_int();
 
-	int fadeTime = 90;
+	int fadeTime = 45;
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->sceneWin_Lose->name.GetString()) == 0) { fadeTime = 5; }
 
 

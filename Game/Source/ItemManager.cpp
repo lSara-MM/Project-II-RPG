@@ -41,6 +41,15 @@ bool ItemManager::Awake(pugi::xml_node& config)
 
 	itemPath = config.attribute("itempath").as_string();
 
+	fxpotypath = "Assets/Audio/Fx/heal.wav";
+	potyfx = app->audio->LoadFx(fxpotypath);
+
+	fxequippath = "Assets/Audio/Fx/equip.wav";
+	equipfx = app->audio->LoadFx(fxequippath);
+
+	fxunequippath = "Assets/Audio/Fx/unequip.wav";
+	unequipfx = app->audio->LoadFx(fxunequippath);
+
 	return ret;
 }
 
@@ -367,33 +376,41 @@ void ItemManager::UseItem(ItemNode* item)
 		{
 		case 85:
 			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(app->combat->listInitiative[app->combat->charaInTurn]->maxHp / item->hp);
+			app->audio->PlayFx(potyfx);
 			break;
 		case 86:
 			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(app->combat->listInitiative[app->combat->charaInTurn]->maxHp / item->hp);
+			app->audio->PlayFx(potyfx);
 			break;
 		case 87:
 			statusEffect = new StatusEffect(item->armor, 3, true, EffectType::ARMOR);
 			app->combat->listInitiative[app->combat->charaInTurn]->listStatusEffects.Add(statusEffect);
+			app->audio->PlayFx(potyfx);
 			break;
 		case 88:
 			statusEffect = new StatusEffect(item->attack, 3, true, EffectType::ATTACK);
 			app->combat->listInitiative[app->combat->charaInTurn]->listStatusEffects.Add(statusEffect);
+			app->audio->PlayFx(potyfx);
 			break;
 		case 89:
 			statusEffect = new StatusEffect(item->critRate, 2, true, EffectType::CRIT_RATE);
 			app->combat->listInitiative[app->combat->charaInTurn]->listStatusEffects.Add(statusEffect);
+			app->audio->PlayFx(potyfx);
 			break;
 		case 90:
 			statusEffect = new StatusEffect(item->critDamage, 2, true, EffectType::CRIT_DMG);
 			app->combat->listInitiative[app->combat->charaInTurn]->listStatusEffects.Add(statusEffect);
+			app->audio->PlayFx(potyfx);
 			break;
 		case 91:
 			statusEffect = new StatusEffect(item->accuracy, 2, true, EffectType::ACCURACY);
 			app->combat->listInitiative[app->combat->charaInTurn]->listStatusEffects.Add(statusEffect);
+			app->audio->PlayFx(potyfx);
 			break;
 		case 92:
 			statusEffect = new StatusEffect(item->dodge, 3, true, EffectType::DODGE);
 			app->combat->listInitiative[app->combat->charaInTurn]->listStatusEffects.Add(statusEffect);
+			app->audio->PlayFx(potyfx);
 			break;
 		}
 	}
@@ -415,6 +432,8 @@ void ItemManager::UseItem(ItemNode* item)
 					arrParty.at(i)->dodge += item->dodge;
 					arrParty.at(i)->speed += item->speed;
 					arrParty.at(i)->res += item->res;
+
+					app->audio->PlayFx(equipfx);
 				}
 				else if (item->type == 2 && item->equiped == false)
 				{
@@ -432,6 +451,7 @@ void ItemManager::UseItem(ItemNode* item)
 					{
 						item->space = 0;
 					}
+					app->audio->PlayFx(unequipfx);
 				}
 
 			}

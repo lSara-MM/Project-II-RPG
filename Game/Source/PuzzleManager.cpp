@@ -1393,7 +1393,7 @@ bool PuzzleManager::TeamMate()
 
 			app->entityManager->tpID = 0;
 			//app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
-
+			app->audio->PlayFx(solvedfx);
 			completeDungeon_B = true;
 		}
 	
@@ -1411,6 +1411,8 @@ bool PuzzleManager::KeyDoorsPuz()
 		{
 			if (keySensor != nullptr)
 				keySensor->body->GetWorld()->DestroyBody(keySensor->body);
+
+			app->audio->PlayFx(confirmInteractfx);
 
 			delete keySensor;
 			keySensor = nullptr;
@@ -1433,6 +1435,8 @@ bool PuzzleManager::KeyDoorsPuz()
 				if (DoorKey1 != nullptr)
 					DoorKey1->body->GetWorld()->DestroyBody(DoorKey1->body);
 
+				app->audio->PlayFx(confirmInteractfx);
+
 				delete DoorKey1;
 				DoorKey1 = nullptr;
 
@@ -1452,6 +1456,8 @@ bool PuzzleManager::KeyDoorsPuz()
 			{
 				if (DoorKey2 != nullptr)
 					DoorKey2->body->GetWorld()->DestroyBody(DoorKey2->body);
+
+				app->audio->PlayFx(confirmInteractfx);
 
 				delete DoorKey2;
 				DoorKey2 = nullptr;
@@ -1504,6 +1510,8 @@ bool PuzzleManager::ChickenBoomPuz()
 				BombCarryOn1 = true;
 				RestartTimer();
 
+				app->audio->PlayFx(confirmInteractfx);
+
 				if (Bomb1 != nullptr)
 					Bomb1->body->GetWorld()->DestroyBody(Bomb1->body);
 
@@ -1524,10 +1532,10 @@ bool PuzzleManager::ChickenBoomPuz()
 		{
 			BombCarryOn1 = false;
 
+			app->moduleparticles->AddParticle(posBomb1.x - 32, posBomb1.y - 32, 40, 1);
+
 			posBomb1.x = posChicken1.x + 64;
 			posBomb1.y = posChicken1.y;
-
-			app->moduleparticles->AddParticle(posBomb1.x, posBomb1.y, 40, 1);
 
 			Bomb1 = app->physics->CreateRectangleSensor(posBomb1.x - widthBomb / 2, posBomb1.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
 			Bomb1->body->SetFixedRotation(true);
@@ -1562,6 +1570,7 @@ bool PuzzleManager::ChickenBoomPuz()
 
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 			{
+				app->audio->PlayFx(confirmInteractfx);
 
 				if (BarricadeContact1) 
 				{
@@ -1627,6 +1636,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 		if(DeltaTime >= 2)
 		{
+			app->moduleparticles->AddParticle(posBomb1.x - 32, posBomb1.y - 32, 40, 1);
+
 			posBomb1.x = posChicken1.x + 64;
 			posBomb1.y = posChicken1.y;
 
@@ -1689,8 +1700,6 @@ bool PuzzleManager::ChickenBoomPuz()
 			RestartTimer();
 			BombPlant1 = false;
 
-			app->moduleparticles->AddParticle(posBomb1.x, posBomb1.y, 40, 1);
-
 			Bomb1 = app->physics->CreateRectangleSensor(posBomb1.x - widthBomb / 2, posBomb1.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
 			Bomb1->body->SetFixedRotation(true);
 			Bomb1->ctype = ColliderType::BOMB;
@@ -1733,11 +1742,10 @@ bool PuzzleManager::ChickenBoomPuz()
 		{
 			BombCarryOn2 = false;
 
+			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 1);
 
 			posBomb2.x = posChicken2.x + 64;
 			posBomb2.y = posChicken2.y;
-
-			app->moduleparticles->AddParticle(posBomb2.x, posBomb2.y, 40, 1);
 
 			Bomb2 = app->physics->CreateRectangleSensor(posBomb2.x - widthBomb / 2, posBomb2.y - heightBomb / 2, widthBomb, heightBomb, bodyType::STATIC);
 			Bomb2->body->SetFixedRotation(true);
@@ -1837,10 +1845,10 @@ bool PuzzleManager::ChickenBoomPuz()
 
 		if (DeltaTime >= 2)
 		{
+			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 1);
+
 			posBomb2.x = posChicken2.x + 64;
 			posBomb2.y = posChicken2.y;
-
-			app->moduleparticles->AddParticle(posBomb2.x, posBomb2.y, 40, 1);
 
 			if (BarricadeExplote1)
 			{
