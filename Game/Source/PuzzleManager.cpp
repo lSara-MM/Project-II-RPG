@@ -827,7 +827,7 @@ bool PuzzleManager::Dun1Update()
 		if (posYanimation_I == 0)//cuando animacion termina, hace el fade2black
 		{
 			teamMate = true;
-			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 90);
+			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 45);
 
 		}
 	}
@@ -886,7 +886,7 @@ bool PuzzleManager::Dun2Update()
 				app->audio->PlayFx(app->hTerrors->combatfx);
 				app->combat->PreLoadCombat(app->BeastT->name, 21, 20); //Boss doble
 				fightBoss2 = true;
-				app->fade->FadingToBlack((Module*)app->BeastT, (Module*)app->combat, 5);
+				app->fade->FadingToBlack((Module*)app->BeastT, (Module*)app->combat, 45);
 				app->questManager->SaveState();
 				app->puzzleManager->Disable();
 				app->BeastT->steps_I = 0;
@@ -1349,7 +1349,7 @@ bool PuzzleManager::Rescue()
 				app->audio->PlayFx(app->hTerrors->combatfx);
 				app->combat->PreLoadCombat(app->hTerrors->name, 20);
 				fightBoss1 = true; 
-				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 5);
+				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 45);
 				app->questManager->SaveState();
 				app->puzzleManager->Disable();
 				app->hTerrors->steps_I = 0;

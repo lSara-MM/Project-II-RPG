@@ -9,12 +9,6 @@
 
 #include "SDL/include/SDL.h"
 
-
-#include "GuiManager.h"
-
-#include "GuiButton.h"
-
-
 #define MAX_KEYS 300
 
 Input::Input() : Module()
@@ -315,14 +309,32 @@ void Input::ActiveGetInput(PlayerInput* i)
 {
 	getInput_B = true;
 	i->input_entered = false;
+	i->timer.Start();
 	playerInput_S = i;
 }
 
 void Input::RenderTempText(SString temp, const char* subs, iPoint pos, int fontsize, Font font, SDL_Color color)
 {
 	// Substitute("character to substitute", new characters)
-	temp.Substitute("%", subs);
-	app->render->TextDraw(temp.GetString(), pos.x, pos.y, fontsize, font, color);
+	string aux = subs;
+
+	if (aux.empty())
+	{
+		if (playerName->timer.ReadMSec() < 700)
+		{
+			temp.Substitute("%", "I");
+			app->render->TextDraw(temp.GetString(), pos.x, pos.y, fontsize, font, color);
+		}
+		else if (playerName->timer.ReadMSec() > 1400)
+		{
+			playerName->timer.Start();
+		}
+	}
+	else
+	{
+		temp.Substitute("%", subs);
+		app->render->TextDraw(temp.GetString(), pos.x, pos.y, fontsize, font, color);
+	}
 }
 
 void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt)

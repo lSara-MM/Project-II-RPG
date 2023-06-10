@@ -213,8 +213,18 @@ bool Player::Update(float dt)
 				if (app->render->camera.x > -3450 + 625 - width) { app->render->camera.x -= 2; }
 				if (app->render->camera.x < -3450 + 655 - width) { app->render->camera.x += 2; }
 				//app->render->camera.x = -3450 + 640 - width;
-				if (app->render->camera.y > -position.y + 345 - height) { app->render->camera.y -= 12; }
-				if (app->render->camera.y < -position.y + 375 - height) { app->render->camera.y += 12; }
+				if (app->render->camera.y < -position.y + 335 - height) 
+				{ 
+					app->render->camera.y += 4;
+				}
+				else if (app->render->camera.y > -position.y + 385 - height)
+				{ 
+					app->render->camera.y -= 4;
+				}
+				else 
+				{ 
+					app->render->camera.y = -position.y + 365 - height;
+				}
 			}
 			else
 			{
@@ -222,19 +232,27 @@ bool Player::Update(float dt)
 				if (position.x > 3875) //Borde Derecho del mapa
 				{
 					//Llevar la camara a la izquerda para alejarla del lado
-					app->render->camera.x = -3875 + 635 - width;
-					/*app->render->camera.y = -position.y + 360 - height;*/
+					if (app->render->camera.x > -3250)
+					{
+						app->render->camera.x -= 4;
+					}
+					else { app->render->camera.x = -3875 + 635 - width; }
 				}
 				else if (position.x < 2000) //Borde izquierdo mapa
 				{
-					app->render->camera.x = -2000 + 635 - width;
+					if (app->render->camera.x < -2150 + 630 - width)
+					{
+						app->render->camera.x += 2;
+					}
+					else { app->render->camera.x = -2000 + 635 - width; }
 				}
 				else
 				{
 					//Setear camara al player (con suavidad)
-
-					if (app->render->camera.x > -position.x + 650 - width) { app->render->camera.x -= 8; }
-					if (app->render->camera.x < -position.x + 630 - width) { app->render->camera.x += 8; }
+					if (app->render->camera.x > -position.x + 650 - width)
+					{ app->render->camera.x -= 8; }
+					else if (app->render->camera.x < -position.x + 630 - width) 
+					{ app->render->camera.x += 8; }
 					else { app->render->camera.x = -position.x + 640 - width; }
 				}
 
@@ -242,15 +260,18 @@ bool Player::Update(float dt)
 				if (position.y < 2070 && position.y > 1400) //Borde arriba (zona vacia por el pasillo a la carpa)
 				{
 					//Setear poco a poco
-					if (app->render->camera.y > -position.y + 350 - height)
-					{
-						app->render->camera.y -= 4;
-					}
-					else if (app->render->camera.y < -position.y + 370 - height)
+					if (app->render->camera.y < -position.y + 330 - height)
 					{
 						app->render->camera.y += 4;
 					}
-					else { app->render->camera.y = -position.y + 365 - height; }
+					else if (app->render->camera.y > -position.y + 390 - height)
+					{
+						app->render->camera.y -= 4;
+					}
+					else 
+					{ 
+						app->render->camera.y = -position.y + 365 - height; 
+					}
 				}
 				else if (position.y > 4240) //Borde de abajo (dungeon horrores)
 				{
@@ -434,22 +455,22 @@ bool Player::Update(float dt)
 	}
 	if (app->hTerrors->active)
 	{
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10, offset + point * (posMiniMap.y + 4507 / 10 - offset));
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10 + 60, offset + point * (posMiniMap.y + 4507 / 10 + 60  - offset));
 	}
 	if (app->practiceTent->active)
 	{
 		//4360 4385
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10, offset + point * (posMiniMap.y + 3585 / 10 - offset));
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10 + 60, offset + point * (posMiniMap.y + 3585 / 10 + 60 - offset));
 	}
 	if (app->circus->active)
 	{
 		//3899 1027
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10, offset + point * (posMiniMap.y + 350 / 10 - offset));
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10 + 60, offset + point * (posMiniMap.y + 350 / 10 + 60 - offset));
 	}
 	if (app->BeastT->active)
 	{
 		//3899 1027
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 1056 / 10, offset + point * (posMiniMap.y + 2978 / 10 - offset));
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 1056 / 10 + 60, offset + point * (posMiniMap.y + 2978 / 10 + 60 - offset));
 	}
 
 	//}
@@ -1106,14 +1127,16 @@ void Player::Controller(float dt)
 
 		currentAnim.speed = currentAnim.speed * 3;
 
-		//V para crear particulas
+		//Shift acelerar la velocidad
 		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_REPEAT) {
-			app->moduleparticles->Modulo = 2;
-			app->moduleparticles->AddParticle(position.x, position.y, 40);
+			vel.x = vel.x * 1.5;
+			vel.y = vel.y * 1.5;
+			currentAnim.speed = currentAnim.speed * 6;
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN) {
-		
+		app->moduleparticles->Modulo = 2;
+		app->moduleparticles->AddParticle(position.x, position.y, 40);
 	}
 	
 	PadLock = false;

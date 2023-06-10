@@ -1193,7 +1193,6 @@ bool ItemManager::LoadParty()
 
 void ItemManager::SetParty()
 {
-	// TO DO when party available
 	for (int i = 0; i < vecPC.size(); i++)
 	{
 		// TO DO: change commented per uncommented

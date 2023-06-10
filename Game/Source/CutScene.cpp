@@ -135,8 +135,9 @@ bool CutScene::Update(float dt)
 		{
 			if (passImg <= NextText.Count() - 1)
 			{
+				SDL_Rect rect = { 0, app->win->GetHeight() - 120, app->win->GetWidth(), app->win->GetHeight() - 110 };
+				app->render->DrawRectangle(rect, 0, 0, 0, 100);
 				text = NextText.At(passImg)->next->data.c_str();
-
 				textHasEnded = app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 20, 100,
 					{ 255, 255, 255 }, Font::TEXT, 0, 30.0f);
 				//app->render->TextDraw(NextText.At(passImg)->next->data, 20, app->win->GetHeight() - 100, 15, Font::UI, { 255, 255, 255 });
@@ -163,11 +164,10 @@ bool CutScene::Update(float dt)
 	{
 		if (passImg >= ImgToPrint.Count() - 1)
 		{
-			//Sara:Aqu� te bloqueo para que se�or pugi no pueda pasar con Espacio mas imagenes y pete xd
 			StopCutScene = true;
 
 			// enable text input
-			if (!app->input->playerName->input_entered)
+			if (!app->input->getInput_B && !app->input->playerName->input_entered)
 			{
 				app->input->ActiveGetInput(app->input->playerName);
 			}
@@ -183,7 +183,6 @@ bool CutScene::Update(float dt)
 			// if name entered, fade to black
 			if (app->input->playerName->input_entered)
 			{
-				//Sara: Aqu� es que ha llegado al final de todas las imagenes y textos
 				app->audio->PlayFx(firmafx);
 				app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 			}

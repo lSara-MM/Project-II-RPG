@@ -23,8 +23,8 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
 	texture0 = app->tex->Load("Assets/Textures/particle0.png");
-	texture1 = app->tex->Load("Assets/Textures/particle0.png");
-	texture2 = app->tex->Load("Assets/Textures/particle0.png");
+	texture1 = app->tex->Load("Assets/Textures/particle1.png");
+	texture2 = app->tex->Load("Assets/Textures/particle2.png");
 	//// Explosion particle
 	//explosion.anim.PushBack({246, 87, 27, 28});
 	//explosion.anim.PushBack({276, 86, 31, 33});
