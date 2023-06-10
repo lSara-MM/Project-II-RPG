@@ -139,7 +139,7 @@ bool Scene::Update(float dt)
 
 	//Inventory
 	if ((app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_Y) == ButtonState::BUTTON_DOWN)
-		&& !app->store->active && !app->dialogueSystem->active && !app->forge->active)
+		&& !app->store->active && !app->dialogueSystem->active && !app->forge->active && !player->OpenMap)
 	{
 		if (app->inventory->active)
 		{
@@ -156,14 +156,14 @@ bool Scene::Update(float dt)
 		}
 	}
 
-	if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN )//digan boton mando
-		&& !app->store->active && !app->dialogueSystem->active)
+	if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_BACK) == ButtonState::BUTTON_DOWN)
+		&& !app->store->active && !app->dialogueSystem->active && !app->forge->active && !player->OpenMap)
 	{
 		if (app->inventory->active)
 		{
 			player->lockMovement = false;
 			app->inventory->inventoryTransition_B = true;
-			//app->inventory->Disable();
+			app->audio->PlayFx(inventoryfx);
 		}
 		else
 		{
@@ -171,6 +171,8 @@ bool Scene::Update(float dt)
 			app->inventory->Enable();
 			app->inventory->partyWindow_B = true;
 			app->inventory->buttonsChangeStat = true;
+			app->audio->PlayFx(inventoryfx);
+
 		}
 	}
 
@@ -315,7 +317,7 @@ void Scene::Debug()
 	}
 
 	// Pause menu
-	if (pause_B == false && player->pauseEnabled_B && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
+	if (pause_B == false && player->pauseEnabled_B && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN)&& !player->OpenMap)
 	{
 		app->audio->PlayFx(pausefx);
 		app->audio->PlayMusic(pause_music, 1.0f);
@@ -373,13 +375,13 @@ void Scene::Debug()
 		LOG("PAUSE");
 	}
 
-
+	//TODO: creo que esto no hace falta
 	// Mute / unmute
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+	//if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
 
-		mute_B = !mute_B;
-		LOG("MUTE");
-	}
+	//	mute_B = !mute_B;
+	//	LOG("MUTE");
+	//}
 
 	if (app->input->godMode_B)
 	{

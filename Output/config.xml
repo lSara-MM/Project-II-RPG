@@ -251,6 +251,7 @@
 	
 	<itemmanager inventorypath="Assets/GUI/UIArt/InventarioPestañas.png"
 				 partypath="Assets/GUI/UIArt/PartyPestañitas.png"
+				 selectedpath="Assets/GUI/UIArt/charSelected.png"
 				 charLockedpath="Assets/GUI/UIArt/cartaCandado.png"
 				 protapath="Assets/GUI/UIArt/cartaProta.png"
 				 compapath="Assets/GUI/UIArt/cartaCompa.png"

@@ -114,8 +114,8 @@ bool Combat::Start()
 	listButtons.Add(button);
 
 
-	// Skip button
-	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, this, { 542, 100, 129, 43}, ButtonType::SKIPPY, "F l e e", 20, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN);
+	// Flee button
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, this, { 542, 100, 129, 43 }, ButtonType::SKIPPY, "F l e e", 20, Font::UI, { 0,0,0,0 }, 7, Easings::ELASTIC_OUT, AnimationAxis::FLEE);
 	listButtons.Add(button);
 	button = nullptr;
 
@@ -135,6 +135,12 @@ bool Combat::Start()
 	transitionCombat_B = false;
 	point = 0.0f;
 	offsetAni = 750;
+	//animation flee
+	animationFlee.Set();
+	animationFlee.AddTween(100, 80, BOUNCE_IN_OUT);
+	transitionFlee_B = false;
+	pointFlee = 0.0f;
+	posxFlee_I = 50;
 
 	isHovering = false;
 	exit_B = false;
@@ -345,20 +351,17 @@ bool Combat::PostUpdate()
 
 			app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x, i->data->bounds.y, &rect);
 			break;
+
+		case ButtonType::SKIPPY:
+			if (i->data->isForward_B==false && i->data->bounds.y == 75)
+			{
+				i->data->isForward_B = true;
+			}
+			break;
 		default:
 			break;
 		}
 	}
-
-	//if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
-	//{
-	//	app->render->DrawTexture(app->input->cursorPressedTex, mouseX_combat, mouseY_combat);
-	//}
-	//else
-	//{
-	//	app->render->DrawTexture(app->input->cursorIdleTex, mouseX_combat, mouseY_combat);
-	//}
-
 	return ret;
 }
 
@@ -1026,6 +1029,13 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 		else
 		{
 			HandleCharaButtons(&vecAllies, 0, vecAllies.size());
+			for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
+			{
+				if (i->data->buttonType == ButtonType::SKIPPY)
+				{
+					i->data->isForward_B = false;
+				}
+			}
 			NextTurn();
 		}
 	}

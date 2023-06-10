@@ -28,6 +28,7 @@ bool Inventory::Start()
 {
 	inventoryIMG = app->tex->Load(app->itemManager->texturePath);
 	partyIMG = app->tex->Load(app->itemManager->partyPath);
+	selectedIMG = app->tex->Load(app->itemManager->selectedPath);
 	charlockedIMG = app->tex->Load(app->itemManager->charLockedPath);
 	protaIMG = app->tex->Load(app->itemManager->protaPath);
 	compaIMG = app->tex->Load(app->itemManager->compaPath);
@@ -420,6 +421,7 @@ bool Inventory::CleanUp()
 	app->guiManager->DestroyGuiControl(NextPage);
 	app->tex->UnLoad(inventoryIMG);
 	app->tex->UnLoad(partyIMG);
+	app->tex->UnLoad(selectedIMG);
 	app->tex->UnLoad(charlockedIMG);
 	app->tex->UnLoad(protaIMG);
 	app->tex->UnLoad(compaIMG);
@@ -797,36 +799,36 @@ void Inventory::InitArr()
 	// Party buttons
 	//// first page
 	GuiButton* temp;
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1010, this, { 272, 97, 142, 258 }, ButtonType::SMALL);
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1010, this, { 261, 103, 164, 248 }, ButtonType::PARTY);
 	temp->state = GuiControlState::NONE;
 	listPartyButtons.Add(temp);
 
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1011, this, { 449, 97, 142, 258 }, ButtonType::SMALL);
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1011, this, { 438, 103, 164, 248 }, ButtonType::PARTY);
 	temp->state = GuiControlState::NONE;
 	listPartyButtons.Add(temp);
 
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1012, this, { 272, 354, 142, 258 }, ButtonType::SMALL);
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1012, this, { 261, 360, 164, 248 }, ButtonType::PARTY);
 	temp->state = GuiControlState::NONE;
 	listPartyButtons.Add(temp);
 
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1013, this, { 449, 354, 142, 258 }, ButtonType::SMALL);
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1013, this, { 438, 360, 164, 248 }, ButtonType::PARTY);
 	temp->state = GuiControlState::NONE;
 	listPartyButtons.Add(temp);
 
 	//// second page
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1014, this, { 695, 95, 142, 258 }, ButtonType::SMALL);
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1014, this, { 695, 95, 164, 248 }, ButtonType::PARTY);
 	temp->state = GuiControlState::NONE;
 	listPartyButtons.Add(temp);
 
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1015, this, { 860, 95, 142, 258 }, ButtonType::SMALL);
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1015, this, { 860, 95, 164, 248 }, ButtonType::PARTY);
 	temp->state = GuiControlState::NONE;
 	listPartyButtons.Add(temp);
 
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1016, this, { 695, 351, 142, 258 }, ButtonType::SMALL);
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1016, this, { 695, 351, 164, 248 }, ButtonType::PARTY);
 	temp->state = GuiControlState::NONE;
 	listPartyButtons.Add(temp);
 
-	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1017, this, { 860, 351, 142, 258 }, ButtonType::SMALL);
+	temp = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1017, this, { 860, 351, 164, 248 }, ButtonType::PARTY);
 	temp->state = GuiControlState::NONE;
 	listPartyButtons.Add(temp);
 	buttonsChangeStat = false;
@@ -1047,5 +1049,9 @@ void Inventory::DrawParty(float point, int offset)
 		{
 			app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
 		}
+	}
+	if (lastPressed!=-1)
+	{
+		app->render->DrawTexture(selectedIMG, listPartyButtons.At(lastPressed)->data->bounds.x - app->render->camera.x, listPartyButtons.At(lastPressed)->data->bounds.y - app->render->camera.y);
 	}
 }

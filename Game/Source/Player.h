@@ -134,6 +134,7 @@ private:
 
 	Tween mapAnimation;//animacion minimapa
 	bool transitionMap_B;//controlar animacion minimapa
+	int posXanimMap_I;//
 	
 	// Open Chest
 	bool Chest_contact = false;

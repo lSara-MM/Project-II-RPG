@@ -34,6 +34,9 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 		break;
 	case ButtonType::SMALL:
 		break;
+	case ButtonType::PARTY:
+		buttonTex = app->tex->Load("Assets/GUI/UIArt/charSelected.png");
+		break;
 	case ButtonType::START:
 		buttonTex = app->tex->Load("Assets/GUI/UIArt/Start.png");
 		break;
@@ -108,7 +111,6 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 
 	fxclickPath = "Assets/Audio/Fx/Button_Menu.wav";
 	fxclick = app->audio->LoadFx(fxclickPath);
-
 	hoverTest = false;
 	isSelected = false;
 }
@@ -154,13 +156,14 @@ bool GuiButton::Update(float dt)
 				{
 					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 					{
+						//app->audio->PlayFx(fxclick);TODO:aclaracion->aqui suena todo el rato mientras mantienes pulsado, tecnicamente no se ha hecho el pressed como tal, eso es cuando sueltas
 						state = GuiControlState::PRESSED;
-						app->audio->PlayFx(fxclick);
 					}
 
 					// If mouse button pressed -> Generate event!
 					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
 					{
+						app->audio->PlayFx(fxclick);
 						NotifyObserverOfClick();
 					}
 				}
@@ -237,6 +240,11 @@ bool GuiButton::Draw(Render* render)
 			offset = -1300;
 			bounds.x = offset + point * (boundsX_AUX - offset);
 			break;
+		case AnimationAxis::FLEE:
+			point = animationButton.GetPoint();
+			offset = 75;
+			bounds.y = offset + point * (boundsY_AUX - offset);
+			break;
 		default:
 			break;
 		}
@@ -249,10 +257,10 @@ bool GuiButton::Draw(Render* render)
 	else if (buttonType == ButtonType::SETTINGS) { rect = { 1, 1, 154, 66 }; }
 	else if (buttonType == ButtonType::IN_SETTINGS) { rect = { 230, 0 , 230, 94}; }
 	else if (buttonType == ButtonType::CLOSE) { rect = { 0, 200, 62, 63 }; }
-	else if (buttonType == ButtonType::SKIPPY) { rect = { 351, 1, 132, 44 }; }
+	else if (buttonType == ButtonType::SKIPPY) { rect = { 451, 1, 132, 44 }; }
 	else if (buttonType == ButtonType::DIALOGUE) { rect = { 0, 0, 371, 65 }; }
 	else if (buttonType == ButtonType::EXTRA_LARGE) { rect.x = 5, rect.y = 5; }
-	else if (buttonType == ButtonType::CHANGE_POSITION) { rect = { 301, 1, 47, 47 }; }
+	else if (buttonType == ButtonType::CHANGE_POSITION) { rect = { 401, 1, 47, 47 }; }
 
 	int offsetX = text.Length() * fontSize / 2;
 
@@ -547,6 +555,7 @@ bool GuiButton::Draw(Render* render)
 				rect.y = 45;
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
+				break;
 			default:
 				break;
 			}
@@ -683,30 +692,28 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::COMBAT_TARGET:
 				break;
-			//case ButtonType::SKILL_1:
-			//	rect.x = bounds.w * 2;
-			//	render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-			//	break;
-			//case ButtonType::SKILL_2:
-			//	rect.x = bounds.w * 11;
-			//	render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-			//	break;
-			//case ButtonType::SKILL_3:
-			//	rect.x = bounds.w * 14;
-			//	render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-			//	break;
-			//case ButtonType::SKILL_4:
-			//	rect.x = bounds.w * 5;
-			//	render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-			//	break;
-			//case ButtonType::CHANGE_POSITION:
-			//	rect.x = bounds.w * 8;
-			//	render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-			//	break;
-			//case ButtonType::SKIPPY:
-			//	rect.x = bounds.w * 2;
-			//	render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
-			//	break;
+			case ButtonType::SKILL_1:
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 3);
+				break;
+			case ButtonType::SKILL_2:
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 3);
+				break;
+			case ButtonType::SKILL_3:
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 3);
+				break;
+			case ButtonType::SKILL_4:
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 3);
+				break;
+			case ButtonType::CHANGE_POSITION:
+				break;
+			case ButtonType::SKIPPY:
+				rect.x = bounds.w * 2;
+				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				break;
+			case ButtonType::PARTY:
+				rect = { 0, 0, 164, 248};
+				render->DrawTexture(buttonTex, bounds.x-app->render->camera.x, bounds.y-app->render->camera.y, &rect);
+				break;
 			default:
 				break;
 			}
@@ -776,7 +783,7 @@ bool GuiButton::Draw(Render* render)
 
 void GuiButton::DrawSkill(int charaId, int skillNumber, int state)
 {
-	SDL_Rect rect = { 151, 201, 47, 47 };
+	SDL_Rect rect = { 201, 201, 47, 47 };
 
 	switch (charaId)
 	{

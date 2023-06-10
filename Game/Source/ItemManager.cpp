@@ -30,6 +30,7 @@ bool ItemManager::Awake(pugi::xml_node& config)
 	coinPath = config.attribute("coinpath").as_string();
 	smallcoinPath = config.attribute("smallcoinpath").as_string();
 	partyPath = config.attribute("partypath").as_string();
+	selectedPath = config.attribute("selectedpath").as_string();
 	charLockedPath = config.attribute("charLockedpath").as_string();
 	protaPath = config.attribute("protapath").as_string();
 	compaPath = config.attribute("compapath").as_string();
