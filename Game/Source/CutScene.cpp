@@ -180,29 +180,15 @@ bool CutScene::Update(float dt)
 				app->input->RenderTempText("%%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
 			}
 
-		// enable text input
-		if (!app->input->playerName->input_entered)
-		{
-			app->input->ActiveGetInput(app->input->playerName);
-		}
-
-		// render input
-		if (app->input->getInput_B)
-		{
-			// TO DO adjust position when bg done
-			iPoint pos = { app->win->GetWidth() - 330, 600 };
-			app->input->RenderTempText("%%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
-		}
-
-		// if name entered, fade to black
-		if (app->input->playerName->input_entered)
-		{
-			//Sara: Aqu� es que ha llegado al final de todas las imagenes y textos
-			app->audio->PlayFx(firmafx);
-			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+			// if name entered, fade to black
+			if (app->input->playerName->input_entered)
+			{
+				//Sara: Aqu� es que ha llegado al final de todas las imagenes y textos
+				app->audio->PlayFx(firmafx);
+				app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+			}
 		}
 	}
-
 
 	//Esto resetea el timer a 0 provocando que el texto aparezca y desaparezca
 	if (DeltaTime >= 2)
