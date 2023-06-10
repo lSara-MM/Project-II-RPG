@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "SDL/include/SDL.h"
 #include "Point.h"
+#include "Timer.h"
 
 #include "External/SDL/include/SDL_gamecontroller.h"
 
@@ -65,6 +66,8 @@ public:
 	string input;
 	int max_chars;
 	bool input_entered = false;
+
+	Timer timer;
 };
 
 
@@ -131,7 +134,7 @@ public:
 
 	// Keep a copy of the current version of the string
 	string temp;
-	bool getInput_B = false;
+	bool getInput_B;
 
 	bool godMode_B = false;
 

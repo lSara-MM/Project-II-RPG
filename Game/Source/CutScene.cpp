@@ -163,11 +163,10 @@ bool CutScene::Update(float dt)
 	{
 		if (passImg >= ImgToPrint.Count() - 1)
 		{
-			//Sara:Aqu� te bloqueo para que se�or pugi no pueda pasar con Espacio mas imagenes y pete xd
 			StopCutScene = true;
 
 			// enable text input
-			if (!app->input->playerName->input_entered)
+			if (!app->input->getInput_B && !app->input->playerName->input_entered)
 			{
 				app->input->ActiveGetInput(app->input->playerName);
 			}
@@ -183,7 +182,6 @@ bool CutScene::Update(float dt)
 			// if name entered, fade to black
 			if (app->input->playerName->input_entered)
 			{
-				//Sara: Aqu� es que ha llegado al final de todas las imagenes y textos
 				app->audio->PlayFx(firmafx);
 				app->fade->FadingToBlack(this, (Module*)app->scene, 90);
 			}

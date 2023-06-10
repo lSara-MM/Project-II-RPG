@@ -395,11 +395,11 @@ public:
 
 			if (dungeon == ChestDungeon::TERRORS)
 			{
-				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 5);
+				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 45);
 			}
 			else
 			{
-				app->fade->FadingToBlack((Module*)app->BeastT, (Module*)app->combat, 5);
+				app->fade->FadingToBlack((Module*)app->BeastT, (Module*)app->combat, 45);
 			}
 			app->puzzleManager->Disable();
 			app->hTerrors->steps_I = 0;

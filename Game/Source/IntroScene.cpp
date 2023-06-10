@@ -117,7 +117,6 @@ bool IntroScene::Update(float dt)
 		animationBackground.Foward();
 	}
 
-
 	animationTitle.Step(1, false);
 	animationBackground.Step(1, false);
 
@@ -144,14 +143,13 @@ bool IntroScene::Update(float dt)
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 	}
 		
-
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
 
 	if (previousGame_B && !pSettings->settings_B)
 	{
 		listButtons.start->next->data->state = GuiControlState::NORMAL;
-		LOG("Continue");
+		//LOG("Continue");
 	}
 	else if(!previousGame_B)
 	{
@@ -261,8 +259,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		transition_B = true;
 		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 		{
-			app->input->ActiveGetInput(app->input->playerName);
-
 			//Resetear Puzzles y Quests
 			app->questManager->resetPuzzlesAndQuests();
 			i->data->isForward_B = false;

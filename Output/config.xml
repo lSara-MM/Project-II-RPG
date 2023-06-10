@@ -172,13 +172,13 @@
 		<Img texturepath="Assets/Textures/cinematica_circo.png"/>
 		<Img texturepath="Assets/Textures/cinematica_contrato.png"/>
 		<Img texturepath="Assets/Textures/cinematica_contrato.png"/>
-		<Text textpath="The postwar period has left Moscow destroyed, not just the streets, people have lost their trust and kindness."/>
-		<Text textpath="This disaster left an impossible dream: I want to be a magician. I always wanted, now I need to."/>
-		<Text textpath="It seemed impossible, but I couldn't help but trust. Then it came. A circus came to Moscow to shed its light on a devastated city, to restore hope."/>
-		<Text textpath="-The best in the world- they proclaim. I did not hesitate, it was my moment, probably my last chance. I had to show my skills."/>
-		<Text textpath="There he was, the Showman, willing to listen to my offer and see what I was capable of."/>
-		<Text textpath="I impressed him, I'm convinced. He wanted to hire me immediately. -You have a lot of potential boy- He took a piece of paper out of nowhere. I have impressed another magician."/>
-		<Text textpath="Happiness flooded me, and there is only one step left. I have to sign."/>
+		<Text textpath="The postwar period has left Moscow destroyed, not just the streets, people have lost their trust and kindness. "/>
+		<Text textpath="This disaster left an impossible dream: I want to be a magician. I always wanted, now I need to. "/>
+		<Text textpath="It seemed impossible, but I couldn't help but trust. Then it came. A circus came to Moscow to shed its light on a devastated city, to restore hope. "/>
+		<Text textpath="-The best in the world- they proclaim. I did not hesitate, it was my moment, probably my last chance. I had to show my skills. "/>
+		<Text textpath="There he was, the Showman, willing to listen to my offer and see what I was capable of. "/>
+		<Text textpath="I impressed him, I'm convinced. He wanted to hire me immediately. -You have a lot of potential boy- He took a piece of paper out of nowhere. I have impressed another magician. "/>
+		<Text textpath="Happiness flooded me, and there is only one step left. I have to sign. "/>
 		<Text textpath="Put you Name."/>
 	</CutScene>
 

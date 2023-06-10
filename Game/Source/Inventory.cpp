@@ -372,16 +372,6 @@ bool Inventory::PostUpdate()
 			selectCharacter[i]->state = GuiControlState::NONE;
 		}
 
-		// TO DO: delete comented when everything works
-		/*app->render->DrawTexture(protaIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
-		app->render->DrawTexture(compaIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
-		app->render->DrawTexture(twinsIMG, offset + point * (272 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-		app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);*/
-		/*app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);*/
-
 		DrawParty(point, offset);
 	}
 
