@@ -113,7 +113,7 @@ bool ModuleParticles::Update()
 bool ModuleParticles::PostUpdate()
 {
 	//Iterating all particle array and drawing any active particles
-	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	for (uint i = 0; i < 500; ++i)
 	{
 		Particle* particle = particles[i];
 
@@ -136,80 +136,95 @@ bool ModuleParticles::PostUpdate()
 	return true;
 }
 
-Particle* ModuleParticles::AddParticle(int x, int y, uint delay)
+Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
 {
 	Particle* newParticle = nullptr;
 
-
-	//Create circle around position designated
-	for (uint i = 0; i < 50; ++i && Modulo == 0)
+	for (uint i = 0; i < 500; ++i)
 	{
-		//Finding an empty slot for a new particle
-		if (particles[i] == nullptr)
-		{
-			int radius = 40;
-			newParticle = new Particle;
-			newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
-			float angle = (2 * 3.14159 * i) / 50;
-			float particleX = x + radius * cos(angle);
-			float particleY = y + radius * sin(angle);
-			newParticle->speed.x = 0;
-			newParticle->speed.y = 0;
-			newParticle->position.x = x;						// so when frameCount reaches 0 the particle will be activated
-			newParticle->position.y = y;
+		particles[i] = nullptr;
+	}
 
-			particles[i] = newParticle;
-			break;
+	Modulo = m;
+
+	if (Modulo == 0)
+	{
+		//Create circle around position designated
+		for (uint i = 0; i < 50; ++i)
+		{
+			//Finding an empty slot for a new particle
+			if (particles[i] == nullptr)
+			{
+				int radius = 40;
+				newParticle = new Particle;
+				newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
+				float angle = (2 * 3.14159 * i) / 50;
+				float particleX = x + radius * cos(angle);
+				float particleY = y + radius * sin(angle);
+				newParticle->speed.x = 0;
+				newParticle->speed.y = 0;
+				newParticle->position.x = x;						// so when frameCount reaches 0 the particle will be activated
+				newParticle->position.y = y;
+
+				particles[i] = newParticle;
+				break;
+			}
 		}
 	}
 
-	//Create particles like an explosion
-	for (uint i = 0; i < 100; ++i && Modulo == 1)
+	if (Modulo == 1)
 	{
-		//Finding an empty slot for a new particle
-		if (particles[i] == nullptr)
+		//Create particles like an explosion
+		for (uint i = 0; i < 100; ++i)
 		{
-			
-			newParticle = new Particle;
-			newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
-			float particleX = x + static_cast<float>(rand() % 10);
-			float particleY = y + static_cast<float>(rand() % 10);
+			//Finding an empty slot for a new particle
+			if (particles[i] == nullptr)
+			{
 
-			Particle* particle = new Particle();
-			newParticle->position.x = particleX;
-			newParticle->position.y = particleY;
+				newParticle = new Particle;
+				newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
+				float particleX = x + static_cast<float>(rand() % 10);
+				float particleY = y + static_cast<float>(rand() % 10);
 
-			// Configurar velocidad aleatoria para simular una explosión
-			newParticle->speed.x = static_cast<float>(rand() % 10 - 5);  // Rango: -5 a 5
-			newParticle->speed.y = static_cast<float>(rand() % 10 - 5);  // Rango: -5 a 5
+				Particle* particle = new Particle();
+				newParticle->position.x = particleX;
+				newParticle->position.y = particleY;
 
-			particles[i] = newParticle;
-			break;
+				// Configurar velocidad aleatoria para simular una explosión
+				newParticle->speed.x = static_cast<float>(rand() % 10 - 5);  // Rango: -5 a 5
+				newParticle->speed.y = static_cast<float>(rand() % 10 - 5);  // Rango: -5 a 5
+
+				particles[i] = newParticle;
+				break;
+			}
 		}
 	}
 
-	//Create particles like a curacion
-	for (uint i = 0; i < 100; ++i && Modulo == 2)
+	if (Modulo == 2)
 	{
-		//Finding an empty slot for a new particle
-		if (particles[i] == nullptr)
+		//Create particles like a curacion
+		for (uint i = 0; i < 100; ++i)
 		{
+			//Finding an empty slot for a new particle
+			if (particles[i] == nullptr)
+			{
 
-			newParticle = new Particle;
-			newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
-			float particleX = x + static_cast<float>(rand() % 10);
-			float particleY = y;
+				newParticle = new Particle;
+				newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
+				float particleX = x + static_cast<float>(rand() % 10);
+				float particleY = y;
 
-			Particle* particle = new Particle();
-			newParticle->position.x = particleX;
-			newParticle->position.y = particleY;
+				Particle* particle = new Particle();
+				newParticle->position.x = particleX;
+				newParticle->position.y = particleY;
 
-			// Configurar velocidad aleatoria para simular una explosión
-			particle->speed.x = static_cast<float>(rand() % 6 - 3);  // Rango: -3 a 3 en movimiento horizontal
-			particle->speed.y = static_cast<float>(rand() % 10 + 5);  // Rango: 5 a 14 hacia arriba
+				// Configurar velocidad aleatoria para simular una explosión
+				particle->speed.x = static_cast<float>(rand() % 6 - 3);  // Rango: -3 a 3 en movimiento horizontal
+				particle->speed.y = static_cast<float>(rand() % 10 + 5);  // Rango: 5 a 14 hacia arriba
 
-			particles[i] = newParticle;
-			break;
+				particles[i] = newParticle;
+				break;
+			}
 		}
 	}
 

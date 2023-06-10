@@ -1134,9 +1134,9 @@ void Player::Controller(float dt)
 			currentAnim.speed = currentAnim.speed * 6;
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN) {
-		app->moduleparticles->Modulo = 2;
-		app->moduleparticles->AddParticle(position.x, position.y, 40);
+	if (app->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN) 
+	{
+		app->moduleparticles->AddParticle(position.x, position.y, 40, 1);
 	}
 	
 	PadLock = false;

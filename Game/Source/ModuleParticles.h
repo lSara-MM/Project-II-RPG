@@ -48,7 +48,7 @@ public:
 	// Param particle	- A template particle from which the new particle will be created
 	// Param x, y		- Position x,y in the screen (upper left axis)
 	// Param delay		- Delay time from the moment the function is called until the particle is displayed in screen
-	Particle* AddParticle(int x, int y, uint delay = 0);
+	Particle* AddParticle(int x, int y, uint delay, int m);
 
 public:
 	//Template particle for an explosion
