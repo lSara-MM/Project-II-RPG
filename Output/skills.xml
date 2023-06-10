@@ -244,9 +244,9 @@ TargetingMethod //Como se ataca
 
 	<skill name="Blinding Paint" id="31" description="A blinding wave of ghost paint."
 		   type="2" movementCaster="0"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="-0.3" bonusAccuracy="120" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="-0.3" bonusAccuracy="90" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="true" autoTarget="false"
-		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-40"
+		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-30"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
