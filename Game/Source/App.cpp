@@ -112,12 +112,12 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(cutScene);
 	AddModule(moduleparticles);
 	AddModule(dialogueSystem);
+	AddModule(puzzleManager);
 	AddModule(inventory);
 	AddModule(store);
 	AddModule(forge);
 	AddModule(guiManager);
 	AddModule(itemManager);
-	AddModule(puzzleManager);
 	AddModule(sceneWin_Lose);
 	
 	//AddModule(initiAllResourcesFromZip);

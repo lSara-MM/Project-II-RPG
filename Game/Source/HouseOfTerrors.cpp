@@ -179,6 +179,7 @@ bool HouseOfTerrors::Update(float dt)
 			app->combat->PreLoadCombat(name);
 
 			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
+			app->questManager->SaveState();
 			app->puzzleManager->CleanUp();
 			app->puzzleManager->active = false;
 			steps_I = 0;

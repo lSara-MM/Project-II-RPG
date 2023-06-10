@@ -279,6 +279,8 @@ bool PuzzleManager::Dun1Start()
 	rescue = false;
 	teamMate = false;
 
+	fightBoss = false;
+
 	//Notas false
 	esc1 = false;
 	esc2 = false;
@@ -329,21 +331,28 @@ bool PuzzleManager::Dun1Start()
 
 	if (rescue == false)
 	{
-		boss = app->tex->Load(texturepathBoss);
+		if (!bossIsDead)
+		{
+			boss = app->tex->Load(texturepathBoss);
 
-		door = app->tex->Load(texturepathDoor);
+			door = app->tex->Load(texturepathDoor);
 
-		Boss = app->physics->CreateRectangle(posBoss.x - widthBoss / 2, posBoss.y - heightBoss / 2, widthBoss, heightBoss, bodyType::STATIC);
-		Boss->body->SetFixedRotation(true);
-		Boss->ctype = ColliderType::BOSSDEAD;
-		Boss->id = 0;
+			Door3 = app->physics->CreateRectangle(posDoor3.x - widthVertical / 2, posDoor3.y - heightVertical / 2, widthVertical, heightVertical, bodyType::STATIC);
+			Door3->body->SetFixedRotation(true);
+		}
+
+		if (!bossInvent)
+		{
+			Boss = app->physics->CreateRectangle(posBoss.x - widthBoss / 2, posBoss.y - heightBoss / 2, widthBoss, heightBoss, bodyType::STATIC);
+			Boss->body->SetFixedRotation(true);
+			Boss->ctype = ColliderType::BOSSDEAD;
+			Boss->id = 0;
+		}
 
 		Loset = app->physics->CreateRectangleSensor(posLoset.x - widthLoset / 2, posLoset.y - heightLoset / 2, widthLoset - 32, heightLoset - 32, bodyType::STATIC);
 		Loset->body->SetFixedRotation(true);
 		Loset->ctype = ColliderType::LOSET;
 
-		Door3 = app->physics->CreateRectangle(posDoor3.x - widthVertical / 2, posDoor3.y - heightVertical / 2, widthVertical, heightVertical, bodyType::STATIC);
-		Door3->body->SetFixedRotation(true);
 	}
 	else
 	{
@@ -375,7 +384,6 @@ bool PuzzleManager::Dun1Start()
 	notas = app->tex->Load(texturepathNotas);
 	loset = app->tex->Load(texturepathLoset);
 	palanca = app->tex->Load(texturepathPalanca);
-
 	bossDeath = app->tex->Load(texturepathBossDeath);
 
 	Palanca = app->physics->CreateRectangle(posPalancas.x - widthPalanca / 2, posPalancas.y - heightPalanca, widthPalanca, heightPalanca, bodyType::STATIC);
@@ -862,8 +870,6 @@ bool PuzzleManager::Dun2Update()
 				app->questManager->SaveState();
 				app->puzzleManager->Disable();
 				app->BeastT->steps_I = 0;
-
-				app->questManager->SaveState();
 			}
 		}
 
@@ -1257,7 +1263,7 @@ bool PuzzleManager::Rescue()
 
 				app->itemManager->AddQuantity(5, 1);
 
-				if (Boss->body != nullptr)
+				if (Boss != nullptr)
 					Boss->body->GetWorld()->DestroyBody(Boss->body);
 
 				delete Boss;
@@ -1286,10 +1292,10 @@ bool PuzzleManager::Rescue()
 					if (door != nullptr)
 						app->tex->UnLoad(door);
 
-					if (Door3->body != nullptr)
+					if (Door3 != nullptr)
 						Door3->body->GetWorld()->DestroyBody(Door3->body);
 
-					if (Loset->body != nullptr)
+					if (Loset != nullptr)
 						Loset->body->GetWorld()->DestroyBody(Loset->body);
 
 					delete Loset;
@@ -1322,7 +1328,7 @@ bool PuzzleManager::Rescue()
 				app->SaveGameRequest();
 				app->audio->PlayFx(app->hTerrors->combatfx);
 				app->combat->PreLoadCombat(app->hTerrors->name, 20);
-				fightBoss = true;
+				fightBoss = true; 
 				app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->combat, 5);
 				app->questManager->SaveState();
 				app->puzzleManager->Disable();

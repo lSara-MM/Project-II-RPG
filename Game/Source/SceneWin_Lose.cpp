@@ -146,6 +146,7 @@ bool SceneWin_Lose::Update(float dt)
 		app->render->DrawTexture(Lose, offset + point * (0 - offset), 0);
 		app->render->TextDraw("You failed", 435, offset + point * (40 - offset), 75, Font::TEXT, { 255,255,255 });
 		app->render->TextDraw("get stronger and try again", 115, offset + point * (130 - offset), 75, Font::TEXT, { 255,255,255 });
+		
 		if (app->puzzleManager->fightBoss)
 		{
 			app->puzzleManager->bossIsDead = false;
