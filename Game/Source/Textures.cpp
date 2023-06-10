@@ -50,10 +50,15 @@ bool Textures::CleanUp()
 	LOG("Freeing textures and Image library");
 	ListItem<SDL_Texture*>* item;
 
+	int i = 0;
 	for(item = textures.start; item != NULL; item = item->next)
 	{
-		if(item->data != nullptr)
+		if (item->data != nullptr)
+		{
+			LOG("%d", i);
 			SDL_DestroyTexture(item->data);
+			i++;
+		}
 	}
 
 	textures.Clear();

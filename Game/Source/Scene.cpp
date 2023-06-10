@@ -401,9 +401,9 @@ bool Scene::InitEntities()
 {
 	for (pugi::xml_node itemNode = sceneNode.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
 	{
-		if (!app->puzzleManager->teamMate && strcmp(itemNode.attribute("name").as_string(), "Yuroslava") == 0)
+		if (!app->puzzleManager->teamMate && strcmp(itemNode.attribute("name").as_string(), "YUROSLAVA") == 0)
 		{
-			break;
+			itemNode = itemNode.next_sibling("npc");
 		}
 
 		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
