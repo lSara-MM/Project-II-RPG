@@ -146,7 +146,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
 
 	Modulo = m;
 
-	if (Modulo == 0)
+	if (Modulo == 2)
 	{
 		//Create circle around position designated
 		for (uint i = 0; i < 50; ++i)
@@ -162,8 +162,8 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
 				float particleY = y + radius * sin(angle);
 				newParticle->speed.x = 0;
 				newParticle->speed.y = 0;
-				newParticle->position.x = x;						// so when frameCount reaches 0 the particle will be activated
-				newParticle->position.y = y;
+				newParticle->position.x = particleX;						// so when frameCount reaches 0 the particle will be activated
+				newParticle->position.y = particleY;
 				newParticle->isAlive = true;
 
 				particles[i] = newParticle;
@@ -198,7 +198,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
 		}
 	}
 
-	if (Modulo == 2)
+	if (Modulo == 0)
 	{
 		//Create particles like a curacion
 		for (uint i = 0; i < 100; ++i)
