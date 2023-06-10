@@ -152,11 +152,11 @@ public:
 	int positionCombat_I;
 	
 	CharacterType charaType; // Ally o Enemy
-	CharacterClass charaClass;
+	CharacterClass charaClass; //Que classe es, esto es para los enemigos
 
 	////Skills Descriptions
-	List<Skill*> listSkills;
-	List<StatusEffect*> listStatusEffects;
+	List<Skill*> listSkills; //Que skills tienen aliados o enemigos (son 4)
+	List<StatusEffect*> listStatusEffects; //Efectos de estado que afectan al chara.
 	List<int> listSkillsHistory; //Aqui guardamos un historial de que skills se ha usado.
 	
 	GuiButton* button;
