@@ -105,6 +105,10 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 
 	fxHoverPath = "Assets/Audio/Fx/on_button.wav";
 	fxHover = app->audio->LoadFx(fxHoverPath);
+
+	fxclickPath = "Assets/Audio/Fx/Button_Menu.wav";
+	fxclick = app->audio->LoadFx(fxclickPath);
+
 	hoverTest = false;
 	isSelected = false;
 }
@@ -151,6 +155,7 @@ bool GuiButton::Update(float dt)
 					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 					{
 						state = GuiControlState::PRESSED;
+						app->audio->PlayFx(fxclick);
 					}
 
 					// If mouse button pressed -> Generate event!
