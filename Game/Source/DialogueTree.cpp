@@ -180,7 +180,9 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 			break;
 
 		case DIALOGUE_DUCK_PUNISHER:
+			activeNode->choicesList.at(i)->eventReturn = 0;
 			app->scene->listNpc.end->data->PinkyIsAngry();
+			
 			break;
 		default:
 			return false;
