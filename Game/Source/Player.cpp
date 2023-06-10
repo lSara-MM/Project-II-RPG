@@ -1105,14 +1105,16 @@ void Player::Controller(float dt)
 
 		currentAnim.speed = currentAnim.speed * 3;
 
-		//V para crear particulas
+		//Shift acelerar la velocidad
 		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_REPEAT) {
-			app->moduleparticles->Modulo = 2;
-			app->moduleparticles->AddParticle(position.x, position.y, 40);
+			vel.x = vel.x * 1.5;
+			vel.y = vel.y * 1.5;
+			currentAnim.speed = currentAnim.speed * 6;
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN) {
-		
+		app->moduleparticles->Modulo = 2;
+		app->moduleparticles->AddParticle(position.x, position.y, 40);
 	}
 	
 	PadLock = false;
