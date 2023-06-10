@@ -457,5 +457,212 @@ TargetingMethod //Como se ataca
 		   secondStatusID="2" secondStatusPositive="true" secondStatusDuration="99" secondStatusIntesity="30"
 	/>
 
+
+	<!--SKILLS MANIQUIS-->
+	<!--SKILLS MANIQUIS-->
+
+
+	<skill name="Basic melee attack" id="100" description="A basic attack that damages frontline that can only be used in the frontline."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="-1.0" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
+		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<skill name="Basic ranged attack" id="101" description="A basic attack that damages anywere that target the weakest ally."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="1"
+	   multiplierDmg="-0.9" bonusAccuracy="120" bonusCritRate="10" bonusCritDamage="10"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<skill name="Basic area attack" id="102" description="A basic attack that damages in area all enemies that can only be used in the backline."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="-0.6" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
+		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+	
+	<!--MELEE-->
+	
+	<skill name="Reposition attack" id="111" description="An attack to reposition when move to the backline."
+		   type="0" movementCaster="-2"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="-0.8" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="0" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<skill name="Melee preparation buff" id="112" description="A buff to damage, beware becose it will use the cleave attack next!"
+		   type="0" movementCaster="-1"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="0.5" bonusAccuracy="200" bonusCritRate="10" bonusCritDamage="15"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
+		   firstStatusID="1" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="50"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<skill name="Cleve attack" id="113" description="A powerful cleve attack, bewere when buffed."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="1.3" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
+		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="2" friendlyFire="false" areaSkill="true" autoTarget="false"
+		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<!--RANGED-->
+	
+	<skill name="Reposition buff" id="121" description="A defensive move to reposition when move to the frontline."
+		   type="0" movementCaster="2"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="0" bonusAccuracy="200" bonusCritRate="10" bonusCritDamage="15"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="0" friendlyFire="false" areaSkill="false" autoTarget="true"
+		   firstStatusID="6" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="80"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<skill name="Preparation debuff" id="122" description="A powerful debuff that doesn't deal damage to prepare the powerful ranged attack."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="1"
+	   multiplierDmg="0" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="6" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-50"
+		   secondStatusID="5" secondStatusPositive="false" secondStatusDuration="2" secondStatusIntesity="-25"
+	/>
+
+	<skill name="Powerful ranged attack" id="123" description="A powerful ranged attack that exploit the debuff."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="2"
+	   multiplierDmg="0" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="6" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-50"
+		   secondStatusID="5" secondStatusPositive="false" secondStatusDuration="2" secondStatusIntesity="-25"
+	/>
+
+	<!--ASSASIN-->
+
+	<skill name="Assasin preparation" id="131" description="An ofensive buff, move the dummy or will make huge damage."
+		   type="0" movementCaster="3"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="0" bonusAccuracy="200" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="0" friendlyFire="false" areaSkill="false" autoTarget="true"
+		   firstStatusID="3" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="80"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<skill name="Debuff before preparation" id="132" description="A debuff that is followed by the assasination preparation."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="2"
+	   multiplierDmg="0" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
+		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="6" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-50"
+		   secondStatusID="5" secondStatusPositive="false" secondStatusDuration="2" secondStatusIntesity="-25"
+	/>
+	
+	<skill name="Asasination attack" id="133" description="A very powerful attack against the weakest ally."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="1"
+	   multiplierDmg="-1.6" bonusAccuracy="80" bonusCritRate="90" bonusCritDamage="30"
+		   posToUseStart="3" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="0" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-15"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<!--MAGE/AOE-->
+
+	<skill name="Charge Up" id="141" description="An ofensive persistent buff, making the huge area attack more dangerous."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="0" bonusAccuracy="200" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="true"
+		   firstStatusID="1" firstStatusPositive="true" firstStatusDuration="5" firstStatusIntesity="30"
+		   secondStatusID="2" secondStatusPositive="true" secondStatusDuration="5" secondStatusIntesity="50"
+	/>
+
+	<skill name="Pathetic attack" id="142" description="A weak attack when in bad position, keep him there."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="2"
+	   multiplierDmg="-0.6" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
+		   posToUseStart="0" posToUseEnd="0" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<skill name="Area destructive attack" id="143" description="A very powerful attack against the weakest ally."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="1"
+	   multiplierDmg="-1.6" bonusAccuracy="80" bonusCritRate="10" bonusCritDamage="70"
+		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
+		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<!--HEALER-->
+
+	<skill name="Heal Up" id="151" description="A heal to the most damage ally."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="1.3" bonusAccuracy="200" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
+		   firstStatusID="-1" firstStatusPositive="true" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="true" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<skill name="Area Debuff" id="152" description="An area debuff with less precision."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="2"
+	   multiplierDmg="0" bonusAccuracy="110" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="0" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="1" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-30"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<skill name="Area healing" id="153" description="An area healing."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="1"
+	   multiplierDmg="0.6" bonusAccuracy="80" bonusCritRate="10" bonusCritDamage="70"
+		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
+		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<!--TANK-->
+
+	<skill name="Desesperate defense" id="161" description="A defensive skill when the tank is low of health."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="1.3" bonusAccuracy="200" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
+		   firstStatusID="-1" firstStatusPositive="true" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="true" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<skill name="Prepare to Tank" id="162" description="An area debuff with less precision."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="2"
+	   multiplierDmg="0" bonusAccuracy="110" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="0" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="1" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-30"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<!--Area Debuff 152-->
+
+	<!--BUFFER-->
+
+	<skill name="Fleeing Attack" id="171" description="A weak attack to reposition."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
+	   multiplierDmg="1.3" bonusAccuracy="200" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
+		   firstStatusID="-1" firstStatusPositive="true" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="true" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<skill name="Area Debuff" id="152" description="An area debuff with less precision."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="2"
+	   multiplierDmg="0" bonusAccuracy="110" bonusCritRate="-200" bonusCritDamage="0"
+		   posToUseStart="0" posToUseEnd="0" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
+		   firstStatusID="1" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-30"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<skill name="Area healing" id="153" description="An area healing."
+		   type="0" movementCaster="0"  movementTarget="0" targetMethod="1"
+	   multiplierDmg="0.6" bonusAccuracy="80" bonusCritRate="10" bonusCritDamage="70"
+		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="true" autoTarget="false"
+		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
+		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+	/>
+
+	<!--SKILLS MANIQUIS-->
+	<!--SKILLS MANIQUIS-->
 	
 </skills>
