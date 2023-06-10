@@ -437,16 +437,28 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x, bounds.y + bounds.h + 7, &rect);
 				break;
 			case ButtonType::SKILL_1:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 0);
+				if (app->combat->charaInTurn<app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 0);
+				}
 				break;
 			case ButtonType::SKILL_2:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 0);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 0);
+				}
 				break;
 			case ButtonType::SKILL_3:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 0);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 0);
+				}
 				break;
 			case ButtonType::SKILL_4:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 0);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 0);
+				}
 				break;
 			case ButtonType::CHANGE_POSITION:
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
@@ -531,16 +543,28 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x, bounds.y + bounds.h + 7, &rect);
 				break;
 			case ButtonType::SKILL_1:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 1);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 1);
+				}
 				break;
 			case ButtonType::SKILL_2:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 1);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 1);
+				}
 				break;
 			case ButtonType::SKILL_3:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 1);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 1);
+				}
 				break;
 			case ButtonType::SKILL_4:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 1);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 1);
+				}
 				break;
 			case ButtonType::CHANGE_POSITION:
 				rect.y = 51;
@@ -628,16 +652,28 @@ bool GuiButton::Draw(Render* render)
 				render->DrawTexture(buttonTex, bounds.x, bounds.y + bounds.h + 7, &rect);
 				break;
 			case ButtonType::SKILL_1:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 2);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 2);
+				}
 				break;
 			case ButtonType::SKILL_2:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 2);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 2);
+				}
 				break;
 			case ButtonType::SKILL_3:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 2);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 2);
+				}
 				break;
 			case ButtonType::SKILL_4:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 2);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 2);
+				}
 				break;
 			case ButtonType::CHANGE_POSITION:
 				rect.y = 101;
@@ -688,16 +724,28 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::COMBAT_TARGET:
 				break;
 			case ButtonType::SKILL_1:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 3);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 3);
+				}
 				break;
 			case ButtonType::SKILL_2:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 3);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 3);
+				}
 				break;
 			case ButtonType::SKILL_3:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 3);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 3);
+				}
 				break;
 			case ButtonType::SKILL_4:
-				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 3);
+				if (app->combat->charaInTurn < app->combat->listInitiative.Count())
+				{
+					DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 3);
+				}
 				break;
 			case ButtonType::CHANGE_POSITION:
 				break;

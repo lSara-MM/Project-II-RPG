@@ -382,7 +382,7 @@ bool Player::Update(float dt)
 			}
 		}
 
-		if (app->dialogueSystem->hasEnded && !app->store->active)
+		if (app->dialogueSystem->hasEnded && !app->store->active && !app->forge->active)
 		{
 			lockMovement = false;
 			pauseEnabled_B = true;
