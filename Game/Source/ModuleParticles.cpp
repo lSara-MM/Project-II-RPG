@@ -140,7 +140,7 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, u
 
 
 	//Create circle around position designated
-	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i && Modulo == 0)
+	for (uint i = 0; i < 50; ++i && Modulo == 0)
 	{
 		//Finding an empty slot for a new particle
 		if (particles[i] == nullptr)
@@ -148,7 +148,7 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, u
 			int radius = 40;
 			newParticle = new Particle(particle);
 			newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
-			float angle = (2 * 3.14159 * i) / MAX_ACTIVE_PARTICLES;
+			float angle = (2 * 3.14159 * i) / 50;
 			float particleX = x + radius * cos(angle);
 			float particleY = y + radius * sin(angle);
 			newParticle->speed.x = 0;
@@ -162,7 +162,7 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, u
 	}
 
 	//Create particles like an explosion
-	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i && Modulo == 0)
+	for (uint i = 0; i < 100; ++i && Modulo == 1)
 	{
 		//Finding an empty slot for a new particle
 		if (particles[i] == nullptr)
@@ -180,8 +180,31 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, u
 			// Configurar velocidad aleatoria para simular una explosión
 			newParticle->speed.x = static_cast<float>(rand() % 10 - 5);  // Rango: -5 a 5
 			newParticle->speed.y = static_cast<float>(rand() % 10 - 5);  // Rango: -5 a 5
-			newParticle->position.x = x;						
-			newParticle->position.y = y;
+
+			particles[i] = newParticle;
+			break;
+		}
+	}
+
+	//Create particles like a curacion
+	for (uint i = 0; i < 100; ++i && Modulo == 2)
+	{
+		//Finding an empty slot for a new particle
+		if (particles[i] == nullptr)
+		{
+
+			newParticle = new Particle(particle);
+			newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
+			float particleX = x + static_cast<float>(rand() % 10);
+			float particleY = y;
+
+			Particle* particle = new Particle();
+			newParticle->position.x = particleX;
+			newParticle->position.y = particleY;
+
+			// Configurar velocidad aleatoria para simular una explosión
+			particle->speed.x = static_cast<float>(rand() % 6 - 3);  // Rango: -3 a 3 en movimiento horizontal
+			particle->speed.y = static_cast<float>(rand() % 10 + 5);  // Rango: 5 a 14 hacia arriba
 
 			particles[i] = newParticle;
 			break;
