@@ -102,15 +102,15 @@ bool Combat::Start()
 	//	listButtons.Add(button);
 	//	j++;
 	//}
-	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, this, { 311 + 0, 433, 47, 47 }, ButtonType::SKILL_1, "", 12, Font::UI, { 0,0,0,0 }, 3, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, this, { 311 + 0, 433, 47, 47 }, ButtonType::SKILL_1, "", 12, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 	listButtons.Add(button);
-	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10 + 1, this, { 311 + 1 * 65, 433, 47, 47 }, ButtonType::SKILL_2, "", 12, Font::UI, { 0,0,0,0 }, 3, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10 + 1, this, { 311 + 1 * 65, 433, 47, 47 }, ButtonType::SKILL_2, "", 12, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 	listButtons.Add(button);
-	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10 + 2, this, { 311 + 2 * 65, 433, 47, 47 }, ButtonType::SKILL_3, "", 12, Font::UI, { 0,0,0,0 }, 3, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10 + 2, this, { 311 + 2 * 65, 433, 47, 47 }, ButtonType::SKILL_3, "", 12, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 	listButtons.Add(button);
-	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10 + 3, this, { 311 + 3 * 65, 433, 47, 47 }, ButtonType::SKILL_4, "", 12, Font::UI, { 0,0,0,0 }, 3, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10 + 3, this, { 311 + 3 * 65, 433, 47, 47 }, ButtonType::SKILL_4, "", 12, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 	listButtons.Add(button);
-	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10 + 4, this, { 311 + 4 * 65, 433, 47, 47 }, ButtonType::CHANGE_POSITION, "", 12, Font::UI, { 0,0,0,0 }, 3, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
+	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10 + 4, this, { 311 + 4 * 65, 433, 47, 47 }, ButtonType::CHANGE_POSITION, "", 12, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 	listButtons.Add(button);
 
 
@@ -175,7 +175,7 @@ bool Combat::Update(float dt)
 		animationCombat.Foward();
 	}
 
-	animationCombat.Step(3, false);
+	animationCombat.Step(2, false);
 
 	point = animationCombat.GetPoint();
 	app->render->DrawTexture(textureBackground, 0, 0);
