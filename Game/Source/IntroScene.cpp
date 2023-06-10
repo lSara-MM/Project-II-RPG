@@ -282,8 +282,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 			i->data->isForward_B = false;
 		}
 
-		app->questManager->Enable();
-
 		app->itemManager->loadParty_B = true;
 		app->combat->firstCombat_B = false;
 		app->input->coso = true;
