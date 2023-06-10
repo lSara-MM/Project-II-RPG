@@ -92,7 +92,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 	}
 }
 
-bool ModuleParticles::Update()
+bool ModuleParticles::Update(float dt)
 {
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -101,7 +101,7 @@ bool ModuleParticles::Update()
 		if(particle == nullptr)	continue;
 
 		// Call particle Update. If it has reached its lifetime, destroy it
-		if(particle->Update() == false)
+		if(particle->Update(dt) == false)
 		{
 			particles[i]->SetToDelete();
 		}
@@ -119,17 +119,17 @@ bool ModuleParticles::PostUpdate()
 
 		if (particle != nullptr && particle->isAlive && Modulo == 0)
 		{
-			app->render->DrawTexture(texture0, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+			app->render->DrawTexture(texture0, particle->position.x, particle->position.y);
 		}
 
 		if (particle != nullptr && particle->isAlive && Modulo == 1)
 		{
-			app->render->DrawTexture(texture1, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+			app->render->DrawTexture(texture1, particle->position.x, particle->position.y);
 		}
 
 		if (particle != nullptr && particle->isAlive && Modulo == 2)
 		{
-			app->render->DrawTexture(texture2, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+			app->render->DrawTexture(texture2, particle->position.x, particle->position.y);
 		}
 	}
 
@@ -165,9 +165,9 @@ Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
 				newParticle->speed.y = 0;
 				newParticle->position.x = x;						// so when frameCount reaches 0 the particle will be activated
 				newParticle->position.y = y;
+				newParticle->isAlive = true;
 
 				particles[i] = newParticle;
-				break;
 			}
 		}
 	}
@@ -186,16 +186,15 @@ Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
 				float particleX = x + static_cast<float>(rand() % 10);
 				float particleY = y + static_cast<float>(rand() % 10);
 
-				Particle* particle = new Particle();
 				newParticle->position.x = particleX;
 				newParticle->position.y = particleY;
 
 				// Configurar velocidad aleatoria para simular una explosión
 				newParticle->speed.x = static_cast<float>(rand() % 10 - 5);  // Rango: -5 a 5
 				newParticle->speed.y = static_cast<float>(rand() % 10 - 5);  // Rango: -5 a 5
+				newParticle->isAlive = true;
 
 				particles[i] = newParticle;
-				break;
 			}
 		}
 	}
@@ -214,16 +213,15 @@ Particle* ModuleParticles::AddParticle(int x, int y, uint delay, int m)
 				float particleX = x + static_cast<float>(rand() % 10);
 				float particleY = y;
 
-				Particle* particle = new Particle();
 				newParticle->position.x = particleX;
 				newParticle->position.y = particleY;
 
 				// Configurar velocidad aleatoria para simular una explosión
-				particle->speed.x = static_cast<float>(rand() % 6 - 3);  // Rango: -3 a 3 en movimiento horizontal
-				particle->speed.y = static_cast<float>(rand() % 10 + 5);  // Rango: 5 a 14 hacia arriba
+				newParticle->speed.x = static_cast<float>(rand() % 6 - 3);  // Rango: -3 a 3 en movimiento horizontal
+				newParticle->speed.y = static_cast<float>(rand() % 10 + 5);  // Rango: 5 a 14 hacia arriba
+				newParticle->isAlive = true;
 
 				particles[i] = newParticle;
-				break;
 			}
 		}
 	}
