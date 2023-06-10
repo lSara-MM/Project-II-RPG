@@ -409,6 +409,7 @@ bool QuestManager::resetPuzzlesAndQuests()
 	app->puzzleManager->rescue = false;
 	app->puzzleManager->teamMate = false;
 	app->puzzleManager->bossIsDead = false;
+	app->puzzleManager->saveFireGuy = false;
 
 	app->puzzleManager->BarricadesExplote = 0;
 	app->puzzleManager->RelicsCompleted = 0;
