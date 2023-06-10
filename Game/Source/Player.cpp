@@ -12,7 +12,6 @@
 #include "HouseOfTerrors.h"
 #include "BeastTent.h"
 #include "PracticeTent.h"
-#include"Circus.h"
 #include"PuzzleManager.h"
 #include"QuestManager.h"
 #include"LootManager.h"
@@ -193,11 +192,11 @@ bool Player::Update(float dt)
 
 	/*Hasta aqu� PuzzleManager*/
 
-	if (app->scene->pause_B || app->hTerrors->pause_B || app->circus->pause_B || app->practiceTent->pause_B)
+	if (app->scene->pause_B || app->hTerrors->pause_B || app->practiceTent->pause_B)
 	{
 		dtP = 0;
 	}
-	else if (!app->scene->pause_B || !app->hTerrors->pause_B || !app->circus->pause_B || !app->practiceTent->pause_B)
+	else if (!app->scene->pause_B || !app->hTerrors->pause_B || !app->practiceTent->pause_B)
 	{
 		dtP = dt / 1000;
 	}
@@ -462,11 +461,6 @@ bool Player::Update(float dt)
 		//4360 4385
 		app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10 + 60, offset + point * (posMiniMap.y + 3585 / 10 + 60 - offset));
 	}
-	if (app->circus->active)
-	{
-		//3899 1027
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10 + 60, offset + point * (posMiniMap.y + 350 / 10 + 60 - offset));
-	}
 	if (app->BeastT->active)
 	{
 		//3899 1027
@@ -686,20 +680,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 				app->entityManager->tpID = 1;
 				app->fade->FadingToBlack((Module*)app->practiceTent, (Module*)app->scene, fadeTime);
 			}
-			if (app->circus->active == true)
-			{
-				app->questManager->SaveState();
-				app->entityManager->tpID = 21;
-				app->fade->FadingToBlack((Module*)app->circus, (Module*)app->scene, fadeTime);
-			}
 			if (app->BeastT->active == true)
 			{
 				app->entityManager->tpID = 22;
 				app->fade->FadingToBlack((Module*)app->BeastT, (Module*)app->scene, fadeTime);
 			}
-			break;
-		case 2:
-			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->circus, fadeTime);
 			break;
 		case 1:
 			app->fade->FadingToBlack((Module*)app->scene, (Module*)app->hTerrors, fadeTime);

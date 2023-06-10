@@ -19,7 +19,7 @@ Particle::~Particle()
 
 }
 
-bool Particle::Update()
+bool Particle::Update(float dt)
 {
 	bool ret = true;
 	frameCount++;

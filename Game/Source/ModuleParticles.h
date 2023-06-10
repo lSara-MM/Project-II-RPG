@@ -22,24 +22,24 @@ public:
 
 	// Called when the module is activated
 	// Loads the necessary textures for the particles
-	bool Start() override;
+	bool Start();
 
 	// Called at the beginning of the application loop
 	// Removes all particles pending to delete
-	bool PreUpdate() override;
+	bool PreUpdate();
 
 	// Called at the middle of the application loop
 	// Iterates all the particles and calls its Update()
 	// Removes any "dead" particles
-	bool Update();
+	bool Update(float dt);
 
 	// Called at the end of the application loop
 	// Iterates all the particles and draws them
-	bool PostUpdate() override;
+	bool PostUpdate();
 
 	// Called on application exit
 	// Destroys all active particles left in the array
-	bool CleanUp() override;
+	bool CleanUp();
 
 	// Called when a particle collider hits another collider
 	void OnCollision(Collider* c1, Collider* c2);

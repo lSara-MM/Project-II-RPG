@@ -11,7 +11,6 @@
 #include "HouseOfTerrors.h"
 #include "BeastTent.h"
 #include "PracticeTent.h"
-#include "Circus.h"
 #include "SceneWin_Lose.h"
 #include "Combat.h"
 
@@ -171,11 +170,6 @@ bool EntityManager::LoadState(pugi::xml_node& data, Module* module_)
 		app->fade->FadingToBlack(module_, (Module*)app->scene, fadeTime);
 	}
 
-	if (strcmp(app->input->sceneNameSaved.c_str(), app->circus->name.GetString()) == 0)
-	{
-		app->fade->FadingToBlack(module_, (Module*)app->circus, fadeTime);
-	}
-
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->practiceTent->name.GetString()) == 0)
 	{
 		app->fade->FadingToBlack(module_, (Module*)app->practiceTent, fadeTime);
@@ -205,12 +199,6 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 	{
 		player.append_attribute("name") = app->scene->name.GetString();
 		pPlayer = app->scene->player;
-	}
-	
-	if (app->circus->active)
-	{
-		player.append_attribute("name") = app->circus->name.GetString();
-		pPlayer = app->circus->player;
 	}
 
 	if (app->practiceTent->active)
