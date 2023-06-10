@@ -57,8 +57,6 @@ public:
 	bool settings_B = false;
 	bool mute_B = true;
 
-	bool combatEnd = false;
-
 	pugi::xml_node sceneNode;
 
 	//enter combat;

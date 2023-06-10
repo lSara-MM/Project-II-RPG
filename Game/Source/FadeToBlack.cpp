@@ -64,8 +64,11 @@ bool FadeToBlack::Update(float dt)
 			if(ImagesOnOff)
 			{
 				//Si se quiere añadir otra script que necesite pasar entre dos imagenes debe ponerse aquí
-				if(app->cutScene->active)
+				if (app->cutScene->active)
+				{
 					app->cutScene->currentTexture = ImageToEnter;
+					app->cutScene->TextTimerToPrint = true;
+				}
 
 				if (app->puzzleManager->active)
 				{

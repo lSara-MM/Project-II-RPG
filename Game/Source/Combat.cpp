@@ -415,9 +415,6 @@ bool Combat::CleanUp()
 		app->questManager->active = true;
 	}
 
-	//Para load de player en hTerror
-	app->hTerrors->combatEnd = true;
-
 	//Unload inventory
 	app->inventory->Disable();
 	app->itemManager->Disable();

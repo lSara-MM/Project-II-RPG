@@ -43,6 +43,7 @@ public:
 public:
 
 	SDL_Texture* currentTexture;
+	bool TextTimerToPrint;
 
 private:
 	int passImg;

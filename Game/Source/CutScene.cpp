@@ -74,6 +74,7 @@ bool CutScene::Start()
 	currentTexture = ImgToPrint.At(passImg)->data;
 
 	StopCutScene = true;
+	TextTimerToPrint = true;
 
 	return true;
 }
@@ -106,6 +107,8 @@ bool CutScene::Update(float dt)
 
 			passImg += 1;
 			StopCutScene = true;
+			textHasEnded = false;
+			TextTimerToPrint = false;
 
 			app->render->ResetDtText();
 			RestartTimer();
@@ -115,6 +118,23 @@ bool CutScene::Update(float dt)
 	//Esto renderiza la imagen que ahora está en pantalla
 	if (passImg <= ImgToPrint.Count() - 1)
 		app->render->DrawTexture(currentTexture, 0, 0);
+
+
+	if (TextTimerToPrint)
+	{
+		//Aquí se printa el texto
+		if (printText)
+		{
+			if (passImg <= NextText.Count() - 1)
+			{
+				text = NextText.At(passImg)->next->data.c_str();
+
+				textHasEnded = app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 20, 100,
+					{ 255, 255, 255 }, Font::TEXT, 0, 30.0f);
+				//app->render->TextDraw(NextText.At(passImg)->next->data, 20, app->win->GetHeight() - 100, 15, Font::UI, { 255, 255, 255 });
+			}
+		}
+	}
 
 	//Esto renderiza y permite que puedas volver a dar al espacio apareciendo el texto Press Space cada segundo
 	if (DeltaTime >= 1)
@@ -131,43 +151,33 @@ bool CutScene::Update(float dt)
 		}
 	}
 
-	//Aquí se printa el texto
-	if (printText)
+	if (TextTimerToPrint)
 	{
-		if (passImg <= NextText.Count() - 1)
+		if (passImg >= ImgToPrint.Count() - 1)
 		{
-			text = NextText.At(passImg)->next->data.c_str();
+			//Sara:Aquí te bloqueo para que señor pugi no pueda pasar con Espacio mas imagenes y pete xd
+			StopCutScene = true;
 
-			textHasEnded = app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 20, 100,
-				{ 255, 255, 255 }, Font::TEXT, 0, 30.0f);
-			//app->render->TextDraw(NextText.At(passImg)->next->data, 20, app->win->GetHeight() - 100, 15, Font::UI, { 255, 255, 255 });
-		}
-	}
+			// enable text input
+			if (!app->input->playerName->input_entered)
+			{
+				app->input->ActiveGetInput(app->input->playerName);
+			}
 
-	if (passImg >= ImgToPrint.Count() - 1)
-	{
-		//Sara:Aquí te bloqueo para que señor pugi no pueda pasar con Espacio mas imagenes y pete xd
-		StopCutScene = true;
+			// render input
+			if (app->input->getInput_B)
+			{
+				// TO DO adjust position when bg done
+				iPoint pos = { 520, 570 };
+				app->input->RenderTempText("%%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
+			}
 
-		// enable text input
-		if (!app->input->playerName->input_entered)
-		{
-			app->input->ActiveGetInput(app->input->playerName);
-		}
-
-		// render input
-		if (app->input->getInput_B)
-		{
-			// TO DO adjust position when bg done
-			iPoint pos = { app->win->GetWidth() - 330, 600 };
-			app->input->RenderTempText("Sign:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
-		}
-
-		// if name entered, fade to black
-		if (app->input->playerName->input_entered)
-		{
-			//Sara: Aquí es que ha llegado al final de todas las imagenes y textos
-			app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+			// if name entered, fade to black
+			if (app->input->playerName->input_entered)
+			{
+				//Sara: Aquí es que ha llegado al final de todas las imagenes y textos
+				app->fade->FadingToBlack(this, (Module*)app->scene, 90);
+			}
 		}
 	}
 
@@ -190,10 +200,12 @@ bool CutScene::PostUpdate()
 {
 	bool ret = true;
 
-	//if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	//{
-	//	app->fade->FadingToBlack(this, (Module*)app->scene, 90);
-	//}
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		passImg = ImgToPrint.Count() - 1;
+		currentTexture = ImgToPrint.At(passImg)->data;
+		text = NextText.At(passImg)->next->data.c_str();
+	}
 
 	return ret;
 }
