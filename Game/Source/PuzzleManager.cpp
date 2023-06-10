@@ -877,7 +877,7 @@ bool PuzzleManager::Dun2Update()
 		{
 			app->render->DrawTexture(textureE, posBoss2.x - widthBoss2 - 20, posBoss2.y - heightBoss2);
 
-			if(app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			if(app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_DOWN)
 			{
 				//Eric: Aquí la transición a combate y el cleanUp de este puzzle
 				//Cuando mates al boss no te olvides de poner esta variable a true y hace un save: bossIsDeadDun2

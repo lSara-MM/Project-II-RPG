@@ -62,6 +62,14 @@ bool Forge::Update(float dt)
 				app->itemManager->nodeList[i]->button->state = GuiControlState::NONE;
 			}
 		}
+		for (size_t i = 0; i < app->itemManager->armorItems.size(); i++)//poner invisibles los botones creados
+		{
+			if (app->itemManager->armorItems[i]->button != nullptr)
+			{
+				app->itemManager->armorItems[i]->button->state = GuiControlState::NONE;
+			}
+		}
+
 		if (posYforgeAnimation == -750)
 		{
 			this->Disable();
@@ -171,6 +179,13 @@ bool Forge::PostUpdate()
 	//raton
 	app->input->RenderMouse();
 
+	if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == ButtonState::BUTTON_DOWN)//con mando es bastante molesto tener que ir con el mouse al boton de cerrar
+	{
+		forgeTransition_B = true;
+		exitButton->isForward_B = false;
+		forgeButton->isForward_B = false;
+		app->scene->player->lockMovement = false;
+	}
 	return true;
 }
 
@@ -410,6 +425,7 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 		forgeTransition_B = true;
 		exitButton->isForward_B = false;
 		forgeButton->isForward_B = false;
+		app->scene->player->lockMovement = false;
 		break;
 	case 1502:
 		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)

@@ -172,7 +172,11 @@ bool Store::PostUpdate()
 
 	if ( app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == ButtonState::BUTTON_DOWN)//con mando es bastante molesto tener que ir con el mouse al boton de cerrar
 	{
-		this->Disable();
+		storeTransition_B = true;
+		buyButton->isForward_B = false;
+		closeStore->isForward_B = false;
+		Add->isForward_B = false;
+		Minus->isForward_B = false;
 		app->scene->player->lockMovement = false;
 	}
 
