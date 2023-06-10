@@ -131,15 +131,7 @@ bool SceneWin_Lose::Update(float dt)
 		app->render->TextDraw("VICTORY", 255, offset + point * (50 - offset), 175, Font::TEXT, { 255,255,255 });
 		if (app->puzzleManager->fightBoss1)
 		{
-			if (app->hTerrors->active)
-			{
-				app->puzzleManager->bossIsDead = true;
-			}
-			if (app->BeastT->active)
-			{
-				app->puzzleManager->bossIsDeadDun2 = true;
-			}
-
+			app->puzzleManager->bossIsDead = true;
 			app->questManager->SaveState();
 		}
 		if (app->puzzleManager->fightBoss2)
