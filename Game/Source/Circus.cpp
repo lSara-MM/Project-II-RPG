@@ -81,7 +81,6 @@ bool Circus::Start()
 	app->entityManager->Enable();
 	app->questManager->Enable();
 
-
 	// If se ha guardado anteriormente, teleport el player donde estaba en el guardado
 	if (app->input->coso)
 	{
