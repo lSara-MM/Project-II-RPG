@@ -55,6 +55,10 @@ public:
 public:
 	pugi::xml_document crafts;
 
+private:
+
+	const char* fxforgepath;
+	uint forgefx;
 };
 
 #endif // __FORGE_H__
