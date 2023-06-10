@@ -134,7 +134,7 @@ bool CutScene::Update(float dt)
 	//Aquí se printa el texto
 	if (printText)
 	{
-		if (passImg <= ImgToPrint.Count() - 1)
+		if (passImg <= NextText.Count() - 1)
 		{
 			text = NextText.At(passImg)->next->data.c_str();
 

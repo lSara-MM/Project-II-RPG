@@ -433,7 +433,7 @@ bool Player::Update(float dt)
 	if (app->BeastT->active)
 	{
 		//3899 1027
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 1256 / 10, offset + point * (posMiniMap.y + 2978 / 10 - offset));
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 1056 / 10, offset + point * (posMiniMap.y + 2978 / 10 - offset));
 	}
 
 	//}
