@@ -349,24 +349,19 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::COMBAT_TARGET:
 				break;
 			case ButtonType::SKILL_1:
-				rect.x = bounds.w * 2;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 0, 3);
 				break;
 			case ButtonType::SKILL_2:
-				rect.x = bounds.w * 11;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 1, 3);
 				break;
 			case ButtonType::SKILL_3:
-				rect.x = bounds.w * 14;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 2, 3);
 				break;
 			case ButtonType::SKILL_4:
-				rect.x = bounds.w * 5;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				DrawSkill(app->combat->listInitiative.At(app->combat->charaInTurn)->data->id, 3, 3);
 				break;
 			case ButtonType::CHANGE_POSITION:
-				rect.x = bounds.w * 8;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
+				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::SKIPPY:
 				break;
@@ -707,8 +702,6 @@ bool GuiButton::Draw(Render* render)
 			case ButtonType::CHANGE_POSITION:
 				break;
 			case ButtonType::SKIPPY:
-				rect.x = bounds.w * 2;
-				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
 				break;
 			case ButtonType::PARTY:
 				rect = { 0, 0, 164, 248};

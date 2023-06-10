@@ -58,9 +58,6 @@
     <ClCompile Include="Source\HouseOfTerrors.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Circus.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Source\PracticeTent.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -219,9 +216,6 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\HouseOfTerrors.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Circus.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\PracticeTent.h">
