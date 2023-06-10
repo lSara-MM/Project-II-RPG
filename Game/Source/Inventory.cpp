@@ -160,7 +160,7 @@ bool Inventory::Update(float dt)
 		inventoryAnimation.Foward();
 	}
 
-	inventoryAnimation.Step(2, false);
+	inventoryAnimation.Step(4, false);
 
 	float point = inventoryAnimation.GetPoint();
 	int offset = -1300;
