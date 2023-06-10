@@ -48,12 +48,13 @@ public:
 	// Param particle	- A template particle from which the new particle will be created
 	// Param x, y		- Position x,y in the screen (upper left axis)
 	// Param delay		- Delay time from the moment the function is called until the particle is displayed in screen
-	Particle* AddParticle(const Particle& particle, int x, int y, uint delay = 0);
+	Particle* AddParticle(int x, int y, uint delay = 0);
 
 public:
 	//Template particle for an explosion
 	Particle explosion;
 	Particle explosionG;
+	int Modulo = 0;
 
 	//Template particle for a laser
 	//Particle laser;
@@ -107,7 +108,7 @@ private:
 	SDL_Texture* texture0 = nullptr;
 	SDL_Texture* texture1 = nullptr;
 	SDL_Texture* texture2 = nullptr;
-	int Modulo = 0;
+	
 
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };

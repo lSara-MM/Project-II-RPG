@@ -242,12 +242,12 @@ TargetingMethod //Como se ataca
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
-	<skill name="Blinding Paint" id="31" description="A blinding wave of ghost paint."
+	<skill name="Blinding Paint" id="31" description="A blinding wave of ghost paint that lowers accurcy and crit chance."
 		   type="2" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="-0.3" bonusAccuracy="90" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="true" autoTarget="false"
-		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-30"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
+		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-20"
+		   secondStatusID="2" secondStatusPositive="false" secondStatusDuration="2" secondStatusIntesity="-20"		   
 	/>
 
 	<skill name="Curse of pain " id="32" description="A high accuracy curse that greatly lowers defense and dodge."
@@ -272,7 +272,7 @@ TargetingMethod //Como se ataca
 		   type="2" movementCaster="0"  movementTarget="2" targetMethod="0"
 	   multiplierDmg="-1.3" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
-		   firstStatusID="6" firstStatusPositive="false" firstStatusDuration="4" firstStatusIntesity="-90"
+		   firstStatusID="6" firstStatusPositive="false" firstStatusDuration="4" firstStatusIntesity="-200"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 	<skill name="Intangibility" id="35" description="A defensive buff that makes the specter nearly invincible."
@@ -285,7 +285,7 @@ TargetingMethod //Como se ataca
 
 	<skill name="Nigthmarish strike" id="36" description="A strike to the backline with high damage that can stun."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="1"
-	   multiplierDmg="-2.5" bonusAccuracy="90" bonusCritRate="20" bonusCritDamage="30"
+	   multiplierDmg="-2.8" bonusAccuracy="90" bonusCritRate="20" bonusCritDamage="30"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="1" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="9" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="1"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
@@ -391,39 +391,6 @@ TargetingMethod //Como se ataca
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 
-	<!--Skills Anguila-->
-
-	<skill name="Fangs Shrapnel" id="45" description="An unaccurate attack that damages two allies."
-		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="-1.0" bonusAccuracy="85" bonusCritRate="20" bonusCritDamage="20"
-		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
-		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
-		   />
-
-	<skill name="Slide Back" id="46" description="A withdrawal to the backiline that also increases highly dodge and resistance."
-		   type="2" movementCaster="1"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="0" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
-		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="true"
-		   firstStatusID="6" firstStatusPositive="true" firstStatusDuration="1" firstStatusIntesity="100"
-		   secondStatusID="7" secondStatusPositive="false" secondStatusDuration="2" secondStatusIntesity="50"
-	/>
-	<skill name="Abysal Gaze" id="47" description="A paralyzing gaze that reduces resistance."
-		   type="3" movementCaster="0"  movementTarget="0" targetMethod="3"
-	   multiplierDmg="0" bonusAccuracy="130" bonusCritRate="-200" bonusCritDamage="0"
-		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
-		   firstStatusID="7" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-40"
-		   secondStatusID="10" secondStatusPositive="false" secondStatusDuration="1" secondStatusIntesity="-1"
-	/>
-
-	<skill name="Electrostatic discharge" id="48" description="A powerful discharge that causes a powerful burn on the target."
-		   type="0" movementCaster="0"  movementTarget="-1" targetMethod="4"
-	   multiplierDmg="-1.5" bonusAccuracy="100" bonusCritRate="10" bonusCritDamage="15"
-		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
-		   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-35"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
-	/>
-
 	<!--Skills Fire Tamer-->
 
 	<skill name="Whip Slash" id="49" description="A reaping atack with the whip that damages all and set on fire eternally."
@@ -471,7 +438,7 @@ TargetingMethod //Como se ataca
 		   type="2" movementCaster="-3"  movementTarget="3" targetMethod="5"
 	   multiplierDmg="-2.0" bonusAccuracy="50" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
-		   firstStatusID="9" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="1"
+		   firstStatusID="9" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="1"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 	<skill name="Cursing gaze" id="55" description="A curse to all allies."
