@@ -169,14 +169,14 @@ bool Character::Update(float dt)
 		// Health
 		string HP_C = std::to_string(currentHp);
 		const char* ch_hp = HP_C.c_str();
-		app->render->TextDraw(ch_hp, position.x + 60, position.y - 57, 15, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw(ch_hp, position.x + 60, position.y - 57, 15, Font::UI, { 255, 246, 240 });
 
 		// Health bar
 		app->render->DrawRectangle({ position.x - 3, position.y - 37, 106, 16 }, 0, 0, 0);
 		app->render->DrawRectangle({ position.x, position.y - 34, (currentHp * 100 / maxHp), 10 }, 181, 33, 33);
 
 		// Character name
-		app->render->TextDraw(name.GetString(), position.x + 3, position.y - 20, 11, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw(name.GetString(), position.x + 3, position.y - 20, 11, Font::UI, { 255, 246, 240 });
 
 		//Si es su turno pues hace cosas
 		if (onTurn)

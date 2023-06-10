@@ -130,7 +130,7 @@ bool CutScene::Update(float dt)
 
 	if (TextTimerToPrint)
 	{
-		//Aqu� se printa el texto
+		//Printa el texto
 		if (printText)
 		{
 			if (passImg <= NextText.Count() - 1)
@@ -139,8 +139,7 @@ bool CutScene::Update(float dt)
 				app->render->DrawRectangle(rect, 0, 0, 0, 100);
 				text = NextText.At(passImg)->next->data.c_str();
 				textHasEnded = app->render->RenderTrimmedText(20, app->win->GetHeight() - 100, 2, text, &texts, 20, 100,
-					{ 255, 255, 255 }, Font::TEXT, 0, 30.0f);
-				//app->render->TextDraw(NextText.At(passImg)->next->data, 20, app->win->GetHeight() - 100, 15, Font::UI, { 255, 255, 255 });
+					{ 255, 246, 240 }, Font::TEXT, 0, 30.0f);
 			}
 		}
 	}
@@ -155,7 +154,7 @@ bool CutScene::Update(float dt)
 			if (passImg <= ImgToPrint.Count() - 2 && textHasEnded)
 			{
 				StopCutScene = false;
-				app->render->TextDraw("PRESS SPACE", app->win->GetWidth() - 200, app->win->GetHeight() - 50, 10, Font::UI, { 255, 255, 255 });
+				app->render->TextDraw("PRESS SPACE", app->win->GetWidth() - 200, app->win->GetHeight() - 50, 10, Font::UI, { 255, 246, 240 });
 			}
 		}
 	}
@@ -176,8 +175,8 @@ bool CutScene::Update(float dt)
 			if (app->input->getInput_B)
 			{
 				// TO DO adjust position when bg done
-				iPoint pos = { 520, 570 };
-				app->input->RenderTempText("%%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
+				iPoint pos = { 540, 575 };
+				app->input->RenderTempText("%%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 246, 240 });
 			}
 
 			// if name entered, fade to black

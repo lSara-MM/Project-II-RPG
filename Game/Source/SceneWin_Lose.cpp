@@ -145,7 +145,7 @@ bool SceneWin_Lose::Update(float dt)
 			app->audio->PlayFx(confirmInteractfx);
 			transition_B = true;
 		}
-		app->render->TextDraw("Press Enter to continue", 1000, 670, 20, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press Enter to continue", 1000, 670, 20, Font::UI, { 255, 246, 240 });
 	}
 	else
 	{

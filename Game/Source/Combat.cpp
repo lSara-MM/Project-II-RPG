@@ -285,14 +285,14 @@ bool Combat::Update(float dt)
 	//God Mode Info
 	if (app->input->godMode_B)
 	{
-		app->render->TextDraw("Press F3 instant win", 10, 20, 12, Font::UI, { 255, 255, 255 });
-		app->render->TextDraw("Press F4 instant lose", 10, 40, 12, Font::UI, { 255, 255, 255 });
-		app->render->TextDraw("Press 1 to destroy first ally", 10, 60, 12, Font::UI, { 255, 255, 255 });
-		app->render->TextDraw("Press 2 to destroy first enemy", 10, 80, 12, Font::UI, { 255, 255, 255 });
-		app->render->TextDraw("Press 3 next turn", 10, 100, 12, Font::UI, { 255, 255, 255 });
-		app->render->TextDraw("Press 4 enemies button handle", 10, 120, 12, Font::UI, { 255, 255, 255 });
-		app->render->TextDraw("Press 5 allies button handle", 10, 140, 12, Font::UI, { 255, 255, 255 });
-		app->render->TextDraw("Press 6 fully heal party", 1100, 20, 12, Font::UI, { 255, 255, 255 });
+		app->render->TextDraw("Press F3 instant win", 10, 20, 12, Font::UI, { 255, 246, 240 });
+		app->render->TextDraw("Press F4 instant lose", 10, 40, 12, Font::UI, { 255, 246, 240 });
+		app->render->TextDraw("Press 1 to destroy first ally", 10, 60, 12, Font::UI, { 255, 246, 240 });
+		app->render->TextDraw("Press 2 to destroy first enemy", 10, 80, 12, Font::UI, { 255, 246, 240 });
+		app->render->TextDraw("Press 3 next turn", 10, 100, 12, Font::UI, { 255, 246, 240 });
+		app->render->TextDraw("Press 4 enemies button handle", 10, 120, 12, Font::UI, { 255, 246, 240 });
+		app->render->TextDraw("Press 5 allies button handle", 10, 140, 12, Font::UI, { 255, 246, 240 });
+		app->render->TextDraw("Press 6 fully heal party", 1100, 20, 12, Font::UI, { 255, 246, 240 });
 	}
 	
 	app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt);
@@ -1024,7 +1024,7 @@ bool Combat::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		if (Flee())
 		{
-			// TO DO: return to scene or what? 
+			app->LoadFromFile(this);
 		}
 		else
 		{

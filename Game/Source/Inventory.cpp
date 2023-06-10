@@ -507,7 +507,6 @@ bool Inventory::OnGuiMouseHoverEvent(GuiControl* control)
 
 bool Inventory::OnGuiMouseOutHoverEvent(GuiControl* control)
 {
-
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 	{
 		if (app->itemManager->nodeList[i]->button != nullptr && app->itemManager->nodeList[i]->button->id == control->id)
@@ -729,16 +728,6 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 		}
 	}
 
-	/*if (chara->listSkills.At(i)->data->posToUseStart_I <= chara->positionCombat_I && chara->positionCombat_I <= chara->listSkills.At(i)->data->posToUseEnd_I && chara->charaType == CharacterType::ALLY)
-	{
-		listButtons.At(offset + i)->data->state = GuiControlState::NORMAL;
-		listButtons.At(offset + i)->data->isSelected = false;
-	}
-	else
-	{
-		listButtons.At(offset + i)->data->state = GuiControlState::SELECTED;
-		listButtons.At(offset + i)->data->isSelected = true;
-	}*/
 	return true;
 }
 
@@ -778,12 +767,20 @@ void Inventory::ChangeArrParty(int prevId, int newId)
 
 void Inventory::InitArr()
 {
+	int aux = 1;
 	// init array
 	for (int i = 0; i < arrCharas.size(); i++)
 	{
 		arrCharas.at(i) = nullptr;
-		if (i < 4) { arrCharas.at(i) = app->itemManager->arrParty.at(i); }
-		else { if (i < app->itemManager->vecPC.size()) { arrCharas.at(i) = app->itemManager->vecPC.at(i); } }		
+		if (i < 4) 
+		{
+			arrCharas.at(i) = app->itemManager->arrParty.at(i);
+			aux = i + 1;
+		}
+		else if (i <= app->itemManager->vecPC.size() && aux < app->itemManager->vecPC.size())
+		{
+			arrCharas.at(i) = app->itemManager->vecPC.at(i - 1);
+		}
 	}
 
 	// Party buttons
@@ -882,166 +879,117 @@ void Inventory::DrawParty(float point, int offset)
 	// down right
 	if (arrCharas.at(3) != nullptr)
 	{
-		if (arrCharas.at(3)->positionCombat_I > -1)
+		switch (arrCharas.at(3)->id)
 		{
-			//app->render->DrawTexture(charlockedIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+		case 0:
+			app->render->DrawTexture(protaIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+			break;
+		case 1:
+			app->render->DrawTexture(compaIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+			break;
+		case 2:
+			app->render->DrawTexture(twinsIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+			break;
+		case 3:
+			app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
+			break;
 		}
-		else
-		{
-			switch (arrCharas.at(3)->id)
-			{
-			case 0:
-				app->render->DrawTexture(protaIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-				break;
-			case 1:
-				app->render->DrawTexture(compaIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-				break;
-			case 2:
-				app->render->DrawTexture(twinsIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-				break;
-			case 3:
-				app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 354 - app->render->camera.y);
-				break;
-			}
-		}		
 	}
 
 	// next page
-	if (arrCharas.size() < 5)
+	// up left
+	if (arrCharas.at(4) != nullptr)
 	{
-		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+		switch (arrCharas.at(4)->id)
+		{
+		case 0:
+			app->render->DrawTexture(protaIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+			break;
+		case 1:
+			app->render->DrawTexture(compaIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+			break;
+		case 2:
+			app->render->DrawTexture(twinsIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+			break;
+		case 3:
+			app->render->DrawTexture(fireIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+			break;
+		}
 	}
 	else
 	{
-		// up left
-		if (arrCharas.at(4) != nullptr)
-		{
-			if (arrCharas.at(4)->positionCombat_I > -1)
-			{
-				app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-			}
-			else
-			{
-				switch (arrCharas.at(4)->id)
-				{
-				case 0:
-					app->render->DrawTexture(protaIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-					break;
-				case 1:
-					app->render->DrawTexture(compaIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-					break;
-				case 2:
-					app->render->DrawTexture(twinsIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-					break;
-				case 3:
-					app->render->DrawTexture(fireIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-					break;
-				}
-			}			
-		}
-		else
-		{
-			app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-		}
+		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+	}
 
-		// up right
-		if (arrCharas.at(5) != nullptr)
+	// up right
+	if (arrCharas.at(5) != nullptr)
+	{
+		switch (arrCharas.at(5)->id)
 		{
-			if (arrCharas.at(5)->positionCombat_I > -1)
-			{
-				app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-			}
-			else
-			{
-				switch (arrCharas.at(5)->id)
-				{
-				case 0:
-					app->render->DrawTexture(protaIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-					break;
-				case 1:
-					app->render->DrawTexture(compaIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-					break;
-				case 2:
-					app->render->DrawTexture(twinsIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-					break;
-				case 3:
-					app->render->DrawTexture(fireIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-					break;
-				}
-			}			
-		}
-		else
-		{
-			app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
-		}
-
-		// down left
-		if (arrCharas.at(6) != nullptr)
-		{
-			if (arrCharas.at(6)->positionCombat_I > -1)
-			{
-				app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-			}
-			else
-			{
-				switch (arrCharas.at(6)->id)
-				{
-				case 0:
-					app->render->DrawTexture(protaIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-					break;
-				case 1:
-					app->render->DrawTexture(compaIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-					break;
-				case 2:
-					app->render->DrawTexture(twinsIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-					break;
-				case 3:
-					app->render->DrawTexture(fireIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-					break;
-				}
-			}
-		}
-		else
-		{
-			app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-		}
-
-		// down right
-		if (arrCharas.at(7) != nullptr)
-		{
-			if (arrCharas.at(7)->positionCombat_I > -1)
-			{
-				app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-			}
-			else
-			{
-				switch (arrCharas.at(7)->id)
-				{
-				case 0:
-					app->render->DrawTexture(protaIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-					break;
-				case 1:
-					app->render->DrawTexture(compaIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-					break;
-				case 2:
-					app->render->DrawTexture(twinsIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-					break;
-				case 3:
-					app->render->DrawTexture(fireIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
-					break;
-				}
-			}
-		}
-		else
-		{
-			app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+		case 0:
+			app->render->DrawTexture(protaIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+			break;
+		case 1:
+			app->render->DrawTexture(compaIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+			break;
+		case 2:
+			app->render->DrawTexture(twinsIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+			break;
+		case 3:
+			app->render->DrawTexture(fireIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+			break;
 		}
 	}
-	if (lastPressed!=-1)
+	else
 	{
-		app->render->DrawTexture(selectedIMG, listPartyButtons.At(lastPressed)->data->bounds.x - app->render->camera.x, listPartyButtons.At(lastPressed)->data->bounds.y - app->render->camera.y);
+		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 95 - app->render->camera.y);
+	}
+
+	// down left
+	if (arrCharas.at(6) != nullptr)
+	{
+		switch (arrCharas.at(6)->id)
+		{
+		case 0:
+			app->render->DrawTexture(protaIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+			break;
+		case 1:
+			app->render->DrawTexture(compaIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+			break;
+		case 2:
+			app->render->DrawTexture(twinsIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+			break;
+		case 3:
+			app->render->DrawTexture(fireIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+			break;
+		}
+	}
+	else
+	{
+		app->render->DrawTexture(charlockedIMG, offset + point * (695 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+	}
+
+	// down right
+	if (arrCharas.at(7) != nullptr)
+	{
+		switch (arrCharas.at(7)->id)
+		{
+		case 0:
+			app->render->DrawTexture(protaIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+			break;
+		case 1:
+			app->render->DrawTexture(compaIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+			break;
+		case 2:
+			app->render->DrawTexture(twinsIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+			break;
+		case 3:
+			app->render->DrawTexture(fireIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
+			break;
+		}
+	}
+	else
+	{
+		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
 	}
 }

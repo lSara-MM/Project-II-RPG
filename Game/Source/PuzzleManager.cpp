@@ -814,7 +814,7 @@ bool PuzzleManager::Dun1Update()
 	if (app->input->getInput_B)
 	{
 		iPoint pos = { app->win->GetWidth() / 4, 650 };
-		app->input->RenderTempText("Code:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 255, 255 });
+		app->input->RenderTempText("Code:  %%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 255, 246, 240 });
 	}
 
 	if (completeDungeon_B)
