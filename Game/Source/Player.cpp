@@ -387,6 +387,8 @@ bool Player::Update(float dt)
 		}
 	}
 
+	app->map->SpriteSortingTiled();
+
 	/*MiniMapa*/
 	posMiniMap.x = -app->render->camera.x + app->render->camera.w / 2 - widthMap / 2 - 50;
 	posMiniMap.y = -app->render->camera.y + app->render->camera.h / 2 - heightMap / 2 - 50;
@@ -454,8 +456,6 @@ bool Player::Update(float dt)
 	{
 		Controller(dtP);
 	}
-
-	app->map->SpriteSortingTiled();
 
 	return true;
 }
