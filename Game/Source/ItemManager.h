@@ -195,6 +195,16 @@ public:
 
 private:
 	pugi::xml_document items;
+
+	const char* fxpotypath;
+	uint potyfx;
+
+	const char* fxequippath;
+	uint equipfx;
+
+	const char* fxunequippath;
+	uint unequipfx;
+
 };
 
 #endif // __ITEMMANAGER_H__

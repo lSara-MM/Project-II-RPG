@@ -54,6 +54,9 @@ private:
 	int SellQuantity = 0;
 	int CurrentPrice = 0;
 
+	const char* fxbuypath;
+	uint buyfx;
+
 };
 
 #endif // __STORE_H__

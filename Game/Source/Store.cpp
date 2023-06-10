@@ -44,6 +44,9 @@ bool Store::Start()
 	storeTransition_B = false;
 	posYstoreAnimation = 0;
 
+	fxbuypath = "Assets/Audio/Fx/buy.wav";
+	buyfx = app->audio->LoadFx(fxbuypath);
+
 	return true;
 }
 
@@ -323,6 +326,9 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 				}
 			}
 		}
+
+		app->audio->PlayFx(buyfx);
+
 		break;
 
 	case 1502:
@@ -348,6 +354,7 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 				}
 			}
 		}
+		app->audio->PlayFx(buyfx);
 		break;
 	case 1503:
 		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
@@ -374,6 +381,7 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 				}
 			}
 		}
+		app->audio->PlayFx(buyfx);
 		break;
 	}
 
