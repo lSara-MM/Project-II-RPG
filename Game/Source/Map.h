@@ -140,6 +140,9 @@ public:
 
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
+	//Sprite Sorting
+	void SpriteSortingTiled();
+
 private:
 
 	bool LoadMap(pugi::xml_node mapFile, int ID);

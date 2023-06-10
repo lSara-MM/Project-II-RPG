@@ -139,7 +139,7 @@ bool Scene::Update(float dt)
 
 	//Inventory
 	if ((app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_Y) == ButtonState::BUTTON_DOWN)
-		&& !app->store->active && !app->dialogueSystem->active)
+		&& !app->store->active && !app->dialogueSystem->active && !app->forge->active)
 	{
 		if (app->inventory->active)
 		{
@@ -190,7 +190,7 @@ bool Scene::Update(float dt)
 bool Scene::PostUpdate()
 {
 	bool ret = true;
-
+	app->map->SpriteSortingTiled();
 	if (exit_B) return false;
 
 	//if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)

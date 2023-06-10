@@ -47,6 +47,7 @@ public:
 
 	// Settings
 	bool OnGuiMouseClickEvent(GuiControl* control);
+
 	
 public:
 

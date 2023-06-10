@@ -2,6 +2,7 @@
 #define __FADETOBLACK_H__
 
 #include "Module.h"
+#include "Tweening.h"
 #include "SDL\include\SDL_rect.h"
 
 struct SDL_Texture;
@@ -47,6 +48,9 @@ private:
 	bool modulesOnOff;
 	bool ImagesOnOff;
 
+	const char* texturepathIzq;
+	const char* texturepathDer;
+
 	// A frame count system to handle the fade time and ratio
 	Uint32 frameCount = 0;
 	Uint32 maxFadeFrames = 0;
@@ -60,8 +64,16 @@ private:
 	
 	SDL_Texture* ImageToPass = nullptr;
 	SDL_Texture* ImageToEnter = nullptr;
+	SDL_Texture* TransitionBG_Izq = nullptr;
+	SDL_Texture* TransitionBG_Der = nullptr;
 
 	pugi::xml_node configNode;
+
+private:
+	bool transition_B;
+	Tween backgroundAnimation;
+	int posYani_I;
+	bool returnTitle_B;
 };
 
 #endif //__FADETOBLACKH__
