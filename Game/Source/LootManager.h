@@ -551,7 +551,9 @@ class Chest
 				sensor = nullptr;
 			}
 
+			lootTable->CleanUp();
 			app->tex->UnLoad(texture);
+			currentAnimation = nullptr;
 
 			return true;
 		}

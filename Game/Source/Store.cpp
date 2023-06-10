@@ -340,7 +340,7 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 				}
 				else
 				{
-					if (app->itemManager->nodeList[i]->quantity < SellQuantity)
+					if (app->itemManager->nodeList[i]->quantity > SellQuantity)
 					{
 						SellQuantity++;
 						CurrentPrice = app->itemManager->nodeList[i]->price * SellQuantity;

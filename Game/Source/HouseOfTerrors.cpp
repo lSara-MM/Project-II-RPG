@@ -68,7 +68,11 @@ bool HouseOfTerrors::Start()
 	app->physics->collisions = false;
 
 	app->itemManager->Enable();
-	app->lootManager->Start();
+	if (app->lootManager->active)
+	{
+		app->lootManager->Start();
+	}
+	app->lootManager->Enable();
 	app->questManager->Enable();
 
 
