@@ -311,57 +311,6 @@ bool Player::Update(float dt)
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x - width * 2, position.y - height * 2, &rect, 1.0f, NULL, NULL, NULL, flipType);
 
-	/*MiniMapa*/
-	posMiniMap.x = -app->render->camera.x + app->render->camera.w / 2 - widthMap / 2;
-	posMiniMap.y = -app->render->camera.y + app->render->camera.h / 2 - heightMap / 2;
-
-	posMiniPlayer.x = posMiniMap.x + position.x / 10;
-	posMiniPlayer.y = posMiniMap.y + position.y / 10;
-
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_X) == ButtonState::BUTTON_DOWN)
-	{
-		MiniMap();
-	}
-
-	/*if (OpenMap)
-	{*/
-	if (transitionMap_B)
-	{
-		mapAnimation.Backward();
-	}
-	else
-	{
-		mapAnimation.Foward();
-	}
-	mapAnimation.Step(1, false);
-
-	float point = mapAnimation.GetPoint();
-	int offset = -1300;
-	app->render->DrawTexture(miniMap, posMiniMap.x, offset + point * (posMiniMap.y - offset));
-
-	if (app->scene->active)
-	{
-		//2659 4907
-		app->render->DrawTexture(dotPlayer, posMiniPlayer.x - 23, offset + point * (posMiniPlayer.y - 30 - offset));
-	}
-	if (app->hTerrors->active)
-	{
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10, offset + point * (posMiniMap.y + 4507 / 10 - offset));
-	}
-	if (app->practiceTent->active)
-	{
-		//4360 4385
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10, offset + point * (posMiniMap.y + 3585 / 10 - offset));
-	}
-	if (app->circus->active)
-	{
-		//3899 1027
-		app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10, offset + point * (posMiniMap.y + 350 / 10 - offset));
-	}
-
-	//}
-	/*MiniMapa*/
-
 	if (npcInteract)
 	{
 		app->render->DrawTexture(textureE, npcTalkingTo->position.x + npcTalkingTo->width / 2 - 12, npcTalkingTo->position.y - 60);
@@ -435,6 +384,60 @@ bool Player::Update(float dt)
 			app->audio->PlayFx(chestfx);
 		}
 	}
+
+	/*MiniMapa*/
+	posMiniMap.x = -app->render->camera.x + app->render->camera.w / 2 - widthMap / 2;
+	posMiniMap.y = -app->render->camera.y + app->render->camera.h / 2 - heightMap / 2;
+
+	posMiniPlayer.x = posMiniMap.x + position.x / 10;
+	posMiniPlayer.y = posMiniMap.y + position.y / 10;
+
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_X) == ButtonState::BUTTON_DOWN)
+	{
+		MiniMap();
+	}
+
+	if (transitionMap_B)
+	{
+		mapAnimation.Backward();
+	}
+	else
+	{
+		mapAnimation.Foward();
+	}
+	mapAnimation.Step(1, false);
+
+	float point = mapAnimation.GetPoint();
+	int offset = -1300;
+	app->render->DrawTexture(miniMap, posMiniMap.x, offset + point * (posMiniMap.y - offset));
+
+	if (app->scene->active)
+	{
+		//2659 4907
+		app->render->DrawTexture(dotPlayer, posMiniPlayer.x - 23, offset + point * (posMiniPlayer.y - 30 - offset));
+	}
+	if (app->hTerrors->active)
+	{
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 2259 / 10, offset + point * (posMiniMap.y + 4507 / 10 - offset));
+	}
+	if (app->practiceTent->active)
+	{
+		//4360 4385
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 4460 / 10, offset + point * (posMiniMap.y + 3585 / 10 - offset));
+	}
+	if (app->circus->active)
+	{
+		//3899 1027
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 3250 / 10, offset + point * (posMiniMap.y + 350 / 10 - offset));
+	}
+	if (app->BeastT->active)
+	{
+		//3899 1027
+		app->render->DrawTexture(dotPlayer, posMiniMap.x + 1256 / 10, offset + point * (posMiniMap.y + 2978 / 10 - offset));
+	}
+
+	//}
+	/*MiniMapa*/
 
 	if (!lockMovement)
 	{
