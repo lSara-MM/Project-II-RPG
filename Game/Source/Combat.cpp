@@ -372,15 +372,8 @@ bool Combat::CleanUp()
 	app->itemManager->Enable();
 
 	LOG("Freeing scene");
-	//Save al terminar
-	if (app->sceneWin_Lose->win == true)
-	{
-		if (firstCombat_B)
-		{
-			firstCombat_B = false;
-		}
-	}
 
+	//Save al terminar
 	HandleEndCombat();
 
 	if (profileTex != nullptr)
@@ -1083,7 +1076,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 	int xText2 = 400;//origen numeor stat dch
 	int xNumber2 = 546;//origen numeor stat dch
 	int offsetY = 4;//offset distancia entre linias
-	int fontSizeEnemies = 14;
+	int fontSizeEnemies = 12;
 	int posY = 535;//y botones
 
 	// target allies
@@ -1248,11 +1241,21 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			}
 			else
 			{
+				SDL_Color color = { 0, 0, 0 };
+				if (enemy->listSkillsHistory.end->data == i + 1)
+				{
+					color = { 181, 33, 33 };
+				}
+				else 
+				{
+					color = { 0, 0, 0 };
+				}
+
 				SString ability;
 				ability += enemy->listSkills.At(i)->data->name;
 				ability += ": ";
 				ability += enemy->listSkills.At(i)->data->description.GetString();
-				app->render->TextDraw(ability.GetString(), xText1, 540 + (fontSizeEnemies + offsetY) * i, fontSizeEnemies);
+				app->render->TextDraw(ability.GetString(), xText1, 540 + (fontSizeEnemies + offsetY) * i, fontSizeEnemies, Font::TEXT, color);
 			}
 
 			//Printar status effects

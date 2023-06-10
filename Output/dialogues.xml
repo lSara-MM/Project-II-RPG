@@ -416,7 +416,7 @@
 		<!-- Notes -->
   <dialogueTree ID="100">
 
-      <node id="0" name="NOTE 1" text="Guess how many sleigh bells does the puppet have to know the first number of the sequences">
+      <node id="0" name="NOTE 1" text="Guess how many sleigh bells does the puppet have to know the first number of the sequences. ">
         <choice id="0" option="Close." nextNode="-1" eventReturn="0"/>
       </node>
 
@@ -425,7 +425,7 @@
 
 	<dialogueTree ID="101">
 
-        <node id="0" name="NOTE 2" text="In the mirror it is found, count the knives to get the second number of the sequences">
+        <node id="0" name="NOTE 2" text="In the paintings it is found, count the knives to get the second number of the sequences. ">
           <choice id="0" option="Close." nextNode="-1" eventReturn="0"/>
         </node>
 
@@ -434,7 +434,7 @@
   
   <dialogueTree ID="102">
 
-    <node id="0" name="NOTE 3" text="It has this creepy look, the closet scratched by how many claws? that will be the third and last">
+    <node id="0" name="NOTE 3" text="It has this creepy look, the closet scratched by how many claws? that will be the third and last. ">
       <choice id="0" option="Close." nextNode="-1" eventReturn="0"/>
     </node>
 
