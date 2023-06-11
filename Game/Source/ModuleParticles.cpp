@@ -159,20 +159,19 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 	if (particleType == 0)
 	{
 		//Create circle around position designated
-		for (uint i = 0; i < quantity; ++i)
+		for (uint i = 0; i < quantity/2; ++i)
 		{
 			//Finding an empty slot for a new particle
 			if (particles[i] == nullptr)
 			{
-				int radius = 40;
 				newParticle = new Particle;
 				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
 
 				float particleX = x + static_cast<float>(rand() % 2);
 				float particleY = y + static_cast<float>(rand() % 2);
 
-				newParticle->speed.x = static_cast<float>(rand() % (speedX) + 1);
-				newParticle->speed.y = static_cast<float>(rand() % (speedY) + 1);
+				newParticle->speed.x = -static_cast<float>(rand() % static_cast<int>(speedX) + 1);
+				newParticle->speed.y = -static_cast<float>(rand() % static_cast<int>(speedY) + 1);
 
 				newParticle->position.x = particleX;						// so when frameCount reaches 0 the particle will be activated
 				newParticle->position.y = particleY;
@@ -180,6 +179,26 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 
 				particles[i] = newParticle;
 			}
+			for (uint i = 0; i < quantity / 2; ++i)
+			{
+				//Finding an empty slot for a new particle
+				if (particles[i] == nullptr)
+				{
+					newParticle = new Particle;
+					newParticle->lifetime = delay;			// We start the frameCount as the negative delay
+
+					float particleX = x + static_cast<float>(rand() % 2);
+					float particleY = y + static_cast<float>(rand() % 2);
+
+					newParticle->speed.x = static_cast<float>(rand() % static_cast<int>(speedX) + 1);
+					newParticle->speed.y = static_cast<float>(rand() % static_cast<int>(speedY) + 1);
+
+					newParticle->position.x = particleX;						// so when frameCount reaches 0 the particle will be activated
+					newParticle->position.y = particleY;
+					newParticle->isAlive = true;
+
+					particles[i] = newParticle;
+				}
 		}
 	}
 
