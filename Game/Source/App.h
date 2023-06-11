@@ -12,6 +12,7 @@
 #define SAVE_STATE_FILENAME "save_game.xml"
 
 #include "External/Optick/include/optick.h"
+#include "SDL_image/include/SDL_image.h"
 
 // Modules
 class Window;
@@ -162,7 +163,7 @@ private:
 	SString organization;
 
 	List<Module*> modules;
-
+	SDL_Surface* iconWindow = IMG_Load("Assets/Maps/prota_MiniMapa.png");
 	
 
 	Timer timer;
