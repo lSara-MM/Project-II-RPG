@@ -677,7 +677,8 @@ bool Combat::NextTurn()
 		charaInTurn = listInitiative.Count() - 1;
 	}
 	listInitiative.At(charaInTurn)->data->ReduceCountStatusEffects(); //Se borra al final de su turno para que puedas aplicarlo
-	listInitiative.At(charaInTurn++)->data->onTurn = false;
+	listInitiative.At(charaInTurn)->data->onTurn = false;
+	charaInTurn++;
 	
 	//Change turn
 	if (charaInTurn >= listInitiative.Count())
