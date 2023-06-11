@@ -279,6 +279,9 @@ bool PuzzleManager::Dun2Awake(pugi::xml_node& config)
 	 explosionpath = "Assets/Audio/Fx/explosion.wav";
 	 explosionfx = app->audio->LoadFx(explosionpath);
 
+	 tictacpath = "Assets/Audio/Fx/tic_tac.wav";
+	 tictacfx = app->audio->LoadFx(tictacpath);
+
 	 //Andreu Miro: Aquí carga los audios que quieras, aunque ya he visto que lo hiciste
 
 	return true;
@@ -1535,6 +1538,9 @@ bool PuzzleManager::ChickenBoomPuz()
 	if (BombCarryOn1)
 	{
 		//Andreu Miro: Aquí puedes poner el play music, este if está en funcionamiento mientras tienes la bomba aviso.
+		if (DeltaTime == 0.0 || DeltaTime == 1.0 || DeltaTime == 2.0 || DeltaTime == 3.0 || DeltaTime == 4.0) {
+			app->audio->PlayFx(tictacfx);
+		}
 
 		posBomb1.x = app->BeastT->player->position.x + 10;
 		posBomb1.y = app->BeastT->player->position.y + 25;
@@ -1762,6 +1768,9 @@ bool PuzzleManager::ChickenBoomPuz()
 	if (BombCarryOn2)
 	{
 		//Andreu Miro: Aquí puedes poner el play music, este if está en funcionamiento mientras tienes la bomba aviso.
+		if (DeltaTime == 0.0 || DeltaTime == 1.0 || DeltaTime == 2.0 || DeltaTime == 3.0 || DeltaTime == 4.0) {
+			app->audio->PlayFx(tictacfx);
+		}
 
 		posBomb2.x = app->BeastT->player->position.x + 10;
 		posBomb2.y = app->BeastT->player->position.y + 25;
@@ -1771,7 +1780,6 @@ bool PuzzleManager::ChickenBoomPuz()
 			//Andreu Miro: Aquí la bomba explotó si no llegaste a colocarla y te explotó en las manos, PauseMusic.
 
 			BombCarryOn2 = false;
-
 			app->audio->PlayFx(explosionfx);
 
 			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 1);
