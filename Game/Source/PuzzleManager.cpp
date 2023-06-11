@@ -907,6 +907,133 @@ bool PuzzleManager::Dun2Update()
 		app->render->DrawTexture(Boss2Texture, posBoss2.x - widthBoss2, posBoss2.y - heightBoss2);
 	}
 
+	//Quitar puzzle1
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		if (keySensor != nullptr)
+			keySensor->body->GetWorld()->DestroyBody(keySensor->body);
+
+		if (DoorKey1 != nullptr)
+			DoorKey1->body->GetWorld()->DestroyBody(DoorKey1->body);
+
+		if (DoorKey2 != nullptr)
+			DoorKey2->body->GetWorld()->DestroyBody(DoorKey2->body);
+
+		delete keySensor;
+		keySensor = nullptr;
+
+		delete DoorKey1;
+		DoorKey1 = nullptr;
+
+		keyDoors = true;
+
+		keySens = false;
+		keyInvent = false;
+		DoorsOpened = 0;
+
+		app->audio->PlayFx(solvedfx);
+
+		app->questManager->SaveState();
+	}	
+
+	//Quitar puzzle2
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		if (Bomb1 != nullptr)
+			Bomb1->body->GetWorld()->DestroyBody(Bomb1->body);
+		
+		if (Bomb2 != nullptr)
+			Bomb2->body->GetWorld()->DestroyBody(Bomb2->body);
+
+		if (Barricade1 != nullptr)
+			Barricade1->body->GetWorld()->DestroyBody(Barricade1->body);	
+		
+		if (Barricade2 != nullptr)
+			Barricade2->body->GetWorld()->DestroyBody(Barricade2->body);
+		
+		if (Barricade3 != nullptr)
+			Barricade3->body->GetWorld()->DestroyBody(Barricade3->body);
+		
+		if (Barricade4 != nullptr)
+			Barricade4->body->GetWorld()->DestroyBody(Barricade4->body);
+		
+		if (Barricade5 != nullptr)
+			Barricade5->body->GetWorld()->DestroyBody(Barricade5->body);
+
+		delete Bomb1;
+		Bomb1 = nullptr;
+
+		delete Bomb2;
+		Bomb2 = nullptr;
+
+		delete Barricade1;
+		Barricade1 = nullptr;
+
+		delete Barricade2;
+		Barricade2 = nullptr;	
+		
+		delete Barricade3;
+		Barricade3 = nullptr;
+		
+		delete Barricade4;
+		Barricade4 = nullptr;	
+		
+		delete Barricade5;
+		Barricade5 = nullptr;
+
+		BarricadeHasExploted1 = true;
+		BarricadeHasExploted2 = true;
+		BarricadeHasExploted3 = true;
+		BarricadeHasExploted4 = true;
+		BarricadeHasExploted5 = true;
+
+		chickenBoom = true;
+
+		BarricadesExplote = 0;
+
+		app->questManager->SaveState();
+	}	
+
+	//Quitar puzzle3
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	{
+		if (relic1 != nullptr)
+			relic1->body->GetWorld()->DestroyBody(relic1->body);
+
+		if (relic2 != nullptr)
+			relic2->body->GetWorld()->DestroyBody(relic2->body);
+
+		if (relic3 != nullptr)
+			relic3->body->GetWorld()->DestroyBody(relic3->body);
+
+		delete relic1;
+		relic1 = nullptr;
+
+		delete relic2;
+		relic2 = nullptr;
+
+		delete relic3;
+		relic3 = nullptr;
+
+		RelicInColumn1 = true;
+		RelicInColumn2 = true;
+		RelicInColumn3 = true;
+
+		relics = true;
+
+		RelicsCompleted = 0;
+
+		if (DoorBossP != nullptr)
+			DoorBossP->body->GetWorld()->DestroyBody(DoorBossP->body);
+
+		delete DoorBossP;
+		DoorBossP = nullptr;
+
+		app->audio->PlayFx(solvedfx);
+
+		app->questManager->SaveState();
+	}
+
 	if (BombPlant1 || BombPlant2 || BombCarryOn1 || BombCarryOn2)
 	{
 		mTicks = SDL_GetTicks() - mStartTicks;
@@ -1444,6 +1571,9 @@ bool PuzzleManager::KeyDoorsPuz()
 
 			keyInvent = true;
 			keySens = false;
+
+			delete DoorKey2;
+			DoorKey2 = nullptr;
 
 			app->questManager->SaveState();
 		}
