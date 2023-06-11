@@ -1442,7 +1442,7 @@ void Combat::RenderGuiChara(int charaID)
 
 void Combat::RenderSkillDescription(int controlID)
 {
-	if (app->combat->listInitiative.Count() < app->combat->charaInTurn)
+	if (app->combat->listInitiative.Count() > app->combat->charaInTurn)
 	{
 		if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ALLY)
 		{
