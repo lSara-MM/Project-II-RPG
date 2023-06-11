@@ -848,7 +848,7 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 
 		if (app->sceneWin_Lose->win)
 		{
-			int coins = rand() % 21;
+			int coins = 10 + rand() % 30;
 
 			app->itemManager->coins += coins;
 
