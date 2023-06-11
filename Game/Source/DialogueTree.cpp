@@ -181,6 +181,7 @@ bool DialogueTree::EventReturn(Module* mod, iPoint pos)
 
 		case DIALOGUE_DUCK_PUNISHER:
 			activeNode->choicesList.at(i)->eventReturn = 0;
+			activeNode->name = "ANGRY PINKY";
 			app->scene->listNpc.end->data->PinkyIsAngry();
 			
 			break;

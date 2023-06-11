@@ -157,5 +157,4 @@ void Npc::PinkyIsAngry()
 {
 	isAnimated = false;
 	dialoguesID.erase(dialoguesID.begin());
-	name = "ANGRY PINKY";
 }
