@@ -167,13 +167,12 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 				int radius = 40;
 				newParticle = new Particle;
 				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
-				float angle = (2 * 3.14159 * i) / 50;
 
-				float particleX = x + static_cast<float>(rand() % 3);
-				float particleY = y + static_cast<float>(rand() % 3);
+				float particleX = x + static_cast<float>(rand() % 2);
+				float particleY = y + static_cast<float>(rand() % 2);
 
-				newParticle->speed.x = static_cast<float>(rand() % (2 * speedX) - speedX);
-				newParticle->speed.y = 0;
+				newParticle->speed.x = static_cast<float>(rand() % (speedX) + 1);
+				newParticle->speed.y = static_cast<float>(rand() % (speedY) + 1);
 
 				newParticle->position.x = particleX;						// so when frameCount reaches 0 the particle will be activated
 				newParticle->position.y = particleY;
