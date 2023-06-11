@@ -1568,7 +1568,7 @@ bool PuzzleManager::ChickenBoomPuz()
 
 			app->audio->PlayFx(explosionfx);
 
-			app->moduleparticles->AddParticle(posBomb1.x - 32, posBomb1.y - 32, 40, 1);
+			app->moduleparticles->AddParticle(posBomb1.x - 32, posBomb1.y - 32, 40, 1, 100);
 
 			posBomb1.x = posChicken1.x + 64;
 			posBomb1.y = posChicken1.y;
@@ -1676,7 +1676,7 @@ bool PuzzleManager::ChickenBoomPuz()
 		{
 			//Andreu Miro: Aquí la bomba explotó colocada, PauseMusic.
 
-			app->moduleparticles->AddParticle(posBomb1.x - 32, posBomb1.y - 32, 40, 1);
+			app->moduleparticles->AddParticle(posBomb1.x - 32, posBomb1.y - 32, 40, 1, 100);
 
 			app->audio->PlayFx(explosionfx);
 			app->audio->PlayFx(solvedfx);
@@ -1797,7 +1797,7 @@ bool PuzzleManager::ChickenBoomPuz()
 			BombCarryOn2 = false;
 			app->audio->PlayFx(explosionfx);
 
-			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 1);
+			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 1, 100);
 
 			posBomb2.x = posChicken2.x + 64;
 			posBomb2.y = posChicken2.y;
@@ -1904,7 +1904,7 @@ bool PuzzleManager::ChickenBoomPuz()
 		{
 			//Andreu Miro: Aquí la bomba explotó colocada, PauseMusic.
 
-			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 1);
+			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 1, 100);
 
 			app->audio->PlayFx(explosionfx);
 			app->audio->PlayFx(solvedfx);

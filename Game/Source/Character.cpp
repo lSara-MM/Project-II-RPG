@@ -1022,7 +1022,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 	StatusEffect* statusEffect2 = new StatusEffect(skill->secondIntensity, skill->secondDuration, skill->secondPositiveEffect, (EffectType)skill->secondStatus);
 	if (skill->multiplierDmg >= 0) //Curacion o buffo, no hace falta calcular esquiva ni nada 
 	{
-		app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y, 40, 2);
+		app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y, 40, 2, 300);
 		app->audio->PlayFx(healfx);
 		
 		//Primer efecto de estado
@@ -1083,7 +1083,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			{
 				//El daño critico es mas potente
 				damage *= ( 100 + 2*(caster->GetStatModifier(EffectType::CRIT_DMG) * (skill->bonusCritDamage + caster->critDamage)) ) / 100;
-				app->moduleparticles->AddParticle(defender->position.x+(126/2), defender->position.y, 20, 0);
+				app->moduleparticles->AddParticle(defender->position.x+(126/2), defender->position.y, 20, 0, 300);
 				app->audio->PlayFx(critfx);
 			}
 

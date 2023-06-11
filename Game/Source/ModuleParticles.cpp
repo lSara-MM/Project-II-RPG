@@ -140,11 +140,16 @@ bool ModuleParticles::PostUpdate()
 	return true;
 }
 
-Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
+Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quantity)
 {
 	Particle* newParticle = nullptr;
 
-	for (uint i = 0; i < 500; ++i)
+	if(quantity > 500)
+	{
+		quantity = 500;
+	}
+
+	for (uint i = 0; i < quantity; ++i)
 	{
 		particles[i] = nullptr;
 	}
@@ -154,7 +159,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
 	if (Modulo == 0)
 	{
 		//Create circle around position designated
-		for (uint i = 0; i < 50; ++i)
+		for (uint i = 0; i < quantity; ++i)
 		{
 			//Finding an empty slot for a new particle
 			if (particles[i] == nullptr)
@@ -179,7 +184,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
 	if (Modulo == 1)
 	{
 		//Create particles like an explosion
-		for (uint i = 0; i < 100; ++i)
+		for (uint i = 0; i < quantity; ++i)
 		{
 			//Finding an empty slot for a new particle
 			if (particles[i] == nullptr)
@@ -206,7 +211,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
 	if (Modulo == 2 || Modulo == 3)
 	{
 		//Create particles like a curacion
-		for (uint i = 0; i < 100; ++i)
+		for (uint i = 0; i < quantity; ++i)
 		{
 			//Finding an empty slot for a new particle
 			if (particles[i] == nullptr)
