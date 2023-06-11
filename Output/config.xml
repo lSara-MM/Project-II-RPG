@@ -168,8 +168,8 @@
 		<Img texturepath="Assets/Textures/cinematica_prota.png"/>
 		<Img texturepath="Assets/Textures/cinematica_circo.png"/>
 		<Img texturepath="Assets/Textures/cinematica_villano.png"/>
-		<Img texturepath="Assets/Textures/cinematica_circo.png"/>
-		<Img texturepath="Assets/Textures/cinematica_circo.png"/>
+		<Img texturepath="Assets/Textures/cinematica_contratoPlayer.png"/>
+		<Img texturepath="Assets/Textures/cinematica_contratoMuestra.png"/>
 		<Img texturepath="Assets/Textures/cinematica_contrato.png"/>
 		<Img texturepath="Assets/Textures/cinematica_contrato.png"/>
 		<Text textpath="The postwar period has left Moscow destroyed, not just the streets, people have lost their trust and kindness. "/>
