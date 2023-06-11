@@ -1038,6 +1038,21 @@ bool PuzzleManager::Dun1CleanUp()
 
 bool PuzzleManager::Dun2CleanUp()
 {
+	BombContact1 = false;
+	BombContact2 = false;
+	BombCarryOn1 = false;
+	BombCarryOn2 = false;
+	BombPlant1 = false;
+	BombPlant2 = false;
+
+	posBomb1.x = posChicken1.x + 64;
+	posBomb1.y = posChicken1.y;	
+	
+	posBomb2.x = posChicken2.x + 64;
+	posBomb2.y = posChicken2.y;
+
+	RestartTimer();
+
 	if (!keyDoors) 
 	{
 		if (DoorKey1 != nullptr)
