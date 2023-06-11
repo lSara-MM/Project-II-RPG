@@ -279,6 +279,8 @@ bool PuzzleManager::Dun2Awake(pugi::xml_node& config)
 	 explosionpath = "Assets/Audio/Fx/explosion.wav";
 	 explosionfx = app->audio->LoadFx(explosionpath);
 
+	 //Andreu Miro: Aquí carga los audios que quieras, aunque ya he visto que lo hiciste
+
 	return true;
 }
 
@@ -670,6 +672,8 @@ bool PuzzleManager::Dun2Start()
 	relicColumn3->body->SetFixedRotation(true);
 	relicColumn3->ctype = ColliderType::RELICOLUMN;
 	relicColumn3->id = 3;
+
+	//Andreu Miro: Aquí carga los audios de la bomba
 
 	return true;
 }
@@ -1504,6 +1508,8 @@ bool PuzzleManager::ChickenBoomPuz()
 {
 	if (BombContact1) 
 	{
+		//Andreu Miro: Por si quieres aquí es cuando interactuas con la bomba 
+
 		if (!BombCarryOn2)
 		{
 			app->render->DrawTexture(textureE, posBomb1.x - 32, posBomb1.y - 80);
@@ -1528,11 +1534,15 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombCarryOn1)
 	{
+		//Andreu Miro: Aquí puedes poner el play music, este if está en funcionamiento mientras tienes la bomba aviso.
+
 		posBomb1.x = app->BeastT->player->position.x + 10;
 		posBomb1.y = app->BeastT->player->position.y + 25;
 
 		if (DeltaTime >= 6)
 		{
+			//Andreu Miro: Aquí la bomba explotó si no llegaste a colocarla y te explotó en las manos, PauseMusic.
+
 			BombCarryOn1 = false;
 
 			app->audio->PlayFx(explosionfx);
@@ -1609,6 +1619,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombPlant1) 
 	{
+		//Andreu Miro: Por si quieres aquí es cuando plantas la bomba 
+
 		if (BarricadeExplote1)
 		{
 			posBomb1.x = posBarricade1.x + widthBarricade1 / 6 - 10;
@@ -1641,6 +1653,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 		if(DeltaTime >= 2)
 		{
+			//Andreu Miro: Aquí la bomba explotó colocada, PauseMusic.
+
 			app->moduleparticles->AddParticle(posBomb1.x - 32, posBomb1.y - 32, 40, 1);
 
 			app->audio->PlayFx(explosionfx);
@@ -1721,6 +1735,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombContact2)
 	{
+		//Andreu Miro: Por si quieres aquí es cuando interactuas con la bomba 
+
 		if (!BombCarryOn1)
 		{
 			app->render->DrawTexture(textureE, posBomb2.x - 32, posBomb2.y - 80);
@@ -1745,11 +1761,15 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombCarryOn2)
 	{
+		//Andreu Miro: Aquí puedes poner el play music, este if está en funcionamiento mientras tienes la bomba aviso.
+
 		posBomb2.x = app->BeastT->player->position.x + 10;
 		posBomb2.y = app->BeastT->player->position.y + 25;
 
 		if (DeltaTime >= 6)
 		{
+			//Andreu Miro: Aquí la bomba explotó si no llegaste a colocarla y te explotó en las manos, PauseMusic.
+
 			BombCarryOn2 = false;
 
 			app->audio->PlayFx(explosionfx);
@@ -1825,6 +1845,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombPlant2)
 	{
+		//Andreu Miro: Por si quieres aquí es cuando plantas la bomba 
+
 		if (BarricadeExplote1)
 		{
 			posBomb2.x = posBarricade1.x + widthBarricade1 / 6 - 10;
@@ -1857,6 +1879,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 		if (DeltaTime >= 2)
 		{
+			//Andreu Miro: Aquí la bomba explotó colocada, PauseMusic.
+
 			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 1);
 
 			app->audio->PlayFx(explosionfx);
@@ -1982,6 +2006,8 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if(BarricadesExplote >= 5)
 	{
+		//Andreu Miro: Aquí se completó el puzzle, esto es si quieres y te sientes inspirado xd
+
 		chickenBoom = true;
 
 		BarricadesExplote = 0;
