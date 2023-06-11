@@ -54,8 +54,6 @@
             <choice id="1" option="Actually, I've changed my mind." nextNode="4" eventReturn="3"/>
         </node>
 
-    
-
         <node id="-1" text ="End of conversation -F1- to talk again"></node>
       </dialogueTree>
 
@@ -435,14 +433,21 @@
 	</dialogueTree>
 
 	<dialogueTree ID="27">
-		<node id="0" name="PINKY" text="Esto antes eran conejos mutantes asesinos. ">
-			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		<node id="0" name="PINKY" text="Tonto. ">
+			<choice id="0" option="Boba. " nextNode="-1" eventReturn="0"/>
 		</node>
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 
 	<dialogueTree ID="28">
 		<node id="0" name="PINKY" text="Con que ahora soy una cucaracha al parecer ya no soy sensei? ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+
+	<dialogueTree ID="29">
+		<node id="0" name="PINKY" text="Esto antes eran conejos mutantes asesinos. ">
 			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
 		</node>
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
