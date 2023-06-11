@@ -422,7 +422,7 @@ void ItemManager::UseItem(ItemNode* item)
 			{
 				if (item->type == 2 && item->equiped == true)
 				{
-					arrParty.at(i)->ModifyHP(item->hp);
+					arrParty.at(i)->ModifyHP(item->maxhp/5);
 					arrParty.at(i)->maxHp += item->maxhp;
 					arrParty.at(i)->armor += item->armor;
 					arrParty.at(i)->attack += item->attack;
