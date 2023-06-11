@@ -189,13 +189,13 @@ bool Character::Update(float dt)
 			app->render->DrawTexture(textureOnturn, position.x, position.y, &rect);
 			
 			//Si stunned pues no hace nada 
-			if (GetStat(EffectType::STUN)==1)
+			if (GetStat(EffectType::STUN) == 1)
 			{
 				if (!delayOn)
 				{
 					turnDelay.Start();
 					delayOn = true;
-					app->moduleparticles->AddParticle(position.x + (126 / 2), position.y, 30, 3, 300);
+					app->moduleparticles->AddParticle(position.x + (126 / 2), position.y, 30, 3, 10, 10, -3);
 				}
 				if ((turnDelay.ReadMSec() > 2000 && delayOn) || app->input->godMode_B)
 				{
@@ -1021,11 +1021,12 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 {
 	StatusEffect* statusEffect1 = new StatusEffect(skill->firstIntensity, skill->firstDuration, skill->firstPositiveEffect, (EffectType)skill->firstStatus);
 	StatusEffect* statusEffect2 = new StatusEffect(skill->secondIntensity, skill->secondDuration, skill->secondPositiveEffect, (EffectType)skill->secondStatus);
+	
 	if (skill->multiplierDmg >= 0) //Curacion o buffo, no hace falta calcular esquiva ni nada 
 	{
-		if (skill->multiplierDmg>0)
+		if (skill->multiplierDmg > 0)
 		{
-			app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y+178, 20, 2, 300);
+			app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y + 178, 20, 2, 20, 10, -3);
 			app->audio->PlayFx(healfx);
 		}
 		
@@ -1087,8 +1088,8 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			if (CalculateRandomProbability(caster->GetStatModifier(EffectType::CRIT_RATE) * (skill->bonusCritRate + caster->critRate))) //Si true hay critico
 			{
 				//El da�o critico es mas potente
-				damage *= ( 100 + 2*(caster->GetStatModifier(EffectType::CRIT_DMG) * (skill->bonusCritDamage + caster->critDamage)) ) / 100;
-				app->moduleparticles->AddParticle(defender->position.x+(126/2), defender->position.y, 20, 0, 300);
+				damage *= (100 + 2 * (caster->GetStatModifier(EffectType::CRIT_DMG) * (skill->bonusCritDamage + caster->critDamage))) / 100;
+				app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y, 20, 0, 10, 5, 0);
 				app->audio->PlayFx(critfx);
 			}
 

@@ -48,60 +48,13 @@ public:
 	// Param particle	- A template particle from which the new particle will be created
 	// Param x, y		- Position x,y in the screen (upper left axis)
 	// Param delay		- Delay time from the moment the function is called until the particle is displayed in screen
-	Particle* AddParticle(int x, int y, int delay, int m, int quantity);
+	Particle* AddParticle(int x, int y, int delay, int m, int quantity, int speedX = 6, int speedY = 0);
 
 public:
 	//Template particle for an explosion
 	Particle explosion;
 	Particle explosionG;
-	int Modulo = 0;
-
-	//Template particle for a laser
-	//Particle laser;
-
-	////Template particles for a normal bullet
-	//Particle bulletN;
-	//Particle bulletNE;
-	//Particle bulletE;
-	//Particle bulletSE;
-	//Particle bulletS;
-	//Particle bulletSW;
-	//Particle bulletW;
-	//Particle bulletNW;
-
-	//Particle TbulletN;
-	//Particle TbulletNE;
-	//Particle TbulletE;
-	//Particle TbulletSE;
-	//Particle TbulletS;
-	//Particle TbulletSW;
-	//Particle TbulletW;
-	//Particle TbulletNW;
-
-	//Particle enemyBullet;
-	//Particle enemyBulletL;
-	//Particle enemyBulletR;
-
-	//Particle deathAnim;
-	//Particle rescuedAnim;
-	//Particle deathredAnim;
-	//Particle deathgreenAnim;
-
-	//Particle BulletBoss;
-	//Particle BulletBossR;
-	//Particle BulletBossL;
-
-	//Particle granadeN;
-	//Particle granadeNE;
-	//Particle granadeE;
-	//Particle granadeSE;
-	//Particle granadeS;
-	//Particle granadeSW;
-	//Particle granadeW;
-	//Particle granadeNW;
-
-	//Particle playerdies;
-
+	int particleType = 0;
 
 private:
 	// Particles spritesheet loaded into an SDL Texture
@@ -113,7 +66,6 @@ private:
 
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };
-
 };
 
 #endif // !__MODULEPARTICLES_H__
