@@ -34,7 +34,6 @@
 #include "Pathfinding.h"
 #include "Physics.h"
 
-
 #include "Defs.h"
 #include "Log.h"
 
@@ -201,7 +200,7 @@ bool App::Start()
 		}
 		item = item->next;
 	}
-
+	SDL_SetWindowIcon(app->win->window, iconWindow);
 	LOG("----------------- Time Start(): %f", timer.ReadMSec());
 	return ret;
 }
