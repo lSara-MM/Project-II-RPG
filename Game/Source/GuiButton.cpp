@@ -373,6 +373,7 @@ bool GuiButton::Draw(Render* render)
 				}
 				break;
 			case ButtonType::CHANGE_POSITION:
+				rect.y = 101;
 				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
 				break;
 			case ButtonType::SKIPPY:

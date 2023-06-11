@@ -416,8 +416,8 @@ bool BeastTent::InitEntities()
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = app->entityManager->entityNode.child("player");
 	player->Awake();
-	player->position.x = 1817;
-	player->position.y = 1250;
+	player->position.x = 1952;
+	player->position.y = 1469;
 
 	return true;
 }

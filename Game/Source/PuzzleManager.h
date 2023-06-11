@@ -348,6 +348,14 @@ private:
 	const char* explosionpath;
 	uint explosionfx;
 
+	const char* tictacpath;
+	uint tictacfx;
+
+	// interact fx
+	const char* interactionPath;
+	uint interactionfx;
+	bool interactionTest;
+
 };
 
 #endif // __SCENE_H__

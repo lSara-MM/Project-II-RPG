@@ -213,8 +213,8 @@
 			x="2432" y="3392" width="64" height="64" texturepath="Assets/Textures/Lore_NPC.png"/>
 		
 		<npc name="PINKY" 
-			dialogueID="7" dialogueID="13"
-			x="3425" y="1105" width="64" height="64" texturepath="Assets/Textures/Pinky_The_Savior.png"/>
+			dialogueID="17" dialogueID="29"
+			x="3410" y="1105" width="64" height="64" texturepath="Assets/Textures/Pinky_The_Savior.png"/>
 	</scene>
 
   <SceneWin_Lose>
@@ -340,23 +340,80 @@ enum class CharacterClass
 
 	</scenes>
 
-	<scenes name="PracticeTent" numEnemies="2">
-		<enemy name ="Skilled Dummy" id="0"
-        maxHp="1000" currentHp="1000" attack="120" armor="18" critRate="5" critDamage="15" accuracy="10" res="20" dodge="5" speed="3"
-        type="1" class="4" skill1ID="21" skill2ID="22" skill3ID="23" skill4ID="24"
+	<scenes name="PracticeTent" numEnemies="8">
+		
+		<enemy name ="Skilled Melee Dummy" id="0"
+        maxHp="800" currentHp="800" attack="150" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="5" speed="40"
+        type="1" class="0" skill1ID="100" skill2ID="111" skill3ID="112" skill4ID="113"
                
         width="0" heigth="0"
 		texturePath="Assets/Textures/dummy_combate.png"
 		
 		sectionX="26" sectionY="62"/>
 
-		<enemy name ="Dummy Dummy" id="1" maxHp="600" currentHp="600" attack="200" armor="0" critRate="5" critDamage="15" accuracy="10" res="20" dodge="5" speed="5"
-        type="1" class="0" skill1ID="25" skill2ID="26" skill3ID="27" skill4ID="28"
+		<enemy name ="Skilled Tank Dummy" id="1"
+        maxHp="1000" currentHp="1000" attack="100" armor="25" critRate="5" critDamage="15" accuracy="10" res="20" dodge="5" speed="30"
+        type="1" class="4" skill1ID="100" skill2ID="161" skill3ID="162" skill4ID="152"
                
         width="0" heigth="0"
-        texturePath ="Assets/Textures/dummy_combate.png"
+		texturePath="Assets/Textures/dummy_combate.png"
 		
 		sectionX="26" sectionY="62"/>
+
+		<enemy name ="Skilled Assasin Dummy" id="2"
+        maxHp="400" currentHp="400" attack="180" armor="5" critRate="20" critDamage="20" accuracy="10" res="5" dodge="20" speed="68"
+        type="1" class="2" skill1ID="100" skill2ID="131" skill3ID="132" skill4ID="133"
+               
+        width="0" heigth="0"
+		texturePath="Assets/Textures/dummy_combate.png"
+		
+		sectionX="26" sectionY="62"/>
+
+		<enemy name ="Skilled Healer Dummy" id="3"
+        maxHp="1200" currentHp="1200" attack="120" armor="5" critRate="5" critDamage="15" accuracy="10" res="30" dodge="5" speed="55"
+        type="1" class="5" skill1ID="101" skill2ID="151" skill3ID="152" skill4ID="153"
+               
+        width="0" heigth="0"
+		texturePath="Assets/Textures/dummy_combate.png"
+		
+		sectionX="26" sectionY="62"/>
+
+		<enemy name ="Skilled Buffer Dummy" id="4"
+        maxHp="500" currentHp="500" attack="110" armor="18" critRate="5" critDamage="15" accuracy="10" res="20" dodge="5" speed="80"
+        type="1" class="6" skill1ID="102" skill2ID="171" skill3ID="172" skill4ID="173"
+               
+        width="0" heigth="0"
+		texturePath="Assets/Textures/dummy_combate.png"
+		
+		sectionX="26" sectionY="62"/>
+
+		<enemy name ="Skilled Debuffer Dummy" id="5"
+        maxHp="450" currentHp="450" attack="130" armor="18" critRate="5" critDamage="15" accuracy="10" res="20" dodge="5" speed="40"
+        type="1" class="7" skill1ID="102" skill2ID="171" skill3ID="152" skill4ID="183"
+               
+        width="0" heigth="0"
+		texturePath="Assets/Textures/dummy_combate.png"
+		
+		sectionX="26" sectionY="62"/>
+
+		<enemy name ="Skilled Ranged Dummy" id="7"
+        maxHp="600" currentHp="600" attack="160" armor="5" critRate="15" critDamage="15" accuracy="20" res="20" dodge="5" speed="35"
+        type="1" class="1" skill1ID="101" skill2ID="121" skill3ID="122" skill4ID="123"
+               
+        width="0" heigth="0"
+		texturePath="Assets/Textures/dummy_combate.png"
+		
+		sectionX="26" sectionY="62"/>
+
+		<enemy name ="Skilled Mage Dummy" id="6"
+        maxHp="400" currentHp="400" attack="150" armor="5" critRate="15" critDamage="15" accuracy="20" res="30" dodge="5" speed="40"
+        type="1" class="3" skill1ID="102" skill2ID="141" skill3ID="142" skill4ID="143"
+               
+        width="0" heigth="0"
+		texturePath="Assets/Textures/dummy_combate.png"
+		
+		sectionX="26" sectionY="62"/>
+		
 	</scenes>
 
 	<scenes name="HouseOfTerrors" numEnemies="3">
