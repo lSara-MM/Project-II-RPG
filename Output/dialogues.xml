@@ -344,8 +344,13 @@
 			<choice id="0" option="If fighting against you guarantees me freedom... " nextNode="11" eventReturn="0"/>
 		</node>
 
-		<node id="11" name="OBSHCHIY" text="Oh no, we have a new comedian in the circus, how come they dressed a comedian so fancy? It's funny huh. Look kid, freedom is overrated, trust me, you don't want to leave this place. No matter how crazy people are, right Medved? ">
+		<node id="11" name="OBSHCHIY" text="Oh no, we have a new comedian in the circus, how come they dressed a comedian so fancy? It's funny huh. Look kid, freedom is overrated, trust me, you don't want to leave this place. No matter how crazy people are, right Medved? It's funny sometimes, some even disappear for a sudden. ">
 			<choice id="0" option="Whatever. Have fun with your Medved. " nextNode="-1" eventReturn="0"/>
+			<choice id="0" option="Disappear, how? " nextNode="12" eventReturn="0"/>
+		</node>
+
+		<node id="12" name="OBSHCHIY" text="Yeah, yeah, you know, disappear. You can't see them, but you can talk to them. I think it's space-time bullshit and that we're locked in a limbo-limited underworld. Whatever, sometimes it happens, and I find it funny. ">
+			<choice id="0" option="Sure. Let me just, go this way... " nextNode="-1" eventReturn="0"/>
 		</node>
 		
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
