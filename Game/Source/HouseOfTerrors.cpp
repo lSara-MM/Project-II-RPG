@@ -342,6 +342,8 @@ void HouseOfTerrors::Debug()
 			pPause->CleanUp();
 		}*/
 
+		app->inventory->Disable();
+
 		LOG("PAUSE");
 	}
 

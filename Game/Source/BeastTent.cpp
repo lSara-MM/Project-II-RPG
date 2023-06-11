@@ -345,6 +345,8 @@ void BeastTent::Debug()
 			pPause->CleanUp();
 		}*/
 
+		app->inventory->Disable();
+
 		LOG("PAUSE");
 	}
 

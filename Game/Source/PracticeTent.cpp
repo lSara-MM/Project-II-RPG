@@ -348,6 +348,8 @@ void PracticeTent::Debug()
 			pPause->CleanUp();
 		}*/
 
+		app->inventory->Disable();
+
 		LOG("PAUSE");
 	}
 

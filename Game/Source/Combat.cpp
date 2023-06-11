@@ -1550,9 +1550,9 @@ void Combat::RenderSkillDescription(int controlID)
 				app->render->TextDraw(ch_DMG, 355, 537, 18);
 
 				//Stats ataques
-				Pre_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::ACCURACY) * (skillPoint->bonusAccuracy + listInitiative.At(charaInTurn)->data->accuracy));
-				CrRate_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_RATE) * (skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->critRate));
-				CrDMG_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_DMG) * (skillPoint->bonusCritDamage + listInitiative.At(charaInTurn)->data->critDamage));
+				Pre_C = to_string((int)(listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::ACCURACY) * (skillPoint->bonusAccuracy + listInitiative.At(charaInTurn)->data->accuracy)));
+				CrRate_C = to_string((int)(listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_RATE) * (skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->critRate)));
+				CrDMG_C = to_string((int)(listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_DMG) * (skillPoint->bonusCritDamage + listInitiative.At(charaInTurn)->data->critDamage)));
 
 				//Printar stats
 				app->render->TextDraw("Accuracy.", midX, 560, 15);
@@ -1772,6 +1772,8 @@ void Combat::HandleEndCombat()
 	}
 
 	SaveCombat();
+
+	app->itemManager->UseItemPostBattle();
 }
 
 
