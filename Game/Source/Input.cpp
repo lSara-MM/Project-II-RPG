@@ -284,7 +284,7 @@ bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 		}
 	}
 
-	if ((event.key.keysym.sym == SDLK_RETURN) && !temp.empty())
+	if (((event.key.keysym.sym == SDLK_RETURN) || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A)) && !temp.empty())
 	{
 		if (temp.length() < playerInput->max_chars) { temp.erase(temp.length() - 1); }
 
