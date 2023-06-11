@@ -213,7 +213,7 @@
 			x="2432" y="3392" width="64" height="64" texturepath="Assets/Textures/Lore_NPC.png"/>
 		
 		<npc name="PINKY" 
-			dialogueID="17" dialogueID="29"
+			dialogueID="17" dialogueID="30"
 			x="3410" y="1105" width="64" height="64" texturepath="Assets/Textures/Pinky_The_Savior.png"/>
 	</scene>
 
@@ -412,8 +412,7 @@ enum class CharacterClass
         width="0" heigth="0"
 		texturePath="Assets/Textures/dummy_combate.png"
 		
-		sectionX="26" sectionY="62"/>
-		
+		sectionX="26" sectionY="62"/>	
 	</scenes>
 
 	<scenes name="HouseOfTerrors" numEnemies="3">
@@ -467,7 +466,7 @@ enum class CharacterClass
         width="0" heigth="0"
         texturePath ="Assets/Textures/EnemyBeeNest.png"
 		
-		sectionX="23" sectionY="65"/>
+		sectionX="0" sectionY="0"/>
 
 		<enemy name ="Psyonic Eel" id="2" maxHp="900" currentHp="900" attack="240" armor="10" critRate="25" critDamage="15" accuracy="50" res="20" dodge="25" speed="75"
         type="1" class="1" skill1ID="45" skill2ID="46" skill3ID="47" skill4ID="48"
