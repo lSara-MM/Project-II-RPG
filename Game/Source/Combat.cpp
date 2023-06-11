@@ -1772,6 +1772,8 @@ void Combat::HandleEndCombat()
 	}
 
 	SaveCombat();
+
+	app->itemManager->UseItemPostBattle();
 }
 
 

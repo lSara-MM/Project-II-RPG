@@ -475,6 +475,31 @@ void ItemManager::UseItem(ItemNode* item)
 	}
 }
 
+void ItemManager::UseItemPostBattle()
+{
+	for (size_t j = 0; j < armorItems.size(); j++)
+	{
+		for (size_t i = 0; i < arrParty.size(); i++)
+		{
+			if (arrParty.at(i) != nullptr && armorItems[j]->whom == i)
+			{
+				if (armorItems[j]->equiped == true)
+				{
+					arrParty.at(i)->maxHp -= armorItems[j]->maxhp;
+					arrParty.at(i)->armor -= armorItems[j]->armor;
+					arrParty.at(i)->attack -= armorItems[j]->attack;
+					arrParty.at(i)->critDamage -= armorItems[j]->critDamage;
+					arrParty.at(i)->critRate -= armorItems[j]->critRate;
+					arrParty.at(i)->accuracy -= armorItems[j]->accuracy;
+					arrParty.at(i)->dodge -= armorItems[j]->dodge;
+					arrParty.at(i)->speed -= armorItems[j]->speed;
+					arrParty.at(i)->res -= armorItems[j]->res;
+				}
+			}
+		}
+	}
+}
+
 void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 {
 	for (pugi::xml_node pugiNode = xml_trees.child("item"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))

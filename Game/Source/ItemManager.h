@@ -111,6 +111,7 @@ public:
 	void LoadArmorItmes();
 
 	void UseItem(ItemNode* item);
+	void UseItemPostBattle();
 
 	bool LoadItemState();
 	bool LoadArmorState();
