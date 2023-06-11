@@ -19,6 +19,7 @@
 #include "ItemManager.h"
 #include "QuestManager.h"
 #include "PuzzleManager.h"
+#include "DialogueSystem.h"
 #include "Combat.h"
 
 #include <iostream>
@@ -278,6 +279,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 
 		app->itemManager->loadParty_B = true;
 		app->input->coso = true;
+		app->dialogueSystem->LoadDialogueState();
 		app->LoadFromFile(this);
 		continueGame_B = true;
 		break;

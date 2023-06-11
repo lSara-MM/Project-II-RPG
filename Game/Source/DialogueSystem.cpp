@@ -277,7 +277,7 @@ bool DialogueSystem::LoadDialogueState()
 		app->input->playerName->input = temp.c_str();
 		app->input->playerName->input_entered = true;
 
-		for (size_t i = 0; i < activeTree->nodeList.size() && !node.child("node").empty(); i++)
+		/*for (size_t i = 0; i < activeTree->nodeList.size() && !node.child("node").empty(); i++)
 		{
 			for (int j = 0; j < activeTree->nodeList[i]->choicesList.size(); j++)
 			{
@@ -287,7 +287,7 @@ bool DialogueSystem::LoadDialogueState()
 					activeTree->nodeList[i]->playerAnswer = node.child("node").attribute("answer").as_int();
 				}
 			}
-		}
+		}*/
 	}
 
 	return ret;
