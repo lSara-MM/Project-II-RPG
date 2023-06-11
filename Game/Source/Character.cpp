@@ -195,7 +195,7 @@ bool Character::Update(float dt)
 				{
 					turnDelay.Start();
 					delayOn = true;
-					app->moduleparticles->AddParticle(position.x + (126 / 2), position.y, 30, 3);
+					app->moduleparticles->AddParticle(position.x + (126 / 2), position.y, 15, 3);
 				}
 				if ((turnDelay.ReadMSec() > 2000 && delayOn) || app->input->godMode_B)
 				{
