@@ -336,7 +336,7 @@ enum class CharacterClass
         width="0" heigth="0"
 		texturePath="Assets/Textures/EnemyWolfLamb.png"
 		
-		sectionX="35" sectionY="36"/>
+		sectionX="20" sectionY="36"/>
 
 	</scenes>
 
