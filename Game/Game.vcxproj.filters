@@ -292,6 +292,7 @@
     <ClInclude Include="Source\Particles.h" />
     <ClInclude Include="Source\ModuleParticles.h" />
     <ClInclude Include="Source\Particle.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -338,5 +339,11 @@
     <ClCompile Include="Source\Tweening.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Output\Assets\Textures\gameExe.ico" />
   </ItemGroup>
 </Project>
