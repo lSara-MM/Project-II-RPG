@@ -176,7 +176,7 @@ bool CutScene::Update(float dt)
 			{
 				// TO DO adjust position when bg done
 				iPoint pos = { 540, 490 };
-				app->input->RenderTempText("%%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 250, 215, 141 });
+				app->input->RenderTempText("%%", app->input->temp.c_str(), pos, 40, Font::TEXT, { 192, 132, 49 });
 			}
 
 			// if name entered, fade to black
