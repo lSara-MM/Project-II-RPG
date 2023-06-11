@@ -1023,8 +1023,12 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 	StatusEffect* statusEffect2 = new StatusEffect(skill->secondIntensity, skill->secondDuration, skill->secondPositiveEffect, (EffectType)skill->secondStatus);
 	if (skill->multiplierDmg >= 0) //Curacion o buffo, no hace falta calcular esquiva ni nada 
 	{
-		app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y+178, 20, 2);
-		app->audio->PlayFx(healfx);
+		if (skill->multiplierDmg>0)
+		{
+			app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y+178, 20, 2);
+			app->audio->PlayFx(healfx);
+		}
+		
 		
 		//Primer efecto de estado
 		if (skill->firstPositiveEffect) //Efecto de estado positivo
