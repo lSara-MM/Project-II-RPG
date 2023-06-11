@@ -18,7 +18,7 @@ class Inventory : public Module
 public:
 
 	// Constructors & Destructors
-	Inventory(unsigned capx = 5, unsigned capy = 6);
+	Inventory(unsigned capx = 5, unsigned capy = 5);
 	~Inventory();
 
 	// Main module steps

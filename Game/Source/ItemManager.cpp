@@ -520,7 +520,7 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 		}
 
 		node->hp = pugiNode.attribute("hp").as_int();
-		node->maxhp = pugiNode.attribute("maxhp").as_int();
+		node->maxhp = pugiNode.attribute("maxHp").as_int();
 		node->attack = pugiNode.attribute("attack").as_int();
 		node->critRate = pugiNode.attribute("critRate").as_int();
 		node->critDamage = pugiNode.attribute("critDamage").as_int();
@@ -700,7 +700,6 @@ void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
 		}
 	}
 }
-
 void ItemManager::LoadSellItems(int x, int y, ItemNode* item)
 {
 	if (item->toSell == false)
@@ -1080,7 +1079,7 @@ bool ItemManager::SaveItemState()
 		armor.append_attribute("whom") = armorItems[i]->whom;
 
 		armor.append_attribute("hp") = armorItems[i]->hp;
-		armor.append_attribute("maxhp") = armorItems[i]->maxhp;
+		armor.append_attribute("maxHp") = armorItems[i]->maxhp;
 		armor.append_attribute("attack") = armorItems[i]->attack;
 		armor.append_attribute("critRate") = armorItems[i]->critRate;
 		armor.append_attribute("critDamage") = armorItems[i]->critDamage;
@@ -1135,7 +1134,7 @@ bool ItemManager::LoadArmorState()
 				armorItems[i]->space = pugiNode.attribute("space").as_int();
 				armorItems[i]->whom = pugiNode.attribute("whom").as_int();
 				armorItems[i]->hp = pugiNode.attribute("hp").as_int();
-				armorItems[i]->maxhp = pugiNode.attribute("maxhp").as_int();
+				armorItems[i]->maxhp = pugiNode.attribute("maxHp").as_int();
 				armorItems[i]->attack = pugiNode.attribute("attack").as_int();
 				armorItems[i]->critRate = pugiNode.attribute("critRate").as_int();
 				armorItems[i]->critDamage = pugiNode.attribute("critDamage").as_int();
