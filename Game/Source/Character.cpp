@@ -195,8 +195,9 @@ bool Character::Update(float dt)
 				{
 					turnDelay.Start();
 					delayOn = true;
+					app->moduleparticles->AddParticle(position.x + (126 / 2), position.y, 30, 3);
 				}
-				if ((turnDelay.ReadMSec() > 1200 && delayOn) || app->input->godMode_B)
+				if ((turnDelay.ReadMSec() > 2000 && delayOn) || app->input->godMode_B)
 				{
 					app->combat->NextTurn();
 				}
@@ -1022,7 +1023,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 	StatusEffect* statusEffect2 = new StatusEffect(skill->secondIntensity, skill->secondDuration, skill->secondPositiveEffect, (EffectType)skill->secondStatus);
 	if (skill->multiplierDmg >= 0) //Curacion o buffo, no hace falta calcular esquiva ni nada 
 	{
-		app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y, 40, 2);
+		app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y+178, 20, 2);
 		app->audio->PlayFx(healfx);
 		
 		//Primer efecto de estado

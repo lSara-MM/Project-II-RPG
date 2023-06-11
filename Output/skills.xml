@@ -34,9 +34,9 @@ TargetingMethod //Como se ataca
 	<!--Skills Prota-->
 	<skill name="Staff Smite" id="1" description="A simple but effective hit that deals good damage and may stun."
 		   type="0" movementCaster="-1"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="-1.5" bonusAccuracy="90" bonusCritRate="10" bonusCritDamage="10"
+	   multiplierDmg="-1.3" bonusAccuracy="90" bonusCritRate="10" bonusCritDamage="10"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="false" autoTarget="false"
-		   firstStatusID="9" firstStatusPositive="false" firstStatusDuration="1" firstStatusIntesity="1"
+		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 	<skill name="Evasion" id="2" description="A defensive guard to recover HP that increases dodge and accuarcy by 40 for 2 turns."
