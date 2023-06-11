@@ -203,7 +203,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
 		}
 	}
 
-	if (Modulo == 2 && Modulo == 3)
+	if (Modulo == 2 || Modulo == 3)
 	{
 		//Create particles like a curacion
 		for (uint i = 0; i < 100; ++i)
