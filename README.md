@@ -44,6 +44,7 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Exit menu -> B button gamepad
 
+* Language and text speed can not be modified
 
 ### Combat
 
