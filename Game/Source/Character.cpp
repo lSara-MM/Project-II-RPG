@@ -864,9 +864,9 @@ bool Character::Update(float dt)
 									}
 									else// Vida baja (rage mode)
 									{
-										if (listSkillsHistory.end->prev->data == 2) //Usado rage skill hace poco
+										if (listSkillsHistory.end->prev->data == 3) //Usado rage skill hace poco
 										{
-											if (listSkillsHistory.end->data == 2) { probSkill = 0; }//Usado turno pasado
+											if (listSkillsHistory.end->data == 3) { probSkill = 0; }//Usado turno pasado
 											else { probSkill = 15; }
 										}
 										else
@@ -1089,7 +1089,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			{
 				//El da�o critico es mas potente
 				damage *= (100 + 2 * (caster->GetStatModifier(EffectType::CRIT_DMG) * (skill->bonusCritDamage + caster->critDamage))) / 100;
-				app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y, 20, 0, 10, 5, 1);
+				app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y + 126/3, 20, 0, 100, 5, 5);
 				app->audio->PlayFx(critfx);
 			}
 
