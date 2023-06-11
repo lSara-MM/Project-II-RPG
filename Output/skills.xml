@@ -43,8 +43,8 @@ TargetingMethod //Como se ataca
 		   type="1" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="0.7" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
-		   firstStatusID="6" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="40"
- 		   secondStatusID="4" secondStatusPositive="true" secondStatusDuration="2" secondStatusIntesity="40"
+		   firstStatusID="6" firstStatusPositive="true" firstStatusDuration="3" firstStatusIntesity="40"
+ 		   secondStatusID="4" secondStatusPositive="true" secondStatusDuration="3" secondStatusIntesity="40"
 	/>
 	<skill name="Card Throw" id="3" description="Volley of sharp cards that deal damage and curses an enemy." 
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
@@ -57,7 +57,7 @@ TargetingMethod //Como se ataca
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="-1.0" bonusAccuracy="85" bonusCritRate="-10" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="1" posToTargetStart="0" posToTargetEnd="1" friendlyFire="false" areaSkill="true" autoTarget="false"
-	   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="1" firstStatusIntesity="-10"
+	   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="1" firstStatusIntesity="-15"
 		secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
 	/>
 
@@ -264,8 +264,8 @@ TargetingMethod //Como se ataca
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="-1.5" bonusAccuracy="110" bonusCritRate="20" bonusCritDamage="20"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
-		   firstStatusID="4" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-25"
-		   secondStatusID="4" secondStatusPositive="false" secondStatusDuration="3" secondStatusIntesity="-25"		   
+		   firstStatusID="7" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-25"
+		   secondStatusID="7" secondStatusPositive="false" secondStatusDuration="3" secondStatusIntesity="-25"		   
 		   />
 	
 	<skill name="Terrorize" id="34" description="Menacing vibe that moves the frontline."
@@ -277,15 +277,15 @@ TargetingMethod //Como se ataca
 	/>
 	<skill name="Intangibility" id="35" description="A defensive buff that makes the specter nearly invincible."
 		   type="3" movementCaster="0"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="0.2" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
+	   multiplierDmg="0" bonusAccuracy="100" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
-		   firstStatusID="5" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="130"
+		   firstStatusID="5" firstStatusPositive="true" firstStatusDuration="2" firstStatusIntesity="120"
 		   secondStatusID="10" secondStatusPositive="true" secondStatusDuration="2" secondStatusIntesity="1"
 	/>
 
 	<skill name="Nigthmarish strike" id="36" description="A strike to the backline with high damage that can stun."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="1"
-	   multiplierDmg="-2.8" bonusAccuracy="90" bonusCritRate="20" bonusCritDamage="30"
+	   multiplierDmg="-2.5" bonusAccuracy="90" bonusCritRate="20" bonusCritDamage="30"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="1" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="9" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="1"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
