@@ -213,8 +213,8 @@
 			x="2432" y="3392" width="64" height="64" texturepath="Assets/Textures/Lore_NPC.png"/>
 		
 		<npc name="PINKY" 
-			dialogueID="7" dialogueID="13"
-			x="3425" y="1105" width="64" height="64" texturepath="Assets/Textures/Pinky_The_Savior.png"/>
+			dialogueID="17" dialogueID="23"
+			x="3410" y="1105" width="64" height="64" texturepath="Assets/Textures/Pinky_The_Savior.png"/>
 	</scene>
 
   <SceneWin_Lose>
