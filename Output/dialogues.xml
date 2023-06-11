@@ -179,7 +179,7 @@
 			<choice id="0" option="..." nextNode="4" eventReturn="0"/>
 		</node>
 
-		<node id="4" name="IVAN" text="Yes! A jail. They kept our friend locked. He is still there actually. ">
+		<node id="4" name="IVAN" text="Yes! A jail. They kept our friend locked. She is still there actually. ">
 			<choice id="0" option="..." nextNode="5" eventReturn="0"/>
 		</node>
 
@@ -187,11 +187,11 @@
 			<choice id="0" option="..." nextNode="6" eventReturn="0"/>
 		</node>
 
-		<node id="6" name="IVAN" text="Save our friend! He is a nice smith, and a fighter. ">
+		<node id="6" name="IVAN" text="Save our friend! She is a nice smith, and a fighter. ">
 			<choice id="0" option="..." nextNode="7" eventReturn="0"/>
 		</node>
 
-		<node id="7" name="IGOR" text="The best I would say. I'm sure it will help you if you save him. ">
+		<node id="7" name="IGOR" text="The best I would say. I'm sure it will help you if you save her. ">
 			<choice id="0" option="..." nextNode="8" eventReturn="0"/>
 		</node>
 
