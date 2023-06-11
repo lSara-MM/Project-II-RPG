@@ -105,3 +105,5 @@ packages/
 !Game/Source/External/PhysFS/include/physfs.h
 !Game/Source/External/PhysFS/libx86/physfs.lib
 !Output/physfs.dll
+
+!Game/Game.aps
