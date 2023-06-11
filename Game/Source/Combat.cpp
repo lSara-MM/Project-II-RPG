@@ -1243,7 +1243,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				SDL_Color color = { 0, 0, 0 };
 				if (enemy->listSkillsHistory.end->data == i + 1)
 				{
-					color = { 181, 33, 33 };
+					color = { 255, 246, 240 };
 				}
 				else 
 				{
@@ -1442,11 +1442,12 @@ void Combat::RenderGuiChara(int charaID)
 
 void Combat::RenderSkillDescription(int controlID)
 {
-	if (app->combat->listInitiative.Count() < app->combat->charaInTurn)
+	if (app->combat->listInitiative.Count() > app->combat->charaInTurn)
 	{
 		if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ALLY)
 		{
 			Skill* skillPoint = listInitiative.At(charaInTurn)->data->listSkills.At(controlID)->data;
+			
 			//Name
 			app->render->TextDraw(skillPoint->name.GetString(), xText1, 545, 24);
 
@@ -1608,11 +1609,11 @@ void Combat::RenderSkillDescription(int controlID)
 			{
 				if (skillPoint->posToUseEnd_I >= i && i >= skillPoint->posToUseStart_I)
 				{
-					app->render->DrawRectangle({ 140 + (3 - i) * 15,580,10,10 }, 0, 0, 220);
+					app->render->DrawRectangle({ 140 + (3 - i) * 15, 580, 10, 10 }, 0, 0, 220);
 				}
 				else
 				{
-					app->render->DrawRectangle({ 140 + (3 - i) * 15,580,10,10 }, 80, 80, 80);
+					app->render->DrawRectangle({ 140 + (3 - i) * 15, 580, 10, 10 }, 80, 80, 80);
 				}
 			}
 
@@ -1639,11 +1640,11 @@ void Combat::RenderSkillDescription(int controlID)
 			{
 				if (skillPoint->posToTargetEnd_I >= i && i >= skillPoint->posToTargetStart_I)
 				{
-					app->render->DrawRectangle({ 140 + (minus - i * multI) * 15,595,10,10 }, r, g, 0);
+					app->render->DrawRectangle({ 140 + (minus - i * multI) * 15, 595, 10, 10 }, r, g, 0);
 				}
 				else
 				{
-					app->render->DrawRectangle({ 140 + (minus - i * multI) * 15,595,10,10 }, 60, 60, 60);
+					app->render->DrawRectangle({ 140 + (minus - i * multI) * 15, 595, 10, 10 }, 60, 60, 60);
 				}
 			}
 			app->render->TextDraw("Target", 80, 590, 12);
