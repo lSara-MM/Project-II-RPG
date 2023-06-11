@@ -127,7 +127,7 @@ TargetingMethod //Como se ataca
 	<!--Skills FireMage-->
 	<skill name="Fire Breath" id="13" description="A fire breath that deals moderate damage to one target and inflicts burns for 3 turns."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="-1.1" bonusAccuracy="110" bonusCritRate="0" bonusCritDamage="0"
+	   multiplierDmg="-1.3" bonusAccuracy="110" bonusCritRate="0" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 	   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-15"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
@@ -143,15 +143,15 @@ TargetingMethod //Como se ataca
 
 	<skill name="Seas of Fire" id="15" description="A wave of fire with low accuracy that damages all enemies and can inflict burns for 2 turns."
 		   type="0" movementCaster="1"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="-0.9" bonusAccuracy="70" bonusCritRate="0" bonusCritDamage="0"
+	   multiplierDmg="-1.1" bonusAccuracy="80" bonusCritRate="0" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
-	   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="-10"
+	   firstStatusID="0" firstStatusPositive="false" firstStatusDuration="3" firstStatusIntesity="-10"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
 
 	<skill name="Oil Spit" id="16" description="An oil spray that damages lightly all enemies but reduces resistance and dodge by 40 for 4 turns."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="-0.4" bonusAccuracy="130" bonusCritRate="-10" bonusCritDamage="0"
+	   multiplierDmg="-0.8" bonusAccuracy="130" bonusCritRate="-10" bonusCritDamage="0"
 		   posToUseStart="2" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="7" firstStatusPositive="false" firstStatusDuration="4" firstStatusIntesity="-40"
 		   secondStatusID="6" secondStatusPositive="false" secondStatusDuration="4" secondStatusIntesity="-40"		  

@@ -129,17 +129,17 @@ bool FadeToBlack::PostUpdate()
 			backgroundAnimation.Foward();
 		}
 
-		backgroundAnimation.Step(1, false);
-		float point = backgroundAnimation.GetPoint();
+		//backgroundAnimation.Step(1, false);
+		//float point = backgroundAnimation.GetPoint();
 		int offset = -1300;
 
-		posYani_I = offset + point * (0 - offset);
+		//posYani_I = offset + point * (0 - offset);
 
 		offset = -1300;
-		app->render->DrawTexture(TransitionBG_Izq, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
+		//app->render->DrawTexture(TransitionBG_Izq, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
 
 		offset = 1300;
-		app->render->DrawTexture(TransitionBG_Der, offset + point * (640 - offset) - app->render->camera.x, 0 - app->render->camera.y);
+		//app->render->DrawTexture(TransitionBG_Der, offset + point * (640 - offset) - app->render->camera.x, 0 - app->render->camera.y);
 	}
 
 	return true;

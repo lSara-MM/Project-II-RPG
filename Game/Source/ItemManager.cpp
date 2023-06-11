@@ -477,9 +477,9 @@ void ItemManager::UseItem(ItemNode* item)
 
 void ItemManager::UseItemPostBattle()
 {
-	for (size_t j = 0; j < armorItems.size(); j++)
+	for (int j = 0; j < armorItems.size(); j++)
 	{
-		for (size_t i = 0; i < arrParty.size(); i++)
+		for (int i = 0; i < arrParty.size(); i++)
 		{
 			if (arrParty.at(i) != nullptr && armorItems[j]->whom == i)
 			{

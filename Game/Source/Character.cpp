@@ -177,7 +177,7 @@ bool Character::Update(float dt)
 
 		// Health bar
 		app->render->DrawRectangle({ position.x - 3, position.y - 37, 106, 16 }, 0, 0, 0);
-		app->render->DrawRectangle({ position.x, position.y - 34, (currentHp * 100 / maxHp), 10 }, 181, 33, 33);
+		app->render->DrawRectangle({ position.x, position.y - 34, (currentHp * 100 / (maxHp+1)), 10 }, 181, 33, 33);
 
 		// Character name
 		app->render->TextDraw(name.GetString(), position.x + 3, position.y - 20, 11, Font::UI, { 255, 246, 240 });
