@@ -146,7 +146,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
 
 	Modulo = m;
 
-	if (Modulo == 2)
+	if (Modulo == 0)
 	{
 		//Create circle around position designated
 		for (uint i = 0; i < 50; ++i)
@@ -198,7 +198,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
 		}
 	}
 
-	if (Modulo == 0)
+	if (Modulo == 2 && Modulo == 3)
 	{
 		//Create particles like a curacion
 		for (uint i = 0; i < 100; ++i)
