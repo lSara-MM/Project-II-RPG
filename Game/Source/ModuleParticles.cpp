@@ -159,7 +159,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 	if (particleType == 0)
 	{
 		//Create circle around position designated
-		for (uint i = 0; i < quantity/2; ++i)
+		for (uint i = 0; i < quantity / 2; ++i)
 		{
 			//Finding an empty slot for a new particle
 			if (particles[i] == nullptr)
@@ -199,68 +199,69 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 
 					particles[i] = newParticle;
 				}
-		}
-	}
-
-	if (particleType == 1)
-	{
-		//Create particles like an explosion
-		for (uint i = 0; i < quantity; ++i)
-		{
-			//Finding an empty slot for a new particle
-			if (particles[i] == nullptr)
-			{
-				newParticle = new Particle;
-				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
-				float particleX = x + static_cast<float>(rand() % 10);
-				float particleY = y + static_cast<float>(rand() % 10);
-
-				newParticle->position.x = particleX;
-				newParticle->position.y = particleY;
-
-				// Configurar velocidad aleatoria para simular una explosión
-				newParticle->speed.x = static_cast<float>(rand() % 10 - 5);  // Rango: -5 a 5
-				newParticle->speed.y = static_cast<float>(rand() % 10 - 5);  // Rango: -5 a 5
-				newParticle->isAlive = true;
-
-				particles[i] = newParticle;
 			}
 		}
-	}
 
-	if (particleType == 2 || particleType == 3)
-	{
-		//Create particles like a curacion
-		for (uint i = 0; i < quantity; ++i)
+		if (particleType == 1)
 		{
-			//Finding an empty slot for a new particle
-			if (particles[i] == nullptr)
+			//Create particles like an explosion
+			for (uint i = 0; i < quantity; ++i)
 			{
-				newParticle = new Particle;
-				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
-				float particleX = x + static_cast<float>(rand() % 10);
-				float particleY = y;
+				//Finding an empty slot for a new particle
+				if (particles[i] == nullptr)
+				{
+					newParticle = new Particle;
+					newParticle->lifetime = delay;			// We start the frameCount as the negative delay
+					float particleX = x + static_cast<float>(rand() % 10);
+					float particleY = y + static_cast<float>(rand() % 10);
 
-				newParticle->position.x = particleX;
-				newParticle->position.y = particleY;
+					newParticle->position.x = particleX;
+					newParticle->position.y = particleY;
 
-				// Configurar velocidad aleatoria para simular una explosión
-				if (particleType == 2) {
-					newParticle->speed.x = static_cast<float>(rand() % speedX - (speedX / 2));  // Rango: -3 a 3 en movimiento horizontal
-					newParticle->speed.y = static_cast<float>(rand() % (10 + speedY) - (15 + speedY));  // Rango: -15 a -5 hacia arriba
+					// Configurar velocidad aleatoria para simular una explosión
+					newParticle->speed.x = static_cast<float>(rand() % 10 - 5);  // Rango: -5 a 5
+					newParticle->speed.y = static_cast<float>(rand() % 10 - 5);  // Rango: -5 a 5
 					newParticle->isAlive = true;
-				}
 
-				if (particleType == 3) {
-					newParticle->speed.x = static_cast<float>(rand() % speedX - (speedX / 2));  // Rango: -3 a 3 en movimiento horizontal
-					newParticle->speed.y = static_cast<float>(rand() % (10 + speedY) + (5 + speedY));  // Rango: 5 a 14 hacia abajo
-					newParticle->isAlive = true;
+					particles[i] = newParticle;
 				}
-
-				particles[i] = newParticle;
 			}
 		}
-	}
 
-	return newParticle;
+		if (particleType == 2 || particleType == 3)
+		{
+			//Create particles like a curacion
+			for (uint i = 0; i < quantity; ++i)
+			{
+				//Finding an empty slot for a new particle
+				if (particles[i] == nullptr)
+				{
+					newParticle = new Particle;
+					newParticle->lifetime = delay;			// We start the frameCount as the negative delay
+					float particleX = x + static_cast<float>(rand() % 10);
+					float particleY = y;
+
+					newParticle->position.x = particleX;
+					newParticle->position.y = particleY;
+
+					// Configurar velocidad aleatoria para simular una explosión
+					if (particleType == 2) {
+						newParticle->speed.x = static_cast<float>(rand() % speedX - (speedX / 2));  // Rango: -3 a 3 en movimiento horizontal
+						newParticle->speed.y = static_cast<float>(rand() % (10 + speedY) - (15 + speedY));  // Rango: -15 a -5 hacia arriba
+						newParticle->isAlive = true;
+					}
+
+					if (particleType == 3) {
+						newParticle->speed.x = static_cast<float>(rand() % speedX - (speedX / 2));  // Rango: -3 a 3 en movimiento horizontal
+						newParticle->speed.y = static_cast<float>(rand() % (10 + speedY) + (5 + speedY));  // Rango: 5 a 14 hacia abajo
+						newParticle->isAlive = true;
+					}
+
+					particles[i] = newParticle;
+				}
+			}
+		}
+
+		return newParticle;
+	}
 }
