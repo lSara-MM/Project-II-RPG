@@ -117,21 +117,21 @@ bool ModuleParticles::PostUpdate()
 	{
 		Particle* particle = particles[i];
 
-		if (particle != nullptr && particle->isAlive && Modulo == 0)
+		if (particle != nullptr && particle->isAlive && particleType == 0)
 		{
 			app->render->DrawTexture(texture0, particle->position.x, particle->position.y);
 		}
 
-		if (particle != nullptr && particle->isAlive && Modulo == 1)
+		if (particle != nullptr && particle->isAlive && particleType == 1)
 		{
 			app->render->DrawTexture(texture1, particle->position.x, particle->position.y);
 		}
 
-		if (particle != nullptr && particle->isAlive && Modulo == 2)
+		if (particle != nullptr && particle->isAlive && particleType == 2)
 		{
 			app->render->DrawTexture(texture2, particle->position.x, particle->position.y);
 		}
-		if (particle != nullptr && particle->isAlive && Modulo == 3)
+		if (particle != nullptr && particle->isAlive && particleType == 3)
 		{
 			app->render->DrawTexture(texture3, particle->position.x, particle->position.y);
 		}
@@ -140,11 +140,11 @@ bool ModuleParticles::PostUpdate()
 	return true;
 }
 
-Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quantity)
+Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quantity, int speedX, int speedY)
 {
 	Particle* newParticle = nullptr;
 
-	if(quantity > 500)
+	if (quantity > 500)
 	{
 		quantity = 500;
 	}
@@ -154,9 +154,9 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 		particles[i] = nullptr;
 	}
 
-	Modulo = m;
+	particleType = m;
 
-	if (Modulo == 0)
+	if (particleType == 0)
 	{
 		//Create circle around position designated
 		for (uint i = 0; i < quantity; ++i)
@@ -168,10 +168,13 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 				newParticle = new Particle;
 				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
 				float angle = (2 * 3.14159 * i) / 50;
-				float particleX = x + radius * cos(angle);
-				float particleY = y + radius * sin(angle);
-				newParticle->speed.x = 0;
+
+				float particleX = x + static_cast<float>(rand() % 3);
+				float particleY = y + static_cast<float>(rand() % 3);
+
+				newParticle->speed.x = static_cast<float>(rand() % (2 * speedX) - speedX);
 				newParticle->speed.y = 0;
+
 				newParticle->position.x = particleX;						// so when frameCount reaches 0 the particle will be activated
 				newParticle->position.y = particleY;
 				newParticle->isAlive = true;
@@ -181,7 +184,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 		}
 	}
 
-	if (Modulo == 1)
+	if (particleType == 1)
 	{
 		//Create particles like an explosion
 		for (uint i = 0; i < quantity; ++i)
@@ -189,7 +192,6 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 			//Finding an empty slot for a new particle
 			if (particles[i] == nullptr)
 			{
-
 				newParticle = new Particle;
 				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
 				float particleX = x + static_cast<float>(rand() % 10);
@@ -208,7 +210,7 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 		}
 	}
 
-	if (Modulo == 2 || Modulo == 3)
+	if (particleType == 2 || particleType == 3)
 	{
 		//Create particles like a curacion
 		for (uint i = 0; i < quantity; ++i)
@@ -216,7 +218,6 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 			//Finding an empty slot for a new particle
 			if (particles[i] == nullptr)
 			{
-
 				newParticle = new Particle;
 				newParticle->lifetime = delay;			// We start the frameCount as the negative delay
 				float particleX = x + static_cast<float>(rand() % 10);
@@ -226,15 +227,15 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 				newParticle->position.y = particleY;
 
 				// Configurar velocidad aleatoria para simular una explosión
-				if (Modulo == 2) {
-					newParticle->speed.x = static_cast<float>(rand() % 6 - 3);  // Rango: -3 a 3 en movimiento horizontal
-					newParticle->speed.y = static_cast<float>(rand() % 10 - 15);  // Rango: -15 a -5 hacia arriba
+				if (particleType == 2) {
+					newParticle->speed.x = static_cast<float>(rand() % speedX - (speedX / 2));  // Rango: -3 a 3 en movimiento horizontal
+					newParticle->speed.y = static_cast<float>(rand() % (10 + speedY) - (15 + speedY));  // Rango: -15 a -5 hacia arriba
 					newParticle->isAlive = true;
 				}
 
-				if (Modulo == 3) {
-					newParticle->speed.x = static_cast<float>(rand() % 6 - 3);  // Rango: -3 a 3 en movimiento horizontal
-					newParticle->speed.y = static_cast<float>(rand() % 10 + 5);  // Rango: 5 a 14 hacia abajo
+				if (particleType == 3) {
+					newParticle->speed.x = static_cast<float>(rand() % speedX - (speedX / 2));  // Rango: -3 a 3 en movimiento horizontal
+					newParticle->speed.y = static_cast<float>(rand() % (10 + speedY) + (5 + speedY));  // Rango: 5 a 14 hacia abajo
 					newParticle->isAlive = true;
 				}
 
