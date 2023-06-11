@@ -98,18 +98,7 @@ bool HouseOfTerrors::Start()
 
 	InitEntities();
 	app->entityManager->Enable();
-
 	app->puzzleManager->Enable();
-
-	//if (combatEnd)
-	//{
-	//	app->LoadFromFile(this);
-	//	combatEnd = false;
-	//}
-
-
-	//GUARRADA SUPER TEMPORAL
-	app->itemManager->comb = 2;
 
 	//enter combat
 	steps_I = 0;

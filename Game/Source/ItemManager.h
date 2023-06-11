@@ -187,10 +187,6 @@ public:
 	int speed = 0;
 
 	int coins = 0;
-
-	// TO DO GUARRADA SUPER TEMPORAL
-	int comb = 0;
-
 	int page = 0;
 
 private:

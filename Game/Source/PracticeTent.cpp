@@ -100,9 +100,6 @@ bool PracticeTent::Start()
 	InitEntities();
 	app->entityManager->Enable();
 
-	//GUARRADA SUPER TEMPORAL
-	app->itemManager->comb = 1;
-
 	// If se ha guardado anteriormente, teleport el player donde estaba en el guardado
 	if (app->input->coso)
 	{

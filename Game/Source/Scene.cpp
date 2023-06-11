@@ -106,9 +106,6 @@ bool Scene::Start()
 		app->iScene->continueGame_B = false;
 	}
 
-	//GUARRADA SUPER TEMPORAL
-	app->itemManager->comb = 0;
-
 	////CleanUp chests
 	//for (int i = 0; i < app->lootManager->chests.size(); i++)
 	//{

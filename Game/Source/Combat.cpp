@@ -411,9 +411,6 @@ bool Combat::CleanUp()
 	app->inventory->Disable();
 	app->itemManager->Disable();
 
-
-	app->input->coso = true;
-
 	return true;
 }
 
@@ -446,6 +443,7 @@ void Combat::Debug()
 		if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
 		{
 			app->sceneWin_Lose->win = false;
+			app->input->coso = false;
 			app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);
 		}
 
@@ -1659,6 +1657,8 @@ void Combat::HandleEndCombat()
 		{
 			app->itemManager->arrParty.at(i)->currentHp = 5;
 		}
+
+		app->input->coso = false;
 	}
 	else
 	{
@@ -1674,6 +1674,8 @@ void Combat::HandleEndCombat()
 				app->itemManager->arrParty.at(i)->currentHp = 5;
 			}		
 		}
+
+		app->input->coso = true;
 	}
 
 	array <int, 4> tempHp;

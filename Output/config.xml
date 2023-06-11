@@ -211,10 +211,10 @@
 		
 		<npc name="OBSHCHIY" dialogueID="6"
 			x="2432" y="3392" width="64" height="64" texturepath="Assets/Textures/Lore_NPC.png"/>
-		
+		<!--
 		<npc name="PINKY" 
 			dialogueID="17" dialogueID="29"
-			x="3410" y="1105" width="64" height="64" texturepath="Assets/Textures/Pinky_The_Savior.png"/>
+			x="3410" y="1105" width="64" height="64" texturepath="Assets/Textures/Pinky_The_Savior.png"/>-->
 	</scene>
 
   <SceneWin_Lose>
