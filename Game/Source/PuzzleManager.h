@@ -345,6 +345,9 @@ private:
 	const char* solvedpath;
 	uint solvedfx;
 
+	const char* explosionpath;
+	uint explosionfx;
+
 };
 
 #endif // __SCENE_H__

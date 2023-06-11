@@ -276,6 +276,9 @@ bool PuzzleManager::Dun2Awake(pugi::xml_node& config)
 	 solvedpath = "Assets/Audio/Fx/puzzle_solved.wav";
 	 solvedfx = app->audio->LoadFx(solvedpath);
 
+	 explosionpath = "Assets/Audio/Fx/explosion.wav";
+	 explosionfx = app->audio->LoadFx(explosionpath);
+
 	return true;
 }
 
@@ -1532,6 +1535,8 @@ bool PuzzleManager::ChickenBoomPuz()
 		{
 			BombCarryOn1 = false;
 
+			app->audio->PlayFx(explosionfx);
+
 			app->moduleparticles->AddParticle(posBomb1.x - 32, posBomb1.y - 32, 40, 1);
 
 			posBomb1.x = posChicken1.x + 64;
@@ -1638,6 +1643,9 @@ bool PuzzleManager::ChickenBoomPuz()
 		{
 			app->moduleparticles->AddParticle(posBomb1.x - 32, posBomb1.y - 32, 40, 1);
 
+			app->audio->PlayFx(explosionfx);
+			app->audio->PlayFx(solvedfx);
+
 			posBomb1.x = posChicken1.x + 64;
 			posBomb1.y = posChicken1.y;
 
@@ -1722,6 +1730,8 @@ bool PuzzleManager::ChickenBoomPuz()
 				BombCarryOn2 = true;
 				RestartTimer();
 
+				app->audio->PlayFx(confirmInteractfx);
+
 				if (Bomb2 != nullptr)
 					Bomb2->body->GetWorld()->DestroyBody(Bomb2->body);
 
@@ -1741,6 +1751,8 @@ bool PuzzleManager::ChickenBoomPuz()
 		if (DeltaTime >= 6)
 		{
 			BombCarryOn2 = false;
+
+			app->audio->PlayFx(explosionfx);
 
 			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 1);
 
@@ -1846,6 +1858,9 @@ bool PuzzleManager::ChickenBoomPuz()
 		if (DeltaTime >= 2)
 		{
 			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 1);
+
+			app->audio->PlayFx(explosionfx);
+			app->audio->PlayFx(solvedfx);
 
 			posBomb2.x = posChicken2.x + 64;
 			posBomb2.y = posChicken2.y;
@@ -1983,8 +1998,6 @@ bool PuzzleManager::ChickenBoomPuz()
 		delete Bomb2;
 		Bomb2 = nullptr;
 
-		app->audio->PlayFx(solvedfx);
-
 		app->questManager->SaveState();
 	}
 
@@ -2001,6 +2014,8 @@ bool PuzzleManager::RelicsPuz()
 		{
 			if (relic1 != nullptr)
 				relic1->body->GetWorld()->DestroyBody(relic1->body);
+
+			app->audio->PlayFx(confirmInteractfx);
 
 			delete relic1;
 			relic1 = nullptr;
@@ -2022,6 +2037,8 @@ bool PuzzleManager::RelicsPuz()
 			if (relic2 != nullptr)
 				relic2->body->GetWorld()->DestroyBody(relic2->body);
 
+			app->audio->PlayFx(confirmInteractfx);
+
 			delete relic2;
 			relic2 = nullptr;
 
@@ -2041,6 +2058,8 @@ bool PuzzleManager::RelicsPuz()
 		{
 			if (relic3 != nullptr)
 				relic3->body->GetWorld()->DestroyBody(relic3->body);
+
+			app->audio->PlayFx(confirmInteractfx);
 
 			delete relic3;
 			relic3 = nullptr;
@@ -2063,6 +2082,8 @@ bool PuzzleManager::RelicsPuz()
 			{
 				//Cambiar textura
 				//Col1 = { , , , };
+
+				app->audio->PlayFx(confirmInteractfx);
 
 				RelicsCompleted += 1;
 				RelicColumnContact1 = false;
@@ -2092,6 +2113,8 @@ bool PuzzleManager::RelicsPuz()
 				//Cambiar textura
 				//Col2 = { , , , };
 
+				app->audio->PlayFx(confirmInteractfx);
+
 				RelicsCompleted += 1;
 				RelicColumnContact2 = false;
 				Relic2Invent = false;
@@ -2118,6 +2141,8 @@ bool PuzzleManager::RelicsPuz()
 			{
 				//Cambiar textura
 				//Col3 = { , , , };
+
+				app->audio->PlayFx(confirmInteractfx);
 
 				RelicsCompleted += 1;
 				RelicColumnContact3 = false;
