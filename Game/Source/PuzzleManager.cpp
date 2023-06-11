@@ -780,6 +780,30 @@ bool PuzzleManager::Dun1Update()
 		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		{
 			saveFireGuy = true;
+
+			if (fireGuy != nullptr)
+				app->tex->UnLoad(fireGuy);
+
+			if (FireGuy != nullptr)
+				FireGuy->body->GetWorld()->DestroyBody(FireGuy->body);
+
+			delete FireGuy;
+			FireGuy = nullptr;
+
+			teamMate = true;
+
+			app->itemManager->AddCharaToParty(3);
+
+			app->questManager->quest1->active = true;
+			app->questManager->quest1->complete = true;
+
+			app->tex->UnLoad(app->hTerrors->player->texture);
+
+			app->questManager->SaveState();
+
+			app->entityManager->tpID = 0;
+			app->audio->PlayFx(solvedfx);
+			completeDungeon_B = true;
 		}
 	}
 
