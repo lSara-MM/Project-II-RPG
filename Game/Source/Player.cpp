@@ -214,11 +214,11 @@ bool Player::Update(float dt)
 				//app->render->camera.x = -3450 + 640 - width;
 				if (app->render->camera.y < -position.y + 335 - height) 
 				{ 
-					app->render->camera.y += 4;
+					app->render->camera.y += 12;
 				}
 				else if (app->render->camera.y > -position.y + 385 - height)
 				{ 
-					app->render->camera.y -= 4;
+					app->render->camera.y -= 12;
 				}
 				else 
 				{ 
@@ -249,9 +249,9 @@ bool Player::Update(float dt)
 				{
 					//Setear camara al player (con suavidad)
 					if (app->render->camera.x > -position.x + 650 - width)
-					{ app->render->camera.x -= 8; }
+					{ app->render->camera.x -= 12; }
 					else if (app->render->camera.x < -position.x + 630 - width) 
-					{ app->render->camera.x += 8; }
+					{ app->render->camera.x += 12; }
 					else { app->render->camera.x = -position.x + 640 - width; }
 				}
 
@@ -261,11 +261,11 @@ bool Player::Update(float dt)
 					//Setear poco a poco
 					if (app->render->camera.y < -position.y + 330 - height)
 					{
-						app->render->camera.y += 4;
+						app->render->camera.y += 12;
 					}
 					else if (app->render->camera.y > -position.y + 390 - height)
 					{
-						app->render->camera.y -= 4;
+						app->render->camera.y -= 12;
 					}
 					else 
 					{ 

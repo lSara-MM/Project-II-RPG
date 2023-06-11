@@ -108,6 +108,7 @@ private:
 	SDL_Texture* texture0 = nullptr;
 	SDL_Texture* texture1 = nullptr;
 	SDL_Texture* texture2 = nullptr;
+	SDL_Texture* texture3 = nullptr;
 	
 
 	// An array to store and handle all the particles

@@ -211,10 +211,10 @@
 		
 		<npc name="OBSHCHIY" dialogueID="6"
 			x="2432" y="3392" width="64" height="64" texturepath="Assets/Textures/Lore_NPC.png"/>
-		<!--
+		
 		<npc name="PINKY" 
 			dialogueID="17" dialogueID="29"
-			x="3410" y="1105" width="64" height="64" texturepath="Assets/Textures/Pinky_The_Savior.png"/>-->
+			x="3410" y="1105" width="64" height="64" texturepath="Assets/Textures/Pinky_The_Savior.png"/>
 	</scene>
 
   <SceneWin_Lose>
@@ -459,7 +459,7 @@ enum class CharacterClass
         width="0" heigth="0"
 		texturePath="Assets/Textures/EnemyWolfLamb.png"
 		
-		sectionX="11" sectionY="0"/>
+		sectionX="20" sectionY="36"/>
 
 		<enemy name ="Surgeon Wasps Nest" id="1" maxHp="1800" currentHp="1800" attack="180" armor="2" critRate="5" critDamage="25" accuracy="5" res="60" dodge="2" speed="25"
         type="1" class="5" skill1ID="41" skill2ID="42" skill3ID="43" skill4ID="44"
@@ -481,9 +481,9 @@ enum class CharacterClass
         type="1" class="8" skill1ID="49" skill2ID="50" skill3ID="51" skill4ID="52"
                
         width="0" heigth="0"
-        texturePath ="Assets/Textures/EnemyBossSpecter.png"
+        texturePath ="Assets/Textures/EnemyBossTamer.png"
 		
-		sectionX="23" sectionY="0"/>
+		sectionX="26" sectionY="0"/>
 
 		<enemy name ="The Beast" id="21" maxHp="4300" currentHp="4000" attack="400" armor="55" critRate="30" critDamage="50" accuracy="30" res="10" dodge="0" speed="20"
         type="1" class="8" skill1ID="53" skill2ID="54" skill3ID="55" skill4ID="56"
@@ -491,7 +491,7 @@ enum class CharacterClass
         width="0" heigth="0"
         texturePath ="Assets/Textures/EnemyBossGoat2.png"
 		
-		sectionX="11" sectionY="0"/>
+		sectionX="5" sectionY="0"/>
 
 	</scenes>
 </combat>
