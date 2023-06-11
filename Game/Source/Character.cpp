@@ -1089,7 +1089,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			{
 				//El da�o critico es mas potente
 				damage *= (100 + 2 * (caster->GetStatModifier(EffectType::CRIT_DMG) * (skill->bonusCritDamage + caster->critDamage))) / 100;
-				app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y, 20, 0, 10, 5, 0);
+				app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y, 20, 0, 10, 5, 1);
 				app->audio->PlayFx(critfx);
 			}
 
