@@ -26,19 +26,26 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Player run -> Left shift / B button gamepad
 
-* Interact  -> E / Y button gamepad
+* Interact  -> E / A button gamepad
 
-* Inventory and combat order -> I
+* Inventory -> I / Y button gamepad
+
+* Minimap -> M / X button gamepad
+
+* Party menu -> P / SELECT gamepad
+
+* Inventory -> I / Y button gamepad
+
+* Pause menu -> ESC / START gamepad
 
 ### Menus
 
-* Intro menu -> Accept / Enter
+* Accept -> Enter/ A button gamepad
 
-* Pause menu -> P
+* Exit menu -> B button gamepad
+
 
 ### Combat
-
-
 
 * Go to Play Scene -> F1 (only God Mode)
 
