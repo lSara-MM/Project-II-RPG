@@ -185,6 +185,7 @@
 	<HouseOfTerrors texturePathDark="Assets/Textures/OscuridadDungeon.png" musicD1="Assets/Audio/Music/Haunted_House.ogg" pause="Assets/Audio/Music/mus_pause.ogg"/>
 	<Circus musicCircus="Assets/Audio/Music/CircusTent_mus.ogg" pause="Assets/Audio/Music/mus_pause.ogg"/>
 	<PracticeTent musTent="Assets/Audio/Music/sala_Entrenamiento.ogg" pause="Assets/Audio/Music/mus_pause.ogg" texturepathDummy="Assets/Textures/dummy_mapa.png" xCollider="576" yCollider="256" widthCollider="67" heightCollider="73" mouseSpeed ="0.5"/>
+	<BeastTent musicD2="Assets/Audio/Music/Beast_mus.ogg" pause="Assets/Audio/Music/mus_pause.ogg"/>
 	
 	<scene music="Assets/Audio/Music/Lobby_Music.ogg" pause="Assets/Audio/Music/mus_pause.ogg"
 		textureAttackPath="Assets/Textures/attack.png"

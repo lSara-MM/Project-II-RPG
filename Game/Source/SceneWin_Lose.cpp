@@ -68,7 +68,7 @@ bool SceneWin_Lose::Start()
 
 	if (win)
 	{
-		//app->audio->PlayMusic(winMusicPath, 1.0f);	
+		app->audio->PlayMusic(winMusicPath, 1.0f);	
 	}
 	else
 	{

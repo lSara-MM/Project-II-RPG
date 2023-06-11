@@ -43,7 +43,7 @@ bool BeastTent::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	musBeastPath = config.attribute("musicD1").as_string();
+	musBeastPath = config.attribute("musicD2").as_string();
 	pause_music = config.attribute("pause").as_string();
 	mute_B = false;
 
