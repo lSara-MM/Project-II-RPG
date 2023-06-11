@@ -70,6 +70,9 @@
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)Build\$(Configuration)\$(ProjectName).exe" "$(SolutionDir)Output\$(ProjectName).exe"</Command>
     </PostBuildEvent>
+    <ResourceCompile>
+      <ResourceOutputFileName>$(IntDir)%(Filename).res</ResourceOutputFileName>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -93,6 +96,9 @@
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)Build\$(Configuration)\$(ProjectName).exe" "$(SolutionDir)Output\$(ProjectName).exe"</Command>
     </PostBuildEvent>
+    <ResourceCompile>
+      <ResourceOutputFileName>$(IntDir)%(Filename).res</ResourceOutputFileName>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetsManager.cpp" />

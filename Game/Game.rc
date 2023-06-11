@@ -52,7 +52,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "D:\\Project-II-RPG\\Output\\Assets\\Textures\\gameExe.ico"
+IDI_ICON1               ICON                    "gameExe.ico"
 
 #endif    // Spanish (Spain, International Sort) resources
 /////////////////////////////////////////////////////////////////////////////
