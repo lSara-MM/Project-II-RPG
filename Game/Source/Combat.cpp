@@ -1442,209 +1442,212 @@ void Combat::RenderGuiChara(int charaID)
 
 void Combat::RenderSkillDescription(int controlID)
 {
-	if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ALLY)
+	if (app->combat->listInitiative.Count() < app->combat->charaInTurn)
 	{
-		Skill* skillPoint = listInitiative.At(charaInTurn)->data->listSkills.At(controlID)->data;
-		//Name
-		app->render->TextDraw(skillPoint->name.GetString(), xText1, 545, 24);
-
-		//Stats to get
-		string DMG_C;
-		string Pre_C;
-		string CrRate_C;
-		string CrDMG_C;
-
-		int midX = 280;
-		//Damage or Heal
-		if (skillPoint->multiplierDmg > 0) //Heal
+		if (listInitiative.At(charaInTurn)->data->charaType == CharacterType::ALLY)
 		{
-			app->render->TextDraw("Healing:", midX, 550, 18);
-			DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->maxHp / 5));
-			const char* ch_DMG = DMG_C.c_str();
-			app->render->TextDraw(ch_DMG, 355, 550, 18);
-		}
-		else
-		{
-			app->render->TextDraw("Damage:", midX, 537, 18);
-			DMG_C = to_string((int)(abs(skillPoint->multiplierDmg) * listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK)));
-			const char* ch_DMG = DMG_C.c_str();
-			app->render->TextDraw(ch_DMG, 355, 537, 18);
+			Skill* skillPoint = listInitiative.At(charaInTurn)->data->listSkills.At(controlID)->data;
+			//Name
+			app->render->TextDraw(skillPoint->name.GetString(), xText1, 545, 24);
 
-			//Stats ataques
-			Pre_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::ACCURACY) * (skillPoint->bonusAccuracy + listInitiative.At(charaInTurn)->data->accuracy));
-			CrRate_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_RATE) * (skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->critRate));
-			CrDMG_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_DMG) * (skillPoint->bonusCritDamage + listInitiative.At(charaInTurn)->data->critDamage));
+			//Stats to get
+			string DMG_C;
+			string Pre_C;
+			string CrRate_C;
+			string CrDMG_C;
 
-			//Printar stats
-			app->render->TextDraw("Accuracy.", midX, 560, 15);
-			const char* ch_Pre = Pre_C.c_str();
-			app->render->TextDraw(ch_Pre, 350, 560, 15);
-
-			app->render->TextDraw("Cr.Rate.", midX, 575, 15);
-			const char* ch_CrRate = CrRate_C.c_str();
-			app->render->TextDraw(ch_CrRate, 350, 575, 15);
-
-			app->render->TextDraw("Cr.Dmg.", midX, 590, 15);
-			const char* ch_CrDMG = CrDMG_C.c_str();
-			app->render->TextDraw(ch_CrDMG, 350, 590, 15);
-		}
-
-		//Efect 1
-		SString effecto_C;
-		switch ((EffectType)skillPoint->firstStatus)
-		{
-		case EffectType::NONE:
-			effecto_C = "None";
-			break;
-		case EffectType::CURRENT_HP:
-			if (skillPoint->firstPositiveEffect) { effecto_C = "Regeneration"; }
-			else { effecto_C = "Burn"; }
-			break;
-		case EffectType::ATTACK:
-			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff ATK"; }
-			else { effecto_C = "Debuff ATK"; }
-			break;
-		case EffectType::CRIT_RATE:
-			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Crit Rate"; }
-			else { effecto_C = "Debuff Crit Rate"; }
-			break;
-		case EffectType::CRIT_DMG:
-			if (skillPoint->firstPositiveEffect) { effecto_C = "BuffCritDMG"; }
-			else { effecto_C = "Debuff Crit DMG"; }
-			break;
-		case EffectType::ACCURACY:
-			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff accuracy"; }
-			else { effecto_C = "Debuff accuracy"; }
-			break;
-		case EffectType::ARMOR:
-			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Armor"; }
-			else { effecto_C = "Debuff Armor"; }
-			break;
-		case EffectType::DODGE:
-			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Dodge"; }
-			else { effecto_C = "Debuff Dodge"; }
-			break;
-		case EffectType::RES:
-			if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Resistance"; }
-			else { effecto_C = "Debuff Resistance"; }
-			break;
-		case EffectType::TAUNT:
-			effecto_C = "Taunt";
-			break;
-		case EffectType::STUN:
-			effecto_C = "Stun!";
-			break;
-		case EffectType::BLESS:
-			if (skillPoint->firstPositiveEffect) { effecto_C = "Bless"; }
-			else { effecto_C = "Curse"; }
-			break;
-		default:
-			break;
-		}
-		app->render->TextDraw(effecto_C.GetString(), 480, 550, 18);
-
-		//Efect 2
-		switch ((EffectType)skillPoint->secondStatus)
-		{
-		case EffectType::NONE:
-			effecto_C = "None";
-			break;
-		case EffectType::CURRENT_HP:
-			if (skillPoint->secondPositiveEffect) { effecto_C = "Regeneration"; }
-			else { effecto_C = "Burn"; }
-			break;
-		case EffectType::ATTACK:
-			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff ATK"; }
-			else { effecto_C = "Debuff ATK"; }
-			break;
-		case EffectType::CRIT_RATE:
-			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Crit Rate"; }
-			else { effecto_C = "Debuff Crit Rate"; }
-			break;
-		case EffectType::CRIT_DMG:
-			if (skillPoint->secondPositiveEffect) { effecto_C = "BuffCritDMG"; }
-			else { effecto_C = "Debuff Crit DMG"; }
-			break;
-		case EffectType::ACCURACY:
-			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff accuracy"; }
-			else { effecto_C = "Debuff accuracy"; }
-			break;
-		case EffectType::ARMOR:
-			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Armor"; }
-			else { effecto_C = "Debuff Armor"; }
-			break;
-		case EffectType::DODGE:
-			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Dodge"; }
-			else { effecto_C = "Debuff Dodge"; }
-			break;
-		case EffectType::RES:
-			if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Resistance"; }
-			else { effecto_C = "Debuff Resistance"; }
-			break;
-		case EffectType::TAUNT:
-			effecto_C = "Taunt";
-			break;
-		case EffectType::STUN:
-			effecto_C = "Stun!";
-			break;
-		case EffectType::BLESS:
-			if (skillPoint->firstPositiveEffect) { effecto_C = "Bless"; }
-			else { effecto_C = "Curse"; }
-			break;
-		default:
-			break;
-		}
-		app->render->TextDraw(effecto_C.GetString(), 480, 570, 18);
-
-		//Description
-		app->render->RenderTrimmedText(xText1, 620, 5, skillPoint->description.GetString(), &auxTexts, fontSizeSkills, 60);
-
-		//Positions Skills
-		Character* charaPoint = listInitiative.At(charaInTurn)->data;
-		app->render->TextDraw("Position", 80, 575, 12);
-		for (int i = 0; i < 4; i++)
-		{
-			if (skillPoint->posToUseEnd_I >= i && i >= skillPoint->posToUseStart_I)
+			int midX = 280;
+			//Damage or Heal
+			if (skillPoint->multiplierDmg > 0) //Heal
 			{
-				app->render->DrawRectangle({ 140 + (3-i) * 15,580,10,10 }, 0, 0, 220);
+				app->render->TextDraw("Healing:", midX, 550, 18);
+				DMG_C = to_string((int)(skillPoint->multiplierDmg * listInitiative.At(charaInTurn)->data->maxHp / 5));
+				const char* ch_DMG = DMG_C.c_str();
+				app->render->TextDraw(ch_DMG, 355, 550, 18);
 			}
 			else
 			{
-				app->render->DrawRectangle({ 140 + (3-i) * 15,580,10,10 }, 80, 80, 80);
+				app->render->TextDraw("Damage:", midX, 537, 18);
+				DMG_C = to_string((int)(abs(skillPoint->multiplierDmg) * listInitiative.At(charaInTurn)->data->GetStat(EffectType::ATTACK)));
+				const char* ch_DMG = DMG_C.c_str();
+				app->render->TextDraw(ch_DMG, 355, 537, 18);
+
+				//Stats ataques
+				Pre_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::ACCURACY) * (skillPoint->bonusAccuracy + listInitiative.At(charaInTurn)->data->accuracy));
+				CrRate_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_RATE) * (skillPoint->bonusCritRate + listInitiative.At(charaInTurn)->data->critRate));
+				CrDMG_C = to_string((int)listInitiative.At(charaInTurn)->data->GetStatModifier(EffectType::CRIT_DMG) * (skillPoint->bonusCritDamage + listInitiative.At(charaInTurn)->data->critDamage));
+
+				//Printar stats
+				app->render->TextDraw("Accuracy.", midX, 560, 15);
+				const char* ch_Pre = Pre_C.c_str();
+				app->render->TextDraw(ch_Pre, 350, 560, 15);
+
+				app->render->TextDraw("Cr.Rate.", midX, 575, 15);
+				const char* ch_CrRate = CrRate_C.c_str();
+				app->render->TextDraw(ch_CrRate, 350, 575, 15);
+
+				app->render->TextDraw("Cr.Dmg.", midX, 590, 15);
+				const char* ch_CrDMG = CrDMG_C.c_str();
+				app->render->TextDraw(ch_CrDMG, 350, 590, 15);
 			}
-		}
-		
-		//Target skills
-		int r = 0;
-		int g = 0;
-		int multI;
-		int minus;
-		if (skillPoint->targetFriend)
-		{
-			g = 220;
-			r = 0;
-			minus = 3;
-			multI = 1;
-		}
-		else
-		{
-			g = 0;
-			r = 220;
-			minus = 0;
-			multI = -1;
-		}
-		for (int i = 0; i < 4; i++)
-		{
-			if (skillPoint->posToTargetEnd_I >= i && i >= skillPoint->posToTargetStart_I)
+
+			//Efect 1
+			SString effecto_C;
+			switch ((EffectType)skillPoint->firstStatus)
 			{
-				app->render->DrawRectangle({ 140 + (minus - i*multI) * 15,595,10,10 }, r, g, 0);
+			case EffectType::NONE:
+				effecto_C = "None";
+				break;
+			case EffectType::CURRENT_HP:
+				if (skillPoint->firstPositiveEffect) { effecto_C = "Regeneration"; }
+				else { effecto_C = "Burn"; }
+				break;
+			case EffectType::ATTACK:
+				if (skillPoint->firstPositiveEffect) { effecto_C = "Buff ATK"; }
+				else { effecto_C = "Debuff ATK"; }
+				break;
+			case EffectType::CRIT_RATE:
+				if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Crit Rate"; }
+				else { effecto_C = "Debuff Crit Rate"; }
+				break;
+			case EffectType::CRIT_DMG:
+				if (skillPoint->firstPositiveEffect) { effecto_C = "BuffCritDMG"; }
+				else { effecto_C = "Debuff Crit DMG"; }
+				break;
+			case EffectType::ACCURACY:
+				if (skillPoint->firstPositiveEffect) { effecto_C = "Buff accuracy"; }
+				else { effecto_C = "Debuff accuracy"; }
+				break;
+			case EffectType::ARMOR:
+				if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Armor"; }
+				else { effecto_C = "Debuff Armor"; }
+				break;
+			case EffectType::DODGE:
+				if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Dodge"; }
+				else { effecto_C = "Debuff Dodge"; }
+				break;
+			case EffectType::RES:
+				if (skillPoint->firstPositiveEffect) { effecto_C = "Buff Resistance"; }
+				else { effecto_C = "Debuff Resistance"; }
+				break;
+			case EffectType::TAUNT:
+				effecto_C = "Taunt";
+				break;
+			case EffectType::STUN:
+				effecto_C = "Stun!";
+				break;
+			case EffectType::BLESS:
+				if (skillPoint->firstPositiveEffect) { effecto_C = "Bless"; }
+				else { effecto_C = "Curse"; }
+				break;
+			default:
+				break;
+			}
+			app->render->TextDraw(effecto_C.GetString(), 480, 550, 18);
+
+			//Efect 2
+			switch ((EffectType)skillPoint->secondStatus)
+			{
+			case EffectType::NONE:
+				effecto_C = "None";
+				break;
+			case EffectType::CURRENT_HP:
+				if (skillPoint->secondPositiveEffect) { effecto_C = "Regeneration"; }
+				else { effecto_C = "Burn"; }
+				break;
+			case EffectType::ATTACK:
+				if (skillPoint->secondPositiveEffect) { effecto_C = "Buff ATK"; }
+				else { effecto_C = "Debuff ATK"; }
+				break;
+			case EffectType::CRIT_RATE:
+				if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Crit Rate"; }
+				else { effecto_C = "Debuff Crit Rate"; }
+				break;
+			case EffectType::CRIT_DMG:
+				if (skillPoint->secondPositiveEffect) { effecto_C = "BuffCritDMG"; }
+				else { effecto_C = "Debuff Crit DMG"; }
+				break;
+			case EffectType::ACCURACY:
+				if (skillPoint->secondPositiveEffect) { effecto_C = "Buff accuracy"; }
+				else { effecto_C = "Debuff accuracy"; }
+				break;
+			case EffectType::ARMOR:
+				if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Armor"; }
+				else { effecto_C = "Debuff Armor"; }
+				break;
+			case EffectType::DODGE:
+				if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Dodge"; }
+				else { effecto_C = "Debuff Dodge"; }
+				break;
+			case EffectType::RES:
+				if (skillPoint->secondPositiveEffect) { effecto_C = "Buff Resistance"; }
+				else { effecto_C = "Debuff Resistance"; }
+				break;
+			case EffectType::TAUNT:
+				effecto_C = "Taunt";
+				break;
+			case EffectType::STUN:
+				effecto_C = "Stun!";
+				break;
+			case EffectType::BLESS:
+				if (skillPoint->firstPositiveEffect) { effecto_C = "Bless"; }
+				else { effecto_C = "Curse"; }
+				break;
+			default:
+				break;
+			}
+			app->render->TextDraw(effecto_C.GetString(), 480, 570, 18);
+
+			//Description
+			app->render->RenderTrimmedText(xText1, 620, 5, skillPoint->description.GetString(), &auxTexts, fontSizeSkills, 60);
+
+			//Positions Skills
+			Character* charaPoint = listInitiative.At(charaInTurn)->data;
+			app->render->TextDraw("Position", 80, 575, 12);
+			for (int i = 0; i < 4; i++)
+			{
+				if (skillPoint->posToUseEnd_I >= i && i >= skillPoint->posToUseStart_I)
+				{
+					app->render->DrawRectangle({ 140 + (3 - i) * 15,580,10,10 }, 0, 0, 220);
+				}
+				else
+				{
+					app->render->DrawRectangle({ 140 + (3 - i) * 15,580,10,10 }, 80, 80, 80);
+				}
+			}
+
+			//Target skills
+			int r = 0;
+			int g = 0;
+			int multI;
+			int minus;
+			if (skillPoint->targetFriend)
+			{
+				g = 220;
+				r = 0;
+				minus = 3;
+				multI = 1;
 			}
 			else
 			{
-				app->render->DrawRectangle({ 140 + (minus - i* multI) * 15,595,10,10 }, 60, 60, 60);
+				g = 0;
+				r = 220;
+				minus = 0;
+				multI = -1;
 			}
+			for (int i = 0; i < 4; i++)
+			{
+				if (skillPoint->posToTargetEnd_I >= i && i >= skillPoint->posToTargetStart_I)
+				{
+					app->render->DrawRectangle({ 140 + (minus - i * multI) * 15,595,10,10 }, r, g, 0);
+				}
+				else
+				{
+					app->render->DrawRectangle({ 140 + (minus - i * multI) * 15,595,10,10 }, 60, 60, 60);
+				}
+			}
+			app->render->TextDraw("Target", 80, 590, 12);
 		}
-		app->render->TextDraw("Target", 80, 590, 12);
 	}
 }
 

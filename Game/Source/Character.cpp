@@ -195,8 +195,9 @@ bool Character::Update(float dt)
 				{
 					turnDelay.Start();
 					delayOn = true;
+					app->moduleparticles->AddParticle(position.x + (126 / 2), position.y, 30, 3);
 				}
-				if ((turnDelay.ReadMSec() > 1200 && delayOn) || app->input->godMode_B)
+				if ((turnDelay.ReadMSec() > 2000 && delayOn) || app->input->godMode_B)
 				{
 					app->combat->NextTurn();
 				}
@@ -638,7 +639,7 @@ bool Character::Update(float dt)
 								}
 								if (CalculateRandomProbability(probSkill) && listSkills.At(3)->data->PosCanBeUsed(positionCombat_I))//Ataques
 								{
-									//usar skill 4(3) (daño + debuff)
+									//usar skill 4(3) (daï¿½o + debuff)
 									UseSkill(listSkills.At(3)->data);
 
 									listSkillsHistory.Add(4);
@@ -646,7 +647,7 @@ bool Character::Update(float dt)
 								}
 								else
 								{
-									//usar skill 1(0) (daño solo) (es la skill mas debil)
+									//usar skill 1(0) (daï¿½o solo) (es la skill mas debil)
 									UseSkill(listSkills.At(0)->data);
 
 									listSkillsHistory.Add(1);
@@ -678,7 +679,7 @@ bool Character::Update(float dt)
 									}
 									else
 									{
-										//Depende de lo dañada que este la party pues buff defensivo o ofensivo
+										//Depende de lo daï¿½ada que este la party pues buff defensivo o ofensivo
 										int maxHPTeam=0;
 										int actualHPTeam=0;
 										for (int i = 0; i < app->combat->vecEnemies.size(); i++)
@@ -1022,8 +1023,12 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 	StatusEffect* statusEffect2 = new StatusEffect(skill->secondIntensity, skill->secondDuration, skill->secondPositiveEffect, (EffectType)skill->secondStatus);
 	if (skill->multiplierDmg >= 0) //Curacion o buffo, no hace falta calcular esquiva ni nada 
 	{
-		app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y, 40, 2, 300);
-		app->audio->PlayFx(healfx);
+		if (skill->multiplierDmg>0)
+		{
+			app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y+178, 20, 2, 300);
+			app->audio->PlayFx(healfx);
+		}
+		
 		
 		//Primer efecto de estado
 		if (skill->firstPositiveEffect) //Efecto de estado positivo
@@ -1081,7 +1086,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			damage = skill->multiplierDmg * caster->GetStat(EffectType::ATTACK);
 			if (CalculateRandomProbability(caster->GetStatModifier(EffectType::CRIT_RATE) * (skill->bonusCritRate + caster->critRate))) //Si true hay critico
 			{
-				//El daño critico es mas potente
+				//El daï¿½o critico es mas potente
 				damage *= ( 100 + 2*(caster->GetStatModifier(EffectType::CRIT_DMG) * (skill->bonusCritDamage + caster->critDamage)) ) / 100;
 				app->moduleparticles->AddParticle(defender->position.x+(126/2), defender->position.y, 20, 0, 300);
 				app->audio->PlayFx(critfx);
