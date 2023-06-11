@@ -25,6 +25,7 @@ bool ModuleParticles::Start()
 	texture0 = app->tex->Load("Assets/Textures/particle0.png");
 	texture1 = app->tex->Load("Assets/Textures/particle1.png");
 	texture2 = app->tex->Load("Assets/Textures/particle2.png");
+	texture3 = app->tex->Load("Assets/Textures/particle3.png");
 	//// Explosion particle
 	//explosion.anim.PushBack({246, 87, 27, 28});
 	//explosion.anim.PushBack({276, 86, 31, 33});
@@ -130,6 +131,10 @@ bool ModuleParticles::PostUpdate()
 		{
 			app->render->DrawTexture(texture2, particle->position.x, particle->position.y);
 		}
+		if (particle != nullptr && particle->isAlive && Modulo == 3)
+		{
+			app->render->DrawTexture(texture3, particle->position.x, particle->position.y);
+		}
 	}
 
 	return true;
@@ -216,9 +221,17 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m)
 				newParticle->position.y = particleY;
 
 				// Configurar velocidad aleatoria para simular una explosión
-				newParticle->speed.x = static_cast<float>(rand() % 6 - 3);  // Rango: -3 a 3 en movimiento horizontal
-				newParticle->speed.y = static_cast<float>(rand() % 10 + 5);  // Rango: 5 a 14 hacia arriba
-				newParticle->isAlive = true;
+				if (Modulo == 2) {
+					newParticle->speed.x = static_cast<float>(rand() % 6 - 3);  // Rango: -3 a 3 en movimiento horizontal
+					newParticle->speed.y = static_cast<float>(rand() % 10 - 15);  // Rango: -15 a -5 hacia arriba
+					newParticle->isAlive = true;
+				}
+
+				if (Modulo == 3) {
+					newParticle->speed.x = static_cast<float>(rand() % 6 - 3);  // Rango: -3 a 3 en movimiento horizontal
+					newParticle->speed.y = static_cast<float>(rand() % 10 + 5);  // Rango: 5 a 14 hacia abajo
+					newParticle->isAlive = true;
+				}
 
 				particles[i] = newParticle;
 			}
