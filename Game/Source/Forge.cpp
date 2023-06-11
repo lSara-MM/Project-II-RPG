@@ -413,6 +413,13 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		if (app->itemManager->nodeList[i]->canCraft && app->itemManager->nodeList[i]->ID == control->id)
 		{
+			for (size_t j = 0; j < app->itemManager->nodeList.size(); j++)
+			{
+				if (app->itemManager->nodeList[j]->forge)
+				{
+					app->itemManager->nodeList[j]->forge = !app->itemManager->nodeList[j]->forge;
+				}
+			}
 			app->itemManager->nodeList[i]->forge = !app->itemManager->nodeList[i]->forge; 
 			break;
 		}
