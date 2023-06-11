@@ -892,17 +892,17 @@ bool PuzzleManager::Dun2Update()
 
 	if (RelicInColumn1)
 	{
-		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn1.x - widthRelicColumn + 3, posRelicColumn1.y - heightRelicColumn - 20, &Rel1);
+		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn1.x - widthRelicColumn + 4, posRelicColumn1.y - heightRelicColumn - 15, &Rel1);
 	}
 
 	if (RelicInColumn2)
 	{
-		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn2.x - widthRelicColumn, posRelicColumn2.y - heightRelicColumn - 12, &Rel2);
+		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn2.x - widthRelicColumn + 10, posRelicColumn2.y - heightRelicColumn - 15, &Rel2);
 	}
 
 	if (RelicInColumn3)
 	{
-		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn3.x - widthRelicColumn + 3, posRelicColumn3.y - heightRelicColumn - 12, &Rel3);
+		app->render->DrawTexture(GeneralTextureDungeon2, posRelicColumn3.x - widthRelicColumn + 3, posRelicColumn3.y - heightRelicColumn - 10, &Rel3);
 	}
 
 	if (!bossIsDeadDun2) 
