@@ -9,6 +9,7 @@
 5 - Quest
 6 - Store
 7 - Forge
+
 -->
 
 <!--
@@ -294,8 +295,8 @@
 			</node>
 
 			<node id="-1" text ="End of conversation -F1- to talk again"></node>
-		</dialogueTree>
-
+	</dialogueTree>	
+	
 	<dialogueTree ID="6">
 
 		<node id="0" name="OBSHCHIY" text="Insensate... ">
@@ -371,49 +372,83 @@
 	</dialogueTree>
 
 	<dialogueTree ID="18">
+		<node id="0" name="PINKY" text="Mis padres murieron en los pinchos. 160, 272. ">
+			<choice id="0" option="Oh... Lo siento.  " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+
+	<dialogueTree ID="19">
 		<node id="0" name="PINKY" text="No soy un furro, soy un DRAGON. ">
 			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
 		</node>
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 	
-	<dialogueTree ID="19">
+	<dialogueTree ID="20">
 		<node id="0" name="PINKY" text="Cada tres ataques hace pum y explotan cosas. ">
 			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
 		</node>
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 	
-	<dialogueTree ID="20">
+	<dialogueTree ID="21">
 		<node id="0" name="PINKY" text="¡MILAGRO! ">
 			<choice id="0" option="¡MILAGRO! " nextNode="-1" eventReturn="0"/>
 		</node>
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 	
-	<dialogueTree ID="21">
-		<node id="0" name="PINKY" text="¡Es que no me escuchais! >:( ">
+	<dialogueTree ID="22">
+		<node id="0" name="PINKY" text="Es que no me escuchais! >:( ">
 			<choice id="0" option="Yo te escucho. " nextNode="-1" eventReturn="0"/>
 		</node>
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 	
-	<dialogueTree ID="22">
+	<dialogueTree ID="23">
 		<node id="0" name="PINKY" text="No estoy delirando ¡Hay un viejo en Qatar! ">
 			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
 		</node>
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 
-	<dialogueTree ID="23">
+	<dialogueTree ID="24">
 		<node id="0" name="PINKY" text="El demonio tiene la cola muy larga. ">
 			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
 		</node>
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
 	</dialogueTree>
 
+	<dialogueTree ID="25">
+		<node id="0" name="PINKY" text="FUYM! ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+	
+	<dialogueTree ID="26">
+		<node id="0" name="PINKY" text="Haced branches, decian... Os seran utiles.. ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
 
-		<!-- Notes -->
+	<dialogueTree ID="27">
+		<node id="0" name="PINKY" text="Esto antes eran conejos mutantes asesinos. ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+
+	<dialogueTree ID="28">
+		<node id="0" name="PINKY" text="Con que ahora soy una cucaracha al parecer ya no soy sensei? ">
+			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
+		</node>
+		<node id="-1" text ="End of conversation -F1- to talk again"></node>
+	</dialogueTree>
+
+<!-- Notes -->
   <dialogueTree ID="100">
 
       <node id="0" name="NOTE 1" text="Guess how many sleigh bells does the puppet have to know the first number of the sequences. ">
@@ -442,5 +477,3 @@
   </dialogueTree>
 	
 </dialogues>
-
-<!--<node id="0" text="Got nothing to offer yet. Be patient. I’ll see you arround.">-->

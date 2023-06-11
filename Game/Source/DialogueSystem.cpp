@@ -6,6 +6,10 @@
 #include "Textures.h"
 #include "Window.h"
 
+#include <iostream>
+using namespace std;
+#include <sstream>
+
 DialogueSystem::DialogueSystem() : Module()
 {
 	name.Create("dialogue");
@@ -108,8 +112,9 @@ bool DialogueSystem::CleanUp()
 
 void DialogueSystem::PerformDialogue(vector<int> dialoguesID)
 {
+	srand(time(NULL));
 	int id = rand() % dialoguesID.size();
-	app->dialogueSystem->LoadDialogue(dialoguesID.at(id));
+	LoadDialogue(dialoguesID.at(id));
 }
 
 
