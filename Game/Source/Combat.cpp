@@ -1100,8 +1100,26 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			//% intensidad
 			app->render->TextDraw("% intensity", 300, 530, 20);
 
-			for (size_t i = 0; i < cha->listStatusEffects.Count() && i<7; i++)
+			int writingLimit = 0;
+			bool jumpList = false;
+			for (size_t i = 0; i < cha->listStatusEffects.Count() && writingLimit <7; i++)
 			{
+				
+				for (int k = i-1; k > 0 ; k--)
+				{
+					if (cha->listStatusEffects.At(i)->data->type== cha->listStatusEffects.At(k)->data->type)
+					{
+						jumpList = true;
+						break;
+					}
+				}
+
+				if(jumpList)
+				{
+					jumpList = false;
+					break;
+				}
+
 				switch (cha->listStatusEffects.At(i)->data->type)
 				{
 				case EffectType::NONE:
@@ -1209,14 +1227,35 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				default:
 					break;
 				}
+				
 				//Efecto
-				app->render->TextDraw(effectToPrint.GetString(), 75, 555 + (fontSizeSkills + offsetY) * i, fontSizeSkills);
-				string numeros = to_string(cha->listStatusEffects.At(i)->data->turnsLeft);
+				app->render->TextDraw(effectToPrint.GetString(), 75, 555 + (fontSizeSkills + offsetY) * writingLimit, fontSizeSkills);
 				//Turnos
-				app->render->TextDraw(numeros.c_str(), 220, 555 + (fontSizeSkills + offsetY) * i, fontSizeSkills);
+				
+				//Buscar el turno menor
+				int minTurns = 999;
+				//Sumar intensidad
+				int intensities = 0;
+
+				for (int j = i; j < cha->listStatusEffects.Count(); j++)
+				{
+					if(cha->listStatusEffects.At(i)->data->type == cha->listStatusEffects.At(j)->data->type)
+					{
+						if (minTurns> cha->listStatusEffects.At(j)->data->turnsLeft)
+						{
+							minTurns = cha->listStatusEffects.At(j)->data->turnsLeft;
+						}
+						intensities += cha->listStatusEffects.At(j)->data->intensity;
+					}
+				}
+				string numeros = to_string(minTurns);
+				app->render->TextDraw(numeros.c_str(), 220, 555 + (fontSizeSkills + offsetY) * writingLimit, fontSizeSkills);
 				//% intensidad
-				numeros = to_string(abs(cha->listStatusEffects.At(i)->data->intensity));
-				app->render->TextDraw(numeros.c_str(), 335, 555 + (fontSizeSkills + offsetY) * i, fontSizeSkills);
+				numeros = to_string(abs(intensities));
+				app->render->TextDraw(numeros.c_str(), 335, 555 + (fontSizeSkills + offsetY) * writingLimit, fontSizeSkills);
+
+				//Sumar 1 al wl
+				writingLimit++;
 			}
 
 			cha = nullptr;
@@ -1261,8 +1300,25 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			Character* cha = vecEnemies.at((SearchInVec(vecEnemies, control->id)));
 			SString effectToPrint;
 
-			for (size_t i = 0; i < cha->listStatusEffects.Count() && i < 3; i++)
+			int writingLimit = 0;
+			bool jumpList = false;
+			for (size_t i = 0; i < cha->listStatusEffects.Count() && writingLimit < 3; i++)
 			{
+				for (int k = i - 1; k > 0; k--)
+				{
+					if (cha->listStatusEffects.At(i)->data->type == cha->listStatusEffects.At(k)->data->type)
+					{
+						jumpList = true;
+						break;
+					}
+				}
+
+				if (jumpList)
+				{
+					jumpList = false;
+					break;
+				}
+
 				switch (cha->listStatusEffects.At(i)->data->type)
 				{
 				case EffectType::NONE:
@@ -1372,15 +1428,35 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				}
 				//Efecto
 				app->render->TextDraw("Effect", xText1, 615, 16);
-				app->render->TextDraw(effectToPrint.GetString(), xText1, 635 + (fontSizeEnemies + offsetY) * i, fontSizeEnemies);
-				string numeros = to_string(cha->listStatusEffects.At(i)->data->turnsLeft);
+				app->render->TextDraw(effectToPrint.GetString(), xText1, 635 + (fontSizeEnemies + offsetY) * writingLimit, fontSizeEnemies);
+
+				//Buscar el turno menor
+				int minTurns = 999;
+				//Sumar intensidad
+				int intensities = 0;
+
+				for (int j = i; j < cha->listStatusEffects.Count(); j++)
+				{
+					if (cha->listStatusEffects.At(i)->data->type == cha->listStatusEffects.At(j)->data->type)
+					{
+						if (minTurns > cha->listStatusEffects.At(j)->data->turnsLeft)
+						{
+							minTurns = cha->listStatusEffects.At(j)->data->turnsLeft;
+						}
+						intensities += cha->listStatusEffects.At(j)->data->intensity;
+					}
+				}
+
+				string numeros = to_string(minTurns);
 				//Turnos
 				app->render->TextDraw("Duration", 190, 615, 16);
-				app->render->TextDraw(numeros.c_str(), 220, 635 + (fontSizeEnemies + offsetY) * i, fontSizeEnemies);
+				app->render->TextDraw(numeros.c_str(), 220, 635 + (fontSizeEnemies + offsetY) * writingLimit, fontSizeEnemies);
 				//% intensidad
 				app->render->TextDraw("% intensity", 300, 615, 16);
-				numeros = to_string(abs(cha->listStatusEffects.At(i)->data->intensity));
-				app->render->TextDraw(numeros.c_str(), 335, 635 + (fontSizeEnemies + offsetY) * i, fontSizeEnemies);
+				numeros = to_string(abs(intensities));
+				app->render->TextDraw(numeros.c_str(), 335, 635 + (fontSizeEnemies + offsetY) * writingLimit, fontSizeEnemies);
+
+				writingLimit++;
 			}
 
 			cha = nullptr;
