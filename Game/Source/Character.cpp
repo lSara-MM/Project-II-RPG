@@ -1228,45 +1228,8 @@ bool Character::UseSkill(Skill* skill)
 
 	if (skill->targetFriend) //Targetea a gente de su propio grupo
 	{
-		//ERIC: QUIZA HAYA QUE CAMBIAR A QUE NO HAYA FALLO POSIBLE, IDK
-		switch (charaType)
-		{
-			int endRange;
-		case CharacterType::ALLY:
+		int endRange;
 
-			endRange = skill->RangeCanTarget(app->combat->vecAllies);
-			if (endRange == -1)
-			{
-				return false;
-			}
-
-			if (skill->areaSkill)
-			{
-				if (skill->targetFriend)
-				{
-					for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
-					{
-						//Atacar a todos
-						if (!app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill))) { break; }
-					}
-				}
-				else
-				{
-					for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
-					{
-					//Atacar a todos
-					if (!app->combat->vecAllies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(i), skill))) { break; }
-					}
-				}		
-			}
-			else
-			{
-				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies,skill->methodTarget);
-				if (!app->combat->vecAllies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecAllies.at(objective), skill))) { break; }
-			}
-			app->audio->PlayFx(healfx);
-			break;
-		case CharacterType::ENEMY:
 			endRange = skill->RangeCanTarget(app->combat->vecEnemies);
 			if (endRange == -1)
 			{
@@ -1275,12 +1238,11 @@ bool Character::UseSkill(Skill* skill)
 
 			if (skill->areaSkill)
 			{
-				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
+				for (size_t i = skill->posToTargetStart_I; i <= endRange; i++)
 				{
 					//Atacar a todos
 					if (!app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill))) { break; }
 				}
-				break;
 			}
 			else
 			{
@@ -1288,48 +1250,14 @@ bool Character::UseSkill(Skill* skill)
 				app->combat->vecEnemies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(objective), skill));
 			}
 			app->audio->PlayFx(healfx);
-			break;
-		case CharacterType::NONE:
-			break;
-		default:
-			break;
-		}
+			
+		
 	}
 	else //Targetea party contraria
 	{
-		switch (charaType)
-		{
+		
 		int endRange;
-		case CharacterType::ALLY: //Esto es un tanto inutil, quiza lo acabe borrando
-
-			endRange = skill->RangeCanTarget(app->combat->vecEnemies);
-			if (endRange == -1)
-			{
-				return false;
-			}
-
-			if (skill->areaSkill)
-			{
-				for (size_t i = skill->posToTargetStart_I; i < endRange; i++)
-				{
-					//Atacar a todos
-					if (!app->combat->vecEnemies.at(i)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(i), skill))) { break; }
-				}
-				app->audio->PlayFx(hitfx);
-			}
-			else
-			{
-				int objective = skill->RandomTarget(skill->posToTargetStart_I, endRange, app->combat->vecAllies, skill->methodTarget);
-				app->combat->vecEnemies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(objective), skill));
-				app->audio->PlayFx(hitfx);
-			}
-			app->audio->PlayFx(hitfx);
-			break;
-
-			break;
-		case CharacterType::ENEMY:
-
-			endRange = skill->RangeCanTarget(app->combat->vecAllies);
+		endRange = skill->RangeCanTarget(app->combat->vecAllies);
 			if (endRange == -1)
 			{
 				return false;
@@ -1353,16 +1281,10 @@ bool Character::UseSkill(Skill* skill)
 				}
 				else
 				{
-					break;
+					return false;
 				}
 				app->audio->PlayFx(hitfx);
 			}
-			break;
-			app->audio->PlayFx(hitfx);
-			break;
-		default:
-			break;
-		}
 	}
 
 	//Movimiento del lanzador, el movimiento del objetivo se hace en el apply skill
