@@ -6,6 +6,7 @@
 #include "Physics.h"
 #include "Render.h"
 #include "Window.h"
+#include "ModuleParticles.h"
 
 #include "Scene.h"
 #include "Combat.h"
@@ -1081,6 +1082,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			{
 				//El daño critico es mas potente
 				damage *= ( 100 + 2*(caster->GetStatModifier(EffectType::CRIT_DMG) * (skill->bonusCritDamage + caster->critDamage)) ) / 100;
+				app->moduleparticles->AddParticle(defender->position.x, defender->position.y, 20, 0);
 				app->audio->PlayFx(critfx);
 			}
 
@@ -1136,6 +1138,17 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
 
 void Character::LoadSkill(int arr[4])
 {
