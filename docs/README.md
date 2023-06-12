@@ -4,9 +4,9 @@ Get ready to enjoy a great, intriguing and mysterious adventure through the eyes
 
 In a dystopian world, more specifically in Russia, our protagonist tired of life decides to resume his childhood dream of working in a circus, just when a famous circus visits the city.
 
-The protagonist, determined to succeed, enters the circus and manages to be hired by the showman who seems strangely excited and intrigued in the protagonist, since as he soon discovers the Twisted Tent circus is not what it seems.
+The protagonist, determined to succeed, enters the circus and manages to be hired by the showman who seems strangely excited and intrigued in the protagonist, since he soon discovers that the Twisted Tent circus is not what it seems.
 
-He explores the circus, solves puzzles, makes new friends, defeats different enemies and reaches the Showman.
+Explore the circus, solves puzzles, makes new friends, defeats different enemies and gets to the Showman.
 
 TRAILER
 
