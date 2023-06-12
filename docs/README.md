@@ -41,7 +41,7 @@ Fight against different enemies in the purest turn-based RPG style
 
 ![Screenshoot 3](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/0ed033c1-b9ed-4c80-898c-64fab6bfbf94)
 
-Explore the circus and carry out missions for the other circus employees
+Explore the circus and carry out missions for the circus employees
 
 ![Screenshoot 4](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/8fb6cc3d-3bff-4d2f-9bdd-b384c607a1b3)
 
