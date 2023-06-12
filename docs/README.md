@@ -40,121 +40,111 @@ And don't forget to collect information before facing a dungeon ;D
 ## How to play
 ### Player
 
-     Player Walk Left -> A / Left Arrow / Left Joystick Gamepad
+* Player walk left -> A / Right arrow / Left Joystick Gamepad
 
+* Player walk right -> D / Left arrow / Left Joystick Gamepad
 
-   	 Player Walk Right -> D / Right Arrow / Left Joystick Gamepad
+* Player walk up -> W / Up arrow / Left Joystick Gamepad
 
+* Player walk down -> S / Down arrow / Left Joystick Gamepad
 
-     Player Walk Up -> W / Up Arrow / Left Joystick Gamepad
+* Player run -> Left shift / B button gamepad
 
+* Interact  -> E / A button gamepad
 
-   	 Player Walk Left -> S / Down Arrow / Left Joystick Gamepad
+* Inventory -> I / Y button gamepad
 
+* Minimap -> M / X button gamepad
 
-   	 Player Run -> Left Shift / B Button Gamepad
+* Party menu -> P / SELECT gamepad
 
+* Inventory -> I / Y button gamepad
 
-     Interact -> E / B Button Gamepad
-
-
-   	 Inventory -> I / Y Button Gamepad
-
-
-   	 Interact -> M / X Button Gamepad
-
-
-   	 Interact -> P / SELECT Gamepad
-
-
-   	 Interact -> I / Y Button Gamepad
-
-
-     Interact -> ESC / START Gamepad
+* Pause menu -> ESC / START gamepad
 
 ### Menus
 
-    Aceptar -> Enter / A Button Gamepad
+* Accept -> Enter/ A button gamepad
 
-    Exit Menu -> ESC / B Button Gamepad
+* Exit menu -> B button gamepad
 
-    Lenguage and text speed can not be modified
+* Language and text speed can not be modified
 
 ### Combat
 
-    Go to PLay Scene -> F1 (God Mode Only)
+* Go to Play Scene -> F1 (only God Mode)
 
-    Instant Win -> F3 (God Mode Only)
+* Insta win -> F3 (only God Mode)
 
-    Instant Lose -> F4 (God Mode Only)
+* Insta lose-> F4 (only God Mode)
 
-    Show GUI -> F7
+* Show GUI -> F7
 
-    God Mode -> F10
+* God Mode -> F10 
 
-    Kill First Ally -> 1 (God Mode Only)
+* Kill First Ally -> 1 (only God Mode)
 
-    Kill First Enemy -> 2 (God Mode Only)
+* Kill First Enemy -> 2 (only God Mode)
 
-    Next Turn -> 3 (God Mode Only)
+* Next turn -> 3 (only God Mode)
 
-    Kill First Ally -> 4 (God Mode Only)
+* Enemies button handle -> 4 (only God Mode)
 
-    Allies Button Handle -> 5 (God Mode Only)
+* Allies button handle -> 5 (only God Mode)
 
-    Fully Heal Party -> 6 (God Mode Only)
+* Fully heal party -> 6 (only God Mode)
 
 ### Debug
 
 #### Logo scene
 
-    Go to Play Scene -> F1
+* Go to Play Scene  -> F1
 
-    Go to Menu Scene -> Return / A Button Gamepad
+* Go to Menu Scene -> Return/A button Gamepad
 
 #### Menu scene
 
-    Go to Play Scene -> F1
+* Go to Play Scene  -> F1
 
-    Show GUI -> F2
+* Show GUI -> F2
 
-    Mute Sound -> M
+* Mute sound -> M key
 
 #### Play scene
 
-    Restart -> F3
+* Restart -> F3
 
-    Return to Menu Scene -> F4
+* Return to Menu scene -> F4
 
-    Save Game -> F5
+* Save game -> F5
 
-    Load Game -> F6
+* Load game -> F6
 
-    Show GUI -> F7
+* Show GUI -> F7
 
-    Show Collisions -> F8
+* Show collisions -> F8
 
-    Enable/Disable FRACP -> F9
+* Enable/disable FRCAP -> F9
 
-    God Mode -> F10
+* God Mode -> F10
 
-    Pause -> ESC / START Gamepad
+* Pause -> ESC/START button Gamepad
 
-    Exit Pause -> Return / B Button Gamepad
+* Exit Pause -> Return/B button Gamepad
 
-    Enter Combat -> C / X Button Gamepad
+* Enter combat -> C key/X button Gamepad
 
-    Add One Item Of Each Type -> 1
+* Add one item of each type -> 1 
 
-    Start Combat -> X
+* Start Combat -> X
 
-### DUNGEON 1: House of Terrors
+### House of Terrors
 
-    Code Puzzle -> 344
+* Code puzzle = 344
 
-    Add Fire Eater To Party -> P + E
+* Add Fire Eater to party -> P + E
 
-    Add Boos Head -> B
+* Add boss dead -> B
 
 ## Team Members
 
