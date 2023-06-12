@@ -12,7 +12,19 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 
 ## Features
 
-* 2 Diferent Dungeons to explore
+* 2 Diferent Dungeons to explore 
+
+* More than 8  different enemies
+
+* Wide variety of objects and equipment with multiple benefits
+
+* Different puzzles and riddles
+
+* Classic turn-based RPG mechanics with multiple abilities
+
+* Shop and innovative forga system
+
+* 
 
 ## Game Preview
 
