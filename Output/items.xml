@@ -109,7 +109,7 @@ type 2
 	<item id="27" quantity="0" name="H_titanium_steel" type="2" kind="4" x="2" y="16" hp="0" maxHp="300" attack="200" armor="0" critRate="0" critDamage="50" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="28" quantity="0" name="H_titanium_titanium" type="2" kind="4" x="2" y="17" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="28" quantity="0" name="H_titanium_gold" type="2" kind="4" x="2" y="17" hp="0" maxHp="200" attack="250" armor="0" critRate="0" critDamage="25" accuracy="0" res="0" dodge="20" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
 	<item id="29" quantity="0" name="CP_leather" type="2" kind="2" x="3" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
@@ -172,7 +172,7 @@ type 2
 	<item id="48" quantity="0" name="CP_steel_steel" type="2" kind="2" x="3" y="19" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="49" quantity="0" name="CP_titanium_titanium" type="2" kind="2" x="3" y="20" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="49" quantity="0" name="CP_titanium_gold" type="2" kind="2" x="3" y="20" hp="0" maxHp="800" attack="50" armor="10" critRate="0" critDamage="0" accuracy="0" res="0" dodge="25" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
 	<item id="50" quantity="0" name="CP_titanium_steel" type="2" kind="2" x="3" y="21" hp="0" maxHp="1300" attack="0" armor="20" critRate="0" critDamage="0" accuracy="0" res="25" dodge="0" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
@@ -229,7 +229,7 @@ type 2
 	<item id="67" quantity="0" name="L_steel_steel" type="2" kind="1" x="4" y="16" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="68" quantity="0" name="L_titanium_titanium" type="2" kind="1" x="4" y="17" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="68" quantity="0" name="L_titanium_gold" type="2" kind="1" x="4" y="17" hp="0" maxHp="650" attack="0" armor="10" critRate="10" critDamage="25" accuracy="10" res="35" dodge="0" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
 	<item id="69" quantity="0" name="L_titanium_steel" type="2" kind="1" x="4" y="18" hp="0" maxHp="800" attack="0" armor="0" critRate="0" critDamage="40" accuracy="0" res="15" dodge="5" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
@@ -274,7 +274,7 @@ type 2
 	<item id="82" quantity="0" name="S_steel_steel" type="2" kind="3" x="5" y="12" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="83" quantity="0" name="S_titanium_titanium" type="2" kind="3" x="5" y="13" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="83" quantity="0" name="S_titanium_gold" type="2" kind="3" x="5" y="13" hp="0" maxHp="500" attack="220" armor="0" critRate="10" critDamage="30" accuracy="0" res="50" dodge="0" speed="40" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
 	<item id="84" quantity="0" name="S_titanium_steel" type="2" kind="3" x="5" y="14" hp="0" maxHp="200" attack="220" armor="0" critRate="0" critDamage="80" accuracy="0" res="50" dodge="0" speed="40" equiped="false" craft="false" price="10" max="4" whom="0" 
@@ -359,6 +359,9 @@ type 2
 		  >
 	</item>
 	<item id="111" quantity="0" name="Puzzle_Food" type="4" kind="1" space="0" x="0" y="7" hp="0" maxHp="616" attack="616" armor="616" critRate="616" critDamage="616" accuracy="616" res="616" dodge="616" speed="616" equiped="false" craft="false" price="10" max="4" whom="0"
+		  >
+	</item>
+	<item id="112" quantity="0" name="Gold" type="3" kind="1" x="7" y="16" hp="0" maxHp="0" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="true" price="60" max="100" whom="0"
 		  >
 	</item>
 	

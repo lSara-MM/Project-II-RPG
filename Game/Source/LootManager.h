@@ -103,7 +103,7 @@ public:
 					lootTableID.push_back(*itemLoot);
 
 					itemLoot->ID = 94;
-					itemLoot->quantity = 2;
+					itemLoot->quantity = 1;
 					itemLoot->name = "Copper";
 
 					lootTableID.push_back(*itemLoot);
@@ -344,6 +344,12 @@ public:
 					itemLoot->ID = 97;
 					itemLoot->quantity = 2;
 					itemLoot->name = "Titanium";
+
+					lootTableID.push_back(*itemLoot);
+
+					itemLoot->ID = 112;
+					itemLoot->quantity = 1;
+					itemLoot->name = "Gold";
 
 					lootTableID.push_back(*itemLoot);
 
