@@ -338,9 +338,7 @@ void Input::RenderTempText(SString temp, const char* subs, iPoint pos, int fonts
 }
 
 void Input::HandleGamepadMouse(int mousePosX, int mousePosY, float mouseSpeed, float dt)
-{
-	int speed_X = 0; int speed_Y = 0;
-	
+{	
 	if (app->input->controller.j1_x > 0)
 	{
 		mousePosX += mouseSpeed * dt;
