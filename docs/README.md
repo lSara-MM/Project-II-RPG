@@ -37,7 +37,7 @@ And don't forget to collect information before facing a dungeon ;D
 
 ![Screenshoot 6](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/15ee7282-16a9-4746-95b0-904f3fe38358)
 
-## Game Controls
+## How to play
 
 ## Team Members
 
