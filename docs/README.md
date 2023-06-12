@@ -20,13 +20,20 @@ Would you sign the contract to start this great adventure?
 
 ![Screenshoot 1](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/51c45c75-7917-4a2c-91b5-b92f70e3f668)
 
+
+Explore the dungeons and get items and equipment
+
 ![Screenshoot 2](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/60400f6c-1c0d-4619-b428-e945fb96fea2)
+
+Fight against different enemies in the purest turn-based RPG style
 
 ![Screenshoot 3](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/0ed033c1-b9ed-4c80-898c-64fab6bfbf94)
 
+Explore the circus and carry out missions for the other different circus employees
+
 ![Screenshoot 4](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/8fb6cc3d-3bff-4d2f-9bdd-b384c607a1b3)
 
-![Screenshoot 5](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/53e721c0-478c-4584-be2f-17f2157aecd4)
+And don't forget to collect information before facing a dungeon ;D
 
 ![Screenshoot 6](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/15ee7282-16a9-4746-95b0-904f3fe38358)
 
