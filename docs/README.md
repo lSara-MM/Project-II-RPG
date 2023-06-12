@@ -97,7 +97,7 @@ npm install -g yarn
 
 ```sh
 # Replace {YOUR_USERNAME} with your actual username
-git clone https://github.com/{YOUR_USERNAME}/neumorphism.git
+git clone https://github.com/lSara-MM/neumorphism.git
 ```
 
 or
