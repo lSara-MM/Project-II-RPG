@@ -13,6 +13,7 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 ## Features
 
 ## Game Preview
+![Pikum-Logo png](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/1f97d38f-4b75-45b8-a58d-a4200943c1ff)
 
 Screenshots
 
