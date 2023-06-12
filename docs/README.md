@@ -12,7 +12,21 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 
 ## Features
 
-* 2 Diferent Dungeons to explore
+* 2 Diferent Dungeons to explore 
+
+* More than 8  different enemies
+
+* 4 different team members
+
+* Wide variety of objects and equipment with multiple benefits
+
+* Different puzzles and riddles
+
+* Classic turn-based RPG mechanics with multiple abilities
+
+* Shop and innovative forge system
+
+* 
 
 ## Game Preview
 
@@ -29,7 +43,7 @@ Fight against different enemies in the purest turn-based RPG style
 
 ![Screenshoot 3](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/0ed033c1-b9ed-4c80-898c-64fab6bfbf94)
 
-Explore the circus and carry out missions for the other different circus employees
+Explore the circus and carry out missions for the circus employees
 
 ![Screenshoot 4](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/8fb6cc3d-3bff-4d2f-9bdd-b384c607a1b3)
 
