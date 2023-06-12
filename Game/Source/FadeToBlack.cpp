@@ -6,6 +6,9 @@
 #include "CutScene.h"
 #include "PuzzleManager.h"
 
+#include "Combat.h"
+#include "LogoScene.h"
+
 #include "SDL/include/SDL_render.h"
 #include "Log.h"
 
@@ -118,7 +121,7 @@ bool FadeToBlack::PostUpdate()
 	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
 	SDL_RenderFillRect(app->render->renderer, &screenRect);
 
-	if (moduleToDisable->name != "logoScene")
+	if (moduleToDisable != app->combat && moduleToDisable != app->lScene)
 	{
 		if (transition_B)
 		{
@@ -129,17 +132,17 @@ bool FadeToBlack::PostUpdate()
 			backgroundAnimation.Foward();
 		}
 
-		//backgroundAnimation.Step(1, false);
-		//float point = backgroundAnimation.GetPoint();
+		backgroundAnimation.Step(1, false);
+		float point = backgroundAnimation.GetPoint();
 		int offset = -1300;
 
-		//posYani_I = offset + point * (0 - offset);
+		posYani_I = offset + point * (0 - offset);
 
 		offset = -1300;
-		//app->render->DrawTexture(TransitionBG_Izq, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
+		app->render->DrawTexture(TransitionBG_Izq, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
 
 		offset = 1300;
-		//app->render->DrawTexture(TransitionBG_Der, offset + point * (640 - offset) - app->render->camera.x, 0 - app->render->camera.y);
+		app->render->DrawTexture(TransitionBG_Der, offset + point * (640 - offset) - app->render->camera.x, 0 - app->render->camera.y);
 	}
 
 	return true;

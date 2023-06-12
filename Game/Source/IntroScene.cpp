@@ -233,6 +233,7 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 			i->data->isForward_B = false;
 		}
 
+		continueGame_B = false;
 		app->input->coso = false;
 		app->entityManager->tpID = 21;
 
