@@ -1,6 +1,3 @@
-remote_theme: longpdo/neumorphism
-
-
 # GENERAL SITE SETTINGS
 # title: This will be displayed as the website's name in your browser tab.
 title: Twisted Tent
@@ -12,7 +9,7 @@ baseurl: ""
 
 # LANDING PAGE
 # username: This will displayed on the landing page as your name.
-username: Pikum Studios
+username: Jose tonto
 # typing_text: This will be typed before 'scroll down for more'.
 # > set this to your job title, e.g. Fullstack Developer
 typing_text: Jekyll Theme
