@@ -42,4 +42,5 @@ And don't forget to collect information before facing a dungeon ;D
 ## Team Members
 
 
-Licencias
+_MIT License_
+
