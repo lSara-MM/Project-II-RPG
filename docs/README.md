@@ -148,6 +148,16 @@ And don't forget to collect information before facing a dungeon ;D
 
 ## Team Members
 
+**Pau Garriga Brotons**
+**Eric Segovia Baena**
+**Alberto Hidalgo Garcia**
+**Andreu Miró Sabaté**
+**Andreu Nosas Soler**
+**Sonia Cristina Ojeda Lanz**
+**Sara Qiao Martinez Mauri**
+**Jose Antonio Tur Izquierdo**
+**Guillem Aixut Anderiz**
+
 
 _MIT License_ / _Copyright (c) 2020 Ray_
 
