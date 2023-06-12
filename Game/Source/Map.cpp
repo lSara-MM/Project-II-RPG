@@ -466,9 +466,7 @@ bool Map::Load(int ID)
     int w, h;
     uchar* data = NULL;
 
-    bool retWalkMap = CreateWalkabilityMap(w, h, &data);
-    if (retWalkMap) app->pathfinding->SetMap(w, h, data);
-    DrawPlatformCollider();
+    DrawPlatformCollider(); //Crear colliders del mapa
 
     RELEASE_ARRAY(data);
 
