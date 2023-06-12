@@ -40,61 +40,59 @@ And don't forget to collect information before facing a dungeon ;D
 ## How to play
 ### Player
 
-    	W ➲ Move player up
+    	Player Walk Left -> A / Left Arrow / Left Joystick Gamepad
 
-* Player walk left -> A / Right arrow / Left Joystick Gamepad
+    	Player Walk Right -> D / Right Arrow / Left Joystick Gamepad
 
-* Player walk right -> D / Left arrow / Left Joystick Gamepad
+    	Player Walk Up -> W / Up Arrow / Left Joystick Gamepad
 
-* Player walk up -> W / Up arrow / Left Joystick Gamepad
+    	Player Walk Left -> S / Down Arrow / Left Joystick Gamepad
 
-* Player walk down -> S / Down arrow / Left Joystick Gamepad
+    	Player Run -> Left Shift / B Button Gamepad
 
-* Player run -> Left shift / B button gamepad
+    	Interact -> E / B Button Gamepad
 
-* Interact  -> E / A button gamepad
+    	Inventory -> I / Y Button Gamepad
 
-* Inventory -> I / Y button gamepad
+    	Interact -> M / X Button Gamepad
 
-* Minimap -> M / X button gamepad
+    	Interact -> P / SELECT Gamepad
 
-* Party menu -> P / SELECT gamepad
+    	Interact -> I / Y Button Gamepad
 
-* Inventory -> I / Y button gamepad
-
-* Pause menu -> ESC / START gamepad
+    	Interact -> ESC / START Gamepad
 
 ### Menus
 
-* Accept -> Enter/ A button gamepad
+    	Aceptar -> Enter / A Button Gamepad
 
-* Exit menu -> B button gamepad
+    	Exit Menu -> ESC / B Button Gamepad
 
-* Language and text speed can not be modified
+    	Lenguage and text speed can not be modified
 
 ### Combat
 
-* Go to Play Scene -> F1 (only God Mode)
+    	Go to PLay Scene -> F1 (God Mode Only)
 
-* Insta win -> F3 (only God Mode)
+    	Instant Win -> F3 (God Mode Only)
 
-* Insta lose-> F4 (only God Mode)
+    	Instant Lose -> F4 (God Mode Only)
 
-* Show GUI -> F7
+    	Show GUI -> F7
 
-* God Mode -> F10 
+    	God Mode -> F10
 
-* Kill First Ally -> 1 (only God Mode)
+    	 Kill First Ally -> 1 (God Mode Only)
 
-* Kill First Enemy -> 2 (only God Mode)
+    	 Kill First Enemy -> 2 (God Mode Only)
 
-* Next turn -> 3 (only God Mode)
+    	 Next Turn -> 3 (God Mode Only)
 
-* Enemies button handle -> 4 (only God Mode)
+    	 Kill First Ally -> 4 (God Mode Only)
 
-* Allies button handle -> 5 (only God Mode)
+    	 Allies Button Handle -> 5 (God Mode Only)
 
-* Fully heal party -> 6 (only God Mode)
+    	 Fully Heal Party -> 6 (God Mode Only)
 
 ### Debug
 
