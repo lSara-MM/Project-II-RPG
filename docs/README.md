@@ -42,23 +42,33 @@ And don't forget to collect information before facing a dungeon ;D
 
     Player Walk Left -> A / Left Arrow / Left Joystick Gamepad
 
+
    	Player Walk Right -> D / Right Arrow / Left Joystick Gamepad
+
 
    	Player Walk Up -> W / Up Arrow / Left Joystick Gamepad
 
+
    	Player Walk Left -> S / Down Arrow / Left Joystick Gamepad
+
 
    	Player Run -> Left Shift / B Button Gamepad
 
+
     Interact -> E / B Button Gamepad
+
 
    	Inventory -> I / Y Button Gamepad
 
+
    	Interact -> M / X Button Gamepad
+
 
    	Interact -> P / SELECT Gamepad
 
+
    	Interact -> I / Y Button Gamepad
+
 
     Interact -> ESC / START Gamepad
 
