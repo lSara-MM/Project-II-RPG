@@ -1,12 +1,12 @@
 # Twisted Tent
 
-Get ready to enjoy a great adventure in the great Twisted Tent circus, living an unusual and mysterious adventure through the eyes of our protagonist.
+Get ready to enjoy a great, intriguing and mysterious adventure through the eyes of our protagonist in the wonderful Twisted Tent circus.
 
 In a dystopian world, more specifically in Russia, our protagonist tired of life decides to resume his childhood dream of working in a circus, just when a famous circus visits the city.
 
-The protagonist, determined to succeed, enters the circus and manages to be hired by the showman who seems strangely enthusiastic about it, but things will not turn out as the protagonist thinks since this circus is not what it seems.
+The protagonist, determined to succeed, enters the circus and manages to be hired by the showman who seems strangely excited and intrigued in the protagonist, but things will not turn out as the protagonist thinks since this circus is not what it seems.
 
-He explores the circus, solves puzzles, makes new friends, and gets closer to the Showman.
+He explores the circus, solves puzzles, makes new friends, defeats different enemies, and gets to the Showman.
 
 TRAILER
 
