@@ -42,5 +42,5 @@ And don't forget to collect information before facing a dungeon ;D
 ## Team Members
 
 
-_MIT License_ _Copyright (c) 2020 Ray_
+_MIT License_ / _Copyright (c) 2020 Ray_
 
