@@ -148,23 +148,34 @@ And don't forget to collect information before facing a dungeon ;D
 
 ## Team Members
 
+**[Andreu Nosàs Soler](https://github.com/AndyCubico)**
+Team Lead / Code / Design / UI
+
 **[Pau Garriga Brotons](https://github.com/DonnoNonno)**
+Produce Owner / Code / Art
 
 **[Éric Segovia Baena](https://github.com/Icefenix7198)**
-
-**[Alberto Hidalgo García](https://github.com/TheimerTR)**
-
-**[Andreu Miro Sabater](https://github.com/AndreuMiroSabate)**
-
-**[Andreu Nosàs Soler](https://github.com/AndyCubico)**
+Code / Design / UI
 
 **[Sara Qiao Martínez Mauri](https://github.com/lSara-MM)**
+Code / Design / UI
+
+**[Alberto Hidalgo García](https://github.com/TheimerTR)**
+Code / UI / Art
+
+**[Andreu Miro Sabater](https://github.com/AndreuMiroSabate)**
+Code / Sound / Design 
 
 **[Sonia Cristina Ojeda Lanz](https://github.com/SoniaOL)**
+Art / UI / Design
 
 **[Jose Antonio Tur](https://github.com/flishflash)**
+Code / Design / Art / UI
 
 **[Guillem Pol Aixut](https://github.com/GuillemAixut)**
+Art / Ui / Clown
+
+
 
 
 _MIT License_ / _Copyright (c) 2020 Ray_
