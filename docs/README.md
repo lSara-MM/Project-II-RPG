@@ -38,7 +38,113 @@ And don't forget to collect information before facing a dungeon ;D
 ![Screenshoot 6](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/15ee7282-16a9-4746-95b0-904f3fe38358)
 
 ## How to play
+### Player
 
+* Player walk left -> A / Right arrow / Left Joystick Gamepad
+
+* Player walk right -> D / Left arrow / Left Joystick Gamepad
+
+* Player walk up -> W / Up arrow / Left Joystick Gamepad
+
+* Player walk down -> S / Down arrow / Left Joystick Gamepad
+
+* Player run -> Left shift / B button gamepad
+
+* Interact  -> E / A button gamepad
+
+* Inventory -> I / Y button gamepad
+
+* Minimap -> M / X button gamepad
+
+* Party menu -> P / SELECT gamepad
+
+* Inventory -> I / Y button gamepad
+
+* Pause menu -> ESC / START gamepad
+
+### Menus
+
+* Accept -> Enter/ A button gamepad
+
+* Exit menu -> B button gamepad
+
+* Language and text speed can not be modified
+
+### Combat
+
+* Go to Play Scene -> F1 (only God Mode)
+
+* Insta win -> F3 (only God Mode)
+
+* Insta lose-> F4 (only God Mode)
+
+* Show GUI -> F7
+
+* God Mode -> F10 
+
+* Kill First Ally -> 1 (only God Mode)
+
+* Kill First Enemy -> 2 (only God Mode)
+
+* Next turn -> 3 (only God Mode)
+
+* Enemies button handle -> 4 (only God Mode)
+
+* Allies button handle -> 5 (only God Mode)
+
+* Fully heal party -> 6 (only God Mode)
+
+### Debug
+
+#### Logo scene
+
+* Go to Play Scene  -> F1
+
+* Go to Menu Scene -> Return/A button Gamepad
+
+#### Menu scene
+
+* Go to Play Scene  -> F1
+
+* Show GUI -> F2
+
+* Mute sound -> M key
+
+#### Play scene
+
+* Restart -> F3
+
+* Return to Menu scene -> F4
+
+* Save game -> F5
+
+* Load game -> F6
+
+* Show GUI -> F7
+
+* Show collisions -> F8
+
+* Enable/disable FRCAP -> F9
+
+* God Mode -> F10
+
+* Pause -> ESC/START button Gamepad
+
+* Exit Pause -> Return/B button Gamepad
+
+* Enter combat -> C key/X button Gamepad
+
+* Add one item of each type -> 1 
+
+* Start Combat -> X
+
+### House of Terrors
+
+* Code puzzle = 344
+
+* Add Fire Eater to party -> P + E
+
+* Add boss dead -> B
 ## Team Members
 
 
