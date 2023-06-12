@@ -537,9 +537,18 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 		nodeList.push_back(node);
 	}
 
-	LoadItemState();
-	LoadArmorItmes();
-	LoadArmorState();
+	if (app->iScene->continueGame_B)
+	{
+		LoadItemState();
+		LoadArmorItmes();
+		LoadArmorState();
+	}
+	else
+	{
+		SaveItemState();
+
+		app->iScene->continueGame_B = true;
+	}
 }
 
 void ItemManager::ArmorForge(ItemNode* item)
