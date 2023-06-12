@@ -22,7 +22,7 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 
 * Classic turn-based RPG mechanics with multiple abilities
 
-* Shop and innovative forga system
+* Shop and innovative forge system
 
 * 
 
