@@ -8,7 +8,7 @@ The protagonist, determined to succeed, enters the circus and manages to be hire
 
 [![Alt text](https://img.youtube.com/vi/mCdA4bJAGGk/0.jpg)](https://www.youtube.com/watch?v=mCdA4bJAGGk)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/mCdA4bJAGGk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+[![Comprehensive Markdown Crash Course](https://img.youtube.com/vi/FEa2diI2qgA/mqdefault.jpg)](https://www.youtube.com/watch?v=FEa2diI2qgA)
 
 Explore the circus, solves puzzles, makes new friends, defeats different enemies and gets to the Showman.
 
