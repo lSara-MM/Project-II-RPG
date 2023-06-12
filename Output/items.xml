@@ -91,25 +91,19 @@ type 2
 	<item id="21" quantity="0" name="H_iron_iron" type="2" kind="4" x="2" y="10" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="22" quantity="0" name="H_iron_iron" type="2" kind="4" x="2" y="11" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="23" quantity="0" name="H_iron_steel" type="2" kind="4" x="2" y="11" hp="0" maxHp="200" attack="80" armor="0" critRate="0" critDamage="60" accuracy="20" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="23" quantity="0" name="H_iron_steel" type="2" kind="4" x="2" y="12" hp="0" maxHp="200" attack="80" armor="0" critRate="0" critDamage="60" accuracy="20" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="24" quantity="0" name="H_iron_titanium" type="2" kind="4" x="2" y="12" hp="0" maxHp="220" attack="150" armor="0" critRate="0" critDamage="30" accuracy="30" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="24" quantity="0" name="H_iron_titanium" type="2" kind="4" x="2" y="13" hp="0" maxHp="220" attack="150" armor="0" critRate="0" critDamage="30" accuracy="30" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="25" quantity="0" name="H_steel_steel" type="2" kind="4" x="2" y="13" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="25" quantity="0" name="H_steel_steel" type="2" kind="4" x="2" y="14" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="27" quantity="0" name="H_titanium_steel" type="2" kind="4" x="2" y="15" hp="0" maxHp="300" attack="200" armor="0" critRate="0" critDamage="50" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="26" quantity="0" name="H_steel_steel" type="2" kind="4" x="2" y="15" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
-		  >
-	</item>
-	<item id="27" quantity="0" name="H_titanium_steel" type="2" kind="4" x="2" y="16" hp="0" maxHp="300" attack="200" armor="0" critRate="0" critDamage="50" accuracy="0" res="0" dodge="0" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
-		  >
-	</item>
-	<item id="28" quantity="0" name="H_titanium_gold" type="2" kind="4" x="2" y="17" hp="0" maxHp="200" attack="250" armor="0" critRate="0" critDamage="25" accuracy="0" res="0" dodge="20" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="28" quantity="0" name="H_titanium_gold" type="2" kind="4" x="2" y="14" hp="0" maxHp="200" attack="250" armor="0" critRate="0" critDamage="25" accuracy="0" res="0" dodge="20" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
 	<item id="29" quantity="0" name="CP_leather" type="2" kind="2" x="3" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
@@ -157,25 +151,22 @@ type 2
 	<item id="43" quantity="0" name="CP_copper_titanium" type="2" kind="2" x="3" y="14" hp="0" maxHp="600" attack="0" armor="0" critRate="0" critDamage="0" accuracy="0" res="15" dodge="20" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="44" quantity="0" name="CP_copper_titanium" type="2" kind="2" x="3" y="15" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="45" quantity="0" name="CP_iron_iron" type="2" kind="2" x="3" y="15" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="45" quantity="0" name="CP_iron_iron" type="2" kind="2" x="3" y="16" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="46" quantity="0" name="CP_iron_steel" type="2" kind="2" x="3" y="16" hp="0" maxHp="800" attack="0" armor="12" critRate="0" critDamage="0" accuracy="0" res="0" dodge="-20" speed="-15" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="46" quantity="0" name="CP_iron_steel" type="2" kind="2" x="3" y="17" hp="0" maxHp="800" attack="0" armor="12" critRate="0" critDamage="0" accuracy="0" res="0" dodge="-20" speed="-15" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="47" quantity="0" name="CP_iron_titanium" type="2" kind="2" x="3" y="17" hp="0" maxHp="1000" attack="0" armor="15" critRate="0" critDamage="0" accuracy="0" res="0" dodge="-10" speed="-10" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="47" quantity="0" name="CP_iron_titanium" type="2" kind="2" x="3" y="18" hp="0" maxHp="1000" attack="0" armor="15" critRate="0" critDamage="0" accuracy="0" res="0" dodge="-10" speed="-10" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="48" quantity="0" name="CP_steel_steel" type="2" kind="2" x="3" y="18" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="48" quantity="0" name="CP_steel_steel" type="2" kind="2" x="3" y="19" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="49" quantity="0" name="CP_titanium_gold" type="2" kind="2" x="3" y="19" hp="0" maxHp="800" attack="50" armor="10" critRate="0" critDamage="0" accuracy="0" res="0" dodge="25" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
-	<item id="49" quantity="0" name="CP_titanium_gold" type="2" kind="2" x="3" y="20" hp="0" maxHp="800" attack="50" armor="10" critRate="0" critDamage="0" accuracy="0" res="0" dodge="25" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
-		  >
-	</item>
-	<item id="50" quantity="0" name="CP_titanium_steel" type="2" kind="2" x="3" y="21" hp="0" maxHp="1300" attack="0" armor="20" critRate="0" critDamage="0" accuracy="0" res="25" dodge="0" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
+	<item id="50" quantity="0" name="CP_titanium_steel" type="2" kind="2" x="3" y="20" hp="0" maxHp="1300" attack="0" armor="20" critRate="0" critDamage="0" accuracy="0" res="25" dodge="0" speed="0" equiped="false" craft="false" price="10" max="4" whom="0" 
 		  >
 	</item>
 	<item id="51" quantity="0" name="L_leather" type="2" kind="1" x="4" y="0" hp="0" maxHp="10" attack="10" armor="10" critRate="10" critDamage="10" accuracy="10" res="10" dodge="10" speed="10" equiped="false" craft="false" price="10" max="4" whom="0" 
