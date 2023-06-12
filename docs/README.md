@@ -12,6 +12,9 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 
 ## Features
 
+* 2 Diferent Dungeons to explore
+
+
 ## Game Preview
 
 Screenshots
