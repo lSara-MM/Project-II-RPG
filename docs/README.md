@@ -16,7 +16,7 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 
 ## Game Preview
 
-Will you have enough voucher to sign the contract and start this great adventure?
+You sign the contract and start this great adventure!
 
 ![Screenshoot 1](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/51c45c75-7917-4a2c-91b5-b92f70e3f668)
 
