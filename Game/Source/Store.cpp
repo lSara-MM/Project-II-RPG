@@ -170,7 +170,7 @@ bool Store::PostUpdate()
 	app->render->DrawTexture(app->itemManager->coinTexture, 1150 - app->render->camera.x, offset + point * (180 - offset) - app->render->camera.y);
 
 	string cn = to_string(app->itemManager->coins);
-	app->render->TextDraw(cn.c_str(), 1125, offset + point * (180 - offset), 25, Font::TEXT, { 255, 246, 240 });
+	app->render->TextDraw(cn.c_str(), 1090, offset + point * (180 - offset), 25, Font::TEXT, { 255, 246, 240 });
 
 
 	if ( app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == ButtonState::BUTTON_DOWN)//con mando es bastante molesto tener que ir con el mouse al boton de cerrar

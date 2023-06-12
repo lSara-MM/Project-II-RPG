@@ -11,7 +11,7 @@
 #include "GuiCheckBox.h"
 #include "GuiSliderBar.h"
 
-#include "Settings.h"
+#include "Menus.h"
 
 struct SDL_Texture;
 
@@ -44,10 +44,6 @@ public:
 
 	void Debug();
 	bool InitEntities();
-
-	// Settings
-	bool OnGuiMouseClickEvent(GuiControl* control);
-
 	
 public:
 
@@ -65,17 +61,8 @@ public:
 	int currentHP_Protagonist = 0;
 	bool isCharacterLoaded_B = true;
 
-private:
 	const char* lobby_music;
-
-	const char* pause_music;
-
-	// Settings
-	Settings* pSettings;
-	Pause* pPause;
-
-	const char* fxpausepath;
-	uint pausefx;
+private:
 
 	const char* fxinventorypath;
 	uint inventoryfx;

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <save_stats>
-	<CombatCharacter name="Player" currentHp="1200" positionCombat="0" />
-	<CombatCharacter name="Nikita" currentHp="1000" positionCombat="1" />
-	<CombatCharacter name="Igor and Ivan" currentHp="1500" positionCombat="2" />
+	<CombatCharacter name="Player" currentHp="1179" positionCombat="0" maxHp="1200" currentHp="1179" attack="200" critRate="30" critDamage="25" accuracy="0" armor="15" dodge="15" res="0" speed="75" />
+	<CombatCharacter name="Nikita" currentHp="939" positionCombat="1" maxHp="1000" currentHp="939" attack="200" critRate="10" critDamage="20" accuracy="10" armor="5" dodge="20" res="10" speed="80" />
+	<CombatCharacter name="Igor and Ivan" currentHp="1405" positionCombat="2" maxHp="1500" currentHp="1405" attack="160" critRate="15" critDamage="15" accuracy="0" armor="10" dodge="10" res="20" speed="40" />
 </save_stats>

@@ -54,8 +54,9 @@ public:
 
 	bool previousGame_B = false;
 	bool continueGame_B = false;
-
-	Settings* pSettings;
+	
+	// buttons
+	List<GuiButton*> listButtons;
 
 private:
 	const char* music_intro;
@@ -63,8 +64,6 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 
-	// buttons
-	List<GuiButton*> listButtons;
 	const char* buttons[6] = { "Play", "Continue", "Settings", "Exit", "\n" };
 	Tween animationTitle;
 	Tween animationBackground;

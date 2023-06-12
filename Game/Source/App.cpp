@@ -34,6 +34,8 @@
 #include "Pathfinding.h"
 #include "Physics.h"
 
+#include "Menus.h"
+
 #include "Defs.h"
 #include "Log.h"
 
@@ -73,12 +75,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	hTerrors = new HouseOfTerrors();
 	BeastT = new BeastTent();
 	practiceTent = new PracticeTent();
+
 	fade = new FadeToBlack();
 	sceneWin_Lose = new SceneWin_Lose();
 	puzzleManager = new PuzzleManager();
 	questManager = new QuestManager();
 	cutScene = new CutScene();
 	moduleparticles = new ModuleParticles();
+	menus = new Menus();
 
 	/*initiAllResourcesFromZip = new InitAllResourcesFromZip();
 	assetsManager = new AssetsManager();*/
@@ -115,6 +119,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(guiManager);
 	AddModule(itemManager);
 	AddModule(sceneWin_Lose);
+
+	AddModule(menus);
 	
 	//AddModule(initiAllResourcesFromZip);
 	//AddModule(assetsManager);

@@ -10,7 +10,7 @@
 #include "GuiCheckBox.h"
 #include "GuiSliderBar.h"
 
-#include "Settings.h"
+#include "Menus.h"
 
 struct SDL_Texture;
 
@@ -44,17 +44,12 @@ public:
 	void Debug();
 	bool InitEntities();
 
-	// Settings
-	bool OnGuiMouseClickEvent(GuiControl* control);
-
 public:
 
 	int npcSetID;
 
 	Player* player;
 	bool frcap_B = true;
-	bool pause_B = false;
-	bool settings_B = false;
 	bool mute_B = true;
 
 	pugi::xml_node sceneNode;
@@ -71,21 +66,11 @@ public:
 	iPoint posDummy;
 
 	bool DummySensor;
+	const char* practicePath;
 
 private:
 	//Music path
-	const char* practisePath;
-
 	const char* texturepathDummy;
-
-	const char* pause_music;
-
-	// Settings
-	Settings* pSettings;
-	Pause* pPause;
-
-	const char* fxpausepath;
-	uint pausefx;
 
 	bool exit_B;
 };

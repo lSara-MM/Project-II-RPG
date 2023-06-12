@@ -49,11 +49,7 @@ bool DialogueSystem::Update(float dt)
 		SDL_Rect rect = { 0, 203, 306, 61 };
 		app->render->DrawTexture(nameBox_tex, pos.x - app->render->camera.x + 16, pos.y - app->render->camera.y - 80, &rect);
 
-		if (!activeTree->UpdateTree(dt, app->dialogueSystem, pos))
-		{
-			app->guiManager->Draw();
-		}
-		else
+		if (activeTree->UpdateTree(dt, app->dialogueSystem, pos))
 		{
 			hasEnded = true;
 			Disable();

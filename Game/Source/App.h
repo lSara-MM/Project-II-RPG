@@ -35,19 +35,21 @@ class Map;
 class PathFinding;
 
 class Physics;
+
 class LogoScene;
 class IntroScene;
 class Scene;
 class HouseOfTerrors;
 class BeastTent;
 class PracticeTent;
-class Circus;
+
 class FadeToBlack;
 class SceneWin_Lose;
 class PuzzleManager;
 class QuestManager;
 class CutScene;
 class ModuleParticles;
+class Menus;
 
 //class InitAllResourcesFromZip;
 //class AssetsManager;
@@ -134,19 +136,21 @@ public:
 	PathFinding* pathfinding;
 	
 	Physics* physics;
+
 	LogoScene* lScene;
 	IntroScene* iScene;
 	Scene* scene;
 	HouseOfTerrors* hTerrors;
 	BeastTent* BeastT;
 	PracticeTent* practiceTent;
-	Circus* circus;
 	FadeToBlack* fade;
 	SceneWin_Lose* sceneWin_Lose;
 	PuzzleManager* puzzleManager;
 	QuestManager* questManager;
 	CutScene* cutScene;
 	ModuleParticles* moduleparticles;
+
+	Menus* menus;
 	
 	/*InitAllResourcesFromZip* initiAllResourcesFromZip;
 	AssetsManager* assetsManager;*/

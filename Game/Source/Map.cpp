@@ -369,6 +369,7 @@ bool Map::CleanUp()
         bodyItem->data->body->GetWorld()->DestroyBody(bodyItem->data->body);
         app->render->active;
         delete bodyItem->data;
+        bodyItem->data = nullptr;
         bodyItem = bodyItem->next;
     }
     listBodies.Clear();

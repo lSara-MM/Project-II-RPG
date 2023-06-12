@@ -624,7 +624,6 @@ void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
 	{
 		if (app->combat->active)
 		{
-
 			if (item->type == 1)
 			{
 				LoadButtons(x, y, item);

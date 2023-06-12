@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <save_state>
 	<items>
-		<coins coin="0" />
+		<coins coin="190" />
 		<item name="C_wood" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="C_copper" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="C_iron" quantity="0" equiped="false" space="0" whom="0" />
@@ -24,13 +24,11 @@
 		<item name="H_copper_steel" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="H_copper_titanium" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="H_iron_iron" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="H_iron_iron" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="H_iron_steel" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="H_iron_titanium" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="H_steel_steel" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="H_steel_steel" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="H_titanium_steel" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="H_titanium_titanium" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="H_titanium_gold" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="CP_leather" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="CP_leather_copper" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="CP_leather_iron" quantity="0" equiped="false" space="0" whom="0" />
@@ -46,12 +44,11 @@
 		<item name="CP_copper_iron" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="CP_copper_steel" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="CP_copper_titanium" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="CP_copper_titanium" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="CP_iron_iron" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="CP_iron_steel" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="CP_iron_titanium" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="CP_steel_steel" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="CP_titanium_titanium" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="CP_titanium_gold" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="CP_titanium_steel" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="L_leather" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="L_leather_copper" quantity="0" equiped="false" space="0" whom="0" />
@@ -70,7 +67,7 @@
 		<item name="L_iron_steel" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="L_iron_titanium" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="L_steel_steel" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="L_titanium_titanium" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="L_titanium_gold" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="L_titanium_steel" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="S_leather" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="S_leather_copper" quantity="0" equiped="false" space="0" whom="0" />
@@ -85,7 +82,7 @@
 		<item name="S_iron_steel" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="S_iron_titanium" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="S_steel_steel" quantity="0" equiped="false" space="0" whom="0" />
-		<item name="S_titanium_titanium" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="S_titanium_gold" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="S_titanium_steel" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Health_Potion" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Max_Health_Potion" quantity="0" equiped="false" space="0" whom="0" />
@@ -111,5 +108,9 @@
 		<item name="Amethyst" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Coral" quantity="0" equiped="false" space="0" whom="0" />
 		<item name="Pearl" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="Puzzle_Horn" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="Puzzle_Water" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="Puzzle_Food" quantity="0" equiped="false" space="0" whom="0" />
+		<item name="Gold" quantity="0" equiped="false" space="0" whom="0" />
 	</items>
 </save_state>

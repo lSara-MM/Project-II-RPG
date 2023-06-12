@@ -294,8 +294,6 @@ bool Combat::Update(float dt)
 		app->render->TextDraw("Press 5 allies button handle", 10, 140, 12, Font::UI, { 255, 246, 240 });
 		app->render->TextDraw("Press 6 fully heal party", 1100, 20, 12, Font::UI, { 255, 246, 240 });
 	}
-	
-	app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt);
 
 	return true;
 }
@@ -306,11 +304,6 @@ bool Combat::PostUpdate()
 	
 	if (exit_B) return false;	
 
-	//if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	//	ret = false;
-	//
-	app->guiManager->Draw();
-
 	//Poner en reborde blanco la habilidad seleccionada? Ahora mismo no parece hacer nada
 	for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 	{
@@ -319,41 +312,39 @@ bool Combat::PostUpdate()
 
 		switch (i->data->buttonType)
 		{
-
 		case ButtonType::SKILL_1:
-			if (lastPressedAbility_I==0)
+			if (lastPressedAbility_I == 0)
 			{
-				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x- offset, i->data->bounds.y- offset, &rect);
+				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x - offset, i->data->bounds.y - offset, &rect);
 			}
 			break;
 		case ButtonType::SKILL_2:
 			if (lastPressedAbility_I == 1)
 			{
-				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x - offset, i->data->bounds.y- offset, &rect);
+				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x - offset, i->data->bounds.y - offset, &rect);
 			}
 			break;
 		case ButtonType::SKILL_3:
 			if (lastPressedAbility_I == 2)
 			{
-				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x - offset, i->data->bounds.y- offset, &rect);
+				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x - offset, i->data->bounds.y - offset, &rect);
 			}
 			break;
 		case ButtonType::SKILL_4:
 			if (lastPressedAbility_I == 3)
 			{
-				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x - offset, i->data->bounds.y- offset, &rect);
+				app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x - offset, i->data->bounds.y - offset, &rect);
 			}
 			break;
 
 		case ButtonType::COMBAT_TARGET:
-			
-			rect = { 0, 0, i->data->bounds.w, i->data->bounds.w };
 
+			rect = { 0, 0, i->data->bounds.w, i->data->bounds.w };
 			app->render->DrawTexture(textureLastSelectedSkill, i->data->bounds.x, i->data->bounds.y, &rect);
 			break;
 
 		case ButtonType::SKIPPY:
-			if (i->data->isForward_B==false && i->data->bounds.y == 75)
+			if (i->data->isForward_B == false && i->data->bounds.y == 75)
 			{
 				i->data->isForward_B = true;
 			}
@@ -379,10 +370,13 @@ bool Combat::CleanUp()
 	if (profileTex != nullptr)
 		app->tex->UnLoad(profileTex);
 	
+	for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
+	{
+		app->guiManager->DestroyGuiControl(i->data);
+	}
 	listButtons.Clear();
-	app->guiManager->CleanUp();
 
-	//pSettings->CleanUp();
+	//app->menus->pSettings->CleanUp();
 
 	// Clean entities vector
 	vecAllies.clear();
@@ -851,29 +845,6 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 			int coins = 10 + rand() % 30;
 
 			app->itemManager->coins += coins;
-
-			/*int loot = rand() % 101;
-
-			if (loot >= 50)
-			{
-				app->itemManager->AddQuantity(94, 1);
-				app->itemManager->AddQuantity(93, 2);
-				app->itemManager->AddQuantity(99, 2);
-				app->itemManager->AddQuantity(99, 2);
-				app->itemManager->AddQuantity(100, 2);
-			}
-			else if (loot >= 70)
-			{
-				app->itemManager->AddQuantity(93, 2);
-				app->itemManager->AddQuantity(99, 2);
-				app->itemManager->AddQuantity(99, 2);
-				app->itemManager->AddQuantity(100, 2);
-			}
-			else if (loot >= 80)
-			{
-				app->itemManager->AddQuantity(93, 2);
-				app->itemManager->AddQuantity(100, 2);
-			}*/
 		}
 		app->audio->PlayFx(winfx);
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);

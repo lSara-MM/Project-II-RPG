@@ -22,6 +22,7 @@
 #include "Map.h"
 #include "Pathfinding.h"
 #include "ModuleParticles.h"
+#include "Menus.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -45,17 +46,12 @@ bool Scene::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	lobby_music = config.attribute("music").as_string();
-	pause_music = config.attribute("pause").as_string();
 	mute_B = false;
 
 	//mouseSpeed = config.attribute("mouseSpeed").as_float();
 	enemyRange_I = config.attribute("enemyRange").as_int();
 
 	sceneNode = config;
-
-	fxpausepath = "Assets/Audio/Fx/Clown_Button.wav";
-	pausefx = app->audio->LoadFx(fxpausepath);
-
 
 	fxinventorypath = "Assets/Audio/Fx/Open_inv.wav";
 	inventoryfx = app->audio->LoadFx(fxinventorypath);
@@ -87,15 +83,6 @@ bool Scene::Start()
 
 	npcSetID = 1;
 
-	// Settings
-	//pSettings = nullptr;
-	//pPause = nullptr;
-	pSettings = new Settings(this);
-	pPause = new Pause(this);
-	pPause->pSettings = pSettings;
-	pause_B = false;
-	settings_B = false;
-
 	InitEntities();
 	app->entityManager->Enable();
 
@@ -105,15 +92,6 @@ bool Scene::Start()
 		//app->LoadGameRequest();
 		app->iScene->continueGame_B = false;
 	}
-
-	////CleanUp chests
-	//for (int i = 0; i < app->lootManager->chests.size(); i++)
-	//{
-	//	if (app->lootManager->chests[i]->used == false)
-	//	{
-	//		app->lootManager->chests[i]->CleanUp();
-	//	}
-	//}
 
 	// If se ha guardado anteriormente, teleport el player donde estaba en el guardado
 	if (app->input->coso && app->entityManager->tpID != 21)
@@ -171,7 +149,6 @@ bool Scene::Update(float dt)
 			app->inventory->partyWindow_B = true;
 			app->inventory->buttonsChangeStat = true;
 			app->audio->PlayFx(inventoryfx);
-
 		}
 	}
 
@@ -183,8 +160,6 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) 
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 45);
 
-	if (pause_B || player->lockMovement) { app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt); }
-
 	return true;
 }
 
@@ -192,49 +167,9 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
+	app->menus->menuOn = player->lockMovement;
+
 	if (exit_B) return false;
-
-	//if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
-	//{
-	//	settings_B = !settings_B;
-
-	//	if (settings_B)
-	//	{
-	//		pSettings = new Settings(this);
-	//	}
-	//	else
-	//	{
-	//		pSettings->CloseSettings();
-	//		pSettings->CleanUp();
-	//	}
-	//}
-	
-	if (pause_B) { pPause->OpenPause(); }
-	else
-	{
-		pPause->ClosePause();
-	}
-	if (settings_B) 
-	{ 
-		pSettings->OpenSettings();
-
-		// TO DO: cambiar aixo, nose perque pero no deixa fer aixo des del settings
-		for (ListItem<GuiButton*>* i = pSettings->pGame->listGameButtons.start; i != nullptr; i = i->next)
-		{
-			if (i->data->id == 807)	// Change TextSpeed button
-			{
-				i->data->text = app->dialogueSystem->GetTextSpeedSString();
-			}
-		}
-	}
-	else
-	{
-		pSettings->CloseSettings();
-	}
-
-	app->guiManager->Draw();
-
-	if ((pause_B || player->lockMovement) && !app->store->active) { app->input->RenderMouse(); }
 
 	return ret;
 }
@@ -248,23 +183,14 @@ bool Scene::CleanUp()
 	{
 		app->itemManager->Disable();
 	}
+
 	app->inventory->Disable();
 
 	player = nullptr;
 	app->entityManager->Disable();
 	listNpc.Clear();
 
-	if (pSettings != nullptr)
-	{
-		pSettings->CleanUp();
-	}
-	if (pPause != nullptr)
-	{
-		pPause->CleanUp();
-	}
-
 	app->dialogueSystem->Disable();
-	app->guiManager->CleanUp();
 	app->map->CleanUp();
 
 	return true;
@@ -314,73 +240,6 @@ void Scene::Debug()
 		app->physics->collisions = !app->physics->collisions;
 		app->input->godMode_B = !app->input->godMode_B;
 	}
-
-	// Pause menu
-	if (pause_B == false && player->pauseEnabled_B && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN)&& !player->OpenMap)
-	{
-		app->audio->PlayFx(pausefx);
-		app->audio->PlayMusic(pause_music, 1.0f);
-
-		//inventory off
-		app->inventory->Disable();
-
-		pause_B = true;	
-
-		if (pause_B)
-		{
-	/*		pPause = new Pause(this);
-			pSettings = pPause->pSettings;*/
-
-			pSettings->settings_B = !pSettings->settings_B;
-		}
-	/*	else
-		{
-			pPause->CleanUp();
-		}*/
-
-		LOG("PAUSE");
-	}
-
-	if (pause_B == true && (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_DOWN))
-	{
-		if (settings_B == true)
-		{
-			for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
-			{
-				i->data->state = GuiControlState::NORMAL;
-			}
-
-			settings_B = false;
-			//pSettings->CloseSettings();
-			//pSettings->CleanUp();
-		}
-		else 
-		{
-			pause_B = false;
-			app->audio->PlayMusic(lobby_music, 1.0f);
-			if (pause_B)
-			{
-				/*pPause = new Pause(this);*/
-				/*pSettings = pPause->pSettings;*/
-
-				pSettings->settings_B = !pSettings->settings_B;
-			}
-			else
-			{
-				/*pPause->CleanUp();*/
-			}
-		}
-		
-		LOG("PAUSE");
-	}
-
-	//TODO: creo que esto no hace falta
-	// Mute / unmute
-	//if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
-
-	//	mute_B = !mute_B;
-	//	LOG("MUTE");
-	//}
 
 	if (app->input->godMode_B)
 	{
@@ -438,273 +297,5 @@ bool Scene::InitEntities()
 	}
 
 	//app->entityManager->Awake();
-	return true;
-}
-
-bool Scene::OnGuiMouseClickEvent(GuiControl* control)
-{
-	LOG("Event by %d ", control->id);
-
-	app->audio->PlayFx(control->fxControl);
-
-	switch (control->id)
-	{
-	case 1:
-		LOG("Button start click");
-		break;
-	case 2:
-		LOG("Button continue click");
-		break;
-	case 3:
-		LOG("Button settings click");
-		break;
-	case 4:
-		LOG("Button Exit game click");
-		break;
-
-		// Pause
-	case 701: 
-		LOG("Button Close pause click");
-		pause_B = false;
-		player->lockMovement = false;
-		app->audio->PlayMusic(lobby_music, 1.0f);
-		//pPause->CleanUp();
-		break;
-		
-	case 702: 
-		LOG("Button Resume click");
-		pause_B = false;
-		player->lockMovement = false;
-		app->audio->PlayMusic(lobby_music, 1.0f);
-		//pPause->CleanUp();
-		break;
-		
-	case 703: 
-		LOG("Button Return to title click");
-		pause_B = false;
-		app->fade->FadingToBlack(this, (Module*)app->iScene, 45);		
-		break;
-		
-	case 704: 
-		LOG("Button Settings click");
-		for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
-		{
-			i->data->state = GuiControlState::DISABLED;
-		}
-
-		settings_B = true;
-		//pSettings = new Settings(this);
-		break;
-			
-	case 705: 
-		LOG("Button Exit click");
-		exit_B = true;
-		break;
-
-
-		// Settings
-	case 801:
-		LOG("Button Close settings click");
-		for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
-		{
-			i->data->state = GuiControlState::NORMAL;
-		}
-
-		settings_B = false;
-		pSettings->CloseSettings();
-		//pSettings->CleanUp();
-		break;
-
-	case 802:
-		LOG("Game settings click");
-		pSettings->pGame->game_B = true;
-
-		pSettings->pControl->CloseControlSettings();
-		pSettings->pGraphics->CloseGraphics();
-		pSettings->pAudio->CloseAudioSettings();
-		break;
-
-	case 803:
-		LOG("Graphics settings click");
-		pSettings->pGraphics->graphics_B = true;
-
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pControl->CloseControlSettings();
-		pSettings->pAudio->CloseAudioSettings();
-		break;
-
-
-	case 804:
-		LOG("Audio settings click");
-		pSettings->pAudio->audio_B = true;
-
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pControl->CloseControlSettings();
-		pSettings->pGraphics->CloseGraphics();
-		break;
-
-	case 805:
-		LOG("Credits settings click");
-		pSettings->pControl->control_B = true;
-
-		pSettings->pGame->CloseGameSettings();
-		pSettings->pGraphics->CloseGraphics();
-		pSettings->pAudio->CloseAudioSettings();
-		break;
-
-
-		// Game settings
-	case 806:
-		LOG("Button Language click");
-
-		break;
-
-	case 807:
-		LOG("Button Text Speed click");
-		control->text = app->dialogueSystem->ChangeTextSpeed();
-		break;
-	case 808:
-		LOG("Button Return to Title click");
-		app->fade->FadingToBlack(this, (Module*)app->iScene, 45);
-		break;
-
-	case 809:
-		LOG("Button Exit Game click");
-		exit_B = true;
-		break;
-
-
-		// Control settings
-	case 810:
-		LOG("Button Move Up keyboard check");
-
-		break;
-
-	case 811:
-		LOG("Button Move Up gamepad check");
-
-		break;
-
-	case 812:
-		LOG("Button Move Left keyboard check");
-
-		break;
-
-	case 813:
-		LOG("Button Move Left gamepad check");
-
-		break;
-
-	case 814:
-		LOG("Button Move Right keyboard check");
-
-		break;
-
-	case 815:
-		LOG("Button Move Right gamepad check");
-
-		break;
-
-	case 816:
-		LOG("Button Move Down keyboard check");
-
-		break;
-
-	case 817:
-		LOG("Button Move Down gamepad check");
-
-		break;
-
-	case 818:
-		LOG("Button Interact keyboard check");
-
-		break;
-
-	case 819:
-		LOG("Button Interact gamepad check");
-
-		break;
-
-	case 820:
-		LOG("Button Inventory keyboard check");
-
-		break;
-
-	case 821:
-		LOG("Button Party gamepad check");
-
-		break;
-
-	case 822:
-		LOG("Button Quests keyboard check");
-
-		break;
-
-	case 823:
-		LOG("Button Quests gamepad check");
-
-		break;
-
-	case 824:
-		LOG("Button Map keyboard check");
-
-		break;
-
-	case 825:
-		LOG("Button Map gamepad check");
-
-		break;
-
-	case 826:
-		LOG("Button Settings keyboard check");
-
-		break;
-
-	case 827:
-		LOG("Button Settings gamepad check");
-
-		break;
-
-
-		// Graphics settings
-	case 828:
-		LOG("Button Windows size");
-
-		break;
-
-	case 829:
-		LOG("Checkbox Fullscreen check");
-		app->win->fullscreen = !app->win->fullscreen;
-		app->win->FullscreenWin();
-		break;
-
-
-	case 830:
-		LOG("Checkbox Vsync check");
-		app->render->vSync_B = !app->render->vSync_B;
-		app->render->VSyncOn();
-		break;
-
-	case 831:
-		LOG("Button Max fps");
-
-		break;
-
-
-		// Audio settings
-	case 832:
-		LOG("Slider bar General volume");
-		app->audio->ChangeGeneralVolume(pSettings->pAudio->general->volume100);
-		break;
-
-	case 833:
-		LOG("Slider bar Music volume");
-		break;
-
-	case 834:
-		LOG("Slider bar Fx volume");
-		break;
-	}
-
 	return true;
 }

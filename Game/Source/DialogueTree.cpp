@@ -67,16 +67,17 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 
 bool DialogueTree::UpdateNodes(Module* mod, iPoint pos)
 {
-	while( listDialogueButtons.Count() > 0)
+	int j = listDialogueButtons.Count();
+	for (int i = 0; i < j; i++)
 	{
 		app->guiManager->DestroyGuiControl(listDialogueButtons.At(0)->data);
 		listDialogueButtons.Del(listDialogueButtons.At(0));
 	}
-
-	GuiButton* button;
-
+	listDialogueButtons.Clear();
+	
 	for (int i = 0; i < activeNode->choicesList.size(); i++)
 	{
+		GuiButton* button;
 		const char* ch_option = activeNode->choicesList.at(i)->text.GetString();	// SString to const char*	
 		int w = FONT_SIZE * 20;
 		int h = FONT_SIZE * 2.5;

@@ -192,11 +192,11 @@ bool Player::Update(float dt)
 
 	/*Hasta aqu� PuzzleManager*/
 
-	if (app->scene->pause_B || app->hTerrors->pause_B || app->practiceTent->pause_B)
+	if (app->menus->pause_B || app->menus->pause_B || app->menus->pause_B)
 	{
 		dtP = 0;
 	}
-	else if (!app->scene->pause_B || !app->hTerrors->pause_B || !app->practiceTent->pause_B)
+	else if (!app->menus->pause_B || !app->menus->pause_B || !app->menus->pause_B)
 	{
 		dtP = dt / 1000;
 	}
@@ -428,7 +428,7 @@ bool Player::Update(float dt)
 	}
 
 	if ((app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_X) == ButtonState::BUTTON_DOWN)
-		&& !app->store->active && !app->dialogueSystem->active && !app->forge->active && !app->inventory->active && !app->scene->pause_B)
+		&& !app->store->active && !app->dialogueSystem->active && !app->forge->active && !app->inventory->active && !app->menus->pause_B)
 	{
 		MiniMap();
 	}

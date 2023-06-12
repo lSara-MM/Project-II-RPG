@@ -376,9 +376,6 @@ bool Inventory::PostUpdate()
 		DrawParty(point, offset);
 	}
 
-	//arreglo cuestionable pero bueno, it works 
-	app->input->RenderMouse();
-
 	return true;
 }
 

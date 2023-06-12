@@ -534,8 +534,6 @@ public:
 		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 961, mod, { x, y + offset * 2, 1, 1 }, ButtonType::SETTINGS_TEXT, "Fx volume", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 		//button->state = GuiControlState::NONE;
 		//listTextAudio.Add(button);
-
-
 	}
 
 	bool OpenAudioSettings()

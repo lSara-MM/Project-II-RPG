@@ -10,7 +10,7 @@
 #include "GuiCheckBox.h"
 #include "GuiSliderBar.h"
 
-#include "Settings.h"
+#include "Menus.h"
 
 struct SDL_Texture;
 
@@ -43,19 +43,12 @@ public:
 
 	void Debug();
 	bool InitEntities();
-
-	// Settings
-	bool OnGuiMouseClickEvent(GuiControl* control);
-
 public:
 
 	int npcSetID;
 
 	Player* player;
 	bool frcap_B = true;
-	bool pause_B = false;
-	bool settings_B = false;
-	bool mute_B = true;
 
 	bool combatEnd = false;
 
@@ -68,20 +61,11 @@ public:
 
 	const char* enterCombatpath;
 	uint combatfx;
+	const char* musBeastPath;
 
 private:
 	//Music path
-	const char* musBeastPath;
-
-	const char* pause_music;
-
 	const char* texturePathBeastDungeon;
-
-	// Settings
-	Settings* pSettings;
-	Pause* pPause;
-	const char* fxpausepath;
-	uint pausefx;
 
 	bool exit_B;
 };

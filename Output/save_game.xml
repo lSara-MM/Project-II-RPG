@@ -11,7 +11,6 @@
 		<previousGame state_B="true" />
 	</introScene>
 	<scene />
-	<Circus />
 	<HouseOfTerrors />
 	<BeastTent />
 	<PracticeTent />
@@ -27,6 +26,7 @@
 		<chest used="false" />
 		<chest used="false" />
 		<chest used="false" />
+		<chest used="true" />
 		<chest used="false" />
 		<chest used="false" />
 		<chest used="false" />
@@ -39,8 +39,7 @@
 		<chest used="false" />
 		<chest used="false" />
 		<chest used="false" />
-		<chest used="false" />
-		<chest used="false" />
+		<chest used="true" />
 		<chest used="false" />
 		<chest used="false" />
 		<chest used="false" />
@@ -52,13 +51,13 @@
 		<chest used="false" />
 	</lootManager>
 	<PuzzleManager />
+	<entitymanager>
+		<player name="scene" x="1706" y="3030" />
+		<party id="0" id="1" id="2" />
+	</entitymanager>
 	<questmanager />
 	<CutScene />
 	<:anonymous />
-	<entitymanager>
-		<player name="scene" x="3323" y="2228" />
-		<party id="0" id="1" id="2" />
-	</entitymanager>
 	<dialogue />
 	<Inventory />
 	<store />
@@ -66,8 +65,9 @@
 	<guiManager />
 	<itemmanager />
 	<SceneWin_Lose />
+	<Menus />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2703" y="-1895" />
+		<camera x="-1385" y="-2697" />
 	</renderer>
 </save_state>

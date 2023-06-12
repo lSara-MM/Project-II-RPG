@@ -107,11 +107,11 @@ bool Npc::Start() {
 
 bool Npc::Update(float dt)
 {
-	if (app->scene->pause_B)//ERROR
+	if (app->menus->pause_B)//ERROR
 	{
 		dtP = 0;
 	}
-	else if (!app->scene->pause_B)
+	else if (!app->menus->pause_B)
 	{
 		dtP = dt / 1000;
 	}

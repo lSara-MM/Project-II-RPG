@@ -125,6 +125,7 @@
     <ClCompile Include="Source\Forge.cpp" />
     <ClCompile Include="Source\ModuleParticles.cpp" />
     <ClCompile Include="Source\Particle.cpp" />
+    <ClCompile Include="Source\Menus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -291,6 +292,7 @@
     <ClInclude Include="Source\ModuleParticles.h" />
     <ClInclude Include="Source\Particle.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\Menus.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">

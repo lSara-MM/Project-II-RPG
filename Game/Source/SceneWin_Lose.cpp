@@ -167,10 +167,6 @@ bool SceneWin_Lose::Update(float dt)
 		}
 	}
 
-	app->guiManager->Draw();
-	app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, dt);
-	app->input->RenderMouse();
-
 	return true;
 }
 
@@ -187,11 +183,13 @@ bool SceneWin_Lose::CleanUp()
 	LOG("Freeing scene");
 	app->tex->UnLoad(Win);
 	app->tex->UnLoad(Lose);
+
 	if (!win)
 	{
 		app->guiManager->DestroyGuiControl(continueButton);
 		app->guiManager->DestroyGuiControl(returnButton);
 	}
+
 	app->questManager->active = true;
 
 	return true;
@@ -244,15 +242,6 @@ void SceneWin_Lose::Debug()
 		app->physics->collisions = !app->physics->collisions;
 		app->input->godMode_B = !app->input->godMode_B;
 	}
-
-	// Mute / unmute
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
-
-		mute_B = !mute_B;
-		LOG("MUTE");
-	}
-
-	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
 }
 
 bool SceneWin_Lose::OnGuiMouseClickEvent(GuiControl* control)
