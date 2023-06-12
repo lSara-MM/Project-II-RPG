@@ -186,7 +186,7 @@ Art / UI / Design
 **[Jose Antonio Tur](https://github.com/flishflash)**
 Code / Design / Art / UI
 
-**[Guillem Pol Aixut Anderi](https://github.com/GuillemAixut)**
+**[Guillem Pol Aixut Anderiz](https://github.com/GuillemAixut)**
 Art / Ui / Clown
 
 
