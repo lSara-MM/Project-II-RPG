@@ -125,7 +125,18 @@ bool Menus::Update(float dt)
 
 		LOG("CLOSE PAUSE");
 	}
+	else if (settings_B == true && app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_DOWN)
+	{
 	
+		for (ListItem<GuiButton*>* i = pPause->listPauseButtons.start; i != nullptr; i = i->next)
+		{
+			i->data->state = GuiControlState::NORMAL;
+		}
+		pSettings->CloseSettings();
+		settings_B = false;
+	}
+	
+
 	app->guiManager->Draw();
 	return true;
 }
