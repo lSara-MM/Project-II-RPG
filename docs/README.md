@@ -26,7 +26,7 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 
 * Shop and innovative forge system
 
-* 
+* Multiple Buffs and Debuffs
 
 ## Game Preview
 
