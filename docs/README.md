@@ -173,7 +173,7 @@ Art / UI / Design
 Code / Design / Art / UI
 
 **[Guillem Pol Aixut](https://github.com/GuillemAixut)**
-Art / Ui / Clown
+Art / Ui / Clownn
 
 
 _MIT License_ / _Copyright (c) 2020 Ray_
