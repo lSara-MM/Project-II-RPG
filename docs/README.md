@@ -1,5 +1,7 @@
 # Twisted Tent
 
+Game Introduction and lore
+
 TRAILER
 
 ## Features
