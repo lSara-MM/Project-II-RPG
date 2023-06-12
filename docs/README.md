@@ -138,7 +138,7 @@ And don't forget to collect information before facing a dungeon ;D
 
 * Start Combat -> X
 
-### DUNGEON 1 House of Terrors
+### DUNGEON 1: House of Terrors
 
 * Code puzzle = 344
 
