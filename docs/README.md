@@ -148,15 +148,15 @@ And don't forget to collect information before facing a dungeon ;D
 
 ## Team Members
 
-**Pau Garriga Brotons**
-**Eric Segovia Baena**
-**Alberto Hidalgo Garcia**
-**Andreu Miró Sabaté**
-**Andreu Nosas Soler**
-**Sonia Cristina Ojeda Lanz**
-**Sara Qiao Martinez Mauri**
-**Jose Antonio Tur Izquierdo**
-**Guillem Aixut Anderiz**
+**[Pau Garriga Brotons](https://github.com/DonnoNonno)**
+**[Éric Segovia Baena](https://github.com/Icefenix7198)**
+**[Alberto Hidalgo García](https://github.com/TheimerTR)**
+**[Andreu Miro Sabater](https://github.com/AndreuMiroSabate)**
+**[Andreu Nosàs Soler](https://github.com/AndyCubico)**
+**[Sara Qiao Martínez Mauri](https://github.com/lSara-MM)**
+**[Sonia Cristina Ojeda Lanz](https://github.com/SoniaOL)**
+**[Jose Antonio Tur](https://github.com/flishflash)**
+**[Guillem Pol Aixut](https://github.com/GuillemAixut)**
 
 
 _MIT License_ / _Copyright (c) 2020 Ray_
