@@ -411,6 +411,8 @@ bool App::CleanUp()
 		item = item->prev;
 	}
 
+	SDL_FreeSurface(iconWindow);
+
 	return ret;
 }
 

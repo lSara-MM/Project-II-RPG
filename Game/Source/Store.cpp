@@ -142,9 +142,6 @@ bool Store::PostUpdate()
 		}
 	}
 
-	//arreglo cuestionable pero bueno, it works 
-	app->input->RenderMouse();
-
 	string c = to_string(CurrentPrice);
 	buyButton->text = c.c_str();
 	if (app->itemManager->coins < CurrentPrice && buyButton->buttonType == ButtonType::BUYITEM) { buyButton->color = { 230, 33, 33 }; }

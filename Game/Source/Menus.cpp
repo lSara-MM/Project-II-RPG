@@ -143,10 +143,8 @@ bool Menus::Update(float dt)
 
 bool Menus::PostUpdate()
 {	
-	if (pause_B) { app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, deltaTime); }
-	if (pause_B) { app->input->RenderMouse(); }
 
-	if (app->iScene->active || app->sceneWin_Lose->active || menuOn || app->combat->active)
+	if (app->iScene->active || app->sceneWin_Lose->active || menuOn || app->combat->active || pause_B)
 	{
 		app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, deltaTime);
 		app->input->RenderMouse();
