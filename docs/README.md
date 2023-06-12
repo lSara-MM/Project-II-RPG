@@ -39,7 +39,6 @@ And don't forget to collect information before facing a dungeon ;D
 
 ## How to play
 ### Player
-    	W ➲ Move player up
 
 * Player walk left -> A / Right arrow / Left Joystick Gamepad
 
