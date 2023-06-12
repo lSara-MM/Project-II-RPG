@@ -337,68 +337,75 @@ void Input::RenderTempText(SString temp, const char* subs, iPoint pos, int fonts
 	}
 }
 
-void Input::HandleGamepadMouse(int mouseX, int mouseY, float mouseSpeed, float dt)
+void Input::HandleGamepadMouse(int mousePosX, int mousePosY, float mouseSpeed, float dt)
 {
 	int speed_X = 0; int speed_Y = 0;
 	
 	if (app->input->controller.j1_x > 0)
 	{
-		mouseX += mouseSpeed * dt;
+		mousePosX += mouseSpeed * dt;
 
 		if (app->input->controller.j1_y > 0)
 		{
-			mouseY += mouseSpeed * dt;
+			mousePosY += mouseSpeed * dt;
 		}
 		if (app->input->controller.j1_y < 0)
 		{
-			mouseY -= mouseSpeed * dt;
+			mousePosY -= mouseSpeed * dt;
 		}
 	}
 
 	else if (app->input->controller.j1_x < 0)
 	{
-		mouseX -= mouseSpeed * dt;
+		mousePosX -= mouseSpeed * dt;
 
 		if (app->input->controller.j1_y > 0)
 		{
-			mouseY += mouseSpeed * dt;
+			mousePosY += mouseSpeed * dt;
 		}
 		if (app->input->controller.j1_y < 0)
 		{
-			mouseY -= mouseSpeed * dt;
+			mousePosY -= mouseSpeed * dt;
 		}
 	}
 
 	else if (app->input->controller.j1_y > 0)
 	{
-		mouseY += mouseSpeed * dt;
+		mousePosY += mouseSpeed * dt;
 
 		if (app->input->controller.j1_x > 0)
 		{
-			mouseX += mouseSpeed * dt;
+			mousePosX += mouseSpeed * dt;
 		}
 		if (app->input->controller.j1_x < 0)
 		{
-			mouseX -= mouseSpeed * dt;
+			mousePosX -= mouseSpeed * dt;
 		}
 	}
 
 	else if (app->input->controller.j1_y < 0)
 	{
-		mouseY -= mouseSpeed * dt;
+		mousePosY -= mouseSpeed * dt;
 
 		if (app->input->controller.j1_x > 0)
 		{
-			mouseX += mouseSpeed * dt;
+			mousePosX += mouseSpeed * dt;
 		}
 		if (app->input->controller.j1_x < 0)
 		{
-			mouseX -= mouseSpeed * dt;
+			mousePosX -= mouseSpeed * dt;
 		}
 	}
 
-	//SDL_WarpMouseInWindow(NULL, mouseX, mouseY);
-	
+	if (mousePosX < app->win->GetWidth() && mousePosX>0)
+	{
+		mouseX = mousePosX;
+	}
+	if (mousePosY < app->win->GetHeight() && mousePosY > 0)
+	{
+		mouseY = mousePosY;
+	}
+
 }
 
 void Input::RenderMouse()
