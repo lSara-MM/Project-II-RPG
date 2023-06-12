@@ -16,6 +16,8 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 
 * More than 8  different enemies
 
+* 4 different team members
+
 * Wide variety of objects and equipment with multiple benefits
 
 * Different puzzles and riddles
