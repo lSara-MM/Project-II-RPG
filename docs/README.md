@@ -187,7 +187,7 @@ Art / UI / Design
 Code / Design / Art / UI
 
 **[Guillem Pol Aixut Anderiz](https://github.com/GuillemAixut)**
-Art / Ui / Clown
+Art / Clown / UI
 
 
 
