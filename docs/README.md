@@ -188,6 +188,7 @@ And don't forget to collect information before facing a dungeon ;D
 * Remove barrels -> 2 (only God Mode)
 
 ## Team Members
+![Captura de pantalla 2023-06-13 211810](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/275ff783-11a1-44d4-8669-0a5f40b29748)
 
 **[Andreu Nosàs Soler](https://github.com/AndyCubico)**
 Team Lead / Code / Design / UI
