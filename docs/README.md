@@ -20,7 +20,7 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 
 * Amacing Cinematics
 
-* Wide variety of objects and equipment with multiple benefits
+* +100 objects and equipment with multiple benefits
 
 * Different puzzles and riddles
 
