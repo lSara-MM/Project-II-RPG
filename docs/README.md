@@ -54,35 +54,35 @@ And don't forget to collect information before facing a dungeon ;D
 ## How to play
 ### Player
 
-* Player walk left -> A / Right arrow / Left Joystick Gamepad
+* **Player walk left** -> A / Right arrow / Left Joystick Gamepad
 
-* Player walk right -> D / Left arrow / Left Joystick Gamepad
+* **Player walk right** -> D / Left arrow / Left Joystick Gamepad
 
-* Player walk up -> W / Up arrow / Left Joystick Gamepad
+* **Player walk up** -> W / Up arrow / Left Joystick Gamepad
 
-* Player walk down -> S / Down arrow / Left Joystick Gamepad
+* **Player walk down** -> S / Down arrow / Left Joystick Gamepad
 
-* Player run -> Left shift / B button gamepad
+* **Player run** -> Left shift / B button gamepad
 
-* Interact  -> E / A button gamepad
+* **Interact**  -> E / A button gamepad
 
-* Inventory -> I / Y button gamepad
+* **Inventory** -> I / Y button gamepad
 
-* Minimap -> M / X button gamepad
+* **Minimap** -> M / X button gamepad
 
-* Party menu -> P / SELECT gamepad
+* **Party menu** -> P / SELECT gamepad
 
-* Inventory -> I / Y button gamepad
+* **Inventory** -> I / Y button gamepad
 
-* Pause menu -> ESC / START gamepad
+* **Pause menu** -> ESC / START gamepad
 
 ### Menus
 
-* Accept -> Enter/ A button gamepad
+* **Accept** -> Enter/ A button gamepad
 
-* Exit menu -> B button gamepad
+* **Exit menu** -> B button gamepad
 
-* Language and text speed can not be modified
+* **Language and text speed can not be modified**
 
 ### Combat
 
