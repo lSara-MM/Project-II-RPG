@@ -228,7 +228,7 @@ TargetingMethod //Como se ataca
 
 	<skill name="Knife Throwing" id="29" description="A volley of knives that deal damage."
 		   type="0" movementCaster="1"  movementTarget="0" targetMethod="0"
-	   multiplierDmg="-0.9" bonusAccuracy="90" bonusCritRate="20" bonusCritDamage="20"
+	   multiplierDmg="-0.7" bonusAccuracy="85" bonusCritRate="10" bonusCritDamage="10"
 		   posToUseStart="1" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="false" areaSkill="true" autoTarget="false"
 		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
@@ -285,7 +285,7 @@ TargetingMethod //Como se ataca
 
 	<skill name="Nigthmarish strike" id="36" description="A strike to the backline with high damage that can stun."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="1"
-	   multiplierDmg="-2.5" bonusAccuracy="90" bonusCritRate="20" bonusCritDamage="30"
+	   multiplierDmg="-2.2" bonusAccuracy="90" bonusCritRate="10" bonusCritDamage="20"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="1" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
 		   firstStatusID="9" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="1"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"

@@ -123,45 +123,45 @@ bool GuiButton::Update(float dt)
 {
 	if (state != GuiControlState::DISABLED)
 	{
-			app->input->GetMousePosition(mouseX, mouseY);
-			
-			GuiControlState previousState = state;
+		app->input->GetMousePosition(mouseX, mouseY);
 
-			if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
-				mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
+		GuiControlState previousState = state;
 
-				state = GuiControlState::FOCUSED;
-				NotifyObserverOfHover();
+		if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
+			mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
 
-				if (hoverTest == false)
-				{
-					app->audio->PlayFx(fxHover);
-					hoverTest = true;
-				}
-				if (previousState != state)
-				{
-				}
-				if (!isSelected)
-				{
-					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
-					{
-						state = GuiControlState::PRESSED;
-					}
-					// If mouse button pressed -> Generate event!
-					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
-					{
-						app->audio->PlayFx(fxclick);
-						NotifyObserverOfClick();
-					}
-				}
-			}
-			else if (hoverTest)
+			state = GuiControlState::FOCUSED;
+			NotifyObserverOfHover();
+
+			if (hoverTest == false)
 			{
-				(isSelected) ? state = GuiControlState::SELECTED : state = GuiControlState::NORMAL;
-				hoverTest = false;
-
-				NotifyObserverOutHover();
+				app->audio->PlayFx(fxHover);
+				hoverTest = true;
 			}
+			if (previousState != state)
+			{
+			}
+			if (!isSelected)
+			{
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
+				{
+					state = GuiControlState::PRESSED;
+				}
+				// If mouse button pressed -> Generate event!
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
+				{
+					app->audio->PlayFx(fxclick);
+					NotifyObserverOfClick();
+				}
+			}
+		}
+		else if (hoverTest)
+		{
+			(isSelected) ? state = GuiControlState::SELECTED : state = GuiControlState::NORMAL;
+			hoverTest = false;
+
+			NotifyObserverOutHover();
+		}
 	}
 	if (isForward_B)
 	{

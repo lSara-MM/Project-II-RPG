@@ -269,7 +269,7 @@
 
 	<map>
 		<mapfolder path="Assets/Maps/"/>
-		<mapfile path="Assets/Maps/map1.tmx"/>		
+		<mapfile path="Assets/Maps/map1 - copia seguridad.tmx"/>		
 		
 		<mapdungeonfolder path="Assets/Maps/"/>
 		<mapdungeonfile path="Assets/Maps/mapDungeon.tmx"/>
@@ -443,7 +443,7 @@ enum class CharacterClass
 		
 		sectionX="26" sectionY="30"/>
 
-		<enemy name ="The Specter" id="20" maxHp="3600" currentHp="3600" attack="250" armor="40" critRate="10" critDamage="20" accuracy="20" res="15" dodge="5" speed="65"
+		<enemy name ="The Specter" id="20" maxHp="3600" currentHp="3600" attack="250" armor="40" critRate="10" critDamage="10" accuracy="20" res="15" dodge="5" speed="65"
         type="1" class="8" skill1ID="33" skill2ID="34" skill3ID="35" skill4ID="36"
                
         width="0" heigth="0"
