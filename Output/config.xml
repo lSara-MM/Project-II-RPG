@@ -269,7 +269,7 @@
 
 	<map>
 		<mapfolder path="Assets/Maps/"/>
-		<mapfile path="Assets/Maps/map1 - copia seguridad.tmx"/>		
+		<mapfile path="Assets/Maps/map1.tmx"/>		
 		
 		<mapdungeonfolder path="Assets/Maps/"/>
 		<mapdungeonfile path="Assets/Maps/mapDungeon.tmx"/>
