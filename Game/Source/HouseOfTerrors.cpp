@@ -38,12 +38,12 @@ bool HouseOfTerrors::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
+
 	musHauntedPath = config.attribute("musicD1").as_string();
-	mute_B = false;
-	sceneNode = config;
 	texturePathDarkestDungeon = config.attribute("texturePathDark").as_string();
 	enterCombatpath = "Assets/Audio/Fx/entrar_sala.wav";
 	combatfx = app->audio->LoadFx(enterCombatpath);
+	
 	return ret;
 }
 
@@ -65,9 +65,6 @@ bool HouseOfTerrors::Start()
 
 	//Music
 	app->audio->PlayMusic(musHauntedPath, 1.0f);
-
-	exit_B = false;
-	npcSetID = 1;
 
 	InitEntities();
 	app->entityManager->Enable();

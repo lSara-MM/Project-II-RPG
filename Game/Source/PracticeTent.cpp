@@ -49,9 +49,6 @@ bool PracticeTent::Awake(pugi::xml_node& config)
 	posDummy.x = config.attribute("xCollider").as_int();
 	posDummy.y = config.attribute("yCollider").as_int();
 
-	mute_B = false;
-	sceneNode = config;
-
 	return ret;
 }
 
@@ -76,9 +73,6 @@ bool PracticeTent::Start()
 
 	//Music
 	app->audio->PlayMusic(practicePath, 1.0f);
-	exit_B = false;
-
-	npcSetID = 1;
 
 	app->itemManager->Enable();
 	app->questManager->Enable();
@@ -92,6 +86,7 @@ bool PracticeTent::Start()
 		player->pbody->body->SetTransform({ PIXEL_TO_METERS(app->input->posX),PIXEL_TO_METERS(app->input->posY) }, 0);
 		app->input->coso = false;
 	}
+
 	return true;
 }
 
