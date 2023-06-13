@@ -865,12 +865,13 @@ bool Character::Update(float dt)
 									{
 										if (listSkillsHistory.end->prev->data == 3) //Usado rage skill hace poco
 										{
-											if (listSkillsHistory.end->data == 3) { probSkill = 0; }//Usado turno pasado
-											else { probSkill = 15; }
+											probSkill = 0;
+											
 										}
 										else
 										{
-											probSkill = 85;
+											if (listSkillsHistory.end->prev->data == 3) { probSkill = 15; }//Usado turno pasado
+											probSkill = 65;
 										}
 
 										//Usar habilidad 3(2) (RageSkill)
