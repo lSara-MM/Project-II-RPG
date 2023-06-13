@@ -215,7 +215,7 @@ Art / UI / Design
 Code / Design / Art / Narrative
 
 **[Guillem Pol Aixut Anderiz](https://github.com/GuillemAixut)**
-UI
+UI / Design
 
 
 
