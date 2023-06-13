@@ -125,12 +125,14 @@ bool Menus::Update(float dt)
 
 bool Menus::PostUpdate()
 {	
-
 	if (app->iScene->active || app->sceneWin_Lose->active || menuOn || app->combat->active || pause_B)
 	{
 		app->input->HandleGamepadMouse(app->input->mouseX, app->input->mouseY, app->input->mouseSpeed_F, deltaTime);
 		app->input->RenderMouse();
 	}
+
+	if (exit_B) return false;
+
 	return true;
 }
 

@@ -282,8 +282,6 @@ bool PuzzleManager::Dun2Awake(pugi::xml_node& config)
 	 tictacpath = "Assets/Audio/Fx/tic_tac.wav";
 	 tictacfx = app->audio->LoadFx(tictacpath);
 
-	 //Andreu Miro: Aquí carga los audios que quieras, aunque ya he visto que lo hiciste
-
 	return true;
 }
 
@@ -337,7 +335,6 @@ bool PuzzleManager::Dun1Start()
 	if (palancas == false)
 	{
 		door = app->tex->Load(texturepathDoor);
-
 		Door1 = app->physics->CreateRectangle(posDoor1.x, posDoor1.y - heightHoritzontal / 2, widthHoritzontal, heightHoritzontal, bodyType::STATIC);
 		Door1->body->SetFixedRotation(true);
 
@@ -369,7 +366,6 @@ bool PuzzleManager::Dun1Start()
 		Loset = app->physics->CreateRectangleSensor(posLoset.x - widthLoset / 2, posLoset.y - heightLoset / 2, widthLoset - 32, heightLoset - 32, bodyType::STATIC);
 		Loset->body->SetFixedRotation(true);
 		Loset->ctype = ColliderType::LOSET;
-
 	}
 	else
 	{
@@ -379,7 +375,6 @@ bool PuzzleManager::Dun1Start()
 	if (escape == false)
 	{
 		doorEscape = app->tex->Load(texturepathDoorEscape);
-
 		DoorEscape = app->physics->CreateRectangle(posDoorEscape.x - widthDoorEscape / 2, posDoorEscape.y - heightDoorEscape / 2, widthDoorEscape, heightDoorEscape, bodyType::STATIC);
 		DoorEscape->body->SetFixedRotation(true);
 
@@ -391,7 +386,6 @@ bool PuzzleManager::Dun1Start()
 	if (teamMate == false)
 	{
 		fireGuy = app->tex->Load(texturepathFireGuy);
-
 		FireGuy = app->physics->CreateRectangleSensor(posFireGuy.x - widthFireGuy / 2, posFireGuy.y - heightFireGuy / 2, widthFireGuy, heightFireGuy * 2, bodyType::STATIC);
 		FireGuy->body->SetFixedRotation(true);
 		FireGuy->ctype = ColliderType::FIREGUY;
@@ -432,7 +426,6 @@ bool PuzzleManager::Dun1Start()
 	winText = app->tex->Load(texturepathWintext);
 	posYanimation_I = 0;
 	completeDungeon_B = false;
-
 	return true;
 }
 
@@ -445,9 +438,7 @@ bool PuzzleManager::Dun2Start()
 	keyDoors = false;
 	chickenBoom = false;
 	relics = false;
-
 	fightBoss2 = false;
-
 	DoorContact1 = false;
 	DoorContact2 = false;
 	DoorKey1Opened = false;
@@ -475,7 +466,6 @@ bool PuzzleManager::Dun2Start()
 	BombCarryOn2 = false;
 	BombPlant1 = false;
 	BombPlant2 = false;
-
 	RelicContact1 = false;
 	RelicContact2 = false;
 	RelicContact3 = false;
@@ -488,7 +478,6 @@ bool PuzzleManager::Dun2Start()
 	RelicInColumn1 = false;
 	RelicInColumn2 = false;
 	RelicInColumn3 = false;
-
 	bossIsDeadDun2 = false;
 	bossDun2Contact = false;
 
@@ -546,9 +535,7 @@ bool PuzzleManager::Dun2Start()
 		Bomb2->body->SetFixedRotation(true);
 		Bomb2->ctype = ColliderType::BOMB;
 		Bomb2->id = 2;
-
 		//Barricada corta
-
 		if (!BarricadeHasExploted1)
 		{
 			Barricade1 = app->physics->CreateRectangle(posBarricade1.x - widthBarricade1 / 2, posBarricade1.y - heightBarricade1 / 2, widthBarricade1, heightBarricade1, bodyType::STATIC);
@@ -572,7 +559,6 @@ bool PuzzleManager::Dun2Start()
 			Barricade3->ctype = ColliderType::BARRICADE;
 			Barricade3->id = 3;
 		}
-
 		//Barricada larga
 		if (!BarricadeHasExploted4)
 		{
@@ -675,8 +661,6 @@ bool PuzzleManager::Dun2Start()
 	relicColumn3->body->SetFixedRotation(true);
 	relicColumn3->ctype = ColliderType::RELICOLUMN;
 	relicColumn3->id = 3;
-
-	//Andreu Miro: Aquí carga los audios de la bomba
 
 	return true;
 }
@@ -824,7 +808,6 @@ bool PuzzleManager::Dun1Update()
 	if (!bossIsDead)
 	{
 		currentDark = app->hTerrors->DarkestDungeon;
-		//app->render->DrawTexture(app->hTerrors->DarkestDungeon, app->hTerrors->player->position.x - app->win->GetWidth() / 2, app->hTerrors->player->position.y - app->win->GetHeight() / 2);
 	}
 	else
 	{
@@ -845,7 +828,6 @@ bool PuzzleManager::Dun1Update()
 	if (currentDark != nullptr)
 		app->render->DrawTexture(currentDark, -app->render->camera.x - app->render->camera.w / 2 + app->win->GetWidth() / 2, -app->render->camera.y + app->render->camera.h / 2 - app->win->GetHeight() / 2);
 
-
 	if (app->input->getInput_B)
 	{
 		iPoint pos = { app->win->GetWidth() / 4, 650 };
@@ -863,10 +845,8 @@ bool PuzzleManager::Dun1Update()
 		{
 			teamMate = true;
 			app->fade->FadingToBlack((Module*)app->hTerrors, (Module*)app->scene, 45);
-
 		}
 	}
-
 	return true;
 }
 
@@ -913,9 +893,6 @@ bool PuzzleManager::Dun2Update()
 
 			if(app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_DOWN)
 			{
-				//Eric: Aquí la transición a combate y el cleanUp de este puzzle
-				//Cuando mates al boss no te olvides de poner esta variable a true y hace un save: bossIsDeadDun2
-
 				LOG("Combat");
 				app->SaveGameRequest();
 				app->audio->PlayFx(app->hTerrors->combatfx);
@@ -927,7 +904,6 @@ bool PuzzleManager::Dun2Update()
 				app->BeastT->steps_I = 0;
 			}
 		}
-
 		app->render->DrawTexture(Boss2Texture, posBoss2.x - widthBoss2, posBoss2.y - heightBoss2);
 	}
 
@@ -1386,7 +1362,6 @@ bool PuzzleManager::Palancas()
 			app->questManager->SaveState();
 		}
 	}
-
 	return true;
 }
 
@@ -1435,7 +1410,6 @@ bool PuzzleManager::Escape()
 
 		app->hTerrors->player->lockMovement = false;
 	}
-
 	return true;
 }
 
@@ -1488,7 +1462,6 @@ bool PuzzleManager::Rescue()
 							app->itemManager->MinusQuantity(app->itemManager->nodeList[i]);
 						}
 					}
-
 					if (door != nullptr)
 						app->tex->UnLoad(door);
 
@@ -1536,7 +1509,6 @@ bool PuzzleManager::Rescue()
 			}
 		}
 	}
-
 	return true;
 }
 
@@ -1575,7 +1547,6 @@ bool PuzzleManager::TeamMate()
 			app->audio->PlayFx(solvedfx);
 			completeDungeon_B = true;
 		}
-	
 	}
 	return true;
 }
@@ -1672,7 +1643,6 @@ bool PuzzleManager::KeyDoorsPuz()
 
 		app->questManager->SaveState();
 	}
-
 	return true;
 }
 
@@ -1680,8 +1650,6 @@ bool PuzzleManager::ChickenBoomPuz()
 {
 	if (BombContact1) 
 	{
-		//Andreu Miro: Por si quieres aquí es cuando interactuas con la bomba 
-
 		if (!BombCarryOn2)
 		{
 			app->render->DrawTexture(textureE, posBomb1.x - 32, posBomb1.y - 80);
@@ -1706,7 +1674,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombCarryOn1)
 	{
-		//Andreu Miro: Aquí puedes poner el play music, este if está en funcionamiento mientras tienes la bomba aviso.
 		if (DeltaTime == 0.0 || DeltaTime == 1.0 || DeltaTime == 2.0 || DeltaTime == 3.0 || DeltaTime == 4.0) {
 			app->audio->PlayFx(tictacfx);
 		}
@@ -1716,8 +1683,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 		if (DeltaTime >= 6)
 		{
-			//Andreu Miro: Aquí la bomba explotó si no llegaste a colocarla y te explotó en las manos, PauseMusic.
-
 			BombCarryOn1 = false;
 
 			app->audio->PlayFx(explosionfx);
@@ -1794,8 +1759,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombPlant1) 
 	{
-		//Andreu Miro: Por si quieres aquí es cuando plantas la bomba 
-
 		if (BarricadeExplote1)
 		{
 			posBomb1.x = posBarricade1.x + widthBarricade1 / 6 - 10;
@@ -1828,8 +1791,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 		if(DeltaTime >= 2)
 		{
-			//Andreu Miro: Aquí la bomba explotó colocada, PauseMusic.
-
 			app->moduleparticles->AddParticle(posBomb1.x - 32, posBomb1.y - 32, 40, 1, 100);
 
 			app->audio->PlayFx(explosionfx);
@@ -1910,8 +1871,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombContact2)
 	{
-		//Andreu Miro: Por si quieres aquí es cuando interactuas con la bomba 
-
 		if (!BombCarryOn1)
 		{
 			app->render->DrawTexture(textureE, posBomb2.x - 32, posBomb2.y - 80);
@@ -1936,7 +1895,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombCarryOn2)
 	{
-		//Andreu Miro: Aquí puedes poner el play music, este if está en funcionamiento mientras tienes la bomba aviso.
 		if (DeltaTime == 0.0 || DeltaTime == 1.0 || DeltaTime == 2.0 || DeltaTime == 3.0 || DeltaTime == 4.0) {
 			app->audio->PlayFx(tictacfx);
 		}
@@ -1946,8 +1904,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 		if (DeltaTime >= 6)
 		{
-			//Andreu Miro: Aquí la bomba explotó si no llegaste a colocarla y te explotó en las manos, PauseMusic.
-
 			BombCarryOn2 = false;
 			app->audio->PlayFx(explosionfx);
 
@@ -1986,7 +1942,6 @@ bool PuzzleManager::ChickenBoomPuz()
 			{
 				app->render->DrawTexture(textureE, posBarricade5.x - 32, posBarricade5.y - 80);
 			}
-
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 			{
 
@@ -2022,8 +1977,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if (BombPlant2)
 	{
-		//Andreu Miro: Por si quieres aquí es cuando plantas la bomba 
-
 		if (BarricadeExplote1)
 		{
 			posBomb2.x = posBarricade1.x + widthBarricade1 / 6 - 10;
@@ -2056,8 +2009,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 		if (DeltaTime >= 2)
 		{
-			//Andreu Miro: Aquí la bomba explotó colocada, PauseMusic.
-
 			app->moduleparticles->AddParticle(posBomb2.x - 32, posBomb2.y - 32, 40, 1, 100);
 
 			app->audio->PlayFx(explosionfx);
@@ -2121,7 +2072,6 @@ bool PuzzleManager::ChickenBoomPuz()
 				delete Barricade5;
 				Barricade5 = nullptr;
 			}
-
 			RestartTimer();
 			BombPlant2 = false;
 
@@ -2183,8 +2133,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 	if(BarricadesExplote >= 5)
 	{
-		//Andreu Miro: Aquí se completó el puzzle, esto es si quieres y te sientes inspirado xd
-
 		chickenBoom = true;
 
 		BarricadesExplote = 0;
@@ -2203,7 +2151,6 @@ bool PuzzleManager::ChickenBoomPuz()
 
 		app->questManager->SaveState();
 	}
-
 	return true;
 }
 
@@ -2283,9 +2230,6 @@ bool PuzzleManager::RelicsPuz()
 
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 			{
-				//Cambiar textura
-				//Col1 = { , , , };
-
 				app->audio->PlayFx(confirmInteractfx);
 
 				RelicsCompleted += 1;
@@ -2313,9 +2257,6 @@ bool PuzzleManager::RelicsPuz()
 
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 			{
-				//Cambiar textura
-				//Col2 = { , , , };
-
 				app->audio->PlayFx(confirmInteractfx);
 
 				RelicsCompleted += 1;
@@ -2342,9 +2283,6 @@ bool PuzzleManager::RelicsPuz()
 
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 			{
-				//Cambiar textura
-				//Col3 = { , , , };
-
 				app->audio->PlayFx(confirmInteractfx);
 
 				RelicsCompleted += 1;
