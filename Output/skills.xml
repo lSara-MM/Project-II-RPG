@@ -285,10 +285,10 @@ TargetingMethod //Como se ataca
 
 	<skill name="Nigthmarish strike" id="36" description="A strike to the backline with high damage that can stun."
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="1"
-	   multiplierDmg="-2.2" bonusAccuracy="90" bonusCritRate="10" bonusCritDamage="20"
+	   multiplierDmg="-2.0" bonusAccuracy="90" bonusCritRate="10" bonusCritDamage="10"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="1" posToTargetEnd="3" friendlyFire="false" areaSkill="false" autoTarget="false"
-		   firstStatusID="9" firstStatusPositive="false" firstStatusDuration="2" firstStatusIntesity="1"
-		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"
+		   firstStatusID="9" firstStatusPositive="false" firstStatusDuration="1" firstStatusIntesity="1"
+		   secondStatusID="11" secondStatusPositive="false" secondStatusDuration="2" secondStatusIntesity="-30"
 	/>
 
 	<!--Skills CabraLobo-->
