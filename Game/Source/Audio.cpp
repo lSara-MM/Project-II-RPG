@@ -4,13 +4,8 @@
 #include "Defs.h"
 #include "Log.h"
 
-// NOTE: Recommended using: Additional Include Directories,
-// instead of 'hardcoding' library location path in code logic
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
-
-// NOTE: Library linkage is configured in Linker Options
-//#pragma comment(lib, "../Game/Source/External/SDL_mixer/libx86/SDL2_mixer.lib")
 
 Audio::Audio() : Module()
 {
@@ -112,7 +107,6 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 	}
 
 	music = Mix_LoadMUS(path);
-	//music = Mix_LoadMUS_RW(app->assetsManager->Load(path), 1);
 
 	if(music == NULL)
 	{
@@ -164,7 +158,6 @@ unsigned int Audio::LoadFx(const char* path)
 		return 0;
 
 	Mix_Chunk* chunk = Mix_LoadWAV(path);
-	//chunk = Mix_LoadWAV_RW(app->assetsManager->Load(path), 1);
 
 	if(chunk == NULL)
 	{
@@ -189,7 +182,6 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 
 	if(id > 0 && id <= fx.Count())
 	{
-		//LOG("Successfully play Fx");
 		Mix_PlayChannel(-1, fx[id - 1], repeat);
 		ret = true;
 	}
@@ -197,7 +189,7 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 	return ret;
 }
 
-bool Audio::ChangeGeneralVolume(int vol)	// to test
+bool Audio::ChangeGeneralVolume(int vol)
 {
 	if (vol >= 0 && vol <= SDL_MIX_MAXVOLUME)
 	{

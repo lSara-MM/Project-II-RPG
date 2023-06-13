@@ -22,7 +22,6 @@ enum CombatType
 	BOSS
 };
 
-
 class Combat : public Module
 {
 public:
@@ -56,7 +55,6 @@ public:
 	bool PreLoadCombat(SString n, int boss = -1, int boss2 = -1);
 	bool InitEnemies(vector<int> arr);
 	bool InitAllies(array<Character*, 4> party);
-
 
 	bool StartCombat();
 	bool OrderBySpeed();

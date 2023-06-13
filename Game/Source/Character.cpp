@@ -393,7 +393,6 @@ bool Character::Update(float dt)
 									if (listSkillsHistory.end->data == 2 )
 									{
 										probSkill = 0;
-
 									}
 									else
 									{
@@ -941,11 +940,9 @@ bool Character::Update(float dt)
 							default:
 								break;
 						}
-				
 						app->combat->NextTurn();
 						delayOn = false;
 					}
-
 					break;
 				case CharacterType::NONE:
 					break;
@@ -989,11 +986,8 @@ bool Character::ModifyHP(int hp)
 	if (currentHp <= 0)
 	{
 		LOG("%s died", name.GetString());
-		//if (charaType == CharacterType::ALLY) { app->combat->RemoveCharacter(&app->combat->vecAllies, this); }
-		//else if (charaType == CharacterType::ENEMY) { app->combat->RemoveCharacter(&app->combat->vecEnemies, this); }
 		return false;
 	}
-
 	return true;
 }
 
@@ -1029,8 +1023,6 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 			app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y + 178, 20, 2, 20, 10, -3);
 			app->audio->PlayFx(healfx);
 		}
-		
-		
 		//Primer efecto de estado
 		if (skill->firstPositiveEffect) //Efecto de estado positivo
 		{	
@@ -1054,7 +1046,6 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				{
 					app->combat->MoveCharacter(defender, skill->movementTarget);
 				}
-				
 			}
 		}
 		//Segundo efecto de estado
@@ -1092,7 +1083,6 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				app->moduleparticles->AddParticle(defender->position.x + (126 / 2), defender->position.y + 126/3, 20, 0, 100, 5, 5);
 				app->audio->PlayFx(critfx);
 			}
-
 			//Primer efecto estado 
 			if (skill->firstPositiveEffect) //Efecto de estado positivo
 			{
@@ -1103,7 +1093,6 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 				{
 					app->combat->MoveCharacter(defender, skill->movementTarget);
 				}
-				
 			}
 			else
 			{
@@ -1114,7 +1103,7 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 					{
 						app->combat->MoveCharacter(defender, skill->movementTarget );
 					}
-					
+
 					if (defender->GetStat(EffectType::BLESS) != 1 && skill->firstStatus != -1)
 					{ defender->listStatusEffects.Add(statusEffect1); }
 				}
@@ -1134,7 +1123,6 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 					{ defender->listStatusEffects.Add(statusEffect2); }
 				}
 			}
-
 			// Calcular reduccion de la defensa
 			float armorRelevance = (10 * defender->GetStat(EffectType::ARMOR) / abs(damage + 1)) + 1;
 			damage += ((defender->GetStat(EffectType::ARMOR)) * armorRelevance); //Esta con mas ya que damage es negativo
@@ -1145,17 +1133,6 @@ int Character::ApplySkill(Character* caster, Character* defender, Skill* skill)
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
 
 void Character::LoadSkill(int arr[4])
 {
@@ -1178,7 +1155,6 @@ void Character::LoadSkill(int arr[4])
 				int probCrit = aux.attribute("bonusCritRate").as_int();
 				int accuracy = aux.attribute("bonusAccuracy").as_int();
 				
-
 				//Status Effect 1
 				int firstStatusID = aux.attribute("firstStatusID").as_int();
 				bool firstPositiveEffect_B = aux.attribute("firstStatusPositive").as_bool();
@@ -1225,7 +1201,6 @@ bool Character::UseSkill(Skill* skill)
 		app->combat->MoveCharacter(this,skill->movementCaster);
 		return true;
 	}
-
 	if (skill->targetFriend) //Targetea a gente de su propio grupo
 	{
 		int endRange;
@@ -1235,7 +1210,6 @@ bool Character::UseSkill(Skill* skill)
 			{
 				return false;
 			}
-
 			if (skill->areaSkill)
 			{
 				for (size_t i = skill->posToTargetStart_I; i <= endRange; i++)
@@ -1250,19 +1224,15 @@ bool Character::UseSkill(Skill* skill)
 				app->combat->vecEnemies.at(objective)->ModifyHP(ApplySkill(this, app->combat->vecEnemies.at(objective), skill));
 			}
 			app->audio->PlayFx(healfx);
-			
-		
 	}
 	else //Targetea party contraria
 	{
-		
 		int endRange;
 		endRange = skill->RangeCanTarget(app->combat->vecAllies);
 			if (endRange == -1)
 			{
 				return false;
 			}
-
 			if (skill->areaSkill)
 			{
 				for (int i = skill->posToTargetStart_I; i <= endRange; i++)
@@ -1292,7 +1262,6 @@ bool Character::UseSkill(Skill* skill)
 	{ 
 		app->combat->MoveCharacter(this, skill->movementCaster); 
 	}
-	
 	return true;
 }
 
@@ -1354,9 +1323,7 @@ int Character::GetStat(EffectType statType)
 			{
 				output = output + i->data->intensity;
 			}
-			//i->data->turnsLeft--; Se gestionara aparte
 		}
-
 		return (base * output / 100);
 
 		break;
@@ -1390,7 +1357,6 @@ int Character::GetStat(EffectType statType)
 				base = 1; //Semi bool, si tiene taunt pues 1, sino sera 0
 			}
 		}
-
 		return base;
 	case EffectType::STUN:
 		base = 0;
@@ -1401,7 +1367,6 @@ int Character::GetStat(EffectType statType)
 				base = 1; //Semi bool, si tiene taunt pues 1, sino sera 0
 			}
 		}
-
 		return base;
 	case EffectType::BLESS:
 		for (ListItem<StatusEffect*>* i = listStatusEffects.start; i != nullptr; i = i->next)
@@ -1411,7 +1376,6 @@ int Character::GetStat(EffectType statType)
 				base = i->data->intensity; //Consegir el tipo de bless (1:Block Negative,0?,-1:Block Positive)
 			}
 		}
-
 		return base;
 	default:
 		break;
@@ -1422,12 +1386,7 @@ int Character::GetStat(EffectType statType)
 		if (i->data->type == statType)
 		{
 			output = output + i->data->intensity;
-		}
-		//Esto no tiene mucho sentido
-		/*if (i->data->type != EffectType::CURRENT_HP)
-		{
-			i->data->turnsLeft--;
-		}*/		
+		}	
 	}
 
 	return base * ((100 + output) / 100);
@@ -1443,12 +1402,7 @@ float Character::GetStatModifier(EffectType statType)
 		{
 			output = output + i->data->intensity;
 		}
-		/*if (i->data->type != EffectType::CURRENT_HP)
-		{
-			i->data->turnsLeft--;
-		}*/
 	}
-
 	return ((100 + output) / 100);
 }
 

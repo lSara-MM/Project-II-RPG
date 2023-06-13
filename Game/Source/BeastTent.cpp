@@ -149,7 +149,6 @@ bool BeastTent::Update(float dt)
 		if (steps_I > 650 + rand() % (751 - 650))
 		{
 			LOG("Combat");
-			//app->SaveGameRequest();
 			app->audio->PlayFx(combatfx);
 			app->combat->PreLoadCombat(name);
 

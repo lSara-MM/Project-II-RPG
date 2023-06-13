@@ -65,9 +65,6 @@ bool Combat::Awake(pugi::xml_node& config)
 
 bool Combat::Start()
 {
-	//Load
-	//LoadCombat();
-
 	//Music combat
 	app->audio->PlayMusic(musCombat, 1.0f);
 
@@ -96,12 +93,7 @@ bool Combat::Start()
 
 	// Skill button
 	GuiButton* button;	int j = 10;
-	//for (int i = 0; i < 5; i++)
-	//{
-	//	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 10, this, { 40 + i * 100, 470, 80, 80 }, ButtonType::COMBAT_TARGET);
-	//	listButtons.Add(button);
-	//	j++;
-	//}
+
 	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, this, { 311 + 0, 433, 47, 47 }, ButtonType::SKILL_1, "", 12, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
 	listButtons.Add(button);
 	button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10 + 1, this, { 311 + 1 * 65, 433, 47, 47 }, ButtonType::SKILL_2, "", 12, Font::UI, { 0,0,0,0 }, 2, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
@@ -122,7 +114,6 @@ bool Combat::Start()
 	xText1 = 75;
 	fontSizeSkills = 17;
 
-
 	//Quest Manager desactivate
 	if (app->questManager->active)
 	{
@@ -135,6 +126,7 @@ bool Combat::Start()
 	transitionCombat_B = false;
 	point = 0.0f;
 	offsetAni = 750;
+
 	//animation flee
 	animationFlee.Set();
 	animationFlee.AddTween(100, 80, BOUNCE_IN_OUT);
@@ -160,7 +152,6 @@ bool Combat::PreUpdate()
 	{
 		NextTurn();
 	}
-
 	return true;
 }
 
@@ -196,7 +187,6 @@ bool Combat::Update(float dt)
 		if (listInitiative.At(j)->data->charaType == CharacterType::ALLY) { color = { 33, 180, 33, 170 }; }
 		if (listInitiative.At(j)->data->charaType == CharacterType::ENEMY) { color = { 180, 33, 33, 170 }; }
 		app->render->DrawRectangle({ x, 20, 76, 76 }, color.r, color.g, color.b, color.a);
-
 
 		app->render->DrawTexture(listInitiative.At(j)->data->texture, x + 1, 21, &listInitiative.At(j)->data->texSection);
 		j++;
@@ -296,7 +286,6 @@ bool Combat::Update(float dt)
 		app->render->TextDraw("Press 5 allies button handle", 10, 140, 12, Font::UI, { 255, 246, 240 });
 		app->render->TextDraw("Press 6 fully heal party", 1100, 20, 12, Font::UI, { 255, 246, 240 });
 	}
-
 	return true;
 }
 
@@ -441,8 +430,6 @@ void Combat::Debug()
 			app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);
 		}
 
-
-		// num
 		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		{
 			vecAllies.at(0)->ModifyHP(-99999);
@@ -522,7 +509,6 @@ bool Combat::PreLoadCombat(SString n, int boss, int boss2)
 	}
 
 	sceneFromName = n;
-
 	return true;
 }
 
@@ -550,7 +536,6 @@ bool Combat::InitEnemies(vector<int> arr)
 						vecEnemies.push_back(chara);
 					}
 				}
-
 				// if list enemies full, stop checking pugi
 				if (vecEnemies.size() == arr.size()) 
 				{
@@ -561,7 +546,6 @@ bool Combat::InitEnemies(vector<int> arr)
 			}
 		}
 	}
-
 	vecSetEnemies.clear();
 	vecSetEnemies.shrink_to_fit();
 
@@ -598,7 +582,6 @@ bool Combat::InitAllies(array<Character*, 4> party)
 
 		vecAllies.push_back(chara);
 	}
-
 	return true;
 }
 
@@ -628,7 +611,6 @@ bool Combat::OrderBySpeed()
 	{
 		listInitiative.Add(vecAllies.at(i));
 	}
-
 	for (int i = 0; i < vecEnemies.size(); i++)
 	{
 		listInitiative.Add(vecEnemies.at(i));
@@ -650,7 +632,6 @@ bool Combat::OrderBySpeed()
 			}
 		}
 	}
-
 	return true;
 }
 
@@ -662,7 +643,6 @@ bool Combat::NextTurn()
 	// Disable all buttons
 	HandleCharaButtons(&app->combat->vecEnemies);
 
-	
 	//Quit turn previous chara 
 	if (charaInTurn >= listInitiative.Count())
 	{
@@ -728,7 +708,6 @@ bool Combat::Flee()
 		ret = false;
 		break;
 	}
-
 	return ret;
 }
 
@@ -786,7 +765,6 @@ bool Combat::HandleSkillsButtons(Character* chara)
 			listButtons.At(offset + i)->data->isSelected = true;
 		}
 	}
-
 	return true;
 }
 
@@ -907,7 +885,6 @@ int Combat::SearchInVec(vector<Character*> arr, int buttonId)
 	{
 		if (arr.at(i)->button->id == buttonId) { return i; }
 	}
-
 	return -1;
 }
 
@@ -1075,7 +1052,6 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			bool jumpList = false;
 			for (size_t i = 0; i < cha->listStatusEffects.Count() && writingLimit <7; i++)
 			{
-				
 				for (int k = i-1; k > 0 ; k--)
 				{
 					if (cha->listStatusEffects.At(i)->data->type== cha->listStatusEffects.At(k)->data->type)
@@ -1084,7 +1060,6 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 						break;
 					}
 				}
-
 				if(jumpList)
 				{
 					jumpList = false;
@@ -1201,7 +1176,6 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				
 				//Efecto
 				app->render->TextDraw(effectToPrint.GetString(), 75, 555 + (fontSizeSkills + offsetY) * writingLimit, fontSizeSkills);
-				//Turnos
 				
 				//Buscar el turno menor
 				int minTurns = 999;
@@ -1228,7 +1202,6 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 				//Sumar 1 al wl
 				writingLimit++;
 			}
-
 			cha = nullptr;
 		}
 	}
@@ -1283,13 +1256,11 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 						break;
 					}
 				}
-
 				if (jumpList)
 				{
 					jumpList = false;
 					break;
 				}
-
 				switch (cha->listStatusEffects.At(i)->data->type)
 				{
 				case EffectType::NONE:
@@ -1417,7 +1388,6 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 						intensities += cha->listStatusEffects.At(j)->data->intensity;
 					}
 				}
-
 				string numeros = to_string(minTurns);
 				//Turnos
 				app->render->TextDraw("Duration", 190, 615, 16);
@@ -1429,10 +1399,8 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 
 				writingLimit++;
 			}
-
 			cha = nullptr;
 		}
-
 		enemy = nullptr;
 	}
 	// skills buttons
@@ -1483,7 +1451,6 @@ void Combat::RenderGuiChara(int charaID)
 	default:
 		break;
 	}
-
 	app->render->DrawTexture(profileTex, 39, offsetAni + point * (385 + 132 - offsetAni), &rect);
 }
 
@@ -1708,7 +1675,6 @@ void Combat::HandleEndCombat()
 		{
 			app->itemManager->arrParty.at(i)->currentHp = 5;
 		}
-
 		app->input->coso = false;
 	}
 	else
@@ -1725,7 +1691,6 @@ void Combat::HandleEndCombat()
 				app->itemManager->arrParty.at(i)->currentHp = 5;
 			}		
 		}
-
 		app->input->coso = true;
 	}
 
@@ -1741,7 +1706,6 @@ void Combat::HandleEndCombat()
 	{
 		app->itemManager->arrParty.at(i)->currentHp = tempHp.at(i);
 	}
-
 	SaveCombat();
 
 	app->itemManager->UseItemPostBattle();
@@ -1779,9 +1743,7 @@ bool Combat::SaveCombat()
 			character.append_attribute("speed") = app->itemManager->arrParty.at(i)->speed;
 		}
 	}
-
 	ret = saveDoc->save_file("save_combat.xml");
-
 	return ret;
 }
 
@@ -1808,7 +1770,6 @@ bool Combat::LoadCombat()
 
 			app->itemManager->arrParty.at(i)->currentHp = itemNode.attribute("currentHp").as_int();
 			app->itemManager->arrParty.at(i)->positionCombat_I = itemNode.attribute("positionCombat").as_int();
-
 			app->itemManager->arrParty.at(i)->maxHp = itemNode.attribute("maxHp").as_int();
 			app->itemManager->arrParty.at(i)->attack = itemNode.attribute("attack").as_int();
 			app->itemManager->arrParty.at(i)->critRate = itemNode.attribute("critRate").as_int();
@@ -1818,11 +1779,9 @@ bool Combat::LoadCombat()
 			app->itemManager->arrParty.at(i)->dodge = itemNode.attribute("dodge").as_int();
 			app->itemManager->arrParty.at(i)->res = itemNode.attribute("res").as_int();
 			app->itemManager->arrParty.at(i)->speed = itemNode.attribute("speed").as_int();
-
 			i++;
 		}
 	}
-
 	return ret;
 }
 
@@ -1845,15 +1804,12 @@ bool Combat::RestartCombatData()
 		pugi::xml_node nodeCombat = saveDoc->append_child("save_stats");
 
 		for (pugi::xml_node itemNode = nodeConfig.child("CombatCharacter"); itemNode != NULL; itemNode = itemNode.next_sibling("CombatCharacter")) {
-
 			pugi::xml_node character = nodeCombat.append_child("CombatCharacter");
 			character.append_attribute("currentHp") = itemNode.attribute("currentHp").as_int();
 			character.append_attribute("positionCombat") = itemNode.attribute("positionCombat").as_int();
 		}
-
 		ret = saveDoc->save_file("save_combat.xml");
 	}
-
 	return ret;
 }
 

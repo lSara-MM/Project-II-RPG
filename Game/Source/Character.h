@@ -44,17 +44,6 @@ public:
 		type = type_;
 	}
 
-	/*bool StatusUpdate(int* affectedStat)
-	{
-		if (turnsLeft > 0)
-		{
-			affectedStat += intensity;
-			turnsLeft--;
-			return true;
-		}
-		return false;
-	}*/
-
 public:
 	
 	int intensity;
@@ -62,7 +51,6 @@ public:
 	bool isPositive; // true positive - false negative
 	EffectType type;
 };
-
 
 // Character
 enum class CharacterType
@@ -86,7 +74,6 @@ enum class CharacterClass
 
 	NO_CLASS
 };
-
 
 class Character : public Entity
 {
@@ -173,7 +160,6 @@ public:
 	
 private:
 	
-
 	int width, height;
 
 	pugi::xml_document skillsFile;
@@ -198,7 +184,6 @@ private:
 	//textura supersaiyan
 	SDL_Texture* textureOnturn;
 
-	
 };
 
 #endif // __CHARACTER_H__
