@@ -49,7 +49,7 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, iPoint pos)
 		activeNode->trimmed = true;
 	}
 
-	LOG("Text Speed %f", dtWait);
+	//LOG("Text Speed %f", dtWait);
 	app->render->RenderTrimmedText(pos.x + 75, pos.y + 70, 10, activeNode->text, &activeNode->texts, FONT_SIZE, max_chars_line, 
 		{ 0, 0, 0 }, Font::TEXT, 0,  dtWait);
 

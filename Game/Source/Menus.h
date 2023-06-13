@@ -50,6 +50,7 @@ public:
 	bool pause_B;
 
 	bool menuOn;
+	bool miniMapOn; 
 private:
 
 	float deltaTime;

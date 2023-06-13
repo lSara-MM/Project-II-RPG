@@ -1102,6 +1102,7 @@ void Player::Controller(float dt)
 void Player::MiniMap() 
 {
 	OpenMap = !OpenMap;
-	lockMovement = !lockMovement;
 	transitionMap_B = !transitionMap_B;
+
+	app->menus->miniMapOn = OpenMap;
 }
