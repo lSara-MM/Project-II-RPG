@@ -6,6 +6,8 @@ name: Release Generator
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
+    branches: 
+      - main
     tags:
       - 'v2.*'
   workflow_dispatch:
@@ -32,6 +34,6 @@ jobs:
      - name: Create Release
        uses: ncipollo/release-action@v1.12.0
        with:
-        tag: Gold Version
+        tag: Gold
         artifacts: "Pikum-Twisted_Tentv1.0.zip"
         token: ${{ secrets.GITHUB_TOKEN }}
