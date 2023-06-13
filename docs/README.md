@@ -6,7 +6,7 @@ In a dystopian world, more specifically in Russia, our protagonist tired of life
 
 The protagonist, determined to succeed, enters the circus and manages to be hired by the showman who seems strangely excited and intrigued in the protagonist, since he will soon discover that the Twisted Tent circus is not what it seems.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/NA1oC-ZlUbg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://youtu.be/sCTet2msyBs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 Explore the circus, solves puzzles, makes new friends, defeats different enemies and gets to the Showman.
 
