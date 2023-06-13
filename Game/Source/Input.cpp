@@ -63,7 +63,7 @@ bool Input::Start()
 	backSpaceMax = false;
 	coso = true;
 
-	mouseSpeed_F = 0.4f;
+	mouseSpeed_F = 0.5f;
 
 	SDL_ShowCursor(false);
 

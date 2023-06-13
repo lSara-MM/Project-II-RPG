@@ -125,7 +125,7 @@ bool Character::Start()
 			position = { 700 + 126 * positionCombat_I, 200 };
 		}
 
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, ButtonType::COMBAT_TARGET);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, ButtonType::COMBAT_TARGET, "", 12, Font::UI, { 0,0,0,0 }, 1, Easings::LINEAR, AnimationAxis::DOWN_Y);
 		app->combat->listButtons.Add(button);
 
 		button->state = GuiControlState::SELECTED;
@@ -136,7 +136,7 @@ bool Character::Start()
 		buttonBounds = { 700 + 126 * positionCombat_I, 200, 125, 180 };
 		position = { 700 + 126 * positionCombat_I, 200 };
 
-		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, ButtonType::COMBAT_TARGET);
+		button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, app->combat, buttonBounds, ButtonType::COMBAT_TARGET, "", 12, Font::UI, { 0,0,0,0 }, 1, Easings::LINEAR, AnimationAxis::DOWN_Y);
 
 		// Texture section
 		SDL_Rect rect = { 0, 0, 0, 0 };

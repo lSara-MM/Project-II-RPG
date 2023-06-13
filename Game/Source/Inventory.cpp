@@ -120,7 +120,7 @@ bool Inventory::Start()
 	inventoryAnimation.AddTween(100, 120, BACK_OUT);
 	inventoryTransition_B = false;
 	posXinventoryAnimation = 0;
-
+	SDL_WarpMouseInWindow(app->win->window, 640, 360);
 	return true;
 }
 

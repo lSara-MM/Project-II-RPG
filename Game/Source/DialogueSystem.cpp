@@ -34,6 +34,7 @@ bool DialogueSystem::Start()
 {
 	textBox_tex = app->tex->Load(textBox_path);
 	nameBox_tex = app->tex->Load(nameBox_path);
+	SDL_WarpMouseInWindow(app->win->window, 1050, 450);
 	hasEnded = false;
 	return true;
 }

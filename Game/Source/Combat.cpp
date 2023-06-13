@@ -145,6 +145,8 @@ bool Combat::Start()
 	isHovering = false;
 	exit_B = false;
 
+	SDL_WarpMouseInWindow(app->win->window, 285, 450);
+
 	return true;
 }
 
