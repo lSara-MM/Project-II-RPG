@@ -53,7 +53,7 @@ bool Input::Start()
 	getInput_B = false;
 	backSpaceMax = false;
 	coso = true;
-	mouseSpeed_F = 0.5f;
+	mouseSpeed_F = 0.4f;
 	SDL_ShowCursor(false);
 	SDL_StopTextInput();
 	cursorIdleTex = app->tex->Load("Assets/Textures/cursor_select.png");
