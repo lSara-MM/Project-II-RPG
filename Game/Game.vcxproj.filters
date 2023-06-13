@@ -112,12 +112,6 @@
     <ClCompile Include="Source\SceneWin_Lose.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AssetsManager.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\InitiAllResourcesFromZip.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Source\LootManager.cpp" />
     <ClCompile Include="Source\Store.cpp" />
     <ClCompile Include="Source\CutScene.cpp" />
@@ -274,12 +268,6 @@
     </ClInclude>
     <ClInclude Include="Source\SceneWin_Lose.h">
       <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AssetsManager.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\InitiAllResourcesFromZip.h">
-      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\Tweening.h">
       <Filter>Utils</Filter>
