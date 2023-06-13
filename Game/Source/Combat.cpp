@@ -1049,7 +1049,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 			bool jumpList = false;
 			for (size_t i = 0; i < cha->listStatusEffects.Count() && writingLimit <7; i++)
 			{
-				for (int k = i-1; k > 0 ; k--)
+				for (int k = i-1; k >= 0 ; k--)
 				{
 					if (cha->listStatusEffects.At(i)->data->type== cha->listStatusEffects.At(k)->data->type)
 					{
