@@ -56,7 +56,7 @@ And don't forget to collect information before facing a dungeon ;D
 
 * **Player walk left** -> A / Right arrow / Left Joystick Gamepad
 
-* **Player walk right** -> D **/** Left arrow / Left Joystick Gamepad
+* **Player walk right** -> D / Left arrow / Left Joystick Gamepad
 
 * **Player walk up** -> W / Up arrow / Left Joystick Gamepad
 
