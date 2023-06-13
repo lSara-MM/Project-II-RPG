@@ -178,6 +178,10 @@ And place them. Now you can fight the boss.
 
 ![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/5f6bf72a-c330-4d54-bd08-aa2cf471f985)
 
+## FORGE AND STORE METADATA
+
+![link](https://docs.google.com/spreadsheets/d/1KOsOuvvZcRZfYQ5oqry389BhcAY8g0lMMocOFgo-GLU/edit?usp=sharing)
+
 ## Controls
 
 ### Player
