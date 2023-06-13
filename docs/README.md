@@ -34,7 +34,6 @@ Would you sign the contract to start this great adventure?
 
 ![Screenshoot 1](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/51c45c75-7917-4a2c-91b5-b92f70e3f668)
 
-
 Explore the dungeons and get items and equipment
 
 ![Screenshoot 2](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/60400f6c-1c0d-4619-b428-e945fb96fea2)
