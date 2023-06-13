@@ -863,14 +863,15 @@ bool Character::Update(float dt)
 									}
 									else// Vida baja (rage mode)
 									{
-										if (listSkillsHistory.end->prev->data == 3) //Usado rage skill hace poco
+										if (listSkillsHistory.end->data == 3) //Usado rage skill hace poco
 										{
-											if (listSkillsHistory.end->data == 3) { probSkill = 0; }//Usado turno pasado
-											else { probSkill = 15; }
+											probSkill = 0;
+											
 										}
 										else
-										{
-											probSkill = 85;
+										{	probSkill = 65;
+											if (listSkillsHistory.end->prev->data == 3) { probSkill = 15; }//Usado turno pasado
+											
 										}
 
 										//Usar habilidad 3(2) (RageSkill)
