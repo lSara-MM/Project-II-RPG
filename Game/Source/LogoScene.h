@@ -5,7 +5,6 @@
 #include "Player.h"
 #include "Tweening.h"
 
-
 struct SDL_Texture;
 
 class LogoScene : public Module

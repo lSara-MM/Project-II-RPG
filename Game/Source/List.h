@@ -10,13 +10,11 @@ struct ListItem
 	tdata data;
 	ListItem<tdata>* next;
 	ListItem<tdata>* prev;
-
 	inline ListItem(const tdata& pData)
 	{
 		data = pData;
 		next = prev = NULL;
 	}
-
 	~ListItem()
 	{}
 };
@@ -25,16 +23,11 @@ struct ListItem
 template<class tdata>
 class List
 {
-
 public:
-
 	ListItem<tdata>* start;
 	ListItem<tdata>* end;
-
 private:
-
 	unsigned int size;
-
 public:
 
 	// Constructor
@@ -43,19 +36,16 @@ public:
 		start = end = NULL;
 		size = 0;
 	}
-
 	// Destructor
 	~List()
 	{
 		Clear();
 	}
-
 	// Get Size
 	unsigned int Count() const
 	{
 		return size;
 	}
-
 	// Add new item
 	ListItem<tdata>* Add(const tdata& item)
 	{
@@ -72,11 +62,9 @@ public:
 			end->next = dataItem;
 			end = dataItem;
 		}
-
 		++size;
 		return(dataItem);
 	}
-
 	// Deletes an item from the list
 	bool Del(ListItem<tdata>* item)
 	{
@@ -84,12 +72,10 @@ public:
 		{
 			return (false);
 		}
-
 		// Now reconstruct the list
 		if(item->prev != NULL)
 		{
 			item->prev->next = item->next;
-
 			if(item->next != NULL)
 			{
 				item->next->prev = item->prev;
@@ -130,7 +116,6 @@ public:
 			RELEASE(pData);
 			pData = pNext;
 		}
-
 		start = end = NULL;
 		size = 0;
 	}
@@ -149,17 +134,12 @@ public:
 			{
 				break;
 			}
-
 			++pos;
 			pItem = pItem->next;
 		}
-
 		return(pItem->data);
 	}
 
-	/**
-	* const read operator access directly to a position in the list
-	*/
 	const tdata& operator [](const unsigned int index) const
 	{
 		long pos;
@@ -173,26 +153,21 @@ public:
 			{
 				break;
 			}
-
 			++pos;
 			pItem = pItem->next;
 		}
-
 		ASSERT(pItem);
-
 		return(pItem->data);
 	}
 
 	const List<tdata>& operator +=(const List<tdata>& other_list)
 	{
 		ListItem<tdata>* pItem = other_list.start;
-
 		while(pItem != NULL)
 		{
 			Add(pItem->data);
 			pItem = pItem->next;
 		}
-
 		return(*this);
 	}
 
@@ -200,15 +175,12 @@ public:
 	{
 		long pos = 0;
 		ListItem<tdata>* pItem = start;
-
 		while(pItem != NULL)
 		{
 			if(pos++ == index)
 				break;
-
 			pItem = pItem->next;
 		}
-
 		return pItem;
 	}
 
@@ -216,15 +188,12 @@ public:
 	{
 		long pos = 0;
 		ListItem<tdata>* pItem = start;
-
 		while(pItem != NULL)
 		{
 			if(pos++ == index)
 				break;
-
 			pItem = pItem->next;
 		}
-
 		return pItem;
 	}
 
@@ -238,7 +207,6 @@ public:
 		{
 			swapped = false;
 			ListItem<tdata>* tmp = start;
-
 			while(tmp != NULL && tmp->next != NULL)
 			{
 				++ret;
@@ -247,11 +215,9 @@ public:
 					SWAP(tmp->data, tmp->next->data);
 					swapped = true;
 				}
-
 				tmp = tmp->next;
 			}
 		}
-
 		return ret;
 	}
 
@@ -264,7 +230,6 @@ public:
 		{
 			if(tmp->data == data)
 				return(index);
-
 			++index;
 			tmp = tmp->next;
 		}
@@ -281,19 +246,15 @@ public:
 			ListItem<tdata>* pNewItem = new ListItem<tdata>(pOtherList->data);
 
 			pNewItem->next = (pMyList) ? pMyList->next : NULL;
-
 			if(pNewItem->next != NULL)
 				pNewItem->next->prev = pNewItem;
 			else
 				end = pNewItem;
-
 			pNewItem->prev = pMyList;
-
 			if(pNewItem->prev != NULL)
 				pNewItem->prev->next = pNewItem;
 			else
 				start = pNewItem;
-
 			pMyList = pNewItem;
 			pOtherList = pOtherList->next;
 		}
