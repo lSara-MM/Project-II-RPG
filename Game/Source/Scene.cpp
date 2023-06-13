@@ -179,12 +179,11 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	if (app->itemManager->active)
-	{
-		app->itemManager->Disable();
-	}
+	app->itemManager->Disable();
 
 	app->inventory->Disable();
+	app->forge->Disable();
+	app->store->Disable();
 
 	player = nullptr;
 	app->entityManager->Disable();
