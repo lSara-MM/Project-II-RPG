@@ -75,6 +75,7 @@ bool IntroScene::Start()
 	transition_B = false;
 	exit_B = false;
 	app->itemManager->loadParty_B = false;
+	SDL_WarpMouseInWindow(app->win->window, 150, 375);
 	return true;
 }
 
