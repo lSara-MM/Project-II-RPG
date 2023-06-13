@@ -14,9 +14,11 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 
 * 2 Diferent Dungeons to explore 
 
-* More than 8  different enemies
+* More than 8 different enemies
 
 * 4 different team members
+
+* Amacing Cinematics
 
 * Wide variety of objects and equipment with multiple benefits
 
@@ -27,6 +29,14 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 * Shop and innovative forge system
 
 * Multiple Buffs and Debuffs
+
+* Remarkable variety of NPCs
+
+* Minimap
+
+* Animated UI
+
+* Original Particles
 
 ## Game Preview
 
