@@ -64,7 +64,6 @@ public:
 	Uint8 BQ3;
 
 	List<Quest*> quests;
-
 };
 
 #endif 

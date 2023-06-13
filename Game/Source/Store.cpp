@@ -164,10 +164,10 @@ bool Store::PostUpdate()
 	string h = to_string(SellQuantity);
 	app->render->TextDraw(h.c_str(), 250, offset + point * (550 - offset), 40, Font::TEXT, { 255, 246, 240 });
 
-	app->render->DrawTexture(app->itemManager->coinTexture, 1150 - app->render->camera.x, offset + point * (180 - offset) - app->render->camera.y);
+	app->render->DrawTexture(app->itemManager->coinTexture, 1150 - app->render->camera.x, offset + point * (165 - offset) - app->render->camera.y);
 
 	string cn = to_string(app->itemManager->coins);
-	app->render->TextDraw(cn.c_str(), 1090, offset + point * (180 - offset), 25, Font::TEXT, { 255, 246, 240 });
+	app->render->TextDraw(cn.c_str(), 1090, offset + point * (165 - offset), 25, Font::TEXT, { 255, 246, 240 });
 
 
 	if ( app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == ButtonState::BUTTON_DOWN)//con mando es bastante molesto tener que ir con el mouse al boton de cerrar

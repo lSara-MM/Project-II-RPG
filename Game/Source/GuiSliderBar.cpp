@@ -94,6 +94,16 @@ bool GuiSliderBar::Update(float dt)
 	return false;
 }
 
+bool GuiSliderBar::CleanUp()
+{
+	app->tex->UnLoad(SliderBarTex);
+
+	// TO DO: arreglo feo temporal? com se borra un boto, pregunta seria
+	state = GuiControlState::NONE;
+
+	return true;
+}
+
 bool GuiSliderBar::Draw(Render* render)
 {
 	switch (axisType)

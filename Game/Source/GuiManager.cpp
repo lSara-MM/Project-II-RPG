@@ -71,6 +71,12 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, Module* ob
 void GuiManager::DestroyGuiControl(GuiControl* gui)
 {
 	guiControlsList.Del(guiControlsList.At(guiControlsList.Find(gui)));
+	
+	if (gui != nullptr)
+	{
+		gui->CleanUp();
+	}
+	
 	delete gui;
 	gui = nullptr;
 }

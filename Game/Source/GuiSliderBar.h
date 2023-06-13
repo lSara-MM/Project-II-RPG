@@ -16,6 +16,8 @@ public:
 	virtual ~GuiSliderBar();
 
 	bool Update(float dt);
+	bool CleanUp();
+
 	bool Draw(Render* render);
 
 	int mouseX, mouseY;

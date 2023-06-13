@@ -107,6 +107,11 @@ public:
 		return true;
 	}
 
+	virtual bool CleanUp()
+	{
+		return true;
+	}
+
 	virtual bool Draw(Render* render)
 	{
 		return true;

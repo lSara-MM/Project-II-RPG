@@ -26,11 +26,6 @@ Npc::Npc() : Entity(EntityType::NPC)
 {
 	//name.Create("Npc");
 
-	idleAnim.PushBack({ 96, 0, 96, 96 });
-	idleAnim.PushBack({ 192, 0, 96, 96 });
-	idleAnim.PushBack({ 96, 0, 96, 96 });
-	idleAnim.PushBack({ 288, 0, 96, 96 });
-
 	idleAnim.speed = 0.07f;
 	idleAnim.loop = true;
 
@@ -58,6 +53,7 @@ bool Npc::Awake() {
 	}
 	else
 	{
+		isAnimated = false;
 		// Load dialogue IDs
 		for (pugi::xml_attribute attr = parameters.first_attribute(); attr; attr = attr.next_attribute())
 		{
@@ -71,6 +67,18 @@ bool Npc::Awake() {
 			}
 		}
 	}	
+
+	if (isAnimated)
+	{
+		idleAnim.PushBack({ 96, 0, 96, 96 });
+		idleAnim.PushBack({ 192, 0, 96, 96 });
+		idleAnim.PushBack({ 96, 0, 96, 96 });
+		idleAnim.PushBack({ 288, 0, 96, 96 });
+	}
+	else
+	{
+		idleAnim.PushBack({ 0, 0, 96, 96 });
+	}
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();

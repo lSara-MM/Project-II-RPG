@@ -17,6 +17,8 @@ public:
 	virtual ~GuiButton();
 
 	bool Update(float dt);
+	bool CleanUp();
+
 	bool Draw(Render* render);
 	void DrawSkill(int charaId, int skillNumber, int state);//skill number = numero skill-1, state->normal=0, focused=1, pressed = 2
 

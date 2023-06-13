@@ -378,8 +378,6 @@ bool Combat::CleanUp()
 	}
 	listButtons.Clear();
 
-	//app->menus->pSettings->CleanUp();
-
 	// Clean entities vector
 	vecAllies.clear();
 	vecAllies.shrink_to_fit();

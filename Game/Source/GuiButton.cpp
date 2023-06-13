@@ -214,6 +214,17 @@ bool GuiButton::Update(float dt)
 	return false;
 }
 
+bool GuiButton::CleanUp()
+{
+	//delete buttonTex;
+	app->tex->UnLoad(buttonTex);
+
+	// TO DO: arreglo feo temporal? com se borra un boto, pregunta seria
+	state = GuiControlState::NONE;
+
+	return true;
+}
+
 bool GuiButton::Draw(Render* render)
 {
 	if (buttonType != ButtonType::ITEM)

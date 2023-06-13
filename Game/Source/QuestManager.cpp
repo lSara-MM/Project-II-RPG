@@ -110,14 +110,6 @@ bool QuestManager::Start() {
 bool QuestManager::CleanUp()
 {
 	bool ret = true;
-	ListItem<Quest*>* item;
-	item = quests.end;
-
-	while (item != NULL && ret == true)
-	{
-		ret = item->data->CleanUp();
-		item = item->prev;
-	}
 
 	quests.Clear();
 	return ret;

@@ -187,6 +187,10 @@ bool IntroScene::CleanUp()
 	LOG("Freeing IntroScene");
 	app->input->temp = "";
 
+	for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
+	{
+		app->guiManager->DestroyGuiControl(i->data);
+	}
 	listButtons.Clear();
 	app->tex->UnLoad(texture);
 
