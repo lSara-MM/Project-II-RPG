@@ -39,12 +39,12 @@ TargetingMethod //Como se ataca
 		   firstStatusID="-1" firstStatusPositive="false" firstStatusDuration="0" firstStatusIntesity="0"
 		   secondStatusID="-1" secondStatusPositive="false" secondStatusDuration="0" secondStatusIntesity="0"		   
 	/>
-	<skill name="Evasion" id="2" description="A defensive guard to recover HP that increases dodge and accuarcy by 40 for 2 turns."
+	<skill name="Evasion" id="2" description="A defensive guard to recover HP that increases dodge and accuarcy by 40 for 3 turns."
 		   type="1" movementCaster="0"  movementTarget="0" targetMethod="0"
 	   multiplierDmg="0.7" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="3" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="true"
-		   firstStatusID="6" firstStatusPositive="true" firstStatusDuration="3" firstStatusIntesity="40"
- 		   secondStatusID="4" secondStatusPositive="true" secondStatusDuration="3" secondStatusIntesity="40"
+		   firstStatusID="6" firstStatusPositive="true" firstStatusDuration="4" firstStatusIntesity="40"
+ 		   secondStatusID="4" secondStatusPositive="true" secondStatusDuration="4" secondStatusIntesity="40"
 	/>
 	<skill name="Card Throw" id="3" description="Volley of sharp cards that deal damage and curses an enemy." 
 		   type="0" movementCaster="0"  movementTarget="0" targetMethod="0"
