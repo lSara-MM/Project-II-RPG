@@ -2,14 +2,11 @@
 #define __HOUSEOFTERRORS_H__
 
 #include "App.h"
-
 #include "Module.h"
 #include "Player.h"
-
 #include "GuiButton.h"
 #include "GuiCheckBox.h"
 #include "GuiSliderBar.h"
-
 #include "Menus.h"
 
 struct SDL_Texture;

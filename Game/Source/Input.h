@@ -6,20 +6,14 @@
 #include "SDL/include/SDL.h"
 #include "Point.h"
 #include "Timer.h"
-
 #include "External/SDL/include/SDL_gamecontroller.h"
 
-//#define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
-//#define LAST_KEYS_PRESSED_BUFFER 50
-
 #define DEAD_ZONE 32700
 #define MAX_BUTTONS 15
-
 #define MAX_PLAYER_CHARS 10
 
 using namespace std;
-
 struct SDL_Rect;
 
 enum EventWindow
@@ -61,15 +55,12 @@ public:
 		max_chars = max_chars_;
 		input_entered = entered_;
 	}
-
 public:
 	string input;
 	int max_chars;
 	bool input_entered = false;
-
 	Timer timer;
 };
-
 
 class Input : public Module
 {
@@ -144,10 +135,8 @@ public:
 	SDL_GameController* sdl_controller;
 	GameController controller;
 	
-	//bool gamepadGUI_B = false;
 	float mouseSpeed_F;
 
-	// TO DO guarradas 
 	int posX, posY;
 	string sceneNameSaved;
 	bool coso;

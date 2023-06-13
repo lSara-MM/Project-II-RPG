@@ -9,7 +9,6 @@
 
 #define MIN_CHARAS_PARTY 3
 
-
 Inventory::Inventory(unsigned capx, unsigned capy) : Module()
 {
 	name.Create("Inventory");
@@ -20,9 +19,7 @@ Inventory::Inventory(unsigned capx, unsigned capy) : Module()
 
 // Destructor
 Inventory::~Inventory()
-{
-
-}
+{}
 
 bool Inventory::Start()
 {
@@ -35,7 +32,6 @@ bool Inventory::Start()
 	twinsIMG = app->tex->Load(app->itemManager->twinsPath);
 	fireIMG = app->tex->Load(app->itemManager->firePath);
 	partyWindow_B = false;
-	
 	buttonInventory = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1004, this, { 734, 20, 114, 60 }, ButtonType::SMALL);
 	buttonInventory->step = 20;//vaya mas rapido
 	buttonInventory->state = GuiControlState::NONE;
@@ -65,7 +61,6 @@ bool Inventory::Start()
 			selectCharacter[i]->step = 20;
 		}
 	}
-
 	// Init Party stuff
 	InitArr();
 
@@ -114,7 +109,6 @@ bool Inventory::Start()
 			}
 		}
 	}
-
 	//animation inventory
 	inventoryAnimation.Set();
 	inventoryAnimation.AddTween(100, 120, BACK_OUT);
@@ -135,7 +129,6 @@ bool Inventory::Update(float dt)
 	if (inventoryTransition_B)
 	{
 		inventoryAnimation.Backward();
-	
 		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 		{
 			if (app->itemManager->nodeList[i]->button != nullptr && app->itemManager->nodeList[i]->quantity > 0)//poner invisibles los botones creados
@@ -159,7 +152,6 @@ bool Inventory::Update(float dt)
 	{
 		inventoryAnimation.Foward();
 	}
-
 	inventoryAnimation.Step(4, false);
 
 	float point = inventoryAnimation.GetPoint();
@@ -182,7 +174,6 @@ bool Inventory::Update(float dt)
 			}
 			buttonsChangeStat = false;
 		}
-
 		if (!partyWindow_B)
 		{
 			app->render->DrawTexture(inventoryIMG, posXinventoryAnimation - app->render->camera.x, 0 - app->render->camera.y);
@@ -200,14 +191,12 @@ bool Inventory::Update(float dt)
 			app->render->DrawTexture(partyIMG, posXinventoryAnimation - app->render->camera.x, 0 - app->render->camera.y);
 		}	
 	}
-	
 	return true;
 }
 
 bool Inventory::PostUpdate()
 {
 	int x = 0;
-
 	float point = inventoryAnimation.GetPoint();
 	int offset = -1300;
 
@@ -215,22 +204,18 @@ bool Inventory::PostUpdate()
 	{
 		buttonInventory->state = GuiControlState::NONE;
 		buttonParty->state = GuiControlState::NORMAL;
-		
 		for (int i = 0; i <= 3; i++)
 		{
 			selectCharacter[i]->state = GuiControlState::NORMAL;
 		}
-		
 		PrevPage->state = GuiControlState::NORMAL;
 		NextPage->state = GuiControlState::NORMAL;
-		
 		if (app->combat->active)
 		{
 			buttonInventory->state = GuiControlState::NONE;
 			buttonParty->state = GuiControlState::NONE;
 			PrevPage->state = GuiControlState::NONE;
 			NextPage->state = GuiControlState::NONE;
-
 			for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 			{
 				if (app->itemManager->nodeList[i]->type != 2)
@@ -243,7 +228,6 @@ bool Inventory::PostUpdate()
 					if (posXinventoryAnimation == 0)//printar items cuando acabe animacion
 					{
 						app->itemManager->LoadQuantity(x, y, app->itemManager->nodeList[i]);
-
 					}
 					if (app->itemManager->nodeList[i]->quantity > 0)
 					{
@@ -277,7 +261,6 @@ bool Inventory::PostUpdate()
 					app->itemManager->armorItems[i]->CleanUp();
 				}
 			}
-
 			for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 			{
 				if (app->itemManager->nodeList[i]->type != 2 && app->itemManager->nodeList[i]->quantity > 0)
@@ -292,7 +275,6 @@ bool Inventory::PostUpdate()
 						if (posXinventoryAnimation == 0)//printar items cuando acabe animacion
 						{
 							app->itemManager->LoadQuantity(x, y, app->itemManager->nodeList[i]);
-
 						}
 						if (app->itemManager->nodeList[i]->equiped == false)
 						{
@@ -305,7 +287,6 @@ bool Inventory::PostUpdate()
 					}
 				}
 			}
-
 			//LOAD STATS
 			if (app->itemManager->arrParty.at(app->itemManager->invPos) != nullptr)
 			{
@@ -359,7 +340,6 @@ bool Inventory::PostUpdate()
 				app->render->TextDraw(s.c_str(), offset + point * (510 - offset), 565, 15, Font::TEXT, { 0, 0, 0 });
 			}
 		}
-
 	}
 	else if (partyWindow_B)
 	{
@@ -367,15 +347,12 @@ bool Inventory::PostUpdate()
 		buttonParty->state = GuiControlState::NONE;
 		PrevPage->state = GuiControlState::NONE;
 		NextPage->state = GuiControlState::NONE;
-
 		for (int i = 0; i <= 3; i++)
 		{
 			selectCharacter[i]->state = GuiControlState::NONE;
 		}
-
 		DrawParty(point, offset);
 	}
-
 	return true;
 }
 
@@ -396,12 +373,10 @@ bool Inventory::CleanUp()
 			app->itemManager->armorItems[i]->CleanUp();
 		}
 	}
-
 	for (int i = 0; i <= 3; i++)
 	{
 		app->guiManager->DestroyGuiControl(selectCharacter[i]);
 	}
-
 	app->guiManager->DestroyGuiControl(buttonInventory);
 	app->guiManager->DestroyGuiControl(buttonParty);
 	app->guiManager->DestroyGuiControl(PrevPage);
@@ -414,27 +389,20 @@ bool Inventory::CleanUp()
 	app->tex->UnLoad(compaIMG);
 	app->tex->UnLoad(twinsIMG);
 	app->tex->UnLoad(fireIMG);
-
 	page = 0;
-
 	// party
 	for (int i = 0; i < arrCharas.size(); i++) { arrCharas.at(i) = nullptr; }
-	
 	for (ListItem<GuiButton*>* i = listPartyButtons.start; i != nullptr; i = i->next)
 	{
 		app->guiManager->DestroyGuiControl(i->data);
 	}
-	
 	listPartyButtons.Clear();
-
 	return true;
 }
 
 void Inventory::ReOrderInventory()
 {
-	if (app->combat->active)
-	{
-	}
+	if (app->combat->active){}
 	else
 	{
 		int x = 0;
@@ -498,7 +466,6 @@ bool Inventory::OnGuiMouseHoverEvent(GuiControl* control)
 			app->itemManager->armorItems[i]->printStats = true;
 		}
 	}
-
 	return true;
 }
 
@@ -518,7 +485,6 @@ bool Inventory::OnGuiMouseOutHoverEvent(GuiControl* control)
 			app->itemManager->armorItems[i]->printStats = false;
 		}
 	}
-
 	return true;
 }
 
@@ -605,7 +571,6 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			app->itemManager->MinusQuantity(app->itemManager->armorItems[i]);
 		}
 	}
-	
 	switch (control->id)
 	{
 		case 1000:
@@ -648,7 +613,6 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			{
 				i->data->state = GuiControlState::NONE;
 			}
-
 			break;
 		case 1005:
 			buttonsChangeStat = true;
@@ -695,7 +659,6 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 		{
 			if (app->itemManager->arrParty.at(k) == nullptr) { break; }
 		}
-
 		if (lastPressed == -1)
 		{
 			int j = 0;
@@ -709,7 +672,6 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 				}
 				j++;
 			}
-
 			listPartyButtons.At(control->id - 1010)->data->state = GuiControlState::SELECTED;
 			lastPressed = control->id - 1010;
 		}
@@ -724,28 +686,24 @@ bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 			lastPressed = -1;
 		}
 	}
-
 	return true;
 }
 
 void Inventory::ChangeArrParty(int prevId, int newId)
 {
 	swap(arrCharas.at(prevId), arrCharas.at(newId));
-
 	if (arrCharas.at(newId) != nullptr)
 	{
 		// if newId out of range, chara out of party -> set positionCombat -1
 		if (newId > 3) { arrCharas.at(newId)->positionCombat_I = -1; }
 		else { arrCharas.at(newId)->positionCombat_I = newId; }
 	}
-
 	// if prevId out of range, chara out of party -> set positionCombat -1
 	if (arrCharas.at(prevId) != nullptr)
 	{
 		if (prevId > 3) { arrCharas.at(prevId)->positionCombat_I = -1; }
 		else { arrCharas.at(prevId)->positionCombat_I = prevId; }
 	}
-
 	for (int i = 0; i < app->itemManager->arrParty.size() - 1; i++)
 	{
 		if (arrCharas.at(i) == nullptr && arrCharas.at(i + 1) != nullptr)
@@ -754,7 +712,6 @@ void Inventory::ChangeArrParty(int prevId, int newId)
 			arrCharas.at(i)->positionCombat_I = i;
 		}
 	}
-
 	// Set 
 	for (int i = 0; i < app->itemManager->arrParty.size(); i++)
 	{
@@ -838,7 +795,6 @@ void Inventory::DrawParty(float point, int offset)
 		app->render->DrawTexture(fireIMG, offset + point * (272 - offset) - app->render->camera.x, 97 - app->render->camera.y);
 		break;
 	}
-
 	// up right
 	switch (arrCharas.at(1)->id)
 	{
@@ -855,7 +811,6 @@ void Inventory::DrawParty(float point, int offset)
 		app->render->DrawTexture(fireIMG, offset + point * (449 - offset) - app->render->camera.x, 97 - app->render->camera.y);
 		break;
 	}
-
 	// down left
 	switch (arrCharas.at(2)->id)
 	{
@@ -989,10 +944,8 @@ void Inventory::DrawParty(float point, int offset)
 	{
 		app->render->DrawTexture(charlockedIMG, offset + point * (860 - offset) - app->render->camera.x, 351 - app->render->camera.y);
 	}
-
 	if (lastPressed != -1)
 	{
 		app->render->DrawTexture(selectedIMG, listPartyButtons.At(lastPressed)->data->bounds.x - app->render->camera.x, listPartyButtons.At(lastPressed)->data->bounds.y - app->render->camera.y);
 	}
-
 }

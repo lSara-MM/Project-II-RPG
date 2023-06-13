@@ -14,7 +14,6 @@
 #include "Player.h"
 #include "Character.h"
 #include "Combat.h"
-
 #include <vector>
 using namespace std;
 
@@ -49,13 +48,10 @@ public:
 	int speed = 0;
 	int max = 0;
 	int price = 0;
-
 	int whom = 0;
-
 	int space = 0;
 	int x = 0;
 	int y = 0;
-
 	int ID = 0;
 
 	bool equiped = false;
@@ -70,7 +66,6 @@ public:
 
 	//Forge position
 	int forgePos = 0;
-
 	int page = 0;
 
 	bool printStats = false;
@@ -98,21 +93,16 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
-
 	int LoadItems();
 	void AddQuantity(int id, int quantity);
-
 	void LoadNodes(pugi::xml_node& xml_trees, ItemNode* item);
 	void LoadQuantity(int x, int y, ItemNode* item);
 	void LoadButtons(int x, int y, ItemNode* item);
 	void MinusQuantity(ItemNode* item);
 	void ItemToSell(ItemNode* item);
-
 	void LoadArmorItmes();
-
 	void UseItem(ItemNode* item);
 	void UseItemPostBattle();
-
 	bool LoadItemState();
 	bool LoadArmorState();
 	bool SaveItemState();
@@ -143,11 +133,9 @@ public:
 public:
 
 	ItemNode* tree = new ItemNode;
-
 	SDL_Texture* itemsTexture;
 	SDL_Texture* coinTexture;
 	SDL_Texture* SmallcoinTexture;
-
 	SString itemPath;
 
 	const char* texturePath;
@@ -166,7 +154,6 @@ public:
 
 	vector <ItemNode*> nodeList;
 	vector <ItemNode*> armorItems;
-
 	array<Character*, 4> arrParty;
 	int partySize;
 	vector<Character*> vecPC;
@@ -186,7 +173,6 @@ public:
 	int esquiva = 0;
 	int resistencia = 0;
 	int speed = 0;
-
 	int coins = 0;
 	int page = 0;
 
@@ -201,7 +187,6 @@ private:
 
 	const char* fxunequippath;
 	uint unequipfx;
-
 };
 
 #endif // __ITEMMANAGER_H__

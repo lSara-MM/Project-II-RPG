@@ -17,8 +17,6 @@
 #include "CutScene.h"
 #include "ModuleParticles.h"
 
-#include "InitiAllResourcesFromZip.h"
-
 #include "EntityManager.h"
 #include "ItemManager.h"
 #include "LootManager.h"

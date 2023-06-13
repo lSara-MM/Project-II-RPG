@@ -1,6 +1,5 @@
 #include "HouseOfTerrors.h"
 #include "Scene.h"
-
 #include "App.h"
 #include "Audio.h"
 #include "Input.h"
@@ -8,12 +7,10 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Window.h"
-
 #include "IntroScene.h"
 #include "Combat.h"
 #include "PuzzleManager.h"
 #include "QuestManager.h"
-
 #include "EntityManager.h"
 #include "FadeToBlack.h"
 #include "DialogueSystem.h"
@@ -22,12 +19,9 @@
 #include "Pathfinding.h"
 #include "ItemManager.h"
 #include "LootManager.h"
-
 #include "Menus.h"
-
 #include "Defs.h"
 #include "Log.h"
-
 #include <iostream>
 using namespace std;
 #include <sstream>
@@ -44,19 +38,12 @@ bool HouseOfTerrors::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
-
 	musHauntedPath = config.attribute("musicD1").as_string();
 	mute_B = false;
-
 	sceneNode = config;
-
-	//mouseSpeed = config.attribute("mouseSpeed").as_float();
-
 	texturePathDarkestDungeon = config.attribute("texturePathDark").as_string();
-
 	enterCombatpath = "Assets/Audio/Fx/entrar_sala.wav";
 	combatfx = app->audio->LoadFx(enterCombatpath);
-
 	return ret;
 }
 
@@ -64,7 +51,6 @@ bool HouseOfTerrors::Start()
 {
 	app->input->godMode_B = false;
 	app->physics->collisions = false;
-
 	app->itemManager->Enable();
 	if (app->lootManager->active)
 	{
@@ -73,17 +59,14 @@ bool HouseOfTerrors::Start()
 	app->lootManager->Enable();
 	app->questManager->Enable();
 
-
 	//Load Map
 	app->map->Load(1);
-
 	DarkestDungeon = app->tex->Load(texturePathDarkestDungeon);
 
 	//Music
 	app->audio->PlayMusic(musHauntedPath, 1.0f);
 
 	exit_B = false;
-
 	npcSetID = 1;
 
 	InitEntities();
@@ -99,7 +82,6 @@ bool HouseOfTerrors::Start()
 		player->pbody->body->SetTransform({ PIXEL_TO_METERS(app->input->posX),PIXEL_TO_METERS(app->input->posY) }, 0);
 		app->input->coso = false;
 	}
-
 	return true;
 }
 
@@ -147,7 +129,6 @@ bool HouseOfTerrors::Update(float dt)
 			app->inventory->buttonsChangeStat = true;
 		}
 	}
-
 	if (!app->input->godMode_B)
 	{
 		if (steps_I > 650 + rand() % (751 - 650))
@@ -156,7 +137,6 @@ bool HouseOfTerrors::Update(float dt)
 			//app->SaveGameRequest();
 			app->audio->PlayFx(combatfx);
 			app->combat->PreLoadCombat(name);
-
 			app->fade->FadingToBlack(this, (Module*)app->combat, 45);
 			app->questManager->SaveState();
 			app->puzzleManager->CleanUp();
@@ -168,18 +148,14 @@ bool HouseOfTerrors::Update(float dt)
 	{
 		steps_I = 0;
 	}
-
 	return true;
 }
 
 bool HouseOfTerrors::PostUpdate()
 {
 	bool ret = true;
-
 	app->menus->menuOn = player->lockMovement;
-
 	if (exit_B) return false;
-
 	return ret;
 }
 
@@ -190,7 +166,6 @@ bool HouseOfTerrors::CleanUp()
 
 	app->itemManager->Disable();
 	app->inventory->Disable();
-
 	player = nullptr;
 	app->entityManager->Disable();
 
@@ -202,7 +177,6 @@ bool HouseOfTerrors::CleanUp()
 			app->lootManager->chests[i]->CleanUp();
 		}
 	}
-
 	if (DarkestDungeon != nullptr) 
 	{
 		app->tex->UnLoad(DarkestDungeon);
@@ -211,7 +185,6 @@ bool HouseOfTerrors::CleanUp()
 	app->puzzleManager->Dun1CleanUp();
 	app->puzzleManager->Disable();
 	app->map->CleanUp();
-
 	return true;
 }
 
@@ -220,7 +193,6 @@ void HouseOfTerrors::Debug()
 	// Start again level
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 		app->fade->FadingToBlack(this, (Module*)app->scene, 0);
-
 	// Return Title
 	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
 	{
@@ -230,13 +202,12 @@ void HouseOfTerrors::Debug()
 	// Load / Save - keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		app->SaveGameRequest();
-
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();
 
 	// Show Gui 
-	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
-
+	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) 
+	{
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
 	}
 
@@ -277,6 +248,5 @@ bool HouseOfTerrors::InitEntities()
 	player->Awake();
 	player->position.x = 2564;
 	player->position.y = 1250;
-
 	return true;
 }

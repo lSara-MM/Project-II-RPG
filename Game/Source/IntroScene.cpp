@@ -1,27 +1,21 @@
 #include "IntroScene.h"
-
 #include "App.h"
 #include "Audio.h"
 #include "Input.h"
 #include "Render.h"
 #include "Textures.h"
 #include "Window.h"
-
 #include "Scene.h"
-
 #include "FadeToBlack.h"
 #include "GuiManager.h"
-
 #include "Defs.h"
 #include "Log.h"
-
 #include "EntityManager.h"
 #include "ItemManager.h"
 #include "QuestManager.h"
 #include "PuzzleManager.h"
 #include "DialogueSystem.h"
 #include "Combat.h"
-
 #include <iostream>
 using namespace std;
 #include <sstream>
@@ -49,22 +43,15 @@ bool IntroScene::Awake(pugi::xml_node& config)
 	//Save boton continue
 	pugi::xml_document gameStateFile;
 	pugi::xml_parse_result result = gameStateFile.load_file("save_game.xml");
-
 	IntroLoadNode = gameStateFile.child("save_state").child("introScene");
-
 	LoadState(IntroLoadNode);
-
 	pugi::xml_document* saveDoc = new pugi::xml_document();
 	pugi::xml_node saveStateNode = saveDoc->append_child("save_state");
-
 	IntroSaveNode = saveStateNode.append_child("introScene");
-
 	animationTitle.Set();
 	animationTitle.AddTween(100, 100, BOUNCE_IN_OUT);
-
 	animationBackground.Set();
 	animationBackground.AddTween(100, 80, BACK_OUT);
-
 	return ret;
 }
 
@@ -73,26 +60,21 @@ bool IntroScene::Start()
 {
 	app->audio->PlayMusic(music_intro, 1.0f);
 	texture = app->tex->Load(texturePath);
-	
 	if (app->questManager->active) 
 	{
 		app->questManager->active = false;
 	}
-
 	// buttons
 	for (int i = 0; buttons[i] != "\n"; i++)
 	{
 		listButtons.Add((GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + 1, this, { 25, 350 + 77 * i, 200, 70 }, ButtonType::START, buttons[i], 20,  Font::UI, { 0,0,0,0 }, 1, Easings::DEF, AnimationAxis::RIGHT_X));
 	}
-
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	app->input->playerName->input_entered = false;
 	transition_B = false;
 	exit_B = false;
-
 	app->itemManager->loadParty_B = false;
-
 	return true;
 }
 
@@ -115,13 +97,11 @@ bool IntroScene::Update(float dt)
 		animationTitle.Foward();
 		animationBackground.Foward();
 	}
-
 	animationTitle.Step(1, false);
 	animationBackground.Step(1, false);
 
 	float point = animationBackground.GetPoint();
 	int offset = -1300;
-
 	app->render->DrawTexture(texture, offset + point * (0 - offset)-app->render->camera.x, 0-app->render->camera.y);
 
 	point = animationTitle.GetPoint();
@@ -135,19 +115,15 @@ bool IntroScene::Update(float dt)
 		{
 			i->data->isForward_B = false;
 		}
-
 		app->input->coso = false;
 		app->questManager->resetPuzzlesAndQuests();
 		app->fade->FadingToBlack(this, (Module*)app->scene, 5);
 	}
-		
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		app->guiManager->GUI_debug = !app->guiManager->GUI_debug;
-
 	if (previousGame_B && !app->menus->settings_B)
 	{
 		listButtons.start->next->data->state = GuiControlState::NORMAL;
-		//LOG("Continue");
 	}
 	else if(!previousGame_B)
 	{
@@ -161,15 +137,9 @@ bool IntroScene::Update(float dt)
 bool IntroScene::PostUpdate()
 {
 	bool ret = true;
-
 	if (exit_B) return false;
-
-	//if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	//	ret = false;
-
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		LOG("general %d, %d music, %d fx", app->menus->pSettings->pAudio->general->volume100, app->menus->pSettings->pAudio->music->volume100,app->menus->pSettings->pAudio->fx->volume100);
-
 	if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == BUTTON_DOWN) {
 		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 		{
@@ -177,7 +147,6 @@ bool IntroScene::PostUpdate()
 		}
 		app->menus->pSettings->settings_B = false;
 	}
-
 	return ret;
 }
 
@@ -186,21 +155,18 @@ bool IntroScene::CleanUp()
 {
 	LOG("Freeing IntroScene");
 	app->input->temp = "";
-
 	for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 	{
 		app->guiManager->DestroyGuiControl(i->data);
 	}
 	listButtons.Clear();
 	app->tex->UnLoad(texture);
-
 	return true;
 }
 
 bool IntroScene::LoadState(pugi::xml_node& data, Module* module)
 {
 	previousGame_B = data.child("previousGame").attribute("state_B").as_bool();
-
 	return true;
 }
 
@@ -208,21 +174,15 @@ bool IntroScene::SaveState(pugi::xml_node& data)
 {
 	pugi::xml_node previousGame = data.append_child("previousGame");
 	previousGame.append_attribute("state_B") = true;
-
 	return true;
 }
 
 bool IntroScene::OnGuiMouseHoverEvent(GuiControl* control)
-{
-	
-
-	return true;
-}
+{return true;}
 
 bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Event by %d ", control->id);
-
 	app->audio->PlayFx(control->fxControl);
 
 	switch (control->id)
@@ -236,11 +196,9 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 			app->questManager->resetPuzzlesAndQuests();
 			i->data->isForward_B = false;
 		}
-
 		continueGame_B = false;
 		app->input->coso = false;
 		app->entityManager->tpID = 21;
-
 		app->fade->FadingToBlack(this, (Module*)app->cutScene, 45);
 		break;
 	case 2:
@@ -250,7 +208,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		{
 			i->data->isForward_B = false;
 		}
-
 		app->itemManager->loadParty_B = true;
 		app->input->coso = true;
 		app->dialogueSystem->LoadDialogueState();
@@ -260,7 +217,6 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 	case 3:
 		LOG("Button settings click");
 		app->menus->settings_B = true;
-
 		for (ListItem<GuiButton*>* i = listButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->state = GuiControlState::DISABLED;
@@ -271,6 +227,5 @@ bool IntroScene::OnGuiMouseClickEvent(GuiControl* control)
 		exit_B = true;
 		break;
 	}
-
 	return true;
 }

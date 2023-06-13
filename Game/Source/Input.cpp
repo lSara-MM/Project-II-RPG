@@ -14,14 +14,11 @@
 Input::Input() : Module()
 {
 	name.Create("input");
-
 	keyboard = new KeyState[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(KeyState) * MAX_KEYS);
 	memset(mouseButtons, KEY_IDLE, sizeof(KeyState) * NUM_MOUSE_BUTTONS);
-
 	gamepadState = new ButtonState[MAX_BUTTONS];
 	memset(gamepadState, BUTTON_IDLE, sizeof(ButtonState) * MAX_BUTTONS);
-	
 }
 
 // Destructor
@@ -45,30 +42,20 @@ bool Input::Awake(pugi::xml_node& config)
 
 	SDL_Init(SDL_INIT_GAMECONTROLLER);
 	sdl_controller = SDL_GameControllerOpen(0);
-
 	return ret;
 }
 
 // Called before the first frame
 bool Input::Start()
 {
-	//Enable Unicode
-	//SDL_EnableUNICODE(SDL_ENABLE);
-
 	playerName = new PlayerInput("", MAX_PLAYER_CHARS, false);
-	
 	temp = "";
 	getInput_B = false;
-
 	backSpaceMax = false;
 	coso = true;
-
 	mouseSpeed_F = 0.5f;
-
 	SDL_ShowCursor(false);
-
 	SDL_StopTextInput();
-
 	cursorIdleTex = app->tex->Load("Assets/Textures/cursor_select.png");
 	cursorPressedTex = app->tex->Load("Assets/Textures/cursor_select_tap.png");
 	return true;
@@ -79,7 +66,6 @@ bool Input::PreUpdate()
 {
 	static SDL_Event event;
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
-
 	for(int i = 0; i < MAX_KEYS; ++i)
 	{
 		if(keys[i] == 1)
@@ -97,7 +83,6 @@ bool Input::PreUpdate()
 				keyboard[i] = KEY_IDLE;
 		}
 	}
-
 	for(int i = 0; i < NUM_MOUSE_BUTTONS; ++i)
 	{
 		if(mouseButtons[i] == KEY_DOWN)
@@ -106,7 +91,6 @@ bool Input::PreUpdate()
 		if(mouseButtons[i] == KEY_UP)
 			mouseButtons[i] = KEY_IDLE;
 	}
-
 	while(SDL_PollEvent(&event) != 0)
 	{
 		switch(event.type)
@@ -114,18 +98,14 @@ bool Input::PreUpdate()
 			case SDL_QUIT:
 				windowEvents[WE_QUIT] = true;
 			break;
-
 			case SDL_WINDOWEVENT:
 				switch(event.window.event)
 				{
-					//case SDL_WINDOWEVENT_LEAVE:
 					case SDL_WINDOWEVENT_HIDDEN:
 					case SDL_WINDOWEVENT_MINIMIZED:
 					case SDL_WINDOWEVENT_FOCUS_LOST:
 					windowEvents[WE_HIDE] = true;
 					break;
-
-					//case SDL_WINDOWEVENT_ENTER:
 					case SDL_WINDOWEVENT_SHOWN:
 					case SDL_WINDOWEVENT_FOCUS_GAINED:
 					case SDL_WINDOWEVENT_MAXIMIZED:
@@ -134,32 +114,25 @@ bool Input::PreUpdate()
 					break;
 				}
 			break;
-
 			case SDL_KEYDOWN:
 				if (getInput_B) { HandleInput(event, playerInput_S); }
 				break;
-
 			case SDL_MOUSEBUTTONDOWN:
 				mouseButtons[event.button.button - 1] = KEY_DOWN;
-				//LOG("Mouse button %d down", event.button.button-1);
 			break;
 
 			case SDL_MOUSEBUTTONUP:
 				mouseButtons[event.button.button - 1] = KEY_UP;
-				//LOG("Mouse button %d up", event.button.button-1);
 			break;
-
 			case SDL_MOUSEMOTION:
 				int scale = app->win->GetScale();
 				mouseMotionX = event.motion.xrel / scale;
 				mouseMotionY = event.motion.yrel / scale;
 				mouseX = event.motion.x / scale;
 				mouseY = event.motion.y / scale;
-				//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
 			break;
 		}
 	}
-
 	SDL_GameControllerUpdate();
 
 	controller.A = SDL_GameControllerGetButton(sdl_controller, SDL_CONTROLLER_BUTTON_A);
@@ -196,7 +169,6 @@ bool Input::PreUpdate()
 	buttons[12] = controller.DPAD_DOWN;
 	buttons[13] = controller.DPAD_LEFT;
 	buttons[14] = controller.DPAD_RIGHT;
-
 	for (int i = 0; i < MAX_BUTTONS; ++i)
 	{
 		if (buttons[i] == 1.0)
@@ -221,7 +193,6 @@ bool Input::PreUpdate()
 	controller.j2_y = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTY)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_RIGHTY) : 0.0f;
 	controller.RT = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERRIGHT)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERRIGHT) : 0.0f;
 	controller.LT = fabsf(SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERLEFT)) > DEAD_ZONE ? SDL_GameControllerGetAxis(sdl_controller, SDL_CONTROLLER_AXIS_TRIGGERLEFT) : 0.0f;
-
 	return true;
 }
 
@@ -230,15 +201,11 @@ bool Input::CleanUp()
 {
 	LOG("Quitting SDL event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
-
 	RELEASE(playerName);
 	app->tex->UnLoad(cursorIdleTex);
 	app->tex->UnLoad(cursorPressedTex);
-	//Disable Unicode
-	//SDL_EnableUNICODE(SDL_DISABLE);
 	return true;
 }
-
 
 bool Input::GetWindowEvent(EventWindow ev)
 {
@@ -257,7 +224,6 @@ void Input::GetMouseMotion(int& x, int& y)
 	y = mouseMotionY;
 }
 
-
 bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 {
 	// If the string less than maximum size
@@ -266,7 +232,6 @@ bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 		//Append the character
 		temp += (char)event.key.keysym.sym;
 	}
-
 	// If backspace was pressed and the string isn't blank
 	if ((event.key.keysym.sym == SDLK_BACKSPACE) && !temp.empty())
 	{
@@ -275,7 +240,6 @@ bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 			temp.erase(temp.length() - 1);
 			backSpaceMax = false;
 		}
-
 		// Remove a character from the end
 		if(temp.length() > 0)
 		{
@@ -283,20 +247,16 @@ bool Input::HandleInput(SDL_Event event, PlayerInput* playerInput)
 			backSpaceMax = true;
 		}
 	}
-
 	if (((event.key.keysym.sym == SDLK_RETURN) || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A)) && !temp.empty())
 	{
 		if (temp.length() < playerInput->max_chars) { temp.erase(temp.length() - 1); }
-
 		// TODO Call Save name
 		app->dialogueSystem->SaveDialogueState();	
 		getInput_B = false;
-
 		playerInput->input = temp;
 		playerInput->input_entered = true;
 		return true;
 	}
-
 	// Ignore shift
 	if (event.key.keysym.sym == SDLK_LSHIFT || event.key.keysym.sym == SDLK_RSHIFT)
 	{
@@ -317,7 +277,6 @@ void Input::RenderTempText(SString temp, const char* subs, iPoint pos, int fonts
 {
 	// Substitute("character to substitute", new characters)
 	string aux = subs;
-
 	if (aux.empty())
 	{
 		if (playerName->timer.ReadMSec() < 700)
@@ -342,7 +301,6 @@ void Input::HandleGamepadMouse(int mousePosX, int mousePosY, float mouseSpeed, f
 	if (app->input->controller.j1_x > 0)
 	{
 		mousePosX += mouseSpeed * dt;
-
 		if (app->input->controller.j1_y > 0)
 		{
 			mousePosY += mouseSpeed * dt;
@@ -352,11 +310,9 @@ void Input::HandleGamepadMouse(int mousePosX, int mousePosY, float mouseSpeed, f
 			mousePosY -= mouseSpeed * dt;
 		}
 	}
-
 	else if (app->input->controller.j1_x < 0)
 	{
 		mousePosX -= mouseSpeed * dt;
-
 		if (app->input->controller.j1_y > 0)
 		{
 			mousePosY += mouseSpeed * dt;
@@ -366,11 +322,9 @@ void Input::HandleGamepadMouse(int mousePosX, int mousePosY, float mouseSpeed, f
 			mousePosY -= mouseSpeed * dt;
 		}
 	}
-
 	else if (app->input->controller.j1_y > 0)
 	{
 		mousePosY += mouseSpeed * dt;
-
 		if (app->input->controller.j1_x > 0)
 		{
 			mousePosX += mouseSpeed * dt;
@@ -380,7 +334,6 @@ void Input::HandleGamepadMouse(int mousePosX, int mousePosY, float mouseSpeed, f
 			mousePosX -= mouseSpeed * dt;
 		}
 	}
-
 	else if (app->input->controller.j1_y < 0)
 	{
 		mousePosY -= mouseSpeed * dt;
@@ -394,7 +347,6 @@ void Input::HandleGamepadMouse(int mousePosX, int mousePosY, float mouseSpeed, f
 			mousePosX -= mouseSpeed * dt;
 		}
 	}
-
 	if (mousePosX < app->win->GetWidth() && mousePosX>0)
 	{
 		mouseX = mousePosX;
@@ -403,7 +355,6 @@ void Input::HandleGamepadMouse(int mousePosX, int mousePosY, float mouseSpeed, f
 	{
 		mouseY = mousePosY;
 	}
-
 }
 
 void Input::RenderMouse()

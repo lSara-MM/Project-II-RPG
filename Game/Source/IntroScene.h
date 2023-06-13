@@ -3,13 +3,10 @@
 
 #include "App.h"
 #include "Module.h"
-
 #include "GuiButton.h"
 #include "GuiCheckBox.h"
 #include "GuiSliderBar.h"
-
 #include "Settings.h"
-
 struct SDL_Texture;
 
 class IntroScene : public Module

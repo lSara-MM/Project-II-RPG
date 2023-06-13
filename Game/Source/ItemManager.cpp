@@ -37,19 +37,13 @@ bool ItemManager::Awake(pugi::xml_node& config)
 	twinsPath = config.attribute("twinspath").as_string();
 	firePath = config.attribute("firepath").as_string();
 	forgePath = config.attribute("forgepath").as_string();
-
-
 	itemPath = config.attribute("itempath").as_string();
-
 	fxpotypath = "Assets/Audio/Fx/heal.wav";
 	potyfx = app->audio->LoadFx(fxpotypath);
-
 	fxequippath = "Assets/Audio/Fx/equip.wav";
 	equipfx = app->audio->LoadFx(fxequippath);
-
 	fxunequippath = "Assets/Audio/Fx/unequip.wav";
 	unequipfx = app->audio->LoadFx(fxunequippath);
-
 	return ret;
 }
 
@@ -67,13 +61,10 @@ bool ItemManager::Start()
 	{
 		LoadParty();
 	}
-
 	LoadItems();
-	
 	itemsTexture = app->tex->Load(itemPath.GetString());
 	coinTexture = app->tex->Load(coinPath);
 	SmallcoinTexture = app->tex->Load(smallcoinPath);
-
 	return true;
 }
 
@@ -85,7 +76,6 @@ bool ItemManager::Update(float dt)
 bool ItemManager::PostUpdate()
 {
 	int x, y = 0;
-
 	for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 	{
 		if (app->itemManager->nodeList[i]->printStats && app->itemManager->nodeList[i]->toSell == false)
@@ -105,9 +95,7 @@ bool ItemManager::PostUpdate()
 						y = 200 + app->itemManager->nodeList[i]->y - 32;
 					}
 					else if (app->itemManager->nodeList[i]->toSell)
-					{
-
-					}
+					{}
 					else
 					{
 						x = 800 + (64 * app->itemManager->nodeList[i]->x) + 70;
@@ -120,13 +108,11 @@ bool ItemManager::PostUpdate()
 					y = app->itemManager->nodeList[i]->y - 32;
 				}
 			}
-
 			if (app->itemManager->nodeList[i]->canCraft)
 			{
 				x = (170 + 80 * app->itemManager->nodeList[i]->x) + 70;
 				y = 300 - 32;
 			}
-
 			int w = app->itemManager->nodeList[i]->name.Length() * 3 + 80;
 			app->render->DrawRectangle({x - app->render->camera.x, y - app->render->camera.y, w, 150}, 0, 0, 0, 180);
 
@@ -217,17 +203,14 @@ bool ItemManager::PostUpdate()
 			app->render->TextDraw(s.c_str(), x + 60, y + 121, 10, Font::TEXT, { 255, 246, 240 });
 		}
 	}
-
 	return true;
 }
 
 bool ItemManager::CleanUp()
 {
 	if (!app->combat->active) { app->SaveToFile(); }
-
 	SaveItemState();
 	app->combat->SaveCombat();
-
 	for (size_t i = 0; i < nodeList.size(); i++)
 	{
 		if (nodeList[i]->quantity > 0 && nodeList[i]->button != nullptr)
@@ -242,10 +225,8 @@ bool ItemManager::CleanUp()
 			armorItems[i]->CleanUp();
 		}
 	}
-
 	nodeList.clear();
 	armorItems.clear();
-
 	// party
 	PartyToNull();
 
@@ -259,18 +240,13 @@ bool ItemManager::CleanUp()
 	}
 	vecPC.clear();
 	vecPC.shrink_to_fit();
-
 	app->tex->UnLoad(itemsTexture);
 	itemsTexture = NULL;	
-	
 	app->tex->UnLoad(coinTexture);
 	coinTexture = NULL;	
-	
 	app->tex->UnLoad(SmallcoinTexture);
 	SmallcoinTexture = NULL;
-
 	page = 0;
-
 	return true;
 }
 
@@ -287,14 +263,12 @@ int ItemManager::LoadItems()
 	else
 	{
 		pugi::xml_node pugiNode = items.first_child();
-
 		while (pugiNode != NULL)
 		{
 			LoadNodes(pugiNode, tree);
 			pugiNode = pugiNode.next_sibling("items");
 		}
 	}
-
 	return 1;
 }
 
@@ -432,7 +406,6 @@ void ItemManager::UseItem(ItemNode* item)
 					arrParty.at(i)->dodge += item->dodge;
 					arrParty.at(i)->speed += item->speed;
 					arrParty.at(i)->res += item->res;
-
 					app->audio->PlayFx(equipfx);
 				}
 				else if (item->type == 2 && item->equiped == false)
@@ -446,17 +419,14 @@ void ItemManager::UseItem(ItemNode* item)
 					arrParty.at(i)->dodge -= item->dodge;
 					arrParty.at(i)->speed -= item->speed;
 					arrParty.at(i)->res -= item->res;
-
 					if (item->space > 0)
 					{
 						item->space = 0;
 					}
 					app->audio->PlayFx(unequipfx);
 				}
-
 			}
 		}
-
 		//Temporal
 		if (item->type == 2 && item->equiped == false)
 		{
@@ -466,9 +436,7 @@ void ItemManager::UseItem(ItemNode* item)
 			}
 		}
 	}
-
 	app->inventory->ReOrderInventory();
-
 	if (item->quantity <= 0)
 	{
 		item->CleanUp();
@@ -505,7 +473,6 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 	for (pugi::xml_node pugiNode = xml_trees.child("item"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
 	{
 		ItemNode* node = new ItemNode;
-
 		node->ID = pugiNode.attribute("id").as_int();
 		node->quantity = pugiNode.attribute("quantity").as_int();
 		node->position.x = pugiNode.attribute("x").as_int();
@@ -513,12 +480,10 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 		node->type = pugiNode.attribute("type").as_int();
 		node->name = pugiNode.attribute("name").as_string();
 		node->kind = pugiNode.attribute("kind").as_int();
-
 		if (node->kind == 5 || node->kind == 6)
 		{
 			node->space = pugiNode.attribute("space").as_int();
 		}
-
 		node->hp = pugiNode.attribute("hp").as_int();
 		node->maxhp = pugiNode.attribute("maxHp").as_int();
 		node->attack = pugiNode.attribute("attack").as_int();
@@ -531,12 +496,9 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 		node->speed = pugiNode.attribute("speed").as_int();
 		node->equiped = pugiNode.attribute("equiped").as_bool();
 		node->price = pugiNode.attribute("price").as_int();
-	
 		node->max = pugiNode.attribute("max").as_int();
-
 		nodeList.push_back(node);
 	}
-
 	if (app->iScene->continueGame_B)
 	{
 		LoadItemState();
@@ -601,7 +563,6 @@ void ItemManager::LoadArmorItmes()
 				node->type = nodeList[i]->type;
 				node->name = nodeList[i]->name;
 				node->kind = nodeList[i]->kind;
-
 				node->hp = nodeList[i]->hp;
 				node->maxhp = nodeList[i]->maxhp;
 				node->attack = nodeList[i]->attack;
@@ -612,7 +573,6 @@ void ItemManager::LoadArmorItmes()
 				node->dodge = nodeList[i]->dodge;
 				node->res = nodeList[i]->res;
 				node->speed = nodeList[i]->speed;
-
 				node->max = nodeList[i]->max;
 
 				armorItems.push_back(node);
@@ -639,9 +599,7 @@ void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
 
 				item->x = x;
 				item->y = y;
-
 				app->render->DrawTexture(itemsTexture, (720 + 70 * x) - app->render->camera.x, y - app->render->camera.y, &seccion);
-
 				string c = to_string(item->quantity);
 				app->render->TextDraw(c.c_str(), (720 + 80 * x), y + 30, 20, Font::TEXT, { 0, 0, 0 });
 			}
@@ -652,12 +610,9 @@ void ItemManager::LoadQuantity(int x, int y, ItemNode* item)
 			{
 				item->CleanUp();
 			}
-
 			LoadButtons(x, y, item);
-
 			item->x = x;
 			item->y = y;
-
 			if (item->equiped == false)
 			{
 				app->render->DrawTexture(itemsTexture, (680 + 70 * x) - app->render->camera.x, y - app->render->camera.y, &seccion);
@@ -713,30 +668,23 @@ void ItemManager::LoadSellItems(int x, int y, ItemNode* item)
 	if (item->toSell == false)
 	{
 		SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
-
 		LoadStoreButtons(x, y, item);
-
 		item->x = x;
 		item->y = y;
-
 		app->render->DrawTexture(itemsTexture, (800 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
 		string c = to_string(item->price);
 		app->render->DrawTexture(app->itemManager->SmallcoinTexture, 800 + (69 * x) + 45 - app->render->camera.x, y + 250 - app->render->camera.y);
 		app->render->TextDraw(c.c_str(), 800 + (69 * x), y + 240, 20, Font::TEXT, { 0, 0, 0 });
 	}
-
 }
 void ItemManager::LoadStoreItems(int x, int y, ItemNode* item)
 {
 	if (item->toSell == false)
 	{
 		SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
-
 		LoadStoreButtons(x, y, item);
-
 		item->x = x;
 		item->y = y;
-
 		app->render->DrawTexture(itemsTexture, (200 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
 		string c = to_string(item->price);
 		app->render->DrawTexture(app->itemManager->SmallcoinTexture, 200 + (69 * x) + 45 - app->render->camera.x, y + 250 - app->render->camera.y);
@@ -747,14 +695,10 @@ void ItemManager::LoadStoreItems(int x, int y, ItemNode* item)
 void ItemManager::ItemToSell(ItemNode* item)
 {
 	SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
-
 	LoadStoreButtons(0, 350, item);
-
 	app->render->DrawTexture(itemsTexture, 160 - app->render->camera.x, 200 + 350 - app->render->camera.y, &seccion);
-
 	//Print Name
 	int offsetX = item->name.GetCapacity() * 30 / 2;
-
 	int x = (720 - offsetX) / 2;
 	app->render->TextDraw(item->name.GetString(), x, 500, 30, Font::TEXT, { 255, 246, 240 });
 }
@@ -764,12 +708,9 @@ void ItemManager::LoadForgeItems(int x, int y, ItemNode* item)
 	if (item->craft == false)
 	{
 		SDL_Rect seccion = { 64 * item->position.x, 64 * item->position.y, 64, 64 };
-
 		LoadForgeButtons(x, y, item);
-
 		item->x = x;
 		item->y = y;
-
 		app->render->DrawTexture(itemsTexture, (800 + (69 * x)) - app->render->camera.x, 200 + y - app->render->camera.y, &seccion);
 	}
 	else
@@ -787,7 +728,6 @@ void ItemManager::LoadForgeItems(int x, int y, ItemNode* item)
 			app->render->DrawTexture(itemsTexture, (230) - app->render->camera.x, 220 - app->render->camera.y, &seccion);
 		}
 	}
-
 }
 
 void ItemManager::LoadCraftItems(int ID0, int ID1, bool armor)
@@ -891,7 +831,6 @@ void ItemManager::LoadCraftButtons(int x, ItemNode* item)
 	{
 		buttonBounds = { 180 , 400 , 64, 64 };
 	}
-
 	if (item->button != nullptr)
 	{
 	}
@@ -899,7 +838,6 @@ void ItemManager::LoadCraftButtons(int x, ItemNode* item)
 	{
 		item->Start();
 	}
-
 	if (item->button != nullptr)
 	{
 		item->button->bounds = buttonBounds;
@@ -911,7 +849,6 @@ void ItemManager::LoadCraftButtons(int x, ItemNode* item)
 void ItemManager::LoadForgeButtons(int x, int y, ItemNode* item)
 {
 	SDL_Rect buttonBounds;
-
 	if (item->craft == false)
 	{
 		buttonBounds = { (800 + (69 * x)), 200 + y, 64, 64 };
@@ -925,10 +862,8 @@ void ItemManager::LoadForgeButtons(int x, int y, ItemNode* item)
 		else
 		{
 			buttonBounds = { (230), 220, 64, 64 };
-
 		}
 	}
-
 	if (item->button != nullptr)
 	{
 	}
@@ -936,7 +871,6 @@ void ItemManager::LoadForgeButtons(int x, int y, ItemNode* item)
 	{
 		item->Start();
 	}
-
 	if (item->button != nullptr)
 	{
 		item->button->bounds = buttonBounds;
@@ -961,7 +895,6 @@ void ItemManager::LoadStoreButtons(int x, int y, ItemNode* item)
 	{
 		buttonBounds = { 160, 200 + y, 64, 64 };
 	}
-
 	if (item->button != nullptr)
 	{
 	}
@@ -969,7 +902,6 @@ void ItemManager::LoadStoreButtons(int x, int y, ItemNode* item)
 	{
 		item->Start();
 	}
-
 	if (item->button != nullptr)
 	{
 		item->button->bounds = buttonBounds;
@@ -982,7 +914,6 @@ void ItemManager::LoadButtons(int x, int y, ItemNode* item)
 {
 	SDL_Rect buttonBounds;
 	buttonBounds = { (680 + 71 * x), y, 64, 64 };
-
 	if (app->combat->active)
 	{
 		buttonBounds = { (720 + 70 * x), y, 64, 64 };
@@ -1002,7 +933,6 @@ void ItemManager::LoadButtons(int x, int y, ItemNode* item)
 		{
 			item->Start();
 		}
-
 		if (item->equiped)
 		{
 			switch (item->kind)
@@ -1042,7 +972,6 @@ void ItemManager::LoadButtons(int x, int y, ItemNode* item)
 			}
 		}
 	}
-
 	if (item->button != nullptr)
 	{
 		item->button->bounds = buttonBounds;
@@ -1056,12 +985,10 @@ bool ItemManager::SaveItemState()
 
 	pugi::xml_document* saveDoc = new pugi::xml_document();
 	pugi::xml_node node = saveDoc->append_child("save_state");
-
 	pugi::xml_node items = node.append_child("items");
 	pugi::xml_node item;
 	pugi::xml_node armor;
 	pugi::xml_node coins_ = items.append_child("coins");
-
 	coins_.append_attribute("coin") = coins;
 
 	// save items
@@ -1085,7 +1012,6 @@ bool ItemManager::SaveItemState()
 		armor.append_attribute("equiped") = armorItems[i]->equiped;
 		armor.append_attribute("space") = armorItems[i]->space;
 		armor.append_attribute("whom") = armorItems[i]->whom;
-
 		armor.append_attribute("hp") = armorItems[i]->hp;
 		armor.append_attribute("maxHp") = armorItems[i]->maxhp;
 		armor.append_attribute("attack") = armorItems[i]->attack;
@@ -1097,19 +1023,15 @@ bool ItemManager::SaveItemState()
 		armor.append_attribute("res") = armorItems[i]->res;
 		armor.append_attribute("speed") = armorItems[i]->speed;
 	}
-
 	ret = saveDoc->save_file("save_items.xml");
-
 	return ret;
 }
 
 bool ItemManager::LoadItemState()
 {
 	bool ret = true;
-
 	const char* file = "save_items.xml";
 	items.load_file(file);
-	
 	//Load items
 	for (pugi::xml_node pugiNode = items.first_child().first_child().first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
 	{
@@ -1121,11 +1043,8 @@ bool ItemManager::LoadItemState()
 			}
 		}
 	}
-
 	pugi::xml_node pugiNode = items.first_child().first_child().child("coins");
-
 	coins = pugiNode.attribute("coin").as_int();
-
 	return ret;
 }
 
@@ -1151,7 +1070,6 @@ bool ItemManager::LoadArmorState()
 				armorItems[i]->dodge = pugiNode.attribute("dodge").as_int();
 				armorItems[i]->res = pugiNode.attribute("res").as_int();
 				armorItems[i]->speed = pugiNode.attribute("speed").as_int();
-
 				if (armorItems[i]->equiped)
 				{
 					UseItem(armorItems[i]);
@@ -1159,7 +1077,6 @@ bool ItemManager::LoadArmorState()
 			}
 		}
 	}
-
 	return true;
 }
 
@@ -1188,11 +1105,9 @@ void ItemManager::ChangeParty(int prevId, int newId)
 {
 	arrParty.at(prevId)->positionCombat_I = newId;
 	arrParty.at(newId)->positionCombat_I = prevId;
-
 	Character* temp = arrParty.at(prevId);
 	arrParty.at(prevId) = arrParty.at(newId);
 	arrParty.at(newId) = temp;
-
 	temp = nullptr;
 }
 
@@ -1228,7 +1143,6 @@ bool ItemManager::LoadParty()
 	else
 	{
 		pugi::xml_node& data = gameStateFile.child("save_state").child(app->entityManager->name.GetString());
-
 		int i = 0;
 		for (pugi::xml_attribute attr = data.child("party").attribute("id"); attr; attr = attr.next_attribute())
 		{
@@ -1237,9 +1151,7 @@ bool ItemManager::LoadParty()
 			partySize = ++i;
 		}
 	}
-
 	app->combat->LoadCombat();
-
 	return true;
 }
 
@@ -1247,9 +1159,7 @@ void ItemManager::SetParty()
 {
 	for (int i = 0; i < vecPC.size(); i++)
 	{
-		// TO DO: change commented per uncommented
 		if (i == arrParty.size() - 1) break;
-		//if (i == arrParty.size()) break;
 		arrParty.at(i) = vecPC.at(i);
 		arrParty.at(i)->positionCombat_I = i;
 		partySize = i;
