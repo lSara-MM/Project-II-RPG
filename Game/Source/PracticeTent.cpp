@@ -50,7 +50,6 @@ bool PracticeTent::Awake(pugi::xml_node& config)
 	posDummy.y = config.attribute("yCollider").as_int();
 
 	mute_B = false;
-	//mouseSpeed = config.attribute("mouseSpeed").as_float();
 	sceneNode = config;
 
 	return ret;
@@ -93,7 +92,6 @@ bool PracticeTent::Start()
 		player->pbody->body->SetTransform({ PIXEL_TO_METERS(app->input->posX),PIXEL_TO_METERS(app->input->posY) }, 0);
 		app->input->coso = false;
 	}
-
 	return true;
 }
 
@@ -165,7 +163,6 @@ bool PracticeTent::Update(float dt)
 			app->inventory->buttonsChangeStat = true;
 		}
 	}
-
 	return true;
 }
 
@@ -211,7 +208,6 @@ bool PracticeTent::CleanUp()
 	player = nullptr;
 
 	app->map->CleanUp();
-
 	return true;
 }
 
@@ -277,6 +273,5 @@ bool PracticeTent::InitEntities()
 	player->Awake();
 	player->position.x = 105;
 	player->position.y = 341;
-
 	return true;
 }
