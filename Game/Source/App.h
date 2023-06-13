@@ -51,9 +51,6 @@ class CutScene;
 class ModuleParticles;
 class Menus;
 
-//class InitAllResourcesFromZip;
-//class AssetsManager;
-
 class App
 {
 public:
@@ -151,9 +148,6 @@ public:
 	ModuleParticles* moduleparticles;
 
 	Menus* menus;
-	
-	/*InitAllResourcesFromZip* initiAllResourcesFromZip;
-	AssetsManager* assetsManager;*/
 
 	// Time control
 	uint frames;

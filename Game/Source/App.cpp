@@ -18,7 +18,6 @@
 #include "ModuleParticles.h"
 
 #include "InitiAllResourcesFromZip.h"
-#include "AssetsManager.h"
 
 #include "EntityManager.h"
 #include "ItemManager.h"
@@ -84,8 +83,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	moduleparticles = new ModuleParticles();
 	menus = new Menus();
 
-	/*initiAllResourcesFromZip = new InitAllResourcesFromZip();
-	assetsManager = new AssetsManager();*/
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -261,6 +258,7 @@ void App::PrepareUpdate()
 
 void App::FinishUpdate()
 {
+	// Load
 	OPTICK_EVENT();
 	if (loadGameRequested == true) LoadFromFile();
 	if (saveGameRequested == true) SaveToFile();
