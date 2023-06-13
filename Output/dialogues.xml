@@ -466,7 +466,7 @@
 	</dialogueTree>
 
 	<dialogueTree ID="31">
-		<node id="0" name="PINKY" text="Invadan Polonia. ">
+		<node id="0" name="PINKY" text="Eres un grande %%x! ">
 			<choice id="0" option="??? " nextNode="-1" eventReturn="0"/>
 		</node>
 		<node id="-1" text ="End of conversation -F1- to talk again"></node>
