@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Textures.h"
+#include "IntroScene.h"
 #include "Window.h"
 
 
@@ -33,7 +34,14 @@ bool LootManager::Awake(pugi::xml_node& config)
 		}
 	}
 
-	LoadState();
+	if (app->iScene->continueGame_B)
+	{
+		LoadState();
+	}
+	else
+	{
+		SaveState(config);
+	}
 
 	return ret;
 }
