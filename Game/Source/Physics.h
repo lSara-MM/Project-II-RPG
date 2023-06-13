@@ -53,7 +53,6 @@ enum class ColliderType {
 	NPC,
 	LOOT,
 	UNKNOWN
-	// ..
 };
 
 // Small class to return to other modules to track position and rotation of physics bodies

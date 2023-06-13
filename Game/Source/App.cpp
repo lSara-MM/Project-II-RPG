@@ -4,7 +4,6 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Window.h"
-
 #include "IntroScene.h"
 #include "HouseOfTerrors.h"
 #include "BeastTent.h"
@@ -16,7 +15,6 @@
 #include "QuestManager.h"
 #include "CutScene.h"
 #include "ModuleParticles.h"
-
 #include "EntityManager.h"
 #include "ItemManager.h"
 #include "LootManager.h"
@@ -30,12 +28,9 @@
 #include "Map.h"
 #include "Pathfinding.h"
 #include "Physics.h"
-
 #include "Menus.h"
-
 #include "Defs.h"
 #include "Log.h"
-
 #include <iostream>
 #include <sstream>
 
@@ -50,13 +45,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render();
 	tex = new Textures();
 	audio = new Audio();
-	
 	physics = new Physics();
 	map = new Map();
 	pathfinding = new PathFinding();
-
 	lootManager = new LootManager();
-
 	entityManager = new EntityManager();
 	itemManager = new ItemManager();
 	combat = new Combat();
@@ -65,14 +57,12 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	inventory = new Inventory();
 	store = new Store();
 	forge = new Forge();
-	
 	lScene = new LogoScene();
 	iScene = new IntroScene();
 	scene = new Scene();
 	hTerrors = new HouseOfTerrors();
 	BeastT = new BeastTent();
 	practiceTent = new PracticeTent();
-
 	fade = new FadeToBlack();
 	sceneWin_Lose = new SceneWin_Lose();
 	puzzleManager = new PuzzleManager();
@@ -80,18 +70,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	cutScene = new CutScene();
 	moduleparticles = new ModuleParticles();
 	menus = new Menus();
-
-
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(input);
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
-
 	AddModule(physics);
 	AddModule(pathfinding);
-
 	AddModule(lScene);
 	AddModule(iScene);
 	AddModule(scene);
@@ -99,7 +85,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(BeastT);
 	AddModule(practiceTent);
 	AddModule(combat);
-
 	AddModule(map);
 	AddModule(lootManager);
 	AddModule(puzzleManager);
@@ -114,15 +99,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(guiManager);
 	AddModule(itemManager);
 	AddModule(sceneWin_Lose);
-
 	AddModule(menus);
-	
-	//AddModule(initiAllResourcesFromZip);
-	//AddModule(assetsManager);
-
 	AddModule(fade);
-
-	// Render last to swap buffer
 	AddModule(render);
 }
 
@@ -137,7 +115,6 @@ App::~App()
 		RELEASE(item->data);
 		item = item->prev;
 	}
-
 	modules.Clear();
 }
 
@@ -152,9 +129,7 @@ bool App::Awake()
 {
 	// Measure the amount of ms that takes to execute the Awake
 	timer = Timer();
-
 	bool ret = false;
-
 	ret = LoadConfig();
 
 	if (ret == true)
@@ -174,7 +149,6 @@ bool App::Awake()
 			item = item->next;
 		}
 	}
-
 	LOG("---------------- Time Awake: %f/n", timer.ReadMSec());
 	return ret;
 }
@@ -288,16 +262,11 @@ void App::FinishUpdate()
 	if (maxFrameDuration > 0 && delay > 0 && app->scene->frcap_B)
 	{
 		SDL_Delay(delay);
-		//LOG("We waited for %f milliseconds and the real delay is % f", delay, delayTimer.ReadMs());
 		dt = maxFrameDuration;
 	}
-	else
-	{
-		//LOG("No wait");
-	}
+	else{}
 
 	//window info
-	
 	if (app->input->godMode_B)
 	{
 		static char title[256];
@@ -311,7 +280,6 @@ void App::FinishUpdate()
 			sprintf_s(title, 256, "Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u Vsync: Off",
 				averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
 		}
-
 		app->win->SetTitle(title);
 	}
 	else
@@ -330,18 +298,14 @@ bool App::PreUpdate()
 	ListItem<Module*>* item;
 	item = modules.start;
 	Module* pModule = NULL;
-
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
-
 		if (pModule->active == false) {
 			continue;
 		}
-
 		ret = item->data->PreUpdate();
 	}
-
 	return ret;
 }
 
@@ -353,18 +317,14 @@ bool App::DoUpdate()
 	ListItem<Module*>* item;
 	item = modules.start;
 	Module* pModule = NULL;
-
 	for (item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
-
 		if (pModule->active == false) {
 			continue;
 		}
-
 		ret = item->data->Update(dt);
 	}
-
 	return ret;
 }
 
@@ -442,24 +402,20 @@ const char* App::GetOrganization() const
 
 void App::LoadGameRequest()
 {
-	// NOTE: We should check if SAVE_STATE_FILENAME actually exist
 	loadGameRequested = true;
 }
 
 // ---------------------------------------
 void App::SaveGameRequest() 
 {
-	// NOTE: We should check if SAVE_STATE_FILENAME actually exist and... should we overwriten
 	saveGameRequested = true;
 }
 
 bool App::LoadFromFile(Module* module)
 {
 	bool ret = true;
-
 	pugi::xml_document gameStateFile;
 	pugi::xml_parse_result result = gameStateFile.load_file("save_game.xml");
-
 	if (result == NULL)
 	{
 		LOG("Could not load xml file savegame.xml. pugi error: %s", result.description());
@@ -519,9 +475,6 @@ void App::DisableAtStart()
 	puzzleManager->active = false;
 	questManager->active = false;
 	cutScene->active = false;
-	//Este debe estar siempre activo para poder cargar correctamente los path en el momento que se necesiten
-	//initiAllResourcesFromZip->active = true;
-	//assetsManager->active = true;
 	inventory->active = false;
 	store->active = false;
 	itemManager->active = false;

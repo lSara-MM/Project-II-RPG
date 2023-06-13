@@ -19,10 +19,8 @@ PathFinding::~PathFinding()
 bool PathFinding::CleanUp()
 {
 	LOG("Freeing pathfinding library");
-
 	lastPath.Clear();
 	RELEASE_ARRAY(map);
-
 	return true;
 }
 
@@ -31,7 +29,6 @@ void PathFinding::SetMap(uint width, uint height, uchar* data)
 {
 	this->width = width;
 	this->height = height;
-
 	RELEASE_ARRAY(map);
 	map = new uchar[width*height];
 	memcpy(map, data, width*height);
@@ -195,7 +192,6 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 			ListItem<PathNode>* node = closed.list.Add(lowest->data);
 			open.list.Del(lowest);
 
-
 			if (node->data.pos == destination)
 			{
 				lastPath.Clear();
@@ -216,7 +212,6 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				break;
 			}
 
-		
 			PathList adjacent;
 			node->data.FindWalkableAdjacents(adjacent);
 
@@ -248,6 +243,5 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 			++iterations;
 		}
 	}
-
 	return ret;
 }

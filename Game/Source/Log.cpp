@@ -1,5 +1,4 @@
 #include "Log.h"
-
 #include <windows.h>
 #include <stdio.h>
 

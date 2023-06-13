@@ -2,13 +2,9 @@
 #define __MAP_H__
 
 #include "Module.h"
-
 #include "EntityManager.h"
-
 #include "List.h"
 #include "Point.h"
-
-
 #include "PugiXml\src\pugixml.hpp"
 
 // Ignore Terrain Types and Tile Types for now, but we want the image!
@@ -22,9 +18,7 @@ struct TileSet
 	int	tileHeight;
 	int columns;
 	int tilecount;
-
 	SDL_Texture* texture;
-
 	SDL_Rect GetTileRect(int gid) const;
 };
 
@@ -38,7 +32,7 @@ enum MapTypes
 	MAPTYPE_STAGGERED
 };
 
-// L06: DONE 5: Create a generic structure to hold properties
+//Create a generic structure to hold properties
 struct Properties
 {
 	struct Property
@@ -49,27 +43,21 @@ struct Properties
 
 	~Properties()
 	{
-		//...
 		ListItem<Property*>* item;
 		item = list.start;
-
 		while (item != NULL)
 		{
 			RELEASE(item->data);
 			item = item->next;
 		}
-
 		list.Clear();
 	}
 
-	// L06: DONE 7: Method to ask for the value of a custom property
+	//Method to ask for the value of a custom property
 	Property* GetProperty(const char* name);
-
 	List<Property*> list;
 };
-
-
-// L05: DONE 1: Create a struct for the map layer
+//Create a struct for the map layer
 struct MapLayer
 {
 	SString	name;
@@ -77,11 +65,9 @@ struct MapLayer
 	int width;
 	int height;
 	uint* data;
-
-	// L06: DONE: Store custom properties
+	//Store custom properties
 	Properties properties;
 
-	
 	MapLayer() : data(NULL)
 	{}
 
@@ -90,14 +76,14 @@ struct MapLayer
 		RELEASE(data);
 	}
 
-	// L05: DONE 6: Short function to get the gid value of x,y
+	//Short function to get the gid value of x,y
 	inline uint Get(int x, int y) const
 	{
 		return data[(y * width) + x];
 	}
 };
 
-// Create a struct needed to hold the information to Map node
+//Create a struct needed to hold the information to Map node
 struct MapData
 {
 	int width;
@@ -106,7 +92,6 @@ struct MapData
 	int	tileHeight;
 	List<TileSet*> tilesets;
 	MapTypes type;
-
 	List<MapLayer*> maplayers;
 };
 
