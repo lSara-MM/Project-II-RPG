@@ -14,9 +14,11 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 
 * 2 Diferent Dungeons to explore 
 
-* More than 8  different enemies
+* More than 8 different enemies
 
 * 4 different team members
+
+* Amacing Cinematics
 
 * Wide variety of objects and equipment with multiple benefits
 
@@ -28,12 +30,19 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 
 * Multiple Buffs and Debuffs
 
+* Remarkable variety of NPCs
+
+* Minimap
+
+* Animated UI
+
+* Original Particles
+
 ## Game Preview
 
 Would you sign the contract to start this great adventure?
 
 ![Screenshoot 1](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/51c45c75-7917-4a2c-91b5-b92f70e3f668)
-
 
 Explore the dungeons and get items and equipment
 
@@ -51,116 +60,135 @@ And don't forget to collect information before facing a dungeon ;D
 
 ![Screenshoot 6](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/15ee7282-16a9-4746-95b0-904f3fe38358)
 
-## How to play
+## Controls
+
 ### Player
 
-* **Player walk left** -> A / Right arrow / Left Joystick Gamepad
+* Player walk left -> A / Right arrow / Left Joystick Gamepad
 
-* **Player walk right** -> D / Left arrow / Left Joystick Gamepad
+* Player walk right -> D / Left arrow / Left Joystick Gamepad
 
-* **Player walk up** -> W / Up arrow / Left Joystick Gamepad
+* Player walk up -> W / Up arrow / Left Joystick Gamepad
 
-* **Player walk down** -> S / Down arrow / Left Joystick Gamepad
+* Player walk down -> S / Down arrow / Left Joystick Gamepad
 
-* **Player run** -> Left shift / B button gamepad
+* Player run -> Left shift / B button gamepad
 
-* **Interact**  -> E / A button gamepad
+* Interact  -> E / A button gamepad
 
-* **Inventory** -> I / Y button gamepad
+### Menus (not in combat)
 
-* **Minimap** -> M / X button gamepad
+* Accept -> Enter/ A button gamepad
 
-* **Party menu** -> P / SELECT gamepad
+* Exit menu -> B button gamepad
 
-* **Inventory** -> I / Y button gamepad
+* Party menu -> P / SELECT gamepad
 
-* **Pause menu** -> ESC / START gamepad
+* Inventory -> I / Y button gamepad 
 
-### Menus
+* Pause menu -> ESC / START gamepad
 
-* **Accept** -> Enter **/ A button gamepad
+* Minimap -> M / X button gamepad
 
-* **Exit menu** -> B button gamepad
+### Usable Settings
 
-* **Language and text speed can not be modified**
+* Text speed
+* Return to Title
+* Exit
+
+* Fullscreen
+* Vsync
+
+* Audio
 
 ### Combat
 
-* **Go to Play Scene** -> F1 (only God Mode)
+* Go to Play Scene -> F1 (only God Mode)
 
-* **Insta win** -> F3 (only God Mode)
+* Insta win -> F3 (only God Mode)
 
-* **Insta lose** -> F4 (only God Mode)
+* Insta lose-> F4 (only God Mode)
 
-* **Show GUI** -> F7
+* Show GUI -> F7
 
-* **God Mode** -> F10 
+* God Mode -> F10 
 
-* **Kill First Ally** -> 1 (only God Mode)
+* Kill First Ally -> 1 (only God Mode)
 
-* **Kill First Enemy** -> 2 (only God Mode)
+* Kill First Enemy -> 2 (only God Mode)
 
-* **Next turn** -> 3 (only God Mode)
+* Next turn -> 3 (only God Mode)
 
-* **Enemies button handle** -> 4 (only God Mode)
+* Enemies button handle -> 4 (only God Mode)
 
-* **Allies button handle** -> 5 (only God Mode)
+* Allies button handle -> 5 (only God Mode)
 
-* **Fully heal party** -> 6 (only God Mode)
+* Fully heal party -> 6 (only God Mode)
 
 ### Debug
 
 #### Logo scene
 
-* **Go to Play Scene**  -> F1
+* Go to Menu Scene -> Return / A button Gamepad
 
-* **Go to Menu Scene** -> Return / A button Gamepad
+#### Intro scene
 
-#### Menu scene
+* Show GUI -> F2
 
-* **Go to Play Scene**  -> F1
+* Cutscene -> space / A button Gamepad
 
-* **Show GUI** -> F2
-
-* **Mute sound** -> M key
+* Enter name -> enter
 
 #### Play scene
 
-* **Restart** -> F3
+* Restart -> F3
 
-* **Return to Menu scene** -> F4
+* Return to Menu scene -> F4
 
-* **Save game** -> F5
+* Save game -> F5
 
-* **Load game** -> F6
+* Load game -> F6
 
-* **Show GUI** -> F7
+* Show GUI -> F7
 
-* **Show collisions** -> F8
+* Show collisions -> F8
 
-* **Enable/disable FRCAP** -> F9
+* Enable / disable FRCAP -> F9
 
-* **God Mode** -> F10
+* God Mode -> F10
 
-* **Pause** -> ESC / START button Gamepad
+* Pause -> ESC / START button Gamepad
 
-* **Exit Pause** -> Return / B button Gamepad
+* Exit Pause -> Return / B button Gamepad
 
-* **Enter combat** -> C key / X button Gamepad
+* Start Combat -> X (only God Mode)
 
-* **Add one item of each type** -> 1 
+* Go to House of Terrors -> H (only God Mode)
 
-* **Start Combat** -> X
+* Go to Beast Tent -> B (only God Mode)
 
 ### House of Terrors
 
-* **Code puzzle** = 344
+* Code puzzle = 344
 
-* **Add Fire Eater to party** -> P + E
+* Add boss dead -> 1 (only God Mode)
 
-* **Add boss dead** -> B
+* Add Fire Eater to party -> 2 (only God Mode)
+
+* No random combat (only God Mode)
+
+* Start Combat -> X (only God Mode)
+
+### Beast Tent
+
+* No random combat (only God Mode)
+
+* Start Combat -> X (only God Mode)
+
+* Remove barrels -> 2 (only God Mode)
 
 ## Team Members
+![Captura de pantalla 2023-06-13 211810](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/275ff783-11a1-44d4-8669-0a5f40b29748)
 
 **[Andreu Nosàs Soler](https://github.com/AndyCubico)**
 Team Lead / Code / Design / UI
@@ -169,13 +197,13 @@ Team Lead / Code / Design / UI
 Produce Owner / Code / Art
 
 **[Éric Segovia Baena](https://github.com/Icefenix7198)**
-Code / Design / UI
+Code / Design
 
 **[Sara Qiao Martínez Mauri](https://github.com/lSara-MM)**
 Code / Design / UI
 
 **[Alberto Hidalgo García](https://github.com/TheimerTR)**
-Code / UI
+Code
 
 **[Andreu Miro Sabater](https://github.com/AndreuMiroSabate)**
 Code / Sound / Design 
@@ -184,10 +212,10 @@ Code / Sound / Design
 Art / UI / Design
 
 **[Jose Antonio Tur](https://github.com/flishflash)**
-Code / Design / Art / UI
+Code / Design / Art / Narrative
 
 **[Guillem Pol Aixut Anderiz](https://github.com/GuillemAixut)**
-Art / UI
+UI
 
 
 

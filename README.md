@@ -42,6 +42,17 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Minimap -> M / X button gamepad
 
+### Usable Settings
+
+* Text speed
+* Return to Title
+* Exit
+
+* Fullscreen
+* Vsync
+
+* Audio
+
 ### Combat
 
 * Go to Play Scene -> F1 (only God Mode)
@@ -133,13 +144,12 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 * [Sonia Cristina Ojeda Lanz](https://github.com/SoniaOL) 
 * [Sara Qiao Martínez Mauri](https://github.com/lSara-MM)
 * [Andreu Nosàs Soler](https://github.com/AndyCubico)
+* [Jose Antonio Tur](https://github.com/flishflash)
 * [Alberto Hidalgo García](https://github.com/TheimerTR)
 * [Éric Segovia Baena](https://github.com/Icefenix7198)
 * [Andreu Miro Sabater](https://github.com/AndreuMiroSabate)
 * [Pau Garriga Brotons](https://github.com/DonnoNonno)
 * [Guillem Pol Aixut](https://github.com/GuillemAixut)
-* [Jose Antonio Tur](https://github.com/flishflash)
-
 
 ## License
 
