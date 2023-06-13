@@ -67,7 +67,7 @@ bool Menus::Update(float dt)
 	}
 
 	// Pause menu
-	if (pause_B == false && !app->cutScene->active && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
+	if (pause_B == false && !app->cutScene->active && !app->combat->active && (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_START) == BUTTON_DOWN))
 	{
 		pause_B = true;
 		app->audio->PlayFx(pausefx);
