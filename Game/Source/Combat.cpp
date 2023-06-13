@@ -1057,7 +1057,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 						break;
 					}
 				}
-				if(jumpList)
+				if (jumpList)
 				{
 					jumpList = false;
 					break;
@@ -1181,7 +1181,7 @@ bool Combat::OnGuiMouseHoverEvent(GuiControl* control)
 
 				for (int j = i; j < cha->listStatusEffects.Count(); j++)
 				{
-					if(cha->listStatusEffects.At(i)->data->type == cha->listStatusEffects.At(j)->data->type)
+					if (cha->listStatusEffects.At(i)->data->type == cha->listStatusEffects.At(j)->data->type)
 					{
 						if (minTurns> cha->listStatusEffects.At(j)->data->turnsLeft)
 						{
