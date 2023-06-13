@@ -101,7 +101,6 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\AssetsManager.cpp" />
     <ClCompile Include="Source\BeastTent.cpp" />
     <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\Combat.cpp">
@@ -112,7 +111,6 @@
     <ClCompile Include="Source\DialogueTree.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Forge.cpp" />
-    <ClCompile Include="Source\InitiAllResourcesFromZip.cpp" />
     <ClCompile Include="Source\LootManager.cpp" />
     <ClCompile Include="Source\Menus.cpp" />
     <ClCompile Include="Source\ModuleParticles.cpp" />
@@ -151,7 +149,6 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Animation.h" />
-    <ClInclude Include="Source\AssetsManager.h" />
     <ClInclude Include="Source\BeastTent.h" />
     <ClInclude Include="Source\Character.h" />
     <ClInclude Include="Source\Combat.h">
@@ -170,7 +167,6 @@
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\GuiSliderBar.h" />
     <ClInclude Include="Source\HouseOfTerrors.h" />
-    <ClInclude Include="Source\InitiAllResourcesFromZip.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\IntroScene.h" />
     <ClInclude Include="Source\Inventory.h" />

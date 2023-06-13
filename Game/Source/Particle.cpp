@@ -10,14 +10,10 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) : anim(p.anim), position(p.position), speed(p.speed),
 										frameCount(p.frameCount), lifetime(p.lifetime)
-{
-
-}
+{}
 
 Particle::~Particle()
-{
-
-}
+{}
 
 bool Particle::Update(float dt)
 {
@@ -48,9 +44,6 @@ bool Particle::Update(float dt)
 		// Update the position in the screen
 		position.x += speed.x;
 		position.y += speed.y;
-
-		/*if (collider != nullptr)
-			collider->SetPos(position.x, position.y);*/
 	}
 
 	return ret;
@@ -59,6 +52,4 @@ bool Particle::Update(float dt)
 void Particle::SetToDelete()
 {
 	pendingToDelete = true;
-	/*if (collider != nullptr)
-		collider->pendingToDelete = true;*/
 }

@@ -1,15 +1,7 @@
 #include "App.h"
-
 #include "Defs.h"
 #include "Log.h"
-
-// NOTE: SDL redefines main function
 #include "SDL/include/SDL.h"
-
-// NOTE: Library linkage is configured in Linker Options
-//#pragma comment(lib, "../Game/Source/External/SDL/libx86/SDL2.lib")
-//#pragma comment(lib, "../Game/Source/External/SDL/libx86/SDL2main.lib")
-
 #include "External/Optick/include/optick.h"
 #include <stdlib.h>
 
@@ -29,10 +21,8 @@ App* app = NULL;
 int main(int argc, char* args[])
 {
 	LOG("Engine starting ...");
-
 	MainState state = CREATE;
 	int result = EXIT_FAILURE;
-
 	while (state != EXIT)
 	{
 		switch (state)
@@ -47,7 +37,6 @@ int main(int argc, char* args[])
 				state = AWAKE;
 			else
 				state = FAIL;
-
 			break;
 
 			// Awake all modules -----------------------------------------------
@@ -98,10 +87,8 @@ int main(int argc, char* args[])
 			}
 			else
 				state = FAIL;
-
 			delete app;
 			break;
-
 			// Exit with errors and shame ---------------------------------------
 		case FAIL:
 			LOG("Exiting with errors :(");
@@ -110,9 +97,7 @@ int main(int argc, char* args[])
 			break;
 		}
 	}
-
 	LOG("... Bye! :)\n");
-
 	// Dump memory leaks
 	delete app;
 	return result;

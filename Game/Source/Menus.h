@@ -2,13 +2,10 @@
 #define __MENUS_H__
 
 #include "App.h"
-
 #include "Module.h"
-
 #include "GuiButton.h"
 #include "GuiCheckBox.h"
 #include "GuiSliderBar.h"
-
 #include "Settings.h"
 #include "Tweening.h"
 

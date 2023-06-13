@@ -13,18 +13,14 @@ LootManager::LootManager() : Module()
 }
 
 LootManager::~LootManager()
-{
-}
+{}
 
 bool LootManager::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Items");
 	bool ret = true;
-
 	pugi::xml_node& data = config;
-
 	chests.clear();
-
 	for (pugi::xml_node pugiNode = config.child("chest"); pugiNode != NULL; pugiNode = pugiNode.next_sibling("chest"))
 	{
 		if (pugiNode.attribute("used").as_bool() == false)
@@ -33,7 +29,6 @@ bool LootManager::Awake(pugi::xml_node& config)
 			chests.push_back(chest);
 		}
 	}
-
 	if (app->iScene->continueGame_B)
 	{
 		LoadState();
@@ -42,7 +37,6 @@ bool LootManager::Awake(pugi::xml_node& config)
 	{
 		SaveState(config);
 	}
-
 	return ret;
 }
 
@@ -55,7 +49,6 @@ bool LootManager::Start()
 			chests[i]->Start();
 		}
 	}
-
 	return true;
 }
 
@@ -66,14 +59,12 @@ bool LootManager::Update(float dt)
 		if ((chests[i]->used == false && app->BeastT->active && chests[i]->dungeon == ChestDungeon::BEASTS) || (chests[i]->used == false && app->hTerrors->active && chests[i]->dungeon == ChestDungeon::TERRORS))
 		{
 			chests[i]->Update(dt);
-
 			if ((chests[i]->dungeon == ChestDungeon::BEASTS && app->BeastT->active == false) || (chests[i]->dungeon == ChestDungeon::TERRORS && app->hTerrors->active == false))
 			{
 				chests[i]->CleanUp();
 			}
 		}
 	}
-
 	return true;
 }
 
@@ -87,21 +78,18 @@ bool LootManager::CleanUpDos()
 bool LootManager::SaveState(pugi::xml_node& data)
 {
 	pugi::xml_node chest;
-
 	// save items
 	for (int i = 0; i < chests.size(); i++)
 	{
 		chest = data.append_child("chest");
 		chest.append_attribute("used") = chests[i]->used;
 	}
-
 	return true;
 }
 
 bool LootManager::LoadState()
 {
 	bool ret = true;
-
 	pugi::xml_document gameStateFile;
 	pugi::xml_parse_result result = gameStateFile.load_file("save_game.xml");
 
@@ -113,7 +101,6 @@ bool LootManager::LoadState()
 	else
 	{
 		pugi::xml_node xml_trees = gameStateFile.first_child().child("lootManager");
-
 		int i = 0;
 		for (pugi::xml_node pugiNode = xml_trees.first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("chest"))
 		{
@@ -121,6 +108,5 @@ bool LootManager::LoadState()
 			i++;
 		}
 	}
-
 	return true;
 }

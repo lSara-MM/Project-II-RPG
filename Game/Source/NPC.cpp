@@ -7,28 +7,21 @@
 #include "Render.h"
 #include "Window.h"
 #include "Textures.h"
-
 #include "Scene.h"
-
 #include "FadeToBlack.h"
 #include "EntityManager.h"
 #include "DialogueSystem.h"
 #include "Map.h"
-
 #include "Log.h"
 #include "Point.h"
-
 #include <stdio.h>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
 Npc::Npc() : Entity(EntityType::NPC)
 {
-	//name.Create("Npc");
-
 	idleAnim.speed = 0.07f;
 	idleAnim.loop = true;
-
 	active = true;
 }
 
@@ -37,15 +30,12 @@ Npc::~Npc() {
 }
 
 bool Npc::Awake() {
-
 	name = parameters.attribute("name").as_string();
-
 	if (strcmp(name.GetString(), "PINKY") == 0) 
 	{ 
 		isAnimated = true;
 		pugi::xml_attribute from = parameters.first_attribute().next_attribute();
 		pugi::xml_attribute to = from.next_attribute();
-
 		for (int i = from.as_int(); i <= to.as_int(); i++)
 		{
 			dialoguesID.push_back(i);
@@ -79,20 +69,15 @@ bool Npc::Awake() {
 	{
 		idleAnim.PushBack({ 0, 0, 96, 96 });
 	}
-
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-
 	width = parameters.attribute("width").as_int();
 	height = parameters.attribute("height").as_int();
-
 	texturePath = parameters.attribute("texturepath").as_string();
-
 	return true;
 }
 
 bool Npc::Start() {
-	//srand(time(NULL));
 
 	texture = app->tex->Load(texturePath);
 	currentAnimation = &idleAnim;
@@ -109,7 +94,6 @@ bool Npc::Start() {
 
 	pbody->body->SetGravityScale(0);
 	pSensor->body->SetGravityScale(0);
-
 	return true;
 }
 
@@ -123,7 +107,6 @@ bool Npc::Update(float dt)
 	{
 		dtP = dt / 1000;
 	}
-
 	SDL_Rect rect = { 0, 0, 96, 96 };
 
 	if (isAnimated)
@@ -141,13 +124,10 @@ bool Npc::CleanUp()
 {
 	if(texture != nullptr)
 		app->tex->UnLoad(texture);
-
 	if(pbody != nullptr)
 		pbody->body->GetWorld()->DestroyBody(pbody->body);
-
 	if(pSensor != nullptr)
 		pSensor->body->GetWorld()->DestroyBody(pSensor->body);
-	
 	dialoguesID.clear();
 	dialoguesID.shrink_to_fit();
 	return true;
@@ -155,7 +135,6 @@ bool Npc::CleanUp()
 
 
 void Npc::OnCollision(PhysBody* physA, PhysBody* physB) {
-
 	switch (physB->ctype)
 	{
 	}

@@ -341,11 +341,9 @@ bool Physics::PostUpdate()
 				}
 				break;
 				}
-
 			}
 		}
 	}
-
 	return ret;
 }
 
