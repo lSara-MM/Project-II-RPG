@@ -28,23 +28,19 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Interact  -> E / A button gamepad
 
-* Inventory -> I / Y button gamepad
-
-* Minimap -> M / X button gamepad
-
-* Party menu -> P / SELECT gamepad
-
-* Inventory -> I / Y button gamepad
-
-* Pause menu -> ESC / START gamepad
-
-### Menus
+### Menus (not in combat)
 
 * Accept -> Enter/ A button gamepad
 
 * Exit menu -> B button gamepad
 
-* Language and text speed can not be modified
+* Party menu -> P / SELECT gamepad
+
+* Inventory -> I / Y button gamepad 
+
+* Pause menu -> ESC / START gamepad
+
+* Minimap -> M / X button gamepad
 
 ### Combat
 
@@ -74,17 +70,15 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 #### Logo scene
 
-* Go to Play Scene  -> F1
+* Go to Menu Scene -> Return / A button Gamepad
 
-* Go to Menu Scene -> Return/A button Gamepad
-
-#### Menu scene
-
-* Go to Play Scene  -> F1
+#### Intro scene
 
 * Show GUI -> F2
 
-* Mute sound -> M key
+* Cutscene -> space / A button Gamepad
+
+* Enter name -> enter
 
 #### Play scene
 
@@ -100,28 +94,39 @@ Befriend your companions from the show and save yourselves from a terrible fate.
 
 * Show collisions -> F8
 
-* Enable/disable FRCAP -> F9
+* Enable / disable FRCAP -> F9
 
 * God Mode -> F10
 
-* Pause -> ESC/START button Gamepad
+* Pause -> ESC / START button Gamepad
 
-* Exit Pause -> Return/B button Gamepad
+* Exit Pause -> Return / B button Gamepad
 
-* Enter combat -> C key/X button Gamepad
+* Start Combat -> X (only God Mode)
 
-* Add one item of each type -> 1 
+* Go to House of Terrors -> H (only God Mode)
 
-* Start Combat -> X
+* Go to Beast Tent -> B (only God Mode)
 
 ### House of Terrors
 
 * Code puzzle = 344
 
-* Add Fire Eater to party -> P + E
+* Add boss dead -> 1 (only God Mode)
 
-* Add boss dead -> B
+* Add Fire Eater to party -> 2 (only God Mode)
 
+* No random combat (only God Mode)
+
+* Start Combat -> X (only God Mode)
+
+### Beast Tent
+
+* No random combat (only God Mode)
+
+* Start Combat -> X (only God Mode)
+
+* Remove barrels -> 2 (only God Mode)
 
 ## Pikum Studios Members
 
