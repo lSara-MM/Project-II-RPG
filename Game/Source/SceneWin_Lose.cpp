@@ -50,6 +50,12 @@ bool SceneWin_Lose::Awake(pugi::xml_node& config)
 	confirmPath = "Assets/Audio/Fx/confirm_interaction.wav";
 	confirmInteractfx = app->audio->LoadFx(confirmPath);
 
+	winFxPath = "Assets/Audio/Fx/win_battle.wav";
+	winfx = app->audio->LoadFx(winFxPath);
+
+	looseFxPath = "Assets/Audio/Fx/loose_battle.wav";
+	loosefx = app->audio->LoadFx(looseFxPath);
+
 	backgroundAnimation.Set();
 	backgroundAnimation.AddTween(100, 80, BACK_OUT);
 	posYani_I = 0;
@@ -68,10 +74,12 @@ bool SceneWin_Lose::Start()
 
 	if (win)
 	{
+		app->audio->PlayFx(winfx);
 		app->audio->PlayMusic(winMusicPath, 1.0f);	
 	}
 	else
 	{
+		app->audio->PlayFx(loosefx);
 		app->audio->PlayMusic(looseMusicPath, 1.0f);
 	}
 	
