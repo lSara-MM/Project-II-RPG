@@ -235,7 +235,7 @@ bool Store::OnGuiMouseOutHoverEvent(GuiControl* control)
 
 bool Store::OnGuiMouseClickEvent(GuiControl* control)
 {
-	if (control->id != 1500 || control->id != 1501)
+	if (control->id != 1500 && control->id != 1501 && control->id != 1502 && control->id != 1503)
 	{
 		for (size_t i = 0; i < app->itemManager->nodeList.size(); i++)
 		{
@@ -297,7 +297,7 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 				{
 					if (app->itemManager->nodeList[i]->toSell && app->itemManager->nodeList[i]->quantity + SellQuantity <= app->itemManager->nodeList[i]->max)
 					{
-						app->itemManager->AddQuantity(i, SellQuantity);
+						app->itemManager->AddQuantity(app->itemManager->nodeList[i]->ID, SellQuantity);
 						app->itemManager->coins -= CurrentPrice;
 						SellQuantity = 0;
 						app->itemManager->nodeList[i]->toSell = false;
