@@ -45,12 +45,8 @@ public:
 	bool InitEntities();
 public:
 
-	int npcSetID;
-
 	Player* player;
 	bool frcap_B = true;
-
-	bool combatEnd = false;
 
 	pugi::xml_node sceneNode;
 
@@ -66,8 +62,6 @@ public:
 private:
 	//Music path
 	const char* texturePathBeastDungeon;
-
-	bool exit_B;
 };
 
 #endif // __HOUSEOFTERRORS_H__

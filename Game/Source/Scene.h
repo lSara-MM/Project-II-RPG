@@ -53,22 +53,14 @@ public:
 	int npcSetID;
 
 	bool frcap_B = true;
-	bool pause_B = false;
-	bool settings_B = false;
-	bool mute_B = true;
-
-	int currentHP_Bard = 0;
-	int currentHP_Protagonist = 0;
-	bool isCharacterLoaded_B = true;
-
 	const char* lobby_music;
+
 private:
+
+	bool debugCombat = false;
 
 	const char* fxinventorypath;
 	uint inventoryfx;
-
-	bool exit_B;
-	int enemyRange_I;
 
 	pugi::xml_node sceneNode;
 };

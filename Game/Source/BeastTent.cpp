@@ -78,10 +78,6 @@ bool BeastTent::Start()
 	//Music
 	app->audio->PlayMusic(musBeastPath, 1.0f);
 
-	exit_B = false;
-
-	npcSetID = 1;
-
 	InitEntities();
 	app->entityManager->Enable();
 	app->puzzleManager->Enable();

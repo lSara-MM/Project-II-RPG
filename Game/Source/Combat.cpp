@@ -344,6 +344,7 @@ bool Combat::PostUpdate()
 			break;
 		}
 	}
+
 	return ret;
 }
 
@@ -1689,7 +1690,7 @@ void Combat::HandleEndCombat()
 			else
 			{
 				app->itemManager->arrParty.at(i)->currentHp = 5;
-			}		
+			}
 		}
 		app->input->coso = true;
 	}
@@ -1706,8 +1707,8 @@ void Combat::HandleEndCombat()
 	{
 		app->itemManager->arrParty.at(i)->currentHp = tempHp.at(i);
 	}
-	SaveCombat();
 
+	SaveCombat();
 	app->itemManager->UseItemPostBattle();
 }
 

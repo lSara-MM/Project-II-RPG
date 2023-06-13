@@ -46,15 +46,13 @@ bool Scene::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	lobby_music = config.attribute("music").as_string();
-	mute_B = false;
-
-	//mouseSpeed = config.attribute("mouseSpeed").as_float();
-	enemyRange_I = config.attribute("enemyRange").as_int();
 
 	sceneNode = config;
 
 	fxinventorypath = "Assets/Audio/Fx/Open_inv.wav";
 	inventoryfx = app->audio->LoadFx(fxinventorypath);
+
+	debugCombat = false;
 
 	return ret;
 }
@@ -79,17 +77,14 @@ bool Scene::Start()
 
 	//Load Map
 	app->map->Load(0);
-	exit_B = false;
 
 	npcSetID = 1;
-
 	InitEntities();
 	app->entityManager->Enable();
 
 
 	if (app->iScene->continueGame_B || app->input->coso)
 	{
-		//app->LoadGameRequest();
 		app->iScene->continueGame_B = false;
 	}
 
@@ -97,6 +92,12 @@ bool Scene::Start()
 	if (app->input->coso && app->entityManager->tpID != 21)
 	{
 		player->pbody->body->SetTransform({ PIXEL_TO_METERS(app->input->posX), PIXEL_TO_METERS(app->input->posY) }, 0);
+		app->input->coso = false;
+	}
+
+	if (debugCombat)
+	{
+		debugCombat = false;
 		app->input->coso = false;
 	}
 
@@ -122,7 +123,6 @@ bool Scene::Update(float dt)
 		{
 			player->lockMovement = false;
 			app->inventory->inventoryTransition_B = true;
-			//app->inventory->Disable();
 			app->audio->PlayFx(inventoryfx);
 		}
 		else 
@@ -243,12 +243,11 @@ void Scene::Debug()
 	{
 		if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
 			LOG("Combat");
+			debugCombat = true;
 			app->combat->PreLoadCombat(name);
 			app->fade->FadingToBlack(this, (Module*)app->combat, 5);
 		}
 	}
-	
-	(mute_B) ? app->audio->PauseMusic() : app->audio->ResumeMusic();
 }
 
 bool Scene::InitEntities()
@@ -293,7 +292,5 @@ bool Scene::InitEntities()
 	default:
 		break;
 	}
-
-	//app->entityManager->Awake();
 	return true;
 }

@@ -43,14 +43,8 @@ public:
 
 public:
 
-	int npcSetID;
-
 	Player* player;
 	bool frcap_B = true;
-	
-	bool mute_B = true;
-
-	pugi::xml_node sceneNode;
 
 	//enter combat;
 	int steps_I;
@@ -64,10 +58,6 @@ public:
 private:
 	//Music path
 	const char* texturePathDarkestDungeon;
-
-	float mouseSpeed;
-
-	bool exit_B;
 };
 
 #endif // __HOUSEOFTERRORS_H__

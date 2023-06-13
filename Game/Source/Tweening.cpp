@@ -19,7 +19,6 @@ Tween::Tween(float multiplier, float smoothness, bool suppressCallbacks) : accum
 	this->suppressCallbacks = suppressCallbacks;
 }
 
-
 Tween::~Tween()
 {
 }

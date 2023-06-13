@@ -33,8 +33,12 @@ bool Menus::Start()
 	pSettings = new Settings(this);
 	pPause = new Pause(this);
 	pPause->pSettings = pSettings;
+
 	pause_B = false;
 	settings_B = false;
+
+	exit_B = false;
+
 	return true;
 }
 

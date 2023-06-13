@@ -50,9 +50,6 @@ public:
 
 	Player* player;
 	bool frcap_B = true;
-	bool mute_B = true;
-
-	pugi::xml_node sceneNode;
 
 	SDL_Texture* dummy;
 	SDL_Texture* textureE;
@@ -71,8 +68,6 @@ public:
 private:
 	//Music path
 	const char* texturepathDummy;
-
-	bool exit_B;
 };
 
 #endif // __PRACTICETENT_H__
