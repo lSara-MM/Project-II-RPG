@@ -80,6 +80,12 @@ private:
 	const char* confirmPath;
 	uint confirmInteractfx;
 
+	const char* winFxPath;
+	uint winfx;
+
+	const char* looseFxPath;
+	uint loosefx;
+
 	bool exit_B;
 };
 

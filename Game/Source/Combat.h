@@ -150,12 +150,6 @@ private:
 	const char* swapPath;
 	uint swapPositionfx;
 
-	const char* winFxPath;
-	uint winfx;
-
-	const char* looseFxPath;
-	uint loosefx;
-
 	//animation combat UI
 	Tween animationCombat;
 	bool transitionCombat_B;

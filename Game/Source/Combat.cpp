@@ -57,9 +57,6 @@ bool Combat::Awake(pugi::xml_node& config)
 	swapPath = "Assets/Audio/Fx/change_position.wav";
 	swapPositionfx = app->audio->LoadFx(swapPath);
 
-	winFxPath = "Assets/Audio/Fx/win_battle.wav";
-	winfx = app->audio->LoadFx(winFxPath);
-
 	return ret;
 }
 
@@ -825,7 +822,6 @@ void Combat::RemoveCharacter(vector<Character*>* arr, Character* chara)
 
 			app->itemManager->coins += coins;
 		}
-		app->audio->PlayFx(winfx);
 		app->fade->FadingToBlack(this, (Module*)app->sceneWin_Lose, 0);
 	}
 	else
