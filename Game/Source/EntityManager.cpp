@@ -5,7 +5,6 @@
 #include "Map.h"
 #include "Physics.h"
 #include "Textures.h"
-
 #include "Scene.h"
 #include "IntroScene.h"
 #include "HouseOfTerrors.h"
@@ -13,14 +12,11 @@
 #include "PracticeTent.h"
 #include "SceneWin_Lose.h"
 #include "Combat.h"
-
-
 #include "ItemManager.h"
 #include "PuzzleManager.h"
 #include "QuestManager.h"
 #include "LootManager.h"
 #include "FadeToBlack.h"
-
 #include "Defs.h"
 #include "Log.h"
 
@@ -28,8 +24,6 @@
 #include "Player.h"
 #include "NPC.h"
 #include "Character.h"
-
-
 
 EntityManager::EntityManager() : Module()
 { 
@@ -51,7 +45,6 @@ bool EntityManager::Awake(pugi::xml_node& config)
 	//Iterates over the entities and calls the Awake
 	ListItem<Entity*>* item;
 	Entity* pEntity = NULL;
-
 	for (item = entities.start; item != NULL && ret == true; item = item->next)
 	{
 		pEntity = item->data;
@@ -59,7 +52,6 @@ bool EntityManager::Awake(pugi::xml_node& config)
 		if (pEntity->active == false) continue;
 		ret = item->data->Awake();
 	}
-
 	return ret;
 }
 
@@ -74,11 +66,9 @@ bool EntityManager::Start() {
 	for (item = entities.start; item != NULL && ret == true; item = item->next)
 	{
 		pEntity = item->data;
-
 		if (pEntity->active == false) continue;
 		ret = item->data->Start();
 	}
-
 	return ret;
 }
 
@@ -94,7 +84,6 @@ bool EntityManager::CleanUp()
 		ret = item->data->CleanUp();
 		item = item->prev;
 	}
-
 	entities.Clear();
 	return ret;
 }
@@ -164,7 +153,6 @@ bool EntityManager::LoadState(pugi::xml_node& data, Module* module_)
 	int fadeTime = 45;
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->sceneWin_Lose->name.GetString()) == 0) { fadeTime = 5; }
 
-
 	if (strcmp(app->input->sceneNameSaved.c_str(), app->scene->name.GetString()) == 0)
 	{
 		app->fade->FadingToBlack(module_, (Module*)app->scene, fadeTime);
@@ -184,7 +172,6 @@ bool EntityManager::LoadState(pugi::xml_node& data, Module* module_)
 	{
 		app->fade->FadingToBlack(module_, (Module*)app->BeastT, fadeTime);
 	}
-
 	return true;
 }
 
@@ -219,13 +206,11 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 		pPlayer = app->BeastT->player;
 	}
 
-
 	if (!app->iScene->previousGame_B)
 	{
 		app->iScene->previousGame_B = true;
 		app->iScene->SaveState(app->iScene->IntroSaveNode);
 	}
-
 	player.append_attribute("x") = pPlayer->position.x;
 	player.append_attribute("y") = pPlayer->position.y;
 
@@ -242,8 +227,6 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 	}
 	pPlayer = nullptr;
 	app->itemManager->loadParty_B = true;
-
-	//app->scene->isCharacterLoaded_B = false;
 	return true;
 }
 
@@ -256,6 +239,5 @@ List<Entity*> EntityManager::GetEntitiesByType(EntityType type)
 			result.Add(entities[i]);
 		}
 	}
-
 	return result;
 }

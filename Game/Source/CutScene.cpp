@@ -16,7 +16,6 @@
 #include "FadeToBlack.h"
 #include "Combat.h"
 
-
 CutScene::CutScene() : Module()
 {
 	name.Create("CutScene");
@@ -46,7 +45,6 @@ bool CutScene::Awake(pugi::xml_node& config)
 	for (int i = 0; pugiNode != NULL; i++)
 	{
 		NextText.Add(pugiNode.attribute("textpath").as_string());
-
 		pugiNode = pugiNode.next_sibling("Text");
 	}
 
@@ -74,14 +72,10 @@ bool CutScene::Start()
 	{
 		ImgToPrint.Add(app->tex->Load(NextImg.At(i)->data));
 	}
-
 	app->fade->FadingToBlackImages(ImgToPrint.At(passImg)->data, ImgToPrint.At(passImg)->data, 40);
-
 	currentTexture = ImgToPrint.At(passImg)->data;
-
 	StopCutScene = true;
 	TextTimerToPrint = true;
-
 	return true;
 }
 
@@ -100,7 +94,6 @@ bool CutScene::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
   			printText = false;
-
 			app->audio->PlayFx(cinematicpassfx);
 
 			if (passImg < ImgToPrint.Count() - 1)
@@ -117,7 +110,6 @@ bool CutScene::Update(float dt)
 			StopCutScene = true;
 			textHasEnded = false;
 			TextTimerToPrint = false;
-
 			app->render->ResetDtText();
 			RestartTimer();
 		}
@@ -126,7 +118,6 @@ bool CutScene::Update(float dt)
 	//Esto renderiza la imagen que ahora est� en pantalla
 	if (passImg <= ImgToPrint.Count() - 1)
 		app->render->DrawTexture(currentTexture, 0, 0);
-
 
 	if (TextTimerToPrint)
 	{
@@ -225,7 +216,6 @@ bool CutScene::CleanUp()
 	{
 		app->tex->UnLoad(ImgToPrint.At(i)->data);
 	}
-
 
 	ImgToPrint.Clear();
 	app->input->temp = "";

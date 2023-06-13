@@ -104,7 +104,6 @@ public:
 
 		data[position] = element;
 		++numElements;
-
 		return true;
 	}
 
@@ -122,7 +121,6 @@ public:
 			data[i] = array[i - position];
 			++numElements;
 		}
-
 		return true;
 	}
 
@@ -176,7 +174,6 @@ public:
 				}
 			}
 		}
-
 		return ret;
 	}
 
@@ -225,7 +222,6 @@ public:
 				}
 			}
 		}
-
 		return ret;
 	}
 
@@ -233,7 +229,6 @@ public:
 	{
 		VALUE* start = &data[0];
 		VALUE* end = &data[numElements-1];
-
 		while(start < end) SWAP(*start++, *end--);
 	}
 
@@ -243,16 +238,13 @@ private:
 	void Alloc(unsigned int mem)
 	{
 		VALUE* tmp = data;
-
 		memCapacity = mem;
 		data = new VALUE[memCapacity];
-
 		numElements = MIN(memCapacity, numElements);
 
 		if(tmp != NULL)
 		{
 			for(unsigned int i = 0; i < numElements; ++i) data[i] = tmp[i];
-
 			delete[] tmp;
 		}
 	}

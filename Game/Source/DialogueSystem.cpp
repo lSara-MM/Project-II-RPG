@@ -206,7 +206,6 @@ SString DialogueSystem::ChangeTextSpeed()
 	default:
 		break;
 	}
-
 	return "Medium";
 }
 
@@ -251,7 +250,6 @@ SString DialogueSystem::GetTextSpeedSString()
 	default:
 		break;
 	}
-
 	return "Medium";
 }
 
@@ -273,20 +271,7 @@ bool DialogueSystem::LoadDialogueState()
 		string temp = node.child("player").attribute("player_name").as_string();
 		app->input->playerName->input = temp.c_str();
 		app->input->playerName->input_entered = true;
-
-		/*for (size_t i = 0; i < activeTree->nodeList.size() && !node.child("node").empty(); i++)
-		{
-			for (int j = 0; j < activeTree->nodeList[i]->choicesList.size(); j++)
-			{
-				if (activeTree->nodeList[i]->choicesList[j]->eventReturn == 3)
-				{
-					activeTree->nodeList[i]->nodeID = node.child("node").attribute("id").as_int();
-					activeTree->nodeList[i]->playerAnswer = node.child("node").attribute("answer").as_int();
-				}
-			}
-		}*/
 	}
-
 	return ret;
 }
 
@@ -297,7 +282,6 @@ bool DialogueSystem::SaveDialogueState()
 
 	pugi::xml_document* saveDoc = new pugi::xml_document();
 	pugi::xml_node node = saveDoc->append_child("save_choices");
-
 
 	pugi::xml_node player = node.append_child("player");
 

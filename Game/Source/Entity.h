@@ -12,10 +12,8 @@ enum class EntityType
 {
 	PLAYER,
 	NPC,
-
 	COMBAT_CHARA,
 	MENU_CHARA,
-
 	UNKNOWN
 };
 
@@ -74,11 +72,9 @@ public:
 	}
 
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {
-	
 	};
 
 	virtual void EndContact(PhysBody* physA, PhysBody* physB) {
-
 	};
 
 public:
@@ -88,8 +84,6 @@ public:
 	bool active = true;
 	pugi::xml_node parameters;
 
-	// Possible properties, it depends on how generic we
-	// want our Entity class, maybe it's not renderable...
 	iPoint position;       
 	bool renderable = true;
 };
