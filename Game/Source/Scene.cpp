@@ -169,8 +169,6 @@ bool Scene::PostUpdate()
 
 	app->menus->menuOn = player->lockMovement;
 
-	if (exit_B) return false;
-
 	return ret;
 }
 

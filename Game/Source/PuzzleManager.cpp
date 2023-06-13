@@ -517,11 +517,11 @@ bool PuzzleManager::Dun2Start()
 			DoorKey2->body->SetFixedRotation(true);
 			DoorKey2->ctype = ColliderType::KEYDOOR;
 			DoorKey2->id = 2;
-
-			keySensor = app->physics->CreateRectangleSensor(posKey.x - widthKey / 2, posKey.y - heightKey / 2, widthKey, heightKey, bodyType::STATIC);
-			keySensor->body->SetFixedRotation(true);
-			keySensor->ctype = ColliderType::KEY;
 		}
+
+		keySensor = app->physics->CreateRectangleSensor(posKey.x - widthKey / 2, posKey.y - heightKey / 2, widthKey, heightKey, bodyType::STATIC);
+		keySensor->body->SetFixedRotation(true);
+		keySensor->ctype = ColliderType::KEY;
 	}
 
 	if (!chickenBoom) 
@@ -924,6 +924,9 @@ bool PuzzleManager::Dun2Update()
 
 		delete DoorKey1;
 		DoorKey1 = nullptr;
+		
+		delete DoorKey2;
+		DoorKey2 = nullptr;
 
 		keyDoors = true;
 
@@ -1566,9 +1569,6 @@ bool PuzzleManager::KeyDoorsPuz()
 
 			keyInvent = true;
 			keySens = false;
-
-			delete DoorKey2;
-			DoorKey2 = nullptr;
 
 			app->questManager->SaveState();
 		}
