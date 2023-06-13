@@ -133,7 +133,7 @@ bool Combat::Start()
 
 	isHovering = false;
 	exit_B = false;
-
+	fleeEnd_B = false;
 	SDL_WarpMouseInWindow(app->win->window, 285, 450);
 
 	return true;
@@ -691,12 +691,16 @@ bool Combat::Flee()
 		if (randSize < 9)
 		{
 			ret = true;
+			fleeEnd_B = true;
+			app->input->godMode_B = false;
 		}
 		break;
 	case ENEMIES:
 		if (randSize < 5)
 		{
 			ret = true;
+			fleeEnd_B = true;
+			app->input->godMode_B = false;
 		}
 		break;
 	case BOSS:

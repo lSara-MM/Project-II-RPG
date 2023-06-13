@@ -109,6 +109,7 @@ public:
 
 	// buttons
 	List<GuiButton*> listButtons;
+	bool fleeEnd_B;
 
 private:
 	bool isMoving;

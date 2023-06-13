@@ -441,7 +441,10 @@ bool GuiButton::Draw(Render* render)
 				}
 				break;
 			case ButtonType::CHANGE_POSITION:
-				render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				if (!app->combat->fleeEnd_B)
+				{
+					render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+				}
 				break;
 			case ButtonType::SKIPPY:
 				render->DrawTexture(buttonTex, bounds.x, bounds.y, &rect);
@@ -813,6 +816,10 @@ void GuiButton::DrawSkill(int charaId, int skillNumber, int state)
 	default:
 		break;
 	}
-	app->render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+	if (!app->combat->fleeEnd_B)
+	{
+		app->render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
+	}
+
 }
 
