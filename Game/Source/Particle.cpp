@@ -45,7 +45,6 @@ bool Particle::Update(float dt)
 		position.x += speed.x;
 		position.y += speed.y;
 	}
-
 	return ret;
 }
 
