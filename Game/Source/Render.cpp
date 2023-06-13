@@ -5,8 +5,6 @@
 #include "Defs.h"
 #include "Log.h"
 
-//#define VSYNC true
-
 Render::Render() : Module()
 {
 	name.Create("renderer");
@@ -86,11 +84,6 @@ bool Render::PostUpdate()
 bool Render::CleanUp()
 {    
 	// Free the font
-	//TTF_CloseFont(ttf_font);PETA AL TANCAR, MOLEST
-
-	// we clean up TTF library
-	//TTF_Quit();	// peta xd
-
 	LOG("Destroying SDL render");
 	SDL_DestroyRenderer(renderer);
 	return true;
@@ -150,7 +143,6 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 		//LOG("Cannot blit to screen. SDL_RenderCopy error: %s,  %d, %d", SDL_GetError(), x, y);
 		ret = false;
 	}
-
 	return ret;
 }
 
@@ -178,7 +170,6 @@ bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint
 		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
 		ret = false;
 	}
-
 	return ret;
 }
 
@@ -202,7 +193,6 @@ bool Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b,
 		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
 		ret = false;
 	}
-
 	return ret;
 }
 
@@ -232,7 +222,6 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
 		ret = false;
 	}
-
 	return ret;
 }
 
@@ -302,12 +291,10 @@ bool Render::TextDraw(const char* text, int x, int y, int size, Font font, SDL_C
 			LOG("Cannot render text to screen. SDL_RenderCopy error: %s", SDL_GetError());
 			ret = false;
 		}
-
 		SDL_DestroyTexture(ttf_texture);
 		ttf_texture = nullptr;
 		TTF_CloseFont(ttf_font);
 	}
-
 	return ret;
 }
 
@@ -335,7 +322,6 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 				{
 					a = line.size() - startIndex;
 				}
-
 				if (a > 0)
 				{
 					int i = 0;
@@ -343,7 +329,6 @@ void Render::SplitText(SString text_, vector<SString>* pTexts, int fontSize_, in
 					{
 						b = line.find_first_of(arr.at(i++), a);
 					} while (b == -1 && a < line.length() && i < arr.size());
-
 					// If we reached the end of the word or the end of the input.
 					string temp;
 					temp.append(line, startIndex, ++b - startIndex);	// string text to append, int index start, int size of text to append
@@ -411,7 +396,6 @@ bool Render::RenderTrimmedText(int x, int y, int offset, SString text, vector<SS
 			TextDraw(temp.at(j).GetString(), x, y + (fontSize_ + offset) * j, fontSize_, font, color);
 		}
 	}
-
 	return ret;
 }
 

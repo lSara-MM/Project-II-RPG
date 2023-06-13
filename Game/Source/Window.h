@@ -54,12 +54,10 @@ private:
 	bool resizable;
 	bool fullscreen_window;
 
-
 	SString title;
 	uint width;
 	uint height;
 	uint scale;
-	
 };
 
 #endif // __WINDOW_H__

@@ -14,7 +14,6 @@
 #include "Render.h"
 #include "Window.h"
 
-
 #include "Log.h"
 #include "Point.h"
 #include "SString.h"
@@ -43,7 +42,6 @@ public:
 						listButtons->At(i)->data->state = GuiControlState::NORMAL;
 						listButtons->start->data->state = GuiControlState::FOCUSED;
 					}
-
 					else
 					{
 						listButtons->At(i)->data->state = GuiControlState::NORMAL;
@@ -57,7 +55,6 @@ public:
 						listButtons->At(i)->data->state = GuiControlState::NORMAL;
 						listButtons->end->data->state = GuiControlState::FOCUSED;
 					}
-
 					else
 					{
 						listButtons->At(i)->data->state = GuiControlState::NORMAL;
@@ -66,21 +63,15 @@ public:
 				}
 				break;
 			}
-
 		}
-
 	}
-
 	int speedAnimButton = 3;//velocidad animacion botones
 	int speedAnimNotButton = 3;//velocidad animacion cosas no botones
-
 };
-
 
 class GameSettings : public HandleSettings
 {
 public:
-
 	GameSettings(Module* mod)
 	{
 		//settingsTexture = app->tex->Load(settingsPath);
@@ -115,51 +106,18 @@ public:
 		button->state = GuiControlState::NONE;
 		button->color = { 255, 246, 240 };
 		listGameButtons.Add(button);
-
-
-		////Texto
-		//int x = 556; int y = 290; int offset = 77;
-		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 955, mod, { x, y, 1, 1 }, ButtonType::SETTINGS_TEXT, "Language", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
-		//button->state = GuiControlState::NONE;
-		//listGameButtons.Add(button);
-
-		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 956, mod, { x, y+offset, 1, 1 }, ButtonType::SETTINGS_TEXT, "Text Speed", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
-		//button->state = GuiControlState::NONE;
-		//listGameButtons.Add(button);
 	}
 
 	bool OpenGameSettings()
 	{
-	/*	int x = 556; int y = 290; int offset = 77;
-		app->render->TextDraw("Language", x, y, 16);
-		app->render->TextDraw("Text Speed", x, y + offset, 16);*/
-
 		if (!open_game_B)
 		{
 			for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
 			{
 				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
-
-				//if (i->data->id == 807)	// Change TextSpeed button
-				//{
-				//	i->data->text = app->dialogueSystem->GetTextSpeedSString();
-				//}
 			}
 		}
-		//if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
-		//	|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
-		//{
-		//	app->input->gamepadGUI_B = true;
-
-		//}
-		//else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
-		//{
-		//	app->input->gamepadGUI_B = false;
-		//}
-
-		//HandleGampeadGUI(&listGameButtons);
-
 		return true;
 	}
 
@@ -171,9 +129,7 @@ public:
 		for (ListItem<GuiButton*>* i = listGameButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-			//i->data->state = GuiControlState::NONE;
 		}
-
 		return true;
 	}
 
@@ -185,9 +141,7 @@ public:
 			i->data = nullptr;
 			app->guiManager->DestroyGuiControl(i->data);
 		}
-
 		listGameButtons.Clear();
-
 		return true;
 	}
 
@@ -211,65 +165,24 @@ public:
 
 	ControlSettings(Module* mod)
 	{
-		//settingsTexture = app->tex->Load(settingsPath);
-
 		// settings buttons
 		control_B = false;
 		open_control_B = false;
 
 		GuiButton* button;
-
-		// buttons
-	/*	int x = 630; int y = 0;
-		for (int i = 0; buttons[i] != "\n"; i++)
-		{
-			if (i == 5) { x = 900; y = 0; }
-
-			button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i + GUI_id + 1, mod, { x, 280 + 77 * y++, 34, 34 }, ButtonType::CONTROL_SETTINGS, buttons[i], 16, Font::UI, { 0,0,0,0 }, 5, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
-			button->state = GuiControlState::NONE;
-			listControlButtons.Add(button);
-		}*/
 	}
 
 	bool OpenControlSettings()
 	{
-		//int x = 530; int y = 290; int offset = 77;
-		//app->render->TextDraw("Move up", x, y, 16);
-		//app->render->TextDraw("Move left", x, y + offset, 16);
-		//app->render->TextDraw("Move right", x, y + offset * 2, 16);
-		//app->render->TextDraw("Move down", x, y + offset * 3, 16);
-		//app->render->TextDraw("Interact", x, y + offset * 4, 16);
-
-		//x = 800;
-		//app->render->TextDraw("Inventory", x, y, 16);
-		//app->render->TextDraw("Party", x, y + offset, 16);
-		//app->render->TextDraw("Quests", x, y + offset * 2, 16);
-		//app->render->TextDraw("Map", x, y + offset * 3, 16);
-		//app->render->TextDraw("Pause", x, y + offset * 4, 16);
-
 		if (!open_control_B)
 		{
 			for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
 			{
 				i->data->isForward_B = true;
-				//i->data->state = GuiControlState::NORMAL;
 			}
 	
 			open_control_B = true;
 		}
-	/*	if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
-			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
-		{
-			app->input->gamepadGUI_B = true;
-
-		}
-		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
-		{
-			app->input->gamepadGUI_B = false;
-		}*/
-
-		//HandleGampeadGUI(&listControlButtons);
-
 		return true;
 	}
 
@@ -281,9 +194,7 @@ public:
 		for (ListItem<GuiButton*>* i = listControlButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-			//i->data->state = GuiControlState::NONE;
 		}
-
 		return true;
 	}
 
@@ -295,9 +206,7 @@ public:
 			i->data = nullptr;
 			app->guiManager->DestroyGuiControl(i->data);
 		}
-
 		listControlButtons.Clear();
-
 		return true;
 	}
 
@@ -321,8 +230,6 @@ public:
 
 	GraphicsSettings(Module* mod)
 	{
-		//settingsTexture = app->tex->Load(settingsPath);
-
 		// settings buttons
 		graphics_B = false;
 		open_graphics_B = false;
@@ -351,36 +258,10 @@ public:
 		button->state = GuiControlState::NONE;
 		button->color = { 255, 246, 240 };
 		listGraphicsButtons.Add(button);
-
-
-		////Texto
-		//int x = 556; int y = 290; int offset = 77;
-		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 956, mod, { x, y, 1, 1 }, ButtonType::SETTINGS_TEXT, "Windows Size", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
-		//button->state = GuiControlState::NONE;
-		//listGraphicsButtons.Add(button);
-
-		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 957, mod, { x, y + offset, 1, 1 }, ButtonType::SETTINGS_TEXT, "Fullscreen", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
-		//button->state = GuiControlState::NONE;
-		//listGraphicsButtons.Add(button);
-
-		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 958, mod, { x, y + offset*2, 1, 1 }, ButtonType::SETTINGS_TEXT, "Vsync", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
-		//button->state = GuiControlState::NONE;
-		//listGraphicsButtons.Add(button);
-
-		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 959, mod, { x, y + offset*3, 1, 1 }, ButtonType::SETTINGS_TEXT, "Max fps", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::RIGHT_X);
-		//button->state = GuiControlState::NONE;
-		//listGraphicsButtons.Add(button);
-
 	}
 
 	bool OpenGraphics()
 	{
-		/*int x = 556; int y = 290; int offset = 77;
-		app->render->TextDraw("Windows Size", x, y, 16);
-		app->render->TextDraw("Fullscreen", x, y + offset, 16);
-		app->render->TextDraw("Vsync", x, y + offset * 2, 16);
-		app->render->TextDraw("Max fps", x, y + offset * 3, 16);*/
-
 		if (!open_graphics_B)
 		{
 			for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
@@ -414,22 +295,8 @@ public:
 						i->data->state = GuiControlState::NORMAL;
 					}
 				}
-
 				open_graphics_B = true;
 			}
-
-		/*	if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
-				|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
-			{
-				app->input->gamepadGUI_B = true;
-
-			}
-			else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
-			{
-				app->input->gamepadGUI_B = false;
-			}*/
-
-			//HandleGampeadGUI(&listGraphicsButtons);
 		}
 		return true;
 	}
@@ -442,15 +309,11 @@ public:
 		for (ListItem<GuiButton*>* i = listGraphicsButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-			//i->data->state = GuiControlState::NONE;
 		}
-
 		for (ListItem<GuiCheckBox*>* i = listGraphicsCheckbox.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-			//i->data->state = GuiControlState::NONE;
 		}
-
 		return true;
 	}
 
@@ -472,7 +335,6 @@ public:
 
 		listGraphicsButtons.Clear();
 		listGraphicsCheckbox.Clear();
-
 		return true;
 	}
 
@@ -493,8 +355,6 @@ public:
 
 	AudioSettings(Module* mod)
 	{
-		//settingsTexture = app->tex->Load(settingsPath);
-
 		// settings buttons
 		audio_B = false;
 		open_audio_B = false;
@@ -519,32 +379,11 @@ public:
 		sliderBar->state = GuiControlState::NONE;
 		fx = sliderBar;
 		listSliderBars.Add(sliderBar);
-
-
-		////Texto
-		//int x = 556; int y = 290; int offset = 77;
-		//GuiButton* button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 959, mod, { x, y, 1, 1 }, ButtonType::SETTINGS_TEXT, "General volume", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
-		//button->state = GuiControlState::NONE;
-		//listTextAudio.Add(button);
-
-		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 960, mod, { x, y + offset, 1, 1 }, ButtonType::SETTINGS_TEXT, "Music volume", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
-		//button->state = GuiControlState::NONE;
-		//listTextAudio.Add(button);
-
-		//button = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 961, mod, { x, y + offset * 2, 1, 1 }, ButtonType::SETTINGS_TEXT, "Fx volume", 16, Font::UI, { 0,0,0,0 }, speedAnimButton, Easings::CUBIC_IN, AnimationAxis::LEFT_X);
-		//button->state = GuiControlState::NONE;
-		//listTextAudio.Add(button);
 	}
 
 	bool OpenAudioSettings()
 	{
-		SDL_Rect rect = { 0, 0, 226, 261 };
-
-	/*	int x = 556; int y = 290; int offset = 77;
-		app->render->TextDraw("General volume", x, y, 16);
-		app->render->TextDraw("Music volume", x, y + offset, 16);
-		app->render->TextDraw("Fx volume", x, y + offset * 2, 16);*/
-	
+		SDL_Rect rect = { 0, 0, 226, 261 };	
 		if (!open_audio_B)
 		{
 			for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
@@ -552,13 +391,6 @@ public:
 				i->data->isForward_B = true;
 				i->data->state = GuiControlState::NORMAL;
 			}
-
-			/*for (ListItem<GuiButton*>* i = listTextAudio.start; i != nullptr; i = i->next)
-			{
-				i->data->isForward_B = true;
-				i->data->state = GuiControlState::NORMAL;
-			}*/
-
 			general->sliderBounds.x = general->bounds.x + app->audio->volume_general * general->bounds.w / SDL_MIX_MAXVOLUME;
 			general->volume100 = app->audio->volume_general;
 
@@ -568,10 +400,8 @@ public:
 			fx->sliderBounds.x = fx->bounds.x + app->audio->volume_fx * fx->bounds.w / SDL_MIX_MAXVOLUME;
 			fx->volume100 = app->audio->volume_fx;
 
-
 			open_audio_B = true;
 		}
-
 		if (app->audio->volume_general != general->volume100)app->audio->ChangeGeneralVolume(general->volume100);
 		if (app->audio->volume_music != music->volume100)app->audio->ChangeMusicVolume(music->volume100);
 		if (app->audio->volume_fx != fx->volume100)app->audio->ChangeFxVolume(fx->volume100);
@@ -587,13 +417,7 @@ public:
 		for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-			//i->data->state = GuiControlState::NONE;
 		}
-		//for (ListItem<GuiButton*>* i = listTextAudio.start; i != nullptr; i = i->next)
-		//{
-		//	i->data->isForward_B = false;
-		//	//i->data->state = GuiControlState::NONE;
-		//}
 		return true;
 	}
 
@@ -601,19 +425,9 @@ public:
 	{
 		for (ListItem<GuiSliderBar*>* i = listSliderBars.start; i != nullptr; i = i->next)
 		{
-		/*	delete i->data;
-			i->data = nullptr;*/
 			app->guiManager->DestroyGuiControl(i->data);
 		}
-		//for (ListItem<GuiButton*>* i = listTextAudio.start; i != nullptr; i = i->next)
-		//{
-		//	/*	delete i->data;
-		//	i->data = nullptr;*/
-		//	app->guiManager->DestroyGuiControl(i->data);
-		//}
 		listSliderBars.Clear();
-		//listTextAudio.Clear();
-
 		return true;
 	}
 
@@ -622,7 +436,6 @@ public:
 	// GUI
 	int GUI_id = 832;
 	List<GuiSliderBar*> listSliderBars;
-	//List<GuiButton*> listTextAudio;
 
 	GuiSliderBar* general, * music, * fx;
 
@@ -678,7 +491,6 @@ public:
 		animationShadow.AddTween(100, 80, EXPONENTIAL_IN);
 	}
 
-
 	bool OpenSettings()
 	{
 		//animaciones cosas menu
@@ -699,7 +511,6 @@ public:
 		int offsetAnimationIzq = -1300;
 		app->render->DrawTexture(sombraDchTexture, offsetAnimationDch + point69 * (0 - offsetAnimationDch) - app->render->camera.x, 0 - app->render->camera.y);
 		app->render->DrawTexture(sombraIzqTexture, offsetAnimationIzq + point69 * (0 - offsetAnimationIzq) - app->render->camera.x, 0 - app->render->camera.y);
-
 
 		if (pGame->game_B) { 
 			pGame->OpenGameSettings();
@@ -762,7 +573,6 @@ public:
 			app->render->TextDraw("Fx volume", x, offsetAnimation + point2 * ((y + offset * 2) - offsetAnimation), 16, Font::TEXT, { 255, 246, 240 });
 		}
 
-
 		if (!open_settings_B)
 		{
 			for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
@@ -773,19 +583,6 @@ public:
 
 			open_settings_B = true;
 		}
-
-	/*	if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
-			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
-		{
-			app->input->gamepadGUI_B = true;
-
-		}
-		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
-		{
-			app->input->gamepadGUI_B = false;
-		}*/
-
-		//HandleGampeadGUI(&listSettingsButtons);
 
 		return true;
 	}
@@ -799,7 +596,6 @@ public:
 		animationShadow.Step(speedAnimNotButton, false);
 		float point = animationMenu.GetPoint();
 		int offsetAnimation = -750;
-		//formula int(offsetAnimation + point * (0 - offsetAnimation))
 
 		app->render->DrawTexture(cartelTexture, 274 - app->render->camera.x, offsetAnimation + point * (210 - offsetAnimation) - app->render->camera.y);
 		app->render->DrawTexture(cintaTexture, 114 - app->render->camera.x, offsetAnimation + point * (85  - offsetAnimation)- app->render->camera.y);
@@ -822,7 +618,6 @@ public:
 		for (ListItem<GuiButton*>* i = listSettingsButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-			//i->data->state = GuiControlState::NONE;
 		}
 
 		return true;
@@ -841,8 +636,7 @@ public:
 
 		listSettingsButtons.Clear();
 		settings_B = false;
-		
-		// no li agraden els clean ups aquests
+	
 		pGame->CleanUp();
 		pControl->CleanUp();
 		pGraphics->CleanUp();
@@ -895,7 +689,6 @@ public:
 	Tween animationShadow;
 };
 
-
 class Pause : public HandleSettings
 {
 public:
@@ -923,11 +716,7 @@ public:
 
 		pauseAnimation.Set();
 		pauseAnimation.AddTween(100, 80, BACK_OUT);
-
-		// Settings
-		//pSettings = new Settings(mod);
 	}
-
 	bool OpenPause()
 	{
 		//animaciones cosas menu
@@ -935,9 +724,6 @@ public:
 		pauseAnimation.Step(speedAnimNotButton, false);
 		float point = pauseAnimation.GetPoint();
 		int offsetAnimation = -750;
-		//formula int(offsetAnimation + point * (0 - offsetAnimation))
-
-		//SDL_Rect rect = { 0, 0, 226, 261 };
 
 		app->audio->lowerBgMusic();
 
@@ -955,20 +741,6 @@ public:
 			app->input->stepSound_B = true;
 			open_pause_B = true;
 		}
-
-	/*	if (app->input->gamepadGUI_B == false && (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == BUTTON_DOWN
-			|| app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == BUTTON_DOWN))
-		{
-			app->input->gamepadGUI_B = true;
-
-		}
-		else if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
-		{
-			app->input->gamepadGUI_B = false;
-		}*/
-
-		//HandleGampeadGUI(&listPauseButtons);
-
 		return true;
 	}
 
@@ -980,9 +752,6 @@ public:
 		pauseAnimation.Step(speedAnimNotButton, false);
 		float point = pauseAnimation.GetPoint();
 		int offsetAnimation = -750;
-		//formula int(offsetAnimation + point * (0 - offsetAnimation))
-
-		//SDL_Rect rect = { 0, 0, 226, 261 };
 
 		app->audio->lowerBgMusic();
 		app->render->DrawTexture(fondoTexture, 0 - app->render->camera.x, offsetAnimation + point * (0  - offsetAnimation)- app->render->camera.y);
@@ -996,26 +765,20 @@ public:
 		for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
-			//i->data->state = GuiControlState::NONE;
 		}
-
 		return true;
 	}
 
 	bool CleanUp()
 	{
 		ClosePause();
-		//app->tex->UnLoad(PauseTexture);
-
 		for (ListItem<GuiButton*>* i = listPauseButtons.start; i != nullptr; i = i->next)
 		{
 			i->data->isForward_B = false;
 			i->data->state = GuiControlState::NONE;
 			app->guiManager->DestroyGuiControl(i->data);
 		}
-
 		listPauseButtons.Clear();
-		
 		return true;
 	}
 
@@ -1026,12 +789,10 @@ public:
 	List<GuiButton*> listPauseButtons;
 	const char* buttons[5] = { "Resume", "Return to Title", "Settings", "Exit", "\n" };
 
-
 	SDL_Texture* fondoTexture;
 	const char* fondoPath = "Assets/GUI/fondo_Pause.png";
 	SDL_Texture* cartelpauseTexture;
 	const char* cartelpausePath = "Assets/GUI/CartelMarron_Pause.png";
-
 
 	bool pause_B;
 	bool open_pause_B;
@@ -1040,196 +801,4 @@ public:
 	Tween pauseAnimation;
 };
 
-
 #endif // __SETTINGS_H__
-
-
-
-// Settings gui manager template
-
-/*
-
-	switch (a)
-	{
-
-		// Settings
-	case 801:
-		LOG("Button Close settings click");
-		pause_P->OpenPause();
-		settings_P->CloseSettings();
-		break;
-
-	case 802:
-		LOG("Game settings click");
-
-		break;
-
-	case 803:
-		LOG("Controls settings click");
-
-		break;
-
-	case 804:
-		LOG("Graphics settings click");
-
-		break;
-
-	case 805:
-		LOG("Audio settings click");
-
-		break;
-
-
-		// Game settings
-	case 806:
-		LOG("Button Language click");
-
-		break;
-
-	case 807:
-		LOG("Button Text Speed click");
-
-		break;
-	case 808:
-		LOG("Button Return to Title click");
-
-		break;
-
-	case 809:
-		LOG("Button Exit Game click");
-
-		break;
-
-
-		// Control settings
-	case 810:
-		LOG("Button Move Up keyboard check");
-
-		break;
-
-	case 811:
-		LOG("Button Move Up gamepad check");
-
-		break;
-
-	case 812:
-		LOG("Button Move Left keyboard check");
-
-		break;
-
-	case 813:
-		LOG("Button Move Left gamepad check");
-
-		break;
-
-	case 814:
-		LOG("Button Move Right keyboard check");
-
-		break;
-
-	case 815:
-		LOG("Button Move Right gamepad check");
-
-		break;
-
-	case 816:
-		LOG("Button Move Down keyboard check");
-
-		break;
-
-	case 817:
-		LOG("Button Move Down gamepad check");
-
-		break;
-
-	case 818:
-		LOG("Button Interact keyboard check");
-
-		break;
-
-	case 819:
-		LOG("Button Interact gamepad check");
-
-		break;
-
-	case 820:
-		LOG("Button Inventory keyboard check");
-
-		break;
-
-	case 821:
-		LOG("Button Party gamepad check");
-
-		break;
-
-	case 822:
-		LOG("Button Quests keyboard check");
-
-		break;
-
-	case 823:
-		LOG("Button Quests gamepad check");
-
-		break;
-
-	case 824:
-		LOG("Button Map keyboard check");
-
-		break;
-
-	case 825:
-		LOG("Button Map gamepad check");
-
-		break;
-
-	case 826:
-		LOG("Button Settings keyboard check");
-
-		break;
-
-	case 827:
-		LOG("Button Settings gamepad check");
-
-		break;
-
-
-		// Graphics settings
-	case 828:
-		LOG("Button Windows size");
-
-		break;
-
-	case 829:
-		LOG("Checkbox Fullscreen check");
-
-		break;
-
-	case 830:
-		LOG("Checkbox Vsync check");
-
-		break;
-
-	case 831:
-		LOG("Button Max fps");
-
-		break;
-
-
-		// Audio settings
-	case 832:
-		LOG("Slider bar General volume");
-
-		break;
-
-	case 833:
-		LOG("Slider bar Music volume");
-
-		break;
-
-	case 834:
-		LOG("Slider bar Fx volume");
-
-		break;
-	}
-
-*/

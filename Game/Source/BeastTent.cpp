@@ -92,6 +92,8 @@ bool BeastTent::Start()
 		app->input->coso = false;
 	}
 
+	player->lockMovement = false;
+
 	return true;
 }
 
@@ -147,6 +149,7 @@ bool BeastTent::Update(float dt)
 			LOG("Combat");
 			app->audio->PlayFx(combatfx);
 			app->combat->PreLoadCombat(name);
+			player->lockMovement = true;
 
 			app->fade->FadingToBlack(this, (Module*)app->combat, 45); 
 			app->questManager->SaveState();

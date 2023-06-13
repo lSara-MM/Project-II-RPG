@@ -6,7 +6,6 @@
 #include "Log.h"
 
 #include "SDL_image/include/SDL_image.h"
-//#pragma comment(lib, "../Game/Source/External/SDL_image/libx86/SDL2_image.lib")
 
 Textures::Textures() : Module()
 {
@@ -60,7 +59,6 @@ bool Textures::CleanUp()
 			i++;
 		}
 	}
-
 	textures.Clear();
 	IMG_Quit();
 	return true;
@@ -71,8 +69,6 @@ SDL_Texture* const Textures::Load(const char* path)
 {
 	SDL_Texture* texture = NULL;
 	SDL_Surface* surface = IMG_Load(path);
-
-	//surface = IMG_Load_RW(app->assetsManager->Load(path), 1);
 
 	if(surface == NULL)
 	{
@@ -101,7 +97,6 @@ bool Textures::UnLoad(SDL_Texture* texture)
 			return true;
 		}
 	}
-
 	return false;
 }
 
@@ -118,7 +113,6 @@ SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface)
 	{
 		textures.Add(texture);
 	}
-
 	return texture;
 }
 

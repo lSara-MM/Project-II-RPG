@@ -85,7 +85,6 @@ bool Scene::Start()
 
 	if (app->iScene->continueGame_B || app->input->coso)
 	{
-		//app->LoadGameRequest();
 		app->iScene->continueGame_B = false;
 	}
 
@@ -124,7 +123,6 @@ bool Scene::Update(float dt)
 		{
 			player->lockMovement = false;
 			app->inventory->inventoryTransition_B = true;
-			//app->inventory->Disable();
 			app->audio->PlayFx(inventoryfx);
 		}
 		else 
@@ -293,7 +291,5 @@ bool Scene::InitEntities()
 	default:
 		break;
 	}
-
-	//app->entityManager->Awake();
 	return true;
 }
