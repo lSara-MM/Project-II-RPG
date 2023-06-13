@@ -54,31 +54,31 @@ And don't forget to collect information before facing a dungeon ;D
 ## How to play
 ### Player
 
-* **Player walk left** -> A / Right arrow / Left Joystick Gamepad
+* **Player walk left** -> A **/** Right arrow **/** Left Joystick Gamepad
 
-* **Player walk right** -> D / Left arrow / Left Joystick Gamepad
+* **Player walk right** -> D **/** Left arrow **/** Left Joystick Gamepad
 
-* **Player walk up** -> W / Up arrow / Left Joystick Gamepad
+* **Player walk up** -> W **/** Up arrow **/** Left Joystick Gamepad
 
-* **Player walk down** -> S / Down arrow / Left Joystick Gamepad
+* **Player walk down** -> S **/** Down arrow **/** Left Joystick Gamepad
 
-* **Player run** -> Left shift / B button gamepad
+* **Player run** -> Left shift **/** B button gamepad
 
-* **Interact**  -> E / A button gamepad
+* **Interact**  -> E **/** A button gamepad
 
-* **Inventory** -> I / Y button gamepad
+* **Inventory** -> I **/** Y button gamepad
 
-* **Minimap** -> M / X button gamepad
+* **Minimap** -> M **/** X button gamepad
 
-* **Party menu** -> P / SELECT gamepad
+* **Party menu** -> P **/** SELECT gamepad
 
-* **Inventory** -> I / Y button gamepad
+* **Inventory** -> I **/** Y button gamepad
 
-* **Pause menu** -> ESC / START gamepad
+* **Pause menu** -> ESC **/** START gamepad
 
 ### Menus
 
-* **Accept** -> Enter/ A button gamepad
+* **Accept** -> Enter **/** A button gamepad
 
 * **Exit menu** -> B button gamepad
 
@@ -86,23 +86,23 @@ And don't forget to collect information before facing a dungeon ;D
 
 ### Combat
 
-* **Go to Play Scene** -> F1 (only God Mode)
+* **Go to Play Scene** -> F1 **only God Mode)**
 
-* **Insta win** -> F3 (only God Mode)
+* **Insta win** -> F3 **(only God Mode)**
 
-* **Insta lose** -> F4 (only God Mode)
+* **Insta lose** -> F4 **(only God Mode)**
 
 * **Show GUI** -> F7
 
 * **God Mode** -> F10 
 
-* **Kill First Ally** -> 1 (only God Mode)
+* **Kill First Ally** -> 1 **(only God Mode)**
 
-* **Kill First Enemy -> 2 (only God Mode)
+* **Kill First Enemy** -> 2 **(only God Mode)**
 
-* **Next turn** -> 3 (only God Mode)
+* **Next turn** -> 3 **(only God Mode)**
 
-* **Enemies button handle** -> 4 (only God Mode)
+* **Enemies button handle** -> 4 **(only God Mode)**
 
 * **Allies button handle** -> 5 (only God Mode)
 
@@ -114,7 +114,7 @@ And don't forget to collect information before facing a dungeon ;D
 
 * **Go to Play Scene**  -> F1
 
-* **Go to Menu Scene** -> Return/A button Gamepad
+* **Go to Menu Scene** -> Return **/** A button Gamepad
 
 #### Menu scene
 
@@ -142,11 +142,11 @@ And don't forget to collect information before facing a dungeon ;D
 
 * **God Mode** -> F10
 
-* **Pause** -> ESC/START button Gamepad
+* **Pause** -> ESC **/** START button Gamepad
 
-* **Exit Pause** -> Return/B button Gamepad
+* **Exit Pause** -> Return **/** B button Gamepad
 
-* **Enter combat** -> C key/X button Gamepad
+* **Enter combat** -> C key **/** X button Gamepad
 
 * **Add one item of each type** -> 1 
 
