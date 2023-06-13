@@ -155,7 +155,6 @@ bool HouseOfTerrors::PostUpdate()
 {
 	bool ret = true;
 	app->menus->menuOn = player->lockMovement;
-	if (exit_B) return false;
 	return ret;
 }
 
