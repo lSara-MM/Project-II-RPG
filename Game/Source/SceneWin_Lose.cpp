@@ -166,14 +166,12 @@ bool SceneWin_Lose::Update(float dt)
 			app->questManager->SaveState();
 		}
 	}
-
 	return true;
 }
 
 bool SceneWin_Lose::PostUpdate()
 {
 	bool ret = true;
-
 	return ret;
 }
 
@@ -189,9 +187,7 @@ bool SceneWin_Lose::CleanUp()
 		app->guiManager->DestroyGuiControl(continueButton);
 		app->guiManager->DestroyGuiControl(returnButton);
 	}
-
 	app->questManager->active = true;
-
 	return true;
 }
 

@@ -22,7 +22,6 @@ enum class SkillType //
 	HEAL, //PAR DEFENSIVO
 	DEBUFF,
 	BUFF,
-	
 };
 
 enum class TargetingMethod //Como se ataca
@@ -34,7 +33,6 @@ enum class TargetingMethod //Como se ataca
 	LOWER_RESISTANCE,
 	FRONTLINE,
 	BACKLINE,
-	
 };
 // prueba
 class Skill
@@ -56,11 +54,9 @@ public:
 
 	int RandomTarget(int posInicial, int posFinal, vector<Character*> arr, TargetingMethod method = TargetingMethod::RANDOM);
 
-	 
 public:
 	SString name;
 	SString description;
-
 
 	SkillType type;
 
@@ -101,10 +97,7 @@ public:
 	bool autoTarget;//Targetearse a si mismo
 	TargetingMethod methodTarget; //Para enemigos solo, como targetean, si random, por vida, etc
 
-
 private:
-
-	
 };
 
 #endif // __SKILLS_H__

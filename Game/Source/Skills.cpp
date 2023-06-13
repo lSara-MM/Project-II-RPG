@@ -15,8 +15,7 @@ Skill::Skill()
 };
 
 Skill::~Skill()
-{
-}
+{}
 
 Skill::Skill(SString name, SString description, int posToUseStart_I, int posToUseEnd_I, int posToTargetStart_I, int posToTargetEnd_I, TargetingMethod method, int movementCaster, int movementTarget_,bool friendlyFire, bool areaSkill, bool autoTarget, float multiplierDmg_, int bonusAccuracy_, int bonusCritRate_, int bonusCritDamage_, int firstStatus, bool firstPositiveEffect,int firstDuration, int firstIntensity, int secondStatus, bool secondPositiveEffect, int secondDuration, int secondIntensity)
 {

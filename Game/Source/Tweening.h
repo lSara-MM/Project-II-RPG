@@ -37,10 +37,7 @@ enum Easings
     BACK_IN,
     BACK_OUT,
     BACK_IN_OUT
-
 };
-
-
 
 class Tween
 {
@@ -463,7 +460,6 @@ public:
         return tween.direction();
     }
     
-
     tweeny::tween<int> Main() const
     {
         return tween;

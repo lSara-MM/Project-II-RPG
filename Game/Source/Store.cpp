@@ -16,9 +16,7 @@ Store::Store(unsigned cap) : Module()
 
 // Destructor
 Store::~Store()
-{
-
-}
+{}
 
 bool Store::Start()
 {
@@ -49,7 +47,6 @@ bool Store::Start()
 
 	return true;
 }
-
 
 bool Store::PreUpdate()
 {
@@ -220,7 +217,6 @@ bool Store::OnGuiMouseHoverEvent(GuiControl* control)
 			app->itemManager->nodeList[i]->printStats = true;
 		}
 	}
-
 	return true;
 }
 
@@ -234,7 +230,6 @@ bool Store::OnGuiMouseOutHoverEvent(GuiControl* control)
 			app->itemManager->nodeList[i]->printStats = false;
 		}
 	}
-
 	return true;
 }
 
@@ -276,7 +271,6 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 					app->itemManager->nodeList[i]->toSell = false;
 					SellQuantity = 0;
 				}
-
 				CurrentPrice = app->itemManager->nodeList[i]->price * SellQuantity;
 			}
 		}
@@ -327,9 +321,7 @@ bool Store::OnGuiMouseClickEvent(GuiControl* control)
 				}
 			}
 		}
-
 		app->audio->PlayFx(buyfx);
-
 		break;
 
 	case 1502:
