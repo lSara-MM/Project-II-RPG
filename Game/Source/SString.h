@@ -304,9 +304,7 @@ public:
 					}
 				}
 			}
-
 		}
-
 		return instances;
 	}
 
@@ -327,7 +325,6 @@ public:
 				}
 			}
 		}
-
 		return ret;
 	}
 
@@ -338,7 +335,6 @@ private:
 		size = requiered_memory;
 		str = new char[size];
 	}
-
 };
 
 #endif // __SString_H__

@@ -128,8 +128,7 @@ bool SceneWin_Lose::Update(float dt)
 	{
 		offset = 1300;
 		app->render->DrawTexture(Win, 0, offset + point * (0 - offset));
-		offset = -1300;
-		app->render->TextDraw("VICTORY", 255, offset + point * (50 - offset), 175, Font::TEXT, { 255,255,255 });
+		app->render->TextDraw("VICTORY", 255, - offset + point * (50 + offset), 175, Font::TEXT, { 255,255,255 });
 		if (app->puzzleManager->fightBoss1)
 		{
 			app->puzzleManager->bossIsDead = true;
@@ -166,14 +165,12 @@ bool SceneWin_Lose::Update(float dt)
 			app->questManager->SaveState();
 		}
 	}
-
 	return true;
 }
 
 bool SceneWin_Lose::PostUpdate()
 {
 	bool ret = true;
-
 	return ret;
 }
 
@@ -189,9 +186,7 @@ bool SceneWin_Lose::CleanUp()
 		app->guiManager->DestroyGuiControl(continueButton);
 		app->guiManager->DestroyGuiControl(returnButton);
 	}
-
 	app->questManager->active = true;
-
 	return true;
 }
 
