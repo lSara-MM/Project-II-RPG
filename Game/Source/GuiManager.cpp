@@ -96,11 +96,9 @@ bool GuiManager::Update(float dt)
 			if (control->data->state != GuiControlState::NONE) { control->data->Update(dt); }
 			control = control->next;
 		}
-
 		accumulatedTime = 0.0f;
 		doLogic = false;
 	}
-	
 	return true;
 }
 
@@ -113,27 +111,17 @@ bool GuiManager::Draw() {
 		if (control->data->state != GuiControlState::NONE) { control->data->Draw(app->render); }
 		control = control->next;
 	}
-
 	return true;
 }
 
 bool GuiManager::CleanUp()
 {
-	/*ListItem<GuiControl*>* control = guiControlsList.start;
-
-	while (control != nullptr)
-	{
-		RELEASE(control);
-		
-	}*/
-
 	ListItem<GuiControl*>* item;
 
 	for (item = guiControlsList.start; item != NULL; item = item->next)
 	{
 		guiControlsList.Del(item);
 	}
-
 	return true;
 }
 

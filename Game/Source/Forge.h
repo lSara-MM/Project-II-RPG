@@ -47,16 +47,13 @@ public:
 	SDL_Texture* forgeTexture;
 	SDL_Texture* forgeInventoryTexture;
 
-
 	Tween forgeAnimation;//animacion tienda
 	bool forgeTransition_B;//controlar animacion tienda
 	int posYforgeAnimation;//hacer animacion salida tienda
 
 public:
 	pugi::xml_document crafts;
-
 private:
-
 	const char* fxforgepath;
 	uint forgefx;
 };

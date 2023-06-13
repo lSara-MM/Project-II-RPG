@@ -38,14 +38,12 @@ enum class GuiControlState
 	SELECTED
 };
 
-
 enum class ButtonType
 {
 	NONE,
 	EXTRA_LARGE,
 	LARGE,
 	SMALL,
-
 	START,
 	CLOSE,
 	MENU,
@@ -84,11 +82,9 @@ enum class AnimationAxis
 	FLEE,
 };
 
-
 class GuiControl
 {
 public:
-
 	GuiControl(GuiControlType type, uint32 id) : type(type), id(id), state(GuiControlState::NORMAL) {}
 
 	GuiControl(GuiControlType type, SDL_Rect bounds, const char* text, int fontSize) :
@@ -155,7 +151,6 @@ public:
 
 	const char* fxPath;
 	uint fxControl;
-
 
 	SDL_Texture* texture;   // Texture atlas reference
 	SDL_Rect section;       // Texture atlas base section

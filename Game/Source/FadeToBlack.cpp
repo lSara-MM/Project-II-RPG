@@ -19,7 +19,6 @@ FadeToBlack::FadeToBlack() : Module()
 
 FadeToBlack::~FadeToBlack()
 {
-
 }
 
 bool FadeToBlack::Awake(pugi::xml_node& config)
@@ -28,14 +27,11 @@ bool FadeToBlack::Awake(pugi::xml_node& config)
 	
 	texturepathIzq = config.attribute("texturepathIZQ").as_string();
 	texturepathDer = config.attribute("texturepathDER").as_string();
-
 	bool ret = true;
 	screenRect = { 0, 0, app->win->GetWidth() * app->win->GetScale(), app->win->GetHeight()* app->win->GetScale() };
-
 	backgroundAnimation.Set();
 	backgroundAnimation.AddTween(100, 30, CUBIC_OUT);
 	posYani_I = 0;
-	
 	return ret;
 }
 
@@ -57,8 +53,6 @@ bool FadeToBlack::Start()
 
 bool FadeToBlack::Update(float dt)
 {
-	//app->audio->PlayMusic(winMusicPath);
-
 	// Exit this function if we are not performing a fade
 	if (currentStep == Fade_Step::NONE) return true;
 
@@ -72,9 +66,7 @@ bool FadeToBlack::Update(float dt)
 				transition_B = true;
 				moduleToDisable->Disable();
 				moduleToEnable->Enable();
-
 				modulesOnOff = false;
-
 				currentStep = Fade_Step::FROM_BLACK;
 			}
 
@@ -93,7 +85,6 @@ bool FadeToBlack::Update(float dt)
 				}
 
 				ImagesOnOff = false;
-
 				currentStep = Fade_Step::FROM_BLACK;
 			}
 		}
@@ -106,7 +97,6 @@ bool FadeToBlack::Update(float dt)
 			currentStep = Fade_Step::NONE;
 		}
 	}
-
 	return true;
 }
 
@@ -144,7 +134,6 @@ bool FadeToBlack::PostUpdate()
 		offset = 1300;
 		app->render->DrawTexture(TransitionBG_Der, offset + point * (640 - offset) - app->render->camera.x, 0 - app->render->camera.y);
 	}
-
 	return true;
 }
 
@@ -152,7 +141,6 @@ bool  FadeToBlack::CleanUp()
 {
 	app->tex->UnLoad(TransitionBG_Izq);
 	app->tex->UnLoad(TransitionBG_Der);
-
 	return true;
 }
 
@@ -168,7 +156,6 @@ bool FadeToBlack::FadingToBlack(Module* moduleToDisable, Module* moduleToEnable,
 		currentStep = Fade_Step::TO_BLACK;
 		frameCount = 0;
 		maxFadeFrames = frames;
-
 	
 		this->moduleToDisable = moduleToDisable;
 		this->moduleToEnable = moduleToEnable;
@@ -177,7 +164,6 @@ bool FadeToBlack::FadingToBlack(Module* moduleToDisable, Module* moduleToEnable,
 
 		ret = true;
 	}
-
 	return ret;
 }
 
@@ -192,7 +178,6 @@ bool FadeToBlack::FadingToBlackImages(SDL_Texture* ImageToPass, SDL_Texture* Ima
 		frameCount = 0;
 		maxFadeFrames = frames;
 
-
 		this->ImageToPass = ImageToPass;
 		this->ImageToEnter = ImageToEnter;
 
@@ -200,6 +185,5 @@ bool FadeToBlack::FadingToBlackImages(SDL_Texture* ImageToPass, SDL_Texture* Ima
 
 		ret = true;
 	}
-
 	return ret;
 }

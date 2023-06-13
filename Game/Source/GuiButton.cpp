@@ -20,7 +20,6 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 	isForward_B = true;
 	animationButton.Set();
 	animationButton.AddTween(100, 80, eType);
-
 	buttonType = bType;
 
 	switch (bType)
@@ -108,7 +107,6 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 
 	fxHoverPath = "Assets/Audio/Fx/on_button.wav";
 	fxHover = app->audio->LoadFx(fxHoverPath);
-
 	fxclickPath = "Assets/Audio/Fx/Button_Menu.wav";
 	fxclick = app->audio->LoadFx(fxclickPath);
 	hoverTest = false;
@@ -117,10 +115,7 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, ButtonType bType, const char* t
 
 GuiButton::~GuiButton()
 {
-	//delete buttonTex;
 	app->tex->UnLoad(buttonTex);
-
-	// TO DO: arreglo feo temporal? com se borra un boto, pregunta seria
 	state = GuiControlState::NONE;
 }
 
@@ -128,11 +123,7 @@ bool GuiButton::Update(float dt)
 {
 	if (state != GuiControlState::DISABLED)
 	{
-		/*if (!app->input->gamepadGUI_B)
-		{*/
 			app->input->GetMousePosition(mouseX, mouseY);
-			//LOG("Mouse x: %d Mouse y: %d", mouseX, mouseY);
-			//LOG("bounds.x: %d bounds.h: %d", bounds.x, bounds.y);
 			
 			GuiControlState previousState = state;
 
@@ -149,17 +140,13 @@ bool GuiButton::Update(float dt)
 				}
 				if (previousState != state)
 				{
-					//LOG("Change state from %d to %d", previousState, state);
 				}
-
 				if (!isSelected)
 				{
 					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
 					{
-						//app->audio->PlayFx(fxclick);TODO:aclaracion->aqui suena todo el rato mientras mantienes pulsado, tecnicamente no se ha hecho el pressed como tal, eso es cuando sueltas
 						state = GuiControlState::PRESSED;
 					}
-
 					// If mouse button pressed -> Generate event!
 					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
 					{
@@ -175,41 +162,15 @@ bool GuiButton::Update(float dt)
 
 				NotifyObserverOutHover();
 			}
-		/*}
-		else
-		{
-			if (state == GuiControlState::FOCUSED)
-			{
-				if (hoverTest == false)
-				{
-					app->audio->PlayFx(fxHover);
-					hoverTest == true;
-				}
-				if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_REPEAT)
-				{
-					state = GuiControlState::PRESSED;
-				}
-			}
-
-			if (state == GuiControlState::PRESSED && app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == ButtonState::BUTTON_UP)
-			{
-				NotifyObserverOfClick();
-				state = GuiControlState::FOCUSED;
-			}
-		}*/
-		
 	}
-
 	if (isForward_B)
 	{
 		animationButton.Foward();
 	}
-
 	else
 	{
 		animationButton.Backward();
 	}
-
 	animationButton.Step(step, false);
 	return false;
 }
@@ -274,7 +235,6 @@ bool GuiButton::Draw(Render* render)
 	else if (buttonType == ButtonType::CHANGE_POSITION) { rect = { 401, 1, 47, 47 }; }
 
 	int offsetX = text.Length() * fontSize / 2;
-
 	int x = (bounds.w - offsetX) / 2;
 	int y = (bounds.h - fontSize) / 2;
 
@@ -287,13 +247,11 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::DISABLED:
 		{
 			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 200, 200, 200, 200, true, false);
-
 		} break;
 
 		case GuiControlState::NORMAL:
 		{
 			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h}, 0, 0, 255, 200, true, false);
-
 		}	break;
 
 		case GuiControlState::FOCUSED:
@@ -304,7 +262,6 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::PRESSED:
 		{
 			render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 255, 0, 200, true, false);
-
 		} break;
 
 		case GuiControlState::SELECTED:
@@ -389,7 +346,6 @@ bool GuiButton::Draw(Render* render)
 				break;
 			case ButtonType::SKIPPY:
 				break;
-
 			default:
 				break;
 			}
@@ -784,7 +740,6 @@ bool GuiButton::Draw(Render* render)
 			}
 		}
 	}
-
 	if (text != "")
 	{
 		if (buttonType == ButtonType::START) {
@@ -794,28 +749,20 @@ bool GuiButton::Draw(Render* render)
 			{
 				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 50, 50, 50 });
 			} break;
-
 			case GuiControlState::NORMAL:
 			{
 				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 163, 163, 163 });
-
 			} break;
-
 			case GuiControlState::FOCUSED:
 			{
 				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 249, 224, 58 });
-
 			} break;
-
 			case GuiControlState::PRESSED:
 			{
 				app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, { 180, 34, 42 });
-
 			} break;
-
 			case GuiControlState::SELECTED:
 				break;
-
 			default:
 				break;
 			}
@@ -823,16 +770,12 @@ bool GuiButton::Draw(Render* render)
 		else if (buttonType == ButtonType::DIALOGUE)
 		{
 			offsetX = fontSize * 2.75f;
-
 			int offsetY = fontSize;
 			int max_chars_line = 31;
 
 			app->render->RenderTrimmedText(bounds.x + offsetX, bounds.y + offsetY, 2, text, &texts, fontSize, max_chars_line, color, Font::UI, 2.5f);
 		}
-		else if (buttonType == ButtonType::SKIPPY && state == GuiControlState::DISABLED)
-		{
-			//no printar nada si disabled
-		}
+		else if (buttonType == ButtonType::SKIPPY && state == GuiControlState::DISABLED){}
 		else
 		{
 			if (buttonType == ButtonType::SETTINGS_TEXT)//no hace falta centre el texto en este caso
@@ -840,7 +783,6 @@ bool GuiButton::Draw(Render* render)
 				x = 0; y = 0;
 			}
 			app->render->TextDraw(text.GetString(), bounds.x + x, bounds.y + y, fontSize, font, color);
-			
 		}
 	}
 	return false;
@@ -872,6 +814,5 @@ void GuiButton::DrawSkill(int charaId, int skillNumber, int state)
 		break;
 	}
 	app->render->DrawTexture(buttonTex, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &rect);
-
 }
 

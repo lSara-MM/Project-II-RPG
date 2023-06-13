@@ -2,7 +2,6 @@
 #define __GUI_SLIDERBAR_H__
 
 #include "GuiControl.h"
-
 #include "Log.h"
 #include "Point.h"
 #include "SString.h"
@@ -41,7 +40,6 @@ private:
 	//fx
 	const char* slidepath;
 	uint slidefx;
-
 };
 
 #endif // __GUI_SLIDERBAR_H__

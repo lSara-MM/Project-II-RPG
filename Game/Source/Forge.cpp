@@ -17,7 +17,6 @@ Forge::Forge(unsigned cap) : Module()
 // Destructor
 Forge::~Forge()
 {
-
 }
 
 bool Forge::Start()
@@ -44,7 +43,6 @@ bool Forge::Start()
 	return true;
 }
 
-
 bool Forge::PreUpdate()
 {
 	return true;
@@ -69,7 +67,6 @@ bool Forge::Update(float dt)
 				app->itemManager->armorItems[i]->button->state = GuiControlState::NONE;
 			}
 		}
-
 		if (posYforgeAnimation == -750)
 		{
 			this->Disable();
@@ -87,13 +84,11 @@ bool Forge::Update(float dt)
 	app->render->DrawTexture(forgeTexture, 80 - app->render->camera.x, posYforgeAnimation - app->render->camera.y);
 	app->render->DrawTexture(forgeInventoryTexture, 700 - app->render->camera.x, offset + point * (80 - offset) - app->render->camera.y);
 	bool ret = true;
-
 	return ret;
 }
 
 bool Forge::PostUpdate()
 {
-
 	//Load all items
 	int x = 0;
 	int y = 0;
@@ -265,7 +260,6 @@ bool Forge::IsForge(int ID0, int ID1, bool armor)
 			}
 		}
 	}
-	//pugiNode.attribute("name").as_string()
 	return ret;
 }
 
@@ -291,7 +285,6 @@ bool Forge::OnGuiMouseHoverEvent(GuiControl* control)
 			}
 		}
 	}
-
 	return true;
 }
 
@@ -311,7 +304,6 @@ bool Forge::OnGuiMouseOutHoverEvent(GuiControl* control)
 			app->itemManager->armorItems[i]->printStats = false;
 		}
 	}
-
 	return true;
 }
 
@@ -328,7 +320,6 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 				app->itemManager->nodeList[i]->craft = false;
 				break;
 			}
-
 			if (app->itemManager->nodeList[i]->craft && forgePos != 0 && app->itemManager->nodeList[i]->forgePos != 0)
 			{
 				if (forgePos == 1 && app->itemManager->nodeList[i]->forgePos == 1)
@@ -347,7 +338,6 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 					break;
 				}
 			}
-
 			if (app->itemManager->nodeList[i]->craft && forgePos == 0)
 			{
 				app->itemManager->nodeList[i]->forgePos = 1;
@@ -373,7 +363,6 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 				app->itemManager->armorItems[i]->craft = false;
 				break;
 			}
-
 			if (app->itemManager->armorItems[i]->craft && forgePos != 0 && app->itemManager->armorItems[i]->forgePos != 0)
 			{
 				if (forgePos == 1 && app->itemManager->armorItems[i]->forgePos == 1)
@@ -392,7 +381,6 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 					break;
 				}
 			}
-
 			if (app->itemManager->armorItems[i]->craft && forgePos == 0)
 			{
 				app->itemManager->armorItems[i]->forgePos = 1;
@@ -405,7 +393,6 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 				forgePos = 2;
 				break;
 			}
-
 		}
 	}
 
@@ -427,7 +414,6 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 
 	switch (control->id)
 	{
-
 	case 1501:
 		forgeTransition_B = true;
 		exitButton->isForward_B = false;
@@ -461,7 +447,6 @@ bool Forge::OnGuiMouseClickEvent(GuiControl* control)
 						app->itemManager->MinusQuantity(app->itemManager->nodeList[j]);
 						app->itemManager->nodeList[j]->CleanUp();
 					}
-
 				}
 				for (size_t j = 0; j < app->itemManager->armorItems.size(); j++)
 				{
