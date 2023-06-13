@@ -10,11 +10,15 @@
 #include "Scene.h"
 #include "GuiButton.h"
 #include "GuiManager.h"
+#include "HouseOfTerrors.h"
+#include "PracticeTent.h"
+#include "BeastTent.h"
 #include "Inventory.h"
 #include "Player.h"
 #include "Character.h"
 #include "Combat.h"
 #include <vector>
+
 using namespace std;
 
 class ItemNode

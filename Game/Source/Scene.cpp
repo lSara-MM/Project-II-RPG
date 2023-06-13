@@ -64,6 +64,10 @@ bool Scene::Start()
 	app->moduleparticles->Enable();
 	app->questManager->Enable();
 	app->itemManager->Enable();
+	if (app->lootManager->active)
+	{
+		app->lootManager->Start();
+	}
 	app->lootManager->Enable();
 
 	app->puzzleManager->active = false;
@@ -81,12 +85,6 @@ bool Scene::Start()
 	npcSetID = 1;
 	InitEntities();
 	app->entityManager->Enable();
-
-
-	if (app->iScene->continueGame_B || app->input->coso)
-	{
-		app->iScene->continueGame_B = false;
-	}
 
 	// If se ha guardado anteriormente, teleport el player donde estaba en el guardado
 	if (app->input->coso && app->entityManager->tpID != 21)

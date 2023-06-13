@@ -500,6 +500,7 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 		node->max = pugiNode.attribute("max").as_int();
 		nodeList.push_back(node);
 	}
+
 	if (app->iScene->continueGame_B)
 	{
 		LoadItemState();
@@ -508,8 +509,6 @@ void ItemManager::LoadNodes(pugi::xml_node& xml_trees, ItemNode* item)
 	}
 	else
 	{
-		SaveItemState();
-
 		app->iScene->continueGame_B = true;
 	}
 }
@@ -1025,6 +1024,7 @@ bool ItemManager::SaveItemState()
 		armor.append_attribute("speed") = armorItems[i]->speed;
 	}
 	ret = saveDoc->save_file("save_items.xml");
+
 	return ret;
 }
 
@@ -1033,6 +1033,7 @@ bool ItemManager::LoadItemState()
 	bool ret = true;
 	const char* file = "save_items.xml";
 	items.load_file(file);
+
 	//Load items
 	for (pugi::xml_node pugiNode = items.first_child().first_child().first_child(); pugiNode != NULL; pugiNode = pugiNode.next_sibling("item"))
 	{
@@ -1046,6 +1047,7 @@ bool ItemManager::LoadItemState()
 	}
 	pugi::xml_node pugiNode = items.first_child().first_child().child("coins");
 	coins = pugiNode.attribute("coin").as_int();
+
 	return ret;
 }
 
