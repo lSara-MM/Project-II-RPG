@@ -180,7 +180,7 @@ And place them. Now you can fight the boss.
 
 ## FORGE AND STORE METADATA
 
-![link](https://docs.google.com/spreadsheets/d/1KOsOuvvZcRZfYQ5oqry389BhcAY8g0lMMocOFgo-GLU/edit?usp=sharing)
+https://docs.google.com/spreadsheets/d/1KOsOuvvZcRZfYQ5oqry389BhcAY8g0lMMocOFgo-GLU/edit?usp=sharing
 
 ## Controls
 
