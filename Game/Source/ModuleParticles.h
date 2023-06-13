@@ -62,8 +62,6 @@ private:
 	SDL_Texture* texture1 = nullptr;
 	SDL_Texture* texture2 = nullptr;
 	SDL_Texture* texture3 = nullptr;
-	
-
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };
 };

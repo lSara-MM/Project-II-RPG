@@ -15,9 +15,7 @@ ModuleParticles::ModuleParticles() : Module()
 }
 
 ModuleParticles::~ModuleParticles()
-{
-
-}
+{}
 
 bool ModuleParticles::Start()
 {
@@ -26,24 +24,6 @@ bool ModuleParticles::Start()
 	texture1 = app->tex->Load("Assets/Textures/particle1.png");
 	texture2 = app->tex->Load("Assets/Textures/particle2.png");
 	texture3 = app->tex->Load("Assets/Textures/particle3.png");
-	//// Explosion particle
-	//explosion.anim.PushBack({246, 87, 27, 28});
-	//explosion.anim.PushBack({276, 86, 31, 33});
-	//explosion.anim.PushBack({310, 86, 28, 32});
-	//explosion.anim.PushBack({342, 87, 29, 29});
-	//explosion.anim.loop = false;
-	//explosion.anim.speed = 0.3f;
-	//
-	//// Granade explosion
-	//explosionG.anim.PushBack({ 0, 404, 49, 55 });
-	//explosionG.anim.PushBack({ 49, 404, 49, 55 });
-	//explosionG.anim.PushBack({ 98, 404, 49, 55 });
-	//explosionG.anim.PushBack({ 147, 404, 49, 55 });
-	//explosionG.anim.PushBack({ 196, 404, 49, 55 });
-	//explosionG.anim.PushBack({ 245, 404, 49, 55 });
-	//explosionG.anim.loop = false;
-	//explosionG.anim.speed = 0.3f;
-
 	return true;
 }
 
@@ -58,14 +38,11 @@ bool ModuleParticles::PreUpdate()
 			particles[i] = nullptr;
 		}
 	}
-
 	return true;
 }
 
 bool ModuleParticles::CleanUp()
 {
-	/*LOG("Unloading particles");*/
-
 	// Delete all remaining active particles on application exit 
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -75,7 +52,6 @@ bool ModuleParticles::CleanUp()
 			particles[i] = nullptr;
 		}
 	}
-
 	return true;
 }
 
@@ -106,7 +82,6 @@ bool ModuleParticles::Update(float dt)
 			particles[i]->SetToDelete();
 		}
 	}
-
 	return true;
 }
 
@@ -116,17 +91,14 @@ bool ModuleParticles::PostUpdate()
 	for (uint i = 0; i < 500; ++i)
 	{
 		Particle* particle = particles[i];
-
 		if (particle != nullptr && particle->isAlive && particleType == 0)
 		{
 			app->render->DrawTexture(texture0, particle->position.x, particle->position.y);
 		}
-
 		if (particle != nullptr && particle->isAlive && particleType == 1)
 		{
 			app->render->DrawTexture(texture1, particle->position.x, particle->position.y);
 		}
-
 		if (particle != nullptr && particle->isAlive && particleType == 2)
 		{
 			app->render->DrawTexture(texture2, particle->position.x, particle->position.y);
@@ -203,7 +175,6 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 			}
 		}
 	}
-
 		if (particleType == 1)
 		{
 			//Create particles like an explosion
@@ -242,7 +213,6 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 					newParticle->lifetime = delay;			// We start the frameCount as the negative delay
 					float particleX = x + static_cast<float>(rand() % 10);
 					float particleY = y;
-
 					newParticle->position.x = particleX;
 					newParticle->position.y = particleY;
 
@@ -252,17 +222,14 @@ Particle* ModuleParticles::AddParticle(int x, int y, int delay, int m, int quant
 						newParticle->speed.y = static_cast<float>(rand() % (10 + speedY) - (15 + speedY));  // Rango: -15 a -5 hacia arriba
 						newParticle->isAlive = true;
 					}
-
 					if (particleType == 3) {
 						newParticle->speed.x = static_cast<float>(rand() % speedX - (speedX / 2));  // Rango: -3 a 3 en movimiento horizontal
 						newParticle->speed.y = static_cast<float>(rand() % (10 + speedY) + (5 + speedY));  // Rango: 5 a 14 hacia abajo
 						newParticle->isAlive = true;
 					}
-
 					particles[i] = newParticle;
 				}
 			}
 		}
-
 		return newParticle;
 	}
