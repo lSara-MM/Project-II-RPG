@@ -355,7 +355,6 @@ private:
 	const char* interactionPath;
 	uint interactionfx;
 	bool interactionTest;
-
 };
 
 #endif // __SCENE_H__

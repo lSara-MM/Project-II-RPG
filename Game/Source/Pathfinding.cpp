@@ -187,7 +187,6 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 		// Iterate while we have tile in the open list
 		while (open.list.Count() > 0)
 		{
-		
 			ListItem<PathNode>* lowest = open.GetNodeLowestScore();
 			ListItem<PathNode>* node = closed.list.Add(lowest->data);
 			open.list.Del(lowest);

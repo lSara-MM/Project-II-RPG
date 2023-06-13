@@ -46,7 +46,6 @@ bool Physics::Start()
 	return true;
 }
 
-// 
 bool Physics::PreUpdate()
 {
 	bool ret = true;
@@ -70,7 +69,6 @@ bool Physics::PreUpdate()
 				pb1->listener->OnCollision(pb1, pb2);
 		}
 	}
-
 	return ret;
 }
 
@@ -385,8 +383,6 @@ void Physics::EndContact(b2Contact* contact)
 		physB->listener->EndContact(physB, physA);
 }
 
-//--------------- PhysBody
-
 void PhysBody::GetPosition(int& x, int& y) const
 {
 	b2Vec2 pos = body->GetPosition();
@@ -432,8 +428,6 @@ int PhysBody::RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& no
 	{
 		if (fixture->GetShape()->RayCast(&output, input, body->GetTransform(), 0) == true)
 		{
-			// do we want the normal ?
-
 			float fx = x2 - x1;
 			float fy = y2 - y1;
 			float dist = sqrtf((fx * fx) + (fy * fy));
@@ -445,6 +439,5 @@ int PhysBody::RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& no
 		}
 		fixture = fixture->GetNext();
 	}
-
 	return ret;
 }

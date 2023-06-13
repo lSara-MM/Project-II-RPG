@@ -25,9 +25,7 @@ QuestManager::QuestManager() : Module()
 
 // Destructor
 QuestManager::~QuestManager()
-{
-
-}
+{}
 
 // Called before render is available
 bool QuestManager::Awake(pugi::xml_node& config)
@@ -188,7 +186,6 @@ bool QuestManager::Update(float dt)
 		if (quest1->complete)
 		{
 			//Quest1 Completed
-			//quest1->active = false;
 
 			RQ1 = 124;
 			GQ1 = 252;
@@ -212,7 +209,6 @@ bool QuestManager::Update(float dt)
 		if (quest2->complete)
 		{
 			//Quest2 Completed
-			//quest2->active = false;
 			RQ2 = 124;
 			GQ2 = 252;
 			BQ2 = 0;
@@ -234,7 +230,6 @@ bool QuestManager::Update(float dt)
 		if (quest3->complete)
 		{
 			//Quest3 Completed
-			//quest3->active = false;
 			RQ3 = 124;
 			GQ3 = 252;
 			BQ3 = 0;
@@ -257,7 +252,6 @@ List<Quest*> QuestManager::GetQuestByType(QuestType type)
 			result.Add(quests[i]);
 		}
 	}
-
 	return result;
 }
 
@@ -331,7 +325,6 @@ bool QuestManager::LoadState() {
 		quest2->complete = gameStateFile.child("save_state").child("quests").attribute("quest2_Complete").as_bool();
 		quest3->complete = gameStateFile.child("save_state").child("quests").attribute("quest3_Complete").as_bool();
 	}
-
 	return ret;
 }
 

@@ -71,9 +71,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 }
 
-Player::~Player() {
-
-}
+Player::~Player() {}
 
 bool Player::Awake() {
 
@@ -190,7 +188,7 @@ bool Player::Update(float dt)
 		}
 	}
 
-	/*Hasta aqu� PuzzleManager*/
+	/*Hasta aqui PuzzleManager*/
 
 	if (app->menus->pause_B || app->menus->pause_B || app->menus->pause_B)
 	{
@@ -211,7 +209,6 @@ bool Player::Update(float dt)
 				//Desplazar camara con suavidad (estaria bien un speed up en funcion distancia) hacia el centro
 				if (app->render->camera.x > -3450 + 625 - width) { app->render->camera.x -= 2; }
 				if (app->render->camera.x < -3450 + 655 - width) { app->render->camera.x += 2; }
-				//app->render->camera.x = -3450 + 640 - width;
 				if (app->render->camera.y < -position.y + 335 - height) 
 				{ 
 					app->render->camera.y += 12;
@@ -254,7 +251,6 @@ bool Player::Update(float dt)
 					{ app->render->camera.x += 12; }
 					else { app->render->camera.x = -position.x + 640 - width; }
 				}
-
 				//Control de Y del mapa
 				if (position.y < 2070 && position.y > 1400) //Borde arriba (zona vacia por el pasillo a la carpa)
 				{
@@ -283,9 +279,6 @@ bool Player::Update(float dt)
 					else if (app->render->camera.y < -position.y + 335 - height) { app->render->camera.y += 15; }
 					else { app->render->camera.y = -position.y + 360 - height; }
 				}
-
-				/*app->render->camera.y = -position.y + 360 - height;
-				app->render->camera.x = -position.x + 640 - width;*/
 			}
 		}
 		else if (app->practiceTent->active == true) //La tienda es tan pequeña que necesita de 
@@ -320,8 +313,6 @@ bool Player::Update(float dt)
 			}
 		}
 	}
-
-
 	vel = b2Vec2(vel.x * dtP, vel.y * dtP);
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);
@@ -344,7 +335,6 @@ bool Player::Update(float dt)
 			app->audio->PlayFx(interactionfx);
 			interactionTest = true;
 		}
-
 		if (!lockMovement)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
@@ -361,19 +351,16 @@ bool Player::Update(float dt)
 					keyLockUp = false;
 					currentAnimation = &idleUpAnim;
 				}
-
 				if (keyLockDown)
 				{
 					keyLockDown = false;
 					currentAnimation = &idleDownAnim;
 				}
-
 				if (keyLockLeft)
 				{
 					keyLockLeft = false;
 					currentAnimation = &idleLeftAnim;
 				}
-
 				if (keyLockRigth)
 				{
 					keyLockRigth = false;
@@ -381,7 +368,6 @@ bool Player::Update(float dt)
 				}
 			}
 		}
-
 		if (app->dialogueSystem->hasEnded && !app->store->active && !app->forge->active)
 		{
 			lockMovement = false;
@@ -389,7 +375,6 @@ bool Player::Update(float dt)
 			app->dialogueSystem->Disable();
 		}
 	}
-
 	if (Chest_contact)
 	{
 		app->render->DrawTexture(textureE, app->lootManager->chests[Chest_ID]->x + 40, app->lootManager->chests[Chest_ID]->y - 20);
@@ -399,7 +384,6 @@ bool Player::Update(float dt)
 			app->audio->PlayFx(interactionfx);
 			interactionTest = true;
 		}
-
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_A) == BUTTON_DOWN)
 		{
 			Chest_contact = false;
@@ -408,7 +392,6 @@ bool Player::Update(float dt)
 			app->audio->PlayFx(chestfx);
 		}
 	}
-
 	app->map->SpriteSortingTiled();
 
 	/*MiniMapa*/
@@ -426,7 +409,6 @@ bool Player::Update(float dt)
 	{
 		currentMiniMap = miniMap;
 	}
-
 	if ((app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_X) == ButtonState::BUTTON_DOWN)
 		&& !app->store->active && !app->dialogueSystem->active && !app->forge->active && !app->inventory->active && !app->menus->pause_B)
 	{
@@ -466,8 +448,6 @@ bool Player::Update(float dt)
 		//3899 1027
 		app->render->DrawTexture(dotPlayer, posMiniMap.x + 1056 / 10 + 60, offset + point * (posMiniMap.y + 2978 / 10 + 60 - offset));
 	}
-
-	//}
 	/*MiniMapa*/
 
 	if (!lockMovement)
@@ -477,7 +457,6 @@ bool Player::Update(float dt)
 
 	return true;
 }
-
 
 bool Player::CleanUp()
 {
@@ -517,7 +496,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB)
 				break;
 			}
 		}
-
 		npcInteract = true;
 		break;
 	case ColliderType::LOOT:
@@ -848,7 +826,6 @@ void Player::Controller(float dt)
 				{
 					app->audio->PlayFx(walk_grass, 0);
 				}
-
 				keyLockUp = true;
 				currentAnimation = &upAnim;
 				vel.y = -125 * 8;
@@ -1109,7 +1086,6 @@ void Player::Controller(float dt)
 				app->render->camera.x -= ceil(speed);
 			}
 		}
-
 		currentAnim.speed = currentAnim.speed * 3;
 
 		//Shift acelerar la velocidad
