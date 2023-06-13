@@ -354,7 +354,7 @@ void ItemManager::UseItem(ItemNode* item)
 			app->audio->PlayFx(potyfx);
 			break;
 		case 86:
-			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(app->combat->listInitiative[app->combat->charaInTurn]->maxHp / item->hp);
+			app->combat->listInitiative[app->combat->charaInTurn]->ModifyHP(app->combat->listInitiative[app->combat->charaInTurn]->maxHp / 2);
 			app->audio->PlayFx(potyfx);
 			break;
 		case 87:
