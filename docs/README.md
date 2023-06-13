@@ -86,79 +86,79 @@ And don't forget to collect information before facing a dungeon ;D
 
 ### Combat
 
-* Go to Play Scene -> F1 (only God Mode)
+* **Go to Play Scene** -> F1 (only God Mode)
 
-* Insta win -> F3 (only God Mode)
+* **Insta win** -> F3 (only God Mode)
 
-* Insta lose-> F4 (only God Mode)
+* **Insta lose** -> F4 (only God Mode)
 
-* Show GUI -> F7
+* **Show GUI** -> F7
 
-* God Mode -> F10 
+* **God Mode** -> F10 
 
-* Kill First Ally -> 1 (only God Mode)
+* **Kill First Ally** -> 1 (only God Mode)
 
-* Kill First Enemy -> 2 (only God Mode)
+* **Kill First Enemy -> 2 (only God Mode)
 
-* Next turn -> 3 (only God Mode)
+* **Next turn** -> 3 (only God Mode)
 
-* Enemies button handle -> 4 (only God Mode)
+* **Enemies button handle** -> 4 (only God Mode)
 
-* Allies button handle -> 5 (only God Mode)
+* **Allies button handle** -> 5 (only God Mode)
 
-* Fully heal party -> 6 (only God Mode)
+* **Fully heal party** -> 6 (only God Mode)
 
 ### Debug
 
 #### Logo scene
 
-* Go to Play Scene  -> F1
+* **Go to Play Scene**  -> F1
 
-* Go to Menu Scene -> Return/A button Gamepad
+* **Go to Menu Scene** -> Return/A button Gamepad
 
 #### Menu scene
 
-* Go to Play Scene  -> F1
+* **Go to Play Scene**  -> F1
 
-* Show GUI -> F2
+* **Show GUI** -> F2
 
-* Mute sound -> M key
+* **Mute sound** -> M key
 
 #### Play scene
 
-* Restart -> F3
+* **Restart** -> F3
 
-* Return to Menu scene -> F4
+* **Return to Menu scene** -> F4
 
-* Save game -> F5
+* **Save game** -> F5
 
-* Load game -> F6
+* **Load game** -> F6
 
-* Show GUI -> F7
+* **Show GUI** -> F7
 
-* Show collisions -> F8
+* **Show collisions** -> F8
 
-* Enable/disable FRCAP -> F9
+* **Enable/disable FRCAP** -> F9
 
-* God Mode -> F10
+* **God Mode** -> F10
 
-* Pause -> ESC/START button Gamepad
+* **Pause** -> ESC/START button Gamepad
 
-* Exit Pause -> Return/B button Gamepad
+* **Exit Pause** -> Return/B button Gamepad
 
-* Enter combat -> C key/X button Gamepad
+* **Enter combat** -> C key/X button Gamepad
 
-* Add one item of each type -> 1 
+* **Add one item of each type** -> 1 
 
-* Start Combat -> X
+* **Start Combat** -> X
 
 ### House of Terrors
 
-* Code puzzle = 344
+* **Code puzzle** = 344
 
-* Add Fire Eater to party -> P + E
+* **Add Fire Eater to party** -> P + E
 
-* Add boss dead -> B
+* **Add boss dead** -> B
 
 ## Team Members
 
