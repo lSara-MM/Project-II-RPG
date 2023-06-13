@@ -486,7 +486,7 @@ enum class CharacterClass
 		
 		sectionX="26" sectionY="0"/>
 
-		<enemy name ="The Beast" id="21" maxHp="4300" currentHp="4000" attack="400" armor="55" critRate="30" critDamage="50" accuracy="30" res="10" dodge="0" speed="20"
+		<enemy name ="The Beast" id="21" maxHp="4300" currentHp="4000" attack="400" armor="55" critRate="30" critDamage="50" accuracy="30" res="50" dodge="0" speed="20"
         type="1" class="8" skill1ID="53" skill2ID="54" skill3ID="55" skill4ID="56"
                
         width="0" heigth="0"
