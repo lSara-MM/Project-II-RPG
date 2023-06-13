@@ -64,11 +64,13 @@ bool PuzzleManager::Start()
 {
 	if (app->hTerrors->active) 
 	{
+		app->hTerrors->player->lockMovement = false;
 		Dun1Start();
 	}
 
 	if (app->BeastT->active)
 	{
+		app->BeastT->player->lockMovement = false;
 		Dun2Start();
 	}
 	
