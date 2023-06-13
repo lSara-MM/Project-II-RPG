@@ -76,7 +76,7 @@ TargetingMethod //Como se ataca
 		   firstStatusID="2" firstStatusPositive="true" firstStatusDuration="3" firstStatusIntesity="30"
 		   secondStatusID="1" secondStatusPositive="true" secondStatusDuration="3" secondStatusIntesity="30"
 	/>
-	<skill name="I trust you!" id="7" description="Words of support intertwined with cautious undertones. Heals an ally and increse their defense 1 turn by 75 and marks them while moves you backwards." 
+	<skill name="I trust you!" id="7" description="Words of support intertwined with cautious undertones. Heals an ally and increse their defense 2 turn by 110 and marks them while moves them forward." 
 		   type="3" movementCaster="0"  movementTarget="-1" targetMethod="0"
 	   multiplierDmg="1.1" bonusAccuracy="0" bonusCritRate="-200" bonusCritDamage="0"
 		   posToUseStart="0" posToUseEnd="2" posToTargetStart="0" posToTargetEnd="3" friendlyFire="true" areaSkill="false" autoTarget="false"
