@@ -79,6 +79,9 @@ bool HouseOfTerrors::Start()
 		player->pbody->body->SetTransform({ PIXEL_TO_METERS(app->input->posX),PIXEL_TO_METERS(app->input->posY) }, 0);
 		app->input->coso = false;
 	}
+
+	player->lockMovement = false;
+
 	return true;
 }
 
@@ -134,6 +137,7 @@ bool HouseOfTerrors::Update(float dt)
 			//app->SaveGameRequest();
 			app->audio->PlayFx(combatfx);
 			app->combat->PreLoadCombat(name);
+			player->lockMovement = true;
 			app->fade->FadingToBlack(this, (Module*)app->combat, 45);
 			app->questManager->SaveState();
 			app->puzzleManager->CleanUp();

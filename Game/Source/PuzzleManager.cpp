@@ -64,11 +64,13 @@ bool PuzzleManager::Start()
 {
 	if (app->hTerrors->active) 
 	{
+		app->hTerrors->player->lockMovement = false;
 		Dun1Start();
 	}
 
 	if (app->BeastT->active)
 	{
+		app->BeastT->player->lockMovement = false;
 		Dun2Start();
 	}
 	
@@ -2236,7 +2238,14 @@ bool PuzzleManager::RelicsPuz()
 				RelicColumnContact1 = false;
 				Relic1Invent = false;
 				RelicInColumn1 = true;
-				app->itemManager->MinusQuantity(app->itemManager->nodeList[110]);
+
+				for (int i=0; i< app->itemManager->nodeList.size(); i++)
+				{
+					if (app->itemManager->nodeList[i]->ID = 110)
+					{
+						app->itemManager->MinusQuantity(app->itemManager->nodeList[i]);
+					}
+				}
 
 
 				app->questManager->SaveState();
@@ -2263,7 +2272,14 @@ bool PuzzleManager::RelicsPuz()
 				RelicColumnContact2 = false;
 				Relic2Invent = false;
 				RelicInColumn2 = true;
-				app->itemManager->MinusQuantity(app->itemManager->nodeList[111]);
+
+				for (int i = 0; i < app->itemManager->nodeList.size(); i++)
+				{
+					if (app->itemManager->nodeList[i]->ID = 111)
+					{
+						app->itemManager->MinusQuantity(app->itemManager->nodeList[i]);
+					}
+				}
 
 				app->questManager->SaveState();
 			}
@@ -2289,7 +2305,14 @@ bool PuzzleManager::RelicsPuz()
 				RelicColumnContact3 = false;
 				Relic3Invent = false;
 				RelicInColumn3 = true;
-				app->itemManager->MinusQuantity(app->itemManager->nodeList[109]);
+
+				for (int i = 0; i < app->itemManager->nodeList.size(); i++)
+				{
+					if (app->itemManager->nodeList[i]->ID = 109)
+					{
+						app->itemManager->MinusQuantity(app->itemManager->nodeList[i]);
+					}
+				}
 
 				app->questManager->SaveState();
 			}

@@ -70,6 +70,7 @@ bool ItemManager::Start()
 
 bool ItemManager::Update(float dt)
 {
+
 	return true;
 }
 
