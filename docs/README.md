@@ -175,7 +175,7 @@ Code / Design / UI
 Code / Design / UI
 
 **[Alberto Hidalgo García](https://github.com/TheimerTR)**
-Code / UI / Art
+Code / UI
 
 **[Andreu Miro Sabater](https://github.com/AndreuMiroSabate)**
 Code / Sound / Design 
@@ -187,7 +187,7 @@ Art / UI / Design
 Code / Design / Art / UI
 
 **[Guillem Pol Aixut Anderiz](https://github.com/GuillemAixut)**
-Art / Clown / UI
+Art / UI
 
 
 
