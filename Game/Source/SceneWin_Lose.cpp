@@ -135,8 +135,8 @@ bool SceneWin_Lose::Update(float dt)
 	if (win)
 	{
 		offset = 1300;
-		app->render->DrawTexture(Win, 0, offset + point * (0 - offset));
-		app->render->TextDraw("VICTORY", 255, -offset + point * (50 + offset), 175, Font::TEXT, { 255,255,255 });
+		app->render->DrawTexture(Win, 0-app->render->camera.x, offset + point * (0 - offset) - app->render->camera.y);
+		app->render->TextDraw("VICTORY", 255-app->render->camera.x, -offset + point * (50 + offset) - app->render->camera.y, 175, Font::TEXT, { 255,255,255 });
 		if (app->puzzleManager->fightBoss1)
 		{
 			app->puzzleManager->bossIsDead = true;
@@ -158,9 +158,9 @@ bool SceneWin_Lose::Update(float dt)
 	else
 	{
 		offset = 750;
-		app->render->DrawTexture(Lose, offset + point * (0 - offset), 0);
-		app->render->TextDraw("You failed", 435, offset + point * (40 - offset), 75, Font::TEXT, { 255,255,255 });
-		app->render->TextDraw("get stronger and try again", 115, offset + point * (130 - offset), 75, Font::TEXT, { 255,255,255 });
+		app->render->DrawTexture(Lose, offset + point * (0 - offset) - app->render->camera.x, 0 - app->render->camera.y);
+		app->render->TextDraw("You failed", 435 - app->render->camera.x, offset + point * (40 - offset) - app->render->camera.y, 75, Font::TEXT, { 255,255,255 });
+		app->render->TextDraw("get stronger and try again", 115 - app->render->camera.x, offset + point * (130 - offset) - app->render->camera.y, 75, Font::TEXT, { 255,255,255 });
 		
 		if (app->puzzleManager->fightBoss1)
 		{
