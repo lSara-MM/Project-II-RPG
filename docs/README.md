@@ -14,13 +14,11 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 
 * 2 Diferent Dungeons to explore 
 
-* More than 8 different enemies
+* More than 8  different enemies
 
 * 4 different team members
 
-* Amacing Cinematics
-
-* +100 objects and equipment with multiple benefits
+* Wide variety of objects and equipment with multiple benefits
 
 * Different puzzles and riddles
 
@@ -29,14 +27,6 @@ Explore the circus, solves puzzles, makes new friends, defeats different enemies
 * Shop and innovative forge system
 
 * Multiple Buffs and Debuffs
-
-* Remarkable variety of NPCs
-
-* Minimap
-
-* Animated UI
-
-* Original Particles
 
 ## Game Preview
 
@@ -59,6 +49,134 @@ Explore the circus and carry out missions for the circus employees
 And don't forget to collect information before facing a dungeon ;D
 
 ![Screenshoot 6](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/15ee7282-16a9-4746-95b0-904f3fe38358)
+
+## Game Guide
+
+### If you don't want to spoil your experience keep scrolling. Come back if you feel like you've got stuck.
+
+### Misions
+
+From the beginning of the game, you have a total of 3 missions.
+
+### NIKITA
+
+Nikita is located inside the trade area, next to the Practice Tent near the center next to some boxes.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/7e1f10ca-b922-4fdf-94a5-d5b44f27476e)
+
+### DRIVE THE ORACLE CRAZY
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/69512c6a-8db5-4acf-ac31-71a7844b0fa6)
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/6cfb828f-8c6f-4539-9899-bf71ab630a19)
+
+Once you get the mission, you have to talk to the Oracle which is next to the House of Terrors. Then just follow the dialogue branch you see below.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/98525f58-5216-4ce0-a25a-15d32ee1a222)
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/3764494a-51ca-47db-95f3-5fdb9c999ad9)
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/271f6712-ce6b-4157-8c32-0782a66e0f43)
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/ea32d494-0765-439e-a7c9-49a24c198bc5)
+
+MISSION COMPLETED.
+
+### TRAIN IS LIFE, TRAIN IS LOVE
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/7854947a-5597-4d26-bcdb-971301a8672d)
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/40e97b91-c091-4fca-811c-664836fd1d29)
+
+Once you get the mission, go to the Practice Tent (placed just at Nikita's right) and fight the Dummy.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/29cc71e4-598b-4309-81b5-a8a868cf9067)
+
+### FIND THE FIRE LADY
+
+Go talk to Igor & Ivan, located in the store, and finish the following dialogue branch.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/824528b4-39e5-4541-a9f9-e9518ceb13f2)
+
+Fight and defeat the Dungeon 1 boss.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/5d8782eb-0a38-4eb2-aabc-bd085f1d80da)
+
+Pick his head.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/80310ffc-a671-42fe-bbb7-ad44c7aa7c9c)
+
+Place the head on the grey plate.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/62ebf43d-de07-41f8-b2c2-0c69739886b8)
+
+Save the fire lady and unlock a new playable character and the forge!
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/f5b4cae5-17e9-4c9e-8cb1-a8c14ab80c0b)
+
+## DUNGEON  1 PUZZLES
+
+### THE LEVER
+
+In this puzzle, you just have to press a lever and the first door to the boss will open.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/a9a24829-a066-4a9b-8ee5-263e9f1cdebd)
+
+### THE NOTES
+
+Read the notes distributed around the dungeon and guess the code. Every note refers to combat enemy.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/1a4fd63e-6906-4646-abf5-c0f5ff858a60)
+
+### Number of the sequences: 3
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/9b73d5f0-f013-48f0-88fc-f1c24c4346f9)
+
+### Number of the sequences: 4
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/f61a6b63-225e-45bc-b20b-091d41fa12e5)
+
+### Number of the sequences: 4
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/38b25286-6c9e-4dfe-b6bd-bd4c0a9deca4)
+
+## DUNGEON  2 PUZZLES
+
+### EGGSPLOSIVE
+
+In the dungeon there are two chickens, they lay a series of eggs that explode over time. You can use these eggs to destroy the red barrels in the dungeon.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/c1dc7d66-4ebc-4707-8a01-22ce7cb6ba52)
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/73415809-d62c-4d70-9340-05081102a85b)
+
+### IT'S THE KEY
+
+Find the key on a table.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/dd53efbf-bcd4-4200-b920-ffd3a12df7c1)
+
+Now you can open the bottom doors.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/69da8dfa-9f51-4ce4-baef-9a4e683fe7c9)
+
+### THE PILLARS
+
+We have to put a relic on top of each pillar.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/00a8ceb1-194c-4020-9571-737714f6aaf0)
+
+Gather the relics.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/c9c4129d-d1e8-423b-9155-1e99fa738fb1)
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/aa40baed-ec2d-4e4b-b6ee-2aa095250807)
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/7fb96ac5-8c5c-4347-99d9-2a54d11eb04b)
+
+And place them. Now you can fight the boss.
+
+![image](https://github.com/lSara-MM/Project-II-RPG/assets/99949318/5f6bf72a-c330-4d54-bd08-aa2cf471f985)
 
 ## Controls
 
@@ -188,7 +306,6 @@ And don't forget to collect information before facing a dungeon ;D
 * Remove barrels -> 2 (only God Mode)
 
 ## Team Members
-![Captura de pantalla 2023-06-13 211810](https://github.com/lSara-MM/Project-II-RPG/assets/99950345/275ff783-11a1-44d4-8669-0a5f40b29748)
 
 **[Andreu Nosàs Soler](https://github.com/AndyCubico)**
 Team Lead / Code / Design / UI
@@ -215,7 +332,7 @@ Art / UI / Design
 Code / Design / Art / Narrative
 
 **[Guillem Pol Aixut Anderiz](https://github.com/GuillemAixut)**
-UI / Design
+UI
 
 
 
