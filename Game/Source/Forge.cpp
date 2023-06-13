@@ -171,9 +171,6 @@ bool Forge::PostUpdate()
 		}
 	}
 
-	//raton
-	app->input->RenderMouse();
-
 	if (app->input->GetGamepadButton(SDL_CONTROLLER_BUTTON_B) == ButtonState::BUTTON_DOWN)//con mando es bastante molesto tener que ir con el mouse al boton de cerrar
 	{
 		forgeTransition_B = true;

@@ -1680,32 +1680,32 @@ void Combat::HandleEndCombat()
 	}
 	else
 	{
-		for (int i = 0; i < app->itemManager->partySize; i++)
+		for (int j = 0; j < app->itemManager->partySize; j++)
 		{
-			int posInVec = SearchInVecID(vecAllies, app->itemManager->arrParty.at(i)->id);
+			int posInVec = SearchInVecID(vecAllies, app->itemManager->arrParty.at(j)->id);
 			if (posInVec != -1)
 			{
-				app->itemManager->arrParty.at(i)->currentHp = vecAllies.at(posInVec)->currentHp;
+				app->itemManager->arrParty.at(j)->currentHp = vecAllies.at(posInVec)->currentHp;
 			}
 			else
 			{
-				app->itemManager->arrParty.at(i)->currentHp = 5;
+				app->itemManager->arrParty.at(j)->currentHp = 5;
 			}
 		}
 		app->input->coso = true;
 	}
 
 	array <int, 4> tempHp;
-	for (int i = 0; i < app->itemManager->partySize; i++)
+	for (int t = 0; t < app->itemManager->partySize; t++)
 	{
-		tempHp.at(i) = app->itemManager->arrParty.at(i)->currentHp;
+		tempHp.at(t) = app->itemManager->arrParty.at(t)->currentHp;
 	}
 
 	LoadCombat();
 
-	for (int i = 0; i < app->itemManager->partySize; i++)
+	for (int k = 0; k < app->itemManager->partySize; k++)
 	{
-		app->itemManager->arrParty.at(i)->currentHp = tempHp.at(i);
+		app->itemManager->arrParty.at(k)->currentHp = tempHp.at(k);
 	}
 
 	SaveCombat();
