@@ -8,7 +8,7 @@ The protagonist, determined to succeed, enters the circus and manages to be hire
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sCTet2msyBs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-#![DOWNLOAD](https://github.com/lSara-MM/Project-II-RPG/releases/tag/Gold)
+# ![DOWNLOAD](https://github.com/lSara-MM/Project-II-RPG/releases/tag/Gold)
 
 Explore the circus, solves puzzles, makes new friends, defeats different enemies and gets to the Showman.
 
